@@ -1,0 +1,52 @@
+/*
+ * Hyper Lime Street — tokens
+ * Mesurés sur la page d'accueil de référence (1536×674, 5441px de haut), voir source.md.
+ * @contrast text:bg text:surface muted:bg on-accent:accent on-ink:ink accent:ink muted-dark:ink
+ */
+:root {
+  /* Couleurs */
+  --bg: #efefef;            /* gris béton clair */
+  --surface: #ffffff;       /* panneaux blancs arrondis */
+  --ink: #111111;           /* blocs « piste » sombres */
+  --ink-2: #000000;         /* barre de navigation, pellicule */
+  --on-ink: #ffffff;
+  --text: #222122;
+  --muted: #6b6b6b;         /* gris lisible sur béton (le #787878 mesuré ne fait que 3,8:1) */
+  --muted-dark: #919191;
+  --accent: #d8fa00;        /* lime fluo : grands aplats */
+  --accent-2: #c6e800;      /* lime du bouton « M'abonner » */
+  --on-accent: #000000;
+  --stroke: #767678;        /* contour épais des boutons pilule */
+  --hatch: rgb(255 255 255 / 0.06); /* rayures diagonales sur les blocs sombres */
+
+  /* Typographie */
+  --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif;  /* Impact mesuré */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 0.9rem;     /* 14.4px */
+  --text-md: 1.2rem;       /* 19.2px */
+  --text-lg: 1.575rem;     /* 25.2px : texte display dominant */
+  --text-xl: 2.4375rem;    /* 39px */
+  --text-2xl: 3.3rem;      /* 52.8px : titres de section */
+  --text-num: clamp(4rem, 8vw, 7.5rem);  /* numéro de section 01–06 */
+  --leading-tight: 1;
+
+  /* Espace */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
+  --section-pad: 117px;    /* padding vertical mesuré (×62) */
+  --nav-h: 60px;
+
+  /* Formes */
+  --radius-sm: 8.4px;      /* vignettes, cartes (dominant) */
+  --radius-md: 24px;
+  --radius-track: 72px;    /* extrémités des « pistes » */
+  --radius-pill: 999px;
+  --stroke-w: 4.8px;       /* contour des boutons pilule mesuré */
+  --cut: 45deg;            /* angle des coupes et des rayures */
+
+  /* Mouvement (easeOutCubic mesuré sur ~250 éléments) */
+  --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --dur-1: 300ms; --dur-2: 400ms; --dur-3: 500ms; --dur-4: 600ms;
+  --marquee: 20s;
+}

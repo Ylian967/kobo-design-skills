@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>orsel — studio d'architecture (démo Nocturne Architecture)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Inter:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #111111; --surface: #141414; --raised: #1c1c1c; --text: #ffffff; --muted: #8a8a8a; --dim: #777777; --line: #2a2a2a; --line-strong: #3a3a3a;
+  --accent: #e3191f; --on-accent: #ffffff; --accent-text: #ff3b3f; --paper: #ffffff; --ink: #111111;
+  --night: #0b1626; --night-2: #13284a; --night-3: #1f4170; --window: #f6c76a; --trail-red: #ff4a3d; --trail-amber: #ffb547; --concrete: #6f6a64; --glass: #2c4a63;
+  --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; --font-body: 'Inter', system-ui, sans-serif;
+  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
+  --text-title: clamp(2rem, 3.4vw, 3.25rem); --text-statement: clamp(1.5rem, 2.8vw, 2.5rem); --text-stat: clamp(3rem, 6vw, 5.5rem); --text-wordmark: clamp(6rem, 44vw, 46rem);
+  --leading-tight: 0.92; --leading-title: 1.08; --leading-body: 1.55; --tracking-display: -0.04em; --tracking-caps: 0.08em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
+  --gutter: clamp(16px, 2.5vw, 40px); --container: 1440px;
+  --radius-card: 4px; --radius-pill: 999px; --control: 44px; --card-ratio: 4 / 5; --hairline: 1px solid var(--line);
+  --shade-hero: linear-gradient(180deg, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0) 28%, rgb(0 0 0 / 0) 55%, rgb(17 17 17 / 0.9) 100%);
+  --shade-card: linear-gradient(180deg, rgb(0 0 0 / 0) 50%, rgb(0 0 0 / 0.7) 100%);
+  --shadow-pop: 0 20px 50px -20px rgb(0 0 0 / 0.8);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-inout: cubic-bezier(0.65, 0, 0.35, 1); --dur-fast: 180ms; --dur-base: 360ms; --dur-slow: 900ms; --dur-reveal: 1200ms;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-base)/var(--leading-body) var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+.caps { font: 500 var(--text-2xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+
+/* ---------- Boutons ---------- */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--control); padding: 0 var(--space-6); border: 0; border-radius: var(--radius-pill);
+  background: var(--accent); color: var(--on-accent); font: 500 var(--text-sm)/1 var(--font-body); cursor: pointer; white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
+.pill:hover { background: color-mix(in srgb, var(--accent) 86%, var(--paper)); }
+.pill:active { transform: scale(.97); }
+.pill .arrow { display: inline-block; transition: transform var(--dur-fast) var(--ease-out); }
+.pill:hover .arrow { transform: translateX(3px) rotate(-45deg); }
+.pill--paper { background: var(--paper); color: var(--ink); }
+.pill--paper:hover { background: color-mix(in srgb, var(--paper) 88%, var(--ink)); }
+.pill--ghost { background: none; color: var(--text); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.pill--ghost:hover { background: var(--raised); }
+.round { width: var(--control); height: var(--control); flex: none; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-strong); background: none; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), opacity var(--dur-fast); }
+.round:hover { background: var(--raised); border-color: var(--muted); }
+.round:disabled { opacity: .35; cursor: default; background: none; border-color: var(--line-strong); }
+.round svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; min-height: max(640px, 100svh); overflow: hidden; isolation: isolate; }
+.city { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 40%, var(--night-3) 64%, color-mix(in srgb, var(--trail-amber) 22%, var(--night-3)) 72%, var(--night) 86%); }
+.city::after { content: ""; position: absolute; inset: 0; background: var(--shade-hero); }
+.city::before { content: ""; position: absolute; left: 0; right: 0; bottom: 21%; height: 36%; background: radial-gradient(50% 60% at 50% 100%, color-mix(in srgb, var(--trail-amber) 30%, transparent), transparent 70%); }
+.tower { position: absolute; bottom: 21%; width: var(--w); height: var(--h); left: var(--x);
+  -webkit-mask-image: linear-gradient(0deg, black 55%, color-mix(in srgb, var(--bg) 75%, transparent)); mask-image: linear-gradient(0deg, black 55%, color-mix(in srgb, var(--bg) 75%, transparent));
+  background:
+    repeating-linear-gradient(90deg, transparent 0 6px, color-mix(in srgb, var(--night) 80%, black) 6px 9px),
+    repeating-linear-gradient(180deg, color-mix(in srgb, var(--window) var(--lit, 40%), transparent) 0 3px, transparent 3px 10px),
+    linear-gradient(180deg, color-mix(in srgb, var(--glass) 70%, var(--night-3)), color-mix(in srgb, var(--night) 70%, black));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--night-3) 60%, transparent); }
+.tower--far { opacity: .45; filter: blur(1.5px); }
+.tower--crown::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 60px; background: color-mix(in srgb, var(--text) 50%, transparent); }
+.tower--crown::after { content: ""; position: absolute; left: calc(50% - 3px); bottom: calc(100% + 58px); width: 6px; height: 6px; border-radius: 50%; background: var(--trail-red); box-shadow: 0 0 12px var(--trail-red); animation: blink 2.4s steps(1) infinite; }
+.road { position: absolute; left: -20%; right: -20%; bottom: 0; height: 22%; background: linear-gradient(180deg, color-mix(in srgb, var(--trail-amber) 18%, var(--night)), color-mix(in srgb, var(--night) 60%, black) 30%, var(--bg)); }
+.trail { position: absolute; left: -10%; width: 120%; height: 260%; border-radius: 50%; border-top: 2px solid var(--c); top: var(--t); filter: drop-shadow(0 0 6px var(--c)); opacity: .9;
+  background-image: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c) 12%, transparent) 50%, transparent); background-size: 50% 3px; background-repeat: no-repeat; animation: drift 9s linear infinite; }
+.hero__top { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--space-6); padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.links { display: flex; gap: var(--space-6); }
+.links a { font: 400 var(--text-sm)/1 var(--font-body); padding: var(--space-3) 0; position: relative; }
+.links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 6px; height: 1px; background: currentColor; transition: right var(--dur-base) var(--ease-out); }
+.links a:hover::after, .links a[aria-current]::after { right: 0; }
+.meta { display: flex; align-items: center; gap: var(--space-6); }
+.clock { font-variant-numeric: tabular-nums; color: var(--text); }
+.clock i { font-style: normal; color: var(--muted); margin: 0 var(--space-2); }
+.menu-btn { display: none; }
+.hero__intro { position: relative; margin-top: var(--space-12); max-width: 300px; }
+.reel { display: inline-flex; align-items: center; gap: var(--space-3); background: none; border: 0; padding: 0; cursor: pointer; min-height: var(--control); }
+.reel__dot { width: var(--control); height: var(--control); border-radius: 50%; background: var(--accent); display: grid; place-items: center; transition: transform var(--dur-base) var(--ease-out); }
+.reel__dot svg { width: 14px; height: 14px; fill: var(--on-accent); margin-left: 2px; }
+.reel:hover .reel__dot { transform: scale(1.1); }
+.reel[aria-pressed="true"] .reel__dot svg { margin-left: 0; }
+.hero__intro p { text-shadow: 0 1px 12px color-mix(in srgb, var(--bg) 80%, transparent); margin-top: var(--space-4); color: color-mix(in srgb, var(--text) 82%, transparent); font-size: var(--text-sm); }
+.hero__side { position: absolute; right: var(--gutter); bottom: calc(var(--text-wordmark) * 0.62); max-width: 240px; text-align: right; color: color-mix(in srgb, var(--text) 82%, transparent); font-size: var(--text-xs); }
+.wordmark { position: absolute; left: 0; right: 0; bottom: 0; translate: 0 26%; margin: 0; text-align: center; font: 500 var(--text-wordmark)/var(--leading-tight) var(--font-display); letter-spacing: var(--tracking-display); white-space: nowrap; color: var(--text); }
+.wordmark span { display: inline-block; animation: rise var(--dur-reveal) var(--ease-out) both; animation-delay: calc(var(--i) * 70ms + 200ms); }
+
+/* ---------- À propos ---------- */
+section { position: relative; }
+.about { padding-block: var(--space-24); }
+.about__grid { display: grid; grid-template-columns: minmax(200px, 1fr) 2.2fr; gap: var(--space-12) var(--space-16); }
+.label { display: flex; align-items: center; gap: var(--space-2); }
+.label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.about__aside { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-8); color: var(--muted); }
+.statement { font: 400 var(--text-statement)/1.2 var(--font-display); letter-spacing: -0.02em; text-wrap: balance; }
+.statement span { color: var(--dim); }
+.about__row { display: grid; grid-template-columns: 1fr 1.4fr; gap: var(--space-8); margin-top: var(--space-16); align-items: stretch; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; border-top: var(--hairline); }
+.stat { padding: var(--space-6) var(--space-6) var(--space-8) 0; border-bottom: var(--hairline); }
+.stat:nth-child(odd) { border-right: var(--hairline); }
+.stat:nth-child(even) { padding-left: var(--space-6); }
+.stat b { display: block; font: 300 var(--text-stat)/1 var(--font-display); letter-spacing: var(--tracking-display); }
+.stat b small { font-size: .6em; color: var(--muted); vertical-align: top; margin-left: 2px; }
+.stat p { margin-top: var(--space-3); color: var(--muted); font-size: var(--text-sm); }
+
+/* ---------- Photos dessinées ---------- */
+.photo { position: relative; overflow: hidden; border-radius: var(--radius-card); background-color: var(--night); }
+.photo::after { content: ""; position: absolute; inset: 0; background: var(--shade-card); }
+.ph-concrete { background:
+  linear-gradient(var(--window), var(--window)) 18% 58% / 30% 3% no-repeat,
+  linear-gradient(color-mix(in srgb, var(--window) 70%, var(--bg)), color-mix(in srgb, var(--window) 40%, var(--bg))) 20% 70% / 40% 14% no-repeat,
+  linear-gradient(var(--concrete), var(--concrete)) 0 46% / 76% 6% no-repeat,
+  linear-gradient(color-mix(in srgb, var(--concrete) 55%, var(--bg)), color-mix(in srgb, var(--concrete) 30%, var(--bg))) 90% 80% / 50% 30% no-repeat,
+  linear-gradient(180deg, var(--night-2) 0%, var(--night-3) 52%, color-mix(in srgb, var(--trail-amber) 25%, var(--night-3)) 62%, var(--bg) 63%); }
+.ph-villa { background:
+  linear-gradient(90deg, var(--window) 0 30%, transparent 30% 33%, var(--window) 33% 63%, transparent 63% 66%, var(--window) 66%) 30% 62% / 52% 12% no-repeat,
+  linear-gradient(var(--concrete), var(--concrete)) 22% 50% / 76% 4% no-repeat,
+  linear-gradient(color-mix(in srgb, var(--concrete) 40%, var(--bg)), var(--bg)) 40% 76% / 70% 10% no-repeat,
+  linear-gradient(color-mix(in srgb, var(--glass) 70%, var(--window)), var(--glass)) 50% 94% / 90% 10% no-repeat,
+  radial-gradient(60% 30% at 70% 20%, color-mix(in srgb, var(--night-3) 70%, var(--text)), transparent 70%),
+  linear-gradient(180deg, var(--night) 0%, var(--night-2) 55%, var(--bg) 56%); }
+.ph-tower { background:
+  repeating-linear-gradient(90deg, transparent 0 9px, var(--night) 9px 12px) 50% 100% / 40% 76% no-repeat,
+  repeating-linear-gradient(180deg, color-mix(in srgb, var(--window) 60%, transparent) 0 6px, transparent 6px 16px) 50% 100% / 40% 76% no-repeat,
+  linear-gradient(var(--glass), var(--night)) 50% 100% / 40% 76% no-repeat,
+  linear-gradient(180deg, color-mix(in srgb, var(--trail-red) 30%, var(--night-2)) 0%, var(--night-2) 40%, var(--night) 100%); }
+.ph-coast { background:
+  linear-gradient(var(--window), var(--window)) 60% 48% / 26% 5% no-repeat,
+  linear-gradient(var(--concrete), var(--concrete)) 64% 42% / 44% 3% no-repeat,
+  linear-gradient(color-mix(in srgb, var(--concrete) 60%, var(--bg)), color-mix(in srgb, var(--concrete) 25%, var(--bg))) 66% 56% / 44% 10% no-repeat,
+  linear-gradient(180deg, color-mix(in srgb, var(--glass) 60%, var(--night)), var(--night)) 0 100% / 100% 34% no-repeat,
+  radial-gradient(30% 18% at 22% 24%, color-mix(in srgb, var(--trail-amber) 70%, var(--text)), transparent 70%),
+  linear-gradient(180deg, color-mix(in srgb, var(--trail-amber) 35%, var(--night-3)) 0%, var(--night-3) 40%, var(--night-2) 66%); }
+.ph-interior { background:
+  linear-gradient(90deg, transparent 0 48%, color-mix(in srgb, var(--concrete) 40%, var(--bg)) 48% 50%, transparent 50%) 0 0 / 100% 70% no-repeat,
+  linear-gradient(180deg, color-mix(in srgb, var(--night-3) 80%, var(--text)), var(--night-2)) 50% 18% / 70% 52% no-repeat,
+  linear-gradient(color-mix(in srgb, var(--concrete) 70%, var(--window)), var(--concrete)) 50% 100% / 100% 30% no-repeat,
+  linear-gradient(var(--raised), var(--surface)); }
+
+/* ---------- Propriétés ---------- */
+.props { padding: var(--space-16) 0 var(--space-24); background: var(--surface); }
+.props__head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-6); margin-bottom: var(--space-10); }
+.title { font: 400 var(--text-title)/var(--leading-title) var(--font-display); letter-spacing: -0.03em; max-width: 16ch; text-wrap: balance; }
+.title em { font-style: normal; color: var(--muted); }
+.ctrls { display: flex; gap: var(--space-2); }
+.track { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(260px, 23vw, 330px); gap: var(--space-4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+  padding: 0 var(--gutter); scroll-padding: 0 var(--gutter); max-width: var(--container); margin: 0 auto; }
+.track::-webkit-scrollbar { display: none; }
+.card { position: relative; aspect-ratio: var(--card-ratio); scroll-snap-align: start; border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-5); }
+.card .photo { position: absolute; inset: 0; border-radius: 0; transition: transform var(--dur-slow) var(--ease-out); }
+.card:hover .photo { transform: scale(1.04); }
+.card__name { position: relative; font: 500 var(--text-lg)/1.2 var(--font-display); }
+.card__loc { position: relative; color: color-mix(in srgb, var(--text) 78%, transparent); font-size: var(--text-xs); margin-top: var(--space-1); }
+.card__go { position: absolute; top: var(--space-4); right: var(--space-4); border-color: color-mix(in srgb, var(--text) 40%, transparent); opacity: 0; transform: translateY(-6px); transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), background var(--dur-fast); }
+.card:hover .card__go, .card:focus-within .card__go { opacity: 1; transform: none; }
+.card--red { background: var(--accent); color: var(--on-accent); justify-content: space-between; }
+.card--red .tag { opacity: .9; }
+.card--red h3 { font: 400 var(--text-xl)/1.1 var(--font-display); letter-spacing: -0.02em; margin-top: var(--space-3); }
+.specs { list-style: none; margin: 0 0 var(--space-5); padding: 0; display: grid; gap: 0; }
+.specs li { display: flex; justify-content: space-between; padding: var(--space-3) 0; border-top: 1px solid color-mix(in srgb, var(--on-accent) 30%, transparent); font-size: var(--text-sm); }
+.progress { max-width: var(--container); margin: var(--space-8) auto 0; padding: 0 var(--gutter); display: flex; align-items: center; gap: var(--space-4); color: var(--muted); }
+.progress__bar { flex: 1; height: 1px; background: var(--line); position: relative; }
+.progress__bar i { position: absolute; left: 0; top: -1px; height: 3px; width: var(--p, 25%); background: var(--accent); transition: width var(--dur-base) var(--ease-out); }
+.progress output { font-variant-numeric: tabular-nums; min-width: 5ch; text-align: right; }
+
+/* ---------- Processus ---------- */
+.process { padding-block: var(--space-24); }
+.process__grid { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-12); }
+.process__aside .title { margin-top: var(--space-6); }
+.process__aside p { margin-top: var(--space-6); color: var(--muted); max-width: 34ch; font-size: var(--text-sm); }
+.steps { border-top: var(--hairline); }
+.step { border-bottom: var(--hairline); }
+.step summary { list-style: none; display: grid; grid-template-columns: 64px 1fr var(--control); align-items: center; gap: var(--space-4); padding: var(--space-6) 0; cursor: pointer; min-height: 88px; }
+.step summary::-webkit-details-marker { display: none; }
+.step__num { color: var(--muted); font: 400 var(--text-sm)/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.step__title { font: 400 var(--text-xl)/1.15 var(--font-display); letter-spacing: -0.02em; transition: color var(--dur-fast); }
+.step summary:hover .step__title { color: color-mix(in srgb, var(--text) 70%, transparent); }
+.step .round { pointer-events: none; }
+.step .round svg { transition: transform var(--dur-base) var(--ease-out); }
+.step[open] .round { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.step[open] .round svg { transform: rotate(45deg); }
+.step__body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); padding: 0 0 var(--space-8) 80px; }
+.step[open] .step__body { animation: open var(--dur-base) var(--ease-out); }
+.step__body .photo { aspect-ratio: 4 / 3; }
+.step__body h4 { margin: 0 0 var(--space-4); font: 500 var(--text-sm)/1 var(--font-body); }
+.step__body ul { margin: 0 0 var(--space-6); padding: 0; list-style: none; color: var(--muted); font-size: var(--text-sm); }
+.step__body li { padding: var(--space-2) 0 var(--space-2) var(--space-5); position: relative; }
+.step__body li::before { content: ""; position: absolute; left: 0; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); translate: 0 -50%; }
+
+/* ---------- Contact + pied ---------- */
+.contact { background: var(--surface); padding: var(--space-24) 0 var(--space-12); overflow: hidden; }
+.contact__top { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-12); align-items: end; }
+.contact__big { font: 400 clamp(2.5rem, 6vw, 5.5rem)/1 var(--font-display); letter-spacing: var(--tracking-display); text-wrap: balance; }
+.contact__big span { color: var(--dim); }
+.field { display: flex; align-items: center; gap: var(--space-2); border-bottom: 1px solid var(--line-strong); padding-bottom: var(--space-2); transition: border-color var(--dur-fast); }
+.field:focus-within { border-color: var(--text); }
+.field input { flex: 1; min-width: 0; min-height: var(--control); background: none; border: 0; color: var(--text); font: 400 var(--text-base) var(--font-body); outline: none; }
+.field input::placeholder { color: var(--muted); }
+.field-note { margin-top: var(--space-3); color: var(--muted); font-size: var(--text-xs); min-height: 1.4em; }
+.foot { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); margin-top: var(--space-24); padding-top: var(--space-8); border-top: var(--hairline); color: var(--muted); font-size: var(--text-sm); }
+.foot h3 { color: var(--text); font: 500 var(--text-2xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; margin-bottom: var(--space-4); }
+.foot a { display: block; padding: var(--space-1) 0; transition: color var(--dur-fast); }
+.foot a:hover { color: var(--text); }
+.foot__mark { margin-top: var(--space-16); font: 500 clamp(4rem, 22vw, 20rem)/0.8 var(--font-display); letter-spacing: var(--tracking-display); color: var(--raised); text-align: center; translate: 0 18%; user-select: none; }
+
+/* ---------- Mouvement ---------- */
+@keyframes rise { from { transform: translateY(60%); opacity: 0; } }
+@keyframes drift { from { background-position: -50% 0; } to { background-position: 150% 0; } }
+@keyframes blink { 50% { opacity: .2; } }
+@keyframes open { from { opacity: 0; transform: translateY(-8px); } }
+@keyframes { from { opacity: 0; transform: translateY(32px); } }
+.hero.is-paused .trail, .hero.is-paused .tower--crown::after { animation-play-state: paused; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .about__grid, .about__row, .process__grid, .contact__top { grid-template-columns: 1fr; }
+  .about__aside { flex-direction: row; }
+  .step__body { grid-template-columns: 1fr; padding-left: 0; }
+  .foot { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .links { display: none; position: absolute; top: 64px; left: var(--gutter); right: var(--gutter); flex-direction: column; gap: 0; padding: var(--space-2) var(--space-4); background: var(--raised); border-radius: var(--radius-card); box-shadow: var(--shadow-pop); z-index: 5; }
+  .links.is-open { display: flex; }
+  .links a { padding: var(--space-4) 0; border-bottom: var(--hairline); }
+  .links a:last-child { border: 0; }
+  .menu-btn { display: inline-flex; }
+  .hero__top { grid-template-columns: auto 1fr; }
+  .meta { justify-content: flex-end; gap: var(--space-3); }
+  .clock { display: none; }
+  .hero__intro { margin-top: var(--space-8); }
+  .hero__side { left: var(--gutter); right: var(--gutter); text-align: left; max-width: none; }
+  .props__head { flex-direction: column; align-items: flex-start; }
+  .track { grid-auto-columns: 78%; }
+  .step summary { grid-template-columns: 40px 1fr var(--control); }
+  .step__title { font-size: var(--text-lg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="city" data-slot="hero-night-city" role="img" aria-label="Ville la nuit en pose longue : tours éclairées et traînées de phares">
+    <div class="tower tower--far" style="--x:1%;--w:6%;--h:22%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:9%;--w:5%;--h:30%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:20%;--w:4%;--h:26%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:31%;--w:7%;--h:20%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:36%;--w:5%;--h:34%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:47%;--w:6%;--h:28%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:54%;--w:8%;--h:24%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:68%;--w:5%;--h:30%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:79%;--w:6%;--h:22%;--lit:18%"></div>
+    <div class="tower tower--far" style="--x:93%;--w:6%;--h:26%;--lit:18%"></div>
+    <div class="tower" style="--x:4%;--w:9%;--h:38%;--lit:30%"></div>
+    <div class="tower tower--crown" style="--x:31%;--w:7%;--h:58%;--lit:45%"></div>
+    <div class="tower" style="--x:14%;--w:12%;--h:30%;--lit:35%"></div>
+    <div class="tower" style="--x:40%;--w:6%;--h:46%;--lit:22%"></div>
+    <div class="tower" style="--x:48%;--w:9%;--h:24%;--lit:40%"></div>
+    <div class="tower tower--crown" style="--x:62%;--w:8%;--h:64%;--lit:42%"></div>
+    <div class="tower" style="--x:72%;--w:11%;--h:36%;--lit:32%"></div>
+    <div class="tower" style="--x:86%;--w:9%;--h:48%;--lit:28%"></div>
+    <div class="road">
+      <span class="trail" style="--c:var(--trail-red);--t:22%"></span>
+      <span class="trail" style="--c:var(--trail-red);--t:28%;animation-delay:-3s"></span>
+      <span class="trail" style="--c:var(--trail-amber);--t:38%;animation-delay:-5s"></span>
+      <span class="trail" style="--c:var(--trail-amber);--t:46%;animation-delay:-1s"></span>
+      <span class="trail" style="--c:var(--window);--t:58%;animation-delay:-7s"></span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero__top">
+      <button class="round menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" aria-label="Ouvrir le menu"><svg viewBox="0 0 16 16"><path d="M2 5h12M2 11h12"/></svg></button>
+      <nav class="links" id="links" aria-label="Principale">
+        <a href="#about" aria-current="page">Studio</a><a href="#props">Projets</a><a href="#process">Services</a><a href="#contact">Journal</a>
+      </nav>
+      <div class="meta">
+        <span class="clock caps" id="clock" aria-label="Date, heure et température à Lisbonne">MER 1 OCT<i>\</i>21:40<i>\</i>18°C</span>
+        <a class="pill" href="#contact">Parlons-en <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="hero__intro">
+      <button class="reel" id="reel" aria-pressed="false">
+        <span class="reel__dot"><svg viewBox="0 0 14 14" aria-hidden="true"><path id="reelIcon" d="M2 1l11 6-11 6z"/></svg></span>
+        <span class="caps">Voir le showreel</span>
+      </button>
+      <p>Studio d'architecture et de promotion de résidences d'exception. Nous dessinons des lieux qui s'allument quand la ville s'éteint.</p>
+    </div>
+  </div>
+  <p class="hero__side">Architecture, intérieurs et résidences — Lisbonne, Paris, Marrakech.</p>
+  <h1 class="wordmark" aria-label="orsel"><span style="--i:0">o</span><span style="--i:1">r</span><span style="--i:2">s</span><span style="--i:3">e</span><span style="--i:4">l</span></h1>
+</header>
+
+<main>
+  <section class="about wrap" id="about" aria-labelledby="aboutTitle">
+    <div class="about__grid">
+      <div class="about__aside">
+        <span class="label caps" id="aboutTitle">À propos</span>
+        <span class="caps">©2026</span>
+      </div>
+      <p class="statement">Depuis quinze ans, nous concevons des maisons et des immeubles où la lumière fait l'architecture. <span>Chaque projet commence par une promenade nocturne sur le terrain, et finit par un lieu qu'on a envie d'habiter longtemps.</span></p>
+    </div>
+    <div class="about__row">
+      <div class="photo ph-concrete" data-slot="studio-photo" role="img" aria-label="Maison en béton aux baies éclairées au crépuscule" style="min-height:280px"></div>
+      <div class="stats">
+        <div class="stat"><b>15<small>+</small></b><p>Années de pratique</p></div>
+        <div class="stat"><b>120<small>+</small></b><p>Résidences livrées</p></div>
+        <div class="stat"><b>08</b><p>Prix d'architecture</p></div>
+        <div class="stat"><b>34<small>k</small></b><p>m² en chantier</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="props" id="props" aria-labelledby="propsTitle">
+    <div class="wrap props__head">
+      <h2 class="title" id="propsTitle">Résidences d'exception <em>signées orsel</em></h2>
+      <div class="ctrls"><button class="round" id="prev" aria-label="Projets précédents" disabled><svg viewBox="0 0 16 16"><path d="M10 3L5 8l5 5"/></svg></button><button class="round" id="next" aria-label="Projets suivants"><svg viewBox="0 0 16 16"><path d="M6 3l5 5-5 5"/></svg></button></div>
+    </div>
+    <div class="track" id="track" tabindex="0" aria-label="Projets, défilement horizontal">
+      <article class="card card--red">
+        <div><span class="caps tag">Nouveau · 2026</span><h3>Villa Ardoise</h3></div>
+        <div>
+          <ul class="specs"><li><span>Chambres</span><span>5</span></li><li><span>Surface</span><span>420 m²</span></li><li><span>Terrain</span><span>1,2 ha</span></li></ul>
+          <a class="pill pill--paper" href="#process">Voir le projet <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
+      <article class="card"><div class="photo ph-villa" data-slot="project-1" role="img" aria-label="Villa basse aux baies vitrées éclairées"></div><a class="round card__go" href="#process" aria-label="Voir Casa Lume"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Casa Lume</h3><p class="card__loc">Comporta, Portugal</p></article>
+      <article class="card"><div class="photo ph-tower" data-slot="project-2" role="img" aria-label="Tour résidentielle éclairée"></div><a class="round card__go" href="#process" aria-label="Voir Tour Vesper"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Tour Vesper</h3><p class="card__loc">Lisbonne, Portugal</p></article>
+      <article class="card"><div class="photo ph-coast" data-slot="project-3" role="img" aria-label="Maison sur la côte au coucher du soleil"></div><a class="round card__go" href="#process" aria-label="Voir Maison Falaise"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Maison Falaise</h3><p class="card__loc">Biarritz, France</p></article>
+      <article class="card"><div class="photo ph-concrete" data-slot="project-4" role="img" aria-label="Maison en béton au crépuscule"></div><a class="round card__go" href="#process" aria-label="Voir Riad Noir"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Riad Noir</h3><p class="card__loc">Marrakech, Maroc</p></article>
+      <article class="card"><div class="photo ph-interior" data-slot="project-5" role="img" aria-label="Séjour en double hauteur"></div><a class="round card__go" href="#process" aria-label="Voir Loft Atlas"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Loft Atlas</h3><p class="card__loc">Paris, France</p></article>
+    </div>
+    <div class="progress"><div class="progress__bar" aria-hidden="true"><i id="bar"></i></div><output class="caps" id="count" aria-live="polite">01 / 06</output></div>
+  </section>
+
+  <section class="process wrap" id="process" aria-labelledby="processTitle">
+    <div class="process__grid">
+      <div class="process__aside">
+        <span class="label caps">Méthode</span>
+        <h2 class="title" id="processTitle">Faire de vos projets immobiliers une réalité</h2>
+        <p>Un seul interlocuteur, de la recherche du terrain à la remise des clés. Quatre étapes, un calendrier tenu.</p>
+      </div>
+      <div class="steps">
+        <details class="step" open>
+          <summary><span class="step__num">01</span><span class="step__title">Terrain et faisabilité</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
+          <div class="step__body">
+            <div class="photo ph-coast" data-slot="process-1" role="img" aria-label="Terrain en bord de mer au crépuscule"></div>
+            <div><h4>Points clés</h4><ul><li>Étude de sol, d'ensoleillement et de vues</li><li>Analyse du plan local d'urbanisme</li><li>Budget et calendrier de principe</li></ul><a class="pill" href="#contact">Réserver une visite <span class="arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </details>
+        <details class="step">
+          <summary><span class="step__num">02</span><span class="step__title">Esquisse et lumière</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
+          <div class="step__body">
+            <div class="photo ph-interior" data-slot="process-2" role="img" aria-label="Maquette d'un séjour"></div>
+            <div><h4>Points clés</h4><ul><li>Trois esquisses, une maquette de lumière</li><li>Choix des matériaux sur échantillons</li><li>Permis de construire déposé par le studio</li></ul><a class="pill" href="#contact">Voir un exemple <span class="arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </details>
+        <details class="step">
+          <summary><span class="step__num">03</span><span class="step__title">Chantier suivi</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
+          <div class="step__body">
+            <div class="photo ph-tower" data-slot="process-3" role="img" aria-label="Chantier de nuit"></div>
+            <div><h4>Points clés</h4><ul><li>Visite hebdomadaire et journal photo</li><li>Entreprises choisies et coordonnées</li><li>Coûts suivis ligne par ligne</li></ul><a class="pill" href="#contact">Parlons-en <span class="arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </details>
+        <details class="step">
+          <summary><span class="step__num">04</span><span class="step__title">Remise des clés</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
+          <div class="step__body">
+            <div class="photo ph-villa" data-slot="process-4" role="img" aria-label="Villa livrée, éclairée la nuit"></div>
+            <div><h4>Points clés</h4><ul><li>Mise en lumière et réglages sur place</li><li>Carnet d'entretien de la maison</li><li>Garantie de parfait achèvement</li></ul><a class="pill" href="#contact">Parlons-en <span class="arrow" aria-hidden="true">→</span></a></div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <div class="contact__top">
+        <h2 class="contact__big" id="contactTitle">Parlons de votre prochain lieu. <span>Nous répondons sous 48 h.</span></h2>
+        <form id="form" novalidate>
+          <label class="caps" for="mail" style="color:var(--muted)">Votre adresse e-mail</label>
+          <div class="field"><input id="mail" type="email" placeholder="nom@domaine.fr" autocomplete="email" required aria-describedby="note"><button class="pill" type="submit">Envoyer</button></div>
+          <p class="field-note" id="note" aria-live="polite"></p>
+        </form>
+      </div>
+      <footer class="foot">
+        <div><h3>Studio</h3><a href="#about">À propos</a><a href="#process">Méthode</a><a href="#contact">Carrières</a></div>
+        <div><h3>Projets</h3><a href="#props">Résidences</a><a href="#props">Intérieurs</a><a href="#props">En cours</a></div>
+        <div><h3>Bureaux</h3><p style="margin:0">Lisbonne · Paris<br>Marrakech</p></div>
+        <div><h3>Suivre</h3><a href="#top">Instagram</a><a href="#top">LinkedIn</a><a href="#top">Retour en haut ↑</a></div>
+      </footer>
+    </div>
+    <p class="foot__mark" aria-hidden="true">orsel</p>
+  </section>
+</main>
+
+<script>
+(() => {
+  const days = ['DIM','LUN','MAR','MER','JEU','VEN','SAM'], months = ['JANV','FÉVR','MARS','AVR','MAI','JUIN','JUIL','AOÛT','SEPT','OCT','NOV','DÉC'];
+  const clock = document.getElementById('clock');
+  const tick = () => { const d = new Date(), p = n => String(n).padStart(2, '0'); clock.innerHTML = `${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}<i>\\</i>${p(d.getHours())}:${p(d.getMinutes())}<i>\\</i>18°C`; };
+  tick(); setInterval(tick, 30000);
+
+
+  const menu = document.getElementById('menuBtn'), links = document.getElementById('links');
+  menu.addEventListener('click', () => { const o = links.classList.toggle('is-open'); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); });
+  links.addEventListener('click', e => { if (e.target.closest('a')) { links.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
+
+  const reel = document.getElementById('reel'), hero = document.getElementById('top'), icon = document.getElementById('reelIcon');
+  reel.addEventListener('click', () => { const on = reel.getAttribute('aria-pressed') !== 'true'; reel.setAttribute('aria-pressed', on); icon.setAttribute('d', on ? 'M2 1h3.5v12H2zM8.5 1H12v12H8.5z' : 'M2 1l11 6-11 6z'); reel.querySelector('.caps').textContent = on ? 'Showreel en lecture' : 'Voir le showreel'; hero.classList.toggle('is-paused', on); });
+
+  const track = document.getElementById('track'), prev = document.getElementById('prev'), next = document.getElementById('next'), bar = document.getElementById('bar'), count = document.getElementById('count');
+  const cards = track.children.length;
+  const step = () => track.children[1].getBoundingClientRect().left - track.children[0].getBoundingClientRect().left;
+  const update = () => { const max = track.scrollWidth - track.clientWidth, r = max > 0 ? track.scrollLeft / max : 1, i = Math.min(cards, Math.round(track.scrollLeft / step()) + 1);
+    bar.style.setProperty('--p', (18 + r * 82) + '%'); count.textContent = String(i).padStart(2, '0') + ' / ' + String(cards).padStart(2, '0');
+    prev.disabled = track.scrollLeft < 4; next.disabled = track.scrollLeft > max - 4; };
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  track.addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
+  track.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next.click(); if (e.key === 'ArrowLeft') prev.click(); });
+
+  document.querySelectorAll('.step').forEach(d => d.addEventListener('toggle', () => { if (d.open) document.querySelectorAll('.step').forEach(o => { if (o !== d) o.open = false; }); }));
+
+  const form = document.getElementById('form'), mail = document.getElementById('mail'), note = document.getElementById('note');
+  form.addEventListener('submit', e => { e.preventDefault(); if (!mail.checkValidity()) { note.textContent = 'Adresse e-mail invalide : vérifiez le format nom@domaine.fr.'; note.style.color = 'var(--accent-text)'; mail.setAttribute('aria-invalid', 'true'); mail.focus(); return; }
+    mail.removeAttribute('aria-invalid'); note.style.color = ''; note.textContent = 'Merci, le studio vous écrit sous 48 h.'; form.reset(); });
+})();
+</script>
+</body>
+</html>

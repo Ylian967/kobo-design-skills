@@ -1,0 +1,8 @@
+{
+  "name": "kobo-design",
+  "description": "Skills de direction artistique complets : chaque style décrit ses tokens, composants, mises en page et animations, et fournit une page d'exemple testée.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ylian"
+  }
+}

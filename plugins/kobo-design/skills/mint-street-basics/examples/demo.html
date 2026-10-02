@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brume — basiques de tous les jours (démo Mint Street Basics)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+:root {
+  --navy: #15162e; --navy-2: #22244a; --mint: #e3f3e3; --card: #ffffff; --card-alt: #d3ebd4; --paper: #ffffff;
+  --ink: #2a2d4a; --muted: #4f5466; --text-inv: #ffffff; --muted-inv: #b8bad0;
+  --green: #22a650; --green-bright: #3ddc84; --green-light: #b9ecc6; --green-strong: #18823f; --green-ink: #0f5f2c; --on-green: #ffffff; --line: #c3dcc5; --line-inv: #34365a; --star: #f2b200;
+  --cloth-white: #f4f2ec; --cloth-sand: #d9c7a7; --cloth-olive: #6f7d4f; --cloth-navy: #2b3366; --cloth-black: #1e1e24; --cloth-rust: #b5583a; --skin: #c99572;
+  --font-display: 'Anton', 'Bebas Neue', 'Arial Narrow', Impact, sans-serif; --font-logo: 'DM Serif Display', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
+  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-card: 1.125rem; --text-band: 1.5rem;
+  --text-title: clamp(2.25rem, 5vw, 4.5rem); --text-hero: clamp(3.5rem, 8vw, 7.5rem); --text-stat: clamp(2.25rem, 3.6vw, 3.25rem); --text-logo-xl: clamp(5rem, 22vw, 20rem);
+  --leading-display: 0.92; --leading-body: 1.55; --tracking-display: 0.005em; --tracking-caps: 0.1em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --gutter: clamp(16px, 3vw, 48px); --container: 1360px;
+  --radius-sm: 8px; --radius-card: 16px; --radius-xl: 28px; --radius-pill: 999px; --control: 48px; --target: 44px;
+  --shadow-card: 0 1px 2px rgb(21 22 46 / 0.06); --shadow-pop: 0 18px 40px -18px rgb(21 22 46 / 0.35);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); --dur-fast: 160ms; --dur-base: 300ms; --dur-slow: 700ms; --dur-marquee: 28s;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--mint); color: var(--ink); font: 400 var(--text-base)/var(--leading-body) var(--font-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 3px solid var(--green-bright); outline-offset: 3px; }
+.on-light :focus-visible, .on-light:focus-visible { outline-color: var(--green-ink); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+.display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; letter-spacing: var(--tracking-display); line-height: var(--leading-display); }
+
+/* ---------- Boutons ---------- */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--control); padding: 0 var(--space-8); border: 0; border-radius: var(--radius-pill); cursor: pointer;
+  font: 700 var(--text-sm)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; white-space: nowrap;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
+.pill:active { transform: scale(.97); }
+.pill--paper { background: var(--paper); color: var(--navy); }
+.pill--paper:hover { background: var(--green-light); }
+.pill--green { background: var(--green-strong); color: var(--on-green); }
+.pill--green:hover { background: color-mix(in srgb, var(--green-strong) 85%, var(--navy)); box-shadow: var(--shadow-pop); }
+.pill--green[data-state="done"] { background: var(--navy); }
+.pill:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.pill .ico { width: 18px; height: 18px; transition: transform var(--dur-base) var(--ease-spring); }
+.pill:hover .ico { transform: translateX(3px); }
+.icon-btn { width: var(--target); height: var(--target); display: grid; place-items: center; border-radius: 50%; border: 0; background: none; cursor: pointer; position: relative; transition: background var(--dur-fast); }
+.icon-btn:hover { background: var(--navy-2); }
+.icon-btn svg, .square svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.badge { position: absolute; top: 4px; right: 2px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--green-bright); color: var(--navy); font: 700 var(--text-2xs)/18px var(--font-body); text-align: center; transition: transform var(--dur-base) var(--ease-spring); }
+.badge.bump { transform: scale(1.3); }
+.square { width: var(--control); height: var(--control); flex: none; display: grid; place-items: center; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--card); color: var(--navy); cursor: pointer; transition: background var(--dur-fast), border-color var(--dur-fast); }
+.square:hover { border-color: var(--ink); }
+.square[aria-pressed="true"] svg { fill: var(--navy); }
+
+/* ---------- Haut ---------- */
+.top { background: var(--navy); color: var(--text-inv); }
+.nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 76px; gap: var(--space-4); }
+.logo { font: 400 2rem/1 var(--font-logo); letter-spacing: -0.01em; }
+.logo i { font-style: normal; color: var(--green-bright); }
+.nav__links { display: flex; gap: var(--space-2); }
+.nav__links a { display: inline-flex; align-items: center; min-height: var(--target); padding: 0 var(--space-4); border-radius: var(--radius-pill); font: 500 var(--text-sm)/1 var(--font-body); color: var(--muted-inv); transition: color var(--dur-fast), background var(--dur-fast); }
+.nav__links a:hover, .nav__links a[aria-current] { color: var(--text-inv); background: var(--navy-2); }
+.nav__tools { display: flex; justify-content: flex-end; gap: var(--space-1); }
+
+/* ---------- Héros ---------- */
+.hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-8); align-items: end; padding-top: var(--space-12); }
+.hero__copy { padding-bottom: var(--space-16); }
+.eyebrow { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--muted-inv); margin-bottom: var(--space-6); }
+.eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green-bright); }
+.hero h1 { font-size: var(--text-hero); }
+.hero h1 span { display: block; animation: up var(--dur-slow) var(--ease-out) both; }
+.hero h1 span:nth-child(2) { animation-delay: 80ms; } .hero h1 span:nth-child(3) { animation-delay: 160ms; }
+.hero__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-10); margin-top: var(--space-10); }
+.stats { display: flex; gap: var(--space-8); }
+.stat b { display: block; font: 400 var(--text-stat)/1 var(--font-display); }
+.stat b span { color: var(--green-bright); }
+.stat p { color: var(--muted-inv); font-size: var(--text-xs); margin-top: var(--space-1); }
+.stat + .stat { padding-left: var(--space-8); border-left: 1px solid var(--line-inv); }
+.stage { position: relative; align-self: stretch; min-height: 520px; overflow: hidden; }
+.arc { position: absolute; left: 50%; bottom: -8%; width: min(520px, 92%); aspect-ratio: 1; translate: -50% 0; border-radius: 50%;
+  background: conic-gradient(from 210deg, var(--green) 0deg, var(--green-light) 200deg, transparent 205deg 360deg);
+  -webkit-mask: radial-gradient(closest-side, transparent 80%, black 81%); mask: radial-gradient(closest-side, transparent 80%, black 81%); animation: spin-in 1.2s var(--ease-out) both; }
+.disc { position: absolute; left: 50%; bottom: -4%; width: min(430px, 76%); aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 26%, var(--navy)), var(--navy-2) 70%); }
+.model { position: absolute; left: 50%; bottom: 0; width: min(360px, 70%); aspect-ratio: 360 / 470; translate: -50% 0; }
+.model > * { position: absolute; }
+.m-hair { left: 37%; top: 0; width: 26%; height: 15%; border-radius: 50% 50% 40% 40%; background: var(--cloth-black); z-index: 2; }
+.m-head { left: 38%; top: 4%; width: 24%; height: 22%; border-radius: 46% 46% 44% 44%; background: linear-gradient(90deg, var(--skin), color-mix(in srgb, var(--skin) 80%, var(--navy))); }
+.m-neck { left: 45%; top: 22%; width: 10%; height: 9%; background: color-mix(in srgb, var(--skin) 82%, var(--navy)); }
+.m-hood { left: 31%; top: 25%; width: 38%; height: 14%; border-radius: 0 0 50% 50%; background: color-mix(in srgb, var(--cloth-white) 85%, var(--navy)); z-index: 1; }
+.m-body { left: 4%; top: 29%; width: 92%; height: 75%; border-radius: 42% 42% 6% 6% / 22% 22% 4% 4%;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--cloth-white) 80%, var(--navy)) 0 12%, var(--cloth-white) 30% 70%, color-mix(in srgb, var(--cloth-white) 84%, var(--navy)) 88%); }
+.m-body::before { content: ""; position: absolute; left: 26%; right: 26%; bottom: 14%; height: 22%; border-radius: 10px 10px 4px 4px; border: 2px solid color-mix(in srgb, var(--cloth-white) 80%, var(--navy)); border-top-width: 3px; }
+.m-body::after { content: ""; position: absolute; left: 12%; right: 12%; top: 0; height: 100%; border-left: 2px solid color-mix(in srgb, var(--cloth-white) 85%, var(--navy)); border-right: 2px solid color-mix(in srgb, var(--cloth-white) 85%, var(--navy)); }
+.m-string { top: 36%; width: 1.5%; height: 14%; border-radius: 4px; background: var(--cloth-sand); z-index: 2; }
+.tag-float { position: absolute; right: 4%; top: 18%; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3); border-radius: var(--radius-pill); background: var(--paper); color: var(--navy); box-shadow: var(--shadow-pop); font-size: var(--text-xs); animation: float 5s ease-in-out infinite; }
+.tag-float b { display: block; font: 400 var(--text-base)/1.1 var(--font-display); text-transform: uppercase; }
+.tag-float .dot { width: 36px; height: 36px; border-radius: 50%; background: var(--green-strong); color: var(--on-green); display: grid; place-items: center; font-weight: 700; }
+
+/* ---------- Bandeau ---------- */
+.band { background: var(--green); color: var(--on-green); overflow: hidden; padding: var(--space-4) 0; }
+.band__track { display: flex; width: max-content; animation: marquee var(--dur-marquee) linear infinite; }
+.band:hover .band__track { animation-play-state: paused; }
+.band p { display: flex; align-items: center; gap: var(--space-8); padding-right: var(--space-8); font: 400 var(--text-band)/1 var(--font-display); text-transform: uppercase; white-space: nowrap; }
+.band p span::after { content: "✦"; margin-left: var(--space-8); font-size: .7em; vertical-align: middle; color: var(--navy); }
+
+/* ---------- Collections ---------- */
+.section { padding-block: var(--space-24); }
+.head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-8); flex-wrap: wrap; margin-bottom: var(--space-10); }
+.head h2 { font-size: var(--text-title); color: var(--navy); max-width: 12ch; }
+.head h2 em { font-style: normal; color: var(--green-ink); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.chip { min-height: var(--target); padding: 0 var(--space-5); border-radius: var(--radius-pill); border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font: 500 var(--text-sm)/1 var(--font-body); transition: background var(--dur-fast), border-color var(--dur-fast), color var(--dur-fast); }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--text-inv); }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
+.card { position: relative; display: flex; flex-direction: column; gap: var(--space-3); }
+.card__media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-card); background: var(--card); box-shadow: var(--shadow-card); overflow: hidden; display: grid; place-items: center; transition: transform var(--dur-base) var(--ease-out); }
+.card:nth-child(even) .card__media { background: var(--card-alt); }
+.card:hover .card__media { transform: translateY(-4px); }
+.card:hover .garment { transform: scale(1.05) rotate(-2deg); }
+.card__new { position: absolute; left: var(--space-3); top: var(--space-3); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--navy); color: var(--text-inv); font: 700 var(--text-2xs)/1.6 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.card .fav { position: absolute; right: var(--space-2); top: var(--space-2); color: var(--navy); }
+.card .fav:hover { background: var(--mint); }
+.card .fav[aria-pressed="true"] svg { fill: var(--green); stroke: var(--green-ink); }
+.card h3 { font: 400 var(--text-card)/1.1 var(--font-display); text-transform: uppercase; color: var(--navy); }
+.card h3 a::after { content: ""; position: absolute; inset: 0 0 56px; }
+.card__row { display: flex; justify-content: space-between; align-items: center; margin-top: calc(-1 * var(--space-2)); }
+.price { font-weight: 700; color: var(--navy); }
+.price s { font-weight: 400; color: var(--muted); margin-left: var(--space-2); }
+.swatches { display: flex; margin-right: calc(-1 * var(--space-3)); position: relative; z-index: 1; }
+.swatch { width: var(--target); height: var(--target); display: grid; place-items: center; border: 0; background: none; cursor: pointer; padding: 0; }
+.swatch::before { content: ""; width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--navy) 15%, transparent); transition: box-shadow var(--dur-fast), transform var(--dur-fast) var(--ease-spring); }
+.swatch[aria-checked="true"]::before { box-shadow: 0 0 0 2px var(--mint), 0 0 0 4px var(--navy); transform: scale(1.05); }
+.swatch:hover::before { transform: scale(1.2); }
+.card.is-hidden { display: none; }
+
+/* Vêtements dessinés */
+.garment { width: 62%; aspect-ratio: 1; position: relative; transition: transform var(--dur-slow) var(--ease-out); filter: drop-shadow(0 14px 14px color-mix(in srgb, var(--navy) 12%, transparent)); }
+.tee { background: linear-gradient(90deg, color-mix(in srgb, var(--g) 86%, var(--navy)), var(--g) 30% 70%, color-mix(in srgb, var(--g) 88%, var(--navy))); clip-path: polygon(32% 4%, 42% 4%, 50% 10%, 58% 4%, 68% 4%, 100% 20%, 88% 40%, 78% 34%, 78% 96%, 22% 96%, 22% 34%, 12% 40%, 0 20%); }
+.hoodie { background: linear-gradient(90deg, color-mix(in srgb, var(--g) 84%, var(--navy)), var(--g) 30% 70%, color-mix(in srgb, var(--g) 86%, var(--navy))); clip-path: polygon(36% 0, 64% 0, 70% 10%, 96% 24%, 100% 94%, 84% 94%, 80% 44%, 78% 98%, 22% 98%, 20% 44%, 16% 94%, 0 94%, 4% 24%, 30% 10%); }
+.hoodie::after { content: ""; position: absolute; left: 34%; right: 34%; bottom: 14%; height: 18%; border-radius: 8px 8px 2px 2px; background: color-mix(in srgb, var(--g) 88%, var(--navy)); }
+.hoodie::before { content: ""; position: absolute; left: 38%; right: 38%; top: 2%; height: 14%; border-radius: 0 0 50% 50%; background: color-mix(in srgb, var(--g) 70%, var(--navy)); }
+.pants { width: 46%; aspect-ratio: 46 / 70; background: linear-gradient(90deg, color-mix(in srgb, var(--g) 86%, var(--navy)), var(--g) 40% 60%, color-mix(in srgb, var(--g) 86%, var(--navy))); clip-path: polygon(8% 0, 92% 0, 100% 100%, 58% 100%, 50% 26%, 42% 100%, 0 100%); }
+.pants::after { content: ""; position: absolute; left: 8%; right: 8%; top: 0; height: 7%; background: color-mix(in srgb, var(--g) 78%, var(--navy)); }
+.cap { width: 58%; aspect-ratio: 58 / 36; }
+.cap::before { content: ""; position: absolute; left: 10%; right: 18%; top: 0; bottom: 18%; border-radius: 50% 50% 8px 8px / 90% 90% 8px 8px; background: linear-gradient(90deg, color-mix(in srgb, var(--g) 86%, var(--navy)), var(--g) 40%, color-mix(in srgb, var(--g) 84%, var(--navy))); }
+.cap::after { content: ""; position: absolute; right: 0; left: 52%; bottom: 6%; height: 20%; border-radius: 0 50% 50% 40% / 0 100% 100% 60%; background: color-mix(in srgb, var(--g) 80%, var(--navy)); }
+
+/* ---------- Fiche produit ---------- */
+.pdp { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-12); align-items: start; }
+.pdp__media { display: grid; grid-template-columns: 80px 1fr; gap: var(--space-4); }
+.thumbs { display: grid; gap: var(--space-3); align-content: start; }
+.thumb { width: 80px; aspect-ratio: 1; border-radius: var(--radius-sm); border: 2px solid transparent; background: var(--card); display: grid; place-items: center; cursor: pointer; padding: 0; transition: border-color var(--dur-fast); }
+.thumb[aria-current="true"] { border-color: var(--navy); }
+.thumb .garment { width: 70%; filter: none; }
+.thumb .pants { width: 44%; }
+.big { aspect-ratio: 1; border-radius: var(--radius-xl); background: radial-gradient(circle at 50% 45%, var(--card), var(--card-alt)); display: grid; place-items: center; position: relative; overflow: hidden; }
+.big .garment { width: 64%; }
+.big .tag { position: absolute; left: var(--space-5); bottom: var(--space-5); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--paper); font: 500 var(--text-xs)/1.4 var(--font-body); color: var(--ink); box-shadow: var(--shadow-card); }
+.crumbs { font-size: var(--text-xs); color: var(--muted); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.pdp h2 { font-size: clamp(2.5rem, 4.4vw, 4rem); color: var(--navy); margin-top: var(--space-3); }
+.rating { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); font-size: var(--text-sm); color: var(--muted); }
+.stars { display: inline-flex; gap: 2px; }
+.stars svg { width: 16px; height: 16px; fill: var(--star); }
+.pdp .price { font-size: 1.75rem; margin-top: var(--space-5); display: block; }
+.pdp .desc { margin-top: var(--space-4); color: var(--muted); max-width: 48ch; }
+.opt { margin-top: var(--space-8); }
+.opt__label { display: flex; justify-content: space-between; font: 700 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--navy); margin-bottom: var(--space-3); }
+.opt__label span { font-weight: 400; color: var(--muted); letter-spacing: 0; text-transform: none; font-size: var(--text-sm); }
+.sizes { display: grid; grid-template-columns: repeat(6, minmax(48px, 1fr)); gap: var(--space-2); max-width: 420px; }
+.size { min-height: var(--control); border-radius: var(--radius-sm); border: 1px solid transparent; background: var(--card-alt); color: var(--ink); cursor: pointer; font: 500 var(--text-sm)/1 var(--font-body); transition: background var(--dur-fast), border-color var(--dur-fast), box-shadow var(--dur-fast); }
+.size:hover:not(:disabled) { border-color: var(--ink); }
+.size[aria-checked="true"] { background: var(--card); border-color: var(--navy); box-shadow: var(--shadow-pop); font-weight: 700; }
+.size:disabled { color: var(--muted); text-decoration: line-through; cursor: not-allowed; background: transparent; border: 1px dashed var(--line); }
+.buy { display: flex; gap: var(--space-3); margin-top: var(--space-8); max-width: 420px; }
+.buy .pill { flex: 1; }
+.perks { list-style: none; padding: 0; margin: var(--space-8) 0 0; display: grid; gap: var(--space-3); font-size: var(--text-sm); color: var(--muted); }
+.perks li { display: flex; gap: var(--space-3); align-items: center; }
+.perks li::before { content: "✓"; width: 24px; height: 24px; flex: none; border-radius: 50%; background: var(--card); color: var(--green-ink); display: grid; place-items: center; font-weight: 700; font-size: var(--text-xs); }
+
+/* ---------- Pied ---------- */
+.foot { background: var(--navy); color: var(--text-inv); padding-top: var(--space-24); overflow: hidden; }
+.foot__top > * { min-width: 0; }
+.foot__top { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: center; }
+.foot h2 { font-size: var(--text-title); }
+.foot h2 span { color: var(--green-bright); }
+.foot__lead { color: var(--muted-inv); margin-top: var(--space-5); max-width: 40ch; }
+.news { display: flex; gap: var(--space-2); margin-top: var(--space-8); max-width: 460px; padding: var(--space-1); border-radius: var(--radius-pill); background: var(--navy-2); }
+.news input { flex: 1; min-width: 0; border: 0; background: none; color: var(--text-inv); padding: 0 var(--space-5); font: 400 var(--text-base) var(--font-body); min-height: var(--control); outline: none; }
+.news input::placeholder { color: var(--muted-inv); }
+.news:focus-within { box-shadow: 0 0 0 2px var(--green-bright); }
+.news-note { color: var(--muted-inv); font-size: var(--text-xs); margin-top: var(--space-3); min-height: 1.4em; }
+.collage { position: relative; aspect-ratio: 1.25; max-width: 560px; justify-self: end; width: 100%; }
+.bubble { position: absolute; border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: var(--b); animation: float 6s ease-in-out infinite; }
+.bubble .garment { width: 58%; filter: none; }
+.bubble--1 { left: 0; top: 10%; width: 46%; aspect-ratio: 1; --b: var(--green); }
+.bubble--2 { left: 38%; top: 0; width: 34%; aspect-ratio: 1; --b: var(--mint); animation-delay: -2s; }
+.bubble--3 { right: 0; top: 34%; width: 40%; aspect-ratio: 1; --b: var(--card-alt); animation-delay: -4s; }
+.bubble--4 { left: 34%; bottom: 0; width: 26%; aspect-ratio: 1; --b: var(--navy-2); animation-delay: -3s; }
+.links { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); margin-top: var(--space-24); padding-top: var(--space-8); border-top: 1px solid var(--line-inv); font-size: var(--text-sm); }
+.links h3 { font: 400 var(--text-lg)/1 var(--font-display); text-transform: uppercase; margin-bottom: var(--space-3); }
+.links a { display: block; padding: var(--space-1) 0; color: var(--muted-inv); transition: color var(--dur-fast); }
+.links a:hover { color: var(--text-inv); }
+.logo-card { margin-top: var(--space-12); margin-bottom: var(--gutter); border-radius: var(--radius-xl); background: var(--mint); color: var(--navy); padding: var(--space-8) var(--space-8) 0; overflow: hidden; }
+.logo-card p:first-child { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-xs); color: var(--muted); }
+.logo-card .xl { font: 400 var(--text-logo-xl)/0.78 var(--font-logo); letter-spacing: -0.03em; text-align: center; translate: 0 8%; white-space: nowrap; }
+.logo-card .xl i { font-style: normal; color: var(--green); }
+
+/* ---------- Mouvement ---------- */
+@keyframes up { from { opacity: 0; transform: translateY(40%); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes spin-in { from { opacity: 0; transform: rotate(-60deg); } }
+@keyframes float { 50% { translate: 0 -8px; } }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .pdp, .foot__top { grid-template-columns: minmax(0, 1fr); }
+  .collage { justify-self: center; }
+  .links { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .nav { grid-template-columns: 1fr auto; }
+  .nav__links { display: none; }
+  .hero { grid-template-columns: 1fr; padding-top: var(--space-6); gap: 0; }
+  .hero__copy { padding-bottom: var(--space-6); }
+  .hero__row { gap: var(--space-6); margin-top: var(--space-6); }
+  .stage { min-height: 380px; }
+  .tag-float { right: 0; top: 2%; }
+  .news .pill { padding: 0 var(--space-5); }
+  .grid { gap: var(--space-3); }
+  .card h3 { font-size: var(--text-base); }
+  .card__row { flex-direction: column; align-items: flex-start; gap: 0; }
+  .swatches { margin-left: calc(-1 * var(--space-3)); }
+  .pdp__media { grid-template-columns: 1fr; }
+  .thumbs { grid-auto-flow: column; justify-content: start; order: 2; }
+  .thumb { width: 64px; }
+  .sizes { grid-template-columns: repeat(3, 1fr); }
+  .section { padding-block: var(--space-16); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="logo" href="#" aria-label="Brume, accueil">brume<i>.</i></a>
+    <nav class="nav__links" aria-label="Principale"><a href="#shop" aria-current="page">Nouveautés</a><a href="#shop">Hauts</a><a href="#shop">Bas</a><a href="#shop">Accessoires</a><a href="#pdp">Best-seller</a></nav>
+    <div class="nav__tools">
+      <button class="icon-btn" aria-label="Rechercher"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button class="icon-btn" aria-label="Mon compte"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
+      <a class="icon-btn" href="#pdp" id="bag" aria-label="Panier, 2 articles"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6z"/><path d="M9 8a3 3 0 016 0"/></svg><span class="badge" id="bagCount" aria-hidden="true">2</span></a>
+    </div>
+  </div>
+
+  <div class="wrap hero">
+    <div class="hero__copy">
+      <p class="eyebrow">Collection automne 2026</p>
+      <h1 class="display"><span>Des basiques</span><span>pensés pour</span><span>chaque jour</span></h1>
+      <div class="hero__row">
+        <a class="pill pill--paper" href="#shop">Explorer <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="stats">
+          <div class="stat"><b>120<span>+</span></b><p>Pièces essentielles</p></div>
+          <div class="stat"><b>15k<span>+</span></b><p>Clients satisfaits</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="stage" data-slot="hero-model" role="img" aria-label="Mannequin portant le sweat à capuche Nuage, devant un arc vert">
+      <div class="disc"></div>
+      <div class="arc"></div>
+      <div class="model">
+        <span class="m-hair"></span><span class="m-head"></span><span class="m-neck"></span>
+        <span class="m-body"></span><span class="m-hood"></span>
+        <span class="m-string" style="left:45%"></span><span class="m-string" style="left:53.5%"></span>
+      </div>
+      <div class="tag-float"><span class="dot" aria-hidden="true">✦</span><span><b>Sweat Nuage</b>Coton bio 380 g · 59 €</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="band" aria-label="Soldes d'automne : livraison offerte dès 60 €, retours gratuits sous 30 jours">
+  <div class="band__track" aria-hidden="true">
+    <p><span>Soldes d'automne</span><span>Livraison offerte dès 60 €</span><span>Retours gratuits 30 jours</span><span>Coton biologique</span></p>
+    <p><span>Soldes d'automne</span><span>Livraison offerte dès 60 €</span><span>Retours gratuits 30 jours</span><span>Coton biologique</span></p>
+  </div>
+</div>
+
+<main class="on-light">
+  <section class="section wrap" id="shop" aria-labelledby="shopTitle">
+    <div class="head">
+      <h2 class="display" id="shopTitle">Collections <em>soigneusement</em> choisies</h2>
+      <div class="chips" role="group" aria-label="Filtrer par catégorie">
+        <button class="chip" aria-pressed="true" data-f="all">Tout</button><button class="chip" aria-pressed="false" data-f="haut">Hauts</button><button class="chip" aria-pressed="false" data-f="bas">Bas</button><button class="chip" aria-pressed="false" data-f="acc">Accessoires</button>
+      </div>
+    </div>
+    <div class="grid" id="grid">
+      <article class="card" data-cat="haut">
+        <div class="card__media" data-slot="product-1"><span class="card__new">Nouveau</span><span class="garment tee" style="--g:var(--cloth-white)" role="img" aria-label="T-shirt épais blanc cassé"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter T-shirt épais aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">T-shirt épais 240 g</a></h3>
+        <div class="card__row"><span class="price">29 €</span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-white)" aria-label="Blanc cassé"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-sand)" aria-label="Sable"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-black)" aria-label="Noir"></button></div></div>
+      </article>
+      <article class="card" data-cat="haut">
+        <div class="card__media" data-slot="product-2"><span class="garment hoodie" style="--g:var(--cloth-olive)" role="img" aria-label="Sweat à capuche olive"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Sweat Nuage aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">Sweat à capuche Nuage</a></h3>
+        <div class="card__row"><span class="price">59 € <s>79 €</s></span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-olive)" aria-label="Olive"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-white)" aria-label="Blanc cassé"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button></div></div>
+      </article>
+      <article class="card" data-cat="bas">
+        <div class="card__media" data-slot="product-3"><span class="garment pants" style="--g:var(--cloth-sand)" role="img" aria-label="Pantalon cargo sable"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Pantalon cargo aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">Pantalon cargo souple</a></h3>
+        <div class="card__row"><span class="price">69 €</span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-sand)" aria-label="Sable"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-olive)" aria-label="Olive"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-black)" aria-label="Noir"></button></div></div>
+      </article>
+      <article class="card" data-cat="acc">
+        <div class="card__media" data-slot="product-4"><span class="card__new">-20 %</span><span class="garment cap" style="--g:var(--cloth-rust)" role="img" aria-label="Casquette en coton rouille"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Casquette aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">Casquette coton lavé</a></h3>
+        <div class="card__row"><span class="price">20 € <s>25 €</s></span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-rust)" aria-label="Rouille"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-sand)" aria-label="Sable"></button></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section wrap pdp" id="pdp" aria-labelledby="pdpTitle">
+    <div class="pdp__media">
+      <div class="thumbs" role="group" aria-label="Vues du produit">
+        <button class="thumb" aria-current="true" aria-label="Vue de face" data-g="hoodie" data-c="var(--cloth-olive)"><span class="garment hoodie" style="--g:var(--cloth-olive)"></span></button>
+        <button class="thumb" aria-current="false" aria-label="Coloris blanc cassé" data-g="hoodie" data-c="var(--cloth-white)"><span class="garment hoodie" style="--g:var(--cloth-white)"></span></button>
+        <button class="thumb" aria-current="false" aria-label="Coloris marine" data-g="hoodie" data-c="var(--cloth-navy)"><span class="garment hoodie" style="--g:var(--cloth-navy)"></span></button>
+      </div>
+      <div class="big" data-slot="pdp-main"><span class="garment hoodie" id="bigG" style="--g:var(--cloth-olive)" role="img" aria-label="Sweat à capuche Nuage, vue de face"></span><span class="tag">Le mannequin mesure 1,82 m et porte un M</span></div>
+    </div>
+    <div>
+      <p class="crumbs">Hauts / Sweats</p>
+      <h2 class="display" id="pdpTitle">Sweat à capuche Nuage</h2>
+      <div class="rating"><span class="stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.6-4.8 4.3 1.4 6.4L10 15l-5.6 3.3 1.4-6.4L1 7.6l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.6-4.8 4.3 1.4 6.4L10 15l-5.6 3.3 1.4-6.4L1 7.6l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.6-4.8 4.3 1.4 6.4L10 15l-5.6 3.3 1.4-6.4L1 7.6l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.6-4.8 4.3 1.4 6.4L10 15l-5.6 3.3 1.4-6.4L1 7.6l6.4-.6z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.6 6 6.4.6-4.8 4.3 1.4 6.4L10 15l-5.6 3.3 1.4-6.4L1 7.6l6.4-.6z"/></svg></span><span>4,8 sur 5 · 126 avis</span></div>
+      <span class="price">59 € <s>79 €</s></span>
+      <p class="desc">Molleton gratté 380 g en coton biologique, coupe légèrement ample, capuche doublée et poche kangourou. Le sweat qu'on ne quitte plus de l'automne.</p>
+      <div class="opt">
+        <p class="opt__label" id="sizeLbl">Taille <span>Guide des tailles</span></p>
+        <div class="sizes" role="radiogroup" aria-labelledby="sizeLbl">
+          <button class="size" role="radio" aria-checked="false">XS</button><button class="size" role="radio" aria-checked="false">S</button><button class="size" role="radio" aria-checked="true">M</button><button class="size" role="radio" aria-checked="false">L</button><button class="size" role="radio" aria-checked="false">XL</button><button class="size" role="radio" aria-checked="false" disabled aria-label="XXL, épuisé">XXL</button>
+        </div>
+      </div>
+      <div class="buy">
+        <button class="pill pill--green" id="add">Ajouter au panier</button>
+        <button class="square" id="save" aria-pressed="false" aria-label="Enregistrer pour plus tard"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></button>
+      </div>
+      <ul class="perks"><li>Livraison offerte dès 60 €, sous 48 h</li><li>Retours gratuits pendant 30 jours</li><li>Fabriqué au Portugal, coton certifié</li></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <h2 class="display">Essentiels <span>polyvalents</span></h2>
+        <p class="foot__lead">Une garde-robe courte, des pièces qui vont ensemble. Recevez les nouveautés et 10 % sur votre première commande.</p>
+        <form class="news" id="news" novalidate><label class="sr-only" for="nmail">Adresse e-mail</label><input id="nmail" type="email" placeholder="Votre e-mail" autocomplete="email" required aria-describedby="nnote"><button class="pill pill--green" type="submit">S'inscrire</button></form>
+        <p class="news-note" id="nnote" aria-live="polite"></p>
+      </div>
+      <div class="collage" data-slot="footer-collage" role="img" aria-label="Collage de vêtements dans des cercles">
+        <span class="bubble bubble--1"><span class="garment tee" style="--g:var(--cloth-white)"></span></span>
+        <span class="bubble bubble--2"><span class="garment cap" style="--g:var(--cloth-navy)"></span></span>
+        <span class="bubble bubble--3"><span class="garment hoodie" style="--g:var(--cloth-olive)"></span></span>
+        <span class="bubble bubble--4"><span class="garment pants" style="--g:var(--cloth-sand)"></span></span>
+      </div>
+    </div>
+    <div class="links">
+      <div><h3>Boutique</h3><a href="#shop">Nouveautés</a><a href="#shop">Hauts</a><a href="#shop">Bas</a></div>
+      <div><h3>Aide</h3><a href="#">Livraison</a><a href="#">Retours</a><a href="#">Guide des tailles</a></div>
+      <div><h3>Maison</h3><a href="#">Notre coton</a><a href="#">Ateliers</a><a href="#">Journal</a></div>
+      <div><h3>Suivre</h3><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a></div>
+    </div>
+    <div class="logo-card">
+      <p><span>© 2026 Brume — marque fictive de démonstration</span><span>Mentions légales · Confidentialité</span></p>
+      <p class="xl" aria-hidden="true">brume<i>.</i></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  document.querySelectorAll('[role="radiogroup"]').forEach(g => {
+    const items = [...g.querySelectorAll('[role="radio"]:not(:disabled)')];
+    const pick = b => { items.forEach(x => { x.setAttribute('aria-checked', x === b); x.tabIndex = x === b ? 0 : -1; }); };
+    items.forEach(b => { if (b.getAttribute('aria-checked') !== 'true') b.tabIndex = -1;
+      b.addEventListener('click', () => { pick(b); const card = b.closest('.card'); if (card) card.querySelector('.garment').style.setProperty('--g', b.style.getPropertyValue('--c')); });
+      b.addEventListener('keydown', e => { const i = items.indexOf(b), d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (d) { e.preventDefault(); const n = items[(i + d + items.length) % items.length]; n.click(); n.focus(); } });
+    });
+  });
+  document.querySelectorAll('.fav, #save').forEach(b => b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true')));
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
+    document.querySelectorAll('.card').forEach(k => k.classList.toggle('is-hidden', c.dataset.f !== 'all' && k.dataset.cat !== c.dataset.f));
+  }));
+  const big = document.getElementById('bigG');
+  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => { document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-current', x === t)); big.style.setProperty('--g', t.dataset.c); }));
+  const add = document.getElementById('add'), count = document.getElementById('bagCount'), bag = document.getElementById('bag'); let n = 2;
+  add.addEventListener('click', () => { if (add.dataset.state) return; add.setAttribute('aria-busy', 'true'); add.textContent = 'Ajout…';
+    setTimeout(() => { n++; count.textContent = n; bag.setAttribute('aria-label', `Panier, ${n} articles`); count.classList.add('bump'); setTimeout(() => count.classList.remove('bump'), 300);
+      add.removeAttribute('aria-busy'); add.dataset.state = 'done'; add.textContent = 'Ajouté ✓';
+      setTimeout(() => { delete add.dataset.state; add.textContent = 'Ajouter au panier'; }, 1800); }, 500); });
+  const news = document.getElementById('news'), mail = document.getElementById('nmail'), note = document.getElementById('nnote');
+  news.addEventListener('submit', e => { e.preventDefault(); if (!mail.checkValidity()) { mail.setAttribute('aria-invalid', 'true'); note.textContent = 'Adresse invalide : vérifiez le format nom@domaine.fr.'; mail.focus(); return; }
+    mail.removeAttribute('aria-invalid'); note.textContent = 'Bienvenue ! Votre code de 10 % arrive par e-mail.'; news.reset(); });
+})();
+</script>
+</body>
+</html>

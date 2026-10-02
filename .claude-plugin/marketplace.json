@@ -1,0 +1,14 @@
+{
+  "name": "kobo",
+  "description": "Kōbō : des skills de direction artistique complets pour construire des sites au style précis (jeu vidéo, gacha, splash art, Japon, street art).",
+  "owner": {
+    "name": "Ylian"
+  },
+  "plugins": [
+    {
+      "name": "kobo-design",
+      "source": "./plugins/kobo-design",
+      "description": "Skills de design analysés à partir de sites de référence, avec tokens, composants, mises en page, mouvement et page d'exemple testée."
+    }
+  ]
+}

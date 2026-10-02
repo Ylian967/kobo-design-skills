@@ -1,0 +1,33 @@
+/*
+ * Noir Inferno Chapters — tokens
+ * Palette de la fiche Awwwards (#000, #9C9C9C, #fff), voir source.md.
+ * @contrast text:bg muted:bg text:mid
+ */
+:root {
+  /* Couleurs : noir et blanc stricts */
+  --bg: #000000;
+  --text: #ffffff;
+  --muted: #9c9c9c;
+  --mid: #2a2a2a;            /* gris foncé des scènes, sous les titres */
+  --haze: rgb(255 255 255 / 0.08);  /* brume, particules */
+  --shade: radial-gradient(70% 60% at 50% 45%, transparent 40%, rgb(0 0 0 / .65));  /* vignettage */
+
+  /* Typographie */
+  --font-title: 'Playfair Display SC', 'Bodoni Moda', Georgia, serif;   /* titres de cercle, 900 */
+  --font-ui: 'Josefin Sans', system-ui, sans-serif;                     /* navigation, capitales espacées */
+  --font-number: 'Playfair Display', Georgia, serif;
+  --text-2xs: 0.625rem;   /* 10px nav */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-title: clamp(1.75rem, 3.6vw, 3rem);   /* titres sobres, centrés */
+  --text-number: clamp(2rem, 3vw, 2.75rem);
+  --tracking-ui: 0.28em;
+
+  /* Espace */
+  --edge: 40px;
+  --space-2: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.7, 0, 0.3, 1);
+  --dur: 1200ms; --dur-title: 1800ms; --drift: 40s;
+}

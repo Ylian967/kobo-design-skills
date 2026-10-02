@@ -1,0 +1,45 @@
+/*
+ * Lore Frame Editorial — tokens
+ * Couleur de la fiche Awwwards (#6D64A3) + polices chargées par la référence (ABC Whyte, IBM Plex Mono), voir source.md.
+ * @contrast text:bg muted:bg on-ink:ink on-accent:accent muted-dark:ink
+ */
+:root {
+  /* Couleurs */
+  --bg: #ffffff;
+  --text: #0f0f12;
+  --muted: #6b6b76;
+  --ink: #1b1726;             /* chapitres illustrés sombres */
+  --on-ink: #ffffff;
+  --muted-dark: #9a96ad;
+  --accent: #6d64a3;          /* violet de lore (fiche Awwwards) */
+  --on-accent: #ffffff;
+  --signal: #c9f26b;          /* lueur de faction (ponctuelle, sur sombre) */
+  --frame: rgb(15 15 18 / 0.14);       /* filets du cadre sur blanc */
+  --frame-dark: rgb(255 255 255 / 0.18);
+
+  /* Typographie */
+  --font-display: 'Inter Tight', 'ABC Whyte', 'Helvetica Neue', Arial, sans-serif;  /* graisse 900, très serrée */
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --text-2xs: 0.625rem;    /* micro-labels mono */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;     /* paragraphes courts */
+  --text-lg: clamp(1.75rem, 3.4vw, 3rem);     /* titres de chapitre */
+  --text-hero: clamp(3.5rem, 9vw, 9rem);      /* manifeste géant */
+  --tracking-display: -0.055em;
+  --leading-display: 0.86;
+  --tracking-mono: 0.04em;
+
+  /* Cadre et grille */
+  --frame-inset: 16px;     /* le cadre fin entoure tout l'écran */
+  --rail: 56px;            /* rail gauche (étoile, numéro) */
+  --nav-h: 44px;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-20: 80px;
+
+  /* Formes */
+  --chamfer: 18px;         /* coin coupé des vignettes */
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 250ms; --dur: 700ms; --dur-draw: 1400ms;
+}

@@ -1,0 +1,56 @@
+/*
+ * {{Nom du style}} — tokens
+ * Valeurs mesurées sur le site de référence (voir source.md), arrondies sur une échelle cohérente.
+ * @contrast text:bg text:surface muted:bg on-accent:accent
+ */
+:root {
+  /* Couleurs */
+  --bg: #000000;
+  --surface: #000000;
+  --text: #ffffff;
+  --muted: #aaaaaa;
+  --accent: #ff0000;
+  --on-accent: #000000;
+  --line: #333333;
+
+  /* Typographie */
+  --font-display: '{{Display}}', system-ui, sans-serif;
+  --font-body: '{{Body}}', system-ui, sans-serif;
+  --font-mono: '{{Mono}}', ui-monospace, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --text-hero: clamp(3rem, 8vw, 7rem);
+  --leading-tight: 1;
+  --leading-body: 1.6;
+  --tracking-caps: 0.12em;
+
+  /* Espace (base 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --container: 1280px;
+
+  /* Formes */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --border: 1px solid var(--line);
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.2);
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 150ms;
+  --dur-base: 280ms;
+  --dur-slow: 600ms;
+}

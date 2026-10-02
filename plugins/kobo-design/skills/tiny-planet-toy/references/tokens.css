@@ -1,0 +1,39 @@
+/*
+ * Tiny Planet Toy — tokens
+ * Couleurs relevées sur captures (rendu WebGL, non mesurable par script), voir source.md.
+ * @contrast text:bg muted:paper text:paper on-accent:accent
+ */
+:root {
+  /* Couleurs */
+  --bg: #63c5be;            /* turquoise de l'espace autour de la planète */
+  --bg-deep: #4fb3ac;
+  --speck: rgb(255 255 255 / 0.35);  /* poussières qui flottent */
+  --paper: #f6f1e4;         /* lettres du logo, panneaux, bulles */
+  --text: #173b3a;          /* encre vert sapin */
+  --muted: #4a5a58;
+  --accent: #f4c84a;        /* bouton jaune « BEGIN » */
+  --accent-edge: #c9952a;   /* bord inférieur du bouton (relief) */
+  --on-accent: #2b2118;
+  --grass: #4c9a5a; --roof: #d0644a; --stone: #b9b5a6; --sky-shadow: rgb(23 59 58 / 0.18);
+
+  /* Typographie */
+  --font-display: 'Bungee', 'Rubik Mono One', system-ui, sans-serif;  /* lettres-blocs du logo */
+  --font-ui: 'Silkscreen', ui-monospace, monospace;                   /* bouton, étiquettes de jeu */
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 2rem;
+  --text-logo: clamp(3rem, 10vw, 7rem);
+
+  /* Espace */
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+
+  /* Formes */
+  --radius-sm: 4px; --radius-md: 10px; --radius-lg: 20px;
+  --tilt: -3deg;            /* bouton et bulles légèrement penchés */
+  --press: 4px;             /* hauteur du relief des boutons */
+  --outline: 2px solid var(--text);
+
+  /* Mouvement */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --dur-fast: 150ms; --dur: 350ms; --spin: 60s;
+}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bastions — Arena Guide (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@1,800&family=Source+Sans+3:wght@400;600&family=Inter:wght@600;700&display=swap">
+<style>
+:root {
+  --bg: #0a1428; --bg-2: #161f32; --panel: #3b4353; --nav: #111111; --paper: #ffffff; --text: #ffffff; --muted: #a09b8c; --ink: #0a1428; --ink-muted: #5b5a56;
+  --gold: #c8aa6e; --on-gold: #111111; --accent: #0bc4e2; --accent-2: #2c8cc2; --on-accent: #111111; --enemy: #e84057; --line: rgb(255 255 255 / 0.22);
+  --grad-cta: linear-gradient(315deg, var(--accent) 0%, var(--accent-2) 100%);
+  --font-display: 'Spectral', 'Beaufort for LOL', Georgia, serif; --font-body: 'Source Sans 3', 'Spiegel', system-ui, sans-serif; --font-ui: 'Inter', system-ui, sans-serif;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-base: 1.125rem; --text-lg: 1.375rem; --text-xl: 1.5rem; --text-title: clamp(2.25rem, 4vw, 3.571rem);
+  --leading-body: 1.556; --leading-title: 1.125; --tracking-ui: 0.08em;
+  --space-1: 4px; --space-2: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
+  --container: 1208px; --text-col: 880px; --nav-h: 80px;
+  --radius-sm: 6.4px; --radius-md: 8px; --radius-lg: 12px; --ring: 4px;
+  --ease-snap: cubic-bezier(0.06, 0.81, 0, 0.98); --ease: ease; --dur-fast: 200ms; --dur-base: 300ms; --dur-color: 1000ms;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--bg-2); color: var(--text); font: 400 var(--text-base)/var(--leading-body) var(--font-body); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.nav { height: var(--nav-h); display: flex; align-items: center; gap: var(--space-8); padding: 0 36px; background: var(--nav); }
+.brand { font: italic 800 1.4rem/1 var(--font-display); color: var(--gold); text-transform: uppercase; }
+.nav ul { display: flex; gap: 36px; margin: 0 auto; padding: 0; list-style: none; }
+.nav ul a { font: 700 var(--text-sm) var(--font-ui); text-transform: uppercase; letter-spacing: .04em; text-decoration: none; transition: color var(--dur-base) var(--ease); }
+.nav ul a:hover { color: var(--gold); }
+.search { width: 44px; height: 44px; border-radius: var(--radius-md); background: #2a2a2a; border: 0; color: var(--text); font-size: 18px; }
+.btn-play { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 16px; border: 0; border-radius: var(--radius-lg); background: var(--grad-cta); color: var(--on-accent); font: 600 var(--text-xs)/1 var(--font-ui); letter-spacing: var(--tracking-ui); text-transform: uppercase; text-decoration: none; cursor: pointer; transition: filter var(--dur-base) var(--ease); }
+.btn-play:hover { filter: brightness(1.12); }
+.btn-play--lg { min-height: 48px; min-width: min(437px, 100%); font-size: 1rem; }
+.btn-gold { display: inline-flex; align-items: center; min-height: 48px; padding: 0 32px; background: var(--gold); color: var(--on-gold); font: 700 var(--text-sm) var(--font-ui); text-transform: uppercase; text-decoration: none; transition: filter var(--dur-base) var(--ease); }
+.btn-gold:hover { filter: brightness(1.1); }
+
+.title { margin: 0 0 var(--space-6); font: italic 800 var(--text-title)/var(--leading-title) var(--font-display); text-transform: uppercase; text-wrap: balance; }
+.subtitle { margin: var(--space-6) 0 var(--space-4); font: italic 800 var(--text-xl) var(--font-display); text-transform: uppercase; }
+.center { text-align: center; }
+.col { max-width: var(--text-col); margin: 0 auto; }
+
+.hero { position: relative; min-height: 480px; display: flex; align-items: center; padding: 0 48px; background: linear-gradient(90deg, rgb(10 20 40 / .92) 30%, transparent 70%), radial-gradient(60% 80% at 70% 50%, #4a5a74, var(--bg)); }
+.hero__inner { max-width: 520px; }
+.hero__kicker { margin: 0 0 8px; }
+.hero em { display: block; margin-bottom: var(--space-12); font-size: var(--text-sm); }
+
+.intro { background: var(--paper); color: var(--ink); padding: var(--space-16) var(--space-4) 0; text-align: center; }
+.intro p { color: var(--ink); }
+.panorama { height: 280px; margin-top: var(--space-16); background: linear-gradient(180deg, var(--paper), #9fb4c9 30%, #3c5a6e 70%, var(--bg)); -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%); mask-image: linear-gradient(180deg, transparent, #000 25%); }
+
+.section { padding: var(--space-16) var(--space-6); background: var(--bg); }
+.what { min-height: 420px; display: grid; place-items: center; text-align: center; background: radial-gradient(60% 70% at 50% 50%, #26405a, var(--bg)); }
+
+.split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-12); max-width: var(--container); margin: 0 auto; align-items: center; }
+.split > * { min-width: 0; text-align: center; }
+.medals { display: flex; justify-content: center; gap: var(--space-8); margin-top: var(--space-8); }
+.medal { display: grid; justify-items: center; gap: var(--space-4); background: none; border: 0; cursor: pointer; color: var(--muted); font: 700 var(--text-sm) var(--font-ui); text-transform: uppercase; transition: color var(--dur-color) var(--ease-snap); }
+.medal__img { position: relative; width: 92px; height: 92px; border-radius: 50%; border: var(--ring) solid var(--accent); padding: 4px; color: var(--accent); transition: transform var(--dur-base) var(--ease), opacity var(--dur-base) var(--ease); }
+.medal__img i { display: block; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 50% 40%, var(--accent), var(--bg) 70%); }
+.medal--enemy .medal__img { border-color: var(--enemy); color: var(--enemy); }
+.medal--enemy .medal__img i { background: radial-gradient(circle at 50% 40%, var(--enemy), var(--bg) 70%); }
+.medal__img::before { content: ""; position: absolute; left: 50%; top: -11px; width: 10px; height: 10px; background: currentColor; transform: translateX(-50%) rotate(45deg); }
+.medal:hover .medal__img { transform: scale(1.05); }
+.medal[aria-selected="true"] { color: var(--text); }
+.medal[aria-selected="false"] .medal__img { opacity: .65; }
+.stage { position: relative; display: grid; justify-items: center; padding: var(--space-8) 0; }
+.stage::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 40%, #2e5a3a 0 8%, transparent 9%), radial-gradient(circle at 70% 60%, #2e5a3a 0 10%, transparent 11%), linear-gradient(135deg, #1d3a2e, #0f2234); opacity: .8; -webkit-mask-image: radial-gradient(60% 60% at 60% 45%, #000 40%, transparent 75%); mask-image: radial-gradient(60% 60% at 60% 45%, #000 40%, transparent 75%); }
+.big-medal { position: relative; width: 180px; height: 180px; border-radius: 50%; border: 8px solid var(--accent); padding: 8px; color: var(--accent); transition: border-color var(--dur-base) var(--ease-snap); }
+.big-medal::before { content: ""; position: absolute; left: 50%; top: -22px; width: 18px; height: 18px; background: currentColor; transform: translateX(-50%) rotate(45deg); }
+.big-medal i { display: block; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 50% 40%, var(--accent), var(--bg) 70%); transition: background var(--dur-base) var(--ease); }
+.big-medal.is-enemy { border-color: var(--enemy); color: var(--enemy); }
+.big-medal.is-enemy i { background: radial-gradient(circle at 50% 40%, var(--enemy), var(--bg) 70%); }
+.stage p, .stage h3 { position: relative; }
+.swap { transition: opacity var(--dur-base) var(--ease); }
+
+.video { max-width: var(--container); margin: 0 auto; }
+.video__frame { aspect-ratio: 16/9; background: var(--panel); display: grid; place-items: center; color: var(--muted); font: 700 var(--text-sm) var(--font-ui); letter-spacing: .1em; }
+.thumbs { display: flex; justify-content: center; gap: var(--space-4); margin: var(--space-6) 0; overflow-x: auto; }
+.thumbs button { flex: none; width: 126px; height: 72px; background: var(--bg-2); border: 1px solid transparent; cursor: pointer; transition: border-color var(--dur-base) var(--ease); }
+.thumbs button[aria-selected="true"] { border-color: var(--gold); }
+.step { max-width: var(--text-col); margin: 0 auto; padding-top: var(--space-4); border-top: 1px solid var(--line); text-align: center; }
+.step h4 { margin: 0 0 var(--space-6); font: 700 1rem var(--font-ui); text-transform: uppercase; }
+
+.final { text-align: center; padding: var(--space-16) var(--space-6) 96px; background: radial-gradient(50% 80% at 50% 100%, #1d3550, var(--bg)); }
+footer { background: var(--nav); color: var(--muted); text-align: center; padding: var(--space-8); font-size: var(--text-sm); }
+
+.reveal.is-in { animation: rise 600ms var(--ease-snap) both; }
+@keyframes rise { from { transform: translateY(24px); opacity: 0; } }
+
+@media (max-width: 1024px) {
+  .nav ul { display: none; } .nav { justify-content: space-between; padding: 0 16px; }
+  .split { grid-template-columns: 1fr; }
+  body { font-size: 1rem; line-height: 1.625; }
+  .hero { padding: 0 20px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <span class="brand">Bastions</span>
+  <ul><li><a href="#">Aperçu du jeu</a></li><li><a href="#">Héros ▾</a></li><li><a href="#">Actualités ▾</a></li><li><a href="#">Notes de version</a></li><li><a href="#">Découvrir ▾</a></li></ul>
+  <button class="search" aria-label="Rechercher">⌕</button>
+  <a class="btn-play" href="#">Jouer</a>
+</header>
+
+<main>
+  <section class="hero" data-slot="cinematic">
+    <div class="hero__inner">
+      <p class="hero__kicker">Cinématique</p>
+      <h1 class="title">La dernière garde</h1>
+      <em>Même quand la tour tombe, quelqu'un reste debout.</em>
+      <a class="btn-gold" href="#">Regarder</a>
+    </div>
+  </section>
+
+  <section class="intro">
+    <h2 class="title reveal">Comment jouer</h2>
+    <p class="col">Il y a beaucoup à apprendre dans Bastions, alors commençons par les bases. Parcourez le guide ci-dessous pour découvrir le mode de jeu le plus populaire.</p>
+    <div class="panorama" data-slot="panorama" aria-hidden="true"></div>
+  </section>
+
+  <section class="section what">
+    <div class="col">
+      <h2 class="title reveal">Qu'est-ce que Bastions ?</h2>
+      <p>Bastions est un jeu de stratégie en équipe : deux équipes de cinq héros s'affrontent pour détruire la base adverse. Choisissez parmi plus de 90 héros, avancez sur les voies, abattez les tours ennemies et emportez la victoire.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="split">
+      <div>
+        <h2 class="title reveal">Détruire la base</h2>
+        <p>Le Cœur est le centre de chaque base. Détruisez le Cœur ennemi en premier pour remporter la partie.</p>
+        <div class="medals" role="tablist" aria-label="Choisir une base" id="baseTabs">
+          <button class="medal" role="tab" aria-selected="true" data-side="ally" data-title="Votre Cœur" data-text="Votre Cœur fait apparaître vos unités. La fontaine, juste derrière, vous rend vos points de vie et donne accès à la boutique."><span class="medal__img"><i></i></span>Votre Cœur</button>
+          <button class="medal medal--enemy" role="tab" aria-selected="false" data-side="enemy" data-title="Cœur ennemi" data-text="Protégé par deux tours, il ne peut être attaqué qu'une fois une voie entièrement dégagée. Il se régénère si personne ne le frappe."><span class="medal__img"><i></i></span>Cœur ennemi</button>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="big-medal" id="bigMedal"><i></i></div>
+        <h3 class="subtitle swap" id="stageTitle">Votre Cœur</h3>
+        <p class="swap" id="stageText">Votre Cœur fait apparaître vos unités. La fontaine, juste derrière, vous rend vos points de vie et donne accès à la boutique.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="title reveal center">Gagner en puissance</h2>
+    <div class="video">
+      <div class="video__frame" data-slot="tutorial-video">VIDÉO 0:06 · MUETTE · EN BOUCLE</div>
+      <div class="thumbs" role="tablist" aria-label="Étapes">
+        <button role="tab" aria-selected="true" aria-label="Expérience"></button><button role="tab" aria-selected="false" aria-label="Or"></button><button role="tab" aria-selected="false" aria-label="Objets"></button><button role="tab" aria-selected="false" aria-label="Compétences"></button>
+      </div>
+      <div class="step"><h4>Gagner de l'expérience</h4><p>Quand un héros accumule assez d'expérience, il monte de niveau et peut améliorer ses compétences. On en gagne en éliminant des unités ennemies, en aidant ses alliés ou en détruisant des structures.</p></div>
+    </div>
+  </section>
+
+  <section class="final">
+    <h2 class="title reveal">Prêt à entrer dans l'arène ?</h2>
+    <a class="btn-play btn-play--lg" href="#">Jouer gratuitement</a>
+  </section>
+</main>
+<footer>© Éditeur fictif — démo Kōbō. Jeu, héros et lieux inventés.</footer>
+
+<script>
+(() => {
+  document.querySelectorAll('[role=tablist]').forEach(list => {
+    const tabs = [...list.querySelectorAll('[role=tab]')];
+    const select = t => { tabs.forEach(x => x.setAttribute('aria-selected', x === t)); list.dispatchEvent(new CustomEvent('tabchange', { detail: t })); };
+    tabs.forEach(t => t.addEventListener('click', () => select(t)));
+    list.addEventListener('keydown', e => { const i = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true'); let n = null; if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length]; if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length]; if (n) { select(n); n.focus(); } });
+  });
+  const big = document.getElementById('bigMedal'), st = document.getElementById('stageTitle'), sx = document.getElementById('stageText');
+  document.getElementById('baseTabs').addEventListener('tabchange', e => {
+    const t = e.detail; [st, sx].forEach(el => el.style.opacity = 0);
+    big.classList.toggle('is-enemy', t.dataset.side === 'enemy');
+    setTimeout(() => { st.textContent = t.dataset.title; sx.textContent = t.dataset.text; [st, sx].forEach(el => el.style.opacity = 1); }, 180);
+  });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .3 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

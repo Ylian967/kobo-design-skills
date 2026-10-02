@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trailo — Zigzag Snack Pop (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,600;0,800;1,800;1,900&display=swap">
+<style>
+:root {
+  --orange: #e85a0c; --orange-bright: #ff6a13; --orange-deep: #c94a00; --orange-ink: #b84300;
+  --yellow: #ffe415; --ink: #2a160c; --bar: #4a2a1a; --brown: #5a3121; --brown-deep: #3f2015;
+  --white: #ffffff; --cream: #fff6e0; --cream-text: #f3e3cf; --muted: #7a5a48;
+  --flavor-lemon: #f7d9a8; --flavor-berry: #ffc9d6; --flavor-mint: #bfe3a1; --flavor-sky: #a9d4f5; --flavor-oat: #e9d3b8;
+  --font-display: 'Anton', 'Bebas Neue', Impact, sans-serif; --font-body: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
+  --text-h2: clamp(2.25rem, 5vw, 4rem); --text-hero: clamp(3.25rem, 9vw, 7.5rem); --text-giant: clamp(5rem, 22vw, 20rem);
+  --leading-display: 0.92; --tracking-caps: 0.06em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --container: 1200px; --gutter: clamp(16px, 4vw, 48px);
+  --radius-sm: 4px; --radius: 8px; --radius-pill: 999px; --zigzag: 18px; --zigzag-h: 12px; --badge: 88px; --stamp: 132px; --stroke: 3px;
+  --shadow-hard: 4px 4px 0 var(--ink); --shadow-hard-lg: 6px 6px 0 var(--ink); --shadow-press: 1px 1px 0 var(--ink);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms; --dur: 280ms; --dur-slow: 600ms; --dur-stamp: 14s;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--cream); color: var(--ink); font: 400 var(--text-base)/1.5 var(--font-body); }
+img, svg { display: block; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; box-shadow: 0 0 0 6px var(--ink); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
+.display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: var(--leading-display); letter-spacing: 0.01em; margin: 0; }
+
+/* ---------- Zigzag (signature) ---------- */
+.zz-bottom { mask: conic-gradient(from -45deg at bottom, transparent, var(--ink) 1deg 89deg, transparent 90deg) bottom / var(--zigzag) var(--zigzag-h) repeat-x, linear-gradient(var(--ink) 0 0) top / 100% calc(100% - var(--zigzag-h) + 1px) no-repeat; }
+.zz-both { mask: conic-gradient(from 135deg at top, transparent, var(--ink) 1deg 89deg, transparent 90deg) top / var(--zigzag) var(--zigzag-h) repeat-x,
+                  conic-gradient(from -45deg at bottom, transparent, var(--ink) 1deg 89deg, transparent 90deg) bottom / var(--zigzag) var(--zigzag-h) repeat-x,
+                  linear-gradient(var(--ink) 0 0) center / 100% calc(100% - 2 * var(--zigzag-h) + 2px) no-repeat; }
+
+/* ---------- Navigation ---------- */
+.nav { background: var(--bar); color: var(--white); position: sticky; top: 0; z-index: 20; }
+.nav .wrap { display: flex; align-items: center; gap: var(--space-6); min-height: 64px; }
+.logo { font: 400 1.75rem/1 var(--font-display); color: var(--yellow); text-decoration: none; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.logo i { width: 18px; height: 18px; background: var(--orange-bright); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.nav nav { flex: 1; }
+.nav ul { display: flex; justify-content: center; gap: var(--space-2); list-style: none; margin: 0 auto; padding: 0; }
+.nav ul a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 var(--space-3); font: 600 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; border-radius: var(--radius-sm); transition: background var(--dur-fast); }
+.nav ul a:hover { background: var(--brown); }
+.chev { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+.cart { position: relative; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--white); background: none; color: var(--white); display: grid; place-items: center; cursor: pointer; }
+.cart svg { width: 20px; height: 20px; }
+.cart b { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; border-radius: var(--radius-pill); background: var(--yellow); color: var(--ink); font: 800 11px/20px var(--font-body); text-align: center; }
+.burger { display: none; }
+
+/* ---------- Boutons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 52px; padding: 0 var(--space-6); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm);
+  font: 800 var(--text-sm)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast); }
+.btn--yellow { background: var(--yellow); color: var(--ink); box-shadow: var(--shadow-hard-lg); }
+.btn--yellow:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+.btn--yellow:active { transform: translate(5px, 5px); box-shadow: var(--shadow-press); }
+.btn .arrow { font-size: 1.1em; }
+.pill { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-6); background: var(--yellow); color: var(--ink); border-radius: var(--radius-pill); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: transform var(--dur) var(--ease-pop); }
+.pill:hover { transform: rotate(-4deg) scale(1.05); }
+
+/* ---------- Héros ---------- */
+.hero { --scene: clamp(220px, 24vw, 340px); position: relative; background: var(--orange); color: var(--white); overflow: hidden; padding: var(--space-16) 0 calc(var(--scene) + 70px); }
+.scene { position: absolute; left: 0; right: 0; bottom: 0; height: var(--scene); }
+.hero .sun { position: absolute; left: 50%; top: 55%; width: min(70vw, 760px); aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, var(--orange-bright) 0 55%, transparent 70%); opacity: .9; }
+.mtn { position: absolute; left: 0; right: 0; bottom: 0; }
+.mtn--back { height: 100%; background: var(--orange-deep); clip-path: polygon(0 60%, 9% 30%, 17% 52%, 27% 8%, 38% 48%, 46% 30%, 55% 56%, 66% 12%, 76% 44%, 85% 26%, 100% 50%, 100% 100%, 0 100%); }
+.mtn--back::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 0 40%, var(--orange-bright) 40% 41%, transparent 41%); opacity: .35; }
+.mtn--front { height: 58%; background: var(--orange-ink); clip-path: polygon(0 40%, 12% 10%, 22% 46%, 34% 30%, 50% 62%, 63% 24%, 74% 44%, 88% 4%, 100% 32%, 100% 100%, 0 100%); }
+.figure { position: absolute; color: var(--brown-deep); z-index: 2; }
+.figure svg { width: 100%; height: auto; }
+.figure--climber { left: calc(27% - 2.6vw); bottom: 91%; width: clamp(40px, 5vw, 76px); }
+.figure--bike { right: 10%; bottom: 38%; width: clamp(72px, 10vw, 150px); }
+.figure--skate { left: 6%; bottom: 24%; width: clamp(44px, 6vw, 90px); }
+.hero-copy { position: relative; z-index: 3; text-align: center; }
+.kicker { display: inline-block; margin-bottom: var(--space-4); padding: 6px 12px; background: var(--ink); color: var(--yellow); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.14em; text-transform: uppercase; transform: rotate(-2deg); }
+.hero h1 { font-size: var(--text-hero); }
+.sticker-word { color: var(--yellow); -webkit-text-stroke: var(--stroke) var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--ink); }
+.hero p.lead { max-width: 30rem; margin: var(--space-6) auto var(--space-8); font: 600 var(--text-lg)/1.35 var(--font-body); color: var(--white); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: center; align-items: center; }
+.search { display: flex; align-items: center; gap: var(--space-2); min-height: 52px; width: min(320px, 100%); padding: 0 var(--space-4); background: var(--white); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-hard-lg); }
+.search svg { width: 20px; height: 20px; color: var(--ink); flex: none; }
+.search input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: 600 var(--text-sm) var(--font-body); color: var(--ink); }
+.search input::placeholder { color: var(--muted); }
+.search input:focus { outline: none; }
+.search:focus-within { box-shadow: var(--shadow-hard-lg), 0 0 0 4px var(--yellow); }
+
+/* ---------- Bande ingrédients (zigzag) ---------- */
+.ingredients { position: relative; z-index: 4; margin-top: calc(-1 * var(--zigzag-h)); background: var(--cream); padding: calc(var(--space-12) + var(--zigzag-h)) 0; }
+.ing-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-6); list-style: none; margin: 0; padding: 0; }
+.ing { display: flex; align-items: center; gap: var(--space-4); }
+.ing .badge { flex: none; width: var(--badge); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); color: var(--ink); }
+.ing .badge svg { width: 40px; height: 40px; }
+.ing strong { font: 800 var(--text-base)/1.1 var(--font-body); text-transform: uppercase; letter-spacing: 0.02em; }
+
+/* ---------- Section brune (traces de pneu) ---------- */
+.trail { position: relative; background: var(--brown); color: var(--white); padding: var(--space-24) 0; overflow: hidden; }
+.tyre { position: absolute; top: -10%; bottom: -10%; width: 90px; background: conic-gradient(from 135deg at 50% 70%, var(--brown-deep) 90deg, transparent 0) 0 0 / 30px 26px; opacity: .8; transform: rotate(14deg); }
+.tyre--a { left: 8%; } .tyre--b { left: calc(8% + 120px); opacity: .5; } .tyre--c { right: 4%; transform: rotate(-20deg); }
+.trail .wrap { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-12); align-items: center; }
+.trail h2 { font-size: var(--text-h2); margin: var(--space-4) 0; }
+.big-italic { display: block; font: 900 italic clamp(2.5rem, 6vw, 4.5rem)/1 var(--font-body); color: var(--yellow); letter-spacing: -0.01em; }
+.trail p { color: var(--cream-text); max-width: 34rem; font-size: var(--text-lg); line-height: 1.45; }
+.trail .row { display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; margin-top: var(--space-6); }
+.trail .note { font: 800 italic var(--text-sm) var(--font-body); color: var(--cream-text); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
+.pack-stage { position: relative; display: grid; place-items: center; min-height: 340px; }
+.pack-stage::before { content: ""; position: absolute; width: 78%; aspect-ratio: 1; border-radius: 50%; background: var(--orange); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-lg); }
+
+/* Emballage dessiné en CSS (remplace la photo produit) */
+.pack { position: relative; width: min(420px, 100%); aspect-ratio: 3 / 1; transform: rotate(-12deg); filter: drop-shadow(8px 10px 0 var(--ink));
+  mask: conic-gradient(from 45deg at left, transparent, var(--ink) 1deg 89deg, transparent 90deg) left / 10px 12px repeat-y,
+        conic-gradient(from -135deg at right, transparent, var(--ink) 1deg 89deg, transparent 90deg) right / 10px 12px repeat-y,
+        linear-gradient(var(--ink) 0 0) center / calc(100% - 18px) 100% no-repeat; }
+.pack-body { position: absolute; inset: 0; background: linear-gradient(180deg, var(--bar) 0 18%, var(--yellow) 18% 24%, var(--bar) 24% 76%, var(--yellow) 76% 82%, var(--bar) 82%); display: flex; align-items: center; justify-content: space-between; padding: 0 9%; }
+.pack-body b { font: 400 clamp(1.8rem, 4vw, 2.8rem)/1 var(--font-display); color: var(--yellow); letter-spacing: 0.02em; }
+.pack-body span { font: 900 italic var(--text-sm)/1.05 var(--font-body); color: var(--white); text-align: right; text-transform: uppercase; }
+.pack-body::after { content: ""; position: absolute; left: 0; right: 0; top: 30%; height: 10%; background: linear-gradient(90deg, transparent, var(--white), transparent); opacity: .18; }
+.pack--sm { width: 92%; transform: rotate(-8deg); filter: drop-shadow(5px 6px 0 var(--ink)); }
+.pack--sm .pack-body b { font-size: clamp(1.4rem, 2.6vw, 2rem); }
+.pack--sm .pack-body span { font-size: var(--text-xs); }
+
+/* ---------- Cartes produit ---------- */
+.shop { padding: var(--space-24) 0 var(--space-16); }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-6); flex-wrap: wrap; margin-bottom: var(--space-12); }
+.sec-head h2 { font-size: var(--text-h2); }
+.sec-head h2 em { font-style: normal; color: var(--orange-ink); }
+.sec-head p { margin: 0; max-width: 22rem; color: var(--muted); font-weight: 600; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); align-items: center; list-style: none; margin: 0; padding: 0; }
+.card { position: relative; border: var(--stroke) solid var(--ink); border-radius: var(--radius); background: var(--flavor); box-shadow: var(--shadow-hard-lg); padding: var(--space-6); transition: transform var(--dur) var(--ease-pop); }
+.card:hover { transform: translateY(-6px) rotate(-1deg); }
+.card--featured { padding: var(--space-8) var(--space-6); transform: scale(1.06); z-index: 1; }
+.card--featured:hover { transform: scale(1.06) translateY(-6px) rotate(-1deg); }
+.card .tag { position: absolute; top: -16px; left: var(--space-6); padding: 6px 12px; background: var(--ink); color: var(--yellow); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; border-radius: var(--radius-sm); }
+.card .art { display: grid; place-items: center; aspect-ratio: 4 / 3; }
+.card h3 { margin: var(--space-4) 0 var(--space-1); font: 400 var(--text-xl)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; }
+.card .meta { margin: 0 0 var(--space-4); font: 600 var(--text-sm) var(--font-body); }
+.add { display: flex; width: 100%; min-height: 48px; border: 2px solid var(--ink); border-radius: var(--radius-sm); background: var(--white); color: var(--ink); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; padding: 0; overflow: hidden; transition: background var(--dur-fast); }
+.add span { flex: 1; display: grid; place-items: center; }
+.add .price { flex: none; padding: 0 var(--space-4); border-left: 2px solid var(--ink); color: var(--orange-ink); font-size: var(--text-sm); }
+.add:hover { background: var(--yellow); }
+.add:hover .price { color: var(--ink); }
+.add:active { transform: translateY(2px); }
+.add[aria-pressed="true"] { background: var(--ink); color: var(--yellow); }
+.add[aria-pressed="true"] .price { color: var(--yellow); border-color: var(--yellow); }
+
+/* ---------- Avis + tampon ---------- */
+.reviews { position: relative; padding: var(--space-16) 0 var(--space-24); }
+.reviews .wrap { position: relative; }
+.reviews h2 { font-size: var(--text-h2); margin-bottom: var(--space-8); }
+.rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.rev { background: var(--white); border: var(--stroke) solid var(--ink); border-radius: var(--radius); padding: var(--space-6); box-shadow: var(--shadow-hard); margin: 0; }
+.rev:nth-child(2) { transform: rotate(1.2deg); } .rev:nth-child(3) { transform: rotate(-1deg); }
+.stars { display: flex; gap: 3px; margin-bottom: var(--space-3); color: var(--orange); }
+.stars i { width: 18px; height: 18px; background: currentColor; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.rev blockquote { margin: 0 0 var(--space-4); font: 600 var(--text-base)/1.45 var(--font-body); }
+.rev figcaption { font: 800 var(--text-xs) var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.stamp { position: absolute; right: 0; top: -40px; width: var(--stamp); aspect-ratio: 1; border-radius: 50%; background: var(--yellow); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); color: var(--ink); display: grid; place-items: center; }
+.stamp svg { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); animation: spin var(--dur-stamp) linear infinite; }
+.stamp text { font: 800 11.5px var(--font-body); letter-spacing: 0.18em; fill: currentColor; text-transform: uppercase; }
+.stamp b { width: 34px; height: 34px; background: var(--orange); clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Pied de page ---------- */
+.foot { background: var(--bar); color: var(--white); padding: calc(var(--space-16) + var(--zigzag-h)) 0 0; margin-top: calc(-1 * var(--zigzag-h)); overflow: hidden; }
+.foot-top { display: flex; justify-content: space-between; gap: var(--space-8); flex-wrap: wrap; }
+.foot h3 { margin: 0 0 var(--space-3); font: 400 var(--text-xl)/1 var(--font-display); text-transform: uppercase; color: var(--yellow); }
+.foot p { margin: 0; color: var(--cream-text); max-width: 26rem; }
+.foot form { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.foot form .search { width: min(280px, 100%); box-shadow: 4px 4px 0 var(--yellow); }
+.foot nav { display: flex; gap: var(--space-2) var(--space-6); flex-wrap: wrap; margin-top: var(--space-8); }
+.foot nav a { display: inline-flex; align-items: center; min-height: 44px; font: 600 var(--text-xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; }
+.foot nav a:hover { color: var(--yellow); }
+.foot .giant { max-width: none; margin: var(--space-8) 0 calc(-0.18 * var(--text-giant)); text-align: center; font: 400 var(--text-giant)/1 var(--font-display); text-transform: uppercase; color: transparent; -webkit-text-stroke: 3px var(--yellow); letter-spacing: 0.02em; user-select: none; }
+.legal { position: relative; padding: var(--space-4) 0 var(--space-6); font-size: var(--text-xs); color: var(--cream-text); text-align: center; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 960px) {
+  .nav ul { display: none; }
+  .burger { display: grid; margin-left: auto; width: 44px; height: 44px; place-content: center; gap: 5px; background: none; border: 0; cursor: pointer; }
+  .burger i { width: 24px; height: 3px; background: var(--white); }
+  .ing-list { grid-template-columns: repeat(2, 1fr); }
+  .ing:last-child { grid-column: 1 / -1; }
+  .trail .wrap { grid-template-columns: 1fr; }
+  .cards, .rev-grid { grid-template-columns: 1fr; }
+  .card--featured { transform: none; order: -1; }
+  .card--featured:hover { transform: translateY(-6px); }
+  .stamp { position: relative; top: 0; margin: 0 0 var(--space-6) auto; }
+}
+@media (max-width: 560px) {
+  :root { --badge: 64px; --stamp: 112px; }
+  .hero { --scene: 170px; padding: var(--space-12) 0 calc(var(--scene) + 56px); }
+  .hero h1 { font-size: 3.4rem; }
+  .sticker-word { text-shadow: 3px 3px 0 var(--ink); }
+  .hero p.lead { font-size: var(--text-base); }
+  .hero-actions .btn, .search { width: 100%; }
+  .figure--bike { right: 4%; }
+  .ing { flex-direction: column; text-align: center; gap: var(--space-2); }
+  .ing .badge svg { width: 30px; height: 30px; }
+  .ing strong { font-size: var(--text-sm); }
+  .pack-stage { min-height: 260px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  .rise { opacity: 1 !important; transform: none !important; }
+}
+/* Entrée du héros (au chargement) */
+.rise { animation: rise var(--dur-slow) var(--ease-pop) both; }
+.rise:nth-child(2) { animation-delay: 80ms; } .rise:nth-child(3) { animation-delay: 160ms; } .rise:nth-child(4) { animation-delay: 240ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px) rotate(-2deg); } }
+</style>
+</head>
+<body>
+<a class="sr-only" href="#main">Aller au contenu</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#" aria-label="Trailo, accueil"><i></i>TRAILO</a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#shop">Barres <span class="chev" aria-hidden="true"></span></a></li>
+        <li><a href="#ingredients">Ingrédients <span class="chev" aria-hidden="true"></span></a></li>
+        <li><a href="#trail">Sorties</a></li>
+        <li><a href="#reviews">Avis</a></li>
+      </ul>
+    </nav>
+    <button class="burger" aria-label="Ouvrir le menu"><i></i><i></i><i></i></button>
+    <button class="cart" aria-label="Panier, 2 articles">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8h14l-1.4 11H6.4z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+      <b id="cart-count">2</b>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero zz-bottom" aria-labelledby="hero-title">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="scene">
+    <div class="mtn mtn--back" data-slot="mountains-back" aria-hidden="true"></div>
+    <div class="mtn mtn--front" data-slot="mountains-front" aria-hidden="true"></div>
+
+    <!-- Silhouettes d'aventure dessinées (remplacent les illustrations d'origine) -->
+    <div class="figure figure--climber" data-slot="figure-climber" aria-hidden="true">
+      <svg viewBox="0 0 60 100" fill="currentColor"><rect x="40" y="2" width="3" height="58"/><path d="M43 4h16l-5 7 5 7H43z"/><circle cx="26" cy="20" r="7"/><path d="M19 30h14l6-12 4 2-6 16-3 18 6 28h-7l-6-24-5 24h-7l3-30-2-14-5 8-4-2z"/></svg>
+    </div>
+    <div class="figure figure--bike" data-slot="figure-cyclist" aria-hidden="true">
+      <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="6"><circle cx="34" cy="72" r="22"/><circle cx="124" cy="72" r="22"/><path d="M34 72l26-34h40l24 34M60 38l20 34h-46M96 26l4 12" stroke-linejoin="round"/><g fill="currentColor" stroke="none"><circle cx="86" cy="10" r="8"/><path d="M58 32l22-14 16 6-8 6 10 14-6 4-14-14-14 10z"/></g></svg>
+    </div>
+    <div class="figure figure--skate" data-slot="figure-skater" aria-hidden="true">
+      <svg viewBox="0 0 80 100" fill="currentColor"><circle cx="40" cy="12" r="8"/><path d="M30 24h16l14 10-3 5-12-6 2 20 10 22h-8l-9-18-8 18h-8l9-24-2-14-12 10-4-4z"/><rect x="10" y="84" width="60" height="5" rx="2.5"/><circle cx="20" cy="94" r="4"/><circle cx="60" cy="94" r="4"/></svg>
+    </div>
+
+    </div>
+    <div class="wrap hero-copy">
+      <span class="kicker rise">Nouvelle recette · Cacahuète crunch</span>
+      <h1 class="display rise" id="hero-title">Vraies <span class="sticker-word">protéines</span>,<br>zéro détour</h1>
+      <p class="lead rise">Une barre dense, salée-sucrée, pensée pour les sorties qui durent : 20 g de protéines, six ingrédients, aucun sirop.</p>
+      <div class="hero-actions rise">
+        <a class="btn btn--yellow" href="#shop">J'en prends <span class="arrow" aria-hidden="true">›</span></a>
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <span class="sr-only">Chercher une saveur</span>
+          <input type="search" placeholder="Chercher une saveur…">
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="ingredients zz-both" id="ingredients" aria-label="Ce qu'il y a dedans">
+    <div class="wrap">
+      <ul class="ing-list">
+        <li class="ing"><span class="badge" style="background:var(--flavor-lemon)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M8 28c0-10 8-18 24-20-2 16-10 24-20 24"/><path d="M8 32l14-14"/></svg></span><strong>20 g de<br>protéines</strong></li>
+        <li class="ing"><span class="badge" style="background:var(--flavor-berry)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><rect x="9" y="12" width="22" height="18" rx="3"/><path d="M6 6l28 28"/></svg></span><strong>Sans sucre<br>ajouté</strong></li>
+        <li class="ing"><span class="badge" style="background:var(--flavor-oat)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 36V10"/><path d="M20 14c-6 0-9-4-9-8 6 0 9 4 9 8zm0 8c-6 0-9-4-9-8 6 0 9 4 9 8zm0 8c-6 0-9-4-9-8 6 0 9 4 9 8zm0-16c6 0 9-4 9-8-6 0-9 4-9 8zm0 8c6 0 9-4 9-8-6 0-9 4-9 8zm0 8c6 0 9-4 9-8-6 0-9 4-9 8z"/></svg></span><strong>Avoine<br>complète</strong></li>
+        <li class="ing"><span class="badge" style="background:var(--flavor-mint)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><ellipse cx="20" cy="20" rx="9" ry="14"/><path d="M20 6c-4 6-4 22 0 28"/></svg></span><strong>Cacao<br>équitable</strong></li>
+        <li class="ing"><span class="badge" style="background:var(--flavor-sky)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6l12 5v9c0 8-5 12-12 14-7-2-12-6-12-14v-9z"/><path d="M14 20l4 4 8-8"/></svg></span><strong>Testée en<br>labo</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="trail" id="trail" aria-labelledby="trail-title">
+    <div class="tyre tyre--a" aria-hidden="true"></div><div class="tyre tyre--b" aria-hidden="true"></div><div class="tyre tyre--c" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <a class="pill" href="#shop">Boutique</a>
+        <h2 class="display" id="trail-title">Le carburant des<br>sorties longues</h2>
+        <span class="big-italic">20 g protéines</span>
+        <p>Du col au skatepark, la même recette : de la cacahuète grillée, de l'avoine, du cacao et rien pour faire semblant.</p>
+        <div class="row"><a class="btn btn--yellow" href="#shop">Composer ma box <span class="arrow" aria-hidden="true">›</span></a><span class="note">Livraison offerte dès 24 barres</span></div>
+      </div>
+      <div class="pack-stage" data-slot="product-hero" role="img" aria-label="Barre Trailo cacahuète crunch (emplacement de la photo produit)">
+        <div class="pack"><div class="pack-body"><b>TRAILO</b><span>Cacahuète<br>crunch · 20 g</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop" id="shop" aria-labelledby="shop-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="display" id="shop-title">Choisis ta <em>saveur</em></h2>
+        <p>Trois recettes, une même règle : on doit pouvoir lire la liste d'ingrédients en une respiration.</p>
+      </div>
+      <ul class="cards">
+        <li class="card" style="--flavor:var(--flavor-mint)">
+          <div class="art" data-slot="product-pistachio"><div class="pack pack--sm"><div class="pack-body"><b>TRAILO</b><span>Pistache<br>sel marin</span></div></div></div>
+          <h3>Pistache sel marin</h3><p class="meta">20 g protéines · 212 kcal</p>
+          <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
+        </li>
+        <li class="card card--featured" style="--flavor:var(--flavor-lemon)">
+          <span class="tag">Best-seller</span>
+          <div class="art" data-slot="product-peanut"><div class="pack pack--sm"><div class="pack-body"><b>TRAILO</b><span>Cacahuète<br>crunch</span></div></div></div>
+          <h3>Cacahuète crunch</h3><p class="meta">21 g protéines · 220 kcal</p>
+          <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
+        </li>
+        <li class="card" style="--flavor:var(--flavor-sky)">
+          <div class="art" data-slot="product-blueberry"><div class="pack pack--sm"><div class="pack-body"><b>TRAILO</b><span>Myrtille<br>avoine</span></div></div></div>
+          <h3>Myrtille avoine</h3><p class="meta">19 g protéines · 205 kcal</p>
+          <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews" aria-labelledby="rev-title">
+    <div class="wrap">
+      <div class="stamp" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#circ" textLength="286" lengthAdjust="spacing">Haute qualité · 100 % testée · </textPath></text></svg>
+        <b></b>
+      </div>
+      <h2 class="display" id="rev-title">Ils l'ont mise<br>dans le sac</h2>
+      <div class="rev-grid">
+        <figure class="rev"><div class="stars" role="img" aria-label="5 sur 5"><i></i><i></i><i></i><i></i><i></i></div><blockquote>« Seule barre qui ne fond pas dans la poche au bout de 80 km. Et on sent vraiment la cacahuète. »</blockquote><figcaption>Inès · cycliste longue distance</figcaption></figure>
+        <figure class="rev"><div class="stars" role="img" aria-label="5 sur 5"><i></i><i></i><i></i><i></i><i></i></div><blockquote>« Je la garde dans le baudrier. Pas écœurante, pas collante, juste efficace. »</blockquote><figcaption>Malo · grimpeur</figcaption></figure>
+        <figure class="rev"><div class="stars" role="img" aria-label="4 sur 5"><i></i><i></i><i></i><i></i></div><blockquote>« La myrtille avoine entre deux sessions, c'est devenu un rituel avec toute l'équipe. »</blockquote><figcaption>Sacha · skate</figcaption></figure>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot zz-both">
+  <div class="wrap">
+    <div class="foot-top">
+      <div><h3>Rejoins la cordée</h3><p>Une recette inédite par saison et −10 % sur ta première box. Pas de spam, promis.</p></div>
+      <form onsubmit="event.preventDefault()">
+        <label class="search"><span class="sr-only">Ton e-mail</span><input type="email" placeholder="ton@email.fr"></label>
+        <button class="btn btn--yellow" type="submit">S'inscrire <span class="arrow" aria-hidden="true">›</span></button>
+      </form>
+    </div>
+    <nav aria-label="Pied de page"><a href="#">Barres</a><a href="#">Box</a><a href="#">Revendeurs</a><a href="#">FAQ</a><a href="#">Contact</a></nav>
+    <p class="giant" aria-hidden="true">Trailo</p>
+  </div>
+  <p class="legal">© 2026 Trailo (marque fictive) — démo Kōbō</p>
+</footer>
+
+<script>
+(() => {
+  const count = document.getElementById('cart-count');
+  document.querySelectorAll('.add').forEach(b => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', on);
+    b.firstElementChild.textContent = on ? 'Dans le panier ✓' : 'Ajouter au panier';
+    count.textContent = +count.textContent + (on ? 1 : -1);
+  }));
+})();
+</script>
+</body>
+</html>

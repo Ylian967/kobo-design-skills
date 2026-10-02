@@ -1,0 +1,37 @@
+/*
+ * Hold To Play Music — tokens
+ * Palette de la fiche Awwwards (#000, #2779a7, #DF6C4F), voir source.md.
+ * @contrast text:bg muted:bg orange:bg blue-light:bg ink:paper
+ */
+:root {
+  /* Couleurs */
+  --bg: #111111;            /* noir de projection (vidéo N&B dessous) */
+  --paper: #ffffff;         /* écran blanc des portraits en contre-jour */
+  --ink: #111111;
+  --text: #ffffff;
+  --muted: #a7a7a7;
+  --blue: #2779a7;          /* lettres peintes (≥ 32px uniquement : 3,9:1) */
+  --blue-light: #4a90c8;    /* bleu pour le petit texte sur noir */
+  --orange: #df6c4f;
+  --veil: rgb(17 17 17 / 0.55);
+
+  /* Typographie */
+  --font-brush: 'Londrina Solid', 'Permanent Marker', sans-serif;  /* + filtre « pinceau » SVG */
+  --font-ui: 'Fira Sans', system-ui, sans-serif;
+  --font-mono: 'Fira Mono', ui-monospace, monospace;
+  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem;
+  --text-logo: clamp(3.5rem, 10vw, 9rem);
+
+  /* Espace */
+  --edge: 20px;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+
+  /* Formes */
+  --key-radius: 22px;       /* touche « espace » dessinée */
+  --key-depth: 4px;
+
+  /* Mouvement */
+  --hold: 1200ms;           /* durée d'appui pour déclencher */
+  --ease: cubic-bezier(0.6, 0, 0.2, 1);
+  --dur-fast: 200ms; --dur: 700ms;
+}

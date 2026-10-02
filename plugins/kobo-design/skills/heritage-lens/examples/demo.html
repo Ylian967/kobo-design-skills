@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ourouk retrouvée — Heritage Lens (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Crimson+Pro:wght@400&family=Inter:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #1c140e; --text: #fbf3e4; --muted: #c9b69a; --gold: #ecd06f; --on-gold: #1c140e; --earth: #987654; --terracotta: #d14836; --parchment: #f3e6cc; --ink: #1c140e; --ink-muted: #6b5440;
+  --veil: linear-gradient(180deg, rgb(28 20 14 / 0) 40%, rgb(28 20 14 / .75)); --ring: rgb(251 243 228 / 0.85);
+  --font-display: 'Gilda Display', 'Bodoni Moda', Georgia, serif; --font-text: 'Crimson Pro', Georgia, serif; --font-ui: 'Inter', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1.0625rem; --text-lg: 1.25rem; --text-title: clamp(2.5rem, 5vw, 4.5rem); --text-hero: clamp(4rem, 12vw, 10rem);
+  --leading-title: 1.02; --leading-text: 1.45; --edge: 24px;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --text-col: 340px;
+  --btn-round: 44px; --enter: 120px; --lens: 220px; --ease: cubic-bezier(0.45, 0, 0.15, 1); --dur-fast: 250ms; --dur: 800ms; --dur-cam: 2400ms;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 400 var(--text-base)/var(--leading-text) var(--font-text); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+.screen { position: fixed; inset: 0; transition: opacity var(--dur) var(--ease), transform var(--dur-cam) var(--ease); }
+.screen[hidden] { display: block !important; opacity: 0; pointer-events: none; }
+/* Accueil */
+.home { background: var(--veil), radial-gradient(60% 40% at 70% 20%, #f2c27a, transparent 70%), linear-gradient(180deg, #8a6a52 0%, #d9a46a 35%, #8a7a3e 55%, #3d3a1e 80%, #1c140e); }
+.home::after { content: ""; position: absolute; left: 0; right: 0; bottom: 22%; height: 10%; background: linear-gradient(90deg, transparent 20%, #d8c4a0 25% 60%, transparent 66%); opacity: .55; filter: blur(1px); pointer-events: none; }
+.home.is-leaving { transform: scale(1.15); opacity: 0; }
+.home__title { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); margin: 0; text-align: center; font: 400 var(--text-hero)/0.9 var(--font-display); text-shadow: 0 2px 40px rgb(28 20 14 / .5); white-space: nowrap; }
+.home__title small { display: block; margin: 4px 0 0 40%; font-size: 0.28em; text-align: left; }
+.enter { position: absolute; left: 50%; top: 72%; transform: translate(-50%, -50%); width: var(--enter); aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ring); background: none; font: 400 var(--text-lg) var(--font-display); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
+.enter::before { content: ""; position: absolute; inset: -10px; border-radius: 50%; border: 1px solid var(--ring); opacity: .6; transition: inset var(--dur-fast) var(--ease); }
+.enter:hover::before { inset: -16px; }
+.help { position: absolute; left: 0; right: 0; bottom: var(--edge); text-align: center; font: 400 var(--text-xs) var(--font-ui); }
+.brand { position: fixed; left: var(--edge); top: var(--edge); z-index: 10; font: 400 1.4rem var(--font-display); }
+.corner { position: fixed; right: var(--edge); bottom: var(--edge); z-index: 10; display: flex; gap: var(--space-3); }
+.round { width: var(--btn-round); height: var(--btn-round); border-radius: 50%; border: 1px solid var(--ring); background: rgb(28 20 14 / .25); cursor: pointer; display: grid; place-items: center; font-family: var(--font-ui); }
+/* Scène */
+.scene { overflow: hidden; cursor: none; }
+.layer { position: absolute; inset: 0; }
+.past { background: var(--veil), repeating-linear-gradient(90deg, transparent 0 9%, #b5472f 9% 12%, transparent 12% 20%), linear-gradient(180deg, #4a2a1e 0 18%, #e7cfa2 18% 55%, #c9a86e 55% 70%, #7c5a3e 70%); }
+.past::after { content: ""; position: absolute; left: 0; right: 0; top: 55%; height: 15%; background: repeating-linear-gradient(90deg, #2f6b5a 0 3%, #e2c27e 3% 6%); opacity: .7; }
+.today { background: linear-gradient(180deg, #9fb6c8 0 30%, #cdbb9c 30% 60%, #a48e70 60%); clip-path: circle(calc(var(--lens) / 2) at var(--x, 70%) var(--y, 50%)); }
+.scene.anim .today { transition: clip-path var(--dur) var(--ease); }
+.today::before { content: ""; position: absolute; inset: 30% 0 40%; background: repeating-linear-gradient(90deg, transparent 0 9%, #a59578 9% 11%, transparent 11% 20%); }
+.scene.is-today .today { clip-path: circle(150% at var(--x, 70%) var(--y, 50%)); }
+.lace { position: absolute; left: var(--x, 70%); top: var(--y, 50%); width: calc(var(--lens) + 40px); aspect-ratio: 1; translate: -50% -50%; pointer-events: none; color: var(--parchment); }
+.lens-hint { position: absolute; left: var(--x, 70%); top: var(--y, 50%); translate: -50% calc(var(--lens) / 2 + 34px); font: 500 var(--text-xs) var(--font-ui); text-align: center; text-shadow: 0 1px 6px rgb(28 20 14 / .8); pointer-events: none; white-space: nowrap; }
+.scene.is-today .lace, .scene.is-today .lens-hint { opacity: 0; }
+.story { position: absolute; left: 12%; top: 26%; width: min(var(--text-col), 80vw); text-align: center; }
+.story h2 { margin: 0 0 var(--space-4); font: 400 var(--text-title)/var(--leading-title) var(--font-display); color: var(--gold); text-shadow: 0 2px 30px rgb(28 20 14 / .6); }
+.story h2 span { display: inline-block; animation: letter 600ms var(--ease) both; }
+.story p { margin: 0; text-shadow: 0 1px 12px rgb(28 20 14 / .8); }
+.place { position: fixed; right: var(--edge); top: var(--edge); z-index: 10; display: flex; align-items: center; gap: var(--space-3); font: 500 var(--text-sm) var(--font-ui); }
+.medal { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--on-gold); display: grid; place-items: center; box-shadow: 0 0 0 4px rgb(236 208 111 / .35); }
+.dots { position: fixed; right: calc(var(--edge) + 18px); top: 50%; translate: 0 -50%; z-index: 10; display: grid; gap: 22px; justify-items: center; }
+.dots button { width: 6px; height: 6px; padding: 0; border-radius: 50%; border: 0; background: var(--text); cursor: pointer; position: relative; }
+.dots button::after { content: ""; position: absolute; inset: -16px; }
+.dots button[aria-current] { width: 14px; height: 14px; background: none; border: 1px solid var(--text); }
+.about { position: fixed; left: var(--edge); bottom: var(--edge); z-index: 10; display: flex; align-items: center; gap: var(--space-3); background: none; border: 0; cursor: pointer; font: 400 var(--text-sm) var(--font-ui); min-height: 44px; }
+.about i { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--ring); display: grid; place-items: center; font-style: normal; }
+.today-btn { position: absolute; left: 12%; top: calc(26% + 300px); background: none; border: 1px solid var(--ring); border-radius: 999px; padding: 8px 16px; font: 500 var(--text-xs) var(--font-ui); cursor: pointer; min-height: 44px; }
+.panel { position: fixed; right: 0; top: 0; bottom: 0; z-index: 20; width: min(420px, 100%); padding: var(--space-12) var(--space-8); background: var(--parchment); color: var(--ink); transform: translateX(100%); transition: transform var(--dur) var(--ease); overflow-y: auto; }
+.panel.is-open { transform: none; }
+.panel h3 { font: 400 2rem/1.1 var(--font-display); margin: 0 0 var(--space-4); }
+.panel p { color: var(--ink-muted); }
+.panel .round { border-color: var(--ink); color: var(--ink); background: none; position: absolute; right: var(--space-6); top: var(--space-6); }
+@keyframes letter { from { opacity: 0; filter: blur(6px); } }
+@media (max-width: 760px) {
+  :root { --lens: 160px; }
+  .story { left: 8%; right: 8%; width: auto; top: 14%; }
+  .today-btn { left: 50%; translate: -50% 0; top: auto; bottom: 90px; }
+  .dots { display: none; }
+  .home__title small { margin-left: 30%; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+</style>
+</head>
+<body>
+<span class="brand">Musée fictif</span>
+<section class="screen home" id="home" aria-label="Accueil">
+  <h1 class="home__title">Ourouk<small>retrouvée</small></h1>
+  <button class="enter" id="enter">Entrer</button>
+  <p class="help">Cliquer sur Entrer pour continuer</p>
+</section>
+
+<section class="screen scene" id="scene" hidden aria-label="Visite">
+  <div class="layer past" data-slot="reconstruction" role="img" aria-label="Reconstitution de la salle des colonnes"></div>
+  <div class="layer today" data-slot="today" role="img" aria-label="La même salle aujourd'hui, en ruines"></div>
+  <svg class="lace" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"></g></svg>
+  <span class="lens-hint">Cliquer pour voir l'état actuel</span>
+  <div class="story"><h2 id="placeTitle">Salle des colonnes</h2><p>Le roi y recevait les délégations venues de tout l'empire. Soixante-douze colonnes peintes portaient un plafond de cèdre ; il n'en reste que treize aujourd'hui.</p></div>
+  <button class="today-btn" id="todayBtn" aria-pressed="false">Voir aujourd'hui</button>
+  <div class="place">Palais royal <span class="medal" aria-hidden="true">✦</span></div>
+  <nav class="dots" aria-label="Lieux"><button aria-label="Porte des nations"></button><button aria-label="Escalier d'honneur"></button><button aria-current="true" aria-label="Salle des colonnes"></button><button aria-label="Trésor"></button><button aria-label="Tombeaux"></button></nav>
+  <button class="about" id="aboutBtn"><span>À propos du projet</span><i aria-hidden="true">→</i></button>
+</section>
+<div class="corner"><button class="round" aria-label="Réglages">⚙</button><button class="round" id="sound" aria-pressed="false" aria-label="Activer le son">🔈</button></div>
+<aside class="panel" id="panel" aria-label="À propos"><button class="round" id="closePanel" aria-label="Fermer">×</button><h3>À propos</h3><p>Cette visite est une démonstration du skill Heritage Lens : la cité, les lieux et les textes sont inventés. Une vraie visite s'appuierait sur des relevés archéologiques, des historiens et des sources citées ici.</p></aside>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const g = document.querySelector('.lace g');
+  for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2, x = 50 + Math.cos(a) * 46, y = 50 + Math.sin(a) * 46; const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('cx', x.toFixed(2)); c.setAttribute('cy', y.toFixed(2)); c.setAttribute('r', '4.5'); g.appendChild(c); }
+  const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); ring.setAttribute('cx', 50); ring.setAttribute('cy', 50); ring.setAttribute('r', 41); g.appendChild(ring);
+  const home = document.getElementById('home'), scene = document.getElementById('scene');
+  document.getElementById('enter').addEventListener('click', () => { home.classList.add('is-leaving'); setTimeout(() => { home.hidden = true; scene.hidden = false; const t = document.getElementById('placeTitle'); let k = 0; t.innerHTML = t.textContent.split(' ').map(w => `<span style="display:inline-block;white-space:nowrap;animation:none">${[...w].map(c => `<span style="animation-delay:${k++ * 30}ms">${c}</span>`).join('')}</span>`).join(' '); }, reduce ? 0 : 900); });
+  let tx = 70, ty = 50, x = 70, y = 50;
+  scene.addEventListener('pointermove', e => { tx = e.clientX / innerWidth * 100; ty = e.clientY / innerHeight * 100; });
+  (function loop() { x += (tx - x) * (reduce ? 1 : .15); y += (ty - y) * (reduce ? 1 : .15); scene.style.setProperty('--x', x + '%'); scene.style.setProperty('--y', y + '%'); requestAnimationFrame(loop); })();
+  const toggle = () => { scene.classList.add('anim'); setTimeout(() => scene.classList.remove('anim'), 850); const on = scene.classList.toggle('is-today'); document.getElementById('todayBtn').setAttribute('aria-pressed', on); document.getElementById('todayBtn').textContent = on ? 'Revenir à la reconstitution' : "Voir aujourd'hui"; };
+  scene.addEventListener('click', e => { if (!e.target.closest('button')) toggle(); });
+  document.getElementById('todayBtn').addEventListener('click', toggle);
+  document.querySelectorAll('.dots button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.dots button').forEach(x => x.toggleAttribute('aria-current', x === b)); document.getElementById('placeTitle').textContent = b.getAttribute('aria-label'); }));
+  const panel = document.getElementById('panel');
+  document.getElementById('aboutBtn').addEventListener('click', () => panel.classList.add('is-open'));
+  document.getElementById('closePanel').addEventListener('click', () => panel.classList.remove('is-open'));
+  const s = document.getElementById('sound'); s.addEventListener('click', () => { const on = s.getAttribute('aria-pressed') !== 'true'; s.setAttribute('aria-pressed', on); s.setAttribute('aria-label', on ? 'Couper le son' : 'Activer le son'); s.textContent = on ? '🔊' : '🔈'; });
+})();
+</script>
+</body>
+</html>

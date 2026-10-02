@@ -1,0 +1,71 @@
+/*
+ * Zigzag Snack Pop — tokens
+ * Valeurs estimées sur les images d'un shot Dribbble (orange #ff6a13, jaune #ffe415, bruns #4a2a1a / #5a3121), voir source.md.
+ * L'orange du héros est assombri (#e85a0c) pour que les titres blancs passent en grand.
+ * Le mot jaune sur orange ne se lit QUE grâce à son contour brun (« autocollant ») : c'est la paire yellow:ink qui compte.
+ * @contrast white:orange:large ink:orange yellow:ink ink:yellow white:brown yellow:brown cream-text:brown white:bar ink:white orange-ink:white orange-ink:cream ink:cream muted:cream ink:flavor-lemon ink:flavor-berry ink:flavor-mint ink:flavor-sky ink:flavor-oat
+ */
+:root {
+  /* Couleurs — marque */
+  --orange: #e85a0c;          /* fond du héros (orange #ff6a13 du shot, assombri) */
+  --orange-bright: #ff6a13;   /* reflets, crêtes de montagne, décor seulement */
+  --orange-deep: #c94a00;     /* montagnes du 2e plan */
+  --orange-ink: #b84300;      /* prix et liens orange sur fond clair */
+  --yellow: #ffe415;          /* bouton principal, mot mis en avant, contour géant du pied de page */
+  --ink: #2a160c;             /* texte sur jaune / orange, contours « autocollant », ombres dures */
+  --bar: #4a2a1a;             /* barre de navigation */
+  --brown: #5a3121;           /* sections « trace de pneu » */
+  --brown-deep: #3f2015;      /* motif de pneu, silhouettes */
+  --white: #ffffff;
+  --cream: #fff6e0;           /* bandes en zigzag, fond des sections claires */
+  --cream-text: #f3e3cf;      /* paragraphes sur brun */
+  --muted: #7a5a48;           /* texte secondaire sur crème */
+
+  /* Couleurs — pastilles d'ingrédients et cartes saveur */
+  --flavor-lemon: #f7d9a8;
+  --flavor-berry: #ffc9d6;
+  --flavor-mint: #bfe3a1;
+  --flavor-sky: #a9d4f5;
+  --flavor-oat: #e9d3b8;
+
+  /* Typographie */
+  --font-display: 'Anton', 'Bebas Neue', Impact, sans-serif;            /* grotesque condensée très grasse */
+  --font-body: 'Archivo', 'Arial Narrow', system-ui, sans-serif;       /* corps + italique gras « 20G PROTÉINES » */
+  --text-xs: 0.75rem;   /* 12 — liens de nav, étiquettes */
+  --text-sm: 0.875rem;  /* 14 */
+  --text-base: 1rem;    /* 16 */
+  --text-lg: 1.25rem;   /* 20 */
+  --text-xl: 1.75rem;   /* 28 — noms de produit */
+  --text-h2: clamp(2.25rem, 5vw, 4rem);
+  --text-hero: clamp(3.25rem, 9vw, 7.5rem);
+  --text-giant: clamp(5rem, 22vw, 20rem);     /* mot en contour du pied de page */
+  --leading-display: 0.92;
+  --tracking-caps: 0.06em;
+
+  /* Espace */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --container: 1200px;
+  --gutter: clamp(16px, 4vw, 48px);
+
+  /* Formes */
+  --radius-sm: 4px;
+  --radius: 8px;              /* cartes produit */
+  --radius-pill: 999px;       /* étiquette « SHOP NOW » */
+  --zigzag: 18px;             /* largeur d'une dent de scie */
+  --zigzag-h: 12px;           /* hauteur d'une dent */
+  --badge: 88px;              /* pastille ingrédient */
+  --stamp: 132px;             /* tampon rond qui tourne */
+  --stroke: 3px;              /* contour brun des éléments « autocollant » */
+
+  /* Ombres dures (aucun flou) */
+  --shadow-hard: 4px 4px 0 var(--ink);
+  --shadow-hard-lg: 6px 6px 0 var(--ink);
+  --shadow-press: 1px 1px 0 var(--ink);
+
+  /* Mouvement */
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);   /* léger rebond */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms; --dur: 280ms; --dur-slow: 600ms;
+  --dur-stamp: 14s;
+}

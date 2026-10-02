@@ -1,0 +1,61 @@
+/*
+ * Alpine Glass Expedition — tokens
+ * Valeurs estimées à l'œil sur le shot Dribbble (voir source.md) : brume #e6edf3 → bleu profond #1d3550, blanc, étoile jaune.
+ * @contrast white:deep white:night white:slate white:glass-solid deep:fog deep:white deep:frost slate:fog muted:fog muted:frost ice:night ice:deep star:night deep:star white:steel:large
+ */
+:root {
+  /* Couleurs — une montagne froide : du blanc de brume au bleu de nuit */
+  --white: #ffffff;           /* titres et texte sur photo, pilule principale */
+  --frost: #f5f8fb;           /* cartes claires */
+  --fog: #e6edf3;             /* brume, fond des sections claires */
+  --ice: #b9cad8;             /* glace, lointains, texte secondaire sur nuit */
+  --steel: #6f8ba3;           /* versants à mi-distance (texte blanc seulement en grand) */
+  --slate: #3c5873;           /* versants à l'ombre, texte secondaire sur clair */
+  --deep: #1d3550;            /* bleu profond : texte sur clair, sections sombres */
+  --night: #0e1c2c;           /* bas de la vignette, pied de page */
+  --muted: #4d6680;           /* méta sur fond clair (5:1) */
+  --star: #f5c84b;            /* étoile de la note — seule couleur chaude, jamais en fond large */
+  --on-white: #1d3550;
+  --glass: rgb(230 237 243 / 0.16);        /* verre dépoli (bouton rond, panneaux) */
+  --glass-strong: rgb(230 237 243 / 0.28);
+  --glass-solid: #4a6886;                   /* équivalent opaque du verre sur photo, pour vérifier le contraste */
+  --glass-border: rgb(255 255 255 / 0.45);
+  --line-light: rgb(255 255 255 / 0.7);     /* contour des puces sur photo */
+  --line: rgb(29 53 80 / 0.16);             /* filets sur fond clair */
+  --vignette: linear-gradient(180deg, rgb(14 28 44 / 0.35) 0%, rgb(14 28 44 / 0) 26%, rgb(14 28 44 / 0) 52%, rgb(14 28 44 / 0.82) 100%);
+
+  /* Typographie */
+  --font-display: 'Instrument Serif', 'Gloock', 'Times New Roman', serif;  /* titres en capitales, serif contrastée un peu étroite */
+  --font-ui: 'Inter', system-ui, sans-serif;                               /* nav, étiquettes, texte */
+  --text-2xs: 0.6875rem;   /* 11px — liens de nav, étiquettes en capitales espacées */
+  --text-xs: 0.75rem;      /* 12px — boutons, puces */
+  --text-sm: 0.875rem;     /* 14px — texte sur photo */
+  --text-base: 1rem;
+  --text-lg: 1.5rem;       /* titres de cartes (serif) */
+  --text-h2: clamp(2.25rem, 4.6vw, 4rem);
+  --text-hero: clamp(2.9rem, 6.4vw, 6rem);       /* « EXPLORER / SANS LIMITES » */
+  --text-giant: clamp(4rem, 13vw, 12rem);        /* nom de marque en pied de page */
+  --leading-display: 0.94;
+  --tracking-display: 0.005em;
+  --tracking-caps: 0.18em;  /* capitales minuscules espacées */
+
+  /* Espace */
+  --edge: clamp(16px, 3.5vw, 48px);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --max: 1320px;
+
+  /* Formes */
+  --radius-pill: 999px;     /* boutons, puces, champs */
+  --radius-card: 28px;      /* cartes de voyage */
+  --radius-panel: 20px;     /* panneaux de verre */
+  --glass-btn: 112px;       /* bouton rond en verre « Explorer les aventures » */
+  --play: 52px;             /* bouton lecture */
+  --blur: 14px;
+  --shadow-soft: 0 24px 60px -24px rgb(14 28 44 / 0.45);
+  --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 20px 50px -20px rgb(14 28 44 / 0.6);
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);     /* sortie douce, « air de montagne » */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms; --dur: 500ms; --dur-slow: 1200ms; --dur-drift: 40s;
+}

@@ -1,0 +1,74 @@
+/*
+ * Showroom Bento — tokens
+ * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * Un studio photo gris clair dans un cadre arrondi, le produit au centre, une rangée de tuiles blanches en bas.
+ * @contrast ink:frame ink:tile muted:frame muted:tile on-ink:ink accent:frame:large accent:tile on-accent:accent accent-ink:frame accent-ink:tile ink:soft muted:soft ink:page
+ */
+:root {
+  /* Couleurs — studio */
+  --page: #d9d9d9;          /* autour du cadre */
+  --frame: #e4e4e4;         /* fond du cadre (studio gris) */
+  --frame-hi: #ffffff;      /* lumière radiale au centre du studio */
+  --tile: #ffffff;          /* tuiles du bento, pilules blanches, boutons ronds */
+  --soft: #f2f2f2;          /* fond des visuels dans les tuiles, survol des pilules */
+  --ink: #1a1a1a;           /* texte, pilule active, bouton « Commander » */
+  --on-ink: #ffffff;
+  --muted: #5e5e5e;         /* légendes, étiquettes de caractéristiques, « € » du prix */
+  --faint: #b5b5b5;         /* traits, icônes inactives (jamais du texte) */
+  --line: #d4d4d4;
+
+  /* Accent : rouge de marque */
+  --accent: #d42a2a;        /* monogramme, mot de marque du titre (grand), peinture par défaut */
+  --on-accent: #ffffff;
+  --accent-ink: #b81f1f;    /* rouge pour le petit texte */
+
+  /* Peintures du configurateur (jamais du texte) */
+  --paint-red: #d42a2a;
+  --paint-yellow: #f2c230;
+  --paint-blue: #2f5fd0;
+  --paint-grey: #8d949b;
+  --paint-black: #262626;
+  --metal: #9aa0a6;         /* fourche, disques, échappement */
+  --metal-hi: #e9ecef;
+  --rubber: #161616;        /* pneus */
+  --rim: #2e2e2e;
+  --glass: #3a4652;         /* bulle, phare éteint */
+
+  /* Typographie */
+  --font-display: 'Outfit', 'Futura', system-ui, sans-serif;   /* grotesque géométrique grasse */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --text-2xs: 0.6875rem;    /* 11px : légende sous le titre, étiquettes de tuiles */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-value: 1.125rem;   /* valeur d'une tuile caractéristique */
+  --text-title: clamp(2rem, 3.1vw, 2.75rem);   /* « Model V4 Ardente », ~44px */
+  --text-price: clamp(2rem, 3.1vw, 2.75rem);   /* même graisse que le titre */
+  --leading-tight: 1.05;
+  --leading-body: 1.5;
+  --tracking-title: -0.02em;
+
+  /* Espace (base 4px) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px;
+  --frame-inset: 12px;      /* marge entre l'écran et le cadre */
+  --pad: clamp(16px, 2.2vw, 32px);
+  --bento-gap: 3px;         /* les tuiles se touchent presque */
+
+  /* Formes */
+  --radius-frame: 16px;
+  --radius-tile: 8px;
+  --radius-pill: 999px;
+  --control: 44px;          /* boutons ronds, hauteur des pilules */
+  --shadow-floor: radial-gradient(closest-side, rgb(0 0 0 / 0.28), rgb(0 0 0 / 0.08) 60%, transparent);
+  --shadow-tile: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-pop: 0 10px 30px -12px rgb(0 0 0 / 0.25);
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 320ms;
+  --dur-slide: 640ms;       /* passage d'un modèle à l'autre */
+}

@@ -1,0 +1,45 @@
+/*
+ * Glacial Mono 3D — tokens
+ * Palette issue de la fiche Awwwards (#b6bac5, #383e4e) et du fond de chargement mesuré (#a0a5b1), voir source.md.
+ * @contrast ink:frost text:night muted:night ink:fog
+ */
+:root {
+  /* Couleurs : deux « météos » */
+  --fog: #b6bac5;            /* scène claire (neige, brouillard) */
+  --frost: #d9dce3;          /* surfaces claires */
+  --loader: #a0a5b1;         /* fond de chargement mesuré */
+  --night: #1f2430;          /* scène sombre (pages de contenu) */
+  --steel: #383e4e;          /* encre principale sur clair */
+  --ink: #1f2430;
+  --text: #e9ecf2;           /* texte sur sombre */
+  --muted: #8a91a3;
+  --glow: rgb(220 235 255 / 0.85);   /* lueur des joints, halos */
+  --line: rgb(233 236 242 / 0.35);
+  --scrim-light: rgb(182 186 197 / 0.72);
+  --scrim-dark: rgb(31 36 48 / 0.72);
+
+  /* Typographie : une seule famille, monospace (IBM Plex Mono chargée par la référence) */
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-logo: 'Unbounded', 'IBM Plex Mono', sans-serif;  /* logotype large et arrondi */
+  --text-2xs: 0.625rem;   /* 10px : micro-labels */
+  --text-xs: 0.6875rem;   /* 11px : texte courant de l'interface */
+  --text-sm: 0.8125rem;   /* 13px : paragraphes de contenu */
+  --text-base: 1rem;
+  --text-logo: 1.5rem;
+  --leading: 1.45;
+  --tracking: 0.02em;
+
+  /* Espace */
+  --edge: 28px;           /* marge de l'interface collée aux bords */
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --text-col: 360px;      /* colonne de texte étroite */
+
+  /* Formes */
+  --bracket: 8px;         /* longueur des crochets de coin */
+  --bracket-w: 1px;
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);   /* expo out */
+  --dur-fast: 200ms; --dur: 600ms; --dur-scene: 1600ms;
+  --scramble: 40ms;       /* pas de l'effet de texte brouillé */
+}

@@ -1,0 +1,43 @@
+/*
+ * Bubble Publisher Hub — tokens
+ * Mesurés sur la page d'accueil de référence (éditeur de jeux, 1536×674), voir source.md.
+ * @contrast text:bg on-red:red red:bg text:club on-ink:ink muted:bg
+ */
+:root {
+  /* Couleurs */
+  --bg: #ffffff;
+  --text: #0e2130;          /* bleu-noir des grands titres */
+  --muted: #5a6670;
+  --red: #e20613;           /* couleur de marque : boutons, titres de carte */
+  --red-light: #f92432;
+  --on-red: #ffffff;
+  --ink: #000000;           /* barre supérieure, bulles titre noires */
+  --on-ink: #ffffff;
+  --club: #fb9aa2;          /* rose de la section communauté */
+  --club-line: rgb(255 255 255 / 0.55);
+  --grad-card: linear-gradient(90deg, #ff5f8f, #ffb347);  /* bandeau des cartes de récompense */
+  --stripe-1: #1565c0; --stripe-2: #00a5a8; --stripe-3: #e8a317; --stripe-4: #d9415b;
+
+  /* Typographie (Metropolis / Gotham mesurées) */
+  --font: 'Montserrat', 'Metropolis', 'Gotham', 'Helvetica Neue', Arial, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.5rem;
+  --text-xl: clamp(2rem, 3.4vw, 3rem);     /* titres de bulle */
+  --text-hero: clamp(2.5rem, 4.5vw, 3.75rem); /* 60px mesuré */
+  --tracking-hero: -0.035em;  /* -2.1px sur 60px */
+  --tracking: -0.02em;
+  --tracking-caps: 0.1em;
+
+  /* Espace */
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-9: 36px; --space-12: 48px; --space-20: 80px;
+  --gutter: 36px;            /* marge latérale mesurée (logo, titres) */
+  --nav-h: 72px;
+
+  /* Formes */
+  --radius: 12px;            /* bulles, cartes */
+  --radius-btn: 8px;
+  --tail: 22px;              /* taille de la queue de bulle */
+
+  /* Mouvement */
+  --ease: ease;
+  --dur-fast: 200ms; --dur: 300ms;
+}

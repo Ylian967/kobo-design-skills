@@ -1,0 +1,62 @@
+/*
+ * Pixel Lime Portfolio — tokens
+ * Valeurs estimées à l'œil sur le shot Dribbble (voir source.md) : lime acide #c6f432, gris clair #ececec, noir #0f0f0f.
+ * @contrast ink:paper ink:white on-lime:lime white:ink lime:ink muted:paper muted:white muted-dark:ink muted-dark:card-dark white:card-dark lime:card-dark on-lime:lime-soft
+ */
+:root {
+  /* Couleurs — trois matières : photo N&B, papier gris clair, nuit ; une seule couleur : le lime */
+  --ink: #0f0f0f;             /* sections sombres, texte sur papier, étiquettes noires */
+  --paper: #ececec;           /* sections claires (avec grille fine) */
+  --white: #ffffff;           /* nom sur photo, carte note blanche, vignettes */
+  --lime: #c6f432;            /* pixels, bouton, surlignage, cartes notes — la seule couleur */
+  --lime-soft: #dcf98a;       /* surlignage au survol, fond de puce active */
+  --on-lime: #0f0f0f;
+  --card-dark: #1a1a1a;       /* cartes et champs sur fond nuit */
+  --muted: #555555;           /* texte secondaire sur papier / blanc (6,3:1) */
+  --muted-dark: #9a9a9a;      /* texte secondaire sur nuit (6,8:1) */
+  --line: rgb(15 15 15 / 0.08);        /* grille sur papier */
+  --line-dark: rgb(255 255 255 / 0.06); /* grille sur nuit */
+  --rule: rgb(15 15 15 / 0.18);        /* filets, bordures de cartes */
+  --rule-dark: rgb(255 255 255 / 0.16);
+
+  /* Photo noir et blanc (dégradés de remplacement, de l'ombre à la lumière) */
+  --photo-0: #0b0b0b; --photo-1: #232323; --photo-2: #3d3d3d; --photo-3: #6b6b6b; --photo-4: #a8a8a8; --photo-5: #d9d9d9;
+  --grain-opacity: 0.22;
+
+  /* Typographie */
+  --font-sans: 'Inter Tight', 'Inter', system-ui, sans-serif;           /* nom, énoncés, titres de projets */
+  --font-mono: 'JetBrains Mono', 'Space Mono', ui-monospace, monospace; /* nav, étiquettes, boutons, notes */
+  --text-2xs: 0.6875rem;   /* 11px — nav, étiquettes mono */
+  --text-xs: 0.75rem;      /* 12px — boutons, méta */
+  --text-sm: 0.875rem;     /* 14px — cartes notes */
+  --text-base: 1rem;
+  --text-lg: 1.375rem;     /* 22px — titres de projets */
+  --text-statement: clamp(1.75rem, 3.3vw, 3rem);  /* énoncés « comment je pense » */
+  --text-section: clamp(2.5rem, 6vw, 5.5rem);
+  --text-name: clamp(4.5rem, 14vw, 13rem);        /* nom en bas de casse sur la photo */
+  --weight-name: 400;
+  --leading-name: 0.86;
+  --leading-statement: 1.28;
+  --tracking-name: -0.045em;
+  --tracking-mono: 0.08em;
+
+  /* Espace et grille */
+  --edge: clamp(16px, 3vw, 40px);
+  --grid-cell: 64px;         /* grille fine des sections */
+  --pixel: clamp(14px, 1.6vw, 24px);  /* taille d'un bloc de mosaïque */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --max: 1360px;
+
+  /* Formes */
+  --radius-0: 0;             /* étiquettes, boutons, pixels : carrés */
+  --radius-card: 6px;        /* cartes notes et vignettes, à peine adoucies */
+  --radius-pill: 999px;      /* surlignages et puces */
+  --tilt-1: -3deg; --tilt-2: 2deg; --tilt-3: -1.5deg;  /* cartes notes posées de travers */
+  --shadow-card: 0 1px 0 rgb(15 15 15 / 0.06), 0 18px 40px -18px rgb(0 0 0 / 0.45);
+  --shadow-lift: 0 2px 0 rgb(15 15 15 / 0.08), 0 30px 60px -20px rgb(0 0 0 / 0.55);
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-step: steps(6, end);       /* pixels qui apparaissent par à-coups */
+  --dur-fast: 160ms; --dur: 420ms; --dur-slow: 900ms;
+}

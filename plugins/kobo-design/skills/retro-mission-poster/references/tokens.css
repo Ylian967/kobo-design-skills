@@ -1,0 +1,40 @@
+/*
+ * Retro Mission Poster — tokens
+ * Palette de la fiche Awwwards (#2779a7, #D14836, #ffffff) ajustée sur captures (crème, terre), voir source.md.
+ * @contrast text:bg on-cream:cream accent:bg on-accent:accent muted:bg sky:cream:large
+ */
+:root {
+  /* Couleurs */
+  --bg: #1a1412;            /* nuit / chargement */
+  --cream: #f4ead8;         /* cadre de l'écran, boutons, titres sur paysage */
+  --on-cream: #1a1412;
+  --text: #f4ead8;
+  --muted: #c9b9a0;
+  --accent: #e24b33;        /* rouge-orangé (logo, « MISSION », anneau) — #D14836 de la fiche, éclairci */
+  --on-accent: #1a1412;
+  --sky: #2779a7;           /* ciel bleu acier */
+  --sand: #c4643c; --rust: #9a4a2e; --dusk: #f2a07a;
+  --grain-opacity: 0.18;
+
+  /* Typographie */
+  --font-display: 'Big Shoulders Display', 'Oswald', sans-serif;   /* capitales hautes et étroites */
+  --font-body: 'Jost', 'Futura', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem;
+  --text-title: clamp(3.5rem, 9vw, 8.5rem);
+  --text-giant: clamp(5rem, 16vw, 15rem);
+  --tracking-caps: 0.12em;
+
+  /* Cadre */
+  --frame: 12px;            /* bordure crème autour de tout l'écran */
+  --edge: 32px;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+
+  /* Formes */
+  --radius: 0;
+  --ring: 120px;            /* anneau dentelé (défilement / chargement) */
+  --tilt: -6deg;            /* titres de chapitre légèrement montants */
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-fast: 250ms; --dur: 900ms; --dur-scene: 1600ms;
+}

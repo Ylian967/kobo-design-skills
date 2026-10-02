@@ -1,0 +1,44 @@
+/*
+ * Heritage Lens — tokens
+ * Palette de la fiche Awwwards (#987654, #D14836, #ECD06F) + valeurs relevées sur captures, voir source.md.
+ * @contrast text:bg gold:bg muted:bg on-gold:gold ink:parchment ink-muted:parchment
+ */
+:root {
+  /* Couleurs */
+  --bg: #1c140e;              /* nuit chaude derrière les scènes */
+  --text: #fbf3e4;            /* ivoire */
+  --muted: #c9b69a;
+  --gold: #ecd06f;            /* or des anneaux, titres de lieu */
+  --on-gold: #1c140e;
+  --earth: #987654;           /* pierre, terre */
+  --terracotta: #d14836;      /* rouge des colonnes, fonds de présentation */
+  --parchment: #f3e6cc;       /* panneaux de lecture */
+  --ink: #1c140e;
+  --ink-muted: #6b5440;
+  --veil: linear-gradient(180deg, rgb(28 20 14 / 0) 40%, rgb(28 20 14 / .75));
+  --ring: rgb(251 243 228 / 0.85);
+
+  /* Typographie */
+  --font-display: 'Gilda Display', 'Bodoni Moda', Georgia, serif;   /* titres de lieu, très contrastés */
+  --font-text: 'Crimson Pro', Georgia, serif;                         /* récit */
+  --font-ui: 'Inter', system-ui, sans-serif;                          /* boutons, aide */
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1.0625rem; --text-lg: 1.25rem;
+  --text-title: clamp(2.5rem, 5vw, 4.5rem);
+  --text-hero: clamp(4rem, 12vw, 10rem);
+  --leading-title: 1.02;
+  --leading-text: 1.45;
+
+  /* Espace */
+  --edge: 24px;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+  --text-col: 340px;
+
+  /* Formes */
+  --btn-round: 44px;
+  --enter: 120px;            /* bouton ENTRER à double anneau */
+  --lens: 220px;             /* lentille avant/après */
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.45, 0, 0.15, 1);
+  --dur-fast: 250ms; --dur: 800ms; --dur-cam: 2400ms;
+}

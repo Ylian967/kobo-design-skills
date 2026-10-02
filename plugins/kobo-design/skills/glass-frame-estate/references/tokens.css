@@ -1,0 +1,73 @@
+/*
+ * Glass Frame Estate — tokens
+ * Valeurs estimées sur les images d'un shot Dribbble (héros photo encadré d'un filet blanc, verre dépoli, pages blanches et bandes noires), voir source.md.
+ * Le texte blanc du héros est toujours posé sur le voile sombre --shade (bas de la photo), jamais sur le ciel clair.
+ * @contrast white:shade white:shade-2 ink:white muted:white ink:surface muted:surface accent:white accent-2:surface white:ink on-dark-muted:ink line-dark:ink:large ink:glass-solid
+ */
+:root {
+  /* Couleurs — interface */
+  --white: #ffffff;
+  --ink: #0d0d0d;             /* texte, bande de chiffres, pied de page, bouton plein sur fond clair */
+  --surface: #f4f3f0;         /* sections claires alternées, fond des champs */
+  --muted: #5e5e5e;           /* texte secondaire sur blanc / surface */
+  --line: #e3e1dc;            /* filets sur fond clair */
+  --on-dark-muted: #a3a3a3;   /* texte secondaire sur --ink */
+  --line-dark: #6a6a6a;       /* logos atténués (grands) et filets sur --ink */
+  --accent: #a8641f;          /* ambre « golden hour » : prix, puce active (sur blanc) */
+  --accent-2: #9c5a1c;        /* même ambre sur --surface */
+
+  /* Couleurs — verre et cadre (héros) */
+  --frame-line: rgb(255 255 255 / 0.85);   /* filet 1px du cadre */
+  --glass: rgb(255 255 255 / 0.14);         /* carte agent en verre dépoli */
+  --glass-line: rgb(255 255 255 / 0.45);
+  --glass-solid: #e9ecef;                    /* repli opaque quand backdrop-filter n'existe pas */
+  --shade: #2a3424;                          /* voile sombre en bas de la photo (sous le titre) */
+  --shade-2: #3b4a36;                        /* voile derrière la carte agent */
+  --wordmark-from: rgb(255 255 255 / 0.72); /* mot-marque géant : dégradé vertical vers transparent */
+  --wordmark-to: rgb(255 255 255 / 0);
+
+  /* Couleurs — photo dessinée (emplacements) */
+  --sky-top: #5d7ea8; --sky-mid: #c9a27c; --sky-glow: #f2b56b; --sun: #ffe1a8;
+  --hill: #4f7a3a; --hill-dark: #2f4f25; --hill-light: #7aa356;
+  --wood: #2b211b; --window: #ffcf86; --stone: #cfc6b8;
+
+  /* Typographie */
+  --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif;   /* mot-marque géant, titres */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --text-2xs: 0.6875rem; /* 11 — nav, méta en capitales */
+  --text-xs: 0.75rem;    /* 12 */
+  --text-sm: 0.875rem;   /* 14 */
+  --text-base: 1rem;     /* 16 */
+  --text-lg: 1.25rem;    /* 20 */
+  --text-xl: 1.75rem;    /* 28 */
+  --text-h2: clamp(2rem, 4vw, 3.25rem);
+  --text-hero: clamp(1.75rem, 3.2vw, 2.75rem);   /* titre bas gauche, léger */
+  --text-wordmark: clamp(5rem, 19vw, 19rem);     /* mot-marque derrière le bâtiment */
+  --tracking-caps: 0.08em;
+  --tracking-wordmark: -0.04em;
+  --weight-light: 300;
+
+  /* Espace */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --frame-inset: clamp(12px, 2vw, 28px);   /* marge entre l'écran et le cadre */
+  --container: 1280px;
+  --gutter: clamp(16px, 4vw, 56px);
+
+  /* Formes */
+  --radius-frame: 6px;
+  --radius-btn: 2px;
+  --radius-card: 4px;
+  --radius-round: 999px;
+  --blur-bg: 22px;        /* photo floutée hors du cadre */
+  --blur-glass: 18px;
+
+  /* Ombres */
+  --shadow-glass: 0 20px 50px rgb(13 13 13 / 0.25);
+  --shadow-card: 0 1px 0 var(--line);
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms; --dur: 420ms; --dur-slow: 900ms; --dur-photo: 1400ms;
+}

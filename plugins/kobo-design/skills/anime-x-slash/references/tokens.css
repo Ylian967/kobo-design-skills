@@ -1,0 +1,71 @@
+/*
+ * Anime X Slash — tokens
+ * Mesurés sur la page d'accueil de référence (1536×730), voir source.md.
+ * @contrast text:bg text:surface muted:bg on-accent:accent on-ink:ink accent-text:bg:large
+ */
+:root {
+  /* Couleurs */
+  --bg: #f4f4f4;            /* gris papier : 70 % de la surface mesurée */
+  --surface: #ffffff;
+  --ink: #000000;           /* blocs noirs : menu, news, pied de page */
+  --on-ink: #ffffff;
+  --text: #000000;
+  --muted: #555555;
+  --accent: #ff211e;        /* rouge signal : aplats, tags, active */
+  --accent-text: #ff4040;   /* rouge des grands titres (texte ≥ 24px uniquement) */
+  --accent-deep: #ed2215;   /* rouge d'appui / survol */
+  --on-accent: #000000;     /* texte sur aplat rouge : noir (blanc = 3,9:1, gros texte seulement) */
+  --line-accent: rgb(255 64 64 / 0.55);  /* filets diagonaux décoratifs */
+  --line-ghost: rgb(0 0 0 / 0.08);
+  --veil: rgb(0 0 0 / 0.55); /* voile sur les visuels découpés */
+
+  /* Couleurs de personnages (une par fiche, jamais deux à la fois) */
+  --chara-1: #eaf4fc;
+  --chara-2: #f8e58c;
+  --chara-3: #7f1184;
+  --chara-4: #fcc800;
+  --chara-5: #ff9933;
+  --chara-6: #eb6ea0;
+  --chara-7: #00fa9a;
+  --chara-8: #008db7;
+
+  /* Typographie */
+  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Noto Sans JP', system-ui, sans-serif;
+  --text-xs: 0.6875rem;   /* 11px : tags RANKING No. */
+  --text-sm: 0.875rem;    /* 14px : nav, langue */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.25rem;     /* 20px : texte courant de l'intro */
+  --text-xl: 2rem;        /* 32px : sous-titres */
+  --text-title: clamp(3.5rem, 6vw, 5.75rem);   /* 91px mesuré : titres de section */
+  --text-number: clamp(4rem, 7vw, 6.5rem);     /* chiffres de classement */
+  --leading-body: 2;      /* 20px / 40px mesuré */
+  --leading-tight: 1;
+  --tracking-body: 0.04em; /* 0.8px sur 20px */
+  --tracking-caps: 0.06em;
+
+  /* Espace */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-10: 40px;
+  --space-20: 80px;       /* padding vertical des sections mesuré */
+  --container: 1146px;    /* largeur de la liste d'actualités mesurée */
+  --text-column: 720px;
+
+  /* Formes */
+  --slant: 33deg;         /* angle des découpes en X */
+  --skew: -24deg;         /* parallélogrammes des cartes */
+  --border-thin: 0.8px;
+  --border-bold: 1.6px;
+  --bar: 4px;             /* filet rouge des listes */
+
+  /* Mouvement */
+  --ease: ease;
+  --ease-snap: cubic-bezier(0.47, 0.53, 0.18, 1);
+  --dur-fast: 300ms;
+  --dur-base: 400ms;
+  --dur-slow: 500ms;
+  --dur-reveal: 1000ms;
+}

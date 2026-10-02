@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polar Labs — Glacial Mono 3D (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap">
+<style>
+:root {
+  --fog: #b6bac5; --frost: #d9dce3; --loader: #a0a5b1; --night: #1f2430; --steel: #383e4e; --ink: #1f2430; --text: #e9ecf2; --muted: #8a91a3;
+  --glow: rgb(220 235 255 / 0.85); --line: rgb(233 236 242 / 0.35); --scrim-light: rgb(182 186 197 / 0.72); --scrim-dark: rgb(31 36 48 / 0.72);
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace; --font-logo: 'Unbounded', 'IBM Plex Mono', sans-serif;
+  --text-2xs: 0.625rem; --text-xs: 0.6875rem; --text-sm: 0.8125rem; --text-base: 1rem; --text-logo: 1.5rem; --leading: 1.45; --tracking: 0.02em;
+  --edge: 28px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --text-col: 360px;
+  --bracket: 8px; --bracket-w: 1px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1); --dur-fast: 200ms; --dur: 600ms; --dur-scene: 1600ms; --scramble: 40ms;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--fog); color: var(--steel); font: 400 var(--text-xs)/var(--leading) var(--font-mono); letter-spacing: var(--tracking); }
+:focus-visible { outline: 1px dashed currentColor; outline-offset: 4px; }
+
+.loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--loader); color: var(--text); font-size: var(--text-sm); transition: opacity var(--dur) var(--ease), visibility var(--dur); }
+.loader.is-done { opacity: 0; visibility: hidden; }
+
+/* Scène fixe pilotée par le défilement */
+.scene { position: fixed; inset: 0; overflow: hidden; transition: background var(--dur-scene) var(--ease); background: radial-gradient(80% 60% at 50% 30%, var(--frost), var(--fog) 70%); }
+body[data-ch="2"] .scene { background: radial-gradient(70% 70% at 50% 40%, #2c3343, var(--night) 70%); }
+body[data-ch="3"] .scene { background: radial-gradient(80% 60% at 50% 30%, #eef0f4, var(--fog) 70%); }
+.mount { position: absolute; left: -10%; right: -10%; bottom: 0; height: 55%; background: radial-gradient(60% 80% at 30% 100%, #c9ccd4, transparent 70%), radial-gradient(50% 70% at 75% 100%, #c1c5ce, transparent 70%); filter: blur(2px); transition: opacity var(--dur-scene) var(--ease); }
+body[data-ch="2"] .mount { opacity: 0; }
+.obj { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); transition: opacity var(--dur) var(--ease), transform var(--dur-scene) var(--ease); }
+.obj[hidden] { display: block !important; opacity: 0; pointer-events: none; transform: translate(-50%, -40%) scale(.9); }
+/* Igloo en blocs aux joints lumineux */
+.dome { width: min(54vw, 420px); aspect-ratio: 2/1.1; border-radius: 50% 50% 6% 6% / 90% 90% 6% 6%; background:
+  repeating-linear-gradient(0deg, transparent 0 34px, var(--glow) 34px 37px), repeating-linear-gradient(90deg, #9da2ae 0 70px, var(--glow) 70px 73px), linear-gradient(180deg, #c6c9d1, #7d8290);
+  background-blend-mode: normal, multiply, normal; box-shadow: inset -30px -20px 60px rgb(31 36 48 / .35), 0 30px 60px rgb(31 36 48 / .2); position: relative; }
+.dome::after { content: ""; position: absolute; right: -8%; bottom: 0; width: 34%; height: 46%; border-radius: 50% 50% 0 0 / 80% 80% 0 0; background: inherit; box-shadow: inherit; }
+/* Rocher sombre */
+.rock { width: min(30vw, 220px); aspect-ratio: 1/1.6; border-radius: 48% 52% 44% 56% / 40% 38% 62% 60%; background: radial-gradient(60% 40% at 60% 30%, #5b6273, #2a2f3b 70%); box-shadow: 0 0 80px rgb(220 235 255 / .12); transform: rotate(8deg); }
+/* Socle + particules */
+.pedestal { position: absolute; left: 50%; bottom: -18%; width: min(90vw, 900px); aspect-ratio: 1; transform: translateX(-50%) rotateX(78deg); border-radius: 50%; background: repeating-radial-gradient(circle, #cfd2da 0 18px, #a6abb7 18px 20px, #e3e5ea 20px 46px); box-shadow: 0 0 0 2px var(--glow); }
+.particles { width: min(40vw, 300px); aspect-ratio: 1; background: radial-gradient(circle, var(--steel) 1.2px, transparent 1.6px) 0 0/7px 7px; -webkit-mask: linear-gradient(45deg, transparent 38%, #000 38% 62%, transparent 62%), linear-gradient(-45deg, transparent 38%, #000 38% 62%, transparent 62%); mask: linear-gradient(45deg, transparent 38%, #000 38% 62%, transparent 62%), linear-gradient(-45deg, transparent 38%, #000 38% 62%, transparent 62%); filter: drop-shadow(0 10px 20px rgb(31 36 48 / .3)); }
+.snow i { position: absolute; top: -10px; width: 3px; height: 3px; border-radius: 50%; background: var(--text); filter: blur(.5px); opacity: .7; animation: fall var(--d) linear infinite; animation-delay: var(--dl); }
+
+/* Interface aux bords */
+.ui { position: fixed; inset: 0; pointer-events: none; z-index: 10; transition: color var(--dur-scene) var(--ease); }
+body[data-ch="2"] .ui { color: var(--text); }
+.ui > * { position: absolute; pointer-events: auto; }
+.ui .tl { left: var(--edge); top: var(--edge); }
+.logo { margin: 0 0 var(--space-2); font: 700 var(--text-logo)/1 var(--font-logo); color: var(--text); text-shadow: 0 0 12px var(--glow), 0 1px 2px rgb(31 36 48 / .5); letter-spacing: .02em; }
+.ui .tl p, .ui .tr p { margin: 0; font-size: var(--text-2xs); }
+.ui .tr { right: var(--edge); top: var(--edge); width: 190px; text-align: right; }
+.ui .tr h2 { margin: 0 0 var(--space-2); font: 500 var(--text-xs) var(--font-mono); }
+.ui .bl { left: var(--edge); bottom: var(--edge); display: grid; gap: var(--space-2); justify-items: start; font-size: var(--text-2xs); }
+.ui .bc { left: 50%; bottom: var(--edge); transform: translateX(-50%); display: flex; align-items: center; gap: var(--space-6); white-space: nowrap; }
+body:not([data-ch="3"]) .ui .bc { display: none; }
+.bracket { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; background: none; border: 0; color: inherit; font: 500 var(--text-xs) var(--font-mono); cursor: pointer; text-decoration: none; }
+.bracket::before, .bracket::after, .bracket span::before, .bracket span::after { content: ""; position: absolute; width: var(--bracket); height: var(--bracket); border: var(--bracket-w) solid currentColor; transition: transform var(--dur-fast) var(--ease); }
+.bracket::before { left: 0; top: 0; border-right: 0; border-bottom: 0; } .bracket::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+.bracket span::before { right: 0; top: 0; border-left: 0; border-bottom: 0; } .bracket span::after { left: 0; bottom: 0; border-right: 0; border-top: 0; }
+.bracket:hover::before { transform: translate(3px, 3px); } .bracket:hover::after { transform: translate(-3px, -3px); }
+.bracket:hover span::before { transform: translate(-3px, 3px); } .bracket:hover span::after { transform: translate(3px, -3px); }
+.ghost { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; min-height: 44px; }
+
+/* Panneau de contenu */
+.panel { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; background: var(--scrim-dark); backdrop-filter: blur(6px); color: var(--text); opacity: 0; visibility: hidden; transition: opacity var(--dur) var(--ease), visibility var(--dur); }
+.panel.is-open { opacity: 1; visibility: visible; }
+.panel__col { width: min(var(--text-col), calc(100% - 32px)); font-size: var(--text-sm); }
+.panel h3 { margin: var(--space-6) 0 var(--space-3); font: 500 var(--text-xs) var(--font-mono); color: var(--muted); }
+.panel p { margin: 0; }
+.panel .links { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+.panel .links a { color: var(--text); text-decoration: none; }
+.panel .close { position: absolute; right: var(--edge); top: var(--edge); }
+
+.spacer { height: 400vh; }
+
+@keyframes fall { to { transform: translate(-40px, 110vh); } }
+@media (max-width: 700px) {
+  :root { --edge: 16px; }
+  .ui .tr p { display: none; }
+  .ui .bc { gap: var(--space-2); font-size: var(--text-2xs); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } .snow { display: none; } }
+</style>
+</head>
+<body data-ch="1">
+<div class="loader" id="loader" role="status" aria-label="Chargement"><span id="ascii">--==+++==-</span></div>
+
+<div class="scene" aria-hidden="true">
+  <div class="mount"></div>
+  <div class="snow"><i style="left:10%;--d:9s;--dl:-2s"></i><i style="left:25%;--d:12s;--dl:-6s"></i><i style="left:40%;--d:10s;--dl:-1s"></i><i style="left:58%;--d:13s;--dl:-8s"></i><i style="left:72%;--d:8s;--dl:-4s"></i><i style="left:86%;--d:11s;--dl:-3s"></i><i style="left:94%;--d:14s;--dl:-9s"></i></div>
+  <div class="obj" data-for="1"><div class="dome" data-slot="hero-3d"></div></div>
+  <div class="obj" data-for="2" hidden><div class="rock"></div></div>
+  <div class="obj" data-for="3" hidden><div class="pedestal"></div><div class="particles" style="position:relative;top:-40px"></div></div>
+</div>
+
+<div class="ui">
+  <div class="tl"><h1 class="logo">POLAR</h1><p>// Copyright © 2026</p><p>Polar Labs. Tous droits réservés.</p></div>
+  <div class="tr"><h2 class="scr" id="rubric">////// Manifeste</h2><p class="scr" id="manifest">Notre mission : construire la plus grande communauté créative en ligne, et ouvrir la prochaine ère du numérique grand public.</p></div>
+  <div class="bl"><span>Défiler pour découvrir</span><button class="ghost" id="sound" aria-pressed="false">◖ Son : coupé</button><button class="bracket" id="openPanel"><span></span>Lire</button></div>
+  <div class="bc"><button class="ghost" aria-label="Précédent">‹——  Studio</button><a class="bracket" href="#"><span></span>X / Réseau</a><button class="ghost" aria-label="Suivant">Archives  ——›</button></div>
+</div>
+
+<section class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="pTitle">
+  <button class="bracket close" id="closePanel"><span></span>Fermer</button>
+  <div class="panel__col">
+    <h3 id="pTitle">////// Résumé</h3>
+    <p>Fondé en 2021, le studio a d'abord créé une petite marque de personnages avant de devenir une maison mère qui développe contenus, produits et expériences autour d'un même univers. Cette transformation vise à faire grandir l'univers d'origine avec de nouvelles façons de raconter des histoires.</p>
+    <h3>/// Découvrir</h3>
+    <div class="links"><a href="#">[X] ↗</a><a href="#">[IG] ↗</a><a href="#">[LI] ↗</a><a href="#">[TK] ↗</a></div>
+    <h3>/// Visiter</h3>
+    <div class="links"><a href="#">[site] ↗</a></div>
+  </div>
+</section>
+
+<div class="spacer" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ascii = document.getElementById('ascii'), loader = document.getElementById('loader');
+  const g = '-=+'; const t = setInterval(() => { ascii.textContent = Array.from({ length: 10 }, () => g[Math.random() * 3 | 0]).join(''); }, 80);
+  setTimeout(() => { clearInterval(t); ascii.textContent = '=========='; setTimeout(() => loader.classList.add('is-done'), 250); }, reduce ? 100 : 1600);
+
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\_<>';
+  const scramble = el => { const target = el.dataset.text || el.textContent; el.dataset.text = target; el.setAttribute('aria-label', target);
+    if (reduce) { el.textContent = target; return; } let i = 0; clearInterval(el._t);
+    el._t = setInterval(() => { el.textContent = [...target].map((c, k) => k < i || c === ' ' ? c : chars[Math.random() * chars.length | 0]).join(''); i += 2; if (i > target.length) { clearInterval(el._t); el.textContent = target; } }, 40); };
+  const rubrics = { 1: '////// Manifeste', 2: '////// Résumé', 3: '////// Réseaux' };
+  let ch = 1;
+  const setCh = n => { if (n === ch) return; ch = n; document.body.dataset.ch = n; document.querySelectorAll('.obj').forEach(o => o.hidden = +o.dataset.for !== n);
+    const r = document.getElementById('rubric'); r.dataset.text = rubrics[n]; scramble(r); };
+  addEventListener('scroll', () => { const p = scrollY / (document.documentElement.scrollHeight - innerHeight); setCh(p < .34 ? 1 : p < .67 ? 2 : 3); }, { passive: true });
+  scramble(document.getElementById('manifest'));
+  const panel = document.getElementById('panel');
+  document.getElementById('openPanel').addEventListener('click', () => panel.classList.add('is-open'));
+  document.getElementById('closePanel').addEventListener('click', () => panel.classList.remove('is-open'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') panel.classList.remove('is-open'); });
+  const s = document.getElementById('sound'); s.addEventListener('click', () => { const on = s.getAttribute('aria-pressed') !== 'true'; s.setAttribute('aria-pressed', on); s.textContent = on ? '◖ Son : activé' : '◖ Son : coupé'; });
+})();
+</script>
+</body>
+</html>

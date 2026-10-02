@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>noé valin — Pixel Lime Portfolio (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root {
+  --ink: #0f0f0f; --paper: #ececec; --white: #ffffff; --lime: #c6f432; --lime-soft: #dcf98a; --on-lime: #0f0f0f; --card-dark: #1a1a1a;
+  --muted: #555555; --muted-dark: #9a9a9a;
+  --line: rgb(15 15 15 / 0.08); --line-dark: rgb(255 255 255 / 0.06); --rule: rgb(15 15 15 / 0.18); --rule-dark: rgb(255 255 255 / 0.16);
+  --photo-0: #0b0b0b; --photo-1: #232323; --photo-2: #3d3d3d; --photo-3: #6b6b6b; --photo-4: #a8a8a8; --photo-5: #d9d9d9; --grain-opacity: 0.22;
+  --font-sans: 'Inter Tight', 'Inter', system-ui, sans-serif; --font-mono: 'JetBrains Mono', 'Space Mono', ui-monospace, monospace;
+  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.375rem;
+  --text-statement: clamp(1.75rem, 3.3vw, 3rem); --text-section: clamp(2.5rem, 6vw, 5.5rem); --text-name: clamp(4.5rem, 14vw, 13rem);
+  --weight-name: 400; --leading-name: 0.86; --leading-statement: 1.28; --tracking-name: -0.045em; --tracking-mono: 0.08em;
+  --edge: clamp(16px, 3vw, 40px); --grid-cell: 64px; --pixel: clamp(14px, 1.6vw, 24px);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --max: 1360px;
+  --radius-0: 0; --radius-card: 6px; --radius-pill: 999px; --tilt-1: -3deg; --tilt-2: 2deg; --tilt-3: -1.5deg;
+  --shadow-card: 0 1px 0 rgb(15 15 15 / 0.06), 0 18px 40px -18px rgb(0 0 0 / 0.45);
+  --shadow-lift: 0 2px 0 rgb(15 15 15 / 0.08), 0 30px 60px -20px rgb(0 0 0 / 0.55);
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1); --ease-step: steps(6, end); --dur-fast: 160ms; --dur: 420ms; --dur-slow: 900ms;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--text-base)/1.5 var(--font-sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.mono { font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--tracking-mono); text-transform: uppercase; }
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--edge); }
+
+/* Grilles fines */
+.grid-bg { background-color: var(--paper); background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: var(--grid-cell) var(--grid-cell); }
+.grid-bg-dark { background-color: var(--ink); color: var(--white); background-image: linear-gradient(var(--line-dark) 1px, transparent 1px), linear-gradient(90deg, var(--line-dark) 1px, transparent 1px); background-size: var(--grid-cell) var(--grid-cell); }
+
+/* Étiquettes */
+.tag { display: inline-flex; align-items: center; gap: var(--space-2); padding: 5px 9px 4px; background: var(--ink); color: var(--white); font: 500 var(--text-2xs)/1.2 var(--font-mono); letter-spacing: var(--tracking-mono); border-radius: var(--radius-0); }
+.tag--lime { background: var(--lime); color: var(--on-lime); }
+.tag i { width: 6px; height: 6px; background: var(--lime); }
+.tag--lime i { background: var(--ink); }
+
+/* Boutons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-3); min-height: 44px; padding: 0 var(--space-4); border: 1px solid transparent; border-radius: var(--radius-0);
+  font: 500 var(--text-xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+.btn .arr { display: inline-block; transition: transform var(--dur) var(--ease); }
+.btn:hover .arr { transform: translateX(4px); }
+.btn:active { transform: translate(1px, 1px); }
+.btn--lime { background: var(--lime); color: var(--on-lime); }
+.btn--lime:hover { background: var(--white); }
+.btn--ink { background: var(--ink); color: var(--white); }
+.btn--ink:hover { background: var(--lime); color: var(--on-lime); }
+.btn--line { border-color: currentColor; background: transparent; }
+.btn--line:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.btn[disabled], .btn[aria-busy="true"] { opacity: .45; cursor: not-allowed; transform: none; }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; background: var(--photo-0); color: var(--white); isolation: isolate; }
+.photo { position: absolute; inset: 0; z-index: -2;
+  background: radial-gradient(ellipse 60% 70% at 64% 38%, var(--photo-3) 0, var(--photo-2) 34%, var(--photo-1) 64%, var(--photo-0) 100%); }
+.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--photo-0) 45%, transparent), transparent 22%, transparent 55%, color-mix(in srgb, var(--photo-0) 70%, transparent)); }
+.grain::before { content: ""; position: absolute; inset: 0; z-index: 3; filter: url(#grain); opacity: var(--grain-opacity); mix-blend-mode: overlay; pointer-events: none; }
+.figure { position: absolute; left: 47%; bottom: 0; width: min(44vw, 620px); aspect-ratio: 0.86; }
+.figure > * { position: absolute; }
+.f-shoulders { left: -6%; right: -6%; bottom: 0; height: 40%; border-radius: 50% 50% 0 0 / 80% 80% 0 0; background: linear-gradient(100deg, var(--photo-0), var(--photo-2) 38%, var(--photo-3) 52%, var(--photo-1) 78%, var(--photo-0)); }
+.f-collar { left: 32%; width: 36%; bottom: 30%; height: 12%; border-radius: 40% 40% 50% 50%; background: linear-gradient(90deg, var(--photo-1), var(--photo-3), var(--photo-1)); }
+.f-neck { left: 40%; width: 20%; bottom: 36%; height: 16%; background: linear-gradient(90deg, var(--photo-2), var(--photo-4) 45%, var(--photo-3)); }
+.f-head { left: 29%; width: 42%; top: 7%; height: 47%; border-radius: 47% 47% 44% 44% / 50% 50% 50% 50%; background: radial-gradient(circle at 36% 38%, var(--photo-5), var(--photo-4) 32%, var(--photo-3) 62%, var(--photo-2) 92%); }
+.f-hair { left: 25%; width: 50%; top: 2%; height: 25%; border-radius: 50% 50% 34% 26% / 80% 80% 30% 30%; background: linear-gradient(165deg, var(--photo-2), var(--photo-0) 60%); }
+.f-brow { left: 34%; width: 32%; top: 26%; height: 6%; border-radius: 50%; background: radial-gradient(ellipse at 50% 60%, color-mix(in srgb, var(--photo-0) 22%, transparent), transparent 70%); }
+.f-nose { left: 47%; width: 7%; top: 33%; height: 10%; border-radius: 40% 40% 50% 50%; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--photo-0) 16%, transparent)); }
+.f-ear { left: 67%; width: 7%; top: 28%; height: 11%; border-radius: 40% 60% 60% 40%; background: linear-gradient(90deg, var(--photo-3), var(--photo-2)); }
+.f-shade { left: 29%; width: 42%; top: 7%; height: 47%; border-radius: inherit; background: linear-gradient(90deg, transparent 50%, color-mix(in srgb, var(--photo-0) 45%, transparent)); border-radius: 47% 47% 44% 44% / 50% 50% 50% 50%; }
+
+/* Mosaïque de pixels (signature) */
+.mosaic { position: absolute; display: grid; grid-template-columns: repeat(var(--cols), var(--pixel)); grid-auto-rows: var(--pixel); pointer-events: none; }
+.mosaic b { background: var(--lime); }
+.mosaic b.k { background: var(--ink); }
+.mosaic b.w { background: var(--white); }
+.mosaic b.o { background: transparent; box-shadow: inset 0 0 0 2px var(--lime); }
+.m-face { left: calc(47% + min(44vw, 620px) * .40); top: 21%; }
+.m-low { left: var(--edge); bottom: 30%; }
+.m-corner { right: 0; top: calc(var(--pixel) * 4); }
+
+.nav { position: absolute; inset: 0 0 auto; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); padding: var(--space-3) var(--edge); }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color var(--dur-fast) var(--ease); }
+.nav a:hover, .nav a[aria-current] { color: var(--lime); }
+.nav .logo { text-decoration: none; font-weight: 700; gap: var(--space-2); }
+.nav .logo i { width: 10px; height: 10px; background: var(--lime); }
+.nav .avail { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--muted-dark); }
+.nav .avail i { width: 7px; height: 7px; background: var(--lime); animation: blink 1.2s var(--ease-step) infinite; }
+
+.hero-tags { position: absolute; z-index: 4; left: calc(47% + min(44vw, 620px) * .12); top: 30%; display: grid; gap: 6px; justify-items: start; }
+.hero-tags .tag:nth-child(2) { margin-left: 34px; }
+.hero-copy { position: absolute; z-index: 5; left: var(--edge); right: var(--edge); bottom: clamp(24px, 6vh, 64px); }
+.name { margin: 0; font: var(--weight-name) var(--text-name)/var(--leading-name) var(--font-sans); letter-spacing: var(--tracking-name); }
+.name span { display: block; }
+.name span + span { padding-left: 0.92em; }
+.name em { font-style: normal; font-weight: 300; }
+.hero-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); margin-top: var(--space-6); flex-wrap: wrap; }
+.hero-row p { margin: 0; max-width: 34ch; font-size: var(--text-sm); color: var(--photo-5); }
+.hero-meta { display: flex; gap: var(--space-6); color: var(--muted-dark); }
+
+/* ---------- Comment je pense ---------- */
+.think { position: relative; padding: var(--space-24) 0; overflow: hidden; }
+.think-grid { display: grid; grid-template-columns: 220px 1fr; gap: var(--space-8); align-items: start; }
+.think-side { display: grid; gap: var(--space-4); justify-items: start; color: var(--muted); }
+.statement { margin: 0; max-width: 24ch; font: 400 var(--text-statement)/var(--leading-statement) var(--font-sans); letter-spacing: -0.02em; }
+.think .statement { max-width: 30ch; }
+.statement b { font-weight: 700; }
+.hl { position: relative; padding: 0 .28em; white-space: nowrap; }
+.hl::before { content: ""; position: absolute; inset: .1em 0 .04em; z-index: -1; background: var(--lime); border-radius: var(--radius-pill); transform-origin: left; }
+.hl { z-index: 0; }
+.drawn { position: relative; white-space: nowrap; }
+.drawn svg { position: absolute; pointer-events: none; overflow: visible; }
+.drawn path { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.drawn--circle svg { inset: -0.32em -0.4em -0.22em -0.36em; width: calc(100% + .76em); height: calc(100% + .54em); }
+.drawn--under svg { left: -2%; right: 0; bottom: -0.32em; width: 104%; height: .4em; }
+.sticker { position: absolute; display: grid; place-items: center; background: var(--lime); color: var(--on-lime); font: 700 var(--text-2xs)/1 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; }
+.sticker--sq { width: 14px; height: 14px; }
+.sticker--pill { padding: 8px 12px; border-radius: var(--radius-pill); transform: rotate(-8deg); box-shadow: 2px 2px 0 var(--ink); }
+.sticker--star { width: 44px; height: 44px; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--space-16); border-top: 1px solid var(--rule); }
+.facts div { padding: var(--space-6) var(--space-6) 0 0; }
+.facts strong { display: block; font: 500 clamp(2.25rem, 4vw, 3.5rem)/1 var(--font-sans); letter-spacing: -0.04em; }
+.facts span { color: var(--muted); }
+
+/* ---------- Notes (nuit) ---------- */
+.notes { padding: var(--space-24) 0; overflow: hidden; }
+.notes-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-8); flex-wrap: wrap; }
+.notes .statement { color: var(--white); max-width: 22ch; margin-top: var(--space-6); }
+.notes .statement b { color: var(--lime); }
+.notes-head .mono { color: var(--muted-dark); }
+.note-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); margin-top: var(--space-16); padding: 0 var(--space-4); }
+.note { position: relative; padding: var(--space-6); border-radius: var(--radius-card); background: var(--lime); color: var(--on-lime); box-shadow: var(--shadow-card); transform: rotate(var(--tilt)); transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  background-image: repeating-linear-gradient(180deg, transparent 0 27px, color-mix(in srgb, var(--ink) 12%, transparent) 27px 28px); background-position: 0 86px; }
+.note:nth-child(1) { --tilt: var(--tilt-1); }
+.note:nth-child(2) { --tilt: var(--tilt-2); background-color: var(--white); color: var(--ink); margin-top: var(--space-8); }
+.note:nth-child(3) { --tilt: var(--tilt-3); }
+.note:hover { transform: rotate(0) translateY(-6px); box-shadow: var(--shadow-lift); }
+.note::before { content: ""; position: absolute; top: -9px; left: 50%; width: 64px; height: 18px; translate: -50% 0; background: color-mix(in srgb, var(--white) 55%, transparent); rotate: -3deg; }
+.note header { display: flex; justify-content: space-between; padding-bottom: var(--space-3); margin-bottom: var(--space-3); border-bottom: 1px dashed currentColor; }
+.note h3 { margin: 0 0 var(--space-3); font: 700 var(--text-lg)/1.15 var(--font-sans); letter-spacing: -0.02em; text-transform: lowercase; }
+.note ul { list-style: none; margin: 0; padding: 0; font: 400 var(--text-sm)/28px var(--font-mono); }
+.note li { display: flex; gap: var(--space-3); align-items: baseline; }
+.note li::before { content: ""; flex: none; width: 12px; height: 12px; border: 1.5px solid currentColor; translate: 0 1px; }
+.note li.done::before { background: currentColor; box-shadow: inset 0 0 0 2px var(--lime); }
+.note:nth-child(2) li.done::before { box-shadow: inset 0 0 0 2px var(--white); }
+.note li.done { text-decoration: line-through; text-decoration-thickness: 1px; }
+.note footer { margin-top: var(--space-4); }
+
+/* ---------- Travaux ---------- */
+.work { padding: var(--space-24) 0; }
+.work-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-6); flex-wrap: wrap; margin-bottom: var(--space-12); }
+.work-head h2 { margin: 0; font: 400 var(--text-section)/0.9 var(--font-sans); letter-spacing: -0.045em; }
+.work-head h2 sup { font: 500 var(--text-xs) var(--font-mono); letter-spacing: 0; vertical-align: top; margin-left: 6px; }
+.chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.chip { min-height: 44px; padding: 0 var(--space-4); border: 1px solid var(--rule); border-radius: var(--radius-pill); background: var(--white); color: var(--ink); font: 500 var(--text-2xs) var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; cursor: pointer; transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--lime); border-color: var(--ink); }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-12) var(--space-8); }
+.card { display: block; text-decoration: none; }
+.card[hidden] { display: none; }
+.card:nth-child(even) { margin-top: var(--space-16); }
+.thumb { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-card); overflow: hidden; background: var(--white); }
+.thumb > *, .thumb-inner > * { position: absolute; }
+.thumb .mosaic { transition: opacity var(--dur) var(--ease); opacity: 0; }
+.card:hover .thumb .mosaic, .card:focus-visible .thumb .mosaic { opacity: 1; }
+.thumb-inner { inset: 0; transition: transform var(--dur-slow) var(--ease); }
+.card:hover .thumb-inner { transform: scale(1.03); }
+.t1 { background: var(--white); }
+.t1 .disc { left: 18%; top: 16%; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--ink); }
+.t1 .bar { right: 12%; top: 22%; width: 22%; height: 56%; background: repeating-linear-gradient(180deg, var(--ink) 0 6px, transparent 6px 18px); }
+.t1 .word { left: 8%; bottom: 8%; font: 700 clamp(1.5rem, 3vw, 2.5rem)/1 var(--font-sans); letter-spacing: -0.04em; color: var(--ink); }
+.t2 { background: linear-gradient(180deg, var(--photo-5), var(--photo-4) 46%, var(--photo-2) 47%, var(--photo-1)); }
+.t2 .sun { left: 58%; top: 18%; width: 18%; aspect-ratio: 1; border-radius: 50%; background: var(--white); }
+.t2 .ridge { left: 0; right: 0; bottom: 0; height: 60%; background: var(--photo-1); clip-path: polygon(0 40%, 18% 22%, 34% 36%, 52% 8%, 70% 30%, 86% 18%, 100% 34%, 100% 100%, 0 100%); }
+.t2 .label { left: 6%; top: 8%; font: 500 var(--text-2xs) var(--font-mono); letter-spacing: var(--tracking-mono); color: var(--ink); text-transform: uppercase; }
+.t3 { background: var(--ink); }
+.t3 .poster { width: 24%; aspect-ratio: 3/4; background: var(--white); top: 18%; border-radius: 2px; }
+.t3 .poster:nth-child(1) { left: 12%; rotate: -6deg; background: var(--photo-4); }
+.t3 .poster:nth-child(2) { left: 38%; top: 12%; background: var(--lime); }
+.t3 .poster:nth-child(3) { left: 64%; rotate: 5deg; }
+.t3 .poster::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: 12%; height: 18%; background: repeating-linear-gradient(180deg, var(--ink) 0 2px, transparent 2px 6px); opacity: .7; }
+.t4 { background: var(--lime); }
+.t4 .glyph { left: 6%; bottom: -14%; font: 700 clamp(9rem, 22vw, 20rem)/1 var(--font-sans); letter-spacing: -0.06em; color: var(--ink); }
+.t4 .dot { right: 10%; top: 12%; width: 22%; aspect-ratio: 1; border: 2px solid var(--ink); border-radius: 50%; }
+.card-row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); margin-top: var(--space-4); }
+.card-row h3 { margin: 0; font: 500 var(--text-lg)/1.2 var(--font-sans); letter-spacing: -0.02em; }
+.card-row h3 .hl::before { transform: scaleX(0); transition: transform var(--dur) var(--ease); }
+.card:hover .card-row h3 .hl::before, .card:focus-visible .card-row h3 .hl::before { transform: scaleX(1); }
+.card .mono { color: var(--muted); }
+
+/* ---------- Services ---------- */
+.services { padding: 0 0 var(--space-24); }
+.svc { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.svc li { border-bottom: 1px solid var(--rule); }
+.svc a { position: relative; display: grid; grid-template-columns: 80px 1fr 1fr 44px; gap: var(--space-6); align-items: center; min-height: 88px; padding: var(--space-4) var(--space-2); text-decoration: none; isolation: isolate; }
+.svc a::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--lime); transform: scaleY(0); transform-origin: bottom; transition: transform var(--dur) var(--ease); }
+.svc a:hover::before, .svc a:focus-visible::before { transform: scaleY(1); }
+.svc strong { font: 500 clamp(1.375rem, 2.6vw, 2.25rem)/1.1 var(--font-sans); letter-spacing: -0.03em; }
+.svc span.d { color: var(--muted); font-size: var(--text-sm); }
+.svc a:hover span.d { color: var(--ink); }
+.svc .go { justify-self: end; font: 400 1.5rem var(--font-sans); transition: transform var(--dur) var(--ease); }
+.svc a:hover .go { transform: rotate(-45deg); }
+
+/* ---------- Contact ---------- */
+.contact { position: relative; padding: var(--space-24) 0 var(--space-8); overflow: hidden; }
+.contact h2 { position: relative; z-index: 1; margin: var(--space-6) 0 var(--space-12); font: 300 clamp(3.25rem, 11vw, 10.5rem)/0.88 var(--font-sans); letter-spacing: -0.05em; }
+.contact h2 b { font-weight: 700; color: var(--lime); }
+.contact .m-contact { right: var(--edge); top: var(--space-16); }
+.form { display: flex; gap: 0; max-width: 560px; }
+.field { flex: 1; display: grid; gap: var(--space-2); }
+.field label { color: var(--muted-dark); }
+.input-row { display: flex; }
+.input { flex: 1; min-width: 0; min-height: 52px; padding: 0 var(--space-4); border: 1px solid var(--rule-dark); border-right: 0; border-radius: var(--radius-0); background: var(--card-dark); color: var(--white); font: 400 var(--text-sm) var(--font-mono); transition: border-color var(--dur-fast) var(--ease); }
+.input::placeholder { color: var(--muted-dark); }
+.input:hover { border-color: var(--muted-dark); }
+.input:focus { outline: none; border-color: var(--lime); box-shadow: inset 0 -2px 0 var(--lime); }
+.input[aria-invalid="true"] { border-color: var(--white); box-shadow: inset 0 -2px 0 var(--white); }
+.input-row .btn { min-height: 52px; }
+.help { min-height: 1.5em; color: var(--muted-dark); }
+.help.ok { color: var(--lime); }
+.foot { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-24); padding-top: var(--space-6); border-top: 1px solid var(--rule-dark); color: var(--muted-dark); }
+.foot nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+.foot a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
+.foot a:hover { color: var(--lime); }
+
+/* ---------- Mouvement ---------- */
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes pix-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise { from { transform: translateY(105%); } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes grow { from { transform: scaleX(0); } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero .mosaic b { animation: pix-in var(--dur-fast) var(--ease-step) both; animation-delay: calc(var(--i) * 18ms + 300ms); }
+  .name span { overflow: hidden; }
+  .name span > em, .name span > b { display: inline-block; animation: rise var(--dur-slow) var(--ease) both; font-weight: inherit; }
+  .name span + span > b { animation-delay: 120ms; }
+  .drawn path { stroke-dasharray: 1; animation: draw 1.2s var(--ease) both; }
+  .think .hl::before { animation: grow var(--dur-slow) var(--ease) both; }
+  @supports (animation-timeline: view()) {
+    .drawn path, .think .hl::before { animation-timeline: view(); animation-range: entry 20% cover 45%; }
+    .note { animation: pix-in linear both; animation-timeline: view(); animation-range: entry 0% entry 50%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .think-grid { grid-template-columns: 1fr; }
+  .note-row { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; gap: var(--space-12); }
+  .note:nth-child(2) { margin-top: 0; }
+  .svc a { grid-template-columns: 48px 1fr 44px; }
+  .svc span.d { display: none; }
+}
+@media (max-width: 640px) {
+  :root { --grid-cell: 40px; --pixel: 15px; }
+  .nav { gap: var(--space-2); }
+  .nav .avail, .nav .hide-s { display: none; }
+  .figure { left: 18%; width: 92vw; bottom: 22%; }
+  .m-face { left: 54%; top: 20%; }
+  .m-low { bottom: 39%; }
+  .m-corner { display: none; }
+  .hero-tags { left: 12%; top: 22%; }
+  .hero-copy { bottom: 28px; }
+  .name { font-size: 4.9rem; }
+  .hero-row { margin-top: var(--space-4); }
+  .hero-meta { display: none; }
+  .facts { grid-template-columns: 1fr; }
+  .facts div { padding: var(--space-4) 0; border-bottom: 1px solid var(--rule); display: flex; align-items: baseline; gap: var(--space-4); }
+  .cards { grid-template-columns: 1fr; }
+  .card:nth-child(even) { margin-top: 0; }
+  .contact .m-contact { display: none; }
+  .think .sticker--pill { right: var(--edge) !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
+
+<header class="hero grain" id="top">
+  <div class="photo" data-slot="portrait-bw" role="img" aria-label="Portrait en noir et blanc du designer (emplacement)">
+    <div class="figure" aria-hidden="true">
+      <div class="f-shoulders"></div><div class="f-neck"></div><div class="f-collar"></div><div class="f-hair"></div><div class="f-ear"></div><div class="f-head"></div><div class="f-shade"></div><div class="f-brow"></div><div class="f-nose"></div><div class="f-hair" style="height:14%;top:4%;left:30%;width:40%"></div>
+    </div>
+  </div>
+  <div class="mosaic m-face" aria-hidden="true" data-pattern="........xx../......xxxx.x/.....xxoxxxx/...x.xxxx.xx/....xxkxxx../..xxxx.xxxxx/.x..xxwxx.x./...xx.xx..x./..x...x...../......x....."></div>
+  <div class="mosaic m-low" aria-hidden="true" data-pattern="x.x..../xxx.x../.x.xxx.x"></div>
+  <div class="mosaic m-corner" aria-hidden="true" data-pattern="..xx/.x.x/xxxx/..x."></div>
+
+  <nav class="nav mono" aria-label="Navigation principale">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>n.valin</a>
+    <a href="#travaux">Travaux</a>
+    <a href="#pense" class="hide-s">À propos</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <span class="avail"><i aria-hidden="true"></i>Dispo · nov. 2026</span>
+  </nav>
+
+  <div class="hero-tags" aria-hidden="true"><span class="tag">créatif</span><span class="tag tag--lime">designer</span></div>
+
+  <div class="hero-copy">
+    <h1 class="name"><span><em>noé</em></span><span><b>valin</b></span></h1>
+    <div class="hero-row">
+      <a class="btn btn--lime" href="#pense">Découvrir la suite <span class="arr" aria-hidden="true">→</span></a>
+      <p>Directeur artistique indépendant. Identités, interfaces et objets imprimés pour des marques qui préfèrent être reconnues plutôt que rassurantes.</p>
+      <div class="hero-meta mono"><span>Paris — Lisbonne</span><span>Portfolio 2018 → 2026</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="think grid-bg" id="pense" aria-labelledby="pense-t">
+    <span class="sticker sticker--sq" style="left:12%;top:56px" aria-hidden="true"></span>
+    <span class="sticker sticker--sq" style="right:3%;top:68%;width:10px;height:10px" aria-hidden="true"></span>
+    <span class="sticker sticker--star" style="right:7%;top:46%" aria-hidden="true"></span>
+    <span class="sticker sticker--pill" style="right:5%;top:36px" aria-hidden="true">✦ sans gabarit</span>
+    <div class="wrap">
+      <div class="think-grid">
+        <div class="think-side">
+          <span class="tag" id="pense-t"><i aria-hidden="true"></i>comment je pense</span>
+          <span class="mono">(01) — méthode</span>
+        </div>
+        <div>
+          <p class="statement">je crois aux <b>idées simples</b> poussées <span class="hl">jusqu'au bout</span>. une identité doit se lire en <span class="drawn drawn--circle">une seconde<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M8 22 C 6 8, 40 2, 70 4 S 99 14, 96 24 S 60 39, 30 37 S 2 30, 10 14 C 14 9, 22 6, 30 5"/></svg></span>, puis <b>récompenser</b> celles et ceux qui restent — avec <span class="drawn drawn--under">un détail qui sourit<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 8 C 40 3, 80 10, 120 6 S 180 4, 198 7"/></svg></span>.</p>
+          <div class="facts">
+            <div><strong>12</strong><span class="mono">ans d'atelier</span></div>
+            <div><strong>140+</strong><span class="mono">projets livrés</span></div>
+            <div><strong>9</strong><span class="mono">pays, 3 langues</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes grid-bg-dark" aria-labelledby="notes-t">
+    <div class="wrap">
+      <div class="notes-head">
+        <div>
+          <span class="tag tag--lime"><i aria-hidden="true"></i>ce que je promets</span>
+          <h2 class="statement" id="notes-t">trois notes épinglées au-dessus de mon bureau. <b>elles décident</b> de presque tout.</h2>
+        </div>
+        <span class="mono">(02) — principes</span>
+      </div>
+      <div class="note-row">
+        <article class="note">
+          <header class="mono"><span>note_01</span><span>lun.</span></header>
+          <h3>une seule idée par page</h3>
+          <ul><li class="done">trouver la phrase</li><li class="done">couper le reste</li><li>la rendre visible de loin</li></ul>
+          <footer class="mono">→ clarté</footer>
+        </article>
+        <article class="note">
+          <header class="mono"><span>note_02</span><span>mer.</span></header>
+          <h3>montrer tôt, montrer brut</h3>
+          <ul><li class="done">croquis au jour 2</li><li>maquette au jour 5</li><li>pas d'effet « tadaa »</li></ul>
+          <footer class="mono">→ confiance</footer>
+        </article>
+        <article class="note">
+          <header class="mono"><span>note_03</span><span>ven.</span></header>
+          <h3>garder un pixel de folie</h3>
+          <ul><li class="done">une couleur, pas deux</li><li class="done">un détail qui joue</li><li>savoir s'arrêter</li></ul>
+          <footer class="mono">→ mémoire</footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="work grid-bg" id="travaux" aria-labelledby="travaux-t">
+    <div class="wrap">
+      <div class="work-head">
+        <h2 id="travaux-t">travaux choisis<sup>(04)</sup></h2>
+        <div class="chips" role="group" aria-label="Filtrer les projets">
+          <button class="chip" aria-pressed="true" data-f="all">Tout</button>
+          <button class="chip" aria-pressed="false" data-f="id">Identité</button>
+          <button class="chip" aria-pressed="false" data-f="web">Web</button>
+          <button class="chip" aria-pressed="false" data-f="ed">Édition</button>
+        </div>
+      </div>
+      <div class="cards">
+        <a class="card" href="#" data-cat="id">
+          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t1"><span class="disc"></span><span class="bar"></span><span class="word">orbe&nbsp;café</span></div><div class="mosaic" style="right:8%;bottom:10%" aria-hidden="true" data-pattern="..x/.xx/xxx"></div></div>
+          <div class="card-row"><h3><span class="hl">orbe café</span></h3><span class="mono">identité · 2026</span></div>
+        </a>
+        <a class="card" href="#" data-cat="web">
+          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t2"><span class="sun"></span><span class="ridge"></span><span class="label">refuge 1820 — réserver</span></div><div class="mosaic" style="left:8%;bottom:12%" aria-hidden="true" data-pattern="x.x/xxx/.x."></div></div>
+          <div class="card-row"><h3><span class="hl">refuge mille-huit</span></h3><span class="mono">site web · 2025</span></div>
+        </a>
+        <a class="card" href="#" data-cat="ed">
+          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t3"><span class="poster"></span><span class="poster"></span><span class="poster"></span></div><div class="mosaic" style="right:6%;top:8%" aria-hidden="true" data-pattern="xx./x.x/.xx"></div></div>
+          <div class="card-row"><h3><span class="hl">festival basse lumière</span></h3><span class="mono">affiches · 2025</span></div>
+        </a>
+        <a class="card" href="#" data-cat="id">
+          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t4"><span class="glyph">a.</span><span class="dot"></span></div><div class="mosaic" style="right:12%;bottom:12%" aria-hidden="true" data-pattern="kk./k.k/.kk"></div></div>
+          <div class="card-row"><h3><span class="hl">atelier amont</span></h3><span class="mono">identité · 2024</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="services grid-bg" id="services" aria-labelledby="services-t">
+    <div class="wrap">
+      <h2 class="sr-only" id="services-t">Services</h2>
+      <ul class="svc">
+        <li><a href="#contact"><span class="mono">(01)</span><strong>direction artistique</strong><span class="d">Plateformes de marque, campagnes, accompagnement d'équipes internes.</span><span class="go" aria-hidden="true">→</span></a></li>
+        <li><a href="#contact"><span class="mono">(02)</span><strong>identité visuelle</strong><span class="d">Logo, typographie, système de couleurs et guide d'usage vivant.</span><span class="go" aria-hidden="true">→</span></a></li>
+        <li><a href="#contact"><span class="mono">(03)</span><strong>design d'interface</strong><span class="d">Sites éditoriaux et produits numériques, du prototype à la recette.</span><span class="go" aria-hidden="true">→</span></a></li>
+        <li><a href="#contact"><span class="mono">(04)</span><strong>édition &amp; affiche</strong><span class="d">Livres, catalogues et séries d'affiches, suivi d'impression compris.</span><span class="go" aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact grid-bg-dark" id="contact" aria-labelledby="contact-t">
+    <div class="mosaic m-contact" aria-hidden="true" data-pattern="...xx/..xxx/.xx.x/xxxx./.x..."></div>
+    <div class="wrap">
+      <span class="tag tag--lime"><i aria-hidden="true"></i>un projet ?</span>
+      <h2 id="contact-t">on fait<br><b>quelque chose</b><br>ensemble ?</h2>
+      <form class="form" novalidate>
+        <div class="field">
+          <label class="mono" for="mail">Votre e-mail</label>
+          <div class="input-row">
+            <input class="input" id="mail" type="email" placeholder="vous@studio.fr" autocomplete="email" aria-describedby="mail-help">
+            <button class="btn btn--lime" type="submit">Écrire <span class="arr" aria-hidden="true">→</span></button>
+          </div>
+          <span class="help mono" id="mail-help" role="status">Réponse sous 48 h, promis.</span>
+        </div>
+      </form>
+      <div class="foot mono">
+        <span>© 2026 noé valin (fictif) — démo Kōbō</span>
+        <nav aria-label="Liens"><a href="#">Réseaux</a><a href="#">Journal</a><a href="#">Mentions</a><a href="#top">Haut ↑</a></nav>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  // Mosaïques : chaque caractère du motif devient un bloc (x lime, k noir, w blanc, o contour, . vide)
+  document.querySelectorAll('.mosaic[data-pattern]').forEach(m => {
+    const rows = m.dataset.pattern.split('/');
+    m.style.setProperty('--cols', Math.max(...rows.map(r => r.length)));
+    let i = 0;
+    rows.forEach(r => [...r.padEnd(Math.max(...rows.map(x => x.length)), '.')].forEach(c => {
+      const b = document.createElement(c === '.' ? 'span' : 'b');
+      if (c !== '.' && c !== 'x') b.className = c;
+      b.style.setProperty('--i', i++ % 23 * 1.7 | 0);
+      m.appendChild(b);
+    }));
+  });
+  // Filtres
+  const chips = document.querySelectorAll('.chip');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.setAttribute('aria-pressed', x === c));
+    document.querySelectorAll('.card').forEach(k => k.hidden = c.dataset.f !== 'all' && k.dataset.cat !== c.dataset.f);
+  }));
+  // Formulaire
+  const f = document.querySelector('.form'), inp = f.querySelector('.input'), help = f.querySelector('.help'), btn = f.querySelector('button');
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const ok = /.+@.+\..+/.test(inp.value);
+    inp.setAttribute('aria-invalid', !ok);
+    help.classList.toggle('ok', ok);
+    if (!ok) { help.textContent = 'Il manque un e-mail valide.'; return; }
+    btn.setAttribute('aria-busy', 'true'); help.textContent = 'Envoi…';
+    setTimeout(() => { btn.removeAttribute('aria-busy'); help.textContent = 'Bien reçu — je vous écris vite.'; }, 900);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+/*
+ * Nocturne Architecture — tokens
+ * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * Un studio d'architecture la nuit : noir presque pur, blanc net, gris de continuation, un seul rouge signal.
+ * @contrast text:bg text:surface text:raised muted:bg muted:surface muted:raised dim:bg:large on-accent:accent accent:bg:large accent-text:bg accent-text:surface ink:paper text:night
+ */
+:root {
+  /* Couleurs — nuit */
+  --bg: #111111;            /* fond du site */
+  --surface: #141414;       /* sections alternées, bas de page */
+  --raised: #1c1c1c;        /* cartes sans photo, survols, champs */
+  --text: #ffffff;
+  --muted: #8a8a8a;         /* petits textes, libellés, « + » des chiffres */
+  --dim: #777777;           /* suite grise d'une grande phrase (grand texte uniquement) */
+  --line: #2a2a2a;          /* filets entre lignes, séparateurs de stats */
+  --line-strong: #3a3a3a;   /* contours de boutons ronds */
+
+  /* Accent : un seul rouge signal */
+  --accent: #e3191f;        /* pilule « Parlons-en », carte rouge, ligne de progression, bouton lecture */
+  --on-accent: #ffffff;
+  --accent-text: #ff3b3f;   /* rouge pour un petit texte sur fond sombre */
+  --paper: #ffffff;         /* pilule blanche posée sur la carte rouge */
+  --ink: #111111;           /* texte de la pilule blanche */
+
+  /* Photos de nuit (emplacements dessinés en CSS) */
+  --night: #0b1626;         /* ciel bleu nuit des photos */
+  --night-2: #13284a;
+  --night-3: #1f4170;
+  --window: #f6c76a;        /* fenêtres allumées */
+  --trail-red: #ff4a3d;     /* traînées de feux arrière */
+  --trail-amber: #ffb547;   /* traînées de phares */
+  --concrete: #6f6a64;      /* béton, pierre */
+  --glass: #2c4a63;         /* façades vitrées */
+
+  /* Typographie */
+  --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;   /* mot-marque, titres, chiffres */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --text-2xs: 0.6875rem;    /* 11px : libellés en capitales, date et heure */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-title: clamp(2rem, 3.4vw, 3.25rem);       /* titres de section */
+  --text-statement: clamp(1.5rem, 2.8vw, 2.5rem);  /* grande phrase bicolore */
+  --text-stat: clamp(3rem, 6vw, 5.5rem);           /* « 15+ » */
+  --text-wordmark: clamp(6rem, 44vw, 46rem);       /* mot-marque géant coupé en bas du héros (5 lettres ≈ toute la largeur) */
+  --leading-tight: 0.92;
+  --leading-title: 1.08;
+  --leading-body: 1.55;
+  --tracking-display: -0.04em;
+  --tracking-caps: 0.08em;
+
+  /* Espace (base 4px) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
+  --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
+  --gutter: clamp(16px, 2.5vw, 40px);
+  --container: 1440px;
+
+  /* Formes */
+  --radius-card: 4px;       /* cartes de projet, photos : presque droites */
+  --radius-pill: 999px;
+  --control: 44px;          /* hauteur des pilules, boutons ronds */
+  --card-ratio: 4 / 5;
+  --hairline: 1px solid var(--line);
+  --shade-hero: linear-gradient(180deg, rgb(0 0 0 / 0.55) 0%, rgb(0 0 0 / 0) 28%, rgb(0 0 0 / 0) 55%, rgb(17 17 17 / 0.9) 100%);
+  --shade-card: linear-gradient(180deg, rgb(0 0 0 / 0) 50%, rgb(0 0 0 / 0.7) 100%);
+  --shadow-pop: 0 20px 50px -20px rgb(0 0 0 / 0.8);
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 360ms;
+  --dur-slow: 900ms;
+  --dur-reveal: 1200ms;     /* montée du mot-marque */
+}

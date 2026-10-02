@@ -1,0 +1,57 @@
+/*
+ * Cosmic Voyage — tokens
+ * Mesurés sur l'accueil, la page personnages et la page actualités de la référence (1536×674), voir source.md.
+ * @contrast text:bg text:surface muted:bg muted:surface on-accent:accent gold:surface link:nav text:glass
+ */
+:root {
+  /* Couleurs */
+  --bg: #0a0e1c;              /* nuit étoilée (fond d'image en réalité) */
+  --bg-deep: #000000;         /* fond de chargement et de page mesuré */
+  --nav: #0d0d0d;             /* barre de navigation */
+  --surface: #111111;         /* cartes d'actualité */
+  --surface-2: #212226;       /* survols, champs */
+  --glass: #2b3f66;           /* panneau personnage (base du verre bleu) */
+  --glass-veil: rgb(93 127 181 / 0.42);
+  --glass-edge: rgb(255 255 255 / 0.22);
+  --text: #e9e9e9;
+  --text-soft: #ccd0d2;
+  --muted: #919191;
+  --gold: #dbbf91;            /* texte actif, ornements */
+  --accent: #db9a45;          /* bouton principal doré */
+  --on-accent: #000000;
+  --accent-sand: #d9c29a;     /* fond du gros bouton « Télécharger » */
+  --link: #5b9dff;            /* onglet actif de la navigation */
+  --line: rgb(229 229 229 / 0.5);
+  --line-dark: #323339;
+  --quote-strip: rgb(0 0 0 / 0.72);
+
+  /* Typographie (polices système sur la référence : Microsoft YaHei / équivalents) */
+  --font-ui: 'Noto Sans', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-title: 'Noto Sans', 'Noto Sans SC', system-ui, sans-serif;
+  --font-quote: 'Noto Serif', 'Noto Serif SC', Georgia, serif;
+  --text-2xs: 0.6875rem;  /* 11px : texte de liste dominant */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 0.9375rem; /* 15px : liens de navigation */
+  --text-lg: 1.5rem;      /* 24px */
+  --text-xl: 1.875rem;    /* 30px : nom de personnage */
+  --text-hero: 3.125rem;  /* 50px */
+  --leading: 1.6;
+
+  /* Espace (échelle --global-spacing mesurée) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
+  --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
+  --nav-h: 58px;
+  --container: 880px;
+
+  /* Rayons (échelle --global-radius mesurée) */
+  --radius-1: 6px; --radius-2: 12px; --radius-3: 16px; --radius-4: 20px; --radius-5: 28px;
+  --radius-card: 0 var(--radius-5) 0 0;   /* signature : un seul coin arrondi */
+
+  /* Mouvement */
+  --ease: ease;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 500ms;
+}

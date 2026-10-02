@@ -1,0 +1,56 @@
+/*
+ * Epic JRPG Product — tokens
+ * Mesurés sur la page produit de référence (1536×674, 11930px), voir source.md.
+ * @contrast text:bg text:bg-warm on-gold:gold gold:bg muted:bg ink:paper on-red:red
+ */
+:root {
+  /* Couleurs */
+  --bg: #000000;             /* fond dominant mesuré */
+  --bg-warm: #1a0c08;        /* fond « braises » derrière les sections (image sur la référence) */
+  --paper: #ffffff;
+  --text: #ffffff;
+  --muted: #b5bdc1;
+  --ink: #263238;            /* texte sur blanc */
+  --gold: #f1c66f;           /* boutons, plaques de titre, filets */
+  --on-gold: #1e244d;        /* texte sur or : bleu nuit (le blanc sur or ne fait que 1,6:1) */
+  --navy: #1e244d;
+  --red: #b0030d;            /* lien actif, accents */
+  --red-brand: #e20613;      /* couleur primaire de l'éditeur */
+  --on-red: #ffffff;
+  --ember: #d2691e;
+  --line-gold: rgb(241 198 111 / 0.8);
+  --scrim: rgb(0 0 0 / 0.6);
+  /* Filet multicolore de l'en-tête (4 segments égaux) */
+  --stripe-1: #1565c0; --stripe-2: #00a5a8; --stripe-3: #e8a317; --stripe-4: #d9415b;
+
+  /* Typographie (Metropolis mesurée = dérivée de Montserrat) */
+  --font: 'Montserrat', 'Metropolis', system-ui, sans-serif;
+  --text-2xs: 0.625rem;  /* 10px */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px : boutons */
+  --text-base: 1rem;     /* 16px : dominant */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.5rem;     /* 24px : titres de bloc */
+  --text-2xl: 2.25rem;   /* 36px : titres de section */
+  --text-hero: 2.8125rem;/* 45px : H1 */
+  --tracking: -0.03em;   /* -0.48px sur 16px, mesuré sur tout le texte */
+  --tracking-caps: 0.08em;
+  --leading: 1.25;
+
+  /* Espace (variables de la référence en rem de 10px → px) */
+  --space-1: 6px; --space-2: 12px; --space-3: 19px; --space-4: 25px; --space-5: 30px; --space-6: 35px; --space-8: 50px;
+  --cta-min: 44px;
+  --nav-h: 70px; --nav-h-top: 140px;
+  --container: 1100px;
+
+  /* Formes */
+  --radius-xs: 4px;  /* cartes média (dominant) */
+  --radius-sm: 5px;
+  --radius-md: 7px;  /* boutons */
+  --radius-lg: 20px;
+  --shadow: 0 0 29px rgb(0 0 0 / 0.5);
+
+  /* Mouvement */
+  --ease: ease;
+  --dur-faster: 100ms; --dur-fast: 200ms; --dur: 300ms; --dur-slow: 500ms;
+}

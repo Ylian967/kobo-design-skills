@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEON DISTRICT — Hyper Lime Street (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap">
+<style>
+:root {
+  --bg: #efefef; --surface: #ffffff; --ink: #111111; --ink-2: #000000; --on-ink: #ffffff; --text: #222122; --muted: #6b6b6b; --muted-dark: #919191;
+  --accent: #d8fa00; --accent-2: #c6e800; --on-accent: #000000; --stroke: #767678; --hatch: rgb(255 255 255 / 0.06);
+  --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif; --font-body: 'Inter', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 0.9rem; --text-md: 1.2rem; --text-lg: 1.575rem; --text-xl: 2.4375rem; --text-2xl: 3.3rem; --text-num: clamp(4rem, 8vw, 7.5rem); --leading-tight: 1;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --section-pad: 117px; --nav-h: 60px;
+  --radius-sm: 8.4px; --radius-md: 24px; --radius-track: 72px; --radius-pill: 999px; --stroke-w: 4.8px; --cut: 45deg;
+  --ease: cubic-bezier(0.215, 0.61, 0.355, 1); --dur-1: 300ms; --dur-2: 400ms; --dur-3: 500ms; --dur-4: 600ms; --marquee: 20s;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-sm)/1.5 var(--font-body); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Nav */
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--nav-h); background: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: var(--space-8); padding: 0 var(--space-6); }
+.logo { font: 400 1.5rem/1 var(--font-display); color: var(--on-ink); letter-spacing: .08em; }
+.nav ul { display: flex; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
+.nav ul a { display: block; color: var(--muted-dark); font: 700 var(--text-sm)/1.1 var(--font-body); text-decoration: none; text-align: center; padding: 4px 12px; border-radius: var(--radius-pill); transition: all var(--dur-1) var(--ease); }
+.nav ul a:hover { color: var(--on-ink); }
+.nav ul a[aria-current="page"] { background: var(--surface); color: var(--text); }
+.btn-dl { background: var(--accent); color: var(--on-accent); border-radius: var(--radius-pill); padding: 8px 12px; font: 700 var(--text-sm)/1 var(--font-body); text-decoration: none; white-space: nowrap; }
+.icons { display: flex; gap: var(--space-3); }
+.icons span { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--stroke); display: grid; place-items: center; color: var(--on-ink); font-size: 14px; }
+.icons span:first-child { animation: rotation 6s linear infinite; }
+
+/* Pagination latérale */
+.pager { position: fixed; right: 0; top: 30%; z-index: 40; width: 50px; padding: 12px 0; background: var(--ink-2); border: 2px solid var(--stroke); border-right: 0; border-radius: 12px 0 0 12px; display: grid; justify-items: center; gap: 6px; color: var(--accent); font: 400 1.4rem/1 var(--font-display); }
+.pager b { writing-mode: vertical-rl; font-weight: 400; }
+.pager small { writing-mode: vertical-rl; font-size: 1rem; color: var(--on-ink); opacity: .7; }
+
+/* Matières */
+.track { position: relative; background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px); }
+.lime { background: var(--accent); color: var(--on-accent); }
+.film { height: 40px; background-color: var(--ink-2); background-image: linear-gradient(90deg, var(--surface) 0 28px, transparent 28px 56px); background-size: 56px 22px; background-repeat: repeat-x; background-position: 14px center; }
+
+/* Héros */
+.hero { position: relative; padding: calc(var(--nav-h) + 24px) 0 0; min-height: 720px; }
+.hero__frame { position: relative; margin: 0 6% 0 12%; height: 560px; background: var(--surface); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%); display: grid; place-items: center; color: var(--muted); font: 400 var(--text-md) var(--font-display); letter-spacing: .1em;
+  background-image: radial-gradient(40% 50% at 60% 50%, rgb(216 250 0 / .35), transparent 70%), repeating-linear-gradient(var(--cut), rgb(17 17 17 / .05) 0 2px, transparent 2px 14px); }
+.hero__logo { position: absolute; left: 10%; bottom: 40px; z-index: 2; background: var(--ink-2); color: var(--on-ink); font: 400 clamp(3rem, 7vw, 6rem)/0.85 var(--font-display); padding: 12px 24px; transform: rotate(-4deg); box-shadow: 10px 10px 0 var(--accent); }
+.stores { position: absolute; right: 8%; bottom: 30px; display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: flex-end; }
+.stores a { min-height: 44px; display: grid; place-items: center; padding: 0 var(--space-6); background: var(--ink-2); color: var(--on-ink); border-radius: var(--radius-sm); text-decoration: none; font: 700 var(--text-sm) var(--font-body); }
+
+/* Section */
+.section { position: relative; padding: var(--space-16) 0; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
+.track--right { margin-left: 6%; height: 260px; border-radius: var(--radius-track) 0 0 var(--radius-track); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
+.track--right::after { content: ""; position: absolute; right: 0; top: 0; width: 260px; height: 100%; background: var(--bg); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.track--left { margin-right: 44%; height: 220px; border-radius: 0 var(--radius-track) var(--radius-track) 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 220px 100%, 0 calc(100% - 220px)); }
+.sec-label { position: relative; display: grid; justify-items: end; align-content: end; padding: var(--space-8) var(--space-12); border-radius: 0 0 0 var(--radius-track); min-height: 280px; }
+.sec-label.left { justify-items: start; border-radius: 0 0 var(--radius-track) 0; }
+.sec-label h2 { margin: 0; font: 400 var(--text-2xl)/var(--leading-tight) var(--font-display); }
+.sec-label span { font: 400 var(--text-md)/1 var(--font-display); letter-spacing: .04em; }
+.sec-label b { font: 400 var(--text-num)/0.9 var(--font-display); }
+.panel { background: var(--surface); border-radius: var(--radius-track) 0 0 var(--radius-track); padding: var(--space-8) var(--space-12); display: grid; gap: var(--space-4); align-content: center; }
+.panel.right { border-radius: 0 var(--radius-track) var(--radius-track) 0; }
+
+/* Personnages */
+.carousel { display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px; background: var(--ink-2); border: var(--stroke-w) solid var(--stroke); border-radius: var(--radius-pill); }
+.carousel .arr { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--bg); font: 400 1.4rem var(--font-display); cursor: pointer; }
+.carousel .arr:last-child { background: var(--surface); }
+.thumb { width: 86px; height: 48px; border-radius: var(--radius-sm); transform: skewX(-12deg); border: 3px solid transparent; cursor: pointer; padding: 0; transition: all var(--dur-2) var(--ease); }
+.thumb[aria-pressed="true"] { border-color: var(--accent); transform: skewX(-12deg) scale(1.06); }
+.char-art { min-height: 280px; display: grid; place-items: center; font: 400 var(--text-md) var(--font-display); color: var(--muted); letter-spacing: .1em; background: radial-gradient(50% 60% at 50% 50%, rgb(17 17 17 / .12), transparent 70%); }
+.pill { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-ink); border: var(--stroke-w) solid var(--stroke); font: 400 var(--text-md)/1 var(--font-display); text-decoration: none; transition: all var(--dur-1) var(--ease); }
+.pill:hover { background: var(--accent); color: var(--on-accent); border-color: var(--ink); }
+.label { justify-self: start; display: inline-block; background: var(--accent); color: var(--on-accent); font: 400 var(--text-sm)/1 var(--font-display); padding: 3px 10px; border-radius: var(--radius-pill); }
+.meta { font: 700 var(--text-xs) var(--font-body); color: var(--muted); }
+.title { margin: 0; font: 400 var(--text-lg)/1.1 var(--font-display); }
+
+/* Vidéo */
+.video { position: relative; min-height: 300px; border-radius: 0 0 var(--radius-track) 0; overflow: hidden; background: linear-gradient(120deg, #3a1d24, var(--ink)); }
+.video__bar { position: absolute; left: 0; right: 0; top: 30%; display: flex; align-items: center; gap: var(--space-6); padding: var(--space-4) var(--space-8); background: rgb(17 17 17 / .78); color: var(--on-ink); flex-wrap: wrap; }
+.video__bar .meta { color: var(--muted-dark); }
+.play { position: absolute; left: var(--space-8); bottom: var(--space-6); display: flex; gap: var(--space-3); }
+.play button { width: 46px; height: 46px; background: var(--accent); border: var(--stroke-w) solid var(--stroke); border-radius: var(--radius-sm); font-size: 16px; cursor: pointer; }
+
+/* Actus */
+.news-img { position: relative; aspect-ratio: 16/8; border-radius: var(--radius-md); overflow: hidden; background: linear-gradient(135deg, #2fc7b8, var(--bg) 60%); display: grid; place-items: center; font: 400 var(--text-xl)/1 var(--font-display); }
+.marquee { position: absolute; left: 0; right: 0; bottom: 0; background: var(--ink-2); color: var(--muted-dark); overflow: hidden; white-space: nowrap; font: 400 var(--text-lg)/1.6 var(--font-display); font-style: italic; }
+.marquee span { display: inline-block; padding-right: 2em; animation: wordsLoop var(--marquee) linear infinite; }
+.marquee:hover span { animation-play-state: paused; }
+.dots { display: flex; gap: var(--space-4); }
+.dots i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--stroke); }
+.dots i:first-child { background: var(--accent); }
+.sub { justify-self: start; display: inline-flex; min-height: 48px; align-items: center; padding: 14px 16px; background: var(--accent-2); color: var(--on-accent); border: 0.8px solid var(--accent-2); border-radius: var(--radius-md); font: 400 1rem var(--font-body); text-decoration: none; transition: all 0.2s linear; }
+
+footer { margin-top: var(--space-16); padding: var(--space-12) var(--space-6) var(--space-8); background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px); color: var(--muted-dark); text-align: center; font-size: var(--text-xs); }
+footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(--space-6) * -1) var(--space-8); background: var(--accent); color: var(--on-accent); font-style: normal; }
+
+.reveal.is-in { animation: slideIn var(--dur-4) var(--ease) both; }
+@keyframes slideIn { from { transform: translate(-80px, 40px); opacity: 0; } }
+@keyframes wordsLoop { to { transform: translateX(-100%); } }
+@keyframes rotation { to { transform: rotate(1turn); } }
+
+@media (max-width: 1023px) {
+  .nav ul, .icons { display: none; } .nav { justify-content: space-between; }
+  .pager { display: none; }
+  .row { grid-template-columns: 1fr; }
+  .sec-label, .sec-label.left { min-height: 0; justify-items: start; border-radius: 0 0 36px 0; padding: var(--space-6); }
+  .sec-label b { font-size: 4.5rem; }
+  .panel, .panel.right { border-radius: 0 0 36px 36px; padding: var(--space-6); }
+  .track--right, .track--left { height: 40px; margin: 0; border-radius: 0 36px 36px 0; }
+  .hero { min-height: 0; padding-bottom: var(--space-6); } .hero__frame { margin: 0 16px; height: 380px; } .hero__logo { position: relative; left: auto; bottom: auto; display: inline-block; margin: -40px 0 0 24px; } .stores { position: static; justify-content: flex-start; margin: var(--space-6) 16px 0; } .track--right::after { display: none; }
+  .carousel { max-width: 100%; overflow-x: auto; } .thumb { width: 64px; }
+  .video { border-radius: 0; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <span class="logo">N·D</span>
+  <ul>
+    <li><a href="#" aria-current="page">Accueil</a></li><li><a href="#perso">Personnages</a></li><li><a href="#video">Vidéos</a></li><li><a href="#actus">Actus &amp;<br>infos</a></li><li><a href="#">Univers<br>du jeu</a></li>
+  </ul>
+  <a class="btn-dl" href="#">Télécharger maintenant</a>
+  <div class="icons" aria-hidden="true"><span>♫</span><span>⚭</span><span>◯</span></div>
+</header>
+<aside class="pager" aria-label="Section courante"><span>⇤</span><b id="pagerNum">01</b><span>⇥</span><small id="pagerNext">02</small></aside>
+
+<main>
+  <section class="hero" data-n="01" aria-label="Accueil">
+    <div class="hero__frame" data-slot="key-art">ILLUSTRATION PRINCIPALE</div>
+    <div class="hero__logo">NEON<br>DISTRICT</div>
+    <div class="stores"><a href="#">Console</a><a href="#">Console X</a><a href="#">App Store</a><a href="#">Play Store</a></div>
+  </section>
+
+  <div class="track track--right reveal" aria-hidden="true"></div>
+
+  <section class="section" id="perso" data-n="02">
+    <div class="row">
+      <div class="panel right">
+        <span class="label">Agent de la semaine</span>
+        <h3 class="title">Kaze — Lame du quartier nord</h3>
+        <p class="meta">Spécialité : attaque rapide · Faction : Les Rouages</p>
+        <div class="carousel" role="group" aria-label="Choisir un agent">
+          <button class="arr" aria-label="Précédent">←</button>
+          <button class="thumb" aria-pressed="true" style="background: linear-gradient(135deg, #8fb7ff, var(--ink))" aria-label="Kaze"></button>
+          <button class="thumb" aria-pressed="false" style="background: linear-gradient(135deg, #f0c79a, var(--ink))" aria-label="Mona"></button>
+          <button class="thumb" aria-pressed="false" style="background: linear-gradient(135deg, #2fc7b8, var(--ink))" aria-label="Dex"></button>
+          <button class="arr" aria-label="Suivant">→</button>
+        </div>
+        <a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a>
+      </div>
+      <div class="sec-label lime"><div class="char-art" data-slot="character-art" style="position:absolute;inset:0;z-index:0;opacity:.6">ILLUSTRATION</div><h2 style="position:relative">Personnages</h2><span style="position:relative">CHARACTERS</span><b style="position:relative">02</b></div>
+    </div>
+  </section>
+
+  <div class="film" aria-hidden="true"></div>
+
+  <section class="section" id="video" data-n="03">
+    <div class="row">
+      <div class="video" data-slot="video-cover">
+        <div class="video__bar"><span class="label">Découverte du personnage</span><span class="meta">29/09/2026</span><span class="title" style="font-size:var(--text-md)">Mona — « Chevalière à remontoir »</span></div>
+        <div class="play"><button aria-label="Lire la vidéo">▶</button><a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a></div>
+      </div>
+      <div class="sec-label lime"><h2>Documents vidéo</h2><span>VIDEO</span><b>03</b></div>
+    </div>
+  </section>
+
+  <div class="track track--left reveal" aria-hidden="true"></div>
+
+  <section class="section" id="actus" data-n="04">
+    <div class="row">
+      <div class="sec-label lime left"><h2>Actus &amp; infos</h2><span>NEWS</span><b>04</b></div>
+      <div class="panel">
+        <div class="news-img" data-slot="news-image">CALENDRIER 10/2026<div class="marquee" aria-hidden="true"><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span></div></div>
+        <p class="meta">01/10/2026</p>
+        <h3 class="title" style="font: 700 var(--text-sm) var(--font-body)">Fond d'écran calendrier pour octobre 2026</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a></div>
+        <a class="sub" href="#">M'abonner maintenant</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="marquee" aria-hidden="true"><span>NEON DISTRICT · DISPONIBLE MAINTENANT · NEON DISTRICT · DISPONIBLE MAINTENANT · </span><span>NEON DISTRICT · DISPONIBLE MAINTENANT · NEON DISTRICT · DISPONIBLE MAINTENANT · </span></div>
+  <p>© Studio fictif — démo Kōbō. Aide · Confidentialité · Conditions</p>
+</footer>
+
+<script>
+(() => {
+  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-pressed', x === t))));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .3 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  const num = document.getElementById('pagerNum'), next = document.getElementById('pagerNext');
+  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const n = +e.target.dataset.n; num.textContent = String(n).padStart(2, '0'); next.textContent = String(n + 1).padStart(2, '0'); } }), { threshold: .5 });
+  document.querySelectorAll('[data-n]').forEach(s => so.observe(s));
+})();
+</script>
+</body>
+</html>

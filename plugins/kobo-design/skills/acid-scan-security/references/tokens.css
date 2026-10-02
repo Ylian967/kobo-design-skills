@@ -1,0 +1,74 @@
+/*
+ * Acid Scan Security — tokens
+ * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * Monochrome vert acide : tout (photo, texte, interface) vit sur une seule rampe du noir-vert au citron.
+ * @contrast text:bg label:bg muted:bg dim:bg on-signal:signal on-signal:acid text:panel muted:panel text:glass text:glass-hi
+ * @contrast text:deep muted:deep dim:deep danger:bg danger:deep acid:deep signal:bg
+ */
+:root {
+  /* Rampe duotone (photo → interface) */
+  --bg: #050c00;            /* noir-vert : fond, ombres de la photo */
+  --deep: #0a1a00;          /* bas de la rampe duotone */
+  --mid: #2fbf00;           /* vert moyen de la photo */
+  --acid: #b8ff5a;          /* hautes lumières de la photo, bouton plein */
+  --signal: #c8f000;        /* bande de scan sur les yeux, état actif */
+  --on-signal: #071200;     /* texte sur --signal ou --acid */
+
+  /* Texte */
+  --text: #d6ff9a;          /* titres et texte, citron pâle */
+  --label: #e0ff3a;         /* surtitres « CHIFFREMENT DE GRADE MILITAIRE » */
+  --muted: #8fbf5a;         /* texte secondaire, dernière ligne du titre */
+  --dim: #6f9a45;           /* métadonnées, numéros de ligne */
+
+  /* Surfaces */
+  --panel: #0f2404;         /* carte CTA vert sombre */
+  --glass: #1d3a0a;         /* bouton « translucide » vert clair, valeur opaque équivalente */
+  --glass-hi: #2a4a12;      /* survol du bouton translucide */
+  --line: #2f5410;          /* réticule, filets, bordures de carte */
+  --line-hi: #6f9a45;       /* crochets d'angle, cadre de scan */
+  --danger: #ffcf3a;        /* alerte (jaune) — reste dans la famille chaude du citron */
+
+  /* Trame */
+  --dot-size: 5px;          /* pas de la grille de points = taille d'un pixel de la photo */
+  --scanline: 3px;          /* pas des lignes de balayage */
+  --dot-opacity: 0.55;
+
+  /* Typographie */
+  --font-display: 'Jersey 10', 'VT323', ui-monospace, monospace;   /* pixel haute et étroite */
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;          /* étiquettes, nav, boutons */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --text-2xs: 0.6875rem;    /* 11px : nav, étiquettes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 2rem;
+  --text-stat: clamp(2.5rem, 4.4vw, 4rem);
+  --text-hero: clamp(3rem, 6.6vw, 7rem);       /* titre pixel 3 lignes */
+  --leading-hero: 0.82;
+  --leading-body: 1.55;
+  --tracking-caps: 0.18em;
+  --tracking-display: 0.01em;
+
+  /* Espace (base 4px) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --edge: clamp(16px, 3vw, 40px);
+  --container: 1320px;
+
+  /* Formes : tout est carré */
+  --radius: 0;
+  --bracket: 14px;          /* longueur des crochets d'angle */
+  --bracket-w: 1px;
+  --border: 1px solid var(--line);
+  --glow: 0 0 24px rgb(184 255 90 / 0.25);
+
+  /* Mouvement : mécanique, en pas */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-step: steps(6, end);
+  --dur-fast: 120ms;
+  --dur-base: 240ms;
+  --dur-slow: 700ms;
+  --dur-scan: 3.2s;         /* passage de la ligne de scan */
+  --dur-blink: 1s;          /* curseur */
+}

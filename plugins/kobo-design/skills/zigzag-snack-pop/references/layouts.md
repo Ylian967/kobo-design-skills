@@ -1,0 +1,73 @@
+# Zigzag Snack Pop — mises en page
+
+Conteneur `--container` (1200px), marges `--gutter`. Rythme vertical en `--space-16` / `--space-24`.
+
+## Page d'accueil produit
+
+```
+┌─ nav brune ──────────────────────────────────────────┐
+│ ▲MARQUE      BARRES ▾  INGRÉDIENTS ▾  SORTIES  AVIS  (🛍2) │
+├─ héros orange ───────────────────────────────────────┤
+│              [ NOUVELLE RECETTE ]                     │
+│                 VRAIES                                │
+│            [PROTÉINES], (jaune autocollant)           │
+│              ZÉRO DÉTOUR                              │
+│          accroche 2 lignes, centrée                   │
+│      [ J'EN PRENDS › ]  [🔍 chercher…      ]          │
+│   🧗          ▲▲ montagnes ▲▲             🚴           │
+│ 🛹 ▲▲▲▲▲▲ 2e plan ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲        │
+└╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱┘
+  bande crème : (●) 20 G DE   (●) SANS SUCRE  (●) …  ×5
+ ╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲
+┌─ section brune + traces de pneu ─────────────────────┐
+│ (BOUTIQUE)                    ╭──────────╮            │
+│ LE CARBURANT DES              │ emballage │ disque    │
+│ SORTIES LONGUES               │  incliné  │ orange    │
+│ 20 g protéines (italique)     ╰──────────╯            │
+│ texte · [ COMPOSER MA BOX › ]                          │
+└──────────────────────────────────────────────────────┘
+  CHOISIS TA SAVEUR                     texte court
+  [carte vert]  [CARTE BEIGE ↑ plus grande]  [carte bleue]
+  ILS L'ONT MISE DANS LE SAC                  (tampon ⟳)
+  [avis]  [avis ↻1°]  [avis ↺1°]
+ ╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲
+┌─ pied brun ──────────────────────────────────────────┐
+│ REJOINS LA CORDÉE          [e-mail      ] [S'INSCRIRE]│
+│ liens…                                                 │
+│        M A R Q U E  (contour jaune géant, coupé)      │
+└──────────────────────────────────────────────────────┘
+```
+
+## Héros
+
+- `padding-bottom: calc(var(--scene) + 70px)` : le texte ne descend jamais dans la zone des montagnes.
+- `.scene` absolue en bas (`--scene` : clamp 220–340px) contient : soleil (disque `--orange-bright` flouté par un dégradé radial), montagnes arrière (100 % de la scène, `clip-path` en dents irrégulières), montagnes avant (58 %), silhouettes positionnées **sur les crêtes** en pourcentage de la scène.
+- Le bas du héros porte `.zz-bottom`, la bande crème suivante remonte de `--zigzag-h`.
+
+## Bande ingrédients
+
+Grille de 5 colonnes (pastille + libellé à droite). 2 colonnes sous 960px, la dernière pleine largeur ; sous 560px, libellé centré sous la pastille.
+
+## Section brune
+
+Grille 1.1fr / 1fr : texte à gauche, visuel produit sur disque orange à droite. Traces de pneu en fond (2–3 bandes). Passe en une colonne sous 960px.
+
+## Grille produits
+
+3 colonnes, `align-items: center` pour que la carte surélevée dépasse en haut et en bas. Sous 960px : une colonne, la carte « best-seller » remonte en premier (`order: -1`) et perd son échelle.
+
+## Avis
+
+Titre à gauche, tampon tournant en haut à droite (absolu ; en flux sous 960px), 3 cartes en grille → une colonne sur mobile.
+
+## Pied de page
+
+Fond `--bar` avec `.zz-both`, inscription à la lettre d'info, liens 12px capitales, mot géant en contour coupé par le bas, mention légale centrée.
+
+## Mobile (390px)
+
+- Nav : logo + burger + panier.
+- Titre héros 54px, boutons et champ pleine largeur, ombre du mot autocollant à 3px.
+- Scène 170px ; les silhouettes restent, plus petites.
+- Pastilles 64px, emballage ramené à la largeur de la colonne.
+- Aucune largeur fixe > 360px ; vérifier `scrollWidth === 390`.

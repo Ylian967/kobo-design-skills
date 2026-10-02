@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sauge — Serif Bistro Green (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<style>
+/* Copie de references/tokens.css */
+:root {
+  --green: #0e5446; --green-deep: #0a3f34; --cream: #fdf6e3; --cream-muted: #c9d8cc; --card: #fffaf0;
+  --orange: #e8603c; --orange-strong: #c4472a; --white: #ffffff; --ink: #1b1a17; --muted: #5b5a52; --line: #e7dcc2;
+  --skin: #c98b62; --herb: #6f9a52; --tomato: #d8452b; --crust: #e2b36a;
+  --font-display: 'DM Serif Display', 'Abril Fatface', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
+  --text-2xl: clamp(2rem, 4vw, 3.25rem); --text-3xl: clamp(2.5rem, 6vw, 5rem); --text-hero: clamp(3.5rem, 11vw, 10.5rem); --text-wordmark: clamp(5rem, 22vw, 20rem);
+  --leading-display: 0.9; --leading-body: 1.6; --tracking-caps: 0.1em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --container: 1240px;
+  --radius-btn: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-section: 32px; --radius-pill: 999px; --frame-photo: 8px;
+  --shadow-photo: 0 18px 40px -12px rgb(10 63 52 / 0.35); --shadow-card: 0 12px 28px -14px rgb(27 26 23 / 0.35);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms; --dur-base: 320ms; --dur-slow: 800ms;
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--green); color: var(--ink); font: 400 var(--text-base)/var(--leading-body) var(--font-body); overflow-x: clip; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { width: min(var(--container), 100% - 2 * var(--space-6)); margin-inline: auto; }
+
+/* ---------- Boutons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-btn); border: 1px solid transparent; font: 500 var(--text-sm)/1 var(--font-body); text-decoration: none; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast); }
+.btn svg { width: 16px; height: 16px; transition: translate var(--dur-fast) var(--ease-out); }
+.btn:hover svg { translate: 3px 0; }
+.btn:active { translate: 0 1px; }
+.btn--primary { background: var(--orange-strong); color: var(--white); }
+.btn--primary:hover { background: var(--orange); color: var(--ink); }
+.btn--outline { border-color: var(--cream); color: var(--cream); background: transparent; }
+.btn--outline:hover { background: var(--cream); color: var(--green); }
+.btn--pill { border-radius: var(--radius-pill); background: var(--green); color: var(--cream); padding: 0 var(--space-6); }
+.btn--pill:hover { background: var(--green-deep); }
+.round { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast); }
+.round svg { width: 18px; height: 18px; }
+
+/* ---------- Navigation flottante ---------- */
+.nav { position: sticky; top: var(--space-4); z-index: 20; display: flex; align-items: center; gap: var(--space-4); width: min(var(--container), 100% - 2 * var(--space-6)); margin: var(--space-4) auto 0; padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); background: color-mix(in srgb, var(--green-deep) 82%, transparent); backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--cream) 14%, transparent); border-radius: var(--radius-sm); color: var(--cream); }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; text-decoration: none; font: 400 var(--text-xl)/1 var(--font-display); }
+.logo i { width: 30px; height: 30px; border-radius: 50%; background: var(--orange); display: grid; place-items: center; }
+.logo i svg { width: 16px; height: 16px; color: var(--cream); }
+.nav ul { display: flex; gap: var(--space-1); margin: 0 auto; padding: var(--space-1); list-style: none; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--cream) 8%, transparent); }
+.nav ul a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 var(--space-4); border-radius: var(--radius-pill); font: 500 var(--text-sm)/1 var(--font-body); text-decoration: none; color: var(--cream-muted); transition: background var(--dur-fast), color var(--dur-fast); }
+.nav ul a:hover { color: var(--cream); }
+.nav ul a[aria-current] { background: var(--cream); color: var(--green); }
+.nav .round { background: color-mix(in srgb, var(--cream) 12%, transparent); color: var(--cream); }
+.nav .round:hover { background: color-mix(in srgb, var(--cream) 22%, transparent); }
+.menu-btn { display: none !important; }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; color: var(--cream); padding: var(--space-12) 0 calc(var(--space-16) + var(--radius-section)); overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 55%, color-mix(in srgb, var(--cream) 9%, transparent), transparent 70%); pointer-events: none; }
+.kicker { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-muted); }
+.kicker::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+.headline { position: relative; margin: var(--space-6) 0 0; font: 400 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: -0.02em; }
+.headline span { display: block; position: relative; }
+.headline .l1 { z-index: 1; }
+.headline .l2 { z-index: 3; text-align: right; margin-top: -0.02em; }
+.headline em { font-style: italic; color: var(--orange); }
+/* Personnage détouré dessiné en CSS (remplacer par une photo PNG détourée) */
+.chef { position: absolute; z-index: 2; left: 50%; bottom: calc(var(--radius-section) * -1); width: clamp(220px, 26vw, 360px); aspect-ratio: 3 / 4.6; translate: -46% 0; pointer-events: none; }
+.chef > * { position: absolute; }
+.chef .toque { left: 30%; top: 0; width: 40%; height: 19%; background: radial-gradient(circle at 25% 45%, var(--white) 0 30%, transparent 31%), radial-gradient(circle at 75% 45%, var(--white) 0 30%, transparent 31%), radial-gradient(circle at 50% 30%, var(--white) 0 36%, transparent 37%), linear-gradient(var(--white), var(--white)) center bottom / 70% 45% no-repeat; }
+.chef .head { left: 35%; top: 15%; width: 30%; height: 20%; border-radius: 46% 46% 50% 50%; background: radial-gradient(70% 60% at 40% 35%, color-mix(in srgb, var(--skin) 70%, var(--crust)), var(--skin)); }
+.chef .head::before { content: ""; position: absolute; left: -4%; right: -4%; top: -6%; height: 34%; border-radius: 50% 50% 20% 20%; background: var(--ink); }
+.chef .neck { left: 43%; top: 33%; width: 14%; height: 6%; background: color-mix(in srgb, var(--skin) 80%, var(--ink)); }
+.chef .jacket { left: 2%; right: 2%; top: 37%; bottom: 0; border-radius: 42% 42% 0 0 / 18% 18% 0 0; background:
+  radial-gradient(circle, var(--line) 0 3px, transparent 3.5px) 42% 30% / 100% 13% repeat-y,
+  radial-gradient(circle, var(--line) 0 3px, transparent 3.5px) 58% 30% / 100% 13% repeat-y,
+  linear-gradient(100deg, var(--white) 40%, var(--line)); box-shadow: inset -18px 0 30px -18px color-mix(in srgb, var(--ink) 30%, transparent); }
+.chef .jacket::before { content: ""; position: absolute; left: 38%; top: 0; width: 24%; height: 9%; background: var(--line); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.chef .arm { top: 54%; width: 24%; height: 15%; background: linear-gradient(180deg, var(--white) 60%, var(--line)); border-radius: 40%; box-shadow: 0 6px 10px -6px color-mix(in srgb, var(--ink) 40%, transparent); }
+.chef .arm::after { content: ""; position: absolute; top: 30%; width: 34%; height: 50%; border-radius: 50%; background: var(--skin); }
+.chef .arm.l::after { right: -14%; } .chef .arm.r::after { left: -14%; }
+.chef .arm.l { left: 8%; rotate: 16deg; } .chef .arm.r { right: 8%; rotate: -16deg; }
+.chef .tray { left: 6%; right: 6%; top: 52%; aspect-ratio: 2.6 / 1; border-radius: 50%; background: radial-gradient(ellipse 34% 36% at 50% 45%, var(--tomato) 0 40%, var(--crust) 42% 70%, transparent 72%), radial-gradient(ellipse at 50% 48%, var(--white) 0 58%, var(--line) 60% 64%, var(--white) 66%); box-shadow: 0 10px 18px -8px color-mix(in srgb, var(--ink) 45%, transparent); }
+.chef .tray::after { content: ""; position: absolute; left: 44%; top: 26%; width: 14%; height: 22%; border-radius: 50% 0; background: var(--herb); rotate: -30deg; }
+
+.hero-foot { position: relative; z-index: 4; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: end; margin-top: var(--space-8); }
+.hero-foot p { margin: 0 0 var(--space-6); max-width: 30ch; color: var(--cream-muted); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.facts { justify-self: end; display: flex; gap: var(--space-8); margin: 0; }
+.facts div { display: grid; gap: var(--space-1); }
+.facts dt { font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-muted); }
+.facts dd { margin: 0; font: 400 var(--text-xl)/1.1 var(--font-display); }
+
+/* ---------- Feuilles qui se chevauchent ---------- */
+.sheet { position: relative; margin-top: calc(var(--radius-section) * -1); border-radius: var(--radius-section) var(--radius-section) 0 0; }
+.sheet--cream { background: var(--cream); z-index: 5; padding: var(--space-24) 0 calc(var(--space-24) + var(--radius-section)); }
+.sheet--orange { background: var(--orange); z-index: 6; padding: var(--space-16) 0 calc(var(--space-16) + var(--radius-section)); overflow: hidden; }
+.sheet--green { background: var(--green); z-index: 7; color: var(--cream); padding-top: var(--space-16); overflow: hidden; }
+
+.sec-head { text-align: center; max-width: 36rem; margin: 0 auto var(--space-12); }
+.sec-head .kicker { color: var(--muted); }
+.sec-head h2 { margin: var(--space-3) 0 var(--space-3); font: 400 var(--text-3xl)/1 var(--font-display); color: var(--green); }
+.sec-head p { margin: 0; color: var(--muted); }
+
+/* ---------- Carrousel « reliure » ---------- */
+.carousel { position: relative; }
+.track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * var(--bind)) / 4); gap: var(--bind); --bind: 28px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: var(--space-2) 0 var(--space-6); }
+.track::-webkit-scrollbar { display: none; }
+.dish { position: relative; scroll-snap-align: start; display: flex; flex-direction: column; padding: var(--space-6) var(--space-6) var(--space-6); border-radius: var(--radius-md); color: var(--white); box-shadow: var(--shadow-card);
+  /* encoches de reliure sur les deux bords */
+  background: radial-gradient(circle at 0 50%, var(--cream) 0 6px, transparent 6.5px) left 30% / 12px 26px repeat-y, radial-gradient(circle at 100% 50%, var(--cream) 0 6px, transparent 6.5px) right 30% / 12px 26px repeat-y, var(--orange);
+  background-size: 12px 26px, 12px 26px, auto; background-position: left 0 top 40px, right 0 top 40px, 0 0; }
+.dish:nth-child(even) { background-color: var(--orange-strong); }
+/* anneaux entre les cartes */
+.dish:not(:last-child)::after { content: ""; position: absolute; top: 40px; bottom: 40px; right: calc(var(--bind) * -1 - 6px); width: calc(var(--bind) + 12px); background: radial-gradient(ellipse 50% 7px at 50% 50%, transparent 0 calc(100% - 3px), var(--green) calc(100% - 3px) 100%, transparent 100%) 0 0 / 100% 26px repeat-y; z-index: 2; pointer-events: none; opacity: 0.9; }
+.plate { position: relative; align-self: center; width: 78%; aspect-ratio: 1; margin: var(--space-2) 0 var(--space-6); border-radius: 50%; background: radial-gradient(circle, var(--white) 0 60%, var(--line) 61% 63%, var(--white) 64%); box-shadow: 0 16px 24px -10px color-mix(in srgb, var(--ink) 50%, transparent); transition: rotate var(--dur-slow) var(--ease-out); }
+.dish:hover .plate { rotate: 25deg; }
+.plate::before { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: var(--food); }
+.plate::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--garnish, none); }
+.p1 { --food: radial-gradient(circle at 40% 40%, var(--crust) 0 30%, transparent 31%), radial-gradient(circle at 62% 58%, var(--tomato) 0 22%, transparent 23%), radial-gradient(circle, var(--herb) 0 64%, color-mix(in srgb, var(--herb) 70%, var(--ink)) 66%); }
+.p2 { --food: repeating-radial-gradient(circle at 50% 50%, var(--crust) 0 3px, color-mix(in srgb, var(--crust) 70%, var(--white)) 3px 6px); --garnish: radial-gradient(circle at 50% 48%, var(--tomato) 0 7%, transparent 7.5%), radial-gradient(circle at 58% 42%, var(--herb) 0 4%, transparent 4.5%); }
+.p3 { --food: radial-gradient(ellipse 60% 40% at 50% 50%, color-mix(in srgb, var(--orange) 80%, var(--white)) 0 60%, transparent 62%), radial-gradient(circle, color-mix(in srgb, var(--herb) 40%, var(--cream)) 0 70%, transparent 71%); --garnish: radial-gradient(circle at 36% 40%, var(--herb) 0 3%, transparent 3.5%), radial-gradient(circle at 64% 62%, var(--herb) 0 3%, transparent 3.5%); }
+.p4 { --food: radial-gradient(circle at 50% 50%, var(--cream) 0 34%, color-mix(in srgb, var(--crust) 80%, var(--ink)) 36% 70%, transparent 72%); --garnish: radial-gradient(circle at 50% 50%, var(--tomato) 0 5%, transparent 5.5%); }
+.dish h3 { margin: 0; font: 400 var(--text-xl)/1.1 var(--font-display); }
+.dish .row { display: flex; align-items: end; justify-content: space-between; gap: var(--space-3); margin-top: auto; }
+.dish .desc { display: block; margin-top: var(--space-1); font: 400 var(--text-sm)/1.4 var(--font-body); }
+.dish .price { display: inline-block; margin-top: var(--space-2); padding: 2px var(--space-2); border-radius: var(--radius-btn); background: var(--cream); color: var(--ink); font: 700 var(--text-sm)/1.4 var(--font-body); }
+.dish .round { background: var(--white); color: var(--orange-strong); flex: none; }
+.dish .round:hover { transform: rotate(-45deg); }
+.dish:nth-child(odd) .desc { color: var(--ink); }
+.carousel-ctrl { display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin-top: var(--space-6); }
+.carousel-ctrl .round { background: transparent; border: 1px solid var(--green); color: var(--green); }
+.carousel-ctrl .round:hover { background: var(--green); color: var(--cream); }
+.dots { display: flex; gap: var(--space-1); }
+.dots button { width: 24px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: width var(--dur-base) var(--ease-out), background var(--dur-base); }
+.dots button[aria-current="true"]::before { width: 22px; border-radius: var(--radius-pill); background: var(--green); }
+
+/* ---------- Titre échelonné avec photos ---------- */
+.stagger { margin: var(--space-24) 0 var(--space-12); font: 400 var(--text-3xl)/1.15 var(--font-display); color: var(--green); }
+.stagger span { display: flex; align-items: center; gap: 0.25em; flex-wrap: wrap; }
+.stagger span:nth-child(2) { padding-left: 12%; }
+.stagger span:nth-child(3) { justify-content: flex-end; }
+.stagger em { font-style: italic; color: var(--orange-strong); }
+.ph { display: inline-block; width: 1.25em; aspect-ratio: 1; flex: none; border: var(--frame-photo) solid var(--card); border-radius: var(--radius-btn); box-shadow: var(--shadow-photo); vertical-align: middle; }
+.ph:nth-of-type(1) { rotate: -4deg; } .ph--b { rotate: 5deg; width: 1.6em; aspect-ratio: 4/3; } .ph--c { rotate: -2deg; }
+.ph--a { background: radial-gradient(circle at 30% 70%, var(--crust) 0 10%, transparent 11%), radial-gradient(circle at 70% 30%, color-mix(in srgb, var(--crust) 60%, var(--cream)) 0 14%, transparent 15%), linear-gradient(160deg, var(--green-deep), var(--green) 60%, color-mix(in srgb, var(--crust) 40%, var(--green))); }
+.ph--b { background: radial-gradient(circle at 50% 60%, var(--white) 0 26%, transparent 27%), radial-gradient(circle at 50% 60%, var(--tomato) 0 34%, transparent 35%), linear-gradient(180deg, color-mix(in srgb, var(--crust) 60%, var(--ink)), color-mix(in srgb, var(--crust) 80%, var(--white))); }
+.ph--c { background: radial-gradient(ellipse 20% 40% at 35% 45%, color-mix(in srgb, var(--tomato) 70%, var(--ink)) 0 60%, transparent 62%), radial-gradient(ellipse 20% 40% at 65% 45%, color-mix(in srgb, var(--tomato) 70%, var(--ink)) 0 60%, transparent 62%), linear-gradient(180deg, var(--cream-muted), var(--card)); }
+.exp { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); border-top: 1px solid var(--line); padding-top: var(--space-8); }
+.exp article { display: grid; gap: var(--space-2); }
+.exp b { font: 400 var(--text-xl)/1 var(--font-display); color: var(--orange-strong); }
+.exp h3 { margin: 0; font: 400 var(--text-lg)/1.2 var(--font-display); color: var(--green); }
+.exp p { margin: 0; color: var(--muted); font-size: var(--text-sm); }
+.exp a { justify-self: start; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; font: 500 var(--text-sm)/1 var(--font-body); color: var(--green); text-underline-offset: 4px; }
+
+/* ---------- Newsletter ---------- */
+.doodles { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--cream); opacity: 0.55; pointer-events: none; }
+.news > * { min-width: 0; }
+.news { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-8); align-items: center; }
+.news h2 { margin: 0; font: 400 var(--text-3xl)/0.95 var(--font-display); color: var(--cream); }
+.news h2 em { display: block; font-style: italic; }
+.news p { margin: 0 0 var(--space-4); color: var(--ink); max-width: 38ch; }
+.subscribe { display: flex; gap: var(--space-2); padding: var(--space-2); background: var(--card); border-radius: var(--radius-pill); box-shadow: var(--shadow-card); }
+.subscribe label { flex: 1; display: flex; min-width: 0; }
+.subscribe input { flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--space-4); border: 0; background: transparent; font: 400 var(--text-base) var(--font-body); color: var(--ink); border-radius: var(--radius-pill); }
+.subscribe input::placeholder { color: var(--muted); }
+.subscribe input:focus-visible { outline: 2px solid var(--green); outline-offset: 0; }
+.news small { display: block; margin-top: var(--space-3); color: var(--ink); font-size: var(--text-xs); }
+
+/* ---------- Pied de page ---------- */
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--space-8); padding-bottom: var(--space-12); border-bottom: 1px solid color-mix(in srgb, var(--cream) 20%, transparent); }
+.foot-grid h3 { margin: 0 0 var(--space-3); font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-muted); }
+.foot-grid p, .foot-grid ul { margin: 0; padding: 0; list-style: none; font-size: var(--text-sm); }
+.foot-grid li a { display: inline-flex; min-height: 32px; align-items: center; text-decoration: none; }
+.foot-grid li a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.foot-grid .lead { font: 400 var(--text-xl)/1.2 var(--font-display); max-width: 18ch; }
+.wordmark { margin: 0; padding: var(--space-6) 0 0; font: 400 var(--text-wordmark)/0.72 var(--font-display); letter-spacing: -0.04em; text-align: center; color: var(--cream); white-space: nowrap; translate: 0 0.04em; }
+.legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); padding: var(--space-4) 0; font-size: var(--text-xs); color: var(--cream-muted); }
+
+/* ---------- Apparition (défilement, sans JS) ---------- */
+@keyframes reveal { from { translate: 0 48px; } }
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+}
+@keyframes rise { from { opacity: 0; translate: 0 0.3em; } }
+.headline .l1, .headline .l2 { animation: rise var(--dur-slow) var(--ease-out) both; }
+.headline .l2 { animation-delay: 120ms; }
+@keyframes chef-in { from { opacity: 0; translate: -46% 30px; } }
+.chef { animation: chef-in 1s var(--ease-out) 200ms both; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .nav ul { display: none; }
+  .menu-btn { display: grid !important; }
+  .nav .logo { margin-right: auto; }
+  .track { grid-auto-columns: calc((100% - 1 * var(--bind)) / 2.2); }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 720px) {
+  .wrap, .nav { width: calc(100% - 2 * var(--space-4)); }
+  .nav .book span { display: none; }
+  .nav .search { display: none; }
+  .hero { padding-top: var(--space-8); }
+  .headline { font-size: clamp(3.25rem, 17vw, 5rem); }
+  .chef { width: 54vw; left: auto; right: -4vw; translate: none; bottom: auto; top: 78px; -webkit-mask-image: linear-gradient(180deg, var(--ink) 78%, transparent); mask-image: linear-gradient(180deg, var(--ink) 78%, transparent); }
+  @keyframes chef-in { from { opacity: 0; translate: 0 30px; } }
+  .headline .l2 { text-align: left; margin-top: 1.25em; }
+  .hero-foot { grid-template-columns: 1fr; margin-top: var(--space-24); }
+  .facts dd { font-size: var(--text-lg); }
+  .facts { justify-self: start; gap: var(--space-6); }
+  .track { grid-auto-columns: 78%; --bind: 22px; }
+  .stagger span:nth-child(2) { padding-left: 0; }
+  .exp { grid-template-columns: 1fr; }
+  .news { grid-template-columns: 1fr; }
+  .foot-grid { grid-template-columns: 1fr; gap: var(--space-6); }
+  .sheet--cream { padding-top: var(--space-16); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  .dish:hover .plate { rotate: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></g></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10 11 5 20 4c0 9-5 15-14 15zM5 19l8-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<header class="nav">
+  <a class="logo" href="#"><i aria-hidden="true"><svg><use href="#i-leaf"/></svg></i>Sauge</a>
+  <nav aria-label="Navigation principale"><ul>
+    <li><a href="#" aria-current="page">Accueil</a></li>
+    <li><a href="#carte">La carte</a></li>
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul></nav>
+  <button class="round search" aria-label="Rechercher"><svg aria-hidden="true"><use href="#i-search"/></svg></button>
+  <a class="btn btn--primary book" href="#contact" aria-label="Réserver une table"><span>Réserver une table</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  <button class="round menu-btn" aria-label="Ouvrir le menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <span class="kicker">Bistrot de saison · Lyon 2e</span>
+      <h1 class="headline" id="hero-title"><span class="l1">Cuisine</span><span class="l2">de <em>saison</em></span></h1>
+      <div class="chef" data-slot="chef-cutout" role="img" aria-label="Cheffe tenant une assiette (emplacement pour une photo détourée)">
+        <span class="jacket"></span><span class="neck"></span><span class="head"></span><span class="toque"></span><span class="arm l"></span><span class="arm r"></span><span class="tray"></span>
+      </div>
+      <div class="hero-foot">
+        <div>
+          <p>Des légumes du marché, du pain au levain cuit chaque matin et une carte qui change avec les semaines.</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="#contact">Réserver une table<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--outline" href="#experiences">Notre histoire<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+        <dl class="facts">
+          <div><dt>Ouvert</dt><dd>Mar → Sam</dd></div>
+          <div><dt>Couverts</dt><dd>38 places</dd></div>
+          <div><dt>Menu</dt><dd>dès 29 €</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet sheet--cream" id="carte" aria-labelledby="fav-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">La carte du moment</span>
+        <h2 id="fav-title">Nos incontournables</h2>
+        <p>Quatre assiettes que les habitués commandent les yeux fermés.</p>
+      </div>
+      <div class="carousel reveal">
+        <div class="track" id="track" tabindex="0" aria-label="Plats signature, défilement horizontal">
+          <article class="dish"><div class="plate p1" data-slot="dish-photo" role="img" aria-label="Salade de pousses et tomates rôties"></div><div class="row"><div><h3>Jardin rôti</h3><span class="desc">Pousses, tomates, burrata</span><span class="price">14 €</span></div><a class="round" href="#" aria-label="Voir Jardin rôti"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate p2" data-slot="dish-photo" role="img" aria-label="Pâtes fraîches à la tomate"></div><div class="row"><div><h3>Tagliatelles</h3><span class="desc">Tomate confite, basilic</span><span class="price">19 €</span></div><a class="round" href="#" aria-label="Voir Tagliatelles"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate p3" data-slot="dish-photo" role="img" aria-label="Truite et purée de petits pois"></div><div class="row"><div><h3>Truite du Vercors</h3><span class="desc">Petits pois, beurre noisette</span><span class="price">24 €</span></div><a class="round" href="#" aria-label="Voir Truite du Vercors"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate p4" data-slot="dish-photo" role="img" aria-label="Tarte fine aux pommes"></div><div class="row"><div><h3>Tarte fine</h3><span class="desc">Pommes, crème crue</span><span class="price">9 €</span></div><a class="round" href="#" aria-label="Voir Tarte fine"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate p1" data-slot="dish-photo" role="img" aria-label="Velouté de courge"></div><div class="row"><div><h3>Velouté d'automne</h3><span class="desc">Courge, noisettes</span><span class="price">11 €</span></div><a class="round" href="#" aria-label="Voir Velouté d'automne"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+        </div>
+        <div class="carousel-ctrl">
+          <button class="round" id="prev" aria-label="Plat précédent"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
+          <div class="dots" id="dots"></div>
+          <button class="round" id="next" aria-label="Plat suivant"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </div>
+      </div>
+
+      <h2 class="stagger reveal" id="experiences">
+        <span>Des moments <i class="ph ph--a" data-slot="photo-salle" aria-hidden="true"></i> à part,</span>
+        <span><i class="ph ph--b" data-slot="photo-plat" aria-hidden="true"></i> autour de la <em>table</em></span>
+        <span>et du jardin <i class="ph ph--c" data-slot="photo-vin" aria-hidden="true"></i></span>
+      </h2>
+      <div class="exp">
+        <article class="reveal"><b>01</b><h3>Table du chef</h3><p>Six convives face au passe, un menu en sept temps raconté par l'équipe.</p><a href="#contact">Réserver<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+        <article class="reveal"><b>02</b><h3>Accords nature</h3><p>Une sélection de vignerons voisins, servie au verre avec chaque assiette.</p><a href="#contact">Découvrir<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+        <article class="reveal"><b>03</b><h3>Brunch du dimanche</h3><p>Pain perdu, œufs mollets et jus pressés, sur la terrasse dès les beaux jours.</p><a href="#contact">Voir le menu<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet sheet--orange" id="contact" aria-labelledby="news-title">
+    <svg class="doodles" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M80 70v70M70 70v28a10 10 0 0 0 20 0V70M80 140v90"/>
+      <path d="M190 260c20-40 70-50 100-20-30 10-60 40-100 20zM200 255l60-25"/>
+      <path d="M1180 60h80l-10 50a30 30 0 0 1-60 0zM1220 140v40M1200 180h40"/>
+      <path d="M1320 250c30-30 80-30 100 0-20 30-70 30-100 0zM1420 250l20-15v30zM1350 245h2"/>
+      <circle cx="1100" cy="280" r="34"/><path d="M1076 280h48M1100 256v48"/>
+      <path d="M340 60c10 20 30 20 40 0M330 60h60l-8 30h-44z"/>
+      <path d="M620 300c0-30 20-50 50-50s50 20 50 50zM610 300h120"/>
+    </g></svg>
+    <div class="wrap news">
+      <h2 id="news-title">Restons <em>en contact</em></h2>
+      <div>
+        <p>Un e-mail par mois : la nouvelle carte, les soirées vignerons et les tables qui se libèrent.</p>
+        <form class="subscribe" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Merci !'">
+          <label><span class="sr-only">Adresse e-mail</span><input type="email" required placeholder="votre@email.fr" autocomplete="email"></label>
+          <button class="btn btn--pill" type="submit">S'inscrire</button>
+        </form>
+        <small>Pas de spam, désinscription en un clic.</small>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sheet sheet--green">
+    <div class="wrap">
+      <div class="foot-grid">
+        <p class="lead">Une cuisine simple, des produits qui ont du goût.</p>
+        <div><h3>Adresse</h3><p>12 rue des Tilleuls<br>69002 Lyon (fictif)</p></div>
+        <div><h3>Horaires</h3><p>Mar – Sam · 12h–14h<br>19h–22h30</p></div>
+        <div><h3>Suivre</h3><ul><li><a href="#">Instagram</a></li><li><a href="#">Journal</a></li><li><a href="#">Cartes cadeaux</a></li></ul></div>
+      </div>
+      <div class="legal"><span>© Sauge (restaurant fictif) — démo Kōbō</span><span>Mentions légales · Allergènes</span></div>
+    </div>
+    <p class="wordmark" aria-hidden="true">Sauge</p>
+  </footer>
+</main>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const track = document.getElementById('track'), dots = document.getElementById('dots'), cards = [...track.children];
+  cards.forEach((c, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Plat ' + (i + 1)); b.addEventListener('click', () => go(i)); dots.appendChild(b); });
+  const go = i => { i = Math.max(0, Math.min(cards.length - 1, i)); track.scrollTo({ left: cards[i].offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' }); };
+  const cur = () => Math.round(track.scrollLeft / (cards[1].offsetLeft - cards[0].offsetLeft));
+  const sync = () => [...dots.children].forEach((d, i) => d.setAttribute('aria-current', i === cur()));
+  track.addEventListener('scroll', () => requestAnimationFrame(sync)); sync();
+  document.getElementById('prev').addEventListener('click', () => go(cur() - 1));
+  document.getElementById('next').addEventListener('click', () => go(cur() + 1));
+})();
+</script>
+</body>
+</html>

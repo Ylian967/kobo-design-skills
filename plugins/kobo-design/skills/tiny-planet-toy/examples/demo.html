@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Postillon — Tiny Planet Toy (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Silkscreen&family=Nunito:wght@600;800&display=swap">
+<style>
+:root {
+  --bg: #63c5be; --bg-deep: #4fb3ac; --speck: rgb(255 255 255 / 0.35); --paper: #f6f1e4; --text: #173b3a; --muted: #4a5a58;
+  --accent: #f4c84a; --accent-edge: #c9952a; --on-accent: #2b2118; --grass: #4c9a5a; --roof: #d0644a; --stone: #b9b5a6; --sky-shadow: rgb(23 59 58 / 0.18);
+  --font-display: 'Bungee', 'Rubik Mono One', system-ui, sans-serif; --font-ui: 'Silkscreen', ui-monospace, monospace; --font-body: 'Nunito', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 2rem; --text-logo: clamp(2.2rem, 7vw, 4.4rem);
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+  --radius-sm: 4px; --radius-md: 10px; --radius-lg: 20px; --tilt: -3deg; --press: 4px; --outline: 2px solid var(--text);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1); --ease: cubic-bezier(0.25, 0.8, 0.25, 1); --dur-fast: 150ms; --dur: 350ms; --spin: 60s;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body { margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 600 var(--text-base)/1.5 var(--font-body); }
+:focus-visible { outline: 3px solid var(--text); outline-offset: 4px; }
+.scene { position: relative; height: 100%; display: grid; place-items: center; align-content: center; gap: var(--space-8); }
+.specks i { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--speck); animation: drift var(--d, 30s) linear infinite; }
+.specks i:nth-child(3n) { width: 0; height: 0; border-radius: 0; background: none; border: 6px solid transparent; border-bottom-color: var(--speck); }
+.specks i:nth-child(4n) { width: 22px; height: 22px; opacity: .6; }
+.stage { position: relative; display: grid; place-items: center; }
+.planet { position: relative; width: min(70vw, 440px); aspect-ratio: 1; border-radius: 50%; animation: spin var(--spin) linear infinite, pop 700ms var(--ease-bounce) both; }
+.planet__ground { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 40% 35%, var(--stone), var(--grass) 72%); box-shadow: 0 0 0 18px var(--bg-deep), inset -20px -30px 0 var(--sky-shadow); }
+.planet__ring { position: absolute; inset: 14%; border-radius: 50%; border: 6px dashed var(--paper); opacity: .6; }
+.planet__ring.b { inset: 32%; border-width: 4px; }
+.hut, .tree { position: absolute; left: 50%; top: 50%; transform-origin: 0 0; transform: rotate(var(--a)) translate(-50%, calc(min(35vw, 220px) * -1 - 14px)); }
+.hut { width: 34px; height: 30px; background: var(--paper); border: 2px solid var(--text); border-top: 10px solid var(--roof); }
+.tree { width: 26px; height: 26px; border-radius: 50%; background: var(--grass); border: 2px solid var(--text); }
+.logo { position: absolute; display: grid; grid-template-columns: repeat(3, auto); gap: 2px 6px; margin: 0; font: 400 var(--text-logo)/0.95 var(--font-display); color: var(--paper); -webkit-text-stroke: 2px var(--text); paint-order: stroke; text-shadow: 4px 6px 0 var(--sky-shadow); }
+.logo span { display: block; animation: drop 500ms var(--ease-bounce) both; animation-delay: calc(400ms + var(--i) * 60ms); }
+.logo span:nth-child(odd) { transform: rotate(1deg) translateY(1px); }
+.toy-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--space-8); border: var(--outline); border-radius: var(--radius-sm); background: var(--accent); color: var(--on-accent); font: 400 var(--text-base)/1 var(--font-ui); text-transform: uppercase; cursor: pointer; transform: rotate(var(--tilt)); box-shadow: 0 var(--press) 0 var(--accent-edge); transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.toy-btn:hover { transform: rotate(var(--tilt)) translateY(-2px); box-shadow: 0 calc(var(--press) + 2px) 0 var(--accent-edge); }
+.toy-btn:active { transform: rotate(var(--tilt)) translateY(var(--press)); box-shadow: 0 0 0 var(--accent-edge); }
+.hud { position: absolute; inset: var(--space-4) var(--space-4) auto; display: flex; justify-content: space-between; pointer-events: none; }
+.hud > * { pointer-events: auto; }
+.pill { padding: 6px 12px; background: var(--paper); border: var(--outline); border-radius: 999px; font: 400 var(--text-sm) var(--font-ui); }
+.round { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: var(--outline); font-size: 18px; cursor: pointer; }
+.bubble { position: absolute; left: 50%; bottom: var(--space-8); width: min(520px, calc(100% - 32px)); transform: translateX(-50%) scale(.6); opacity: 0; padding: var(--space-6); background: var(--paper); border: var(--outline); border-radius: var(--radius-md); transition: transform var(--dur) var(--ease-bounce), opacity var(--dur) var(--ease); }
+.bubble.is-open { transform: translateX(-50%) scale(1); opacity: 1; }
+.bubble b { position: absolute; top: -14px; left: 20px; padding: 2px 8px; background: var(--accent); border: var(--outline); font: 400 var(--text-xs) var(--font-ui); text-transform: uppercase; }
+.bubble p { margin: 0; }
+.hint { position: absolute; bottom: var(--space-4); left: 0; right: 0; text-align: center; font: 400 var(--text-xs) var(--font-ui); color: var(--text); opacity: .7; }
+body.is-playing .logo { transform: translateY(-60vh); transition: transform 900ms var(--ease); }
+body.is-playing .planet { transform: scale(1.6); }
+body.is-playing #begin { visibility: hidden; }
+@keyframes spin { to { rotate: 1turn; } }
+@keyframes pop { from { scale: .8; opacity: 0; } }
+@keyframes drop { from { transform: translateY(-80px); opacity: 0; } }
+@keyframes drift { from { transform: translate(0, 0) rotate(0); } to { transform: translate(120px, -80px) rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } .specks { display: none; } }
+</style>
+</head>
+<body>
+<main class="scene">
+  <div class="specks" aria-hidden="true">
+    <i style="left:8%;top:12%;--d:34s"></i><i style="left:22%;top:70%;--d:26s"></i><i style="left:40%;top:20%;--d:40s"></i><i style="left:63%;top:82%;--d:30s"></i>
+    <i style="left:78%;top:30%;--d:24s"></i><i style="left:90%;top:60%;--d:36s"></i><i style="left:12%;top:45%;--d:28s"></i><i style="left:55%;top:8%;--d:32s"></i>
+    <i style="left:70%;top:50%;--d:38s"></i><i style="left:33%;top:88%;--d:22s"></i><i style="left:85%;top:12%;--d:30s"></i><i style="left:4%;top:85%;--d:42s"></i>
+  </div>
+  <div class="hud"><span class="pill">LETTRES 0/12</span><button class="round" aria-label="Couper le son">♪</button></div>
+  <div class="stage">
+    <div class="planet" aria-hidden="true">
+      <div class="planet__ground"></div><div class="planet__ring"></div><div class="planet__ring b"></div>
+      <span class="hut" style="--a:0deg"></span><span class="tree" style="--a:25deg"></span><span class="hut" style="--a:55deg"></span><span class="tree" style="--a:80deg"></span>
+      <span class="hut" style="--a:110deg"></span><span class="hut" style="--a:150deg"></span><span class="tree" style="--a:175deg"></span><span class="hut" style="--a:205deg"></span>
+      <span class="tree" style="--a:240deg"></span><span class="hut" style="--a:270deg"></span><span class="tree" style="--a:300deg"></span><span class="hut" style="--a:330deg"></span>
+    </div>
+    <h1 class="logo" aria-label="Postillon"><span style="--i:0">P</span><span style="--i:1">O</span><span style="--i:2">S</span><span style="--i:3">T</span><span style="--i:4">I</span><span style="--i:5">L</span><span style="--i:6">L</span><span style="--i:7">O</span><span style="--i:8">N</span></h1>
+  </div>
+  <button class="toy-btn" id="begin">Commencer</button>
+  <div class="bubble" id="bubble" role="dialog" aria-live="polite"><b>Facteur</b><p id="say"></p></div>
+  <p class="hint">Glisser pour tourner · toucher pour parler</p>
+</main>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const line = "Bonjour ! Douze lettres attendent d'être livrées sur cette petite planète. Tu m'aides ?";
+  const say = document.getElementById('say'), bubble = document.getElementById('bubble');
+  document.getElementById('begin').addEventListener('click', () => {
+    document.body.classList.add('is-playing'); bubble.classList.add('is-open');
+    if (reduce) { say.textContent = line; return; }
+    let i = 0; const t = setInterval(() => { say.textContent = line.slice(0, ++i); if (i >= line.length) clearInterval(t); }, 30);
+    bubble.addEventListener('click', () => { clearInterval(t); say.textContent = line; }, { once: true });
+  });
+})();
+</script>
+</body>
+</html>

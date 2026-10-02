@@ -1,0 +1,62 @@
+/*
+ * Signal Orange Techwear — tokens
+ * Valeurs estimées sur les images d'un shot Dribbble (anthracite #1a1a1a / #222, orange signal #e8601c, blanc), voir source.md.
+ * Le blanc sur orange ne passe qu'en grand (3,4:1) : texte sur bouton orange plein = --on-accent (noir).
+ * @contrast text:bg text:panel text:panel-2 muted:bg muted:panel muted:panel-2 accent:bg accent:panel accent:panel-2 on-accent:accent dim:bg:large white:accent:large
+ */
+:root {
+  /* Couleurs */
+  --bg: #121212;              /* fond de page */
+  --panel: #1a1a1a;           /* panneaux, cartes */
+  --panel-2: #222222;         /* panneau surélevé, survol */
+  --line: #2e2e2e;            /* filets 1px (décor) */
+  --line-strong: #444444;     /* contours de panneaux, boutons secondaires */
+  --text: #f2f2f2;
+  --white: #ffffff;
+  --muted: #9a9a9a;           /* texte courant 11–13px, valeurs de specs */
+  --dim: #6f6f6f;             /* grands numéros d'index, texte vertical (grand seulement) */
+  --accent: #e8601c;          /* orange signal */
+  --on-accent: #111111;
+  --accent-glow: rgb(232 96 28 / 0.18);
+  --scrim: rgb(18 18 18 / 0.72);
+
+  /* Typographie */
+  --font-display: 'Michroma', 'Syncopate', 'Orbitron', sans-serif;   /* géométrique étendue, capitales */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;             /* étiquettes techniques, specs */
+  --text-2xs: 0.625rem;  /* 10 — étiquettes mono */
+  --text-xs: 0.6875rem;  /* 11 — texte courant de panneau */
+  --text-sm: 0.8125rem;  /* 13 */
+  --text-base: 0.9375rem;/* 15 */
+  --text-lg: 1.125rem;   /* 18 */
+  --text-h3: 1.25rem;
+  --text-h2: clamp(2rem, 6vw, 5.5rem);      /* « CHAQUE COUCHE. » */
+  --text-hero: clamp(1.9rem, 4.4vw, 4rem);  /* empilement du héros */
+  --tracking-display: 0.02em;
+  --tracking-label: 0.22em;
+  --leading-display: 1.02;
+
+  /* Espace */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --container: 1360px;
+  --gutter: clamp(16px, 3.5vw, 48px);
+
+  /* Formes */
+  --radius: 2px;              /* boutons, onglets */
+  --radius-panel: 6px;        /* panneaux translucides */
+  --radius-pill: 999px;       /* forme orange « // », compteur, icônes rondes */
+  --border: 1px solid var(--line-strong);
+  --cut: 14px;                /* coin coupé des cartes produit */
+
+  /* Ombres et matières */
+  --shadow-panel: 0 24px 60px rgb(0 0 0 / 0.45);
+  --panel-glass: rgb(26 26 26 / 0.78);
+  --blur: 14px;
+  --grid-size: 64px;          /* quadrillage de fond très discret */
+
+  /* Mouvement */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-snap: steps(4, end);
+  --dur-fast: 160ms; --dur: 320ms; --dur-slow: 700ms; --dur-scan: 3.2s;
+}

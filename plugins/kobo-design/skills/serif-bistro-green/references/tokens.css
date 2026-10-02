@@ -1,0 +1,69 @@
+/*
+ * Serif Bistro Green — tokens
+ * Valeurs estimées à l'œil sur les images du shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * L'orange vif du shot (--orange) ne porte que du grand texte ou des fonds de carte ; les boutons utilisent --orange-strong.
+ * @contrast cream:green cream-muted:green cream:green-deep green:cream ink:cream muted:cream cream:orange-strong white:orange-strong ink:orange white:orange:large cream:orange:large ink:card muted:card cream:ink
+ */
+:root {
+  /* Couleurs */
+  --green: #0e5446;          /* vert profond : héros, pied de page, titres sur crème */
+  --green-deep: #0a3f34;     /* barre de navigation, survols */
+  --cream: #fdf6e3;          /* sections claires, texte sur vert */
+  --cream-muted: #c9d8cc;    /* texte secondaire sur vert */
+  --card: #fffaf0;           /* cadres photo, champs */
+  --orange: #e8603c;         /* accent : cartes plats, bandeau newsletter, icône du logo */
+  --orange-strong: #c4472a;  /* boutons et petit texte sur orange (contraste) */
+  --white: #ffffff;
+  --ink: #1b1a17;            /* texte sur crème / sur orange */
+  --muted: #5b5a52;
+  --line: #e7dcc2;           /* filets sur crème */
+  --skin: #c98b62;           /* illustration (personnage détouré) */
+  --herb: #6f9a52;           /* illustration (garnitures) */
+  --tomato: #d8452b;         /* illustration (garnitures) */
+  --crust: #e2b36a;          /* illustration (pain, pâtes) */
+
+  /* Typographie */
+  --font-display: 'DM Serif Display', 'Abril Fatface', Georgia, serif;   /* serif d'affiche à fort contraste */
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(2rem, 4vw, 3.25rem);
+  --text-3xl: clamp(2.5rem, 6vw, 5rem);
+  --text-hero: clamp(3.5rem, 11vw, 10.5rem);
+  --text-wordmark: clamp(5rem, 22vw, 20rem);
+  --leading-display: 0.9;
+  --leading-body: 1.6;
+  --tracking-caps: 0.1em;
+
+  /* Espace (base 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --container: 1240px;
+
+  /* Formes */
+  --radius-btn: 4px;         /* petits boutons rectangulaires */
+  --radius-sm: 8px;          /* barre de navigation */
+  --radius-md: 12px;         /* cartes plats */
+  --radius-section: 32px;    /* haut des sections crème qui chevauchent le vert */
+  --radius-pill: 999px;
+  --frame-photo: 8px;        /* bordure crème des photos encadrées */
+  --shadow-photo: 0 18px 40px -12px rgb(10 63 52 / 0.35);
+  --shadow-card: 0 12px 28px -14px rgb(27 26 23 / 0.35);
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+  --dur-slow: 800ms;
+}

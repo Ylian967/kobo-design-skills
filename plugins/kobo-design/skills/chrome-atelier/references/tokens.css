@@ -1,0 +1,77 @@
+/*
+ * Chrome Atelier — tokens
+ * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * Deux ambiances : « atelier » (blanc cassé, filets gris) et « nuit » (bleu-gris profond, photo).
+ * @contrast ink:bg muted:bg gold-ink:bg ink:paper muted:paper on-ink:ink
+ * @contrast on-night:night muted-night:night gold:night on-night:night-2 ink:on-night
+ */
+:root {
+  /* Couleurs — atelier (clair) */
+  --bg: #f2f2f0;            /* blanc cassé de la page produit */
+  --paper: #fbfbf9;         /* panneau blanc (communauté, confirmation) */
+  --ink: #111111;           /* titres, logo, bouton plein */
+  --on-ink: #f2f2f0;
+  --muted: #5c5c58;         /* texte courant, liens de navigation */
+  --line: #c9c9c4;          /* filets : diagonales, croix, anneau (décoratif, jamais du texte) */
+  --line-strong: #9c9c96;   /* filets des légendes (callouts) */
+  --gold-ink: #7f6127;      /* or lisible en petit texte sur clair */
+
+  /* Couleurs — nuit (sombre) */
+  --night: #0e1216;         /* fond « photo » bleu-gris très profond */
+  --night-2: #1b232b;       /* reflets, panneau sombre */
+  --night-3: #2c3742;       /* lumière de bord de la photo */
+  --on-night: #ecebe6;
+  --muted-night: #9aa2a8;
+  --line-night: #3a444e;    /* filets et cercles-guides sur la photo */
+
+  /* Métaux (dégradés de la pièce — jamais du texte, sauf --gold sur nuit) */
+  --gold: #c9a45c;
+  --gold-hi: #f3dca0;
+  --gold-lo: #6e5121;
+  --chrome-hi: #ffffff;
+  --chrome: #c7ccd1;
+  --chrome-lo: #4d555d;
+  --white-gold: #e7e3da;
+
+  /* Typographie */
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;  /* capitales larges (font-stretch 112%) */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;          /* étiquettes [ entre crochets ], valeurs techniques */
+  --text-2xs: 0.6875rem;    /* 11px : liens de navigation, étiquettes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-title: clamp(2rem, 3.6vw, 3.25rem);    /* titre produit 2 lignes décalées */
+  --text-hero: clamp(2.4rem, 5.4vw, 5rem);      /* titre de la scène nuit, 4 lignes */
+  --leading-tight: 1.02;
+  --leading-body: 1.6;
+  --tracking-caps: 0.14em;
+  --tracking-title: 0.01em;
+  --stretch-display: 112%;
+  --indent-step: 2.4em;     /* décalage d'une ligne de titre à l'autre */
+
+  /* Espace (base 4px) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --edge: clamp(20px, 4vw, 56px);
+  --container: 1360px;
+  --ring-size: min(68vh, 620px); /* grand cercle autour du produit */
+
+  /* Formes */
+  --radius-pill: 999px;
+  --radius-card: 4px;
+  --hairline: 1px solid var(--line);
+  --hairline-night: 1px solid var(--line-night);
+  --shadow-piece: 0 40px 60px -30px rgb(17 17 17 / 0.35);
+  --shadow-card: 0 30px 80px -40px rgb(0 0 0 / 0.6);
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 900ms;
+  --dur-spin: 24s;          /* rotation lente de la pièce / des reflets */
+}

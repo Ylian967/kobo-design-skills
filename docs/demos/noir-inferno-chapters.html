@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neuf Cercles — Noir Inferno Chapters (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@900&family=Playfair+Display:wght@400&family=Josefin+Sans:wght@400&display=swap">
+<style>
+:root {
+  --bg: #000000; --text: #ffffff; --muted: #9c9c9c; --mid: #2a2a2a; --haze: rgb(255 255 255 / 0.08);
+  --shade: radial-gradient(70% 60% at 50% 45%, transparent 40%, rgb(0 0 0 / .65));
+  --font-title: 'Playfair Display SC', 'Bodoni Moda', Georgia, serif; --font-ui: 'Josefin Sans', system-ui, sans-serif; --font-number: 'Playfair Display', Georgia, serif;
+  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-title: clamp(1.75rem, 3.6vw, 3rem); --text-number: clamp(2rem, 3vw, 2.75rem); --tracking-ui: 0.28em;
+  --edge: 40px; --space-2: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  --ease: cubic-bezier(0.7, 0, 0.3, 1); --dur: 1200ms; --dur-title: 1800ms; --drift: 40s;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-sm)/1.5 var(--font-ui); }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 1px solid var(--text); outline-offset: 4px; }
+.ui { font: 400 var(--text-2xs)/1 var(--font-ui); letter-spacing: var(--tracking-ui); text-transform: uppercase; }
+.chapter { position: fixed; inset: 0; opacity: 0; visibility: hidden; transition: opacity calc(var(--dur) / 2) var(--ease), visibility 0s calc(var(--dur) / 2); }
+.chapter.is-active { opacity: 1; visibility: visible; transition-delay: calc(var(--dur) / 2), 0s; }
+.scene { position: absolute; inset: 0; filter: grayscale(1) contrast(1.1); transform: scale(1); transition: transform 20s linear; }
+.chapter.is-active .scene { transform: scale(1.06); }
+.scene::after { content: ""; position: absolute; inset: 0; background: var(--shade); }
+.haze { position: absolute; inset: -20%; background: radial-gradient(40% 30% at 30% 60%, var(--haze), transparent 70%), radial-gradient(35% 25% at 70% 40%, var(--haze), transparent 70%); animation: drift var(--drift) linear infinite alternate; pointer-events: none; }
+/* Scènes en CSS (à remplacer par des illustrations) */
+.s1 { background: linear-gradient(180deg, #1c1c1c 0 55%, #0c0c0c 55% 58%, #262626 58% 75%, #050505); }
+.s1::before { content: ""; position: absolute; left: 0; right: 0; top: 58%; height: 12%; background: repeating-linear-gradient(90deg, transparent 0 4%, #3a3a3a 4% 18%, transparent 18% 22%, #2c2c2c 22% 40%, transparent 40% 46%); border-radius: 30px; }
+.s2 { background: linear-gradient(180deg, #d9d9d9, #8c8c8c 50%, #3a3a3a); }
+.s2::before { content: ""; position: absolute; right: 18%; bottom: 0; width: 26%; height: 70%; background: #141414; clip-path: polygon(20% 100%, 30% 20%, 60% 0, 80% 30%, 100% 100%); }
+.s3 { background: radial-gradient(circle at 50% 30%, #e6e6e6, #6e6e6e 60%, #222); }
+.s3::before { content: ""; position: absolute; inset: 20% 0 0; background: radial-gradient(circle at 50% 22%, #bdbdbd 0 7%, transparent 7.5%) 0 0/12% 34%, radial-gradient(ellipse at 50% 80%, #4a4a4a 0 30%, transparent 31%) 0 0/12% 34%; }
+.s4 { background: radial-gradient(50% 50% at 50% 50%, #3a3a3a, #000 70%); }
+.ch-title { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; width: min(90vw, 900px); font: 900 var(--text-title)/1 var(--font-title); text-align: center; text-shadow: 0 0 40px var(--bg); opacity: 0; filter: blur(8px); transition: opacity var(--dur-title) var(--ease), filter var(--dur-title) var(--ease); }
+.chapter.is-active .ch-title { opacity: 1; filter: none; transition-delay: var(--dur); }
+.corner { position: fixed; z-index: 10; }
+.tl { left: var(--edge); top: var(--edge); font: 900 1rem/1 var(--font-title); letter-spacing: 0; text-transform: none; }
+.tc { left: 50%; top: var(--edge); translate: -50% 0; }
+.tr { right: var(--edge); top: var(--edge); display: flex; gap: var(--space-4); align-items: center; }
+.bl { left: var(--edge); bottom: var(--edge); display: flex; gap: var(--space-4); }
+.br { right: var(--edge); bottom: var(--edge); }
+.number { position: fixed; left: 50%; bottom: calc(var(--edge) - 8px); translate: -50% 0; z-index: 10; text-align: center; font: 400 var(--text-number)/1 var(--font-number); }
+.number::before { content: ""; display: block; width: 3px; height: 3px; margin: 0 auto 10px; border-radius: 50%; background: var(--text); }
+.number span { display: inline-block; transition: opacity 600ms var(--ease); }
+.toc { position: fixed; inset: 0; z-index: 30; background: var(--bg); display: grid; place-items: center; opacity: 0; visibility: hidden; transition: opacity 600ms var(--ease), visibility 600ms; }
+.toc.is-open { opacity: 1; visibility: visible; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); counter-reset: c; }
+.toc li { counter-increment: c; }
+.toc button { font: 900 1.5rem/1 var(--font-title); color: var(--muted); }
+.toc button::before { content: counter(c) "  "; font: 400 1rem var(--font-number); }
+.toc button[aria-current] { color: var(--text); }
+.toc .close { position: absolute; right: var(--edge); top: var(--edge); }
+@keyframes drift { to { transform: translate(6%, -3%); } }
+@media (max-width: 700px) { :root { --edge: 20px; } .tc, .bl, .br { display: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; } }
+</style>
+</head>
+<body>
+<div class="corner tl">Neuf Cercles</div>
+<button class="corner tc ui" id="openToc">Sommaire du projet.</button>
+<div class="corner tr ui"><span>FR · EN</span><button aria-label="Son coupé" aria-pressed="false">▮▯▮</button></div>
+<div class="corner bl ui"><a href="#" style="color:inherit">X</a><a href="#" style="color:inherit">IG</a></div>
+<a class="corner br ui" href="#" style="color:inherit;text-decoration:none">À propos du groupe</a>
+
+<main>
+  <section class="chapter is-active" aria-label="Chapitre 1"><div class="scene s1" role="img" aria-label="Une rue la nuit, des voitures à l'arrêt dans la brume"></div><div class="haze"></div></section>
+  <section class="chapter" aria-label="Chapitre 2"><div class="scene s2" role="img" aria-label="Une falaise isolée dans le brouillard"></div><div class="haze"></div><h2 class="ch-title">Le dernier phare.</h2></section>
+  <section class="chapter" aria-label="Chapitre 3"><div class="scene s3" role="img" aria-label="Une foule de silhouettes identiques et masquées"></div><div class="haze"></div><h2 class="ch-title">Les visages prêtés.</h2></section>
+  <section class="chapter" aria-label="Chapitre 4"><div class="scene s4" role="img" aria-label="Un noir presque total, une lueur au centre"></div><div class="haze"></div><h2 class="ch-title">Le silence, enfin.</h2></section>
+</main>
+<div class="number" aria-live="polite"><span id="num">1</span></div>
+
+<nav class="toc" id="toc" aria-label="Sommaire"><button class="close ui" id="closeToc">Fermer</button><ol><li><button data-go="0" aria-current="true">La rue</button></li><li><button data-go="1">Le dernier phare.</button></li><li><button data-go="2">Les visages prêtés.</button></li><li><button data-go="3">Le silence, enfin.</button></li></ol></nav>
+<script>
+(() => {
+  const chs = [...document.querySelectorAll('.chapter')], num = document.getElementById('num'); let i = 0, lock = false;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const go = n => { if (lock || n === i || n < 0 || n >= chs.length) return; lock = true; chs[i].classList.remove('is-active'); i = n; chs[i].classList.add('is-active');
+    num.style.opacity = 0; setTimeout(() => { num.textContent = i + 1; num.style.opacity = 1; }, reduce ? 0 : 600);
+    document.querySelectorAll('[data-go]').forEach(b => b.toggleAttribute('aria-current', +b.dataset.go === i)); setTimeout(() => lock = false, reduce ? 0 : 1200); };
+  addEventListener('wheel', e => go(i + (e.deltaY > 0 ? 1 : -1)), { passive: true });
+  addEventListener('keydown', e => { if (['ArrowDown', 'PageDown', ' '].includes(e.key)) go(i + 1); if (['ArrowUp', 'PageUp'].includes(e.key)) go(i - 1); if (e.key.toLowerCase() === 's') toc.classList.add('is-open'); if (e.key === 'Escape') toc.classList.remove('is-open'); });
+  let y0 = null; addEventListener('touchstart', e => y0 = e.touches[0].clientY, { passive: true }); addEventListener('touchend', e => { if (y0 === null) return; const d = y0 - e.changedTouches[0].clientY; if (Math.abs(d) > 40) go(i + (d > 0 ? 1 : -1)); y0 = null; });
+  const toc = document.getElementById('toc');
+  document.getElementById('openToc').addEventListener('click', () => toc.classList.add('is-open'));
+  document.getElementById('closeToc').addEventListener('click', () => toc.classList.remove('is-open'));
+  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { toc.classList.remove('is-open'); go(+b.dataset.go); }));
+})();
+</script>
+</body>
+</html>

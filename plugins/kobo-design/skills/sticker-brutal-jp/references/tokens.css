@@ -1,0 +1,70 @@
+/*
+ * Sticker Brutal JP — tokens
+ * Valeurs estimées à l'œil sur les images du shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * Règle : tout texte est en --ink (noir). Les couleurs vives sont des fonds d'autocollants, jamais du texte.
+ * @contrast ink:bg ink:paper ink:card muted:paper muted:card ink:yellow ink:pink ink:peri ink:teal ink:green ink:mint paper:ink
+ */
+:root {
+  /* Couleurs — page et papier */
+  --bg: #fde9dc;            /* pêche de la page, autour du cadre */
+  --paper: #fbf3ec;         /* intérieur du cadre « navigateur » */
+  --card: #ffffff;          /* cartes de service */
+  --ink: #111111;           /* texte, contours, ombres dures */
+  --muted: #4a4440;         /* texte secondaire (corps japonais long) */
+
+  /* Couleurs — autocollants (fonds plats, toujours contour --ink) */
+  --yellow: #f6c744;        /* bouton principal, katakana vertical, pastille œil */
+  --pink: #f0458f;          /* rose vif : fond du portrait, sélecteur de langue */
+  --peri: #8c9cf0;          /* pervenche : bulle du prénom */
+  --teal: #1f9e8f;          /* sarcelle : tuile graphique */
+  --green: #3bd16f;         /* vert : pastille « disponible » */
+  --mint: #bfe9d6;          /* pastel doux pour fonds de tuiles secondaires */
+  --red: #e5322d;           /* point de statut uniquement (pas de texte) */
+
+  /* Typographie */
+  --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', system-ui, sans-serif;          /* titres latins énormes, toujours en 900 */
+  --font-jp: 'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;       /* tout le japonais, 400 → 900 */
+  --font-sticker: 'Dela Gothic One', 'Noto Sans CJK JP Black', 'Hiragino Sans', sans-serif;             /* katakana vertical, gros mots */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(1.75rem, 3.2vw, 2.5rem);
+  --text-hero: clamp(3.25rem, 8.4vw, 7.5rem);
+  --leading-tight: 0.92;
+  --leading-jp: 1.85;      /* le japonais respire plus que le latin */
+  --tracking-caps: 0.04em;
+
+  /* Espace (base 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --container: 1240px;
+  --frame-gap: clamp(12px, 3vw, 48px);   /* marge entre la page pêche et le cadre */
+
+  /* Formes */
+  --stroke: 3px;            /* contour du cadre et des autocollants */
+  --stroke-sm: 2px;         /* contour des cartes et puces */
+  --radius-sm: 8px;
+  --radius-md: 12px;        /* cartes */
+  --radius-lg: 24px;        /* cadre navigateur */
+  --radius-pill: 999px;
+  --shadow-hard: 5px 5px 0 0 var(--ink);    /* ombre décalée sans flou */
+  --shadow-hard-sm: 3px 3px 0 0 var(--ink);
+  --shadow-hard-lg: 8px 8px 0 0 var(--ink);
+  --tilt: -6deg;            /* inclinaison type des autocollants (varier -12° → 10°) */
+
+  /* Mouvement */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur-base: 240ms;
+  --dur-slow: 600ms;
+}

@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ora P1 — compagnon vocal de poche (démo Pocket Device Noir)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #000000; --bg-2: #0d0d0d; --surface: #1a1a1a; --chip: #2a2a2a; --giant: #1f1f1f; --text: #ffffff; --muted: #8a8a8a; --chip-text: #a6a6a6; --line: #262626;
+  --glass: rgb(255 255 255 / 0.08); --glass-line: rgb(255 255 255 / 0.12); --glass-hi: rgb(255 255 255 / 0.16);
+  --red: #e5343a; --red-text: #ff5a5f; --paper: #ffffff; --on-paper: #000000;
+  --device: #121212; --device-hi: #3a3a3a; --dial: #1c1c1c; --lcd: #0f1a14; --lcd-text: #cfe8c2;
+  --wood: #7a4a2a; --wood-dark: #3a2213; --wall: #1e140d; --lamp: #f0b26a; --ceramic: #e9e2d6; --coffee: #2a170c; --fabric: #c9622a; --fabric-dark: #7d3412; --rock: #2b2b2b; --rock-hi: #4a4a4a;
+  --font-display: 'Geist', 'Inter', system-ui, sans-serif; --font-body: 'Geist', 'Inter', system-ui, sans-serif; --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.5rem;
+  --text-statement: clamp(1.25rem, 2vw, 1.625rem); --text-title: clamp(2rem, 3.6vw, 3rem); --text-hero: clamp(2.75rem, 5vw, 4.5rem); --text-giant: clamp(6rem, 22vw, 20rem);
+  --leading-tight: 1; --leading-title: 1.08; --leading-body: 1.55; --tracking-tight: -0.035em; --tracking-caps: 0.06em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
+  --gutter: clamp(16px, 3vw, 40px); --container: 1280px;
+  --radius-xs: 3px; --radius-sm: 4px; --radius-md: 12px; --radius-lg: 20px; --control: 44px; --blur: 18px;
+  --shadow-float: 0 24px 60px -20px rgb(0 0 0 / 0.9);
+  --fade-bottom: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.75) 72%, #000000 100%);
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1); --ease-inout: cubic-bezier(0.7, 0, 0.3, 1); --dur-fast: 150ms; --dur-base: 300ms; --dur-slow: 800ms; --dur-pulse: 1600ms;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-base)/var(--leading-body) var(--font-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+h1, h2, h3, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+.wrap { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+.mono { font-family: var(--font-mono); }
+.hl { color: var(--red); }
+
+/* ---------- Boutons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--control); padding: 0 var(--space-5); border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer;
+  font: 500 var(--text-sm)/1 var(--font-body); white-space: nowrap; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast); }
+.btn:active { transform: translateY(1px); }
+.btn--paper { background: var(--paper); color: var(--on-paper); }
+.btn--paper:hover { background: color-mix(in srgb, var(--paper) 86%, var(--bg)); }
+.btn--ghost { background: color-mix(in srgb, var(--bg) 35%, transparent); border-color: var(--glass-line); color: var(--text); backdrop-filter: blur(8px); }
+.btn--ghost:hover { background: var(--glass-hi); border-color: color-mix(in srgb, var(--text) 40%, transparent); }
+.btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: var(--text-xs); position: relative; }
+.btn--sm::after { content: ""; position: absolute; inset: -4px; }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+.btn .play { width: 0; height: 0; border-left: 7px solid currentColor; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
+.chip { display: inline-flex; align-items: center; gap: var(--space-1); padding: 3px var(--space-2); border-radius: var(--radius-xs); background: var(--chip); color: var(--chip-text); font: 500 var(--text-2xs)/1.4 var(--font-mono); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.chip--glass { background: var(--glass); box-shadow: inset 0 0 0 1px var(--glass-line); color: var(--text); }
+
+/* ---------- Objet (rendu CSS) ---------- */
+.device { --s: 18px; position: relative; font-size: var(--s); width: 9em; height: 12.6em; border-radius: 2.4em; flex: none;
+  background: radial-gradient(120% 70% at 30% 0%, color-mix(in srgb, var(--device-hi) 45%, var(--device)), var(--device) 60%);
+  box-shadow: inset 0 0 0 .06em var(--device-hi), inset .25em .25em .6em color-mix(in srgb, var(--text) 6%, transparent), 0 1.4em 2.4em -0.6em var(--bg), 0 .3em .6em color-mix(in srgb, var(--bg) 70%, transparent); }
+.device__btn { position: absolute; top: -.32em; left: 50%; width: 2em; height: .5em; translate: -50% 0; border-radius: .3em .3em .1em .1em; background: var(--red); box-shadow: inset 0 .08em 0 color-mix(in srgb, var(--text) 35%, transparent); }
+.device__lcd { position: absolute; left: 1.2em; right: 1.2em; top: 1.3em; height: 2.4em; border-radius: .45em; background: var(--lcd); box-shadow: inset 0 0 0 .06em color-mix(in srgb, var(--device-hi) 70%, transparent);
+  display: flex; flex-direction: column; justify-content: center; padding: 0 .6em; color: var(--lcd-text); font-family: var(--font-mono); line-height: 1.2; overflow: hidden; }
+.device__lcd b { font-weight: 500; font-size: .7em; }
+.device__lcd span { font-size: .42em; letter-spacing: .08em; display: flex; align-items: center; gap: .5em; opacity: .85; }
+.device__lcd span::before { content: ""; width: .9em; height: .9em; border-radius: 50%; background: var(--red); animation: pulse var(--dur-pulse) ease-in-out infinite; }
+.device__dial { position: absolute; left: 50%; bottom: 1.4em; width: 5.6em; aspect-ratio: 1; translate: -50% 0; border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--text) 16%, transparent) 0 1deg, transparent 1deg 10deg), radial-gradient(circle, var(--dial) 60%, color-mix(in srgb, var(--device-hi) 60%, var(--dial)) 61%, var(--dial) 66%);
+  box-shadow: inset 0 .1em .3em color-mix(in srgb, var(--bg) 80%, transparent), 0 .05em 0 color-mix(in srgb, var(--text) 10%, transparent); transition: transform var(--dur-slow) var(--ease-out); }
+.device__dial::after { content: ""; position: absolute; inset: 1.4em; border-radius: 50%; background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--device-hi) 70%, var(--dial)), var(--device) 70%); box-shadow: 0 .1em .3em var(--bg); }
+.device__dial::before { content: ""; position: absolute; left: 50%; top: .45em; width: .24em; height: .7em; translate: -50% 0; border-radius: .1em; background: var(--text); opacity: .8; }
+.device__mic { position: absolute; left: 50%; top: 4.15em; translate: -50% 0; display: flex; gap: .35em; }
+.device__mic i { width: .2em; height: .2em; border-radius: 50%; background: var(--bg); box-shadow: inset 0 .03em 0 color-mix(in srgb, var(--text) 20%, transparent); }
+.device:hover .device__dial { transform: rotate(40deg); }
+.device[data-state="idle"] .device__lcd span::before { background: var(--muted); animation: none; }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; min-height: max(700px, 100svh); overflow: hidden; isolation: isolate; display: flex; flex-direction: column; }
+.desk { position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(40% 36% at 78% 18%, color-mix(in srgb, var(--lamp) 45%, transparent), transparent 70%),
+              radial-gradient(70% 50% at 50% 60%, color-mix(in srgb, var(--lamp) 14%, transparent), transparent 70%),
+              linear-gradient(180deg, var(--wall) 0%, color-mix(in srgb, var(--wall) 70%, var(--wood-dark)) 52%, var(--wood-dark) 52.2%); }
+.desk__top { position: absolute; left: -10%; right: -10%; top: 52%; bottom: 0;
+  background: repeating-linear-gradient(176deg, transparent 0 14px, color-mix(in srgb, var(--wood-dark) 35%, transparent) 14px 16px, transparent 16px 34px),
+              linear-gradient(180deg, color-mix(in srgb, var(--wood) 80%, var(--lamp)) 0%, var(--wood) 30%, var(--wood-dark) 100%); }
+.desk::after { content: ""; position: absolute; inset: 0; background: var(--fade-bottom); }
+.cup { position: absolute; left: 22%; top: 58%; width: 120px; height: 46px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, var(--coffee) 48%, var(--ceramic) 50% 64%, color-mix(in srgb, var(--ceramic) 70%, var(--wood-dark)) 66%); box-shadow: 0 18px 24px -10px var(--bg); }
+.cup::before { content: ""; position: absolute; left: -36px; right: -36px; top: 10px; bottom: -22px; border-radius: 50%; background: color-mix(in srgb, var(--ceramic) 75%, var(--wood-dark)); z-index: -1; }
+.notebook { position: absolute; right: 18%; top: 60%; width: 220px; height: 120px; border-radius: 6px; background: linear-gradient(90deg, var(--ceramic) 0 49%, color-mix(in srgb, var(--ceramic) 70%, var(--wood-dark)) 49.5% 50.5%, var(--ceramic) 51%); transform: perspective(500px) rotateX(55deg) rotateZ(-8deg); opacity: .8; }
+.hero__device { position: absolute; left: 50%; top: 56%; translate: -50% 0; transform: perspective(900px) rotateX(18deg); }
+.hero__device .device { --s: 19px; }
+.nav { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-4); min-height: 72px; }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); font: 600 var(--text-lg)/1 var(--font-display); letter-spacing: var(--tracking-tight); min-height: var(--control); }
+.logo i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; }
+.logo i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 3px; height: 3px; border-radius: 50%; background: var(--red); }
+.nav__links { display: flex; gap: var(--space-1); }
+.nav__links a { display: inline-flex; align-items: center; min-height: var(--control); padding: 0 var(--space-3); font-size: var(--text-xs); color: color-mix(in srgb, var(--text) 75%, transparent); transition: color var(--dur-fast); }
+.nav__links a:hover, .nav__links a[aria-current] { color: var(--text); }
+.nav__end { display: flex; justify-content: flex-end; }
+.menu { display: none; }
+.hero__copy { position: relative; z-index: 2; text-align: center; margin-top: clamp(48px, 9vh, 110px); padding-inline: var(--gutter); }
+.hero h1 { font: 500 var(--text-hero)/var(--leading-tight) var(--font-display); letter-spacing: var(--tracking-tight); text-shadow: 0 2px 30px color-mix(in srgb, var(--bg) 60%, transparent); animation: fade-up var(--dur-slow) var(--ease-out) both; }
+.hero__sub { color: color-mix(in srgb, var(--text) 70%, transparent); max-width: 40ch; margin: var(--space-4) auto 0; font-size: var(--text-sm); animation: fade-up var(--dur-slow) var(--ease-out) 100ms both; }
+.hero__ctas { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-6); flex-wrap: wrap; animation: fade-up var(--dur-slow) var(--ease-out) 200ms both; }
+.corner { position: absolute; bottom: var(--space-8); z-index: 2; font: 500 var(--text-2xs)/1.4 var(--font-mono); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--muted); }
+.corner b { display: block; color: var(--text); font-weight: 500; }
+.corner--l { left: var(--gutter); }
+.corner--r { right: calc(var(--gutter) + 300px); }
+.offer { position: absolute; right: var(--gutter); bottom: var(--space-8); z-index: 3; width: 268px; padding: var(--space-4); border-radius: var(--radius-md); background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
+  box-shadow: var(--shadow-float); animation: fade-up var(--dur-slow) var(--ease-out) 400ms both; }
+.offer h2 { font: 500 var(--text-base)/1.2 var(--font-display); margin: var(--space-2) 0 var(--space-1); }
+.offer p { font-size: var(--text-xs); color: color-mix(in srgb, var(--text) 72%, transparent); }
+.offer__row { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-4); }
+.offer__price { font: 500 var(--text-lg)/1 var(--font-display); }
+.offer__price s { font-size: var(--text-xs); color: var(--muted); margin-left: var(--space-1); }
+.offer__close { position: absolute; top: 4px; right: 4px; width: var(--control); height: var(--control); border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 50%; }
+.offer__close:hover { color: var(--text); }
+.offer[hidden] { display: none; }
+
+/* ---------- Manifeste ---------- */
+.manifest { position: relative; background: var(--bg); padding: var(--space-32) 0; overflow: hidden; text-align: center; }
+.rays { position: absolute; left: 50%; top: 50%; width: 1600px; aspect-ratio: 1; translate: -50% -50%;
+  background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--text) 14%, transparent) 0deg .25deg, transparent .25deg 4deg);
+  -webkit-mask: radial-gradient(circle, transparent 9%, black 12%, color-mix(in srgb, var(--bg) 50%, transparent) 30%, transparent 55%); mask: radial-gradient(circle, transparent 9%, black 12%, color-mix(in srgb, var(--bg) 50%, transparent) 30%, transparent 55%); animation: turn 120s linear infinite; }
+.manifest .chip { position: relative; }
+.manifest p { position: relative; max-width: 30ch; margin: var(--space-6) auto 0; font: 400 var(--text-statement)/1.4 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+
+/* ---------- Produit ---------- */
+.product { position: relative; background: var(--bg-2); padding: var(--space-24) 0; overflow: hidden; }
+.product__head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-6); flex-wrap: wrap; }
+.title { font: 500 var(--text-title)/var(--leading-title) var(--font-display); letter-spacing: var(--tracking-tight); max-width: 16ch; }
+.title span { color: var(--muted); }
+.lead { color: var(--muted); max-width: 38ch; font-size: var(--text-sm); }
+.reveal { position: relative; display: grid; place-items: center; min-height: 560px; margin-top: var(--space-12); }
+.giant { position: absolute; inset: 50% 0 auto; translate: 0 -50%; text-align: center; white-space: nowrap; font: 600 var(--text-giant)/1 var(--font-display); letter-spacing: -0.05em; color: var(--giant); -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 8%, transparent); user-select: none; }
+.reveal .device { --s: 34px; z-index: 1; cursor: pointer; animation: hover-y 6s ease-in-out infinite; }
+.reveal .device::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -1.4em; height: .9em; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--bg) 90%, transparent), transparent); z-index: -1; }
+.callouts { position: absolute; inset: 0; }
+.callout { position: absolute; z-index: 2; display: grid; gap: var(--space-2); max-width: 220px; font-size: var(--text-xs); color: var(--muted); }
+.callout b { color: var(--text); font: 500 var(--text-sm)/1.3 var(--font-body); }
+.callout::before { content: ""; width: 40px; height: 1px; background: color-mix(in srgb, var(--text) 30%, transparent); }
+.callout--1 { left: 4%; top: 18%; } .callout--2 { left: 8%; bottom: 14%; } .callout--3 { right: 4%; top: 26%; text-align: right; justify-items: end; } .callout--4 { right: 8%; bottom: 12%; text-align: right; justify-items: end; }
+.listen { margin-top: var(--space-8); display: flex; justify-content: center; }
+
+/* ---------- Fonctions ---------- */
+.features { background: var(--bg); padding: var(--space-24) 0; }
+.fgrid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap: var(--space-4); margin-top: var(--space-12); }
+.tile { position: relative; min-height: 300px; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-4); }
+.tile--rock { grid-row: span 2; min-height: 620px;
+  background: radial-gradient(60% 40% at 30% 30%, var(--rock-hi), transparent 70%), radial-gradient(50% 35% at 75% 60%, color-mix(in srgb, var(--rock-hi) 80%, var(--rock)), transparent 70%), radial-gradient(80% 50% at 50% 100%, var(--bg), transparent), var(--rock); }
+.tile--rock::before { content: ""; position: absolute; inset: 0; background: repeating-radial-gradient(circle at 40% 40%, transparent 0 3px, color-mix(in srgb, var(--bg) 18%, transparent) 3px 4px); opacity: .6; }
+.tile--fabric { background: repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--fabric-dark) 45%, transparent) 22px 40px, transparent 40px 70px), radial-gradient(70% 60% at 60% 30%, color-mix(in srgb, var(--fabric) 80%, var(--lamp)), var(--fabric) 50%, var(--fabric-dark)); }
+.tile--plain { background: var(--surface); }
+.tile--wide { grid-column: span 2; }
+.tile .device { --s: 13px; position: absolute; left: 50%; top: 42%; translate: -50% -50%; }
+.tile--rock .device { --s: 22px; top: 40%; transform: rotate(-8deg); }
+.tile--fabric .device { transform: rotate(12deg); }
+.glass { position: relative; padding: var(--space-4); border-radius: var(--radius-md); background: color-mix(in srgb, var(--bg) 35%, transparent); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur)); transition: background var(--dur-base), border-color var(--dur-base); }
+.tile:hover .glass { border-color: color-mix(in srgb, var(--text) 24%, transparent); }
+.glass h3 { font: 500 var(--text-base)/1.25 var(--font-display); margin: var(--space-2) 0 var(--space-1); }
+.glass p { font-size: var(--text-xs); color: color-mix(in srgb, var(--text) 75%, transparent); }
+.stat-big { font: 500 clamp(3rem, 6vw, 5rem)/1 var(--font-display); letter-spacing: var(--tracking-tight); position: absolute; left: var(--space-5); top: var(--space-5); }
+.stat-big small { font-size: .35em; color: var(--muted); margin-left: var(--space-1); }
+.wave { position: absolute; left: var(--space-5); right: var(--space-5); top: 26%; height: 60px; display: flex; align-items: center; gap: 4px; }
+.wave i { flex: 1; height: var(--h); border-radius: 2px; background: color-mix(in srgb, var(--text) 30%, transparent); animation: eq 1.2s ease-in-out infinite alternate; animation-delay: var(--d); }
+.wave i:nth-child(5n+3) { background: var(--red); }
+
+/* ---------- Avis ---------- */
+.voices { background: var(--bg-2); padding: var(--space-24) 0; }
+.vrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-top: var(--space-10); }
+.voice { padding: var(--space-5); border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--space-5); justify-content: space-between; transition: border-color var(--dur-base); }
+.voice:hover { border-color: color-mix(in srgb, var(--text) 20%, transparent); }
+.voice q { font-size: var(--text-sm); quotes: "« " " »"; }
+.who { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-xs); }
+.who b { display: block; font-weight: 500; font-size: var(--text-sm); }
+.who span { color: var(--muted); }
+.avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; display: grid; place-items: center; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--text); background: radial-gradient(circle at 35% 30%, var(--a), color-mix(in srgb, var(--a) 40%, var(--bg))); }
+
+/* ---------- Appel final + pied ---------- */
+.cta { position: relative; padding: var(--space-24) 0 var(--space-12); background: var(--bg); overflow: hidden; }
+.cta__box { position: relative; border-radius: var(--radius-lg); overflow: hidden; padding: clamp(32px, 6vw, 80px); min-height: 420px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: var(--space-5);
+  background: radial-gradient(50% 70% at 85% 50%, color-mix(in srgb, var(--lamp) 50%, transparent), transparent 70%), linear-gradient(100deg, var(--bg) 30%, var(--wood-dark) 70%, var(--wood)); }
+.cta__box .device { --s: 20px; position: absolute; right: 12%; top: 50%; translate: 0 -50%; transform: rotate(-10deg); }
+.cta__box h2 { position: relative; max-width: 14ch; }
+.cta__box p { position: relative; color: color-mix(in srgb, var(--text) 75%, transparent); max-width: 36ch; font-size: var(--text-sm); }
+.foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--line); color: var(--muted); font-size: var(--text-xs); }
+.foot nav { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
+.foot a { display: inline-flex; align-items: center; min-height: var(--control); transition: color var(--dur-fast); }
+.foot a:hover { color: var(--text); }
+
+/* ---------- Mouvement ---------- */
+@keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
+@keyframes pulse { 50% { opacity: .25; } }
+@keyframes turn { to { rotate: 360deg; } }
+@keyframes hover-y { 50% { translate: 0 -10px; } }
+@keyframes eq { from { transform: scaleY(.35); } }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 1000px) {
+  .fgrid { grid-template-columns: 1fr 1fr; }
+  .tile--rock { grid-row: auto; grid-column: span 2; min-height: 420px; }
+  .vrow { grid-template-columns: 1fr 1fr; }
+  .corner--r { display: none; }
+}
+@media (max-width: 720px) {
+  .nav { grid-template-columns: 1fr auto; }
+  .nav__links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; padding: var(--space-2); border-radius: var(--radius-md); background: color-mix(in srgb, var(--surface) 92%, transparent); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); }
+  .nav__links.is-open { display: flex; }
+  .nav__end { gap: var(--space-2); }
+  .menu { display: inline-grid; place-items: center; width: var(--control); height: var(--control); border-radius: var(--radius-sm); border: 1px solid var(--glass-line); background: none; cursor: pointer; }
+  .hero { min-height: 780px; }
+  .hero__device { top: 50%; }
+  .cup { left: -6%; } .notebook { right: -30%; }
+  .offer { left: var(--gutter); right: var(--gutter); width: auto; bottom: var(--space-4); }
+  .corner--l { bottom: auto; top: 46%; }
+  .reveal { min-height: 440px; }
+  .reveal .device { --s: 24px; }
+  .callout { position: static; max-width: none; }
+  .callouts { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-8); }
+  .callout--3, .callout--4 { text-align: left; justify-items: start; }
+  .fgrid, .vrow { grid-template-columns: 1fr; }
+  .tile--rock, .tile--wide { grid-column: auto; }
+  .cta__box { min-height: 660px; justify-content: flex-start; }
+  .cta__box .device { right: 50%; top: auto; bottom: 32px; translate: 50% 0; --s: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <div class="desk" data-slot="hero-desk-photo" role="img" aria-label="Bureau en bois éclairé par une lampe, tasse de café et carnet, l'objet posé au centre">
+    <div class="desk__top"></div>
+    <span class="cup"></span><span class="notebook"></span>
+  </div>
+  <div class="hero__device" aria-hidden="true">
+    <div class="device"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>À L'ÉCOUTE…</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+  </div>
+
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Ora, accueil"><i aria-hidden="true"></i>ora</a>
+    <nav class="nav__links" id="links" aria-label="Principale"><a href="#product" aria-current="page">Produit</a><a href="#features">Fonctions</a><a href="#voices">Avis</a><a href="#cta">Assistance</a></nav>
+    <div class="nav__end">
+      <button class="menu" id="menu" aria-expanded="false" aria-controls="links" aria-label="Ouvrir le menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h12M2 11h12"/></svg></button>
+      <a class="btn btn--paper btn--sm" href="#cta">Acheter</a>
+    </div>
+  </div>
+
+  <div class="hero__copy">
+    <h1>Rencontrez Ora.</h1>
+    <p class="hero__sub">Un compagnon vocal de poche qui écoute, retient et vous rappelle l'essentiel, sans écran ni notification.</p>
+    <div class="hero__ctas"><a class="btn btn--paper" href="#cta">Précommander</a><a class="btn btn--ghost" href="#product"><span class="play" aria-hidden="true"></span>Voir la démo</a></div>
+  </div>
+
+  <p class="corner corner--l"><b>Ora P1</b>Modèle 2026</p>
+  <p class="corner corner--r"><b>Compagnon IA</b>Vocal · Hors ligne</p>
+  <aside class="offer" id="offer" aria-labelledby="offerTitle">
+    <button class="offer__close" id="offerClose" aria-label="Fermer l'offre">×</button>
+    <span class="chip chip--glass">Offre du moment</span>
+    <h2 id="offerTitle">Étui en laine offert</h2>
+    <p>Pour toute précommande avant le 31 octobre.</p>
+    <div class="offer__row"><span class="offer__price">149 € <s>179 €</s></span><a class="btn btn--paper btn--sm" href="#cta">J'en profite</a></div>
+  </aside>
+</header>
+
+<main>
+  <section class="manifest" aria-label="Manifeste">
+    <div class="rays" aria-hidden="true"></div>
+    <span class="chip">Pourquoi Ora</span>
+    <p>Ora écoute, résume et vous rappelle ce qui compte. <span class="hl">Sans écran</span>, sans fil d'actualité, <span class="hl">sans distraction</span> : juste votre voix, et une molette.</p>
+  </section>
+
+  <section class="product" id="product" aria-labelledby="productTitle">
+    <div class="wrap">
+      <div class="product__head">
+        <h2 class="title" id="productTitle">Tient dans la main. <span>Pèse 62 grammes.</span></h2>
+        <p class="lead">Un boîtier en aluminium noir, une molette pour tout faire, un petit écran qui ne montre que l'heure et ce qu'Ora est en train de faire.</p>
+      </div>
+      <div class="reveal">
+        <p class="giant" aria-hidden="true">Ora P1</p>
+        <div class="device" id="bigDevice" data-state="listening" role="img" aria-label="Ora P1 : boîtier noir, petit écran, molette ronde et bouton rouge sur le dessus">
+          <span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span id="lcdState">À L'ÉCOUTE…</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div>
+        </div>
+        <div class="callouts">
+          <p class="callout callout--1"><span class="chip">Écran</span><b>Écran mémoire 1,1 pouce</b>L'heure et l'état, rien d'autre.</p>
+          <p class="callout callout--2"><span class="chip">Micro</span><b>4 capsules, portée 3 m</b>Réduction du bruit embarquée.</p>
+          <p class="callout callout--3"><span class="chip">Bouton</span><b>Bouton rouge</b>Un appui pour parler, deux pour noter.</p>
+          <p class="callout callout--4"><span class="chip">Molette</span><b>Molette crantée</b>Volume, rappel, navigation.</p>
+        </div>
+      </div>
+      <div class="listen"><button class="btn btn--ghost" id="listenBtn" aria-pressed="true" aria-controls="bigDevice">Mettre en veille</button></div>
+    </div>
+  </section>
+
+  <section class="features" id="features" aria-labelledby="featTitle">
+    <div class="wrap">
+      <div class="product__head">
+        <h2 class="title" id="featTitle">Pensé pour disparaître. <span>Jusqu'à ce que vous en ayez besoin.</span></h2>
+        <span class="chip">Dans Ora P1</span>
+      </div>
+      <div class="fgrid">
+        <article class="tile tile--rock" data-slot="feature-rock">
+          <div class="device" aria-hidden="true"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>NOTE AJOUTÉE</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+          <div class="glass"><span class="chip chip--glass">Mémoire</span><h3>Tout reste sur l'appareil</h3><p>Transcriptions et rappels chiffrés localement. Rien ne part sans votre accord.</p></div>
+        </article>
+        <article class="tile tile--plain">
+          <p class="stat-big">5<small>jours</small></p>
+          <div class="glass"><span class="chip chip--glass">Batterie</span><h3>Autonomie de 5 jours</h3><p>Recharge sans fil complète en 50 minutes.</p></div>
+        </article>
+        <article class="tile tile--fabric" data-slot="feature-fabric">
+          <div class="device" aria-hidden="true"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>RAPPEL 10:00</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+          <div class="glass"><span class="chip chip--glass">Rappels</span><h3>Il vous le redit au bon moment</h3><p>« Rappelle-moi d'appeler Lina en sortant. »</p></div>
+        </article>
+        <article class="tile tile--plain tile--wide">
+          <div class="wave" aria-hidden="true"></div>
+          <div class="glass"><span class="chip chip--glass">Voix</span><h3>Comprend le français parlé, même à voix basse</h3><p>Modèle vocal embarqué, fonctionne hors ligne, 12 langues.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="voices" id="voices" aria-labelledby="voicesTitle">
+    <div class="wrap">
+      <div class="product__head"><h2 class="title" id="voicesTitle">Ils l'ont gardé en poche. <span>Et l'écran dans le tiroir.</span></h2></div>
+      <div class="vrow">
+        <figure class="voice" style="margin:0"><q>Je note mes idées en marchant, sans sortir le téléphone. C'est devenu un réflexe.</q><figcaption class="who"><span class="avatar" style="--a:var(--fabric)" aria-hidden="true">CM</span><span><b>Camille M.</b><span>Architecte</span></span></figcaption></figure>
+        <figure class="voice" style="margin:0"><q>Le bouton rouge est le seul bouton dont j'ai besoin dans une journée de tournage.</q><figcaption class="who"><span class="avatar" style="--a:var(--wood)" aria-hidden="true">YB</span><span><b>Yanis B.</b><span>Réalisateur</span></span></figcaption></figure>
+        <figure class="voice" style="margin:0"><q>Les rappels arrivent au bon moment, à voix basse. Personne autour ne s'en rend compte.</q><figcaption class="who"><span class="avatar" style="--a:var(--rock-hi)" aria-hidden="true">SL</span><span><b>Sofia L.</b><span>Médecin</span></span></figcaption></figure>
+        <figure class="voice" style="margin:0"><q>Enfin un objet connecté qui ne réclame pas mon attention.</q><figcaption class="who"><span class="avatar" style="--a:var(--lamp)" aria-hidden="true">TR</span><span><b>Théo R.</b><span>Développeur</span></span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="cta" aria-labelledby="ctaTitle">
+    <div class="wrap">
+      <div class="cta__box" data-slot="cta-lifestyle">
+        <div class="device" aria-hidden="true"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>BONJOUR</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+        <span class="chip chip--glass" style="position:relative">Livraison en novembre</span>
+        <h2 class="title" id="ctaTitle">Réservez le vôtre. <span>149 €.</span></h2>
+        <p>Précommande sans frais, annulable à tout moment. Étui en laine offert jusqu'au 31 octobre.</p>
+        <div class="hero__ctas" style="justify-content:flex-start;position:relative"><button class="btn btn--paper" id="preorder">Précommander</button><a class="btn btn--ghost" href="#features">Fiche technique</a></div>
+      </div>
+      <footer class="foot">
+        <span>© 2026 Ora — produit fictif de démonstration</span>
+        <nav aria-label="Pied de page"><a href="#">Garantie</a><a href="#">Confidentialité</a><a href="#">Contact</a><a href="#top">Haut de page ↑</a></nav>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const wave = document.querySelector('.wave');
+  for (let i = 0; i < 48; i++) { const b = document.createElement('i'); b.style.setProperty('--h', (12 + Math.abs(Math.sin(i * 0.7)) * 44 + (i % 3) * 4) + 'px'); b.style.setProperty('--d', (i % 8) * -0.15 + 's'); wave.appendChild(b); }
+  const tick = () => { const d = new Date(), t = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); document.querySelectorAll('.clock').forEach(c => c.textContent = t); };
+  tick(); setInterval(tick, 30000);
+
+  const menu = document.getElementById('menu'), links = document.getElementById('links');
+  menu.addEventListener('click', () => { const o = links.classList.toggle('is-open'); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); });
+  links.addEventListener('click', e => { if (e.target.closest('a')) { links.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
+
+  document.getElementById('offerClose').addEventListener('click', () => { document.getElementById('offer').hidden = true; });
+
+  const dev = document.getElementById('bigDevice'), btn = document.getElementById('listenBtn'), state = document.getElementById('lcdState');
+  const toggle = () => { const on = dev.dataset.state !== 'listening'; dev.dataset.state = on ? 'listening' : 'idle'; state.textContent = on ? "À L'ÉCOUTE…" : 'EN VEILLE'; btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Mettre en veille' : 'Réveiller Ora'; };
+  btn.addEventListener('click', toggle); dev.addEventListener('click', toggle);
+
+  const pre = document.getElementById('preorder');
+  pre.addEventListener('click', () => { pre.setAttribute('aria-busy', 'true'); pre.textContent = 'Réservation…'; setTimeout(() => { pre.removeAttribute('aria-busy'); pre.textContent = 'Réservé ✓'; pre.setAttribute('aria-disabled', 'true'); }, 700); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hautvent — Alpine Glass Expedition (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root {
+  --white: #ffffff; --frost: #f5f8fb; --fog: #e6edf3; --ice: #b9cad8; --steel: #6f8ba3; --slate: #3c5873; --deep: #1d3550; --night: #0e1c2c; --muted: #4d6680;
+  --star: #f5c84b; --on-white: #1d3550;
+  --glass: rgb(230 237 243 / 0.16); --glass-strong: rgb(230 237 243 / 0.28); --glass-solid: #4a6886; --glass-border: rgb(255 255 255 / 0.45);
+  --line-light: rgb(255 255 255 / 0.7); --line: rgb(29 53 80 / 0.16);
+  --vignette: linear-gradient(180deg, rgb(14 28 44 / 0.35) 0%, rgb(14 28 44 / 0) 26%, rgb(14 28 44 / 0) 52%, rgb(14 28 44 / 0.82) 100%);
+  --font-display: 'Instrument Serif', 'Gloock', 'Times New Roman', serif; --font-ui: 'Inter', system-ui, sans-serif;
+  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.5rem;
+  --text-h2: clamp(2.25rem, 4.6vw, 4rem); --text-hero: clamp(2.9rem, 6.4vw, 6rem); --text-giant: clamp(4rem, 13vw, 12rem);
+  --leading-display: 0.94; --tracking-display: 0.005em; --tracking-caps: 0.18em;
+  --edge: clamp(16px, 3.5vw, 48px);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --max: 1320px;
+  --radius-pill: 999px; --radius-card: 28px; --radius-panel: 20px; --glass-btn: 112px; --play: 52px; --blur: 14px;
+  --shadow-soft: 0 24px 60px -24px rgb(14 28 44 / 0.45);
+  --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 20px 50px -20px rgb(14 28 44 / 0.6);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); --dur-fast: 200ms; --dur: 500ms; --dur-slow: 1200ms; --dur-drift: 40s;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--fog); color: var(--deep); font: 400 var(--text-base)/1.55 var(--font-ui); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+.light :focus-visible { outline-color: var(--deep); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.caps { font: 500 var(--text-2xs)/1.5 var(--font-ui); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--edge); }
+.display { margin: 0; font: 400 var(--text-h2)/var(--leading-display) var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; }
+
+/* ---------- Boutons ---------- */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-6); border: 1px solid transparent; border-radius: var(--radius-pill);
+  font: 600 var(--text-2xs)/1 var(--font-ui); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur) var(--ease); }
+.pill--white { background: var(--white); color: var(--on-white); }
+.pill--white:hover { background: var(--fog); box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--night) 50%, transparent); }
+.pill--deep { background: var(--deep); color: var(--white); }
+.pill--deep:hover { background: var(--night); }
+.pill--ghost { border-color: var(--line-light); color: var(--white); background: transparent; }
+.pill--ghost:hover { background: var(--glass); border-color: var(--white); }
+.pill:active { transform: scale(.97); }
+.pill[disabled], .pill[aria-busy="true"] { opacity: .5; cursor: not-allowed; transform: none; }
+.pill .arr { transition: transform var(--dur) var(--ease); }
+.pill:hover .arr { transform: translate(2px, -2px); }
+
+.chip { display: inline-flex; align-items: center; min-height: 36px; padding: 0 var(--space-4); border: 1px solid var(--line-light); border-radius: var(--radius-pill); color: var(--white);
+  font: 500 var(--text-2xs)/1 var(--font-ui); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; background: transparent; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); position: relative; }
+.chip::after { content: ""; position: absolute; inset: -4px 0; }  /* cible tactile 44px */
+.chip:hover { background: var(--white); color: var(--on-white); }
+.chip--dark { border-color: var(--line); color: var(--deep); }
+.chip--dark:hover, .chip--dark[aria-pressed="true"] { background: var(--deep); color: var(--white); border-color: var(--deep); }
+
+.glass-btn { position: relative; display: grid; place-items: center; align-content: center; gap: var(--space-2); width: var(--glass-btn); aspect-ratio: 1; border-radius: 50%; text-align: center; text-decoration: none; color: var(--white);
+  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--white) 35%, transparent), transparent 55%), linear-gradient(160deg, color-mix(in srgb, var(--ice) 38%, transparent), color-mix(in srgb, var(--slate) 32%, transparent));
+  border: 1px solid var(--glass-border); backdrop-filter: blur(var(--blur)) saturate(1.2); -webkit-backdrop-filter: blur(var(--blur)) saturate(1.2); box-shadow: var(--shadow-glass);
+  font: 600 9.5px/1.35 var(--font-ui); letter-spacing: var(--tracking-caps); text-transform: uppercase; transition: transform var(--dur) var(--ease), background var(--dur) var(--ease); }
+.glass-btn .ico { font: 400 1.5rem/1 var(--font-ui); letter-spacing: 0; transition: transform var(--dur) var(--ease); }
+.glass-btn:hover { transform: scale(1.06); }
+.glass-btn:hover .ico { transform: translate(3px, -3px); }
+.glass-btn::before { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--white) 22%, transparent); }
+
+.play { display: grid; place-items: center; flex: none; width: var(--play); height: var(--play); border-radius: 50%; border: 1px solid var(--glass-border); background: color-mix(in srgb, var(--night) 55%, transparent); color: var(--white); cursor: pointer;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease); }
+.play:hover { background: var(--deep); transform: scale(1.06); }
+.play svg { width: 14px; height: 14px; margin-left: 2px; fill: currentColor; }
+.play[aria-pressed="true"] svg { margin-left: 0; }
+
+/* ---------- Héros ---------- */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; color: var(--white); isolation: isolate; display: flex; flex-direction: column; background: var(--deep); }
+.land { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
+.land .s-sky1 { stop-color: var(--steel); } .land .s-sky2 { stop-color: var(--ice); } .land .s-sky3 { stop-color: var(--fog); }
+.land .s-white { stop-color: var(--white); } .land .s-ice { stop-color: var(--ice); } .land .s-steel { stop-color: var(--steel); } .land .s-slate { stop-color: var(--slate); } .land .s-deep { stop-color: var(--deep); } .land .s-night { stop-color: var(--night); }
+.land .far { fill: var(--ice); opacity: .75; }
+.land .shadow { fill: var(--slate); opacity: .5; }
+.land .snow { fill: var(--white); }
+.land .snow-soft { fill: var(--fog); opacity: .85; }
+.land .gully { fill: none; stroke: var(--white); stroke-width: 2; stroke-linecap: round; opacity: .55; }
+.land .mist { fill: var(--white); }
+.land .pine { fill: var(--night); }
+.drift { animation: drift var(--dur-drift) var(--ease-in-out) infinite alternate; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--vignette); pointer-events: none; }
+
+.nav { position: relative; z-index: 5; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-6); padding: var(--space-6) var(--edge); }
+.brand { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; text-decoration: none; font: 400 1.6rem/1 var(--font-display); }
+.brand svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+.links { display: flex; gap: var(--space-8); margin: 0; padding: 0; list-style: none; }
+.links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; position: relative; }
+.links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 10px; height: 1px; background: currentColor; transition: right var(--dur) var(--ease); }
+.links a:hover::after, .links a[aria-current]::after { right: 0; }
+.nav .pill { justify-self: end; }
+.menu-btn { display: none; }
+
+.hero-main { position: relative; z-index: 2; flex: 1; display: grid; justify-items: center; align-content: start; text-align: center; padding: clamp(24px, 6vh, 72px) var(--edge) 0; }
+.kicker { margin-bottom: var(--space-4); display: inline-flex; align-items: center; gap: var(--space-3); }
+.kicker::before, .kicker::after { content: ""; width: 28px; height: 1px; background: var(--line-light); }
+.hero h1 { margin: 0; font: 400 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; text-shadow: 0 2px 40px color-mix(in srgb, var(--night) 35%, transparent); }
+.hero h1 span { display: block; }
+.hero h1 span:first-child { font-size: .86em; letter-spacing: .06em; }
+.hero h1 em { font-style: italic; text-transform: none; }
+.hero-text { max-width: 38ch; margin: var(--space-6) 0 0; font-size: var(--text-sm); line-height: 1.6; text-shadow: 0 1px 16px color-mix(in srgb, var(--night) 60%, transparent); }
+
+.hero .glass-btn { position: absolute; z-index: 3; right: 15%; top: 56%; }
+.hero-foot { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr auto 1fr; align-items: end; gap: var(--space-6); padding: 0 var(--edge) var(--space-8); }
+.journey { display: flex; align-items: center; gap: var(--space-4); }
+.journey p { margin: 0; line-height: 1.6; }
+.chips { display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: center; }
+.rating { justify-self: end; text-align: right; }
+.rating strong { display: flex; align-items: baseline; justify-content: flex-end; gap: 2px; font: 400 2.75rem/1 var(--font-display); }
+.rating strong small { font-size: .5em; opacity: .85; }
+.rating .st { color: var(--star); font-size: .55em; align-self: flex-start; margin-left: 4px; }
+.rating span { display: block; margin-top: var(--space-1); }
+
+/* ---------- Aventures ---------- */
+.section { padding: var(--space-24) 0; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-8); flex-wrap: wrap; margin-bottom: var(--space-12); }
+.sec-head .caps { color: var(--muted); display: block; margin-bottom: var(--space-4); }
+.sec-head p { max-width: 36ch; margin: 0; color: var(--slate); font-size: var(--text-sm); }
+.filters { display: flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-8); }
+.filters .chip { min-height: 44px; }
+.trips { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: var(--space-6); }
+.trip { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 520px; padding: var(--space-3); border-radius: var(--radius-card); overflow: hidden; color: var(--white); text-decoration: none; isolation: isolate; box-shadow: var(--shadow-soft); }
+.trip[hidden] { display: none; }
+.scene { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--c1) 0%, var(--c2) 52%, var(--c3) 100%); transition: transform var(--dur-slow) var(--ease); }
+.trip:hover .scene { transform: scale(1.05); }
+.scene i { position: absolute; left: -5%; right: -5%; }
+.scene .p1 { top: 24%; bottom: 0; background: linear-gradient(180deg, var(--white) 0 9%, var(--c4) 22%, var(--c5)); clip-path: polygon(0 52%, 22% 30%, 34% 38%, 52% 4%, 66% 26%, 78% 18%, 100% 46%, 100% 100%, 0 100%); }
+.scene .p2 { top: 48%; bottom: 0; background: linear-gradient(180deg, var(--c5), var(--night)); clip-path: polygon(0 34%, 16% 20%, 30% 34%, 46% 14%, 62% 30%, 80% 10%, 100% 28%, 100% 100%, 0 100%); }
+.scene .mist { top: 46%; height: 18%; background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--white) 75%, transparent), transparent 70%); filter: blur(6px); }
+.scene .lake { top: 74%; bottom: 0; background: linear-gradient(180deg, var(--ice), var(--slate) 60%, var(--deep)); clip-path: polygon(0 18%, 100% 4%, 100% 100%, 0 100%); opacity: .9; }
+.scene .lake::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 7px, color-mix(in srgb, var(--white) 18%, transparent) 7px 8px); }
+.scene .trees { top: 58%; bottom: 0; background: linear-gradient(180deg, var(--deep), var(--night)); clip-path: polygon(0 100%, 0.00% 46%, 2.08% 18%, 4.17% 46%, 6.25% 4%, 8.33% 46%, 10.42% 26%, 12.50% 46%, 14.58% 10%, 16.67% 46%, 18.75% 0%, 20.83% 46%, 22.92% 22%, 25.00% 46%, 27.08% 12%, 29.17% 46%, 31.25% 30%, 33.33% 46%, 35.42% 6%, 37.50% 46%, 39.58% 16%, 41.67% 46%, 43.75% 18%, 45.83% 46%, 47.92% 4%, 50.00% 46%, 52.08% 26%, 54.17% 46%, 56.25% 10%, 58.33% 46%, 60.42% 0%, 62.50% 46%, 64.58% 22%, 66.67% 46%, 68.75% 12%, 70.83% 46%, 72.92% 30%, 75.00% 46%, 77.08% 6%, 79.17% 46%, 81.25% 16%, 83.33% 46%, 85.42% 18%, 87.50% 46%, 89.58% 4%, 91.67% 46%, 93.75% 26%, 95.83% 46%, 97.92% 10%, 100% 46%, 100% 100%); }
+.trip--a { --c1: var(--ice); --c2: var(--fog); --c3: var(--steel); --c4: var(--ice); --c5: var(--slate); }
+.trip--b { --c1: var(--steel); --c2: var(--ice); --c3: var(--slate); --c4: var(--steel); --c5: var(--deep); }
+.trip--c { --c1: var(--slate); --c2: var(--steel); --c3: var(--deep); --c4: var(--ice); --c5: var(--slate); }
+.trip::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--night) 55%, transparent)); }
+.trip-top { position: absolute; top: var(--space-4); left: var(--space-4); right: var(--space-4); display: flex; justify-content: space-between; align-items: center; }
+.trip-top .chip { background: color-mix(in srgb, var(--night) 38%, transparent); border-color: var(--glass-border); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); min-height: 32px; }
+.trip-top .chip::after { display: none; }
+.panel { padding: var(--space-6); border-radius: var(--radius-panel); background: var(--glass-strong); border: 1px solid var(--glass-border); backdrop-filter: blur(var(--blur)) saturate(1.15); -webkit-backdrop-filter: blur(var(--blur)) saturate(1.15); box-shadow: var(--shadow-glass); }
+.panel h3 { margin: 0 0 var(--space-3); font: 400 var(--text-lg)/1.05 var(--font-display); text-transform: uppercase; letter-spacing: .01em; }
+.panel-row { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); }
+.panel-row p { margin: 0; font-size: var(--text-sm); }
+.panel-row b { font: 400 1.35rem/1 var(--font-display); }
+.go { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--on-white); font-size: 1.1rem; transition: transform var(--dur) var(--ease); }
+.trip:hover .go, .trip:focus-visible .go { transform: rotate(45deg); }
+
+/* ---------- Méthode (nuit) ---------- */
+.method { position: relative; background: var(--deep); color: var(--white); overflow: hidden; }
+.method .ridge-art { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 60%; pointer-events: none; }
+.method .ridge-art path { fill: none; stroke: var(--ice); stroke-width: 1; opacity: .25; }
+.method .sec-head .caps { color: var(--ice); }
+.method .sec-head p { color: var(--ice); }
+.steps { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.step { padding: var(--space-8); border-radius: var(--radius-panel); background: var(--glass); border: 1px solid color-mix(in srgb, var(--white) 18%, transparent); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur)); }
+.step .n { display: block; font: 400 4rem/1 var(--font-display); color: var(--ice); }
+.step h3 { margin: var(--space-6) 0 var(--space-3); font: 400 1.75rem/1.05 var(--font-display); text-transform: uppercase; }
+.step p { margin: 0; color: var(--ice); font-size: var(--text-sm); }
+.figures { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: var(--space-16); border-top: 1px solid color-mix(in srgb, var(--white) 20%, transparent); }
+.figures div { padding-top: var(--space-6); }
+.figures strong { display: block; font: 400 clamp(2.5rem, 4.5vw, 3.75rem)/1 var(--font-display); }
+.figures span { color: var(--ice); }
+
+/* ---------- Témoignage ---------- */
+.quote { text-align: center; }
+.quote .stars { color: var(--deep); letter-spacing: .3em; font-size: 1.1rem; }
+.quote .stars b { color: var(--star); -webkit-text-stroke: .5px var(--deep); }
+.quote blockquote { max-width: 24ch; margin: var(--space-6) auto var(--space-8); font: 400 clamp(1.9rem, 3.6vw, 3.25rem)/1.08 var(--font-display); }
+.quote blockquote em { color: var(--slate); }
+.who { display: inline-flex; align-items: center; gap: var(--space-3); text-align: left; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: radial-gradient(circle at 50% 38%, var(--fog) 0 22%, transparent 23%), radial-gradient(ellipse at 50% 100%, var(--fog) 0 45%, transparent 46%), linear-gradient(160deg, var(--steel), var(--deep)); border: 2px solid var(--white); }
+.who b { display: block; font-weight: 600; }
+.who span { color: var(--muted); font-size: var(--text-sm); }
+
+/* ---------- Appel final + pied ---------- */
+.final { position: relative; background: var(--night); color: var(--white); padding-top: var(--space-24); overflow: hidden; }
+.final .crest { position: absolute; inset: 0 0 auto; width: 100%; height: 90px; }
+.final .crest path { fill: var(--fog); }
+.final-grid { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-12); align-items: end; padding-top: var(--space-12); }
+.final h2 { font-size: clamp(2.6rem, 6vw, 5.5rem); }
+.final p { color: var(--ice); max-width: 40ch; margin: var(--space-6) 0 0; font-size: var(--text-sm); }
+.field label { display: block; color: var(--ice); margin-bottom: var(--space-3); }
+.field-row { display: flex; gap: var(--space-2); padding: 6px; border-radius: var(--radius-pill); border: 1px solid color-mix(in srgb, var(--white) 28%, transparent); background: var(--glass); transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.field-row:hover { border-color: var(--line-light); }
+.field-row:focus-within { border-color: var(--white); box-shadow: 0 0 0 4px color-mix(in srgb, var(--white) 12%, transparent); }
+.field-row.is-error { border-color: var(--star); }
+.field input { flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--space-4); border: 0; background: transparent; color: var(--white); font: 400 var(--text-sm) var(--font-ui); }
+.field input::placeholder { color: var(--ice); }
+.field input:focus { outline: none; }
+.hint { min-height: 1.6em; margin-top: var(--space-3); color: var(--ice); font-size: var(--text-xs); }
+.hint.err { color: var(--star); }
+.final .giant { position: relative; max-width: none; margin: var(--space-16) 0 0; font: 400 var(--text-giant)/.8 var(--font-display); text-transform: uppercase; text-align: center; letter-spacing: .02em;
+  color: transparent; background: linear-gradient(180deg, color-mix(in srgb, var(--ice) 55%, transparent), transparent 85%); -webkit-background-clip: text; background-clip: text; user-select: none; }
+.foot { position: relative; display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-6) 0 var(--space-8); border-top: 1px solid color-mix(in srgb, var(--white) 14%, transparent); color: var(--ice); }
+.foot nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+.foot a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.foot a:hover { color: var(--white); }
+
+/* ---------- Mouvement ---------- */
+@keyframes drift { from { transform: translateX(-3%); } to { transform: translateX(3%); } }
+@keyframes up { from { opacity: 0; transform: translateY(24px); } }
+@keyframes zoom-out { from { transform: scale(1.08); } }
+@media (prefers-reduced-motion: no-preference) {
+  .land { animation: zoom-out 2.4s var(--ease) both; }
+  .hero h1 span, .hero-text, .kicker { animation: up var(--dur-slow) var(--ease) both; }
+  .kicker { animation-delay: 100ms; } .hero h1 span:first-child { animation-delay: 200ms; } .hero h1 span:last-child { animation-delay: 320ms; } .hero-text { animation-delay: 480ms; }
+  .hero .glass-btn, .hero-foot { animation: up var(--dur-slow) var(--ease) 700ms both; }
+  @supports (animation-timeline: view()) {
+    .step { animation: up linear both; animation-timeline: view(); animation-range: entry 0% entry 60%; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 1000px) {
+  .trips { grid-template-columns: 1fr 1fr; }
+  .trip:first-child { grid-column: 1 / -1; min-height: 440px; }
+  .steps { grid-template-columns: 1fr; }
+  .figures { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-8); }
+  .final-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .nav { grid-template-columns: 1fr auto; padding-block: var(--space-4); }
+  .links, .nav .pill { display: none; }
+  .nav .menu-btn { display: inline-flex; justify-self: end; }
+  .nav.is-open .links { display: flex; flex-direction: column; gap: 0; position: absolute; top: calc(100% - 8px); left: var(--edge); right: var(--edge); padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-panel); background: color-mix(in srgb, var(--night) 72%, transparent); border: 1px solid var(--glass-border); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur)); }
+  .land { left: -100%; width: 200%; }  /* recadrage portrait : garder le sommet dans l'écran */
+  .hero-main { padding-top: 4vh; }
+  .hero h1 { font-size: 3.15rem; }
+  .hero .glass-btn { --glass-btn: 96px; right: var(--edge); top: auto; bottom: 236px; }
+  .hero-foot { grid-template-columns: 1fr; gap: var(--space-6); padding-bottom: var(--space-6); }
+  .chips { justify-content: flex-start; order: -1; max-width: 62%; }
+  .rating { justify-self: start; text-align: left; position: absolute; right: var(--edge); bottom: var(--space-6); }
+  .rating strong { justify-content: flex-start; font-size: 2.25rem; }
+  .trips { grid-template-columns: 1fr; }
+  .trip, .trip:first-child { min-height: 440px; }
+  .giant { font-size: 21vw; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <svg class="land" data-slot="mountain-photo" role="img" aria-label="Massif enneigé dans la brume, lumière froide du matin (emplacement photo)" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-slate"/><stop offset=".3" class="s-sky1"/><stop offset=".7" class="s-sky2"/><stop offset=".85" class="s-sky3"/></linearGradient>
+      <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" class="s-white" stop-opacity=".9"/><stop offset="1" class="s-white" stop-opacity="0"/></radialGradient>
+      <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s-ice"/><stop offset=".35" class="s-steel"/><stop offset="1" class="s-deep"/></linearGradient>
+      <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-steel"/><stop offset=".6" class="s-slate"/><stop offset="1" class="s-deep"/></linearGradient>
+      <linearGradient id="front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-deep"/><stop offset="1" class="s-night"/></linearGradient>
+      <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
+    </defs>
+    <rect width="1440" height="900" fill="url(#sky)"/>
+    <circle cx="1120" cy="380" r="280" fill="url(#glow)" opacity=".6"/>
+    <path class="far" d="M0 560 L120 520 L210 540 L330 480 L420 515 L520 470 L600 500 L700 455 L780 485 L860 460 L960 495 L1060 455 L1160 490 L1260 462 L1360 492 L1440 470 L1440 900 L0 900Z"/>
+    <g class="drift"><ellipse class="mist" cx="420" cy="500" rx="520" ry="40" opacity=".55" filter="url(#blur)"/></g>
+    <g transform="translate(110 185)">
+      <path fill="url(#rock)" d="M480 640 L640 430 L700 400 L760 430 L840 300 L930 205 L985 270 L1030 252 L1120 360 L1180 352 L1300 480 L1440 530 L1440 900 L480 900Z"/>
+      <path class="shadow" d="M930 205 L985 270 L1030 252 L1120 360 L1180 352 L1300 480 L1440 530 L1440 900 L1010 900 L965 560 L945 360Z"/>
+      <path class="snow" d="M930 205 L985 270 L962 266 L948 292 L930 276 L908 310 L890 292 L866 322 L848 300 L840 300 Z"/>
+      <path class="snow-soft" d="M985 270 L1030 252 L1060 290 L1040 300 L1022 286 L1004 304 L990 290 Z"/>
+      <path class="snow" d="M700 400 L760 430 L740 434 L726 452 L710 438 L694 450 L672 440 L640 430 Z"/>
+      <path class="gully" d="M928 280 C 925 330, 918 380, 912 450 M 952 300 C 958 350, 962 400, 970 470 M 880 330 C 872 370, 862 410, 850 470 M 1040 300 C 1060 340, 1075 380, 1090 430"/>
+    </g>
+    <g class="drift" style="animation-direction: alternate-reverse"><ellipse class="mist" cx="900" cy="690" rx="760" ry="60" opacity=".7" filter="url(#blur)"/></g>
+    <path fill="url(#mid)" d="M0 680 L140 630 L260 660 L380 600 L500 650 L620 615 L760 675 L900 640 L1040 690 L1180 650 L1320 700 L1440 670 L1440 900 L0 900Z"/>
+    <ellipse class="mist" cx="300" cy="760" rx="600" ry="40" opacity=".35" filter="url(#blur)"/>
+    <path fill="url(#front)" d="M0 790 L180 755 L300 775 L460 735 L620 780 L800 760 L980 800 L1140 765 L1300 790 L1440 770 L1440 900 L0 900Z"/>
+    <g class="pines" id="pines"></g>
+  </svg>
+
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5"/><path d="M5 23 L12 13 L16 18 L20 11 L27 23"/><path d="M18.5 13.5 L20 11 L21.6 13.6"/></svg>Hautvent</a>
+    <ul class="links caps" id="menu">
+      <li><a href="#aventures" aria-current="page">Aventures</a></li>
+      <li><a href="#methode">Faune</a></li>
+      <li><a href="#methode">Expériences</a></li>
+    </ul>
+    <a class="pill pill--white" href="#aventures">Voir les voyages</a>
+    <button class="pill pill--ghost menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+  </nav>
+
+  <div class="hero-main">
+    <span class="kicker caps">Saison 2027 · Alpes &amp; Pyrénées</span>
+    <h1><span>Explorer</span><span>sans limites</span></h1>
+    <p class="hero-text">Des itinéraires à pied, à ski et en bivouac, préparés par des guides qui vivent là-haut. Petits groupes, vrais silences, matériel fourni.</p>
+  </div>
+
+  <a class="glass-btn" href="#aventures"><span class="ico" aria-hidden="true">↗</span>Explorer<br>les aventures</a>
+
+  <div class="hero-foot">
+    <div class="journey">
+      <button class="play" aria-label="Lire le film de présentation" aria-pressed="false"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 1 L13 7 L2 13Z"/></svg></button>
+      <p class="caps">Votre voyage,<br>pensé avec<br>soin</p>
+    </div>
+    <div class="chips">
+      <a class="chip" href="#aventures">Treks en montagne</a>
+      <a class="chip" href="#aventures">Bivouac sauvage</a>
+    </div>
+    <div class="rating">
+      <strong aria-hidden="true">4,8<small>/5</small><span class="st">★</span></strong>
+      <span class="caps" aria-hidden="true">Note moyenne</span><span class="sr-only">Note moyenne : 4,8 sur 5</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section light" id="aventures" aria-labelledby="av-t">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="caps">Nos aventures · 24 départs</span><h2 class="display" id="av-t">Choisissez<br>votre terrain</h2></div>
+        <p>Chaque itinéraire est testé deux fois par saison. Le niveau indiqué est honnête : on préfère vous voir revenir que renoncer.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrer par terrain">
+        <button class="chip chip--dark" aria-pressed="true" data-f="all">Tout</button>
+        <button class="chip chip--dark" aria-pressed="false" data-f="trek">Treks</button>
+        <button class="chip chip--dark" aria-pressed="false" data-f="camp">Bivouac</button>
+        <button class="chip chip--dark" aria-pressed="false" data-f="ski">Ski de rando</button>
+      </div>
+      <div class="trips">
+        <a class="trip trip--a" href="#" data-cat="trek">
+          <div class="scene" data-slot="trip-photo"><i class="p1"></i><i class="mist"></i><i class="p2"></i><i class="lake"></i></div>
+          <div class="trip-top"><span class="chip">6 jours</span><span class="chip">Modéré</span></div>
+          <div class="panel"><h3>Le tour des<br>lacs gelés</h3><div class="panel-row"><p>Dès <b>1 240 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
+        </a>
+        <a class="trip trip--b" href="#" data-cat="camp">
+          <div class="scene" data-slot="trip-photo"><i class="p1"></i><i class="mist"></i><i class="trees"></i></div>
+          <div class="trip-top"><span class="chip">3 nuits</span><span class="chip">Facile</span></div>
+          <div class="panel"><h3>Bivouac sous<br>les mélèzes</h3><div class="panel-row"><p>Dès <b>480 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
+        </a>
+        <a class="trip trip--c" href="#" data-cat="ski">
+          <div class="scene" data-slot="trip-photo"><i class="p1"></i><i class="mist"></i><i class="p2"></i></div>
+          <div class="trip-top"><span class="chip">5 jours</span><span class="chip">Sportif</span></div>
+          <div class="panel"><h3>La haute route<br>des crêtes</h3><div class="panel-row"><p>Dès <b>1 690 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section method" id="methode" aria-labelledby="me-t">
+    <svg class="ridge-art" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 300 L160 220 L300 270 L460 150 L600 240 L760 110 L900 230 L1060 160 L1200 250 L1320 190 L1440 240"/>
+      <path d="M0 340 L200 280 L340 320 L520 230 L680 300 L840 210 L1000 290 L1160 240 L1300 300 L1440 270"/>
+      <path d="M0 370 L240 330 L420 360 L600 310 L780 350 L960 300 L1140 345 L1300 320 L1440 340"/>
+    </svg>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><span class="caps">Comment on travaille</span><h2 class="display" id="me-t">Le grand air,<br>sans l'improvisation</h2></div>
+        <p>Trois étapes, un seul interlocuteur, du premier appel au retour dans la vallée.</p>
+      </div>
+      <div class="steps">
+        <article class="step"><span class="n">01</span><h3>On écoute</h3><p>Votre niveau, vos envies, vos limites. Un échange de vingt minutes avec le guide qui partira avec vous.</p></article>
+        <article class="step"><span class="n">02</span><h3>On trace</h3><p>Itinéraire, refuges, plan B météo. Vous recevez un carnet de route clair, hors ligne et imprimable.</p></article>
+        <article class="step"><span class="n">03</span><h3>On veille</h3><p>Groupes de huit maximum, balise satellite, matériel technique fourni et vérifié la veille du départ.</p></article>
+      </div>
+      <div class="figures">
+        <div><strong>12</strong><span class="caps">Guides diplômés</span></div>
+        <div><strong>38</strong><span class="caps">Itinéraires</span></div>
+        <div><strong>8</strong><span class="caps">Pers. par groupe</span></div>
+        <div><strong>4,8/5</strong><span class="caps">Note moyenne</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section quote light" aria-label="Témoignage">
+    <div class="wrap">
+      <p class="stars" aria-label="5 étoiles sur 5"><b>★★★★★</b></p>
+      <blockquote>« On est partis pour la vue. <em>On est revenus pour le silence</em> — et pour le guide. »</blockquote>
+      <div class="who"><span class="avatar" data-slot="avatar" aria-hidden="true"></span><span><b>Margaux &amp; Idris</b><span>Haute route des crêtes, mars 2026</span></span></div>
+    </div>
+  </section>
+
+  <section class="final" aria-labelledby="fi-t">
+    <svg class="crest" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 H1440 V40 L1300 70 L1180 30 L1040 64 L900 22 L760 58 L620 26 L480 66 L340 34 L200 62 L80 38 L0 56 Z"/></svg>
+    <div class="wrap">
+      <div class="final-grid">
+        <div>
+          <span class="caps" style="color:var(--ice)">Carnet de saison</span>
+          <h2 class="display" id="fi-t">Le grand air<br>vous attend</h2>
+          <p>Une lettre par mois : nouveaux départs, conditions en altitude et places qui se libèrent. Rien d'autre.</p>
+        </div>
+        <form class="field" novalidate>
+          <label class="caps" for="mail">Votre e-mail</label>
+          <div class="field-row">
+            <input id="mail" type="email" placeholder="vous@exemple.fr" autocomplete="email" aria-describedby="mail-hint">
+            <button class="pill pill--white" type="submit">S'inscrire <span class="arr" aria-hidden="true">↗</span></button>
+          </div>
+          <p class="hint" id="mail-hint" role="status">Désinscription en un clic.</p>
+        </form>
+      </div>
+      <p class="giant" aria-hidden="true">Hautvent</p>
+      <div class="foot caps">
+        <span>© 2026 Hautvent (fictif) — démo Kōbō</span>
+        <nav aria-label="Pied de page"><a href="#aventures">Aventures</a><a href="#methode">Sécurité</a><a href="#">Contact</a><a href="#top">Haut ↑</a></nav>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  // Sapins du premier plan (positions déterministes)
+  const g = document.getElementById('pines'); let d = '';
+  for (let i = 0; i < 70; i++) {
+    const x = (i * 97.3) % 1440, base = 800 + Math.sin(i * 1.7) * 18 + (i % 5) * 6, h = 28 + (i * 37 % 34), w = h * .38;
+    d += `M${x} ${base} L${x + w / 2} ${base - h} L${x + w} ${base}Z`;
+  }
+  g.innerHTML = `<path class="pine" d="${d}"/>`;
+  // Menu mobile
+  const nav = document.querySelector('.nav'), mb = nav.querySelector('.menu-btn');
+  mb.addEventListener('click', () => { const o = nav.classList.toggle('is-open'); mb.setAttribute('aria-expanded', o); mb.textContent = o ? 'Fermer' : 'Menu'; });
+  // Lecture (démo)
+  const play = document.querySelector('.play');
+  play.addEventListener('click', () => {
+    const on = play.getAttribute('aria-pressed') !== 'true';
+    play.setAttribute('aria-pressed', on);
+    play.innerHTML = on ? '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 1h3.5v12H2zM8.5 1H12v12H8.5z"/></svg>' : '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 1 L13 7 L2 13Z"/></svg>';
+    play.setAttribute('aria-label', on ? 'Mettre en pause le film' : 'Lire le film de présentation');
+  });
+  // Filtres
+  const chips = document.querySelectorAll('.filters .chip');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.setAttribute('aria-pressed', x === c));
+    document.querySelectorAll('.trip').forEach(t => t.hidden = c.dataset.f !== 'all' && t.dataset.cat !== c.dataset.f);
+  }));
+  // Inscription
+  const f = document.querySelector('.field'), inp = f.querySelector('input'), row = f.querySelector('.field-row'), hint = f.querySelector('.hint'), btn = f.querySelector('button');
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const ok = /.+@.+\..+/.test(inp.value);
+    row.classList.toggle('is-error', !ok); inp.setAttribute('aria-invalid', !ok); hint.classList.toggle('err', !ok);
+    if (!ok) { hint.textContent = 'Cette adresse ne semble pas complète.'; return; }
+    btn.setAttribute('aria-busy', 'true'); hint.textContent = 'Inscription…';
+    setTimeout(() => { btn.removeAttribute('aria-busy'); hint.textContent = 'C\'est noté — première lettre le 1er du mois.'; }, 900);
+  });
+})();
+</script>
+</body>
+</html>

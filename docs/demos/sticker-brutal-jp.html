@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>荒田ミオ — Sticker Brutal JP (démo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+<style>
+/* Copie de references/tokens.css */
+:root {
+  --bg: #fde9dc; --paper: #fbf3ec; --card: #ffffff; --ink: #111111; --muted: #4a4440;
+  --yellow: #f6c744; --pink: #f0458f; --peri: #8c9cf0; --teal: #1f9e8f; --green: #3bd16f; --mint: #bfe9d6; --red: #e5322d;
+  --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', system-ui, sans-serif;
+  --font-jp: 'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --font-sticker: 'Dela Gothic One', 'Noto Sans CJK JP Black', 'Hiragino Sans', sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
+  --text-2xl: clamp(1.75rem, 3.2vw, 2.5rem); --text-hero: clamp(3.25rem, 8.4vw, 7.5rem);
+  --leading-tight: 0.92; --leading-jp: 1.85; --tracking-caps: 0.04em;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+  --container: 1240px; --frame-gap: clamp(12px, 3vw, 48px);
+  --stroke: 3px; --stroke-sm: 2px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 24px; --radius-pill: 999px;
+  --shadow-hard: 5px 5px 0 0 var(--ink); --shadow-hard-sm: 3px 3px 0 0 var(--ink); --shadow-hard-lg: 8px 8px 0 0 var(--ink);
+  --tilt: -6deg;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1); --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms; --dur-base: 240ms; --dur-slow: 600ms;
+}
+
+* { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 500 var(--text-base)/var(--leading-jp) var(--font-jp); overflow-x: clip; }
+a { color: inherit; }
+img, svg { display: block; }
+:focus-visible { outline: var(--stroke) solid var(--ink); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Autocollant : la brique de base ---------- */
+.sticker { border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); }
+
+/* ---------- Scène : page pêche + autocollants flottants + cadre ---------- */
+.stage { position: relative; max-width: calc(var(--container) + 2 * var(--frame-gap)); margin: 0 auto; padding: var(--space-16) var(--frame-gap) var(--space-12); }
+.float { position: absolute; z-index: 0; pointer-events: none; animation: bob 6s var(--ease-out) infinite alternate; }
+.f-half { left: 0; top: 160px; width: 92px; height: 46px; background: var(--peri); border-radius: 92px 92px 0 0; rotate: -18deg; }
+.f-sq { right: 4px; top: 22px; width: 64px; height: 64px; background: var(--yellow); border-radius: 16px; rotate: 14deg; animation-delay: -2s; }
+.f-blob { left: 12px; bottom: 120px; width: 70px; height: 70px; background: var(--green); border-radius: 50% 50% 50% 8px; rotate: 10deg; animation-delay: -4s; }
+.f-half2 { right: -8px; bottom: 280px; width: 80px; height: 40px; background: var(--pink); border-radius: 0 0 80px 80px; rotate: 22deg; animation-delay: -1s; }
+.f-star { left: 46%; top: 10px; width: 46px; height: 46px; background: var(--teal); clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); border: 0; box-shadow: none; filter: drop-shadow(3px 3px 0 var(--ink)); animation-delay: -3s; }
+
+.frame { position: relative; z-index: 1; background: var(--paper); border: var(--stroke) solid var(--ink); border-radius: var(--radius-lg); box-shadow: var(--shadow-hard-lg); overflow: hidden; }
+.chrome { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-6); border-bottom: var(--stroke) solid var(--ink); background: var(--card); }
+.chrome i { width: 14px; height: 14px; border-radius: 50%; border: var(--stroke-sm) solid var(--ink); background: var(--pink); }
+.chrome i:nth-child(2) { background: var(--yellow); } .chrome i:nth-child(3) { background: var(--green); }
+.chrome span { margin-left: var(--space-4); padding: 2px var(--space-4); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); font: 700 var(--text-xs)/1.6 var(--font-jp); background: var(--paper); }
+
+/* ---------- Navigation ---------- */
+.nav { display: flex; align-items: center; gap: var(--space-6); padding: var(--space-4) var(--space-8); }
+.logo { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); font: 900 var(--text-base)/1 var(--font-display); text-decoration: none; background: var(--card); }
+.logo b { width: 12px; height: 12px; border-radius: 50%; background: var(--pink); border: var(--stroke-sm) solid var(--ink); }
+.nav ul { display: flex; gap: var(--space-2); margin: 0 auto; padding: 0; list-style: none; }
+.nav ul a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); font: 700 var(--text-sm)/1 var(--font-jp); text-decoration: none; border-radius: var(--radius-pill); border: var(--stroke-sm) solid transparent; transition: border-color var(--dur-fast), background var(--dur-fast); }
+.nav ul a:hover { border-color: var(--ink); background: var(--card); }
+.lang { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); background: var(--pink); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); box-shadow: var(--shadow-hard-sm); font: 700 var(--text-sm)/1 var(--font-jp); cursor: pointer; color: var(--ink); transition: translate var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
+.lang::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--red); border: var(--stroke-sm) solid var(--ink); }
+.lang:active { translate: 3px 3px; box-shadow: 0 0 0 0 var(--ink); }
+.menu-btn { display: none; }
+
+/* ---------- Boutons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 52px; padding: 0 var(--space-6); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-hard); font: 900 var(--text-base)/1 var(--font-jp); color: var(--ink); text-decoration: none; cursor: pointer; transition: translate var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast); }
+.btn--primary { background: var(--yellow); }
+.btn--ghost { background: var(--card); }
+.btn:hover { translate: -2px -2px; box-shadow: 7px 7px 0 0 var(--ink); }
+.btn:active { translate: 5px 5px; box-shadow: 0 0 0 0 var(--ink); }
+.btn svg { width: 18px; height: 18px; }
+
+/* ---------- Héros ---------- */
+.hero { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: var(--space-8); align-items: center; padding: var(--space-8) var(--space-8) var(--space-16); }
+.hello { display: inline-flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-4); padding: 2px var(--space-3); background: var(--card); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); font: 700 var(--text-sm)/1.7 var(--font-jp); rotate: -2deg; }
+.hero h1 { margin: 0; font: 900 var(--text-hero)/var(--leading-tight) var(--font-display); letter-spacing: -0.01em; text-transform: uppercase; }
+.hero h1 .hl { position: relative; display: inline-block; padding: 0 0.08em; z-index: 0; }
+.hero h1 .hl::before { content: ""; position: absolute; inset: 0.14em -0.02em 0.06em; z-index: -1; background: var(--peri); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); rotate: -1.5deg; }
+.hero__text h2 { margin: var(--space-6) 0 var(--space-3); font: 900 var(--text-2xl)/1.35 var(--font-jp); }
+.hero__text .lead { margin: 0 0 var(--space-8); max-width: 34em; color: var(--muted); font-weight: 500; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+/* Visuel : portrait hexagonal + autocollants */
+.visual { position: relative; aspect-ratio: 1 / 1.02; max-width: 520px; width: 100%; justify-self: end; }
+.hex-wrap { position: absolute; inset: 6% 4% 4% 10%; filter: drop-shadow(var(--stroke) 0 0 var(--ink)) drop-shadow(calc(-1 * var(--stroke)) 0 0 var(--ink)) drop-shadow(0 var(--stroke) 0 var(--ink)) drop-shadow(0 calc(-1 * var(--stroke)) 0 var(--ink)) drop-shadow(6px 6px 0 var(--ink)); }
+.hex { width: 100%; height: 100%; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background:
+  radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--paper) 35%, transparent) 0 1.5px, transparent 2px) 0 0 / 14px 14px,
+  var(--pink); position: relative; overflow: hidden; }
+/* Portrait N&B dessiné en CSS (remplacer par une photo détourée en niveaux de gris) */
+.person { position: absolute; left: 50%; bottom: 0; width: 62%; height: 86%; translate: -50% 0; filter: grayscale(1) contrast(1.1); }
+.person .hair { position: absolute; left: 22%; top: 2%; width: 56%; height: 46%; border-radius: 48% 48% 40% 40%; background: var(--ink); }
+.person .face { position: absolute; left: 30%; top: 9%; width: 40%; height: 36%; border-radius: 44% 44% 48% 48%; background: linear-gradient(160deg, var(--card), color-mix(in srgb, var(--ink) 22%, var(--card))); }
+.person .fringe { position: absolute; left: 27%; top: 4%; width: 46%; height: 14%; border-radius: 50% 50% 30% 60%; background: var(--ink); rotate: -6deg; }
+.person .neck { position: absolute; left: 43%; top: 42%; width: 14%; height: 10%; background: color-mix(in srgb, var(--ink) 30%, var(--card)); }
+.person .body { position: absolute; left: 4%; right: 4%; bottom: 0; height: 50%; border-radius: 46% 46% 0 0; background: linear-gradient(180deg, color-mix(in srgb, var(--ink) 70%, var(--card)), var(--ink)); }
+.person .body::after { content: ""; position: absolute; left: 41%; top: 0; width: 18%; height: 30%; background: var(--card); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+
+.visual .kana { position: absolute; right: -2%; top: 4%; margin: 0; writing-mode: vertical-rl; font: 400 clamp(3rem, 6.4vw, 5.6rem)/1 var(--font-sticker); color: var(--yellow); -webkit-text-stroke: var(--stroke) var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--ink); letter-spacing: -0.02em; }
+.tag { position: absolute; display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-sm); font: 900 var(--text-base)/1.2 var(--font-jp); white-space: nowrap; }
+.tag--name { left: -2%; top: 14%; background: var(--peri); border-radius: var(--radius-md) var(--radius-md) var(--radius-md) 0; rotate: var(--tilt); }
+.tag--name::after { content: ""; position: absolute; left: -3px; bottom: -14px; width: 16px; height: 14px; background: var(--peri); border: var(--stroke) solid var(--ink); border-top: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.tag--open { left: 4%; bottom: 6%; background: var(--green); border-radius: var(--radius-pill); rotate: 4deg; }
+.tag--open svg { width: 18px; height: 18px; }
+.tile { position: absolute; display: grid; place-items: center; border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-sm); }
+.tile--chart { right: 4%; bottom: 14%; width: 76px; height: 76px; background: var(--teal); border-radius: var(--radius-md); rotate: 8deg; color: var(--ink); }
+.tile--eye { left: 2%; top: 46%; width: 64px; height: 64px; background: var(--yellow); border-radius: 50%; rotate: -10deg; }
+.tile svg { width: 60%; height: 60%; }
+
+/* ---------- Bande défilante ---------- */
+.tape { overflow: hidden; border-block: var(--stroke) solid var(--ink); background: var(--yellow); rotate: -1.2deg; margin: 0 -2%; }
+.tape__track { display: flex; width: max-content; animation: tape 26s linear infinite; }
+.tape span { padding: var(--space-3) var(--space-6); font: 900 var(--text-lg)/1 var(--font-display); text-transform: uppercase; white-space: nowrap; display: inline-flex; align-items: center; gap: var(--space-6); }
+.tape span::after { content: "✦"; font-family: var(--font-jp); }
+
+/* ---------- Services ---------- */
+.section { padding: var(--space-24) var(--space-8) var(--space-16); }
+.sec-head { text-align: center; margin: 0 auto var(--space-12); max-width: 40em; }
+.kicker { display: inline-block; margin-bottom: var(--space-3); padding: 2px var(--space-3); background: var(--mint); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); font: 900 var(--text-xs)/1.8 var(--font-display); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.sec-head h2 { margin: 0 0 var(--space-3); font: 900 var(--text-2xl)/1.3 var(--font-jp); }
+.sec-head p { margin: 0; color: var(--muted); }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); }
+.card { position: relative; display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); background: var(--card); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-md); box-shadow: var(--shadow-hard); text-decoration: none; transition: translate var(--dur-base) var(--ease-spring), box-shadow var(--dur-base) var(--ease-spring), rotate var(--dur-base) var(--ease-spring); }
+.card:hover { translate: -3px -4px; rotate: -1deg; box-shadow: var(--shadow-hard-lg); }
+.card .ico { width: 56px; height: 56px; display: grid; place-items: center; border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-md); box-shadow: var(--shadow-hard-sm); }
+.card .ico svg { width: 28px; height: 28px; }
+.card h3 { margin: var(--space-2) 0 0; font: 900 var(--text-lg)/1.1 var(--font-display); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
+.card h3 small { display: block; margin-top: var(--space-1); font: 900 var(--text-sm)/1.4 var(--font-jp); letter-spacing: 0; text-transform: none; }
+.card p { margin: 0; font-size: var(--text-sm); color: var(--muted); }
+.card .more { margin-top: auto; padding-top: var(--space-2); font: 700 var(--text-sm)/1 var(--font-jp); display: inline-flex; align-items: center; gap: var(--space-1); }
+
+/* ---------- Chiffres + chips ---------- */
+.proof { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-8); align-items: start; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.stat { padding: var(--space-6) var(--space-4); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-md); box-shadow: var(--shadow-hard-sm); text-align: center; }
+.stat:nth-child(1) { background: var(--peri); rotate: -2deg; } .stat:nth-child(2) { background: var(--mint); rotate: 1.5deg; } .stat:nth-child(3) { background: var(--yellow); rotate: -1deg; }
+.stat b { display: block; font: 900 clamp(2rem, 4vw, 3rem)/1 var(--font-display); }
+.stat span { font: 700 var(--text-sm)/1.5 var(--font-jp); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.chip { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); background: var(--card); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); font: 700 var(--text-sm)/1 var(--font-jp); cursor: pointer; transition: background var(--dur-fast), translate var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); color: var(--ink); }
+.chip:hover { box-shadow: var(--shadow-hard-sm); translate: -1px -1px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.proof h3 { margin: 0 0 var(--space-4); font: 900 var(--text-xl)/1.4 var(--font-jp); }
+
+/* ---------- Contact ---------- */
+.cta { margin: 0 var(--space-8) var(--space-12); padding: var(--space-12); display: grid; grid-template-columns: 1fr auto; gap: var(--space-8); align-items: center; background: var(--yellow); border: var(--stroke) solid var(--ink); border-radius: var(--radius-lg); box-shadow: var(--shadow-hard-lg); position: relative; overflow: hidden; }
+.cta::after { content: ""; position: absolute; right: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: var(--pink); border: var(--stroke) solid var(--ink); }
+.cta h2 { margin: 0 0 var(--space-2); font: 900 var(--text-2xl)/1.3 var(--font-jp); }
+.cta p { margin: 0; font-weight: 700; }
+.form { position: relative; z-index: 1; display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.field { display: grid; gap: var(--space-1); }
+.field label { font: 700 var(--text-xs)/1.4 var(--font-jp); }
+.input { min-height: 52px; width: 260px; max-width: 100%; padding: 0 var(--space-4); background: var(--card); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); font: 500 var(--text-base) var(--font-jp); color: var(--ink); }
+.input:focus { outline: none; box-shadow: var(--shadow-hard-sm); }
+.form .btn { align-self: end; background: var(--card); }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding: var(--space-6) var(--space-8); border-top: var(--stroke) solid var(--ink); font: 700 var(--text-sm)/1.6 var(--font-jp); background: var(--card); }
+.foot nav { display: flex; gap: var(--space-4); }
+
+/* ---------- Mouvement ---------- */
+@keyframes bob { to { translate: 0 -10px; } }
+@keyframes tape { to { transform: translateX(-50%); } }
+@keyframes pop { from { opacity: 0; scale: 0.6; } }
+.pop { animation: pop var(--dur-slow) var(--ease-spring) both; }
+.pop:nth-child(2) { animation-delay: 80ms; } .pop:nth-child(3) { animation-delay: 160ms; } .pop:nth-child(4) { animation-delay: 240ms; } .pop:nth-child(5) { animation-delay: 320ms; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: var(--space-6) var(--space-6) var(--space-12); }
+  .visual { justify-self: center; max-width: 420px; }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .proof { grid-template-columns: 1fr; }
+  .cta { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .stage { padding: var(--space-12) var(--frame-gap) var(--space-8); }
+  .chrome { padding: var(--space-2) var(--space-4); }
+  .chrome span { display: none; }
+  .nav { padding: var(--space-3) var(--space-4); gap: var(--space-3); }
+  .nav ul { display: none; }
+  .logo { margin-right: auto; }
+  .lang span { display: none; }
+  .menu-btn { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--card); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-hard-sm); cursor: pointer; }
+  .menu-btn svg { width: 20px; height: 20px; }
+  .hero { padding: var(--space-4) var(--space-4) var(--space-12); }
+  .hero h1 { font-size: clamp(2.6rem, 13vw, 3.6rem); }
+  .actions .btn { flex: 1 1 100%; }
+  .section { padding: var(--space-16) var(--space-4) var(--space-12); }
+  .cards { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: var(--space-2); }
+  .stat { padding: var(--space-4) var(--space-2); }
+  .cta { margin: 0 var(--space-4) var(--space-8); padding: var(--space-8) var(--space-6); }
+  .input { width: 100%; }
+  .cta::after { width: 96px; height: 96px; right: -36px; top: -36px; }
+  .field, .form .btn { flex: 1 1 100%; }
+  .foot { padding: var(--space-6) var(--space-4); }
+  .tag { font-size: var(--text-sm); }
+  .tile--chart { width: 60px; height: 60px; } .tile--eye { width: 52px; height: 52px; }
+  .f-half, .f-blob { width: 56px; } .f-half { height: 28px; } .f-blob { height: 56px; }
+  .f-star { left: 70%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  .btn:hover, .card:hover { translate: none; rotate: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M7 15l4-4 3 3 6-7"/><path d="M16 7h4v4"/></g></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3.2" fill="currentColor"/></g></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1L19 8l-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></g></symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></g></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="stage">
+  <!-- Autocollants flottants autour du cadre (décor) -->
+  <span class="float sticker f-half" aria-hidden="true"></span>
+  <span class="float sticker f-sq" aria-hidden="true"></span>
+  <span class="float sticker f-blob" aria-hidden="true"></span>
+  <span class="float sticker f-half2" aria-hidden="true"></span>
+  <span class="float f-star" aria-hidden="true"></span>
+
+  <div class="frame">
+    <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>arata-mio.design / ja</span></div>
+
+    <header class="nav">
+      <a class="logo" href="#"><b aria-hidden="true"></b>ARATA MIO</a>
+      <nav aria-label="メインメニュー"><ul>
+        <li><a href="#services">サービス</a></li>
+        <li><a href="#works">実績</a></li>
+        <li><a href="#about">プロフィール</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul></nav>
+      <button class="lang" aria-label="言語を切り替える（現在：日本語）"><span>日本語</span>JA</button>
+      <button class="menu-btn" aria-label="メニューを開く"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__text">
+          <p class="hello">こんにちは！デザイナーの荒田ミオです</p>
+          <h1 id="hero-title">Loud <span class="hl">Brand</span><br>Design</h1>
+          <h2>売れるブランドを、<br>いちばん目立つ形で。</h2>
+          <p class="lead">スタートアップや小さなお店のために、ロゴ・ウェブサイト・SNSのビジュアルをまとめてデザインします。打ち合わせは日本語・英語どちらでも大丈夫です。</p>
+          <div class="actions">
+            <a class="btn btn--primary" href="#contact">無料で相談する<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="#works">実績を見る</a>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="hex-wrap pop"><div class="hex" data-slot="portrait" role="img" aria-label="デザイナーの白黒ポートレート（差し替え用の枠）">
+            <div class="person" aria-hidden="true"><span class="hair"></span><span class="neck"></span><span class="body"></span><span class="face"></span><span class="fringe"></span></div>
+          </div></div>
+          <p class="kana pop" aria-hidden="true">ブランド</p>
+          <span class="tag tag--name pop">ミオです！</span>
+          <span class="tile tile--chart pop" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>
+          <span class="tile tile--eye pop" aria-hidden="true"><svg><use href="#i-eye"/></svg></span>
+          <span class="tag tag--open pop"><svg aria-hidden="true"><use href="#i-check"/></svg>新規ご依頼 受付中</span>
+        </div>
+      </section>
+
+      <div class="tape" aria-hidden="true"><div class="tape__track">
+        <span>Branding</span><span>UI Design</span><span>ロゴ制作</span><span>Landing Page</span><span>SNS</span><span>Growth</span>
+        <span>Branding</span><span>UI Design</span><span>ロゴ制作</span><span>Landing Page</span><span>SNS</span><span>Growth</span>
+      </div></div>
+
+      <section class="section" id="services" aria-labelledby="svc-title">
+        <div class="sec-head">
+          <span class="kicker">Services</span>
+          <h2 id="svc-title">できること</h2>
+          <p>ひとりのデザイナーが、最初のロゴから公開後の改善まで伴走します。</p>
+        </div>
+        <div class="cards">
+          <a class="card" href="#contact"><span class="ico" style="background:var(--peri)"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Branding<small>ロゴ・ブランド設計</small></h3><p>名前の響きから色・書体まで、覚えてもらえる顔をつくります。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="#contact"><span class="ico" style="background:var(--yellow)"><svg aria-hidden="true"><use href="#i-layout"/></svg></span><h3>Web Design<small>ウェブサイト制作</small></h3><p>スマホで読みやすく、問い合わせにつながる構成で設計します。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="#contact"><span class="ico" style="background:var(--teal)"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Growth<small>改善・分析</small></h3><p>公開して終わりにしない。数字を見ながら毎月すこしずつ育てます。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="#contact"><span class="ico" style="background:var(--pink)"><svg aria-hidden="true"><use href="#i-spark"/></svg></span><h3>Social<small>SNSビジュアル</small></h3><p>投稿テンプレートとバナーを、ブランドの声に合わせて揃えます。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        </div>
+      </section>
+
+      <section class="section" id="works" aria-labelledby="works-title" style="padding-top:0">
+        <div class="proof">
+          <div>
+            <span class="kicker">Numbers</span>
+            <h3 id="works-title">これまでの実績</h3>
+            <div class="stats">
+              <div class="stat"><b>120+</b><span>プロジェクト</span></div>
+              <div class="stat"><b>8年</b><span>デザイン歴</span></div>
+              <div class="stat"><b>×2.4</b><span>平均CV改善</span></div>
+            </div>
+          </div>
+          <div>
+            <span class="kicker">Topics</span>
+            <h3>相談したいことは？</h3>
+            <ul class="chips" aria-label="相談内容を選ぶ">
+              <li><button class="chip" aria-pressed="true">ロゴ</button></li>
+              <li><button class="chip" aria-pressed="false">ウェブサイト</button></li>
+              <li><button class="chip" aria-pressed="false">名刺・印刷物</button></li>
+              <li><button class="chip" aria-pressed="false">SNS</button></li>
+              <li><button class="chip" aria-pressed="false">まだ決めていない</button></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="contact" aria-labelledby="cta-title">
+        <div style="position:relative;z-index:1">
+          <h2 id="cta-title">まずは気軽に<br>お話ししましょう。</h2>
+          <p>30分のオンライン相談は無料です。2営業日以内にお返事します。</p>
+        </div>
+        <form class="form" onsubmit="event.preventDefault()">
+          <div class="field"><label for="mail">メールアドレス</label><input class="input" id="mail" type="email" placeholder="you@example.jp" autocomplete="email"></div>
+          <button class="btn" type="submit">送信する<svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="foot" id="about">
+      <span>© 荒田ミオ（架空の人物）— Kōbō デモ</span>
+      <nav aria-label="フッター"><a href="#">Instagram</a><a href="#">note</a><a href="#">English</a></nav>
+    </footer>
+  </div>
+</div>
+<script>
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') !== 'true')));
+document.querySelector('.lang').addEventListener('click', e => { const b = e.currentTarget; const ja = b.lastChild.textContent === 'JA'; b.lastChild.textContent = ja ? 'EN' : 'JA'; b.firstElementChild.textContent = ja ? 'English' : '日本語'; });
+</script>
+</body>
+</html>
