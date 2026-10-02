@@ -122,6 +122,8 @@ plugins/kobo-design/skills/<style>/
 
 ### Ajouter un nouveau style à partir d'un site
 
+> Guide complet, avec les règles et des demandes prêtes à copier : [CREER-UN-SKILL.md](CREER-UN-SKILL.md).
+
 Dans Claude Code :
 
 ```

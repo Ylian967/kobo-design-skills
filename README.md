@@ -41,13 +41,15 @@ Claude ne charge `references/` que lorsqu'il en a besoin : le skill reste léger
 
 ## Ajouter un style
 
+**Guide pas à pas : [CREER-UN-SKILL.md](CREER-UN-SKILL.md)** (créer un style ou n'importe quel skill avec Claude, demandes prêtes à copier).
+
 La méthode complète est dans le skill [`site-to-skill`](plugins/kobo-design/skills/site-to-skill/SKILL.md) (utilisable aussi depuis Claude Code : `/kobo-design:site-to-skill https://…`).
 
 En bref :
 
 1. Mesurer le site avec `plugins/kobo-design/skills/site-to-skill/scripts/extract-design.js` (console du navigateur).
 2. Copier `templates/skill/` vers `plugins/kobo-design/skills/<style>/` et remplir.
-3. Construire `examples/demo.html` à partir du skill seul, la comparer au site.
+3. Construire `examples/demo.html` à partir du skill seul, avec de vraies images (et la 3D si le style en a), la comparer au site.
 4. Vérifier : `python3 tools/check.py <style>`
 5. Mettre à jour la galerie : `python3 tools/build_gallery.py`
 
