@@ -66,12 +66,17 @@ svg { display: block; }
 .socials a:hover { color: var(--accent); border-color: var(--accent); }
 .socials svg { width: 16px; height: 16px; }
 
-/* Mannequin dessiné (emplacement photo) */
-.model { position: relative; align-self: stretch; display: grid; place-items: end center; min-height: 520px; }
+/* Photos (vraies images, voir references/assets.md) : sombres, désaturées, accent orange */
+.shot { position: relative; overflow: hidden; isolation: isolate; background: radial-gradient(circle at 50% 45%, var(--panel-2), var(--bg) 75%); }
+.shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; filter: grayscale(1) contrast(1.15) brightness(.78); }
+.shot::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, var(--accent-glow), transparent 45%), radial-gradient(circle at 85% 15%, var(--accent-glow), transparent 40%); mix-blend-mode: screen; }
+
+/* Mannequin (photo) */
+.model { position: relative; align-self: stretch; min-height: 520px; }
 .model::before { content: ""; position: absolute; left: 50%; top: 42%; width: 120%; aspect-ratio: 1; translate: -50% -50%; background: radial-gradient(circle, var(--accent-glow), transparent 62%); }
-.model::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: 0; height: 18px; border-radius: 50%; background: radial-gradient(ellipse, var(--bg), transparent 70%); }
-.model svg { position: relative; width: min(100%, 340px); height: auto; z-index: 1; }
-.model .c-coat { fill: var(--panel-2); stroke: var(--line-strong); stroke-width: 1; } .model .c-pant { fill: var(--line); } .model .c-dark { fill: var(--bg); } .model .c-mid { fill: var(--line-strong); } .model .c-acc { fill: var(--accent); } .model .c-line { fill: none; stroke: var(--line-strong); stroke-width: 1.5; } .model .c-accline { fill: none; stroke: var(--accent); stroke-width: 2; }
+.model .shot { position: absolute; inset: 0; background: transparent; -webkit-mask-image: radial-gradient(ellipse 62% 72% at 50% 46%, black 55%, transparent 100%); mask-image: radial-gradient(ellipse 62% 72% at 50% 46%, black 55%, transparent 100%); }
+.model .shot img { object-position: 50% 20%; transition: filter var(--dur) var(--ease); }
+.model.is-flat .shot::after { opacity: 0; }
 .vertical { position: absolute; right: 2%; top: 6%; z-index: 2; writing-mode: vertical-rl; font: 400 var(--text-sm)/1 var(--font-display); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
 .vertical b { font-weight: 400; color: var(--accent); }
 .scan { position: absolute; left: 10%; right: 10%; top: 10%; height: 1px; z-index: 2; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: .7; animation: scan var(--dur-scan) var(--ease) infinite alternate; }
@@ -80,8 +85,7 @@ svg { display: block; }
 .side { display: grid; gap: var(--space-4); z-index: 2; }
 .panel { border: var(--border); border-radius: var(--radius-panel); background: var(--panel-glass); -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur)); box-shadow: var(--shadow-panel); padding: var(--space-5); }
 .product { display: grid; grid-template-columns: 96px 1fr; gap: var(--space-4); }
-.thumb { aspect-ratio: 1; border-radius: var(--radius); background: radial-gradient(circle at 50% 60%, var(--panel-2), var(--bg)); border: 1px solid var(--line); display: grid; place-items: center; }
-.thumb svg { width: 82%; }
+.thumb { aspect-ratio: 1; border-radius: var(--radius); border: 1px solid var(--line); }
 .product h3 { margin: 0 0 var(--space-2); color: var(--accent); }
 .product p { margin: 0; color: var(--muted); font-size: var(--text-xs); line-height: 1.55; }
 .product .btn { grid-column: 1 / -1; }
@@ -131,17 +135,16 @@ svg { display: block; }
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4); list-style: none; margin: 0; padding: 0; }
 .card a { display: block; height: 100%; text-decoration: none; background: var(--panel); border: 1px solid var(--line); clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%); transition: background var(--dur) var(--ease), border-color var(--dur); }
 .card a:hover { background: var(--panel-2); border-color: var(--line-strong); }
-.card .pic { position: relative; aspect-ratio: 4 / 5; display: grid; place-items: center; background: radial-gradient(circle at 50% 55%, var(--panel-2), var(--panel) 70%); border-bottom: 1px solid var(--line); overflow: hidden; }
-.card .pic svg { width: 64%; transition: transform var(--dur-slow) var(--ease); }
-.card a:hover .pic svg { transform: scale(1.05) rotate(-2deg); }
-.card .pic::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 0 calc(50% - 1px), var(--accent) calc(50% - 1px) 50%, transparent 50%) 0 -100% / 100% 200% no-repeat; opacity: 0; }
-.card a:hover .pic::after { opacity: .5; animation: sweep 900ms var(--ease) both; }
-.card .tag { position: absolute; left: var(--space-3); top: var(--space-3); color: var(--accent); }
+.card .pic { aspect-ratio: 4 / 5; border-bottom: 1px solid var(--line); }
+.card .pic img { transition: transform var(--dur-slow) var(--ease), filter var(--dur) var(--ease); }
+.card a:hover .pic img { transform: scale(1.07) rotate(-1deg); filter: grayscale(.6) contrast(1.15) brightness(.85); }
+.card .pic .sweep { position: absolute; inset: 0; z-index: 2; background: linear-gradient(transparent 0 calc(50% - 1px), var(--accent) calc(50% - 1px) 50%, transparent 50%) 0 -100% / 100% 200% no-repeat; opacity: 0; }
+.card a:hover .pic .sweep { opacity: .5; animation: sweep 900ms var(--ease) both; }
+.card .tag { position: absolute; z-index: 3; left: var(--space-3); top: var(--space-3); padding: 4px 6px; background: var(--scrim); color: var(--accent); }
 .card .body { padding: var(--space-4); }
 .card h3 { margin: 0 0 var(--space-2); font: 400 var(--text-sm)/1.3 var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; }
 .card .meta { display: flex; justify-content: space-between; color: var(--muted); font: 400 var(--text-xs)/1 var(--font-mono); }
 .card .meta b { color: var(--text); font-weight: 500; }
-.svg-line { fill: none; stroke: var(--line-strong); stroke-width: 1.5; } .svg-fill { fill: var(--line); stroke: var(--line-strong); stroke-width: 1; } .svg-dark { fill: var(--bg); } .svg-acc { fill: var(--accent); } .svg-accline { fill: none; stroke: var(--accent); stroke-width: 1.5; }
 
 /* Bandeau */
 .ticker { overflow: hidden; border-block: 1px solid var(--line); padding: var(--space-4) 0; }
@@ -182,7 +185,6 @@ footer.site { padding: var(--space-16) 0 var(--space-8); }
   .hero .wrap { grid-template-columns: 1fr; padding-top: var(--space-8); gap: var(--space-4); }
   .intro { order: 1; }
   .model { order: 2; min-height: 380px; margin-top: calc(-1 * var(--space-8)); }
-  .model svg { width: 250px; }
   .side { order: 3; grid-template-columns: 1fr; }
   .socials { margin-top: var(--space-4); }
   .foot { grid-template-columns: 1fr 1fr; } .foot > div:first-child { grid-column: 1 / -1; }
@@ -228,35 +230,17 @@ footer.site { padding: var(--space-16) 0 var(--space-8); }
         </ul>
       </div>
 
-      <div class="model" data-slot="model-photo" role="img" aria-label="Mannequin en veste technique à capuche, masque à visière orange (emplacement photo)">
+      <div class="model">
+        <div class="shot" data-slot="model-photo">
+          <img src="https://images.unsplash.com/photo-1535732278552-5a8a57552b63?auto=format&fit=crop&w=900&h=1200&q=80" alt="Homme en long manteau noir debout devant un mur gris, photo en noir et blanc" width="900" height="1200" fetchpriority="high" decoding="async">
+        </div>
         <span class="vertical" aria-hidden="true">Techwear <b>26</b></span>
         <span class="scan" aria-hidden="true"></span>
-        <svg viewBox="0 0 200 420" aria-hidden="true">
-          <!-- jambes / pantalon cargo -->
-          <path class="c-pant" d="M66 250h34l-2 140H72z"/><path class="c-pant" d="M100 250h34l-6 140h-26z"/>
-          <path class="c-line" d="M70 300h26M104 300h26"/><rect class="c-mid" x="62" y="290" width="12" height="30" rx="2"/><rect class="c-mid" x="128" y="290" width="12" height="30" rx="2"/>
-          <!-- bottes -->
-          <path class="c-mid" d="M66 386h34v18H58q0-14 8-18z"/><path class="c-mid" d="M102 386h30q8 4 8 18h-38z"/><rect class="c-acc" x="58" y="402" width="42" height="4"/><rect class="c-acc" x="102" y="402" width="38" height="4"/>
-          <!-- manteau long -->
-          <path class="c-coat" d="M58 96q42-14 84 0l14 70-4 120-22 6-4-90-4 94H74l-4-94-4 90-22-6-4-120z"/>
-          <path class="c-line" d="M100 92v200M80 130l20 22 20-22"/>
-          <!-- bras -->
-          <path class="c-coat" d="M58 98l-18 20-8 110 16 4 12-96z"/><path class="c-coat" d="M142 98l18 20 8 110-16 4-12-96z"/>
-          <rect class="c-dark" x="30" y="226" width="18" height="16" rx="3"/><rect class="c-dark" x="152" y="226" width="18" height="16" rx="3"/>
-          <!-- sangles -->
-          <path class="c-accline" d="M62 104l78 92"/><rect class="c-acc" x="92" y="146" width="16" height="8" rx="1"/>
-          <rect class="c-dark" x="112" y="180" width="30" height="40" rx="3"/><path class="c-line" d="M112 192h30"/>
-          <!-- capuche et masque -->
-          <path class="c-coat" d="M66 70q0-50 34-52 34 2 34 52l-6 30H72z"/>
-          <path class="c-dark" d="M78 56q22-12 44 0v34q-22 10-44 0z"/>
-          <rect class="c-acc" x="80" y="62" width="40" height="5" rx="2.5"/>
-          <path class="c-line" d="M84 78h32M86 84h28"/>
-        </svg>
       </div>
 
       <div class="side">
         <article class="panel product">
-          <div class="thumb" data-slot="product-thumb"><svg viewBox="0 0 120 60" aria-hidden="true"><path class="svg-fill" d="M8 40q2-18 18-22l20-6 10 10q20 2 34 8 22 4 22 16v6H8z"/><path class="svg-line" d="M30 24l6 10M40 20l6 10M50 18l6 10"/><rect class="svg-acc" x="8" y="48" width="104" height="5"/><path class="svg-dark" d="M8 53h104v3H8z"/></svg></div>
+          <div class="thumb shot" data-slot="product-thumb"><img src="https://images.unsplash.com/photo-1542357091-d4cd9ad6ba02?auto=format&fit=crop&w=200&h=200&q=80" alt="Pieds de deux skateurs en baskets sur leurs planches" width="200" height="200" decoding="async"></div>
           <div><h3 class="label">NX-01 Sneaker</h3><p>Semelle crantée à mousse double densité, tige en maille balistique, laçage rapide à une main.</p></div>
           <a class="btn btn--outline" href="#">Voir le film produit <span class="ne" aria-hidden="true">↗</span></a>
         </article>
@@ -291,18 +275,14 @@ footer.site { padding: var(--space-16) 0 var(--space-8); }
         <span class="label count">12 pièces</span>
       </div>
       <ul class="grid">
-        <li class="card"><a href="#"><div class="pic" data-slot="product-jacket"><span class="label tag">NX-02 / Veste</span>
-          <svg viewBox="0 0 120 130" aria-hidden="true"><path class="svg-fill" d="M38 14q22-10 44 0l26 18-6 50-14-4v48H32V78l-14 4-6-50z"/><path class="svg-dark" d="M44 6q16-6 32 0l-4 18H48z"/><path class="svg-line" d="M60 24v104M36 60h18M66 60h18"/><path class="svg-accline" d="M38 14l44 70"/></svg></div>
+        <li class="card"><a href="#"><div class="pic shot" data-slot="product-jacket"><img src="https://images.unsplash.com/photo-1535732176766-a9a9513547e5?auto=format&fit=crop&w=800&h=1000&q=80" alt="Homme vu de dos portant une veste technique sombre" width="800" height="1000" loading="lazy" decoding="async"><span class="sweep" aria-hidden="true"></span><span class="label tag">NX-02 / Veste</span></div>
           <div class="body"><h3>Coque Phantom</h3><div class="meta"><span>3 couches</span><b>420 €</b></div></div></a></li>
-        <li class="card"><a href="#"><div class="pic" data-slot="product-pants"><span class="label tag">NX-04 / Bas</span>
-          <svg viewBox="0 0 120 140" aria-hidden="true"><path class="svg-fill" d="M30 6h60l6 128H68L60 50l-8 84H24z"/><rect class="svg-dark" x="30" y="6" width="60" height="10"/><rect class="svg-dark" x="18" y="58" width="16" height="26" rx="2"/><rect class="svg-dark" x="86" y="58" width="16" height="26" rx="2"/><path class="svg-accline" d="M26 120h30M66 120h30"/></svg></div>
+        <li class="card"><a href="#"><div class="pic shot" data-slot="product-pants"><img src="https://images.unsplash.com/photo-1590411914259-ab083f58d04b?auto=format&fit=crop&w=800&h=1000&q=80" alt="Pantalon cargo et veste portés sur des rails" width="800" height="1000" loading="lazy" decoding="async"><span class="sweep" aria-hidden="true"></span><span class="label tag">NX-04 / Bas</span></div>
           <div class="body"><h3>Cargo Nightfall</h3><div class="meta"><span>Ripstop</span><b>260 €</b></div></div></a></li>
-        <li class="card"><a href="#"><div class="pic" data-slot="product-bag"><span class="label tag">NX-03 / Accessoires</span>
-          <svg viewBox="0 0 120 120" aria-hidden="true"><path class="svg-accline" d="M20 10l80 60"/><rect class="svg-fill" x="28" y="44" width="68" height="52" rx="10"/><rect class="svg-dark" x="38" y="56" width="48" height="14" rx="3"/><path class="svg-line" d="M28 80h68"/><rect class="svg-acc" x="56" y="84" width="12" height="6" rx="1"/></svg></div>
-          <div class="body"><h3>Sling Relais</h3><div class="meta"><span>6 L</span><b>140 €</b></div></div></a></li>
-        <li class="card"><a href="#"><div class="pic" data-slot="product-mask"><span class="label tag">NX-05 / Accessoires</span>
-          <svg viewBox="0 0 120 100" aria-hidden="true"><path class="svg-fill" d="M14 30q46-30 92 0l-6 40q-40 22-80 0z"/><rect class="svg-acc" x="24" y="38" width="72" height="6" rx="3"/><path class="svg-line" d="M30 56h60M34 64h52"/><circle class="svg-dark" cx="60" cy="74" r="8"/></svg></div>
-          <div class="body"><h3>Masque Signal</h3><div class="meta"><span>Filtre N95</span><b>85 €</b></div></div></a></li>
+        <li class="card"><a href="#"><div class="pic shot" data-slot="product-hoodie"><img src="https://images.unsplash.com/photo-1673092147872-5ddb03194341?auto=format&fit=crop&w=800&h=1000&q=80" alt="Homme en hoodie noir adossé à un mur de briques" width="800" height="1000" loading="lazy" decoding="async"><span class="sweep" aria-hidden="true"></span><span class="label tag">NX-03 / Hauts</span></div>
+          <div class="body"><h3>Hoodie Relais</h3><div class="meta"><span>Molleton lourd</span><b>140 €</b></div></div></a></li>
+        <li class="card"><a href="#"><div class="pic shot" data-slot="product-helmet"><img src="https://images.unsplash.com/photo-1627530980937-b8721b91506a?auto=format&fit=crop&w=800&h=1000&q=80" alt="Casque intégral blanc à visière irisée" width="800" height="1000" loading="lazy" decoding="async"><span class="sweep" aria-hidden="true"></span><span class="label tag">NX-05 / Accessoires</span></div>
+          <div class="body"><h3>Casque Signal</h3><div class="meta"><span>Visière irisée</span><b>385 €</b></div></div></a></li>
       </ul>
     </div>
   </section>
@@ -315,7 +295,7 @@ footer.site { padding: var(--space-16) 0 var(--space-8); }
       <div><h4 class="label">Boutique</h4><ul><li><a href="#">Vestes</a></li><li><a href="#">Bas</a></li><li><a href="#">Accessoires</a></li></ul></div>
       <div><h4 class="label">Unité</h4><ul><li><a href="#">Labo</a></li><li><a href="#">Garantie</a></li><li><a href="#">Contact</a></li></ul></div>
     </div>
-    <div class="legal label"><span>© 2026 Noctunit</span><span>Paris — 48.85° N</span></div>
+    <div class="legal label"><span>© 2026 Noctunit · Photos : Unsplash</span><span>Paris — 48.85° N</span></div>
   </div>
 </footer>
 
@@ -323,7 +303,7 @@ footer.site { padding: var(--space-16) 0 var(--space-8); }
 (() => {
   document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => t.parentElement.querySelectorAll('.tab').forEach(o => o.setAttribute('aria-selected', o === t))));
   const sw = document.querySelector('.toggle');
-  sw.addEventListener('click', () => { const on = sw.getAttribute('aria-checked') !== 'true'; sw.setAttribute('aria-checked', on); sw.previousElementSibling.textContent = on ? 'Profondeur on' : 'Profondeur off'; document.querySelector('.model').style.filter = on ? '' : 'grayscale(1)'; });
+  sw.addEventListener('click', () => { const on = sw.getAttribute('aria-checked') !== 'true'; sw.setAttribute('aria-checked', on); sw.previousElementSibling.textContent = on ? 'Profondeur on' : 'Profondeur off'; document.querySelector('.model').classList.toggle('is-flat', !on); });
 })();
 </script>
 </body>

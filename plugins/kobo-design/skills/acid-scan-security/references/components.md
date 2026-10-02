@@ -49,7 +49,7 @@ Huit dégradés d'une couleur en `background` (aucun élément en plus). Variabl
 ## Photo duotone tramée (signature, 1/3)
 
 - Conteneur `data-slot`, `role="img"` + `aria-label`.
-- Image : convertie en luminance, puis répartie sur la rampe `--bg, --deep, --mid, --acid, --text` avec un **tramage ordonné** (matrice de Bayer 4×4). En maquette, la démo dessine un portrait en canvas à 1 pixel = `--dot-size` et l'agrandit avec `image-rendering: pixelated`.
+- Image : convertie en luminance, puis répartie sur la rampe `--bg, --deep, --mid, --acid, --text` avec un **tramage ordonné** (matrice de Bayer 4×4). La source est une **image réelle, voir `assets.md`** : la démo lit la photo dans un canvas (1 pixel = `--dot-size`, agrandi avec `image-rendering: pixelated`), jamais un visage dessiné.
 - Par-dessus : une **trame de points** (le noir entre les pixels) et des **lignes de balayage** ; dégradés sombres en haut et en bas pour la lisibilité du texte.
 
 ```css
@@ -60,7 +60,7 @@ Huit dégradés d'une couleur en `background` (aucun élément en plus). Variabl
   background: repeating-linear-gradient(180deg, transparent 0 calc(var(--scanline) - 1px), color-mix(in srgb, var(--bg) 35%, transparent) calc(var(--scanline) - 1px) var(--scanline)); }
 ```
 
-Avec une vraie photo, faire le traitement une fois côté serveur (ou en CSS : `filter: grayscale(1) contrast(1.4)` + calque `--mid` en `mix-blend-mode: multiply` + calque `--acid` en `screen`), puis ajouter la trame.
+En production, le traitement peut aussi se faire une fois côté serveur (image déjà tramée). Repli CSS si le canvas échoue (photo sans CORS, script coupé) : `filter: grayscale(1) contrast(1.4)` sur la photo + calque `--acid` en `mix-blend-mode: multiply`, puis la trame de points par-dessus (voir `assets.md` § 3).
 
 ## Bande et cadre de scan (signature, 2/3)
 

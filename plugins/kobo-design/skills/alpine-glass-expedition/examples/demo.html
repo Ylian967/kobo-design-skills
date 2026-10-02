@@ -76,16 +76,11 @@ a { color: inherit; }
 
 /* ---------- Héros ---------- */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; color: var(--white); isolation: isolate; display: flex; flex-direction: column; background: var(--deep); }
-.land { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
-.land .s-sky1 { stop-color: var(--steel); } .land .s-sky2 { stop-color: var(--ice); } .land .s-sky3 { stop-color: var(--fog); }
-.land .s-white { stop-color: var(--white); } .land .s-ice { stop-color: var(--ice); } .land .s-steel { stop-color: var(--steel); } .land .s-slate { stop-color: var(--slate); } .land .s-deep { stop-color: var(--deep); } .land .s-night { stop-color: var(--night); }
-.land .far { fill: var(--ice); opacity: .75; }
-.land .shadow { fill: var(--slate); opacity: .5; }
-.land .snow { fill: var(--white); }
-.land .snow-soft { fill: var(--fog); opacity: .85; }
-.land .gully { fill: none; stroke: var(--white); stroke-width: 2; stroke-linecap: round; opacity: .55; }
-.land .mist { fill: var(--white); }
-.land .pine { fill: var(--night); }
+/* Photo de montagne réelle, refroidie : désaturée + teinte bleue en mode « color » + brume qui dérive */
+.land { position: absolute; inset: 0; z-index: -2; margin: 0; overflow: hidden; background: linear-gradient(180deg, var(--slate), var(--steel) 40%, var(--ice) 70%, var(--deep)); /* repli */ }
+.land img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: saturate(0.55) contrast(1.05) brightness(0.95); color: transparent; }
+.land::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--steel), var(--deep)); mix-blend-mode: color; opacity: 0.4; pointer-events: none; }
+.mist { position: absolute; inset: 40% -10% 10%; z-index: -1; pointer-events: none; background: radial-gradient(50% 30% at 30% 40%, color-mix(in srgb, var(--white) 30%, transparent), transparent 70%), radial-gradient(55% 25% at 75% 70%, color-mix(in srgb, var(--fog) 35%, transparent), transparent 70%); filter: blur(12px); }
 .drift { animation: drift var(--dur-drift) var(--ease-in-out) infinite alternate; }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--vignette); pointer-events: none; }
 
@@ -129,18 +124,10 @@ a { color: inherit; }
 .trips { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: var(--space-6); }
 .trip { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 520px; padding: var(--space-3); border-radius: var(--radius-card); overflow: hidden; color: var(--white); text-decoration: none; isolation: isolate; box-shadow: var(--shadow-soft); }
 .trip[hidden] { display: none; }
-.scene { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--c1) 0%, var(--c2) 52%, var(--c3) 100%); transition: transform var(--dur-slow) var(--ease); }
+.scene { position: absolute; inset: 0; z-index: -1; margin: 0; background: linear-gradient(180deg, var(--ice), var(--steel) 52%, var(--slate)); /* repli */ transition: transform var(--dur-slow) var(--ease); }
 .trip:hover .scene { transform: scale(1.05); }
-.scene i { position: absolute; left: -5%; right: -5%; }
-.scene .p1 { top: 24%; bottom: 0; background: linear-gradient(180deg, var(--white) 0 9%, var(--c4) 22%, var(--c5)); clip-path: polygon(0 52%, 22% 30%, 34% 38%, 52% 4%, 66% 26%, 78% 18%, 100% 46%, 100% 100%, 0 100%); }
-.scene .p2 { top: 48%; bottom: 0; background: linear-gradient(180deg, var(--c5), var(--night)); clip-path: polygon(0 34%, 16% 20%, 30% 34%, 46% 14%, 62% 30%, 80% 10%, 100% 28%, 100% 100%, 0 100%); }
-.scene .mist { top: 46%; height: 18%; background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--white) 75%, transparent), transparent 70%); filter: blur(6px); }
-.scene .lake { top: 74%; bottom: 0; background: linear-gradient(180deg, var(--ice), var(--slate) 60%, var(--deep)); clip-path: polygon(0 18%, 100% 4%, 100% 100%, 0 100%); opacity: .9; }
-.scene .lake::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 7px, color-mix(in srgb, var(--white) 18%, transparent) 7px 8px); }
-.scene .trees { top: 58%; bottom: 0; background: linear-gradient(180deg, var(--deep), var(--night)); clip-path: polygon(0 100%, 0.00% 46%, 2.08% 18%, 4.17% 46%, 6.25% 4%, 8.33% 46%, 10.42% 26%, 12.50% 46%, 14.58% 10%, 16.67% 46%, 18.75% 0%, 20.83% 46%, 22.92% 22%, 25.00% 46%, 27.08% 12%, 29.17% 46%, 31.25% 30%, 33.33% 46%, 35.42% 6%, 37.50% 46%, 39.58% 16%, 41.67% 46%, 43.75% 18%, 45.83% 46%, 47.92% 4%, 50.00% 46%, 52.08% 26%, 54.17% 46%, 56.25% 10%, 58.33% 46%, 60.42% 0%, 62.50% 46%, 64.58% 22%, 66.67% 46%, 68.75% 12%, 70.83% 46%, 72.92% 30%, 75.00% 46%, 77.08% 6%, 79.17% 46%, 81.25% 16%, 83.33% 46%, 85.42% 18%, 87.50% 46%, 89.58% 4%, 91.67% 46%, 93.75% 26%, 95.83% 46%, 97.92% 10%, 100% 46%, 100% 100%); }
-.trip--a { --c1: var(--ice); --c2: var(--fog); --c3: var(--steel); --c4: var(--ice); --c5: var(--slate); }
-.trip--b { --c1: var(--steel); --c2: var(--ice); --c3: var(--slate); --c4: var(--steel); --c5: var(--deep); }
-.trip--c { --c1: var(--slate); --c2: var(--steel); --c3: var(--deep); --c4: var(--ice); --c5: var(--slate); }
+.scene img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.55) contrast(1.05); color: transparent; }
+.scene::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--steel), var(--deep)); mix-blend-mode: color; opacity: 0.35; }
 .trip::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--night) 55%, transparent)); }
 .trip-top { position: absolute; top: var(--space-4); left: var(--space-4); right: var(--space-4); display: flex; justify-content: space-between; align-items: center; }
 .trip-top .chip { background: color-mix(in srgb, var(--night) 38%, transparent); border-color: var(--glass-border); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); min-height: 32px; }
@@ -176,7 +163,8 @@ a { color: inherit; }
 .quote blockquote { max-width: 24ch; margin: var(--space-6) auto var(--space-8); font: 400 clamp(1.9rem, 3.6vw, 3.25rem)/1.08 var(--font-display); }
 .quote blockquote em { color: var(--slate); }
 .who { display: inline-flex; align-items: center; gap: var(--space-3); text-align: left; }
-.avatar { width: 48px; height: 48px; border-radius: 50%; background: radial-gradient(circle at 50% 38%, var(--fog) 0 22%, transparent 23%), radial-gradient(ellipse at 50% 100%, var(--fog) 0 45%, transparent 46%), linear-gradient(160deg, var(--steel), var(--deep)); border: 2px solid var(--white); }
+.avatar { flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: var(--steel); border: 2px solid var(--white); }
+.avatar img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.55); color: transparent; }
 .who b { display: block; font-weight: 600; }
 .who span { color: var(--muted); font-size: var(--text-sm); }
 
@@ -184,6 +172,7 @@ a { color: inherit; }
 .final { position: relative; background: var(--night); color: var(--white); padding-top: var(--space-24); overflow: hidden; }
 .final .crest { position: absolute; inset: 0 0 auto; width: 100%; height: 90px; }
 .final .crest path { fill: var(--fog); }
+.final-grid > * { min-width: 0; }
 .final-grid { position: relative; display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-12); align-items: end; padding-top: var(--space-12); }
 .final h2 { font-size: clamp(2.6rem, 6vw, 5.5rem); }
 .final p { color: var(--ice); max-width: 40ch; margin: var(--space-6) 0 0; font-size: var(--text-sm); }
@@ -209,7 +198,7 @@ a { color: inherit; }
 @keyframes up { from { opacity: 0; transform: translateY(24px); } }
 @keyframes zoom-out { from { transform: scale(1.08); } }
 @media (prefers-reduced-motion: no-preference) {
-  .land { animation: zoom-out 2.4s var(--ease) both; }
+  .land img { animation: zoom-out 2.4s var(--ease) both; }
   .hero h1 span, .hero-text, .kicker { animation: up var(--dur-slow) var(--ease) both; }
   .kicker { animation-delay: 100ms; } .hero h1 span:first-child { animation-delay: 200ms; } .hero h1 span:last-child { animation-delay: 320ms; } .hero-text { animation-delay: 480ms; }
   .hero .glass-btn, .hero-foot { animation: up var(--dur-slow) var(--ease) 700ms both; }
@@ -236,7 +225,7 @@ a { color: inherit; }
   .nav .menu-btn { display: inline-flex; justify-self: end; }
   .nav.is-open .links { display: flex; flex-direction: column; gap: 0; position: absolute; top: calc(100% - 8px); left: var(--edge); right: var(--edge); padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-panel); background: color-mix(in srgb, var(--night) 72%, transparent); border: 1px solid var(--glass-border); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur)); }
-  .land { left: -100%; width: 200%; }  /* recadrage portrait : garder le sommet dans l'écran */
+  .land img { object-position: 55% 30%; }  /* recadrage portrait : garder les sommets dans l'écran */
   .hero-main { padding-top: 4vh; }
   .hero h1 { font-size: 3.15rem; }
   .hero .glass-btn { --glass-btn: 96px; right: var(--edge); top: auto; bottom: 236px; }
@@ -253,33 +242,8 @@ a { color: inherit; }
 <body>
 
 <header class="hero" id="top">
-  <svg class="land" data-slot="mountain-photo" role="img" aria-label="Massif enneigé dans la brume, lumière froide du matin (emplacement photo)" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
-    <defs>
-      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-slate"/><stop offset=".3" class="s-sky1"/><stop offset=".7" class="s-sky2"/><stop offset=".85" class="s-sky3"/></linearGradient>
-      <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" class="s-white" stop-opacity=".9"/><stop offset="1" class="s-white" stop-opacity="0"/></radialGradient>
-      <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="s-ice"/><stop offset=".35" class="s-steel"/><stop offset="1" class="s-deep"/></linearGradient>
-      <linearGradient id="mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-steel"/><stop offset=".6" class="s-slate"/><stop offset="1" class="s-deep"/></linearGradient>
-      <linearGradient id="front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s-deep"/><stop offset="1" class="s-night"/></linearGradient>
-      <filter id="blur" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
-    </defs>
-    <rect width="1440" height="900" fill="url(#sky)"/>
-    <circle cx="1120" cy="380" r="280" fill="url(#glow)" opacity=".6"/>
-    <path class="far" d="M0 560 L120 520 L210 540 L330 480 L420 515 L520 470 L600 500 L700 455 L780 485 L860 460 L960 495 L1060 455 L1160 490 L1260 462 L1360 492 L1440 470 L1440 900 L0 900Z"/>
-    <g class="drift"><ellipse class="mist" cx="420" cy="500" rx="520" ry="40" opacity=".55" filter="url(#blur)"/></g>
-    <g transform="translate(110 185)">
-      <path fill="url(#rock)" d="M480 640 L640 430 L700 400 L760 430 L840 300 L930 205 L985 270 L1030 252 L1120 360 L1180 352 L1300 480 L1440 530 L1440 900 L480 900Z"/>
-      <path class="shadow" d="M930 205 L985 270 L1030 252 L1120 360 L1180 352 L1300 480 L1440 530 L1440 900 L1010 900 L965 560 L945 360Z"/>
-      <path class="snow" d="M930 205 L985 270 L962 266 L948 292 L930 276 L908 310 L890 292 L866 322 L848 300 L840 300 Z"/>
-      <path class="snow-soft" d="M985 270 L1030 252 L1060 290 L1040 300 L1022 286 L1004 304 L990 290 Z"/>
-      <path class="snow" d="M700 400 L760 430 L740 434 L726 452 L710 438 L694 450 L672 440 L640 430 Z"/>
-      <path class="gully" d="M928 280 C 925 330, 918 380, 912 450 M 952 300 C 958 350, 962 400, 970 470 M 880 330 C 872 370, 862 410, 850 470 M 1040 300 C 1060 340, 1075 380, 1090 430"/>
-    </g>
-    <g class="drift" style="animation-direction: alternate-reverse"><ellipse class="mist" cx="900" cy="690" rx="760" ry="60" opacity=".7" filter="url(#blur)"/></g>
-    <path fill="url(#mid)" d="M0 680 L140 630 L260 660 L380 600 L500 650 L620 615 L760 675 L900 640 L1040 690 L1180 650 L1320 700 L1440 670 L1440 900 L0 900Z"/>
-    <ellipse class="mist" cx="300" cy="760" rx="600" ry="40" opacity=".35" filter="url(#blur)"/>
-    <path fill="url(#front)" d="M0 790 L180 755 L300 775 L460 735 L620 780 L800 760 L980 800 L1140 765 L1300 790 L1440 770 L1440 900 L0 900Z"/>
-    <g class="pines" id="pines"></g>
-  </svg>
+  <figure class="land" data-slot="mountain-photo"><img src="https://images.unsplash.com/photo-1560710990-9f5d4197b5a2?auto=format&fit=crop&w=2000&q=80" width="2000" height="1333" fetchpriority="high" alt="Sommets enneigés sous un ciel bleu nuit, lumière froide"></figure>
+  <div class="mist drift" aria-hidden="true"></div>
 
   <nav class="nav" aria-label="Navigation principale">
     <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5"/><path d="M5 23 L12 13 L16 18 L20 11 L27 23"/><path d="M18.5 13.5 L20 11 L21.6 13.6"/></svg>Hautvent</a>
@@ -331,17 +295,17 @@ a { color: inherit; }
       </div>
       <div class="trips">
         <a class="trip trip--a" href="#" data-cat="trek">
-          <div class="scene" data-slot="trip-photo"><i class="p1"></i><i class="mist"></i><i class="p2"></i><i class="lake"></i></div>
+          <figure class="scene" data-slot="trip-photo"><img src="https://images.unsplash.com/photo-1548679847-1d4ff48016c7?auto=format&fit=crop&w=800&h=1040&q=80" width="800" height="1040" loading="lazy" alt="Chaînes de montagnes superposées dans la brume bleue"></figure>
           <div class="trip-top"><span class="chip">6 jours</span><span class="chip">Modéré</span></div>
-          <div class="panel"><h3>Le tour des<br>lacs gelés</h3><div class="panel-row"><p>Dès <b>1 240 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
+          <div class="panel"><h3>La traversée<br>des brumes</h3><div class="panel-row"><p>Dès <b>1 240 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
         </a>
         <a class="trip trip--b" href="#" data-cat="camp">
-          <div class="scene" data-slot="trip-photo"><i class="p1"></i><i class="mist"></i><i class="trees"></i></div>
+          <figure class="scene" data-slot="trip-photo"><img src="https://images.unsplash.com/photo-1571863533956-01c88e79957e?auto=format&fit=crop&w=800&h=1040&q=80" width="800" height="1040" loading="lazy" alt="Tente de bivouac plantée dans un alpage"></figure>
           <div class="trip-top"><span class="chip">3 nuits</span><span class="chip">Facile</span></div>
-          <div class="panel"><h3>Bivouac sous<br>les mélèzes</h3><div class="panel-row"><p>Dès <b>480 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
+          <div class="panel"><h3>Bivouac<br>en alpage</h3><div class="panel-row"><p>Dès <b>480 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
         </a>
         <a class="trip trip--c" href="#" data-cat="ski">
-          <div class="scene" data-slot="trip-photo"><i class="p1"></i><i class="mist"></i><i class="p2"></i></div>
+          <figure class="scene" data-slot="trip-photo"><img src="https://images.unsplash.com/photo-1614597396930-cd6760b99f7c?auto=format&fit=crop&w=800&h=1040&q=80" width="800" height="1040" loading="lazy" alt="Alpiniste minuscule au pied de grands pics enneigés"></figure>
           <div class="trip-top"><span class="chip">5 jours</span><span class="chip">Sportif</span></div>
           <div class="panel"><h3>La haute route<br>des crêtes</h3><div class="panel-row"><p>Dès <b>1 690 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
         </a>
@@ -378,7 +342,7 @@ a { color: inherit; }
     <div class="wrap">
       <p class="stars" aria-label="5 étoiles sur 5"><b>★★★★★</b></p>
       <blockquote>« On est partis pour la vue. <em>On est revenus pour le silence</em> — et pour le guide. »</blockquote>
-      <div class="who"><span class="avatar" data-slot="avatar" aria-hidden="true"></span><span><b>Margaux &amp; Idris</b><span>Haute route des crêtes, mars 2026</span></span></div>
+      <div class="who"><span class="avatar" data-slot="avatar" aria-hidden="true"><img src="https://images.unsplash.com/photo-1614597396930-cd6760b99f7c?auto=format&fit=crop&w=96&h=96&q=80" width="96" height="96" loading="lazy" alt=""></span><span><b>Margaux &amp; Idris</b><span>Haute route des crêtes, mars 2026</span></span></div>
     </div>
   </section>
 
@@ -402,7 +366,7 @@ a { color: inherit; }
       </div>
       <p class="giant" aria-hidden="true">Hautvent</p>
       <div class="foot caps">
-        <span>© 2026 Hautvent (fictif) — démo Kōbō</span>
+        <span>© 2026 Hautvent (fictif) — démo Kōbō · Photos : Unsplash</span>
         <nav aria-label="Pied de page"><a href="#aventures">Aventures</a><a href="#methode">Sécurité</a><a href="#">Contact</a><a href="#top">Haut ↑</a></nav>
       </div>
     </div>
@@ -411,13 +375,6 @@ a { color: inherit; }
 
 <script>
 (() => {
-  // Sapins du premier plan (positions déterministes)
-  const g = document.getElementById('pines'); let d = '';
-  for (let i = 0; i < 70; i++) {
-    const x = (i * 97.3) % 1440, base = 800 + Math.sin(i * 1.7) * 18 + (i % 5) * 6, h = 28 + (i * 37 % 34), w = h * .38;
-    d += `M${x} ${base} L${x + w / 2} ${base - h} L${x + w} ${base}Z`;
-  }
-  g.innerHTML = `<path class="pine" d="${d}"/>`;
   // Menu mobile
   const nav = document.querySelector('.nav'), mb = nav.querySelector('.menu-btn');
   mb.addEventListener('click', () => { const o = nav.classList.toggle('is-open'); mb.setAttribute('aria-expanded', o); mb.textContent = o ? 'Fermer' : 'Menu'; });

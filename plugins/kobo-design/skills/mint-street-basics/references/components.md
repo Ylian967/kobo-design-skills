@@ -57,17 +57,19 @@ Le texte reste à 24px minimum (blanc sur vert = grand texte uniquement). Le con
 ## Arc du héros (signature)
 
 ```html
-<div class="stage" data-slot="hero-model" role="img" aria-label="…">
-  <div class="disc"></div><div class="arc"></div><img class="model" alt="" src="mannequin-detoure.png">
+<div class="stage" data-slot="hero-model">
+  <div class="disc"><img src="porte-hoodie.webp" alt="Mannequin en sweat à capuche sable, de face" width="1000" height="1000" fetchpriority="high"></div>
+  <div class="arc"></div>
 </div>
 ```
 ```css
 .arc { position: absolute; left: 50%; bottom: -8%; width: min(520px, 92%); aspect-ratio: 1; translate: -50% 0; border-radius: 50%;
   background: conic-gradient(from 210deg, var(--green) 0deg, var(--green-light) 200deg, transparent 205deg 360deg);
   mask: radial-gradient(closest-side, transparent 80%, black 81%); }
-.disc { /* disque intérieur légèrement plus clair que le fond */ background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 26%, var(--navy)), var(--navy-2) 70%); }
+.disc { /* fenêtre ronde : vraie photo, repli bleu nuit clair */ border-radius: 50%; overflow: hidden; background: var(--navy-2); }
+.disc img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
 ```
-Le mannequin est coupé à la taille par le bas du héros (`overflow: hidden`). Une étiquette flottante blanche (« Sweat Nuage · 59 € ») peut pointer le produit porté.
+La photo du mannequin (image réelle, voir `assets.md`) est coupée par le bas du héros (`overflow: hidden`) ; l'arc reste un élément graphique CSS. Une étiquette flottante blanche (« Sweat Nuage · 59 € ») peut pointer le produit porté.
 
 ## Chiffres clés
 
@@ -79,9 +81,9 @@ Pilule 44px, contour `--line`, texte `--ink` ; survol contour `--ink` ; active (
 
 ## Carte produit
 
-- **Anatomie** : visuel 4:5 rayon 16px (fond `--card` ou `--card-alt` en alternance), vêtement détouré centré à 62 % avec ombre douce ; badge « Nouveau » / « -20 % » en pilule `--navy` en haut à gauche ; cœur en haut à droite ; nom Anton 18px capitales `--navy` ; ligne prix (DM Sans 700, ancien prix barré `--muted`) + pastilles de couleur.
-- **États** : survol = visuel qui monte de 4px et vêtement à 1.05 / -2° ; focus sur le lien du nom (zone cliquable étendue à tout le visuel) ; rupture = badge « Épuisé » + pastilles désactivées.
-- **Pastilles** : `role="radio"` dans un `radiogroup`, bouton 44×44 transparent, pastille 16px dessinée en `::before` ; choisie = double anneau (`--mint` puis `--navy`). Changer la pastille recolore le visuel.
+- **Anatomie** : visuel 4:5 rayon 16px (fond `--card` ou `--card-alt` en alternance), vraie photo du vêtement (image réelle, voir `assets.md`) : packshot détouré centré à 72 % avec ombre douce, ou photo en passe-partout 12px ; badge « Nouveau » / « -20 % » en pilule `--navy` en haut à gauche ; cœur en haut à droite ; nom Anton 18px capitales `--navy` ; ligne prix (DM Sans 700, ancien prix barré `--muted`) + pastilles de couleur.
+- **États** : survol = visuel qui monte de 4px et photo à 1.04 (détouré : 1.05 / -2°) ; focus sur le lien du nom (zone cliquable étendue à tout le visuel) ; rupture = badge « Épuisé » + pastilles désactivées.
+- **Pastilles** : `role="radio"` dans un `radiogroup`, bouton 44×44 transparent, pastille 16px dessinée en `::before` ; choisie = double anneau (`--mint` puis `--navy`). Changer la pastille affiche la vraie photo du coloris si elle existe (jamais un filtre qui recolore).
 
 ```css
 .swatch { width: var(--target); height: var(--target); background: none; border: 0; display: grid; place-items: center; }
@@ -103,7 +105,7 @@ Pilule `--navy-2` contenant le champ (sans bord, placeholder `--muted-inv`) et l
 
 ## Collage de cercles
 
-Quatre cercles de tailles différentes (46 %, 40 %, 34 %, 26 % de la largeur) qui se chevauchent légèrement, fonds `--green`, `--mint`, `--card-alt`, `--navy-2`, un vêtement détouré dans chacun ; ils flottent de 8px en décalé.
+Quatre cercles de tailles différentes (46 %, 40 %, 34 %, 26 % de la largeur) qui se chevauchent légèrement, fonds `--green`, `--mint`, `--card-alt`, `--navy-2`, une vraie photo (porté ou packshot) dans chacun, fond token en repli ; ils flottent de 8px en décalé.
 
 ## Carte du logotype
 

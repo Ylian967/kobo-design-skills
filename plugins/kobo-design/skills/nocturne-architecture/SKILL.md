@@ -21,7 +21,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 4. **Phrase bicolore** : chaque grand texte se termine en `--dim` (gris) ; la première idée en blanc, la suite en gris.
 5. Contraste : texte courant ≥ 4,5:1 ; `--dim` (#777) et le rouge `--accent` en texte uniquement en grand (≥ 24px) ; petit texte rouge en `--accent-text` ; texte sur rouge en `--on-accent` (paires vérifiées dans `references/tokens.css`).
 6. **Formes** : pilules (999px) pour les actions, cercles 44px à contour fin pour les flèches, cartes et photos presque droites (4px). Séparateurs = filets 1px `--line`.
-7. **Mouvement lent et cinématique** : le mot-marque monte lettre par lettre au chargement, les traînées de phares défilent, les photos zooment de 4 % au survol. Rien ne rebondit.
+7. **Mouvement lent et cinématique** : le mot-marque monte lettre par lettre au chargement, la photo du héros zoome très lentement (vraie vidéo de traînées si on en a une), les photos zooment de 4 % au survol. Rien ne rebondit.
 8. Accessibilité : cibles ≥ 44px, focus visible (contour rouge clair), `prefers-reduced-motion` respecté, le carrousel se pilote au clavier.
 9. Aucune valeur en dur : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
 
@@ -33,6 +33,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | `references/components.md` | Avant de coder une pilule, un bouton rond, la navigation, l'horloge, une carte de projet, une stat, une étape, un champ. |
 | `references/layouts.md` | Avant de construire une page : héros nocturne, « À propos », carrousel de projets, méthode, contact, mobile. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets nocturnes, cadrages (plein écran, 4:5, 4:3), étalonnage nuit, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
 | `source.md` | Pour connaître le shot de référence et ce qui a été estimé. |
 
@@ -60,9 +61,13 @@ La police du shot ressemble à une Helvetica / Inter Display ; **Inter Tight** e
 | Suite de phrase | `--dim` #777 | Grand texte seulement |
 | Filets | `--line` #2a2a2a | Séparateurs, stats, étapes |
 | Accent | `--accent` #e3191f + `--on-accent` | Pilule, lecture, carte rouge, progression |
-| Photos | `--night`, `--window`, `--trail-*` | Emplacements dessinés, jamais l'interface |
+| Photos | `--night`, `--night-3`, `--grade-night` | Repli et teinte des photos, jamais l'interface |
 
 **Règle de l'accent** : au plus trois touches rouges visibles dans un même écran.
+
+## Images et 3D
+
+Le style repose sur de **vraies photos d'architecture la nuit** : ville en pose longue pour le héros, villas et tours éclairées pour les cartes 4:5 et les étapes 4:3. Toutes passent par le même étalonnage (`--grade-night`, teinte bleu nuit, voile `--shade-card` ou `--shade-hero`) avec `--night` en couleur de repli. La 3D est optionnelle (maquette `.glb` du programme, éclairage qui passe du jour à la nuit). Jamais de dessin CSS/SVG à la place d'une photo, d'un bâtiment ou d'une ville : détails, sources et prompts dans `references/assets.md`.
 
 ## Signature
 
@@ -96,4 +101,5 @@ La police du shot ressemble à une Helvetica / Inter Display ; **Inter Tight** e
 - [ ] Carrousel 4:5 avec une carte rouge, flèches rondes et ligne de progression.
 - [ ] Composants conformes à `references/components.md` (repos, survol, appui, focus, désactivé).
 - [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md` (nuit, étalonnage commun), avec `alt` et couleur de repli `--night`.
 - [ ] Aucun élément du shot d'origine (nom, logo, photos, textes).

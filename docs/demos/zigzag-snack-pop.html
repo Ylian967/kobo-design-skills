@@ -23,6 +23,7 @@
   --shadow-hard: 4px 4px 0 var(--ink); --shadow-hard-lg: 6px 6px 0 var(--ink); --shadow-press: 1px 1px 0 var(--ink);
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 140ms; --dur: 280ms; --dur-slow: 600ms; --dur-stamp: 14s;
+  --grade-pop: saturate(1.15) contrast(1.06);
 }
 * { box-sizing: border-box; }
 html { overflow-x: clip; }
@@ -70,15 +71,15 @@ a { color: inherit; }
 .hero { --scene: clamp(220px, 24vw, 340px); position: relative; background: var(--orange); color: var(--white); overflow: hidden; padding: var(--space-16) 0 calc(var(--scene) + 70px); }
 .scene { position: absolute; left: 0; right: 0; bottom: 0; height: var(--scene); }
 .hero .sun { position: absolute; left: 50%; top: 55%; width: min(70vw, 760px); aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, var(--orange-bright) 0 55%, transparent 70%); opacity: .9; }
-.mtn { position: absolute; left: 0; right: 0; bottom: 0; }
-.mtn--back { height: 100%; background: var(--orange-deep); clip-path: polygon(0 60%, 9% 30%, 17% 52%, 27% 8%, 38% 48%, 46% 30%, 55% 56%, 66% 12%, 76% 44%, 85% 26%, 100% 50%, 100% 100%, 0 100%); }
-.mtn--back::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 0 40%, var(--orange-bright) 40% 41%, transparent 41%); opacity: .35; }
-.mtn--front { height: 58%; background: var(--orange-ink); clip-path: polygon(0 40%, 12% 10%, 22% 46%, 34% 30%, 50% 62%, 63% 24%, 74% 44%, 88% 4%, 100% 32%, 100% 100%, 0 100%); }
-.figure { position: absolute; color: var(--brown-deep); z-index: 2; }
-.figure svg { width: 100%; height: auto; }
-.figure--climber { left: calc(27% - 2.6vw); bottom: 91%; width: clamp(40px, 5vw, 76px); }
-.figure--bike { right: 10%; bottom: 38%; width: clamp(72px, 10vw, 150px); }
-.figure--skate { left: 6%; bottom: 24%; width: clamp(44px, 6vw, 90px); }
+.duo { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; isolation: isolate; background: var(--orange-deep); }
+.duo img { width: 100%; height: 100%; object-fit: cover; color: transparent; filter: grayscale(1) contrast(1.25) brightness(1.05); mix-blend-mode: multiply; }
+.duo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--orange-bright); }
+.duo::after { content: ""; position: absolute; inset: 0; background: var(--brown-deep); mix-blend-mode: lighten; }
+.duo--back { height: 100%; clip-path: polygon(0 60%, 9% 30%, 17% 52%, 27% 8%, 38% 48%, 46% 30%, 55% 56%, 66% 12%, 76% 44%, 85% 26%, 100% 50%, 100% 100%, 0 100%); }
+.duo--back img { object-position: 50% 30%; }
+.duo--front { height: 58%; clip-path: polygon(0 40%, 12% 10%, 22% 46%, 34% 30%, 50% 62%, 63% 24%, 74% 44%, 88% 4%, 100% 32%, 100% 100%, 0 100%); }
+.duo--front::before { background: var(--orange); }
+.duo--front img { object-position: 50% 45%; }
 .hero-copy { position: relative; z-index: 3; text-align: center; }
 .kicker { display: inline-block; margin-bottom: var(--space-4); padding: 6px 12px; background: var(--ink); color: var(--yellow); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.14em; text-transform: uppercase; transform: rotate(-2deg); }
 .hero h1 { font-size: var(--text-hero); }
@@ -111,20 +112,9 @@ a { color: inherit; }
 .trail .row { display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; margin-top: var(--space-6); }
 .trail .note { font: 800 italic var(--text-sm) var(--font-body); color: var(--cream-text); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
 .pack-stage { position: relative; display: grid; place-items: center; min-height: 340px; }
-.pack-stage::before { content: ""; position: absolute; width: 78%; aspect-ratio: 1; border-radius: 50%; background: var(--orange); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-lg); }
-
-/* Emballage dessiné en CSS (remplace la photo produit) */
-.pack { position: relative; width: min(420px, 100%); aspect-ratio: 3 / 1; transform: rotate(-12deg); filter: drop-shadow(8px 10px 0 var(--ink));
-  mask: conic-gradient(from 45deg at left, transparent, var(--ink) 1deg 89deg, transparent 90deg) left / 10px 12px repeat-y,
-        conic-gradient(from -135deg at right, transparent, var(--ink) 1deg 89deg, transparent 90deg) right / 10px 12px repeat-y,
-        linear-gradient(var(--ink) 0 0) center / calc(100% - 18px) 100% no-repeat; }
-.pack-body { position: absolute; inset: 0; background: linear-gradient(180deg, var(--bar) 0 18%, var(--yellow) 18% 24%, var(--bar) 24% 76%, var(--yellow) 76% 82%, var(--bar) 82%); display: flex; align-items: center; justify-content: space-between; padding: 0 9%; }
-.pack-body b { font: 400 clamp(1.8rem, 4vw, 2.8rem)/1 var(--font-display); color: var(--yellow); letter-spacing: 0.02em; }
-.pack-body span { font: 900 italic var(--text-sm)/1.05 var(--font-body); color: var(--white); text-align: right; text-transform: uppercase; }
-.pack-body::after { content: ""; position: absolute; left: 0; right: 0; top: 30%; height: 10%; background: linear-gradient(90deg, transparent, var(--white), transparent); opacity: .18; }
-.pack--sm { width: 92%; transform: rotate(-8deg); filter: drop-shadow(5px 6px 0 var(--ink)); }
-.pack--sm .pack-body b { font-size: clamp(1.4rem, 2.6vw, 2rem); }
-.pack--sm .pack-body span { font-size: var(--text-xs); }
+.disc { position: relative; width: min(78%, 400px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--orange); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-lg); }
+.disc img { width: 100%; height: 100%; object-fit: cover; color: transparent; filter: var(--grade-pop); }
+.disc-tag { position: absolute; right: 6%; bottom: 14%; padding: 8px 14px; background: var(--yellow); color: var(--ink); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); font: 900 italic var(--text-sm)/1 var(--font-body); text-transform: uppercase; transform: rotate(-6deg); }
 
 /* ---------- Cartes produit ---------- */
 .shop { padding: var(--space-24) 0 var(--space-16); }
@@ -138,7 +128,9 @@ a { color: inherit; }
 .card--featured { padding: var(--space-8) var(--space-6); transform: scale(1.06); z-index: 1; }
 .card--featured:hover { transform: scale(1.06) translateY(-6px) rotate(-1deg); }
 .card .tag { position: absolute; top: -16px; left: var(--space-6); padding: 6px 12px; background: var(--ink); color: var(--yellow); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; border-radius: var(--radius-sm); }
-.card .art { display: grid; place-items: center; aspect-ratio: 4 / 3; }
+.card .art { aspect-ratio: 4 / 3; overflow: hidden; border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); background: var(--cream); box-shadow: var(--shadow-hard); transform: rotate(-3deg); }
+.card:nth-child(2) .art { transform: rotate(2deg); }
+.card .art img { width: 100%; height: 100%; object-fit: cover; color: transparent; filter: var(--grade-pop); }
 .card h3 { margin: var(--space-4) 0 var(--space-1); font: 400 var(--text-xl)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; }
 .card .meta { margin: 0 0 var(--space-4); font: 600 var(--text-sm) var(--font-body); }
 .add { display: flex; width: 100%; min-height: 48px; border: 2px solid var(--ink); border-radius: var(--radius-sm); background: var(--white); color: var(--ink); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; padding: 0; overflow: hidden; transition: background var(--dur-fast); }
@@ -200,7 +192,6 @@ a { color: inherit; }
   .sticker-word { text-shadow: 3px 3px 0 var(--ink); }
   .hero p.lead { font-size: var(--text-base); }
   .hero-actions .btn, .search { width: 100%; }
-  .figure--bike { right: 4%; }
   .ing { flex-direction: column; text-align: center; gap: var(--space-2); }
   .ing .badge svg { width: 30px; height: 30px; }
   .ing strong { font-size: var(--text-sm); }
@@ -242,20 +233,8 @@ a { color: inherit; }
   <section class="hero zz-bottom" aria-labelledby="hero-title">
     <div class="sun" aria-hidden="true"></div>
     <div class="scene">
-    <div class="mtn mtn--back" data-slot="mountains-back" aria-hidden="true"></div>
-    <div class="mtn mtn--front" data-slot="mountains-front" aria-hidden="true"></div>
-
-    <!-- Silhouettes d'aventure dessinées (remplacent les illustrations d'origine) -->
-    <div class="figure figure--climber" data-slot="figure-climber" aria-hidden="true">
-      <svg viewBox="0 0 60 100" fill="currentColor"><rect x="40" y="2" width="3" height="58"/><path d="M43 4h16l-5 7 5 7H43z"/><circle cx="26" cy="20" r="7"/><path d="M19 30h14l6-12 4 2-6 16-3 18 6 28h-7l-6-24-5 24h-7l3-30-2-14-5 8-4-2z"/></svg>
-    </div>
-    <div class="figure figure--bike" data-slot="figure-cyclist" aria-hidden="true">
-      <svg viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="6"><circle cx="34" cy="72" r="22"/><circle cx="124" cy="72" r="22"/><path d="M34 72l26-34h40l24 34M60 38l20 34h-46M96 26l4 12" stroke-linejoin="round"/><g fill="currentColor" stroke="none"><circle cx="86" cy="10" r="8"/><path d="M58 32l22-14 16 6-8 6 10 14-6 4-14-14-14 10z"/></g></svg>
-    </div>
-    <div class="figure figure--skate" data-slot="figure-skater" aria-hidden="true">
-      <svg viewBox="0 0 80 100" fill="currentColor"><circle cx="40" cy="12" r="8"/><path d="M30 24h16l14 10-3 5-12-6 2 20 10 22h-8l-9-18-8 18h-8l9-24-2-14-12 10-4-4z"/><rect x="10" y="84" width="60" height="5" rx="2.5"/><circle cx="20" cy="94" r="4"/><circle cx="60" cy="94" r="4"/></svg>
-    </div>
-
+      <div class="duo duo--back" data-slot="mountains-back" aria-hidden="true"><img src="https://images.unsplash.com/photo-1601224748193-d24f166b5c77?auto=format&fit=crop&w=2000&h=700&q=80" alt="" width="2000" height="700" fetchpriority="high" decoding="async"></div>
+      <div class="duo duo--front" data-slot="mountains-front" aria-hidden="true"><img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=2000&h=500&q=80" alt="" width="2000" height="500" fetchpriority="high" decoding="async"></div>
     </div>
     <div class="wrap hero-copy">
       <span class="kicker rise">Nouvelle recette · Cacahuète crunch</span>
@@ -294,8 +273,9 @@ a { color: inherit; }
         <p>Du col au skatepark, la même recette : de la cacahuète grillée, de l'avoine, du cacao et rien pour faire semblant.</p>
         <div class="row"><a class="btn btn--yellow" href="#shop">Composer ma box <span class="arrow" aria-hidden="true">›</span></a><span class="note">Livraison offerte dès 24 barres</span></div>
       </div>
-      <div class="pack-stage" data-slot="product-hero" role="img" aria-label="Barre Trailo cacahuète crunch (emplacement de la photo produit)">
-        <div class="pack"><div class="pack-body"><b>TRAILO</b><span>Cacahuète<br>crunch · 20 g</span></div></div>
+      <div class="pack-stage">
+        <div class="disc" data-slot="product-hero"><img src="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&w=1000&h=1000&q=80" alt="Barre de céréales posée sur un fond blanc" width="1000" height="1000" loading="lazy" decoding="async"></div>
+        <span class="disc-tag">20 g protéines</span>
       </div>
     </div>
   </section>
@@ -307,20 +287,20 @@ a { color: inherit; }
         <p>Trois recettes, une même règle : on doit pouvoir lire la liste d'ingrédients en une respiration.</p>
       </div>
       <ul class="cards">
-        <li class="card" style="--flavor:var(--flavor-mint)">
-          <div class="art" data-slot="product-pistachio"><div class="pack pack--sm"><div class="pack-body"><b>TRAILO</b><span>Pistache<br>sel marin</span></div></div></div>
-          <h3>Pistache sel marin</h3><p class="meta">20 g protéines · 212 kcal</p>
+        <li class="card" style="--flavor:var(--flavor-oat)">
+          <div class="art" data-slot="product-oat"><img src="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&w=800&h=600&q=80" alt="Barre de céréales à l'avoine, gros plan" width="800" height="600" loading="lazy" decoding="async"></div>
+          <h3>Avoine nature</h3><p class="meta">18 g protéines · 198 kcal</p>
           <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
         </li>
         <li class="card card--featured" style="--flavor:var(--flavor-lemon)">
           <span class="tag">Best-seller</span>
-          <div class="art" data-slot="product-peanut"><div class="pack pack--sm"><div class="pack-body"><b>TRAILO</b><span>Cacahuète<br>crunch</span></div></div></div>
+          <div class="art" data-slot="product-peanut"><img src="https://images.unsplash.com/photo-1564988208558-9270de7c5848?auto=format&fit=crop&w=800&h=600&q=80" alt="Pot de beurre de cacahuète entouré de cacahuètes grillées" width="800" height="600" loading="lazy" decoding="async"></div>
           <h3>Cacahuète crunch</h3><p class="meta">21 g protéines · 220 kcal</p>
           <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
         </li>
-        <li class="card" style="--flavor:var(--flavor-sky)">
-          <div class="art" data-slot="product-blueberry"><div class="pack pack--sm"><div class="pack-body"><b>TRAILO</b><span>Myrtille<br>avoine</span></div></div></div>
-          <h3>Myrtille avoine</h3><p class="meta">19 g protéines · 205 kcal</p>
+        <li class="card" style="--flavor:var(--flavor-berry)">
+          <div class="art" data-slot="product-cacao"><img src="https://images.unsplash.com/photo-1622484212850-eb596d769edc?auto=format&fit=crop&w=800&h=600&q=80" alt="Morceaux de barre au chocolat noir" width="800" height="600" loading="lazy" decoding="async"></div>
+          <h3>Cacao intense</h3><p class="meta">20 g protéines · 214 kcal</p>
           <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
         </li>
       </ul>
@@ -337,7 +317,7 @@ a { color: inherit; }
       <div class="rev-grid">
         <figure class="rev"><div class="stars" role="img" aria-label="5 sur 5"><i></i><i></i><i></i><i></i><i></i></div><blockquote>« Seule barre qui ne fond pas dans la poche au bout de 80 km. Et on sent vraiment la cacahuète. »</blockquote><figcaption>Inès · cycliste longue distance</figcaption></figure>
         <figure class="rev"><div class="stars" role="img" aria-label="5 sur 5"><i></i><i></i><i></i><i></i><i></i></div><blockquote>« Je la garde dans le baudrier. Pas écœurante, pas collante, juste efficace. »</blockquote><figcaption>Malo · grimpeur</figcaption></figure>
-        <figure class="rev"><div class="stars" role="img" aria-label="4 sur 5"><i></i><i></i><i></i><i></i></div><blockquote>« La myrtille avoine entre deux sessions, c'est devenu un rituel avec toute l'équipe. »</blockquote><figcaption>Sacha · skate</figcaption></figure>
+        <figure class="rev"><div class="stars" role="img" aria-label="4 sur 5"><i></i><i></i><i></i><i></i></div><blockquote>« L'avoine nature entre deux sessions, c'est devenu un rituel avec toute l'équipe. »</blockquote><figcaption>Sacha · skate</figcaption></figure>
       </div>
     </div>
   </section>
@@ -355,7 +335,7 @@ a { color: inherit; }
     <nav aria-label="Pied de page"><a href="#">Barres</a><a href="#">Box</a><a href="#">Revendeurs</a><a href="#">FAQ</a><a href="#">Contact</a></nav>
     <p class="giant" aria-hidden="true">Trailo</p>
   </div>
-  <p class="legal">© 2026 Trailo (marque fictive) — démo Kōbō</p>
+  <p class="legal">© 2026 Trailo (marque fictive) — démo Kōbō · Photos : Unsplash</p>
 </footer>
 
 <script>

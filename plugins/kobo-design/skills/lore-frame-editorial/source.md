@@ -22,3 +22,4 @@
 | ABC Whyte (payante) | Inter Tight 900 | Licence |
 | Hexaframe (logo) | Logo tracé générique en SVG | Identité |
 | Illustrations, personnages, symbole, noms | Emplacements et formes | Droits d'auteur |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démonstration |

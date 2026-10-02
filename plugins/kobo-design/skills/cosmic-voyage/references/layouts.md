@@ -3,14 +3,14 @@
 ## Principes
 
 - Barre de navigation fixe 58px en haut, contenu en dessous.
-- Fond fixe : nuit étoilée (dégradé `--bg` → bleu nuit + étoiles), parfois une nébuleuse bleu-violet floue.
+- Fond fixe : nuit étoilée réelle — scène Three.js (étoiles, nébuleuse en particules, planète) au-dessus d'une photo de nébuleuse en repli, voir `assets.md`. Jamais d'étoiles ou de planète dessinées en CSS.
 - Points de rupture mesurés : 1024px (desktop), 1024–1365px (petit desktop), ≤ 1023px (mobile/tablette).
 - Échelle d'espacement 4 → 80px (mesurée), rayons 6 → 48px.
 
 ## Accueil (une seule hauteur d'écran)
 
 La page d'accueil **ne défile pas** : c'est une scène pleine hauteur (100vh − nav).
-1. Illustration plein écran (emplacement `data-slot="key-art"`).
+1. Illustration plein écran du projet (`data-slot="key-art"`) ou, sans illustration, la scène 3D de l'espace (planète annelée à droite, voir `assets.md`) avec un voile sombre à gauche pour le logo.
 2. Logo en haut à gauche (emplacement).
 3. Bloc de téléchargement en bas au centre-gauche (QR + 6 boutons) et bouton lecture vidéo.
 4. Rail social à droite, « Scroll Down » vertical à gauche.

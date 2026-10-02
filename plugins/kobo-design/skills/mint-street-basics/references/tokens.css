@@ -30,14 +30,13 @@
   --line-inv: #34365a;      /* filets sur bleu nuit */
   --star: #f2b200;          /* étoiles d'avis (jamais du texte) */
 
-  /* Vêtements dessinés (emplacements, jamais du texte) */
+  /* Coloris (pastilles de couleur, jamais du texte ni un filtre sur les photos) */
   --cloth-white: #f4f2ec;
   --cloth-sand: #d9c7a7;
   --cloth-olive: #6f7d4f;
   --cloth-navy: #2b3366;
   --cloth-black: #1e1e24;
   --cloth-rust: #b5583a;
-  --skin: #c99572;
 
   /* Typographie */
   --font-display: 'Anton', 'Bebas Neue', 'Arial Narrow', Impact, sans-serif;           /* capitales condensées très grasses */

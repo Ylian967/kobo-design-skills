@@ -9,11 +9,11 @@
 
 ## Ordre de la page produit
 
-1. **Héros** : visuel clé plein cadre (groupe de personnages), logo du jeu en bas au centre.
+1. **Héros** : visuel clé plein cadre (groupe de personnages — image réelle, voir `assets.md`), fondu vers le noir, logo du jeu en bas au centre.
 2. **Pitch + vidéo** : à gauche sous-titre + ornement + 3 paragraphes ; à droite vidéo encadrée d'ornements.
 3. **Achat rapide** : badges de plateformes avec dates, bouton or « Acheter », bouton contour « Ajouter à la liste de souhaits ».
 4. **Notes presse** : bandeau centré.
-5. **Caractéristiques principales** : titre 36px, puis blocs en **zigzag** (image floutée/vidéo d'un côté, plaque dorée + paragraphe + petit losange de l'autre).
+5. **Caractéristiques principales** : titre 36px, puis blocs en **zigzag** (capture réelle ou vidéo d'un côté — voir `assets.md` —, plaque dorée + paragraphe + petit losange de l'autre).
 6. **Module d'achat** détaillé.
 7. **Pied de page** doré clair à motifs fins, liens bleu nuit.
 

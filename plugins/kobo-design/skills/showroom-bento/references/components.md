@@ -64,7 +64,7 @@ Grille `1fr auto 1fr` : monogramme rouge (44px) | groupe de pilules centré (gap
 .carousel { position: absolute; left: 50%; bottom: 0; translate: -50% 0; display: flex; gap: var(--space-1); padding: 4px; border-radius: var(--radius-pill); background: var(--tile); }
 ```
 - Les voisins sont cliquables (survol : opacité .75) et pilotables au clavier par ← →.
-- Le produit doit être un rendu **détouré** (PNG/WebP transparent ou SVG) vu de profil, roues posées sur l'ombre.
+- Le produit est une **image réelle, voir `assets.md`** : idéalement un rendu ou packshot **détouré** (PNG/WebP/AVIF transparent) vu de profil, roues posées sur l'ombre ; sinon une photo studio dans un cadre arrondi (`--radius-frame`, fond `--paint-black` en repli), comme dans la démo. Jamais un dessin SVG.
 
 ## Tuile
 
@@ -72,7 +72,7 @@ Fond `--tile`, rayon `--radius-tile`, padding 16px, ombre `--shadow-tile`. Survo
 
 ## Tuile accessoire
 
-Deux colonnes : texte (titre 16px, description 12px `--muted`, puis en bas prix Outfit 700 20px + pilule noire « Acheter » 40px) | visuel sur fond `--soft` radial (image détourée). Survol : le visuel tourne de -4° et grossit de 4 %. Occupe deux rangées.
+Deux colonnes : texte (titre 16px, description 12px `--muted`, puis en bas prix Outfit 700 20px + pilule noire « Acheter » 40px) | visuel sur fond `--soft` radial (photo réelle du produit, détourée ou recadrée, voir `assets.md`). Survol : le visuel tourne de -4° et grossit de 4 %. Occupe deux rangées.
 
 ## Tuile caractéristique
 
@@ -95,14 +95,14 @@ Colonne texte (titre, consigne, visuel du produit de face sur `--soft`, nom de l
 .swatch input:checked + i::after { /* coche blanche (noire sur teinte claire) */ }
 .swatch input:focus-visible + i { outline: 2px solid var(--ink); outline-offset: 4px; }
 ```
-Changer de teinte met à jour `--paint` sur le rendu de profil et sur la vue de face (rendus SVG à classes `fill: var(--paint)` ou jeu d'images par teinte).
+Changer de teinte remplace l'image par celle de la teinte choisie (une photo ou un rendu par teinte, fondu enchaîné), voir `assets.md`. La démo n'a qu'une photo rouge : elle simule les teintes par `filter: hue-rotate()`, à ne pas reproduire en production.
 
-## Rendu produit recolorable (maquette)
+## Rendu produit par teinte
 
-Carrosserie dessinée une fois dans un `<g id="bodywork">` sans `fill`, réutilisée deux fois : `<use class="pt">` (couleur `var(--paint)`) puis `<use fill="url(#shade)">` (dégradé blanc → transparent → noir pour le volume). Pneus, jantes, métal et bulle ont leurs propres classes de tokens.
+Image réelle, voir `assets.md` : un jeu de rendus (ou photos studio) par teinte, même angle, même lumière, même cadrage, nommés `modele-teinte-profil.webp` ; ou un configurateur 3D (`assets.md` § 5).
 
 ## États vide, chargement, erreur
 
-- **Chargement du rendu** : ombre au sol et pilule du carrousel déjà en place ; silhouette `--soft` floue à la place du produit.
+- **Chargement du rendu** : ombre au sol et pilule du carrousel déjà en place ; cadre de la photo en couleur de repli (`--paint-black` ou `--soft`) aux bonnes proportions.
 - **Rupture de stock** : pilule « Acheter » désactivée + mention `--accent-ink` 11px « Bientôt disponible ».
 - **Erreur de configuration** : la pastille reste sur la teinte précédente, message 11px `--accent-ink` sous la tuile.

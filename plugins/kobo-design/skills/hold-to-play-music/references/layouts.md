@@ -2,7 +2,7 @@
 
 ## Accueil
 
-Vidéo N&B plein écran (triptyque de la même personne possible), logo du label en haut au centre avec « présente », titre peint au centre, sous-titre 13px, consigne « Maintenez [espace] pour lancer » en bas au centre, pied de page sur la dernière ligne.
+Vidéo N&B plein écran (triptyque de photos ou de vidéos réelles, voir `assets.md`), logo du label en haut au centre avec « présente », titre peint au centre, sous-titre 13px, consigne « Maintenez [espace] pour lancer » en bas au centre, pied de page sur la dernière ligne.
 
 ## Page d'artiste
 

@@ -25,7 +25,7 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Marque, monogramme, nom de modèle, textes | Marque fictive « Vantor Moto », monogramme V inventé, modèles « Ardente / Strale / Solare », textes en français | Marque et droits d'auteur |
-| Photos / rendus de la moto, du casque | Dessins SVG stylisés recolorables (emplacements `data-slot`) | Droits d'auteur ; à remplacer par vos rendus détourés |
+| Photos / rendus de la moto, du casque | Visuels de la démo : photos Unsplash libres (licence Unsplash) en cadre arrondi, teintes simulées par filtre, à remplacer par les images du projet (rendus détourés par teinte) | Droits d'auteur |
 | Rouge de marque #d42a2a en petit texte (4:1 sur le gris) | Rouge réservé au grand titre (paire `:large`) ; `--accent-ink` #b81f1f pour le petit texte (5,1:1) | Contraste ≥ 4,5:1 |
 | Légende grise claire 11px | `--muted` #5e5e5e (5,1:1 sur le cadre) | Lisibilité |
 | Prix en dollars à décimale anglaise (« $ 32.000 », « $350.5 ») | Euros au format français (« 32 000 € », « 350,50 € ») | Contenu localisé |

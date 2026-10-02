@@ -25,7 +25,7 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom de marque, logo-mot, textes | Marque fictive « Ossel », logo à cercle, textes inventés en français | Marque et droits d'auteur |
-| Rendu 3D du bijou, photo de portrait | Pièce dessinée en SVG (dégradés or / chrome), portrait abstrait en dégradés CSS, emplacements `data-slot` | Droits d'auteur ; à remplacer par vos propres rendus |
+| Rendu 3D du bijou, photo de portrait | Visuels de la démo : photos Unsplash libres (licence Unsplash) et scène Three.js (pièce procédurale), à remplacer par les images et le modèle du projet | Droits d'auteur |
 | Logos presse | Mots-symboles typographiques inventés | Marques tierces |
 | Or utilisé en petit texte | `--gold-ink` #7f6127 (5,1:1 sur `--bg`) ; `--gold` réservé au métal et au texte sur nuit (8:1) | Lisibilité |
 | Liens de nav gris très clair | `--muted` #5c5c58 (6:1) | Contraste ≥ 4,5:1 |

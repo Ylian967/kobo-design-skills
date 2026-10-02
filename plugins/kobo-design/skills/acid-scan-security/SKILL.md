@@ -33,6 +33,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (duotone acide, tra
 | `references/components.md` | Boutons (plein, translucide, contour), nav, crochets d'angle, photo duotone tramée, bande + cadre de scan, réticule, carte CTA cadenas, cartes, puces, champ terminal, bascules, journal, jauge segmentée. |
 | `references/layouts.md` | Héros scan, bandeau de mesures, grille de couches, console d'analyse, bandeau final, mobile. |
 | `references/motion.md` | Balayage, clignotement, tramage, journal qui s'écrit, jauge en pas. |
+| `references/assets.md` | Avant de placer le portrait ou une photo : sujet, cadrage des yeux, traitement canvas tramé, repli duotone CSS, sources, prompts IA. |
 | `examples/demo.html` | Page complète (marque fictive « Gridward »). |
 | `source.md` | Shot de référence, ce qui a été vu, écarts. |
 
@@ -58,6 +59,10 @@ La police du shot n'est pas identifiée : c'est une grotesque pixelisée haute. 
 | Surfaces | `--panel`, `--glass`, `--glass-hi` | carte CTA, bouton translucide, bascule active |
 | Filets | `--line`, `--line-hi` | bordures, réticule, crochets |
 | Alerte | `--danger` | lignes « ALERTE », champ en erreur |
+
+## Images et 3D
+
+Le portrait du héros part d'une **vraie photo** (visage de face, regard caméra) lue dans un `<canvas>` (`crossOrigin="anonymous"`), convertie en luminance et **tramée sur la rampe verte des tokens** (Bayer 4×4, 1 pixel = `--dot-size`) ; si le canvas échoue, la même photo reste visible en **duotone CSS** (N&B × calque `--acid` en `multiply`). Les yeux de la photo se règlent par `data-eye` pour caler la bande de scan. Pas de 3D (optionnelle). Jamais de visage dessiné en canvas, CSS ou SVG à la place d'une photo : détails dans `references/assets.md`.
 
 ## Signature
 
@@ -89,3 +94,4 @@ La police du shot n'est pas identifiée : c'est une grotesque pixelisée haute. 
 - [ ] Boutons : repos, survol, appui, focus, désactivé, chargement (`aria-busy`).
 - [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
 - [ ] Aucun élément de la marque d'origine.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.

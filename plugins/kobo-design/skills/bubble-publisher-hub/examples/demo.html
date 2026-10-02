@@ -46,11 +46,14 @@ a { color: inherit; }
 
 .manifesto { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-9); padding: var(--space-20) var(--gutter); align-items: start; }
 .manifesto h1 { margin: 0 0 var(--space-20); font: 600 var(--text-hero)/1 var(--font); letter-spacing: var(--tracking-hero); }
-.visual { aspect-ratio: 4/3; --bubble-bg: #3b2a22; background: radial-gradient(50% 60% at 50% 40%, #a5502a, #2a1a14 75%); color: rgb(255 255 255 / .6); display: grid; place-items: center; font-size: var(--text-xs); letter-spacing: .2em; }
-.slogan { position: absolute; right: -10px; top: -30px; padding: 12px 28px; font: 600 2.4rem/1.05 var(--font); }
+.visual { aspect-ratio: 4/3; --bubble-bg: var(--text); }
+.visual img, .media-fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.visual img { border-radius: var(--radius); }
+.slogan { z-index: 1; position: absolute; right: -10px; top: -30px; padding: 12px 28px; font: 600 2.4rem/1.05 var(--font); }
 
-.featured { position: relative; min-height: 640px; padding: var(--space-12) var(--gutter); display: flex; justify-content: flex-end; align-items: flex-end; background: radial-gradient(30% 40% at 45% 40%, #ffd27a, transparent 60%), radial-gradient(70% 80% at 40% 60%, #e2501a, #7a1a08 80%); }
-.featured__slot { position: absolute; inset: 0; display: grid; place-items: center; color: rgb(255 255 255 / .6); font-size: var(--text-xs); letter-spacing: .2em; }
+.featured { position: relative; min-height: 640px; padding: var(--space-12) var(--gutter); display: flex; justify-content: flex-end; align-items: flex-end; background: var(--text); }
+.featured__slot { position: absolute; inset: 0; overflow: hidden; background: var(--text); }
+.featured__slot img { object-position: 30% 50%; }
 .callouts { position: relative; display: grid; gap: 40px; width: min(350px, 100%); }
 .callout { padding: var(--space-9); }
 .callout h2 { margin: 0 0 var(--space-6); font: 700 var(--text-lg)/1.2 var(--font); color: var(--red); }
@@ -63,14 +66,16 @@ a { color: inherit; }
 .panel { position: relative; z-index: 1; background: var(--bg); border-radius: var(--radius); padding: var(--space-9); display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--space-9); }
 .panel__intro svg { width: 64px; height: 64px; color: var(--red); }
 .rewards { display: grid; grid-auto-flow: column; grid-auto-columns: 224px; gap: var(--space-4); overflow-x: auto; padding-bottom: var(--space-3); }
-.reward { border-radius: var(--radius); overflow: hidden; border: 1px solid #eceef0; }
+.reward { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--club-line); }
 .reward div { height: 90px; background: var(--grad-card); }
 .reward p { margin: 0; padding: var(--space-3) var(--space-4); font-weight: 600; }
 .arrows { display: flex; justify-content: flex-end; gap: var(--space-4); grid-column: 1 / -1; }
 .arrows button { background: none; border: 0; color: var(--red); font-size: 2rem; cursor: pointer; min-width: 44px; min-height: 44px; }
 .arrows button:disabled { opacity: .35; cursor: default; }
 
-.playtest { position: relative; min-height: 460px; padding: var(--space-12) var(--gutter); background: linear-gradient(90deg, rgb(0 0 0 / .7), transparent 60%), linear-gradient(135deg, #22303a, #0d1418); color: var(--on-ink); }
+.playtest { position: relative; isolation: isolate; overflow: hidden; min-height: 460px; padding: var(--space-12) var(--gutter); background: var(--ink); color: var(--on-ink); }
+.playtest > .media-fill { z-index: -2; object-position: 80% 50%; }
+.playtest::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(0 0 0 / .82), rgb(0 0 0 / .35) 65%, transparent); }
 .playtest .title-bubble { color: var(--text); }
 .playtest p { max-width: 420px; font-size: 1.25rem; }
 .picto { display: inline-grid; place-items: center; width: 72px; height: 48px; border: 2px solid var(--red); border-radius: 10px; color: var(--red); font-weight: 700; margin-bottom: var(--space-4); }
@@ -79,11 +84,11 @@ a { color: inherit; }
 .releases .title-bubble { display: table; margin-left: 0; }
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-bottom: 60px; text-align: left; }
 .card { aspect-ratio: 4/3; overflow: visible; }
-.card__img { position: absolute; inset: 0; border-radius: var(--radius); overflow: hidden; }
-.card__img i { position: absolute; inset: 0; background: var(--g); transition: transform var(--dur) var(--ease); }
+.card__img { position: absolute; inset: 0; border-radius: var(--radius); overflow: hidden; background: var(--text); }
+.card__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur) var(--ease); }
 .card__img::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, rgb(0 0 0 / .75)); }
-.card:hover .card__img i { transform: scale(1.04); }
-.card::after { background: var(--tail-c, #111); }
+.card:hover .card__img img { transform: scale(1.04); }
+.card::after { background: var(--ink); }
 .card__meta { position: absolute; left: 30px; right: 24px; bottom: 30px; display: flex; justify-content: space-between; align-items: end; color: var(--on-ink); z-index: 1; }
 .card__meta b { font: 700 1.2rem/1 var(--font); text-transform: uppercase; letter-spacing: .02em; }
 
@@ -91,10 +96,11 @@ dialog { border: 0; padding: 0; border-radius: var(--radius); width: min(1000px,
 dialog::backdrop { background: rgb(0 0 0 / .55); }
 .dlg { display: grid; grid-template-columns: 1.3fr 1fr; min-height: 420px; }
 .collage { position: relative; overflow: hidden; background: var(--bg); }
-.collage span { position: absolute; width: 140px; height: 140px; transform: rotate(-15deg); border-radius: 50% 50% 12px 50%; }
+.collage span { position: absolute; width: 140px; height: 140px; transform: rotate(-15deg); border-radius: 50% 50% 12px 50%; overflow: hidden; background: var(--ink); }
+.collage span img { width: 100%; height: 100%; object-fit: cover; transform: rotate(15deg) scale(1.3); }
 .dlg__body { display: grid; place-content: center; justify-items: center; gap: var(--space-6); padding: var(--space-9); text-align: center; }
 .dlg__body h2 { margin: 0; font: 700 1.8rem/1.2 var(--font); }
-.close { position: absolute; right: 20px; top: 20px; width: 40px; height: 40px; border: 1px solid #ccd; border-radius: 6px; background: var(--bg); font-size: 20px; cursor: pointer; }
+.close { position: absolute; right: 20px; top: 20px; width: 40px; height: 40px; border: 1px solid var(--muted); border-radius: 6px; background: var(--bg); font-size: 20px; cursor: pointer; }
 
 footer { background: var(--ink); color: var(--on-ink); padding: var(--space-12) var(--gutter); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4); font-size: var(--text-sm); }
 
@@ -123,11 +129,11 @@ footer { background: var(--ink); color: var(--on-ink); padding: var(--space-12) 
 <main>
   <section class="manifesto">
     <div><h1>Nous sommes<br>Studio Kumo,<br>éditeur de jeux</h1><a class="link-u" href="#">Rejoignez l'aventure</a></div>
-    <div class="visual bubble" data-slot="manifesto-visual">VISUEL<span class="slogan bubble bubble--red">Ensemble,<br>vers demain</span></div>
+    <div class="visual bubble" data-slot="manifesto-visual"><img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1200&q=80&h=900" alt="Deux amis jouent ensemble, manettes en main, devant un téléviseur" width="1200" height="900" fetchpriority="high"><span class="slogan bubble bubble--red">Ensemble,<br>vers demain</span></div>
   </section>
 
   <section class="featured">
-    <div class="featured__slot" data-slot="featured-game">VISUEL PLEIN CADRE DU JEU À LA UNE</div>
+    <div class="featured__slot" data-slot="featured-game"><img class="media-fill" src="https://images.unsplash.com/photo-1558324190-c940eb141401?auto=format&fit=crop&w=2000&q=80" alt="Salle d'arcade baignée de néons roses et bleus, rangées de bornes de jeu" width="2000" height="1333" loading="lazy"></div>
     <div class="callouts">
       <div class="callout bubble"><h2>LAMES DE L'AUBE est maintenant disponible</h2><a class="btn-red" href="#">Acheter maintenant !</a></div>
       <div class="callout bubble"><h2 style="color:var(--text)">Le jeu est en promotion cette semaine</h2><a class="link-u" href="#">Voir l'offre</a></div>
@@ -143,7 +149,8 @@ footer { background: var(--ink); color: var(--on-ink); padding: var(--space-12) 
     </div>
   </section>
 
-  <section class="playtest">
+  <section class="playtest" data-slot="playtest">
+    <img class="media-fill" src="https://images.unsplash.com/photo-1574661569551-8374cd0465e2?auto=format&fit=crop&w=2000&q=80" alt="Enseigne lumineuse « ARCADE » en néon rouge dans l'obscurité" width="2000" height="1333" loading="lazy">
     <h2 class="title-bubble bubble">Deviens playtesteur !</h2>
     <div><span class="picto">+ ∷</span><p>Rejoins notre communauté et joue en avant-première aux jeux en développement.</p><a class="btn-red" href="#">Postuler</a></div>
   </section>
@@ -151,21 +158,21 @@ footer { background: var(--ink); color: var(--on-ink); padding: var(--space-12) 
   <section class="releases">
     <h2 class="title-bubble bubble bubble--ink">Jeux tendance et à venir</h2>
     <div class="cards">
-      <article class="card bubble" style="--g: linear-gradient(135deg, #7d93a8, #2d3b48); --tail-c: #2d3b48"><div class="card__img"><i></i></div><div class="card__meta"><b>Escadrille 8</b><span>02/10/2026</span></div></article>
-      <article class="card bubble" style="--g: linear-gradient(135deg, #8fd0ff, #3a7bd5); --tail-c: #3a7bd5"><div class="card__img"><i></i></div><div class="card__meta"><b>Mini Safari</b><span>15/10/2026</span></div></article>
-      <article class="card bubble" style="--g: linear-gradient(135deg, #ffd1a6, #6aa8e8); --tail-c: #4a7fb8"><div class="card__img"><i></i></div><div class="card__meta"><b>Contes d'Éther</b><span>16/10/2026</span></div></article>
+      <article class="card bubble" data-slot="release-1"><div class="card__img"><img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=80&h=600" alt="Manette de jeu posée sur un fond rose et turquoise" width="800" height="600" loading="lazy"></div><div class="card__meta"><b>Escadrille 8</b><span>02/10/2026</span></div></article>
+      <article class="card bubble" data-slot="release-2"><div class="card__img"><img src="https://images.unsplash.com/photo-1574661569551-8374cd0465e2?auto=format&fit=crop&w=800&q=80&h=600" alt="Néon rouge d'une enseigne de salle d'arcade" width="800" height="600" loading="lazy"></div><div class="card__meta"><b>Mini Safari</b><span>15/10/2026</span></div></article>
+      <article class="card bubble" data-slot="release-3"><div class="card__img"><img src="https://images.unsplash.com/photo-1558324190-c940eb141401?auto=format&fit=crop&w=800&q=80&h=600" alt="Allée de bornes d'arcade éclairées au néon" width="800" height="600" loading="lazy"></div><div class="card__meta"><b>Contes d'Éther</b><span>16/10/2026</span></div></article>
     </div>
     <a class="btn-red" href="#">Toutes les prochaines sorties</a>
   </section>
 </main>
-<footer><span>© Studio Kumo (fictif) — démo Kōbō</span><span>Mentions légales · Confidentialité · Cookies</span></footer>
+<footer><span>© Studio Kumo (fictif) — démo Kōbō · Photos : Unsplash</span><span>Mentions légales · Confidentialité · Cookies</span></footer>
 
 <dialog id="dlg" aria-labelledby="dlgTitle">
   <div class="dlg">
     <div class="collage" aria-hidden="true">
-      <span style="left:20px;top:10px;background:#5b7d5a"></span><span style="left:170px;top:-20px;background:var(--ink);border-radius:12px 50% 50% 50%"></span><span style="left:320px;top:40px;background:var(--red);border-radius:50%"></span>
-      <span style="left:60px;top:170px;background:var(--red);border-radius:50% 50% 50% 12px"></span><span style="left:220px;top:150px;background:#c97a3a"></span><span style="left:380px;top:210px;background:var(--ink);border-radius:12px"></span>
-      <span style="left:10px;top:320px;background:#4a6a9a"></span><span style="left:200px;top:310px;background:#f2c94c;border-radius:50% 12px 50% 50%"></span>
+      <span style="left:20px;top:10px"><img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=400&q=80&h=400" alt="" width="400" height="400" loading="lazy"></span><span style="left:170px;top:-20px;background:var(--ink);border-radius:12px 50% 50% 50%"></span><span style="left:320px;top:40px;background:var(--red);border-radius:50%"></span>
+      <span style="left:60px;top:170px;background:var(--red);border-radius:50% 50% 50% 12px"></span><span style="left:220px;top:150px"><img src="https://images.unsplash.com/photo-1558324190-c940eb141401?auto=format&fit=crop&w=400&q=80&h=400" alt="" width="400" height="400" loading="lazy"></span><span style="left:380px;top:210px;background:var(--ink);border-radius:12px"></span>
+      <span style="left:10px;top:320px"><img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=400&q=80&h=400" alt="" width="400" height="400" loading="lazy"></span><span style="left:200px;top:310px;background:var(--red-light);border-radius:50% 12px 50% 50%"></span>
     </div>
     <div class="dlg__body"><svg width="48" height="40" viewBox="0 0 48 40" fill="none" stroke="var(--red)" stroke-width="2.5" aria-hidden="true"><rect x="2" y="2" width="44" height="30" rx="3"/><path d="M2 4l22 16L46 4M8 32l-4 6"/></svg><h2 id="dlgTitle">Rejoignez la communauté et vivez l'actualité en direct !</h2><button class="btn-red" id="closeDlg2">Je m'inscris</button></div>
   </div>

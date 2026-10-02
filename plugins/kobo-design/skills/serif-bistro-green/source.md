@@ -31,7 +31,9 @@ Captures du shot (maquette de landing page de restaurant) :
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom et logo du restaurant | Restaurant inventé « Sauge », icône feuille | Marque |
-| Photos (personne, plats, salle) | Personnage, assiettes et vignettes dessinés en CSS + `data-slot` | Droits d'auteur et droit à l'image |
+| Photos (personne, plats, salle) | Autres photos (cheffe, plats) avec `data-slot` | Droits d'auteur et droit à l'image |
+| Personnage détouré du héros | Portrait de la cheffe cadré dans une arche entre les mots | Pas de détourage propre disponible en photo libre ; l'arche garde l'effet « entre les mots » |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo |
 | Textes anglais du shot | Textes français réécrits | Droits d'auteur |
 | Blanc / crème en petit texte sur orange vif (~3,2:1) | Petit texte en `--ink` sur `--orange`, ou blanc sur `--orange-strong` (#c4472a, 4,9:1) | Lisibilité |
 | Bouton orange vif avec texte blanc | Bouton `--orange-strong` (4,9:1), l'orange vif reste en survol avec texte `--ink` | Lisibilité |

@@ -30,8 +30,8 @@ Aplat `--gold`, texte `--on-gold` Inter 700 14px capitales, coins droits, paddin
 
 ```html
 <div role="tablist" class="medals">
-  <button role="tab" aria-selected="true" class="medal medal--ally"><span class="medal__img"></span><span class="medal__label">Votre base</span></button>
-  <button role="tab" aria-selected="false" class="medal medal--enemy"><span class="medal__img"></span><span class="medal__label">Base ennemie</span></button>
+  <button role="tab" aria-selected="true" class="medal medal--ally"><span class="medal__img"><img src="…" alt="" width="92" height="92"></span><span class="medal__label">Votre base</span></button>
+  <button role="tab" aria-selected="false" class="medal medal--enemy"><span class="medal__img"><img src="…" alt="" width="92" height="92"></span><span class="medal__label">Base ennemie</span></button>
 </div>
 ```
 ```css
@@ -42,11 +42,13 @@ Aplat `--gold`, texte `--on-gold` Inter 700 14px capitales, coins droits, paddin
 .medal[aria-selected="true"] { color: var(--text); }
 .medal[aria-selected="false"] .medal__img { opacity: .7; }
 ```
+Dans le cercle : une image réelle (lieu, héros, objectif) en `object-fit: cover`, jamais un dégradé qui imite une image (voir `assets.md`).
+
 Le **grand médaillon** (180px, anneau 8px) affiché à côté de l'explication reprend la même forme, avec un anneau extérieur ouvert en haut (deux arcs).
 
 ## Carte en fond
 
-Image de carte (vue de dessus) à droite de la section, masquée par un dégradé radial vers `--bg` : `mask-image: radial-gradient(60% 60% at 60% 50%, #000 40%, transparent 75%)`.
+Image réelle de carte ou de terrain (vue de dessus, voir `assets.md`) à droite de la section, masquée par un dégradé radial vers `--bg` : `mask-image: radial-gradient(60% 60% at 60% 50%, #000 40%, transparent 75%)`.
 
 ## Bloc vidéo + vignettes
 
@@ -58,7 +60,7 @@ Vidéo ou image plein cadre, voile sombre à gauche. Texte à gauche : « Ciném
 
 ## Section d'introduction (blanche)
 
-Fond `--paper`, titre en `--ink` italique, paragraphe centré `--ink`, puis une grande illustration panoramique qui fait la transition vers la section sombre suivante.
+Fond `--paper`, titre en `--ink` italique, paragraphe centré `--ink`, puis une grande image panoramique réelle (paysage, château, voir `assets.md`) qui fait la transition vers la section sombre suivante.
 
 ## États
 

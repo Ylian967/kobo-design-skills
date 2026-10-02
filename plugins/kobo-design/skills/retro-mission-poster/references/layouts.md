@@ -8,7 +8,7 @@ Chaque chapitre = `100vh` (ou `100dvh`), défilement par chapitre (`scroll-snap-
 ┌─ cadre crème ─────────────────────────────┐
 │ LOGO                                  ≡   │
 │                         CHAPITRE 1        │
-│   (image collage)       TITRE EN          │
+│   (photos collage)      TITRE EN          │
 │                         BIAIS             │
 │                              ACCROCHE     │
 │              ( ↓ )           [BOUTON]     │
@@ -17,7 +17,7 @@ Chaque chapitre = `100vh` (ou `100dvh`), défilement par chapitre (`scroll-snap-
 
 ## Chapitre « mission »
 
-Planète géante en haut, désert en bas, silhouettes au premier plan, mot géant rouge entre les deux, anneau ↓ en bas au centre.
+Image réelle du ciel (planète, lancement) en haut, désert en bas, silhouettes ou horizon détouré au premier plan (voir `assets.md`), mot géant rouge entre les deux, anneau ↓ en bas au centre.
 
 ## Pages de lecture (si nécessaire)
 

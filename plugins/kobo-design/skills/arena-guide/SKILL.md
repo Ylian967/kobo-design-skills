@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Navigation, boutons, titres, médaillons-onglets, bloc vidéo + vignettes, carte en fond, héros vidéo. |
 | `references/layouts.md` | Héros cinématique, intro blanche, sections « objectif », sections vidéo, mobile. |
 | `references/motion.md` | Courbe « snap » mesurée, changements d'onglet, apparitions. |
+| `references/assets.md` | Avant de placer une image : paysages fantasy, médaillons, carte fondue, voiles, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Mesures et écarts. |
 
@@ -44,6 +45,10 @@ Les polices d'origine (Beaufort, Spiegel) sont propriétaires. Équivalents Goog
 | Titres | **Spectral** 800 italique | capitales, 57px desktop, interligne 1.125 |
 | Texte | **Source Sans 3** 400/600 | 18px / 28px |
 | Navigation, boutons, onglets | **Inter** 600/700 | 13–14px, capitales, espacement +0.08em |
+
+## Images et 3D
+
+Les visuels sont de vraies images : captures, cinématiques et splash arts du projet en priorité, sinon photos de paysages de légende (châteaux sur la montagne, vallées, parois rocheuses) et de scène esport. Elles sont toujours posées sous un **voile nuit** (dégradé latéral pour le texte du héros, fondus blanc → nuit pour le panorama, flou + radial pour les fonds de section) et, dans les médaillons, recadrées en cercle derrière l'anneau de camp. Les anneaux, losanges et filets restent en CSS ; jamais de héros, de bâtiment ou de carte dessiné en CSS/SVG à la place d'une image. 3D optionnelle. Détails : `references/assets.md`.
 
 ## Signature
 
@@ -70,4 +75,5 @@ Les polices d'origine (Beaufort, Spiegel) sont propriétaires. Équivalents Goog
 - [ ] Médaillons accessibles au clavier.
 - [ ] Contrastes vérifiés, rouge seulement en grand.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du jeu d'origine.

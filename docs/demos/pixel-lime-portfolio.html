@@ -60,21 +60,11 @@ a { color: inherit; }
 
 /* ---------- Héros ---------- */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; background: var(--photo-0); color: var(--white); isolation: isolate; }
-.photo { position: absolute; inset: 0; z-index: -2;
-  background: radial-gradient(ellipse 60% 70% at 64% 38%, var(--photo-3) 0, var(--photo-2) 34%, var(--photo-1) 64%, var(--photo-0) 100%); }
-.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--photo-0) 45%, transparent), transparent 22%, transparent 55%, color-mix(in srgb, var(--photo-0) 70%, transparent)); }
+.photo { position: absolute; inset: 0; z-index: -2; margin: 0; background: radial-gradient(ellipse 60% 70% at 64% 38%, var(--photo-3) 0, var(--photo-1) 64%, var(--photo-0) 100%); /* repli si la photo ne charge pas */ }
+/* Portrait réel : N&B dur + grain (le grain est posé par .grain::before) */
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 62% 35%; filter: grayscale(1) contrast(1.15) brightness(0.88); color: transparent; }
+.photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--photo-0) 45%, transparent), transparent 22%, transparent 50%, color-mix(in srgb, var(--photo-0) 78%, transparent)); }
 .grain::before { content: ""; position: absolute; inset: 0; z-index: 3; filter: url(#grain); opacity: var(--grain-opacity); mix-blend-mode: overlay; pointer-events: none; }
-.figure { position: absolute; left: 47%; bottom: 0; width: min(44vw, 620px); aspect-ratio: 0.86; }
-.figure > * { position: absolute; }
-.f-shoulders { left: -6%; right: -6%; bottom: 0; height: 40%; border-radius: 50% 50% 0 0 / 80% 80% 0 0; background: linear-gradient(100deg, var(--photo-0), var(--photo-2) 38%, var(--photo-3) 52%, var(--photo-1) 78%, var(--photo-0)); }
-.f-collar { left: 32%; width: 36%; bottom: 30%; height: 12%; border-radius: 40% 40% 50% 50%; background: linear-gradient(90deg, var(--photo-1), var(--photo-3), var(--photo-1)); }
-.f-neck { left: 40%; width: 20%; bottom: 36%; height: 16%; background: linear-gradient(90deg, var(--photo-2), var(--photo-4) 45%, var(--photo-3)); }
-.f-head { left: 29%; width: 42%; top: 7%; height: 47%; border-radius: 47% 47% 44% 44% / 50% 50% 50% 50%; background: radial-gradient(circle at 36% 38%, var(--photo-5), var(--photo-4) 32%, var(--photo-3) 62%, var(--photo-2) 92%); }
-.f-hair { left: 25%; width: 50%; top: 2%; height: 25%; border-radius: 50% 50% 34% 26% / 80% 80% 30% 30%; background: linear-gradient(165deg, var(--photo-2), var(--photo-0) 60%); }
-.f-brow { left: 34%; width: 32%; top: 26%; height: 6%; border-radius: 50%; background: radial-gradient(ellipse at 50% 60%, color-mix(in srgb, var(--photo-0) 22%, transparent), transparent 70%); }
-.f-nose { left: 47%; width: 7%; top: 33%; height: 10%; border-radius: 40% 40% 50% 50%; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--photo-0) 16%, transparent)); }
-.f-ear { left: 67%; width: 7%; top: 28%; height: 11%; border-radius: 40% 60% 60% 40%; background: linear-gradient(90deg, var(--photo-3), var(--photo-2)); }
-.f-shade { left: 29%; width: 42%; top: 7%; height: 47%; border-radius: inherit; background: linear-gradient(90deg, transparent 50%, color-mix(in srgb, var(--photo-0) 45%, transparent)); border-radius: 47% 47% 44% 44% / 50% 50% 50% 50%; }
 
 /* Mosaïque de pixels (signature) */
 .mosaic { position: absolute; display: grid; grid-template-columns: repeat(var(--cols), var(--pixel)); grid-auto-rows: var(--pixel); pointer-events: none; }
@@ -82,7 +72,7 @@ a { color: inherit; }
 .mosaic b.k { background: var(--ink); }
 .mosaic b.w { background: var(--white); }
 .mosaic b.o { background: transparent; box-shadow: inset 0 0 0 2px var(--lime); }
-.m-face { left: calc(47% + min(44vw, 620px) * .40); top: 21%; }
+.m-face { left: 58%; top: 18%; }
 .m-low { left: var(--edge); bottom: 30%; }
 .m-corner { right: 0; top: calc(var(--pixel) * 4); }
 
@@ -94,7 +84,7 @@ a { color: inherit; }
 .nav .avail { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--muted-dark); }
 .nav .avail i { width: 7px; height: 7px; background: var(--lime); animation: blink 1.2s var(--ease-step) infinite; }
 
-.hero-tags { position: absolute; z-index: 4; left: calc(47% + min(44vw, 620px) * .12); top: 30%; display: grid; gap: 6px; justify-items: start; }
+.hero-tags { position: absolute; z-index: 4; left: 50%; top: 34%; display: grid; gap: 6px; justify-items: start; }
 .hero-tags .tag:nth-child(2) { margin-left: 34px; }
 .hero-copy { position: absolute; z-index: 5; left: var(--edge); right: var(--edge); bottom: clamp(24px, 6vh, 64px); }
 .name { margin: 0; font: var(--weight-name) var(--text-name)/var(--leading-name) var(--font-sans); letter-spacing: var(--tracking-name); }
@@ -176,19 +166,9 @@ a { color: inherit; }
 .t1 .disc { left: 18%; top: 16%; width: 46%; aspect-ratio: 1; border-radius: 50%; background: var(--ink); }
 .t1 .bar { right: 12%; top: 22%; width: 22%; height: 56%; background: repeating-linear-gradient(180deg, var(--ink) 0 6px, transparent 6px 18px); }
 .t1 .word { left: 8%; bottom: 8%; font: 700 clamp(1.5rem, 3vw, 2.5rem)/1 var(--font-sans); letter-spacing: -0.04em; color: var(--ink); }
-.t2 { background: linear-gradient(180deg, var(--photo-5), var(--photo-4) 46%, var(--photo-2) 47%, var(--photo-1)); }
-.t2 .sun { left: 58%; top: 18%; width: 18%; aspect-ratio: 1; border-radius: 50%; background: var(--white); }
-.t2 .ridge { left: 0; right: 0; bottom: 0; height: 60%; background: var(--photo-1); clip-path: polygon(0 40%, 18% 22%, 34% 36%, 52% 8%, 70% 30%, 86% 18%, 100% 34%, 100% 100%, 0 100%); }
-.t2 .label { left: 6%; top: 8%; font: 500 var(--text-2xs) var(--font-mono); letter-spacing: var(--tracking-mono); color: var(--ink); text-transform: uppercase; }
-.t3 { background: var(--ink); }
-.t3 .poster { width: 24%; aspect-ratio: 3/4; background: var(--white); top: 18%; border-radius: 2px; }
-.t3 .poster:nth-child(1) { left: 12%; rotate: -6deg; background: var(--photo-4); }
-.t3 .poster:nth-child(2) { left: 38%; top: 12%; background: var(--lime); }
-.t3 .poster:nth-child(3) { left: 64%; rotate: 5deg; }
-.t3 .poster::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: 12%; height: 18%; background: repeating-linear-gradient(180deg, var(--ink) 0 2px, transparent 2px 6px); opacity: .7; }
-.t4 { background: var(--lime); }
-.t4 .glyph { left: 6%; bottom: -14%; font: 700 clamp(9rem, 22vw, 20rem)/1 var(--font-sans); letter-spacing: -0.06em; color: var(--ink); }
-.t4 .dot { right: 10%; top: 12%; width: 22%; aspect-ratio: 1; border: 2px solid var(--ink); border-radius: 50%; }
+/* Vignettes photo : même traitement N&B que le héros, le lime n'apparaît qu'en pixels au survol */
+.thumb-photo { background: var(--photo-1); }
+.thumb-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); color: transparent; }
 .card-row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); margin-top: var(--space-4); }
 .card-row h3 { margin: 0; font: 500 var(--text-lg)/1.2 var(--font-sans); letter-spacing: -0.02em; }
 .card-row h3 .hl::before { transform: scaleX(0); transition: transform var(--dur) var(--ease); }
@@ -265,8 +245,8 @@ a { color: inherit; }
   :root { --grid-cell: 40px; --pixel: 15px; }
   .nav { gap: var(--space-2); }
   .nav .avail, .nav .hide-s { display: none; }
-  .figure { left: 18%; width: 92vw; bottom: 22%; }
-  .m-face { left: 54%; top: 20%; }
+  .photo img { object-position: 60% 30%; }
+  .m-face { left: 50%; top: 16%; }
   .m-low { bottom: 39%; }
   .m-corner { display: none; }
   .hero-tags { left: 12%; top: 22%; }
@@ -287,11 +267,7 @@ a { color: inherit; }
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
 
 <header class="hero grain" id="top">
-  <div class="photo" data-slot="portrait-bw" role="img" aria-label="Portrait en noir et blanc du designer (emplacement)">
-    <div class="figure" aria-hidden="true">
-      <div class="f-shoulders"></div><div class="f-neck"></div><div class="f-collar"></div><div class="f-hair"></div><div class="f-ear"></div><div class="f-head"></div><div class="f-shade"></div><div class="f-brow"></div><div class="f-nose"></div><div class="f-hair" style="height:14%;top:4%;left:30%;width:40%"></div>
-    </div>
-  </div>
+  <figure class="photo" data-slot="portrait-bw"><img src="https://images.unsplash.com/photo-1693008370682-d330a57024ba?auto=format&fit=crop&w=2000&q=80" width="2000" height="1333" fetchpriority="high" alt="Portrait en noir et blanc : un homme assis au volant d'une voiture, la main contre le visage"></figure>
   <div class="mosaic m-face" aria-hidden="true" data-pattern="........xx../......xxxx.x/.....xxoxxxx/...x.xxxx.xx/....xxkxxx../..xxxx.xxxxx/.x..xxwxx.x./...xx.xx..x./..x...x...../......x....."></div>
   <div class="mosaic m-low" aria-hidden="true" data-pattern="x.x..../xxx.x../.x.xxx.x"></div>
   <div class="mosaic m-corner" aria-hidden="true" data-pattern="..xx/.x.x/xxxx/..x."></div>
@@ -390,16 +366,16 @@ a { color: inherit; }
           <div class="card-row"><h3><span class="hl">orbe café</span></h3><span class="mono">identité · 2026</span></div>
         </a>
         <a class="card" href="#" data-cat="web">
-          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t2"><span class="sun"></span><span class="ridge"></span><span class="label">refuge 1820 — réserver</span></div><div class="mosaic" style="left:8%;bottom:12%" aria-hidden="true" data-pattern="x.x/xxx/.x."></div></div>
+          <div class="thumb thumb-photo" data-slot="project-cover"><div class="thumb-inner"><img src="https://images.unsplash.com/photo-1487338875411-8880f74114a2?auto=format&fit=crop&w=1200&h=900&q=80" width="1200" height="900" loading="lazy" alt="Poste de travail avec deux écrans affichant des maquettes, en noir et blanc"></div><div class="mosaic" style="left:8%;bottom:12%" aria-hidden="true" data-pattern="x.x/xxx/.x."></div></div>
           <div class="card-row"><h3><span class="hl">refuge mille-huit</span></h3><span class="mono">site web · 2025</span></div>
         </a>
         <a class="card" href="#" data-cat="ed">
-          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t3"><span class="poster"></span><span class="poster"></span><span class="poster"></span></div><div class="mosaic" style="right:6%;top:8%" aria-hidden="true" data-pattern="xx./x.x/.xx"></div></div>
-          <div class="card-row"><h3><span class="hl">festival basse lumière</span></h3><span class="mono">affiches · 2025</span></div>
+          <div class="thumb thumb-photo" data-slot="project-cover"><div class="thumb-inner"><img src="https://images.unsplash.com/photo-1664255898524-0cf78e27416f?auto=format&fit=crop&w=1200&h=900&q=80" width="1200" height="900" loading="lazy" alt="Photo de campagne en noir et blanc : un homme accroupi devant une voiture"></div><div class="mosaic" style="right:6%;top:8%" aria-hidden="true" data-pattern="xx./x.x/.xx"></div></div>
+          <div class="card-row"><h3><span class="hl">basse lumière</span></h3><span class="mono">campagne photo · 2025</span></div>
         </a>
         <a class="card" href="#" data-cat="id">
-          <div class="thumb" data-slot="project-cover"><div class="thumb-inner t4"><span class="glyph">a.</span><span class="dot"></span></div><div class="mosaic" style="right:12%;bottom:12%" aria-hidden="true" data-pattern="kk./k.k/.kk"></div></div>
-          <div class="card-row"><h3><span class="hl">atelier amont</span></h3><span class="mono">identité · 2024</span></div>
+          <div class="thumb thumb-photo" data-slot="project-cover"><div class="thumb-inner"><img src="https://images.unsplash.com/photo-1664255898007-37e69038d38c?auto=format&fit=crop&w=1200&h=900&q=80" width="1200" height="900" loading="lazy" alt="Pull noir photographié en noir et blanc, gros plan sur la maille"></div><div class="mosaic" style="right:12%;bottom:12%" aria-hidden="true" data-pattern="kk./k.k/.kk"></div></div>
+          <div class="card-row"><h3><span class="hl">atelier amont</span></h3><span class="mono">identité textile · 2024</span></div>
         </a>
       </div>
     </div>
@@ -433,7 +409,7 @@ a { color: inherit; }
         </div>
       </form>
       <div class="foot mono">
-        <span>© 2026 noé valin (fictif) — démo Kōbō</span>
+        <span>© 2026 noé valin (fictif) — démo Kōbō · Photos : Unsplash</span>
         <nav aria-label="Liens"><a href="#">Réseaux</a><a href="#">Journal</a><a href="#">Mentions</a><a href="#top">Haut ↑</a></nav>
       </div>
     </div>

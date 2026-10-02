@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Navigation, boutons pilule, ruban « piste », bloc numéroté, carrousel de vignettes, pellicule, pagination latérale, défilant. |
 | `references/layouts.md` | Héros, sections numérotées en zigzag, mobile. |
 | `references/motion.md` | Courbe easeOutCubic, défilant, entrées en glissement. |
+| `references/assets.md` | Avant de placer une image : photos de rue, duotone noir → lime, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Mesures et écarts. |
 
@@ -41,6 +42,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 |---|---|---|
 | Display (titres, numéros, boutons, nav, dates) | **Anton** (équivalent d'Impact) | 25px dominant, titres 53px, numéros 120px, interligne 1 |
 | Paragraphes, méta | **Inter** 400/700 | 12–16px |
+
+## Images et 3D
+
+Les visuels sont de vraies images : key art et personnages du projet en priorité, sinon photos de rue (skate en action, murs de graffitis et d'autocollants, tunnels, ruelles), contrastées et légèrement désaturées. Sur un bloc lime, l'image passe en **duotone noir → lime** (N&B en `multiply` sur `--accent`) ; ailleurs elle garde ses couleurs, recouverte au besoin des rayures à 45°. Rubans, rayures, pellicule et autocollants restent des formes CSS ; jamais de personnage, de skate ou de décor dessiné en CSS/SVG à la place d'une photo. 3D optionnelle. Détails : `references/assets.md`.
 
 ## Signature
 
@@ -67,4 +72,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Un seul bouton lime plein par écran.
 - [ ] Défilant pausable, mouvement réduit respecté.
 - [ ] Testé à 375px et 1440px.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du jeu d'origine.

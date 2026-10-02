@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Barre de navigation, bouton « Télécharger », en-tête de section, onglets, carte d'actualité, panneau de personnage, frise d'emblèmes, carrousel de vignettes, citations, rail social. |
 | `references/layouts.md` | Accueil plein écran, page personnages, page actualités, mobile. |
 | `references/motion.md` | Intro « hyperespace », transitions de panneaux, survols. |
+| `references/assets.md` | Avant de placer une image ou la scène 3D : photos d'espace, traitements, prompts IA, recette Three.js (étoiles, nébuleuse, planète). |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Mesures et écarts. |
 
@@ -44,6 +45,10 @@ La référence utilise des polices système (Microsoft YaHei, Inter en appoint).
 | Interface, texte | **Noto Sans** 400/500 (+ Noto Sans SC pour le chinois/japonais) | 11–15px, poids 500 dominant |
 | Nom de personnage, grands titres | Noto Sans 300/400 | 30–50px, léger, blanc |
 | Citations | **Noto Serif** 400 | 11–12px, blanc, sur bandes noires |
+
+## Images et 3D
+
+Le fond étoilé est une **vraie scène 3D** (Three.js) fixe derrière l'interface : champ d'étoiles, nébuleuse en particules aux couleurs des tokens et planète gazeuse annelée d'or qui s'éloigne au défilement, posée sur une photo de nébuleuse qui sert de repli. Les illustrations et vignettes sont de vraies images (illustrations du projet, sinon photos d'espace : nébuleuses, stations, Terre en orbite), fondues dans le verre par un masque en dégradé. Jamais d'étoiles, de planète ou de personnage dessinés en CSS/SVG à la place d'une image ou de la 3D. Détails : `references/assets.md`.
 
 ## Signature
 
@@ -60,7 +65,7 @@ La référence utilise des polices système (Microsoft YaHei, Inter en appoint).
 
 - Coin unique : `borderTopRightRadius: 28` (natif, aucun souci).
 - Verre : `expo-blur` (`BlurView intensity={30} tint="dark"`) + calque bleu `--glass-veil`.
-- Fond étoilé : image statique ou `react-native-svg` avec quelques centaines de cercles ; éviter un canvas animé en continu.
+- Fond étoilé : photo de nébuleuse (`expo-image`) + scène `expo-gl` / `@react-three/fiber/native` légère (voir `assets.md`) ; sur appareil faible, l'image seule.
 - Frise d'emblèmes : `FlatList` verticale avec `snapToInterval`.
 
 ## Avant de livrer
@@ -70,4 +75,5 @@ La référence utilise des polices système (Microsoft YaHei, Inter en appoint).
 - [ ] Or réservé à l'actif et au bouton principal.
 - [ ] Contrastes et cibles tactiles vérifiés.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément de l'univers d'origine.

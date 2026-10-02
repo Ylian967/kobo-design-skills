@@ -22,7 +22,7 @@
   --paper: #ffffff;         /* pilule blanche posée sur la carte rouge */
   --ink: #111111;           /* texte de la pilule blanche */
 
-  /* Photos de nuit (emplacements dessinés en CSS) */
+  /* Photos de nuit : couleurs de repli et de teinte des vraies photos (voir assets.md) */
   --night: #0b1626;         /* ciel bleu nuit des photos */
   --night-2: #13284a;
   --night-3: #1f4170;
@@ -31,6 +31,7 @@
   --trail-amber: #ffb547;   /* traînées de phares */
   --concrete: #6f6a64;      /* béton, pierre */
   --glass: #2c4a63;         /* façades vitrées */
+  --grade-night: saturate(0.8) contrast(1.08) brightness(0.82);  /* étalonnage commun des photos */
 
   /* Typographie */
   --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;   /* mot-marque, titres, chiffres */

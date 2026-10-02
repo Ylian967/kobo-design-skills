@@ -73,7 +73,7 @@ Précise-le dans ta demande. Chaque skill a une section « Adaptation React / Re
 - **Un style par projet.** Mélanger deux skills donne un résultat moyen.
 - **Commence par les tokens.** Demande d'abord : « installe les tokens du skill dans mon projet » (couleurs, polices, espacements), puis construis les écrans.
 - **Montre la démo.** Tu peux dire : « inspire-toi de `examples/demo.html` du skill pour la structure ».
-- **Tes images.** Les démos utilisent des formes à la place des illustrations. Pour un rendu proche des références, fournis tes propres images (personnages, photos) : le skill indique où les placer (`data-slot`).
+- **Les images et la 3D.** Chaque skill a un fichier `references/assets.md` : quel type de photo ou de rendu utiliser, avec quel cadrage et quel traitement (noir et blanc, duotone…), où les trouver (tes images, Unsplash, Pexels, génération IA avec un prompt prêt à l'emploi) et, pour les styles 3D, comment monter la scène (Three.js, React Three Fiber, modèles `.glb`). Les démos utilisent des photos Unsplash libres : remplace-les par les tiennes aux emplacements `data-slot`.
 
 ---
 
@@ -87,7 +87,8 @@ plugins/kobo-design/skills/<style>/
 │   ├── tokens.css        ← variables CSS (couleurs, polices, espaces, durées)
 │   ├── components.md     ← boutons, cartes, menus, champs… avec code
 │   ├── layouts.md        ← structure des pages + version mobile
-│   └── motion.md         ← animations et version « mouvement réduit »
+│   ├── motion.md         ← animations et version « mouvement réduit »
+│   └── assets.md         ← images et 3D : sujets, traitements, sources, recette 3D
 └── examples/
     └── demo.html         ← page d'exemple à ouvrir dans le navigateur
 ```
@@ -143,7 +144,7 @@ Le skill `site-to-skill` décrit toute la méthode : mesurer le site dans le nav
 | Claude Code n'utilise pas le skill | L'appeler par son nom : `/kobo-design:<style>` |
 | `/kobo-design:…` est inconnu | Plugin pas installé ou pas rechargé : `/plugin` puis `/reload-plugins` |
 | Les couleurs ne correspondent pas | Vérifier que les tokens ont été copiés tels quels dans le projet |
-| Le rendu est « vide » | Normal sans illustrations : ajouter tes images aux emplacements `data-slot` |
+| Les photos ou la 3D ne s'affichent pas | Les démos chargent les photos (Unsplash) et Three.js depuis Internet : vérifier la connexion ; hors ligne, une couleur de repli s'affiche |
 | Une police ne s'affiche pas | Vérifier le lien Google Fonts du skill, ou installer le paquet `@expo-google-fonts/…` en React Native |
 | `check.py` signale un contraste | Ajuster la couleur dans `tokens.css` jusqu'à repasser au-dessus de 4,5:1 |
 

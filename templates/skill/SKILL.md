@@ -31,6 +31,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | `references/components.md` | Avant de coder un bouton, une carte, une navigation, un champ, un badge, un modal. |
 | `references/layouts.md` | Avant de construire une page : structures de héros, sections, grilles, pied de page. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, traitements, sources, prompts IA, recette 3D. |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
 | `source.md` | Pour connaître le site de référence et les mesures relevées. |
 
@@ -41,6 +42,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 ## Couleurs
 
 {{Tableau court des rôles de couleur (renvoie vers tokens.css pour les valeurs). Règle d'usage de l'accent.}}
+
+## Images et 3D
+
+{{2 à 4 phrases : quel type de photos/rendus, quel traitement, si une scène 3D est attendue. Rappeler : jamais de dessin CSS/SVG à la place d'une photo ; détails dans `references/assets.md`.}}
 
 ## Signature
 
@@ -62,4 +67,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 - [ ] Mise en page issue de `references/layouts.md`, testée à 375px et 1440px.
 - [ ] Animations conformes à `references/motion.md`, mouvement réduit respecté.
 - [ ] Contrastes vérifiés.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] La signature est présente, sans excès.

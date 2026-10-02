@@ -31,6 +31,7 @@
 | Orange de fond #ff6a13 avec titres blancs (2,9:1) | `--orange` #e85a0c (3,6:1, titres ≥ 24px uniquement) ; #ff6a13 gardé en décor | Contraste |
 | Mot jaune directement sur orange (2,2:1) | Mot jaune avec contour + ombre brune `--ink` (13,4:1 sur le contour) | Lisibilité |
 | Prix orange sur fond clair | `--orange-ink` #b84300 (5,5:1) | Contraste |
-| Nom de marque, logo, emballages, photos produit | Marque fictive « Trailo », emballages dessinés en CSS (`data-slot`) | Marque et droits d'auteur |
-| Illustrations d'aventuriers | Silhouettes SVG simplifiées redessinées | Droits d'auteur |
+| Nom de marque, logo, emballages, photos produit | Marque fictive « Trailo », autres photos de produit libres dans des cadres autocollants (`data-slot`) | Marque et droits d'auteur |
+| Illustrations d'aventuriers | Vraies photos d'escalade passées en duotone brun → orange et découpées en crêtes | Droits d'auteur ; garder l'esprit « affiche » avec des images réelles |
 | Textes anglais (« GRAB YOUR'S », « SHOP NOW »…) | Textes français inventés | Identité, langue |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans images propriétaires |

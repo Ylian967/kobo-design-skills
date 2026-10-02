@@ -33,4 +33,5 @@
 |---|---|---|
 | Microsoft YaHei (système Windows) | Noto Sans / Noto Sans SC | Disponible partout via Google Fonts |
 | Illustrations, logo, emblèmes de factions | Emplacements `data-slot` et formes | Droits d'auteur |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash) et scène Three.js, à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |
 | Intro vidéo/canvas d'origine | Hyperespace recodé en canvas simple | Identité de l'œuvre |

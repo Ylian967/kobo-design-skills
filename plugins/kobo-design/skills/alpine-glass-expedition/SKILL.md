@@ -22,7 +22,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (photo froide plein
 5. **Hiérarchie** : le titre crie (blanc, 48–96px), tout le reste chuchote (11–14px). Pas de taille intermédiaire en héros.
 6. **Une seule couleur chaude** : `--star`, uniquement pour l'étoile de note (et l'état d'erreur sur fond nuit). Jamais en fond large.
 7. **Contraste** : texte blanc seulement sur zones sombres de la photo (vignette, versants à l'ombre) ou sur `--deep`/`--night` ; sur clair, texte `--deep` ou `--muted` (paires vérifiées dans `references/tokens.css`).
-8. **Accessibilité** : cibles ≥ 44px (les puces de 36px ont une zone tactile étendue), `:focus-visible` blanc (bleu profond sur clair), `prefers-reduced-motion` coupe dérive de la brume et entrées ; la photo a un `aria-label`.
+8. **Accessibilité** : cibles ≥ 44px (les puces de 36px ont une zone tactile étendue), `:focus-visible` blanc (bleu profond sur clair), `prefers-reduced-motion` coupe dérive de la brume et entrées ; la photo a un `alt` descriptif.
 9. **Aucune valeur en dur** : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
 
 ## Fichiers du skill
@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (photo froide plein
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
 | `references/components.md` | Avant de coder un bouton (pilule, verre, lecture), la nav, une puce, la note, une carte de voyage, un panneau de verre, un champ. |
 | `references/layouts.md` | Avant de construire une page : héros montagne, grille de séjours, méthode, témoignage, appel final, mobile. |
+| `references/assets.md` | Avant de placer une image : photo de montagne du héros, cartes de séjour, avatar, traitement froid, sources, prompts IA. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
 | `examples/demo.html` | Pour voir le résultat attendu (agence fictive « Hautvent ») et reprendre des morceaux. |
 | `source.md` | Shot de référence, ce qui a été vu, écarts. |
@@ -55,13 +56,17 @@ La serif du shot n'est pas identifiée : elle est contrastée, transitionnelle, 
 |---|---|---|
 | Brume | `--fog`, `--frost` | fond des sections claires, cartes claires |
 | Glace | `--ice` | lointains, texte secondaire sur nuit |
-| Versants | `--steel`, `--slate` | photo de remplacement ; `--slate` en texte secondaire sur clair |
+| Versants | `--steel`, `--slate` | teinte froide et repli des photos ; `--slate` en texte secondaire sur clair |
 | Profond | `--deep` | texte sur clair, sections sombres, pilule sombre |
 | Nuit | `--night` | bas de la vignette, pied de page |
 | Blanc | `--white` / `--on-white` | titres sur photo, pilule principale |
 | Verre | `--glass`, `--glass-strong`, `--glass-border` | bouton rond, panneaux, puces sur carte |
 | Méta | `--muted` | surtitres et méta sur fond clair |
 | Chaud | `--star` | étoile de la note, erreur sur nuit |
+
+## Images et 3D
+
+La montagne est une **vraie photo** plein cadre (sommets enneigés, brume, ciel sombre au-dessus du titre), refroidie en CSS : désaturation, teinte bleue en `mix-blend-mode: color`, calque de brume qui dérive, vignette. Les cartes de séjour et l'avatar du témoignage sont aussi de vraies photos traitées de la même façon. Pas de 3D attendue. Jamais de paysage, de personnage ou d'objet dessiné en CSS/SVG à la place d'une photo ; détails dans `references/assets.md`.
 
 ## Signature
 
@@ -72,6 +77,7 @@ Avec lui, le **trio du bas du héros** : bouton lecture rond + 3 lignes en capit
 ## À éviter
 
 - Des photos chaudes (coucher de soleil orange, forêt verte saturée) : le style est froid et brumeux.
+- Un paysage dessiné en SVG ou des cartes en dégradés CSS à la place des photos.
 - Des boutons carrés, des ombres dures, des cartes à angles vifs.
 - Mettre le titre en sans-serif ou en gras : il est en serif fine, capitales.
 - Multiplier le verre (chaque carte, chaque bouton) : il perd son effet et coûte cher au rendu.
@@ -93,6 +99,7 @@ Avec lui, le **trio du bas du héros** : bouton lecture rond + 3 lignes en capit
 
 - [ ] Tokens importés, aucune couleur hors `:root` ; palette froide, `--star` seul point chaud.
 - [ ] Héros : photo plein cadre + vignette, nav (logo, liens centrés, pilule blanche), titre serif capitales 2 lignes, texte 3 lignes.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Un bouton rond en verre ; trio du bas (lecture + texte, puces, note).
 - [ ] Texte blanc uniquement sur zones sombres ; contrastes vérifiés.
 - [ ] Boutons : repos, survol, appui, focus, désactivé, chargement (`aria-busy`).

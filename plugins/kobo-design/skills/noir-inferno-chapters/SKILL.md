@@ -32,7 +32,8 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Scène peinte, titre de chapitre, numéro, coins d'interface, sommaire, brume et particules. |
 | `references/layouts.md` | Ouverture, chapitre, sommaire, fin, mobile. |
 | `references/motion.md` | Fondus au noir, dérive, apparition du titre. |
-| `examples/demo.html` | Démo de 4 chapitres en CSS. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, N&B contrasté, grain, vignettage, sources, prompts IA, idée 3D. |
+| `examples/demo.html` | Démo de 4 chapitres en photos N&B. |
 | `source.md` | Observations et écarts. |
 
 ## Typographie
@@ -42,6 +43,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Titres de chapitre | **Playfair Display SC** 900 (équivalent choisi à l'œil) | 28–48px, capitales, interligne 1, centré |
 | Interface | **Josefin Sans** 400 | 10px, capitales, +0.28em |
 | Numéro | Playfair Display 400 | 32–44px |
+
+## Images et 3D
+
+Chaque chapitre est **une vraie image** (photo ou illustration peinte) en noir et blanc très contrasté : noirs bouchés, blancs francs, grain, vignettage et brume par-dessus. Les sujets sont humains et graves (foule, geste, visage, silhouette dans le noir). La brume, le vignettage et le grain restent en CSS ; jamais de dessin CSS/SVG à la place d'une photo, d'une foule, d'un visage ou d'un lieu. La 3D est optionnelle (parallaxe 2,5D par carte de profondeur). Détails et code dans `references/assets.md`.
 
 ## Signature
 
@@ -66,4 +71,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Un titre court + un numéro par chapitre.
 - [ ] Interface uniquement aux coins.
 - [ ] Sommaire clavier et textes alternatifs.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.

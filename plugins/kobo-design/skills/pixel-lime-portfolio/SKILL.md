@@ -33,6 +33,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (photo N&B + pixels
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
 | `references/components.md` | Avant de coder un bouton, la nav, une étiquette, la mosaïque, un surlignage, un tracé, une fiche, une carte projet, un filtre, un champ. |
 | `references/layouts.md` | Avant de construire une page : héros photo, énoncé, fiches, grille de projets, services, contact, mobile. |
+| `references/assets.md` | Avant de placer une image : portrait N&B du héros, vignettes de projets, placement de la grappe, sources, prompts IA, traitements. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
 | `examples/demo.html` | Pour voir le résultat attendu (portfolio fictif « noé valin ») et reprendre des morceaux. |
 | `source.md` | Shot de référence, ce qui a été vu, écarts. |
@@ -61,9 +62,13 @@ La grotesque du shot n'est pas identifiée : Inter Tight en est l'équivalent le
 | Accent doux | `--lime-soft` | survol d'un surlignage, fond de puce active secondaire |
 | Surfaces nuit | `--card-dark`, `--rule-dark` | champs, cartes sur nuit |
 | Secondaire | `--muted` (sur clair), `--muted-dark` (sur nuit) | méta, aides, descriptions |
-| Photo | `--photo-0` → `--photo-5` | dégradés de remplacement N&B |
+| Photo | `--photo-0` → `--photo-5` | couleurs de repli N&B sous les vraies photos |
 
 Règle de l'accent : sur un écran donné, le lime occupe **moins de 10 % de la surface** — sauf les fiches, qui sont l'exception assumée de la section nuit.
+
+## Images et 3D
+
+Le héros est un **vrai portrait** de la personne, passé en noir et blanc dur avec grain, sujet au centre-droit ; les **pixels lime restent en CSS** et viennent mordre le visage ou le contour du sujet. Les vignettes de projets sont de vraies images (captures, campagnes, objets) dans le même N&B, avec une mini-grappe au survol. Pas de 3D attendue. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un objet ; détails dans `references/assets.md`.
 
 ## Signature
 
@@ -74,6 +79,7 @@ Deuxième marque : **l'énoncé travaillé** (gras + pilule lime + cercle tracé
 ## À éviter
 
 - Ajouter une deuxième couleur (bleu, rose, orange) ou des photos en couleurs : le N&B + lime est le style.
+- Un portrait ou des objets dessinés en dégradés CSS à la place d'une vraie photo.
 - Des pixels réguliers en damier ou en dégradé : la grappe doit être organique, comme un glitch.
 - Mettre le nom en capitales ou en gras : il est en bas de casse, poids normal.
 - Des cartes à grosse ombre ou à gros rayon : seules les fiches ont une ombre, et elles sont de travers.
@@ -94,6 +100,7 @@ Deuxième marque : **l'énoncé travaillé** (gras + pilule lime + cercle tracé
 ## Avant de livrer
 
 - [ ] Tokens importés, aucune couleur hors `:root` ; lime seul accent.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Héros : photo N&B granuleuse, grappe de pixels, 2 étiquettes, nom bas de casse décalé, bouton lime mono.
 - [ ] Nav mono soulignée, liens ≥ 44px de haut.
 - [ ] Un énoncé travaillé (gras, pilule, tracé), sur papier quadrillé.

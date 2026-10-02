@@ -27,5 +27,6 @@
 | Texte blanc directement sur la photo | Voile `--shade` en bas de photo, texte posé dessus (13:1) | Contraste garanti quelle que soit la photo |
 | Carte en verre seule | Repli opaque `--glass-solid` sans `backdrop-filter` | Compatibilité, contraste |
 | Prix / liens (couleur non relevée) | Ambre `--accent` #a8641f (4,7:1 sur blanc) tiré de la lumière dorée | Cohérence, contraste |
-| Nom « Realeste », logo, photos de maisons et de l'équipe, numéro de téléphone | Marque fictive « Halden », maisons et portraits dessinés en CSS (`data-slot`), numéro factice | Marque, droits d'auteur, vie privée |
+| Nom « Realeste », logo, photos de maisons et de l'équipe, numéro de téléphone | Marque fictive « Halden », photos Unsplash libres (`data-slot`), numéro factice | Marque, droits d'auteur, vie privée |
 | Textes anglais | Textes français inventés | Identité, langue |
+| Photos de maisons et d'équipe | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droits d'auteur ; démonstration du rendu avec de vraies images |

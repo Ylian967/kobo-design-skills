@@ -29,7 +29,7 @@ Conteneur `--container` (1360px), marges `--gutter`, quadrillage de fond `--grid
 ```
 
 - Colonnes `1.05fr / 1fr / 0.95fr`, `min-height: min(100svh - 68px, 860px)`, contenu centré verticalement.
-- Le mannequin occupe toute la hauteur de sa colonne, posé en bas, avec halo orange radial derrière et texte vertical en haut à droite.
+- Le mannequin (image réelle ou modèle 3D, voir `assets.md`) occupe toute la hauteur de sa colonne, décor fondu par masque radial, halo orange derrière et texte vertical en haut à droite.
 - Chevron de défilement au centre bas.
 
 ## Collection

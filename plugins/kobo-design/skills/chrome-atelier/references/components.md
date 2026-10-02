@@ -79,9 +79,9 @@ Le `<b>` intérieur sert à l'animation de montée (voir `motion.md`). Sur mobil
 
 ## Pièce produit
 
-- Conteneur `data-slot="product-3d"` avec `role="img"` et un `aria-label` descriptif.
-- Rendu 3D (WebGL / image détourée) avec ombre portée douce (`drop-shadow(0 34px 30px …)`) et une ellipse de sol floue dessous.
-- En maquette : SVG aux dégradés `--gold-hi → --gold → --gold-lo` et `--chrome-hi → --chrome → --chrome-lo`, couleurs portées par des classes `stop-color: var(--…)`.
+- Conteneur `data-slot="product-3d"` avec `role="img"` et un `aria-label` descriptif (« … rendu 3D interactif : glisser pour la faire tourner »).
+- **Vraie scène 3D, voir `assets.md` § 5** : canvas Three.js transparent posé dans le cercle, ombre portée douce (`drop-shadow(0 34px 30px …)`) et ellipse de sol floue dessous. Couleurs des métaux lues dans les tokens `--gold`, `--chrome`, `--white-gold`.
+- Repli : photo réelle (bijou porté ou rendu pré-calculé) recadrée en disque à l'intérieur du cercle, qui s'efface en fondu quand la 3D est prête (`.is-3d-ready`). Jamais de dessin SVG de la pièce.
 
 ## Légende reliée
 
@@ -98,7 +98,7 @@ Trait horizontal 1px `--line-strong` (40–150px) + pastille 7px de la couleur d
 
 ## Sélecteur de titre d'or (10K, 14K, 18K, 22K)
 
-Rangée centrée en bas du héros : légende mono « Titre », puis des `<button aria-pressed>` en mono 11px séparés par des virgules. Zone de 44×44px, texte minuscule. Actif : `--ink` + soulignement décalé de 6px. Survol : `--ink`.
+Rangée centrée en bas du héros : légende mono « Titre », puis des `<button aria-pressed>` en mono 11px séparés par des virgules. Zone de 44×44px, texte minuscule. Actif : `--ink` + soulignement décalé de 6px. Survol : `--ink`. Effet : la teinte du métal or de la scène 3D glisse vers la nouvelle couleur (10K pâle → 22K jaune saturé), voir `assets.md`.
 
 ## Barre de caractéristiques (scène nuit)
 
@@ -127,5 +127,5 @@ Remplace le formulaire : sceau rond 72px à contour `--ink` avec ✓, titre « V
 ## États vide, chargement, erreur
 
 - **Rendu 3D en chargement** : le cercle et les filets sont déjà là ; la pièce apparaît en fondu + montée de 12px.
-- **Image manquante** : dégradé `--night-2 → --night` et cercles-guides seuls ; la page reste cohérente.
+- **Image manquante** : fond `--night` (ou `--night-2`) et cercles-guides seuls ; la page reste cohérente. Les photos elles-mêmes sont réelles, voir `assets.md`.
 - **Erreur de formulaire** : message en `--gold-ink` sous le champ, focus renvoyé au champ.

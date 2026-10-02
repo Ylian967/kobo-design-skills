@@ -31,7 +31,7 @@ SVG fin blanc : un losange central plein entre deux losanges ajourés reliés pa
 
 ## Vidéo encadrée
 
-Image 16:9 à coins 4px, logo du jeu en haut à gauche (emplacement), bouton lecture rond blanc 64px avec triangle contour au centre. Au clic, l'image est remplacée par la vidéo.
+Image réelle 16:9 à coins 4px (voir `assets.md`), logo du jeu en haut à gauche (emplacement), bouton lecture rond blanc 64px avec triangle contour au centre. Au clic, l'image est remplacée par la vidéo.
 
 ## Badges de plateforme
 
@@ -39,12 +39,12 @@ Rectangles à contour blanc 0.8px, rayon 4px, logo de la plateforme en blanc, da
 
 ## Bandeau de notes presse
 
-Bandeau bleu (image) de 1000px, grille 4×2 : note « 9/10 » en 24px 700 blanc encadrée de deux traînées lumineuses, nom du média en capitales 12px dessous.
+Bandeau bleu de 1000px (aplat/dégradé de marque), grille 4×2 : note « 9/10 » en 24px 700 blanc encadrée de deux traînées lumineuses, nom du média en capitales 12px dessous.
 
 ## Module d'achat
 
 - Colonne gauche : `select` pays, `select` édition (fond transparent, contour blanc 0.8px, rayon 5px, chevron), titre « Sélectionnez la plateforme » 700 18px, **grille 2×3 de tuiles** (contour blanc, logo ; tuile active = fond or, logo bleu nuit).
-- Colonne droite : visuel de l'édition (rayon 4px, bouton plein écran carré noir), nom de l'édition 700 18px, bouton or large « Dématérialisé », **accordéon** « Voir le contenu de l'édition » avec « + » or et filet or dessous.
+- Colonne droite : visuel réel de l'édition (rayon 4px, voir `assets.md`, bouton plein écran carré noir), nom de l'édition 700 18px, bouton or large « Dématérialisé », **accordéon** « Voir le contenu de l'édition » avec « + » or et filet or dessous.
 
 ## Boutons flottants
 

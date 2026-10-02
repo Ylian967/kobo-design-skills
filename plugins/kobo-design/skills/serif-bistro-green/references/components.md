@@ -52,7 +52,7 @@ Contour 1px `--cream`, texte crème, fond transparent (« Notre histoire → »)
 
 ## Carte de plat (avec reliure)
 
-- **Anatomie** : fond `--orange` (une carte sur deux en `--orange-strong`), rayon 12px, padding 24px, ombre `--shadow-card` ; assiette ronde blanche vue de dessus (78 % de la largeur, liseré `--line`, ombre portée) ; en bas : nom en serif 28px blanc, description 14px (`--ink` sur orange vif, blanc sur orange foncé), prix dans une petite étiquette crème ; bouton rond blanc ↗.
+- **Anatomie** : fond `--orange` (une carte sur deux en `--orange-strong`), rayon 12px, padding 24px, ombre `--shadow-card` ; photo réelle de l'assiette vue de dessus recadrée en cercle (78 % de la largeur, bord blanc 6px, ombre portée — image réelle, voir `assets.md`) ; en bas : nom en serif 28px blanc, description 14px (`--ink` sur orange vif, blanc sur orange foncé), prix dans une petite étiquette crème ; bouton rond blanc ↗.
 - **Reliure** : encoches crème de 12px sur les bords gauche et droit (pas de 26px), et une colonne d'anneaux verts dans la gouttière entre deux cartes.
 - **États** : survol (l'assiette tourne de 25°, 800ms) ; focus du bouton rond ; carte entière non cliquable (seul le bouton l'est, pour éviter les liens imbriqués).
 
@@ -72,10 +72,10 @@ Piste en `grid-auto-flow: column`, 4 cartes visibles (2,2 sous 1024px, 1,3 sous 
 
 ## Titre échelonné avec vignettes
 
-Titre `h2` en serif `--text-3xl` vert, découpé en 3 lignes : 1re à gauche, 2e décalée de 12 %, 3e à droite ; un mot en italique `--orange-strong` ; 3 vignettes **dans** les lignes (carré 1.25em ou 4:3 1.6em), bord `--card` 8px, rayon 4px, ombre `--shadow-photo`, rotations -4°, +5°, -2°. Vignettes décoratives (`aria-hidden`), le texte reste lisible seul.
+Titre `h2` en serif `--text-3xl` vert, découpé en 3 lignes : 1re à gauche, 2e décalée de 12 %, 3e à droite ; un mot en italique `--orange-strong` ; 3 vignettes photo réelles (voir `assets.md`) **dans** les lignes (carré 1.25em ou 4:3 1.6em), bord `--card` 8px, rayon 4px, ombre `--shadow-photo`, rotations -4°, +5°, -2°. Vignettes décoratives (`aria-hidden`), le texte reste lisible seul.
 
 ```html
-<h2 class="stagger"><span>Des moments <i class="ph ph--a" data-slot="photo-salle" aria-hidden="true"></i> à part,</span>…</h2>
+<h2 class="stagger"><span>Des moments <span class="ph ph--a" data-slot="photo-cuisine" aria-hidden="true"><img src="…" alt="" loading="lazy"></span> à part,</span>…</h2>
 ```
 
 ## Bloc « expérience »
@@ -110,6 +110,6 @@ Feuille verte : phrase d'accroche en serif 28px, colonnes Adresse / Horaires / S
 
 ## États vide, chargement, erreur
 
-- **Vide** (aucun créneau) : assiette vide dessinée + « Complet ce soir — essayez demain midi ? » + bouton secondaire.
-- **Chargement** : cartes squelettes `--line` sur crème, assiette en cercle qui pulse doucement (opacité 0.6 → 1).
+- **Vide** (aucun créneau) : photo d'une assiette vide ou d'une table dressée (voir `assets.md`) + « Complet ce soir — essayez demain midi ? » + bouton secondaire.
+- **Chargement** : cartes squelettes `--line` sur crème, cercle `--card` à la place de la photo qui pulse doucement (opacité 0.6 → 1).
 - **Erreur** : bandeau crème à filet `--orange-strong`, texte `--ink`, bouton « Réessayer ».

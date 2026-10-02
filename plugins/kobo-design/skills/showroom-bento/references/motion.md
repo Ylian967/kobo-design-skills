@@ -12,7 +12,7 @@
 | Chargement | Tuiles du bento : fondu + montée 16px, décalées de 40ms | 640ms | `--ease-out` | 8 tuiles → 280ms d'étalement |
 | Modèle suivant / précédent | Produit qui sort (translateX ∓30 %, scale .8, fondu) puis le suivant entre du côté opposé | 280ms + 420ms | `--ease-inout` puis `--ease-out` | titre, prix, compteur mis à jour entre les deux |
 | Voisins | Changement de teinte vers celle du modèle adjacent ; opacité .5 → .75 au survol | 320ms | `--ease-out` | |
-| Changement de couleur | Fondu de la peinture (`fill` / `stroke`) sur le profil et la vue de face | 320ms | `--ease-inout` | avec des photos : fondu enchaîné entre images |
+| Changement de couleur | Fondu enchaîné entre la photo de l'ancienne et de la nouvelle teinte | 320ms | `--ease-inout` | images réelles, voir `assets.md` |
 | Pastille | Agrandissement 1.12 au survol / à la sélection, anneau + coche | 160ms | `--ease-out` | |
 | Survol pilule / bouton rond | Fond `--soft`, appui `scale(.97 / .94)` | 160ms | `--ease-out` | |
 | Survol tuile accessoire | Visuel qui tourne de -4° et grossit de 4 % | 320ms | `--ease-out` | |

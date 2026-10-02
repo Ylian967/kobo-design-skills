@@ -19,7 +19,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 2. **Les titres crient, le reste parle** : capitales condensées Anton pour le héros, les titres de section et les noms de produit ; tout le reste en DM Sans 400–700, petit et calme.
 3. Contraste : texte courant ≥ 4,5:1 ; le vert franc `--green` ne porte que du **grand** texte blanc (bandeau en 24px) ; les boutons d'achat utilisent `--green-strong` ; le vert en petit texte sur menthe est `--green-ink` (paires vérifiées dans `references/tokens.css`).
 4. **Formes** : pilules pour les actions, cartes à 16px, puces de taille et bouton favori en carré arrondi 8px, cercles pour le collage et l'arc. Pas d'angles vifs.
-5. **Le produit flotte** : vêtements détourés sur fond blanc ou vert pâle, légère ombre portée ; jamais de photo d'ambiance pleine carte.
+5. **Le produit flotte** : vraie photo du vêtement, packshot détouré sur fond blanc ou vert pâle (légère ombre portée) ou photo cadrée en passe-partout dans la carte ; jamais de photo d'ambiance pleine carte.
 6. **Mouvement vif et élastique** : bandeau qui défile en continu, arc qui tourne en entrant, badge du panier qui rebondit, cartes qui montent de 4px au survol.
 7. Accessibilité : cibles ≥ 44px (pastilles de couleur comprises), focus visible (vert vif sur bleu nuit, vert foncé sur menthe), `prefers-reduced-motion` respecté, groupes de taille et de couleur au clavier (flèches).
 8. Aucune valeur en dur : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | `references/components.md` | Avant de coder une pilule, la navigation, une carte produit, des pastilles, des puces de taille, le bandeau, l'arc, un champ. |
 | `references/layouts.md` | Avant de construire une page : héros, collection, fiche produit, pied de page, mobile. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : portés, packshots, fenêtre ronde du héros, passe-partout des cartes, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
 | `source.md` | Pour connaître le shot de référence et ce qui a été estimé. |
 
@@ -63,9 +64,13 @@ La police du shot ressemble à Anton / Bebas Neue ; Anton est l'équivalent grat
 
 **Règle de l'accent** : le vert signale ce qui fait vendre ou avancer (achat, promo, chiffres). Jamais en fond de carte produit.
 
+## Images et 3D
+
+Les vêtements et le mannequin sont de **vraies photos** : porté net en lumière du jour dans la fenêtre ronde du héros, packshots détourés ou photos en passe-partout dans les cartes 4:5, une vraie photo par coloris sur la fiche, portés variés dans les cercles du collage. Couleurs naturelles, jamais de filtre vert sur le vêtement ; chaque conteneur garde un fond token (`--card`, `--card-alt`, `--navy-2`) en repli. La 3D est optionnelle (vue 360° du modèle `.glb` du produit sur la fiche). Jamais de dessin CSS/SVG à la place d'une photo, d'un mannequin ou d'un vêtement : détails dans `references/assets.md`.
+
 ## Signature
 
-**Le héros à l'arc vert** : titre condensé géant sur trois lignes à gauche, chiffres « 120+ / 15k+ » et pilule blanche « Explorer » dessous ; à droite, un mannequin coupé à la taille devant un **anneau vert en dégradé** (vert franc → menthe, ouvert sur un quart) posé sur un disque plus sombre. Suivi immédiatement du **bandeau vert défilant**. Une fois par page.
+**Le héros à l'arc vert** : titre condensé géant sur trois lignes à gauche, chiffres « 120+ / 15k+ » et pilule blanche « Explorer » dessous ; à droite, la photo d'un mannequin dans une fenêtre ronde, coupée par le bas du héros, entourée d'un **anneau vert en dégradé** (vert franc → menthe, ouvert sur un quart) posé sur un disque plus sombre. Suivi immédiatement du **bandeau vert défilant**. Une fois par page.
 
 ## À éviter
 
@@ -80,7 +85,7 @@ La police du shot ressemble à Anton / Bebas Neue ; Anton est l'équivalent grat
 
 - Arc du héros : `react-native-svg` (`Circle` avec `strokeDasharray` et `LinearGradient` vert → menthe), rotation d'entrée avec Reanimated.
 - Bandeau : deux copies du texte dans une `Animated.View` translatée en boucle (`withRepeat(withTiming(-width))`), arrêt quand l'écran perd le focus.
-- Cartes : `FlatList` à 2 colonnes, `borderRadius: 16`, image détourée `resizeMode="contain"`.
+- Cartes : `FlatList` à 2 colonnes, `borderRadius: 16`, photo via `expo-image` (`contentFit="contain"` pour un détouré, `"cover"` en passe-partout).
 - Puces de taille et pastilles : `Pressable` 44×44 avec `accessibilityRole="radio"` et `accessibilityState={{ checked, disabled }}`.
 - Badge du panier : `withSpring` sur l'échelle à chaque ajout ; retour haptique léger (`expo-haptics`).
 - Polices : `@expo-google-fonts/anton`, `@expo-google-fonts/dm-serif-display`, `@expo-google-fonts/dm-sans`.
@@ -88,10 +93,11 @@ La police du shot ressemble à Anton / Bebas Neue ; Anton est l'équivalent grat
 ## Avant de livrer
 
 - [ ] Tokens importés, aucune valeur en dur.
-- [ ] Héros bleu nuit : titre condensé, chiffres au « + » vert, pilule blanche, mannequin devant l'arc vert.
+- [ ] Héros bleu nuit : titre condensé, chiffres au « + » vert, pilule blanche, photo du mannequin dans l'arc vert.
 - [ ] Bandeau vert défilant (texte ≥ 24px), en pause au survol, figé en mouvement réduit.
 - [ ] Corps menthe : cartes 16px alternées blanc / vert pâle, noms condensés, prix, pastilles 44px.
 - [ ] Fiche produit : étoiles, puces de taille (choisie en blanc, épuisée barrée), pilule verte + favori carré.
 - [ ] Pied bleu nuit : collage de cercles, inscription, logotype géant sur carte menthe.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md` (portés, packshots, une photo par coloris), avec `alt` et couleur de repli.
 - [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
 - [ ] Aucun élément du shot d'origine (nom, logotype, photos, textes).

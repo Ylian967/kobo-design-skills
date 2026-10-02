@@ -24,14 +24,12 @@
 * { box-sizing: border-box; }
 html { overflow-x: clip; }
 body { margin: 0; background: var(--bg); color: var(--text); font: 500 var(--text-sm)/var(--leading) var(--font-ui); }
-body::before { content: ""; position: fixed; inset: 0; z-index: -1;
-  background:
-    radial-gradient(1px 1px at 12% 22%, var(--text) 50%, transparent), radial-gradient(1px 1px at 33% 78%, var(--text) 50%, transparent),
-    radial-gradient(1.5px 1.5px at 58% 14%, var(--text) 50%, transparent), radial-gradient(1px 1px at 72% 62%, var(--text) 50%, transparent),
-    radial-gradient(1px 1px at 88% 30%, var(--text-soft) 50%, transparent), radial-gradient(1px 1px at 22% 52%, var(--text-soft) 50%, transparent),
-    radial-gradient(60% 50% at 80% 20%, rgb(93 127 181 / .35), transparent 70%), radial-gradient(50% 40% at 15% 85%, rgb(120 90 180 / .22), transparent 70%),
-    linear-gradient(180deg, var(--bg), #101a38 60%, var(--bg));
-  background-size: 220px 220px, 260px 260px, 300px 300px, 180px 180px, 240px 240px, 200px 200px, 100% 100%, 100% 100%, 100% 100%; }
+/* Espace : scène Three.js fixe derrière l'interface (étoiles, nébuleuse en particules, planète), photo de nébuleuse en repli */
+.space { position: fixed; inset: 0; z-index: -1; background: var(--bg); overflow: hidden; }
+.space canvas { position: absolute; inset: 0; }
+.space .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .7; transition: opacity 1.2s var(--ease); }
+.space.is-3d-ready .fallback { opacity: .28; }
+.space::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, var(--bg) 100%); opacity: .6; pointer-events: none; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
@@ -56,9 +54,7 @@ a { color: inherit; }
 
 /* Héros */
 .hero { position: relative; height: min(100vh, 760px); padding-top: var(--nav-h); overflow: hidden; }
-.hero__art { position: absolute; inset: var(--nav-h) 0 0; display: grid; place-items: center; color: var(--muted); font-size: var(--text-xs); letter-spacing: .1em;
-  background: radial-gradient(45% 55% at 70% 45%, rgb(219 191 145 / .28), transparent 70%), radial-gradient(40% 60% at 30% 60%, rgb(91 157 255 / .25), transparent 70%); }
-.hero__ring { position: absolute; right: 18%; top: 22%; width: 340px; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--glass-edge); box-shadow: inset 0 0 80px rgb(93 127 181 / .35); animation: float 5s ease-in-out infinite; }
+.hero__veil { position: absolute; inset: var(--nav-h) 0 0; background: linear-gradient(90deg, rgb(0 0 0 / .55), transparent 55%); pointer-events: none; }
 .hero__logo { position: absolute; left: 60px; top: calc(var(--nav-h) + 28px); font: 300 2rem/1 var(--font-title); letter-spacing: .12em; text-transform: uppercase; }
 .hero__logo small { display: block; font-size: var(--text-2xs); letter-spacing: .3em; color: var(--gold); margin-bottom: 4px; }
 .getit { position: absolute; left: 26%; bottom: 60px; display: flex; gap: var(--space-3); align-items: center; }
@@ -68,8 +64,8 @@ a { color: inherit; }
 .store { min-height: 50px; display: flex; align-items: center; gap: 10px; padding: 0 var(--space-4); background: var(--bg-deep); border: 0.8px solid var(--line-dark); border-radius: var(--radius-1); color: var(--text); text-decoration: none; font: 500 var(--text-lg)/1 var(--font-ui); }
 .store small { display: block; font-size: 9px; }
 .store span { font-size: var(--text-base); }
-.play { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--link), var(--gold), #c084fc, var(--link)); animation: spin 6s linear infinite; }
-.play b { width: 60px; height: 60px; border-radius: 50%; background: #3b3fd9; display: grid; place-items: center; animation: spin 6s linear infinite reverse; font-size: 20px; }
+.play { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--link), var(--gold), var(--accent-sand), var(--link)); animation: spin 6s linear infinite; }
+.play b { width: 60px; height: 60px; border-radius: 50%; background: var(--glass); display: grid; place-items: center; animation: spin 6s linear infinite reverse; font-size: 20px; }
 .rail { position: absolute; right: 16px; top: 30%; display: grid; gap: 10px; justify-items: center; }
 .rail span { writing-mode: vertical-rl; font-size: var(--text-2xs); color: var(--text-soft); }
 .rail a { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--text); font-size: var(--text-2xs); text-decoration: none; }
@@ -100,14 +96,18 @@ a { color: inherit; }
 .va s::after { content: ""; position: absolute; left: 3px; top: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--text); }
 .panel__body { position: relative; display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: var(--space-6); padding: var(--space-6) var(--space-5); }
 .desc { padding: var(--space-4); background: rgb(0 0 0 / .25); border-radius: var(--radius-1); font: 500 var(--text-xs)/1.7 var(--font-ui); color: var(--text); margin: 0; }
-.art { position: relative; min-height: 260px; display: grid; place-items: center; color: var(--text-soft); font-size: var(--text-2xs); letter-spacing: .1em;
-  background: radial-gradient(40% 60% at 50% 40%, rgb(233 233 233 / .35), transparent 70%), linear-gradient(120deg, transparent 40%, rgb(219 191 145 / .4) 50%, transparent 60%); transition: transform var(--dur-slow) ease-in-out, opacity var(--dur-slow) ease-in-out; }
+.art { position: relative; min-height: 260px; margin: calc(var(--space-6) * -1) calc(var(--space-5) * -1) calc(var(--space-6) * -1) 0; overflow: hidden; border-radius: var(--radius-card); background: var(--glass); transition: transform var(--dur-slow) ease-in-out, opacity var(--dur-slow) ease-in-out; }
+/* Image fondue dans le verre : masque en dégradé vers la gauche + filet doré */
+.art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%); mask-image: linear-gradient(90deg, transparent, #000 35%); }
+.art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--quote-strip), transparent 45%); }
 .quotes { position: absolute; right: var(--space-5); bottom: var(--space-4); display: grid; justify-items: end; gap: 4px; }
 .quotes span { background: var(--quote-strip); padding: 2px 8px; font: 400 var(--text-2xs) var(--font-quote); color: var(--text); }
 .quotes span:nth-child(odd) { margin-right: 24px; }
 .panel > * { min-width: 0; }
 .thumbs { overflow-x: auto; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-5); border-top: 1px solid var(--glass-edge); }
-.thumbs button { width: 52px; height: 52px; border: 1px solid var(--line-dark); padding: 0; cursor: pointer; position: relative; }
+.thumbs button { width: 52px; height: 52px; flex: none; border: 1px solid var(--line-dark); padding: 0; cursor: pointer; position: relative; background: var(--surface-2); }
+.thumbs button img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .thumbs button[aria-pressed="true"] { border-color: var(--gold); }
 .thumbs button[aria-pressed="true"]::after { content: ""; position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: var(--gold); }
 .arrow { background: none; border: 0; color: var(--gold); font-size: 22px; min-width: 44px; min-height: 44px; cursor: pointer; }
@@ -121,7 +121,9 @@ a { color: inherit; }
 .news-list { display: grid; gap: var(--space-4); }
 .news-card { display: grid; grid-template-columns: 196px 1fr; gap: var(--space-5); padding: var(--space-4) var(--space-5); background: var(--surface); border-radius: var(--radius-card); color: var(--text); text-decoration: none; transition: background var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
 .news-card:hover { background: var(--surface-2); transform: translateX(4px); }
-.news-card .thumb { aspect-ratio: 196/64; align-self: center; background: linear-gradient(120deg, var(--glass), var(--gold)); }
+.news-card .thumb { aspect-ratio: 196/64; align-self: center; overflow: hidden; background: var(--glass); }
+.news-card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-slow) var(--ease-out); }
+.news-card:hover .thumb img { transform: scale(1.05); }
 .news-card div { display: grid; grid-template-rows: auto 1fr auto; min-width: 0; }
 .news-card h3 { margin: 0 0 6px; font: 500 var(--text-sm) var(--font-ui); }
 .news-card p { margin: 0; font: 400 var(--text-2xs)/1.5 var(--font-ui); color: var(--muted); }
@@ -143,7 +145,7 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
   .rail, .scroll { display: none; }
   .chars { grid-template-columns: 1fr; }
   .factions { grid-auto-flow: column; justify-content: start; overflow-x: auto; } .factions::before { display: none; }
-  .panel__body { grid-template-columns: 1fr; } .art { order: -1; } .quotes span:not(:first-child) { display: none; }
+  .panel__body { grid-template-columns: 1fr; } .art { order: -1; margin: calc(var(--space-6) * -1) calc(var(--space-5) * -1) 0; aspect-ratio: 16/10; min-height: 0; } .quotes span:not(:first-child) { display: none; }
   .news-card { grid-template-columns: 1fr; } .news-card .thumb { aspect-ratio: 16/6; }
   .tabs { gap: var(--space-4); overflow-x: auto; }
 }
@@ -151,6 +153,7 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
 </style>
 </head>
 <body>
+<div class="space" data-3d data-slot="space-3d" aria-hidden="true"><img class="fallback" src="https://images.unsplash.com/photo-1710678245561-f605d854f514?auto=format&fit=crop&w=2000&q=80" alt="" width="2000" height="1333" fetchpriority="high"></div>
 <div class="warp" id="warp" aria-hidden="true"><canvas id="warpCanvas"></canvas><button id="skip">Passer l'intro</button></div>
 
 <header class="topnav">
@@ -164,8 +167,7 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
 
 <main>
   <section class="hero" aria-label="Accueil">
-    <div class="hero__art" data-slot="key-art">ILLUSTRATION PRINCIPALE</div>
-    <div class="hero__ring" aria-hidden="true"></div>
+    <div class="hero__veil" aria-hidden="true"></div>
     <div class="hero__logo"><small>VOYAGE STELLAIRE</small>Orbitale<br>Express</div>
     <div class="getit">
       <div class="qr" aria-label="QR code de téléchargement"><i></i></div>
@@ -198,7 +200,7 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
         </div>
         <div class="panel__body">
           <p class="desc" id="charDesc">Elle cartographie les nébuleuses oubliées et vend ses cartes au plus offrant. On dit qu'aucune étoile ne lui a jamais échappé deux fois. Quelle route choisira-t-elle quand le dernier phare s'éteindra ?</p>
-          <div class="art" id="charArt" data-slot="character-art">ILLUSTRATION DU PERSONNAGE</div>
+          <div class="art" id="charArt" data-slot="character-art"><img src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=1200&q=80" alt="La Terre vue depuis l'orbite, une station spatiale au premier plan" width="1200" height="800" loading="lazy"></div>
           <div class="quotes" aria-label="Citation">
             <span>« Bienvenue à bord. Je suis Lyra, cartographe indépendante,</span>
             <span>et ce train passe exactement là où mes cartes s'arrêtent.</span>
@@ -208,10 +210,10 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
         </div>
         <div class="thumbs" role="group" aria-label="Choisir un personnage">
           <button class="arrow" aria-label="Précédent">‹</button>
-          <button aria-pressed="true" style="background: linear-gradient(135deg, var(--gold), var(--glass))" aria-label="Lyra" data-name="Lyra"></button>
-          <button aria-pressed="false" style="background: linear-gradient(135deg, var(--link), var(--bg))" aria-label="Orion" data-name="Orion"></button>
-          <button aria-pressed="false" style="background: linear-gradient(135deg, #c084fc, var(--bg))" aria-label="Vesper" data-name="Vesper"></button>
-          <button aria-pressed="false" style="background: linear-gradient(135deg, var(--text-soft), var(--glass))" aria-label="Calix" data-name="Calix"></button>
+          <button aria-pressed="true" aria-label="Lyra" data-name="Lyra" data-src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=1200&q=80" data-alt="La Terre vue depuis l'orbite, une station spatiale au premier plan"><img src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
+          <button aria-pressed="false" aria-label="Orion" data-name="Orion" data-src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=1200&q=80" data-alt="Station spatiale aux panneaux dorés sur fond noir"><img src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
+          <button aria-pressed="false" aria-label="Vesper" data-name="Vesper" data-src="https://images.unsplash.com/photo-1677926405168-fa86268b7295?auto=format&fit=crop&w=1200&q=80" data-alt="Nébuleuse rose et orange"><img src="https://images.unsplash.com/photo-1677926405168-fa86268b7295?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
+          <button aria-pressed="false" aria-label="Calix" data-name="Calix" data-src="https://images.unsplash.com/photo-1710678245561-f605d854f514?auto=format&fit=crop&w=1200&q=80" data-alt="Nébuleuse turquoise et rouge"><img src="https://images.unsplash.com/photo-1710678245561-f605d854f514?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
           <button class="arrow" aria-label="Suivant">›</button>
         </div>
       </article>
@@ -225,15 +227,15 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
         <button role="tab" aria-selected="true">Quoi de neuf ?</button><button role="tab" aria-selected="false">Informations</button><button role="tab" aria-selected="false">Événements</button><button role="tab" aria-selected="false">Annonces</button>
       </div>
       <div class="news-list">
-        <a class="news-card" href="#"><span class="thumb"></span><div><h3>Taux d'obtention de l'invocation « Constellation »</h3><p></p><time datetime="2026-09-28">28/9/2026</time></div></a>
-        <a class="news-card" href="#"><span class="thumb" style="background: linear-gradient(120deg, #c084fc, var(--glass))"></span><div><h3>Mise à jour 4.6 « La valse des comètes »</h3><p>Une nouvelle région s'ouvre au-delà de la ceinture d'astéroïdes. Avant la prochaine éclipse, l'équipage devra trouver un pilote capable de traverser la tempête…</p><time datetime="2026-09-28">28/9/2026</time></div></a>
-        <a class="news-card" href="#"><span class="thumb" style="background: linear-gradient(120deg, var(--link), var(--bg))"></span><div><h3>Bande-annonce de Lyra — « Les cartes du silence »</h3><p>Thème : jusqu'où peut-on cartographier l'inconnu ?</p><time datetime="2026-09-27">27/9/2026</time></div></a>
+        <a class="news-card" href="#"><span class="thumb" data-slot="news-thumb"><img src="https://images.unsplash.com/photo-1677926405168-fa86268b7295?auto=format&fit=crop&w=400&h=130&q=75" alt="Nébuleuse rose et orange" width="400" height="130" loading="lazy"></span><div><h3>Taux d'obtention de l'invocation « Constellation »</h3><p></p><time datetime="2026-09-28">28/9/2026</time></div></a>
+        <a class="news-card" href="#"><span class="thumb" data-slot="news-thumb"><img src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=400&h=130&q=75" alt="Station spatiale aux panneaux dorés" width="400" height="130" loading="lazy"></span><div><h3>Mise à jour 4.6 « La valse des comètes »</h3><p>Une nouvelle région s'ouvre au-delà de la ceinture d'astéroïdes. Avant la prochaine éclipse, l'équipage devra trouver un pilote capable de traverser la tempête…</p><time datetime="2026-09-28">28/9/2026</time></div></a>
+        <a class="news-card" href="#"><span class="thumb" data-slot="news-thumb"><img src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=400&h=130&q=75" alt="La Terre et une station spatiale en orbite" width="400" height="130" loading="lazy"></span><div><h3>Bande-annonce de Lyra — « Les cartes du silence »</h3><p>Thème : jusqu'où peut-on cartographier l'inconnu ?</p><time datetime="2026-09-27">27/9/2026</time></div></a>
       </div>
       <a class="cta" href="#">S'abonner maintenant</a>
     </div>
   </section>
 </main>
-<footer>© Studio fictif — démo Kōbō. Contenu et personnages inventés.</footer>
+<footer>© Studio fictif — démo Kōbō. Contenu et personnages inventés. Photos : Unsplash · 3D : Three.js</footer>
 
 <script>
 (() => {
@@ -257,9 +259,166 @@ footer { padding: var(--space-12) var(--space-4); background: var(--nav); color:
   document.querySelectorAll('.thumbs button[data-name]').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('.thumbs button[data-name]').forEach(x => x.setAttribute('aria-pressed', x === b));
     art.style.opacity = 0; art.style.transform = 'translateX(40px)';
-    setTimeout(() => { nm.textContent = b.dataset.name; art.style.opacity = 1; art.style.transform = 'none'; }, reduce ? 0 : 250);
+    setTimeout(() => { nm.textContent = b.dataset.name; const im = art.querySelector('img'); im.src = b.dataset.src; im.alt = b.dataset.alt; art.style.opacity = 1; art.style.transform = 'none'; }, reduce ? 0 : 250);
   }));
 })();
 </script>
+<!-- Scène 3D : champ d'étoiles + nébuleuse en particules + planète annelée, fixe derrière l'interface -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const host = document.querySelector('[data-3d]');
+const css = getComputedStyle(document.documentElement);
+const tok = (name) => new THREE.Color(css.getPropertyValue(name).trim());   // couleurs lues dans les tokens
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+} catch (e) { host.classList.add('no-webgl'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+host.appendChild(renderer.domElement);
+renderer.domElement.setAttribute('aria-hidden', 'true');
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 200);
+camera.position.set(0, 0, 9);
+
+// Sprite rond et doux pour les particules (dessiné une fois sur un canvas 2D)
+function dotTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d'), grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grd.addColorStop(0, 'rgba(255,255,255,1)'); grd.addColorStop(0.35, 'rgba(255,255,255,.55)'); grd.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const dot = dotTexture();
+const gauss = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+
+// 1. Champ d'étoiles (coquille sphérique autour de la caméra), blanc + quelques étoiles dorées
+function starField(count, color, size) {
+  const pos = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const r = 18 + Math.random() * 40, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+    pos.set([r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th), r * Math.cos(ph)], i * 3);
+  }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  return new THREE.Points(geo, new THREE.PointsMaterial({ color, size, map: dot, transparent: true, depthWrite: false, sizeAttenuation: true }));
+}
+const sky = new THREE.Group();
+sky.add(starField(3200, tok('--text'), 0.16), starField(500, tok('--gold'), 0.22));
+scene.add(sky);
+
+// 2. Nébuleuse en particules : nuage aplati, couleurs mélangées entre --link, --glass et --gold, mélange additif
+const NEB = 2600, nPos = new Float32Array(NEB * 3), nCol = new Float32Array(NEB * 3);
+const cA = tok('--link'), cB = tok('--glass'), cC = tok('--gold'), tmp = new THREE.Color();
+for (let i = 0; i < NEB; i++) {
+  const arm = Math.random() * Math.PI * 2, rad = Math.abs(gauss()) * 4;
+  nPos.set([Math.cos(arm) * rad * 1.8 + gauss() * 0.8, Math.sin(arm) * rad * 0.6 + gauss() * 0.5, -14 + gauss() * 2.5], i * 3);
+  tmp.copy(cB).lerp(cA, Math.random()); if (Math.random() < 0.18) tmp.lerp(cC, 0.7);
+  nCol.set([tmp.r, tmp.g, tmp.b], i * 3);
+}
+const nGeo = new THREE.BufferGeometry();
+nGeo.setAttribute('position', new THREE.BufferAttribute(nPos, 3));
+nGeo.setAttribute('color', new THREE.BufferAttribute(nCol, 3));
+const nebula = new THREE.Points(nGeo, new THREE.PointsMaterial({ size: 1.1, map: dot, vertexColors: true, transparent: true, opacity: 0.32, depthWrite: false, blending: THREE.AdditiveBlending }));
+nebula.position.set(-3, 1.5, 0);
+scene.add(nebula);
+
+// 3. Planète gazeuse : texture à bandes générée à partir des tokens, atmosphère en fresnel, anneau doré
+function bandTexture() {
+  const c = document.createElement('canvas'); c.width = 16; c.height = 512;
+  const g = c.getContext('2d'), base = tok('--glass'), hi = tok('--text-soft'), deep = tok('--bg'), col = new THREE.Color();
+  for (let y = 0; y < 512; y++) {
+    const t = y / 512, n = Math.sin(t * 38) * 0.5 + Math.sin(t * 91 + 1.3) * 0.3 + (Math.random() - 0.5) * 0.15;
+    col.copy(base).lerp(n > 0 ? hi : deep, Math.min(1, Math.abs(n) * 0.55));
+    g.fillStyle = col.getStyle(); g.fillRect(0, y, 16, 1);
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
+const planet = new THREE.Group();
+const globe = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 64), new THREE.MeshStandardMaterial({ map: bandTexture(), roughness: 0.9, metalness: 0 }));
+planet.add(globe);
+
+const atmo = new THREE.Mesh(new THREE.SphereGeometry(1.06, 64, 48), new THREE.ShaderMaterial({
+  uniforms: { uColor: { value: tok('--link') } },
+  vertexShader: `varying vec3 vN; varying vec3 vV;
+    void main() { vN = normalize(normalMatrix * normal); vec4 mv = modelViewMatrix * vec4(position, 1.0); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }`,
+  fragmentShader: `uniform vec3 uColor; varying vec3 vN; varying vec3 vV;
+    void main() { float f = pow(1.0 - abs(dot(vN, vV)), 2.5); gl_FragColor = vec4(uColor, f * 0.85);
+    #include <tonemapping_fragment>
+    #include <colorspace_fragment>
+    }`,
+  transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
+}));
+planet.add(atmo);
+
+const R0 = 1.35, R1 = 2.2;
+const ringGeo = new THREE.RingGeometry(R0, R1, 180, 1);
+{ const p = ringGeo.attributes.position, uv = ringGeo.attributes.uv, v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i++) { v.fromBufferAttribute(p, i); uv.setXY(i, (v.length() - R0) / (R1 - R0), 0.5); } }
+function ringTexture() {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 4;
+  const g = c.getContext('2d'), gold = tok('--gold');
+  for (let x = 0; x < 512; x++) {
+    const t = x / 512, a = (0.25 + 0.5 * Math.abs(Math.sin(t * 40))) * (t < 0.04 || t > 0.97 ? 0 : 1) * (t > 0.55 && t < 0.6 ? 0.1 : 1);
+    g.fillStyle = `rgba(${Math.round(gold.r * 255)},${Math.round(gold.g * 255)},${Math.round(gold.b * 255)},${a.toFixed(3)})`;
+    g.fillRect(x, 0, 1, 4);
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.LinearSRGBColorSpace; return t;
+}
+const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ map: ringTexture(), transparent: true, side: THREE.DoubleSide, depthWrite: false }));
+ring.rotation.x = -Math.PI / 2;
+planet.add(ring);
+planet.rotation.set(0.28, 0, 0.32);
+scene.add(planet);
+
+const sun = new THREE.DirectionalLight(tok('--accent-sand'), 2.6); sun.position.set(-5, 3, 4); scene.add(sun);
+scene.add(new THREE.AmbientLight(tok('--glass'), 0.35));
+
+// Mise en page : planète à droite du héros sur grand écran, en haut et plus petite sur mobile
+let baseX = 0, baseY = 0;
+function resize() {
+  const w = host.clientWidth, h = host.clientHeight;
+  renderer.setSize(w, h, false);
+  renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+  const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z, halfW = halfH * camera.aspect;
+  if (camera.aspect > 1) { baseX = halfW * 0.45; baseY = 0.1; planet.scale.setScalar(1); }
+  else { baseX = halfW * 0.25; baseY = halfH * 0.35; planet.scale.setScalar(0.7); }
+  render();
+}
+
+let px = 0, py = 0;
+if (!reduce) addEventListener('pointermove', (e) => { px = e.clientX / innerWidth - 0.5; py = e.clientY / innerHeight - 0.5; }, { passive: true });
+
+function render(t = 0) {
+  const s = scrollY / Math.max(1, innerHeight);
+  planet.position.set(baseX, baseY + s * 3.2, 0);          // la planète s'éloigne vers le haut au défilement
+  sky.rotation.y = s * 0.12 + t * 0.004;
+  nebula.rotation.z = t * 0.01;
+  globe.rotation.y = t * 0.08;
+  camera.position.x += (px * 0.6 - camera.position.x) * 0.05;
+  camera.position.y += (-py * 0.4 - camera.position.y) * 0.05;
+  camera.lookAt(0, 0, 0);
+  renderer.render(scene, camera);
+}
+new ResizeObserver(resize).observe(host); resize();
+
+const clock = new THREE.Clock();
+if (reduce) { addEventListener('scroll', () => render(0), { passive: true }); }
+else { (function tick() { render(clock.getElapsedTime()); requestAnimationFrame(tick); })(); }
+host.classList.add('is-3d-ready');
+</script>
+
 </body>
 </html>

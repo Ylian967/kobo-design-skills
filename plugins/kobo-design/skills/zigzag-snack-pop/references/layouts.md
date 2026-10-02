@@ -14,7 +14,7 @@ Conteneur `--container` (1200px), marges `--gutter`. Rythme vertical en `--space
 │              ZÉRO DÉTOUR                              │
 │          accroche 2 lignes, centrée                   │
 │      [ J'EN PRENDS › ]  [🔍 chercher…      ]          │
-│   🧗          ▲▲ montagnes ▲▲             🚴           │
+│   ▲▲ photos d’aventure en duotone, découpées en crêtes ▲▲ │
 │ 🛹 ▲▲▲▲▲▲ 2e plan ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲        │
 └╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱┘
   bande crème : (●) 20 G DE   (●) SANS SUCRE  (●) …  ×5
@@ -41,7 +41,7 @@ Conteneur `--container` (1200px), marges `--gutter`. Rythme vertical en `--space
 ## Héros
 
 - `padding-bottom: calc(var(--scene) + 70px)` : le texte ne descend jamais dans la zone des montagnes.
-- `.scene` absolue en bas (`--scene` : clamp 220–340px) contient : soleil (disque `--orange-bright` flouté par un dégradé radial), montagnes arrière (100 % de la scène, `clip-path` en dents irrégulières), montagnes avant (58 %), silhouettes positionnées **sur les crêtes** en pourcentage de la scène.
+- `.scene` absolue en bas (`--scene` : clamp 220–340px) contient : soleil (disque `--orange-bright` flouté par un dégradé radial), bande photo arrière (100 % de la scène) et bande photo avant (58 %) : vraies photos d'aventure en duotone, découpées en crêtes par `clip-path` (image réelle, voir `assets.md`).
 - Le bas du héros porte `.zz-bottom`, la bande crème suivante remonte de `--zigzag-h`.
 
 ## Bande ingrédients
@@ -50,7 +50,7 @@ Grille de 5 colonnes (pastille + libellé à droite). 2 colonnes sous 960px, la 
 
 ## Section brune
 
-Grille 1.1fr / 1fr : texte à gauche, visuel produit sur disque orange à droite. Traces de pneu en fond (2–3 bandes). Passe en une colonne sous 960px.
+Grille 1.1fr / 1fr : texte à gauche, photo produit dans un disque orange à droite. Traces de pneu en fond (2–3 bandes). Passe en une colonne sous 960px.
 
 ## Grille produits
 
@@ -68,6 +68,6 @@ Fond `--bar` avec `.zz-both`, inscription à la lettre d'info, liens 12px capita
 
 - Nav : logo + burger + panier.
 - Titre héros 54px, boutons et champ pleine largeur, ombre du mot autocollant à 3px.
-- Scène 170px ; les silhouettes restent, plus petites.
-- Pastilles 64px, emballage ramené à la largeur de la colonne.
+- Scène 170px ; les bandes photo restent, recadrées au centre.
+- Pastilles 64px, disque produit ramené à la largeur de la colonne.
 - Aucune largeur fixe > 360px ; vérifier `scrollWidth === 390`.

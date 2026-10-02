@@ -9,7 +9,7 @@
 | Moment | Effet | Durée | Courbe | Notes |
 |---|---|---|---|---|
 | Chargement | Lettres du mot-marque qui montent de 60 % en fondu, décalées de 70ms | 1200ms | `--ease-out` | démarre à 200ms |
-| Héros (continu) | Reflet qui glisse le long des traînées de phares | 9s | linéaire | boucle, en pause pendant le showreel |
+| Héros (continu) | Photo qui zoome très lentement (1 → 1.06), comme une pose longue | 40s | `--ease-inout` | aller-retour, en pause pendant le showreel |
 | Héros (continu) | Feu rouge d'antenne qui clignote | 2.4s | `steps(1)` | |
 | Survol lien | Soulignement 1px qui se dessine de gauche à droite | 360ms | `--ease-out` | |
 | Survol pilule | Fond éclairci, flèche qui pivote de -45° et avance de 3px | 180ms | `--ease-out` | appui `scale(.97)` |
@@ -25,10 +25,9 @@
 @keyframes rise { from { transform: translateY(60%); opacity: 0; } }
 .wordmark span { display: inline-block; animation: rise var(--dur-reveal) var(--ease-out) both; animation-delay: calc(var(--i) * 70ms + 200ms); }
 
-@keyframes drift { from { background-position: -50% 0; } to { background-position: 150% 0; } }
-.trail { border-top: 2px solid var(--c); border-radius: 50%; filter: drop-shadow(0 0 6px var(--c));
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c) 12%, transparent) 50%, transparent) no-repeat 0 0 / 50% 3px;
-  animation: drift 9s linear infinite; }
+@keyframes breathe { to { transform: scale(1.06); } }
+.city img { transform-origin: 50% 70%; animation: breathe 40s var(--ease-inout) infinite alternate; }  /* vraie photo, voir assets.md */
+.hero.is-paused .city img { animation-play-state: paused; }
 
 .card .photo { transition: transform var(--dur-slow) var(--ease-out); }
 .card:hover .photo { transform: scale(1.04); }
@@ -48,4 +47,4 @@ document.querySelectorAll('.reveal').forEach(el => el.getBoundingClientRect().to
   *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
 }
 ```
-Mot-marque affiché d'un coup, traînées figées (la photo reste), pas d'apparition au défilement, carrousel sans défilement animé ; les changements d'état (étape ouverte, bouton rouge) restent visibles.
+Mot-marque affiché d'un coup, photo du héros fixe, pas d'apparition au défilement, carrousel sans défilement animé ; les changements d'état (étape ouverte, bouton rouge) restent visibles.

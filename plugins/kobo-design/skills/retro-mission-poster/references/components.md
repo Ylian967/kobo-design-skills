@@ -23,13 +23,13 @@ Surtitre « CHAPITRE 1 » (Jost 12px +0.12em crème), puis 2–4 mots en Big Sho
 
 ```html
 <div class="layers">
-  <div class="layer layer--back" data-slot="planet-landscape"></div>
+  <div class="layer layer--back duo grain" data-slot="planet"><img src="…" alt="…"></div>
   <p class="giant" aria-hidden="true">MISSION</p>
-  <div class="layer layer--front" data-slot="silhouettes"></div>
+  <div class="layer layer--front grain" data-slot="silhouettes"><img src="silhouettes-detourees.webp" alt=""></div>
 </div>
 <h2 class="sr-only">Mission</h2>
 ```
-`.giant` : Big Shoulders Display 900, `--text-giant`, `--accent`, centré ; `.layer--front` est une image PNG détourée (ou SVG de silhouettes) au-dessus.
+`.giant` : Big Shoulders Display 900, `--text-giant`, `--accent`, centré ; `.layer--front` est une image réelle détourée (PNG/WebP transparent) au-dessus, ou à défaut une photo fondue par le haut (`mask-image`) ; jamais des silhouettes dessinées en CSS/SVG. Voir `assets.md`.
 
 ## Anneau dentelé
 
@@ -57,4 +57,4 @@ Fond `--bg`, carte sombre arrondie au centre (rayon 12px), anneau dentelé avec 
 
 ## États
 
-- **Image manquante** : dégradé terre → crépuscule + grain (le style reste cohérent).
+- **Image manquante** : fond `--rust` + grain (le style reste cohérent) ; en production, toujours une image réelle traitée selon `assets.md`.

@@ -2,7 +2,7 @@
 
 ## Scène peinte
 
-Image plein écran en niveaux de gris (`filter: grayscale(1) contrast(1.1)` si la source est en couleur), recouverte de : vignettage (`--shade`), brume (2 dégradés blancs à 6–10 % qui dérivent), grain léger. `role="img"` + `aria-label` qui décrit la scène.
+Image réelle plein écran (photo ou illustration peinte, voir `assets.md`) en niveaux de gris très contrastés (`filter: grayscale(1) contrast(1.4) brightness(.85)` si la source est en couleur), recouverte de : vignettage (`--shade`), brume (2 dégradés blancs à 6–10 % qui dérivent), grain léger. `role="img"` + `aria-label` qui décrit la scène.
 
 ## Titre de chapitre
 
@@ -37,4 +37,4 @@ Panneau noir plein écran : liste numérotée des chapitres (numéro + titre en 
 ## États
 
 - **Chargement** : écran noir, numéro « 0 » qui clignote lentement.
-- **Image manquante** : dégradé gris + silhouettes simples ; le titre et le numéro suffisent.
+- **Image manquante** : fond `--mid` + vignettage ; le titre et le numéro suffisent (pas de silhouettes dessinées).

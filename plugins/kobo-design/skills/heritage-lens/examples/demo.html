@@ -26,8 +26,13 @@ button { font: inherit; color: inherit; }
 .screen { position: fixed; inset: 0; transition: opacity var(--dur) var(--ease), transform var(--dur-cam) var(--ease); }
 .screen[hidden] { display: block !important; opacity: 0; pointer-events: none; }
 /* Accueil */
-.home { background: var(--veil), radial-gradient(60% 40% at 70% 20%, #f2c27a, transparent 70%), linear-gradient(180deg, #8a6a52 0%, #d9a46a 35%, #8a7a3e 55%, #3d3a1e 80%, #1c140e); }
-.home::after { content: ""; position: absolute; left: 0; right: 0; bottom: 22%; height: 10%; background: linear-gradient(90deg, transparent 20%, #d8c4a0 25% 60%, transparent 66%); opacity: .55; filter: blur(1px); pointer-events: none; }
+.home { background: var(--bg); overflow: hidden; }
+/* Images réelles (voir references/assets.md) */
+.home__img, .layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.home__img { filter: sepia(.25) saturate(1.3) contrast(1.05); }
+.home::after { content: ""; position: absolute; inset: 0; background: var(--veil); pointer-events: none; }
+.home > :not(img) { z-index: 1; }
+.credit { position: absolute; left: var(--edge); bottom: var(--edge); margin: 0; font: 400 var(--text-xs) var(--font-ui); color: var(--muted); }
 .home.is-leaving { transform: scale(1.15); opacity: 0; }
 .home__title { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); margin: 0; text-align: center; font: 400 var(--text-hero)/0.9 var(--font-display); text-shadow: 0 2px 40px rgb(28 20 14 / .5); white-space: nowrap; }
 .home__title small { display: block; margin: 4px 0 0 40%; font-size: 0.28em; text-align: left; }
@@ -40,17 +45,20 @@ button { font: inherit; color: inherit; }
 .round { width: var(--btn-round); height: var(--btn-round); border-radius: 50%; border: 1px solid var(--ring); background: rgb(28 20 14 / .25); cursor: pointer; display: grid; place-items: center; font-family: var(--font-ui); }
 /* Scène */
 .scene { overflow: hidden; cursor: none; }
-.layer { position: absolute; inset: 0; }
-.past { background: var(--veil), repeating-linear-gradient(90deg, transparent 0 9%, #b5472f 9% 12%, transparent 12% 20%), linear-gradient(180deg, #4a2a1e 0 18%, #e7cfa2 18% 55%, #c9a86e 55% 70%, #7c5a3e 70%); }
-.past::after { content: ""; position: absolute; left: 0; right: 0; top: 55%; height: 15%; background: repeating-linear-gradient(90deg, #2f6b5a 0 3%, #e2c27e 3% 6%); opacity: .7; }
-.today { background: linear-gradient(180deg, #9fb6c8 0 30%, #cdbb9c 30% 60%, #a48e70 60%); clip-path: circle(calc(var(--lens) / 2) at var(--x, 70%) var(--y, 50%)); }
+.layer { position: absolute; inset: 0; overflow: hidden; background: var(--bg); isolation: isolate; }
+/* « Reconstitué » : même photo, réchauffée, saturée, lumière dorée */
+.past img { filter: sepia(.35) saturate(1.6) contrast(1.08) brightness(1.06) hue-rotate(-6deg); }
+.past::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(70% 60% at 25% 20%, var(--gold), transparent 70%); mix-blend-mode: soft-light; opacity: .8; }
+.past::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--veil); pointer-events: none; }
+/* « Aujourd'hui » : neutre, plus froid et pâle */
+.today img { filter: saturate(.6) contrast(1.02) brightness(1.02); }
+.today { clip-path: circle(calc(var(--lens) / 2) at var(--x, 70%) var(--y, 50%)); }
 .scene.anim .today { transition: clip-path var(--dur) var(--ease); }
-.today::before { content: ""; position: absolute; inset: 30% 0 40%; background: repeating-linear-gradient(90deg, transparent 0 9%, #a59578 9% 11%, transparent 11% 20%); }
 .scene.is-today .today { clip-path: circle(150% at var(--x, 70%) var(--y, 50%)); }
-.lace { position: absolute; left: var(--x, 70%); top: var(--y, 50%); width: calc(var(--lens) + 40px); aspect-ratio: 1; translate: -50% -50%; pointer-events: none; color: var(--parchment); }
-.lens-hint { position: absolute; left: var(--x, 70%); top: var(--y, 50%); translate: -50% calc(var(--lens) / 2 + 34px); font: 500 var(--text-xs) var(--font-ui); text-align: center; text-shadow: 0 1px 6px rgb(28 20 14 / .8); pointer-events: none; white-space: nowrap; }
+.lace { position: absolute; z-index: 2; left: var(--x, 70%); top: var(--y, 50%); width: calc(var(--lens) + 40px); aspect-ratio: 1; translate: -50% -50%; pointer-events: none; color: var(--parchment); }
+.lens-hint { position: absolute; z-index: 2; left: var(--x, 70%); top: var(--y, 50%); translate: -50% calc(var(--lens) / 2 + 34px); font: 500 var(--text-xs) var(--font-ui); text-align: center; text-shadow: 0 1px 6px rgb(28 20 14 / .8); pointer-events: none; white-space: nowrap; }
 .scene.is-today .lace, .scene.is-today .lens-hint { opacity: 0; }
-.story { position: absolute; left: 12%; top: 26%; width: min(var(--text-col), 80vw); text-align: center; }
+.story { position: absolute; z-index: 2; left: 12%; top: 26%; width: min(var(--text-col), 80vw); text-align: center; }
 .story h2 { margin: 0 0 var(--space-4); font: 400 var(--text-title)/var(--leading-title) var(--font-display); color: var(--gold); text-shadow: 0 2px 30px rgb(28 20 14 / .6); }
 .story h2 span { display: inline-block; animation: letter 600ms var(--ease) both; }
 .story p { margin: 0; text-shadow: 0 1px 12px rgb(28 20 14 / .8); }
@@ -62,7 +70,7 @@ button { font: inherit; color: inherit; }
 .dots button[aria-current] { width: 14px; height: 14px; background: none; border: 1px solid var(--text); }
 .about { position: fixed; left: var(--edge); bottom: var(--edge); z-index: 10; display: flex; align-items: center; gap: var(--space-3); background: none; border: 0; cursor: pointer; font: 400 var(--text-sm) var(--font-ui); min-height: 44px; }
 .about i { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--ring); display: grid; place-items: center; font-style: normal; }
-.today-btn { position: absolute; left: 12%; top: calc(26% + 300px); background: none; border: 1px solid var(--ring); border-radius: 999px; padding: 8px 16px; font: 500 var(--text-xs) var(--font-ui); cursor: pointer; min-height: 44px; }
+.today-btn { position: absolute; z-index: 2; left: 12%; top: calc(26% + 300px); background: none; border: 1px solid var(--ring); border-radius: 999px; padding: 8px 16px; font: 500 var(--text-xs) var(--font-ui); cursor: pointer; min-height: 44px; }
 .panel { position: fixed; right: 0; top: 0; bottom: 0; z-index: 20; width: min(420px, 100%); padding: var(--space-12) var(--space-8); background: var(--parchment); color: var(--ink); transform: translateX(100%); transition: transform var(--dur) var(--ease); overflow-y: auto; }
 .panel.is-open { transform: none; }
 .panel h3 { font: 400 2rem/1.1 var(--font-display); margin: 0 0 var(--space-4); }
@@ -75,6 +83,7 @@ button { font: inherit; color: inherit; }
   .today-btn { left: 50%; translate: -50% 0; top: auto; bottom: 90px; }
   .dots { display: none; }
   .home__title small { margin-left: 30%; }
+  .help { bottom: calc(var(--edge) + var(--btn-round) + var(--space-3)); }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
 </style>
@@ -82,24 +91,26 @@ button { font: inherit; color: inherit; }
 <body>
 <span class="brand">Musée fictif</span>
 <section class="screen home" id="home" aria-label="Accueil">
+  <img class="home__img" data-slot="home" src="https://images.unsplash.com/photo-1580706486641-ebec9f673d36?auto=format&fit=crop&w=2000&q=80" alt="Des colonnes antiques à contre-jour, au coucher du soleil" width="2000" height="1333" fetchpriority="high">
   <h1 class="home__title">Ourouk<small>retrouvée</small></h1>
   <button class="enter" id="enter">Entrer</button>
   <p class="help">Cliquer sur Entrer pour continuer</p>
+  <p class="credit">Photos : Unsplash</p>
 </section>
 
 <section class="screen scene" id="scene" hidden aria-label="Visite">
-  <div class="layer past" data-slot="reconstruction" role="img" aria-label="Reconstitution de la salle des colonnes"></div>
-  <div class="layer today" data-slot="today" role="img" aria-label="La même salle aujourd'hui, en ruines"></div>
+  <div class="layer past" data-slot="reconstruction"><img id="imgPast" src="https://images.unsplash.com/photo-1654849476646-b23bd8597bae?auto=format&fit=crop&w=2000&q=80" alt="La salle des colonnes reconstituée : portes et piliers baignés de lumière dorée" width="2000" height="1333" loading="lazy"></div>
+  <div class="layer today" data-slot="today"><img id="imgToday" src="https://images.unsplash.com/photo-1654849476646-b23bd8597bae?auto=format&fit=crop&w=2000&q=80" alt="La même salle aujourd'hui : portes et piliers en ruines, à ciel ouvert" width="2000" height="1333" loading="lazy"></div>
   <svg class="lace" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"></g></svg>
   <span class="lens-hint">Cliquer pour voir l'état actuel</span>
   <div class="story"><h2 id="placeTitle">Salle des colonnes</h2><p>Le roi y recevait les délégations venues de tout l'empire. Soixante-douze colonnes peintes portaient un plafond de cèdre ; il n'en reste que treize aujourd'hui.</p></div>
   <button class="today-btn" id="todayBtn" aria-pressed="false">Voir aujourd'hui</button>
   <div class="place">Palais royal <span class="medal" aria-hidden="true">✦</span></div>
-  <nav class="dots" aria-label="Lieux"><button aria-label="Porte des nations"></button><button aria-label="Escalier d'honneur"></button><button aria-current="true" aria-label="Salle des colonnes"></button><button aria-label="Trésor"></button><button aria-label="Tombeaux"></button></nav>
+  <nav class="dots" aria-label="Lieux"><button aria-label="Porte des nations" data-img="1624991721151-e746c489fedf" data-alt="les ruines de la porte sous un ciel nuageux"></button><button aria-label="Escalier d'honneur" data-img="1580706486641-ebec9f673d36" data-alt="les colonnes de l'escalier face au soleil couchant"></button><button aria-current="true" aria-label="Salle des colonnes" data-img="1654849476646-b23bd8597bae" data-alt="les portes et les piliers de la salle"></button><button aria-label="Trésor" data-img="1686028731741-d5771a9f665e" data-alt="un pilier de pierre sculpté du trésor"></button><button aria-label="Tombeaux" data-img="1624991721151-e746c489fedf" data-alt="le plateau des tombeaux et ses ruines"></button></nav>
   <button class="about" id="aboutBtn"><span>À propos du projet</span><i aria-hidden="true">→</i></button>
 </section>
 <div class="corner"><button class="round" aria-label="Réglages">⚙</button><button class="round" id="sound" aria-pressed="false" aria-label="Activer le son">🔈</button></div>
-<aside class="panel" id="panel" aria-label="À propos"><button class="round" id="closePanel" aria-label="Fermer">×</button><h3>À propos</h3><p>Cette visite est une démonstration du skill Heritage Lens : la cité, les lieux et les textes sont inventés. Une vraie visite s'appuierait sur des relevés archéologiques, des historiens et des sources citées ici.</p></aside>
+<aside class="panel" id="panel" aria-label="À propos"><button class="round" id="closePanel" aria-label="Fermer">×</button><h3>À propos</h3><p>Cette visite est une démonstration du skill Heritage Lens : la cité, les lieux et les textes sont inventés. Une vraie visite s'appuierait sur des relevés archéologiques, des historiens et des sources citées ici.</p><p>Photos : Unsplash (licence Unsplash). La « reconstitution » est la même photo retraitée (chaleur, saturation, lumière dorée) : un vrai projet utiliserait une reconstitution 3D ou IA validée par des archéologues.</p></aside>
 
 <script>
 (() => {
@@ -115,7 +126,9 @@ button { font: inherit; color: inherit; }
   const toggle = () => { scene.classList.add('anim'); setTimeout(() => scene.classList.remove('anim'), 850); const on = scene.classList.toggle('is-today'); document.getElementById('todayBtn').setAttribute('aria-pressed', on); document.getElementById('todayBtn').textContent = on ? 'Revenir à la reconstitution' : "Voir aujourd'hui"; };
   scene.addEventListener('click', e => { if (!e.target.closest('button')) toggle(); });
   document.getElementById('todayBtn').addEventListener('click', toggle);
-  document.querySelectorAll('.dots button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.dots button').forEach(x => x.toggleAttribute('aria-current', x === b)); document.getElementById('placeTitle').textContent = b.getAttribute('aria-label'); }));
+  document.querySelectorAll('.dots button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.dots button').forEach(x => x.toggleAttribute('aria-current', x === b)); document.getElementById('placeTitle').textContent = b.getAttribute('aria-label');
+    const src = `https://images.unsplash.com/photo-${b.dataset.img}?auto=format&fit=crop&w=2000&q=80`, past = document.getElementById('imgPast'), today = document.getElementById('imgToday');
+    past.src = src; today.src = src; past.alt = `Reconstitution : ${b.dataset.alt}, sous la lumière dorée`; today.alt = `Aujourd'hui : ${b.dataset.alt}`; }));
   const panel = document.getElementById('panel');
   document.getElementById('aboutBtn').addEventListener('click', () => panel.classList.add('is-open'));
   document.getElementById('closePanel').addEventListener('click', () => panel.classList.remove('is-open'));

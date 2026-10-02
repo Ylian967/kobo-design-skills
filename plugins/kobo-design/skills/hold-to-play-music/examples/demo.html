@@ -22,9 +22,14 @@ button { font: inherit; }
 :focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
 .screen { position: fixed; inset: 0; transition: opacity var(--dur) var(--ease); }
 .screen[hidden] { display: block !important; opacity: 0; pointer-events: none; }
-.bw { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); filter: grayscale(1) contrast(1.15); }
-.bw i { background: radial-gradient(30% 35% at 50% 30%, #6a6a6a, transparent 70%), radial-gradient(45% 60% at 50% 85%, #2f2f2f, transparent 70%), #151515; }
-.bw::after { content: ""; position: absolute; inset: 0; background: var(--veil); }
+/* Triptyque N&B : photos aujourd'hui, <video muted loop playsinline> demain (même classe, même filtre) */
+.bw { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--bg); }
+img { color: transparent; } /* pas de texte alt visible si l'image ne charge pas : le fond token prend le relais */
+.bw figure { position: relative; margin: 0; overflow: hidden; background: var(--bg); }
+.bw figure + figure { border-left: 1px solid var(--bg); }
+.bw img, .bw video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(.9); }
+.bw::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .18; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
+.bw::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--veil); }
 .label-logo { position: absolute; left: 50%; top: var(--space-6); translate: -50% 0; text-align: center; font: 900 1.6rem/1 var(--font-brush); filter: url(#brush); }
 .label-logo small { display: block; font: 500 var(--text-2xs) var(--font-ui); filter: none; margin-top: 4px; color: var(--muted); }
 .title { position: absolute; left: 50%; top: 46%; translate: -50% -50%; margin: 0; text-align: center; }
@@ -39,12 +44,15 @@ button { font: inherit; }
 .key__label { position: relative; }
 /* Artiste */
 .artist { background: var(--paper); color: var(--ink); }
-.silhouette { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: min(46vw, 420px); aspect-ratio: 1/1.25; background: var(--ink); clip-path: polygon(38% 4%, 62% 4%, 66% 22%, 60% 30%, 92% 42%, 100% 100%, 0 100%, 8% 42%, 40% 30%, 34% 22%); }
-.silhouette::after { content: ""; position: absolute; left: 28%; top: 0; width: 44%; height: 9%; background: var(--ink); border-radius: 40% 40% 0 0; }
+/* Portrait en contre-jour : photo N&B très contrastée, multipliée sur le papier blanc, bords fondus */
+.portrait { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: min(46vw, 420px); aspect-ratio: 4/5; margin: 0; background: var(--paper); /* repli : papier (le multiply a besoin du blanc dessous) */
+  -webkit-mask-image: radial-gradient(75% 85% at 50% 60%, black 55%, transparent 100%); mask-image: radial-gradient(75% 85% at 50% 60%, black 55%, transparent 100%); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.8) brightness(.85); mix-blend-mode: multiply; transition: opacity var(--dur) var(--ease); }
 .tl-logo { position: absolute; left: var(--edge); top: var(--edge); font: 900 1.4rem/1 var(--font-brush); filter: url(#brush); }
 .tr-title { position: absolute; right: var(--edge); top: var(--edge); font: 900 1.2rem/1 var(--font-brush); filter: url(#brush); text-transform: uppercase; }
 .card { position: absolute; left: var(--edge); bottom: 60px; display: grid; gap: var(--space-3); }
-.cover { width: 90px; aspect-ratio: 1; background: linear-gradient(180deg, #ddd, #111 60%); }
+.cover { width: 90px; aspect-ratio: 1; margin: 0; overflow: hidden; background: var(--ink); }
+.cover img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.2); }
 .card p { margin: 0; display: flex; align-items: center; gap: var(--space-3); font: 700 var(--text-sm) var(--font-ui); }
 .card u { text-underline-offset: 3px; }
 .round { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid currentColor; display: grid; place-items: center; background: none; color: inherit; cursor: pointer; }
@@ -66,21 +74,28 @@ footer a { color: inherit; text-decoration: none; }
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="brush"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter></svg>
 
 <section class="screen home" id="home" aria-label="Accueil">
-  <div class="bw" data-slot="bw-video" aria-hidden="true"><i></i><i></i><i></i></div>
+  <!-- Triptyque : chaque <img> peut être remplacée par
+       <video muted loop playsinline autoplay preload="metadata" poster="…jpg"><source src="clip.webm" type="video/webm"><source src="clip.mp4" type="video/mp4"></video>
+       (voir references/assets.md § 4) -->
+  <div class="bw" data-slot="bw-video">
+    <figure><img src="https://images.unsplash.com/photo-1621450698168-4ec4fa1dcf52?auto=format&fit=crop&w=800&h=1400&q=80" width="800" height="1400" alt="Guitariste assis, photo noir et blanc" fetchpriority="high"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1659150140178-d672b4763fd0?auto=format&fit=crop&w=800&h=1400&q=80" width="800" height="1400" alt="Musicien éclairé par une lumière dure, noir et blanc" fetchpriority="high"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1470019693664-1d202d2c0907?auto=format&fit=crop&w=800&h=1400&q=80" width="800" height="1400" alt="Clavier de piano en noir et blanc" fetchpriority="high"></figure>
+  </div>
   <div class="label-logo">ÉCHO<small>présente</small></div>
   <h1 class="title"><span class="brush" id="brushTitle">Dix ans de bruit</span><small>Un voyage interactif à travers dix ans de musique.</small></h1>
 </section>
 
 <section class="screen artist" id="artist" hidden aria-label="Artiste">
-  <div class="silhouette" data-slot="portrait" role="img" aria-label="Portrait en contre-jour de l'artiste"></div>
+  <figure class="portrait" data-slot="portrait"><img id="artistPhoto" src="https://images.unsplash.com/photo-1659150140178-d672b4763fd0?auto=format&fit=crop&w=840&h=1050&q=80" width="840" height="1050" alt="Portrait en contre-jour de l'artiste, noir et blanc" loading="lazy"></figure>
   <span class="tl-logo">ÉCHO</span><span class="tr-title">Dix ans de bruit</span>
-  <div class="card"><div class="cover" data-slot="cover"></div><p><u id="artistName">Nadia Rive (2016)</u><button class="round" aria-label="Voir les titres">↓</button></p></div>
+  <div class="card"><figure class="cover" data-slot="cover"><img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=200&h=200&q=80" width="200" height="200" alt="Pochette : vinyle sur une platine, noir et blanc" loading="lazy"></figure><p><u id="artistName">Nadia Rive (2016)</u><button class="round" aria-label="Voir les titres">↓</button></p></div>
 </section>
 
 <p class="hold"><span id="holdVerb">Maintenez</span> <button class="key" id="key" aria-describedby="holdHelp"><span class="key__fill"></span><span class="key__label">espace</span></button> <span id="holdGoal">pour lancer l'expérience.</span></p>
 <span id="holdHelp" hidden>Maintenez la barre d'espace ou ce bouton ; un clic simple fonctionne aussi.</span>
 <button class="help">Besoin d'aide ?</button>
-<footer><span>© 2026 Écho (label fictif) · À propos · Démo Kōbō</span><span>#DixAnsDeBruit · Partager f t · ⤢</span></footer>
+<footer><span>© 2026 Écho (label fictif) · À propos · Démo Kōbō · Photos : Unsplash</span><span>#DixAnsDeBruit · Partager f t · ⤢</span></footer>
 <div class="flash" id="flash"></div>
 
 <script>
@@ -89,8 +104,10 @@ footer a { color: inherit; text-decoration: none; }
   const bt = document.getElementById('brushTitle'); bt.innerHTML = [...bt.textContent].map((c, i) => c === ' ' ? ' ' : `<span style="--i:${i}">${c}</span>`).join('');
   const key = document.getElementById('key'), home = document.getElementById('home'), artist = document.getElementById('artist'), flash = document.getElementById('flash');
   const artists = ['Nadia Rive (2016)', 'Les Néons (2018)', 'Kaito (2021)', 'Orage Blanc (2024)']; let idx = -1;
+  const photo = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=840&h=1050&q=80`;
+  const portraits = ['1659150140178-d672b4763fd0', '1621450698168-4ec4fa1dcf52', '1659150140178-d672b4763fd0', '1621450698168-4ec4fa1dcf52'];
   const next = () => { if (!reduce) { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); }
-    setTimeout(() => { home.hidden = true; artist.hidden = false; document.body.classList.add('on-paper'); idx = (idx + 1) % artists.length; document.getElementById('artistName').textContent = artists[idx]; document.getElementById('holdGoal').textContent = "pour changer d'artiste."; }, reduce ? 0 : 280); };
+    setTimeout(() => { home.hidden = true; artist.hidden = false; document.body.classList.add('on-paper'); idx = (idx + 1) % artists.length; document.getElementById('artistName').textContent = artists[idx]; document.getElementById('artistPhoto').src = photo(portraits[idx]); document.getElementById('holdGoal').textContent = "pour changer d'artiste."; }, reduce ? 0 : 280); };
   let p = 0, held = false, fired = false, last = performance.now();
   (function frame(t) { const dt = t - last; last = t; p = held ? Math.min(1, p + dt / 1200) : Math.max(0, p - dt / 300); key.style.setProperty('--p', p); if (p >= 1) { held = false; fired = true; key.classList.remove('is-held'); p = 0; next(); } requestAnimationFrame(frame); })(last);
   const down = () => { fired = false; held = true; key.classList.add('is-held'); }, up = () => { held = false; key.classList.remove('is-held'); };

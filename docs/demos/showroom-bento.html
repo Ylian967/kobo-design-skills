@@ -65,25 +65,25 @@ button { font: inherit; color: inherit; }
 /* ---------- Scène carrousel ---------- */
 .stage { position: relative; display: grid; place-items: center; min-height: 340px; }
 .hero-bike { position: relative; z-index: 2; width: min(820px, 60vw); margin-bottom: 40px; }
-.bike { display: block; width: 100%; height: auto; position: relative; z-index: 2; filter: drop-shadow(0 18px 14px color-mix(in srgb, var(--ink) 18%, transparent)); }
-.bike--main { --paint: var(--paint-red); }
+/* Produit : vraie photo dans un cadre studio arrondi (pas de faux détourage) */
+.bike { display: block; width: 100%; aspect-ratio: 16 / 9; margin: 0; position: relative; z-index: 2; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black); box-shadow: var(--shadow-pop); }
+.bike img, .side img, .visual img { display: block; width: 100%; height: 100%; object-fit: cover; color: transparent; }
 .floor { position: absolute; left: 50%; bottom: -18px; width: 96%; height: 46px; translate: -50% 0; background: var(--shadow-floor); z-index: 1; }
-.side { position: absolute; top: 50%; width: min(560px, 42vw); translate: 0 -54%; opacity: .5; filter: saturate(.55) blur(1px); z-index: 1; cursor: pointer; border: 0; background: none; padding: 0; transition: opacity var(--dur-base) var(--ease-out); }
+.side { position: absolute; top: 50%; width: min(560px, 42vw); aspect-ratio: 16 / 9; translate: 0 -54%; opacity: .5; filter: saturate(.55) blur(1px); z-index: 1; cursor: pointer; border: 0; padding: 0; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black); transition: opacity var(--dur-base) var(--ease-out); }
 .side:hover { opacity: .75; }
 .side--prev { left: calc(var(--pad) * -1 - 24%); }
 .side--next { right: calc(var(--pad) * -1 - 24%); }
-.side svg { width: 100%; height: auto; display: block; }
-.side--prev svg { transform: scaleX(-1); }
 .carousel { position: absolute; left: 50%; bottom: 0; translate: -50% 0; z-index: 3; display: flex; align-items: center; gap: var(--space-1); padding: 4px; border-radius: var(--radius-pill); background: var(--tile); box-shadow: var(--shadow-tile); }
 .carousel .icon-btn { width: 40px; height: 40px; background: var(--soft); }
 .carousel .icon-btn:hover { background: var(--ink); color: var(--on-ink); }
 .carousel output { min-width: 64px; text-align: center; font: 600 var(--text-xs) var(--font-body); font-variant-numeric: tabular-nums; }
 
-/* Peinture du SVG */
-.pt { fill: var(--paint); transition: fill var(--dur-base) var(--ease-inout); }
-.rb { fill: var(--rubber); } .rm { fill: var(--rim); } .mt { fill: var(--metal); } .mh { fill: var(--metal-hi); } .gl { fill: var(--glass); } .tl { fill: var(--tile); }
-.st-mt { stroke: var(--metal); fill: none; } .st-tl { stroke: var(--tile); fill: none; } .st-pt { stroke: var(--paint); fill: none; transition: stroke var(--dur-base) var(--ease-inout); }
-.sh-a { stop-color: var(--frame-hi); stop-opacity: .45; } .sh-b { stop-color: var(--frame-hi); stop-opacity: 0; } .sh-c { stop-color: var(--ink); stop-opacity: .35; }
+/* Teinte de démo : la photo rouge est virée par filtre (en production : une photo par teinte, fondu enchaîné) */
+.visual[data-paint] img { transition: filter var(--dur-base) var(--ease-inout); }
+.visual[data-paint="yellow"] img { filter: hue-rotate(48deg) saturate(1.3) brightness(1.15); }
+.visual[data-paint="blue"] img { filter: hue-rotate(220deg) saturate(1.1); }
+.visual[data-paint="grey"] img { filter: saturate(0) brightness(1.15); }
+.visual[data-paint="black"] img { filter: saturate(0) brightness(.6); }
 
 /* ---------- Bento ---------- */
 .bento { display: grid; grid-template-columns: minmax(0, 1.7fr) repeat(3, minmax(0, 1fr)) minmax(0, 1.7fr); grid-template-rows: auto auto; gap: var(--bento-gap); margin-top: var(--space-6); position: relative; z-index: 2; }
@@ -95,9 +95,9 @@ button { font: inherit; color: inherit; }
 .acc__buy { margin-top: auto; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding-top: var(--space-4); }
 .acc__buy strong { font: 700 var(--text-lg) var(--font-display); }
 .visual { border-radius: calc(var(--radius-tile) - 2px); background: radial-gradient(circle at 50% 45%, var(--tile), var(--soft) 70%); display: grid; place-items: center; overflow: hidden; }
-.visual svg { width: 92%; height: auto; transition: transform var(--dur-base) var(--ease-out); }
-.acc:hover .visual svg { transform: rotate(-4deg) scale(1.04); }
-.helmet { --paint: var(--paint-black); }
+.acc .visual { background: var(--soft); }
+.acc .visual img { transition: transform var(--dur-base) var(--ease-out); }
+.acc:hover .visual img { transform: rotate(-4deg) scale(1.04); }
 .spec { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-4); min-height: 104px; transition: background var(--dur-fast) var(--ease-out); }
 .spec:hover { background: var(--soft); }
 .spec svg { width: 22px; height: 22px; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
@@ -105,8 +105,8 @@ button { font: inherit; color: inherit; }
 .spec span { color: var(--muted); font-size: var(--text-2xs); }
 .color { grid-column: 5; grid-row: 1 / span 2; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); }
 .color__copy { display: flex; flex-direction: column; min-width: 0; }
-.color .visual { flex: 1; margin-top: var(--space-3); min-height: 110px; }
-.color .visual svg { width: auto; height: 120px; }
+.color .visual { flex: 1; margin-top: var(--space-3); min-height: 110px; position: relative; background: var(--paint-black); }
+.color .visual img { position: absolute; inset: 0; }
 .color__extra { margin-top: var(--space-3); display: flex; justify-content: space-between; align-items: baseline; }
 .color__extra strong { font: 700 var(--text-base) var(--font-display); }
 .color__extra span { color: var(--muted); font-size: var(--text-2xs); }
@@ -129,7 +129,7 @@ button { font: inherit; color: inherit; }
 .bento > * { animation: rise var(--dur-slide) var(--ease-out) both; }
 .bento > :nth-child(2) { animation-delay: 40ms; } .bento > :nth-child(3) { animation-delay: 80ms; } .bento > :nth-child(4) { animation-delay: 120ms; }
 .bento > :nth-child(5) { animation-delay: 160ms; } .bento > :nth-child(6) { animation-delay: 200ms; } .bento > :nth-child(7) { animation-delay: 240ms; } .bento > :nth-child(8) { animation-delay: 280ms; }
-.bike--main { animation: drive-in var(--dur-slide) var(--ease-out) both; }
+#bike-main { animation: drive-in var(--dur-slide) var(--ease-out) both; }
 
 /* ---------- Tablette ---------- */
 @media (max-width: 1100px) {
@@ -151,7 +151,7 @@ button { font: inherit; color: inherit; }
   .head { flex-direction: column; gap: var(--space-3); margin-top: var(--space-6); }
   .price, .price + .caption { text-align: left; margin-left: 0; }
   .stage { min-height: 300px; padding-bottom: 56px; }
-  .hero-bike { width: 104%; margin-bottom: 16px; }
+  .hero-bike { width: 100%; margin-bottom: 16px; }
   .side { display: none; }
   .bento { grid-template-columns: 1fr 1fr; }
   .acc { grid-column: 1 / -1; }
@@ -164,72 +164,6 @@ button { font: inherit; color: inherit; }
 </style>
 </head>
 <body>
-<!-- Dessins réutilisés (placeholders des rendus produit) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="sh-a"/><stop offset=".45" class="sh-b"/><stop offset="1" class="sh-c"/></linearGradient>
-    <g id="bodywork">
-      <path d="M66 124 C120 120 200 130 264 144 L258 178 C200 178 150 170 110 152 C88 142 74 134 66 124 Z"/>
-      <path d="M248 144 C266 112 330 100 386 114 C394 130 388 152 378 174 L270 182 C256 170 248 158 248 144 Z"/>
-      <path d="M372 118 C422 108 472 106 512 122 C542 134 564 154 570 174 C562 190 542 200 514 206 L472 214 C452 232 434 250 422 258 L362 260 C350 240 340 222 336 206 C350 176 362 146 372 118 Z"/>
-      <path d="M300 250 C340 254 390 258 426 256 C418 272 408 286 398 294 L326 298 C314 284 304 266 300 250 Z"/>
-    </g>
-    <symbol id="bike" viewBox="0 0 640 380">
-      <!-- roue arrière -->
-      <circle cx="150" cy="290" r="78" class="rb"/><circle cx="150" cy="290" r="58" class="rm"/>
-      <g class="st-mt" stroke-width="7" stroke-linecap="round"><path d="M150 290 L150 238 M150 290 L195 316 M150 290 L105 316"/></g>
-      <circle cx="150" cy="290" r="14" class="mt"/>
-      <!-- bras oscillant, moteur, échappement -->
-      <path d="M146 280 L300 236 L312 258 L154 302 Z" class="rm"/>
-      <path d="M262 214 L384 204 L404 270 L334 302 L268 286 Z" class="rm"/>
-      <g class="st-mt" stroke-width="3"><path d="M282 232 L376 224 M284 248 L382 240 M288 264 L384 256"/></g>
-      <rect x="318" y="296" width="96" height="20" rx="10" class="mt" transform="rotate(-6 366 306)"/>
-      <!-- cadre arrière, amortisseur, garde-boue arrière -->
-      <path d="M176 160 L300 236 L310 214 L232 170 Z" class="rm"/>
-      <path d="M246 178 L282 250" class="st-mt" stroke-width="9" stroke-linecap="round"/>
-      <path d="M96 238 Q150 196 206 226" style="fill:none;stroke:var(--rubber)" stroke-width="10" stroke-linecap="round"/>
-      <!-- fourche + roue avant -->
-      <path d="M452 146 L508 292" class="st-mt" stroke-width="16" stroke-linecap="round"/>
-      <circle cx="505" cy="290" r="78" class="rb"/><circle cx="505" cy="290" r="58" class="rm"/>
-      <circle cx="505" cy="290" r="40" class="st-mt" stroke-width="8" stroke-dasharray="3 7"/>
-      <g class="st-mt" stroke-width="7" stroke-linecap="round"><path d="M505 290 L505 238 M505 290 L550 316 M505 290 L460 316"/></g>
-      <circle cx="505" cy="290" r="14" class="mt"/>
-      <path d="M452 226 Q505 200 556 236" class="st-pt" stroke-width="12" stroke-linecap="round"/>
-      <!-- selle, carrosserie peinte + ombrage -->
-      <use href="#bodywork" class="pt"/>
-      <use href="#bodywork" fill="url(#shade)"/>
-      <path d="M150 132 C196 122 238 124 262 134 C262 142 260 148 256 152 C222 148 186 148 156 146 Z" class="rb"/>
-      <path d="M436 112 C458 88 500 92 522 120 C494 118 464 116 436 112 Z" class="gl"/>
-      <path d="M540 156 C552 158 562 164 568 172 L556 184 C546 180 538 174 534 166 Z" class="mh"/>
-      <path d="M350 176 L520 182" class="st-tl" stroke-width="5" stroke-linecap="round"/>
-      <path d="M358 190 L470 196" class="st-tl" stroke-width="2" stroke-linecap="round" opacity=".7"/>
-      <path d="M420 122 L446 112" class="st-mt" stroke-width="6" stroke-linecap="round"/>
-    </symbol>
-    <g id="frontwork">
-      <path d="M100 44 C142 44 162 84 162 122 C162 152 132 168 100 168 C68 168 38 152 38 122 C38 84 58 44 100 44 Z"/>
-      <path d="M14 70 C14 62 34 62 38 70 C40 78 18 80 14 70 Z M186 70 C186 62 166 62 162 70 C160 78 182 80 186 70 Z"/>
-      <path d="M78 178 Q100 168 122 178 L118 196 Q100 190 82 196 Z"/>
-    </g>
-    <symbol id="front" viewBox="0 0 200 270">
-      <rect x="84" y="170" width="32" height="96" rx="15" class="rb"/>
-      <rect x="66" y="126" width="9" height="86" rx="4" class="mt"/><rect x="125" y="126" width="9" height="86" rx="4" class="mt"/>
-      <path d="M38 70 L58 82 M162 70 L142 82" class="st-mt" stroke-width="3"/>
-      <use href="#frontwork" class="pt"/><use href="#frontwork" fill="url(#shade)"/>
-      <path d="M100 18 C126 18 136 44 134 72 L66 72 C64 44 74 18 100 18 Z" class="gl"/>
-      <path d="M62 116 C70 108 88 112 90 124 C82 130 66 128 62 116 Z M138 116 C130 108 112 112 110 124 C118 130 134 128 138 116 Z" class="mh"/>
-      <path d="M100 76 L100 160" class="st-tl" stroke-width="4"/>
-    </symbol>
-    <g id="shell"><path d="M28 124 C16 56 76 16 122 20 C172 26 194 82 182 132 L150 154 L58 158 Z"/></g>
-    <symbol id="helmet" viewBox="0 0 200 180">
-      <use href="#shell" class="pt"/><use href="#shell" fill="url(#shade)"/>
-      <path d="M92 70 C128 58 170 68 184 96 L180 120 C152 108 120 106 96 112 Z" class="gl"/>
-      <path d="M40 60 C70 34 110 26 140 30" class="st-tl" stroke-width="5" stroke-linecap="round"/>
-      <path d="M62 140 L148 138 L146 156 L64 160 Z" class="rb"/>
-      <circle cx="74" cy="104" r="8" class="mt"/>
-    </symbol>
-  </defs>
-</svg>
-
 <div class="frame">
   <header class="nav">
     <a class="mono-logo" href="#" aria-label="Vantor, accueil">
@@ -261,10 +195,10 @@ button { font: inherit; color: inherit; }
   </div>
 
   <section class="stage" aria-label="Modèles" aria-roledescription="carrousel">
-    <button class="side side--prev" data-dir="-1" aria-label="Modèle précédent" style="--paint: var(--paint-yellow)"><svg viewBox="0 0 640 380" aria-hidden="true"><use href="#bike"/></svg></button>
+    <button class="side side--prev" data-dir="-1" aria-label="Modèle précédent"><img id="side-prev" src="https://images.unsplash.com/photo-1610645888304-8d56f2ad24b1?auto=format&fit=crop&w=1120&h=630&q=80" width="1120" height="630" alt="" loading="lazy"></button>
     <div class="hero-bike"><span class="floor" aria-hidden="true"></span>
-    <svg class="bike bike--main" id="bike-main" viewBox="0 0 640 380" data-slot="product-side" role="img" aria-label="Moto sportive vue de profil, carénage rouge (emplacement du rendu produit)"><use href="#bike"/></svg></div>
-    <button class="side side--next" data-dir="1" aria-label="Modèle suivant" style="--paint: var(--paint-blue)"><svg viewBox="0 0 640 380" aria-hidden="true"><use href="#bike"/></svg></button>
+      <figure class="bike" id="bike-main" data-slot="product-side"><img id="bike-img" src="https://images.unsplash.com/photo-1698695067900-2bcfca3d2071?auto=format&fit=crop&w=1600&h=900&q=80" width="1600" height="900" alt="Ardente : moto sportive rouge en studio sombre, vue de trois-quarts" fetchpriority="high"></figure></div>
+    <button class="side side--next" data-dir="1" aria-label="Modèle suivant"><img id="side-next" src="https://images.unsplash.com/photo-1568772585471-4f4169aed2a2?auto=format&fit=crop&w=1120&h=630&q=80" width="1120" height="630" alt="" loading="lazy"></button>
     <div class="carousel">
       <button class="icon-btn" data-dir="-1" aria-label="Modèle précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <output id="m-index" aria-live="polite">01 / 03</output>
@@ -276,10 +210,10 @@ button { font: inherit; color: inherit; }
     <article class="tile acc" id="accessoire">
       <div class="acc__copy">
         <h2>Casque Aero R</h2>
-        <p>Coque carbone, visière photochromique, ventilation à six entrées.</p>
+        <p>Coque blanche en fibre composite, visière iridium photochromique, six entrées d'air.</p>
         <div class="acc__buy"><strong>350,50 €</strong><button class="pill pill--ink" style="min-height:40px;padding:0 var(--space-4)">Acheter</button></div>
       </div>
-      <div class="visual" data-slot="accessory-image"><svg class="helmet" viewBox="0 0 200 180" role="img" aria-label="Casque intégral noir (emplacement photo)"><use href="#helmet"/></svg></div>
+      <div class="visual" data-slot="accessory-image"><img src="https://images.unsplash.com/photo-1627530980937-b8721b91506a?auto=format&fit=crop&w=600&h=700&q=80" width="600" height="700" alt="Casque intégral blanc à visière irisée" loading="lazy"></div>
     </article>
 
     <div class="tile spec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M3 21h13M7 8h5"/><path d="M15 10h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V9l-3-3"/></svg><div><strong>Essence</strong><span>Carburant</span></div></div>
@@ -293,7 +227,7 @@ button { font: inherit; color: inherit; }
       <div class="color__copy">
         <h2>Couleur</h2>
         <p>Choisissez la teinte du carénage.</p>
-        <div class="visual" data-slot="product-front"><svg class="front" id="front-view" viewBox="0 0 200 270" role="img" aria-label="Moto vue de face (emplacement du rendu)"><use href="#front"/></svg></div>
+        <div class="visual" data-slot="product-paint" id="paint-view" data-paint="red"><img src="https://images.unsplash.com/photo-1698695067900-2bcfca3d2071?auto=format&fit=crop&w=600&h=400&q=80" width="600" height="400" alt="Aperçu de la moto dans la teinte choisie" loading="lazy"></div>
         <div class="color__extra"><span id="paint-name">Rouge course</span><strong id="paint-extra">Inclus</strong></div>
       </div>
       <fieldset class="swatches">
@@ -307,23 +241,23 @@ button { font: inherit; color: inherit; }
     </article>
   </section>
 </div>
-<footer class="foot"><span>© Vantor Moto (fictif) — démo Kōbō</span><span>Mentions · Financement · Contact</span></footer>
+<footer class="foot"><span>© Vantor Moto (fictif) — démo Kōbō · Photos : Unsplash</span><span>Mentions · Financement · Contact</span></footer>
 
 <script>
 (() => {
+  const photo = (id, w, h) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
   const models = [
-    { code: 'V4', name: 'Ardente', price: '32 000', paint: 'red', caption: 'Sportive · 1 103 cm³ · livraison sous 6 semaines dans votre concession.' },
-    { code: 'S2', name: 'Strale', price: '24 500', paint: 'blue', caption: 'Roadster · 955 cm³ · disponible en essai cette semaine.' },
-    { code: 'R1', name: 'Solare', price: '27 900', paint: 'yellow', caption: 'Sport-touring · 1 158 cm³ · bagagerie incluse.' },
+    { code: 'V4', name: 'Ardente', price: '32 000', paint: 'red', img: '1698695067900-2bcfca3d2071', alt: 'moto sportive rouge en studio sombre, vue de trois-quarts', caption: 'Sportive · 1 103 cm³ · livraison sous 6 semaines dans votre concession.' },
+    { code: 'S2', name: 'Strale', price: '24 500', paint: 'red', img: '1568772585471-4f4169aed2a2', alt: 'moto rouge garée dans un parking', caption: 'Roadster · 955 cm³ · disponible en essai cette semaine.' },
+    { code: 'R1', name: 'Solare', price: '27 900', paint: 'red', img: '1610645888304-8d56f2ad24b1', alt: 'moto rouge posée sur le sable', caption: 'Sport-touring · 1 158 cm³ · bagagerie incluse.' },
   ];
   const names = { red: 'Rouge course', yellow: 'Jaune solaire', blue: 'Bleu piste', grey: 'Gris titane', black: 'Noir mat' };
   const $ = id => document.getElementById(id);
-  const bike = $("bike-main"), front = $("front-view"), prev = document.querySelector('.side--prev'), next = document.querySelector('.side--next');
+  const bike = $('bike-main'), bikeImg = $('bike-img'), paintView = $('paint-view'), prevImg = $('side-prev'), nextImg = $('side-next');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let i = 0;
-  const paintVar = p => `var(--paint-${p})`;
   function setPaint(p, model) {
-    bike.style.setProperty('--paint', paintVar(p)); front.style.setProperty('--paint', paintVar(p));
+    paintView.dataset.paint = p;
     $('paint-name').textContent = names[p];
     $('paint-extra').textContent = p === model.paint ? 'Inclus' : '+140,50 €';
     document.querySelector(`input[name=paint][value=${p}]`).checked = true;
@@ -332,9 +266,10 @@ button { font: inherit; color: inherit; }
     const m = models[i], n = models.length;
     $('m-code').textContent = m.code; $('m-name').textContent = m.name; $('m-price').textContent = m.price; $('m-caption').textContent = m.caption;
     $('m-index').textContent = `0${i + 1} / 0${n}`;
-    bike.setAttribute('aria-label', `Moto ${m.name} vue de profil (emplacement du rendu produit)`);
-    prev.style.setProperty('--paint', paintVar(models[(i - 1 + n) % n].paint));
-    next.style.setProperty('--paint', paintVar(models[(i + 1) % n].paint));
+    bikeImg.src = photo(m.img, 1600, 900); bikeImg.alt = `${m.name} : ${m.alt}`;
+    prevImg.src = photo(models[(i - 1 + n) % n].img, 1120, 630);
+    nextImg.src = photo(models[(i + 1) % n].img, 1120, 630);
+    paintView.querySelector('img').src = photo(m.img, 600, 400);
     setPaint(m.paint, m);
   }
   function go(dir) {

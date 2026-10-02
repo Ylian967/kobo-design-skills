@@ -13,7 +13,7 @@ CHAQUE JOUR                                     │   coupé à la   │
 (EXPLORER →)   120+ | 15k+                      │   taille       │
 ━━━━━━━━━━━━━━━━━━━━━━━ bandeau vert défilant ━━━━━━━━━━━━━━━━━━━━━━━
 ```
-Grille `1.15fr 1fr`, alignée en bas ; la scène de droite fait au moins 520px de haut et coupe le mannequin. Le bandeau colle au bas du héros.
+Grille `1.15fr 1fr`, alignée en bas ; la scène de droite fait au moins 520px de haut et coupe la photo du mannequin. Le bandeau colle au bas du héros.
 
 ## Collection (menthe)
 
@@ -31,7 +31,7 @@ Titre à gauche (12 caractères de large au plus), filtres alignés en bas à dr
 
 ```
 [▢]  [  grand visuel carré, rayon 28px  ]     HAUTS / SWEATS
-[▢]  [  vêtement détouré                 ]     SWEAT À CAPUCHE NUAGE
+[▢]  [  photo réelle (voir assets.md)     ]     SWEAT À CAPUCHE NUAGE
 [▢]  [  (étiquette taille mannequin)     ]     ★★★★★ 4,8 · 126 avis
                                                59 €  79 €
                                                Description 2–3 lignes
@@ -49,7 +49,7 @@ Grille `1fr 1fr` : titre « ESSENTIELS POLYVALENTS » (second mot en vert vif), 
 ## Mobile (≤ 760px)
 
 - Barre : logotype + icônes ; liens dans un menu.
-- Héros empilé : texte, pilule et chiffres, puis la scène (380px) avec le mannequin et l'arc.
+- Héros empilé : texte, pilule et chiffres, puis la scène (380px) avec la photo du mannequin et l'arc.
 - Collection : filtres sous le titre (retour à la ligne), grille 2 colonnes écart 12px, prix et pastilles sur deux lignes.
 - Fiche produit : grand visuel en premier, vignettes en ligne dessous, puces de taille sur 3 colonnes, pilule + favori sur une ligne.
 - Pied : une colonne ; liens en 2 colonnes ; logotype à 22vw.

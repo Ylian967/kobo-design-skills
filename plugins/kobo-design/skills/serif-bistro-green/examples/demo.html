@@ -69,24 +69,12 @@ a { color: inherit; }
 .headline .l1 { z-index: 1; }
 .headline .l2 { z-index: 3; text-align: right; margin-top: -0.02em; }
 .headline em { font-style: italic; color: var(--orange); }
-/* Personnage détouré dessiné en CSS (remplacer par une photo PNG détourée) */
-.chef { position: absolute; z-index: 2; left: 50%; bottom: calc(var(--radius-section) * -1); width: clamp(220px, 26vw, 360px); aspect-ratio: 3 / 4.6; translate: -46% 0; pointer-events: none; }
-.chef > * { position: absolute; }
-.chef .toque { left: 30%; top: 0; width: 40%; height: 19%; background: radial-gradient(circle at 25% 45%, var(--white) 0 30%, transparent 31%), radial-gradient(circle at 75% 45%, var(--white) 0 30%, transparent 31%), radial-gradient(circle at 50% 30%, var(--white) 0 36%, transparent 37%), linear-gradient(var(--white), var(--white)) center bottom / 70% 45% no-repeat; }
-.chef .head { left: 35%; top: 15%; width: 30%; height: 20%; border-radius: 46% 46% 50% 50%; background: radial-gradient(70% 60% at 40% 35%, color-mix(in srgb, var(--skin) 70%, var(--crust)), var(--skin)); }
-.chef .head::before { content: ""; position: absolute; left: -4%; right: -4%; top: -6%; height: 34%; border-radius: 50% 50% 20% 20%; background: var(--ink); }
-.chef .neck { left: 43%; top: 33%; width: 14%; height: 6%; background: color-mix(in srgb, var(--skin) 80%, var(--ink)); }
-.chef .jacket { left: 2%; right: 2%; top: 37%; bottom: 0; border-radius: 42% 42% 0 0 / 18% 18% 0 0; background:
-  radial-gradient(circle, var(--line) 0 3px, transparent 3.5px) 42% 30% / 100% 13% repeat-y,
-  radial-gradient(circle, var(--line) 0 3px, transparent 3.5px) 58% 30% / 100% 13% repeat-y,
-  linear-gradient(100deg, var(--white) 40%, var(--line)); box-shadow: inset -18px 0 30px -18px color-mix(in srgb, var(--ink) 30%, transparent); }
-.chef .jacket::before { content: ""; position: absolute; left: 38%; top: 0; width: 24%; height: 9%; background: var(--line); clip-path: polygon(0 0, 100% 0, 50% 100%); }
-.chef .arm { top: 54%; width: 24%; height: 15%; background: linear-gradient(180deg, var(--white) 60%, var(--line)); border-radius: 40%; box-shadow: 0 6px 10px -6px color-mix(in srgb, var(--ink) 40%, transparent); }
-.chef .arm::after { content: ""; position: absolute; top: 30%; width: 34%; height: 50%; border-radius: 50%; background: var(--skin); }
-.chef .arm.l::after { right: -14%; } .chef .arm.r::after { left: -14%; }
-.chef .arm.l { left: 8%; rotate: 16deg; } .chef .arm.r { right: 8%; rotate: -16deg; }
-.chef .tray { left: 6%; right: 6%; top: 52%; aspect-ratio: 2.6 / 1; border-radius: 50%; background: radial-gradient(ellipse 34% 36% at 50% 45%, var(--tomato) 0 40%, var(--crust) 42% 70%, transparent 72%), radial-gradient(ellipse at 50% 48%, var(--white) 0 58%, var(--line) 60% 64%, var(--white) 66%); box-shadow: 0 10px 18px -8px color-mix(in srgb, var(--ink) 45%, transparent); }
-.chef .tray::after { content: ""; position: absolute; left: 44%; top: 26%; width: 14%; height: 22%; border-radius: 50% 0; background: var(--herb); rotate: -30deg; }
+/* Photo de la cheffe cadrée dans une arche, glissée entre les deux lignes du titre */
+.chef { position: absolute; z-index: 2; left: 50%; bottom: calc(var(--radius-section) * -1); width: clamp(220px, 26vw, 360px); aspect-ratio: 3 / 4.2; translate: -46% 0; margin: 0; pointer-events: none;
+  border-radius: var(--radius-pill) var(--radius-pill) 0 0; overflow: hidden; background: var(--green-deep); outline: 1px solid color-mix(in srgb, var(--cream) 35%, transparent); outline-offset: 10px; box-shadow: var(--shadow-photo); }
+.chef img { color: transparent; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(0.92) contrast(1.04); }
+/* fondu vert en bas : la photo se fond dans la nappe avant d'être coupée par la feuille crème */
+.chef::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, color-mix(in srgb, var(--green) 55%, transparent)); }
 
 .hero-foot { position: relative; z-index: 4; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: end; margin-top: var(--space-8); }
 .hero-foot p { margin: 0 0 var(--space-6); max-width: 30ch; color: var(--cream-muted); }
@@ -118,14 +106,9 @@ a { color: inherit; }
 .dish:nth-child(even) { background-color: var(--orange-strong); }
 /* anneaux entre les cartes */
 .dish:not(:last-child)::after { content: ""; position: absolute; top: 40px; bottom: 40px; right: calc(var(--bind) * -1 - 6px); width: calc(var(--bind) + 12px); background: radial-gradient(ellipse 50% 7px at 50% 50%, transparent 0 calc(100% - 3px), var(--green) calc(100% - 3px) 100%, transparent 100%) 0 0 / 100% 26px repeat-y; z-index: 2; pointer-events: none; opacity: 0.9; }
-.plate { position: relative; align-self: center; width: 78%; aspect-ratio: 1; margin: var(--space-2) 0 var(--space-6); border-radius: 50%; background: radial-gradient(circle, var(--white) 0 60%, var(--line) 61% 63%, var(--white) 64%); box-shadow: 0 16px 24px -10px color-mix(in srgb, var(--ink) 50%, transparent); transition: rotate var(--dur-slow) var(--ease-out); }
+.plate { position: relative; align-self: center; width: 78%; aspect-ratio: 1; margin: var(--space-2) 0 var(--space-6); border-radius: 50%; overflow: hidden; border: 6px solid var(--white); background: var(--card); box-shadow: 0 16px 24px -10px color-mix(in srgb, var(--ink) 50%, transparent); transition: rotate var(--dur-slow) var(--ease-out); }
 .dish:hover .plate { rotate: 25deg; }
-.plate::before { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: var(--food); }
-.plate::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--garnish, none); }
-.p1 { --food: radial-gradient(circle at 40% 40%, var(--crust) 0 30%, transparent 31%), radial-gradient(circle at 62% 58%, var(--tomato) 0 22%, transparent 23%), radial-gradient(circle, var(--herb) 0 64%, color-mix(in srgb, var(--herb) 70%, var(--ink)) 66%); }
-.p2 { --food: repeating-radial-gradient(circle at 50% 50%, var(--crust) 0 3px, color-mix(in srgb, var(--crust) 70%, var(--white)) 3px 6px); --garnish: radial-gradient(circle at 50% 48%, var(--tomato) 0 7%, transparent 7.5%), radial-gradient(circle at 58% 42%, var(--herb) 0 4%, transparent 4.5%); }
-.p3 { --food: radial-gradient(ellipse 60% 40% at 50% 50%, color-mix(in srgb, var(--orange) 80%, var(--white)) 0 60%, transparent 62%), radial-gradient(circle, color-mix(in srgb, var(--herb) 40%, var(--cream)) 0 70%, transparent 71%); --garnish: radial-gradient(circle at 36% 40%, var(--herb) 0 3%, transparent 3.5%), radial-gradient(circle at 64% 62%, var(--herb) 0 3%, transparent 3.5%); }
-.p4 { --food: radial-gradient(circle at 50% 50%, var(--cream) 0 34%, color-mix(in srgb, var(--crust) 80%, var(--ink)) 36% 70%, transparent 72%); --garnish: radial-gradient(circle at 50% 50%, var(--tomato) 0 5%, transparent 5.5%); }
+.plate img { color: transparent; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .dish h3 { margin: 0; font: 400 var(--text-xl)/1.1 var(--font-display); }
 .dish .row { display: flex; align-items: end; justify-content: space-between; gap: var(--space-3); margin-top: auto; }
 .dish .desc { display: block; margin-top: var(--space-1); font: 400 var(--text-sm)/1.4 var(--font-body); }
@@ -147,11 +130,9 @@ a { color: inherit; }
 .stagger span:nth-child(2) { padding-left: 12%; }
 .stagger span:nth-child(3) { justify-content: flex-end; }
 .stagger em { font-style: italic; color: var(--orange-strong); }
-.ph { display: inline-block; width: 1.25em; aspect-ratio: 1; flex: none; border: var(--frame-photo) solid var(--card); border-radius: var(--radius-btn); box-shadow: var(--shadow-photo); vertical-align: middle; }
-.ph:nth-of-type(1) { rotate: -4deg; } .ph--b { rotate: 5deg; width: 1.6em; aspect-ratio: 4/3; } .ph--c { rotate: -2deg; }
-.ph--a { background: radial-gradient(circle at 30% 70%, var(--crust) 0 10%, transparent 11%), radial-gradient(circle at 70% 30%, color-mix(in srgb, var(--crust) 60%, var(--cream)) 0 14%, transparent 15%), linear-gradient(160deg, var(--green-deep), var(--green) 60%, color-mix(in srgb, var(--crust) 40%, var(--green))); }
-.ph--b { background: radial-gradient(circle at 50% 60%, var(--white) 0 26%, transparent 27%), radial-gradient(circle at 50% 60%, var(--tomato) 0 34%, transparent 35%), linear-gradient(180deg, color-mix(in srgb, var(--crust) 60%, var(--ink)), color-mix(in srgb, var(--crust) 80%, var(--white))); }
-.ph--c { background: radial-gradient(ellipse 20% 40% at 35% 45%, color-mix(in srgb, var(--tomato) 70%, var(--ink)) 0 60%, transparent 62%), radial-gradient(ellipse 20% 40% at 65% 45%, color-mix(in srgb, var(--tomato) 70%, var(--ink)) 0 60%, transparent 62%), linear-gradient(180deg, var(--cream-muted), var(--card)); }
+.ph { display: inline-block; width: 1.25em; aspect-ratio: 1; flex: none; overflow: hidden; border: var(--frame-photo) solid var(--card); border-radius: var(--radius-btn); background: var(--line); box-shadow: var(--shadow-photo); vertical-align: middle; }
+.ph img { color: transparent; display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph--a { rotate: -4deg; } .ph--b { rotate: 5deg; width: 1.6em; aspect-ratio: 4/3; } .ph--c { rotate: -2deg; }
 .exp { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); border-top: 1px solid var(--line); padding-top: var(--space-8); }
 .exp article { display: grid; gap: var(--space-2); }
 .exp b { font: 400 var(--text-xl)/1 var(--font-display); color: var(--orange-strong); }
@@ -208,7 +189,7 @@ a { color: inherit; }
   .nav .search { display: none; }
   .hero { padding-top: var(--space-8); }
   .headline { font-size: clamp(3.25rem, 17vw, 5rem); }
-  .chef { width: 54vw; left: auto; right: -4vw; translate: none; bottom: auto; top: 78px; -webkit-mask-image: linear-gradient(180deg, var(--ink) 78%, transparent); mask-image: linear-gradient(180deg, var(--ink) 78%, transparent); }
+  .chef { width: 46vw; left: auto; right: var(--space-4); translate: none; bottom: auto; top: 86px; outline-offset: 6px; -webkit-mask-image: linear-gradient(180deg, var(--ink) 80%, transparent); mask-image: linear-gradient(180deg, var(--ink) 80%, transparent); }
   @keyframes chef-in { from { opacity: 0; translate: 0 30px; } }
   .headline .l2 { text-align: left; margin-top: 1.25em; }
   .hero-foot { grid-template-columns: 1fr; margin-top: var(--space-24); }
@@ -256,9 +237,7 @@ a { color: inherit; }
     <div class="wrap">
       <span class="kicker">Bistrot de saison · Lyon 2e</span>
       <h1 class="headline" id="hero-title"><span class="l1">Cuisine</span><span class="l2">de <em>saison</em></span></h1>
-      <div class="chef" data-slot="chef-cutout" role="img" aria-label="Cheffe tenant une assiette (emplacement pour une photo détourée)">
-        <span class="jacket"></span><span class="neck"></span><span class="head"></span><span class="toque"></span><span class="arm l"></span><span class="arm r"></span><span class="tray"></span>
-      </div>
+      <figure class="chef" data-slot="chef-portrait"><img src="https://images.unsplash.com/photo-1709837167719-1ff90bdbbac5?auto=format&fit=crop&w=800&h=1120&q=80" width="800" height="1120" fetchpriority="high" alt="La cheffe en tenue de cuisine, au travail derrière le passe"></figure>
       <div class="hero-foot">
         <div>
           <p>Des légumes du marché, du pain au levain cuit chaque matin et une carte qui change avec les semaines.</p>
@@ -285,11 +264,11 @@ a { color: inherit; }
       </div>
       <div class="carousel reveal">
         <div class="track" id="track" tabindex="0" aria-label="Plats signature, défilement horizontal">
-          <article class="dish"><div class="plate p1" data-slot="dish-photo" role="img" aria-label="Salade de pousses et tomates rôties"></div><div class="row"><div><h3>Jardin rôti</h3><span class="desc">Pousses, tomates, burrata</span><span class="price">14 €</span></div><a class="round" href="#" aria-label="Voir Jardin rôti"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate p2" data-slot="dish-photo" role="img" aria-label="Pâtes fraîches à la tomate"></div><div class="row"><div><h3>Tagliatelles</h3><span class="desc">Tomate confite, basilic</span><span class="price">19 €</span></div><a class="round" href="#" aria-label="Voir Tagliatelles"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate p3" data-slot="dish-photo" role="img" aria-label="Truite et purée de petits pois"></div><div class="row"><div><h3>Truite du Vercors</h3><span class="desc">Petits pois, beurre noisette</span><span class="price">24 €</span></div><a class="round" href="#" aria-label="Voir Truite du Vercors"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate p4" data-slot="dish-photo" role="img" aria-label="Tarte fine aux pommes"></div><div class="row"><div><h3>Tarte fine</h3><span class="desc">Pommes, crème crue</span><span class="price">9 €</span></div><a class="round" href="#" aria-label="Voir Tarte fine"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate p1" data-slot="dish-photo" role="img" aria-label="Velouté de courge"></div><div class="row"><div><h3>Velouté d'automne</h3><span class="desc">Courge, noisettes</span><span class="price">11 €</span></div><a class="round" href="#" aria-label="Voir Velouté d'automne"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1667657682263-86e924b34fd9?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Salade de saison vue de dessus, pousses et légumes croquants"></div><div class="row"><div><h3>Jardin d'été</h3><span class="desc">Pousses, radis, herbes du jardin</span><span class="price">14 €</span></div><a class="round" href="#" aria-label="Voir Jardin d'été"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Risotto crémeux dressé dans une assiette blanche"></div><div class="row"><div><h3>Risotto</h3><span class="desc">Parmesan 24 mois, beurre noisette</span><span class="price">19 €</span></div><a class="round" href="#" aria-label="Voir Risotto"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1706650616334-97875fae8521?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Filet de bœuf tranché avec des asperges vertes"></div><div class="row"><div><h3>Filet & asperges</h3><span class="desc">Bœuf de l'Aubrac, jus corsé</span><span class="price">28 €</span></div><a class="round" href="#" aria-label="Voir Filet & asperges"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Steak-frites servi sur une assiette"></div><div class="row"><div><h3>Steak-frites</h3><span class="desc">Frites maison, sauce au poivre</span><span class="price">24 €</span></div><a class="round" href="#" aria-label="Voir Steak-frites"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
+          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1708184528305-33ce7daced65?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Bol de salade composée posé sur une table en bois"></div><div class="row"><div><h3>Bol du marché</h3><span class="desc">Céréales, légumes rôtis, tahini</span><span class="price">16 €</span></div><a class="round" href="#" aria-label="Voir Bol du marché"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
         </div>
         <div class="carousel-ctrl">
           <button class="round" id="prev" aria-label="Plat précédent"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
@@ -299,9 +278,9 @@ a { color: inherit; }
       </div>
 
       <h2 class="stagger reveal" id="experiences">
-        <span>Des moments <i class="ph ph--a" data-slot="photo-salle" aria-hidden="true"></i> à part,</span>
-        <span><i class="ph ph--b" data-slot="photo-plat" aria-hidden="true"></i> autour de la <em>table</em></span>
-        <span>et du jardin <i class="ph ph--c" data-slot="photo-vin" aria-hidden="true"></i></span>
+        <span>Des moments <span class="ph ph--a" data-slot="photo-cuisine" aria-hidden="true"><img src="https://images.unsplash.com/photo-1709837167719-1ff90bdbbac5?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt=""></span> à part,</span>
+        <span><span class="ph ph--b" data-slot="photo-plat" aria-hidden="true"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=400&h=300&q=80" width="400" height="300" loading="lazy" alt=""></span> autour de la <em>table</em></span>
+        <span>et du jardin <span class="ph ph--c" data-slot="photo-jardin" aria-hidden="true"><img src="https://images.unsplash.com/photo-1708184528305-33ce7daced65?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt=""></span></span>
       </h2>
       <div class="exp">
         <article class="reveal"><b>01</b><h3>Table du chef</h3><p>Six convives face au passe, un menu en sept temps raconté par l'équipe.</p><a href="#contact">Réserver<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
@@ -342,7 +321,7 @@ a { color: inherit; }
         <div><h3>Horaires</h3><p>Mar – Sam · 12h–14h<br>19h–22h30</p></div>
         <div><h3>Suivre</h3><ul><li><a href="#">Instagram</a></li><li><a href="#">Journal</a></li><li><a href="#">Cartes cadeaux</a></li></ul></div>
       </div>
-      <div class="legal"><span>© Sauge (restaurant fictif) — démo Kōbō</span><span>Mentions légales · Allergènes</span></div>
+      <div class="legal"><span>© Sauge (restaurant fictif) — démo Kōbō · Photos : Unsplash</span><span>Mentions légales · Allergènes</span></div>
     </div>
     <p class="wordmark" aria-hidden="true">Sauge</p>
   </footer>

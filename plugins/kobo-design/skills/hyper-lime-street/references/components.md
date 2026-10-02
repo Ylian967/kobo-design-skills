@@ -62,7 +62,7 @@ Onglet fixé au bord droit de l'écran : noir avec bord gauche arrondi, numéro 
 
 ## Carte d'actualité
 
-Panneau blanc à grand rayon (72px côté extérieur), image 16:9 à coins 24px, un **défilant** noir sur le bas de l'image (texte Anton italique gris clair), date Inter 700 12px, titre Inter 700 14px, points de pagination (le point actif est lime), bouton pilule à droite.
+Panneau blanc à grand rayon (72px côté extérieur), image réelle 16:9 à coins 24px (voir `assets.md`), un **défilant** noir sur le bas de l'image (texte Anton italique gris clair), date Inter 700 12px, titre Inter 700 14px, points de pagination (le point actif est lime), bouton pilule à droite.
 
 ## Défilant (marquee)
 

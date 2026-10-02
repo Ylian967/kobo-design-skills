@@ -8,10 +8,10 @@
 
 ## Accueil d'éditeur
 
-1. **Manifeste** : grand titre 60px sur 3 lignes à gauche (« Nous sommes … »), visuel-bulle à droite avec un **slogan dans une bulle rouge** qui déborde en haut à droite, lien souligné « Rejoignez l'aventure » en bas à gauche.
-2. **Jeu à la une** : visuel plein cadre (≈ 700px), pile d'encarts-bulles blancs à droite.
+1. **Manifeste** : grand titre 60px sur 3 lignes à gauche (« Nous sommes … »), visuel-bulle à droite (image réelle, voir `assets.md`) avec un **slogan dans une bulle rouge** qui déborde en haut à droite, lien souligné « Rejoignez l'aventure » en bas à gauche.
+2. **Jeu à la une** : visuel réel plein cadre (≈ 700px), pile d'encarts-bulles blancs à droite.
 3. **Club** : section rose, titre-bulle noir, panneau blanc avec carrousel de récompenses.
-4. **Playtest** : visuel sombre plein cadre, titre-bulle blanc à gauche, icône + texte + bouton.
+4. **Playtest** : photo sombre plein cadre, titre-bulle blanc à gauche, icône + texte + bouton.
 5. **Jeux tendance et à venir** : titre-bulle blanc sur visuel, puis grille de cartes de sortie et bouton rouge.
 6. **Pied de page** : noir, liens blancs, filet 4 couleurs en haut.
 

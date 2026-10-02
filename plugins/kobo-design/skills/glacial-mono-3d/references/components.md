@@ -37,7 +37,7 @@ Overlay sur scène sombre floutée : colonne 360px centrée, sections préfixée
 
 ## Socle 3D
 
-Un disque métallique en anneaux concentriques (CSS : `radial-gradient` + `repeating-radial-gradient` + perspective `rotateX(75deg)`) sur lequel flotte l'objet du chapitre (logo en particules, objet). Flèches fines `<——` `——>` de part et d'autre.
+Un disque métallique en anneaux concentriques (vrai objet 3D : cylindres `MeshPhysicalMaterial` métal, voir `assets.md`) sur lequel flotte l'objet du chapitre (logo en particules `THREE.Points`, objet `.glb`). Flèches fines `<——` `——>` de part et d'autre.
 
 ## Neige / particules
 
@@ -45,5 +45,5 @@ Points blancs flous qui tombent lentement (canvas 2D ou `radial-gradient` animé
 
 ## États
 
-- **Pas de WebGL** : image de la scène en fond (`data-slot`), interface inchangée.
+- **Pas de WebGL** : photo réelle N&B de la scène en fond (`data-slot`, voir `assets.md`), interface inchangée.
 - **Son coupé** par défaut ; le bouton change de libellé sans popup.

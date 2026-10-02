@@ -27,10 +27,11 @@ Captures du shot (maquette de site personnel, version japonaise) :
 
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
-| Portrait de l'autrice | Portrait dessiné en CSS + `data-slot="portrait"` | Droit à l'image |
+| Portrait de l'autrice | Photo Unsplash libre en N&B + `data-slot="portrait"` | Droit à l'image |
 | Prénom, logo, textes japonais d'origine | Personne inventée (荒田ミオ / Arata Mio), textes réécrits | Identité et droits d'auteur |
 | Titre latin du shot | Autre mot-clé (« LOUD BRAND DESIGN ») | Ne pas reprendre le texte |
 | Grotesque noire non identifiée | Archivo variable 900 | Licence libre, graisses cohérentes |
 | Couleurs vives éventuellement utilisées en texte | Texte toujours `--ink` sur les couleurs (≥ 5:1) | Lisibilité |
 | Point rouge du sélecteur de langue | Conservé, mais jamais porteur d'information seul (le libellé change) | Accessibilité |
 | Animation inconnue | Appui « écrasé », pop, flottement, bande — tous coupés en mouvement réduit | Proposition + accessibilité |
+| Portrait (démo) | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droit à l'image ; démonstration du rendu avec une vraie photo |

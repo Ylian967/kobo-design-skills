@@ -32,7 +32,8 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Chargeur ASCII, crochets, texte brouillé, bouton son, panneau de contenu, carrousel 3D sur socle, défilant. |
 | `references/layouts.md` | Scène plein écran, chapitres au défilement, panneau de contenu, mobile. |
 | `references/motion.md` | Caméra, brouillage, transitions de chapitre, Three.js. |
-| `examples/demo.html` | Démo en CSS (sans WebGL) avec l'interface complète. |
+| `references/assets.md` | Avant de construire la scène ou de placer une image : recette 3D complète (éclats de glace, matières, lumière, caméra), photos de repli, traitements, prompts IA. |
+| `examples/demo.html` | Démo Three.js (éclats de glace, rocher de nuit, socle à particules) avec photos de repli et l'interface complète. |
 | `source.md` | Observations et écarts. |
 
 ## Typographie
@@ -41,6 +42,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 |---|---|---|
 | Interface et texte | **IBM Plex Mono** 400/500 | 10–13px, interligne 1.45 |
 | Logotype | **Unbounded** 700 (équivalent arrondi et large) | 24px, blanc avec halo |
+
+## Images et 3D
+
+Le visuel principal est une **vraie scène Three.js** : un amas d'éclats de glace en verre transmissif (`MeshPhysicalMaterial`) posé dans le brouillard, sous une lumière froide, avec une parallaxe au pointeur et une caméra qui voyage au défilement vers un rocher de nuit puis un socle à particules. Toutes les couleurs des matières sont lues dans les tokens. Sous le canvas, des **photos de glace en N&B** (iceberg, glacier, banquise) servent de repli sans WebGL. Jamais de dessin CSS/SVG à la place d'un objet ou d'un paysage. Recette complète dans `references/assets.md`.
 
 ## Signature
 
@@ -66,4 +71,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Crochets sur tous les éléments cliquables.
 - [ ] Contraste vérifié dans les deux ambiances.
 - [ ] Repli sans WebGL et mouvement réduit fonctionnels.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Testé à 375px et 1440px.

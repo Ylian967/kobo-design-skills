@@ -31,6 +31,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Bulle (CSS), barre double, boutons rouges, encart de jeu, carte de sortie, titre-bulle, section club, collage, lien souligné. |
 | `references/layouts.md` | Accueil éditeur, sorties à venir, club, mobile. |
 | `references/motion.md` | Survols, carrousels, fenêtre. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, masque bulle, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Mesures et écarts. |
 
@@ -39,6 +40,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Rôle | Police | Réglages |
 |---|---|---|
 | Tout | **Montserrat** (Metropolis / Gotham d'origine) | Hero 60px 600 -0.035em ; titres-bulles 48px 700 ; titres d'encart 24px 700 rouge ; nav 16px 600 ; boutons 14px 700 capitales +0.1em |
+
+## Images et 3D
+
+Les visuels de jeux sont rois : key arts, jaquettes, captures, ou en maquette des photos pop et saturées (joueurs, manettes, arcades néon). Chaque image est **enfermée dans une bulle** (coins `--radius` + queue) ou posée plein cadre sous des encarts-bulles blancs ; les cartes de sortie reçoivent un dégradé noir en bas pour le nom et la date. La 3D est optionnelle (mascotte ou manette dans une bulle). Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un objet. Détails dans `references/assets.md`.
 
 ## Signature
 
@@ -64,4 +69,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Encarts en bulle sur les visuels.
 - [ ] Fenêtre d'inscription accessible et non intrusive.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément de l'éditeur d'origine.

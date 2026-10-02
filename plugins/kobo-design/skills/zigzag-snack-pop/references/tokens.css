@@ -15,7 +15,7 @@
   --ink: #2a160c;             /* texte sur jaune / orange, contours « autocollant », ombres dures */
   --bar: #4a2a1a;             /* barre de navigation */
   --brown: #5a3121;           /* sections « trace de pneu » */
-  --brown-deep: #3f2015;      /* motif de pneu, silhouettes */
+  --brown-deep: #3f2015;      /* motif de pneu, ombres du duotone photo */
   --white: #ffffff;
   --cream: #fff6e0;           /* bandes en zigzag, fond des sections claires */
   --cream-text: #f3e3cf;      /* paragraphes sur brun */
@@ -68,4 +68,7 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 140ms; --dur: 280ms; --dur-slow: 600ms;
   --dur-stamp: 14s;
+
+  /* Photos */
+  --grade-pop: saturate(1.15) contrast(1.06);   /* photos de nourriture (l'aventure passe en duotone, voir assets.md) */
 }

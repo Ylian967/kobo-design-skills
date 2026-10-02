@@ -11,12 +11,12 @@ Lent, précis, joaillier : la pièce **flotte** et la planche **se trace**. Rien
 | Chargement | Lignes de titre qui montent derrière un masque, 90ms d'écart | 900ms | `--ease-out` | `<b>` dans `<span overflow:hidden>` |
 | Chargement | Texte, pilules, sélecteur : fondu + montée 28px, décalés de 100ms | 900ms | `--ease-out` | |
 | Chargement | Traits de légende qui se tracent depuis la pièce (`scaleX` origine droite) | 900ms, délai 400ms | `--ease-out` | |
-| En continu | Pièce qui flotte (±7px, ±1.5°) | 7s aller-retour | `--ease-inout` | `alternate infinite` |
+| En continu | Pièce qui flotte (±7px, ±1.5°) et tourne lentement sur elle-même (3D : `position.y = sin(t·0.9)·0.08`, `rotation.y += 0.25 rad/s`, inertie au glisser) | 7s aller-retour | `--ease-inout` | en CSS pour une image fixe, dans la boucle Three.js pour la 3D (`assets.md`) |
 | En continu | Point qui orbite sur le grand cercle | 24s | linéaire | `--dur-spin` |
 | Survol pilule | Inversion des couleurs, flèche +3px | 180ms | `--ease-out` | |
 | Appui pilule | `scale(.97)` | 180ms | `--ease-out` | |
 | Survol lien nav | Soulignement tracé de gauche à droite | 420ms | `--ease-out` | sort par la droite |
-| Choix du titre d'or | La pièce change de teinte (dégradés) en fondu | 420ms | `--ease-inout` | avec un vrai rendu 3D : changement de matériau |
+| Choix du titre d'or | La pièce change de teinte en fondu | ≈ 420ms | `--ease-inout` | 3D : `material.color.lerp(cible, 0.08)` à chaque image ; image fixe : `filter: saturate()` |
 | Apparition au défilement | Panneau / titre nuit : fondu + montée 24px | 900ms | `--ease-out` | optionnel, voir ci-dessous |
 | Envoi du formulaire | Formulaire remplacé par la confirmation, sceau qui se dessine | 420ms | `--ease-out` | focus déplacé |
 

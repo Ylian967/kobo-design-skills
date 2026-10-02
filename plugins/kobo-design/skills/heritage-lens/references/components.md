@@ -12,7 +12,7 @@ Sous le bouton : « Cliquer sur Entrer pour continuer », Inter 12px.
 
 ## Lentille avant / après (signature)
 
-- Conteneur rond `--lens`, image « aujourd'hui » à l'intérieur (`object-fit: cover`), anneau festonné SVG autour (24 petits arcs).
+- Conteneur rond `--lens`, image réelle « aujourd'hui » à l'intérieur (`object-fit: cover`, même cadrage que la reconstitution, voir `assets.md`), anneau festonné SVG autour (24 petits arcs).
 - Sur ordinateur, elle suit la souris dans la zone de la scène (lissage 0.15) ; sur mobile, elle est fixe et se déplace au doigt.
 - Légende sous la lentille : « Cliquer pour voir l'état actuel », Inter 500 12px blanc avec ombre.
 - Clic / Entrée : la lentille s'agrandit en plein écran (transition `clip-path: circle()`), second clic pour revenir.
@@ -51,4 +51,4 @@ Chaque lieu devient une carte arrondie (24px) plein écran : titre centré, bout
 ## États
 
 - **Chargement** : fond `--bg`, nom du site en Gilda Display qui apparaît lettre par lettre en fondu, puis le bouton Entrer.
-- **Sans WebGL** : images fixes pour chaque scène, mêmes interactions.
+- **Sans WebGL** : images fixes pour chaque scène (photos ou rendus réels, voir `assets.md`), mêmes interactions.

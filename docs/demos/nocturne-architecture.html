@@ -12,6 +12,7 @@
   --bg: #111111; --surface: #141414; --raised: #1c1c1c; --text: #ffffff; --muted: #8a8a8a; --dim: #777777; --line: #2a2a2a; --line-strong: #3a3a3a;
   --accent: #e3191f; --on-accent: #ffffff; --accent-text: #ff3b3f; --paper: #ffffff; --ink: #111111;
   --night: #0b1626; --night-2: #13284a; --night-3: #1f4170; --window: #f6c76a; --trail-red: #ff4a3d; --trail-amber: #ffb547; --concrete: #6f6a64; --glass: #2c4a63;
+  --grade-night: saturate(0.8) contrast(1.08) brightness(0.82);
   --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; --font-body: 'Inter', system-ui, sans-serif;
   --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
   --text-title: clamp(2rem, 3.4vw, 3.25rem); --text-statement: clamp(1.5rem, 2.8vw, 2.5rem); --text-stat: clamp(3rem, 6vw, 5.5rem); --text-wordmark: clamp(6rem, 44vw, 46rem);
@@ -56,22 +57,9 @@ h1, h2, h3, p { margin: 0; }
 
 /* ---------- Héros ---------- */
 .hero { position: relative; min-height: max(640px, 100svh); overflow: hidden; isolation: isolate; }
-.city { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 40%, var(--night-3) 64%, color-mix(in srgb, var(--trail-amber) 22%, var(--night-3)) 72%, var(--night) 86%); }
+.city { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--night); }
+.city img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; color: transparent; filter: var(--grade-night); transform-origin: 50% 70%; animation: breathe 40s var(--ease-inout) infinite alternate; }
 .city::after { content: ""; position: absolute; inset: 0; background: var(--shade-hero); }
-.city::before { content: ""; position: absolute; left: 0; right: 0; bottom: 21%; height: 36%; background: radial-gradient(50% 60% at 50% 100%, color-mix(in srgb, var(--trail-amber) 30%, transparent), transparent 70%); }
-.tower { position: absolute; bottom: 21%; width: var(--w); height: var(--h); left: var(--x);
-  -webkit-mask-image: linear-gradient(0deg, black 55%, color-mix(in srgb, var(--bg) 75%, transparent)); mask-image: linear-gradient(0deg, black 55%, color-mix(in srgb, var(--bg) 75%, transparent));
-  background:
-    repeating-linear-gradient(90deg, transparent 0 6px, color-mix(in srgb, var(--night) 80%, black) 6px 9px),
-    repeating-linear-gradient(180deg, color-mix(in srgb, var(--window) var(--lit, 40%), transparent) 0 3px, transparent 3px 10px),
-    linear-gradient(180deg, color-mix(in srgb, var(--glass) 70%, var(--night-3)), color-mix(in srgb, var(--night) 70%, black));
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--night-3) 60%, transparent); }
-.tower--far { opacity: .45; filter: blur(1.5px); }
-.tower--crown::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 60px; background: color-mix(in srgb, var(--text) 50%, transparent); }
-.tower--crown::after { content: ""; position: absolute; left: calc(50% - 3px); bottom: calc(100% + 58px); width: 6px; height: 6px; border-radius: 50%; background: var(--trail-red); box-shadow: 0 0 12px var(--trail-red); animation: blink 2.4s steps(1) infinite; }
-.road { position: absolute; left: -20%; right: -20%; bottom: 0; height: 22%; background: linear-gradient(180deg, color-mix(in srgb, var(--trail-amber) 18%, var(--night)), color-mix(in srgb, var(--night) 60%, black) 30%, var(--bg)); }
-.trail { position: absolute; left: -10%; width: 120%; height: 260%; border-radius: 50%; border-top: 2px solid var(--c); top: var(--t); filter: drop-shadow(0 0 6px var(--c)); opacity: .9;
-  background-image: linear-gradient(90deg, transparent, color-mix(in srgb, var(--c) 12%, transparent) 50%, transparent); background-size: 50% 3px; background-repeat: no-repeat; animation: drift 9s linear infinite; }
 .hero__top { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--space-6); padding-top: var(--space-4); padding-bottom: var(--space-4); }
 .links { display: flex; gap: var(--space-6); }
 .links a { font: 400 var(--text-sm)/1 var(--font-body); padding: var(--space-3) 0; position: relative; }
@@ -110,39 +98,11 @@ section { position: relative; }
 .stat b small { font-size: .6em; color: var(--muted); vertical-align: top; margin-left: 2px; }
 .stat p { margin-top: var(--space-3); color: var(--muted); font-size: var(--text-sm); }
 
-/* ---------- Photos dessinées ---------- */
-.photo { position: relative; overflow: hidden; border-radius: var(--radius-card); background-color: var(--night); }
-.photo::after { content: ""; position: absolute; inset: 0; background: var(--shade-card); }
-.ph-concrete { background:
-  linear-gradient(var(--window), var(--window)) 18% 58% / 30% 3% no-repeat,
-  linear-gradient(color-mix(in srgb, var(--window) 70%, var(--bg)), color-mix(in srgb, var(--window) 40%, var(--bg))) 20% 70% / 40% 14% no-repeat,
-  linear-gradient(var(--concrete), var(--concrete)) 0 46% / 76% 6% no-repeat,
-  linear-gradient(color-mix(in srgb, var(--concrete) 55%, var(--bg)), color-mix(in srgb, var(--concrete) 30%, var(--bg))) 90% 80% / 50% 30% no-repeat,
-  linear-gradient(180deg, var(--night-2) 0%, var(--night-3) 52%, color-mix(in srgb, var(--trail-amber) 25%, var(--night-3)) 62%, var(--bg) 63%); }
-.ph-villa { background:
-  linear-gradient(90deg, var(--window) 0 30%, transparent 30% 33%, var(--window) 33% 63%, transparent 63% 66%, var(--window) 66%) 30% 62% / 52% 12% no-repeat,
-  linear-gradient(var(--concrete), var(--concrete)) 22% 50% / 76% 4% no-repeat,
-  linear-gradient(color-mix(in srgb, var(--concrete) 40%, var(--bg)), var(--bg)) 40% 76% / 70% 10% no-repeat,
-  linear-gradient(color-mix(in srgb, var(--glass) 70%, var(--window)), var(--glass)) 50% 94% / 90% 10% no-repeat,
-  radial-gradient(60% 30% at 70% 20%, color-mix(in srgb, var(--night-3) 70%, var(--text)), transparent 70%),
-  linear-gradient(180deg, var(--night) 0%, var(--night-2) 55%, var(--bg) 56%); }
-.ph-tower { background:
-  repeating-linear-gradient(90deg, transparent 0 9px, var(--night) 9px 12px) 50% 100% / 40% 76% no-repeat,
-  repeating-linear-gradient(180deg, color-mix(in srgb, var(--window) 60%, transparent) 0 6px, transparent 6px 16px) 50% 100% / 40% 76% no-repeat,
-  linear-gradient(var(--glass), var(--night)) 50% 100% / 40% 76% no-repeat,
-  linear-gradient(180deg, color-mix(in srgb, var(--trail-red) 30%, var(--night-2)) 0%, var(--night-2) 40%, var(--night) 100%); }
-.ph-coast { background:
-  linear-gradient(var(--window), var(--window)) 60% 48% / 26% 5% no-repeat,
-  linear-gradient(var(--concrete), var(--concrete)) 64% 42% / 44% 3% no-repeat,
-  linear-gradient(color-mix(in srgb, var(--concrete) 60%, var(--bg)), color-mix(in srgb, var(--concrete) 25%, var(--bg))) 66% 56% / 44% 10% no-repeat,
-  linear-gradient(180deg, color-mix(in srgb, var(--glass) 60%, var(--night)), var(--night)) 0 100% / 100% 34% no-repeat,
-  radial-gradient(30% 18% at 22% 24%, color-mix(in srgb, var(--trail-amber) 70%, var(--text)), transparent 70%),
-  linear-gradient(180deg, color-mix(in srgb, var(--trail-amber) 35%, var(--night-3)) 0%, var(--night-3) 40%, var(--night-2) 66%); }
-.ph-interior { background:
-  linear-gradient(90deg, transparent 0 48%, color-mix(in srgb, var(--concrete) 40%, var(--bg)) 48% 50%, transparent 50%) 0 0 / 100% 70% no-repeat,
-  linear-gradient(180deg, color-mix(in srgb, var(--night-3) 80%, var(--text)), var(--night-2)) 50% 18% / 70% 52% no-repeat,
-  linear-gradient(color-mix(in srgb, var(--concrete) 70%, var(--window)), var(--concrete)) 50% 100% / 100% 30% no-repeat,
-  linear-gradient(var(--raised), var(--surface)); }
+/* ---------- Photos (traitement nuit, voir references/assets.md) ---------- */
+.photo { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--radius-card); background: var(--night); }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; filter: var(--grade-night); }
+.photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--night-3); mix-blend-mode: color; opacity: .22; pointer-events: none; }
+.photo::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade-card); pointer-events: none; }
 
 /* ---------- Propriétés ---------- */
 .props { padding: var(--space-16) 0 var(--space-24); background: var(--surface); }
@@ -208,15 +168,14 @@ section { position: relative; }
 .foot h3 { color: var(--text); font: 500 var(--text-2xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; margin-bottom: var(--space-4); }
 .foot a { display: block; padding: var(--space-1) 0; transition: color var(--dur-fast); }
 .foot a:hover { color: var(--text); }
+.credit { margin-top: var(--space-8); color: var(--muted); }
 .foot__mark { margin-top: var(--space-16); font: 500 clamp(4rem, 22vw, 20rem)/0.8 var(--font-display); letter-spacing: var(--tracking-display); color: var(--raised); text-align: center; translate: 0 18%; user-select: none; }
 
 /* ---------- Mouvement ---------- */
 @keyframes rise { from { transform: translateY(60%); opacity: 0; } }
-@keyframes drift { from { background-position: -50% 0; } to { background-position: 150% 0; } }
-@keyframes blink { 50% { opacity: .2; } }
+@keyframes breathe { to { transform: scale(1.06); } }
 @keyframes open { from { opacity: 0; transform: translateY(-8px); } }
-@keyframes { from { opacity: 0; transform: translateY(32px); } }
-.hero.is-paused .trail, .hero.is-paused .tower--crown::after { animation-play-state: paused; }
+.hero.is-paused .city img { animation-play-state: paused; }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 900px) {
@@ -250,32 +209,8 @@ section { position: relative; }
 <body>
 
 <header class="hero" id="top">
-  <div class="city" data-slot="hero-night-city" role="img" aria-label="Ville la nuit en pose longue : tours éclairées et traînées de phares">
-    <div class="tower tower--far" style="--x:1%;--w:6%;--h:22%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:9%;--w:5%;--h:30%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:20%;--w:4%;--h:26%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:31%;--w:7%;--h:20%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:36%;--w:5%;--h:34%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:47%;--w:6%;--h:28%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:54%;--w:8%;--h:24%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:68%;--w:5%;--h:30%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:79%;--w:6%;--h:22%;--lit:18%"></div>
-    <div class="tower tower--far" style="--x:93%;--w:6%;--h:26%;--lit:18%"></div>
-    <div class="tower" style="--x:4%;--w:9%;--h:38%;--lit:30%"></div>
-    <div class="tower tower--crown" style="--x:31%;--w:7%;--h:58%;--lit:45%"></div>
-    <div class="tower" style="--x:14%;--w:12%;--h:30%;--lit:35%"></div>
-    <div class="tower" style="--x:40%;--w:6%;--h:46%;--lit:22%"></div>
-    <div class="tower" style="--x:48%;--w:9%;--h:24%;--lit:40%"></div>
-    <div class="tower tower--crown" style="--x:62%;--w:8%;--h:64%;--lit:42%"></div>
-    <div class="tower" style="--x:72%;--w:11%;--h:36%;--lit:32%"></div>
-    <div class="tower" style="--x:86%;--w:9%;--h:48%;--lit:28%"></div>
-    <div class="road">
-      <span class="trail" style="--c:var(--trail-red);--t:22%"></span>
-      <span class="trail" style="--c:var(--trail-red);--t:28%;animation-delay:-3s"></span>
-      <span class="trail" style="--c:var(--trail-amber);--t:38%;animation-delay:-5s"></span>
-      <span class="trail" style="--c:var(--trail-amber);--t:46%;animation-delay:-1s"></span>
-      <span class="trail" style="--c:var(--window);--t:58%;animation-delay:-7s"></span>
-    </div>
+  <div class="city" data-slot="hero-night-city">
+    <img src="https://images.unsplash.com/photo-1506606401543-2e73709cebb4?auto=format&fit=crop&w=2000&q=80" alt="Ville la nuit en pose longue : tours éclairées et traînées de phares rouges et ambrées" width="2000" height="1333" fetchpriority="high" decoding="async">
   </div>
 
   <div class="wrap">
@@ -311,7 +246,7 @@ section { position: relative; }
       <p class="statement">Depuis quinze ans, nous concevons des maisons et des immeubles où la lumière fait l'architecture. <span>Chaque projet commence par une promenade nocturne sur le terrain, et finit par un lieu qu'on a envie d'habiter longtemps.</span></p>
     </div>
     <div class="about__row">
-      <div class="photo ph-concrete" data-slot="studio-photo" role="img" aria-label="Maison en béton aux baies éclairées au crépuscule" style="min-height:280px"></div>
+      <div class="photo" data-slot="studio-photo" style="min-height:280px"><img src="https://images.unsplash.com/photo-1678889284769-b7dcbec1f082?auto=format&fit=crop&w=1200&h=900&q=80" alt="Maison d'architecte aux grandes baies éclairées, la nuit" width="1200" height="900" loading="lazy" decoding="async"></div>
       <div class="stats">
         <div class="stat"><b>15<small>+</small></b><p>Années de pratique</p></div>
         <div class="stat"><b>120<small>+</small></b><p>Résidences livrées</p></div>
@@ -334,11 +269,11 @@ section { position: relative; }
           <a class="pill pill--paper" href="#process">Voir le projet <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
-      <article class="card"><div class="photo ph-villa" data-slot="project-1" role="img" aria-label="Villa basse aux baies vitrées éclairées"></div><a class="round card__go" href="#process" aria-label="Voir Casa Lume"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Casa Lume</h3><p class="card__loc">Comporta, Portugal</p></article>
-      <article class="card"><div class="photo ph-tower" data-slot="project-2" role="img" aria-label="Tour résidentielle éclairée"></div><a class="round card__go" href="#process" aria-label="Voir Tour Vesper"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Tour Vesper</h3><p class="card__loc">Lisbonne, Portugal</p></article>
-      <article class="card"><div class="photo ph-coast" data-slot="project-3" role="img" aria-label="Maison sur la côte au coucher du soleil"></div><a class="round card__go" href="#process" aria-label="Voir Maison Falaise"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Maison Falaise</h3><p class="card__loc">Biarritz, France</p></article>
-      <article class="card"><div class="photo ph-concrete" data-slot="project-4" role="img" aria-label="Maison en béton au crépuscule"></div><a class="round card__go" href="#process" aria-label="Voir Riad Noir"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Riad Noir</h3><p class="card__loc">Marrakech, Maroc</p></article>
-      <article class="card"><div class="photo ph-interior" data-slot="project-5" role="img" aria-label="Séjour en double hauteur"></div><a class="round card__go" href="#process" aria-label="Voir Loft Atlas"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Loft Atlas</h3><p class="card__loc">Paris, France</p></article>
+      <article class="card"><div class="photo" data-slot="project-1"><img src="https://images.unsplash.com/photo-1750271329214-a7dbce880e85?auto=format&fit=crop&w=800&h=1000&q=80" alt="Villa basse aux baies vitrées éclairées, piscine au crépuscule" width="800" height="1000" loading="lazy" decoding="async"></div><a class="round card__go" href="#process" aria-label="Voir Casa Lume"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Casa Lume</h3><p class="card__loc">Comporta, Portugal</p></article>
+      <article class="card"><div class="photo" data-slot="project-2"><img src="https://images.unsplash.com/photo-1694057442309-bfe467bff9a9?auto=format&fit=crop&w=800&h=1000&q=80" alt="Tours éclairées au-dessus d'une autoroute en pose longue" width="800" height="1000" loading="lazy" decoding="async"></div><a class="round card__go" href="#process" aria-label="Voir Tour Vesper"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Tour Vesper</h3><p class="card__loc">Lisbonne, Portugal</p></article>
+      <article class="card"><div class="photo" data-slot="project-3"><img src="https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=800&h=1000&q=80" alt="Villa éclairée sur une colline, la nuit" width="800" height="1000" loading="lazy" decoding="async"></div><a class="round card__go" href="#process" aria-label="Voir Maison Falaise"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Maison Falaise</h3><p class="card__loc">Biarritz, France</p></article>
+      <article class="card"><div class="photo" data-slot="project-4"><img src="https://images.unsplash.com/photo-1696393800648-662c06289a5e?auto=format&fit=crop&w=800&h=1000&q=80" alt="Maison cubique contemporaine éclairée de l'intérieur" width="800" height="1000" loading="lazy" decoding="async"></div><a class="round card__go" href="#process" aria-label="Voir Riad Noir"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Riad Noir</h3><p class="card__loc">Marrakech, Maroc</p></article>
+      <article class="card"><div class="photo" data-slot="project-5"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&h=1000&q=80" alt="Villa blanche à toit plat et sa piscine" width="800" height="1000" loading="lazy" decoding="async"></div><a class="round card__go" href="#process" aria-label="Voir Villa Alba"><svg viewBox="0 0 16 16"><path d="M4 12L12 4M6 4h6v6"/></svg></a><h3 class="card__name">Villa Alba</h3><p class="card__loc">Ibiza, Espagne</p></article>
     </div>
     <div class="progress"><div class="progress__bar" aria-hidden="true"><i id="bar"></i></div><output class="caps" id="count" aria-live="polite">01 / 06</output></div>
   </section>
@@ -354,28 +289,28 @@ section { position: relative; }
         <details class="step" open>
           <summary><span class="step__num">01</span><span class="step__title">Terrain et faisabilité</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
           <div class="step__body">
-            <div class="photo ph-coast" data-slot="process-1" role="img" aria-label="Terrain en bord de mer au crépuscule"></div>
+            <div class="photo" data-slot="process-1"><img src="https://images.unsplash.com/photo-1758612853656-def5033bccb5?auto=format&fit=crop&w=1200&h=900&q=80" alt="Villa sur une colline à la tombée de la nuit, vue depuis le terrain" width="1200" height="900" loading="lazy" decoding="async"></div>
             <div><h4>Points clés</h4><ul><li>Étude de sol, d'ensoleillement et de vues</li><li>Analyse du plan local d'urbanisme</li><li>Budget et calendrier de principe</li></ul><a class="pill" href="#contact">Réserver une visite <span class="arrow" aria-hidden="true">→</span></a></div>
           </div>
         </details>
         <details class="step">
           <summary><span class="step__num">02</span><span class="step__title">Esquisse et lumière</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
           <div class="step__body">
-            <div class="photo ph-interior" data-slot="process-2" role="img" aria-label="Maquette d'un séjour"></div>
+            <div class="photo" data-slot="process-2"><img src="https://images.unsplash.com/photo-1696393800648-662c06289a5e?auto=format&fit=crop&w=1200&h=900&q=80" alt="Volumes cubiques d'une maison moderne, baies éclairées" width="1200" height="900" loading="lazy" decoding="async"></div>
             <div><h4>Points clés</h4><ul><li>Trois esquisses, une maquette de lumière</li><li>Choix des matériaux sur échantillons</li><li>Permis de construire déposé par le studio</li></ul><a class="pill" href="#contact">Voir un exemple <span class="arrow" aria-hidden="true">→</span></a></div>
           </div>
         </details>
         <details class="step">
           <summary><span class="step__num">03</span><span class="step__title">Chantier suivi</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
           <div class="step__body">
-            <div class="photo ph-tower" data-slot="process-3" role="img" aria-label="Chantier de nuit"></div>
+            <div class="photo" data-slot="process-3"><img src="https://images.unsplash.com/photo-1506606401543-2e73709cebb4?auto=format&fit=crop&w=1200&h=900&q=80" alt="Skyline de nuit et traînées lumineuses de la circulation" width="1200" height="900" loading="lazy" decoding="async"></div>
             <div><h4>Points clés</h4><ul><li>Visite hebdomadaire et journal photo</li><li>Entreprises choisies et coordonnées</li><li>Coûts suivis ligne par ligne</li></ul><a class="pill" href="#contact">Parlons-en <span class="arrow" aria-hidden="true">→</span></a></div>
           </div>
         </details>
         <details class="step">
           <summary><span class="step__num">04</span><span class="step__title">Remise des clés</span><span class="round" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 2v12M2 8h12"/></svg></span></summary>
           <div class="step__body">
-            <div class="photo ph-villa" data-slot="process-4" role="img" aria-label="Villa livrée, éclairée la nuit"></div>
+            <div class="photo" data-slot="process-4"><img src="https://images.unsplash.com/photo-1678889284769-b7dcbec1f082?auto=format&fit=crop&w=1200&h=900&q=80" alt="Maison livrée, toutes les pièces éclairées la nuit" width="1200" height="900" loading="lazy" decoding="async"></div>
             <div><h4>Points clés</h4><ul><li>Mise en lumière et réglages sur place</li><li>Carnet d'entretien de la maison</li><li>Garantie de parfait achèvement</li></ul><a class="pill" href="#contact">Parlons-en <span class="arrow" aria-hidden="true">→</span></a></div>
           </div>
         </details>
@@ -399,6 +334,7 @@ section { position: relative; }
         <div><h3>Bureaux</h3><p style="margin:0">Lisbonne · Paris<br>Marrakech</p></div>
         <div><h3>Suivre</h3><a href="#top">Instagram</a><a href="#top">LinkedIn</a><a href="#top">Retour en haut ↑</a></div>
       </footer>
+      <p class="credit caps">Photos : Unsplash (licence Unsplash), à remplacer par les images du projet</p>
     </div>
     <p class="foot__mark" aria-hidden="true">orsel</p>
   </section>

@@ -12,8 +12,9 @@
   --bg: #000000; --bg-2: #0d0d0d; --surface: #1a1a1a; --chip: #2a2a2a; --giant: #1f1f1f; --text: #ffffff; --muted: #8a8a8a; --chip-text: #a6a6a6; --line: #262626;
   --glass: rgb(255 255 255 / 0.08); --glass-line: rgb(255 255 255 / 0.12); --glass-hi: rgb(255 255 255 / 0.16);
   --red: #e5343a; --red-text: #ff5a5f; --paper: #ffffff; --on-paper: #000000;
-  --device: #121212; --device-hi: #3a3a3a; --dial: #1c1c1c; --lcd: #0f1a14; --lcd-text: #cfe8c2;
+  --device: #121212; --device-hi: #3a3a3a; --dial: #1c1c1c; --metal: #6e6e6e; --lcd: #0f1a14; --lcd-text: #cfe8c2;
   --wood: #7a4a2a; --wood-dark: #3a2213; --wall: #1e140d; --lamp: #f0b26a; --ceramic: #e9e2d6; --coffee: #2a170c; --fabric: #c9622a; --fabric-dark: #7d3412; --rock: #2b2b2b; --rock-hi: #4a4a4a;
+  --grade-warm: brightness(0.62) saturate(1.1) sepia(0.18) contrast(1.06);
   --font-display: 'Geist', 'Inter', system-ui, sans-serif; --font-body: 'Geist', 'Inter', system-ui, sans-serif; --font-mono: 'Geist Mono', ui-monospace, monospace;
   --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.5rem;
   --text-statement: clamp(1.25rem, 2vw, 1.625rem); --text-title: clamp(2rem, 3.6vw, 3rem); --text-hero: clamp(2.75rem, 5vw, 4.5rem); --text-giant: clamp(6rem, 22vw, 20rem);
@@ -52,41 +53,23 @@ h1, h2, h3, p { margin: 0; }
 .chip { display: inline-flex; align-items: center; gap: var(--space-1); padding: 3px var(--space-2); border-radius: var(--radius-xs); background: var(--chip); color: var(--chip-text); font: 500 var(--text-2xs)/1.4 var(--font-mono); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
 .chip--glass { background: var(--glass); box-shadow: inset 0 0 0 1px var(--glass-line); color: var(--text); }
 
-/* ---------- Objet (rendu CSS) ---------- */
-.device { --s: 18px; position: relative; font-size: var(--s); width: 9em; height: 12.6em; border-radius: 2.4em; flex: none;
-  background: radial-gradient(120% 70% at 30% 0%, color-mix(in srgb, var(--device-hi) 45%, var(--device)), var(--device) 60%);
-  box-shadow: inset 0 0 0 .06em var(--device-hi), inset .25em .25em .6em color-mix(in srgb, var(--text) 6%, transparent), 0 1.4em 2.4em -0.6em var(--bg), 0 .3em .6em color-mix(in srgb, var(--bg) 70%, transparent); }
-.device__btn { position: absolute; top: -.32em; left: 50%; width: 2em; height: .5em; translate: -50% 0; border-radius: .3em .3em .1em .1em; background: var(--red); box-shadow: inset 0 .08em 0 color-mix(in srgb, var(--text) 35%, transparent); }
-.device__lcd { position: absolute; left: 1.2em; right: 1.2em; top: 1.3em; height: 2.4em; border-radius: .45em; background: var(--lcd); box-shadow: inset 0 0 0 .06em color-mix(in srgb, var(--device-hi) 70%, transparent);
-  display: flex; flex-direction: column; justify-content: center; padding: 0 .6em; color: var(--lcd-text); font-family: var(--font-mono); line-height: 1.2; overflow: hidden; }
-.device__lcd b { font-weight: 500; font-size: .7em; }
-.device__lcd span { font-size: .42em; letter-spacing: .08em; display: flex; align-items: center; gap: .5em; opacity: .85; }
-.device__lcd span::before { content: ""; width: .9em; height: .9em; border-radius: 50%; background: var(--red); animation: pulse var(--dur-pulse) ease-in-out infinite; }
-.device__dial { position: absolute; left: 50%; bottom: 1.4em; width: 5.6em; aspect-ratio: 1; translate: -50% 0; border-radius: 50%;
-  background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--text) 16%, transparent) 0 1deg, transparent 1deg 10deg), radial-gradient(circle, var(--dial) 60%, color-mix(in srgb, var(--device-hi) 60%, var(--dial)) 61%, var(--dial) 66%);
-  box-shadow: inset 0 .1em .3em color-mix(in srgb, var(--bg) 80%, transparent), 0 .05em 0 color-mix(in srgb, var(--text) 10%, transparent); transition: transform var(--dur-slow) var(--ease-out); }
-.device__dial::after { content: ""; position: absolute; inset: 1.4em; border-radius: 50%; background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--device-hi) 70%, var(--dial)), var(--device) 70%); box-shadow: 0 .1em .3em var(--bg); }
-.device__dial::before { content: ""; position: absolute; left: 50%; top: .45em; width: .24em; height: .7em; translate: -50% 0; border-radius: .1em; background: var(--text); opacity: .8; }
-.device__mic { position: absolute; left: 50%; top: 4.15em; translate: -50% 0; display: flex; gap: .35em; }
-.device__mic i { width: .2em; height: .2em; border-radius: 50%; background: var(--bg); box-shadow: inset 0 .03em 0 color-mix(in srgb, var(--text) 20%, transparent); }
-.device:hover .device__dial { transform: rotate(40deg); }
-.device[data-state="idle"] .device__lcd span::before { background: var(--muted); animation: none; }
+/* ---------- Objet : scène Three.js (voir references/assets.md) ---------- */
+[data-3d] { position: relative; }
+[data-3d] canvas { position: absolute; inset: 0; display: block; }
+[data-3d] .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; background: var(--rock); border-radius: var(--radius-lg); transition: opacity var(--dur-slow) var(--ease-out); }
+[data-3d].is-3d-ready .fallback { opacity: 0; }
+
+/* ---------- Photos ---------- */
+.shot { position: absolute; inset: 0; overflow: hidden; }
+.shot img { width: 100%; height: 100%; object-fit: cover; color: transparent; }
 
 /* ---------- Héros ---------- */
 .hero { position: relative; min-height: max(700px, 100svh); overflow: hidden; isolation: isolate; display: flex; flex-direction: column; }
-.desk { position: absolute; inset: 0; z-index: -1;
-  background: radial-gradient(40% 36% at 78% 18%, color-mix(in srgb, var(--lamp) 45%, transparent), transparent 70%),
-              radial-gradient(70% 50% at 50% 60%, color-mix(in srgb, var(--lamp) 14%, transparent), transparent 70%),
-              linear-gradient(180deg, var(--wall) 0%, color-mix(in srgb, var(--wall) 70%, var(--wood-dark)) 52%, var(--wood-dark) 52.2%); }
-.desk__top { position: absolute; left: -10%; right: -10%; top: 52%; bottom: 0;
-  background: repeating-linear-gradient(176deg, transparent 0 14px, color-mix(in srgb, var(--wood-dark) 35%, transparent) 14px 16px, transparent 16px 34px),
-              linear-gradient(180deg, color-mix(in srgb, var(--wood) 80%, var(--lamp)) 0%, var(--wood) 30%, var(--wood-dark) 100%); }
+.desk { position: absolute; inset: 0; z-index: -1; background: var(--wall); }
+.desk img { object-position: 50% 70%; filter: var(--grade-warm); }
+.desk::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), transparent 30%); }
 .desk::after { content: ""; position: absolute; inset: 0; background: var(--fade-bottom); }
-.cup { position: absolute; left: 22%; top: 58%; width: 120px; height: 46px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, var(--coffee) 48%, var(--ceramic) 50% 64%, color-mix(in srgb, var(--ceramic) 70%, var(--wood-dark)) 66%); box-shadow: 0 18px 24px -10px var(--bg); }
-.cup::before { content: ""; position: absolute; left: -36px; right: -36px; top: 10px; bottom: -22px; border-radius: 50%; background: color-mix(in srgb, var(--ceramic) 75%, var(--wood-dark)); z-index: -1; }
-.notebook { position: absolute; right: 18%; top: 60%; width: 220px; height: 120px; border-radius: 6px; background: linear-gradient(90deg, var(--ceramic) 0 49%, color-mix(in srgb, var(--ceramic) 70%, var(--wood-dark)) 49.5% 50.5%, var(--ceramic) 51%); transform: perspective(500px) rotateX(55deg) rotateZ(-8deg); opacity: .8; }
-.hero__device { position: absolute; left: 50%; top: 56%; translate: -50% 0; transform: perspective(900px) rotateX(18deg); }
-.hero__device .device { --s: 19px; }
+.hero__device { position: absolute; left: 50%; top: 44%; width: min(620px, 100%); height: 48%; translate: -50% 0; }
 .nav { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-4); min-height: 72px; }
 .logo { display: inline-flex; align-items: center; gap: var(--space-2); font: 600 var(--text-lg)/1 var(--font-display); letter-spacing: var(--tracking-tight); min-height: var(--control); }
 .logo i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; }
@@ -131,8 +114,8 @@ h1, h2, h3, p { margin: 0; }
 .lead { color: var(--muted); max-width: 38ch; font-size: var(--text-sm); }
 .reveal { position: relative; display: grid; place-items: center; min-height: 560px; margin-top: var(--space-12); }
 .giant { position: absolute; inset: 50% 0 auto; translate: 0 -50%; text-align: center; white-space: nowrap; font: 600 var(--text-giant)/1 var(--font-display); letter-spacing: -0.05em; color: var(--giant); -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 8%, transparent); user-select: none; }
-.reveal .device { --s: 34px; z-index: 1; cursor: pointer; animation: hover-y 6s ease-in-out infinite; }
-.reveal .device::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: -1.4em; height: .9em; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--bg) 90%, transparent), transparent); z-index: -1; }
+.reveal__stage { width: min(460px, 100%); height: 560px; z-index: 1; cursor: pointer; }
+.reveal__stage .fallback { opacity: .5; }
 .callouts { position: absolute; inset: 0; }
 .callout { position: absolute; z-index: 2; display: grid; gap: var(--space-2); max-width: 220px; font-size: var(--text-xs); color: var(--muted); }
 .callout b { color: var(--text); font: 500 var(--text-sm)/1.3 var(--font-body); }
@@ -144,15 +127,13 @@ h1, h2, h3, p { margin: 0; }
 .features { background: var(--bg); padding: var(--space-24) 0; }
 .fgrid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap: var(--space-4); margin-top: var(--space-12); }
 .tile { position: relative; min-height: 300px; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-4); }
-.tile--rock { grid-row: span 2; min-height: 620px;
-  background: radial-gradient(60% 40% at 30% 30%, var(--rock-hi), transparent 70%), radial-gradient(50% 35% at 75% 60%, color-mix(in srgb, var(--rock-hi) 80%, var(--rock)), transparent 70%), radial-gradient(80% 50% at 50% 100%, var(--bg), transparent), var(--rock); }
-.tile--rock::before { content: ""; position: absolute; inset: 0; background: repeating-radial-gradient(circle at 40% 40%, transparent 0 3px, color-mix(in srgb, var(--bg) 18%, transparent) 3px 4px); opacity: .6; }
-.tile--fabric { background: repeating-linear-gradient(115deg, transparent 0 22px, color-mix(in srgb, var(--fabric-dark) 45%, transparent) 22px 40px, transparent 40px 70px), radial-gradient(70% 60% at 60% 30%, color-mix(in srgb, var(--fabric) 80%, var(--lamp)), var(--fabric) 50%, var(--fabric-dark)); }
+.tile--rock { grid-row: span 2; min-height: 620px; background: var(--rock); }
+.tile--fabric { background: var(--fabric-dark); }
 .tile--plain { background: var(--surface); }
 .tile--wide { grid-column: span 2; }
-.tile .device { --s: 13px; position: absolute; left: 50%; top: 42%; translate: -50% -50%; }
-.tile--rock .device { --s: 22px; top: 40%; transform: rotate(-8deg); }
-.tile--fabric .device { transform: rotate(12deg); }
+.tile .shot img { transition: transform var(--dur-slow) var(--ease-out); }
+.tile:hover .shot img { transform: scale(1.04); }
+.tile .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--bg) 70%, transparent)); }
 .glass { position: relative; padding: var(--space-4); border-radius: var(--radius-md); background: color-mix(in srgb, var(--bg) 35%, transparent); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur)); transition: background var(--dur-base), border-color var(--dur-base); }
 .tile:hover .glass { border-color: color-mix(in srgb, var(--text) 24%, transparent); }
 .glass h3 { font: 500 var(--text-base)/1.25 var(--font-display); margin: var(--space-2) 0 var(--space-1); }
@@ -177,14 +158,18 @@ h1, h2, h3, p { margin: 0; }
 /* ---------- Appel final + pied ---------- */
 .cta { position: relative; padding: var(--space-24) 0 var(--space-12); background: var(--bg); overflow: hidden; }
 .cta__box { position: relative; border-radius: var(--radius-lg); overflow: hidden; padding: clamp(32px, 6vw, 80px); min-height: 420px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: var(--space-5);
-  background: radial-gradient(50% 70% at 85% 50%, color-mix(in srgb, var(--lamp) 50%, transparent), transparent 70%), linear-gradient(100deg, var(--bg) 30%, var(--wood-dark) 70%, var(--wood)); }
-.cta__box .device { --s: 20px; position: absolute; right: 12%; top: 50%; translate: 0 -50%; transform: rotate(-10deg); }
+  background: var(--wood-dark); isolation: isolate; }
+.cta__box .shot { z-index: -1; }
+.cta__box .shot img { object-position: 70% 50%; filter: var(--grade-warm); }
+.cta__box .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, var(--bg) 25%, color-mix(in srgb, var(--bg) 40%, transparent) 60%, transparent); }
+.cta__device { position: absolute; right: 2%; top: 0; bottom: 0; width: 42%; }
 .cta__box h2 { position: relative; max-width: 14ch; }
 .cta__box p { position: relative; color: color-mix(in srgb, var(--text) 75%, transparent); max-width: 36ch; font-size: var(--text-sm); }
 .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--line); color: var(--muted); font-size: var(--text-xs); }
 .foot nav { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
 .foot a { display: inline-flex; align-items: center; min-height: var(--control); transition: color var(--dur-fast); }
 .foot a:hover { color: var(--text); }
+.credit { color: var(--muted); }
 
 /* ---------- Mouvement ---------- */
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
@@ -207,19 +192,20 @@ h1, h2, h3, p { margin: 0; }
   .nav__end { gap: var(--space-2); }
   .menu { display: inline-grid; place-items: center; width: var(--control); height: var(--control); border-radius: var(--radius-sm); border: 1px solid var(--glass-line); background: none; cursor: pointer; }
   .hero { min-height: 780px; }
-  .hero__device { top: 50%; }
-  .cup { left: -6%; } .notebook { right: -30%; }
+  .hero__device { top: 46%; height: 34%; }
   .offer { left: var(--gutter); right: var(--gutter); width: auto; bottom: var(--space-4); }
   .corner--l { bottom: auto; top: 46%; }
   .reveal { min-height: 440px; }
-  .reveal .device { --s: 24px; }
+  .reveal__stage { height: 440px; }
   .callout { position: static; max-width: none; }
   .callouts { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-8); }
   .callout--3, .callout--4 { text-align: left; justify-items: start; }
   .fgrid, .vrow { grid-template-columns: 1fr; }
   .tile--rock, .tile--wide { grid-column: auto; }
   .cta__box { min-height: 660px; justify-content: flex-start; }
-  .cta__box .device { right: 50%; top: auto; bottom: 32px; translate: 50% 0; --s: 16px; }
+  .cta__device { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 300px; }
+  .cta__box .shot img { object-position: 60% 100%; }
+  .cta__box .shot::after { background: linear-gradient(180deg, var(--bg) 35%, color-mix(in srgb, var(--bg) 30%, transparent) 75%); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -230,13 +216,10 @@ h1, h2, h3, p { margin: 0; }
 <body>
 
 <header class="hero" id="top">
-  <div class="desk" data-slot="hero-desk-photo" role="img" aria-label="Bureau en bois éclairé par une lampe, tasse de café et carnet, l'objet posé au centre">
-    <div class="desk__top"></div>
-    <span class="cup"></span><span class="notebook"></span>
+  <div class="desk shot" data-slot="hero-desk-photo">
+    <img src="https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?auto=format&fit=crop&w=2000&q=80" alt="Bureau en bois clair avec une tasse de café et un clavier, lumière chaude" width="2000" height="1333" fetchpriority="high" decoding="async">
   </div>
-  <div class="hero__device" aria-hidden="true">
-    <div class="device"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>À L'ÉCOUTE…</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
-  </div>
+  <div class="hero__device" data-3d="hero" aria-hidden="true"></div>
 
   <div class="wrap nav">
     <a class="logo" href="#top" aria-label="Ora, accueil"><i aria-hidden="true"></i>ora</a>
@@ -279,8 +262,8 @@ h1, h2, h3, p { margin: 0; }
       </div>
       <div class="reveal">
         <p class="giant" aria-hidden="true">Ora P1</p>
-        <div class="device" id="bigDevice" data-state="listening" role="img" aria-label="Ora P1 : boîtier noir, petit écran, molette ronde et bouton rouge sur le dessus">
-          <span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span id="lcdState">À L'ÉCOUTE…</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div>
+        <div class="reveal__stage" id="bigDevice" data-3d="reveal" data-state="listening" role="img" aria-label="Ora P1 en 3D : boîtier noir mat aux coins arrondis, petit écran qui affiche l'heure et une onde, molette ronde en métal et bouton rouge sur le dessus">
+          <img class="fallback" src="https://images.unsplash.com/photo-1680026548022-e76f693d0a62?auto=format&fit=crop&w=1000&h=1200&q=80" alt="" width="1000" height="1200" loading="lazy" decoding="async">
         </div>
         <div class="callouts">
           <p class="callout callout--1"><span class="chip">Écran</span><b>Écran mémoire 1,1 pouce</b>L'heure et l'état, rien d'autre.</p>
@@ -300,16 +283,16 @@ h1, h2, h3, p { margin: 0; }
         <span class="chip">Dans Ora P1</span>
       </div>
       <div class="fgrid">
-        <article class="tile tile--rock" data-slot="feature-rock">
-          <div class="device" aria-hidden="true"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>NOTE AJOUTÉE</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+        <article class="tile tile--rock">
+          <div class="shot" data-slot="feature-rock"><img src="https://images.unsplash.com/photo-1680026548022-e76f693d0a62?auto=format&fit=crop&w=1200&h=1600&q=80" alt="Roches noires fracturées, texture mate" width="1200" height="1600" loading="lazy" decoding="async"></div>
           <div class="glass"><span class="chip chip--glass">Mémoire</span><h3>Tout reste sur l'appareil</h3><p>Transcriptions et rappels chiffrés localement. Rien ne part sans votre accord.</p></div>
         </article>
         <article class="tile tile--plain">
           <p class="stat-big">5<small>jours</small></p>
           <div class="glass"><span class="chip chip--glass">Batterie</span><h3>Autonomie de 5 jours</h3><p>Recharge sans fil complète en 50 minutes.</p></div>
         </article>
-        <article class="tile tile--fabric" data-slot="feature-fabric">
-          <div class="device" aria-hidden="true"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>RAPPEL 10:00</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+        <article class="tile tile--fabric">
+          <div class="shot" data-slot="feature-fabric"><img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&h=800&q=80" alt="Canapé en tissu orange, flou et chaleureux" width="800" height="800" loading="lazy" decoding="async"></div>
           <div class="glass"><span class="chip chip--glass">Rappels</span><h3>Il vous le redit au bon moment</h3><p>« Rappelle-moi d'appeler Lina en sortant. »</p></div>
         </article>
         <article class="tile tile--plain tile--wide">
@@ -334,15 +317,16 @@ h1, h2, h3, p { margin: 0; }
 
   <section class="cta" id="cta" aria-labelledby="ctaTitle">
     <div class="wrap">
-      <div class="cta__box" data-slot="cta-lifestyle">
-        <div class="device" aria-hidden="true"><span class="device__btn"></span><div class="device__lcd"><b class="clock">09:42</b><span>BONJOUR</span></div><div class="device__mic"><i></i><i></i><i></i><i></i></div><div class="device__dial"></div></div>
+      <div class="cta__box">
+        <div class="shot" data-slot="cta-lifestyle"><img src="https://images.unsplash.com/photo-1487015307662-6ce6210680f1?auto=format&fit=crop&w=1600&q=80" alt="Table ronde en bois, chaise et tasse dans une pièce lumineuse" width="1600" height="1067" loading="lazy" decoding="async"></div>
+        <div class="cta__device" data-3d="cta" aria-hidden="true"></div>
         <span class="chip chip--glass" style="position:relative">Livraison en novembre</span>
         <h2 class="title" id="ctaTitle">Réservez le vôtre. <span>149 €.</span></h2>
         <p>Précommande sans frais, annulable à tout moment. Étui en laine offert jusqu'au 31 octobre.</p>
         <div class="hero__ctas" style="justify-content:flex-start;position:relative"><button class="btn btn--paper" id="preorder">Précommander</button><a class="btn btn--ghost" href="#features">Fiche technique</a></div>
       </div>
       <footer class="foot">
-        <span>© 2026 Ora — produit fictif de démonstration</span>
+        <span>© 2026 Ora — produit fictif de démonstration · <span class="credit">Photos : Unsplash · 3D : Three.js</span></span>
         <nav aria-label="Pied de page"><a href="#">Garantie</a><a href="#">Confidentialité</a><a href="#">Contact</a><a href="#top">Haut de page ↑</a></nav>
       </footer>
     </div>
@@ -353,8 +337,6 @@ h1, h2, h3, p { margin: 0; }
 (() => {
   const wave = document.querySelector('.wave');
   for (let i = 0; i < 48; i++) { const b = document.createElement('i'); b.style.setProperty('--h', (12 + Math.abs(Math.sin(i * 0.7)) * 44 + (i % 3) * 4) + 'px'); b.style.setProperty('--d', (i % 8) * -0.15 + 's'); wave.appendChild(b); }
-  const tick = () => { const d = new Date(), t = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); document.querySelectorAll('.clock').forEach(c => c.textContent = t); };
-  tick(); setInterval(tick, 30000);
 
   const menu = document.getElementById('menu'), links = document.getElementById('links');
   menu.addEventListener('click', () => { const o = links.classList.toggle('is-open'); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); });
@@ -362,13 +344,191 @@ h1, h2, h3, p { margin: 0; }
 
   document.getElementById('offerClose').addEventListener('click', () => { document.getElementById('offer').hidden = true; });
 
-  const dev = document.getElementById('bigDevice'), btn = document.getElementById('listenBtn'), state = document.getElementById('lcdState');
-  const toggle = () => { const on = dev.dataset.state !== 'listening'; dev.dataset.state = on ? 'listening' : 'idle'; state.textContent = on ? "À L'ÉCOUTE…" : 'EN VEILLE'; btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Mettre en veille' : 'Réveiller Ora'; };
+  const dev = document.getElementById('bigDevice'), btn = document.getElementById('listenBtn');
+  const toggle = () => { const on = dev.dataset.state !== 'listening'; dev.dataset.state = on ? 'listening' : 'idle'; btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Mettre en veille' : 'Réveiller Ora'; };
   btn.addEventListener('click', toggle); dev.addEventListener('click', toggle);
 
   const pre = document.getElementById('preorder');
   pre.addEventListener('click', () => { pre.setAttribute('aria-busy', 'true'); pre.textContent = 'Réservation…'; setTimeout(() => { pre.removeAttribute('aria-busy'); pre.textContent = 'Réservé ✓'; pre.setAttribute('aria-disabled', 'true'); }, 700); });
 })();
+</script>
+<!-- Objet en 3D : Three.js r170 (voir references/assets.md). Repli : l'image .fallback (ou la photo de fond) si WebGL est absent. -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const css = getComputedStyle(document.documentElement);
+const v = (name) => css.getPropertyValue(name).trim();          // couleurs et polices lues dans les tokens
+const tok = (name) => new THREE.Color(v(name));
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MONO = v('--font-mono');
+
+// ---- Écran : texture canvas (heure + onde + état) ----
+function makeScreen() {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 192;
+  const g = c.getContext('2d');
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+  const draw = (t, listening, label) => {
+    g.fillStyle = v('--lcd'); g.fillRect(0, 0, c.width, c.height);
+    const d = new Date(), time = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    g.fillStyle = v('--lcd-text'); g.textBaseline = 'alphabetic';
+    g.font = `500 68px ${MONO}`; g.fillText(time, 30, 92);
+    const n = 20, x0 = 262, step = 11;                              // onde : 20 barres
+    for (let i = 0; i < n; i++) {
+      const amp = listening ? 6 + 46 * Math.abs(Math.sin(t * 3.1 + i * 0.7) * Math.sin(t * 1.3 + i * 0.31)) : 3;
+      g.fillRect(x0 + i * step, 66 - amp / 2, step - 4, amp);
+    }
+    g.globalAlpha = listening ? 0.25 + 0.75 * (0.5 + 0.5 * Math.cos(t * Math.PI * 2 / 1.6)) : 1;
+    g.fillStyle = listening ? v('--red') : v('--muted');
+    g.beginPath(); g.arc(44, 146, 10, 0, Math.PI * 2); g.fill();
+    g.globalAlpha = 1; g.fillStyle = v('--lcd-text');
+    g.font = `500 28px ${MONO}`; g.fillText(label, 68, 156);
+    tex.needsUpdate = true;
+  };
+  return { tex, draw };
+}
+
+// ---- L'objet : boîtier noir mat, écran, micro, molette métal, bouton rouge ----
+function makeDevice() {
+  const W = 1.8, H = 2.52, D = 0.5, F = D / 2;
+  const group = new THREE.Group();
+  const body = new THREE.Mesh(new RoundedBoxGeometry(W, H, D, 8, 0.24),
+    new THREE.MeshPhysicalMaterial({ color: tok('--device'), roughness: 0.62, metalness: 0.15, clearcoat: 0.25, clearcoatRoughness: 0.7 }));
+  group.add(body);
+
+  const bezel = new THREE.Mesh(new RoundedBoxGeometry(1.46, 0.62, 0.04, 3, 0.08),
+    new THREE.MeshPhysicalMaterial({ color: tok('--dial'), roughness: 0.25, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.05 }));
+  bezel.position.set(0, 0.76, F); group.add(bezel);
+  const screen = makeScreen();
+  const lcd = new THREE.Mesh(new THREE.PlaneGeometry(1.36, 0.51), new THREE.MeshBasicMaterial({ map: screen.tex, toneMapped: false }));
+  lcd.position.set(0, 0.76, F + 0.021); group.add(lcd);
+
+  const holeGeo = new THREE.CylinderGeometry(0.028, 0.028, 0.02, 16), holeMat = new THREE.MeshBasicMaterial({ color: tok('--bg') });
+  for (let i = 0; i < 4; i++) { const h = new THREE.Mesh(holeGeo, holeMat); h.rotation.x = Math.PI / 2; h.position.set(-0.18 + i * 0.12, 0.3, F + 0.002); group.add(h); }
+
+  const well = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.02, 96), new THREE.MeshStandardMaterial({ color: tok('--bg'), roughness: 0.9 }));
+  well.rotation.x = Math.PI / 2; well.position.set(0, -0.5, F + 0.001); group.add(well);
+  const metal = new THREE.MeshPhysicalMaterial({ color: tok('--metal'), metalness: 1, roughness: 0.32 });
+  const dial = new THREE.Group(); dial.position.set(0, -0.5, F);
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.64, 0.64, 0.12, 96), metal);
+  ring.rotation.x = Math.PI / 2; ring.position.z = 0.06; dial.add(ring);
+  const knurl = new THREE.BoxGeometry(0.03, 0.02, 0.1);           // crans sur la tranche
+  for (let i = 0; i < 60; i++) { const a = i / 60 * Math.PI * 2, k = new THREE.Mesh(knurl, metal); k.position.set(Math.cos(a) * 0.64, Math.sin(a) * 0.64, 0.06); k.rotation.z = a; dial.add(k); }
+  const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.14, 96),
+    new THREE.MeshPhysicalMaterial({ color: tok('--device'), roughness: 0.35, metalness: 0.6, clearcoat: 0.6 }));
+  cap.rotation.x = Math.PI / 2; cap.position.z = 0.08; dial.add(cap);
+  const mark = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.14, 0.01), new THREE.MeshBasicMaterial({ color: tok('--text') }));
+  mark.position.set(0, 0.53, 0.125); dial.add(mark);
+  group.add(dial);
+
+  const button = new THREE.Mesh(new RoundedBoxGeometry(0.56, 0.16, 0.24, 4, 0.06),
+    new THREE.MeshPhysicalMaterial({ color: tok('--red'), roughness: 0.35, clearcoat: 0.8, clearcoatRoughness: 0.2 }));
+  button.position.set(0, H / 2 + 0.03, 0); group.add(button);
+  return { group, dial, button, screen, baseY: H / 2 + 0.03, bottom: -H / 2 };
+}
+
+function makeShadow() {                                             // ombre douce au sol (texture canvas)
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const g = c.getContext('2d'), grad = g.createRadialGradient(64, 64, 4, 64, 64, 64);
+  grad.addColorStop(0, v('--bg')); grad.addColorStop(1, 'transparent');
+  g.fillStyle = grad; g.fillRect(0, 0, 128, 128);
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 1.4), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, opacity: 0.85, depthWrite: false }));
+  m.rotation.x = -Math.PI / 2; return m;
+}
+
+// Réglages par emplacement : caméra, pose, texte de l'écran
+const SETUPS = {
+  hero:   { cam: [0, 2.2, 8.4], look: [0, -0.4, 0], rot: [-0.12, -0.38, 0], float: false, label: "À L'ÉCOUTE…" },
+  reveal: { cam: [0, 0.2, 7.2], look: [0, 0, 0], rot: [0, -0.25, 0], float: true, label: null },
+  cta:    { cam: [0, 0.4, 7.4], look: [0, 0, 0], rot: [0.05, 0.45, -0.17], float: true, label: 'BONJOUR' },
+};
+const stateHost = document.getElementById('bigDevice');
+
+function mount(host) {
+  const cfg = SETUPS[host.dataset['3d']];
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
+  catch (e) { host.classList.add('no-webgl'); return null; }      // l'image de repli reste visible
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.domElement.setAttribute('aria-hidden', 'true');
+  host.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 0.55;
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  camera.position.set(...cfg.cam); camera.lookAt(...cfg.look);
+
+  const dev = makeDevice();
+  const pivot = new THREE.Group(); pivot.add(dev.group); scene.add(pivot);
+  pivot.rotation.set(...cfg.rot);
+  const shadow = makeShadow(); shadow.position.y = dev.bottom - 0.12; scene.add(shadow);
+  const key = new THREE.DirectionalLight(tok('--lamp'), 2.2); key.position.set(4, 5, 4); scene.add(key);   // lumière de lampe chaude
+  const rim = new THREE.DirectionalLight(tok('--text'), 1.4); rim.position.set(-4, 2, -3); scene.add(rim);  // liseré froid
+  scene.add(new THREE.AmbientLight(tok('--text'), 0.15));
+
+  const resize = () => {
+    const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
+    camera.aspect = w / h;
+    camera.fov = w / h < 0.8 ? 38 : 30;                             // recule un peu sur mobile
+    camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(resize).observe(host); resize();
+
+  let px = 0, py = 0, over = false, visible = true, last = -1, lastState = null, press = -10;
+  host.addEventListener('pointermove', (e) => { const r = host.getBoundingClientRect(); px = (e.clientX - r.left) / r.width - 0.5; py = (e.clientY - r.top) / r.height - 0.5; over = true; });
+  host.addEventListener('pointerleave', () => { px = py = 0; over = false; });
+  new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(host);
+
+  const render = (t) => {
+    const listening = cfg.label ? true : stateHost.dataset.state === 'listening';
+    const label = cfg.label || (listening ? "À L'ÉCOUTE…" : 'EN VEILLE');
+    if (lastState !== null && lastState !== listening) press = t;  // appui sur le bouton rouge
+    lastState = listening;
+    if (t - last > 0.05 || reduce) { dev.screen.draw(t, listening, label); last = t; }
+    if (!reduce) {
+      const sway = Math.sin(t * 0.4) * 0.18;
+      pivot.rotation.y += (cfg.rot[1] + sway + px * 0.9 - pivot.rotation.y) * 0.06;
+      pivot.rotation.x += (cfg.rot[0] + py * 0.45 - pivot.rotation.x) * 0.06;
+      dev.dial.rotation.z += ((over ? -0.7 : 0) - dev.dial.rotation.z) * 0.05;   // la molette tourne au survol
+      const lift = cfg.float ? Math.sin(t * 1.05) * 0.1 : 0;
+      dev.group.position.y = lift;
+      shadow.scale.setScalar(1 - lift * 0.8); shadow.material.opacity = 0.85 - lift;
+    }
+    const k = Math.min(1, (t - press) / 0.25);
+    dev.button.position.y = dev.baseY - Math.sin(k * Math.PI) * 0.05;
+    renderer.render(scene, camera);
+  };
+  host.classList.add('is-3d-ready');
+  return { render, isVisible: () => visible };
+}
+
+const views = [...document.querySelectorAll('[data-3d]')].map(mount).filter(Boolean);
+const clock = new THREE.Clock();
+if (reduce) {
+  const still = () => views.forEach((vw) => vw.render(0));
+  still(); setInterval(still, 30000);                               // heure à jour, sans animation
+  stateHost.addEventListener('click', () => setTimeout(still, 0));
+  document.getElementById('listenBtn').addEventListener('click', () => setTimeout(still, 0));
+  document.fonts.ready.then(still);
+} else {
+  const loop = () => { const t = clock.getElapsedTime(); views.forEach((vw) => vw.isVisible() && vw.render(t)); requestAnimationFrame(loop); };
+  loop();
+}
 </script>
 </body>
 </html>

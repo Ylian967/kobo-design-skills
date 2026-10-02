@@ -8,9 +8,9 @@
 ## Séquence type
 
 1. **Chargement** : logo tracé sur blanc.
-2. **Ouverture** (sombre) : illustration plein cadre (un visage, un paysage), intro en haut à gauche, manifeste géant en bas à droite, `SCROLL` en bas à droite.
+2. **Ouverture** (sombre) : image réelle plein cadre (un visage, un paysage — voir `assets.md`), intro en haut à gauche, manifeste géant en bas à droite, `SCROLL` en bas à droite.
 3. **Page éditoriale** (blanc) : titre 2 lignes en haut à gauche, vignette-onglet à gauche, grande vignette à droite (pleine hauteur), petite vignette en bas au centre, paragraphe en bas à gauche.
-4. **Chapitre illustré** : paysage sombre, symbole géant au centre (glyphe blanc en forme de croix ornée), aucun texte sauf un label mono.
+4. **Chapitre illustré** : paysage sombre (image réelle, voir `assets.md`), symbole géant au centre (glyphe blanc en forme de croix ornée), aucun texte sauf un label mono.
 5. **Terminal** puis **factions** : deux fiches côte à côte.
 6. **Fin** : manifeste rappelé, liens mono, `SE CONNECTER`.
 

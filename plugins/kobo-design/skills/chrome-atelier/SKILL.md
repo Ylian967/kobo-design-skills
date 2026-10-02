@@ -33,6 +33,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (filets, cercle, cr
 | `references/components.md` | Pilules, navigation, étiquette crochets, titre décalé, filets + cercle, légendes, sélecteur de titre d'or, barre de caractéristiques, champ, puces, panneau, confirmation. |
 | `references/layouts.md` | Page produit « atelier », scène nuit, presse, communauté / liste d'attente, mobile. |
 | `references/motion.md` | Flottement de la pièce, orbite du cercle, montée des titres, tracé des légendes. |
+| `references/assets.md` | Avant de placer la pièce 3D ou une photo : recette Three.js (forme, métaux, lumière, titre d'or), portraits nuit, sources, prompts IA. |
 | `examples/demo.html` | Page complète (marque fictive « Ossel »). |
 | `source.md` | Shot de référence, ce qui a été vu, écarts. |
 
@@ -60,6 +61,10 @@ La police d'origine n'est pas identifiée : Archivo élargie rend la grotesque l
 | Nuit | `--night`, `--night-2`, `--night-3` | fond photo, reflets |
 | Texte nuit | `--on-night`, `--muted-night`, `--line-night` | titres, étiquettes, guides |
 | Métaux | `--gold*`, `--chrome*`, `--white-gold` | rendu de la pièce, pastilles de légende — jamais du texte sur clair |
+
+## Images et 3D
+
+La pièce centrale est une **vraie scène 3D** (Three.js ou React Three Fiber) : métal poli à réflexions d'environnement, forme organique, rotation au glisser, et le sélecteur de titre d'or change la teinte du métal en direct. Une photo de repli reste sous le canvas. Les sections nuit et communauté utilisent de **vraies photos de portrait** en N&B virées bleu-gris par un calque `--night-3`, fondues vers le texte. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou du bijou : recette et sources dans `references/assets.md`.
 
 ## Signature
 
@@ -91,3 +96,4 @@ La police d'origine n'est pas identifiée : Archivo élargie rend la grotesque l
 - [ ] Une seule pilule pleine par écran ; états survol, appui, focus, désactivé présents.
 - [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
 - [ ] Aucun élément de la marque d'origine.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.

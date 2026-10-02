@@ -8,7 +8,7 @@
 
 ## Chapitres (au défilement)
 
-1. **Arrivée** : paysage de brouillard, objet principal (bâtiment de glace aux joints lumineux) au centre. Manifeste en haut à droite.
+1. **Arrivée** : paysage de brouillard, objet principal en 3D (éclats de glace ou bâtiment de glace, voir `assets.md`) au centre. Manifeste en haut à droite.
 2. **Nuit** : la caméra plonge, le fond passe à `--night`, un objet sombre (rocher, sculpture) flotte ; le panneau de contenu peut s'ouvrir.
 3. **Socle** : carrousel d'objets 3D (logos en particules) sur un socle métallique, navigation précédente / suivante en bas.
 4. **Sortie** : retour au brouillard, liens et crédits en mono.

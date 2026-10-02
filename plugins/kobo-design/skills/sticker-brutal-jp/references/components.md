@@ -115,7 +115,7 @@ Petite pilule `--mint` à contour 2px, Archivo 900 12px capitales +0.04em (« SE
 ## Portrait hexagonal (signature)
 
 ```html
-<div class="hex-wrap"><div class="hex" data-slot="portrait" role="img" aria-label="Portrait de la designer"></div></div>
+<div class="hex-wrap"><div class="hex" data-slot="portrait"><img src="portrait-nb.jpg" alt="Portrait de la designer" width="1000" height="1000" fetchpriority="high"></div></div>
 ```
 
 ```css
@@ -124,10 +124,10 @@ Petite pilule `--mint` à contour 2px, Archivo 900 12px capitales +0.04em (« SE
   drop-shadow(0 var(--stroke) 0 var(--ink)) drop-shadow(0 calc(-1 * var(--stroke)) 0 var(--ink)) drop-shadow(6px 6px 0 var(--ink)); }
 .hex { clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%);
   background: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--paper) 35%, transparent) 0 1.5px, transparent 2px) 0 0 / 14px 14px, var(--pink); }
-.hex img { filter: grayscale(1) contrast(1.1); object-fit: cover; object-position: top; }
+.hex img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: grayscale(1) contrast(1.2) brightness(1.08); mix-blend-mode: multiply; }
 ```
 
-Photo : personne détourée, en niveaux de gris, cadrée buste, qui dépasse légèrement le bas de l'hexagone.
+Photo réelle (voir `assets.md`) : personne en niveaux de gris sur fond blanc, cadrée buste ; le `multiply` donne au fond la couleur rose de l'hexagone. Avec un détourage PNG, la personne peut dépasser légèrement le bas.
 
 ## Katakana vertical (signature)
 

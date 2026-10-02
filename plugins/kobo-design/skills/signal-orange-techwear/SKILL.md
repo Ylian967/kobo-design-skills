@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Navigation, empilement de titre, boutons (tous états), lien souligné, icônes rondes, panneau produit, tableau de specs, interrupteur, index de section, onglets, carte produit, bandeau défilant, texte vertical. |
 | `references/layouts.md` | Héros en 3 colonnes, collection, mobile. |
 | `references/motion.md` | Découpe des titres, ligne de scan, balayage des cartes, clignotant, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, traitement N&B sombre + lueur orange, sources, prompts IA, recette du mannequin 3D `.glb`. |
 | `examples/demo.html` | Page d'exemple complète (marque fictive). |
 | `source.md` | Référence, observations et écarts. |
 
@@ -57,6 +58,10 @@ Michroma n'a qu'une graisse : ne jamais simuler le gras. Alternative plus serré
 | Signal | `--accent`, `--on-accent`, `--accent-glow` | actif, étiquettes, CTA, halo |
 
 Règle : au plus **un** aplat orange par zone (onglet actif, pilule, ou bouton plein).
+
+## Images et 3D
+
+Le mannequin et les pièces sont de **vraies photos de mode** (ou un vrai mannequin 3D `.glb`), toujours **éteintes** : noir et blanc, sombres et contrastées, décor fondu dans la page par un masque radial. L'orange ne vient jamais de la photo : il est ajouté par l'interface (lueur `--accent-glow` en `screen`, étiquettes sur `--scrim`). Le mannequin 3D en rotation est l'option naturelle du héros, avec la photo en repli. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un produit : détails dans `references/assets.md`.
 
 ## Signature
 
@@ -86,4 +91,5 @@ Règle : au plus **un** aplat orange par zone (onglet actif, pilule, ou bouton p
 - [ ] Onglets, interrupteur et jauges accessibles.
 - [ ] Testé à 375px et 1440px, aucun débordement horizontal, mouvement réduit respecté.
 - [ ] Contrastes vérifiés (`python3 tools/check.py signal-orange-techwear`).
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du concept d'origine.

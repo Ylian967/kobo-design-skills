@@ -20,3 +20,4 @@
 |---|---|---|
 | Logo, voiture, photos, textes | Formes, dégradés et contenu inventé | Marque et droits d'auteur |
 | Rouge #D14836 | #e24b33 pour le texte sur nuit (4,6:1) | Lisibilité |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), postérisées et en duotone, à remplacer par les images du projet | Démonstration |

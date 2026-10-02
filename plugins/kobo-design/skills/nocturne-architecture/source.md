@@ -27,9 +27,10 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom du studio, mot-marque, textes en anglais | Studio fictif « orsel », projets et textes inventés en français | Marque et droits d'auteur |
-| Photos de ville, de villas et d'intérieurs | Dessins en dégradés CSS (`data-slot`) à remplacer par vos photos | Droits d'auteur |
+| Photos de ville, de villas et d'intérieurs | Autres photos nocturnes libres (`data-slot`), étalonnées selon `references/assets.md` | Droits d'auteur |
 | Rouge #e3191f en petit texte sur #111 (4:1) | Rouge réservé aux aplats et au grand texte (`:large`) ; `--accent-text` #ff3b3f pour le petit texte (5,4:1) | Contraste ≥ 4,5:1 |
 | Gris de continuation ~#777 (4,2:1) | Gardé pour le grand texte uniquement (paire `:large`) ; petit texte gris en `--muted` #8a8a8a (5,5:1) | Contraste |
 | Liens de navigation minuscules sans zone de clic | Zone de 44px de haut, soulignement animé au survol | Cibles tactiles |
 | Date / heure / température figées | Horloge réelle en français ; température fictive | Contenu localisé |
 | Composition ordinateur uniquement | Version mobile (menu repliable, mot-marque à 44vw, carrousel à 78 %) | Adaptation |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans images propriétaires |

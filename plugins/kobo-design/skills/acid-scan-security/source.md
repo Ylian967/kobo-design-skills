@@ -27,7 +27,7 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom de marque, logo, textes | Marque fictive « Gridward », logo anneau générique, textes inventés en français | Marque et droits d'auteur |
-| Photo de visage | Portrait abstrait dessiné en canvas et tramé (emplacement `data-slot="portrait-duotone"`) | Droit à l'image ; à remplacer par votre photo traitée |
+| Photo de visage | Visuels de la démo : photos Unsplash libres (licence Unsplash), lues et tramées en canvas (`data-slot="portrait-duotone"`), à remplacer par les images du projet | Droit à l'image |
 | Bouton translucide (texte pâle sur vert clair transparent) | Fond `--acid` à 16 % ; paire de contraste vérifiée sur l'équivalent opaque `--glass` (11,2:1) | Lisibilité vérifiable |
 | Texte gris-vert très sombre pour les métadonnées | `--dim` #6f9a45 (6:1) | Contraste ≥ 4,5:1 |
 | Titre pixel dans tous les corps | Pixel réservé aux grands corps ; mono en dessous de 28px | Lisibilité |

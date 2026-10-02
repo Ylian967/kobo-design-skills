@@ -18,5 +18,6 @@
 
 | Élément du site | Dans le skill | Raison |
 |---|---|---|
-| Illustrations, titres, nom de l'œuvre | Scènes CSS génériques, titres inventés | Droits d'auteur |
+| Illustrations, titres, nom de l'œuvre | Photos N&B libres, titres inventés | Droits d'auteur |
 | Navigation uniquement à la molette | Sommaire clavier ajouté | Accessibilité |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), passées en N&B contrasté, à remplacer par les images du projet | Démonstration |

@@ -30,3 +30,4 @@
 | Metropolis (libre, hors Google Fonts) | Montserrat | Même dessin d'origine, disponible partout |
 | Texte blanc sur or (1,6:1) | Texte bleu nuit #1e244d sur or (9,2:1) | Lisibilité |
 | Logos, personnages, jaquettes, vidéos | Emplacements | Droits d'auteur |
+| Visuels du jeu | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droits d'auteur |

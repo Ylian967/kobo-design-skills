@@ -21,3 +21,4 @@
 | Logo du label, artistes, pochettes, vidéos | Formes et contenu inventé | Marque et droits d'auteur |
 | Bleu #2779a7 en petit texte (3,9:1) | `--blue-light` pour le petit texte | Lisibilité |
 | Geste obligatoire | Alternative clic et flèches | Accessibilité |
+| Vidéos et photos du label | Visuels de la démo : photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Droits ; les `<img>` du triptyque sont prêtes à devenir des `<video>` |

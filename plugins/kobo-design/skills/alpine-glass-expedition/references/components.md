@@ -83,11 +83,11 @@ Sur une carte photo : fond nuit à 38 % flouté, pour rester lisible sur un ciel
 
 ## Carte de voyage
 
-Carte 520px de haut, rayon `--radius-card`, image plein cadre (`data-slot="trip-photo"`) + dégradé sombre en bas, ombre `--shadow-soft`. En haut : deux puces (durée à gauche, niveau à droite). En bas : **panneau de verre** (`--glass-strong`, flou 14px, bordure claire, rayon 20px) avec titre Instrument Serif 24px capitales sur 2 lignes, prix (« Dès **1 240 €** », chiffre en serif) et rond blanc ↗ 44px qui pivote de 45° au survol. Survol : l'image zoome à 1.05 en 1.2s.
+Carte 520px de haut, rayon `--radius-card`, vraie photo plein cadre refroidie (`data-slot="trip-photo"`, image réelle, voir `assets.md`) + dégradé sombre en bas, ombre `--shadow-soft`. En haut : deux puces (durée à gauche, niveau à droite). En bas : **panneau de verre** (`--glass-strong`, flou 14px, bordure claire, rayon 20px) avec titre Instrument Serif 24px capitales sur 2 lignes, prix (« Dès **1 240 €** », chiffre en serif) et rond blanc ↗ 44px qui pivote de 45° au survol. Survol : l'image zoome à 1.05 en 1.2s.
 
 ```html
 <a class="trip" href="/sejours/lacs-geles">
-  <div class="scene" data-slot="trip-photo"><img src="lacs.jpg" alt=""></div>
+  <figure class="scene" data-slot="trip-photo"><img src="brumes.jpg" alt="Chaînes de montagnes dans la brume bleue" loading="lazy" width="800" height="1040"></figure>
   <div class="trip-top"><span class="chip">6 jours</span><span class="chip">Modéré</span></div>
   <div class="panel"><h3>Le tour des<br>lacs gelés</h3><div class="panel-row"><p>Dès <b>1 240 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
 </a>
@@ -123,4 +123,4 @@ Pilule de verre sur nuit (bordure blanche à 28 %, padding 6px) contenant l'inpu
 
 ## Témoignage
 
-Centré sur `--fog` : 5 étoiles (`--star` cerclé `--deep`), citation Instrument Serif 30–52px (24ch), partie en italique `--slate`, avatar rond 48px bordé de blanc + nom Inter 600 + séjour `--muted`.
+Centré sur `--fog` : 5 étoiles (`--star` cerclé `--deep`), citation Instrument Serif 30–52px (24ch), partie en italique `--slate`, avatar rond 48px bordé de blanc (photo réelle de la personne ou de son séjour, voir `assets.md`) + nom Inter 600 + séjour `--muted`.

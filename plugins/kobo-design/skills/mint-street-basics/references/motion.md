@@ -12,7 +12,7 @@
 | Chargement | Arc vert qui tourne de -60° à 0 en fondu | 1.2s | `--ease-out` | |
 | Continu | Bandeau défilant (piste dupliquée, -50 %) | 28s | linéaire | pause au survol |
 | Continu | Étiquette flottante et bulles du collage qui montent de 8px | 5–6s | `ease-in-out` | décalées |
-| Survol carte | Visuel +4px vers le haut, vêtement 1.05 et -2° | 300ms / 700ms | `--ease-out` | |
+| Survol carte | Visuel +4px vers le haut, photo 1.04 (détouré : 1.05 et -2°) | 300ms / 700ms | `--ease-out` | |
 | Survol pilule | Flèche +3px | 300ms | `--ease-spring` | appui `scale(.97)` |
 | Pastille | Agrandissement 1.2 au survol, double anneau à la sélection | 160ms | `--ease-spring` | recolore le visuel |
 | Ajout au panier | « Ajout… » 500ms → « Ajouté ✓ » sur bleu nuit 1,8s ; badge du panier à 1.3 puis retour | 300ms | `--ease-spring` | |

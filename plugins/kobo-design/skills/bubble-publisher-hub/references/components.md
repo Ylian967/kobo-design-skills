@@ -35,7 +35,7 @@ Bulle blanche (≈ 350px) posée à droite d'un visuel plein cadre : titre rouge
 
 ## Carte de sortie
 
-Bulle à fond image (ratio 4:3), dégradé noir en bas, logo du jeu en bas à gauche (emplacement), date `JJ/MM/AAAA` blanche 16px en bas à droite. Grille de 3, gouttière 16px. Bouton rouge centré dessous « Toutes les prochaines sorties ».
+Bulle à fond image réelle (ratio 4:3, voir `assets.md`), dégradé noir en bas, logo du jeu en bas à gauche (emplacement), date `JJ/MM/AAAA` blanche 16px en bas à droite. Grille de 3, gouttière 16px. Bouton rouge centré dessous « Toutes les prochaines sorties ».
 
 ## Titre-bulle
 
@@ -47,7 +47,7 @@ Fond `--club` avec de grands pictogrammes de manettes/bulles en contour blanc tr
 
 ## Collage (fenêtre d'inscription)
 
-Grille de tuiles inclinées de 15°, chacune une forme de bulle différente (coins arrondis variables, une pointe) : images, aplats noirs, cercles rouges. À droite : icône enveloppe rouge, titre 32px 700, bouton rouge « Je m'inscris ». Bouton fermer carré en haut à droite.
+Grille de tuiles inclinées de 15°, chacune une forme de bulle différente (coins arrondis variables, une pointe) : images réelles (voir `assets.md`), aplats noirs, cercles rouges. À droite : icône enveloppe rouge, titre 32px 700, bouton rouge « Je m'inscris ». Bouton fermer carré en haut à droite.
 
 ## Icônes
 

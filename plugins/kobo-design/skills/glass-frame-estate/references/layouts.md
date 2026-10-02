@@ -35,7 +35,7 @@ Conteneur `--container` (1280px), marges `--gutter`, sections `--space-24` en ve
 ## Héros
 
 - Hauteur `100svh`, bornée 640–960px ; marge `--frame-inset` autour du cadre.
-- Plans dans la photo : ciel → mot-marque (haut, 12 %) → colline/sujet → voile.
+- Plans dans la photo réelle (voir `assets.md`) : ciel → mot-marque (haut, 12 %) → sujet (détourage optionnel) → voile.
 - Titre à `--space-8` du bas et de la gauche ; carte verre à `--space-8` du bas et de la droite. Les deux reposent sur le voile.
 
 ## Catalogue
@@ -57,7 +57,7 @@ Section `--surface` : 3 cartes, puis bloc 2 colonnes séparé par un filet (titr
 ## Mobile (390px)
 
 - Cadre à 12px du bord ; barre : logo + « MENU » ⠿.
-- Mot-marque à ~80px, descendu à 21 % pour rester derrière le toit ; maison à 58 % de largeur.
+- Mot-marque à ~80px, à 16 % ; photo du héros en recadrage portrait (`<picture>`, voir `assets.md`).
 - Carte verre pleine largeur collée en bas du cadre ; titre et bouton juste au-dessus (accroche masquée).
 - Annonces, articles : 1 colonne. Équipe et chiffres : 2 colonnes. Lettre d'info et pied : 1 colonne.
 - Toujours `min-width: 0` sur les enfants de grille qui contiennent un champ.

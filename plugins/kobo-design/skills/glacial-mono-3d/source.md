@@ -21,3 +21,4 @@
 |---|---|---|
 | Logo, mascotte, marques, modèles 3D | Objets génériques et emplacements | Marque et droits d'auteur |
 | Texte blanc sur brouillard clair (≈ 2,5:1) | Encre acier sur clair, voile si besoin | Lisibilité |
+| Scène 3D d'origine | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droits d'auteur |

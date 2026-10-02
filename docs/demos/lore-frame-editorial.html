@@ -50,18 +50,24 @@ body.is-dark .topnav a:not([aria-current]):not(.signin) { color: var(--muted-dar
 /* Sections */
 .chapter { position: relative; min-height: 100vh; padding: calc(var(--frame-inset) + var(--nav-h) + var(--space-6)) calc(var(--frame-inset) + var(--space-6)) var(--space-12) calc(var(--frame-inset) + var(--rail) + var(--space-6)); }
 .dark { background: var(--ink); color: var(--on-ink); }
-.art { position: absolute; inset: 0; overflow: hidden; }
-.opening .art { background: radial-gradient(35% 45% at 55% 45%, #e0a383, transparent 70%), radial-gradient(40% 50% at 70% 30%, #4b2f78, transparent 70%), radial-gradient(30% 40% at 85% 60%, rgb(201 242 107 / .55), transparent 70%), linear-gradient(135deg, #2a2140, var(--ink)); }
-.intro { position: relative; width: 260px; margin: 0; }
+.art { position: absolute; inset: 0; overflow: hidden; background: var(--ink); isolation: isolate; }
+/* Images réelles teintées (voir references/assets.md) */
+.art img, .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.05); }
+.art::before, .thumb::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--accent); mix-blend-mode: soft-light; opacity: .55; pointer-events: none; }
+.art::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgb(27 23 38 / .55), transparent 35% 55%, var(--ink)); }
+.opening .art img { object-position: 60% 40%; }
+.symbol-ch .art img { filter: brightness(.55) saturate(.7); }
+.symbol-ch .art::after { background: radial-gradient(60% 60% at 50% 50%, rgb(27 23 38 / .2), var(--ink)); }
+.intro { position: relative; z-index: 3; width: 260px; margin: 0; }
 .intro b { font-weight: 900; }
-.manifesto { position: absolute; right: calc(var(--frame-inset) + var(--space-8)); bottom: var(--space-20); margin: 0; font: 900 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; text-align: left; }
+.manifesto { position: absolute; z-index: 3; right: calc(var(--frame-inset) + var(--space-8)); bottom: var(--space-20); margin: 0; font: 900 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; text-align: left; }
 .manifesto .line { display: flex; align-items: baseline; gap: var(--space-3); overflow: hidden; }
 .manifesto .line:nth-child(2) { margin-left: 1.2em; } .manifesto .line:nth-child(3) { margin-left: -0.8em; }
 .manifesto small { font: 500 var(--text-2xs) var(--font-mono); letter-spacing: var(--tracking-mono); }
 .manifesto .w { display: block; transition: transform var(--dur) var(--ease-out); }
 html.js .manifesto:not(.is-in) .w { transform: translateY(105%); }
 .manifesto .line:nth-child(2) .w { transition-delay: 120ms; } .manifesto .line:nth-child(3) .w { transition-delay: 240ms; }
-.scroll { position: absolute; right: calc(var(--frame-inset) + var(--space-4)); bottom: calc(var(--frame-inset) + var(--space-4)); }
+.scroll { position: absolute; z-index: 3; right: calc(var(--frame-inset) + var(--space-4)); bottom: calc(var(--frame-inset) + var(--space-4)); }
 
 .edito { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 0; padding-right: calc(var(--frame-inset)); }
 .edito__left { position: relative; min-height: 80vh; padding-right: var(--space-8); border-right: 1px solid var(--frame); }
@@ -69,21 +75,17 @@ html.js .manifesto:not(.is-in) .w { transform: translateY(105%); }
 .edito h2 .mono { display: block; margin-bottom: var(--space-3); color: var(--muted); }
 .chamfer { clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer))); }
 .tab { clip-path: polygon(0 0, 34% 0, 40% 10%, 100% 10%, 100% 100%, 0 100%); }
-.thumb { position: relative; overflow: hidden; background: var(--ink); }
-.thumb i { position: absolute; inset: 0; transition: transform var(--dur-fast) var(--ease); }
-.thumb:hover i { transform: scale(1.04); }
-.thumb .mono { position: absolute; left: 10px; top: 14%; color: var(--on-ink); }
+.thumb { position: relative; overflow: hidden; background: var(--ink); isolation: isolate; }
+.thumb img { transition: transform var(--dur-fast) var(--ease); }
+.thumb:hover img { transform: scale(1.04); }
+.thumb .mono { position: absolute; z-index: 3; left: 10px; top: 14%; color: var(--on-ink); }
 .t1 { width: 180px; aspect-ratio: 16/10; }
-.t1 i { background: linear-gradient(120deg, #8a5a9a, #1b1726 70%); }
 .t2 { position: absolute; right: var(--space-8); bottom: var(--space-12); width: 200px; aspect-ratio: 1; }
-.t2 i { background: radial-gradient(50% 50% at 50% 40%, #e0a383, #4b2f78 80%); }
 .edito p { position: absolute; left: 0; bottom: 0; width: 220px; margin: 0; font-size: var(--text-xs); }
 .edito__right { padding-left: var(--space-8); }
 .t3 { width: 100%; height: 100%; min-height: 520px; }
-.t3 i { background: linear-gradient(170deg, #e7c9ff, #6d64a3 30%, #2ecfa6 55%, #1b1726 85%); }
 
-.symbol-ch .art { background: linear-gradient(180deg, #8b7a6e, #3d3330 70%); }
-.glyph { position: absolute; left: 50%; top: 50%; width: 120px; height: 220px; transform: translate(-50%, -50%); }
+.glyph { position: absolute; z-index: 3; left: 50%; top: 50%; width: 120px; height: 220px; transform: translate(-50%, -50%); }
 .glyph::before, .glyph::after { content: ""; position: absolute; background: var(--on-ink); border-radius: 4px; }
 .glyph::before { left: 50%; top: 0; bottom: 0; width: 18px; transform: translateX(-50%); }
 .glyph::after { top: 40%; left: 0; right: 0; height: 18px; }
@@ -94,9 +96,11 @@ html.js .manifesto:not(.is-in) .w { transform: translateY(105%); }
 .faction { display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: var(--space-6); align-items: end; }
 .faction h3 { margin: var(--space-3) 0; font: 900 2.2rem/0.9 var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; }
 .faction p { margin: 0; color: var(--muted-dark); font-size: var(--text-xs); }
-.faction .thumb { aspect-ratio: 3/4; box-shadow: inset 0 0 0 1px var(--signal); }
+.faction .thumb { aspect-ratio: 3/4; }
+.faction .thumb::after { content: ""; position: absolute; inset: 0; z-index: 2; box-shadow: inset 0 0 0 1px var(--signal); pointer-events: none; }
 .badge { display: inline-block; padding: 3px 6px; background: var(--accent); color: var(--on-accent); }
 
+.credits { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding: var(--space-8) calc(var(--frame-inset) + var(--space-6)) calc(var(--frame-inset) + var(--space-8)) calc(var(--frame-inset) + var(--rail) + var(--space-6)); background: var(--ink); color: var(--muted-dark); }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes thick { to { stroke-width: 34; } }
 @keyframes blink { 50% { opacity: 0; } }
@@ -123,7 +127,7 @@ html.js .manifesto:not(.is-in) .w { transform: translateY(105%); }
 
 <main>
   <section class="chapter dark opening" id="c1" data-dark data-n="01">
-    <div class="art" data-slot="opening-illustration" role="img" aria-label="Portrait illustré d'une sentinelle (emplacement)"></div>
+    <div class="art" data-slot="opening-illustration"><img src="https://images.unsplash.com/photo-1537770846878-f79ea627a64b?auto=format&fit=crop&w=2000&q=80" alt="Un masque blanc qui émerge de l'obscurité, éclairé de côté" width="2000" height="1333" fetchpriority="high"></div>
     <p class="intro"><b>SENTINELLES</b> est un projet de narration collective qui donne la parole aux conteurs. Un monde vivant, encore inexploré, qui attend d'être imaginé.</p>
     <h1 class="manifesto reveal" aria-label="Veiller. Protéger. Réinventer.">
       <span class="line"><small>01V</small><span class="w">Veiller.</span></span>
@@ -136,27 +140,28 @@ html.js .manifesto:not(.is-in) .w { transform: translateY(105%); }
   <section class="chapter edito" id="c2" data-n="02">
     <div class="edito__left">
       <h2><span class="mono">• 01</span>Un monde familier… sur une autre voie.</h2>
-      <div class="thumb tab t1"><i></i><span class="mono">Archive 07</span></div>
-      <div class="thumb chamfer t2"><i></i><span class="mono">Sujet 12</span></div>
+      <div class="thumb tab t1" data-slot="archive"><img src="https://images.unsplash.com/photo-1642345843526-6279c8880a49?auto=format&fit=crop&w=400&h=250&q=80" alt="Une rue sombre sous la pluie, éclairée par un néon rouge" width="400" height="250" loading="lazy"><span class="mono">Archive 07</span></div>
+      <div class="thumb chamfer t2" data-slot="subject"><img src="https://images.unsplash.com/photo-1604315841269-a1f298321670?auto=format&fit=crop&w=400&h=400&q=80" alt="Une rue de nuit baignée de lumières cyan et magenta" width="400" height="400" loading="lazy"><span class="mono">Sujet 12</span></div>
       <p>Isolée dans la zone sûre d'Aurelis, l'humanité tente de ne pas sombrer dans le chaos.</p>
     </div>
-    <div class="edito__right"><div class="thumb chamfer t3" data-slot="key-art"><i></i><span class="mono">Gardien · Tour nord</span></div></div>
+    <div class="edito__right"><div class="thumb chamfer t3" data-slot="key-art"><img src="https://images.unsplash.com/photo-1672872476232-da16b45c9001?auto=format&fit=crop&w=1200&h=1500&q=80" alt="Une ville futuriste vue de haut, la nuit, criblée de néons" width="1200" height="1500" loading="lazy"><span class="mono">Gardien · Tour nord</span></div></div>
   </section>
 
   <section class="chapter dark symbol-ch" id="c3" data-dark data-n="03">
-    <div class="art" data-slot="landscape"></div>
+    <div class="art" data-slot="landscape"><img src="https://images.unsplash.com/photo-1672872476232-da16b45c9001?auto=format&fit=crop&w=2000&q=80" alt="La ville vue de très haut, plongée dans la nuit" width="2000" height="1333" loading="lazy"></div>
     <div class="glyph" aria-hidden="true"></div>
-    <span class="mono" style="position:relative">• Le monde</span>
+    <span class="mono" style="position:relative;z-index:3">• Le monde</span>
   </section>
 
   <section class="chapter dark" id="c4" data-dark data-n="04">
     <div class="terminal" id="term" aria-live="polite">// Initialisation<br>Nouveaux fichiers dans la base<br><span id="typed"></span><span class="cur" aria-hidden="true"></span></div>
     <div class="factions">
-      <article class="faction"><div><span class="mono badge">Faction · 01</span><h3>Les Veilleurs</h3><p>Gardiens des anciennes tours, ils pensent que la mémoire protège mieux que les murs.</p></div><div class="thumb chamfer"><i style="background:linear-gradient(160deg,#6d64a3,#1b1726)"></i></div></article>
-      <article class="faction"><div><span class="mono badge">Faction · 02</span><h3>Les Brisants</h3><p>Ils veulent abattre la zone sûre pour rendre le monde à ceux qui vivent dehors.</p></div><div class="thumb chamfer"><i style="background:linear-gradient(160deg,#c97a5a,#1b1726)"></i></div></article>
+      <article class="faction"><div><span class="mono badge">Faction · 01</span><h3>Les Veilleurs</h3><p>Gardiens des anciennes tours, ils pensent que la mémoire protège mieux que les murs.</p></div><div class="thumb chamfer" data-slot="faction-veilleurs"><img src="https://images.unsplash.com/photo-1537770846878-f79ea627a64b?auto=format&fit=crop&w=400&h=533&q=80" alt="Le masque blanc des Veilleurs dans l'ombre" width="400" height="533" loading="lazy"></div></article>
+      <article class="faction"><div><span class="mono badge">Faction · 02</span><h3>Les Brisants</h3><p>Ils veulent abattre la zone sûre pour rendre le monde à ceux qui vivent dehors.</p></div><div class="thumb chamfer" data-slot="faction-brisants"><img src="https://images.unsplash.com/photo-1642345843526-6279c8880a49?auto=format&fit=crop&w=400&h=533&q=80" alt="Une rue mouillée sous un néon rouge, territoire des Brisants" width="400" height="533" loading="lazy"></div></article>
     </div>
   </section>
 </main>
+<footer class="credits mono"><span>Sentinelles — démo Kōbō (univers fictif)</span><span>Photos : Unsplash</span></footer>
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

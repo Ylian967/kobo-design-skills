@@ -19,7 +19,7 @@ Rien de ceci n'est visible sur le shot (image fixe) : c'est une proposition coh�
 | Lien de nav | Filet qui se trace de gauche à droite | 500ms | `--ease` |
 | Carte de voyage | Image qui zoome à 1.05 ; rond ↗ qui pivote de 45° | 1.2s / 500ms | `--ease` |
 | Panneaux d'étape | Entrée au défilement (montée + fondu) | lié au défilement | linéaire |
-| Parallaxe (option) | Calques du paysage à 0.1 / 0.2 / 0.35 de la vitesse de défilement | continu | — |
+| Parallaxe (option) | Photo à 0.15 et calque de brume à 0.35 de la vitesse de défilement | continu | — |
 
 ## Code
 
@@ -45,7 +45,7 @@ Rien de ceci n'est visible sur le shot (image fixe) : c'est une proposition coh�
 }
 ```
 
-Parallaxe (option, en JS) : sur `scroll`, via `requestAnimationFrame`, appliquer `transform: translateY(calc(var(--y) * k))` à chaque calque du SVG ; ne l'activer que si `matchMedia('(prefers-reduced-motion: no-preference)')` est vrai.
+Parallaxe (option, en JS) : sur `scroll`, via `requestAnimationFrame`, appliquer `transform: translateY(calc(var(--y) * k))` à la photo et au calque de brume ; ne l'activer que si `matchMedia('(prefers-reduced-motion: no-preference)')` est vrai.
 
 `backdrop-filter` coûte cher : ne pas animer le flou lui-même, n'animer que `transform` et `opacity` des éléments en verre.
 

@@ -28,10 +28,11 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom du produit, logo, textes en anglais | Produit fictif « Ora P1 », logo carré inventé, textes en français | Marque et droits d'auteur |
-| Rendus 3D de l'objet, photos de bureau, roche, tissu | Objet dessiné en CSS (boîtier, écran, molette, bouton) et ambiances en dégradés, dans des emplacements `data-slot` | Droits d'auteur ; à remplacer par vos rendus et photos |
+| Rendus 3D de l'objet, photos de bureau, roche, tissu | Objet en scène Three.js procédurale (boîtier, écran, molette, bouton) et autres photos libres, dans des emplacements `data-3d` / `data-slot` | Droits d'auteur ; à remplacer par votre modèle `.glb` et vos photos |
 | Texte gris des étiquettes sur #2a2a2a (contraste faible) | `--chip-text` #a6a6a6 (5,9:1) | Contraste ≥ 4,5:1 |
 | Rouge #e5343a en texte sur gris #1a1a1a (4,1:1) | Rouge en texte uniquement sur noir (4,9:1) ; `--red-text` #ff5a5f sur gris (5,7:1) | Contraste |
 | Nom géant #2a2a2a | `--giant` #1f1f1f + contour blanc à 8 % (décor, `aria-hidden`) | Rester en arrière-plan sans gêner la lecture |
 | Petit bouton « Shop Now » (~32px) | Hauteur 36px visible + zone cliquable étendue à 44px | Cible tactile |
 | Prix en dollars, offre « Hot Offers! » | « Offre du moment », prix en euros | Contenu localisé |
 | Composition ordinateur uniquement | Version mobile (menu repliable, carte d'offre pleine largeur, légendes en grille sous l'objet) | Adaptation |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash) et scène Three.js, à remplacer par les images et le modèle du projet | Démo sans images propriétaires |

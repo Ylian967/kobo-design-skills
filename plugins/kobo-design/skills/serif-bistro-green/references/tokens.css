@@ -17,9 +17,9 @@
   --ink: #1b1a17;            /* texte sur crème / sur orange */
   --muted: #5b5a52;
   --line: #e7dcc2;           /* filets sur crème */
-  --skin: #c98b62;           /* illustration (personnage détouré) */
-  --herb: #6f9a52;           /* illustration (garnitures) */
-  --tomato: #d8452b;         /* illustration (garnitures) */
+  --skin: #c98b62;           /* ornements dessinés (personnes et plats = photos, voir assets.md) */
+  --herb: #6f9a52;           /* ornements dessinés */
+  --tomato: #d8452b;         /* ornements dessinés */
   --crust: #e2b36a;          /* illustration (pain, pâtes) */
 
   /* Typographie */

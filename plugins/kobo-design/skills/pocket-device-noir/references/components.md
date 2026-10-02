@@ -5,7 +5,7 @@ Toutes les valeurs viennent de `tokens.css`. Code complet et fonctionnel dans `e
 ## Boutons
 
 - **Rôle** : blanc plein = action principale (« Précommander », « Acheter ») ; contour sombre = action secondaire (« Voir la démo »). Jamais plus de deux côte à côte.
-- **Anatomie** : hauteur 44px (petit : 36px visibles + zone étendue à 44px), padding 0 20px, rayon 4px, Geist 500 14px. Icône lecture en triangle CSS pour la démo.
+- **Anatomie** : hauteur 44px (petit : 36px visibles + zone étendue à 44px), padding 0 20px, rayon 4px, Geist 500 14px. Icône lecture en triangle CSS (pictogramme d'interface).
 - **États** : survol (blanc → gris très clair ; contour → fond `--glass-hi`, contour blanc à 40 %) ; appui `translateY(1px)` ; focus contour 2px `--text` décalé de 3px ; désactivé / terminé opacité .4 + `aria-disabled` ; chargement « Réservation… » + `aria-busy`.
 
 ```html
@@ -63,26 +63,24 @@ Deux lignes en Geist Mono 11px capitales : la première en blanc (« ORA P1 »),
 ```
 Fermable (bouton 44px). Sur mobile : pleine largeur en bas du héros.
 
-## L'objet en CSS (emplacement)
+## L'objet (scène 3D)
 
-Boîtier 9×12,6 em à coins de 2,4em, reflet radial en haut à gauche, arête 1px `--device-hi` ; **bouton rouge** sur le dessus ; **petit écran** `--lcd` avec l'heure (Geist Mono) et l'état précédé d'un voyant rouge qui pulse ; rangée de 4 trous de micro ; **molette** à crans (`repeating-conic-gradient`) avec repère blanc, qui tourne de 40° au survol. Taille réglée par `--s` (`font-size`).
+L'objet n'est **jamais dessiné en CSS** : c'est une vraie scène Three.js (ou le rendu / la photo produit du projet). Recette complète dans `assets.md` § 5 : boîtier noir mat arrondi (`RoundedBoxGeometry`), petit écran en texture canvas (heure, onde, voyant rouge, état), 4 trous de micro, molette circulaire en métal à crans qui tourne de 40° au survol, bouton rouge sur la tranche.
 
 ```html
-<div class="device" style="--s: 34px" role="img" aria-label="Ora P1 : boîtier noir, petit écran, molette ronde et bouton rouge">
-  <span class="device__btn"></span>
-  <div class="device__lcd"><b class="clock">09:42</b><span>À L'ÉCOUTE…</span></div>
-  <div class="device__mic"><i></i><i></i><i></i><i></i></div>
-  <div class="device__dial"></div>
+<div class="reveal__stage" id="bigDevice" data-3d="reveal" data-state="listening" role="img" aria-label="Ora P1 en 3D : boîtier noir mat, petit écran, molette métal et bouton rouge">
+  <img class="fallback" src="photo-ou-rendu.webp" alt="" width="1000" height="1200" loading="lazy">
+  <!-- le module Three.js ajoute ici un <canvas aria-hidden="true"> puis la classe .is-3d-ready -->
 </div>
 ```
-`data-state="idle"` éteint le voyant (gris, sans pulsation). Remplacer par un rendu 3D ou un PNG détouré dès qu'il existe : l'emplacement garde ses proportions.
+`data-state="idle"` met l'écran en veille (voyant gris, onde plate). Variantes `data-3d="hero"` (posé sur le bureau, sans fond) et `data-3d="cta"` (incliné à droite). Repli : l'image `.fallback` (couleur `--rock` derrière) si WebGL est absent.
 
 ## Nom géant (signature)
 
 ```html
 <div class="reveal">
   <p class="giant" aria-hidden="true">Ora P1</p>
-  <div class="device" style="--s: 34px">…</div>
+  <div class="reveal__stage" data-3d="reveal" …>…</div>
   <div class="callouts"><p class="callout callout--1"><span class="chip">Écran</span><b>Écran mémoire 1,1 pouce</b>L'heure et l'état.</p>…</div>
 </div>
 ```
@@ -104,7 +102,7 @@ Texte centré `--text-statement`, 30 caractères de large, deux ou trois mots en
 
 ## Panneau de fonction (verre sur texture)
 
-Tuile à coins de 20px (roche, tissu orange ou `--surface`), objet en rendu au centre, et en bas un panneau de verre : fond noir à 35 %, contour `--glass-line`, flou 18px, étiquette + titre Geist 500 16px + ligne 12px. Survol : contour blanc à 24 %. Variante chiffre (« 5 jours » en 48–80px) et variante onde sonore (barres grises, une sur cinq en rouge).
+Tuile à coins de 20px (roche, tissu orange ou `--surface`), vraie photo de texture en fond (image réelle, voir `assets.md`), et en bas un panneau de verre : fond noir à 35 %, contour `--glass-line`, flou 18px, étiquette + titre Geist 500 16px + ligne 12px. Survol : contour blanc à 24 %. Variante chiffre (« 5 jours » en 48–80px) et variante onde sonore (barres grises, une sur cinq en rouge).
 
 ## Témoignage miniature
 

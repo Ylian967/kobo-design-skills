@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Cadre et rail, étoile-boussole, nav mono, manifeste géant, vignette à coin coupé, logo tracé, terminal « initialisation ». |
 | `references/layouts.md` | Ouverture, chapitre illustré, page éditoriale, factions, mobile. |
 | `references/motion.md` | Tracé du logo, révélations au défilement, parallaxe des vignettes. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, teinte violette, sources, prompts IA, idée 3D. |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Observations et écarts. |
 
@@ -42,6 +43,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Manifeste, titres | **Inter Tight** 900 (ABC Whyte d'origine, payante) | capitales, -0.055em, interligne 0.86 |
 | Labels, nav, numéros | **IBM Plex Mono** 400/500 | 10–12px, capitales, +0.04em |
 | Paragraphes | Inter Tight 500 | 13–14px, interligne 1.4, colonne 260px |
+
+## Images et 3D
+
+Les chapitres et les vignettes portent de **vraies images** : art de concept du projet, ou photos nocturnes (masque, ville de nuit, rues au néon) toutes teintées vers le violet `--accent` et assombries en bas pour porter le texte blanc. Le cadre, l'étoile-boussole, le glyphe et le logo tracé restent en SVG, car ce sont des signes ; mais jamais de dessin CSS/SVG à la place d'une photo, d'un personnage, d'un lieu ou d'un objet. La 3D est optionnelle (maquette de ville pour « Le monde »). Détails, prompts et code dans `references/assets.md`.
 
 ## Signature
 
@@ -68,4 +73,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Labels en mono.
 - [ ] Illustrations en plein cadre ou en vignettes à coin coupé.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément de l'univers d'origine.

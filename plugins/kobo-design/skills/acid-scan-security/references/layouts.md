@@ -24,7 +24,7 @@ RESTENT À VOUS.                 │                       │ 🔒      │
 POINT FINAL.   ← --muted        │                       │ COMMENCER→
                                                         └─────────┘
 ```
-Hauteur `max(100vh, 720px)`. Le visage est centré horizontalement, les yeux à 40 % de la hauteur ; le titre occupe le tiers bas gauche et peut chevaucher le bas du visage, jamais la bande de scan.
+Hauteur `max(100vh, 720px)`. Le visage (photo réelle, voir `assets.md`) est centré horizontalement, les yeux à 40 % de la hauteur (réglés par `data-eye`) ; le titre occupe le tiers bas gauche et peut chevaucher le bas du visage, jamais la bande de scan.
 
 ## Bandeau de mesures
 

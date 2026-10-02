@@ -47,8 +47,10 @@ a { color: inherit; }
 
 /* Héros */
 .hero { position: relative; padding: calc(var(--nav-h) + 24px) 0 0; min-height: 720px; }
-.hero__frame { position: relative; margin: 0 6% 0 12%; height: 560px; background: var(--surface); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%); display: grid; place-items: center; color: var(--muted); font: 400 var(--text-md) var(--font-display); letter-spacing: .1em;
-  background-image: radial-gradient(40% 50% at 60% 50%, rgb(216 250 0 / .35), transparent 70%), repeating-linear-gradient(var(--cut), rgb(17 17 17 / .05) 0 2px, transparent 2px 14px); }
+.hero__frame { position: relative; margin: 0 6% 0 12%; height: 560px; overflow: hidden; background: var(--ink); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%); }
+/* Photo de rue contrastée + rayures 45° par-dessus (matière du style) */
+.hero__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; filter: contrast(1.12) saturate(.9); }
+.hero__frame::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 14px), linear-gradient(0deg, rgb(17 17 17 / .45), transparent 40%); pointer-events: none; }
 .hero__logo { position: absolute; left: 10%; bottom: 40px; z-index: 2; background: var(--ink-2); color: var(--on-ink); font: 400 clamp(3rem, 7vw, 6rem)/0.85 var(--font-display); padding: 12px 24px; transform: rotate(-4deg); box-shadow: 10px 10px 0 var(--accent); }
 .stores { position: absolute; right: 8%; bottom: 30px; display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: flex-end; }
 .stores a { min-height: 44px; display: grid; place-items: center; padding: 0 var(--space-6); background: var(--ink-2); color: var(--on-ink); border-radius: var(--radius-sm); text-decoration: none; font: 700 var(--text-sm) var(--font-body); }
@@ -71,9 +73,15 @@ a { color: inherit; }
 .carousel { display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px; background: var(--ink-2); border: var(--stroke-w) solid var(--stroke); border-radius: var(--radius-pill); }
 .carousel .arr { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--bg); font: 400 1.4rem var(--font-display); cursor: pointer; }
 .carousel .arr:last-child { background: var(--surface); }
-.thumb { width: 86px; height: 48px; border-radius: var(--radius-sm); transform: skewX(-12deg); border: 3px solid transparent; cursor: pointer; padding: 0; transition: all var(--dur-2) var(--ease); }
+.thumb { width: 86px; height: 48px; flex: none; overflow: hidden; border-radius: var(--radius-sm); transform: skewX(-12deg); border: 3px solid transparent; cursor: pointer; padding: 0; background: var(--muted); transition: all var(--dur-2) var(--ease); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transform: skewX(12deg) scale(1.2); }
 .thumb[aria-pressed="true"] { border-color: var(--accent); transform: skewX(-12deg) scale(1.06); }
-.char-art { min-height: 280px; display: grid; place-items: center; font: 400 var(--text-md) var(--font-display); color: var(--muted); letter-spacing: .1em; background: radial-gradient(50% 60% at 50% 50%, rgb(17 17 17 / .12), transparent 70%); }
+/* Duotone noir → lime : photo N&B en multiply sur le bloc lime */
+.char-art { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; background: var(--accent); }
+.char-art img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; filter: grayscale(1) contrast(1.35) brightness(1.1); mix-blend-mode: multiply; transition: opacity var(--dur-2) var(--ease); }
+.char-art img.is-swapping { opacity: 0; }
+.char-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, var(--accent) 10%, transparent 60%); }
+.sec-label > :not(.char-art) { position: relative; }
 .pill { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-ink); border: var(--stroke-w) solid var(--stroke); font: 400 var(--text-md)/1 var(--font-display); text-decoration: none; transition: all var(--dur-1) var(--ease); }
 .pill:hover { background: var(--accent); color: var(--on-accent); border-color: var(--ink); }
 .label { justify-self: start; display: inline-block; background: var(--accent); color: var(--on-accent); font: 400 var(--text-sm)/1 var(--font-display); padding: 3px 10px; border-radius: var(--radius-pill); }
@@ -81,14 +89,17 @@ a { color: inherit; }
 .title { margin: 0; font: 400 var(--text-lg)/1.1 var(--font-display); }
 
 /* Vidéo */
-.video { position: relative; min-height: 300px; border-radius: 0 0 var(--radius-track) 0; overflow: hidden; background: linear-gradient(120deg, #3a1d24, var(--ink)); }
+.video { position: relative; min-height: 300px; border-radius: 0 0 var(--radius-track) 0; overflow: hidden; background: var(--ink); }
+.video > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(.85); }
 .video__bar { position: absolute; left: 0; right: 0; top: 30%; display: flex; align-items: center; gap: var(--space-6); padding: var(--space-4) var(--space-8); background: rgb(17 17 17 / .78); color: var(--on-ink); flex-wrap: wrap; }
 .video__bar .meta { color: var(--muted-dark); }
 .play { position: absolute; left: var(--space-8); bottom: var(--space-6); display: flex; gap: var(--space-3); }
 .play button { width: 46px; height: 46px; background: var(--accent); border: var(--stroke-w) solid var(--stroke); border-radius: var(--radius-sm); font-size: 16px; cursor: pointer; }
 
 /* Actus */
-.news-img { position: relative; aspect-ratio: 16/8; border-radius: var(--radius-md); overflow: hidden; background: linear-gradient(135deg, #2fc7b8, var(--bg) 60%); display: grid; place-items: center; font: 400 var(--text-xl)/1 var(--font-display); }
+.news-img { position: relative; aspect-ratio: 16/8; border-radius: var(--radius-md); overflow: hidden; background: var(--ink); }
+.news-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1); }
+.news-img .label { position: absolute; left: var(--space-4); top: var(--space-4); font-size: var(--text-md); }
 .marquee { position: absolute; left: 0; right: 0; bottom: 0; background: var(--ink-2); color: var(--muted-dark); overflow: hidden; white-space: nowrap; font: 400 var(--text-lg)/1.6 var(--font-display); font-style: italic; }
 .marquee span { display: inline-block; padding-right: 2em; animation: wordsLoop var(--marquee) linear infinite; }
 .marquee:hover span { animation-play-state: paused; }
@@ -133,7 +144,7 @@ footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(
 
 <main>
   <section class="hero" data-n="01" aria-label="Accueil">
-    <div class="hero__frame" data-slot="key-art">ILLUSTRATION PRINCIPALE</div>
+    <div class="hero__frame" data-slot="key-art"><img src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=2000&q=80" alt="Skateur en plein saut sur fond de ciel bleu" width="2000" height="1333" fetchpriority="high"></div>
     <div class="hero__logo">NEON<br>DISTRICT</div>
     <div class="stores"><a href="#">Console</a><a href="#">Console X</a><a href="#">App Store</a><a href="#">Play Store</a></div>
   </section>
@@ -148,14 +159,14 @@ footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(
         <p class="meta">Spécialité : attaque rapide · Faction : Les Rouages</p>
         <div class="carousel" role="group" aria-label="Choisir un agent">
           <button class="arr" aria-label="Précédent">←</button>
-          <button class="thumb" aria-pressed="true" style="background: linear-gradient(135deg, #8fb7ff, var(--ink))" aria-label="Kaze"></button>
-          <button class="thumb" aria-pressed="false" style="background: linear-gradient(135deg, #f0c79a, var(--ink))" aria-label="Mona"></button>
-          <button class="thumb" aria-pressed="false" style="background: linear-gradient(135deg, #2fc7b8, var(--ink))" aria-label="Dex"></button>
+          <button class="thumb" aria-pressed="true" aria-label="Kaze" data-src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=1200&q=80" data-alt="Skateur en plein saut sur fond de ciel bleu"><img src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=200&h=120&q=70" alt="" width="86" height="48" loading="lazy"></button>
+          <button class="thumb" aria-pressed="false" aria-label="Mona" data-src="https://images.unsplash.com/photo-1542357091-d4cd9ad6ba02?auto=format&fit=crop&w=1200&q=80" data-alt="Deux skateurs, pieds sur leurs planches"><img src="https://images.unsplash.com/photo-1542357091-d4cd9ad6ba02?auto=format&fit=crop&w=200&h=120&q=70" alt="" width="86" height="48" loading="lazy"></button>
+          <button class="thumb" aria-pressed="false" aria-label="Dex" data-src="https://images.unsplash.com/photo-1562292657-2dc74a21b520?auto=format&fit=crop&w=1200&q=80" data-alt="Ruelle couverte de graffitis colorés"><img src="https://images.unsplash.com/photo-1562292657-2dc74a21b520?auto=format&fit=crop&w=200&h=120&q=70" alt="" width="86" height="48" loading="lazy"></button>
           <button class="arr" aria-label="Suivant">→</button>
         </div>
         <a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a>
       </div>
-      <div class="sec-label lime"><div class="char-art" data-slot="character-art" style="position:absolute;inset:0;z-index:0;opacity:.6">ILLUSTRATION</div><h2 style="position:relative">Personnages</h2><span style="position:relative">CHARACTERS</span><b style="position:relative">02</b></div>
+      <div class="sec-label lime"><div class="char-art" data-slot="character-art"><img id="charImg" src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=1200&q=80" alt="Skateur en plein saut sur fond de ciel bleu" width="1200" height="800" loading="lazy"></div><h2>Personnages</h2><span>CHARACTERS</span><b>02</b></div>
     </div>
   </section>
 
@@ -163,7 +174,7 @@ footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(
 
   <section class="section" id="video" data-n="03">
     <div class="row">
-      <div class="video" data-slot="video-cover">
+      <div class="video" data-slot="video-cover"><img src="https://images.unsplash.com/photo-1720461307190-32a77e4d96b6?auto=format&fit=crop&w=1200&q=80" alt="Tunnel sombre couvert de graffitis, éclairé d'une lumière jaune" width="1200" height="800" loading="lazy">
         <div class="video__bar"><span class="label">Découverte du personnage</span><span class="meta">29/09/2026</span><span class="title" style="font-size:var(--text-md)">Mona — « Chevalière à remontoir »</span></div>
         <div class="play"><button aria-label="Lire la vidéo">▶</button><a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a></div>
       </div>
@@ -177,7 +188,7 @@ footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(
     <div class="row">
       <div class="sec-label lime left"><h2>Actus &amp; infos</h2><span>NEWS</span><b>04</b></div>
       <div class="panel">
-        <div class="news-img" data-slot="news-image">CALENDRIER 10/2026<div class="marquee" aria-hidden="true"><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span></div></div>
+        <div class="news-img" data-slot="news-image"><img src="https://images.unsplash.com/photo-1517776832751-0a7e6993de03?auto=format&fit=crop&w=1200&q=80" alt="Porte couverte de graffitis et d'autocollants" width="1200" height="600" loading="lazy"><span class="label">Calendrier 10/2026</span><div class="marquee" aria-hidden="true"><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span></div></div>
         <p class="meta">01/10/2026</p>
         <h3 class="title" style="font: 700 var(--text-sm) var(--font-body)">Fond d'écran calendrier pour octobre 2026</h3>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a></div>
@@ -189,12 +200,17 @@ footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(
 
 <footer>
   <div class="marquee" aria-hidden="true"><span>NEON DISTRICT · DISPONIBLE MAINTENANT · NEON DISTRICT · DISPONIBLE MAINTENANT · </span><span>NEON DISTRICT · DISPONIBLE MAINTENANT · NEON DISTRICT · DISPONIBLE MAINTENANT · </span></div>
-  <p>© Studio fictif — démo Kōbō. Aide · Confidentialité · Conditions</p>
+  <p>© Studio fictif — démo Kōbō. Aide · Confidentialité · Conditions · Photos : Unsplash</p>
 </footer>
 
 <script>
 (() => {
-  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-pressed', x === t))));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, charImg = document.getElementById('charImg');
+  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-pressed', x === t));
+    charImg.classList.add('is-swapping');
+    setTimeout(() => { charImg.src = t.dataset.src; charImg.alt = t.dataset.alt; charImg.classList.remove('is-swapping'); }, reduce ? 0 : 200);
+  }));
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .3 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   const num = document.getElementById('pagerNum'), next = document.getElementById('pagerNext');

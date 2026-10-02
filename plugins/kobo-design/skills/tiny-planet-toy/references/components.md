@@ -1,22 +1,16 @@
 # Tiny Planet Toy — composants
 
-## Planète (version CSS/SVG, toujours présente)
+## Planète (Three.js, cœur du style)
 
-Un disque de 360–520px : dégradé radial vert/gris, routes en anneaux (bordures en pointillés), maisons = petits blocs SVG répartis sur le bord et orientés vers l'extérieur (`rotate(angle)` + `translateY(-rayon)`), arbres = cercles verts. Le tout tourne très lentement (`--spin`). Un halo turquoise clair (`--bg-deep`) l'entoure.
+Vraie petite planète low-poly en 3D : sphère bosselée `--grass`, deux chemins `--stone` qui en font le tour, maisons (`--paper` + toit `--roof`), arbres, rochers, posés selon la normale ; ombrage cel 3 tons, halo `--bg-deep` derrière ; glisser pour tourner, inertie, rotation lente au repos (`--spin`). Recette complète et code : `assets.md` et `examples/demo.html`.
 
 ```html
-<div class="planet" aria-hidden="true"><div class="planet__ground"></div><div class="planet__ring"></div><span class="hut" style="--a: 20deg"></span>…</div>
-```
-```css
-.planet { position: relative; width: min(70vw, 460px); aspect-ratio: 1; border-radius: 50%; animation: spin var(--spin) linear infinite; }
-.planet__ground { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 40% 35%, var(--stone), var(--grass) 70%); box-shadow: 0 0 0 18px var(--bg-deep); }
-.hut { position: absolute; left: 50%; top: 50%; width: 34px; height: 30px; background: var(--paper); border-top: 10px solid var(--roof); transform: rotate(var(--a)) translateY(calc(min(35vw, 230px) * -1)); transform-origin: 0 0; }
-@keyframes spin { to { transform: rotate(1turn); } }
+<div class="planet" data-3d data-slot="planet" aria-hidden="true"><div class="planet__fallback"><!-- capture du rendu --></div></div>
 ```
 
-## Planète (version WebGL, optionnelle)
+## Planète : repli
 
-Three.js : `SphereGeometry` (rayon 1) en `MeshToonMaterial` avec une texture peinte, objets (maisons, arbres) instanciés sur la surface avec leur normale comme axe « haut », caméra orthographique, rotation lente via `requestAnimationFrame`. Charger seulement après l'affichage de la version CSS et si `!matchMedia('(prefers-reduced-motion: reduce)').matches`.
+Sans WebGL (ou avant le chargement du module) : une **capture du rendu** de la planète (image réelle, voir `assets.md`), sinon un disque aux couleurs des tokens (`--stone` → `--grass`, halo `--bg-deep`). Jamais de maisons ni d'arbres dessinés en CSS/SVG.
 
 ## Logo en blocs
 
@@ -46,5 +40,5 @@ Coins de l'écran uniquement : en haut à gauche un compteur (Silkscreen dans un
 
 ## États
 
-- **Chargement** : la planète en version CSS s'affiche immédiatement ; un petit compteur Silkscreen « 42 % » sous le bouton tant que le WebGL charge.
-- **Pas de WebGL** : on reste en version CSS, sans message d'erreur.
+- **Chargement** : le repli (capture du rendu) s'affiche immédiatement ; un petit compteur Silkscreen « 42 % » sous le bouton tant que le WebGL charge.
+- **Pas de WebGL** : on reste sur le repli, sans message d'erreur.

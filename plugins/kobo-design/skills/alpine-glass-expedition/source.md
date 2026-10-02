@@ -27,7 +27,8 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom de marque, logo, textes | Agence fictive « Hautvent », logo montagne générique dans un cercle, textes inventés en français | Marque et droits d'auteur |
-| Photo de montagne | Paysage dessiné en SVG (ciel, lointains, massif enneigé, brume, sapins), `data-slot="mountain-photo"` ; cartes en CSS, `data-slot="trip-photo"` | Droits d'auteur ; à remplacer par vos photos traitées en bleus froids |
+| Photo de montagne | Autre photo de sommets (Unsplash) refroidie, `data-slot="mountain-photo"` ; photos de cartes `data-slot="trip-photo"` | Droits d'auteur ; à remplacer par vos photos traitées en bleus froids |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo |
 | Texte blanc posé sur zones claires de la photo | Massif décalé sous le texte, ciel assombri en haut, ombre portée douce sur le texte ; paire vérifiée sur l'équivalent opaque `--slate` (7,4:1) | Lisibilité |
 | Bouton de verre translucide | Contraste vérifié sur l'équivalent opaque `--glass-solid` (5,8:1) | Contraste vérifiable |
 | Puces de 36px de haut | Zone tactile étendue à 44px par un pseudo-élément | Accessibilité |

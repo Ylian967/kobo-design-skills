@@ -24,7 +24,7 @@ Pas de barre : seulement le **carré MENU** fixe en haut à gauche, le **sélect
 4. En bas au centre : le logotype noir en italique condensé, qui chevauche le visuel.
 5. À droite : « VISUAL SELECTER » vertical + 4 vignettes.
 
-Sans illustrations : remplacer par une composition de formes (parallélogrammes de couleurs `--chara-*`, trame, X géant) et un emplacement `data-slot="key-visual"`.
+Le visuel principal est toujours une image réelle (illustration officielle du projet, photo de cosplay/acteur, rendu) dans `data-slot="key-visual"` : voir `assets.md`. Le X géant, la trame et les éclats restent des formes graphiques CSS ; jamais de personnage dessiné en CSS/SVG.
 
 ## Bande visuelle découpée
 

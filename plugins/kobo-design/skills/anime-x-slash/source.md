@@ -32,5 +32,6 @@
 | Élément du site | Dans le skill | Raison |
 |---|---|---|
 | Logo, illustrations et personnages officiels | Formes, trames et emplacements `data-slot` | Droits d'auteur |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |
 | Noms de la série, des personnages et du casting | Contenu fictif | Identité de l'œuvre |
 | Blanc sur rouge en 14px (« OFFICIAL SNS ») | Noir sur rouge | Contraste 3,8:1 insuffisant |

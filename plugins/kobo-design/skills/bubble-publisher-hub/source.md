@@ -27,3 +27,4 @@
 | Metropolis / Gotham | Montserrat | Libre, même famille de dessin |
 | Logo-bulle, jeux, visuels | Formes et emplacements | Marque et droits d'auteur |
 | Fenêtre d'inscription ouverte automatiquement | Ouverte au clic | Expérience et accessibilité |
+| Visuels de jeux | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droits d'auteur |

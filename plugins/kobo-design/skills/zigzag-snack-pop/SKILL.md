@@ -1,6 +1,6 @@
 ---
 name: zigzag-snack-pop
-description: Direction artistique « Zigzag Snack Pop » pour marques de snacks énergiques et produits food/sport (barre protéinée, boisson, granola, nutrition outdoor, D2C alimentaire), inspirée des landings Dribbble de barres protéinées. Héros orange vif avec montagnes en aplats et silhouettes d'aventuriers brun foncé, titre en grotesque condensée très grasse avec un mot jaune « autocollant » (contour et ombre dure brune), bouton jaune rectangulaire à ombre décalée, bandes crème à bords en dents de scie, pastilles d'ingrédients rondes colorées, sections brunes à traces de pneu, cartes produit couleur saveur dont celle du milieu est surélevée, tampon rond qui tourne, mot géant en contour jaune en pied de page. À utiliser pour une landing produit food, une boutique de snacks, une page « ingrédients », une app de commande ou un site au style « énergique, outdoor, sticker, pop, orange, fun et costaud ».
+description: Direction artistique « Zigzag Snack Pop » pour marques de snacks énergiques et produits food/sport (barre protéinée, boisson, granola, nutrition outdoor, D2C alimentaire), inspirée des landings Dribbble de barres protéinées. Héros orange vif avec photos d'aventure (escalade, vélo, skate) en duotone brun-orange découpées en crêtes de montagne, titre en grotesque condensée très grasse avec un mot jaune « autocollant » (contour et ombre dure brune), bouton jaune rectangulaire à ombre décalée, bandes crème à bords en dents de scie, pastilles d'ingrédients rondes colorées, sections brunes à traces de pneu, cartes produit couleur saveur dont celle du milieu est surélevée, tampon rond qui tourne, mot géant en contour jaune en pied de page. À utiliser pour une landing produit food, une boutique de snacks, une page « ingrédients », une app de commande ou un site au style « énergique, outdoor, sticker, pop, orange, fun et costaud ».
 ---
 
 # Zigzag Snack Pop
@@ -9,7 +9,7 @@ description: Direction artistique « Zigzag Snack Pop » pour marques de snacks 
 
 ## L'idée
 
-La page se lit comme un **emballage** : de grands aplats (orange, crème, brun) séparés par des **bords en zigzag** comme une découpe de sachet. Le héros est une **affiche d'aventure** : montagnes orange en deux plans, silhouettes brunes (grimpeur, cycliste, skateur), titre géant condensé blanc avec **un seul mot jaune traité en autocollant**. Tout ce qui est cliquable a l'air **imprimé et collé** : contour brun épais, ombre dure décalée, aucun flou. Le reste est sobre : texte courant en grotesque normale, une seule couleur d'accent (le jaune).
+La page se lit comme un **emballage** : de grands aplats (orange, crème, brun) séparés par des **bords en zigzag** comme une découpe de sachet. Le héros est une **affiche d'aventure** : deux bandes de vraies photos d'escalade passées en duotone brun → orange et découpées en crêtes de montagne, titre géant condensé blanc avec **un seul mot jaune traité en autocollant**. Tout ce qui est cliquable a l'air **imprimé et collé** : contour brun épais, ombre dure décalée, aucun flou. Le reste est sobre : texte courant en grotesque normale, une seule couleur d'accent (le jaune).
 
 Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom de marque, de photo produit, d'illustration ni de texte d'origine.
 
@@ -21,7 +21,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 4. **Trois aplats** : orange (énergie), brun (sérieux, preuve), crème (respiration). Les couleurs « saveur » ne vivent que dans les pastilles et cartes produit.
 5. **Contraste** : blanc sur orange seulement en grand (3,6:1) ; petit texte sur orange en `--ink` ; prix orange sur clair en `--orange-ink`. Le jaune sur orange n'est lisible qu'avec son contour brun.
 6. **Mouvement à rebond** court (`--ease-pop`) ; le tampon tourne lentement ; rien ne bouge si mouvement réduit.
-7. **Accessibilité** : cibles ≥ 44px, focus jaune + halo brun, silhouettes et décors en `aria-hidden`.
+7. **Accessibilité** : cibles ≥ 44px, focus jaune + halo brun, photos d'aventure décoratives et décors en `aria-hidden`.
 8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
@@ -29,9 +29,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Navigation, boutons (tous états), champ de recherche, bord zigzag, pastille ingrédient, étiquette pilule, carte produit, emballage dessiné, tampon tournant, carte d'avis, mot géant. |
+| `references/components.md` | Navigation, boutons (tous états), champ de recherche, bord zigzag, pastille ingrédient, étiquette pilule, carte produit, photo produit sur disque, tampon tournant, carte d'avis, mot géant. |
 | `references/layouts.md` | Héros affiche, bande ingrédients, section brune, grille produits, avis, pied de page, mobile. |
 | `references/motion.md` | Rebonds, pression des boutons, tampon, entrée du héros, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : photos d'aventure en duotone découpées en crêtes, photos produit en cadre autocollant, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète (marque fictive). |
 | `source.md` | Référence, observations et écarts. |
 
@@ -57,6 +58,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 
 Règle : un seul bouton jaune plein par écran ; le jaune n'est jamais un fond de section.
 
+## Images et 3D
+
+Deux familles de **vraies photos** : l'**aventure** (grimpeurs, falaises, cyclistes, skate) toujours en **duotone brun → orange**, découpée en crêtes de montagne dans le héros ; la **nourriture** (barre, cacahuètes, chocolat) en couleurs franches (`--grade-pop`), posée dans un disque orange ou une « photo collée » à contour brun et ombre dure. Chaque conteneur garde un aplat token en repli. La 3D est optionnelle (emballage `.glb` qui pivote sur le disque). Jamais de dessin CSS/SVG à la place d'une photo, d'un aventurier, d'un paysage ou du produit : les formes graphiques (soleil, zigzag, pictogrammes, tampon) restent en CSS ; détails dans `references/assets.md`.
+
 ## Signature
 
 **La bande crème en dents de scie** qui coupe le héros orange, portant la rangée de pastilles d'ingrédients — et, en écho, le **mot autocollant jaune** du titre. Une bande zigzag par transition majeure, pas plus.
@@ -66,7 +71,8 @@ Règle : un seul bouton jaune plein par écran ; le jaune n'est jamais un fond d
 - Des ombres floues, des dégradés doux sur les boutons, des coins très arrondis (max 8px sauf pilule et pastilles).
 - Du jaune en texte sur crème ou blanc (illisible).
 - Plus d'un mot jaune par titre, ou des titres en minuscules.
-- Des photos de produit détourées « premium » sur fond blanc : ici le produit est posé sur un disque orange avec ombre dure.
+- Des photos de produit détourées « premium » sur fond blanc : ici la photo du produit est cadrée dans un disque orange ou une carte, avec contour brun et ombre dure.
+- Des photos d'aventure en couleurs réelles à côté de l'orange : toujours en duotone.
 - Copier le nom, le logo, les emballages ou les illustrations de la référence.
 
 ## Adaptation React / React Native
@@ -83,6 +89,7 @@ Règle : un seul bouton jaune plein par écran ; le jaune n'est jamais un fond d
 - [ ] Au moins deux bords zigzag, ombres toutes dures.
 - [ ] Un mot autocollant par titre de héros, un seul bouton jaune plein par écran.
 - [ ] Pastilles d'ingrédients et cartes saveur, carte centrale surélevée sur ordinateur.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md` (duotone pour l'aventure, couleurs pour la nourriture), avec `alt` et couleur de repli.
 - [ ] Testé à 375px et 1440px, aucun débordement horizontal, mouvement réduit respecté.
 - [ ] Contrastes vérifiés (`python3 tools/check.py zigzag-snack-pop`).
 - [ ] Aucun élément de la marque d'origine.

@@ -31,3 +31,4 @@
 | Impact (police système) | Anton (Google Fonts) | Disponible partout, même structure condensée |
 | Gris #787878 sur béton | #6b6b6b | 3,8:1 → 4,6:1 |
 | Logo, personnages, illustrations | Emplacements `data-slot` | Droits d'auteur |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |

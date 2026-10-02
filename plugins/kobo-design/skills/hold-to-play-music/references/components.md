@@ -28,11 +28,11 @@ Sur fond vidéo clair, titre entièrement blanc (variante).
 
 ## Page d'artiste
 
-Fond `--paper`, portrait en contre-jour (silhouette noire) centré, qui touche le bas ; logo du label en haut à gauche (encre), titre du site en petit lettrage en haut à droite.
+Fond `--paper`, portrait en contre-jour centré, qui touche le bas : **image réelle, voir `assets.md`** (photo N&B, `contrast(1.8)` + `mix-blend-mode: multiply` sur le blanc, bords fondus par masque) ; logo du label en haut à gauche (encre), titre du site en petit lettrage en haut à droite.
 
 ## Vignette d'artiste
 
-En bas à gauche : pochette carrée 90px, sous elle « Nom (2011) » en Fira Sans 700 14px souligné + bouton rond ↓ (contour 1.5px) pour la liste des titres.
+En bas à gauche : pochette carrée 90px (image réelle N&B, voir `assets.md`), sous elle « Nom (2011) » en Fira Sans 700 14px souligné + bouton rond ↓ (contour 1.5px) pour la liste des titres.
 
 ## Pied de page
 

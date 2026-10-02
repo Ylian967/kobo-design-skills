@@ -55,7 +55,7 @@ Texte `--text` 14px, actif en `--gold` ; une petite **étoile à quatre branches
 - Grand panneau 900×520 environ, fond `--glass-veil` sur flou (`backdrop-filter: blur(10px)`), bordure 1px `--glass-edge`, **coin haut-droit arrondi**.
 - En-tête : emblème carré à gauche (fond plus sombre), nom en 30px léger, ligne « micro + interrupteur + VA : nom ».
 - Corps : bloc de description en verre plus sombre (`rgb(0 0 0 / .25)`), texte 12px blanc interligne 1.6.
-- L'illustration du personnage **déborde du panneau** à droite et en haut.
+- L'illustration du personnage (image réelle : illustration PNG du projet ou rendu, voir `assets.md`) **déborde du panneau** à droite et en haut ; dans la démo, une photo fondue dans le verre par un masque en dégradé.
 - **Citations** : 3 ou 4 lignes en Noto Serif 11px blanc, chacune sur sa propre bande noire `--quote-strip`, alignées à droite, en escalier.
 - En bas : carrousel de vignettes carrées 52px (bordure dorée fine sur la vignette active + petit triangle doré dessous), flèches ‹ › dorées.
 

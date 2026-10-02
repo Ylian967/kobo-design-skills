@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Cadre photo, mot-marque, barre du haut, boutons (tous états), carte verre, puces de filtre, carte d'annonce, bande de chiffres, portrait d'équipe, carte d'article, champ de lettre d'info, pied de page. |
 | `references/layouts.md` | Héros encadré, catalogue 2×2, bande noire, équipe 4×2, journal, mobile. |
 | `references/motion.md` | Mise au point de la photo, montée du texte, survols, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : sujets, cadrages, lumière dorée, grade et voile, détourage pour le mot-marque, sources, prompts IA, maquette 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète (agence fictive). |
 | `source.md` | Référence, observations et écarts. |
 
@@ -55,7 +56,11 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Secondaire | `--muted`, `--on-dark-muted` | méta, légendes |
 | Accent | `--accent` / `--accent-2` | prix, « Lire → » |
 | Verre | `--glass`, `--glass-line`, `--frame-line` | carte conseiller, cadre, favoris |
-| Photo | `--sky-*`, `--hill*`, `--wood`, `--window` | emplacements dessinés seulement |
+| Repli photo | `--sky-*`, `--shade`, `--stone` | fond des conteneurs avant chargement, grade doré |
+
+## Images et 3D
+
+Le style vit de **vraies photos d'architecture en lumière dorée** (fin de journée, ciel dégagé en haut du cadre) et de **vrais portraits** homogènes pour l'équipe et la carte conseiller. Traitement discret : grade chaud en `soft-light`, voile `--shade` sous le texte du héros, même photo floutée hors du cadre, portraits légèrement désaturés. Pour que le mot-marque passe derrière le toit, on superpose un détourage réel de la photo. La 3D est optionnelle (maquette du bien sur une fiche). Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un bâtiment : détails dans `references/assets.md`.
 
 ## Signature
 
@@ -85,4 +90,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Annonces en 2×2, bande noire, équipe 4×2 (2 colonnes en mobile).
 - [ ] Testé à 375px et 1440px, aucun débordement horizontal, mouvement réduit respecté.
 - [ ] Contrastes vérifiés (`python3 tools/check.py glass-frame-estate`).
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du template d'origine.

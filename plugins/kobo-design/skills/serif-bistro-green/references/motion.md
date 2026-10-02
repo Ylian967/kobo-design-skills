@@ -8,7 +8,7 @@ Lent et appétissant, comme un service qui prend son temps : montées douces, fo
 
 | Moment | Effet | Durée | Courbe | Notes |
 |---|---|---|---|---|
-| Chargement de page | Lignes du titre qui montent de 0.3em + fondu, la 2e décalée de 120ms ; personnage qui monte de 30px | 800ms / 1s | `--ease-out` | personnage décalé de 200ms |
+| Chargement de page | Lignes du titre qui montent de 0.3em + fondu, la 2e décalée de 120ms ; arche photo de la cheffe qui monte de 30px | 800ms / 1s | `--ease-out` | arche décalée de 200ms |
 | Apparition au défilement | Blocs (`.reveal`) qui montent de 48px pendant leur entrée dans l'écran | lié au défilement | linéaire | `animation-timeline: view()`, sans JS ; contenu visible si non supporté |
 | Survol de bouton | Couleur de fond + flèche qui glisse de 3px | 180ms | `--ease-out` | |
 | Survol de carte de plat | L'assiette tourne de 25° | 800ms | `--ease-out` | |
@@ -41,7 +41,7 @@ Lent et appétissant, comme un service qui prend son temps : montées douces, fo
 
 ## Mouvement réduit
 
-- Titre et personnage affichés directement, sans montée.
+- Titre et arche photo affichés directement, sans montée.
 - Apparitions au défilement supprimées (contenu déjà en place).
 - Assiettes fixes au survol ; seul le changement de couleur des boutons reste (instantané).
 - Carrousel : saut direct à la carte (`behavior: 'auto'`).

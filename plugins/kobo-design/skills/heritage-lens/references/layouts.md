@@ -2,7 +2,7 @@
 
 ## Accueil
 
-Paysage plein écran au soleil bas, voile en bas ; titre géant centré (1 mot) avec un sous-titre en plus petit calé à droite sous le titre ; bouton Entrer au centre sous le titre ; aide en bas au centre ; logo en haut à gauche ; réglages et son en bas à droite.
+Photo réelle plein écran au soleil bas (voir `assets.md`), voile en bas ; titre géant centré (1 mot) avec un sous-titre en plus petit calé à droite sous le titre ; bouton Entrer au centre sous le titre ; aide en bas au centre ; logo en haut à gauche ; réglages et son en bas à droite.
 
 ## Scène de lieu
 

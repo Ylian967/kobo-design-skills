@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Cadre, grain, titre de chapitre, mot entre deux plans, anneau dentelé, bouton crème, bloc d'accroche, chargement. |
 | `references/layouts.md` | Chapitres plein écran, écran « mission », mobile. |
 | `references/motion.md` | Parallaxe des calques, montée des titres, anneau. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, postérisation, duotone, grain, détourage, sources, prompts IA, idée 3D. |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Observations et écarts. |
 
@@ -42,6 +43,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Titres de chapitre, mot géant | **Big Shoulders Display** 700–900 | capitales, interligne 0.85, -6° pour les titres |
 | Surtitres (« CHAPITRE 1 ») | Jost 500 | 12px, capitales, +0.12em |
 | Accroche, boutons | **Jost** 400/600 | 14–18px |
+
+## Images et 3D
+
+Les affiches sont des **collages de vraies photos** (désert, ciel, lancement, machine, silhouettes) traitées en impression rétro : postérisation, duotone chaud rouille → pêche, grain partout. Le premier plan du « mot entre deux plans » est une photo détourée (ou, à défaut, fondue par le haut). Le cadre, l'anneau et le logo restent en CSS/SVG ; jamais de dessin CSS/SVG à la place d'une photo, d'un véhicule, d'une personne ou d'un paysage. La 3D est optionnelle (planète en ombrage « toon »). Détails et code dans `references/assets.md`.
 
 ## Signature
 
@@ -68,4 +73,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Au moins un mot entre deux plans.
 - [ ] Anneau de défilement accessible.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément de la marque d'origine.

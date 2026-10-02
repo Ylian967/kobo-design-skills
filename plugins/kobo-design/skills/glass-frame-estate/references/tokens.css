@@ -26,7 +26,7 @@
   --wordmark-from: rgb(255 255 255 / 0.72); /* mot-marque géant : dégradé vertical vers transparent */
   --wordmark-to: rgb(255 255 255 / 0);
 
-  /* Couleurs — photo dessinée (emplacements) */
+  /* Couleurs — repli des photos (fond des conteneurs avant chargement) et grade doré, voir assets.md */
   --sky-top: #5d7ea8; --sky-mid: #c9a27c; --sky-glow: #f2b56b; --sun: #ffe1a8;
   --hill: #4f7a3a; --hill-dark: #2f4f25; --hill-light: #7aa356;
   --wood: #2b211b; --window: #ffcf86; --stone: #cfc6b8;

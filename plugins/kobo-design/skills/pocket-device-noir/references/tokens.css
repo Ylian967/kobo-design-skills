@@ -25,14 +25,15 @@
   --paper: #ffffff;         /* bouton plein blanc */
   --on-paper: #000000;
 
-  /* Objet (rendu CSS, jamais du texte) */
+  /* Objet : matières de la scène 3D (lues par Three.js via getComputedStyle, jamais du texte) */
   --device: #121212;
   --device-hi: #3a3a3a;     /* reflet sur l'arête */
-  --dial: #1c1c1c;
+  --dial: #1c1c1c;          /* cadre de l'écran */
+  --metal: #6e6e6e;         /* molette en métal (metalness 1) */
   --lcd: #0f1a14;           /* petit écran */
   --lcd-text: #cfe8c2;
 
-  /* Photos chaudes (emplacements dessinés, jamais du texte) */
+  /* Photos chaudes : couleurs de repli des conteneurs et lumière de lampe (jamais du texte) */
   --wood: #7a4a2a;
   --wood-dark: #3a2213;
   --wall: #1e140d;
@@ -43,6 +44,7 @@
   --fabric-dark: #7d3412;
   --rock: #2b2b2b;
   --rock-hi: #4a4a4a;
+  --grade-warm: brightness(0.62) saturate(1.1) sepia(0.18) contrast(1.06);  /* étalonnage des photos */
 
   /* Typographie */
   --font-display: 'Geist', 'Inter', system-ui, sans-serif;     /* grotesque nette, titres serrés */

@@ -6,7 +6,8 @@ Pour chaque dossier plugins/kobo-design/skills/<style>/ :
   - les fichiers obligatoires existent ;
   - le frontmatter de SKILL.md est valide (name = nom du dossier, description ≤ 1536 caractères) ;
   - les paires de contraste déclarées dans references/tokens.css passent (4.5:1 par défaut, 3:1 si suffixe ":large") ;
-  - la page d'exemple n'écrit pas de couleur en dur en dehors de :root.
+  - la page d'exemple n'écrit pas de couleur en dur en dehors de :root ;
+  - la page d'exemple utilise de vraies images (photos) ou une vraie scène 3D, et SKILL.md a une section « Images et 3D ».
 
 Usage : python3 tools/check.py            (tous les skills)
         python3 tools/check.py <style>    (un seul)
@@ -18,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "plugins" / "kobo-design" / "skills"
 REQUIRED = ["SKILL.md", "source.md", "references/tokens.css", "references/components.md",
-            "references/layouts.md", "references/motion.md", "examples/demo.html"]
+            "references/layouts.md", "references/motion.md", "references/assets.md", "examples/demo.html"]
 META_SKILLS = {"site-to-skill", "catalogue"}  # skills outils, sans tokens ni démo
 
 
@@ -99,6 +100,15 @@ def check_skill(d: Path):
         hard = set(re.findall(r"#[0-9a-fA-F]{6}\b", body))
         if hard:
             notes.append(f"demo.html : {len(hard)} couleur(s) en dur hors :root ({', '.join(sorted(hard)[:5])})")
+        photos = len(re.findall(r"https://images\.unsplash\.com/photo-", html))
+        three = "three.module.js" in html or "three@" in html
+        if photos == 0 and not three:
+            errs.append("demo.html : aucune vraie image (photo) ni scène 3D — les visuels ne doivent pas être des dessins CSS/SVG")
+        else:
+            notes.append(f"demo.html : {photos} photo(s), 3D {'oui' if three else 'non'}")
+    sk_txt = sk.read_text(encoding="utf-8") if sk.exists() else ""
+    if d.name not in META_SKILLS and "## Images et 3D" not in sk_txt:
+        errs.append("SKILL.md : section « ## Images et 3D » absente")
     return errs, notes
 
 

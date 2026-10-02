@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Touche « maintenir », lettrage peint (filtre SVG), page d'artiste, vignette, pied de page, aide. |
 | `references/layouts.md` | Accueil, page d'artiste, transitions, mobile. |
 | `references/motion.md` | Remplissage, bascule d'artiste, vidéo. |
+| `references/assets.md` | Avant de placer une photo ou une vidéo : triptyque N&B, portraits en contre-jour, pochettes, passage photo → vidéo. |
 | `examples/demo.html` | Démo jouable (espace ou appui). |
 | `source.md` | Observations et écarts. |
 
@@ -42,6 +43,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Titre peint | **Londrina Solid** 900 + filtre SVG « pinceau » | capitales, 56–144px, une couleur par lettre |
 | Consigne, interface | **Fira Sans** 500/700 | 12–18px |
 | Pied de page | **Fira Mono** 400 | 10px |
+
+## Images et 3D
+
+Les visuels sont de **vraies photos ou vidéos noir et blanc** : triptyque d'un musicien en fond d'accueil (grain, voile `--veil`), portrait très contrasté multiplié sur le blanc pour l'effet contre-jour, pochette N&B en vignette. Chaque photo du triptyque est prévue pour être remplacée par une `<video muted loop playsinline>` sans toucher au CSS. Pas de 3D (optionnelle, voir `references/assets.md`). Jamais de silhouette en `clip-path` ni de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un objet.
 
 ## Signature
 
@@ -68,3 +73,4 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Son coupé par défaut.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
 - [ ] Aucun élément du label d'origine.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.

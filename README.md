@@ -31,7 +31,8 @@ plugins/kobo-design/skills/<style>/
 │   ├── tokens.css            variables CSS (contrastes déclarés et vérifiés)
 │   ├── components.md         boutons, cartes, navigation, champs, badges, modals + états
 │   ├── layouts.md            héros, sections, grilles, en-tête, mobile
-│   └── motion.md             animations : durées, courbes, mouvement réduit
+│   ├── motion.md             animations : durées, courbes, mouvement réduit
+│   └── assets.md             images et 3D : sujets, traitements, sources, recette 3D
 └── examples/
     └── demo.html             page complète construite uniquement avec le skill
 ```

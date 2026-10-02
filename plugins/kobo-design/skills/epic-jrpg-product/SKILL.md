@@ -31,6 +31,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | En-tête à filet multicolore, boutons or, plaque de titre, ornements, vidéo encadrée, tuiles plateformes, bandeau notes, accordéon, boutons flottants. |
 | `references/layouts.md` | Héros, pitch + vidéo, achat rapide, caractéristiques en zigzag, module d'achat, mobile. |
 | `references/motion.md` | Transitions courtes (0.2s), lecteur vidéo, accordéon. |
+| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, traitements, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète. |
 | `source.md` | Mesures et écarts. |
 
@@ -39,6 +40,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Rôle | Police | Réglages |
 |---|---|---|
 | Tout | **Montserrat** 300–900 (Metropolis d'origine, libre mais absente de Google Fonts) | 16px/20px 500 dominant ; titres 36px 700 ; H1 45px 900 ; boutons 14px 600 capitales +0.08em |
+
+## Images et 3D
+
+Le style vit de **visuels sombres et chauds** : key art et captures du jeu, ou, en maquette, photos de braises, de flammes, d'armures et de silhouettes à contre-jour. Le héros fond vers le noir pour porter le titre, les photos N&B passent en duotone braise, et une texture de braises réelle tapisse le fond des sections. La 3D est optionnelle (coffret collector qu'on fait pivoter dans le module d'achat). Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un objet : seuls les ornements restent dessinés. Détails dans `references/assets.md`.
 
 ## Signature
 
@@ -65,4 +70,5 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 - [ ] Achat accessible en permanence.
 - [ ] Ornements limités à deux par écran.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du jeu ou de l'éditeur d'origine.

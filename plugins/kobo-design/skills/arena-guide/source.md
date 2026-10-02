@@ -31,3 +31,4 @@
 | Beaufort for LOL (propriétaire) | Spectral 800 italique | Licence ; même serif robuste |
 | Spiegel (propriétaire) | Source Sans 3 | Licence ; sans humaniste |
 | Champions, carte, logos, vidéos | Emplacements et formes | Droits d'auteur |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |

@@ -19,7 +19,7 @@
   --rule: rgb(15 15 15 / 0.18);        /* filets, bordures de cartes */
   --rule-dark: rgb(255 255 255 / 0.16);
 
-  /* Photo noir et blanc (dégradés de remplacement, de l'ombre à la lumière) */
+  /* Photo noir et blanc : couleurs de repli sous la vraie photo, de l'ombre à la lumière */
   --photo-0: #0b0b0b; --photo-1: #232323; --photo-2: #3d3d3d; --photo-3: #6b6b6b; --photo-4: #a8a8a8; --photo-5: #d9d9d9;
   --grain-opacity: 0.22;
 

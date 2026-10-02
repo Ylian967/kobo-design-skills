@@ -12,7 +12,7 @@
   --navy: #15162e; --navy-2: #22244a; --mint: #e3f3e3; --card: #ffffff; --card-alt: #d3ebd4; --paper: #ffffff;
   --ink: #2a2d4a; --muted: #4f5466; --text-inv: #ffffff; --muted-inv: #b8bad0;
   --green: #22a650; --green-bright: #3ddc84; --green-light: #b9ecc6; --green-strong: #18823f; --green-ink: #0f5f2c; --on-green: #ffffff; --line: #c3dcc5; --line-inv: #34365a; --star: #f2b200;
-  --cloth-white: #f4f2ec; --cloth-sand: #d9c7a7; --cloth-olive: #6f7d4f; --cloth-navy: #2b3366; --cloth-black: #1e1e24; --cloth-rust: #b5583a; --skin: #c99572;
+  --cloth-white: #f4f2ec; --cloth-sand: #d9c7a7; --cloth-olive: #6f7d4f; --cloth-navy: #2b3366; --cloth-black: #1e1e24; --cloth-rust: #b5583a;
   --font-display: 'Anton', 'Bebas Neue', 'Arial Narrow', Impact, sans-serif; --font-logo: 'DM Serif Display', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
   --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-card: 1.125rem; --text-band: 1.5rem;
   --text-title: clamp(2.25rem, 5vw, 4.5rem); --text-hero: clamp(3.5rem, 8vw, 7.5rem); --text-stat: clamp(2.25rem, 3.6vw, 3.25rem); --text-logo-xl: clamp(5rem, 22vw, 20rem);
@@ -85,18 +85,8 @@ h1, h2, h3, p { margin: 0; }
 .arc { position: absolute; left: 50%; bottom: -8%; width: min(520px, 92%); aspect-ratio: 1; translate: -50% 0; border-radius: 50%;
   background: conic-gradient(from 210deg, var(--green) 0deg, var(--green-light) 200deg, transparent 205deg 360deg);
   -webkit-mask: radial-gradient(closest-side, transparent 80%, black 81%); mask: radial-gradient(closest-side, transparent 80%, black 81%); animation: spin-in 1.2s var(--ease-out) both; }
-.disc { position: absolute; left: 50%; bottom: -4%; width: min(430px, 76%); aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--green) 26%, var(--navy)), var(--navy-2) 70%); }
-.model { position: absolute; left: 50%; bottom: 0; width: min(360px, 70%); aspect-ratio: 360 / 470; translate: -50% 0; }
-.model > * { position: absolute; }
-.m-hair { left: 37%; top: 0; width: 26%; height: 15%; border-radius: 50% 50% 40% 40%; background: var(--cloth-black); z-index: 2; }
-.m-head { left: 38%; top: 4%; width: 24%; height: 22%; border-radius: 46% 46% 44% 44%; background: linear-gradient(90deg, var(--skin), color-mix(in srgb, var(--skin) 80%, var(--navy))); }
-.m-neck { left: 45%; top: 22%; width: 10%; height: 9%; background: color-mix(in srgb, var(--skin) 82%, var(--navy)); }
-.m-hood { left: 31%; top: 25%; width: 38%; height: 14%; border-radius: 0 0 50% 50%; background: color-mix(in srgb, var(--cloth-white) 85%, var(--navy)); z-index: 1; }
-.m-body { left: 4%; top: 29%; width: 92%; height: 75%; border-radius: 42% 42% 6% 6% / 22% 22% 4% 4%;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--cloth-white) 80%, var(--navy)) 0 12%, var(--cloth-white) 30% 70%, color-mix(in srgb, var(--cloth-white) 84%, var(--navy)) 88%); }
-.m-body::before { content: ""; position: absolute; left: 26%; right: 26%; bottom: 14%; height: 22%; border-radius: 10px 10px 4px 4px; border: 2px solid color-mix(in srgb, var(--cloth-white) 80%, var(--navy)); border-top-width: 3px; }
-.m-body::after { content: ""; position: absolute; left: 12%; right: 12%; top: 0; height: 100%; border-left: 2px solid color-mix(in srgb, var(--cloth-white) 85%, var(--navy)); border-right: 2px solid color-mix(in srgb, var(--cloth-white) 85%, var(--navy)); }
-.m-string { top: 36%; width: 1.5%; height: 14%; border-radius: 4px; background: var(--cloth-sand); z-index: 2; }
+.disc { position: absolute; left: 50%; bottom: -4%; width: min(430px, 76%); aspect-ratio: 1; translate: -50% 0; border-radius: 50%; overflow: hidden; background: var(--navy-2); }
+.disc img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; color: transparent; }
 .tag-float { position: absolute; right: 4%; top: 18%; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3); border-radius: var(--radius-pill); background: var(--paper); color: var(--navy); box-shadow: var(--shadow-pop); font-size: var(--text-xs); animation: float 5s ease-in-out infinite; }
 .tag-float b { display: block; font: 400 var(--text-base)/1.1 var(--font-display); text-transform: uppercase; }
 .tag-float .dot { width: 36px; height: 36px; border-radius: 50%; background: var(--green-strong); color: var(--on-green); display: grid; place-items: center; font-weight: 700; }
@@ -119,12 +109,14 @@ h1, h2, h3, p { margin: 0; }
 .chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--text-inv); }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-5); }
 .card { position: relative; display: flex; flex-direction: column; gap: var(--space-3); }
-.card__media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-card); background: var(--card); box-shadow: var(--shadow-card); overflow: hidden; display: grid; place-items: center; transition: transform var(--dur-base) var(--ease-out); }
+.card__media { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-card); background: var(--card); box-shadow: var(--shadow-card); overflow: hidden; transition: transform var(--dur-base) var(--ease-out); }
+.card__media img { position: absolute; inset: var(--space-3); width: calc(100% - 2 * var(--space-3)); height: calc(100% - 2 * var(--space-3)); object-fit: cover; border-radius: calc(var(--radius-card) - 4px); background: var(--card-alt); color: transparent; transition: transform var(--dur-slow) var(--ease-out); }
+.card:nth-child(even) .card__media img { background: var(--card); }
 .card:nth-child(even) .card__media { background: var(--card-alt); }
 .card:hover .card__media { transform: translateY(-4px); }
-.card:hover .garment { transform: scale(1.05) rotate(-2deg); }
-.card__new { position: absolute; left: var(--space-3); top: var(--space-3); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--navy); color: var(--text-inv); font: 700 var(--text-2xs)/1.6 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
-.card .fav { position: absolute; right: var(--space-2); top: var(--space-2); color: var(--navy); }
+.card:hover .card__media img { transform: scale(1.04); }
+.card__new { position: absolute; z-index: 1; left: var(--space-3); top: var(--space-3); padding: var(--space-1) var(--space-3); border-radius: var(--radius-pill); background: var(--navy); color: var(--text-inv); font: 700 var(--text-2xs)/1.6 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.card .fav { position: absolute; z-index: 1; background: var(--paper); right: var(--space-2); top: var(--space-2); color: var(--navy); }
 .card .fav:hover { background: var(--mint); }
 .card .fav[aria-pressed="true"] svg { fill: var(--green); stroke: var(--green-ink); }
 .card h3 { font: 400 var(--text-card)/1.1 var(--font-display); text-transform: uppercase; color: var(--navy); }
@@ -139,29 +131,17 @@ h1, h2, h3, p { margin: 0; }
 .swatch:hover::before { transform: scale(1.2); }
 .card.is-hidden { display: none; }
 
-/* Vêtements dessinés */
-.garment { width: 62%; aspect-ratio: 1; position: relative; transition: transform var(--dur-slow) var(--ease-out); filter: drop-shadow(0 14px 14px color-mix(in srgb, var(--navy) 12%, transparent)); }
-.tee { background: linear-gradient(90deg, color-mix(in srgb, var(--g) 86%, var(--navy)), var(--g) 30% 70%, color-mix(in srgb, var(--g) 88%, var(--navy))); clip-path: polygon(32% 4%, 42% 4%, 50% 10%, 58% 4%, 68% 4%, 100% 20%, 88% 40%, 78% 34%, 78% 96%, 22% 96%, 22% 34%, 12% 40%, 0 20%); }
-.hoodie { background: linear-gradient(90deg, color-mix(in srgb, var(--g) 84%, var(--navy)), var(--g) 30% 70%, color-mix(in srgb, var(--g) 86%, var(--navy))); clip-path: polygon(36% 0, 64% 0, 70% 10%, 96% 24%, 100% 94%, 84% 94%, 80% 44%, 78% 98%, 22% 98%, 20% 44%, 16% 94%, 0 94%, 4% 24%, 30% 10%); }
-.hoodie::after { content: ""; position: absolute; left: 34%; right: 34%; bottom: 14%; height: 18%; border-radius: 8px 8px 2px 2px; background: color-mix(in srgb, var(--g) 88%, var(--navy)); }
-.hoodie::before { content: ""; position: absolute; left: 38%; right: 38%; top: 2%; height: 14%; border-radius: 0 0 50% 50%; background: color-mix(in srgb, var(--g) 70%, var(--navy)); }
-.pants { width: 46%; aspect-ratio: 46 / 70; background: linear-gradient(90deg, color-mix(in srgb, var(--g) 86%, var(--navy)), var(--g) 40% 60%, color-mix(in srgb, var(--g) 86%, var(--navy))); clip-path: polygon(8% 0, 92% 0, 100% 100%, 58% 100%, 50% 26%, 42% 100%, 0 100%); }
-.pants::after { content: ""; position: absolute; left: 8%; right: 8%; top: 0; height: 7%; background: color-mix(in srgb, var(--g) 78%, var(--navy)); }
-.cap { width: 58%; aspect-ratio: 58 / 36; }
-.cap::before { content: ""; position: absolute; left: 10%; right: 18%; top: 0; bottom: 18%; border-radius: 50% 50% 8px 8px / 90% 90% 8px 8px; background: linear-gradient(90deg, color-mix(in srgb, var(--g) 86%, var(--navy)), var(--g) 40%, color-mix(in srgb, var(--g) 84%, var(--navy))); }
-.cap::after { content: ""; position: absolute; right: 0; left: 52%; bottom: 6%; height: 20%; border-radius: 0 50% 50% 40% / 0 100% 100% 60%; background: color-mix(in srgb, var(--g) 80%, var(--navy)); }
-
 /* ---------- Fiche produit ---------- */
 .pdp { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-12); align-items: start; }
 .pdp__media { display: grid; grid-template-columns: 80px 1fr; gap: var(--space-4); }
 .thumbs { display: grid; gap: var(--space-3); align-content: start; }
-.thumb { width: 80px; aspect-ratio: 1; border-radius: var(--radius-sm); border: 2px solid transparent; background: var(--card); display: grid; place-items: center; cursor: pointer; padding: 0; transition: border-color var(--dur-fast); }
+.thumb { width: 80px; aspect-ratio: 1; border-radius: var(--radius-sm); border: 2px solid transparent; background: var(--card); cursor: pointer; padding: 3px; overflow: hidden; transition: border-color var(--dur-fast); }
+.thumb img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 5px; color: transparent; }
 .thumb[aria-current="true"] { border-color: var(--navy); }
-.thumb .garment { width: 70%; filter: none; }
-.thumb .pants { width: 44%; }
-.big { aspect-ratio: 1; border-radius: var(--radius-xl); background: radial-gradient(circle at 50% 45%, var(--card), var(--card-alt)); display: grid; place-items: center; position: relative; overflow: hidden; }
-.big .garment { width: 64%; }
-.big .tag { position: absolute; left: var(--space-5); bottom: var(--space-5); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--paper); font: 500 var(--text-xs)/1.4 var(--font-body); color: var(--ink); box-shadow: var(--shadow-card); }
+.big { aspect-ratio: 1; border-radius: var(--radius-xl); background: var(--card-alt); position: relative; overflow: hidden; }
+.big img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; transition: opacity var(--dur-base) var(--ease-out); }
+.big img.is-swapping { opacity: 0; }
+.big .tag { position: absolute; z-index: 1; left: var(--space-5); bottom: var(--space-5); padding: var(--space-2) var(--space-4); border-radius: var(--radius-pill); background: var(--paper); font: 500 var(--text-xs)/1.4 var(--font-body); color: var(--ink); box-shadow: var(--shadow-card); }
 .crumbs { font-size: var(--text-xs); color: var(--muted); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
 .pdp h2 { font-size: clamp(2.5rem, 4.4vw, 4rem); color: var(--navy); margin-top: var(--space-3); }
 .rating { display: flex; align-items: center; gap: var(--space-2); margin-top: var(--space-4); font-size: var(--text-sm); color: var(--muted); }
@@ -197,7 +177,7 @@ h1, h2, h3, p { margin: 0; }
 .news-note { color: var(--muted-inv); font-size: var(--text-xs); margin-top: var(--space-3); min-height: 1.4em; }
 .collage { position: relative; aspect-ratio: 1.25; max-width: 560px; justify-self: end; width: 100%; }
 .bubble { position: absolute; border-radius: 50%; display: grid; place-items: center; overflow: hidden; background: var(--b); animation: float 6s ease-in-out infinite; }
-.bubble .garment { width: 58%; filter: none; }
+.bubble img { width: 100%; height: 100%; object-fit: cover; color: transparent; }
 .bubble--1 { left: 0; top: 10%; width: 46%; aspect-ratio: 1; --b: var(--green); }
 .bubble--2 { left: 38%; top: 0; width: 34%; aspect-ratio: 1; --b: var(--mint); animation-delay: -2s; }
 .bubble--3 { right: 0; top: 34%; width: 40%; aspect-ratio: 1; --b: var(--card-alt); animation-delay: -4s; }
@@ -209,6 +189,7 @@ h1, h2, h3, p { margin: 0; }
 .logo-card { margin-top: var(--space-12); margin-bottom: var(--gutter); border-radius: var(--radius-xl); background: var(--mint); color: var(--navy); padding: var(--space-8) var(--space-8) 0; overflow: hidden; }
 .logo-card p:first-child { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-xs); color: var(--muted); }
 .logo-card .xl { font: 400 var(--text-logo-xl)/0.78 var(--font-logo); letter-spacing: -0.03em; text-align: center; translate: 0 8%; white-space: nowrap; }
+.credit { margin-top: var(--space-4); font-size: var(--text-xs); color: var(--muted); }
 .logo-card .xl i { font-style: normal; color: var(--green); }
 
 /* ---------- Mouvement ---------- */
@@ -274,15 +255,10 @@ h1, h2, h3, p { margin: 0; }
         </div>
       </div>
     </div>
-    <div class="stage" data-slot="hero-model" role="img" aria-label="Mannequin portant le sweat à capuche Nuage, devant un arc vert">
-      <div class="disc"></div>
+    <div class="stage" data-slot="hero-model">
+      <div class="disc"><img src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=1000&h=1000&q=80" alt="Jeune homme en sweat à capuche sable dans la rue, de face" width="1000" height="1000" fetchpriority="high" decoding="async"></div>
       <div class="arc"></div>
-      <div class="model">
-        <span class="m-hair"></span><span class="m-head"></span><span class="m-neck"></span>
-        <span class="m-body"></span><span class="m-hood"></span>
-        <span class="m-string" style="left:45%"></span><span class="m-string" style="left:53.5%"></span>
-      </div>
-      <div class="tag-float"><span class="dot" aria-hidden="true">✦</span><span><b>Sweat Nuage</b>Coton bio 380 g · 59 €</span></div>
+      <div class="tag-float"><span class="dot" aria-hidden="true">✦</span><span><b>Sweat Nuage sable</b>Coton bio 380 g · 59 €</span></div>
     </div>
   </div>
 </header>
@@ -299,29 +275,29 @@ h1, h2, h3, p { margin: 0; }
     <div class="head">
       <h2 class="display" id="shopTitle">Collections <em>soigneusement</em> choisies</h2>
       <div class="chips" role="group" aria-label="Filtrer par catégorie">
-        <button class="chip" aria-pressed="true" data-f="all">Tout</button><button class="chip" aria-pressed="false" data-f="haut">Hauts</button><button class="chip" aria-pressed="false" data-f="bas">Bas</button><button class="chip" aria-pressed="false" data-f="acc">Accessoires</button>
+        <button class="chip" aria-pressed="true" data-f="all">Tout</button><button class="chip" aria-pressed="false" data-f="capuche">Capuches</button><button class="chip" aria-pressed="false" data-f="rond">Cols ronds</button>
       </div>
     </div>
     <div class="grid" id="grid">
-      <article class="card" data-cat="haut">
-        <div class="card__media" data-slot="product-1"><span class="card__new">Nouveau</span><span class="garment tee" style="--g:var(--cloth-white)" role="img" aria-label="T-shirt épais blanc cassé"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter T-shirt épais aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
-        <h3><a href="#pdp">T-shirt épais 240 g</a></h3>
-        <div class="card__row"><span class="price">29 €</span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-white)" aria-label="Blanc cassé"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-sand)" aria-label="Sable"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-black)" aria-label="Noir"></button></div></div>
-      </article>
-      <article class="card" data-cat="haut">
-        <div class="card__media" data-slot="product-2"><span class="garment hoodie" style="--g:var(--cloth-olive)" role="img" aria-label="Sweat à capuche olive"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Sweat Nuage aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+      <article class="card" data-cat="capuche">
+        <div class="card__media" data-slot="product-1"><span class="card__new">Nouveau</span><img src="https://images.unsplash.com/photo-1688111421205-a0a85415b224?auto=format&fit=crop&w=800&h=1000&q=80" alt="Sweat à capuche blanc cassé, gros plan sur le molleton et les cordons" width="800" height="1000" loading="lazy" decoding="async"><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Sweat Nuage aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
         <h3><a href="#pdp">Sweat à capuche Nuage</a></h3>
-        <div class="card__row"><span class="price">59 € <s>79 €</s></span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-olive)" aria-label="Olive"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-white)" aria-label="Blanc cassé"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button></div></div>
+        <div class="card__row"><span class="price">59 € <s>79 €</s></span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-white)" aria-label="Blanc cassé"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-sand)" aria-label="Sable"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button></div></div>
       </article>
-      <article class="card" data-cat="bas">
-        <div class="card__media" data-slot="product-3"><span class="garment pants" style="--g:var(--cloth-sand)" role="img" aria-label="Pantalon cargo sable"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Pantalon cargo aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
-        <h3><a href="#pdp">Pantalon cargo souple</a></h3>
-        <div class="card__row"><span class="price">69 €</span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-sand)" aria-label="Sable"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-olive)" aria-label="Olive"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-black)" aria-label="Noir"></button></div></div>
+      <article class="card" data-cat="rond">
+        <div class="card__media" data-slot="product-2"><img src="https://images.unsplash.com/photo-1578681994827-a9776963799c?auto=format&fit=crop&w=800&h=1000&q=80" alt="Sweat col rond noir avec broderie sur la poitrine" width="800" height="1000" loading="lazy" decoding="async"><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Sweat brodé aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">Sweat brodé Minuit</a></h3>
+        <div class="card__row"><span class="price">65 €</span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-black)" aria-label="Noir"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-olive)" aria-label="Olive"></button></div></div>
       </article>
-      <article class="card" data-cat="acc">
-        <div class="card__media" data-slot="product-4"><span class="card__new">-20 %</span><span class="garment cap" style="--g:var(--cloth-rust)" role="img" aria-label="Casquette en coton rouille"></span><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Casquette aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
-        <h3><a href="#pdp">Casquette coton lavé</a></h3>
-        <div class="card__row"><span class="price">20 € <s>25 €</s></span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-rust)" aria-label="Rouille"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-sand)" aria-label="Sable"></button></div></div>
+      <article class="card" data-cat="capuche">
+        <div class="card__media" data-slot="product-3"><img src="https://images.unsplash.com/photo-1611817757591-c3f345024273?auto=format&fit=crop&w=800&h=1000&q=80" alt="Jeune homme portant un sweat à capuche taupe" width="800" height="1000" loading="lazy" decoding="async"><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Hoodie Taupe aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">Hoodie oversize Taupe</a></h3>
+        <div class="card__row"><span class="price">69 €</span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-sand)" aria-label="Taupe"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-olive)" aria-label="Olive"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-black)" aria-label="Noir"></button></div></div>
+      </article>
+      <article class="card" data-cat="rond">
+        <div class="card__media" data-slot="product-4"><span class="card__new">-20 %</span><img src="https://images.unsplash.com/photo-1767451436272-daa71c486b96?auto=format&fit=crop&w=800&h=1000&q=80" alt="Femme assise en sweat gris chiné sur fond clair" width="800" height="1000" loading="lazy" decoding="async"><button class="icon-btn fav" aria-pressed="false" aria-label="Ajouter Sweat Galet aux favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></button></div>
+        <h3><a href="#pdp">Sweat col rond Galet</a></h3>
+        <div class="card__row"><span class="price">44 € <s>55 €</s></span><div class="swatches" role="radiogroup" aria-label="Couleur"><button class="swatch" role="radio" aria-checked="true" style="--c:var(--cloth-white)" aria-label="Gris chiné"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-rust)" aria-label="Rouille"></button><button class="swatch" role="radio" aria-checked="false" style="--c:var(--cloth-navy)" aria-label="Marine"></button></div></div>
       </article>
     </div>
   </section>
@@ -329,11 +305,11 @@ h1, h2, h3, p { margin: 0; }
   <section class="section wrap pdp" id="pdp" aria-labelledby="pdpTitle">
     <div class="pdp__media">
       <div class="thumbs" role="group" aria-label="Vues du produit">
-        <button class="thumb" aria-current="true" aria-label="Vue de face" data-g="hoodie" data-c="var(--cloth-olive)"><span class="garment hoodie" style="--g:var(--cloth-olive)"></span></button>
-        <button class="thumb" aria-current="false" aria-label="Coloris blanc cassé" data-g="hoodie" data-c="var(--cloth-white)"><span class="garment hoodie" style="--g:var(--cloth-white)"></span></button>
-        <button class="thumb" aria-current="false" aria-label="Coloris marine" data-g="hoodie" data-c="var(--cloth-navy)"><span class="garment hoodie" style="--g:var(--cloth-navy)"></span></button>
+        <button class="thumb" aria-current="true" aria-label="Coloris blanc cassé" data-src="https://images.unsplash.com/photo-1688111421205-a0a85415b224?auto=format&fit=crop&w=1200&h=1200&q=80" data-alt="Sweat à capuche Nuage blanc cassé, détail du molleton"><img src="https://images.unsplash.com/photo-1688111421205-a0a85415b224?auto=format&fit=crop&w=200&h=200&q=80" alt="" width="200" height="200" loading="lazy" decoding="async"></button>
+        <button class="thumb" aria-current="false" aria-label="Coloris sable, porté" data-src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=1200&h=1200&q=80" data-alt="Sweat à capuche Nuage sable, porté dans la rue"><img src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=200&h=200&q=80" alt="" width="200" height="200" loading="lazy" decoding="async"></button>
+        <button class="thumb" aria-current="false" aria-label="Coloris taupe, porté" data-src="https://images.unsplash.com/photo-1611817757591-c3f345024273?auto=format&fit=crop&w=1200&h=1200&q=80" data-alt="Sweat à capuche Nuage taupe, porté"><img src="https://images.unsplash.com/photo-1611817757591-c3f345024273?auto=format&fit=crop&w=200&h=200&q=80" alt="" width="200" height="200" loading="lazy" decoding="async"></button>
       </div>
-      <div class="big" data-slot="pdp-main"><span class="garment hoodie" id="bigG" style="--g:var(--cloth-olive)" role="img" aria-label="Sweat à capuche Nuage, vue de face"></span><span class="tag">Le mannequin mesure 1,82 m et porte un M</span></div>
+      <div class="big" data-slot="pdp-main"><img id="bigImg" src="https://images.unsplash.com/photo-1688111421205-a0a85415b224?auto=format&fit=crop&w=1200&h=1200&q=80" alt="Sweat à capuche Nuage blanc cassé, détail du molleton" width="1200" height="1200" loading="lazy" decoding="async"><span class="tag">Le mannequin mesure 1,82 m et porte un M</span></div>
     </div>
     <div>
       <p class="crumbs">Hauts / Sweats</p>
@@ -365,11 +341,11 @@ h1, h2, h3, p { margin: 0; }
         <form class="news" id="news" novalidate><label class="sr-only" for="nmail">Adresse e-mail</label><input id="nmail" type="email" placeholder="Votre e-mail" autocomplete="email" required aria-describedby="nnote"><button class="pill pill--green" type="submit">S'inscrire</button></form>
         <p class="news-note" id="nnote" aria-live="polite"></p>
       </div>
-      <div class="collage" data-slot="footer-collage" role="img" aria-label="Collage de vêtements dans des cercles">
-        <span class="bubble bubble--1"><span class="garment tee" style="--g:var(--cloth-white)"></span></span>
-        <span class="bubble bubble--2"><span class="garment cap" style="--g:var(--cloth-navy)"></span></span>
-        <span class="bubble bubble--3"><span class="garment hoodie" style="--g:var(--cloth-olive)"></span></span>
-        <span class="bubble bubble--4"><span class="garment pants" style="--g:var(--cloth-sand)"></span></span>
+      <div class="collage" data-slot="footer-collage">
+        <span class="bubble bubble--1"><img src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=600&h=600&q=80" alt="Homme en sweat à capuche sable" width="600" height="600" loading="lazy" decoding="async"></span>
+        <span class="bubble bubble--2"><img src="https://images.unsplash.com/photo-1578681994827-a9776963799c?auto=format&fit=crop&w=600&h=600&q=80" alt="Sweat noir brodé" width="600" height="600" loading="lazy" decoding="async"></span>
+        <span class="bubble bubble--3"><img src="https://images.unsplash.com/photo-1767451436272-daa71c486b96?auto=format&fit=crop&w=600&h=600&q=80" alt="Femme en sweat gris" width="600" height="600" loading="lazy" decoding="async"></span>
+        <span class="bubble bubble--4"><img src="https://images.unsplash.com/photo-1688111421205-a0a85415b224?auto=format&fit=crop&w=600&h=600&q=80" alt="Molleton blanc en gros plan" width="600" height="600" loading="lazy" decoding="async"></span>
       </div>
     </div>
     <div class="links">
@@ -380,6 +356,7 @@ h1, h2, h3, p { margin: 0; }
     </div>
     <div class="logo-card">
       <p><span>© 2026 Brume — marque fictive de démonstration</span><span>Mentions légales · Confidentialité</span></p>
+      <p class="credit">Photos : Unsplash (licence Unsplash), à remplacer par les photos des produits</p>
       <p class="xl" aria-hidden="true">brume<i>.</i></p>
     </div>
   </div>
@@ -391,7 +368,7 @@ h1, h2, h3, p { margin: 0; }
     const items = [...g.querySelectorAll('[role="radio"]:not(:disabled)')];
     const pick = b => { items.forEach(x => { x.setAttribute('aria-checked', x === b); x.tabIndex = x === b ? 0 : -1; }); };
     items.forEach(b => { if (b.getAttribute('aria-checked') !== 'true') b.tabIndex = -1;
-      b.addEventListener('click', () => { pick(b); const card = b.closest('.card'); if (card) card.querySelector('.garment').style.setProperty('--g', b.style.getPropertyValue('--c')); });
+      b.addEventListener('click', () => pick(b));
       b.addEventListener('keydown', e => { const i = items.indexOf(b), d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (d) { e.preventDefault(); const n = items[(i + d + items.length) % items.length]; n.click(); n.focus(); } });
     });
   });
@@ -400,8 +377,13 @@ h1, h2, h3, p { margin: 0; }
     document.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === c));
     document.querySelectorAll('.card').forEach(k => k.classList.toggle('is-hidden', c.dataset.f !== 'all' && k.dataset.cat !== c.dataset.f));
   }));
-  const big = document.getElementById('bigG');
-  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => { document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-current', x === t)); big.style.setProperty('--g', t.dataset.c); }));
+  const big = document.getElementById('bigImg');
+  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => {
+    document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-current', x === t));
+    if (big.src === t.dataset.src) return;
+    big.classList.add('is-swapping');
+    setTimeout(() => { big.src = t.dataset.src; big.alt = t.dataset.alt; big.classList.remove('is-swapping'); }, 200);
+  }));
   const add = document.getElementById('add'), count = document.getElementById('bagCount'), bag = document.getElementById('bag'); let n = 2;
   add.addEventListener('click', () => { if (add.dataset.state) return; add.setAttribute('aria-busy', 'true'); add.textContent = 'Ajout…';
     setTimeout(() => { n++; count.textContent = n; bag.setAttribute('aria-label', `Panier, ${n} articles`); count.classList.add('bump'); setTimeout(() => count.classList.remove('bump'), 300);

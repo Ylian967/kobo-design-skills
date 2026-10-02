@@ -22,7 +22,7 @@ Tous les exemples supposent le `:root` de `tokens.css`.
 .frame { position: relative; height: 100%; border: 1px solid var(--frame-line); border-radius: var(--radius-frame); overflow: hidden; isolation: isolate; }
 .veil { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--shade) 80%, transparent) 88%, var(--shade)); }
 ```
-Sans photo détourée, le mot-marque passe simplement derrière une colline/le toit dessinés, ou au-dessus du sujet sans le toucher.
+Sans photo détourée, le mot-marque se place dans le ciel, au-dessus du sujet sans le toucher. Photo réelle et détourage : voir `assets.md`.
 
 ## Mot-marque géant
 
@@ -60,7 +60,7 @@ Libellé court + « → ». Bouton blanc sur photo, noir ou contour sur fond cla
   background: var(--glass); backdrop-filter: blur(var(--blur-glass)) saturate(1.2); box-shadow: var(--shadow-glass); }
 @supports not (backdrop-filter: blur(1px)) { .agent { background: var(--glass-solid); color: var(--ink); } }
 ```
-Contenu : portrait carré 84px (rayon 2px) + surtitre « Votre conseillère » 11px capitales, nom Inter 500 16px, téléphone en lien `tel:` ; dessous, bouton blanc pleine largeur « Appeler → » (flèche à droite, `justify-content: space-between`).
+Contenu : portrait carré 84px (photo réelle, voir `assets.md`) (rayon 2px) + surtitre « Votre conseillère » 11px capitales, nom Inter 500 16px, téléphone en lien `tel:` ; dessous, bouton blanc pleine largeur « Appeler → » (flèche à droite, `justify-content: space-between`).
 
 ## Puces de filtre
 
@@ -83,7 +83,7 @@ Fond `--ink`. 4 chiffres Inter Tight 400 40–64px avec légende `--on-dark-mute
 
 ## Portrait d'équipe
 
-Rapport 4:5, rayon 4px, `filter: grayscale(.35)` qui disparaît au survol. Nom Inter 500, rôle `--muted` 14px.
+Photo réelle (voir `assets.md`), rapport 4:5, rayon 4px, `filter: grayscale(.35)` sur l'`img`, qui disparaît au survol. Nom Inter 500, rôle `--muted` 14px.
 
 ## Carte d'article
 
@@ -99,5 +99,5 @@ Fond `--ink`, 4 colonnes (marque + 3 listes), titres de colonne 11px capitales `
 
 ## États
 
-- **Photo en chargement** : fond `--shade` avec dégradé ciel ; la photo apparaît par mise au point (voir motion).
+- **Photo en chargement** : fond `--shade` avec dégradé ciel en tokens (repli si l'image ne charge pas) ; la photo apparaît par mise au point (voir motion).
 - **Aucun résultat** : texte Inter 300 28px centré + bouton contour « Réinitialiser les filtres ».

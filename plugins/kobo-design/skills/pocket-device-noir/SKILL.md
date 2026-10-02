@@ -29,9 +29,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton, la navigation, une étiquette, la carte de verre, l'objet en CSS, un panneau de fonction, un témoignage. |
+| `references/components.md` | Avant de coder un bouton, la navigation, une étiquette, la carte de verre, l'emplacement 3D de l'objet, un panneau de fonction, un témoignage. |
 | `references/layouts.md` | Avant de construire une page : héros bureau, manifeste à rayons, révélation produit, grille de fonctions, avis, appel final, mobile. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
+| `references/assets.md` | Avant de placer une photo ou l'objet : photos chaudes (bureau, roche, tissu), étalonnage, sources, prompts IA, **recette 3D complète de l'objet** (Three.js, R3F, React Native). |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
 | `source.md` | Pour connaître le shot de référence et ce qui a été estimé. |
 
@@ -58,9 +59,14 @@ La police du shot ressemble à une grotesque néo-suisse (type Inter / SF) ; **G
 | Texte | `--text`, `--muted` #8a8a8a | Titres, sous-titres |
 | Verre | `--glass`, `--glass-line`, `--glass-hi` | Carte d'offre, panneaux de fonction |
 | Rouge | `--red` #e5343a | Mots surlignés sur noir, bouton et voyant de l'objet |
-| Photos | `--wood`, `--lamp`, `--fabric`, `--rock`… | Emplacements dessinés, jamais l'interface |
+| Photos | `--wood`, `--lamp`, `--fabric`, `--rock`…, `--grade-warm` | Repli et étalonnage des photos, lumière de la scène 3D, jamais l'interface |
+| Objet 3D | `--device`, `--metal`, `--dial`, `--lcd`, `--red` | Matières de la scène Three.js |
 
 **Règle de l'accent** : le rouge est la couleur de l'objet ; dans l'interface, il ne sert qu'à surligner deux ou trois mots d'un manifeste.
+
+## Images et 3D
+
+L'objet est une **vraie scène 3D** Three.js : boîtier noir mat arrondi, petit écran en texture canvas (heure, onde, voyant), molette circulaire en métal qui tourne au survol, bouton rouge ; il pivote doucement et suit le pointeur, dans le héros, la révélation et l'appel final, avec une image de repli. Autour, de **vraies photos chaudes** (bureau en bois, intérieur, roche noire, tissu orange) étalonnées `--grade-warm` et fondues au noir. Jamais de dessin CSS/SVG à la place d'une photo ou de l'objet : recette, sources et prompts dans `references/assets.md`.
 
 ## Signature
 
@@ -81,7 +87,7 @@ La police du shot ressemble à une grotesque néo-suisse (type Inter / SF) ; **G
 - Verre fumé : `BlurView` (expo-blur, `intensity` 30, `tint="dark"`) avec `borderWidth: 1` et `borderColor` translucide.
 - Rayons du manifeste : `react-native-svg` (lignes depuis le centre, opacité dégressive) ou une image ; rotation lente avec Reanimated.
 - Nom géant : `Text` avec `adjustsFontSizeToFit` et `numberOfLines={1}`, couleur `--giant`, derrière une image détourée de l'objet.
-- Objet : rendu 3D ou PNG détouré ; flottement `withRepeat(withTiming(translateY: -10))`, voyant `withRepeat` sur l'opacité.
+- Objet : `expo-gl` + `@react-three/fiber/native` (même recette que `assets.md` § 5) ou PNG pré-rendu si l'appareil est faible ; flottement `withRepeat(withTiming(translateY: -10))`.
 - Polices : `@expo-google-fonts/geist`, `@expo-google-fonts/geist-mono`.
 
 ## Avant de livrer
@@ -92,5 +98,6 @@ La police du shot ressemble à une grotesque néo-suisse (type Inter / SF) ; **G
 - [ ] Section produit : nom géant gris sombre derrière l'objet, légendes techniques avec étiquettes.
 - [ ] Panneaux de verre sur textures (roche, tissu) ; témoignages miniatures.
 - [ ] Composants conformes à `references/components.md` (repos, survol, appui, focus, désactivé).
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md` : objet en scène Three.js avec repli, photos chaudes étalonnées, `alt` et couleur de repli.
 - [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
 - [ ] Aucun élément du shot d'origine (nom, logo, rendus, textes).

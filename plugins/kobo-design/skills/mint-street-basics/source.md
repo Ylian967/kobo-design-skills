@@ -27,10 +27,11 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom de marque, logotype, textes en anglais | Marque fictive « brume. », produits et textes inventés en français | Marque et droits d'auteur |
-| Photos du mannequin et des vêtements | Dessins CSS (silhouette, t-shirt, sweat, pantalon, casquette) dans des emplacements `data-slot` | Droits d'auteur ; à remplacer par vos photos détourées |
+| Photos du mannequin et des vêtements | Autres photos libres (portés et sweats) dans des emplacements `data-slot`, cadrées selon `references/assets.md` | Droits d'auteur ; à remplacer par vos packshots et portés |
 | Texte blanc sur vert #22a650 (3,2:1) | Bandeau gardé en 24px (paire `:large`) ; boutons en `--green-strong` #18823f (4,9:1) | Contraste ≥ 4,5:1 pour le petit texte |
 | Vert en petit texte sur menthe | `--green-ink` #0f5f2c (6,8:1) | Contraste |
 | Promo « Halloween » | « Soldes d'automne », livraison offerte dès 60 € | Contenu localisé, saison neutre |
 | Prix en dollars | Euros au format français (« 59 € ») | Contenu localisé |
 | Pastilles de couleur ~16px | Pastille 16px dans une zone cliquable 44×44px | Cible tactile |
 | Composition ordinateur uniquement | Version mobile (grille 2 colonnes, héros empilé, puces de taille sur 3 colonnes) | Adaptation |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans images propriétaires |

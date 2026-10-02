@@ -32,6 +32,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/components.md` | Avant de coder menu, boutons, liste d'actualités, cartes de classement, fiches casting, tags. |
 | `references/layouts.md` | Avant de construire une page : écran de chargement, héros, intro, sections, pied de page, mobile. |
 | `references/motion.md` | Avant d'ajouter une animation. |
+| `references/assets.md` | Avant de placer une image : sujets, cadrages, traitement N&B + couleur personnage, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
 | `source.md` | Mesures relevées et écarts assumés. |
 
@@ -44,6 +45,10 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Noms dans le casting | Noto Sans JP 700 **italique** | Rouge `--accent`, rôle en noir italique petit à gauche |
 
 Les deux polices sont sur Google Fonts : `family=Oswald:wght@400;500&family=Noto+Sans+JP:ital,wght@0,400;0,700` (l'italique de Noto Sans JP est synthétique, c'est le cas sur la référence aussi).
+
+## Images et 3D
+
+Les visuels sont de vraies images : illustrations officielles du projet en priorité, sinon photos de silhouettes d'action (sabre, lame, contre-jour) et de rues de nuit. Elles passent toutes en **N&B très contrasté**, la couleur n'arrivant que par les tokens (calque `--c` du personnage en multiply sur les cartes, voile rouge léger dans le héros, voile `--veil` dans la bande découpée). Les découpes en X, trames et éclats restent des formes CSS ; jamais de personnage, d'arme ou de décor dessiné en CSS/SVG à la place d'une image. 3D optionnelle. Détails : `references/assets.md`.
 
 ## Signature
 
@@ -72,4 +77,5 @@ Les deux polices sont sur Google Fonts : `family=Oswald:wght@400;500&family=Noto
 - [ ] Titres de section rouges, alignés à gauche, texte dans une colonne décalée.
 - [ ] Contrastes respectés (texte noir sur rouge).
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément de la série d'origine.

@@ -10,7 +10,7 @@
 ## Structure d'une page guide
 
 1. **Héros cinématique** (≈ 480px) : visuel plein cadre, texte à gauche.
-2. **Intro blanche** : titre « Comment jouer » centré + paragraphe, puis panorama illustré.
+2. **Intro blanche** : titre « Comment jouer » centré + paragraphe, puis panorama (image réelle fondue blanc → nuit, voir `assets.md`).
 3. **Question générale** (« Qu'est-ce que le jeu ? ») : titre centré sur une vidéo floutée en fond, paragraphe centré.
 4. **Sections objectif** (2 colonnes 50/50) : à gauche titre + paragraphe + médaillons-onglets ; à droite grand médaillon sur la carte fondue + sous-titre italique + explication centrée. Les sections suivantes inversent parfois les colonnes.
 5. **Sections vidéo** : titre à gauche, bloc vidéo + vignettes centré.

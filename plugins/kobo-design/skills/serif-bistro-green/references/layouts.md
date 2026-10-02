@@ -30,6 +30,8 @@ Barre flottante collante (`position: sticky; top: 16px`), largeur du conteneur, 
 
 ## Héros
 
+Le personnage est une **image réelle** (photo de la cheffe dans une arche, voir `assets.md`).
+
 ```
  [● Sauge]   (Accueil) La carte  Expériences  Contact   (⌕) [Réserver →]
 
@@ -43,9 +45,9 @@ Barre flottante collante (`position: sticky; top: 16px`), largeur du conteneur, 
 ```
 
 - Padding : 48px haut, 64px + 32px bas.
-- Personnage : `position: absolute`, centré (`left: 50%`, `translate: -46% 0`), largeur `clamp(220px, 26vw, 360px)`, pieds sous le bord de la feuille crème.
+- Arche photo : `position: absolute`, centrée (`left: 50%`, `translate: -46% 0`), largeur `clamp(220px, 26vw, 360px)`, ratio 3:4.2, bas sous le bord de la feuille crème.
 - Empilement : ligne 1 `z-index: 1`, personnage `2`, ligne 2 `3`, pied du héros `4`.
-- Un léger halo crème (radial à 9 %) derrière le personnage pour le détacher.
+- Un léger halo crème (radial à 9 %) derrière l'arche, et un filet crème décalé de 10px autour d'elle.
 
 ## Sections types
 
@@ -65,7 +67,7 @@ Feuille verte : 4 colonnes, filet, mentions, puis le nom géant centré, `white-
 ## Adaptation mobile
 
 - Sous 720px : navigation = logo + bouton « Réserver » réduit à la flèche + menu.
-- Héros : titre à `clamp(3.25rem, 17vw, 5rem)` ; le personnage (54vw) se cale à droite, sous la toque la 1re ligne « Cuisine » à gauche, la 2e ligne (« de saison ») traverse son torse ; le bas du personnage s'efface (`mask-image` dégradé) ; texte et boutons passent sous le personnage (marge 96px) ; chiffres en ligne.
+- Héros : titre à `clamp(3.25rem, 17vw, 5rem)` ; l'arche photo (46vw) se cale à droite, sous la toque la 1re ligne « Cuisine » à gauche, la 2e ligne (« de saison ») traverse son torse ; le bas de l'arche s'efface (`mask-image` dégradé) ; texte et boutons passent sous l'arche (marge 96px) ; chiffres en ligne.
 - Carrousel : cartes à 78 % de largeur, la suivante dépasse pour inviter au geste.
 - Titre échelonné : lignes alignées à gauche sauf la dernière ; vignettes conservées.
 - Expériences, newsletter, pied de page : une colonne. Le nom géant reste sur une ligne (22vw).

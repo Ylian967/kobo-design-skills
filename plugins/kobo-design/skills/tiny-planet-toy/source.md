@@ -20,5 +20,6 @@
 
 | Élément du site | Dans le skill | Raison |
 |---|---|---|
-| Monde 3D, logo, personnages | Planète CSS/SVG générique, Three.js optionnel | Droits d'auteur |
-| Rendu 100 % WebGL | Version CSS d'abord | Accessibilité, performance, mouvement réduit |
+| Monde 3D, logo, personnages | Planète Three.js low-poly générique | Droits d'auteur |
+| Rendu 100 % WebGL | Planète en WebGL, interface en HTML, repli image/disque | Accessibilité, performance, mouvement réduit |
+| Visuels | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droits d'auteur |

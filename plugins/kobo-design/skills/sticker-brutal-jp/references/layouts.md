@@ -39,7 +39,7 @@ Structures déduites des captures du shot (valeurs estimées), réécrites comme
 ## Héros
 
 - Gauche : salutation en pilule inclinée (-2°), titre latin sur 3 lignes avec **un mot surligné** par un autocollant pervenche incliné derrière, sous-titre japonais 900 sur 2 lignes, corps 3 lignes max (34em), deux boutons.
-- Droite : composition carrée — hexagone (88 % de la zone), katakana vertical qui dépasse à droite, 4 autocollants aux coins (bulle en haut à gauche, pastille œil à gauche, tuile graphique en bas à droite, pastille verte en bas à gauche).
+- Droite : composition carrée — hexagone avec portrait photo réel (88 % de la zone, voir `assets.md`), katakana vertical qui dépasse à droite, 4 autocollants aux coins (bulle en haut à gauche, pastille œil à gauche, tuile graphique en bas à droite, pastille verte en bas à gauche).
 - Padding vertical : 32px haut, 64px bas.
 
 ## Sections types

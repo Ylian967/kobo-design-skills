@@ -19,3 +19,4 @@
 |---|---|---|
 | Logo de l'institution, reconstitutions 3D, textes | Emplacements, dégradés, contenu inventé | Marque et droits d'auteur |
 | Lentille uniquement à la souris | Équivalent clavier ajouté | Accessibilité |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash) ; la « reconstitution » est la même photo retraitée en CSS. À remplacer par les images et reconstitutions du projet | Démonstration |

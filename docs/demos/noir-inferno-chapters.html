@@ -25,18 +25,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .ui { font: 400 var(--text-2xs)/1 var(--font-ui); letter-spacing: var(--tracking-ui); text-transform: uppercase; }
 .chapter { position: fixed; inset: 0; opacity: 0; visibility: hidden; transition: opacity calc(var(--dur) / 2) var(--ease), visibility 0s calc(var(--dur) / 2); }
 .chapter.is-active { opacity: 1; visibility: visible; transition-delay: calc(var(--dur) / 2), 0s; }
-.scene { position: absolute; inset: 0; filter: grayscale(1) contrast(1.1); transform: scale(1); transition: transform 20s linear; }
-.chapter.is-active .scene { transform: scale(1.06); }
-.scene::after { content: ""; position: absolute; inset: 0; background: var(--shade); }
+/* Scènes : vraies photos en N&B très contrasté (voir references/assets.md) */
+.scene { position: absolute; inset: 0; overflow: hidden; background: var(--mid); }
+.scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.4) brightness(.85); transform: scale(1); transition: transform 20s linear; }
+.chapter.is-active .scene img { transform: scale(1.06); }
+.scene--dark img { filter: grayscale(1) contrast(1.5) brightness(.6); }
+.scene::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade); }
+.scene::after { content: ""; position: absolute; inset: 0; z-index: 2; filter: url(#grain); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
 .haze { position: absolute; inset: -20%; background: radial-gradient(40% 30% at 30% 60%, var(--haze), transparent 70%), radial-gradient(35% 25% at 70% 40%, var(--haze), transparent 70%); animation: drift var(--drift) linear infinite alternate; pointer-events: none; }
-/* Scènes en CSS (à remplacer par des illustrations) */
-.s1 { background: linear-gradient(180deg, #1c1c1c 0 55%, #0c0c0c 55% 58%, #262626 58% 75%, #050505); }
-.s1::before { content: ""; position: absolute; left: 0; right: 0; top: 58%; height: 12%; background: repeating-linear-gradient(90deg, transparent 0 4%, #3a3a3a 4% 18%, transparent 18% 22%, #2c2c2c 22% 40%, transparent 40% 46%); border-radius: 30px; }
-.s2 { background: linear-gradient(180deg, #d9d9d9, #8c8c8c 50%, #3a3a3a); }
-.s2::before { content: ""; position: absolute; right: 18%; bottom: 0; width: 26%; height: 70%; background: #141414; clip-path: polygon(20% 100%, 30% 20%, 60% 0, 80% 30%, 100% 100%); }
-.s3 { background: radial-gradient(circle at 50% 30%, #e6e6e6, #6e6e6e 60%, #222); }
-.s3::before { content: ""; position: absolute; inset: 20% 0 0; background: radial-gradient(circle at 50% 22%, #bdbdbd 0 7%, transparent 7.5%) 0 0/12% 34%, radial-gradient(ellipse at 50% 80%, #4a4a4a 0 30%, transparent 31%) 0 0/12% 34%; }
-.s4 { background: radial-gradient(50% 50% at 50% 50%, #3a3a3a, #000 70%); }
 .ch-title { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; width: min(90vw, 900px); font: 900 var(--text-title)/1 var(--font-title); text-align: center; text-shadow: 0 0 40px var(--bg); opacity: 0; filter: blur(8px); transition: opacity var(--dur-title) var(--ease), filter var(--dur-title) var(--ease); }
 .chapter.is-active .ch-title { opacity: 1; filter: none; transition-delay: var(--dur); }
 .corner { position: fixed; z-index: 10; }
@@ -56,27 +52,29 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .toc button::before { content: counter(c) "  "; font: 400 1rem var(--font-number); }
 .toc button[aria-current] { color: var(--text); }
 .toc .close { position: absolute; right: var(--edge); top: var(--edge); }
+.toc .credit { position: absolute; left: 0; right: 0; bottom: var(--edge); text-align: center; color: var(--muted); }
 @keyframes drift { to { transform: translate(6%, -3%); } }
 @media (max-width: 700px) { :root { --edge: 20px; } .tc, .bl, .br { display: none; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; } }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
 <div class="corner tl">Neuf Cercles</div>
 <button class="corner tc ui" id="openToc">Sommaire du projet.</button>
 <div class="corner tr ui"><span>FR · EN</span><button aria-label="Son coupé" aria-pressed="false">▮▯▮</button></div>
-<div class="corner bl ui"><a href="#" style="color:inherit">X</a><a href="#" style="color:inherit">IG</a></div>
+<div class="corner bl ui"><a href="#" style="color:inherit">X</a><a href="#" style="color:inherit">IG</a><span>Photos : Unsplash</span></div>
 <a class="corner br ui" href="#" style="color:inherit;text-decoration:none">À propos du groupe</a>
 
 <main>
-  <section class="chapter is-active" aria-label="Chapitre 1"><div class="scene s1" role="img" aria-label="Une rue la nuit, des voitures à l'arrêt dans la brume"></div><div class="haze"></div></section>
-  <section class="chapter" aria-label="Chapitre 2"><div class="scene s2" role="img" aria-label="Une falaise isolée dans le brouillard"></div><div class="haze"></div><h2 class="ch-title">Le dernier phare.</h2></section>
-  <section class="chapter" aria-label="Chapitre 3"><div class="scene s3" role="img" aria-label="Une foule de silhouettes identiques et masquées"></div><div class="haze"></div><h2 class="ch-title">Les visages prêtés.</h2></section>
-  <section class="chapter" aria-label="Chapitre 4"><div class="scene s4" role="img" aria-label="Un noir presque total, une lueur au centre"></div><div class="haze"></div><h2 class="ch-title">Le silence, enfin.</h2></section>
+  <section class="chapter is-active" aria-label="Chapitre 1"><div class="scene" data-slot="chapter-1"><img src="https://images.unsplash.com/photo-1591848478625-de43268e6fb8?auto=format&fit=crop&w=2000&q=80" alt="Une manifestation en noir et blanc, des poings levés au-dessus de la foule" width="2000" height="1333" fetchpriority="high" style="object-position:50% 40%"></div><div class="haze"></div></section>
+  <section class="chapter" aria-label="Chapitre 2"><div class="scene" data-slot="chapter-2"><img src="https://images.unsplash.com/photo-1591817414324-78965f740086?auto=format&fit=crop&w=2000&q=80" alt="Une foule en noir et blanc, un poing levé au premier plan" width="2000" height="1333" loading="lazy" style="object-position:50% 40%"></div><div class="haze"></div><h2 class="ch-title">Les voix levées.</h2></section>
+  <section class="chapter" aria-label="Chapitre 3"><div class="scene" data-slot="chapter-3"><img src="https://images.unsplash.com/photo-1540172777610-b15b605dd68d?auto=format&fit=crop&w=2000&q=80" alt="Le visage d'une femme en gros plan, en noir et blanc, dans un clair-obscur" width="2000" height="1333" loading="lazy" style="object-position:50% 30%"></div><div class="haze"></div><h2 class="ch-title">Les visages prêtés.</h2></section>
+  <section class="chapter" aria-label="Chapitre 4"><div class="scene scene--dark" data-slot="chapter-last"><img src="https://images.unsplash.com/photo-1638638977172-9f7169a77930?auto=format&fit=crop&w=2000&q=80" alt="Une femme presque engloutie par l'obscurité, en noir et blanc" width="2000" height="1333" loading="lazy" style="object-position:50% 30%"></div><div class="haze"></div><h2 class="ch-title">Le silence, enfin.</h2></section>
 </main>
 <div class="number" aria-live="polite"><span id="num">1</span></div>
 
-<nav class="toc" id="toc" aria-label="Sommaire"><button class="close ui" id="closeToc">Fermer</button><ol><li><button data-go="0" aria-current="true">La rue</button></li><li><button data-go="1">Le dernier phare.</button></li><li><button data-go="2">Les visages prêtés.</button></li><li><button data-go="3">Le silence, enfin.</button></li></ol></nav>
+<nav class="toc" id="toc" aria-label="Sommaire"><button class="close ui" id="closeToc">Fermer</button><ol><li><button data-go="0" aria-current="true">La foule.</button></li><li><button data-go="1">Les voix levées.</button></li><li><button data-go="2">Les visages prêtés.</button></li><li><button data-go="3">Le silence, enfin.</button></li></ol><p class="credit ui">Photos : Unsplash</p></nav>
 <script>
 (() => {
   const chs = [...document.querySelectorAll('.chapter')], num = document.getElementById('num'); let i = 0, lock = false;

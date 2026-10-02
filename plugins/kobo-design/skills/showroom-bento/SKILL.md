@@ -33,6 +33,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (cadre studio, carr
 | `references/components.md` | Cadre studio, pilules, boutons ronds, titre + prix, carrousel à voisins, ombre au sol, tuiles accessoire / caractéristique / couleur, pastilles, badge. |
 | `references/layouts.md` | Écran vitrine, grille bento, tablette, mobile. |
 | `references/motion.md` | Changement de modèle, entrée du bento, changement de peinture. |
+| `references/assets.md` | Avant de placer une photo produit : cadrages du carrousel, accessoire, teintes, rendus détourés, sources, prompts IA, 3D optionnelle. |
 | `examples/demo.html` | Page complète (marque fictive « Vantor Moto »). |
 | `source.md` | Shot de référence, ce qui a été vu, écarts. |
 
@@ -57,6 +58,10 @@ La police du shot n'est pas identifiée : c'est une grotesque géométrique gras
 | Action | `--ink` / `--on-ink` | pilule active, Commander, Acheter |
 | Marque | `--accent`, `--accent-ink`, `--on-accent` | monogramme, nom de marque, badge |
 | Produit | `--paint-*`, `--metal*`, `--rubber`, `--rim`, `--glass` | rendus et pastilles — jamais du texte |
+
+## Images et 3D
+
+Le produit se montre en **vraies photos** : de préférence des rendus ou packshots **détourés** de profil posés sur l'ombre au sol ; à défaut, une photo studio dans un cadre arrondi (jamais de faux détourage). Le carrousel enchaîne une photo par modèle, la tuile accessoire montre la vraie photo du casque, la tuile couleur une photo par teinte. 3D optionnelle (configurateur à 360°). Jamais de moto, de casque ou de produit dessiné en CSS/SVG : détails dans `references/assets.md`.
 
 ## Signature
 
@@ -89,3 +94,4 @@ La police du shot n'est pas identifiée : c'est une grotesque géométrique gras
 - [ ] Pilules et boutons : repos, survol, appui, focus, désactivé ; pastilles avec coche.
 - [ ] Testé à 390px et 1440px, sans défilement horizontal ; clavier ← → ; mouvement réduit respecté.
 - [ ] Aucun élément de la marque d'origine.
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.

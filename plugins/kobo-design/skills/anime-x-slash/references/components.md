@@ -66,7 +66,7 @@ Label « LANGUAGE » Oswald 11px au-dessus, deux petites cases 26×20 : inactive
 
 ## Visuel découpé en X
 
-Image (ou aplat) dans un conteneur, masquée par un `clip-path` qui dessine deux bandes diagonales, avec un voile `--veil`. Un grand mot Oswald (titre de la section suivante) dépasse en bas, en gris translucide.
+Image réelle (photo ou illustration du projet, voir `assets.md`) dans un conteneur, masquée par un `clip-path` qui dessine deux bandes diagonales, avec un voile `--veil`. Un grand mot Oswald (titre de la section suivante) dépasse en bas, en gris translucide.
 Le plus simple : un masque en dégradé net à l'angle `--slant` (deux bandes opaques séparées par une fente transparente).
 ```css
 .x-cut { position: relative; aspect-ratio: 16/9; overflow: hidden; }
@@ -79,7 +79,7 @@ Le plus simple : un masque en dégradé net à l'angle `--slant` (deux bandes op
 
 ## Carte de classement (parallélogramme)
 
-- **Anatomie** : parallélogramme (`--skew`), visuel du personnage en fond, dégradé blanc vers le bas, **chiffre géant Oswald rouge** (01, 02…) en bas à gauche, étiquette noire « RANKING No. » au-dessus du chiffre, étiquette noire « HERO NAME » + nom blanc en haut à droite.
+- **Anatomie** : parallélogramme (`--skew`), visuel réel du personnage en fond (photo/illustration N&B + calque `--c` en multiply, voir `assets.md`), dégradé blanc vers le bas, **chiffre géant Oswald rouge** (01, 02…) en bas à gauche, étiquette noire « RANKING No. » au-dessus du chiffre, étiquette noire « HERO NAME » + nom blanc en haut à droite.
 - Les cartes s'emboîtent sans gouttière, bordure claire 1.6px ; des triangles noirs pleins comblent les extrémités de la rangée.
 - Survol : le visuel zoome à 1.05 (500ms `--ease-snap`), la couleur du personnage apparaît en liseré.
 

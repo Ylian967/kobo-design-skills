@@ -59,7 +59,7 @@ Cercles 44px, `--border`, icône trait 1.6px `--muted` ; survol : contour et ic�
 
 ```html
 <article class="panel product">
-  <div class="thumb"><img …></div>
+  <div class="thumb shot"><img …></div>   <!-- photo réelle, voir assets.md -->
   <div><h3 class="label">NX-01 Sneaker</h3><p>Description 2 lignes…</p></div>
   <a class="btn btn--outline" href="#">Voir le film produit <span class="ne">↗</span></a>
 </article>
@@ -112,7 +112,7 @@ Conteneur `role="tablist"` ; compteur « 12 pièces » en `.label` gris à droit
 .card h3 { font: 400 var(--text-sm)/1.3 var(--font-display); text-transform: uppercase; }
 .card .meta { display: flex; justify-content: space-between; color: var(--muted); font: 400 var(--text-xs)/1 var(--font-mono); }
 ```
-Image 4:5 sur halo `--panel-2`, ligne de balayage orange au survol (voir motion).
+Image réelle 4:5 traitée en N&B sombre (voir `assets.md`), repli halo `--panel-2`, étiquette sur `--scrim`, ligne de balayage orange au survol (voir motion).
 
 ## Texte vertical
 

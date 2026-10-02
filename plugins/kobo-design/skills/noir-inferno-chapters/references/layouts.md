@@ -2,7 +2,7 @@
 
 ## Séquence
 
-1. **Ouverture** (chapitre 1) : scène de rue ou de foule, sans titre central — seulement le nom du projet en haut à gauche et « 1 » en bas.
+1. **Ouverture** (chapitre 1) : photo réelle de rue ou de foule (voir `assets.md`), sans titre central — seulement le nom du projet en haut à gauche et « 1 » en bas.
 2. **Chapitres 2 à N** : une scène + un titre central + le numéro.
 3. **Fin** : écran noir, une phrase finale centrée, liens d'écoute / d'achat en capitales espacées.
 

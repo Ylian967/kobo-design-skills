@@ -91,7 +91,7 @@ Cercle `--badge` (88px, 64px mobile), fond `--flavor-*`, contour brun, ombre dur
 .card--featured { transform: scale(1.06); z-index: 1; }   /* carte du milieu, surélevée */
 .card .tag { position: absolute; top: -16px; left: var(--space-6); background: var(--ink); color: var(--yellow); … }
 ```
-Contenu : visuel produit (emballage incliné), nom Anton 28px capitales, méta Archivo 600 14px, puis **barre d'ajout** :
+Contenu : photo produit collée (voir ci-dessous), nom Anton 28px capitales, méta Archivo 600 14px, puis **barre d'ajout** :
 
 ```css
 .add { display: flex; min-height: 48px; border: 2px solid var(--ink); border-radius: var(--radius-sm); background: var(--white); font: 800 var(--text-xs)/1 var(--font-body); text-transform: uppercase; }
@@ -100,9 +100,15 @@ Contenu : visuel produit (emballage incliné), nom Anton 28px capitales, méta A
 .add[aria-pressed="true"] { background: var(--ink); color: var(--yellow); }   /* ajouté */
 ```
 
-## Emballage dessiné (emplacement produit)
+## Photo produit (disque et photo collée)
 
-Rectangle 3:1 incliné (-8 à -12°), bandes `--bar` / `--yellow`, nom de marque en Anton jaune, extrémités **sertie** (petites dents en `mask` à gauche et à droite), ombre portée dure `drop-shadow(8px 10px 0 var(--ink))`. Toujours porter un `data-slot` pour la future photo.
+Le produit est toujours une **vraie photo** (image réelle, voir `assets.md`), jamais un emballage dessiné. Section brune : photo ronde dans un disque `--orange` (contour `--stroke`, ombre `--shadow-hard-lg`) + étiquette jaune inclinée « 20 g protéines ». Cartes : photo 4:3 « collée » (contour 3px, rayon 4px, ombre dure, rotation -3° / +2°), couleurs `--grade-pop`. Toujours un `data-slot` et un fond token en repli.
+
+```css
+.disc { width: min(78%, 400px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--orange); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-lg); }
+.card .art { aspect-ratio: 4 / 3; overflow: hidden; border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); background: var(--cream); box-shadow: var(--shadow-hard); transform: rotate(-3deg); }
+.disc img, .card .art img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-pop); }
+```
 
 ## Tampon tournant
 
@@ -137,5 +143,5 @@ Blanc, contour brun, rayon 8px, ombre dure 4px, légère rotation alternée (±1
 ## États communs
 
 - **Chargement** : pastille qui tourne avec l'étoile orange au centre.
-- **Vide** (panier) : silhouette brune + bouton jaune « Choisir une saveur ».
+- **Vide** (panier) : pictogramme de sac brun + bouton jaune « Choisir une saveur ».
 - **Erreur** : contour `--orange-ink`, message Archivo 600 14px `--orange-ink` sous le champ.

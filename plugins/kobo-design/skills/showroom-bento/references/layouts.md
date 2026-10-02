@@ -15,7 +15,7 @@
 │ Model V4 Ardente                                              32 000 €   │
 │ légende 11px                                             mention 11px    │
 │                                                                          │
-│ ▒▒moto▒▒          ┌──────── moto au centre ────────┐          ▒▒moto▒▒  │
+│ ▒▒photo▒▒         ┌──── photo moto au centre ───────┐         ▒▒photo▒▒  │
 │ (voisine,         │                                │          (voisine,  │
 │  coupée)          └────────────────────────────────┘           coupée)  │
 │                     ░░░░░░░ ombre au sol ░░░░░░░                         │

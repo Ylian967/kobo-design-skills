@@ -33,34 +33,20 @@ a { color: inherit; }
 .wrap { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
 .caps { font: 500 var(--text-2xs)/1.2 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
 
-/* ---------- Photo dessinée (emplacement d'image) ---------- */
-.photo { position: absolute; inset: 0; overflow: hidden; background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 46%, var(--sky-glow) 64%, var(--sun) 72%); }
-.photo .sun { position: absolute; left: var(--sun-x, 70%); top: var(--sun-y, 58%); width: 46%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, var(--sun) 0 8%, color-mix(in srgb, var(--sun) 50%, transparent) 22%, transparent 62%); }
-.photo .cloud { position: absolute; height: 2.4%; border-radius: var(--radius-round); background: color-mix(in srgb, var(--sun) 55%, transparent); filter: blur(3px); }
-.photo .hill { position: absolute; left: -25%; right: -25%; bottom: -48%; height: 92%; border-radius: 50% 50% 0 0 / 70% 70% 0 0; background: radial-gradient(ellipse at 62% 8%, var(--hill-light), transparent 45%), linear-gradient(180deg, var(--hill) 0 30%, var(--hill-dark) 70%); }
-.photo .hill--far { bottom: -40%; left: -40%; right: 10%; background: linear-gradient(180deg, color-mix(in srgb, var(--hill-dark) 70%, var(--sky-mid)), var(--hill-dark)); opacity: .85; }
-.photo .tree { position: absolute; width: 2.4%; aspect-ratio: 1 / 3; background: linear-gradient(90deg, var(--hill-dark), color-mix(in srgb, var(--hill-dark) 70%, var(--ink))); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.photo .veil { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--shade) 80%, transparent) 88%, var(--shade)); }
-/* Maison A (A-frame) */
-.house { position: absolute; left: var(--house-x, 50%); bottom: var(--house-y, 30%); width: var(--house-w, 30%); aspect-ratio: 1 / 0.92; translate: -50% 0; }
-.house .roof { position: absolute; inset: 0 0 8%; background: linear-gradient(90deg, var(--wood) 0 50%, color-mix(in srgb, var(--wood) 80%, var(--sky-glow)) 50%); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.house .glass { position: absolute; left: 21%; right: 21%; top: 26%; bottom: 8%; clip-path: polygon(50% 0, 100% 100%, 0 100%);
-  background: repeating-linear-gradient(90deg, transparent 0 15%, var(--wood) 15% 16.5%), linear-gradient(0deg, transparent 0 32%, var(--wood) 32% 34%, transparent 34% 62%, var(--wood) 62% 64%, transparent 64%), radial-gradient(ellipse at 50% 85%, var(--sun), var(--window) 45%, color-mix(in srgb, var(--window) 60%, var(--wood))); }
-.house .deck { position: absolute; left: -8%; right: -8%; bottom: 0; height: 8%; background: linear-gradient(180deg, var(--stone), color-mix(in srgb, var(--stone) 50%, var(--wood))); }
-.house .glow { position: absolute; left: 10%; right: 10%; bottom: -14%; height: 18%; border-radius: 50%; background: radial-gradient(ellipse, color-mix(in srgb, var(--window) 50%, transparent), transparent 70%); }
-/* Maison B (cube contemporain) */
-.house--box { aspect-ratio: 1 / 0.55; }
-.house--box .vol1 { position: absolute; left: 0; width: 62%; bottom: 0; height: 64%; background: linear-gradient(90deg, var(--stone) 0 18%, var(--window) 18% 82%, var(--stone) 82%); box-shadow: inset 0 6px 0 var(--wood); }
-.house--box .vol2 { position: absolute; right: 0; width: 52%; top: 0; height: 52%; background: linear-gradient(180deg, var(--wood) 0 12%, color-mix(in srgb, var(--window) 70%, var(--sky-top)) 12% 88%, var(--wood) 88%); }
-.house--box .vol2::after { content: ""; position: absolute; inset: 12% 0; background: repeating-linear-gradient(90deg, transparent 0 22%, var(--wood) 22% 23.5%); }
-.house--box .pool { position: absolute; left: 4%; right: 30%; bottom: -14%; height: 10%; background: linear-gradient(90deg, var(--sky-top), color-mix(in srgb, var(--sky-top) 50%, var(--white))); }
+/* ---------- Photos (vraies images, voir references/assets.md) ---------- */
+.media { position: absolute; inset: 0; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, var(--sky-top), var(--sky-mid) 55%, var(--shade)); }
+.media img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; } /* color : masque le texte alt si l'image ne charge pas */
+.media--warm img { filter: saturate(1.06) contrast(1.03); }
+.media--warm::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(200deg, color-mix(in srgb, var(--sky-glow) 30%, transparent), transparent 55%); mix-blend-mode: soft-light; }
+.media .veil { position: absolute; inset: 0; z-index: 3; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--shade) 80%, transparent) 88%, var(--shade)); }
 
 /* ---------- Héros encadré ---------- */
 .hero { position: relative; height: 100vh; height: 100svh; min-height: 640px; max-height: 960px; padding: var(--frame-inset); overflow: hidden; color: var(--white); background: var(--shade); }
-.hero-bg { position: absolute; inset: calc(-2 * var(--blur-bg)); filter: blur(var(--blur-bg)) saturate(1.1); }
+.hero-bg { position: absolute; inset: calc(-2 * var(--blur-bg)); background: var(--shade); }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: blur(var(--blur-bg)) saturate(1.1); }
 .frame { position: relative; height: 100%; border: 1px solid var(--frame-line); border-radius: var(--radius-frame); overflow: hidden; isolation: isolate; }
-.frame .photo { animation: settle var(--dur-photo) var(--ease) both; }
-.wordmark { position: absolute; left: 0; right: 0; top: 12%; margin: 0; text-align: center; font: 700 var(--text-wordmark)/0.8 var(--font-display); letter-spacing: var(--tracking-wordmark); text-transform: uppercase;
+.frame .media img { animation: settle var(--dur-photo) var(--ease) both; }
+.wordmark { position: absolute; z-index: 2; left: 0; right: 0; top: 12%; margin: 0; text-align: center; font: 700 var(--text-wordmark)/0.8 var(--font-display); letter-spacing: var(--tracking-wordmark); text-transform: uppercase;
   background: linear-gradient(180deg, var(--wordmark-from) 10%, var(--wordmark-to) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; }
 .topbar { position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: var(--space-4) var(--space-6); }
 .brand { justify-self: start; display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; text-decoration: none; font: 600 var(--text-base)/1 var(--font-display); letter-spacing: 0.18em; }
@@ -102,10 +88,9 @@ a { color: inherit; }
 .agent .info a { font: 400 var(--text-sm)/1.2 var(--font-body); text-decoration: none; font-variant-numeric: tabular-nums; }
 .agent .btn { width: 100%; justify-content: space-between; }
 
-/* Portrait dessiné (emplacement photo) */
-.portrait { position: relative; overflow: hidden; background: linear-gradient(160deg, var(--p1, var(--stone)), var(--p2, var(--sky-mid))); }
-.portrait::before { content: ""; position: absolute; left: 50%; top: 22%; width: 34%; aspect-ratio: 1 / 1.15; translate: -50% 0; border-radius: 50% 50% 46% 46%; background: var(--skin, color-mix(in srgb, var(--wood) 55%, var(--sky-glow))); }
-.portrait::after { content: ""; position: absolute; left: 50%; top: 62%; width: 80%; aspect-ratio: 1.4; translate: -50% 0; border-radius: 50% 50% 0 0; background: var(--cloth, var(--ink)); }
+/* Portraits (vraies photos) */
+.portrait { position: relative; overflow: hidden; background: var(--stone); }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; color: transparent; }
 
 /* ---------- Sections ---------- */
 section.block { padding: var(--space-24) 0; }
@@ -121,8 +106,8 @@ section.block { padding: var(--space-24) 0; }
 .listings { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-12) var(--space-8); list-style: none; margin: 0; padding: 0; }
 .listing a { display: block; text-decoration: none; }
 .listing .pic { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius-card); overflow: hidden; }
-.listing .pic .photo { transition: transform var(--dur-slow) var(--ease); }
-.listing a:hover .pic .photo { transform: scale(1.04); }
+.listing .pic img { transition: transform var(--dur-slow) var(--ease); }
+.listing a:hover .pic img { transform: scale(1.04); }
 .listing .badge { position: absolute; z-index: 2; left: var(--space-4); top: var(--space-4); padding: 8px 12px; border-radius: var(--radius-btn); background: var(--white); color: var(--ink); }
 .listing .fav { position: absolute; z-index: 2; right: var(--space-4); top: var(--space-4); width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-line); background: var(--glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--white); display: grid; place-items: center; cursor: pointer; }
 .listing .fav svg { width: 18px; height: 18px; }
@@ -145,8 +130,9 @@ section.block { padding: var(--space-24) 0; }
 
 /* Équipe */
 .team { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8) var(--space-6); list-style: none; margin: 0; padding: 0; }
-.member .portrait { aspect-ratio: 4 / 5; border-radius: var(--radius-card); filter: grayscale(.35); transition: filter var(--dur) var(--ease); }
-.member:hover .portrait { filter: none; }
+.member .portrait { aspect-ratio: 4 / 5; border-radius: var(--radius-card); }
+.member .portrait img { filter: grayscale(.35); transition: filter var(--dur) var(--ease); }
+.member:hover .portrait img { filter: none; }
 .member strong { display: block; margin-top: var(--space-3); font-weight: 500; }
 .member span { color: var(--muted); font-size: var(--text-sm); }
 
@@ -197,8 +183,7 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
 @media (max-width: 640px) {
   .topbar { grid-template-columns: 1fr auto; padding: var(--space-3) var(--space-4); }
   .topbar .clock, .topbar .city { display: none; }
-  .wordmark { top: 21%; }
-  .frame .photo { --house-w: 58% !important; --house-y: 40% !important; }
+  .wordmark { top: 16%; }
   .hero-title { left: var(--space-4); right: var(--space-4); bottom: calc(var(--space-4) + 156px); }
   .hero-title p { display: none; }
   .agent { left: var(--space-3); right: var(--space-3); bottom: var(--space-3); width: auto; }
@@ -217,18 +202,16 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
 <header class="hero" aria-labelledby="hero-title">
   <!-- Fond flouté : la même photo, hors du cadre -->
   <div class="hero-bg" aria-hidden="true">
-    <div class="photo" style="--house-w:22%;--house-y:34%"><div class="sun"></div><div class="hill hill--far"></div><div class="hill"></div><div class="house"><div class="roof"></div><div class="glass"></div><div class="deck"></div></div></div>
+    <img src="https://images.unsplash.com/photo-1666934209832-f8daf644f622?auto=format&fit=crop&w=400&q=80" alt="" width="400" height="267" decoding="async">
   </div>
 
   <div class="frame">
-    <div class="photo" data-slot="hero-photo" role="img" aria-label="Maison en A en bois sur une colline verte au coucher du soleil (emplacement photo)" style="--house-w:27%;--house-y:31%;--sun-x:72%;--sun-y:56%">
-      <div class="sun"></div>
-      <span class="cloud" style="left:6%;top:47%;width:22%"></span><span class="cloud" style="left:62%;top:44%;width:18%"></span>
+    <div class="media media--warm" data-slot="hero-photo">
+      <picture>
+        <source media="(max-width: 640px)" srcset="https://images.unsplash.com/photo-1666934209832-f8daf644f622?auto=format&fit=crop&w=900&h=1600&q=80">
+        <img src="https://images.unsplash.com/photo-1666934209832-f8daf644f622?auto=format&fit=crop&w=2000&q=80" alt="Maison en A en bois au pignon entièrement vitré, au cœur de la nature" width="2000" height="1333" fetchpriority="high" decoding="async">
+      </picture>
       <p class="wordmark" aria-hidden="true">Halden</p>
-      <div class="hill hill--far"></div>
-      <div class="hill"></div>
-      <span class="tree" style="left:30%;bottom:40%"></span><span class="tree" style="left:32.5%;bottom:39%;width:1.8%"></span><span class="tree" style="left:66%;bottom:39%"></span><span class="tree" style="left:69%;bottom:37%;width:3%"></span>
-      <div class="house"><div class="glow"></div><div class="roof"></div><div class="glass"></div><div class="deck"></div></div>
       <div class="veil"></div>
     </div>
 
@@ -247,10 +230,10 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
       <a class="btn btn--white" href="#main">En savoir plus <span class="arr" aria-hidden="true">→</span></a>
     </div>
 
-    <aside class="agent" aria-label="Votre conseillère">
+    <aside class="agent" aria-label="Votre contact">
       <div class="agent-row">
-        <div class="portrait" data-slot="agent-portrait" role="img" aria-label="Portrait de la conseillère (emplacement)" style="--p1:var(--sky-mid);--p2:var(--stone);--cloth:var(--shade)"></div>
-        <div class="info"><span class="caps">Votre conseillère</span><strong>Clara Vasseur</strong><a href="tel:+33100000000">+33 1 00 00 00 00</a></div>
+        <div class="portrait" data-slot="agent-portrait"><img src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?auto=format&fit=crop&w=200&h=200&q=80" alt="Portrait d'un conseiller en costume, bras croisés" width="200" height="200" decoding="async"></div>
+        <div class="info"><span class="caps">Votre contact</span><strong>Camille Vasseur</strong><a href="tel:+33100000000">+33 1 00 00 00 00</a></div>
       </div>
       <a class="btn btn--white" href="tel:+33100000000">Appeler <span class="arr" aria-hidden="true">→</span></a>
     </aside>
@@ -268,24 +251,24 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
       </div>
       <ul class="listings">
         <li class="listing"><a href="#">
-          <div class="pic"><div class="photo" data-slot="listing-1" style="--house-w:36%;--house-y:26%;--sun-x:22%"><div class="sun"></div><div class="hill hill--far"></div><div class="hill"></div><div class="house"><div class="glow"></div><div class="roof"></div><div class="glass"></div><div class="deck"></div></div></div><span class="badge caps">Nouveau</span></div>
+          <div class="pic"><div class="media media--warm" data-slot="listing-1"><img src="https://images.unsplash.com/photo-1631645033513-15144f920557?auto=format&fit=crop&w=800&h=500&q=80" alt="Maison contemporaine sur une colline sous un ciel bleu profond" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Nouveau</span></div>
           <div class="row"><h3>Le Refuge du Plateau</h3><span class="price">1 240 000 €</span></div>
           <div class="specs"><span>Vercors</span><span>4 ch.</span><span>3 sdb</span><span>210 m²</span></div>
         </a></li>
         <li class="listing"><a href="#">
-          <div class="pic"><div class="photo" data-slot="listing-2" style="--house-w:46%;--house-y:30%;--sky-top:var(--sky-mid);--sun-y:50%"><div class="sun"></div><div class="hill"></div><div class="house house--box"><div class="vol1"></div><div class="vol2"></div><div class="pool"></div></div></div><span class="badge caps">Vue mer</span></div>
+          <div class="pic"><div class="media media--warm" data-slot="listing-2"><img src="https://images.unsplash.com/photo-1660361338517-8c8fbb3ac264?auto=format&fit=crop&w=800&h=500&q=80" alt="Villa blanche aux lignes pures avec piscine" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Vue mer</span></div>
           <div class="row"><h3>Villa Cap Lumière</h3><span class="price">3 450 000 €</span></div>
           <div class="specs"><span>Côte basque</span><span>5 ch.</span><span>4 sdb</span><span>320 m²</span></div>
         </a></li>
         <li class="listing"><a href="#">
-          <div class="pic"><div class="photo" data-slot="listing-3" style="--house-w:40%;--house-y:24%;--sky-top:var(--shade-2);--sun-x:40%;--sun-y:66%"><div class="sun"></div><div class="hill hill--far"></div><div class="hill"></div><div class="house house--box"><div class="vol1"></div><div class="vol2"></div></div></div><span class="badge caps">Exclusivité</span></div>
+          <div class="pic"><div class="media media--warm" data-slot="listing-3"><img src="https://images.unsplash.com/photo-1698994705178-d244d73ea573?auto=format&fit=crop&w=800&h=500&q=80" alt="Maison moderne en bois et béton" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Exclusivité</span></div>
           <div class="row"><h3>Maison des Pins</h3><span class="price">890 000 €</span></div>
           <div class="specs"><span>Landes</span><span>3 ch.</span><span>2 sdb</span><span>165 m²</span></div>
         </a></li>
         <li class="listing"><a href="#">
-          <div class="pic"><div class="photo" data-slot="listing-4" style="--house-w:30%;--house-y:30%;--sun-x:80%;--sun-y:48%"><div class="sun"></div><div class="hill"></div><span class="tree" style="left:20%;bottom:34%;width:4%"></span><span class="tree" style="left:74%;bottom:32%;width:4%"></span><div class="house"><div class="roof"></div><div class="glass"></div><div class="deck"></div></div></div><span class="badge caps">Sous offre</span></div>
-          <div class="row"><h3>Chalet Belvédère</h3><span class="price">2 100 000 €</span></div>
-          <div class="specs"><span>Haute-Savoie</span><span>6 ch.</span><span>5 sdb</span><span>280 m²</span></div>
+          <div class="pic"><div class="media media--warm" data-slot="listing-4"><img src="https://images.unsplash.com/photo-1750271329214-a7dbce880e85?auto=format&fit=crop&w=800&h=500&q=80" alt="Villa éclairée au crépuscule, piscine au premier plan" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Sous offre</span></div>
+          <div class="row"><h3>Domaine du Couchant</h3><span class="price">2 100 000 €</span></div>
+          <div class="specs"><span>Luberon</span><span>6 ch.</span><span>5 sdb</span><span>280 m²</span></div>
         </a></li>
       </ul>
     </div>
@@ -307,14 +290,14 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
     <div class="wrap">
       <div class="sec-head"><div><span class="caps eyebrow">02 — L'équipe</span><h2 id="t-title">Nos conseillers</h2></div><a class="btn btn--ghost" href="#">Nous rejoindre <span class="arr" aria-hidden="true">→</span></a></div>
       <ul class="team">
-        <li class="member"><div class="portrait" data-slot="team-1" style="--p1:var(--stone);--p2:var(--sky-mid)"></div><strong>Clara Vasseur</strong><span>Directrice, Paris</span></li>
-        <li class="member"><div class="portrait" data-slot="team-2" style="--p1:var(--sky-top);--p2:var(--stone);--cloth:var(--shade-2)"></div><strong>Jonas Meyer</strong><span>Montagne</span></li>
-        <li class="member"><div class="portrait" data-slot="team-3" style="--p1:var(--sky-glow);--p2:var(--stone);--cloth:var(--wood)"></div><strong>Inès Barre</strong><span>Littoral</span></li>
-        <li class="member"><div class="portrait" data-slot="team-4" style="--p1:var(--hill-light);--p2:var(--stone)"></div><strong>Paul Okafor</strong><span>Estimation</span></li>
-        <li class="member"><div class="portrait" data-slot="team-5" style="--p1:var(--stone);--p2:var(--sky-top);--cloth:var(--shade)"></div><strong>Léa Fontaine</strong><span>Genève</span></li>
-        <li class="member"><div class="portrait" data-slot="team-6" style="--p1:var(--sky-mid);--p2:var(--sky-glow);--cloth:var(--wood)"></div><strong>Marc Delorme</strong><span>Domaines viticoles</span></li>
-        <li class="member"><div class="portrait" data-slot="team-7" style="--p1:var(--stone);--p2:var(--hill-light)"></div><strong>Sofia Reyes</strong><span>Clientèle internationale</span></li>
-        <li class="member"><div class="portrait" data-slot="team-8" style="--p1:var(--sky-top);--p2:var(--sky-mid);--cloth:var(--shade-2)"></div><strong>Hugo Lambert</strong><span>Juridique</span></li>
+        <li class="member"><div class="portrait" data-slot="team-1"><img src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?auto=format&fit=crop&w=600&h=750&q=80" alt="Conseiller en costume, bras croisés" width="600" height="750" loading="lazy" decoding="async"></div><strong>Camille Vasseur</strong><span>Direction, Paris</span></li>
+        <li class="member"><div class="portrait" data-slot="team-2"><img src="https://images.unsplash.com/photo-1656399910161-8efafd973a29?auto=format&fit=crop&w=600&h=750&q=80" alt="Conseiller souriant, la ville en arrière-plan" width="600" height="750" loading="lazy" decoding="async"></div><strong>Sacha Meyer</strong><span>Montagne</span></li>
+        <li class="member"><div class="portrait" data-slot="team-3"><img src="https://images.unsplash.com/photo-1552699611-e2c208d5d9cf?auto=format&fit=crop&w=600&h=750&q=80" alt="Femme aux cheveux sombres, regard vers l'objectif" width="600" height="750" loading="lazy" decoding="async"></div><strong>Inès Barre</strong><span>Littoral</span></li>
+        <li class="member"><div class="portrait" data-slot="team-4"><img src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=600&h=750&q=80" alt="Homme en sweat beige dans la rue" width="600" height="750" loading="lazy" decoding="async"></div><strong>Paul Okafor</strong><span>Estimation</span></li>
+        <li class="member"><div class="portrait" data-slot="team-5"><img src="https://images.unsplash.com/photo-1667053508464-eb11b394df83?auto=format&fit=crop&w=600&h=750&q=80" alt="Femme photographiée sur fond gris" width="600" height="750" loading="lazy" decoding="async"></div><strong>Léa Fontaine</strong><span>Genève</span></li>
+        <li class="member"><div class="portrait" data-slot="team-6"><img src="https://images.unsplash.com/photo-1611817757591-c3f345024273?auto=format&fit=crop&w=600&h=750&q=80" alt="Jeune homme en sweat taupe" width="600" height="750" loading="lazy" decoding="async"></div><strong>Marc Delorme</strong><span>Domaines viticoles</span></li>
+        <li class="member"><div class="portrait" data-slot="team-7"><img src="https://images.unsplash.com/photo-1662850886700-4ec19bd30d11?auto=format&fit=crop&w=600&h=750&q=80" alt="Femme souriante aux cheveux bouclés" width="600" height="750" loading="lazy" decoding="async"></div><strong>Sofia Reyes</strong><span>Clientèle internationale</span></li>
+        <li class="member"><div class="portrait" data-slot="team-8"><img src="https://images.unsplash.com/photo-1535732278552-5a8a57552b63?auto=format&fit=crop&w=600&h=750&q=80" alt="Homme en long manteau noir devant un mur gris" width="600" height="750" loading="lazy" decoding="async"></div><strong>Hugo Lambert</strong><span>Juridique</span></li>
       </ul>
     </div>
   </section>
@@ -323,9 +306,9 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
     <div class="wrap">
       <div class="sec-head"><div><span class="caps eyebrow">03 — Journal</span><h2 id="j-title">Vivre autrement</h2></div><a class="btn btn--ghost" href="#">Tous les articles <span class="arr" aria-hidden="true">→</span></a></div>
       <ul class="posts">
-        <li class="post"><a href="#"><div class="pic"><div class="photo" data-slot="post-1" style="--house-w:40%;--house-y:24%"><div class="sun"></div><div class="hill"></div><div class="house"><div class="roof"></div><div class="glass"></div><div class="deck"></div></div></div></div><span class="caps meta">Architecture · 6 min</span><h3>Pourquoi la maison en A revient en force</h3><span class="more">Lire →</span></a></li>
-        <li class="post"><a href="#"><div class="pic"><div class="photo" data-slot="post-2" style="--house-w:50%;--house-y:30%;--sun-x:30%"><div class="sun"></div><div class="hill"></div><div class="house house--box"><div class="vol1"></div><div class="vol2"></div><div class="pool"></div></div></div></div><span class="caps meta">Marché · 4 min</span><h3>Résidences secondaires : ce qui change en 2027</h3><span class="more">Lire →</span></a></li>
-        <li class="post"><a href="#"><div class="pic"><div class="photo" data-slot="post-3" style="--sky-top:var(--shade-2);--sun-y:70%"><div class="sun"></div><div class="hill hill--far"></div><div class="hill"></div><span class="tree" style="left:40%;bottom:36%;width:5%"></span><span class="tree" style="left:47%;bottom:38%;width:4%"></span><span class="tree" style="left:55%;bottom:36%;width:5%"></span></div></div><span class="caps meta">Guide · 8 min</span><h3>Acheter un terrain en montagne, pas à pas</h3><span class="more">Lire →</span></a></li>
+        <li class="post"><a href="#"><div class="pic"><div class="media media--warm" data-slot="post-1"><img src="https://images.unsplash.com/photo-1697462248408-25479e5acfb0?auto=format&fit=crop&w=800&h=600&q=80" alt="Cabane en A noire au milieu de la forêt, vue du ciel" width="800" height="600" loading="lazy" decoding="async"></div></div><span class="caps meta">Architecture · 6 min</span><h3>Pourquoi la maison en A revient en force</h3><span class="more">Lire →</span></a></li>
+        <li class="post"><a href="#"><div class="pic"><div class="media media--warm" data-slot="post-2"><img src="https://images.unsplash.com/photo-1696393800648-662c06289a5e?auto=format&fit=crop&w=800&h=600&q=80" alt="Maison cubique moderne, fenêtres éclairées" width="800" height="600" loading="lazy" decoding="async"></div></div><span class="caps meta">Marché · 4 min</span><h3>Résidences secondaires : ce qui change en 2027</h3><span class="more">Lire →</span></a></li>
+        <li class="post"><a href="#"><div class="pic"><div class="media media--warm" data-slot="post-3"><img src="https://images.unsplash.com/photo-1491824989090-cc2d0b57eb0d?auto=format&fit=crop&w=800&h=600&q=80" alt="Collines baignées de brouillard doré" width="800" height="600" loading="lazy" decoding="async"></div></div><span class="caps meta">Guide · 8 min</span><h3>Acheter un terrain en montagne, pas à pas</h3><span class="more">Lire →</span></a></li>
       </ul>
 
       <div class="news">
@@ -350,7 +333,7 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
     </div>
     <p class="foot-word" aria-hidden="true">Halden</p>
   </div>
-  <div class="wrap legal"><span>© 2026 Halden (fictif)</span><span>Mentions légales · Confidentialité</span></div>
+  <div class="wrap legal"><span>© 2026 Halden (fictif) · Photos : Unsplash</span><span>Mentions légales · Confidentialité</span></div>
 </footer>
 
 <script>

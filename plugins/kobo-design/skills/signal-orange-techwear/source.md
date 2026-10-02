@@ -29,5 +29,6 @@
 | Texte courant gris ~11px (valeur exacte inconnue) | `--muted` #9a9a9a (6,2:1 sur panneau) | Contraste garanti |
 | Texte sur onglet orange plein | `--on-accent` noir (5,5:1) au lieu du blanc (3,4:1) | Contraste en petite taille |
 | Jauges et interrupteur purement visuels | `role="switch"`, texte `sr-only` pour les jauges | Accessibilité |
-| Nom « CyberRonin », produits « RONIN-X », « CR-01 », photos du mannequin | Marque fictive « Noctunit », références « NX-0x », mannequin et produits dessinés en SVG (`data-slot`) | Marque et droits d'auteur |
+| Nom « CyberRonin », produits « RONIN-X », « CR-01 », photos du mannequin | Marque fictive « Noctunit », références « NX-0x », mannequin et produits en photos Unsplash libres (`data-slot`) | Marque et droits d'auteur |
 | Textes anglais | Textes français inventés | Identité, langue |
+| Photos du mannequin et des produits | Visuels de la démo : photos Unsplash libres (licence Unsplash) et/ou scène Three.js, à remplacer par les images du projet | Droits d'auteur ; démonstration du rendu avec de vraies images |

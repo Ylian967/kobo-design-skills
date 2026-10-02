@@ -33,6 +33,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | `references/components.md` | Avant de coder un bouton, une carte, la navigation, une puce, un champ, une bulle, une pastille, le portrait hexagonal ou le katakana vertical. |
 | `references/layouts.md` | Avant de construire une page : cadre navigateur, héros deux colonnes, sections, bande défilante, contact, mobile. |
 | `references/motion.md` | Avant d'ajouter une animation : appui « écrasé », apparition « pop », flottement, bande. |
+| `references/assets.md` | Avant de placer le portrait ou une image : sujet, cadrage, N&B + `multiply` sur le rose, détourage, sources, prompt IA, 3D optionnelle. |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
 | `source.md` | Pour connaître le shot de référence, ce qui a été vu et les écarts. |
 
@@ -63,6 +64,10 @@ Le shot utilise une grotesque noire du type Archivo Black ; on prend **Archivo v
 | Statut | `--red` | point du sélecteur de langue seulement |
 
 Règle d'usage : **jaune = l'action**, une seule zone jaune dominante par écran (bouton du héros ou bloc contact). Les autres couleurs tournent sans hiérarchie, mais jamais deux autocollants voisins de la même couleur.
+
+## Images et 3D
+
+La seule image indispensable est un **vrai portrait** de la personne, en noir et blanc sur fond blanc, découpé dans l'hexagone rose tramé : `grayscale` + `mix-blend-mode: multiply` fait prendre au fond blanc la couleur de la forme, ou un détourage PNG laisse dépasser la personne en bas. Les autocollants (formes, bulles, pastilles, tuiles, katakana) sont du graphisme et restent en CSS/SVG. La 3D est optionnelle (un seul autocollant en jeton 3D). Jamais de dessin CSS/SVG à la place d'une photo ou d'un personnage : détails dans `references/assets.md`.
 
 ## Signature
 
@@ -96,4 +101,5 @@ Règle d'usage : **jaune = l'action**, une seule zone jaune dominante par écran
 - [ ] Japonais réel, relu, `lang="ja"` ; titres latins en Archivo 900.
 - [ ] Testé à 375px et 1440px sans défilement horizontal ; autocollants coupés proprement par `overflow-x: clip`.
 - [ ] Mouvement réduit respecté (pas de flottement ni de bande défilante).
+- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du shot d'origine (portrait, nom, logo, textes).

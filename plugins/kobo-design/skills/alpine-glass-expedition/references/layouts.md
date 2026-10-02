@@ -32,16 +32,9 @@ Conteneur : `max-width: var(--max)` (1320px), marges `--edge` (16 → 48px). Sec
 - Bouton de verre à ≈ 15 % du bord droit, à 56 % de la hauteur, sur un versant.
 - Vignette : `--vignette` (haut 35 %, milieu transparent, bas 82 %).
 
-### Photo de remplacement en SVG
+### Photo du héros
 
-Calques de l'arrière vers l'avant, chacun avec un dégradé de tokens (les `stop` prennent `stop-color: var(--…)` en CSS) :
-1. ciel (`--slate` → `--steel` → `--ice` → `--fog`) ; halo blanc radial à droite ;
-2. lointains `--ice` à 75 % ;
-3. bande de brume (ellipse floutée, dérive lente) ;
-4. massif principal (dégradé roche `--ice` → `--steel` → `--deep`), face à l'ombre `--slate` à 50 %, calottes de neige blanches, couloirs en traits blancs ;
-5. seconde brume, crête moyenne (`--steel` → `--deep`), troisième brume légère ;
-6. premier plan `--deep` → `--night` avec sapins (triangles).
-`preserveAspectRatio="xMidYMax slice"` ; en portrait, élargir le SVG (200 %) et le décaler (`left: -100%`) pour garder le sommet dans l'écran.
+Image réelle, voir `assets.md` : une vraie photo de sommets enneigés en `<figure class="land" data-slot="mountain-photo">` plein cadre (`object-fit: cover`), refroidie (désaturation + teinte bleue en `mix-blend-mode: color`), avec un calque de brume CSS qui dérive lentement et la vignette par-dessus. Couleur de repli du conteneur : dégradé `--slate` → `--steel` → `--ice` → `--deep`. En portrait, régler `object-position` (≈ 55 % 30 %) pour garder les sommets dans l'écran ; ne jamais remplacer la photo par un paysage dessiné en SVG.
 
 ## Séjours
 
@@ -68,7 +61,7 @@ Crête de montagne en haut (SVG rempli `--fog` qui « descend » dans la section
 
 - Nav : logo + bouton « Menu » (pilule fantôme) ; panneau de verre sombre pour les liens.
 - Titre à ≈ 50px, toujours 2 lignes ; texte 3–4 lignes.
-- Photo recadrée en portrait sur le sommet (voir plus haut).
+- Photo recadrée en portrait sur le sommet via `object-position` (voir plus haut).
 - Bouton de verre réduit à 96px, à droite, au-dessus du bas du héros.
 - Bas du héros empilé : puces (2 lignes, à gauche) → lecture + texte à gauche, note à droite sur la même ligne.
 - Cartes de voyage en une colonne, 440px de haut.

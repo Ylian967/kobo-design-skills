@@ -39,7 +39,7 @@ DES ANNÉES DE                           ( portrait, pièce à l'oreille )
 ÉPAISSEUR         │ PRIX             │ VOLUME
 6 MICRONS         │ 1 000 €          │ 0,7 CM³
 ```
-La photo est plein cadre ; le visage et la pièce sont à droite, le titre à gauche peut chevaucher la zone sombre de la photo mais jamais la pièce. Barre de caractéristiques collée en bas, pleine largeur.
+La photo (portrait réel, voir `assets.md`) occupe les deux tiers droits et se fond dans `--night` vers la gauche ; le visage et la pièce sont à droite, le titre à gauche peut chevaucher la zone sombre de la photo mais jamais la pièce. Barre de caractéristiques collée en bas, pleine largeur.
 
 ## Presse
 

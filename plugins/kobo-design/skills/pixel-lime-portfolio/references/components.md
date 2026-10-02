@@ -91,7 +91,7 @@ Règles de dessin : bord irrégulier, quelques pixels isolés qui « s'échappen
 
 ## Photo noir et blanc
 
-Conteneur `data-slot="portrait-bw"` avec `role="img"` + `aria-label`. Vraie photo : `filter: grayscale(1) contrast(1.08) brightness(.92)`, cadrage sujet au centre-droit, assez de vide à gauche pour le nom. Voile : dégradé sombre en haut (nav) et en bas (nom). Grain : filtre SVG `feTurbulence` en `mix-blend-mode: overlay` à `--grain-opacity`.
+Conteneur `<figure data-slot="portrait-bw">` avec un `<img>` réel (`alt` descriptif, `fetchpriority="high"`) — image réelle, voir `assets.md`. Traitement : `filter: grayscale(1) contrast(1.08) brightness(.92)`, cadrage sujet au centre-droit, assez de vide à gauche pour le nom. Voile : dégradé sombre en haut (nav) et en bas (nom). Grain : filtre SVG `feTurbulence` en `mix-blend-mode: overlay` à `--grain-opacity`.
 
 ```html
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
@@ -170,7 +170,7 @@ Ordre : lime, blanc (décalé de 32px vers le bas), lime. Si la liste est intera
 
 ## Carte projet
 
-Vignette 4:3 rayon 6px (`data-slot="project-cover"`), puis une ligne : titre Inter Tight 500 22px **bas de casse** à gauche, méta mono `--muted` à droite (« identité · 2026 »). Toute la carte est un lien. Survol/focus : vignette zoom 1.03, petite grappe de pixels qui apparaît, pilule lime qui s'étire sous le titre. Grille 2 colonnes, colonne de droite décalée de 64px vers le bas.
+Vignette 4:3 rayon 6px (`data-slot="project-cover"`, image réelle N&B, voir `assets.md`), puis une ligne : titre Inter Tight 500 22px **bas de casse** à gauche, méta mono `--muted` à droite (« identité · 2026 »). Toute la carte est un lien. Survol/focus : vignette zoom 1.03, petite grappe de pixels qui apparaît, pilule lime qui s'étire sous le titre. Grille 2 colonnes, colonne de droite décalée de 64px vers le bas.
 
 ## Puces de filtre
 

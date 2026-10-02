@@ -53,3 +53,5 @@ Mot `SCROLL` en mono 10px en bas à droite du cadre, avec une petite flèche ↓
 
 - **Chargement** : logo tracé.
 - **Image manquante** : rectangle à coin coupé `--ink` avec label mono `IMAGE · À VENIR`.
+
+Toutes les vignettes, fiches et chapitres contiennent une **image réelle** (art du projet ou photo), teintée selon `references/assets.md` ; jamais un dégradé ou un dessin à la place.

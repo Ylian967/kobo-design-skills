@@ -9,7 +9,7 @@
 
 ## Héros (section 01)
 
-Illustration plein cadre dans un rectangle blanc légèrement **incliné** (le bord gauche part en biais), logo du jeu en bas à gauche qui déborde, boutons des stores (noirs, rayon 8px) en bas à droite. Fond béton autour.
+Image réelle plein cadre (key art du projet ou photo de rue, voir `assets.md`) dans un rectangle légèrement **incliné** (le bord gauche part en biais), logo du jeu en bas à gauche qui déborde, boutons des stores (noirs, rayon 8px) en bas à droite. Fond béton autour.
 
 ## Sections 02 → 06
 
@@ -19,7 +19,7 @@ Structure type :
 │  bloc lime numéroté    │   contenu (blanc)        │
 └──────── pellicule en diagonale ──────────────────┘
 ```
-- **Personnages** : grande illustration à droite, carrousel de vignettes en bas à gauche, bouton pilule à droite.
+- **Personnages** : grande image réelle à droite (duotone noir → lime sur le bloc numéroté, voir `assets.md`), carrousel de vignettes en bas à gauche, bouton pilule à droite.
 - **Vidéos** : image de la vidéo en fond, bande d'infos sombre translucide par-dessus (étiquette lime, date, titre), carrousel de vignettes, numéro « 03 » dans le bloc lime à droite.
 - **Actus** : carte d'actualité dans un panneau blanc, bloc lime à gauche.
 - **Univers** : grande image à coins 24px, texte court, bouton pilule.

@@ -29,8 +29,9 @@
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
 | Nom de la personne, textes, projets | Portfolio fictif « noé valin », textes et projets inventés en français | Identité et droits d'auteur |
-| Photo du portrait | Portrait N&B dessiné en CSS (dégradés) + grain SVG, emplacement `data-slot="portrait-bw"` | Droit à l'image ; à remplacer par votre photo traitée |
-| Vignettes de projets | Compositions abstraites en CSS, `data-slot="project-cover"` | Droits d'auteur |
+| Photo du portrait | Autre portrait N&B (Unsplash) + grain SVG, emplacement `data-slot="portrait-bw"` | Droit à l'image ; à remplacer par votre photo traitée |
+| Vignettes de projets | Photos N&B (poste de travail, campagne, vêtement) + une composition graphique pour un logo, `data-slot="project-cover"` | Droits d'auteur |
+| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo |
 | Gris secondaires très clairs sur gris clair | `--muted` #555555 (6,3:1 sur papier), `--muted-dark` #9a9a9a (6,8:1 sur nuit) | Contraste ≥ 4,5:1 |
 | Liens de nav minuscules | Zone cliquable portée à 44px de haut, taille visuelle conservée | Accessibilité |
 | Lime en texte | Uniquement sur `--ink` / `--card-dark` (≥ 13:1), jamais sur papier | Lisibilité |

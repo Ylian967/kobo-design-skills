@@ -35,7 +35,8 @@ Dans le dépôt Kōbō, partir de `templates/skill/`. Dossier `plugins/kobo-desi
 - `references/components.md` : chaque composant avec rôle, anatomie, états et code HTML/CSS de référence.
 - `references/layouts.md` : patrons de pages et de sections, grille, en-tête, mobile.
 - `references/motion.md` : catalogue des animations avec durées et courbes mesurées.
-- `examples/demo.html` : une page complète construite **uniquement** à partir du skill.
+- `references/assets.md` : les visuels du site analysés (sujets, cadrages, lumière, traitements), où trouver ou générer des images équivalentes, et la recette 3D si le site en utilise (objets, matières, lumière, interaction).
+- `examples/demo.html` : une page complète construite **uniquement** à partir du skill, avec de **vraies images** (photos libres, rendus) et une vraie scène 3D si le style en a une — jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un objet.
 - `source.md` : référence, mesures brutes, écarts assumés.
 
 La `description` du SKILL.md commence par ce que fait le style, puis liste les mots qu'une personne utiliserait pour le demander.
