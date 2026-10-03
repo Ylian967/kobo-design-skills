@@ -3,341 +3,469 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sauge — Serif Bistro Green (démo)</title>
+<title>Maison Sauge — table de quartier, Lyon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 <style>
-/* Copie de references/tokens.css */
 :root {
-  --green: #0e5446; --green-deep: #0a3f34; --cream: #fdf6e3; --cream-muted: #c9d8cc; --card: #fffaf0;
-  --orange: #e8603c; --orange-strong: #c4472a; --white: #ffffff; --ink: #1b1a17; --muted: #5b5a52; --line: #e7dcc2;
-  --skin: #c98b62; --herb: #6f9a52; --tomato: #d8452b; --crust: #e2b36a;
-  --font-display: 'DM Serif Display', 'Abril Fatface', Georgia, serif; --font-body: 'DM Sans', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
-  --text-2xl: clamp(2rem, 4vw, 3.25rem); --text-3xl: clamp(2.5rem, 6vw, 5rem); --text-hero: clamp(3.5rem, 11vw, 10.5rem); --text-wordmark: clamp(5rem, 22vw, 20rem);
-  --leading-display: 0.9; --leading-body: 1.6; --tracking-caps: 0.1em;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --container: 1240px;
-  --radius-btn: 4px; --radius-sm: 8px; --radius-md: 12px; --radius-section: 32px; --radius-pill: 999px; --frame-photo: 8px;
-  --shadow-photo: 0 18px 40px -12px rgb(10 63 52 / 0.35); --shadow-card: 0 12px 28px -14px rgb(27 26 23 / 0.35);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 180ms; --dur-base: 320ms; --dur-slow: 800ms;
+  --green: #004e48; --green-card: #18605a; --cream: #fef8e6; --cream-box: #fcf4e2; --frame: #fae8d2; --orange: #e45834; --orange-btn: #c8431f; --paper: #ffffff;
+  --ink: #1d1208; --soft: #d5ddd0; --green-soft: #2f615c; --line-green: rgb(254 248 230 / 0.2); --line-cream: rgb(0 78 72 / 0.18); --line-art: rgb(254 248 230 / 0.6);
+  --field: rgb(255 255 255 / 0.18); --shadow: rgb(0 40 36 / 0.28); --font-display: 'Abril Fatface', 'Bodoni 72', Georgia, serif;
+  --font: 'DM Sans', 'Helvetica Neue', Arial, sans-serif; --fs-hero: clamp(3.9rem, 10.6vw, 9.6rem); --fs-hero-2: clamp(2.5rem, 6.5vw, 5.9rem);
+  --fs-stagger: clamp(3.4rem, 11vw, 10rem); --fs-giant: clamp(3.6rem, 15.5vw, 14rem); --fs-h2: clamp(2.2rem, 4.4vw, 4rem); --fs-h3: 1.5rem; --fs-card: 1.125rem;
+  --fs-price: 1.375rem; --fs-lead: 1.25rem; --fs-body: 1rem; --fs-small: 0.875rem; --fs-tiny: 0.75rem; --page: 1440px; --gutter: clamp(16px, 4.2vw, 60px); --nav-w: 1028px;
+  --nav-h: 64px; --btn-h: 54px; --btn-h-s: 38px; --r-btn: 8px; --r-card: 18px; --r-sheet: clamp(24px, 3vw, 44px); --frame-w: 8px; --fav-w: 300px; --fav-gap: 44px;
+  --arch-w: clamp(220px, 23vw, 340px); --ease: cubic-bezier(0.22, 1, 0.36, 1); --ease-back: cubic-bezier(0.34, 1.4, 0.64, 1); --dur-fast: 200ms; --dur: 500ms;
+  --dur-slow: 1000ms;
 }
 
-* { box-sizing: border-box; }
-html { overflow-x: clip; scroll-behavior: smooth; }
-body { margin: 0; background: var(--green); color: var(--ink); font: 400 var(--text-base)/var(--leading-body) var(--font-body); overflow-x: clip; }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.wrap { width: min(var(--container), 100% - 2 * var(--space-6)); margin-inline: auto; }
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--green); color: var(--cream); font: 400 var(--fs-body)/1.55 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+h1, h2, h3, p, ul, figure { margin: 0; padding: 0; }
+ul { list-style: none; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.wrap { width: min(100%, var(--page)); margin-inline: auto; padding-inline: var(--gutter); }
+.display { font-family: var(--font-display); font-weight: 400; line-height: 1; letter-spacing: -0.01em; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 /* ---------- Boutons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-btn); border: 1px solid transparent; font: 500 var(--text-sm)/1 var(--font-body); text-decoration: none; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast); }
-.btn svg { width: 16px; height: 16px; transition: translate var(--dur-fast) var(--ease-out); }
-.btn:hover svg { translate: 3px 0; }
-.btn:active { translate: 0 1px; }
-.btn--primary { background: var(--orange-strong); color: var(--white); }
-.btn--primary:hover { background: var(--orange); color: var(--ink); }
-.btn--outline { border-color: var(--cream); color: var(--cream); background: transparent; }
-.btn--outline:hover { background: var(--cream); color: var(--green); }
-.btn--pill { border-radius: var(--radius-pill); background: var(--green); color: var(--cream); padding: 0 var(--space-6); }
-.btn--pill:hover { background: var(--green-deep); }
-.round { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer; transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast); }
-.round svg { width: 18px; height: 18px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: var(--btn-h); padding-inline: 26px; border: 1.5px solid transparent; border-radius: var(--r-btn);
+  background: var(--orange-btn); color: var(--cream); font-family: var(--font-display); font-size: var(--fs-small); letter-spacing: 0.06em; white-space: nowrap; cursor: pointer;
+  transition: transform var(--dur) var(--ease), background-color var(--dur-fast), color var(--dur-fast); }
+.btn::after { content: "→"; font-family: var(--font); transition: transform var(--dur) var(--ease); }
+.btn:hover { transform: translateY(-3px); }
+.btn:hover::after { transform: translateX(5px); }
+.btn:active { transform: translateY(0); }
+.btn--s { height: var(--btn-h-s); padding-inline: 16px; font-size: var(--fs-tiny); }
+.btn--line { background: transparent; border-color: currentColor; }
+.btn--line:hover { background: var(--cream); color: var(--green); border-color: var(--cream); }
+.btn--paper { background: var(--paper); color: var(--orange-btn); }
+
+/* ---------- Feuilles empilées ---------- */
+.sheet { position: relative; border-radius: var(--r-sheet) var(--r-sheet) 0 0; margin-top: calc(var(--r-sheet) * -1); padding-block: clamp(64px, 8vw, 120px) calc(clamp(64px, 8vw, 120px) + var(--r-sheet)); }
+.sheet--cream { background: var(--cream); color: var(--green); }
+.sheet--orange { background: var(--orange); color: var(--cream); }
+.sheet--green { background: var(--green); color: var(--cream); }
+
+/* ---------- Apparitions ---------- */
+.js .rise { opacity: 0; transform: translateY(28px); transition: opacity var(--dur-slow) var(--ease) var(--d, 0ms), transform var(--dur-slow) var(--ease) var(--d, 0ms); }
+.js .in .rise, .js .rise.in { opacity: 1; transform: none; }
+.mask { display: inline-block; overflow: hidden; padding-bottom: 0.16em; margin-bottom: -0.16em; vertical-align: top; }
+.mask > b { display: inline-block; font-weight: 400; }
+.js .mask > b { transform: translateY(112%); transition: transform var(--dur-slow) var(--ease) var(--d, 0ms); }
+.js .in .mask > b { transform: none; }
 
 /* ---------- Navigation flottante ---------- */
-.nav { position: sticky; top: var(--space-4); z-index: 20; display: flex; align-items: center; gap: var(--space-4); width: min(var(--container), 100% - 2 * var(--space-6)); margin: var(--space-4) auto 0; padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); background: color-mix(in srgb, var(--green-deep) 82%, transparent); backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--cream) 14%, transparent); border-radius: var(--radius-sm); color: var(--cream); }
-.logo { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; text-decoration: none; font: 400 var(--text-xl)/1 var(--font-display); }
-.logo i { width: 30px; height: 30px; border-radius: 50%; background: var(--orange); display: grid; place-items: center; }
-.logo i svg { width: 16px; height: 16px; color: var(--cream); }
-.nav ul { display: flex; gap: var(--space-1); margin: 0 auto; padding: var(--space-1); list-style: none; border-radius: var(--radius-pill); background: color-mix(in srgb, var(--cream) 8%, transparent); }
-.nav ul a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 var(--space-4); border-radius: var(--radius-pill); font: 500 var(--text-sm)/1 var(--font-body); text-decoration: none; color: var(--cream-muted); transition: background var(--dur-fast), color var(--dur-fast); }
-.nav ul a:hover { color: var(--cream); }
-.nav ul a[aria-current] { background: var(--cream); color: var(--green); }
-.nav .round { background: color-mix(in srgb, var(--cream) 12%, transparent); color: var(--cream); }
-.nav .round:hover { background: color-mix(in srgb, var(--cream) 22%, transparent); }
-.menu-btn { display: none !important; }
+.nav { position: fixed; z-index: 20; top: 18px; left: 50%; width: min(var(--nav-w), calc(100% - 2 * 16px)); height: var(--nav-h); transform: translateX(-50%);
+  display: flex; align-items: center; gap: 16px; padding-inline: 18px 10px; border: 1px solid var(--line-green); border-radius: 14px; background: var(--green-card); color: var(--cream);
+  box-shadow: 0 10px 30px -14px var(--shadow); transition: transform var(--dur) var(--ease); }
+.nav.is-away { transform: translate(-50%, calc(-100% - 70px)); }
+.logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 1.125rem; white-space: nowrap; }
+.logo i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--orange); }
+.logo svg { width: 15px; height: 15px; fill: none; stroke: var(--cream); stroke-width: 1.8; stroke-linecap: round; }
+.nav-links { display: flex; gap: 4px; margin-inline: auto; font-size: var(--fs-small); font-weight: 500; }
+.nav-links a { padding: 7px 14px; border-radius: 99px; transition: background-color var(--dur-fast), color var(--dur-fast); }
+.nav-links a:hover { background: var(--line-green); }
+.nav-links a.is-on { background: var(--cream); color: var(--green); }
+.nav-tools { display: flex; align-items: center; gap: 10px; }
+.round { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line-green); border-radius: 50%; background: transparent; cursor: pointer; transition: background-color var(--dur-fast); }
+.round:hover { background: var(--line-green); }
+.round svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.burger { display: none; }
+.nav .btn { height: 44px; padding-inline: 18px; font-size: var(--fs-tiny); }
 
 /* ---------- Héros ---------- */
-.hero { position: relative; color: var(--cream); padding: var(--space-12) 0 calc(var(--space-16) + var(--radius-section)); overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 55%, color-mix(in srgb, var(--cream) 9%, transparent), transparent 70%); pointer-events: none; }
-.kicker { display: inline-flex; align-items: center; gap: var(--space-2); font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-muted); }
-.kicker::before { content: ""; width: 24px; height: 1px; background: currentColor; }
-.headline { position: relative; margin: var(--space-6) 0 0; font: 400 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: -0.02em; }
-.headline span { display: block; position: relative; }
-.headline .l1 { z-index: 1; }
-.headline .l2 { z-index: 3; text-align: right; margin-top: -0.02em; }
-.headline em { font-style: italic; color: var(--orange); }
-/* Photo de la cheffe cadrée dans une arche, glissée entre les deux lignes du titre */
-.chef { position: absolute; z-index: 2; left: 50%; bottom: calc(var(--radius-section) * -1); width: clamp(220px, 26vw, 360px); aspect-ratio: 3 / 4.2; translate: -46% 0; margin: 0; pointer-events: none;
-  border-radius: var(--radius-pill) var(--radius-pill) 0 0; overflow: hidden; background: var(--green-deep); outline: 1px solid color-mix(in srgb, var(--cream) 35%, transparent); outline-offset: 10px; box-shadow: var(--shadow-photo); }
-.chef img { color: transparent; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(0.92) contrast(1.04); }
-/* fondu vert en bas : la photo se fond dans la nappe avant d'être coupée par la feuille crème */
-.chef::after { content: ""; position: absolute; inset: 55% 0 0; background: linear-gradient(transparent, color-mix(in srgb, var(--green) 55%, transparent)); }
+.hero { position: relative; padding-top: calc(var(--nav-h) + 58px); padding-bottom: var(--r-sheet); overflow: hidden; }
+.hero-title { position: relative; z-index: 1; }
+.hero-title span.line { display: flex; justify-content: space-between; gap: var(--arch-w); }
+.hero-title .l1 { font-size: var(--fs-hero); }
+.hero-title .l2 { font-size: var(--fs-hero-2); margin-top: 0.12em; }
+.hero-row { display: grid; grid-template-columns: 1fr var(--arch-w) 1fr; gap: clamp(20px, 4vw, 64px); align-items: start; }
+.arch { position: relative; z-index: 2; height: clamp(420px, 44vw, 640px); margin-top: calc(-1 * clamp(150px, 15.5vw, 228px)); border: var(--frame-w) solid var(--frame); border-bottom: 0; border-radius: 999px 999px 0 0; overflow: hidden; background: var(--green-card); }
+.js .arch { transform: translateY(18%); opacity: 0; transition: transform 1400ms var(--ease) 200ms, opacity var(--dur-slow) var(--ease) 200ms; }
+.js .in .arch { transform: none; opacity: 1; }
+.hero-left { display: grid; justify-items: center; gap: 16px; width: min(100%, 250px); margin-top: 34px; text-align: center; font-size: var(--fs-small); color: var(--soft); }
+.plate { width: 190px; aspect-ratio: 1; border-radius: 50%; overflow: hidden; box-shadow: 0 22px 34px -18px var(--shadow); }
+.plate img { transform: rotate(var(--turn, 0deg)); }
+.js .hero-left .plate { transform: scale(0.6) rotate(-90deg); opacity: 0; transition: transform 1200ms var(--ease-back) 500ms, opacity var(--dur) 500ms; }
+.js .in .hero-left .plate { transform: none; opacity: 1; }
+.hero-right { margin-top: 62px; max-width: 360px; justify-self: end; }
+.hero-right p { font-size: var(--fs-lead); line-height: 1.45; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 
-.hero-foot { position: relative; z-index: 4; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: end; margin-top: var(--space-8); }
-.hero-foot p { margin: 0 0 var(--space-6); max-width: 30ch; color: var(--cream-muted); }
-.actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-.facts { justify-self: end; display: flex; gap: var(--space-8); margin: 0; }
-.facts div { display: grid; gap: var(--space-1); }
-.facts dt { font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-muted); }
-.facts dd { margin: 0; font: 400 var(--text-xl)/1.1 var(--font-display); }
+/* ---------- Incontournables : fiches reliées ---------- */
+.center { text-align: center; }
+h2.display { font-size: var(--fs-h2); }
+.fav { margin-top: clamp(36px, 5vw, 64px); }
+.fav-track { display: flex; gap: var(--fav-gap); width: min(100%, calc(3 * var(--fav-w) + 2 * var(--fav-gap))); margin-inline: auto; padding-block: 8px 18px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.fav-track::-webkit-scrollbar { display: none; }
+.fav-card { position: relative; flex: 0 0 var(--fav-w); display: grid; justify-items: center; align-content: space-between; height: 330px; padding: 30px 22px 24px; border-radius: var(--r-card); background: var(--orange); color: var(--cream); scroll-snap-align: start; }
+.fav-card + .fav-card::before { content: ""; position: absolute; left: calc(-1 * var(--fav-gap) - 13px); top: 26px; bottom: 26px; width: calc(var(--fav-gap) + 26px); background: var(--paper);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='24'%3E%3Crect x='0' y='7' width='70' height='9' rx='4.5'/%3E%3C/svg%3E") 0 0 / 100% 24px repeat-y;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='24'%3E%3Crect x='0' y='7' width='70' height='9' rx='4.5'/%3E%3C/svg%3E") 0 0 / 100% 24px repeat-y; }
+.fav-card .plate { width: 178px; transition: transform 1200ms var(--ease); }
+.fav-card:hover .plate { transform: rotate(50deg) scale(1.05); }
+.fav-foot { display: flex; align-items: center; gap: 14px; }
+.fav-foot h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h3); }
+.go { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--paper); color: var(--green); transition: transform var(--dur) var(--ease-back); }
+.fav-card:hover .go { transform: rotate(-45deg) scale(1.1); }
+.dots { display: flex; justify-content: center; gap: 4px; margin-top: 18px; }
+.dots button { width: 24px; height: 24px; padding: 0; border: 0; background: none; cursor: pointer; }
+.dots button::before { content: ""; display: block; width: 9px; height: 9px; margin: auto; border: 1.5px solid var(--green); border-radius: 50%; transition: background-color var(--dur-fast), transform var(--dur) var(--ease-back); }
+.dots button[aria-current="true"]::before { background: var(--green); transform: scale(1.25); }
 
-/* ---------- Feuilles qui se chevauchent ---------- */
-.sheet { position: relative; margin-top: calc(var(--radius-section) * -1); border-radius: var(--radius-section) var(--radius-section) 0 0; }
-.sheet--cream { background: var(--cream); z-index: 5; padding: var(--space-24) 0 calc(var(--space-24) + var(--radius-section)); }
-.sheet--orange { background: var(--orange); z-index: 6; padding: var(--space-16) 0 calc(var(--space-16) + var(--radius-section)); overflow: hidden; }
-.sheet--green { background: var(--green); z-index: 7; color: var(--cream); padding-top: var(--space-16); overflow: hidden; }
+/* ---------- Bandeau orange ---------- */
+.banner { text-align: center; }
+.banner h2 { font-size: var(--fs-h2); line-height: 1.12; display: grid; justify-items: center; }
+.banner h2 .row { display: inline-flex; align-items: center; gap: 0.35em; }
+.banner h2 .row:nth-child(2) { transform: translateX(-4%); }
+.banner h2 .row:nth-child(3) { transform: translateX(3%); }
+.art { width: 1.25em; height: 1.25em; flex: none; fill: none; stroke: var(--line-art); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.art { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.js .art { stroke-dashoffset: 1; transition: stroke-dashoffset 1600ms var(--ease) 300ms; }
+.js .in .art { stroke-dashoffset: 0; }
 
-.sec-head { text-align: center; max-width: 36rem; margin: 0 auto var(--space-12); }
-.sec-head .kicker { color: var(--muted); }
-.sec-head h2 { margin: var(--space-3) 0 var(--space-3); font: 400 var(--text-3xl)/1 var(--font-display); color: var(--green); }
-.sec-head p { margin: 0; color: var(--muted); }
+/* ---------- La carte ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+.chip { height: 36px; padding-inline: 16px; border: 1px solid var(--line-green); border-radius: 99px; background: transparent; font-family: var(--font-display); font-size: var(--fs-tiny); letter-spacing: 0.05em; cursor: pointer; transition: background-color var(--dur-fast), border-color var(--dur-fast); }
+.chip:hover { background: var(--line-green); }
+.chip[aria-pressed="true"] { background: var(--orange-btn); border-color: var(--orange-btn); }
+.dishes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 34px; }
+.dish { display: flex; flex-direction: column; padding: 12px; border: 1px solid var(--line-green); border-radius: var(--r-card); background: var(--green-card); transition: opacity 220ms, transform var(--dur) var(--ease); }
+.dish[hidden] { display: none; }
+.dishes.is-out .dish { opacity: 0; transform: translateY(14px) scale(0.97); }
+.dish figure { aspect-ratio: 1 / 0.8; border-radius: 10px; overflow: hidden; background: var(--cream-box); }
+.dish img { transition: transform var(--dur-slow) var(--ease); }
+.dish:hover img { transform: scale(1.06); }
+.dish h3 { margin-top: 16px; font-family: var(--font-display); font-weight: 400; font-size: var(--fs-card); }
+.dish p { margin-top: 6px; font-size: var(--fs-small); line-height: 1.45; color: var(--soft); }
+.dish-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 16px; }
+.price { font-family: var(--font-display); font-size: var(--fs-price); }
 
-/* ---------- Carrousel « reliure » ---------- */
-.carousel { position: relative; }
-.track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * var(--bind)) / 4); gap: var(--bind); --bind: 28px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: var(--space-2) 0 var(--space-6); }
-.track::-webkit-scrollbar { display: none; }
-.dish { position: relative; scroll-snap-align: start; display: flex; flex-direction: column; padding: var(--space-6) var(--space-6) var(--space-6); border-radius: var(--radius-md); color: var(--white); box-shadow: var(--shadow-card);
-  /* encoches de reliure sur les deux bords */
-  background: radial-gradient(circle at 0 50%, var(--cream) 0 6px, transparent 6.5px) left 30% / 12px 26px repeat-y, radial-gradient(circle at 100% 50%, var(--cream) 0 6px, transparent 6.5px) right 30% / 12px 26px repeat-y, var(--orange);
-  background-size: 12px 26px, 12px 26px, auto; background-position: left 0 top 40px, right 0 top 40px, 0 0; }
-.dish:nth-child(even) { background-color: var(--orange-strong); }
-/* anneaux entre les cartes */
-.dish:not(:last-child)::after { content: ""; position: absolute; top: 40px; bottom: 40px; right: calc(var(--bind) * -1 - 6px); width: calc(var(--bind) + 12px); background: radial-gradient(ellipse 50% 7px at 50% 50%, transparent 0 calc(100% - 3px), var(--green) calc(100% - 3px) 100%, transparent 100%) 0 0 / 100% 26px repeat-y; z-index: 2; pointer-events: none; opacity: 0.9; }
-.plate { position: relative; align-self: center; width: 78%; aspect-ratio: 1; margin: var(--space-2) 0 var(--space-6); border-radius: 50%; overflow: hidden; border: 6px solid var(--white); background: var(--card); box-shadow: 0 16px 24px -10px color-mix(in srgb, var(--ink) 50%, transparent); transition: rotate var(--dur-slow) var(--ease-out); }
-.dish:hover .plate { rotate: 25deg; }
-.plate img { color: transparent; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-.dish h3 { margin: 0; font: 400 var(--text-xl)/1.1 var(--font-display); }
-.dish .row { display: flex; align-items: end; justify-content: space-between; gap: var(--space-3); margin-top: auto; }
-.dish .desc { display: block; margin-top: var(--space-1); font: 400 var(--text-sm)/1.4 var(--font-body); }
-.dish .price { display: inline-block; margin-top: var(--space-2); padding: 2px var(--space-2); border-radius: var(--radius-btn); background: var(--cream); color: var(--ink); font: 700 var(--text-sm)/1.4 var(--font-body); }
-.dish .round { background: var(--white); color: var(--orange-strong); flex: none; }
-.dish .round:hover { transform: rotate(-45deg); }
-.dish:nth-child(odd) .desc { color: var(--ink); }
-.carousel-ctrl { display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin-top: var(--space-6); }
-.carousel-ctrl .round { background: transparent; border: 1px solid var(--green); color: var(--green); }
-.carousel-ctrl .round:hover { background: var(--green); color: var(--cream); }
-.dots { display: flex; gap: var(--space-1); }
-.dots button { width: 24px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
-.dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--line); transition: width var(--dur-base) var(--ease-out), background var(--dur-base); }
-.dots button[aria-current="true"]::before { width: 22px; border-radius: var(--radius-pill); background: var(--green); }
+/* ---------- Soirées : titre en escalier ---------- */
+.stagger { position: relative; }
+.stagger h2 { font-size: var(--fs-stagger); line-height: 1.06; }
+.stagger h2 .mask { display: block; }
+.stagger h2 .s1 { margin-left: 4%; }
+.stagger h2 .s2 { margin-left: 13%; }
+.stagger h2 .s3 { margin-left: 31%; margin-top: 0.55em; }
+.frame { position: absolute; z-index: 2; border: var(--frame-w) solid var(--frame); border-radius: var(--r-card); overflow: hidden; box-shadow: 0 26px 40px -26px var(--shadow); will-change: transform; }
+.frame img { height: 116%; }
+.f1 { right: 4%; top: 6%; width: 23%; aspect-ratio: 1 / 1.08; }
+.f2 { left: 11%; top: 44%; width: 21%; aspect-ratio: 1 / 1.06; }
+.f3 { right: 10%; top: 72%; width: 19%; aspect-ratio: 1 / 1.3; }
+.stagger-text { max-width: 400px; margin-top: clamp(36px, 5vw, 72px); margin-left: 32%; color: var(--green-soft); }
+.stagger-text .btn { margin-top: 24px; }
 
-/* ---------- Titre échelonné avec photos ---------- */
-.stagger { margin: var(--space-24) 0 var(--space-12); font: 400 var(--text-3xl)/1.15 var(--font-display); color: var(--green); }
-.stagger span { display: flex; align-items: center; gap: 0.25em; flex-wrap: wrap; }
-.stagger span:nth-child(2) { padding-left: 12%; }
-.stagger span:nth-child(3) { justify-content: flex-end; }
-.stagger em { font-style: italic; color: var(--orange-strong); }
-.ph { display: inline-block; width: 1.25em; aspect-ratio: 1; flex: none; overflow: hidden; border: var(--frame-photo) solid var(--card); border-radius: var(--radius-btn); background: var(--line); box-shadow: var(--shadow-photo); vertical-align: middle; }
-.ph img { color: transparent; display: block; width: 100%; height: 100%; object-fit: cover; }
-.ph--a { rotate: -4deg; } .ph--b { rotate: 5deg; width: 1.6em; aspect-ratio: 4/3; } .ph--c { rotate: -2deg; }
-.exp { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); border-top: 1px solid var(--line); padding-top: var(--space-8); }
-.exp article { display: grid; gap: var(--space-2); }
-.exp b { font: 400 var(--text-xl)/1 var(--font-display); color: var(--orange-strong); }
-.exp h3 { margin: 0; font: 400 var(--text-lg)/1.2 var(--font-display); color: var(--green); }
-.exp p { margin: 0; color: var(--muted); font-size: var(--text-sm); }
-.exp a { justify-self: start; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; font: 500 var(--text-sm)/1 var(--font-body); color: var(--green); text-underline-offset: 4px; }
+/* ---------- Lettre ---------- */
+.news { text-align: center; overflow: hidden; }
+.news .wrap { position: relative; }
+.news h2 { font-size: var(--fs-h2); }
+.news p { max-width: 520px; margin: 14px auto 0; color: var(--ink); }
+.news form { display: flex; justify-content: center; gap: 10px; margin-top: 28px; }
+.news input { width: min(100%, 320px); height: 46px; padding-inline: 16px; border: 1px solid var(--line-art); border-radius: var(--r-btn); background: var(--field); color: var(--ink); }
+.news input::placeholder { color: var(--ink); opacity: 0.75; }
+.news .btn { height: 46px; }
+.news small { display: block; margin-top: 12px; font-size: var(--fs-tiny); color: var(--ink); }
+.news .art { position: absolute; width: clamp(90px, 11vw, 150px); height: auto; aspect-ratio: 1; stroke-width: 1; }
+.news .art.a { left: var(--gutter); top: -10px; transform: rotate(-10deg); }
+.news .art.b { right: var(--gutter); bottom: -20px; transform: rotate(8deg); }
+.badge { display: grid; place-items: center; width: 34px; height: 34px; margin: 0 auto 14px; border-radius: 10px; background: var(--cream); color: var(--orange-btn); }
+.badge svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 
-/* ---------- Newsletter ---------- */
-.doodles { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--cream); opacity: 0.55; pointer-events: none; }
-.news > * { min-width: 0; }
-.news { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-8); align-items: center; }
-.news h2 { margin: 0; font: 400 var(--text-3xl)/0.95 var(--font-display); color: var(--cream); }
-.news h2 em { display: block; font-style: italic; }
-.news p { margin: 0 0 var(--space-4); color: var(--ink); max-width: 38ch; }
-.subscribe { display: flex; gap: var(--space-2); padding: var(--space-2); background: var(--card); border-radius: var(--radius-pill); box-shadow: var(--shadow-card); }
-.subscribe label { flex: 1; display: flex; min-width: 0; }
-.subscribe input { flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--space-4); border: 0; background: transparent; font: 400 var(--text-base) var(--font-body); color: var(--ink); border-radius: var(--radius-pill); }
-.subscribe input::placeholder { color: var(--muted); }
-.subscribe input:focus-visible { outline: 2px solid var(--green); outline-offset: 0; }
-.news small { display: block; margin-top: var(--space-3); color: var(--ink); font-size: var(--text-xs); }
+/* ---------- Pied ---------- */
+.foot { padding-bottom: 0; overflow: hidden; }
+.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; font-size: var(--fs-small); color: var(--soft); }
+.foot-grid h3 { margin-bottom: 14px; font-size: var(--fs-tiny); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream); }
+.foot-grid li + li { margin-top: 6px; }
+.foot-grid a:hover { color: var(--cream); text-decoration: underline; text-underline-offset: 3px; }
+.foot-grid .logo { color: var(--cream); margin-bottom: 12px; }
+.foot-grid b { color: var(--cream); font-family: var(--font-display); font-weight: 400; }
+.social { display: flex; gap: 8px; margin-top: 18px; }
+.social a { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid var(--line-green); border-radius: 50%; font-size: var(--fs-tiny); font-weight: 700; color: var(--cream); transition: background-color var(--dur-fast); }
+.social a:hover { background: var(--orange-btn); text-decoration: none; }
+.legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line-green); font-size: var(--fs-tiny); color: var(--soft); }
+.giant { display: block; margin-top: 18px; font-size: var(--fs-giant); line-height: 0.95; white-space: nowrap; text-align: center; padding-bottom: 0.14em; }
+.giant .mask > b { transition-duration: 1400ms; }
 
-/* ---------- Pied de page ---------- */
-.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--space-8); padding-bottom: var(--space-12); border-bottom: 1px solid color-mix(in srgb, var(--cream) 20%, transparent); }
-.foot-grid h3 { margin: 0 0 var(--space-3); font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--cream-muted); }
-.foot-grid p, .foot-grid ul { margin: 0; padding: 0; list-style: none; font-size: var(--text-sm); }
-.foot-grid li a { display: inline-flex; min-height: 32px; align-items: center; text-decoration: none; }
-.foot-grid li a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.foot-grid .lead { font: 400 var(--text-xl)/1.2 var(--font-display); max-width: 18ch; }
-.wordmark { margin: 0; padding: var(--space-6) 0 0; font: 400 var(--text-wordmark)/0.72 var(--font-display); letter-spacing: -0.04em; text-align: center; color: var(--cream); white-space: nowrap; translate: 0 0.04em; }
-.legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); padding: var(--space-4) 0; font-size: var(--text-xs); color: var(--cream-muted); }
-
-/* ---------- Apparition (défilement, sans JS) ---------- */
-@keyframes reveal { from { translate: 0 48px; } }
-@supports (animation-timeline: view()) {
-  .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 40%; }
+/* ---------- Mobile ---------- */
+@media (max-width: 1000px) {
+  .dishes { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { display: none; position: absolute; top: calc(100% + 8px); left: 0; right: 0; flex-direction: column; padding: 10px; border: 1px solid var(--line-green); border-radius: 14px; background: var(--green-card); }
+  .nav.is-open .nav-links { display: flex; }
+  .nav-links a { padding: 12px 14px; }
+  .nav-tools { margin-left: auto; }
+  .burger { display: grid; }
+  .search { display: none; }
 }
-@keyframes rise { from { opacity: 0; translate: 0 0.3em; } }
-.headline .l1, .headline .l2 { animation: rise var(--dur-slow) var(--ease-out) both; }
-.headline .l2 { animation-delay: 120ms; }
-@keyframes chef-in { from { opacity: 0; translate: -46% 30px; } }
-.chef { animation: chef-in 1s var(--ease-out) 200ms both; }
-
-/* ---------- Responsive ---------- */
-@media (max-width: 1024px) {
-  .nav ul { display: none; }
-  .menu-btn { display: grid !important; }
-  .nav .logo { margin-right: auto; }
-  .track { grid-auto-columns: calc((100% - 1 * var(--bind)) / 2.2); }
+@media (max-width: 760px) {
+  .hero { padding-top: calc(var(--nav-h) + 46px); }
+  .hero-title { text-align: center; }
+  .hero-title span.line { flex-direction: column; align-items: center; gap: 0; }
+  .hero-title .l1 { font-size: 21vw; }
+  .hero-title .l2 { font-size: 12.5vw; }
+  .hero-row { grid-template-columns: 1fr; justify-items: center; gap: 0; }
+  .arch { order: 3; width: 64vw; height: 86vw; margin-top: 40px; }
+  .hero-right { order: 1; justify-self: center; margin-top: 26px; text-align: center; }
+  .hero-right p { font-size: 1.0625rem; }
+  .hero-cta { justify-content: center; }
+  .hero-left { order: 2; margin-top: 36px; }
+  .hero-left .plate { width: 150px; }
+  .fav-track { width: var(--fav-w); max-width: 100%; }
+  .banner h2 .row:nth-child(n) { transform: none; }
+  .dishes { gap: 12px; }
+  .dish { padding: 8px; }
+  .dish p { display: none; }
+  .dish-foot { flex-direction: column; align-items: flex-start; }
+  .stagger h2 .s1, .stagger h2 .s2, .stagger h2 .s3 { margin-left: 0; margin-top: 0; }
+  .stagger h2 { font-size: 15vw; }
+  .frames { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: start; margin-top: 28px; }
+  .frame { position: static; width: auto; border-width: 5px; }
+  .f2 { margin-top: 28px; }
+  .f3 { aspect-ratio: 1 / 1.08; margin-top: 10px; }
+  .stagger-text { margin-left: 0; }
+  .news form { flex-direction: column; align-items: center; }
+  .news .art { opacity: 0.5; width: 76px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
+  .foot-grid > :first-child, .foot-grid > :last-child { grid-column: 1 / -1; }
 }
-@media (max-width: 720px) {
-  .wrap, .nav { width: calc(100% - 2 * var(--space-4)); }
-  .nav .book span { display: none; }
-  .nav .search { display: none; }
-  .hero { padding-top: var(--space-8); }
-  .headline { font-size: clamp(3.25rem, 17vw, 5rem); }
-  .chef { width: 46vw; left: auto; right: var(--space-4); translate: none; bottom: auto; top: 86px; outline-offset: 6px; -webkit-mask-image: linear-gradient(180deg, var(--ink) 80%, transparent); mask-image: linear-gradient(180deg, var(--ink) 80%, transparent); }
-  @keyframes chef-in { from { opacity: 0; translate: 0 30px; } }
-  .headline .l2 { text-align: left; margin-top: 1.25em; }
-  .hero-foot { grid-template-columns: 1fr; margin-top: var(--space-24); }
-  .facts dd { font-size: var(--text-lg); }
-  .facts { justify-self: start; gap: var(--space-6); }
-  .track { grid-auto-columns: 78%; --bind: 22px; }
-  .stagger span:nth-child(2) { padding-left: 0; }
-  .exp { grid-template-columns: 1fr; }
-  .news { grid-template-columns: 1fr; }
-  .foot-grid { grid-template-columns: 1fr; gap: var(--space-6); }
-  .sheet--cream { padding-top: var(--space-16); }
-}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
-  .dish:hover .plate { rotate: none; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .js .rise, .js .arch, .js .hero-left .plate { opacity: 1; transform: none; }
+  .js .mask > b { transform: none; }
+  .js .art { stroke-dashoffset: 0; }
+  .fav-card:hover .plate, .dish:hover img { transform: none; }
 }
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add('js');</script>
+
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></g></symbol>
-  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 10 11 5 20 4c0 9-5 15-14 15zM5 19l8-8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-cloche" viewBox="0 0 48 48"><path pathLength="1" d="M6 34h36M9 34a15 15 0 0 1 30 0M24 19v-4M21 15h6M4 39h40"/></symbol>
+  <symbol id="i-verre" viewBox="0 0 48 48"><path pathLength="1" d="M15 6h18l-2 14a7 7 0 0 1-14 0zM24 27v13M16 42h16M16 15h16"/></symbol>
+  <symbol id="i-couverts" viewBox="0 0 48 48"><path pathLength="1" d="M14 6v12a4 4 0 0 0 8 0V6M18 6v36M32 42V6c-5 4-6 12-5 20h5"/></symbol>
+  <symbol id="i-feuille" viewBox="0 0 24 24"><path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14zM5 19l8-8"/></symbol>
 </svg>
 
-<header class="nav">
-  <a class="logo" href="#"><i aria-hidden="true"><svg><use href="#i-leaf"/></svg></i>Sauge</a>
-  <nav aria-label="Navigation principale"><ul>
-    <li><a href="#" aria-current="page">Accueil</a></li>
-    <li><a href="#carte">La carte</a></li>
-    <li><a href="#experiences">Expériences</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul></nav>
-  <button class="round search" aria-label="Rechercher"><svg aria-hidden="true"><use href="#i-search"/></svg></button>
-  <a class="btn btn--primary book" href="#contact" aria-label="Réserver une table"><span>Réserver une table</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-  <button class="round menu-btn" aria-label="Ouvrir le menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+<nav class="nav" aria-label="Navigation principale">
+  <a class="logo" href="#haut"><i><svg viewBox="0 0 24 24"><use href="#i-feuille"/></svg></i>Maison Sauge</a>
+  <div class="nav-links" id="menu">
+    <a class="is-on" href="#haut">Accueil</a>
+    <a href="#incontournables">Signatures</a>
+    <a href="#carte">La carte</a>
+    <a href="#soirees">Soirées</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-tools">
+    <button class="round search" aria-label="Rechercher"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg></button>
+    <a class="btn" href="#contact">Réserver</a>
+    <button class="round burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></svg></button>
+  </div>
+</nav>
+
+<header class="hero" id="haut" data-in>
+  <div class="wrap">
+    <h1 class="hero-title display">
+      <span class="line l1"><span class="mask"><b>Chaque</b></span> <span class="mask" style="--d:90ms"><b>table</b></span></span>
+      <span class="line l2"><span class="mask" style="--d:220ms"><b>a le goût</b></span> <span class="mask" style="--d:300ms"><b>de chez soi</b></span></span>
+    </h1>
+    <div class="hero-row">
+      <div class="hero-left">
+        <div class="plate" data-turn><img src="https://images.unsplash.com/photo-1782112691766-1772366fcedc?auto=format&fit=crop&w=420&h=420&q=75" alt="Pièce de bœuf grillée sur riz safrané, vue de dessus"></div>
+        <p class="rise" style="--d:700ms">De la cuisine ouverte à votre table, tout est préparé le jour même, servi sans chichi.</p>
+        <a class="btn btn--s rise" style="--d:800ms" href="#carte">Commander</a>
+      </div>
+      <figure class="arch"><img src="https://images.unsplash.com/photo-1781888681811-332968760c2a?auto=format&fit=crop&crop=faces&w=700&h=1300&q=75" alt="Camille Aubrac, cheffe de Maison Sauge, souriante en veste claire"></figure>
+      <div class="hero-right">
+        <p class="rise" style="--d:500ms">Une cuisine de marché, des vins de copains et une salle où l'on reste volontiers jusqu'au café.</p>
+        <div class="hero-cta rise" style="--d:620ms">
+          <a class="btn" href="#carte">Voir la carte</a>
+          <a class="btn btn--line" href="#soirees">Notre histoire</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
 <main>
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap">
-      <span class="kicker">Bistrot de saison · Lyon 2e</span>
-      <h1 class="headline" id="hero-title"><span class="l1">Cuisine</span><span class="l2">de <em>saison</em></span></h1>
-      <figure class="chef" data-slot="chef-portrait"><img src="https://images.unsplash.com/photo-1709837167719-1ff90bdbbac5?auto=format&fit=crop&w=800&h=1120&q=80" width="800" height="1120" fetchpriority="high" alt="La cheffe en tenue de cuisine, au travail derrière le passe"></figure>
-      <div class="hero-foot">
-        <div>
-          <p>Des légumes du marché, du pain au levain cuit chaque matin et une carte qui change avec les semaines.</p>
-          <div class="actions">
-            <a class="btn btn--primary" href="#contact">Réserver une table<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn--outline" href="#experiences">Notre histoire<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          </div>
-        </div>
-        <dl class="facts">
-          <div><dt>Ouvert</dt><dd>Mar → Sam</dd></div>
-          <div><dt>Couverts</dt><dd>38 places</dd></div>
-          <div><dt>Menu</dt><dd>dès 29 €</dd></div>
-        </dl>
-      </div>
+<section class="sheet sheet--cream" id="incontournables" data-in>
+  <div class="wrap center">
+    <h2 class="display"><span class="mask"><b>Nos incontournables</b></span></h2>
+    <div class="fav rise" style="--d:150ms">
+      <ul class="fav-track" tabindex="0" aria-label="Plats signatures">
+        <li class="fav-card"><div class="plate"><img src="https://images.unsplash.com/photo-1762328845844-64b041d0c5f1?auto=format&fit=crop&w=400&h=400&q=75" alt="Carpaccio de betterave aux pétales" loading="lazy"></div><div class="fav-foot"><h3>Betterave</h3><a class="go" href="#carte" aria-label="Voir la betterave à la carte">→</a></div></li>
+        <li class="fav-card"><div class="plate"><img src="https://images.unsplash.com/photo-1777994505580-33478f04fa4a?auto=format&fit=crop&w=400&h=400&q=75" alt="Linguine aux légumes d'été" loading="lazy"></div><div class="fav-foot"><h3>Linguine</h3><a class="go" href="#carte" aria-label="Voir les linguine à la carte">→</a></div></li>
+        <li class="fav-card"><div class="plate"><img src="https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=400&h=400&q=75" alt="Risotto aux champignons" loading="lazy"></div><div class="fav-foot"><h3>Risotto</h3><a class="go" href="#carte" aria-label="Voir le risotto à la carte">→</a></div></li>
+        <li class="fav-card"><div class="plate"><img src="https://images.unsplash.com/photo-1631709497146-a239ef373cf1?auto=format&fit=crop&w=400&h=400&q=75" alt="Bouillon de nouilles aux herbes" loading="lazy"></div><div class="fav-foot"><h3>Bouillon</h3><a class="go" href="#carte" aria-label="Voir le bouillon à la carte">→</a></div></li>
+        <li class="fav-card"><div class="plate"><img src="https://images.unsplash.com/photo-1762922425232-ab2b6b251739?auto=format&fit=crop&w=400&h=400&q=75" alt="Pappardelle aux coquillages" loading="lazy"></div><div class="fav-foot"><h3>Coquillages</h3><a class="go" href="#carte" aria-label="Voir les coquillages à la carte">→</a></div></li>
+      </ul>
+      <div class="dots" role="group" aria-label="Position du carrousel"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="sheet sheet--cream" id="carte" aria-labelledby="fav-title">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="kicker">La carte du moment</span>
-        <h2 id="fav-title">Nos incontournables</h2>
-        <p>Quatre assiettes que les habitués commandent les yeux fermés.</p>
-      </div>
-      <div class="carousel reveal">
-        <div class="track" id="track" tabindex="0" aria-label="Plats signature, défilement horizontal">
-          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1667657682263-86e924b34fd9?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Salade de saison vue de dessus, pousses et légumes croquants"></div><div class="row"><div><h3>Jardin d'été</h3><span class="desc">Pousses, radis, herbes du jardin</span><span class="price">14 €</span></div><a class="round" href="#" aria-label="Voir Jardin d'été"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Risotto crémeux dressé dans une assiette blanche"></div><div class="row"><div><h3>Risotto</h3><span class="desc">Parmesan 24 mois, beurre noisette</span><span class="price">19 €</span></div><a class="round" href="#" aria-label="Voir Risotto"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1706650616334-97875fae8521?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Filet de bœuf tranché avec des asperges vertes"></div><div class="row"><div><h3>Filet & asperges</h3><span class="desc">Bœuf de l'Aubrac, jus corsé</span><span class="price">28 €</span></div><a class="round" href="#" aria-label="Voir Filet & asperges"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Steak-frites servi sur une assiette"></div><div class="row"><div><h3>Steak-frites</h3><span class="desc">Frites maison, sauce au poivre</span><span class="price">24 €</span></div><a class="round" href="#" aria-label="Voir Steak-frites"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-          <article class="dish"><div class="plate" data-slot="dish-photo"><img src="https://images.unsplash.com/photo-1708184528305-33ce7daced65?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt="Bol de salade composée posé sur une table en bois"></div><div class="row"><div><h3>Bol du marché</h3><span class="desc">Céréales, légumes rôtis, tahini</span><span class="price">16 €</span></div><a class="round" href="#" aria-label="Voir Bol du marché"><svg aria-hidden="true"><use href="#i-arrow-ne"/></svg></a></div></article>
-        </div>
-        <div class="carousel-ctrl">
-          <button class="round" id="prev" aria-label="Plat précédent"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
-          <div class="dots" id="dots"></div>
-          <button class="round" id="next" aria-label="Plat suivant"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-        </div>
-      </div>
+<section class="sheet sheet--orange banner" data-in>
+  <div class="wrap">
+    <h2 class="display">
+      <span class="row"><svg class="art"><use href="#i-cloche"/></svg><span class="mask"><b>L'art de recevoir,</b></span></span>
+      <span class="row"><span class="mask" style="--d:100ms"><b>du premier verre</b></span></span>
+      <span class="row"><span class="mask" style="--d:200ms"><b>au dernier café</b></span><svg class="art"><use href="#i-verre"/></svg></span>
+    </h2>
+  </div>
+</section>
 
-      <h2 class="stagger reveal" id="experiences">
-        <span>Des moments <span class="ph ph--a" data-slot="photo-cuisine" aria-hidden="true"><img src="https://images.unsplash.com/photo-1709837167719-1ff90bdbbac5?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt=""></span> à part,</span>
-        <span><span class="ph ph--b" data-slot="photo-plat" aria-hidden="true"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=400&h=300&q=80" width="400" height="300" loading="lazy" alt=""></span> autour de la <em>table</em></span>
-        <span>et du jardin <span class="ph ph--c" data-slot="photo-jardin" aria-hidden="true"><img src="https://images.unsplash.com/photo-1708184528305-33ce7daced65?auto=format&fit=crop&w=400&h=400&q=80" width="400" height="400" loading="lazy" alt=""></span></span>
-      </h2>
-      <div class="exp">
-        <article class="reveal"><b>01</b><h3>Table du chef</h3><p>Six convives face au passe, un menu en sept temps raconté par l'équipe.</p><a href="#contact">Réserver<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
-        <article class="reveal"><b>02</b><h3>Accords nature</h3><p>Une sélection de vignerons voisins, servie au verre avec chaque assiette.</p><a href="#contact">Découvrir<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
-        <article class="reveal"><b>03</b><h3>Brunch du dimanche</h3><p>Pain perdu, œufs mollets et jus pressés, sur la terrasse dès les beaux jours.</p><a href="#contact">Voir le menu<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
-      </div>
+<section class="sheet sheet--green" id="carte" data-in>
+  <div class="wrap">
+    <h2 class="display"><span class="mask"><b>Explorez la carte</b></span></h2>
+    <div class="chips rise" style="--d:120ms" role="group" aria-label="Filtrer la carte">
+      <button class="chip" aria-pressed="true" data-cat="tout">Tout</button>
+      <button class="chip" aria-pressed="false" data-cat="entrees">Entrées</button>
+      <button class="chip" aria-pressed="false" data-cat="grill">Grillades</button>
+      <button class="chip" aria-pressed="false" data-cat="mer">La mer</button>
+      <button class="chip" aria-pressed="false" data-cat="pates">Pâtes</button>
+      <button class="chip" aria-pressed="false" data-cat="bar">Cocktails</button>
     </div>
-  </section>
-
-  <section class="sheet sheet--orange" id="contact" aria-labelledby="news-title">
-    <svg class="doodles" viewBox="0 0 1440 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M80 70v70M70 70v28a10 10 0 0 0 20 0V70M80 140v90"/>
-      <path d="M190 260c20-40 70-50 100-20-30 10-60 40-100 20zM200 255l60-25"/>
-      <path d="M1180 60h80l-10 50a30 30 0 0 1-60 0zM1220 140v40M1200 180h40"/>
-      <path d="M1320 250c30-30 80-30 100 0-20 30-70 30-100 0zM1420 250l20-15v30zM1350 245h2"/>
-      <circle cx="1100" cy="280" r="34"/><path d="M1076 280h48M1100 256v48"/>
-      <path d="M340 60c10 20 30 20 40 0M330 60h60l-8 30h-44z"/>
-      <path d="M620 300c0-30 20-50 50-50s50 20 50 50zM610 300h120"/>
-    </g></svg>
-    <div class="wrap news">
-      <h2 id="news-title">Restons <em>en contact</em></h2>
-      <div>
-        <p>Un e-mail par mois : la nouvelle carte, les soirées vignerons et les tables qui se libèrent.</p>
-        <form class="subscribe" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Merci !'">
-          <label><span class="sr-only">Adresse e-mail</span><input type="email" required placeholder="votre@email.fr" autocomplete="email"></label>
-          <button class="btn btn--pill" type="submit">S'inscrire</button>
-        </form>
-        <small>Pas de spam, désinscription en un clic.</small>
-      </div>
+    <div class="dishes rise" style="--d:220ms" aria-live="polite">
+      <article class="dish" data-cat="grill"><figure><img src="https://images.unsplash.com/photo-1654879259483-af42804bd2bb?auto=format&fit=crop&w=560&h=450&q=72" alt="Entrecôte grillée" loading="lazy"></figure><h3>Entrecôte grillée</h3><p>Bœuf de l'Aubrac maturé, beurre noisette, légumes rôtis.</p><div class="dish-foot"><span class="price">34 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="mer"><figure><img src="https://images.unsplash.com/photo-1762922425232-ab2b6b251739?auto=format&fit=crop&w=560&h=450&q=72" alt="Pappardelle aux coquillages" loading="lazy"></figure><h3>Pappardelle aux coquillages</h3><p>Palourdes, moules de bouchot, bisque légère au safran.</p><div class="dish-foot"><span class="price">26 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="pates"><figure><img src="https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=560&h=450&q=72" alt="Risotto aux champignons" loading="lazy"></figure><h3>Risotto aux champignons</h3><p>Riz carnaroli, cèpes poêlés, parmesan de trente mois.</p><div class="dish-foot"><span class="price">22 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="grill"><figure><img src="https://images.unsplash.com/photo-1706650616334-97875fae8521?auto=format&fit=crop&w=560&h=450&q=72" alt="Filet de bœuf et asperges" loading="lazy"></figure><h3>Filet, asperges vertes</h3><p>Cuit au sautoir, jus corsé, pousses du jardin.</p><div class="dish-foot"><span class="price">38 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="entrees"><figure><img src="https://images.unsplash.com/photo-1762328845844-64b041d0c5f1?auto=format&fit=crop&w=560&h=450&q=72" alt="Carpaccio de betterave" loading="lazy"></figure><h3>Carpaccio de betterave</h3><p>Betterave chioggia, chèvre frais, vinaigre de framboise.</p><div class="dish-foot"><span class="price">14 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="pates"><figure><img src="https://images.unsplash.com/photo-1777994505580-33478f04fa4a?auto=format&fit=crop&w=560&h=450&q=72" alt="Linguine aux légumes" loading="lazy"></figure><h3>Linguine du marché</h3><p>Tomates confites, olives taggiasche, basilic.</p><div class="dish-foot"><span class="price">19 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="mer"><figure><img src="https://images.unsplash.com/photo-1611762687807-7cdd09aef422?auto=format&fit=crop&w=560&h=450&q=72" alt="Assortiment de makis" loading="lazy"></figure><h3>Makis de la criée</h3><p>Thon rouge, avocat, riz vinaigré maison.</p><div class="dish-foot"><span class="price">24 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
+      <article class="dish" data-cat="bar"><figure><img src="https://images.unsplash.com/photo-1621873495884-845a939892d1?auto=format&fit=crop&w=560&h=450&q=72" alt="Negroni avec un zeste d'orange" loading="lazy"></figure><h3>Negroni fumé</h3><p>Gin, vermouth rouge, amer, zeste d'orange brûlé.</p><div class="dish-foot"><span class="price">13 €</span><a class="btn btn--s" href="#contact">Commander</a></div></article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="sheet sheet--green">
-    <div class="wrap">
-      <div class="foot-grid">
-        <p class="lead">Une cuisine simple, des produits qui ont du goût.</p>
-        <div><h3>Adresse</h3><p>12 rue des Tilleuls<br>69002 Lyon (fictif)</p></div>
-        <div><h3>Horaires</h3><p>Mar – Sam · 12h–14h<br>19h–22h30</p></div>
-        <div><h3>Suivre</h3><ul><li><a href="#">Instagram</a></li><li><a href="#">Journal</a></li><li><a href="#">Cartes cadeaux</a></li></ul></div>
-      </div>
-      <div class="legal"><span>© Sauge (restaurant fictif) — démo Kōbō · Photos : Unsplash</span><span>Mentions légales · Allergènes</span></div>
+<section class="sheet sheet--cream" id="soirees" data-in>
+  <div class="wrap stagger">
+    <h2 class="display">
+      <span class="mask s1"><b>Soirées</b></span>
+      <span class="mask s2" style="--d:120ms"><b>en petit</b></span>
+      <span class="mask s3" style="--d:240ms"><b>comité</b></span>
+    </h2>
+    <div class="frames">
+      <figure class="frame f1" data-speed="-0.10"><img src="https://images.unsplash.com/photo-1583953623787-ada99d338235?auto=format&fit=crop&w=640&h=760&q=72" alt="Pièce de bœuf aux herbes sur assiette sombre" loading="lazy"></figure>
+      <figure class="frame f2" data-speed="0.08"><img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&h=700&q=72" alt="Plateau de sushis" loading="lazy"></figure>
+      <figure class="frame f3" data-speed="-0.16"><img src="https://images.unsplash.com/photo-1500217052183-bc01eee1a74e?auto=format&fit=crop&w=520&h=760&q=72" alt="Cocktail ambré dans la lumière du soir" loading="lazy"></figure>
     </div>
-    <p class="wordmark" aria-hidden="true">Sauge</p>
-  </footer>
+    <div class="stagger-text rise">
+      <p>Chaque premier jeudi du mois, la cheffe ferme la salle pour vingt couverts&nbsp;: un menu en six temps, les vignerons à table et la cuisine grande ouverte.</p>
+      <a class="btn" href="#contact">Voir les dates</a>
+    </div>
+  </div>
+</section>
+
+<section class="sheet sheet--orange news" id="contact" data-in>
+  <div class="wrap">
+    <svg class="art a" viewBox="0 0 48 48"><use href="#i-couverts"/></svg>
+    <svg class="art b" viewBox="0 0 48 48"><use href="#i-cloche"/></svg>
+    <span class="badge"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 8l8 6 8-6"/></svg></span>
+    <h2 class="display"><span class="mask"><b>Restons à table</b></span></h2>
+    <p class="rise" style="--d:120ms">Menus de saison, soirées en petit comité et tables de dernière minute&nbsp;: une lettre par mois, pas plus.</p>
+    <form class="rise" style="--d:220ms" onsubmit="event.preventDefault(); this.querySelector('.btn').textContent = 'Merci !';">
+      <label class="sr" for="mail">Votre adresse e-mail</label>
+      <input id="mail" type="email" placeholder="Votre adresse e-mail" required>
+      <button class="btn btn--paper" type="submit">S'abonner</button>
+    </form>
+    <small>Aucune publicité. Désabonnement en un clic.</small>
+  </div>
+</section>
 </main>
+
+<footer class="sheet sheet--green foot" data-in>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#haut"><i><svg viewBox="0 0 24 24"><use href="#i-feuille"/></svg></i>Maison Sauge</a>
+        <p>Table de quartier et cave vivante, au pied des pentes de la Croix-Rousse.</p>
+        <div class="social"><a href="#" aria-label="Instagram">in</a><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Pinterest">p</a></div>
+      </div>
+      <div><h3>Naviguer</h3><ul><li><a href="#haut">Accueil</a></li><li><a href="#incontournables">Signatures</a></li><li><a href="#carte">La carte</a></li><li><a href="#soirees">Soirées</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h3>Contact</h3><ul><li><b>Maison Sauge</b></li><li>12, rue des Tables-Claudiennes</li><li>69001 Lyon</li><li>04 00 00 00 00</li><li>bonjour@maisonsauge.example</li></ul></div>
+      <div><h3>Horaires</h3><ul><li><b>Mardi – jeudi</b></li><li>12 h – 14 h · 19 h – 22 h</li><li><b>Vendredi – samedi</b></li><li>12 h – 14 h 30 · 19 h – 23 h</li><li><b>Dimanche</b></li><li>Brunch, 11 h – 15 h</li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Maison Sauge — restaurant fictif, page de démonstration.</span><span>Mentions légales · Confidentialité · Carrières</span></div>
+  </div>
+  <span class="giant display" aria-hidden="true"><span class="mask"><b>Maison Sauge</b></span></span>
+</footer>
 
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const track = document.getElementById('track'), dots = document.getElementById('dots'), cards = [...track.children];
-  cards.forEach((c, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Plat ' + (i + 1)); b.addEventListener('click', () => go(i)); dots.appendChild(b); });
-  const go = i => { i = Math.max(0, Math.min(cards.length - 1, i)); track.scrollTo({ left: cards[i].offsetLeft - track.offsetLeft, behavior: reduce ? 'auto' : 'smooth' }); };
-  const cur = () => Math.round(track.scrollLeft / (cards[1].offsetLeft - cards[0].offsetLeft));
-  const sync = () => [...dots.children].forEach((d, i) => d.setAttribute('aria-current', i === cur()));
-  track.addEventListener('scroll', () => requestAnimationFrame(sync)); sync();
-  document.getElementById('prev').addEventListener('click', () => go(cur() - 1));
-  document.getElementById('next').addEventListener('click', () => go(cur() + 1));
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  // Entrées : chaque section reçoit .in une fois
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.18 });
+  $$('[data-in]').forEach(s => io.observe(s));
+
+  // Navigation : se range en descendant, revient en remontant ; menu mobile
+  const nav = $('.nav'), burger = $('.burger');
+  burger.addEventListener('click', () => burger.setAttribute('aria-expanded', nav.classList.toggle('is-open')));
+  $$('.nav-links a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('is-open'); burger.setAttribute('aria-expanded', false); }));
+
+  // Carrousel : les points suivent le défilement, avance seule quand il est visible
+  const track = $('.fav-track'), dots = $('.dots'), cards = $$('.fav-card');
+  let pages = 1, auto = 0, seen = false;
+  const stepW = () => cards[1].offsetLeft - cards[0].offsetLeft;
+  const page = () => Math.round(track.scrollLeft / stepW());
+  const mark = () => $$('button', dots).forEach((b, i) => b.setAttribute('aria-current', i === page()));
+  const go = i => track.scrollTo({ left: i * stepW(), behavior: still ? 'auto' : 'smooth' });
+  const build = () => {
+    pages = Math.max(1, cards.length - Math.round(track.clientWidth / stepW()) + 1);
+    dots.innerHTML = '';
+    for (let i = 0; i < pages; i++) { const b = document.createElement('button'); b.setAttribute('aria-label', 'Position ' + (i + 1)); b.onclick = () => { go(i); play(); }; dots.append(b); }
+    mark();
+  };
+  const play = () => { clearInterval(auto); if (!still && seen) auto = setInterval(() => go((page() + 1) % pages), 4200); };
+  track.addEventListener('scroll', mark, { passive: true });
+  track.addEventListener('pointerenter', () => clearInterval(auto));
+  track.addEventListener('pointerleave', play);
+  track.addEventListener('focusin', () => clearInterval(auto));
+  new IntersectionObserver(([e]) => { seen = e.isIntersecting; play(); }, { threshold: 0.5 }).observe(track);
+  build(); addEventListener('resize', build);
+
+  // Carte : filtre par pastille, sortie puis retour en cascade
+  const grid = $('.dishes'), dishes = $$('.dish');
+  $$('.chip').forEach(chip => chip.addEventListener('click', () => {
+    $$('.chip').forEach(c => c.setAttribute('aria-pressed', c === chip));
+    grid.classList.add('is-out');
+    setTimeout(() => {
+      let n = 0;
+      dishes.forEach(d => { const ok = chip.dataset.cat === 'tout' || d.dataset.cat === chip.dataset.cat; d.hidden = !ok; d.style.transitionDelay = ok ? (n++ * 60) + 'ms' : ''; });
+      requestAnimationFrame(() => grid.classList.remove('is-out'));
+    }, still ? 0 : 230);
+  }));
+
+  // Défilement : barre, assiette qui tourne, cadres en léger décalage
+  const turn = $('[data-turn] img'), frames = $$('.frame'), zone = $('.stagger');
+  const wide = matchMedia('(min-width: 761px)');
+  let last = 0, tick = false;
+  const onScroll = () => {
+    tick = false;
+    const y = scrollY;
+    nav.classList.toggle('is-away', y > last && y > 400 && !nav.classList.contains('is-open'));
+    last = y;
+    if (still) return;
+    if (y < innerHeight) turn.style.setProperty('--turn', (y * 0.18).toFixed(1) + 'deg');
+    const r = zone.getBoundingClientRect();
+    if (wide.matches && r.bottom > 0 && r.top < innerHeight) {
+      const mid = r.top + r.height / 2 - innerHeight / 2;
+      frames.forEach(f => f.style.transform = `translate3d(0, ${(mid * f.dataset.speed).toFixed(1)}px, 0)`);
+    } else if (!wide.matches) frames.forEach(f => f.style.transform = '');
+  };
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
 })();
 </script>
 </body>

@@ -1,69 +1,63 @@
 /*
  * Serif Bistro Green — tokens
- * Valeurs estimées à l'œil sur les images du shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
- * L'orange vif du shot (--orange) ne porte que du grand texte ou des fonds de carte ; les boutons utilisent --orange-strong.
- * @contrast cream:green cream-muted:green cream:green-deep green:cream ink:cream muted:cream cream:orange-strong white:orange-strong ink:orange white:orange:large cream:orange:large ink:card muted:card cream:ink
+ * MESURÉS le 2026-10-03 par lecture des pixels sur les 8 images du shot Dribbble (3200 × 2400 chacune, vues de présentation).
+ * La référence est fixe : couleurs, tailles et positions sont mesurées ou lues ; tout le mouvement est proposé.
+ * @contrast cream:green cream:green-card soft:green soft:green-card green:cream green:cream-box green-soft:cream cream:orange:large ink:orange cream:orange-btn orange-btn:paper green:paper
  */
 :root {
-  /* Couleurs */
-  --green: #0e5446;          /* vert profond : héros, pied de page, titres sur crème */
-  --green-deep: #0a3f34;     /* barre de navigation, survols */
-  --cream: #fdf6e3;          /* sections claires, texte sur vert */
-  --cream-muted: #c9d8cc;    /* texte secondaire sur vert */
-  --card: #fffaf0;           /* cadres photo, champs */
-  --orange: #e8603c;         /* accent : cartes plats, bandeau newsletter, icône du logo */
-  --orange-strong: #c4472a;  /* boutons et petit texte sur orange (contraste) */
-  --white: #ffffff;
-  --ink: #1b1a17;            /* texte sur crème / sur orange */
-  --muted: #5b5a52;
-  --line: #e7dcc2;           /* filets sur crème */
-  --skin: #c98b62;           /* ornements dessinés (personnes et plats = photos, voir assets.md) */
-  --herb: #6f9a52;           /* ornements dessinés */
-  --tomato: #d8452b;         /* ornements dessinés */
-  --crust: #e2b36a;          /* illustration (pain, pâtes) */
+  /* ---- Couleurs ---- */
+  --green: #004e48;         /* mesuré : fond du héros, de la carte et du pied */
+  --green-card: #18605a;    /* mesuré : fiche de plat, barre de navigation */
+  --cream: #fef8e6;         /* mesuré : feuilles claires, texte sur vert */
+  --cream-box: #fcf4e2;     /* mesuré : fond de l'image dans la fiche de plat */
+  --frame: #fae8d2;         /* mesuré : cadre épais autour des photos */
+  --orange: #e45834;        /* mesuré : fiches « incontournables », bandeaux, boutons du shot */
+  --orange-btn: #c8431f;    /* choisi : orange foncé des boutons, pour un petit texte crème lisible (4,6:1) */
+  --paper: #ffffff;         /* lu : bouton rond à flèche, bouton du formulaire, anneaux de reliure */
+  --ink: #1d1208;           /* choisi : petit texte sur orange (le shot le met en crème, 3,5:1) */
+  --soft: #d5ddd0;          /* choisi : texte secondaire sur vert (shot : crème à ≈ 75 %) */
+  --green-soft: #2f615c;    /* choisi : texte secondaire sur crème */
+  --line-green: rgb(254 248 230 / 0.2);    /* lu : contour des fiches, des pastilles, filets du pied */
+  --line-cream: rgb(0 78 72 / 0.18);       /* choisi : filets sur crème */
+  --line-art: rgb(254 248 230 / 0.6);      /* lu : dessins au trait sur orange */
+  --field: rgb(255 255 255 / 0.18);        /* lu : champ du formulaire sur orange */
+  --shadow: rgb(0 40 36 / 0.28);           /* choisi : ombre des assiettes et de la barre */
 
-  /* Typographie */
-  --font-display: 'DM Serif Display', 'Abril Fatface', Georgia, serif;   /* serif d'affiche à fort contraste */
-  --font-body: 'DM Sans', system-ui, sans-serif;
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.75rem;
-  --text-2xl: clamp(2rem, 4vw, 3.25rem);
-  --text-3xl: clamp(2.5rem, 6vw, 5rem);
-  --text-hero: clamp(3.5rem, 11vw, 10.5rem);
-  --text-wordmark: clamp(5rem, 22vw, 20rem);
-  --leading-display: 0.9;
-  --leading-body: 1.6;
-  --tracking-caps: 0.1em;
+  /* ---- Typographie ---- */
+  --font-display: 'Abril Fatface', 'Bodoni 72', Georgia, serif;   /* shot : didone grasse non identifiée, plus étroite dans le héros */
+  --font: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --fs-hero: clamp(3.9rem, 10.6vw, 9.6rem);      /* shot : capitales de 190px de haut (police étroite) ; ici réglé sur la largeur */
+  --fs-hero-2: clamp(2.5rem, 6.5vw, 5.9rem);     /* mesuré : 2e ligne aux 2/3 de la première (125 / 190) */
+  --fs-stagger: clamp(3.4rem, 11vw, 10rem);      /* lu : titre en escalier « Exclusive Dining Experiences » */
+  --fs-giant: clamp(3.6rem, 15.5vw, 14rem);      /* lu : nom géant du pied, sur toute la largeur */
+  --fs-h2: clamp(2.2rem, 4.4vw, 4rem);           /* lu : titres de section ≈ 64px */
+  --fs-h3: 1.5rem;          /* choisi : nom sur fiche orange, 24px pour rester un « grand texte » */
+  --fs-card: 1.125rem;      /* lu : nom du plat ≈ 18px */
+  --fs-price: 1.375rem;     /* lu : prix ≈ 22px */
+  --fs-lead: 1.25rem;       /* mesuré : texte de droite du héros ≈ 22px, ramené à 20 */
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;     /* lu : boutons, liens, descriptions ≈ 13 à 14px */
+  --fs-tiny: 0.75rem;
 
-  /* Espace (base 4px) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-24: 96px;
-  --container: 1240px;
+  /* ---- Grille (page de 1440) ---- */
+  --page: 1440px;
+  --gutter: clamp(16px, 4.2vw, 60px);
+  --nav-w: 1028px;          /* mesuré : barre flottante 1028 × 69 */
+  --nav-h: 64px;
+  --btn-h: 54px;            /* mesuré : bouton principal 214 × 54 */
+  --btn-h-s: 38px;          /* lu : petit bouton des fiches */
+  --r-btn: 8px;             /* mesuré : rayon du bouton ≈ 8px */
+  --r-card: 18px;           /* lu : fiches, cadres de photo */
+  --r-sheet: clamp(24px, 3vw, 44px);   /* lu : coins des feuilles qui se recouvrent */
+  --frame-w: 8px;           /* lu : épaisseur du cadre crème des photos */
+  --fav-w: 300px;           /* lu : fiche orange ≈ 300 × 330 */
+  --fav-gap: 44px;          /* lu : écart entre fiches, traversé par la reliure */
+  --arch-w: clamp(220px, 23vw, 340px);
 
-  /* Formes */
-  --radius-btn: 4px;         /* petits boutons rectangulaires */
-  --radius-sm: 8px;          /* barre de navigation */
-  --radius-md: 12px;         /* cartes plats */
-  --radius-section: 32px;    /* haut des sections crème qui chevauchent le vert */
-  --radius-pill: 999px;
-  --frame-photo: 8px;        /* bordure crème des photos encadrées */
-  --shadow-photo: 0 18px 40px -12px rgb(10 63 52 / 0.35);
-  --shadow-card: 0 12px 28px -14px rgb(27 26 23 / 0.35);
-
-  /* Mouvement */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 180ms;
-  --dur-base: 320ms;
-  --dur-slow: 800ms;
+  /* ---- Mouvement (proposé : la référence est fixe) ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-back: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-fast: 200ms;
+  --dur: 500ms;
+  --dur-slow: 1000ms;
 }

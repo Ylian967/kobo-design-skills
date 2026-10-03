@@ -1,103 +1,109 @@
 ---
 name: serif-bistro-green
-description: Direction artistique « Serif Bistro Green » pour restaurants, bistrots, brasseries, traiteurs, caves, épiceries fines et landings food. Héros vert profond avec énorme titre en serif d'affiche crème sur deux lignes et photo de la cheffe cadrée dans une arche glissée entre les mots, barre de navigation flottante translucide avec liens en pilules et petit bouton orange « Réserver une table », sections crème à grand rayon supérieur qui chevauchent le vert comme des feuilles empilées, carrousel de cartes orange avec vraie photo d'assiette ronde vue de dessus reliées par une « reliure à spirale », titre échelonné avec petites photos encadrées glissées entre les mots, bandeau newsletter orange aux dessins au trait crème, pied de page vert avec nom géant. À utiliser quand on demande : site de restaurant, réservation de table, carte / menu, landing gastronomique, food, chef, bistronomie, ambiance chaleureuse, vert et orange, serif élégant, éditorial culinaire. Fournit tokens, composants, mises en page, animations et une page d'exemple.
+description: Direction artistique « Serif Bistro Green » pour restaurants, bistrots, brasseries, traiteurs, caves, épiceries fines et landings food. Héros vert profond avec énorme titre en serif d'affiche crème sur deux lignes et photo de la cheffe cadrée dans une arche glissée entre les mots, barre de navigation flottante avec liens en pilules et bouton orange « Réserver », sections en feuilles à grand rayon supérieur qui se recouvrent (vert, crème, orange), carrousel de fiches orange avec vraie photo d'assiette ronde vue de dessus reliées par une « reliure à spirale », carte filtrable en fiches de plat, titre en escalier avec photos encadrées glissées entre les mots, bandeau de lettre d'information orange aux dessins au trait, pied de page vert avec nom géant. À utiliser quand on demande : site de restaurant, réservation de table, carte / menu, landing gastronomique, food, chef, bistronomie, ambiance chaleureuse, vert et orange, serif élégant, éditorial culinaire. Fournit tokens, composants, mises en page, animations et une page d'exemple.
 ---
 
 # Serif Bistro Green
 
-> Une ardoise vert bouteille, une grande serif crème et une assiette orange qui donne faim : chic, mais on a envie d'y entrer.
+> Une nappe vert bouteille, une grande serif crème et une assiette sur fond orange : chic, mais on a envie d'y entrer.
 
 ## L'idée
 
-Le visiteur doit sentir **la salle avant d'avoir réservé** : chaleur, produit, gens. Le langage vient des sites de restaurants éditoriaux : un **vert profond** qui sert de nappe, une **serif d'affiche à fort contraste** qui parle fort et lentement, un **orange tomate** réservé à ce qui se mange ou se réserve. Le style vit dans le **titre du héros** (énorme, avec un personnage pris entre les deux lignes), dans les **feuilles crème** aux coins très arrondis qui recouvrent le vert, et dans les **cartes de plats** reliées comme un carnet. L'interface (navigation, boutons, champs) reste petite, précise, presque discrète.
+Le visiteur doit sentir **la salle avant d'avoir réservé** : chaleur, produit, gens. Un **vert profond** sert de nappe, une **serif d'affiche à fort contraste** parle fort et lentement, un **orange tomate** est réservé à ce qui se mange ou se réserve. Le style vit dans le **titre du héros** (énorme, avec une personne prise entre les mots), dans les **feuilles** aux coins très arrondis qui se recouvrent, et dans les **fiches de plats reliées** comme un carnet. L'interface (barre, boutons, champs) reste petite et précise.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythme, traitements), jamais l'identité : pas de nom, logo, photo ni texte du shot d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, photos ni textes de la maquette d'origine.
 
 ## Règles prioritaires
 
-1. **Trois matières seulement** : vert (`--green`) pour le héros et le pied de page, crème (`--cream`) pour la lecture, orange (`--orange`) pour les plats et le bandeau newsletter. Chaque section est une **feuille** à rayon supérieur 32px qui chevauche la précédente de 32px.
-2. **La serif crie, la sans se tait** : DM Serif Display pour tout ce qui est titre, nom de plat, chiffre ; DM Sans 400–500 en 14–16px pour le reste. Jamais de serif en gras, jamais de sans en grand.
-3. **Le titre du héros est une affiche** : 2 lignes, 56 → 168px, interligne 0.9, la 1re à gauche, la 2e à droite, un mot en italique orange ; la photo de la cheffe, cadrée dans une arche, passe **entre** les deux lignes (derrière la 2e, devant la 1re).
-4. **Les boutons sont petits** : rayon 4px, hauteur 44px, 14px ; orange plein (`--orange-strong`) pour l'action, contour crème pour le secondaire, pilule verte seulement dans un champ newsletter.
-5. **Contraste** : l'orange vif `--orange` ne porte que du **grand texte** (≥ 24px) ou du texte `--ink` ; tout petit texte blanc ou crème se pose sur `--orange-strong` (paires vérifiées dans `references/tokens.css`).
-6. **Mouvement doux** : montées de 24–48px et fondus lents (800ms, `--ease-out`), assiettes qui tournent au survol ; rien qui rebondit.
-7. **Accessibilité** : cibles ≥ 44px, focus orange 2px décalé, carrousel utilisable au clavier (flèches + points), `prefers-reduced-motion` respecté.
-8. **Aucune valeur en dur** : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
+1. **Trois couleurs, pas plus** : vert, crème, orange. Chaque section est une feuille d'une seule couleur ; jamais deux feuilles de même couleur à la suite.
+2. **La serif d'affiche pour tout ce qui se lit de loin** (titres, noms de plats, prix, boutons) ; DM Sans pour le reste.
+3. **Une personne dans le titre** : une seule arche par page, entre les deux moitiés du titre du héros.
+4. **Les assiettes sont rondes et vraies** : photo vue de dessus recadrée en cercle, jamais un dessin.
+5. **Feuilles empilées** : coins supérieurs de `--r-sheet`, chaque section remonte sur la précédente.
+6. **Orange en surface, orange foncé en bouton** : `--orange` pour les fiches et bandeaux, `--orange-btn` pour les boutons. Petit texte sur orange : `--ink`.
+7. **Un cadre crème épais** (`--frame`, 8px) autour de chaque photo rectangulaire posée sur une feuille.
+8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder la navigation flottante, un bouton, une carte de plat, la reliure, le titre échelonné, la newsletter, un champ, une puce. |
-| `references/layouts.md` | Avant de construire une page : héros avec personnage, feuilles empilées, carrousel, expériences, pied de page, mobile. |
-| `references/assets.md` | Avant de placer une image : portrait du héros en arche, assiettes rondes, vignettes du titre, sources, prompts IA, traitements. |
-| `references/motion.md` | Avant d'ajouter une animation : entrée du héros, apparitions au défilement, assiettes, carrousel. |
-| `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
-| `source.md` | Pour connaître le shot de référence, ce qui a été vu et les écarts. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Barre flottante, bouton, titre à arche, assiette ronde, fiche reliée, feuille, pastille, fiche de plat, titre en escalier, bandeau, pied. |
+| `references/layouts.md` | Ordre des sections, repères, version mobile, autres pages. |
+| `references/motion.md` | Mots qui montent, assiettes qui tournent, carrousel, filtre, cadres en décalage, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : types de photo, recadrages, pictogrammes. |
+| `examples/demo.html` | Page d'accueil complète animée (restaurant fictif « Maison Sauge »). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Poids | Taille | Interlignage | Espacement |
-|---|---|---|---|---|---|
-| Titre du héros | **DM Serif Display** | 400 (+ italique) | `--text-hero` (56 → 168px) | 0.9 | -0.02em |
-| Titres de section, titre échelonné | DM Serif Display | 400 | `--text-3xl` (40 → 80px) | 1–1.15 | 0 |
-| Noms de plats, chiffres, citations | DM Serif Display | 400 | 20–28px | 1.1 | 0 |
-| Nom géant du pied de page | DM Serif Display | 400 | `--text-wordmark` (80 → 320px) | 0.72 | -0.04em |
-| Texte courant | **DM Sans** | 400 | 16px | 1.6 | 0 |
-| Navigation, boutons | DM Sans | 500 | 14px | 1 | 0 |
-| Surtitres | DM Sans | 500 | 12px | 1 | +0.1em, capitales, tiret de 24px devant |
+| Rôle | Police | Taille |
+|---|---|---|
+| Titre du héros, ligne 1 | Abril Fatface | `--fs-hero` (jusqu'à 154px) |
+| Titre du héros, ligne 2 | Abril Fatface | `--fs-hero-2` (2/3 de la première) |
+| Titre en escalier | Abril Fatface | `--fs-stagger` |
+| Nom géant du pied | Abril Fatface | `--fs-giant` |
+| Titre de section | Abril Fatface | `--fs-h2` (≈ 64px) |
+| Nom de plat, prix | Abril Fatface | `--fs-card`, `--fs-price` |
+| Bouton, pastille | Abril Fatface, espacée de 0.06em | `--fs-small`, `--fs-tiny` |
+| Texte | DM Sans 400 | `--fs-body`, `--fs-lead` dans le héros |
 
-Le shot montre une serif d'affiche haute et contrastée (type Abril Fatface / DM Serif Display) ; DM Serif Display est retenue car elle a une italique, utile pour le mot coloré du titre.
+Interligne des titres : 1 à 1.12. Pas de capitales forcées dans les titres ; pas d'italique.
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Nappe | `--green` / `--green-deep` | héros, pied de page, barre de navigation, titres sur crème |
-| Papier | `--cream` / `--card` | sections de lecture ; cadres photo et champs |
-| Accent | `--orange` | cartes de plats, bandeau newsletter, icône du logo, mot en italique du héros |
-| Action | `--orange-strong` | boutons principaux, petit texte sur orange en blanc |
-| Texte | `--ink` / `--muted` sur crème ; `--cream` / `--cream-muted` sur vert | |
-| Illustration | `--skin`, `--herb`, `--tomato`, `--crust` | réservés aux petits ornements dessinés ; personnes et plats sont toujours des photos (`references/assets.md`) |
+| `--green` | #004e48 | Héros, carte, pied |
+| `--green-card` | #18605a | Fiche de plat, barre |
+| `--cream` | #fef8e6 | Feuilles claires, texte sur vert |
+| `--orange` | #e45834 | Fiches reliées, bandeaux |
+| `--orange-btn` | #c8431f | Boutons, pastille active |
+| `--frame` | #fae8d2 | Cadre des photos |
+| `--ink` | #1d1208 | Petit texte sur orange |
 
-Règle d'usage : **l'orange = ce qui se mange ou se réserve**. Pas d'orange décoratif ailleurs (pas de filets, pas d'icônes orange dans le texte).
+Le crème sur `--orange` n'est permis qu'en **grand texte** (24px et plus).
+
+## Mise en page
+
+- Page de 1440px, marges de 60px ; barre flottante de 1028px centrée.
+- Héros : titre sur deux lignes, chacune coupée en deux autour de l'arche ; à gauche une assiette ronde et trois lignes, à droite un texte et deux boutons.
+- Puis : feuille crème (carrousel relié), bandeau orange, feuille verte (carte filtrable sur 4 colonnes), feuille crème (titre en escalier et cadres), feuille orange (lettre), pied vert au nom géant.
+- Détail et version mobile : `references/layouts.md`.
+
+## Mouvement
+
+La référence est fixe : tout le mouvement est **proposé**. Trois gestes : les **mots montent** derrière un cache, les **assiettes tournent** (au défilement dans le héros, au survol sur les fiches), les **feuilles se recouvrent**. Rien ne tourne en continu ; le carrousel avance seul toutes les 4.2s et s'arrête au survol. Détail, code et mesures : `references/motion.md`.
 
 ## Images et 3D
 
-Les personnes et les plats sont de **vraies photos** chaudes et naturelles : la cheffe en portrait vertical cadré dans une arche au cœur du héros, les assiettes vues de dessus recadrées en cercle bordé de blanc sur les cartes orange, et de petits tirages encadrés glissés dans le titre échelonné. Les plats gardent leurs vraies couleurs ; seul le portrait est légèrement atténué et fondu dans le vert. Pas de 3D attendue. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un plat : seuls les dessins au trait de la newsletter restent en SVG. Détails dans `references/assets.md`.
+- **Pas de 3D** dans ce style.
+- **Vraies photos** partout : portrait sur fond sombre pour l'arche, assiettes vues de dessus pour les cercles, plats en gros plan pour la carte, photos sombres et chaudes pour les cadres.
+- La référence utilise des images détourées ; le skill obtient l'effet par le **cadrage** (arche, cercle), sans détourage.
+- Dessins au trait en SVG pour les bandeaux orange.
+- Identifiants et recadrages : `references/assets.md`.
 
-## Signature
+## Accessibilité
 
-**La cheffe entre les mots** : dans le héros vert, la photo de la cheffe, cadrée dans une arche cerclée d'un filet crème, se tient au centre ; l'arche passe devant la première ligne du titre et la seconde ligne passe devant elle ; le bas de l'arche est coupé net par la feuille crème qui remonte. Une seule fois, en haut de la page d'accueil. Écho secondaire : **la reliure** — les cartes orange du carrousel sont percées d'encoches sur les bords et reliées par une colonne d'anneaux, comme un carnet de commandes.
+- Contrastes vérifiés dans `tokens.css` (`@contrast`) ; l'orange du shot a été foncé pour les boutons.
+- Carrousel : piste focalisable, défilable au clavier, arrêt de l'avance au focus ; points avec libellé.
+- Filtres : boutons `aria-pressed`, grille en `aria-live="polite"`.
+- Le nom géant du pied est décoratif (`aria-hidden`).
+- `prefers-reduced-motion` : tout est en place d'emblée, plus d'avance automatique.
 
-## À éviter
+## À ne pas faire
 
-- Une photo plein cadre en fond de héros : la signature disparaît ; le portrait reste dans son arche, entre les mots.
-- Un personnage ou des assiettes dessinés en CSS/SVG à la place des photos.
-- Des boutons arrondis géants ou en pilule partout : ils sont petits et presque carrés.
-- Plusieurs accents (bleu, jaune…) : vert, crème, orange, point.
-- Mettre du petit texte blanc ou crème sur l'orange vif (3,2:1) : passer en `--orange-strong` ou en `--ink`.
-- Des sections plates bord à bord : chaque section est une feuille arrondie qui recouvre la précédente.
-- Reprendre le nom, le logo, les photos ou les textes du shot de référence.
+- Ajouter une quatrième couleur, un dégradé ou une ombre colorée.
+- Mettre du petit texte crème sur orange.
+- Remplacer une assiette par un dessin ou un émoji.
+- Empiler deux arches ou deux titres en escalier sur une même page.
+- Animer une feuille entière au défilement.
 
-## Adaptation React / React Native
+## Vérification
 
-- Feuilles empilées : `View` avec `borderTopLeftRadius/RightRadius: 32` et `marginTop: -32`, `zIndex` croissant.
-- Cheffe entre les mots : trois couches absolues (ligne 1, `expo-image` dans une arche `overflow: 'hidden'`, ligne 2) dans un même conteneur ; en natif, l'ordre des enfants fait le `zIndex`.
-- Carrousel : `FlatList` horizontale avec `snapToInterval` = largeur de carte + gouttière ; reliure dessinée en `react-native-svg` (anneaux) entre les cartes, encoches via `View` ronds couleur crème sur les bords.
-- Barre flottante translucide : `expo-blur` (`BlurView`) teinté vert profond.
-- Titre échelonné avec photos : `Text` imbriqués + `Image` en ligne (iOS) ou lignes en `flexDirection: 'row'` avec `flexWrap` (plus fiable sur Android).
-- Polices : `@expo-google-fonts/dm-serif-display`, `@expo-google-fonts/dm-sans`.
-
-## Avant de livrer
-
-- [ ] Tokens importés, aucune valeur en dur.
-- [ ] Héros vert avec titre serif 2 lignes et photo de la cheffe en arche glissée entre les mots.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Sections en feuilles arrondies qui se chevauchent (vert → crème → orange → vert).
-- [ ] Cartes de plats orange reliées, carrousel au clavier, points synchronisés.
-- [ ] Boutons petits (rayon 4px), états survol / focus / appui / désactivé conformes à `references/components.md`.
-- [ ] Contrastes vérifiés (petit texte jamais blanc sur `--orange`).
-- [ ] Testé à 375px et 1440px sans défilement horizontal ; mouvement réduit respecté.
-- [ ] Aucun élément du shot d'origine (nom, logo, photos, textes).
+1. `python3 tools/check.py serif-bistro-green` passe.
+2. À 1440px et à 390px : pas de défilement horizontal, aucune erreur dans la console.
+3. L'arche ne masque pas un mot entier du titre.
+4. Les trois couleurs alternent d'une feuille à l'autre.
+5. Mouvement réduit : la page est lisible sans aucune animation.

@@ -1,115 +1,91 @@
 # Serif Bistro Green — composants
 
-Chaque composant : rôle, anatomie, valeurs (en tokens), états, code de référence. Valeurs estimées sur les captures (voir `source.md`). Tous les extraits n'utilisent que des `var(--…)`.
+Toutes les valeurs viennent de `tokens.css`. Le code complet est dans `examples/demo.html`.
 
-## Bouton principal
+## Barre de navigation flottante
 
-- **Rôle** : réserver (« Réserver une table »). Un par écran, plus un dans la navigation.
-- **Anatomie** : rectangle rayon 4px, 44px de haut, padding 0 16px, DM Sans 500 14px, flèche fine 16px à droite.
-- **États** : repos (`--orange-strong`, texte blanc) ; survol (`--orange`, texte `--ink`, flèche glisse de 3px) ; appui (`translate: 0 1px`) ; focus (contour `--orange` 2px décalé de 3px) ; désactivé (fond `--line`, texte `--muted`) ; chargement (flèche remplacée par un petit cercle qui tourne, texte « Un instant… »).
+Mesurée : 1028 × 69px, centrée, détachée du bord. Fond `--green-card`, contour `--line-green`, rayon 14px. Logo (pastille ronde orange + nom en `--font-display`), liens en pilules (l'actif : fond crème, texte vert), bouton rond de recherche, bouton orange « Réserver ».
 
 ```html
-<a class="btn btn--primary" href="#reserver">Réserver une table<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+<nav class="nav">
+  <a class="logo" href="#"><i><svg>…</svg></i>Maison Sauge</a>
+  <div class="nav-links" id="menu"><a class="is-on" href="#">Accueil</a><a href="#">La carte</a></div>
+  <div class="nav-tools">
+    <button class="round search" aria-label="Rechercher">…</button>
+    <a class="btn" href="#">Réserver</a>
+    <button class="round burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">…</button>
+  </div>
+</nav>
 ```
 
-```css
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4);
-  border-radius: var(--radius-btn); border: 1px solid transparent; font: 500 var(--text-sm)/1 var(--font-body); text-decoration: none; cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); }
-.btn svg { width: 16px; height: 16px; transition: translate var(--dur-fast) var(--ease-out); }
-.btn:hover svg { translate: 3px 0; }
-.btn:active { translate: 0 1px; }
-.btn--primary { background: var(--orange-strong); color: var(--white); }
-.btn--primary:hover { background: var(--orange); color: var(--ink); }
-.btn:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; }
-```
+Sous 1000px : les liens deviennent un panneau sous la barre, ouvert par le bouton rond à deux traits.
 
-## Bouton secondaire
+## Bouton
 
-Contour 1px `--cream`, texte crème, fond transparent (« Notre histoire → ») ; survol : fond crème, texte `--green`. Sur crème : contour et texte `--green`, survol fond vert.
+Mesuré : 214 × 54px, rayon ≈ 8px. Texte en `--font-display`, petit, espacé, suivi d'une flèche.
 
-```css
-.btn--outline { border-color: var(--cream); color: var(--cream); background: transparent; }
-.btn--outline:hover { background: var(--cream); color: var(--green); }
-```
+| Variante | Fond | Texte | Usage |
+|---|---|---|---|
+| `.btn` | `--orange-btn` | `--cream` | action principale |
+| `.btn--line` | transparent, contour | couleur du texte | action secondaire |
+| `.btn--paper` | `--paper` | `--orange-btn` | sur fond orange |
+| `.btn--s` | hauteur 38px | — | fiches de plat |
 
-## Bouton rond
+L'orange du shot (`--orange`) sert aux **surfaces** ; les boutons prennent `--orange-btn`, plus foncé, pour que le petit texte crème reste lisible.
 
-44px, cercle. Variantes : recherche (fond crème à 12 % sur vert), flèche de carte (fond `--white`, flèche ↗ `--orange-strong`, tourne de -45° au survol), contrôle de carrousel (contour `--green`, survol plein).
+## Titre du héros avec arche
 
-## Navigation flottante
-
-- **Anatomie** : barre collante à 16px du haut, largeur du conteneur, fond `--green-deep` à 82 % + flou 10px, filet crème à 14 %, rayon 8px. Logo (rond orange 30px avec icône crème + nom en serif 28px) ; groupe de liens en pilules centré dans une gélule crème à 8 % ; recherche ronde ; bouton principal.
-- **Lien actif** : pilule `--cream`, texte `--green` (`aria-current="page"`). Autres : `--cream-muted`, survol `--cream`.
-- **Mobile (< 1024px)** : liens remplacés par un bouton menu rond ; sous 720px le bouton « Réserver » ne garde que la flèche (avec `aria-label`) et la recherche passe dans le menu.
-
-```css
-.nav { position: sticky; top: var(--space-4); display: flex; align-items: center; gap: var(--space-4); padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
-  background: color-mix(in srgb, var(--green-deep) 82%, transparent); backdrop-filter: blur(10px);
-  border: 1px solid color-mix(in srgb, var(--cream) 14%, transparent); border-radius: var(--radius-sm); color: var(--cream); }
-.nav ul a[aria-current] { background: var(--cream); color: var(--green); }
-```
-
-## Carte de plat (avec reliure)
-
-- **Anatomie** : fond `--orange` (une carte sur deux en `--orange-strong`), rayon 12px, padding 24px, ombre `--shadow-card` ; photo réelle de l'assiette vue de dessus recadrée en cercle (78 % de la largeur, bord blanc 6px, ombre portée — image réelle, voir `assets.md`) ; en bas : nom en serif 28px blanc, description 14px (`--ink` sur orange vif, blanc sur orange foncé), prix dans une petite étiquette crème ; bouton rond blanc ↗.
-- **Reliure** : encoches crème de 12px sur les bords gauche et droit (pas de 26px), et une colonne d'anneaux verts dans la gouttière entre deux cartes.
-- **États** : survol (l'assiette tourne de 25°, 800ms) ; focus du bouton rond ; carte entière non cliquable (seul le bouton l'est, pour éviter les liens imbriqués).
-
-```css
-.dish { position: relative; display: flex; flex-direction: column; padding: var(--space-6); border-radius: var(--radius-md); color: var(--white); box-shadow: var(--shadow-card);
-  background: radial-gradient(circle at 0 50%, var(--cream) 0 6px, transparent 6.5px) left 0 top 40px / 12px 26px repeat-y,
-              radial-gradient(circle at 100% 50%, var(--cream) 0 6px, transparent 6.5px) right 0 top 40px / 12px 26px repeat-y,
-              var(--orange); }
-.dish:not(:last-child)::after { content: ""; position: absolute; top: 40px; bottom: 40px; right: calc(var(--bind) * -1 - 6px); width: calc(var(--bind) + 12px);
-  background: radial-gradient(ellipse 50% 7px at 50% 50%, transparent 0 calc(100% - 3px), var(--green) calc(100% - 3px) 100%, transparent 100%) 0 0 / 100% 26px repeat-y; }
-.dish:hover .plate { rotate: 25deg; }
-```
-
-## Carrousel
-
-Piste en `grid-auto-flow: column`, 4 cartes visibles (2,2 sous 1024px, 1,3 sous 720px), `scroll-snap-type: x mandatory`, barre de défilement masquée, piste focusable (`tabindex="0"`, `aria-label`). Sous la piste : flèche précédente, points (8px, l'actif s'allonge en pilule verte de 22px, zone cliquable 24×44px), flèche suivante.
-
-## Titre échelonné avec vignettes
-
-Titre `h2` en serif `--text-3xl` vert, découpé en 3 lignes : 1re à gauche, 2e décalée de 12 %, 3e à droite ; un mot en italique `--orange-strong` ; 3 vignettes photo réelles (voir `assets.md`) **dans** les lignes (carré 1.25em ou 4:3 1.6em), bord `--card` 8px, rayon 4px, ombre `--shadow-photo`, rotations -4°, +5°, -2°. Vignettes décoratives (`aria-hidden`), le texte reste lisible seul.
+Deux lignes en `--font-display` ; chaque ligne est coupée en deux moitiés écartées de la largeur de l'arche (`gap: var(--arch-w)`). L'arche (cadre `--frame` de 8px, sommet en demi-cercle, pas de bord en bas) remonte dans le titre par une marge négative et passe au-dessus des lettres.
 
 ```html
-<h2 class="stagger"><span>Des moments <span class="ph ph--a" data-slot="photo-cuisine" aria-hidden="true"><img src="…" alt="" loading="lazy"></span> à part,</span>…</h2>
+<h1 class="hero-title display">
+  <span class="line l1"><span class="mask"><b>Chaque</b></span> <span class="mask"><b>table</b></span></span>
+  <span class="line l2"><span class="mask"><b>a le goût</b></span> <span class="mask"><b>de chez soi</b></span></span>
+</h1>
+<figure class="arch"><img src="…" alt="…"></figure>
 ```
 
-## Bloc « expérience »
+## Assiette ronde
 
-Grille de 3 colonnes sous un filet `--line` : numéro « 01 » en serif orange foncé, titre serif 20px vert, texte 14px `--muted`, lien souligné avec flèche (44px de haut).
+Une vraie photo vue de dessus, recadrée en cercle (`border-radius: 50%`), ombre portée vers le bas. 190px dans le héros, 178px sur les fiches. C'est l'image qui tourne, pas le disque.
 
-## Newsletter
+## Fiche reliée (carrousel)
 
-- Bandeau `--orange` (feuille arrondie), dessins au trait crème (fourchette, feuille, verre, poisson, cloche) en SVG `stroke-width: 2`, opacité 55 %, décoratifs.
-- Titre serif crème `--text-3xl` (grand texte → 3,2:1 accepté), texte `--ink`.
-- Champ en gélule `--card` avec ombre ; bouton en pilule `--green` / texte crème à l'intérieur.
-- **États** : focus du champ (contour vert 2px) ; erreur (message `--ink` sous la gélule précédé de « ! », `aria-invalid`) ; succès (le bouton affiche « Merci ! »).
+Fiche `--orange` de 300 × 330px, rayon `--r-card` : assiette, nom en `--font-display` (24px), bouton rond blanc à flèche. Entre deux fiches, une **reliure à spirale** : un pseudo-élément blanc, masqué par un motif d'anneaux arrondis répété tous les 24px, qui déborde de 13px sur chaque fiche.
 
 ```css
-.subscribe { display: flex; gap: var(--space-2); padding: var(--space-2); background: var(--card); border-radius: var(--radius-pill); box-shadow: var(--shadow-card); }
-.subscribe label { flex: 1; display: flex; min-width: 0; }
-.subscribe input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: transparent; font: 400 var(--text-base) var(--font-body); color: var(--ink); }
-.btn--pill { border-radius: var(--radius-pill); background: var(--green); color: var(--cream); padding: 0 var(--space-6); }
+.fav-card + .fav-card::before { content: ""; position: absolute; left: calc(-1 * var(--fav-gap) - 13px); top: 26px; bottom: 26px;
+  width: calc(var(--fav-gap) + 26px); background: var(--paper); mask: url("…anneau.svg") 0 0 / 100% 24px repeat-y; }
 ```
 
-## Champ de saisie (formulaire de réservation)
+La piste défile avec `scroll-snap` (souris, doigt, clavier) ; des points ronds en dessous indiquent la position.
 
-Fond `--card`, filet 1px `--line`, rayon 4px, 48px de haut, libellé 12px capitales au-dessus. Focus : filet `--green` 2px. Erreur : filet `--orange-strong` + message texte. Désactivé : fond `--cream`, texte `--muted`.
+## Feuille
 
-## Puce (filtres de la carte)
+Chaque section est une feuille : coins supérieurs très arrondis (`--r-sheet`), remontée d'autant sur la précédente. Trois couleurs : `sheet--cream`, `sheet--orange`, `sheet--green`. Ne jamais poser deux feuilles de même couleur à la suite.
 
-Pilule 36px (zone 44px) en DM Sans 500 14px : contour `--line`, texte `--green` ; sélectionnée : fond `--green`, texte `--cream` (`aria-pressed`). Exemples : « Entrées », « Plats », « Desserts », « Végétarien ».
+## Pastille de filtre
+
+Hauteur 36px, contour `--line-green`, texte en `--font-display`. Active : fond `--orange-btn`. Ce sont des `<button aria-pressed>`.
+
+## Fiche de plat
+
+Fond `--green-card`, contour `--line-green`, marge intérieure 12px. Image dans une boîte `--cream-box` (rapport 1 / 0.8, rayon 10px), nom en `--font-display` (18px), description en `--soft`, puis prix (22px) et petit bouton sur une même ligne, collés en bas.
+
+## Titre en escalier et cadres
+
+Trois lignes géantes (`--fs-stagger`) décalées vers la droite ; trois photos dans un cadre `--frame` de 8px, posées en absolu entre les mots. Une photo peut mordre sur une lettre, jamais masquer un mot entier.
+
+## Bandeau à dessins au trait
+
+Feuille orange, titre crème sur trois lignes décalées, petits dessins au trait (`stroke: var(--line-art)`, sans remplissage) au début et à la fin des lignes. Dans le formulaire de la lettre : champ translucide `--field`, texte `--ink`, bouton blanc.
 
 ## Pied de page
 
-Feuille verte : phrase d'accroche en serif 28px, colonnes Adresse / Horaires / Suivre (surtitres 12px capitales `--cream-muted`, texte 14px crème), filet crème à 20 %, mentions, puis **nom géant** en serif crème `--text-wordmark`, interligne 0.72, coupé en bas par le bord de la page.
+Feuille verte : logo et réseaux, trois colonnes (naviguer, contact, horaires), ligne légale sous un filet, puis le **nom géant** en `--fs-giant` sur toute la largeur.
 
-## États vide, chargement, erreur
+## États
 
-- **Vide** (aucun créneau) : photo d'une assiette vide ou d'une table dressée (voir `assets.md`) + « Complet ce soir — essayez demain midi ? » + bouton secondaire.
-- **Chargement** : cartes squelettes `--line` sur crème, cercle `--card` à la place de la photo qui pulse doucement (opacité 0.6 → 1).
-- **Erreur** : bandeau crème à filet `--orange-strong`, texte `--ink`, bouton « Réessayer ».
+- Survol : voir `motion.md`.
+- Focus clavier : contour de 2px de la couleur du texte, décalé de 3px.
+- Petit texte sur orange : toujours `--ink`, jamais crème.
