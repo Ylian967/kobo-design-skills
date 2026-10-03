@@ -1,54 +1,60 @@
 # Acid Scan Security — mises en page
 
-## Grille et conteneur
+> La référence ne montre **que le héros** (une image 4:3). Les positions du héros sont relevées sur cette image ramenée à 1440px de large ; les sections suivantes sont **proposées** pour faire une page complète dans le même langage.
 
-- Marges `--edge` (16 → 40px). Héros et bandeau de mesures en pleine largeur ; sections de contenu dans `--container` (1320px) centré.
-- Rythme vertical des sections : 96px. Point de rupture : 860px.
+## Héros scan (relevé)
 
-## En-tête
-
-Absolu sur le héros, grille `1fr auto 1fr` : logo | liens centrés | bouton translucide. Hauteur ~76px. Pas de fond : le dégradé sombre du haut de la photo assure le contraste.
-
-## Héros scan
+Hauteur `100svh` (min 640px). Tout est positionné en pourcentage de l'écran, sur la photo :
 
 ```
-◎ GRIDWARD        [PLATEFORME]  MENACES  MESURES  DOCS        [SE PROTÉGER]
-                                │                    petit paragraphe
-                                │                    pâle, 3 lignes
-          ┌ SUJET 07 · SCAN ─────┼──────────┐
-──────────│▓▓▓ ◉ ▓▓▓▓▓▓▓▓▓ ◉ ▓▓▓▓│▓▓▓▓▓▓▓▓▓▓│──────────  ← réticule à la hauteur des yeux
-          └──────────────────────┼──────────┘ CORRESPONDANCE 99,2 %
-■ CHIFFREMENT DE GRADE MILITAIRE│        (visage duotone tramé)
-VOS DONNÉES                     │                       ┌─────────┐
-RESTENT À VOUS.                 │                       │ 🔒      │
-POINT FINAL.   ← --muted        │                       │ COMMENCER→
-                                                        └─────────┘
+◎ GRIDWARD             SÉCURITÉ   CONFORMITÉ   RESSOURCES        ┃ SE PROTÉGER ┃  ← bouton collé en haut à droite, hauteur de la barre
+                                │                      Une sécurité des données avancée…   ← 68 % / 17,5 %
+                                │                      (4 lignes, Inter 18px)
+CHIFFREMENT                     │                                                         ← 27 %
+GRADE MILITAIRE  (jaune)  ┌─────┼─────┐
+                          │█████│█████│▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ← bande claire 40 → 74 % de la largeur
+──────────────────────────┼═════╪═════┼───────────────────────────  ← réticule à 36 % (trait jaune dans le cadre)
+                          └─────┼─────┘
+                                │        (portrait vert, yeux sur le croisement)
+PROTECTION                      │                                       ┌ ─ ─ ─ ─ ┐
+BLINDÉE POUR                    │                                         ┌─────┐
+VOS DONNÉES   ← --muted         │                                         │ 🔒  │   ← carte CTA 186px + crochets
+                                │                                         └─────┘
+                             ■ DÉFILER                                  └ ─ ─ ─ ─ ┘
 ```
-Hauteur `max(100vh, 720px)`. Le visage (photo réelle, voir `assets.md`) est centré horizontalement, les yeux à 40 % de la hauteur (réglés par `data-eye`) ; le titre occupe le tiers bas gauche et peut chevaucher le bas du visage, jamais la bande de scan.
 
-## Bandeau de mesures
+| Élément | Position à 1440 |
+|---|---|
+| Logo | gauche `--edge` (≈ 80px), centré dans la barre de 72px |
+| Liens | centrés, écart ≈ 46px |
+| Bouton nav | collé à droite et en haut, ≈ 214 × 72px |
+| Paragraphe | gauche 68 %, haut 17,5 %, largeur ≈ 383px |
+| Surtitre | gauche `--edge`, haut 27 % |
+| Réticule | vertical 50 %, horizontal `--eye-y` 36 % |
+| Cadre jaune | centré sur le croisement, ≈ 121px |
+| Bande | 40 → 74 % de la largeur, ≈ 6 % de la hauteur, centrée sur les yeux |
+| Titre | gauche `--edge`, bas 14 % |
+| Carte CTA | droite `--edge` + 14px, bas 16 % |
 
-4 colonnes pleine largeur, filets haut et bas, chiffres pixel + étiquettes mono.
+Le **visage** est un peu à droite du centre : l'œil gauche (à l'écran) est sur le croisement, l'autre œil à droite.
 
-## Grille de couches
+## Page complète (proposé)
 
-En-tête de section : surtitre `[ Plateforme ]` + titre pixel à gauche, phrase `--muted` à droite (alignée en bas). Puis 3 cartes à crochets, gap 16px.
+| # | Section | Fond | Contenu |
+|---|---|---|---|
+| 0 | Amorçage | `--void` | journal mono en bas à gauche + barre de progression |
+| 1 | Héros scan | photo verte | voir ci-dessus |
+| 2 | Mesures | `--bg` | 4 cellules pleine largeur à filets : chiffre pixel, jauge segmentée, étiquette mono |
+| 3 | Plateforme | `--bg` | surtitre + titre 2 lignes à gauche, phrase à droite (alignée en bas) ; 3 cartes de couche avec images vertes |
+| 4 | Console | `--bg`, filet haut | 2 colonnes `1fr / 1.15fr` : surtitre, titre, champ terminal, bouton, fiche d'identité | journal à crochets avec jauge |
+| 5 | Bandeau final | dégradé radial vert + chiffres binaires | surtitre, titre géant 2 lignes centré, bouton, crochets |
+| 6 | Pied | `--bg` | une ligne mono `--dim` |
 
-## Console d'analyse
-
-Deux colonnes `.9fr / 1.1fr` : à gauche surtitre, titre, champ terminal, bascules, bouton plein ; à droite le journal (hauteur min 360px) avec la jauge segmentée.
-
-## Bandeau final
-
-Bloc centré à crochets 22px, fond `--deep` avec trame de points `--line` au pas de 10px ; surtitre, titre pixel géant sur deux lignes (seconde en `--muted`), bouton plein.
-
-## Pied de page
-
-Une ligne mono `--dim`, filet haut.
+Conteneur des sections : `--container` 1320px ; rythme vertical 96–128px ; point de rupture 860px.
 
 ## Adaptation mobile (≤ 860px)
 
-- Nav : logo + bouton translucide compact + bouton menu carré 44px.
-- Héros (min 820px) : paragraphe en haut sur toute la largeur (sans la ligne mono) ; visage recadré à droite (centre à 56 %), yeux à 40 % ; titre pixel 42–54px au-dessus de la carte CTA ; carte CTA en bande horizontale en bas ; coordonnées du réticule masquées.
-- Mesures en 2 × 2 ; cartes et console en une colonne ; journal à colonnes resserrées.
-- Bandeau final : padding réduit, titre à 48px.
+- **Nav** 56px : logo + « Menu ».
+- **Héros** : réticule à 34 % ; la photo couvre toute la largeur, l'œil reste sur le croisement ; surtitre sous la nav ; bas de l'écran empilé : **titre** (`12,5vw`, 3 lignes) → **paragraphe** (14px) → **carte CTA** 132px à gauche ; la bande va de 8 % à 92 % de la largeur ; lecture « ID 07 » masquée ; le dégradé du bas est plus haut et plus sombre pour la lisibilité.
+- Mesures 2 × 2 ; cartes et console en une colonne.
+- Bandeau final : titre `9vw` minimum 52px.

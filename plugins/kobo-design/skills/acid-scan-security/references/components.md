@@ -1,120 +1,97 @@
 # Acid Scan Security — composants
 
-Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html`.
+Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html`. « Relevé » = vu sur l'image de référence ; « proposé » = ajouté par le skill pour faire une page complète.
 
-## Boutons
+## 1. Navigation (relevé)
 
-Carrés (`--radius: 0`), hauteur 44px, JetBrains Mono 700 11px capitales +0.18em, padding 0 24px, petit carré de 6px en icône optionnelle.
+Barre de 72px **sans fond** posée sur la photo, grille 3 colonnes :
+- **Logo** à gauche (marge `--edge`) : anneau épais + nom en Inter 500 17px capitales, `--text`. L'anneau extérieur pointillé tourne lentement (6s).
+- **Liens** centrés : Inter 600 12px capitales, interlettrage `--tracking-nav` (.14em), `--text`, écart ≈ 46px. Survol : filet `--signal` qui s'étire dessous.
+- **Bouton** collé au bord droit et au bord haut, **aussi haut que la barre** (≈ 214 × 72px) : fond clair translucide `--glass-a` + flou, filet gauche `--line`, texte Inter 600 12px. Survol : aplat `--signal` qui monte, texte `--on-signal`.
+- Après le héros : la barre prend un fond `--bg` à 88 % flouté et un filet bas ; le bouton passe à `--glass` opaque.
+- Mobile : logo + bouton « Menu » (deux traits) ; les liens et le bouton passent dans le menu.
 
-| Variante | Repos | Survol | Usage |
+## 2. Photo de scan en couches (signature, relevé)
+
+Une seule photo réelle, **4 versions superposées** au même endroit :
+
+| Couche | Rôle | Couleurs | Découpe |
 |---|---|---|---|
-| `.btn--solid` | fond `--acid`, texte `--on-signal` | fond `--signal` + halo `--glow` | action principale, une par écran |
-| `.btn--glass` | `--acid` à 16 % + contour `--acid` à 30 %, flou 8px, texte `--text` | `--acid` à 28 %, contour plein | bouton de nav « Se protéger » |
-| `.btn--ghost` | contour `--line-hi`, texte `--text` | contour `--text`, fond `--panel` | secondaire, bouton menu |
+| `layer--base` | l'image principale | rampe verte `--void → --deep → --mid → --hot` (+30 % `--text` dans les plus hautes lumières) | bords gauche/droit fondus |
+| `layer--ghost` | frange rouge du vieux moniteur | `--ghost` là où l'image est sombre, transparent ailleurs ; décalée de `--rgb-shift` (6px) | aucune |
+| `layer--band` | bande plus lumineuse sur les yeux, décalée de 12px vers la droite (effet « tranche glissée ») | rampe chaude `--deep → --hot → --signal` | `clip-path: inset()` : de 40 % à 74 % de la largeur, ≈ 6 % de la hauteur |
+| `layer--box` | intérieur jaune du cadre de détection | rampe jaune autour de `--signal` | moitié haute du cadre (au-dessus du réticule) |
 
-États communs : appui = `translateY(1px)` ; focus = contour 1px `--signal` décalé de 3px ; désactivé ou chargement (`aria-busy="true"`) = opacité .45 + `not-allowed`.
+Positionnement commun : `--ix`, `--iy`, `--ih` calculés en JS pour que **l'œil gauche de la photo (à l'écran) tombe sur le croisement du réticule** (50 % ; `--eye-y` 36 %), un peu au-dessus de la ligne. Réglages par photo : `data-eye="x y"` (position de l'œil en fractions de la photo) et `data-scale` (hauteur de la photo / hauteur du héros, ≈ 1,3).
+
+Par-dessus : **chiffres binaires** (`.bits`, 0/1 en mono 7px tous les 9px, `--bits-opacity` 10 %), **lignes de balayage** tous les 3px (`--void` à 22 %), **voiles** : assombrissement `--veil` derrière le titre (bas gauche) et le paragraphe (haut droit), dégradé vers `--bg` en bas.
 
 ```html
-<button class="btn btn--solid" type="submit"><span class="sq" aria-hidden="true"></span>Lancer l'analyse</button>
+<div class="rig" role="img" aria-label="Portrait … traité en vert, bande de scan sur l'œil">
+  <div class="layer layer--base"><img crossorigin="anonymous" src="…" alt="" fetchpriority="high"></div>
+  <div class="layer layer--ghost" aria-hidden="true"><img crossorigin="anonymous" src="…" alt=""></div>
+  <div class="layer layer--band" aria-hidden="true"><img crossorigin="anonymous" src="…" alt=""></div>
+  <div class="layer layer--box" aria-hidden="true"><img crossorigin="anonymous" src="…" alt=""></div>
+</div>
 ```
+Les `<img>` sont remplacées au chargement par des canvas déjà colorés (voir `motion.md`, « Photo en 4 couches »).
+
+## 3. Réticule et cadre de détection (signature, relevé)
+
+- **Réticule** : un filet vertical à 50 % sur toute la hauteur, un filet horizontal à `--eye-y` sur toute la largeur, couleur `--line` (blanc-vert à 22 %).
+- **Cadre** : carré ≈ 8,4 % de la largeur (121px à 1440, 72–132px), contour 1px `--signal` à 70 % ; **moitié haute remplie** par la couche jaune ; **trait `--signal` de 2px** qui déborde de 6 % de chaque côté, exactement sur le réticule horizontal.
+- **Lecture** (proposé) : « ID 07 · 98,6 % » en mono 10px `--signal` à droite du cadre, masquée en mobile.
+
+## 4. Surtitre pixel (relevé)
+
+« CHIFFREMENT / GRADE MILITAIRE » : VT323 `--fs-label` (≈ 33px), interligne .9, capitales, couleur `--label` (jaune-citron), à gauche à 27 % de la hauteur. Se décode à l'entrée.
+
+## 5. Paragraphe d'intro (relevé)
+
+Inter 400 `--fs-intro` (≈ 18px) / 1.6, `--text-2`, ≈ 383px de large, placé à 68 % de la largeur et 17,5 % de la hauteur. Lignes allumées une à une.
+
+## 6. Titre pixel 3 lignes (relevé)
+
+VT323 `--fs-hero` (≈ 106px à 1440, limité par la hauteur d'écran), interligne `--lh-hero` 1 (les accents français ont besoin de place), capitales, **lignes 1–2 en `--text`, ligne 3 en `--muted`**, léger halo `--hot` à 30 %. Ancré en bas à gauche (14 % du bas). Lignes de 14 caractères maximum. Chaque ligne a `aria-hidden`, le `<h1>` porte le vrai texte en `aria-label`.
+
+## 7. Carte CTA cadenas (relevé)
+
+Carré `--cta-size` (186px ; 132px en mobile), dégradé vertical `--deep → --panel`, cadenas au trait 24 × 28px + libellé Inter 600 12px capitales centrés, `--text`. **Crochets d'angle en L** `--bracket` (32px, 1,5px) écartés de `--cta-gap` (14px). Survol : crochets collés à la carte, lueur `--hot` qui balaie la carte, anse du cadenas qui se soulève.
+
+## 8. Crochets d'angle (relevé)
+
+Huit dégradés d'une couleur en `background`, sans élément en plus. Variables `--c` couleur, `--l` longueur, `--w` épaisseur.
+
 ```css
-.btn { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; padding: 0 var(--space-6); border: 1px solid transparent;
-  border-radius: var(--radius); font: 700 var(--text-2xs) var(--font-mono); letter-spacing: var(--tracking-caps); text-transform: uppercase; cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
-.btn--solid { background: var(--acid); color: var(--on-signal); }
-.btn--solid:hover { background: var(--signal); box-shadow: var(--glow); }
-.btn--glass { background: color-mix(in srgb, var(--acid) 16%, transparent); border-color: color-mix(in srgb, var(--acid) 30%, transparent); backdrop-filter: blur(8px); color: var(--text); }
-.btn:active { transform: translateY(1px); }
-.btn[disabled], .btn[aria-busy="true"] { opacity: .45; cursor: not-allowed; }
-```
-
-## Navigation
-
-Grille 3 colonnes : logo (anneau concentrique `--acid` / `--mid` + nom en mono 700) ; liens centrés en mono 11px `--muted`, gap 32px ; bouton translucide à droite. Survol et page courante : texte `--text` encadré de crochets `[ … ]` `--signal` qui apparaissent. Mobile : liens dans un panneau `--panel` ouvert par un bouton carré 44px (`aria-expanded`).
-
-## Crochets d'angle
-
-Huit dégradés d'une couleur en `background` (aucun élément en plus). Variables : `--c` couleur, `--l` longueur, `--w` épaisseur.
-
-```css
-.brackets { --c: var(--line-hi); --l: var(--bracket); --w: var(--bracket-w);
+.brackets { --c: var(--bracket); --l: var(--bracket-len); --w: var(--bracket-w);
   background:
     linear-gradient(var(--c), var(--c)) top left / var(--l) var(--w) no-repeat, linear-gradient(var(--c), var(--c)) top left / var(--w) var(--l) no-repeat,
     linear-gradient(var(--c), var(--c)) top right / var(--l) var(--w) no-repeat, linear-gradient(var(--c), var(--c)) top right / var(--w) var(--l) no-repeat,
     linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--w) no-repeat, linear-gradient(var(--c), var(--c)) bottom left / var(--w) var(--l) no-repeat,
     linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--w) no-repeat, linear-gradient(var(--c), var(--c)) bottom right / var(--w) var(--l) no-repeat; }
-.card { background-color: var(--deep); }   /* la couleur de fond se pose APRÈS, en longhand */
 ```
+Mettre les crochets sur un `<span>` à part (position absolue) quand l'élément a déjà un fond.
 
-## Photo duotone tramée (signature, 1/3)
+## 9. Composants des sections (proposé)
 
-- Conteneur `data-slot`, `role="img"` + `aria-label`.
-- Image : convertie en luminance, puis répartie sur la rampe `--bg, --deep, --mid, --acid, --text` avec un **tramage ordonné** (matrice de Bayer 4×4). La source est une **image réelle, voir `assets.md`** : la démo lit la photo dans un canvas (1 pixel = `--dot-size`, agrandi avec `image-rendering: pixelated`), jamais un visage dessiné.
-- Par-dessus : une **trame de points** (le noir entre les pixels) et des **lignes de balayage** ; dégradés sombres en haut et en bas pour la lisibilité du texte.
+| Composant | Description |
+|---|---|
+| **Surtitre de section** | VT323 `--fs-label` `--label` + carré 8px qui clignote |
+| **Titre de section** | VT323 `--fs-h2`, interligne 1, 2 lignes, la seconde en `--muted` ; décodé à l'entrée |
+| **Bandeau de mesures** | 4 cellules séparées par des filets `--line-solid` ; chiffre VT323 `--fs-stat` qui monte ; jauge segmentée ; étiquette mono `--dim`. Mobile 2 × 2 |
+| **Jauge segmentée** | segments de 8px de haut, écart 3px, `--line-solid` éteints, `--hot` allumés, dernier allumé `--signal` |
+| **Carte de couche** | fond `--deep`, filet `--line-solid`, image 4:3 en rampe verte avec lignes de balayage et étiquette `--signal` « COUCHE 01 » ; corps : index mono, titre VT323, texte `--text-2`. Survol : crochets, ligne de scan jaune sur l'image |
+| **Champ terminal** | 52px, fond `--panel`, filet `--line-solid`, invite `>_` `--signal`, saisie mono ; focus : filet `--signal` ; erreur : message `--label` + `aria-invalid` |
+| **Bouton plein** | 52px, fond `--signal`, texte `--on-signal` Inter 600 12px capitales, carré 6px ; survol : aplat `--text` qui glisse |
+| **Journal** | panneau `--panel` à crochets, barre (adresse + état), lignes mono 12px / 2 (heure `--dim`, statut `--text`, ALERTE `--label`), curseur qui clignote, jauge 24 segments ; `role="log" aria-live="polite"` |
+| **Fiche d'identité** | portrait 3:4 en rampe verte avec réticule, liste mono (Agent, Accès, Clé, Statut) |
+| **Bandeau final** | fond radial `--mid → --deep → --bg`, chiffres binaires, titre VT323 géant centré, bouton plein, crochets autour |
+| **Pied** | mono `--dim`, filet haut |
 
-```css
-.photo canvas { width: 100%; height: 100%; image-rendering: pixelated; }
-.photo::before { content: ""; position: absolute; inset: 0; opacity: var(--dot-opacity);
-  background: radial-gradient(circle at center, transparent 0 1.6px, var(--bg) 2.3px) 0 0 / var(--dot-size) var(--dot-size); }
-.photo::after { content: ""; position: absolute; inset: 0;
-  background: repeating-linear-gradient(180deg, transparent 0 calc(var(--scanline) - 1px), color-mix(in srgb, var(--bg) 35%, transparent) calc(var(--scanline) - 1px) var(--scanline)); }
-```
+## États
 
-En production, le traitement peut aussi se faire une fois côté serveur (image déjà tramée). Repli CSS si le canvas échoue (photo sans CORS, script coupé) : `filter: grayscale(1) contrast(1.4)` sur la photo + calque `--acid` en `mix-blend-mode: multiply`, puis la trame de points par-dessus (voir `assets.md` § 3).
-
-## Bande et cadre de scan (signature, 2/3)
-
-- **Bande** : rectangle `--signal` sur les yeux ; les zones sombres de l'image y deviennent `--on-signal` (seuil de luminance ~0.2), le reste `--signal`.
-- **Cadre** : contour 1px `--text` décalé de 10px autour de la bande, crochets 2px `--signal` décalés de 18px.
-- **Étiquette** au-dessus à gauche : fond `--signal`, texte `--on-signal` mono 700 (« Sujet 07 · scan biométrique ») ; **résultat** en dessous à droite sur fond `--bg` (« Correspondance 99,2 % »).
-
-## Réticule (signature, 3/3)
-
-Filet vertical à 50 % et filet horizontal à la hauteur des yeux (`--eye`), en `--text` à 35 %. Coordonnées mono « X 0.500 · Y 0.400 » près du croisement (masquées en mobile).
-
-## Surtitre et titre
-
-```html
-<span class="label mono">Chiffrement de grade militaire</span>
-<h1 class="hero-title"><span>Vos données</span><span>restent à vous.</span><span>Point final.</span></h1>
-```
-Surtitre `--label` précédé d'un carré 8px qui clignote. Titre Jersey 10 `--text-hero`, interligne 0.82, halo `text-shadow` `--acid` à 25 % ; dernière ligne `--muted`.
-
-## Carte CTA cadenas
-
-Carré 232px, fond `--panel` à 88 %, crochets `--text` de 16px, cadenas pixel (SVG `shape-rendering: crispEdges`) `--acid` en haut, libellé pixel 32px + flèche mono en bas. Survol : fond `--glass`, halo, cadenas qui monte de 3px en `--ease-step`, flèche +4px. Mobile : bande horizontale pleine largeur.
-
-## Bandeau de mesures
-
-Grille de 4 colonnes séparées par `--line` ; chiffre en Jersey 10 `--text-stat` (sans retour à la ligne), étiquette mono `--dim`. Mobile : 2 × 2.
-
-## Carte de couche
-
-Fond `--deep`, bordure `--line`, crochets `--line-hi` ; index mono en haut à droite, icône pixel 40px `--acid`, titre pixel 32px, texte `--muted`, puces. Survol : bordure `--line-hi`, fond `--panel`, crochets `--signal`.
-
-## Puces
-
-Mono 11px capitales, bordure `--line`, carré 5px `--mid` en tête. Variante `.chip--hot` : fond `--signal`, texte `--on-signal`.
-
-## Champ « terminal »
-
-Boîte carrée 52px, fond `--deep`, bordure `--line`, invite `>_` en `--dim`, saisie mono `--text`, curseur `caret-color: --signal`. Survol : bordure `--line-hi` ; focus : bordure + anneau 1px `--signal` ; erreur : bordure et message `--danger` (message en `aria-live`). L'aide sous le champ est en `--dim`.
-
-## Bascules de filtre
-
-Boutons carrés 44px `aria-pressed`, mono 11px, bordure `--line`. Actif : fond `--glass`, bordure `--acid`, texte `--text`.
-
-## Journal (terminal)
-
-Panneau `--deep` à crochets, barre d'en-tête (adresse mono `--dim` + état `--acid`), liste numérotée en `decimal-leading-zero` : numéro `--dim`, heure, statut coloré (`OK` `--acid`, `ALERTE` `--danger`, `RÉSOLU` `--signal`), texte `--muted`. Curseur bloc qui clignote après la dernière ligne. `role="log"` + `aria-live="polite"`.
-
-## Jauge segmentée
-
-24 segments carrés de 10px, gap 3px, `--line` éteints / `--acid` allumés, allumage en pas (`--ease-step`).
-
-## États vide, chargement, erreur
-
-- **Vide** : journal avec une seule ligne « En attente d'une cible… » et le curseur.
-- **Chargement** : bouton `aria-busy`, état « ● Analyse… », lignes ajoutées une à une, jauge qui se remplit.
-- **Erreur** : champ et message `--danger`, focus renvoyé au champ.
-- **Sans canvas / sans JS** : fond en dégradé radial `--mid → --deep → --bg` + trame ; la page reste lisible.
+- **Chargement de la page** : amorçage terminal puis allumage (voir `motion.md`).
+- **Image absente** : le héros garde son dégradé vert (`.hero.no-img`), le texte reste lisible.
+- **Canvas refusé** (image sans CORS) : les `<img>` gardent le filtre SVG de repli.
+- **Formulaire** : vide (« En attente d'une cible » + curseur), en cours (`aria-busy`, « ● Analyse » en `--signal`), erreur (message `--label`, focus renvoyé), terminé (« ● Terminé »).
+- **Focus clavier** : contour 1px `--signal` décalé de 3px partout.

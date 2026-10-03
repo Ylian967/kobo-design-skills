@@ -1,53 +1,75 @@
 /*
  * Lore Frame Editorial — tokens
- * Couleur de la fiche Awwwards (#6D64A3) + polices chargées par la référence (ABC Whyte, IBM Plex Mono), voir source.md.
- * @contrast text:bg muted:bg on-ink:ink on-accent:accent muted-dark:ink
+ * Mesurés sur le site de référence le 2026-10-03 (Chrome 1536×674, styles calculés et variables CSS du site),
+ * sauf mention « choisi » ou « observé ». Voir source.md.
+ * Toutes les grandes tailles suivent la largeur de l'écran (vw), comme sur la référence.
+ * @contrast ink:paper muted:paper ink:lavender ink:lime ink:periwinkle paper:ink on-dark-muted:ink ink:panel
  */
 :root {
-  /* Couleurs */
-  --bg: #ffffff;
-  --text: #0f0f12;
-  --muted: #6b6b76;
-  --ink: #1b1726;             /* chapitres illustrés sombres */
-  --on-ink: #ffffff;
-  --muted-dark: #9a96ad;
-  --accent: #6d64a3;          /* violet de lore (fiche Awwwards) */
-  --on-accent: #ffffff;
-  --signal: #c9f26b;          /* lueur de faction (ponctuelle, sur sombre) */
-  --frame: rgb(15 15 18 / 0.14);       /* filets du cadre sur blanc */
-  --frame-dark: rgb(255 255 255 / 0.18);
+  /* ── Couleurs ─────────────────────────────────────────────── */
+  --paper: #ffffff;          /* mesuré : fond des pages éditoriales */
+  --ink: #000000;            /* mesuré : texte, pied de page, panneau du menu */
+  --muted: #6e6e6e;          /* choisi : liens de nav inactifs (le site utilise un gris plus clair, trop pâle à 11px) */
+  --panel: #efefef;          /* observé : barre de progression du cadre, fonds gris clairs */
+  --lavender: #968adf;       /* mesuré rgb(150,138,223) : section « collection », page équipe */
+  --lime: #c0fb50;           /* mesuré rgb(192,251,80) : page active du menu, étiquette « PAGE 001 » */
+  --periwinkle: #8ca6ff;     /* mesuré rgb(140,166,255) : accents secondaires (liens actifs sur sombre) */
+  --on-dark-muted: #a6a6a6;  /* choisi : texte secondaire sur noir */
+  --reveal-from: #c4c4c4;    /* observé : couleur d'un mot de titre avant sa révélation (sur blanc) */
+  --reveal-from-dark: rgb(255 255 255 / 0.32); /* observé : idem sur illustration */
+  --line-light: rgb(255 255 255 / 0.2);  /* mesuré : filets du cadre et de la grille sur illustration */
+  --line-dark: rgb(0 0 0 / 0.1);         /* mesuré : filets du cadre et de la grille sur blanc */
+  --veil: rgb(0 0 0 / 0.4);              /* mesuré (rgba(0,0,0,.4)) : voile derrière le menu ouvert */
 
-  /* Typographie */
-  --font-display: 'Inter Tight', 'ABC Whyte', 'Helvetica Neue', Arial, sans-serif;  /* graisse 900, très serrée */
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --text-2xs: 0.625rem;    /* micro-labels mono */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;     /* paragraphes courts */
-  --text-lg: clamp(1.75rem, 3.4vw, 3rem);     /* titres de chapitre */
-  --text-hero: clamp(3.5rem, 9vw, 9rem);      /* manifeste géant */
-  /* Mesuré sur le site (2026-10-03, 1440px) : toutes les tailles suivent la largeur */
-  --text-body-fluid: 0.9375vw;   /* 13.5px à 1440 : paragraphes */
-  --text-story: 1.3125vw;        /* 18.9px : récit long */
-  --text-statement: 3.25vw;      /* 46.8px, graisse 650, capitales : phrases-chapitres */
-  --text-manifest: 9.44vw;       /* 135.9px, interligne 0.84, approche -0.094em */
-  --text-counter: 25.6vw;        /* 369px : grands numéros en police hexagonale (Hexaframe 700) */
-  --text-label: 0.6875vw;        /* 9.9px : micro-labels mono */
-  --font-hex: 'Tektur', 'Chakra Petch', var(--font-mono);   /* équivalent libre de Hexaframe (payante) */
-  --tracking-display: -0.055em;
-  --leading-display: 0.86;
-  --tracking-mono: 0.04em;
+  /* ── Typographie ──────────────────────────────────────────── */
+  --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;  /* site : ABC Whyte Plus (payante, variable) */
+  --font-hex: 'Tektur', 'Chakra Petch', sans-serif;                    /* site : Hexaframe 700 (payante) — mots et chiffres géants */
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;               /* identique au site */
+  --weight-display: 650;     /* mesuré : titres, manifeste, menu */
+  --weight-hex: 700;         /* mesuré */
 
-  /* Cadre et grille */
-  --frame-inset: 16px;     /* le cadre fin entoure tout l'écran */
-  --rail: 56px;            /* rail gauche (étoile, numéro) */
-  --nav-h: 44px;
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-20: 80px;
+  --fs-label: max(10px, 0.645vw);    /* mesuré 9.9px à 1536 : micro-labels mono (« ■ 001 », « 01K ») */
+  --fs-nav: 11px;                     /* mesuré : nav du cadre, IBM Plex Mono 450 capitales */
+  --fs-menu-small: 13.44px;           /* mesuré : liens mono du pied, ligne « STORY » du menu (−0.04em) */
+  --fs-body: max(14px, 0.879vw);      /* mesuré 13.5px à 1536 (relevé à 14px pour la lisibilité) */
+  --fs-story: max(17px, 1.23vw);      /* mesuré 18.9px : légende centrée des chapitres */
+  --fs-statement: max(30px, 3.25vw);  /* mesuré 49.92px à 1536 : phrases-chapitres, graisse 650 */
+  --fs-menu: max(40px, 4vw);          /* mesuré 61.44px : mots du menu plein panneau */
+  --fs-manifest: max(56px, 8.85vw);   /* mesuré 135.9px : « GARDER. PROTÉGER. … » */
+  --fs-counter: max(120px, 18vw);     /* mesuré 276px : compteur vertical « 05K » (police hexagonale) */
+  --fs-word: max(84px, 19vw);         /* mesuré 291.84px : mot-titre « GARDIENS », logo du pied */
 
-  /* Formes */
-  --chamfer: 18px;         /* coin coupé des vignettes */
+  --lh-statement: 0.9;       /* mesuré 44.928 / 49.92 */
+  --lh-manifest: 0.84;       /* mesuré */
+  --lh-menu: 0.85;           /* mesuré 52.224 / 61.44 */
+  --lh-hex: 0.8;             /* mesuré 233.47 / 291.84 */
+  --ls-display: -0.07em;     /* mesuré −3.49px / 49.92 et −4.30px / 61.44 */
+  --ls-manifest: -0.094em;   /* mesuré */
+  --ls-hex: -0.1em;          /* mesuré −29.18px / 291.84 */
+  --ls-mono: -0.04em;        /* mesuré sur le texte mono 9–13px */
+  --indent-first: 2.6em;     /* observé : la 1re ligne des phrases-chapitres commence après l'index « ■ 001 » */
 
-  /* Mouvement */
-  --ease: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 250ms; --dur: 700ms; --dur-draw: 1400ms;
+  /* ── Cadre (variables du site) ────────────────────────────── */
+  --frame-pad: 20px;         /* mesuré --menu-pad */
+  --rail-w: 67px;            /* mesuré --menu-width */
+  --bar-h: 51px;             /* mesuré --menu-height */
+  --frame-radius: 10px;      /* mesuré --menu-radius */
+  --line: 1px;               /* mesuré --line-thickness */
+  --radius: 1rem;            /* mesuré --radius : planches illustrées */
+  --overlap: 2rem;           /* mesuré --overlap */
+  --parallax: 4rem;          /* mesuré --parallax */
+  --chamfer: 16px;           /* mesuré : coin coupé du bouton « Connexion » */
+  --chamfer-lg: 1.6rem;      /* mesuré : coin coupé des boutons du pied */
+
+  /* ── Mouvement ────────────────────────────────────────────── */
+  --ease-out-cubic: cubic-bezier(.215, .61, .355, 1);   /* variable du site */
+  --ease-out-quart: cubic-bezier(.165, .84, .44, 1);    /* variable du site */
+  --ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1);
+  --ease-in-out-sine: cubic-bezier(.445, .05, .55, .95); /* variable du site (transform .2s) */
+  --dur-ui: 200ms;           /* mesuré : couleurs, bordures, opacités (0.2s ×12) */
+  --dur-fast: 100ms;         /* mesuré (0.1s ×14) */
+  --dur-scramble-tick: 40ms; /* observé : une lettre aléatoire toutes les ~40ms */
+  --dur-menu: 700ms;         /* observé : ouverture du panneau de menu */
+  --dur-panel: 900ms;        /* observé : planche qui s'agrandit / se redresse */
+  --dur-loader-min: 1800ms;  /* choisi : durée mini du chargement pour que l'intro se lise */
 }

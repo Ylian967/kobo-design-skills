@@ -1,41 +1,61 @@
 # Source — Acid Scan Security
 
-- **Site de référence** : https://dribbble.com/shots/27776445-ThreatIQ-Next-Gen-Data-Security-Website (Subash Chandra)
+- **Référence** : https://dribbble.com/shots/27776445-ThreatIQ-Next-Gen-Data-Security-Website (Subash Chandra)
 - **Famille** : Tech / cybersécurité
-- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
+- **Analysé le** : 2026-10-01 (première version) ; **2026-10-03, réécriture complète** : image du shot ouverte à pleine résolution (3200×2400) dans Chrome, couleurs **mesurées par lecture des pixels** (échantillonnage canvas zone par zone), tailles et positions relevées sur l'image ramenée à 1440px de large, polices pixel comparées côte à côte.
+- **Ce qui plaît** : le portrait vert de vision nocturne, la bande et le cadre jaune sur l'œil, le titre pixel, les crochets autour du bouton.
 
-## Ce qui a été vu
+## Ce que contient la référence
 
-- **Héros plein cadre** : photo de visage en monochrome vert acide (duotone du noir-vert ~#0a1a00 au vert ~#2fbf00 et au citron ~#b8ff5a), recouverte d'une grille de points / lignes de balayage façon écran pixel.
-- **Réticule** : un filet vertical au centre et un filet horizontal vers 40 % de la hauteur, à la hauteur des yeux.
-- **Bande de scan** : rectangle citron vif (~#c8f000) en travers des yeux, entouré d'un cadre de détection fin.
-- **Titre** : en bas à gauche, capitales d'aspect pixel / bitmap, hautes, citron pâle (~#d6ff9a), sur trois lignes, la dernière plus sombre.
-- **Surtitre** « MILITARY-GRADE ENCRYPTION » en jaune-citron (~#e0ff3a), capitales ; petit paragraphe pâle en haut à droite.
-- **Navigation** : logo anneau + nom à gauche, liens minuscules en capitales espacées au centre, bouton carré vert clair translucide « GET PROTECTED » à droite.
-- **Carte CTA** : carré vert sombre avec icône cadenas et « START PROTECTING », encadré de crochets d'angle en L.
+Le shot ne contient **qu'une image** : le héros d'une landing, en 4:3. Aucune autre image, aucune vidéo, aucun site en ligne trouvé. **Aucune animation n'est visible.**
 
-## Pages explorées (2026-10-03)
+## Mesures (pixels de l'image)
 
-| Source | Relevé |
+| Élément | Valeur mesurée |
 |---|---|
-| Shot Dribbble | Une seule image (3200×2400, héros). Relue à pleine résolution : rien de plus que ce qui est décrit. |
-| Autres shots du même projet / site en ligne | Aucun trouvé (recherche Dribbble par nom de projet, description du shot sans lien). |
+| Vert dominant du fond | #189000 (couleur la plus fréquente) ; plus vif #2bab00 |
+| Ombres (cheveux) | #000300 → #001800 |
+| Frange rouge des cheveux | #301800 → #481800 |
+| Titre lignes 1–2 | jusqu'à #f4ffcb (moyenne des lettres #d8ffa8) |
+| Titre ligne 3 | #9de373 |
+| Surtitre | #ffff2c (jaune) |
+| Paragraphe | #c6ffa8 |
+| Nav | #d2ffa9 |
+| Bouton nav | fond moyen #5f8654, texte #fcfff0 |
+| Carte CTA | haut #0a3e05, bas #002301 |
+| Crochets | #afff78 |
+| Intérieur du cadre jaune | jusqu'à #ffff4e (moyenne #839d19, l'œil reste visible) |
+| Contraste texte pâle / vert vif | 3,6 à 3,9:1 |
 
-## Non mesuré
+## Positions et tailles (image ramenée à 1440px)
 
-- Il s'agit d'un **mockup Dribbble** : analyse visuelle des images uniquement, aucun site en ligne, aucun code inspecté.
-- Toutes les valeurs (couleurs, tailles, pas de trame, espacements) sont **estimées à l'œil**.
-- La police du titre n'est pas identifiée : Jersey 10 (pixel haute) est **choisie à l'œil** ; JetBrains Mono et Inter complètent.
-- Les sections sous le héros (mesures, couches, console, bandeau final) ne figurent pas sur les captures : elles prolongent le langage du héros et sont proposées par le skill.
-- Aucune animation n'est visible sur des images fixes : le mouvement (`motion.md`) est une proposition.
+| Élément | Relevé (≈) |
+|---|---|
+| Barre de nav | 72px ; bouton ≈ 214 × 72px collé en haut à droite |
+| Marge gauche (logo, surtitre, titre) | ≈ 78px |
+| Paragraphe | gauche 68 %, haut 17,5 %, ≈ 383px de large, 4 lignes |
+| Surtitre | haut ≈ 27 %, capitales pixel ≈ 23px de haut |
+| Réticule | vertical 50 %, horizontal ≈ 36 % |
+| Cadre de l'œil | ≈ 121 × 118px, moitié haute jaune |
+| Bande des yeux | de ≈ 40 % à 74 % de la largeur, ≈ 6 % de la hauteur |
+| Titre | 3 lignes, capitales ≈ 75px de haut, pas de ligne ≈ 93px |
+| Carte CTA | ≈ 186px de côté, crochets ≈ 14px plus loin |
+
+## Non mesuré / proposé
+
+- **Toutes les animations** (`motion.md`) sont proposées : la référence est une image fixe. Elles prolongent ce que l'image évoque (scan, verrouillage, écran cathodique, données).
+- **Les sections sous le héros** (mesures, plateforme, console, bandeau final) sont proposées.
+- Les tailles sont déduites des proportions de l'image (pas de code lisible).
+- La police du titre n'est pas identifiée ; VT323 retenue après comparaison avec Jersey 10, Silkscreen, Tiny5, Micro 5, Pixelify Sans et Doto.
+- Le gain de performance cité dans `motion.md` (17 → 60 images/s) est mesuré dans un Chromium sans carte graphique : un vrai navigateur sera plus rapide dans les deux cas.
 
 ## Écarts assumés
 
 | Élément du shot | Dans le skill | Raison |
 |---|---|---|
-| Nom de marque, logo, textes | Marque fictive « Gridward », logo anneau générique, textes inventés en français | Marque et droits d'auteur |
-| Photo de visage | Visuels de la démo : photos Unsplash libres (licence Unsplash), lues et tramées en canvas (`data-slot="portrait-duotone"`), à remplacer par les images du projet | Droit à l'image |
-| Bouton translucide (texte pâle sur vert clair transparent) | Fond `--acid` à 16 % ; paire de contraste vérifiée sur l'équivalent opaque `--glass` (11,2:1) | Lisibilité vérifiable |
-| Texte gris-vert très sombre pour les métadonnées | `--dim` #6f9a45 (6:1) | Contraste ≥ 4,5:1 |
-| Titre pixel dans tous les corps | Pixel réservé aux grands corps ; mono en dessous de 28px | Lisibilité |
-| Seulement un héros | Sections supplémentaires et alerte `--danger` jaune | Rendre le skill utilisable sur une page complète |
+| Nom ThreatIQ, logo, textes anglais | Marque fictive « Gridward », logo anneau, textes français | Identité et droits |
+| Photo du shot | Photo Unsplash (licence Unsplash) recolorée, à remplacer par celle du projet | Droit à l'image |
+| Texte pâle directement sur le vert vif (3,6–3,9:1) | Voiles `--veil` derrière le titre et le paragraphe (≥ 9:1) | Lisibilité |
+| Bouton nav translucide | Translucide sur la photo, `--glass` opaque (5,9:1) une fois la page défilée | Contraste vérifiable |
+| Une seule image | Page complète + version mobile | Rendre le skill utilisable |
+| Interligne du titre très serré | 1 (au lieu de ≈ 0,87) | Les accents français se chevauchaient |

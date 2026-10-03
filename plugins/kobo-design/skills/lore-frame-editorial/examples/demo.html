@@ -3,177 +3,694 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sentinelles — Lore Frame Editorial (démo)</title>
+<title>AXO — les archives des Gardiens (démo Lore Frame Editorial)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..700&family=Tektur:wght@700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root {
-  --bg: #ffffff; --text: #0f0f12; --muted: #6b6b76; --ink: #1b1726; --on-ink: #ffffff; --muted-dark: #9a96ad; --accent: #6d64a3; --on-accent: #ffffff; --signal: #c9f26b;
-  --frame: rgb(15 15 18 / 0.14); --frame-dark: rgb(255 255 255 / 0.18);
-  --font-display: 'Inter Tight', 'ABC Whyte', 'Helvetica Neue', Arial, sans-serif; --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-lg: clamp(1.75rem, 3.4vw, 3rem); --text-hero: clamp(3.5rem, 9vw, 9rem);
-  --tracking-display: -0.055em; --leading-display: 0.86; --tracking-mono: 0.04em;
-  --frame-inset: 16px; --rail: 56px; --nav-h: 44px;
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-20: 80px;
-  --chamfer: 18px; --ease: cubic-bezier(0.65, 0, 0.35, 1); --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --dur-fast: 250ms; --dur: 700ms; --dur-draw: 1400ms;
+  --paper: #ffffff; --ink: #000000; --muted: #6e6e6e; --panel: #efefef; --lavender: #968adf; --lime: #c0fb50; --periwinkle: #8ca6ff;
+  --on-dark-muted: #a6a6a6; --reveal-from: #c4c4c4; --reveal-from-dark: rgb(255 255 255 / 0.32);
+  --line-light: rgb(255 255 255 / 0.2); --line-dark: rgb(0 0 0 / 0.1); --veil: rgb(0 0 0 / 0.4);
+  --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; --font-hex: 'Tektur', 'Chakra Petch', sans-serif; --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --weight-display: 650; --weight-hex: 700;
+  --fs-label: max(10px, 0.645vw); --fs-nav: 11px; --fs-menu-small: 13.44px; --fs-body: max(14px, 0.879vw); --fs-story: max(17px, 1.23vw);
+  --fs-statement: max(30px, 3.25vw); --fs-menu: max(40px, 4vw); --fs-manifest: max(56px, 8.85vw); --fs-counter: max(120px, 18vw); --fs-word: max(84px, 19vw);
+  --lh-statement: 0.9; --lh-manifest: 0.84; --lh-menu: 0.85; --lh-hex: 0.8; --ls-display: -0.07em; --ls-manifest: -0.094em; --ls-hex: -0.1em; --ls-mono: -0.04em; --indent-first: 2.6em;
+  --frame-pad: 20px; --rail-w: 67px; --bar-h: 51px; --frame-radius: 10px; --line: 1px; --radius: 1rem; --overlap: 2rem; --parallax: 4rem; --chamfer: 16px; --chamfer-lg: 1.6rem;
+  --ease-out-cubic: cubic-bezier(.215, .61, .355, 1); --ease-out-quart: cubic-bezier(.165, .84, .44, 1); --ease-in-out-cubic: cubic-bezier(.645, .045, .355, 1); --ease-in-out-sine: cubic-bezier(.445, .05, .55, .95);
+  --dur-ui: 200ms; --dur-fast: 100ms; --dur-scramble-tick: 40ms; --dur-menu: 700ms; --dur-panel: 900ms; --dur-loader-min: 1800ms;
 }
+@media (max-width: 760px) { :root { --frame-pad: 10px; --rail-w: 0px; --bar-h: 48px; --fs-statement: max(30px, 8vw); --fs-manifest: max(52px, 15vw); --fs-menu: max(40px, 11vw); } }
+
 * { box-sizing: border-box; }
 html { overflow-x: clip; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 500 var(--text-sm)/1.4 var(--font-display); }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--fs-body)/1.3 var(--font-display); letter-spacing: -0.02em; }
+body.is-loading { overflow: hidden; }
+img { display: block; max-width: 100%; }
 a { color: inherit; }
-:focus-visible { outline: 1px solid var(--accent); outline-offset: 3px; }
-.mono { font: 500 var(--text-2xs)/1.3 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.label { font: 400 var(--fs-label)/1.2 var(--font-mono); letter-spacing: var(--ls-mono); text-transform: uppercase; margin: 0; }
+.label--sq::before { content: ""; display: inline-block; width: 5px; height: 5px; margin-right: .8em; background: currentColor; vertical-align: .12em; }
+.inner { padding: calc(var(--frame-pad) + var(--bar-h)) var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) + var(--rail-w)); }
 
-/* Chargement */
-.loader { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: var(--bg); transition: opacity 500ms var(--ease), visibility 500ms; }
-.loader.is-done { opacity: 0; visibility: hidden; }
-.loader svg { width: min(60vw, 520px); }
-.loader path { fill: none; stroke: var(--text); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw var(--dur-draw) var(--ease) forwards, thick 400ms var(--ease) var(--dur-draw) forwards; }
+/* ── Chargement ─────────────────────────────────────────── */
+.loader { position: fixed; inset: 0; z-index: 400; background: var(--paper); cursor: none; transition: opacity 500ms var(--ease-out-cubic), visibility 500ms; }
+.loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+.loader__row { position: absolute; left: calc(var(--frame-pad) + var(--rail-w) + 8vw); right: calc(var(--frame-pad) + 8vw); top: 50%; }
+.loader__track { height: 1px; background: var(--line-dark); }
+.loader__fill { height: 1px; width: calc(var(--p, 0) * 100%); background: var(--ink); }
+.loader__meta { display: flex; justify-content: space-between; gap: 2rem; margin-top: 8px; }
+.loader__path { overflow: hidden; white-space: nowrap; text-overflow: clip; max-width: 55%; }
+.sound-cursor { position: absolute; left: 0; top: 0; width: 56px; translate: -50% -50%; display: grid; justify-items: center; gap: 6px; pointer-events: none; transition: transform .25s var(--ease-out-cubic); }
+.sound-cursor svg { width: 46px; height: 46px; }
+.sound-cursor .ring { animation: spin-clockwise 6s linear infinite; transform-origin: 50% 50%; }
+.sound-cursor .label { white-space: nowrap; font-size: 8px; }
+@keyframes spin-clockwise { to { transform: rotate(1turn); } }
+.goo { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+.loader.is-merging .goo { opacity: 1; }
+.loader.is-merging .loader__row, .loader.is-merging .sound-cursor { opacity: 0; transition: opacity .2s; }
+.goo .bars rect { fill: var(--ink); transform-box: fill-box; transform-origin: center; transform: scaleY(0); }
+.loader.is-merging .goo .bars rect { animation: bar 1.7s var(--ease-in-out-cubic) both; }
+@keyframes bar { 0% { transform: scaleY(0); } 40% { transform: scaleY(1); } 72% { transform: scaleY(1) scaleX(1.6); } 100% { transform: scaleY(0) scaleX(1.6); } }
+.goo .mark { font: var(--weight-hex) 330px/1 var(--font-hex); letter-spacing: var(--ls-hex); fill: var(--ink); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.loader.is-merging .goo .mark { animation: mark 1.7s var(--ease-in-out-cubic) both; }
+@keyframes mark { 0%, 30% { opacity: 0; transform: scale(1.2, .4); } 62%, 100% { opacity: 1; transform: none; } }
 
-/* Cadre */
-.frame { position: fixed; inset: var(--frame-inset); border: 1px solid var(--frame); pointer-events: none; z-index: 40; transition: border-color var(--dur) var(--ease); }
-.frame::before { content: ""; position: absolute; top: 0; bottom: 0; left: var(--rail); border-left: 1px solid var(--frame); transition: inherit; }
-.frame::after { content: ""; position: absolute; left: 0; right: 0; top: var(--nav-h); border-top: 1px solid var(--frame); transition: inherit; }
-body.is-dark .frame, body.is-dark .frame::before, body.is-dark .frame::after { border-color: var(--frame-dark); }
-.rail { position: fixed; left: var(--frame-inset); top: var(--frame-inset); bottom: var(--frame-inset); width: var(--rail); z-index: 41; display: grid; grid-template-rows: var(--nav-h) 1fr auto; justify-items: center; align-items: center; transition: color var(--dur) var(--ease); }
-.rail .star { width: 26px; height: 26px; transition: transform var(--dur) var(--ease); }
-.rail span { padding-bottom: var(--space-3); }
-.topnav { position: fixed; left: calc(var(--frame-inset) + var(--rail)); right: var(--frame-inset); top: var(--frame-inset); height: var(--nav-h); z-index: 41; display: flex; align-items: center; justify-content: center; gap: var(--space-8); transition: color var(--dur) var(--ease); }
-.topnav a { text-decoration: none; color: var(--muted); }
-.topnav a[aria-current] { color: inherit; }
-.topnav a[aria-current]::before { content: "• "; }
-.topnav .signin { position: absolute; right: var(--space-4); color: inherit; }
-body.is-dark .rail, body.is-dark .topnav { color: var(--on-ink); }
-body.is-dark .topnav a:not([aria-current]):not(.signin) { color: var(--muted-dark); }
+/* ── Cadre ──────────────────────────────────────────────── */
+.frame { position: fixed; inset: var(--frame-pad); z-index: 100; pointer-events: none; border: var(--line) solid var(--line-dark); border-radius: var(--frame-radius); transition: border-color var(--dur-ui); }
+.frame__rail { position: absolute; inset: 0 auto 0 0; width: var(--rail-w); border-right: var(--line) solid var(--line-dark); display: grid; grid-template-rows: var(--bar-h) 1fr 64px; justify-items: center; align-items: center; transition: border-color var(--dur-ui); }
+.frame__bar { position: absolute; inset: 0 0 auto var(--rail-w); height: var(--bar-h); border-bottom: var(--line) solid var(--line-dark); display: flex; align-items: center; justify-content: center; transition: border-color var(--dur-ui); }
+.frame__progress { position: absolute; inset: 0 auto 0 0; width: calc(var(--p, 0) * 100%); background: var(--panel); transition: background-color var(--dur-ui); }
+.frame button, .frame a { pointer-events: auto; }
+.icon-btn { width: 44px; height: 44px; display: grid; place-items: center; }
+.burger { width: 26px; height: 6px; border-block: 1px solid currentColor; }
+.star { width: 40px; height: 74px; }
+.star path { fill: currentColor; }
+.sound { display: flex; gap: 2px; align-items: center; height: 14px; }
+.sound i { width: 1.5px; height: 6px; background: currentColor; }
+.sound[aria-pressed="true"] i { animation: eq .9s var(--ease-in-out-sine) infinite alternate; }
+.sound i:nth-child(2) { animation-delay: .2s; } .sound i:nth-child(3) { animation-delay: .45s; } .sound i:nth-child(4) { animation-delay: .1s; }
+@keyframes eq { to { height: 14px; } }
+.nav { position: relative; display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+.nav a { font: 450 var(--fs-nav)/1 var(--font-mono); text-transform: uppercase; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; transition: color var(--dur-ui); }
+.nav a[aria-current="true"] { color: var(--ink); }
+.nav a[aria-current="true"]::before { content: ""; width: 5px; height: 5px; background: currentColor; margin-right: .8em; }
+.btn-sign { position: absolute; right: -1px; top: -1px; background: var(--paper); color: var(--ink); font: 600 14px/1.5 var(--font-mono); padding: 14px 28px; text-decoration: none; border-radius: 0 var(--frame-radius) 0 0; clip-path: polygon(0 0, 100% 0, 100% 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer))); text-transform: uppercase; }
+body.on-art .frame, body.on-art .frame__rail, body.on-art .frame__bar { border-color: var(--line-light); color: var(--paper); }
+body.on-art .frame__progress { background: rgb(255 255 255 / .12); }
+body.on-art .nav a { color: rgb(255 255 255 / .55); }
+body.on-art .nav a[aria-current="true"] { color: var(--paper); }
+body:not(.on-art) .btn-sign { box-shadow: inset 0 0 0 1px var(--line-dark); }
+@media (max-width: 760px) { .frame__rail { display: none; } .nav { display: none; } .frame__bar { justify-content: space-between; padding-left: 4px; } .frame__bar .m-only { display: grid; } }
+.m-only { display: none; }
 
-/* Sections */
-.chapter { position: relative; min-height: 100vh; padding: calc(var(--frame-inset) + var(--nav-h) + var(--space-6)) calc(var(--frame-inset) + var(--space-6)) var(--space-12) calc(var(--frame-inset) + var(--rail) + var(--space-6)); }
-.dark { background: var(--ink); color: var(--on-ink); }
-.art { position: absolute; inset: 0; overflow: hidden; background: var(--ink); isolation: isolate; }
-/* Images réelles teintées (voir references/assets.md) */
-.art img, .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.8) contrast(1.05); }
-.art::before, .thumb::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--accent); mix-blend-mode: soft-light; opacity: .55; pointer-events: none; }
-.art::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(180deg, rgb(27 23 38 / .55), transparent 35% 55%, var(--ink)); }
-.opening .art img { object-position: 60% 40%; }
-.symbol-ch .art img { filter: brightness(.55) saturate(.7); }
-.symbol-ch .art::after { background: radial-gradient(60% 60% at 50% 50%, rgb(27 23 38 / .2), var(--ink)); }
-.intro { position: relative; z-index: 3; width: 260px; margin: 0; }
-.intro b { font-weight: 900; }
-.manifesto { position: absolute; z-index: 3; right: calc(var(--frame-inset) + var(--space-8)); bottom: var(--space-20); margin: 0; font: 900 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; text-align: left; }
-.manifesto .line { display: flex; align-items: baseline; gap: var(--space-3); overflow: hidden; }
-.manifesto .line:nth-child(2) { margin-left: 1.2em; } .manifesto .line:nth-child(3) { margin-left: -0.8em; }
-.manifesto small { font: 500 var(--text-2xs) var(--font-mono); letter-spacing: var(--tracking-mono); }
-.manifesto .w { display: block; transition: transform var(--dur) var(--ease-out); }
-html.js .manifesto:not(.is-in) .w { transform: translateY(105%); }
-.manifesto .line:nth-child(2) .w { transition-delay: 120ms; } .manifesto .line:nth-child(3) .w { transition-delay: 240ms; }
-.scroll { position: absolute; z-index: 3; right: calc(var(--frame-inset) + var(--space-4)); bottom: calc(var(--frame-inset) + var(--space-4)); }
+/* ── Planches (forme de dossier) ────────────────────────── */
+.planche { position: relative; margin: 0; overflow: hidden; background: var(--lavender); will-change: transform; }
+.planche img { width: 100%; height: 100%; object-fit: cover; }
+.planche figcaption { position: absolute; left: 7%; top: 8%; color: var(--paper); z-index: 1; }
+.f-a { clip-path: url(#folder-a); } .f-b { clip-path: url(#folder-b); } .f-c { clip-path: url(#folder-c); }
 
-.edito { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 0; padding-right: calc(var(--frame-inset)); }
-.edito__left { position: relative; min-height: 80vh; padding-right: var(--space-8); border-right: 1px solid var(--frame); }
-.edito h2 { margin: 0 0 var(--space-12); padding-bottom: var(--space-6); border-bottom: 1px solid var(--frame); font: 900 var(--text-lg)/0.9 var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; }
-.edito h2 .mono { display: block; margin-bottom: var(--space-3); color: var(--muted); }
-.chamfer { clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer))); }
-.tab { clip-path: polygon(0 0, 34% 0, 40% 10%, 100% 10%, 100% 100%, 0 100%); }
-.thumb { position: relative; overflow: hidden; background: var(--ink); isolation: isolate; }
-.thumb img { transition: transform var(--dur-fast) var(--ease); }
-.thumb:hover img { transform: scale(1.04); }
-.thumb .mono { position: absolute; z-index: 3; left: 10px; top: 14%; color: var(--on-ink); }
-.t1 { width: 180px; aspect-ratio: 16/10; }
-.t2 { position: absolute; right: var(--space-8); bottom: var(--space-12); width: 200px; aspect-ratio: 1; }
-.edito p { position: absolute; left: 0; bottom: 0; width: 220px; margin: 0; font-size: var(--text-xs); }
-.edito__right { padding-left: var(--space-8); }
-.t3 { width: 100%; height: 100%; min-height: 520px; }
+/* ── Typo ───────────────────────────────────────────────── */
+.statement { font: var(--weight-display) var(--fs-statement)/var(--lh-statement) var(--font-display); letter-spacing: var(--ls-display); text-transform: uppercase; margin: 0; text-indent: var(--indent-first); }
+.statement-block { position: relative; }
+.statement-block > .label { position: absolute; left: 0; top: .5em; }
+[data-reveal] span { color: var(--reveal-from); transition: color var(--dur-ui) linear; }
+[data-reveal] span.is-on { color: var(--ink); }
+.on-art-local [data-reveal] span { color: var(--reveal-from-dark); }
+.on-art-local [data-reveal] span.is-on { color: var(--paper); }
+.hex { font: var(--weight-hex) var(--fs-word)/var(--lh-hex) var(--font-hex); letter-spacing: var(--ls-hex); text-transform: uppercase; margin: 0; }
 
-.glyph { position: absolute; z-index: 3; left: 50%; top: 50%; width: 120px; height: 220px; transform: translate(-50%, -50%); }
-.glyph::before, .glyph::after { content: ""; position: absolute; background: var(--on-ink); border-radius: 4px; }
-.glyph::before { left: 50%; top: 0; bottom: 0; width: 18px; transform: translateX(-50%); }
-.glyph::after { top: 40%; left: 0; right: 0; height: 18px; }
+/* ── 0. Ouverture → 001 ─────────────────────────────────── */
+.pin { position: relative; }
+.pin__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+#ouverture { height: 300vh; }
+.hero__art { position: absolute; inset: 0; z-index: 3; background: var(--lavender); will-change: clip-path, transform; }
+.hero__art img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
+.hero__art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg, rgb(0 0 0 / .45), transparent 40%); pointer-events: none; }
+.hero__type { position: absolute; inset: 0; z-index: 4; color: var(--paper); pointer-events: none; }
+.hero__intro { position: absolute; left: calc(var(--frame-pad) + var(--rail-w) + 40px); top: calc(var(--frame-pad) + var(--bar-h) + 30px); max-width: 300px; margin: 0; }
+.manifest { position: absolute; left: calc(var(--frame-pad) + var(--rail-w) + 3vw); right: calc(var(--frame-pad) + 2vw); bottom: calc(var(--frame-pad) + 4vh); margin: 0; font: var(--weight-display) var(--fs-manifest)/var(--lh-manifest) var(--font-display); letter-spacing: var(--ls-manifest); text-transform: uppercase; }
+.manifest span { display: block; position: relative; width: max-content; max-width: 100%; }
+.manifest span:nth-child(1) { margin-left: 26%; } .manifest span:nth-child(2) { margin-left: 34%; } .manifest span:nth-child(3) { margin-left: 0; }
+.manifest small { position: absolute; left: -.35em; top: -.05em; translate: -100% 0; font: 400 var(--fs-label)/1 var(--font-mono); letter-spacing: 0; }
+.hero__scroll { position: absolute; right: calc(var(--frame-pad) + 40px); bottom: calc(var(--frame-pad) + 26px); }
+.hero__mark { position: absolute; inset: 0; display: grid; place-items: center; z-index: 5; color: var(--paper); pointer-events: none; }
+.hero__mark { transition: opacity .9s var(--ease-out-cubic) .4s; }
+.hero__mark .hex { font-size: min(34vw, 62vh); line-height: 1; transition: transform 1.2s var(--ease-out-cubic); }
+body.is-ready .hero__mark .hex { transform: scale(1.06); }
+.hero__panel { position: absolute; inset: 0; z-index: 2; background: var(--paper); }
+.s001 { position: absolute; inset: calc(var(--frame-pad) + var(--bar-h)) var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) + var(--rail-w)); display: grid; grid-template-columns: 64% 36%; }
+.s001__left { border-right: var(--line) solid var(--line-dark); display: grid; grid-template-rows: auto 1fr; }
+.s001__head { padding: 3.5vw 2.6vw 2.4vw; border-bottom: var(--line) solid var(--line-dark); }
+.s001__body { position: relative; padding: 2.4vw 2.6vw; }
+.s001 .p-world { width: min(240px, 16vw); aspect-ratio: 16 / 9; }
+.s001__typed { position: absolute; left: 2.6vw; bottom: 2.4vw; max-width: 280px; margin: 0; min-height: 2.6em; }
+.p-tower { position: absolute; z-index: 1; right: calc(var(--frame-pad) + 2.4vw); top: calc(var(--frame-pad) + var(--bar-h) + 5vh); bottom: calc(var(--frame-pad) + 4vh); width: calc((100vw - var(--rail-w) - 2 * var(--frame-pad)) * .36 - 4.8vw); }
+@media (max-width: 760px) { .p-tower { display: none; } }
 
-.terminal { max-width: 520px; font: 400 var(--text-xs)/1.8 var(--font-mono); letter-spacing: var(--tracking-mono); text-transform: uppercase; }
-.terminal .cur { display: inline-block; width: 8px; height: 12px; background: currentColor; animation: blink 1s steps(1) infinite; vertical-align: -1px; }
-.factions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); margin-top: var(--space-12); }
-.faction { display: grid; grid-template-columns: minmax(0, 1fr) 160px; gap: var(--space-6); align-items: end; }
-.faction h3 { margin: var(--space-3) 0; font: 900 2.2rem/0.9 var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; }
-.faction p { margin: 0; color: var(--muted-dark); font-size: var(--text-xs); }
-.faction .thumb { aspect-ratio: 3/4; }
-.faction .thumb::after { content: ""; position: absolute; inset: 0; z-index: 2; box-shadow: inset 0 0 0 1px var(--signal); pointer-events: none; }
-.badge { display: inline-block; padding: 3px 6px; background: var(--accent); color: var(--on-accent); }
+/* ── 002 / 003 : HUD sur illustration ───────────────────── */
+.art-sec { position: relative; color: var(--paper); background: var(--lavender); }
+.art-sec .pin__stage > img { position: absolute; inset: -8% 0; width: 100%; height: 116%; object-fit: cover; will-change: transform; }
+.art-sec .pin__stage::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / .18); pointer-events: none; }
+#role { height: 220vh; }
+.hud { position: absolute; inset: calc(var(--frame-pad) + var(--bar-h)) var(--frame-pad) var(--frame-pad) calc(var(--frame-pad) + var(--rail-w)); z-index: 2; display: grid; grid-template-columns: 30% 40% 30%; grid-template-rows: 1fr 1fr; }
+.hud > div { border-right: var(--line) solid var(--line-light); border-bottom: var(--line) solid var(--line-light); position: relative; padding: 2.4vw; }
+.hud > div:nth-child(3n) { border-right: 0; } .hud > div:nth-child(n+4) { border-bottom: 0; }
+.hud .wide { grid-column: span 2; }
+.hud .diag { background: linear-gradient(to top right, transparent calc(50% - .5px), var(--line-light) 50%, transparent calc(50% + .5px)); }
+.temp { display: flex; align-items: center; gap: 8px; position: absolute; right: 2.4vw; bottom: 2.4vw; }
+.temp i { width: 22px; height: 5px; background: linear-gradient(90deg, #fff, rgb(255 255 255 / .2)); }
+.points { position: absolute; right: 0; top: 18%; width: 34%; height: 46%; z-index: 2; opacity: .85; }
 
-.credits { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding: var(--space-8) calc(var(--frame-inset) + var(--space-6)) calc(var(--frame-inset) + var(--space-8)) calc(var(--frame-inset) + var(--rail) + var(--space-6)); background: var(--ink); color: var(--muted-dark); }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes thick { to { stroke-width: 34; } }
-@keyframes blink { 50% { opacity: 0; } }
+/* ── Rideau de barres ───────────────────────────────────── */
+.curtain { position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0; }
+.curtain.is-on { opacity: 1; }
+.curtain rect { fill: rgb(255 255 255 / .92); transform-box: fill-box; transform-origin: center; transform: scaleY(0); }
+.curtain.is-on rect { animation: bar 1.4s var(--ease-in-out-cubic) both; }
+
+/* ── 004 : collection ───────────────────────────────────── */
+.s004a { min-height: 100vh; }
+.s004a .grid3 { display: grid; grid-template-columns: 26% 46% 28%; min-height: calc(100vh - var(--bar-h) - 2 * var(--frame-pad)); border-left: 0; }
+.s004a .grid3 > div { border-right: var(--line) solid var(--line-dark); position: relative; }
+.s004a .grid3 > div:last-child { border-right: 0; display: grid; grid-template-rows: 1fr 1fr; }
+.counter { position: absolute; inset: 4vh 0 4vh 2.6vw; }
+.counter__num { position: absolute; left: calc(var(--fs-counter) * .82); bottom: 0; transform-origin: 0 100%; transform: rotate(-90deg); display: flex; white-space: nowrap; font: var(--weight-hex) var(--fs-counter)/.82 var(--font-hex); letter-spacing: var(--ls-hex); }
+.counter > .label { position: absolute; left: calc(var(--fs-counter) * .9); bottom: 0; }
+.counter__digit { display: inline-block; overflow: hidden; height: .82em; width: .66em; }
+.counter__digit b { display: block; font-weight: inherit; transition: transform .8s var(--ease-out-quart); }
+.counter .label { writing-mode: vertical-rl; rotate: 180deg; }
+.s004a .p-char { position: absolute; left: 8%; right: 8%; top: 7%; bottom: 7%; }
+.ruler-cell { position: relative; border-bottom: var(--line) solid var(--line-dark); padding: 1.6vw; overflow: hidden; }
+.ruler-lines { position: absolute; left: 12%; right: 22%; top: 18%; bottom: 10%; background: repeating-linear-gradient(to bottom, var(--line-dark) 0 1px, transparent 1px 16.6%); }
+.ruler { position: absolute; right: 12%; top: 16%; bottom: 10%; width: 14px; background: repeating-linear-gradient(to bottom, var(--ink) 0 1px, transparent 1px 4px) right / 6px 100% no-repeat, repeating-linear-gradient(to bottom, var(--ink) 0 1px, transparent 1px 20px) right / 14px 100% no-repeat; }
+.crystal { position: absolute; left: 30%; top: 16%; height: 74%; aspect-ratio: 1 / 2.1; object-fit: cover; clip-path: polygon(50% 0, 88% 22%, 78% 86%, 50% 100%, 22% 86%, 12% 22%); background: var(--panel); }
+.s004a .p-eye { position: absolute; inset: 9% 6%; border-radius: var(--frame-radius); }
+.s004b { background: var(--lavender); min-height: 100vh; }
+.s004b .cols { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--line) solid var(--line-dark); }
+.s004b .cols > div { padding: 3.5vw 2.6vw; } .s004b .cols > div + div { border-left: var(--line) solid var(--line-dark); display: grid; grid-template-columns: 30% 1fr; gap: 1rem; }
+.fan { position: relative; height: min(46vh, 380px); margin: 6vh 0 4vh; overflow-x: clip; overflow-y: visible; }
+.fan .planche { position: absolute; left: 50%; bottom: 0; width: 14vw; max-width: 230px; aspect-ratio: 3 / 4.2; transition: transform 1s var(--ease-out-quart), z-index 0s .3s, filter 1s; transform-origin: 50% 100%; }
+
+/* ── Chapitres plein cadre ──────────────────────────────── */
+.chapter { height: 320vh; }
+.chapter .pin__stage { background: var(--paper); }
+.chapter__art { position: absolute; inset: 0; z-index: 2; background: var(--lavender); will-change: clip-path, transform; }
+.chapter__art img { width: 100%; height: 100%; object-fit: cover; }
+.chapter__art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgb(0 0 0 / .55)); pointer-events: none; }
+.chapter__cap { position: absolute; z-index: 3; left: 50%; bottom: calc(var(--frame-pad) + 6vh); width: min(560px, 80vw); translate: -50% 0; text-align: center; color: var(--paper); display: grid; gap: 1rem; justify-items: center; }
+.chapter__cap p:last-child { font: 500 var(--fs-story)/1.25 var(--font-display); letter-spacing: -0.02em; margin: 0; }
+.scatter .planche { position: absolute; z-index: 1; }
+
+/* ── Gardiens ───────────────────────────────────────────── */
+.s-gardiens { min-height: 120vh; }
+.s-gardiens .word { border-bottom: var(--line) solid var(--line-dark); padding: 6vh 2.6vw 3vh; overflow: hidden; }
+.s-gardiens .float { position: relative; height: 0; }
+.s-gardiens .float .planche { position: absolute; transform-origin: 50% 50%; }
+.s-gardiens .foot { padding: 2.6vw; display: grid; gap: 14vh; }
+.s-gardiens .foot p:last-child { max-width: 300px; margin: 0; min-height: 2.6em; }
+
+/* ── Pied ───────────────────────────────────────────────── */
+.footer { position: relative; z-index: 120; background: var(--ink); color: var(--paper); }
+.footer__cols { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: var(--line) solid var(--line-light); }
+.footer__cols > div { padding: 34px 30px 70px; min-height: 230px; }
+.footer__cols > div + div { border-left: var(--line) solid var(--line-light); }
+.footer__cols ul { list-style: none; margin: 24px 0 0; padding: 0; }
+.footer__cols a { font: 400 var(--fs-menu-small)/1.3 var(--font-mono); letter-spacing: var(--ls-mono); text-transform: uppercase; text-decoration: none; display: inline-block; padding: 0 2px; }
+.footer__cols a:hover, .footer__cols a:focus-visible { background: var(--paper); color: var(--ink); outline: none; }
+.footer .log { color: var(--on-dark-muted); margin-top: 18px; display: grid; gap: 4px; }
+.btn-line { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; padding: 18px 64px 18px 28px; position: relative; text-decoration: none; font: 400 11px/1 var(--font-mono); text-transform: uppercase; color: var(--paper); }
+.btn-line svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.btn-line svg polygon { fill: none; stroke: var(--paper); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.footer__logo { font: var(--weight-hex) 31vw/.82 var(--font-hex); letter-spacing: var(--ls-hex); margin: 0; padding: 2vw 1.4vw 0; white-space: nowrap; overflow: hidden; }
+.footer__legal { display: flex; justify-content: center; gap: 48px; padding: 20px; position: relative; }
+.footer__legal a { font: 400 10px/1 var(--font-mono); text-transform: uppercase; text-decoration: none; color: var(--paper); }
+.footer__legal span { position: absolute; right: 22px; }
+
+/* ── Menu ───────────────────────────────────────────────── */
+.page { transition: filter var(--dur-menu) var(--ease-out-quart); }
+body.menu-open .page { filter: grayscale(1) brightness(.78); }
+.veil { position: fixed; inset: 0; z-index: 290; background: var(--veil); opacity: 0; visibility: hidden; transition: opacity var(--dur-menu), visibility var(--dur-menu); }
+body.menu-open .veil { opacity: 1; visibility: visible; }
+.menu { position: fixed; z-index: 300; top: var(--frame-pad); bottom: var(--frame-pad); left: var(--frame-pad); width: min(643px, calc(100% - 2 * var(--frame-pad))); background: var(--ink); color: var(--paper); border-radius: var(--frame-radius); display: grid; grid-template-columns: 1fr var(--rail-w); clip-path: inset(0 100% 0 0 round var(--frame-radius)); visibility: hidden; transition: clip-path var(--dur-menu) var(--ease-out-quart), visibility 0s var(--dur-menu); }
+body.menu-open .menu { clip-path: inset(0 0 0 0 round var(--frame-radius)); visibility: visible; transition: clip-path var(--dur-menu) var(--ease-out-quart); }
+.menu__main { display: grid; grid-template-rows: 1fr auto auto auto; min-width: 0; }
+.menu__top { position: relative; padding: 36px 0 30px 26px; display: grid; grid-template-columns: 140px 1fr; }
+.menu__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.menu__list li { display: flex; align-items: flex-start; gap: 10px; }
+.menu__link { display: inline-block; padding: .04em .12em 0; font: var(--weight-display) var(--fs-menu)/var(--lh-menu) var(--font-display); letter-spacing: var(--ls-display); text-transform: uppercase; color: var(--paper); text-decoration: none; clip-path: polygon(0 0, 100% 0, 100% calc(100% - .28em), calc(100% - .28em) 100%, 0 100%); }
+.menu__link:hover, .menu__link:focus-visible { background: var(--paper); color: var(--ink); outline: none; }
+.menu__link[aria-current="page"] { background: var(--lime); color: var(--ink); }
+.menu__tag { font: 400 9px/1.1 var(--font-mono); text-transform: uppercase; opacity: 0; }
+.menu__list li:hover .menu__tag, .menu__list li:focus-within .menu__tag { opacity: 1; }
+.menu__list li .menu__tag.is-active { color: var(--lime); opacity: 1; }
+.menu__row { border-top: var(--line) solid var(--line-light); padding: 22px 26px; display: grid; grid-template-columns: 140px 1fr; font: 400 10px/1.6 var(--font-mono); text-transform: uppercase; }
+.menu__row a { text-decoration: none; }
+.menu__rail { border-left: var(--line) solid var(--line-light); display: grid; grid-template-rows: var(--bar-h) 1fr 64px; justify-items: center; align-items: center; }
+.menu__rail > :first-child { border-bottom: var(--line) solid var(--line-light); width: 100%; height: 100%; display: grid; place-items: center; }
+.close { width: 18px; height: 18px; position: relative; } .close::before, .close::after { content: ""; position: absolute; left: 50%; top: 0; width: 1.5px; height: 100%; background: currentColor; rotate: 45deg; } .close::after { rotate: -45deg; }
+@media (max-width: 760px) { .menu { grid-template-columns: 1fr 48px; } .menu__top, .menu__row { grid-template-columns: 1fr; gap: 14px; } }
+
+/* ── Mobile ─────────────────────────────────────────────── */
 @media (max-width: 760px) {
-  :root { --frame-inset: 8px; --rail: 32px; }
-  .topnav a:not([aria-current]):not(.signin) { display: none; }
-  .manifesto { left: calc(var(--frame-inset) + var(--rail) + var(--space-4)); right: var(--space-4); font-size: 2.5rem; }
-  .chapter { overflow-x: clip; }
-  .manifesto .line:nth-child(n) { margin-left: 0; }
-  .edito, .factions, .faction { grid-template-columns: 1fr; }
-  .edito__left { border-right: 0; min-height: 0; padding: 0; display: grid; gap: var(--space-6); }
-  .t2, .edito p { position: static; } .edito__right { padding: var(--space-6) 0 0; } .t3 { min-height: 360px; }
+  .hero__intro { left: 24px; right: 24px; top: auto; bottom: 46vh; }
+  .manifest { left: 24px; right: 12px; bottom: 9vh; } .manifest span { margin-left: 0 !important; padding-left: 1.2em; } .manifest small { left: 0; translate: 0 0; }
+  .hero__scroll { display: none; }
+  .s001 { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .s001__left { border-right: 0; } .s001 .p-tower { display: none; } .s001__typed { display: none; }
+  .hud { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr 1fr; } .hud .wide { grid-column: span 2; }
+  .points { display: none; }
+  .s004a .grid3 { grid-template-columns: 1fr; } .s004a .grid3 > div { border-right: 0; border-bottom: var(--line) solid var(--line-dark); min-height: 60vh; }
+  .counter { position: relative; inset: auto; padding: 4vh 6vw; } .counter__num { position: static; transform: none; } .counter > .label { position: static; writing-mode: horizontal-tb; rotate: 0deg; margin-top: 8px; }
+  .s004b .cols { grid-template-columns: 1fr; } .s004b .cols > div + div { border-left: 0; border-top: var(--line) solid var(--line-dark); grid-template-columns: 1fr; }
+  .fan { height: 52vh; margin: 4vh 0; } .fan .planche { width: 46vw; }
+  .footer__cols { grid-template-columns: 1fr 1fr; } .footer__cols > div:nth-child(3) { border-left: 0; } .footer__cols > div { min-height: 160px; border-top: var(--line) solid var(--line-light); }
+  .footer__legal { flex-wrap: wrap; gap: 18px; } .footer__legal span { position: static; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } .loader { display: none; } }
+
+/* ── Mouvement réduit ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
 </style>
 </head>
-<body>
-<script>document.documentElement.classList.add('js');</script>
-<div class="loader" id="loader" aria-hidden="true"><svg viewBox="0 0 560 220"><path d="M30 30 L28 190 M150 30 L70 110 L150 190 M200 190 L200 70 M200 120 L280 120 L300 100 M350 190 L352 40 Q352 30 362 30 L420 30 M352 110 L440 110 M470 190 L520 190"/></svg></div>
+<body class="is-loading">
 
-<div class="frame" aria-hidden="true"></div>
-<div class="rail"><span class="mono">≡</span><svg class="star" id="star" viewBox="0 0 26 26" aria-hidden="true"><path d="M13 0 L14.2 11.8 L26 13 L14.2 14.2 L13 26 L11.8 14.2 L0 13 L11.8 11.8Z" fill="currentColor"/><rect x="10" y="10" width="6" height="6" transform="rotate(45 13 13)" fill="none" stroke="currentColor"/></svg><span class="mono" id="chNum">01</span></div>
-<nav class="topnav mono" aria-label="Chapitres"><a href="#c1" aria-current="true">Projet</a><a href="#c2">Le donjon</a><a href="#c4">Factions</a><a href="#c3">Le monde</a><a class="signin" href="#">Se connecter</a></nav>
+<!-- Formes de dossier (signes : unités relatives, gardent les arrondis à toutes les tailles) -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <clipPath id="folder-a" clipPathUnits="objectBoundingBox"><path d="M.04,0 H.4 Q.43,0 .45,.025 L.48,.06 H.96 Q1,.06 1,.1 V.9 L.9,1 H.05 Q.02,1 .02,.97 V.78 L0,.74 V.04 Q0,0 .04,0 Z"/></clipPath>
+  <clipPath id="folder-b" clipPathUnits="objectBoundingBox"><path d="M.03,0 H.5 Q.54,0 .57,.06 L.6,.11 H.97 Q1,.11 1,.16 V.95 Q1,1 .96,1 H.07 L0,.88 V.04 Q0,0 .03,0 Z"/></clipPath>
+  <clipPath id="folder-c" clipPathUnits="objectBoundingBox"><path d="M.04,0 H.62 Q.66,0 .69,.03 L.72,.06 H.95 Q1,.06 1,.1 V.93 L.92,1 H.06 Q.02,1 .02,.96 V.56 L0,.52 V.04 Q0,0 .04,0 Z"/></clipPath>
+</svg>
 
-<main>
-  <section class="chapter dark opening" id="c1" data-dark data-n="01">
-    <div class="art" data-slot="opening-illustration"><img src="https://images.unsplash.com/photo-1537770846878-f79ea627a64b?auto=format&fit=crop&w=2000&q=80" alt="Un masque blanc qui émerge de l'obscurité, éclairé de côté" width="2000" height="1333" fetchpriority="high"></div>
-    <p class="intro"><b>SENTINELLES</b> est un projet de narration collective qui donne la parole aux conteurs. Un monde vivant, encore inexploré, qui attend d'être imaginé.</p>
-    <h1 class="manifesto reveal" aria-label="Veiller. Protéger. Réinventer.">
-      <span class="line"><small>01V</small><span class="w">Veiller.</span></span>
-      <span class="line"><small>02P</small><span class="w">Protéger.</span></span>
-      <span class="line"><small>03R</small><span class="w">Réinventer.</span></span>
-    </h1>
-    <span class="scroll mono">Scroll ↓</span>
-  </section>
+<!-- 0. Chargement -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__row">
+    <div class="loader__track"><div class="loader__fill"></div></div>
+    <div class="loader__meta"><p class="label" id="ld-pct">▸▸ Chargement – 0%</p><p class="label loader__path" id="ld-path"></p></div>
+  </div>
+  <div class="sound-cursor" id="ld-cursor">
+    <svg viewBox="0 0 46 46"><circle class="ring" cx="23" cy="23" r="21" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="20 4 10 4"/><path d="M19 18v10M23 15v16M27 19v8" stroke="currentColor" stroke-width="1.4"/></svg>
+    <span class="label">Cliquer pour activer le son</span>
+  </div>
+  <svg class="goo" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+    <defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="9"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 30 -13"/></filter></defs>
+    <g filter="url(#goo)"><g class="bars" id="goo-bars"></g><text class="mark" x="600" y="420" text-anchor="middle">AXO</text></g>
+  </svg>
+</div>
 
-  <section class="chapter edito" id="c2" data-n="02">
-    <div class="edito__left">
-      <h2><span class="mono">• 01</span>Un monde familier… sur une autre voie.</h2>
-      <div class="thumb tab t1" data-slot="archive"><img src="https://images.unsplash.com/photo-1642345843526-6279c8880a49?auto=format&fit=crop&w=400&h=250&q=80" alt="Une rue sombre sous la pluie, éclairée par un néon rouge" width="400" height="250" loading="lazy"><span class="mono">Archive 07</span></div>
-      <div class="thumb chamfer t2" data-slot="subject"><img src="https://images.unsplash.com/photo-1604315841269-a1f298321670?auto=format&fit=crop&w=400&h=400&q=80" alt="Une rue de nuit baignée de lumières cyan et magenta" width="400" height="400" loading="lazy"><span class="mono">Sujet 12</span></div>
-      <p>Isolée dans la zone sûre d'Aurelis, l'humanité tente de ne pas sombrer dans le chaos.</p>
+<!-- Cadre -->
+<div class="frame" id="frame">
+  <div class="frame__rail">
+    <button class="icon-btn" id="open-menu" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span class="burger"></span></button>
+    <svg class="star" viewBox="0 0 40 74" aria-hidden="true"><path d="M19 0h2v26h-2zM19 48h2v26h-2zM0 36h13v2H0zM27 36h13v2H27zM15 28h2v18h-2zM23 28h2v18h-2zM17 26h6v2h-6zM17 46h6v2h-6z"/></svg>
+    <button class="icon-btn" id="sound" aria-label="Activer le son" aria-pressed="false"><span class="sound"><i></i><i></i><i></i><i></i></span></button>
+  </div>
+  <div class="frame__bar">
+    <div class="frame__progress" id="progress"></div>
+    <button class="icon-btn m-only" aria-label="Ouvrir le menu" data-open-menu><span class="burger"></span></button>
+    <ul class="nav" id="nav">
+      <li><a href="#ouverture" data-nav="projet" aria-current="true">Projet</a></li>
+      <li><a href="#bastion" data-nav="bastion">Le Bastion</a></li>
+      <li><a href="#factions" data-nav="factions">Factions</a></li>
+      <li><a href="#monde" data-nav="monde">Le Monde</a></li>
+    </ul>
+    <a class="btn-sign" href="#connexion">Connexion</a>
+  </div>
+</div>
+
+<div class="veil" data-close-menu></div>
+
+<!-- Menu -->
+<nav class="menu" id="menu" aria-label="Menu principal">
+  <div class="menu__main">
+    <div class="menu__top">
+      <p class="label label--sq">Découvrir</p>
+      <ul class="menu__list">
+        <li><a class="menu__link" href="#ouverture" aria-current="page" data-scr>Histoire</a><span class="menu__tag is-active">Page<br>001</span></li>
+        <li><a class="menu__link" href="#protocole" data-scr>Protocole</a><span class="menu__tag">Page<br>002</span></li>
+        <li><a class="menu__link" href="#journal" data-scr>Journal</a><span class="menu__tag">Page<br>003</span></li>
+        <li><a class="menu__link" href="#media" data-scr>Média</a><span class="menu__tag">Page<br>004</span></li>
+        <li><a class="menu__link" href="#galerie" data-scr>Galerie</a><span class="menu__tag">Page<br>005</span></li>
+        <li><a class="menu__link" href="#apropos" data-scr>À propos</a><span class="menu__tag">Page<br>006</span></li>
+      </ul>
     </div>
-    <div class="edito__right"><div class="thumb chamfer t3" data-slot="key-art"><img src="https://images.unsplash.com/photo-1672872476232-da16b45c9001?auto=format&fit=crop&w=1200&h=1500&q=80" alt="Une ville futuriste vue de haut, la nuit, criblée de néons" width="1200" height="1500" loading="lazy"><span class="mono">Gardien · Tour nord</span></div></div>
+    <div class="menu__row"><span class="label--sq">Rejoindre</span><span><a href="#x">X</a><br><a href="#discord">Discord</a></span></div>
+    <div class="menu__row"><span>Collection sur</span><span><a href="#place">↗ Place de marché</a></span></div>
+    <div class="menu__row"><span>FR ⌄</span><span style="color:var(--on-dark-muted)">© 2026</span></div>
+  </div>
+  <div class="menu__rail">
+    <div><button class="icon-btn" aria-label="Fermer le menu" data-close-menu><span class="close"></span></button></div>
+    <svg class="star" viewBox="0 0 40 74" aria-hidden="true"><path fill="currentColor" d="M19 0h2v26h-2zM19 48h2v26h-2zM0 36h13v2H0zM27 36h13v2H27zM15 28h2v18h-2zM23 28h2v18h-2zM17 26h6v2h-6zM17 46h6v2h-6z"/></svg>
+    <span class="sound" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  </div>
+</nav>
+
+<!-- Rideau de barres -->
+<svg class="curtain" id="curtain" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true"><g filter="url(#goo)" id="curtain-bars"></g></svg>
+
+<main class="page" id="page">
+
+  <!-- 1. Ouverture → 001 -->
+  <section class="pin" id="ouverture" data-nav-id="projet" aria-label="Ouverture">
+    <div class="pin__stage">
+      <div class="hero__panel" id="hero-panel">
+        <div class="s001">
+          <div class="s001__left">
+            <div class="s001__head statement-block">
+              <p class="label label--sq" data-scramble>001</p>
+              <h2 class="statement" data-reveal>Un monde familier… sur une autre voie.</h2>
+            </div>
+            <div class="s001__body">
+              <figure class="planche f-b p-world"><img src="https://images.unsplash.com/photo-1677793601527-5e4ba4e32401?auto=format&fit=crop&w=600&q=80" alt="Une silhouette debout au sommet d'un rocher, dans la brume" width="600" height="338" loading="lazy" data-slot="world-small"></figure>
+              <p class="s001__typed" data-type>Isolé dans la Brume, un peuple garde ce qui reste du savoir.</p>
+            </div>
+          </div>
+          <div></div>
+        </div>
+        <figure class="planche f-c p-tower" id="p-tower" style="position:absolute"><img src="https://images.unsplash.com/photo-1635336969656-0e63e076904f?auto=format&fit=crop&w=900&q=80" alt="Une tour futuriste lumineuse qui domine la ville" width="900" height="1200" loading="lazy" data-slot="tower"><figcaption class="label label--sq">Tour de veille</figcaption></figure>
+      </div>
+      <div class="hero__art" id="hero-art"><img src="https://images.unsplash.com/photo-1653443658457-f78c48564f80?auto=format&fit=crop&w=2000&q=80" alt="Le visage d'une jeune femme éclairé par des lumières violettes et bleues" width="2000" height="1333" fetchpriority="high" data-slot="opening"></div>
+      <div class="hero__type" id="hero-type">
+        <p class="hero__intro">AXO raconte une histoire collective et donne la parole à celles et ceux qui l'écrivent. Les Gardiens forment un récit vivant, un monde à explorer et à réinventer.</p>
+        <h1 class="manifest" aria-label="Veiller. Défendre. Rêver."><span><small>01V</small>Veiller.</span><span><small>02D</small>Défendre.</span><span><small>03R</small>Rêver.</span></h1>
+        <p class="label hero__scroll">Défiler ↘</p>
+      </div>
+      <div class="hero__mark" aria-hidden="true"><p class="hex">AXO</p></div>
+    </div>
   </section>
 
-  <section class="chapter dark symbol-ch" id="c3" data-dark data-n="03">
-    <div class="art" data-slot="landscape"><img src="https://images.unsplash.com/photo-1672872476232-da16b45c9001?auto=format&fit=crop&w=2000&q=80" alt="La ville vue de très haut, plongée dans la nuit" width="2000" height="1333" loading="lazy"></div>
-    <div class="glyph" aria-hidden="true"></div>
-    <span class="mono" style="position:relative;z-index:3">• Le monde</span>
+  <!-- 2. 002 -->
+  <section class="pin art-sec" id="role" data-theme="art" data-nav-id="projet" aria-label="Le rôle">
+    <div class="pin__stage on-art-local">
+      <img src="https://images.unsplash.com/photo-1503494201477-5e04f651cfe5?auto=format&fit=crop&w=2000&q=80" alt="Des nuages dorés au coucher du soleil" width="2000" height="1333" loading="lazy" data-slot="sky" data-parallax>
+      <canvas class="points" id="points" aria-hidden="true"></canvas>
+      <div class="hud">
+        <div class="wide statement-block"><p class="label label--sq" data-scramble>002</p><h2 class="statement" data-reveal>Vous êtes un Gardien : une force de changement dans ce monde.</h2></div>
+        <div><p class="label" data-scramble>// Initialisation</p></div>
+        <div></div><div class="diag"></div>
+        <div><p class="label" data-scramble>N 45°27.37<br>E 004°38.57</p><p class="label temp"><i></i><span data-scramble>33.8°</span></p></div>
+      </div>
+    </div>
   </section>
 
-  <section class="chapter dark" id="c4" data-dark data-n="04">
-    <div class="terminal" id="term" aria-live="polite">// Initialisation<br>Nouveaux fichiers dans la base<br><span id="typed"></span><span class="cur" aria-hidden="true"></span></div>
-    <div class="factions">
-      <article class="faction"><div><span class="mono badge">Faction · 01</span><h3>Les Veilleurs</h3><p>Gardiens des anciennes tours, ils pensent que la mémoire protège mieux que les murs.</p></div><div class="thumb chamfer" data-slot="faction-veilleurs"><img src="https://images.unsplash.com/photo-1537770846878-f79ea627a64b?auto=format&fit=crop&w=400&h=533&q=80" alt="Le masque blanc des Veilleurs dans l'ombre" width="400" height="533" loading="lazy"></div></article>
-      <article class="faction"><div><span class="mono badge">Faction · 02</span><h3>Les Brisants</h3><p>Ils veulent abattre la zone sûre pour rendre le monde à ceux qui vivent dehors.</p></div><div class="thumb chamfer" data-slot="faction-brisants"><img src="https://images.unsplash.com/photo-1642345843526-6279c8880a49?auto=format&fit=crop&w=400&h=533&q=80" alt="Une rue mouillée sous un néon rouge, territoire des Brisants" width="400" height="533" loading="lazy"></div></article>
+  <!-- 3. 003 -->
+  <section class="pin art-sec" id="question" data-theme="art" data-nav-id="projet" aria-label="La question" style="height:200vh">
+    <div class="pin__stage on-art-local">
+      <img src="https://images.unsplash.com/photo-1582491795316-0782a861c529?auto=format&fit=crop&w=2000&q=80" alt="Une montagne enneigée sous un ciel violet" width="2000" height="1333" loading="lazy" data-slot="mountain" data-parallax>
+      <div class="hud" style="grid-template-columns:30% 70%">
+        <div class="diag"></div>
+        <div class="statement-block" style="border-right:0"><p class="label label--sq" data-scramble>003</p><h2 class="statement" data-reveal>Que ferez-vous de ce pouvoir ? Protéger ou détruire ? Donner ou prendre ?</h2></div>
+        <div></div>
+        <div style="border-right:0"><p class="label label--sq" data-scramble>Symbole des Gardiens</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 004 — compteur -->
+  <section class="s004a" id="collection" data-nav-id="projet" aria-label="La collection">
+    <div class="inner">
+      <div class="grid3">
+        <div><div class="counter" id="counter" aria-label="10 000"><span class="counter__num" aria-hidden="true"><span class="counter__digit"><b>0</b></span><span class="counter__digit"><b>5</b></span><span class="counter__digit"><b>K</b></span></span><p class="label" data-scramble>▸▸ Collection initiale</p></div></div>
+        <div><figure class="planche f-a p-char"><img src="https://images.unsplash.com/photo-1548361403-cb0c785eea54?auto=format&fit=crop&w=1000&q=80" alt="Portrait d'une femme vêtue de noir, éclairée par une lumière colorée" width="1000" height="1250" loading="lazy" data-slot="character"><figcaption class="label label--sq">Animus — personnage</figcaption></figure></div>
+        <div>
+          <div class="ruler-cell"><p class="label label--sq" data-scramble>Cristal d'Onde</p><span class="ruler-lines"></span><img class="crystal" src="https://images.unsplash.com/photo-1551947391-249dcb8ed976?auto=format&fit=crop&w=400&q=80" alt="Une pierre d'améthyste violette en forme de goutte" width="400" height="840" loading="lazy" data-slot="crystal"><span class="ruler"></span></div>
+          <div style="position:relative"><figure class="planche p-eye" style="background:var(--panel)"><img src="https://images.unsplash.com/photo-1483519173755-be893fab1f46?auto=format&fit=crop&w=900&q=80" alt="Gros plan sur un œil humain" width="900" height="506" loading="lazy" data-slot="eye"><figcaption class="label label--sq">Fenêtres sur le</figcaption></figure></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 004 — éventail -->
+  <section class="s004b" data-nav-id="projet" aria-label="10 000 Gardiens">
+    <div class="inner">
+      <div class="cols">
+        <div class="statement-block"><p class="label label--sq" data-scramble>004</p><h2 class="statement" data-reveal>10 000 Gardiens uniques.</h2></div>
+        <div><p class="label label--sq" data-scramble>Collection initiale</p><p style="margin:0;max-width:340px">Chaque Gardien naît avec des attributs tirés de plus de 400 éléments peints à la main. Des objets personnels et iconiques, qui portent l'évolution, l'ouverture et l'imagination.</p></div>
+      </div>
+      <div class="fan" id="fan" aria-label="Portraits de Gardiens"></div>
+    </div>
+  </section>
+
+  <!-- 6. Chapitres -->
+  <section class="pin chapter" id="bastion" data-nav-id="bastion" aria-label="Le Bastion">
+    <div class="pin__stage">
+      <div class="scatter">
+        <figure class="planche f-c" style="left:12%;top:8%;width:13vw;aspect-ratio:2/4.4"><img src="https://images.unsplash.com/photo-1573384293689-0327bf65bd86?auto=format&fit=crop&w=500&q=80" alt="Un bâtiment en spirale" width="500" height="1100" loading="lazy"></figure>
+        <figure class="planche f-b" style="right:14%;bottom:4%;width:21vw;aspect-ratio:16/10"><img src="https://images.unsplash.com/photo-1547628565-aacfedcae2aa?auto=format&fit=crop&w=700&q=80" alt="Un bâtiment gris aux lumières vertes" width="700" height="440" loading="lazy"></figure>
+      </div>
+      <div class="chapter__art f-a" data-chapter><img src="https://images.unsplash.com/photo-1585427915733-13af3fcb80b0?auto=format&fit=crop&w=2000&q=80" alt="La ligne d'horizon d'une ville la nuit, sous un ciel rose" width="2000" height="1333" loading="lazy" data-slot="chapter-bastion"></div>
+      <div class="chapter__cap" data-cap><p class="label" data-scramble>001 ■ Le Bastion</p><p data-reveal>Le dernier refuge du savoir. Un lieu à comprendre, à protéger, et pour lequel se battre.</p></div>
+    </div>
+  </section>
+  <section class="pin chapter" id="factions" data-nav-id="factions" aria-label="Les factions">
+    <div class="pin__stage">
+      <div class="chapter__art f-b" data-chapter><img src="https://images.unsplash.com/photo-1644353224392-7e532d7b8f4b?auto=format&fit=crop&w=2000&q=80" alt="Un homme debout, bras croisés, dans une lumière de néon" width="2000" height="1333" loading="lazy" data-slot="chapter-factions"></div>
+      <div class="chapter__cap" data-cap><p class="label" data-scramble>002 ■ Factions</p><p data-reveal>Un monde, deux factions. Divisées dans leurs croyances, unies dans leur but.</p></div>
+    </div>
+  </section>
+  <section class="pin chapter" id="monde" data-nav-id="monde" aria-label="Le monde">
+    <div class="pin__stage">
+      <div class="chapter__art f-c" data-chapter><img src="https://images.unsplash.com/photo-1559632244-d51c406dc89a?auto=format&fit=crop&w=2000&q=80" alt="Des formations rocheuses grises dans la brume" width="2000" height="1333" loading="lazy" data-slot="chapter-monde"></div>
+      <div class="chapter__cap" data-cap><p class="label" data-scramble>003 ■ Le Monde</p><p data-reveal>La découverte de l'Onde annonça un âge d'or. C'est du moins ce qu'ils croyaient.</p></div>
+    </div>
+  </section>
+
+  <!-- 7. Gardiens -->
+  <section class="s-gardiens" id="gardiens" data-nav-id="monde" aria-label="Devenir Gardien">
+    <div class="inner">
+      <div class="word"><p class="hex" aria-label="Gardiens">Gardiens</p></div>
+      <div class="float" id="float">
+        <figure class="planche f-a" style="left:31%;top:-26vh;width:19vw;aspect-ratio:1/.95"><img src="https://images.unsplash.com/photo-1721905402477-27ce7eedb47f?auto=format&fit=crop&w=700&q=80" alt="Une grande tour dominant la ville" width="700" height="660" loading="lazy"><figcaption class="label label--sq">Le Monde</figcaption></figure>
+        <figure class="planche f-c" style="left:56%;top:-20vh;width:9vw;aspect-ratio:1/1.9"><img src="https://images.unsplash.com/photo-1627645835237-0743e52b991f?auto=format&fit=crop&w=400&q=80" alt="Un luminaire violet et blanc" width="400" height="760" loading="lazy"><figcaption class="label label--sq">Le Bastion</figcaption></figure>
+        <figure class="planche f-b" style="left:36%;top:2vh;width:16vw;aspect-ratio:16/8"><img src="https://images.unsplash.com/photo-1499155286265-79a9dc9c6380?auto=format&fit=crop&w=600&q=80" alt="Le regard d'une femme dans une lumière rose" width="600" height="300" loading="lazy"><figcaption class="label label--sq">Faction</figcaption></figure>
+      </div>
+      <div class="foot"><p class="label label--sq" data-scramble>Devenir Gardien</p><p data-type>Quel chemin tracerez-vous pour devenir le Gardien de votre destin ?</p></div>
     </div>
   </section>
 </main>
-<footer class="credits mono"><span>Sentinelles — démo Kōbō (univers fictif)</span><span>Photos : Unsplash</span></footer>
+
+<!-- 8. Pied -->
+<footer class="footer" id="pied">
+  <div class="footer__cols">
+    <div><p class="label" data-scramble>// Initialisation</p><p class="label log"><span data-scramble>Nouveaux fichiers</span><span data-scramble>GRD_53815.JPG</span><span data-scramble>JOURNAL_SON_2026.WAV</span></p></div>
+    <div><p class="label label--sq" data-scramble>Découvrir plus</p><ul><li><a href="#ouverture" data-scr-hover>Histoire</a></li><li><a href="#journal" data-scr-hover>Journal</a></li><li><a href="#media" data-scr-hover>Média</a></li><li><a href="#galerie" data-scr-hover>Galerie</a></li><li><a href="#apropos" data-scr-hover>À propos</a></li><li><a href="#emplois" data-scr-hover>Emplois ↗</a></li></ul></div>
+    <div><p class="label label--sq" data-scramble>Rejoindre la conversation</p><ul><li><a href="#x" data-scr-hover>X</a></li><li><a href="#discord" data-scr-hover>Discord</a></li></ul></div>
+    <div><p class="label label--sq" data-scramble>Plus d'infos</p><ul><li><a href="#contact" data-scr-hover style="color:var(--on-dark-muted)">Écrire à</a></li><li><a href="#contact" data-scr-hover>bonjour@axo.exemple</a></li></ul>
+      <a class="btn-line" href="#livre"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points="0,0 100,0 100,74 90,100 0,100"/></svg>↓ Livre de marque</a></div>
+  </div>
+  <p class="footer__logo" aria-label="AXO">AXO</p>
+  <div class="footer__legal"><a href="#confidentialite">Confidentialité</a><a href="#conditions">Conditions</a><a href="#licence">Licence</a><span class="label">© 2026</span></div>
+</footer>
+
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  setTimeout(() => document.getElementById('loader').classList.add('is-done'), reduce ? 0 : 2000);
-  const star = document.getElementById('star'), num = document.getElementById('chNum'); let turns = 0;
-  const so = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const s = e.target;
-    document.body.classList.toggle('is-dark', s.hasAttribute('data-dark')); num.textContent = s.dataset.n; star.style.transform = `rotate(${++turns * 45}deg)`;
-    document.querySelectorAll('.topnav a[href^="#c"]').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#' + s.id));
-    s.querySelectorAll('.reveal').forEach(r => r.classList.add('is-in'));
-    if (s.id === 'c4' && !s.dataset.typed) { s.dataset.typed = 1; const txt = 'Liora — Veilleuse · Kael — Brisant · Tour nord — scellée'; const el = document.getElementById('typed'); if (reduce) el.textContent = txt; else { let i = 0; const t = setInterval(() => { el.textContent = txt.slice(0, ++i); if (i >= txt.length) clearInterval(t); }, 25); } }
-  }), { threshold: .45 });
-  document.querySelectorAll('.chapter').forEach(c => so.observe(c));
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const lerp = (a, b, t) => a + (b - a) * t, clamp01 = v => Math.min(1, Math.max(0, v));
+  const mobile = () => innerWidth <= 760;
+
+  /* ── Décodage ── */
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  function scramble(el, tick = 40, rounds = 3) {
+    if (!el.dataset.text) { el.dataset.text = el.innerHTML; if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', el.textContent.trim()); }
+    const html = el.dataset.text;
+    if (reduce || html.includes('<br') || html.includes('<span')) { el.innerHTML = html; if (!reduce && html.includes('<br')) scrambleLines(el, html, tick, rounds); return; }
+    const final = el.textContent = new DOMParser().parseFromString(html, 'text/html').body.textContent;
+    let frame = 0; clearInterval(el._s);
+    el._s = setInterval(() => {
+      const fixed = Math.floor(frame / rounds);
+      el.textContent = [...final].map((c, i) => i < fixed || /[\s■▸.–—:/'’°…]/.test(c) ? c : GLYPHS[(Math.random() * GLYPHS.length) | 0]).join('');
+      if (fixed >= final.length) { clearInterval(el._s); el.textContent = final; }
+      frame++;
+    }, tick);
+  }
+  function scrambleLines(el, html, tick, rounds) {          // texte avec <br> : on décode chaque ligne
+    const lines = html.split(/<br\s*\/?>/i); let frame = 0; clearInterval(el._s);
+    const total = Math.max(...lines.map(l => l.length));
+    el._s = setInterval(() => {
+      const fixed = Math.floor(frame / rounds);
+      el.innerHTML = lines.map(l => [...l].map((c, i) => i < fixed || /[\s°.:/]/.test(c) ? c : GLYPHS[(Math.random() * 36) | 0]).join('')).join('<br>');
+      if (fixed >= total) { clearInterval(el._s); el.innerHTML = html; }
+      frame++;
+    }, tick);
+  }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    if (el.hasAttribute('data-scramble') && !el._done) { el._done = 1; scramble(el); }
+    if (el.hasAttribute('data-type') && !el._done) { el._done = 1; type(el); }
+  }), { threshold: .6 });
+  $$('[data-scramble],[data-type]').forEach(el => io.observe(el));
+  $$('[data-scr-hover]').forEach(a => { a.setAttribute('aria-label', a.textContent); a.addEventListener('mouseenter', () => scramble(a, 35, 2)); a.addEventListener('focus', () => scramble(a, 35, 2)); });
+
+  /* ── Frappe ── */
+  function type(el, speed = 18) {
+    const full = el.dataset.text ??= el.textContent;
+    el.setAttribute('aria-label', full);
+    if (reduce) { el.textContent = full; return; }
+    let i = 0; el.textContent = '';
+    const t = setInterval(() => { el.textContent = full.slice(0, ++i); if (i >= full.length) clearInterval(t); }, speed);
+  }
+
+  /* ── Révélation mot à mot ── */
+  $$('[data-reveal]').forEach(h => { h.setAttribute('aria-label', h.textContent); h.innerHTML = h.textContent.split(' ').map(w => `<span aria-hidden="true">${w}</span>`).join(' '); });
+  function reveal() {
+    $$('[data-reveal]').forEach(h => {
+      if (h.closest('[data-cap]')) return;
+      const r = h.getBoundingClientRect(); const p = reduce ? 1 : clamp01((innerHeight * .9 - r.top) / (innerHeight * .45));
+      const w = h.children; for (let i = 0; i < w.length; i++) w[i].classList.toggle('is-on', i < Math.ceil(p * w.length));
+    });
+  }
+
+  /* ── Chargement ── */
+  const loader = $('#loader'), pct = $('#ld-pct'), path = $('#ld-path'), cur = $('#ld-cursor');
+  const bars = $('#goo-bars'), cbars = $('#curtain-bars');
+  function makeBars(g, cols = 22, gap = 1200 / 22) {
+    let s = '';
+    for (let r = 0; r < 3; r++) for (let c = 0; c < cols; c++) {
+      if ((c * 7 + r * 3) % 5 === 0) continue;
+      const h = 90 + ((c * 37 + r * 53) % 110), x = c * gap + (r % 2 ? gap / 2 : 0) + 10, y = 40 + r * 190 + ((c * 13) % 40);
+      s += `<rect x="${x}" y="${y}" width="${16 + (c % 3) * 6}" height="${h}" rx="12" style="animation-delay:${((c + r) % 6) * 40}ms"/>`;
+    }
+    g.innerHTML = s;
+  }
+  makeBars(bars); makeBars(cbars);
+  loader.addEventListener('pointermove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
+  cur.style.left = '50%'; cur.style.top = '70%';
+  const segs = ['HTTPS://', 'AXO.EXEMPLE/', 'ARCHIVES/', 'GRD-14/', 'BASTION/', 'ONDE-C/', 'FICHIERS/', '43UK2L'];
+  let shown = '', loaded = 0;
+  const imgs = $$('img').slice(0, 6); imgs.forEach(i => i.complete ? loaded++ : i.addEventListener('load', () => loaded++, { once: true }) || i.addEventListener('error', () => loaded++, { once: true }));
+  const t0 = performance.now(), MIN = reduce ? 0 : 1800;
+  function loadTick(now) {
+    const timeP = clamp01((now - t0) / MIN), imgP = imgs.length ? loaded / imgs.length : 1;
+    const p = reduce ? 1 : Math.min(timeP, Math.max(imgP, timeP * .9 + (now - t0 > 4000 ? 1 : 0)));
+    loader.style.setProperty('--p', p);
+    pct.textContent = `▸▸ Chargement – ${Math.round(p * 100)}%`;
+    const want = Math.floor(p * segs.join('').length); const all = segs.join('');
+    if (shown.length < want) { shown = all.slice(0, want); path.textContent = shown; }
+    if (p < 1) requestAnimationFrame(loadTick); else finishLoad();
+  }
+  function finishLoad() {
+    if (reduce) { loader.classList.add('is-done'); ready(); return; }
+    loader.classList.add('is-merging');
+    setTimeout(() => { loader.classList.add('is-done'); ready(); }, 1700);
+  }
+  function ready() { document.body.classList.remove('is-loading'); document.body.classList.add('is-ready'); }
+  requestAnimationFrame(loadTick);
+
+  /* ── Son (bouton seulement, aucun son joué) ── */
+  $('#sound').addEventListener('click', e => { const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Couper le son' : 'Activer le son'); });
+
+  /* ── Menu ── */
+  const menu = $('#menu'), openBtns = [$('#open-menu'), ...$$('[data-open-menu]')];
+  function setMenu(open) {
+    document.body.classList.toggle('menu-open', open);
+    openBtns.forEach(b => b.setAttribute('aria-expanded', open));
+    if (open) { $$('.menu__link', menu).forEach((a, i) => setTimeout(() => scramble(a, 40, 2), 120 + i * 60)); setTimeout(() => $('.menu__link', menu).focus(), 80); }
+    else openBtns[0].focus({ preventScroll: true });
+  }
+  openBtns.forEach(b => b.addEventListener('click', () => setMenu(true)));
+  $$('[data-close-menu]').forEach(b => b.addEventListener('click', () => setMenu(false)));
+  $$('.menu__link', menu).forEach(a => { a.addEventListener('mouseenter', () => scramble(a, 40, 2)); a.addEventListener('click', () => setMenu(false)); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) setMenu(false); });
+
+  /* ── Éventail ── */
+  const fanPics = [
+    ['1499155286265-79a9dc9c6380', 'Le regard d’une femme dans une lumière rose', '#d7a9c9'],
+    ['1508179522353-11ba468c4a1c', 'Un homme derrière une vitre éclairée de néons', '#6f7f9e'],
+    ['1615276884890-2f2ffdab7b43', 'Un homme à lunettes dans une lumière bleue', '#7c8a86'],
+    ['1653443673814-a8d18180451f', 'Une femme dans une lumière colorée floue', '#a58fb4'],
+    ['1626775550407-c09be28b6053', 'Une femme en débardeur rouge', '#c58c7a'],
+    ['1548361403-cb0c785eea54', 'Une femme vêtue de noir dans une lumière colorée', '#5f5a73'],
+    ['1653443678403-5dcdda15f133', 'Une femme les yeux fermés, éclairée de bleu', '#7a96b8'],
+    ['1644353224392-7e532d7b8f4b', 'Un homme bras croisés sous un néon', '#4f4b5c'],
+    ['1653443688877-ff1d74f1e4a0', 'Une femme les yeux fermés dans une lumière rose', '#c79ab4'],
+    ['1653443658457-f78c48564f80', 'Un visage éclairé de violet', '#8d7fc4'],
+    ['1615276884890-2f2ffdab7b43', 'Un homme à lunettes, de profil', '#9aa79c'],
+  ];
+  const fan = $('#fan'); const shapes = ['f-a', 'f-b', 'f-c'];
+  fan.innerHTML = fanPics.map(([id, alt, bg], i) => `<figure class="planche ${shapes[i % 3]}" style="background:${bg}"><img src="https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=420&h=590&q=80" alt="${alt}" width="420" height="590" loading="lazy"></figure>`).join('');
+  const cards = $$('.planche', fan); let fanOffset = 0;
+  function layoutFan() {
+    const n = cards.length, mid = (n - 1) / 2, step = mobile() ? 26 : 7.6;
+    cards.forEach((c, i) => {
+      const k = ((i + fanOffset) % n + n) % n, d = k - mid, s = 1 - Math.abs(d) * .085;
+      c.style.transform = `translateX(calc(-50% + ${d * step}vw)) scale(${s})`;
+      c.style.zIndex = 100 - Math.round(Math.abs(d) * 10);
+    });
+  }
+  layoutFan();
+  if (!reduce) setInterval(() => { if (document.hidden) return; const r = fan.getBoundingClientRect(); if (r.top < innerHeight && r.bottom > 0) { fanOffset++; layoutFan(); } }, 2400);
+  addEventListener('resize', layoutFan);
+
+  /* ── Compteur ── */
+  const digits = $$('#counter .counter__digit b'); let counted = false;
+  function setCounter(v) { const s = v.padStart(3, '0'); digits.forEach((b, i) => { if (b.textContent !== s[i]) { b.style.transform = reduce ? 'none' : 'translateY(-100%)'; setTimeout(() => { b.style.transition = 'none'; b.textContent = s[i]; b.style.transform = reduce ? 'none' : 'translateY(100%)'; requestAnimationFrame(() => { b.style.transition = ''; b.style.transform = 'none'; }); }, reduce ? 0 : 400); } }); }
+
+  /* ── Nuage de points (canvas 2D) ── */
+  const cv = $('#points'), ctx = cv.getContext('2d');
+  function drawPoints(t) {
+    const w = cv.width = cv.clientWidth * devicePixelRatio, h = cv.height = cv.clientHeight * devicePixelRatio;
+    ctx.clearRect(0, 0, w, h); ctx.fillStyle = 'rgb(255 255 255 / .8)';
+    for (let y = 0; y < 26; y++) for (let x = 0; x < 70; x++) {
+      const u = x / 69, v = y / 25, z = Math.sin(u * 6 + t * .0006) * .18 + Math.cos(v * 5 + u * 3) * .12;
+      const px = (u * .9 + v * .1) * w, py = (v * .55 + .2 - z + u * .1) * h;
+      ctx.fillRect(px, py, 1.4 * devicePixelRatio, 1.4 * devicePixelRatio);
+    }
+  }
+
+  /* ── Boucle de défilement ── */
+  const heroMark = $('.hero__mark'), heroSec = $('#ouverture'), heroArt = $('#hero-art'), heroType = $('#hero-type'), heroPanel = $('#hero-panel'), tower = $('#p-tower');
+  const chapters = $$('.chapter'), planches = $$('.planche:not(#fan .planche)'), progressEl = $('#progress');
+  const navLinks = $$('[data-nav]'), navSecs = $$('[data-nav-id]'), artSecs = $$('[data-theme="art"]'), floatCards = $$('#float .planche');
+  const curtain = $('#curtain'); let curtainDone = false;
+  let lastY = scrollY, vel = 0;
+  const pinP = s => { const r = s.getBoundingClientRect(); return clamp01(-r.top / (r.height - innerHeight)); };
+  const snap = p => reduce ? (p < .5 ? 0 : 1) : p;
+
+  function tick(now) {
+    const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+    progressEl.style.setProperty('--p', max > 0 ? y / max : 0);
+
+    // vitesse amortie → planches qui se plient
+    vel = lerp(vel, Math.max(-60, Math.min(60, y - lastY)), .12); lastY = y;
+    if (!reduce) planches.forEach((p, i) => { if (p.closest('[data-chapter]') || p === heroArt) return; const side = i % 2 ? 1 : -1; p.style.transform = `perspective(900px) rotateX(${vel * -.07}deg) rotate(${vel * .02 * side}deg) skewY(${vel * .025}deg)`; });
+
+    // héros → planche
+    const hp = snap(clamp01(pinP(heroSec) * 1.5));
+    const fin = mobile() ? [55, 5, 6, 5] : [22, 37, 8, 36];       // inset final : haut, droite, bas, gauche (%)
+    heroArt.style.clipPath = `inset(${hp * fin[0]}% ${hp * fin[1]}% ${hp * fin[2]}% ${hp * fin[3]}% round ${hp * 16}px)`;
+    heroArt.style.transform = `rotate(${hp * -1.2}deg) skewY(${reduce ? 0 : vel * .02}deg)`;
+    heroType.style.opacity = 1 - clamp01(hp * 2.2);
+    heroMark.style.opacity = document.body.classList.contains('is-ready') ? 0 : 1;
+    heroPanel.style.clipPath = `polygon(0 0, ${hp * 112}% 0, ${hp * 100}% 100%, 0 100%)`;
+    tower.style.opacity = clamp01((hp - .6) / .4); tower.style.translate = `0 ${(1 - clamp01((hp - .6) / .4)) * 12}vh`;
+
+    // chapitres : petite planche → plein cadre → sortie en biais
+    chapters.forEach(ch => {
+      const p = snap(pinP(ch)), art = $('[data-chapter]', ch), grow = clamp01(p / .4), leave = clamp01((p - .78) / .22);
+      const sc = lerp(mobile() ? .8 : .42, 1, grow);                    // la planche grandit jusqu'au plein cadre
+      art.style.transform = `translateY(${leave * -45}%) rotate(${leave * -3.5 + (1 - grow) * 1.5}deg) skewY(${leave * 2}deg) scale(${sc})`;
+      $$('.scatter .planche', ch).forEach((s, i) => s.style.translate = `0 ${grow * (i ? 40 : -40)}vh`);
+      const cap = $('[data-cap]', ch); cap.style.opacity = clamp01((grow - .7) / .3) * (1 - leave);
+      cap.classList.add('on-art-local');
+      const words = $('[data-reveal]', cap).children, rp = reduce ? 1 : clamp01((p - .38) / .3);   // légende révélée pendant le plein cadre
+      for (let i = 0; i < words.length; i++) words[i].classList.toggle('is-on', i < Math.ceil(rp * words.length));
+    });
+
+    // parallaxe des illustrations HUD
+    if (!reduce) $$('[data-parallax]').forEach(img => { const s = img.closest('section'); img.style.transform = `translateY(${(pinP(s) - .5) * -8}%)`; });
+
+    // thème du cadre : sur illustration ?
+    const probe = 40;
+    const onArt = (pinP(heroSec) < .25 && heroSec.getBoundingClientRect().top <= probe) || artSecs.some(s => { const r = s.getBoundingClientRect(); return r.top <= probe && r.bottom > probe; }) ||
+      chapters.some(ch => { const r = ch.getBoundingClientRect(), p = pinP(ch); return r.top <= probe && r.bottom > probe && p > .35 && p < .8; });
+    document.body.classList.toggle('on-art', onArt);
+
+    // nav de section
+    let active = 'projet';
+    navSecs.forEach(s => { const r = s.getBoundingClientRect(); if (r.top <= innerHeight * .5 && r.bottom > innerHeight * .5) active = s.dataset.navId; });
+    navLinks.forEach(a => a.setAttribute('aria-current', a.dataset.nav === active ? 'true' : 'false'));
+
+    // rideau de barres à l'entrée de la collection
+    const col = $('#collection').getBoundingClientRect();
+    if (!curtainDone && !reduce && col.top < innerHeight * (mobile() ? .55 : 1.2)) { curtainDone = true; curtain.classList.add('is-on'); setTimeout(() => curtain.classList.remove('is-on'), 1450); }
+
+    // compteur
+    if (!counted && col.top < innerHeight * .4) { counted = true; setCounter('10K'); }
+
+    // cartes qui s'écrasent
+    const fr = $('#gardiens').getBoundingClientRect(), fp = clamp01((-fr.top) / (innerHeight * .8));
+    floatCards.forEach((c, i) => c.style.transform = `scaleX(${reduce ? 1 : 1 - fp * (1 - i * .1)}) rotate(${i % 2 ? 1 : -1}deg)`);
+
+    reveal();
+    if ($('#role').getBoundingClientRect().bottom > 0 && $('#role').getBoundingClientRect().top < innerHeight && !mobile()) drawPoints(now);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 })();
 </script>
 </body>

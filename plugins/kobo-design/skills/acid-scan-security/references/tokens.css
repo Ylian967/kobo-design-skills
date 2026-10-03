@@ -1,74 +1,87 @@
 /*
  * Acid Scan Security — tokens
- * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
- * Monochrome vert acide : tout (photo, texte, interface) vit sur une seule rampe du noir-vert au citron.
- * @contrast text:bg label:bg muted:bg dim:bg on-signal:signal on-signal:acid text:panel muted:panel text:glass text:glass-hi
- * @contrast text:deep muted:deep dim:deep danger:bg danger:deep acid:deep signal:bg
+ * Couleurs MESURÉES par échantillonnage des pixels de l'image du shot (3200×2400, voir source.md),
+ * tailles ESTIMÉES en ramenant la maquette à 1440px de large (1 px d'image = 0,5 px de maquette).
+ * Tout vit sur une seule rampe verte, du noir-vert au citron pâle, + un jaune « détection ».
+ * @contrast text:bg text-2:bg muted:bg dim:bg label:bg text:deep text-2:deep label:deep
+ * @contrast text:veil text-2:veil label:veil on-signal:signal on-signal:hot text:glass text:panel
+ * @contrast text:mid:large label:mid:large
  */
 :root {
-  /* Rampe duotone (photo → interface) */
-  --bg: #050c00;            /* noir-vert : fond, ombres de la photo */
-  --deep: #0a1a00;          /* bas de la rampe duotone */
-  --mid: #2fbf00;           /* vert moyen de la photo */
-  --acid: #b8ff5a;          /* hautes lumières de la photo, bouton plein */
-  --signal: #c8f000;        /* bande de scan sur les yeux, état actif */
-  --on-signal: #071200;     /* texte sur --signal ou --acid */
+  /* ---- Rampe verte (photo → interface) ---- */
+  --void: #000a00;          /* noir le plus profond (cheveux, ombres) — mesuré #000300…#001800 */
+  --bg: #021800;            /* fond des sections sous le héros */
+  --deep: #0a3e05;          /* carte CTA, moyenne mesurée de la carte « Start » */
+  --veil: #0d4a03;          /* zone assombrie derrière le texte du héros (écart : le shot met le texte sur --mid) */
+  --mid: #189000;           /* vert dominant du fond de la photo (couleur la plus fréquente mesurée) */
+  --hot: #2bab00;           /* vert le plus vif (bords lumineux, bande des yeux) */
+  --ghost: #481800;         /* frange rouge sombre du décalage RVB autour des cheveux (mesuré #301800…#481800) */
 
-  /* Texte */
-  --text: #d6ff9a;          /* titres et texte, citron pâle */
-  --label: #e0ff3a;         /* surtitres « CHIFFREMENT DE GRADE MILITAIRE » */
-  --muted: #8fbf5a;         /* texte secondaire, dernière ligne du titre */
-  --dim: #6f9a45;           /* métadonnées, numéros de ligne */
+  /* ---- Texte ---- */
+  --text: #ecffd0;          /* titre lignes 1–2 (mesuré jusqu'à #f4ffcb), nav */
+  --text-2: #c6ffa8;        /* paragraphe d'intro (mesuré #c6ffa8) */
+  --muted: #9de373;         /* 3e ligne du titre, plus éteinte (mesuré #9de373) */
+  --dim: #7fbf55;           /* métadonnées, numéros */
+  --label: #f2ff2c;         /* surtitre « grade militaire » jaune-citron (mesuré #ffff2c) */
 
-  /* Surfaces */
-  --panel: #0f2404;         /* carte CTA vert sombre */
-  --glass: #1d3a0a;         /* bouton « translucide » vert clair, valeur opaque équivalente */
-  --glass-hi: #2a4a12;      /* survol du bouton translucide */
-  --line: #2f5410;          /* réticule, filets, bordures de carte */
-  --line-hi: #6f9a45;       /* crochets d'angle, cadre de scan */
-  --danger: #ffcf3a;        /* alerte (jaune) — reste dans la famille chaude du citron */
+  /* ---- Détection ---- */
+  --signal: #f5ff4a;        /* carré jaune sur l'œil (mesuré #ffff4e) */
+  --on-signal: #021800;
+  --bracket: #afff78;       /* crochets d'angle de la carte CTA (mesuré #afff78) */
 
-  /* Trame */
-  --dot-size: 5px;          /* pas de la grille de points = taille d'un pixel de la photo */
-  --scanline: 3px;          /* pas des lignes de balayage */
-  --dot-opacity: 0.55;
+  /* ---- Surfaces ---- */
+  --panel: #002301;         /* bas du dégradé de la carte CTA (mesuré #002301) */
+  --glass: #3f6a34;         /* bouton « translucide » de la nav, équivalent opaque (shot ≈ #5f8654, éclairci par le fond) */
+  --glass-a: rgb(214 255 200 / 0.26);   /* le même, translucide, sur la photo */
+  --line: rgb(214 255 190 / 0.22);      /* réticule et filets sur la photo */
+  --line-solid: #2c5a1c;    /* filets sur fond sombre */
 
-  /* Typographie */
-  --font-display: 'Jersey 10', 'VT323', ui-monospace, monospace;   /* pixel haute et étroite */
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;          /* étiquettes, nav, boutons */
-  --font-body: 'Inter', system-ui, sans-serif;
-  --text-2xs: 0.6875rem;    /* 11px : nav, étiquettes */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 2rem;
-  --text-stat: clamp(2.5rem, 4.4vw, 4rem);
-  --text-hero: clamp(3rem, 6.6vw, 7rem);       /* titre pixel 3 lignes */
-  --leading-hero: 0.82;
-  --leading-body: 1.55;
-  --tracking-caps: 0.18em;
-  --tracking-display: 0.01em;
+  /* ---- Texture binaire (rangées de 0 et 1 sur la photo) ---- */
+  --bits-size: 7px;         /* corps des chiffres */
+  --bits-pitch: 9px;        /* pas des rangées */
+  --bits-opacity: 0.1;
+  --scanline: 3px;          /* lignes de balayage */
+  --rgb-shift: 6px;         /* décalage de la frange rouge */
 
-  /* Espace (base 4px) */
+  /* ---- Typographie ---- */
+  --font-pixel: 'VT323', 'Jersey 10', ui-monospace, monospace;   /* titre et surtitre : grotesque pixelisée fine */
+  --font-sans: 'Inter', system-ui, sans-serif;                    /* nav, paragraphe, boutons */
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;         /* console, coordonnées, journal */
+  --fs-hero: clamp(3.5rem, min(7.4vw, 13.5vh), 7.25rem);  /* ≈ 106px à 1440 (hauteur de capitale mesurée ≈ 75px) */
+  --lh-hero: 1;
+  --fs-label: clamp(1.5rem, 2.3vw, 2.125rem);  /* surtitre pixel ≈ 33px */
+  --lh-label: 0.9;
+  --fs-h2: clamp(2.75rem, 5.2vw, 5rem);
+  --fs-stat: clamp(3rem, 5.6vw, 5.5rem);
+  --fs-intro: clamp(1rem, 1.25vw, 1.125rem);   /* paragraphe ≈ 18px / 1.6 */
+  --fs-nav: 0.75rem;                            /* 12px, capitales */
+  --fs-small: 0.875rem;
+  --fs-mono: 0.75rem;
+  --tracking-nav: 0.14em;
+  --tracking-pixel: 0.01em;
+
+  /* ---- Grille (maquette 1440) ---- */
+  --edge: clamp(16px, 5.5vw, 80px);  /* marge gauche du logo et du titre ≈ 78px */
+  --nav-h: 72px;                      /* hauteur de la nav = hauteur du bouton plein bord */
+  --eye-y: 36%;                       /* hauteur du réticule horizontal (36 % du héros) */
+  --cta-size: 186px;                  /* carte CTA carrée */
+  --cta-gap: 14px;                    /* écart carte ↔ crochets */
+  --bracket-len: 32px;
+  --bracket-w: 1.5px;
+  --radius: 0;                        /* tout est carré */
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
-  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --edge: clamp(16px, 3vw, 40px);
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
   --container: 1320px;
 
-  /* Formes : tout est carré */
-  --radius: 0;
-  --bracket: 14px;          /* longueur des crochets d'angle */
-  --bracket-w: 1px;
-  --border: 1px solid var(--line);
-  --glow: 0 0 24px rgb(184 255 90 / 0.25);
-
-  /* Mouvement : mécanique, en pas */
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-step: steps(6, end);
+  /* ---- Mouvement (proposé : le shot est une image fixe) ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-step: steps(5, end);
   --dur-fast: 120ms;
-  --dur-base: 240ms;
+  --dur-base: 260ms;
   --dur-slow: 700ms;
-  --dur-scan: 3.2s;         /* passage de la ligne de scan */
-  --dur-blink: 1s;          /* curseur */
+  --dur-boot: 1600ms;       /* allumage CRT + journal d'amorçage */
+  --dur-scan: 1100ms;       /* bande qui descend se caler sur les yeux */
+  --dur-decode: 900ms;      /* décodage d'une ligne pixel */
+  --dur-blink: 1s;
 }

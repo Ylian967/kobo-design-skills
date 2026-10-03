@@ -1,78 +1,99 @@
 ---
 name: lore-frame-editorial
-description: Direction artistique « Lore Frame Editorial » pour sites de narration illustrée (univers de jeu, IP, bande dessinée, projet artistique), inspirée des sites primés qui racontent un monde chapitre par chapitre. Cadre fin qui entoure tout l'écran, rail latéral avec une étoile-boussole, manifeste en grotesque géante très serrée, micro-labels en monospace, pages éditoriales blanches qui alternent avec des illustrations plein cadre, vignettes à coin coupé, logo tracé à la main au chargement. À utiliser pour une landing d'univers, un lore, une présentation de factions/personnages, un portfolio d'illustrateur ou une app de lecture au style « éditorial, narratif, art de concept ».
+description: Direction artistique « Lore Frame Editorial » pour raconter un univers illustré (jeu, licence, collection de personnages, projet artistique, NFT, bande dessinée), inspirée des sites primés qui se lisent comme un dossier d'archives. Tout vit dans un cadre fixe à coins de 10px avec rail gauche (menu, étoile-réticule, son) et barre de progression ; phrases-chapitres énormes en grotesque 650 très serrée révélées mot à mot ; mots géants en police hexagonale ; micro-labels mono qui se décodent lettre par lettre ; images en planches à onglet de dossier qui se plient au défilement et grandissent jusqu'au plein cadre ; chargement façon terminal et logo qui fond comme du liquide ; menu noir à mot actif citron ; section lavande avec éventail de portraits ; pied noir avec logo géant. À utiliser pour une landing d'univers, un lore, une présentation de factions ou de personnages, une collection, une page équipe ou un portfolio d'illustrateur au style « archive, terminal, art de concept, éditorial ».
 ---
 
 # Lore Frame Editorial
 
-> Un livre d'art qu'on feuillette à l'écran : un cadre fin, des titres énormes et serrés, et l'illustration qui prend toute la place quand l'histoire l'exige.
+> On ouvre les archives d'un monde : un terminal charge les fichiers, puis chaque dossier s'ouvre en grand, illustration après illustration.
 
 ## L'idée
 
-Toute la page est **encadrée** par un filet fin (inset 16px) avec un **rail à gauche** (une étoile-boussole, un numéro de chapitre) et une navigation minuscule en haut. Deux registres alternent : **chapitres illustrés** plein cadre (une image, un manifeste en grotesque géante blanche) et **pages éditoriales** blanches (titre noir serré, un paragraphe court en bas, des vignettes à coin coupé disposées librement comme sur une planche). Les métadonnées vivent en **monospace minuscule** (`// INITIALISATION`, `01 K`, `SCROLL`).
+Trois couches qui ne se mélangent jamais :
+1. **Le cadre** — un terminal posé sur l'écran : filet fin, coins de 10px, rail à gauche, barre en haut avec la progression et la nav de section. Il ne bouge pas, il change seulement de couleur (noir sur blanc, blanc sur illustration).
+2. **La voix** — des **phrases énormes et serrées** (Inter Tight 650, −0.07em, capitales) qui se révèlent mot à mot, des **mots géants hexagonaux**, et tout le reste en **mono minuscule** qui se décode.
+3. **Les archives** — des illustrations très colorées présentées comme des **planches en forme de dossier** (coins arrondis, onglet, coin coupé), qui se plient quand on défile et s'ouvrent en plein cadre pour les chapitres.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de logo, de personnages, d'illustrations ni de noms de l'univers d'origine.
+Le mouvement est la moitié du style : sans les animations de `references/motion.md`, la page est ratée.
+
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : ni le logo, ni les personnages, ni les noms, ni les textes de la référence.
 
 ## Règles prioritaires
 
-1. **Le cadre est permanent** : filet fin autour de l'écran, rail gauche, nav en haut ; il passe en blanc translucide sur les chapitres sombres.
-2. **Grotesque géante et serrée** (900, -0.055em, interligne 0.86) pour 1 à 3 lignes maximum par écran. Tout le reste est petit.
-3. **Mono minuscule** pour les labels, numéros, navigation (10–12px, capitales, +0.04em).
-4. **Illustration = chapitre** : pleine page, texte posé dessus en blanc ; jamais d'illustration réduite en vignette carrée banale (les vignettes ont un coin coupé).
-5. **Espace blanc assumé** sur les pages éditoriales : un titre en haut, un paragraphe en bas à gauche, des images dispersées.
-6. **Contraste** : noir sur blanc, blanc sur `--ink` ; le violet `--accent` porte du texte blanc (5,2:1).
-7. **Accessibilité** : la narration au défilement reste lisible sans animation ; les images ont des descriptions.
-8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
+1. **Le cadre est toujours là** : marge 20px, rail 67px, barre 51px, coins 10px, filets 1px ; il s'inverse sur les illustrations.
+2. **Deux tailles seulement** : énorme (phrases, manifeste, mots hexagonaux, menu) ou minuscule (mono 10–14px, paragraphes 14px). Rien entre les deux.
+3. **Capitales serrées** pour toute la grande typo ; la première ligne d'une phrase-chapitre est **indentée** après son index « ■ 001 ».
+4. **Images = planches de dossier**, jamais de rectangle simple ; couleurs vives, dominante lavande.
+5. **Tout texte mono se décode**, toute phrase-chapitre se révèle, tout petit paragraphe se tape.
+6. **Sections collantes** : chaque étape occupe 1,5 à 3 écrans de défilement.
+7. **Couleurs d'interface** : noir, blanc, gris clair, **lavande** (section collection) et **citron** (seulement la page active du menu).
+8. **Accessibilité** : vrai texte dans `aria-label` pour tout ce qui se décode ou se tape ; `prefers-reduced-motion` affiche tout à l'état final ; menu au clavier (Échap ferme) ; contrastes de `tokens.css`.
+9. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Cadre et rail, étoile-boussole, nav mono, manifeste géant, vignette à coin coupé, logo tracé, terminal « initialisation ». Puis, mesurés sur le site : écran « RESIZE », échelle fluide, libellés doublés, texte qui se décode, index du manifeste. |
-| `references/layouts.md` | Ouverture, chapitre illustré, page éditoriale, factions, mobile. |
-| `references/motion.md` | Tracé du logo, révélations au défilement, parallaxe des vignettes. |
-| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, teinte violette, sources, prompts IA, idée 3D. |
-| `examples/demo.html` | Page d'exemple complète. |
-| `source.md` | Observations et écarts. |
+| `references/tokens.css` | Toujours, en premier : couleurs, échelle fluide, cadre, courbes (mesurés). |
+| `references/motion.md` | **Toujours** : les 9 mouvements signature et leur code (chargement, fusion du logo, décodage, révélation, frappe, planches pliées, héros → planche, chapitre plein cadre, menu). |
+| `references/components.md` | Cadre, bouton à coin coupé, label mono, phrase-chapitre, manifeste, planche de dossier, chapitre plein cadre, grille HUD, rideau de barres, compteur vertical, éventail, fiche objet à règle, mot-titre, menu, pied, grille d'équipe, galerie. |
+| `references/layouts.md` | Ordre de l'accueil (10 sections), pages internes (À propos, Galerie, Journal, Média, Protocole), grilles à filets, mobile. |
+| `references/assets.md` | Avant de placer une image : familles d'images, emplacements, sources, prompts IA, option WebGL. |
+| `examples/demo.html` | Accueil complet avec toutes les animations. |
+| `source.md` | Ce qui a été mesuré / observé sur la référence, et les écarts. |
 
 ## Typographie
 
-| Rôle | Police | Réglages |
+| Rôle | Police (Google Fonts) | Réglages |
 |---|---|---|
-| Manifeste, titres | **Inter Tight** 900 (ABC Whyte Plus d'origine, payante, variable) | capitales, -0.055em, interligne 0.86 ; phrases-chapitres mesurées à 3.25vw graisse 650 |
-| Grands numéros, mot-titre | **Tektur** 700 (Hexaframe d'origine, payante) | 19–26vw, capitales |
-| Labels, nav, numéros | **IBM Plex Mono** 400/500 | 10–12px, capitales, +0.04em |
-| Paragraphes | Inter Tight 500 | 13–14px, interligne 1.4, colonne 260px |
+| Phrases-chapitres, manifeste, menu | **Inter Tight** 650 (site : ABC Whyte Plus) | capitales ; 3.25vw / 8.85vw / 4vw ; interligne 0.9 / 0.84 / 0.85 ; −0.07em (manifeste −0.094em) |
+| Mots géants, compteur, logo | **Tektur** 700 (site : Hexaframe) | 18–19vw, interligne 0.8, −0.1em |
+| Labels, nav, pied, boutons | **IBM Plex Mono** 400 / 450 / 600 | 10–14px, capitales, −0.04em |
+| Paragraphes | Inter Tight 400–500 | 14px / 1.3 (site 13.5px) ; légendes de chapitre 18.9px centrées |
+
+## Couleurs
+
+| Rôle | Token |
+|---|---|
+| Fond éditorial / texte | `--paper` / `--ink` |
+| Nav inactive, texte secondaire | `--muted` (sur blanc), `--on-dark-muted` (sur noir) |
+| Progression, fonds gris | `--panel` |
+| Section collection, équipe | `--lavender` (texte `--ink`) |
+| Page active du menu | `--lime` (texte `--ink`) |
+| Mot non révélé | `--reveal-from` / `--reveal-from-dark` |
+| Filets | `--line-dark` / `--line-light` |
 
 ## Images et 3D
 
-Les chapitres et les vignettes portent de **vraies images** : art de concept du projet, ou photos nocturnes (masque, ville de nuit, rues au néon) toutes teintées vers le violet `--accent` et assombries en bas pour porter le texte blanc. Le cadre, l'étoile-boussole, le glyphe et le logo tracé restent en SVG, car ce sont des signes ; mais jamais de dessin CSS/SVG à la place d'une photo, d'un personnage, d'un lieu ou d'un objet. La 3D est optionnelle (maquette de ville pour « Le monde »). Détails, prompts et code dans `references/assets.md`.
+De **vraies images** très colorées : portraits de personnages sur fond uni et panoramas peints du monde (couchant rose-orange, violet, lavande), plus quelques objets isolés. Présentées en **planches de dossier** ; jamais de dessin CSS/SVG à la place d'un personnage, d'un lieu ou d'un objet. Le cadre, l'étoile, le rideau de barres, la règle et le logo sont des signes et restent en SVG. WebGL optionnel pour plier les planches. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le cadre + l'étoile-boussole** : le filet qui entoure l'écran et la petite étoile à 4 branches sur le rail gauche, qui tourne de 45° à chaque changement de chapitre.
+**Le cadre-terminal + la planche de dossier qui s'ouvre** : un écran encadré qui charge comme un terminal, puis des illustrations en forme de dossier qui se plient et s'agrandissent jusqu'au plein cadre.
 
 ## À éviter
 
-- Des cartes arrondies, des ombres, des dégradés d'interface : le décor vient des illustrations.
-- Des titres moyens (24–40px) en série : soit géant, soit minuscule.
-- Centrer les paragraphes ou les élargir.
-- Utiliser les illustrations, noms ou logo de la référence.
+- Des images rectangulaires simples, des ombres portées, des cartes à coins réguliers.
+- Des tailles moyennes (24–40px) : soit énorme, soit minuscule.
+- Des images ternes ou nocturnes uniformes : la référence est lumineuse et colorée.
+- Du citron ailleurs que sur la page active du menu.
+- Une page sans mouvement, ou des animations décoratives non liées au défilement.
+- Le logo, les personnages, les noms ou les textes de la référence.
 
 ## Adaptation React / React Native
 
-- Cadre : `View` absolue avec `borderWidth: StyleSheet.hairlineWidth` et `pointerEvents="none"`.
-- Coin coupé : masque SVG (`react-native-svg` `ClipPath`) sur l'image.
-- Inter Tight et IBM Plex Mono : `@expo-google-fonts/inter-tight`, `@expo-google-fonts/ibm-plex-mono`.
-- Chapitres : `FlatList` paginée verticale (`pagingEnabled`).
+- Cadre : composant `Frame` fixe ; React Native : `View` absolue `pointerEvents="box-none"`.
+- Révélation, décodage, frappe : hooks `useInView` + `requestAnimationFrame` ; React Native : `react-native-reanimated` (`useAnimatedScrollHandler`).
+- Planche de dossier : `clipPath` SVG en `objectBoundingBox` ; React Native : `MaskedView` + `react-native-svg`.
+- Polices : `@expo-google-fonts/inter-tight`, `@expo-google-fonts/tektur`, `@expo-google-fonts/ibm-plex-mono`.
 
 ## Avant de livrer
 
-- [ ] Cadre et rail présents sur tous les écrans.
-- [ ] Titres géants serrés, tout le reste petit.
-- [ ] Labels en mono.
-- [ ] Illustrations en plein cadre ou en vignettes à coin coupé.
-- [ ] Testé à 375px et 1440px, mouvement réduit respecté.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
+- [ ] Tokens importés, aucune valeur en dur.
+- [ ] Cadre complet (rail, barre, progression, nav de section active, inversion sur illustration).
+- [ ] Les 9 mouvements de `motion.md` présents là où la page en a besoin, et coupés en mouvement réduit.
+- [ ] Toutes les images en planches de dossier, colorées, avec `alt` et couleur de repli.
+- [ ] Texte réel accessible pour tout ce qui se décode ou se tape.
+- [ ] Testé à 375px et 1440px, sans débordement horizontal.
+- [ ] Contrastes vérifiés (`python3 tools/check.py lore-frame-editorial`).
 - [ ] Aucun élément de l'univers d'origine.
