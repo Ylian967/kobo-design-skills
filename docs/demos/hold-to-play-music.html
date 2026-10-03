@@ -1,120 +1,366 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dix Ans de Bruit — Hold To Play Music (démo)</title>
+<title>Persistance — dix ans du label Minuit Dix</title>
+<meta name="description" content="Démo du style Hold To Play Music : rétrospective interactive d'un label fictif.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@900&family=Figtree:wght@200;400;500;700&family=Inconsolata:wght@400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&family=Inconsolata&family=Londrina+Solid:wght@900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #111111; --paper: #ffffff; --ink: #111111; --text: #ffffff; --muted: #a7a7a7; --blue: #2779a7; --blue-light: #4a90c8; --orange: #e47839; --blue-klein: #002fa7; --veil: rgb(17 17 17 / 0.55);
-  --font-brush: 'Londrina Solid', 'Permanent Marker', sans-serif; --font-ui: 'Figtree', 'Fira Sans', system-ui, sans-serif; --font-mono: 'Inconsolata', 'Fira Mono', ui-monospace, monospace;
-  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-logo: clamp(3.5rem, 10vw, 9rem);
-  --edge: 20px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
-  --key-radius: 22px; --key-depth: 4px; --hold: 1200ms; --ease: cubic-bezier(0.6, 0, 0.2, 1); --dur-fast: 200ms; --dur: 700ms;
+  --bg: #000000; --paper: #ffffff; --white: #ffffff; --ink: #383838; --orange: #e47839; --hot: #ff6600; --klein: #002fa7; --grey: #858585; --pale: #bababa;
+  --orange-ink: #b4541a; --veil: rgb(0 0 0 / 0.45); --veil-strong: rgb(0 0 0 / 0.86); --ghost: rgb(255 255 255 / 0.4); --font-paint: 'Londrina Solid', 'Impact', sans-serif;
+  --font-ui: 'Figtree', system-ui, sans-serif; --font-mono: 'Inconsolata', ui-monospace, monospace; --w-thin: 300; --fs-paint: clamp(3.1rem, 9vw, 8.2rem);
+  --paint-tall: 1.9; --fs-artist: 2.375rem; --fs-credit: 2.875rem; --fs-say: 1.25rem; --lh-say: 3rem; --fs-key: 1.0625rem; --fs-tag: 0.894rem; --fs-mono: 0.8125rem;
+  --fs-mono-s: 0.75rem; --edge: clamp(16px, 2.1vw, 30px); --key-w: 140px; --key-h: 48px; --key-line: 1.6px; --cover: 150px; --cover-big: 424px; --foot-y: 44px;
+  --ease-snap: cubic-bezier(1, 0, 0, 1); --ease-slide: cubic-bezier(0.77, 0, 0.175, 1); --ease-push: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-soft: cubic-bezier(0.645, 0.045, 0.355, 1); --dur-blink: 100ms; --dur-fade: 300ms; --dur-snap: 500ms; --dur-slide: 700ms; --dur-push: 1000ms; --hold: 1500ms;
+  --zap: 180ms; --cut: 2000ms;
 }
-* { box-sizing: border-box; }
-html, body { height: 100%; overflow: hidden; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 500 var(--text-sm)/1.4 var(--font-ui); }
-button { font: inherit; }
-:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
-.screen { position: fixed; inset: 0; transition: opacity var(--dur) var(--ease); }
-.screen[hidden] { display: block !important; opacity: 0; pointer-events: none; }
-/* Triptyque N&B : photos aujourd'hui, <video muted loop playsinline> demain (même classe, même filtre) */
-.bw { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--bg); }
-img { color: transparent; } /* pas de texte alt visible si l'image ne charge pas : le fond token prend le relais */
-.bw figure { position: relative; margin: 0; overflow: hidden; background: var(--bg); }
-.bw figure + figure { border-left: 1px solid var(--bg); }
-.bw img, .bw video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(.9); }
-.bw::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .18; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"); }
-.bw::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--veil); }
-.label-logo { position: absolute; left: 50%; top: var(--space-6); translate: -50% 0; text-align: center; font: 900 1.6rem/1 var(--font-brush); filter: url(#brush); }
-.label-logo small { display: block; font: 500 var(--text-2xs) var(--font-ui); filter: none; margin-top: 4px; color: var(--muted); }
-.title { position: absolute; left: 50%; top: 46%; translate: -50% -50%; margin: 0; text-align: center; }
-.brush { display: block; font: 900 var(--text-logo)/0.9 var(--font-brush); filter: url(#brush); letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
-.brush span { display: inline-block; animation: hop 400ms var(--ease) both; animation-delay: calc(var(--i) * 60ms); }
-.brush span:nth-child(3n+1) { color: var(--blue); } .brush span:nth-child(3n+2) { color: var(--orange); } .brush span:nth-child(3n) { color: var(--text); }
-.title small { display: block; margin-top: var(--space-4); font: 500 var(--text-xs) var(--font-ui); color: var(--muted); }
-.hold { position: fixed; left: 0; right: 0; bottom: 64px; z-index: 5; margin: 0; display: flex; justify-content: center; align-items: center; gap: var(--space-3); font: 700 var(--text-lg) var(--font-ui); flex-wrap: wrap; padding: 0 var(--space-4); text-align: center; transition: color var(--dur) var(--ease); }
-.key { position: relative; min-width: 140px; min-height: 44px; padding: 0 24px; border-radius: var(--key-radius); border: 2px solid currentColor; background: var(--paper); color: var(--ink); box-shadow: 0 var(--key-depth) 0 var(--text); overflow: hidden; font: 500 var(--text-sm) var(--font-ui); cursor: pointer; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); touch-action: none; user-select: none; }
-.key.is-held { transform: translateY(var(--key-depth)); box-shadow: 0 0 0 var(--text); }
-.key__fill { position: absolute; inset: 0; background: var(--orange); transform-origin: left; transform: scaleX(var(--p, 0)); }
-.key__label { position: relative; }
-/* Artiste */
-.artist { background: var(--paper); color: var(--ink); }
-/* Portrait en contre-jour : photo N&B très contrastée, multipliée sur le papier blanc, bords fondus */
-.portrait { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: min(46vw, 420px); aspect-ratio: 4/5; margin: 0; background: var(--paper); /* repli : papier (le multiply a besoin du blanc dessous) */
-  -webkit-mask-image: radial-gradient(75% 85% at 50% 60%, black 55%, transparent 100%); mask-image: radial-gradient(75% 85% at 50% 60%, black 55%, transparent 100%); }
-.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.8) brightness(.85); mix-blend-mode: multiply; transition: opacity var(--dur) var(--ease); }
-.tl-logo { position: absolute; left: var(--edge); top: var(--edge); font: 900 1.4rem/1 var(--font-brush); filter: url(#brush); }
-.tr-title { position: absolute; right: var(--edge); top: var(--edge); font: 900 1.2rem/1 var(--font-brush); filter: url(#brush); text-transform: uppercase; }
-.card { position: absolute; left: var(--edge); bottom: 60px; display: grid; gap: var(--space-3); }
-.cover { width: 90px; aspect-ratio: 1; margin: 0; overflow: hidden; background: var(--ink); }
-.cover img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.2); }
-.card p { margin: 0; display: flex; align-items: center; gap: var(--space-3); font: 700 var(--text-sm) var(--font-ui); }
-.card u { text-underline-offset: 3px; }
-.round { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid currentColor; display: grid; place-items: center; background: none; color: inherit; cursor: pointer; }
-body.on-paper .hold { color: var(--ink); }
-body.on-paper .key { box-shadow: 0 var(--key-depth) 0 var(--ink); }
-.help { position: fixed; right: var(--edge); bottom: 60px; z-index: 5; background: none; border: 0; color: inherit; font: 700 var(--text-sm) var(--font-ui); cursor: pointer; min-height: 44px; }
-body.on-paper .help, body.on-paper footer { color: var(--ink); }
-footer { position: fixed; left: var(--edge); right: var(--edge); bottom: var(--space-4); z-index: 5; display: flex; justify-content: space-between; gap: var(--space-4); font: 400 var(--text-2xs) var(--font-mono); color: var(--text); flex-wrap: wrap; }
-footer a { color: inherit; text-decoration: none; }
-.flash { position: fixed; inset: 0; z-index: 20; background: var(--paper); opacity: 0; pointer-events: none; }
-.flash.go { animation: flash var(--dur) var(--ease); }
-@keyframes hop { from { transform: scale(.8); opacity: 0; } }
-@keyframes flash { 40% { opacity: .8; } }
-@media (max-width: 700px) { .hold { bottom: 80px; font-size: var(--text-base); } .key { min-height: 56px; } .cover { width: 64px; } .card { bottom: 150px; } .help { display: none; } .brush { font-size: 17vw; white-space: normal; } .title { width: calc(100% - 32px); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; overflow: hidden; background: var(--bg); color: var(--white); font: 400 var(--fs-say)/1.35 var(--font-ui); -webkit-font-smoothing: antialiased; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--hot); outline-offset: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.mono { font: 400 var(--fs-mono)/1.25 var(--font-mono); }
+.fill { position: absolute; inset: 0; }
+
+/* ---------- Plans photo : coupes franches, jamais de fondu ---------- */
+.shots { position: fixed; inset: 0; background: var(--bg); }
+.shots img { position: absolute; inset: 0; visibility: hidden; }
+.shots img.show { visibility: visible; }
+.shots::after { content: ""; position: absolute; inset: 0; background: var(--veil); transition: opacity var(--dur-snap) var(--ease-snap); }
+.lit .shots::after, .zap .shots::after { opacity: 0.35; }
+/* grain : une tuile de bruit tirée une fois, fixe (l'animer redessinait tout l'écran à chaque image) */
+.grain { position: fixed; inset: 0; opacity: 0.16; pointer-events: none; }
+
+/* ---------- Coins ---------- */
+.label { position: fixed; z-index: 5; top: var(--edge); left: var(--edge); display: grid; justify-items: center; gap: 2px; text-decoration: none; }
+.label svg { width: 34px; height: 44px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.label b { font: 900 1.25rem/1 var(--font-paint); letter-spacing: 0.02em; text-transform: uppercase; }
+.mini { position: fixed; z-index: 5; top: var(--edge); right: var(--edge); font: 900 1.5rem/1 var(--font-paint); text-transform: uppercase; opacity: 0; transition: opacity var(--dur-snap) var(--ease-snap); }
+[data-view="artist"] .mini { opacity: 1; }
+.foot { position: fixed; z-index: 5; left: var(--edge); right: var(--edge); bottom: calc(var(--foot-y) - 30px); display: flex; justify-content: space-between; gap: 20px; }
+.foot ul { display: flex; gap: 18px; }
+.foot a, .foot button { display: inline-block; padding: 8px 0; text-decoration: none; transition: color var(--dur-snap) var(--ease-snap); }
+.foot a:hover, .foot button:hover { color: var(--orange); }
+.foot .soft { color: var(--pale); }
+
+/* ---------- Écran blanc d'ouverture ---------- */
+.intro { position: fixed; inset: 0; z-index: 20; display: grid; align-content: center; justify-items: center; gap: 34px; padding: 0 var(--edge) 8vh; background: var(--paper); color: var(--ink); text-align: center; transition: opacity var(--dur-fade) var(--ease-soft), visibility 0s var(--dur-fade); }
+.intro .label { position: static; }
+.intro .icons { display: flex; gap: 10px; }
+.intro .icons svg { width: 40px; height: 40px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.intro p { max-width: 36em; font-size: 0.9375rem; font-weight: 600; line-height: 1.5; }
+.intro .o { color: var(--orange-ink); }
+.intro .k { color: var(--klein); }
+.intro button { font-weight: 600; text-decoration: underline; text-underline-offset: 4px; padding: 12px; }
+.started .intro { opacity: 0; visibility: hidden; }
+
+/* ---------- Mot peint ---------- */
+.center { position: fixed; inset: 0; z-index: 3; display: grid; align-content: center; justify-items: center; padding: 0 var(--edge) 6vh; text-align: center; }
+.presents { color: var(--grey); font: 400 var(--fs-mono-s)/1.3 var(--font-mono); margin-bottom: 1.5vh; }
+.paint { display: flex; justify-content: center; padding-block: 0.52em; font: 900 var(--fs-paint)/0.86 var(--font-paint); text-transform: uppercase; user-select: none; }
+.paint.rough { filter: url(#rough); will-change: transform; }
+.paint span { display: inline-block; transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(var(--sx), var(--sy)); transition: transform 900ms var(--ease-slide), color var(--dur-snap) var(--ease-snap); transition-delay: calc(var(--i) * 45ms), 0s; }
+.started .paint span { transform: rotate(var(--tilt)) scaleY(var(--tall)); }
+.paint .k { color: var(--klein); }
+.paint .o { color: var(--orange); }
+.zap .paint span, [data-view="artist"] .paint span { color: var(--white); }
+.tag { margin-top: 3.4vh; font-size: var(--fs-tag); font-weight: var(--w-thin); }
+[data-view="artist"] .home-only { display: none; }
+
+/* ---------- Consigne et touche ---------- */
+.say { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 14px; margin-top: 5.2vh; font-size: var(--fs-say); font-weight: 600; line-height: var(--lh-say); }
+.say.bottom { position: fixed; z-index: 4; left: 0; right: 0; bottom: calc(var(--foot-y) + 26px); margin: 0; }
+.key { position: relative; display: inline-grid; place-items: center; width: var(--key-w); height: var(--key-h); border-radius: 999px; font-size: var(--fs-key); font-weight: var(--w-thin); touch-action: none; user-select: none; -webkit-user-select: none; transition: color var(--dur-blink) linear; }
+.key svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; fill: none; stroke-width: var(--key-line); }
+.key .track { stroke: currentColor; }
+.key .fill-line { stroke: var(--hot); stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset var(--dur-fade) var(--ease-soft); }
+.holding .key .fill-line { stroke-dashoffset: 0; transition: stroke-dashoffset var(--hold) linear; }
+.ready .key { color: var(--hot); }
+.say .when-ready, .ready .say .when-idle { display: none; }
+.ready .say .when-ready { display: inline; }
+.say[hidden] { display: none; }
+.say.bottom { pointer-events: none; }
+.say.bottom .key { pointer-events: auto; }
+.skip { display: block; margin: 6px auto 0; padding: 10px; color: var(--pale); font: 400 var(--fs-mono)/1 var(--font-mono); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Page d'artiste ---------- */
+.artist { position: fixed; inset: 0; z-index: 3; display: none; place-items: center; padding: 0 var(--edge); text-align: center; pointer-events: none; }
+[data-view="artist"] .artist { display: grid; }
+[data-view="artist"] .center { display: none; }
+.artist > * { grid-area: 1 / 1; opacity: 0; transition: opacity var(--dur-snap) var(--ease-snap); }
+.artist [data-step].on { opacity: 1; }
+.artist h2 { font: 600 var(--fs-artist)/1.1 var(--font-ui); }
+.hint { display: inline-flex; align-items: center; gap: 10px; padding: 12px 14px; font-size: 0.875rem; font-weight: 600; pointer-events: auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+.hint u { text-underline-offset: 4px; }
+.hint kbd { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; box-shadow: inset 0 0 0 var(--key-line) currentColor; font: 600 0.875rem var(--font-ui); animation: blink 0.9s steps(2) infinite; }
+@keyframes blink { 50% { color: var(--hot); } }
+.lit .hint { opacity: 0 !important; }
+.bar { position: fixed; z-index: 4; left: var(--edge); right: var(--edge); bottom: calc(var(--foot-y) + 26px); display: none; align-items: flex-end; justify-content: space-between; pointer-events: none; }
+[data-view="artist"] .bar.on { display: flex; }
+.bar > * { pointer-events: auto; }
+.sleeve { display: grid; gap: 12px; justify-items: start; text-align: left; animation: push var(--dur-push) var(--ease-push) both; }
+@keyframes push { from { transform: translateY(40px); opacity: 0; } }
+.sleeve .pic { width: var(--cover); height: var(--cover); }
+.sleeve span { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.sleeve i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; box-shadow: inset 0 0 0 var(--key-line) currentColor; }
+.sleeve i svg, .help-btn svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.help-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 600; }
+
+/* ---------- Pochette ouverte et aide ---------- */
+.sheet { position: fixed; inset: 0; z-index: 30; display: grid; grid-template-columns: auto minmax(0, 420px); align-content: center; justify-content: center; align-items: center; gap: clamp(24px, 5vw, 80px); padding: var(--edge); background: var(--veil-strong); visibility: hidden; opacity: 0; transition: opacity var(--dur-fade) var(--ease-soft), visibility 0s var(--dur-fade); }
+.sheet.open { visibility: visible; opacity: 1; transition-delay: 0s; }
+.sheet .pic { width: min(var(--cover-big), 70vw); aspect-ratio: 1; transform: translateX(-60px); transition: transform var(--dur-slide) var(--ease-slide); }
+.sheet.open .pic { transform: none; }
+.sheet h2 { font: 600 var(--fs-artist)/1.1 var(--font-ui); margin-bottom: 8px; }
+.sheet .year { color: var(--orange); font-weight: 600; margin-bottom: 28px; }
+.sheet li { display: flex; justify-content: space-between; gap: 20px; padding: 11px 0; border-top: 1px solid var(--ghost); font-size: 1rem; }
+.sheet li span { color: var(--pale); font-family: var(--font-mono); }
+.sheet dl { display: grid; grid-template-columns: auto 1fr; gap: 16px 24px; margin: 28px 0 0; align-items: center; font-size: 1rem; }
+.sheet dt { justify-self: start; }
+.sheet dd { margin: 0; }
+.sheet kbd { display: inline-grid; place-items: center; min-width: 34px; height: 34px; padding: 0 12px; border-radius: 999px; box-shadow: inset 0 0 0 var(--key-line) currentColor; font: var(--w-thin) 0.9375rem var(--font-ui); }
+.close { position: absolute; top: var(--edge); right: var(--edge); min-height: 44px; padding: 0 6px; font: 400 var(--fs-mono)/1 var(--font-mono); text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  .say { font-size: 1.0625rem; line-height: 2.2rem; gap: 6px 10px; }
+  .say.bottom { bottom: calc(var(--foot-y) + 16px); padding: 0 var(--edge); }
+  .foot { font-size: 0.75rem; }
+  .foot .wide { display: none; }
+  .bar { bottom: calc(var(--foot-y) + 150px); }
+  .sleeve { --cover: 92px; }
+  .help-btn span { display: none; }
+  .artist h2 { font-size: 1.75rem; }
+  .sheet { grid-template-columns: 1fr; justify-items: center; align-content: start; overflow-y: auto; padding-top: 70px; }
+  .sheet > div { width: 100%; }
+  .intro p { font-size: 0.875rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .paint span { transform: rotate(var(--tilt)) scaleY(var(--tall)); }
+}
 </style>
 </head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="brush"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter></svg>
+<body data-view="home">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- bords irréguliers du lettrage, posés une fois les lettres en place -->
+  <filter id="rough" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.035 0.12" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <symbol id="mark" viewBox="0 0 34 44"><path d="M11 3l4 9M23 3l-4 9"/><rect x="6" y="12" width="22" height="20" rx="7"/><circle cx="13" cy="20" r="2.200"/><circle cx="21" cy="20" r="2.200"/><path d="M12 26.500h10M10 37h14M8 41h18"/></symbol>
+</svg>
 
-<section class="screen home" id="home" aria-label="Accueil">
-  <!-- Triptyque : chaque <img> peut être remplacée par
-       <video muted loop playsinline autoplay preload="metadata" poster="…jpg"><source src="clip.webm" type="video/webm"><source src="clip.mp4" type="video/mp4"></video>
-       (voir references/assets.md § 4) -->
-  <div class="bw" data-slot="bw-video">
-    <figure><img src="https://images.unsplash.com/photo-1621450698168-4ec4fa1dcf52?auto=format&fit=crop&w=800&h=1400&q=80" width="800" height="1400" alt="Guitariste assis, photo noir et blanc" fetchpriority="high"></figure>
-    <figure><img src="https://images.unsplash.com/photo-1659150140178-d672b4763fd0?auto=format&fit=crop&w=800&h=1400&q=80" width="800" height="1400" alt="Musicien éclairé par une lumière dure, noir et blanc" fetchpriority="high"></figure>
-    <figure><img src="https://images.unsplash.com/photo-1470019693664-1d202d2c0907?auto=format&fit=crop&w=800&h=1400&q=80" width="800" height="1400" alt="Clavier de piano en noir et blanc" fetchpriority="high"></figure>
+<div class="shots" id="shots" aria-hidden="true"></div>
+<div class="grain" id="grain" aria-hidden="true"></div>
+
+<a class="label" href="#" aria-label="Minuit Dix, accueil" id="homeLink"><svg aria-hidden="true"><use href="#mark"/></svg><b>Minuit Dix</b></a>
+<p class="mini" aria-hidden="true">Persistance</p>
+
+<!-- ============ Accueil : mot peint + consigne ============ -->
+<main class="center" id="home">
+  <p class="presents home-only">présente</p>
+  <h1 class="paint" id="paint" aria-label="Persistance"></h1>
+  <p class="tag home-only">Une expérience interactive à travers dix ans de musique.</p>
+  <p class="say home-only" id="sayHome">
+    <span class="when-idle">Maintenez</span><span class="when-ready">Relâchez</span>
+    <button class="key" aria-label="Maintenir pour lancer (ou Entrée pour passer directement)"><svg viewBox="0 0 140 48" preserveAspectRatio="none" aria-hidden="true"><rect class="track" x="0.800" y="0.800" width="138.400" height="46.400" rx="23.200"/><rect class="fill-line" pathLength="1" x="0.800" y="0.800" width="138.400" height="46.400" rx="23.200"/></svg><span class="key-name">espace</span></button>
+    <span class="when-idle">pour lancer Persistance.</span><span class="when-ready">Persistance est prête.</span>
+  </p>
+</main>
+
+<!-- ============ Page d'artiste ============ -->
+<section class="artist" id="artist" aria-live="polite">
+  <h2 data-step="0"><span id="aName"></span><br><span id="aTrack"></span></h2>
+  <h2 data-step="1" id="aYear"></h2>
+  <button class="hint" data-step="2" id="hint"><kbd>H</kbd><span><u>Maintenez H</u> pour rallumer la scène.</span></button>
+</section>
+<div class="bar" id="bar">
+  <button class="sleeve" id="sleeve"><span class="pic"><img id="aCover" alt=""></span><span><b id="aLine"></b><i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.500v9M2.500 7 6 10.500 9.500 7"/></svg></i></span></button>
+  <button class="help-btn" id="helpBtn"><svg viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5"/><path d="M4.600 4.600a1.500 1.500 0 1 1 2 1.400c-.4.200-.6.500-.6 1M6 9v.100"/></svg><span>Besoin d'aide ?</span></button>
+</div>
+<p class="say bottom" id="sayArtist" hidden>
+  <span class="when-idle">Maintenez</span><span class="when-ready">Relâchez</span>
+  <button class="key" aria-label="Maintenir pour changer d'artiste (ou Entrée)"><svg viewBox="0 0 140 48" preserveAspectRatio="none" aria-hidden="true"><rect class="track" x="0.800" y="0.800" width="138.400" height="46.400" rx="23.200"/><rect class="fill-line" pathLength="1" x="0.800" y="0.800" width="138.400" height="46.400" rx="23.200"/></svg><span class="key-name">espace</span></button>
+  <span class="when-idle">pour changer d'artiste.</span><span class="when-ready">pour découvrir la suite.</span>
+</p>
+
+<footer class="foot mono">
+  <ul><li class="wide">© Minuit Dix 2026 — label fictif</li><li><button id="aboutBtn">À propos</button></li></ul>
+  <ul><li class="wide">#Persistance</li><li class="soft">Démonstration, sans son</li></ul>
+</footer>
+
+<!-- ============ Écran blanc d'ouverture ============ -->
+<div class="intro" id="intro">
+  <div class="label"><svg aria-hidden="true"><use href="#mark"/></svg><b>Minuit Dix</b></div>
+  <div class="icons" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M14 30V10l16-3v19M14 30a4 4 0 1 1-4-4 4 4 0 0 1 4 4zM30 26a4 4 0 1 1-4-4 4 4 0 0 1 4 4z"/></svg><svg viewBox="0 0 40 40"><path d="M7 26v-5a13 13 0 0 1 26 0v5M7 24h4v9H9a2 2 0 0 1-2-2zM33 24h-4v9h2a2 2 0 0 0 2-2z"/></svg></div>
+  <p>Pour ses dix ans, <span class="o">Minuit Dix</span> présente <span class="k">Persistance</span>, une expérience musicale interactive.<br>Allumez vos <span class="o">haut-parleurs</span> ou mettez votre <span class="k">casque</span>.</p>
+  <button id="introGo">Commencer</button>
+</div>
+
+<!-- Pochette ouverte -->
+<div class="sheet" id="album" role="dialog" aria-modal="true" aria-labelledby="albTitle" inert>
+  <div class="pic"><img id="albCover" alt=""></div>
+  <div><h2 id="albTitle"></h2><p class="year" id="albYear"></p><ol id="albTracks"></ol></div>
+  <button class="close">Fermer</button>
+</div>
+
+<!-- Aide / à propos -->
+<div class="sheet" id="help" role="dialog" aria-modal="true" aria-labelledby="helpTitle" inert>
+  <div style="grid-column:1/-1; max-width:520px">
+    <h2 id="helpTitle">Comment ça marche</h2>
+    <p style="font-size:1rem; color:var(--pale)">Persistance est une rétrospective fictive, écrite pour montrer le style Hold To Play Music. Le label Minuit Dix et ses artistes n'existent pas.</p>
+    <dl>
+      <dt><kbd>espace</kbd></dt><dd>Maintenez, puis relâchez : un autre artiste arrive.</dd>
+      <dt><kbd>H</kbd></dt><dd>Maintenez pour rallumer la scène en couleur.</dd>
+      <dt><kbd>Entrée</kbd></dt><dd>Sur la touche dessinée : passe directement à la suite, sans maintenir.</dd>
+      <dt><kbd>Échap</kbd></dt><dd>Ferme cette fenêtre.</dd>
+    </dl>
   </div>
-  <div class="label-logo">ÉCHO<small>présente</small></div>
-  <h1 class="title"><span class="brush" id="brushTitle">Dix ans de bruit</span><small>Un voyage interactif à travers dix ans de musique.</small></h1>
-</section>
-
-<section class="screen artist" id="artist" hidden aria-label="Artiste">
-  <figure class="portrait" data-slot="portrait"><img id="artistPhoto" src="https://images.unsplash.com/photo-1659150140178-d672b4763fd0?auto=format&fit=crop&w=840&h=1050&q=80" width="840" height="1050" alt="Portrait en contre-jour de l'artiste, noir et blanc" loading="lazy"></figure>
-  <span class="tl-logo">ÉCHO</span><span class="tr-title">Dix ans de bruit</span>
-  <div class="card"><figure class="cover" data-slot="cover"><img src="https://images.unsplash.com/photo-1603048588665-791ca8aea617?auto=format&fit=crop&w=200&h=200&q=80" width="200" height="200" alt="Pochette : vinyle sur une platine, noir et blanc" loading="lazy"></figure><p><u id="artistName">Nadia Rive (2016)</u><button class="round" aria-label="Voir les titres">↓</button></p></div>
-</section>
-
-<p class="hold"><span id="holdVerb">Maintenez</span> <button class="key" id="key" aria-describedby="holdHelp"><span class="key__fill"></span><span class="key__label">espace</span></button> <span id="holdGoal">pour lancer l'expérience.</span></p>
-<span id="holdHelp" hidden>Maintenez la barre d'espace ou ce bouton ; un clic simple fonctionne aussi.</span>
-<button class="help">Besoin d'aide ?</button>
-<footer><span>© 2026 Écho (label fictif) · À propos · Démo Kōbō · Photos : Unsplash</span><span>#DixAnsDeBruit · Partager f t · ⤢</span></footer>
-<div class="flash" id="flash"></div>
+  <button class="close">Fermer</button>
+</div>
 
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const bt = document.getElementById('brushTitle'); bt.innerHTML = [...bt.textContent].map((c, i) => c === ' ' ? ' ' : `<span style="--i:${i}">${c}</span>`).join('');
-  const key = document.getElementById('key'), home = document.getElementById('home'), artist = document.getElementById('artist'), flash = document.getElementById('flash');
-  const artists = ['Nadia Rive (2016)', 'Les Néons (2018)', 'Kaito (2021)', 'Orage Blanc (2024)']; let idx = -1;
-  const photo = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=840&h=1050&q=80`;
-  const portraits = ['1659150140178-d672b4763fd0', '1621450698168-4ec4fa1dcf52', '1659150140178-d672b4763fd0', '1621450698168-4ec4fa1dcf52'];
-  const next = () => { if (!reduce) { flash.classList.remove('go'); void flash.offsetWidth; flash.classList.add('go'); }
-    setTimeout(() => { home.hidden = true; artist.hidden = false; document.body.classList.add('on-paper'); idx = (idx + 1) % artists.length; document.getElementById('artistName').textContent = artists[idx]; document.getElementById('artistPhoto').src = photo(portraits[idx]); document.getElementById('holdGoal').textContent = "pour changer d'artiste."; }, reduce ? 0 : 280); };
-  let p = 0, held = false, fired = false, last = performance.now();
-  (function frame(t) { const dt = t - last; last = t; p = held ? Math.min(1, p + dt / 1200) : Math.max(0, p - dt / 300); key.style.setProperty('--p', p); if (p >= 1) { held = false; fired = true; key.classList.remove('is-held'); p = 0; next(); } requestAnimationFrame(frame); })(last);
-  const down = () => { fired = false; held = true; key.classList.add('is-held'); }, up = () => { held = false; key.classList.remove('is-held'); };
-  addEventListener('keydown', e => { if (e.code === 'Space' && !e.repeat) { e.preventDefault(); down(); } if (e.key === 'ArrowRight') next(); });
-  addEventListener('keyup', e => { if (e.code === 'Space') up(); });
-  key.addEventListener('pointerdown', down); key.addEventListener('pointerup', up); key.addEventListener('pointerleave', up);
-  key.addEventListener('click', e => { if (fired) { fired = false; return; } if (e.detail === 0 || p < .15) next(); });
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+  const body = document.body, css = getComputedStyle(document.documentElement);
+  const ms = name => parseFloat(css.getPropertyValue(name));
+  const HOLD = ms('--hold'), ZAP = ms('--zap'), CUT = ms('--cut');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const U = (id, extra) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&${extra}`;
+
+  const artists = [
+    { name: 'Iris Okoye', track: '« Néon rouge »', year: 2016, photo: '1615748562188-07be820cff5b', cover: '1533208087231-c3618eab623c', alt: 'Chanteuse éclairée au néon rouge', tracks: ['Néon rouge', 'Minuit dix', 'Les heures bleues', 'Rien ne presse'] },
+    { name: 'Calder & Fils', track: '« Larsen »', year: 2018, photo: '1499424017184-418f6808abf9', cover: '1532640331846-d2da5987c3ee', alt: 'Guitariste sur scène, projecteurs dans le dos', tracks: ['Larsen', 'Sous les rampes', 'Dernier rappel', 'Route de nuit'] },
+    { name: 'Mona Vidal', track: '« Touches noires »', year: 2020, photo: '1524578471438-cdd96d68d82c', cover: '1562619371-b67725b6fde2', alt: 'Mains sur un clavier rouge sous une lumière rose', tracks: ['Touches noires', 'Arpège', 'Velours', 'Synthèse'] },
+    { name: 'Le Grand Tambour', track: '« Peaux »', year: 2022, photo: '1568153354382-6bcd1d46568b', cover: '1547560789-365538e5b23e', alt: 'Batterie violette sur scène', tracks: ['Peaux', 'Contretemps', 'Charleston', 'Roulement'] },
+    { name: 'Sillon', track: '« 33 tours »', year: 2024, photo: '1616681255209-368a2cd3e643', cover: '1524664399170-77e7118fdb6d', alt: 'Disque vinyle sous une lumière rouge', tracks: ['33 tours', 'Face B', 'Diamant', 'Poussière'] },
+  ];
+
+  // Plans : une version noir et blanc (sat=-100, côté serveur) et une version couleur par photo
+  const shots = document.getElementById('shots');
+  artists.forEach((a, i) => {
+    a.gray = Object.assign(new Image(), { src: U(a.photo, 'w=1600&q=70&sat=-100'), alt: '' });
+    a.color = Object.assign(new Image(), { src: U(a.photo, 'w=1600&q=70'), alt: '' });
+    shots.append(a.gray, a.color);
+  });
+  let shown = null;
+  const show = img => { if (shown === img) return; if (shown) shown.classList.remove('show'); img.classList.add('show'); shown = img; };
+
+  // Grain
+  const tile = document.createElement('canvas'), g = tile.getContext('2d');
+  tile.width = tile.height = 256;
+  const noise = g.createImageData(256, 256);
+  for (let i = 0; i < noise.data.length; i += 4) { const v = Math.random() * 255; noise.data[i] = noise.data[i + 1] = noise.data[i + 2] = v; noise.data[i + 3] = 255; }
+  g.putImageData(noise, 0, 0);
+  document.getElementById('grain').style.backgroundImage = `url(${tile.toDataURL()})`;
+
+  // Mot peint : chaque lettre part d'un trait dispersé puis se range
+  const paint = document.getElementById('paint'), tones = ['k', 'o', '', 'k', 'o', 'k', '', 'o', 'k', '', 'o'];
+  const rnd = (a, b) => (a + Math.random() * (b - a)).toFixed(2);
+  paint.innerHTML = [...'Persistance'].map((c, i) => `<span class="${tones[i]}" aria-hidden="true" style="--i:${i};--x:${rnd(-0.6, 0.6)}em;--y:${rnd(-0.8, 0.8)}em;--r:${rnd(-80, 80)}deg;--sx:${rnd(0.15, 0.5)};--sy:${rnd(0.5, 1.1)};--tilt:${rnd(-3.5, 3.5)}deg;--tall:${rnd(1.75, 2.05)}">${c}</span>`).join('');
+
+  // Accueil : les plans noir et blanc se succèdent en coupes franches
+  let idx = -1, view = 'home', homeCut = 0, cutTimer = 0;
+  const cycle = () => { if (view === 'home' && !holding) show(artists[homeCut++ % artists.length].gray); };
+  const start = () => {
+    if (body.classList.contains('started')) return;
+    body.classList.add('started'); cycle(); cutTimer = setInterval(cycle, CUT);
+    setTimeout(() => paint.classList.add('rough'), reduced ? 0 : 1500);
+  };
+  document.getElementById('introGo').addEventListener('click', start);
+  setTimeout(start, 3200);
+
+  // Maintenir : la touche se remplit, les plans couleur défilent, puis « Relâchez »
+  let holding = false, ready = false, holdTimer = 0, zapTimer = 0, seq = 0;
+  const dialogOpen = () => $('.sheet.open').length > 0;
+  const startHold = () => {
+    if (holding || dialogOpen() || !body.classList.contains('started')) return;
+    holding = true; body.classList.add('holding', 'zap');
+    let z = 0;
+    const zap = () => show(artists[(idx + 1 + z++) % artists.length].color);
+    zap(); if (!reduced) zapTimer = setInterval(zap, ZAP);
+    holdTimer = setTimeout(() => { ready = true; body.classList.add('ready'); }, HOLD);
+  };
+  const endHold = () => {
+    if (!holding) return;
+    holding = false; clearTimeout(holdTimer); clearInterval(zapTimer);
+    body.classList.remove('holding', 'zap', 'ready');
+    if (ready) { ready = false; next(); } else if (view === 'artist') show(artists[idx].gray); else cycle();
+  };
+
+  // Artiste suivant : nom et morceau, puis l'année, puis la scène et ses commandes
+  const steps = $('#artist [data-step]'), bar = document.getElementById('bar'), sayArtist = document.getElementById('sayArtist');
+  const step = n => steps.forEach(s => s.classList.toggle('on', +s.dataset.step === n));
+  function next() {
+    idx = (idx + 1) % artists.length; view = 'artist'; body.dataset.view = 'artist';
+    const a = artists[idx], mine = ++seq;
+    show(a.gray); bar.classList.remove('on'); sayArtist.hidden = true;
+    document.getElementById('aName').textContent = a.name;
+    document.getElementById('aTrack').textContent = a.track;
+    document.getElementById('aYear').textContent = a.year;
+    document.getElementById('aLine').textContent = `${a.name} (${a.year})`;
+    document.getElementById('aCover').src = U(a.cover, 'w=300&h=300&q=70');
+    const t = reduced ? 0.2 : 1;
+    step(0);
+    setTimeout(() => mine === seq && step(1), 1700 * t);
+    setTimeout(() => { if (mine !== seq) return; step(2); bar.classList.add('on'); sayArtist.hidden = false; }, 2900 * t);
+  }
+
+  // Clavier : espace (maintenir), H (rallumer la scène)
+  const light = on => { if (view !== 'artist' || holding) return; body.classList.toggle('lit', on); show(on ? artists[idx].color : artists[idx].gray); };
+  addEventListener('keydown', e => {
+    if (e.code === 'Space') { if (!e.target.closest('.sheet, .intro')) e.preventDefault(); if (!e.repeat) startHold(); }
+    else if (e.key.toLowerCase() === 'h' && !e.repeat) light(true);
+    else if (e.key === 'Escape') $('.sheet.open').forEach(closeSheet);
+  });
+  addEventListener('keyup', e => { if (e.code === 'Space') endHold(); else if (e.key.toLowerCase() === 'h') light(false); });
+  addEventListener('blur', () => { endHold(); light(false); });
+
+  // Souris et doigt : on maintient la touche dessinée ; Entrée dessus passe directement à la suite
+  const coarse = matchMedia('(pointer: coarse)').matches;
+  $('.key').forEach(k => {
+    if (coarse) k.querySelector('.key-name').textContent = 'ici';
+    k.addEventListener('pointerdown', e => { e.preventDefault(); k.setPointerCapture(e.pointerId); startHold(); });
+    ['pointerup', 'pointercancel'].forEach(ev => k.addEventListener(ev, endHold));
+    k.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); next(); } });
+    k.addEventListener('contextmenu', e => e.preventDefault());
+  });
+  const hint = document.getElementById('hint');
+  if (coarse) hint.innerHTML = '<kbd aria-hidden="true">●</kbd><span><u>Maintenez ici</u> pour rallumer la scène.</span>';
+  hint.addEventListener('pointerdown', e => { e.preventDefault(); hint.setPointerCapture(e.pointerId); light(true); });
+  ['pointerup', 'pointercancel'].forEach(ev => hint.addEventListener(ev, () => light(false)));
+  hint.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.repeat) light(true); });
+  hint.addEventListener('keyup', e => { if (e.key === 'Enter') light(false); });
+
+  // Fenêtres
+  let opener = null;
+  const openSheet = (sheet, from) => { opener = from; sheet.inert = false; sheet.classList.add('open'); sheet.querySelector('.close').focus(); };
+  function closeSheet(sheet) { sheet.classList.remove('open'); sheet.inert = true; if (opener) opener.focus(); }
+  $('.sheet .close').forEach(b => b.addEventListener('click', () => closeSheet(b.closest('.sheet'))));
+  const album = document.getElementById('album'), help = document.getElementById('help');
+  document.getElementById('sleeve').addEventListener('click', e => {
+    const a = artists[idx];
+    document.getElementById('albCover').src = U(a.cover, 'w=900&h=900&q=75');
+    document.getElementById('albCover').alt = `Pochette de ${a.track}, peinture abstraite`;
+    document.getElementById('albTitle').textContent = `${a.name} — ${a.track}`;
+    document.getElementById('albYear').textContent = `Minuit Dix, ${a.year}`;
+    document.getElementById('albTracks').innerHTML = a.tracks.map((t, i) => `<li>${t}<span>0${i + 1}</span></li>`).join('');
+    openSheet(album, e.currentTarget);
+  });
+  document.getElementById('helpBtn').addEventListener('click', e => openSheet(help, e.currentTarget));
+  document.getElementById('aboutBtn').addEventListener('click', e => openSheet(help, e.currentTarget));
+  document.getElementById('homeLink').addEventListener('click', e => { e.preventDefault(); seq++; view = 'home'; body.dataset.view = 'home'; body.classList.remove('lit'); bar.classList.remove('on'); sayArtist.hidden = true; step(-1); cycle(); });
 })();
 </script>
 </body>
