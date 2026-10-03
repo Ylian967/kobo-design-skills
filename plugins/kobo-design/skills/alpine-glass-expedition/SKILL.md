@@ -1,108 +1,105 @@
 ---
 name: alpine-glass-expedition
-description: Direction artistique « Alpine Glass Expedition » pour sites de voyage d'aventure et d'outdoor (agence de trek, randonnée, alpinisme, bivouac, ski de randonnée, safari, écotourisme, refuge, guide de montagne), inspirée d'un concept Dribbble de site de voyages d'aventure. Photo de montagne plein cadre en bleus froids désaturés, de la brume blanche au bleu profond, vignette sombre en bas ; grand titre en serif contrastée et un peu étroite, en capitales blanches sur deux lignes ; nav avec liens minuscules en capitales espacées centrés et pilule blanche à droite ; bouton rond en verre dépoli avec flèche ↗ ; bouton lecture rond ; note « 4,8/5 ★ » ; puces en contour blanc fin ; cartes de voyage arrondies avec panneau de verre. À utiliser pour une landing d'agence d'aventure, une page de séjours, une fiche itinéraire, un site de refuge ou une app de randonnée au style « montagne, brume, verre dépoli, élégant, froid, premium outdoor ».
+description: Direction artistique « Alpine Glass Expedition » pour sites de voyage d'aventure et d'outdoor (agence de trek, randonnée, alpinisme, bivouac, ski de randonnée, écotourisme, refuge, guide de montagne), inspirée d'un concept Dribbble de site de voyages d'aventure. Photo plein écran d'un alpiniste de près dans la brume, presque monochrome bleu-gris avec un seul objet chaud, lumière en diagonale (brume claire en haut à gauche, bleu nuit en bas à droite) ; énorme titre en serif à empattements, capitales blanches sur deux lignes, posé en bas devant le sujet ; nav en capitales espacées sombres avec pilule blanche ; bouton rond « sphère de verre » bleu avec flèche ↗ ; bouton lecture rond et trois lignes en capitales ; note « 4,8/5 ★ » en chiffres fins et étroits ; puces en contour blanc empilées. Animée : altimètre de chargement, brume qui se lève, brume en dérive et neige fine, titre qui sort de la pente, sphère qui flotte et suit le pointeur, cartes qui se lèvent, itinéraire qui se trace au défilement. À utiliser pour une landing d'agence d'aventure, une page de séjours, une fiche itinéraire, un site de refuge ou une app de randonnée au style « montagne, brume, verre, froid, premium outdoor ».
 ---
 
 # Alpine Glass Expedition
 
-> Un sommet dans la brume du matin, un titre gravé en capitales blanches, et un bouton de verre posé sur la montagne comme une goutte de givre.
+> Un alpiniste sort de la brume, le titre est gravé en capitales blanches devant lui, et une sphère de verre bleu flotte sur la pente.
 
 ## L'idée
 
-Le site est une **fenêtre sur la montagne** : la photo occupe tout l'écran, dans une gamme **froide et désaturée** qui va du blanc de brume (`--fog`) au bleu de nuit (`--night`), avec une **vignette** qui assombrit le bas pour poser l'interface. Le titre, en **serif d'affiche un peu étroite**, en capitales blanches, donne le ton éditorial et premium ; tout le reste est **minuscule et espacé** (Inter 11px, +0.18em). L'interface est **ronde et transparente** : pilules, puces en contour blanc, bouton lecture, et surtout un **bouton rond en verre dépoli** qui flotte sur la photo. Une seule touche chaude : l'**étoile jaune** de la note.
+La page est une **photo de montagne vue de près**, presque monochrome : tout va de la brume claire `--mist` au bleu nuit `--deep`, et **un seul objet reste chaud** (un casque, un sac). La lumière tombe **en diagonale** : clair en haut à gauche, sombre en bas à droite, bas de l'écran uni pour porter le texte. Deux voix : une **serif à empattements en capitales énormes** pour le titre, et **Archivo** pour tout le reste (capitales espacées pour la nav et les boutons, chiffres fins et étroits pour la note). L'interface est **ronde** : pilule blanche, puces en contour, disque de lecture, et la **sphère de verre** bleue.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (photo froide plein cadre, serif capitales, verre dépoli, pilules), jamais l'identité : pas de nom, logo, photo ni texte d'origine.
+Le mouvement fait la moitié du style (`references/motion.md`). Attention : la référence est une image fixe, donc **toutes les animations sont proposées** par le skill (voir `source.md`).
+
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : ni le nom, ni le logo, ni la photo, ni les textes du shot.
 
 ## Règles prioritaires
 
-1. **La photo d'abord, et froide** : plein cadre, bleus et blancs désaturés, brume ; jamais de couleurs chaudes saturées. Vignette `--vignette` obligatoire (haut léger, bas sombre).
-2. **Deux voix** : serif d'affiche (Instrument Serif) en **capitales** pour les titres ; Inter pour tout le reste, en **petites capitales espacées** (11px, +0.18em) pour la nav, les étiquettes, les boutons et les puces.
-3. **Tout est rond** : boutons et puces en pilule, bouton lecture et bouton de verre circulaires, cartes à 28px. Aucun angle vif dans l'interface.
-4. **Le verre est rare** : un bouton rond en verre par écran, plus les panneaux de cartes. Toujours `backdrop-filter` + bordure fine claire + reflet interne.
-5. **Hiérarchie** : le titre crie (blanc, 48–96px), tout le reste chuchote (11–14px). Pas de taille intermédiaire en héros.
-6. **Une seule couleur chaude** : `--star`, uniquement pour l'étoile de note (et l'état d'erreur sur fond nuit). Jamais en fond large.
-7. **Contraste** : texte blanc seulement sur zones sombres de la photo (vignette, versants à l'ombre) ou sur `--deep`/`--night` ; sur clair, texte `--deep` ou `--muted` (paires vérifiées dans `references/tokens.css`).
-8. **Accessibilité** : cibles ≥ 44px (les puces de 36px ont une zone tactile étendue), `:focus-visible` blanc (bleu profond sur clair), `prefers-reduced-motion` coupe dérive de la brume et entrées ; la photo a un `alt` descriptif.
-9. **Aucune valeur en dur** : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
+1. **Une photo, de près, froide** : une personne en montagne dans la brume, plein écran, refroidie sur la rampe `--abyss → --deep → --ridge → --slate → --steel → --haze → --mist`. Jamais de couleurs chaudes en fond.
+2. **Un seul point chaud dans la photo** (casque, sac) ; dans l'interface, seule l'étoile `--star` est chaude (`--ember` est réservé aux erreurs).
+3. **Lumière en diagonale** : voile à 155°, texte **sombre** `--ink` en haut à gauche (nav, logo, bouton lecture), texte **blanc** en bas et à droite.
+4. **Titre** : serif capitales, 2 lignes courtes (≤ 14 caractères), `--fs-hero`, ancré en bas à 372px du bord, devant le sujet.
+5. **Tout est rond** : pilules, puces, disques, cartes à `--r-card`. Aucun angle vif.
+6. **Une sphère de verre par écran** : dégradé bleu opaque, jamais de `backdrop-filter`.
+7. **Le site reste bleu nuit** après le héros : fond `--deep` partout, pas de section blanche.
+8. **Fluide** : photos refroidies une fois (canvas), voile dans le calque de la photo, brume et neige dans un seul canvas, une seule boucle (`motion.md`, « Performance »).
+9. **Accessibilité** : vrai texte en `aria-label` pour le titre découpé et la note ; `prefers-reduced-motion` ouvre sur l'état final ; cibles ≥ 44px ; focus blanc 2px ; contrastes de `tokens.css`.
+10. **Aucune valeur en dur** : tout vient de `references/tokens.css` (la rampe est lue dans les variables CSS en JS).
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton (pilule, verre, lecture), la nav, une puce, la note, une carte de voyage, un panneau de verre, un champ. |
-| `references/layouts.md` | Avant de construire une page : héros montagne, grille de séjours, méthode, témoignage, appel final, mobile. |
-| `references/assets.md` | Avant de placer une image : photo de montagne du héros, cartes de séjour, avatar, traitement froid, sources, prompts IA. |
-| `references/motion.md` | Avant d'ajouter une animation ou une transition. |
-| `examples/demo.html` | Pour voir le résultat attendu (agence fictive « Hautvent ») et reprendre des morceaux. |
-| `source.md` | Shot de référence, ce qui a été vu, écarts. |
+| `references/tokens.css` | Toujours, en premier : couleurs mesurées sur l'image, tailles, grille du héros. |
+| `references/motion.md` | **Toujours** : les 10 mouvements signature, le code, les règles de performance. |
+| `references/components.md` | Nav, photo et voile diagonal, titre, sphère de verre, bouton lecture, note, puces, composants des sections, états. |
+| `references/layouts.md` | Positions exactes du héros, page complète, mobile. |
+| `references/assets.md` | Avant de choisir une photo : sujet, cadrage, haut clair, refroidissement, replis, React Native. |
+| `examples/demo.html` | Page complète animée (agence fictive « Hautvent »). |
+| `source.md` | Ce qui a été mesuré sur l'image, ce qui est proposé, les écarts. |
 
 ## Typographie
 
 | Rôle | Police (Google Fonts) | Réglages |
 |---|---|---|
-| Titre du héros | **Instrument Serif** 400 | `--text-hero` 46–96px, capitales, interligne 0.94 ; 1re ligne à 0.86em et +0.06em pour que la 2e paraisse plus large |
-| Titres de section, cartes | Instrument Serif 400 | `--text-h2` 36–64px / 24px (`--text-lg`), capitales |
-| Chiffres (note, statistiques) | Instrument Serif 400 | 44–60px, « /5 » à 0.5em |
-| Citations | Instrument Serif 400 + italique | 30–52px, bas de casse, partie en italique `--slate` |
-| Nav, étiquettes, boutons, puces | **Inter** 500/600 | 11px, capitales, +0.18em |
-| Texte | Inter 400 | 14px / 1.6 sur photo, 16px ailleurs |
+| Titre, titres de section et de carte, logo | **Roboto Serif** 500, largeur 90 % | capitales ; titre 122px à 1440, interligne 0.92, approche −0.035em |
+| Citation | Roboto Serif 400, largeur 90 % | bas de casse, 24–42px / 1.16 |
+| Nav, pilule, puces, sphère | **Archivo** 600 (500 dans la sphère) | 16px capitales ; approche .1em (nav), .08em (pilule), .04em (puces) |
+| Trois lignes du bouton lecture | Archivo 500 | 24px / 24px, capitales |
+| Note et chiffres | Archivo **300**, largeur 70 % | 67px ; libellé 400, 19,6px capitales |
+| Paragraphes | Archivo 400 | 20px / 30px sous le titre, 16px ailleurs |
 
-La serif du shot n'est pas identifiée : elle est contrastée, transitionnelle, un peu condensée. Instrument Serif en est l'équivalent le plus proche à l'œil ; **Gloock** donne un rendu plus gras et plus dramatique (à garder pour un seul mot-titre).
+La serif du shot n'est pas identifiée (empattements épais, contraste moyen, lettres serrées) ; Roboto Serif resserrée est la plus proche parmi celles comparées. Pour l'interface, les largeurs mesurées collent à Archivo au pixel près.
 
 ## Couleurs
 
-| Rôle | Token | Usage |
-|---|---|---|
-| Brume | `--fog`, `--frost` | fond des sections claires, cartes claires |
-| Glace | `--ice` | lointains, texte secondaire sur nuit |
-| Versants | `--steel`, `--slate` | teinte froide et repli des photos ; `--slate` en texte secondaire sur clair |
-| Profond | `--deep` | texte sur clair, sections sombres, pilule sombre |
-| Nuit | `--night` | bas de la vignette, pied de page |
-| Blanc | `--white` / `--on-white` | titres sur photo, pilule principale |
-| Verre | `--glass`, `--glass-strong`, `--glass-border` | bouton rond, panneaux, puces sur carte |
-| Méta | `--muted` | surtitres et méta sur fond clair |
-| Chaud | `--star` | étoile de la note, erreur sur nuit |
+| Rôle | Token |
+|---|---|
+| Rampe de la photo | `--abyss`, `--deep`, `--ridge`, `--slate`, `--steel`, `--haze`, `--mist` |
+| Fond de page, bas du héros | `--deep` ; pied `--abyss` |
+| Titre | `--white` → `--snow` (dégradé vertical) |
+| Texte sombre sur brume | `--ink` |
+| Note | `--frost` ; étoile `--star` |
+| Sphère de verre | `--sky`, `--glacier`, `--steel`, `--slate` |
+| Bouton lecture | `--tarn` |
+| Pilule | `--white` avec lueur `--pill-glow` en haut |
+| Texte secondaire sur sombre | `--muted` |
+| Erreur | `--ember` |
 
 ## Images et 3D
 
-La montagne est une **vraie photo** plein cadre (sommets enneigés, brume, ciel sombre au-dessus du titre), refroidie en CSS : désaturation, teinte bleue en `mix-blend-mode: color`, calque de brume qui dérive, vignette. Les cartes de séjour et l'avatar du témoignage sont aussi de vraies photos traitées de la même façon. Pas de 3D attendue. Jamais de paysage, de personnage ou d'objet dessiné en CSS/SVG à la place d'une photo ; détails dans `references/assets.md`.
+Le héros est une **vraie photo** : une personne en montagne, de près, dans la neige ou la brume, avec un objet de couleur chaude, **haut de l'image clair**. Toutes les photos (héros, cartes de séjour, étapes, portrait du guide, photo finale) sont refroidies une fois dans un canvas sur la rampe du skill ; les pixels chauds sont épargnés. Brume et flocons sont ajoutés par-dessus. Jamais de montagne, de tente ou de personne dessinée ; le profil d'altitude est un graphique et reste en SVG. Pas de 3D attendue. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le bouton rond en verre dépoli** (112px) posé sur la photo, à droite du sommet : dégradé bleu glacé translucide, flou d'arrière-plan, bordure 1px claire, reflet en haut à gauche, anneau extérieur fin, flèche ↗ et libellé en capitales minuscules sur 2 lignes. Un par écran, jamais deux.
-
-Avec lui, le **trio du bas du héros** : bouton lecture rond + 3 lignes en capitales à gauche, puces en contour au centre, note « 4,8/5 ★ » à droite.
+**La sphère de verre sur la pente** : un disque bleu en dégradé (reflet clair en haut, bord inférieur éclairci) qui flotte à droite, juste au-dessus d'un titre serif géant posé devant un alpiniste dans la brume.
 
 ## À éviter
 
-- Des photos chaudes (coucher de soleil orange, forêt verte saturée) : le style est froid et brumeux.
-- Un paysage dessiné en SVG ou des cartes en dégradés CSS à la place des photos.
-- Des boutons carrés, des ombres dures, des cartes à angles vifs.
-- Mettre le titre en sans-serif ou en gras : il est en serif fine, capitales.
-- Multiplier le verre (chaque carte, chaque bouton) : il perd son effet et coûte cher au rendu.
-- Du texte blanc sur la neige ou le ciel clair : déplacer le texte ou renforcer la vignette.
-- Utiliser `--star` pour des boutons ou des badges.
-- Reprendre le nom, le logo, la photo ou les textes du shot de référence.
+- Des photos chaudes ou colorées, un paysage sans personne dans le héros, un ciel sombre derrière la nav.
+- Un titre en sans-serif, en bas de casse ou sur trois lignes.
+- Plusieurs sphères de verre par écran, ou du verre flouté (`backdrop-filter`) partout.
+- Des sections blanches ou des cartes à angles vifs.
+- `--star` ou `--ember` en fond de bouton.
+- Du texte blanc sur la brume claire, du texte sombre sur l'ombre bleue.
+- Le nom, le logo, la photo ou les textes du shot.
 
 ## Adaptation React / React Native
 
-- **Photo** : `ImageBackground` plein écran + `expo-linear-gradient` pour la vignette (mêmes arrêts que `--vignette`).
-- **Verre dépoli** : `expo-blur` (`<BlurView intensity={40} tint="light">`) dans une `View` ronde `overflow: 'hidden'`, bordure `StyleSheet.hairlineWidth` blanche à 45 %, dégradé translucide par-dessus. Sur Android ancien, repli : fond `--glass-solid` à 70 %.
-- **Capitales espacées** : `textTransform: 'uppercase'`, `letterSpacing: 2` (≈ 0.18em à 11px).
-- **Note** : `Text` imbriqués (« 4,8 » + « /5 » plus petit + « ★ » `--star`), `accessibilityLabel="Note moyenne 4,8 sur 5"`.
-- **Cartes de voyage** : `Pressable` + `Animated` (`scale` 1 → 1.05 de l'image au `onPressIn`).
-- Brume qui dérive : Reanimated `withRepeat(withTiming(...), -1, true)` sur `translateX`, coupé si `isReduceMotionEnabled`.
-- Polices : `@expo-google-fonts/instrument-serif`, `@expo-google-fonts/inter`.
+- Héros : composant `<MistHero src focus="48% 30%" />` qui refroidit l'image dans un `useEffect` après `onLoad` ; un seul `requestAnimationFrame` pour parallaxe, brume et neige.
+- Entrées et compteurs : hook `useInView` ; observer le parent d'un élément découpé par `clip-path`.
+- React Native : images déjà refroidies, `expo-linear-gradient` pour le voile diagonal et la sphère (dégradé vertical + bordure), `react-native-reanimated` pour le flottement et le défilement, `react-native-svg` pour le profil d'altitude.
+- Polices : `@expo-google-fonts/roboto-serif`, `@expo-google-fonts/archivo`.
 
 ## Avant de livrer
 
-- [ ] Tokens importés, aucune couleur hors `:root` ; palette froide, `--star` seul point chaud.
-- [ ] Héros : photo plein cadre + vignette, nav (logo, liens centrés, pilule blanche), titre serif capitales 2 lignes, texte 3 lignes.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Un bouton rond en verre ; trio du bas (lecture + texte, puces, note).
-- [ ] Texte blanc uniquement sur zones sombres ; contrastes vérifiés.
-- [ ] Boutons : repos, survol, appui, focus, désactivé, chargement (`aria-busy`).
-- [ ] Menu mobile accessible (`aria-expanded`).
-- [ ] Testé à 390px et 1440px, sans défilement horizontal ; sommet toujours visible en portrait ; mouvement réduit respecté.
-- [ ] Aucun élément de la marque d'origine.
+- [ ] Tokens importés, aucune valeur en dur (rampe lue dans les variables CSS).
+- [ ] Photo du héros : personne entre 40 et 50 % de la largeur, haut clair, un seul point chaud.
+- [ ] Voile diagonal en place ; texte sombre en haut à gauche, blanc ailleurs.
+- [ ] Les 10 mouvements de `motion.md` présents, coupés en mouvement réduit.
+- [ ] Règles « Performance » respectées (deux grands calques, pas de flou d'arrière-plan, une seule boucle).
+- [ ] Contrastes vérifiés (`python3 tools/check.py alpine-glass-expedition`).
+- [ ] Testé à 390px et 1440px, sans débordement horizontal.
+- [ ] Aucun élément du shot d'origine.

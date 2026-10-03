@@ -1,126 +1,100 @@
 # Alpine Glass Expedition — composants
 
-Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html`.
+Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html`. « Relevé » = mesuré sur l'image de référence (maquette 1440px) ; « proposé » = ajouté par le skill pour faire une page complète.
 
-## Boutons pilule
+## 1. Navigation (relevé)
 
-Hauteur 44px, rayon `--radius-pill`, Inter 600 11px capitales +0.18em, padding 0 24px, flèche ↗ optionnelle qui monte en diagonale au survol.
+Barre de 86px **sans fond**, posée sur la brume claire de la photo, texte **sombre** `--ink`. Grille 3 colonnes.
+- **Logo** à gauche (marge `--edge`, 91px) : petit signe (≈ 27 × 23px) + nom en **serif** 500, ≈ 29px, approche −0.02em.
+- **Liens** centrés sur la page : Archivo 600, 16px, capitales, approche `--ls-nav` (.1em), écart 82px. Survol : filet 1px qui s'étire.
+- **Pilule blanche** à droite (marge `--edge-end`, 74px) : ≈ 199 × 54px, rayon plein, texte `--ink` Archivo 600 16px capitales `--ls-btn`. Détail relevé : **lueur bleue en haut** de la pilule (`--pill-glow` → blanc à 38 %).
+- Après le héros (proposé) : fond `--deep` à 94 %, texte blanc, hauteur 70px, filet bas `--line`.
+- Mobile : logo + pilule « Menu » ; panneau plein écran `--deep`, liens en serif capitales 44px.
 
-| Variante | Repos | Survol | Usage |
-|---|---|---|---|
-| `.pill--white` | fond `--white`, texte `--on-white` | fond `--fog` + ombre douce | action principale sur photo ou nuit (« Voir les voyages », « S'inscrire ») |
-| `.pill--deep` | fond `--deep`, texte `--white` | fond `--night` | action principale sur fond clair |
-| `.pill--ghost` | contour `--line-light`, texte `--white` | fond `--glass`, contour blanc | secondaire sur photo, bouton « Menu » |
+```css
+.pill { height: var(--pill-h); padding: 0 26px; border-radius: var(--r-pill); color: var(--ink);
+  background: linear-gradient(180deg, var(--pill-glow), var(--white) 38%);
+  font: 600 var(--fs-ui)/1 var(--font-ui); letter-spacing: var(--ls-btn); text-transform: uppercase; }
+```
 
-États communs : appui = `scale(.97)` ; focus = contour 2px `--white` décalé de 3px (`--deep` sur fond clair) ; désactivé ou chargement (`aria-busy="true"`) = opacité .5 + `not-allowed`.
+## 2. Photo du héros et voile diagonal (signature, relevé)
+
+Une **vraie photo** plein cadre (sujet : une personne en montagne, de près, dans la brume), refroidie sur la rampe du skill. Par-dessus, un **voile en diagonale** : la lumière vient du coin haut gauche (`--mist`), l'ombre bleue occupe le coin bas droit (`--ridge` puis `--deep`), et tout le bas de l'écran est `--deep` uni pour porter le titre.
+
+```css
+.hero__photo { position: absolute; top: -4%; bottom: -4%; left: -26%; width: 130%; will-change: transform; }   /* marge pour la parallaxe */
+.hero__shade { position: absolute; inset: 0; background:           /* DANS .hero__photo : un seul calque */
+  linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--deep) 86%, transparent) 74%, var(--deep) 90%),
+  linear-gradient(155deg, transparent 37%, color-mix(in srgb, var(--ridge) 82%, transparent) 57%, color-mix(in srgb, var(--deep) 94%, transparent) 74%),
+  radial-gradient(46% 51% at 97% 18%, color-mix(in srgb, var(--ridge) 78%, transparent), transparent 72%),      /* sous la note */
+  radial-gradient(40% 46% at 20% 15%, color-mix(in srgb, var(--mist) 88%, transparent), transparent 78%); }     /* sous le logo et le bouton lecture */
+```
+Par-dessus encore : le canvas `.fx` (brume + neige, voir `motion.md`).
+
+## 3. Titre (relevé)
+
+Serif à empattements épais, un peu étroite, **capitales blanches sur deux lignes**, la 2e plus longue. `--fs-hero` (122px à 1440 : capitales de 87px), interligne `--lh-hero` 0.92, approche `--ls-hero`, graisse 500, largeur 90 %. Léger **dégradé vertical** blanc → `--snow`. Aligné à 372px du bord gauche, en bas de l'écran. 12 à 14 caractères par ligne au plus.
+
+```css
+.title { font: var(--display-weight) var(--fs-hero)/var(--lh-hero) var(--font-display); font-stretch: var(--display-wdth);
+  letter-spacing: var(--ls-hero); text-transform: uppercase; color: var(--white); }
+.title .ln > span { background: linear-gradient(180deg, var(--white) 25%, var(--snow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+```
+Le dégradé se pose sur le `<span>` de chaque ligne (pas sur le `<h1>`) : un parent en `background-clip: text` ne peint pas ses enfants animés.
+
+## 4. Paragraphe (relevé)
+
+Archivo 400, `--fs-lead` (20px / 30px), blanc, largeur `--lead-w` (580px), 3 lignes, 50px sous le titre, même bord gauche.
+
+## 5. Bouton de verre (signature, relevé)
+
+Disque de `--glass` (192px) posé **à droite, juste au-dessus du titre** (son bas mord de 8px sur la hauteur des capitales). **Sphère en dégradé**, pas de transparence : reflet `--sky` tout en haut, `--glacier`, `--steel` au centre, `--slate` en bas, liseré clair qui remonte au bord inférieur, fin contour sombre et ombre portée. Dedans : flèche ↗ 16px, puis deux lignes Archivo 500 16px capitales, interligne 1, blanc.
+
+```css
+.orb { width: var(--glass); aspect-ratio: 1; border-radius: 50%; display: grid; place-content: center; justify-items: center; gap: 14px; color: var(--white);
+  background: radial-gradient(125% 100% at 50% -4%, var(--sky), var(--glacier) 20%, var(--steel) 46%, var(--slate) 78%, var(--steel) 104%);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--abyss) 60%, transparent), 0 26px 46px -20px var(--abyss); }
+```
+Variante 56px sans texte dans les cartes. **Un seul grand bouton de verre par écran.**
+
+## 6. Bouton lecture + trois lignes (relevé)
+
+Disque `--tarn` de `--play` (76px), triangle blanc aux coins arrondis, halo de 5px à 22 %. À 15px à droite : **trois lignes** Archivo 500 `--fs-caps` (24px / 24px), capitales sans approche, `--ink`. Placé à gauche, à ≈ 19 % de la hauteur, **sur la brume claire**.
+
+## 7. Note (relevé)
+
+« 4,8/5 » en Archivo **300 étroit** (`font-stretch: var(--rating-wdth)`), `--fs-rating` (67px), `--frost` ; **étoile `--star`** de 14px en exposant à droite ; dessous, à 12px, libellé Archivo 400 `--fs-rating-label` (19,6px) capitales. Placée à droite, à la hauteur du bouton lecture, sur l'ombre bleue.
 
 ```html
-<a class="pill pill--white" href="#aventures">Voir les voyages</a>
-<button class="pill pill--deep" type="submit">Réserver <span class="arr" aria-hidden="true">↗</span></button>
-```
-```css
-.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-6);
-  border: 1px solid transparent; border-radius: var(--radius-pill); font: 600 var(--text-2xs)/1 var(--font-ui); letter-spacing: var(--tracking-caps);
-  text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer;
-  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur) var(--ease); }
-.pill--white { background: var(--white); color: var(--on-white); }
-.pill--white:hover { background: var(--fog); box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--night) 50%, transparent); }
-.pill--deep { background: var(--deep); color: var(--white); }
-.pill--ghost { border-color: var(--line-light); color: var(--white); background: transparent; }
-.pill--ghost:hover { background: var(--glass); border-color: var(--white); }
-.pill:active { transform: scale(.97); }
-.pill .arr { transition: transform var(--dur) var(--ease); }
-.pill:hover .arr { transform: translate(2px, -2px); }
-.pill[disabled], .pill[aria-busy="true"] { opacity: .5; cursor: not-allowed; transform: none; }
+<p class="rating" aria-label="Note moyenne : 4,8 sur 5">
+  <span class="rating__num" aria-hidden="true"><span data-count="4.8" data-dec="1">4,8</span>/5<svg>…étoile…</svg></span>
+  <span class="rating__lbl" aria-hidden="true">Note moyenne</span>
+</p>
 ```
 
-## Bouton rond en verre (signature)
+## 8. Puces en contour (relevé)
 
-Disque `--glass-btn` (112px), flèche ↗ 24px au-dessus d'un libellé en capitales 9.5px sur 2 lignes. Verre : reflet radial en haut à gauche + dégradé glace → ardoise translucides, `backdrop-filter: blur(14px) saturate(1.2)`, bordure 1px `--glass-border`, ombre `--shadow-glass` (reflet interne + ombre portée bleutée), anneau extérieur fin à 9px. Survol : `scale(1.06)` et la flèche part en diagonale. Placé sur la photo, à droite du sommet, jamais sur du texte.
+Pilules `--chip-h` (58px), contour blanc 1px, texte blanc Archivo 600 16px capitales `--ls-chip`, marge intérieure 22px ; **empilées** à gauche du titre (écart 16px), leur haut aligné sur le haut du titre. Fond `--deep` à 26 % (ajout pour la lisibilité). Survol et état choisi (`aria-pressed="true"`) : aplat blanc, texte `--ink`.
 
-```html
-<a class="glass-btn" href="#aventures"><span class="ico" aria-hidden="true">↗</span>Explorer<br>les aventures</a>
-```
-```css
-.glass-btn { position: relative; display: grid; place-items: center; align-content: center; gap: var(--space-2); width: var(--glass-btn); aspect-ratio: 1;
-  border-radius: 50%; text-align: center; text-decoration: none; color: var(--white);
-  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--white) 35%, transparent), transparent 55%), linear-gradient(160deg, color-mix(in srgb, var(--ice) 38%, transparent), color-mix(in srgb, var(--slate) 32%, transparent));
-  border: 1px solid var(--glass-border); backdrop-filter: blur(var(--blur)) saturate(1.2); -webkit-backdrop-filter: blur(var(--blur)) saturate(1.2);
-  box-shadow: var(--shadow-glass); font: 600 9.5px/1.35 var(--font-ui); letter-spacing: var(--tracking-caps); text-transform: uppercase;
-  transition: transform var(--dur) var(--ease); }
-.glass-btn::before { content: ""; position: absolute; inset: -9px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--white) 22%, transparent); }
-.glass-btn:hover { transform: scale(1.06); }
-.glass-btn .ico { font: 400 1.5rem/1 var(--font-ui); transition: transform var(--dur) var(--ease); }
-.glass-btn:hover .ico { transform: translate(3px, -3px); }
-```
-Sans `backdrop-filter` (`@supports not`) : fond `color-mix(in srgb, var(--glass-solid) 80%, transparent)`.
+## 9. Composants des sections (proposé)
 
-## Bouton lecture
-
-Cercle `--play` (52px), fond nuit à 55 % flouté, bordure `--glass-border`, triangle blanc 14px décalé de 2px à droite. Survol : fond `--deep`, `scale(1.06)`. Bascule `aria-pressed` + `aria-label` « Lire / Mettre en pause le film » ; l'icône devient deux barres. À côté : 3 lignes en capitales espacées (« Votre voyage, / pensé avec / soin »).
-
-## Navigation
-
-Grille `1fr auto 1fr` : logo (icône montagne dans un cercle, trait 1.4px + nom en Instrument Serif 26px) ; liens **centrés** en capitales 11px +0.18em, espacés de 32px, avec un filet de 1px qui se trace de gauche à droite au survol et reste sous la page courante (`aria-current`) ; pilule blanche à droite.
-
-```css
-.nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: var(--space-6) var(--edge); }
-.links a { display: inline-flex; align-items: center; min-height: 44px; position: relative; text-decoration: none; }
-.links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 10px; height: 1px; background: currentColor; transition: right var(--dur) var(--ease); }
-.links a:hover::after, .links a[aria-current]::after { right: 0; }
-```
-Mobile (< 760px) : liens et pilule masqués, bouton `.pill--ghost` « Menu » (`aria-expanded`, `aria-controls`) qui ouvre les liens dans un panneau de verre sombre arrondi sous la nav.
-
-## Puces
-
-Contour 1px `--line-light`, texte blanc, Inter 500 11px capitales, 36px de haut, zone tactile étendue à 44px (`::after { inset: -4px 0 }`). Survol : fond blanc, texte `--on-white`.
-Variante `.chip--dark` sur fond clair (filtres) : contour `--line`, texte `--deep`, 44px ; active (`aria-pressed="true"`) et survol : fond `--deep`, texte blanc.
-Sur une carte photo : fond nuit à 38 % flouté, pour rester lisible sur un ciel clair.
-
-## Note
-
-« 4,8 » en Instrument Serif 44px, « /5 » à 0.5em, étoile `--star` en exposant (`aria-hidden`), puis « Note moyenne » en capitales 11px. Alignée à droite dans le héros. Pour les lecteurs d'écran, préférer un texte complet : `<span class="sr-only">Note moyenne : 4,8 sur 5</span>`.
-
-## Carte de voyage
-
-Carte 520px de haut, rayon `--radius-card`, vraie photo plein cadre refroidie (`data-slot="trip-photo"`, image réelle, voir `assets.md`) + dégradé sombre en bas, ombre `--shadow-soft`. En haut : deux puces (durée à gauche, niveau à droite). En bas : **panneau de verre** (`--glass-strong`, flou 14px, bordure claire, rayon 20px) avec titre Instrument Serif 24px capitales sur 2 lignes, prix (« Dès **1 240 €** », chiffre en serif) et rond blanc ↗ 44px qui pivote de 45° au survol. Survol : l'image zoome à 1.05 en 1.2s.
-
-```html
-<a class="trip" href="/sejours/lacs-geles">
-  <figure class="scene" data-slot="trip-photo"><img src="brumes.jpg" alt="Chaînes de montagnes dans la brume bleue" loading="lazy" width="800" height="1040"></figure>
-  <div class="trip-top"><span class="chip">6 jours</span><span class="chip">Modéré</span></div>
-  <div class="panel"><h3>Le tour des<br>lacs gelés</h3><div class="panel-row"><p>Dès <b>1 240 €</b></p><span class="go" aria-hidden="true">↗</span></div></div>
-</a>
-```
-```css
-.trip { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 520px; padding: var(--space-3);
-  border-radius: var(--radius-card); overflow: hidden; color: var(--white); text-decoration: none; isolation: isolate; box-shadow: var(--shadow-soft); }
-.scene { position: absolute; inset: 0; z-index: -1; transition: transform var(--dur-slow) var(--ease); }
-.trip:hover .scene { transform: scale(1.05); }
-.panel { padding: var(--space-6); border-radius: var(--radius-panel); background: var(--glass-strong); border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--blur)) saturate(1.15); -webkit-backdrop-filter: blur(var(--blur)) saturate(1.15); box-shadow: var(--shadow-glass); }
-.go { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--on-white); transition: transform var(--dur) var(--ease); }
-.trip:hover .go, .trip:focus-visible .go { transform: rotate(45deg); }
-```
-États : complet = puce « Complet » + panneau désaturé, lien vers la liste d'attente ; chargement = carte `--ice` avec reflet qui glisse (squelette).
-
-## Panneau d'étape (fond nuit)
-
-Verre très léger (`--glass`, bordure blanche à 18 %), rayon 20px, padding 32px : numéro « 01 » en serif 64px `--ice`, titre serif 28px capitales, texte 14px `--ice`.
-
-## Champ d'inscription
-
-Pilule de verre sur nuit (bordure blanche à 28 %, padding 6px) contenant l'input transparent (Inter 14px blanc, placeholder `--ice`) et une `.pill--white`.
-
-| État | Rendu |
+| Composant | Description |
 |---|---|
-| Repos | bordure blanche à 28 % |
-| Survol | bordure `--line-light` |
-| Focus (`:focus-within`) | bordure blanche + halo 4px blanc à 12 % |
-| Erreur | bordure `--star` + message `--star` « Cette adresse ne semble pas complète. » (`aria-invalid`) |
-| Envoi | bouton `aria-busy`, message « Inscription… » dans `role="status"` |
-| Succès | message de confirmation `--ice` |
+| **Surtitre** | filet de 34px + Archivo 600 16px capitales `--ls-nav`, `--muted` |
+| **Titre de section** | même serif que le héros, `--fs-h2`, 2 lignes, révélé par lignes |
+| **Carte de séjour** | ratio 3 / 4.3, rayon `--r-card`, photo refroidie plein cadre, voile haut et bas ; étiquette en contour (34px) en haut à gauche ; en bas : nom en serif capitales `--fs-h3`, méta 14px `--frost`, petite sphère de verre 56px avec flèche |
+| **Filtres** | rangée de puces 46px, une seule choisie ; les cartes hors filtre passent à 22 % |
+| **Chiffres** | 4 colonnes à filets `--line` ; valeur dans le style de la note (Archivo 300 étroit, `--fs-rating`), libellé 14px capitales `--muted` |
+| **Film de la semaine** | scène collante : cadre photo arrondi avec l'altitude en grand ; liste des 6 jours à filets (jour actif en blanc, décalé de 10px) ; **profil d'altitude** en SVG (trait blanc 1,5px qui se trace, point `--star`) |
+| **Témoignage** | portrait rond 190px + citation en serif bas de casse `--fs-quote`, mots allumés un à un ; signature en capitales `--muted` |
+| **Champ pilule** | contour blanc 1px, rayon plein, champ transparent + pilule blanche dedans ; focus : contour `--sky` ; erreur : contour et message `--ember` |
+| **Pied** | `--abyss`, une ligne 14px `--muted` |
 
-## Témoignage
+## États
 
-Centré sur `--fog` : 5 étoiles (`--star` cerclé `--deep`), citation Instrument Serif 30–52px (24ch), partie en italique `--slate`, avatar rond 48px bordé de blanc (photo réelle de la personne ou de son séjour, voir `assets.md`) + nom Inter 600 + séjour `--muted`.
+- **Chargement de la page** : altimètre puis voile de brume (voir `motion.md`).
+- **Image absente** : le héros garde son dégradé diagonal `--mist → --haze → --ridge → --deep`, cartes et cadres leur fond `--ridge` ; tout le texte reste lisible.
+- **Canvas refusé** (image sans CORS) : filtre CSS de repli `saturate(.45)`.
+- **Formulaire** : vide (aide `--muted`), erreur (message + contour `--ember`, `aria-invalid`, focus renvoyé), envoi (`aria-busy`, pilule à 60 %), terminé (message de confirmation en `aria-live`).
+- **Focus clavier** : contour 2px blanc décalé de 4px partout.
+- **Cibles tactiles** : 44px au moins (pilule, puces et menu passent à 44px en mobile).

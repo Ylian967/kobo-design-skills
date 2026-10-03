@@ -1,61 +1,88 @@
 /*
  * Alpine Glass Expedition — tokens
- * Valeurs estimées à l'œil sur le shot Dribbble (voir source.md) : brume #e6edf3 → bleu profond #1d3550, blanc, étoile jaune.
- * @contrast white:deep white:night white:slate white:glass-solid deep:fog deep:white deep:frost slate:fog muted:fog muted:frost ice:night ice:deep star:night deep:star white:steel:large
+ * Couleurs MESURÉES par lecture des pixels de l'image du shot (3200×2400 : maquette 1440×1120 en @2x, voir source.md).
+ * Tailles et positions MESURÉES sur la même image (2 px d'image = 1 px de maquette), sauf mention « choisi ».
+ * Mouvement PROPOSÉ : la référence est une image fixe.
+ * @contrast white:deep white:abyss white:ridge white:tarn white:slate frost:deep frost:ridge snow:deep muted:deep muted:abyss
+ * @contrast ink:mist ink:haze ink:white ink:frost ink:snow ink:sky ink:glacier star:deep star:abyss ember:deep
+ * @contrast white:steel:large frost:steel:large
  */
 :root {
-  /* Couleurs — une montagne froide : du blanc de brume au bleu de nuit */
-  --white: #ffffff;           /* titres et texte sur photo, pilule principale */
-  --frost: #f5f8fb;           /* cartes claires */
-  --fog: #e6edf3;             /* brume, fond des sections claires */
-  --ice: #b9cad8;             /* glace, lointains, texte secondaire sur nuit */
-  --steel: #6f8ba3;           /* versants à mi-distance (texte blanc seulement en grand) */
-  --slate: #3c5873;           /* versants à l'ombre, texte secondaire sur clair */
-  --deep: #1d3550;            /* bleu profond : texte sur clair, sections sombres */
-  --night: #0e1c2c;           /* bas de la vignette, pied de page */
-  --muted: #4d6680;           /* méta sur fond clair (5:1) */
-  --star: #f5c84b;            /* étoile de la note — seule couleur chaude, jamais en fond large */
-  --on-white: #1d3550;
-  --glass: rgb(230 237 243 / 0.16);        /* verre dépoli (bouton rond, panneaux) */
-  --glass-strong: rgb(230 237 243 / 0.28);
-  --glass-solid: #4a6886;                   /* équivalent opaque du verre sur photo, pour vérifier le contraste */
-  --glass-border: rgb(255 255 255 / 0.45);
-  --line-light: rgb(255 255 255 / 0.7);     /* contour des puces sur photo */
-  --line: rgb(29 53 80 / 0.16);             /* filets sur fond clair */
-  --vignette: linear-gradient(180deg, rgb(14 28 44 / 0.35) 0%, rgb(14 28 44 / 0) 26%, rgb(14 28 44 / 0) 52%, rgb(14 28 44 / 0.82) 100%);
+  /* ---- Brume → nuit : la diagonale de la photo ---- */
+  --white: #ffffff;         /* titre (haut du dégradé), paragraphe, puces, pilule — mesuré #ffffff */
+  --snow: #ebecee;          /* bas du dégradé du titre — mesuré #ebecee */
+  --frost: #eff3f8;         /* chiffre et libellé de la note — mesuré #eff3f8 */
+  --mist: #d8e2eb;          /* brume la plus claire, coin haut gauche — mesuré #d8e2eb */
+  --haze: #afc4d4;          /* brume moyenne — mesuré #afc4d4 */
+  --sky: #a0d3fe;           /* reflet en haut du bouton de verre — mesuré #a0d3fe */
+  --glacier: #76a9d4;       /* haut du bouton de verre — mesuré #76a9d4 */
+  --steel: #4e7795;         /* centre du bouton de verre, ciel à droite — mesuré #4e7795 */
+  --slate: #3a5f79;         /* bas du bouton de verre — mesuré #3a5f79 */
+  --ridge: #264d66;         /* ombre bleue de la diagonale — mesuré #264d66 */
+  --tarn: #203d4f;          /* disque du bouton lecture — mesuré #203d4f */
+  --deep: #1b2d3b;          /* bas de la photo, fond de page — mesuré #1b2d3b */
+  --abyss: #182a38;         /* zone la plus sombre, sous le titre — mesuré #182a38 */
+  --ink: #142633;           /* texte sombre sur brume : nav, logo, texte du bouton lecture — mesuré #142633 */
+  --muted: #9db3c4;         /* choisi : texte secondaire sur fond sombre */
 
-  /* Typographie */
-  --font-display: 'Instrument Serif', 'Gloock', 'Times New Roman', serif;  /* titres en capitales, serif contrastée un peu étroite */
-  --font-ui: 'Inter', system-ui, sans-serif;                               /* nav, étiquettes, texte */
-  --text-2xs: 0.6875rem;   /* 11px — liens de nav, étiquettes en capitales espacées */
-  --text-xs: 0.75rem;      /* 12px — boutons, puces */
-  --text-sm: 0.875rem;     /* 14px — texte sur photo */
-  --text-base: 1rem;
-  --text-lg: 1.5rem;       /* titres de cartes (serif) */
-  --text-h2: clamp(2.25rem, 4.6vw, 4rem);
-  --text-hero: clamp(2.9rem, 6.4vw, 6rem);       /* « EXPLORER / SANS LIMITES » */
-  --text-giant: clamp(4rem, 13vw, 12rem);        /* nom de marque en pied de page */
-  --leading-display: 0.94;
-  --tracking-display: 0.005em;
-  --tracking-caps: 0.18em;  /* capitales minuscules espacées */
+  /* ---- Les deux seules touches chaudes ---- */
+  --star: #efa801;          /* étoile de la note — mesuré #efa801 */
+  --ember: #e8742c;         /* choisi : l'objet chaud de la photo (casque, sac), erreurs de formulaire */
 
-  /* Espace */
-  --edge: clamp(16px, 3.5vw, 48px);
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --max: 1320px;
+  /* ---- Filets et voiles (choisis) ---- */
+  --line: rgb(255 255 255 / 0.22);       /* filets sur fond sombre */
+  --line-ink: rgb(20 38 51 / 0.18);      /* filets sur brume */
+  --pill-glow: #91b6d3;                  /* lueur bleue en haut de la pilule blanche — mesuré #91b6d3 */
 
-  /* Formes */
-  --radius-pill: 999px;     /* boutons, puces, champs */
-  --radius-card: 28px;      /* cartes de voyage */
-  --radius-panel: 20px;     /* panneaux de verre */
-  --glass-btn: 112px;       /* bouton rond en verre « Explorer les aventures » */
-  --play: 52px;             /* bouton lecture */
-  --blur: 14px;
-  --shadow-soft: 0 24px 60px -24px rgb(14 28 44 / 0.45);
-  --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 0.35), 0 20px 50px -20px rgb(14 28 44 / 0.6);
+  /* ---- Typographie ---- */
+  --font-display: 'Roboto Serif', 'Source Serif 4', Georgia, serif;  /* titre : serif à empattements épais, un peu étroite (police du shot non identifiée) */
+  --font-ui: 'Archivo', 'Inter', system-ui, sans-serif;               /* tout le reste : les largeurs mesurées collent à Archivo */
+  --display-weight: 500;
+  --display-wdth: 90%;                    /* choisi : la serif du shot est plus étroite que Roboto Serif normale */
+  --fs-hero: clamp(2.75rem, 8.5vw, 7.66rem);    /* 122px à 1440 : capitales mesurées 87px de haut */
+  --lh-hero: 0.92;                        /* pas de ligne mesuré 113px */
+  --ls-hero: -0.035em;                    /* lettres presque jointes sur le shot */
+  --fs-h2: clamp(2.25rem, 5vw, 4.5rem);   /* choisi : titres de section */
+  --fs-h3: clamp(1.5rem, 2.1vw, 1.875rem);/* choisi : titres de carte */
+  --fs-quote: clamp(1.5rem, 2.9vw, 2.625rem); /* choisi */
+  --fs-lead: clamp(1rem, 1.39vw, 1.25rem);/* 20px / 30px : paragraphe sous le titre (mesuré) */
+  --lh-lead: 1.5;
+  --fs-caps: clamp(1rem, 1.67vw, 1.5rem); /* 24px / 24px : trois lignes du bouton lecture (mesuré) */
+  --fs-ui: clamp(0.8125rem, 1.11vw, 1rem);/* 16px : nav, pilule, puces, bouton de verre (capitales mesurées 11px) */
+  --fs-small: 0.875rem;
+  --fs-rating: clamp(2.75rem, 4.65vw, 4.19rem); /* 67px : « 4,8/5 », chiffres mesurés 45px de haut */
+  --rating-wdth: 70%;                     /* Archivo 300 étroit : largeur mesurée 114px */
+  --fs-rating-label: clamp(0.875rem, 1.36vw, 1.225rem); /* 19,6px (mesuré) */
+  --ls-nav: 0.1em;                        /* liens de nav : « ADVENTURES » mesuré 123px */
+  --ls-btn: 0.08em;                       /* pilule */
+  --ls-chip: 0.04em;                      /* puces */
 
-  /* Mouvement */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);     /* sortie douce, « air de montagne » */
+  /* ---- Grille du héros (maquette 1440) ---- */
+  --edge: clamp(16px, 6.32vw, 91px);      /* marge gauche : logo, bouton lecture, puces (mesuré 91px) */
+  --edge-end: clamp(16px, 5.14vw, 74px);  /* marge droite : pilule (mesuré 74px) */
+  --col-side: clamp(0px, 19.5vw, 281px);  /* colonne des puces : le titre commence à 372px */
+  --lead-w: 580px;                        /* largeur du paragraphe (mesuré 579px) */
+  --nav-h: 86px;                          /* liens et pilule centrés à 43px */
+  --pill-h: 54px;                         /* pilule 199 × 54 */
+  --chip-h: 58px;                         /* puces ≈ 188 × 58, écart 16px */
+  --chip-gap: 16px;
+  --play: clamp(56px, 5.3vw, 76px);       /* bouton lecture 76px */
+  --glass: clamp(132px, 13.3vw, 192px);   /* bouton de verre 192px */
+  --container: 1258px;                    /* 1440 − 91 − 91 */
+
+  /* ---- Formes ---- */
+  --r-pill: 999px;
+  --r-card: 28px;                         /* choisi : cartes et cadres photo */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
+
+  /* ---- Mouvement (proposé) ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);        /* sortie longue et douce, comme la brume qui se pose */
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 200ms; --dur: 500ms; --dur-slow: 1200ms; --dur-drift: 40s;
+  --dur-fast: 180ms;
+  --dur: 420ms;
+  --dur-slow: 1100ms;
+  --dur-veil: 1400ms;       /* la brume d'ouverture se lève */
+  --dur-float: 7s;          /* flottement du bouton de verre */
+  --dur-pulse: 2.6s;        /* anneau du bouton lecture */
 }

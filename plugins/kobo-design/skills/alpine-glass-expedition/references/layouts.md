@@ -1,69 +1,59 @@
 # Alpine Glass Expedition — mises en page
 
-Conteneur : `max-width: var(--max)` (1320px), marges `--edge` (16 → 48px). Sections : padding vertical `--space-24` (96px).
+> La référence ne montre **que le héros** (une image : maquette 1440 × 1120px, coupée en bas). Les positions du héros sont **mesurées** sur cette image ; les sections suivantes sont **proposées** pour faire une page complète dans le même langage.
 
-## Ordre de page type
+## Héros (relevé)
+
+Hauteur `100svh` (min 720px). Le haut est ancré en haut, le bloc titre est ancré **en bas** (marge `--edge`).
+
+```
+▲ Hautvent              AVENTURES    ITINÉRAIRE    GUIDES             ( VOIR LES SÉJOURS )   ← nav 86px, texte sombre sur brume
+   (brume claire)                         ▓▓▓
+ ●▶  VOTRE VOYAGE,                      ▓▓▓▓▓▓▓  (personne, 40–50 % de la largeur)     4,8/5 ★
+     PENSÉ AVEC                         ▓▓▓▓▓▓▓                                        NOTE MOYENNE
+     ATTENTION                          ▓▓▓▓▓▓▓            (ombre bleue en diagonale)
+                                        ▓▓▓▓▓▓▓                        ╭──────╮
+                                         ▓▓▓▓▓                         │  ↗   │  ← bouton de verre 192px
+ ( TREKS D'ALTITUDE )    EXPLORER         ▓▓▓                          ╰──────╯
+ ( BIVOUAC SAUVAGE  )    SANS LIMITES                                           ← titre 122px, 2 lignes
+                         Des sommets, des vallées secrètes…                     ← paragraphe 20px, 3 lignes
+   (bleu profond uni)
+```
+
+| Élément | Position à 1440 (mesurée) |
+|---|---|
+| Logo | gauche 91px (`--edge`), centré à 43px du haut |
+| Liens | centrés sur la page (de 470 à 969px), écart 82px |
+| Pilule | droite 74px (`--edge-end`), 199 × 54px |
+| Bouton lecture + texte | gauche 91px, haut 217px (≈ 19,4 %) ; texte à 15px du disque |
+| Note | bord droit à 94px, haut 223px ; libellé 12px plus bas |
+| Puces | gauche 91px, empilées, haut aligné sur le titre (+5px) |
+| Titre | gauche 372px (colonne `--col-side` de 281px après la marge), capitales de 87px, pas de 113px |
+| Paragraphe | même bord gauche, 50px sous le titre, 580px de large, bas à 91px du bord |
+| Bouton de verre | gauche 951px (579px après le début du titre), centre à 613px du haut ; son bas mord de 8px sur le titre |
+| Lumière | brume `--mist` en haut à gauche, ombre `--ridge` / `--deep` en bas à droite, frontière à ≈ 155° ; bas uni `--deep` à partir de ≈ 75 % |
+
+Règles de placement de la photo : la **personne entre 40 et 50 % de la largeur**, tête sous la nav ; le **coin haut gauche clair** (texte sombre) ; le titre passe **devant ses jambes**.
+
+## Page complète (proposé)
 
 | # | Section | Fond | Contenu |
 |---|---|---|---|
-| 1 | Héros | photo montagne + vignette | nav, surtitre, titre 2 lignes, texte, bouton de verre, trio du bas |
-| 2 | Séjours | `--fog` | surtitre + titre serif + texte à droite, filtres, 3 cartes de voyage |
-| 3 | Méthode | `--deep` + lignes de crêtes | titre, 3 panneaux d'étape, 4 chiffres |
-| 4 | Témoignage | `--fog` | étoiles, citation, auteur |
-| 5 | Appel final + pied | `--night`, crête en haut | titre, inscription, nom géant en dégradé, liens |
+| 0 | Ouverture | `--mist` | altimètre centré, libellé, filet de progression |
+| 1 | Héros | photo + voile diagonal | voir ci-dessus |
+| 2 | Séjours | `--deep` | surtitre + titre 2 lignes à gauche, phrase à droite (alignée en bas) ; rangée de filtres ; **4 cartes** de séjour ; bande de **4 chiffres** à filets |
+| 3 | Film de la semaine | `--deep` | section de 340vh, scène collante en 2 colonnes `1.05fr / 1fr` : cadre photo avec altitude | surtitre, titre, liste des 6 jours, profil d'altitude |
+| 4 | Parole de guide | `--deep` | surtitre ; portrait rond à gauche, citation en serif et signature à droite |
+| 5 | Appel final | photo refroidie + voile vertical | titre à la taille du héros, champ pilule à gauche, bouton de verre à droite |
+| 6 | Pied | `--abyss` | une ligne |
 
-## Héros
+Conteneur : `--container` 1258px (mêmes marges que le héros) ; rythme vertical 96–128px ; point de rupture 860px. **Tout le site reste sur fond `--deep`** après le héros : le bas de la photo et la page ont la même couleur, sans couture.
 
-```
-(◬) Hautvent          AVENTURES   FAUNE   EXPÉRIENCES          ( VOIR LES VOYAGES )
+## Adaptation mobile (≤ 860px)
 
-                         —— SAISON 2027 · ALPES ——
-                               EXPLORER
-                            SANS LIMITES
-                         texte sur trois lignes
-                                              /\
-                                         /\  /  \     ( ↗ verre )
-                          ~~~~ brume ~~~~/    \
-(▶) VOTRE VOYAGE,          ( TREKS EN MONTAGNE ) ( BIVOUAC SAUVAGE )       4,8/5★
-    PENSÉ AVEC SOIN                                                    NOTE MOYENNE
-```
-- `min-height: 100svh`, colonne flex : nav, bloc titre (centré, haut), bas du héros (grille `1fr auto 1fr`, aligné en bas).
-- **Le sommet est sous le texte**, décalé à droite du centre : le titre et le texte se posent sur le ciel assombri, jamais sur la neige.
-- Bouton de verre à ≈ 15 % du bord droit, à 56 % de la hauteur, sur un versant.
-- Vignette : `--vignette` (haut 35 %, milieu transparent, bas 82 %).
-
-### Photo du héros
-
-Image réelle, voir `assets.md` : une vraie photo de sommets enneigés en `<figure class="land" data-slot="mountain-photo">` plein cadre (`object-fit: cover`), refroidie (désaturation + teinte bleue en `mix-blend-mode: color`), avec un calque de brume CSS qui dérive lentement et la vignette par-dessus. Couleur de repli du conteneur : dégradé `--slate` → `--steel` → `--ice` → `--deep`. En portrait, régler `object-position` (≈ 55 % 30 %) pour garder les sommets dans l'écran ; ne jamais remplacer la photo par un paysage dessiné en SVG.
-
-## Séjours
-
-En-tête : surtitre `--muted`, titre serif 2 lignes à gauche ; paragraphe 36ch `--slate` à droite, aligné en bas. Filtres (`.chip--dark`). Grille `1.15fr 1fr 1fr`, gap 24px — la première carte est un peu plus large. 1000px : 2 colonnes, la première sur toute la largeur. 760px : 1 colonne.
-
-## Méthode
-
-Fond `--deep` avec 3 lignes de crêtes en filet `--ice` à 25 % en bas (SVG `preserveAspectRatio="none"`). En-tête comme ci-dessus (couleurs `--ice`). 3 panneaux d'étape en grille, puis 4 chiffres en serif séparés par un filet blanc à 20 %.
-
-## Témoignage
-
-Centré, une seule citation, beaucoup d'air (96px au-dessus et en dessous).
-
-## Appel final et pied
-
-Crête de montagne en haut (SVG rempli `--fog` qui « descend » dans la section nuit). Grille `1.2fr 1fr` : titre serif + texte à gauche, champ d'inscription à droite, alignés en bas. Puis nom de marque géant (`--text-giant`) en dégradé `--ice` → transparent (décoratif, `aria-hidden`), filet, ligne de liens en capitales.
-
-## Pages secondaires
-
-- **Fiche séjour** : héros photo 70vh avec titre du séjour, puces (durée, niveau, saison) et note ; puis colonne 2/3 – 1/3 : itinéraire jour par jour (liste avec ligne verticale et points) à gauche, panneau de réservation collant en verre clair (`--frost`) à droite avec prix serif et `.pill--deep`.
-- **Liste de séjours** : filtres collants sous la nav, grille de cartes 3 colonnes, carte « Sur mesure » en fond `--deep`.
-
-## Mobile (< 760px)
-
-- Nav : logo + bouton « Menu » (pilule fantôme) ; panneau de verre sombre pour les liens.
-- Titre à ≈ 50px, toujours 2 lignes ; texte 3–4 lignes.
-- Photo recadrée en portrait sur le sommet via `object-position` (voir plus haut).
-- Bouton de verre réduit à 96px, à droite, au-dessus du bas du héros.
-- Bas du héros empilé : puces (2 lignes, à gauche) → lecture + texte à gauche, note à droite sur la même ligne.
-- Cartes de voyage en une colonne, 440px de haut.
-- Méthode : panneaux empilés, chiffres en 2 × 2.
-- Vérifier à 390px : aucun débordement horizontal (`overflow-x: clip` sur `html`, `overflow: hidden` sur le héros).
+- **Nav** 64px : logo + pilule « Menu » 44px.
+- **Héros** (min 640px) : bouton lecture 56px et texte 13px en haut à gauche ; note à droite (chiffre 40px) sur une ombre `--ridge` renforcée ; le bloc du bas s'empile : **puces en ligne** (44px) → **titre** `12vw` sur 2 lignes → paragraphe 16px ; le **bouton de verre** (132px) se place à droite, au-dessus des puces ; le voile du bas monte plus haut (dès 35 %).
+- Photo : même sujet centré (`object-position: 48% 30%`).
+- Cartes sur 2 colonnes (ratio 3 / 4.6, petite sphère masquée) ; chiffres en 2 × 2.
+- Film : une colonne, cadre photo à 30svh, liste compacte (14px), profil dessous.
+- Témoignage et appel final en une colonne ; le champ pilule devient un bloc arrondi de 28px avec le bouton en pleine largeur ; le second bouton de verre est masqué.
