@@ -66,7 +66,6 @@ En bref :
 | [`anime-x-slash`](plugins/kobo-design/skills/anime-x-slash/) — Anime X Slash | Jeu vidéo & anime | [tbhx.net](https://tbhx.net/en/) |
 | [`chrome-atelier`](plugins/kobo-design/skills/chrome-atelier/) — Chrome Atelier | Luxe / bijou produit 3D | [Dribbble](https://dribbble.com/shots/27491195-Website-Design-for-Avant-Garde-Jewelry-Product) |
 | [`cosmic-voyage`](plugins/kobo-design/skills/cosmic-voyage/) — Cosmic Voyage | Jeu vidéo & gacha | [hsr.hoyoverse.com](https://hsr.hoyoverse.com/fr-fr/home) |
-| [`epic-jrpg-product`](plugins/kobo-design/skills/epic-jrpg-product/) — Epic JRPG Product | Jeu vidéo | [fr.bandainamcoent.eu](https://fr.bandainamcoent.eu/tales-of/tales-of-arise) |
 | [`glacial-mono-3d`](plugins/kobo-design/skills/glacial-mono-3d/) — Glacial Mono 3D | Expérience web 3D | [igloo.inc](https://www.igloo.inc/) |
 | [`glass-frame-estate`](plugins/kobo-design/skills/glass-frame-estate/) — Glass Frame Estate | Immobilier / annonces | [Dribbble](https://dribbble.com/shots/27776118-Realeste-Real-Estate-Property-Listing-Website-Template) |
 | [`heritage-lens`](plugins/kobo-design/skills/heritage-lens/) — Heritage Lens | Culture / patrimoine immersif | [getty.edu](http://www.getty.edu/persepolis) |

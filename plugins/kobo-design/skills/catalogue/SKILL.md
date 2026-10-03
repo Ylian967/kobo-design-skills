@@ -1,6 +1,6 @@
 ---
 name: catalogue
-description: Catalogue des 24 directions artistiques Kōbō (jeu vidéo, anime, gacha, expériences web primées, luxe, tech, mode, food, immobilier, voyage, portfolio). À utiliser quand on demande quel style choisir, « montre-moi les styles », « je veux un site sombre / coloré / japonais / luxe… », ou avant de lancer un projet sans style imposé. Propose 1 à 3 skills adaptés et explique pourquoi.
+description: Catalogue des 23 directions artistiques Kōbō (jeu vidéo, anime, gacha, expériences web primées, luxe, tech, mode, food, immobilier, voyage, portfolio). À utiliser quand on demande quel style choisir, « montre-moi les styles », « je veux un site sombre / coloré / japonais / luxe… », ou avant de lancer un projet sans style imposé. Propose 1 à 3 skills adaptés et explique pourquoi.
 ---
 
 # Catalogue Kōbō
@@ -23,7 +23,6 @@ Ne jamais mélanger deux styles dans un même projet : choisir, puis s'y tenir.
 | `anime-x-slash` | Anime d'action | Gris papier, noir, rouge signal, coupes obliques | tbhx.net (série animée) |
 | `cosmic-voyage` | Gacha spatial | Nuit étoilée, verre bleuté, cartes à un seul coin arrondi, accents dorés | hsr.hoyoverse.com |
 | `hyper-lime-street` | Action urbaine | Béton clair, blocs noirs rayés, jaune-vert acide | zenless.hoyoverse.com |
-| `epic-jrpg-product` | Fiche produit de J-RPG | Noir et braises, plaques dorées, ornements | Page Tales of Arise (Bandai Namco) |
 
 ## Expériences web primées (Awwwards)
 
@@ -57,7 +56,7 @@ Ne jamais mélanger deux styles dans un même projet : choisir, puis s'y tenir.
 
 ## Raccourcis par envie
 
-- **Sombre et premium** : `pocket-device-noir`, `nocturne-architecture`, `epic-jrpg-product`, `glacial-mono-3d`.
+- **Sombre et premium** : `pocket-device-noir`, `nocturne-architecture`, `glacial-mono-3d`.
 - **Clair et élégant** : `chrome-atelier`, `glass-frame-estate`, `showroom-bento`.
 - **Coloré et joyeux** : `sticker-brutal-jp`, `zigzag-snack-pop`, `tiny-planet-toy`.
 - **Japon / anime** : `anime-x-slash`, `hyper-lime-street`, `sticker-brutal-jp`, `cosmic-voyage`.
