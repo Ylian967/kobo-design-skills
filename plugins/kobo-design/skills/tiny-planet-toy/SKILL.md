@@ -1,74 +1,103 @@
 ---
 name: tiny-planet-toy
-description: Direction artistique « Tiny Planet Toy » pour sites-expériences ludiques et mini-jeux web, inspirée des expériences WebGL primées où l'on explore une petite planète dessinée à la main. Turquoise doux, petite planète ronde couverte de maisons et d'arbres au style aquarelle/cel, logo en lettres-blocs posées sur la planète, bouton jaune penché en relief, poussières flottantes, interface minimale. À utiliser pour une landing de jeu indé, un portfolio interactif, une page d'événement ludique, un mini-jeu web ou une app au style « jouet, diorama, monde miniature, cosy 3D ».
+description: Direction artistique « Tiny Planet Toy » pour sites-expériences ludiques et mini-jeux web, inspirée d'une expérience WebGL primée où l'on explore une petite planète dessinée à la main. Fond turquoise uni semé de poussières, petite planète ronde en volume couverte de maisons et d'arbres au rendu dessin animé à contours d'encre, logo en lettres-blocs crème posées en grille 3 × 3 sur la planète, bouton-bloc jaune penché qui s'enfonce comme une touche, volet d'entrée incliné, boîte de dialogue à étiquette bleue et texte tracé à la main qui s'écrit lettre à lettre, fiches à contour d'encre et ombre décalée, touches de clavier en blocs. À utiliser pour une landing de jeu indé, un portfolio interactif, une page d'événement ludique, un mini-jeu web ou une app au style « jouet, diorama, monde miniature, cosy 3D, low-poly, cel-shading ». Fournit tokens, composants, mises en page, animations et une page d'exemple avec planète Three.js.
 ---
 
 # Tiny Planet Toy
 
-> Un diorama de poche : une petite planète dessinée flotte dans un ciel turquoise, et un seul bouton jaune invite à jouer.
+> Une planète qui tient dans la main, posée sur du turquoise : on a envie de la faire tourner avant même de lire.
 
 ## L'idée
 
-L'écran entier est un **jouet**. Au centre, une petite planète vue de l'espace (maisons, arbres, routes qui épousent la courbure). Le logo est fait de **lettres-blocs** posées à plat sur la planète, comme des bâtiments. Autour : un turquoise uni, quelques poussières qui dérivent. L'interface se réduit à un **bouton jaune penché, en relief**, et à de petites étiquettes. Rien ne doit rappeler un site web classique tant que la personne n'a pas commencé.
+Le visiteur ne lit pas une page, il **reçoit un jouet**. Au centre, une **petite planète en volume** — maisons, arbres, un phare, un bateau — au rendu de dessin animé, cernée d'encre. Dessus, le nom du jeu en **lettres-blocs** tombées du ciel ; dessous, un **bloc jaune** penché qui ne demande qu'à être enfoncé. Le reste de l'interface parle comme le jeu : une **boîte de dialogue** où le texte s'écrit lettre à lettre, des fiches à gros contour, des touches de clavier en relief. Fond uni, peu de mots, tout a une **épaisseur**.
 
-Inspiré de : voir `source.md`. On reprend le principe (planète-diorama, palette, interface-jouet), jamais l'identité : pas le monde, le logo ni les illustrations d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de monde, de personnage, de logo ni de texte du jeu d'origine.
 
 ## Règles prioritaires
 
-1. **Un seul élément central** (la planète) et **un seul appel à l'action** (bouton jaune). Tout le reste attend.
-2. **Couleurs douces, encre sombre** : turquoise de fond, crème pour les surfaces, vert sapin pour le texte. Jamais de blanc pur ni de noir pur.
-3. **Tout est légèrement penché** (-3°) et **en relief** (ombre pleine de 4px vers le bas qui s'écrase à l'appui).
-4. **Typo-jouet** : lettres-blocs (Bungee) pour le logo et les titres, police pixel (Silkscreen) pour les boutons, Nunito pour le texte lu.
-5. **Contraste** : texte vert sapin sur turquoise (5,9:1) ; jamais de blanc sur turquoise (2:1).
-6. **La planète est en vraie 3D** (Three.js, low-poly, qu'on fait tourner au glisser). Un repli doit exister pour le premier affichage et les appareils sans WebGL : capture du rendu, sinon disque aux couleurs des tokens — jamais de maisons ou d'arbres dessinés en CSS/SVG.
-7. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
+1. **Une planète, seule, au centre** ; fond `--sky` uni, juste des poussières.
+2. **Rendu dessin animé** : aplats, trois paliers d'ombre, contour d'encre `--ink` — jamais de dégradé lisse ni d'ombre floue.
+3. **Tout ce qui se clique est un bloc** : une face, un contour de 3px, une tranche ou une ombre décalée ; il s'enfonce à l'appui.
+4. **Trois écritures** : blocs (titres, logo), pixels (étiquettes, boutons), main levée (dialogues, texte).
+5. **Le texte parle en répliques** : court, à la première personne, dans une boîte de dialogue.
+6. **La 3D reste petite** : un canvas à la taille de la planète, rendu à la demande ; le reste est du HTML.
+7. **Texte `--ink`** sur le turquoise, le jaune, le bleu et le crème.
+8. **Aucune valeur en dur** : tout vient de `references/tokens.css`, y compris les couleurs de la scène 3D.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Planète (Three.js et repli), logo en blocs, bouton relief, bulles de dialogue, HUD minimal, poussières. Puis, observés sur le site : écran de chargement dessiné, bloc de départ 3D, scène de jeu cel-shading. |
-| `references/layouts.md` | Écran-titre, écran de jeu / exploration, pages d'info, mobile. |
-| `references/motion.md` | Rotation lente, flottement, rebonds, transition titre → jeu. |
-| `references/assets.md` | Avant de construire la planète ou de placer un visuel : recette 3D complète (géométrie, matières toon, lumière, caméra, glisser), modèles libres, repli, prompts IA. |
-| `examples/demo.html` | Écran-titre complet : planète Three.js qu'on fait tourner au glisser, logo et bouton en HTML. |
-| `source.md` | Observations et écarts. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Ciel, planète, logo en blocs, bouton-bloc, boîte de dialogue, fiche de quartier, touche, chargement. |
+| `references/layouts.md` | Écran-titre, page de présentation, mobile, autres écrans. |
+| `references/motion.md` | Volet d'entrée, chute des blocs, rotation, pivot, machine à écrire, performance, mouvement réduit. |
+| `references/assets.md` | Construction de la planète, recette du rendu, polices. |
+| `examples/demo.html` | Page complète animée avec planète Three.js (jeu fictif « Estafette »). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police | Réglages |
+| Rôle | Police | Taille |
 |---|---|---|
-| Logo, titres | **Bungee** | capitales, blocs, crème avec contour sombre |
-| Boutons, HUD | **Silkscreen** | 14–16px, capitales |
-| Texte | **Nunito** 600/800 | 16–18px |
+| Lettre d'un bloc du logo | Rubik Mono One | `--fs-block` (jusqu'à 62px) |
+| Titre de section | Rubik Mono One, capitales | `--fs-h2` (jusqu'à 42px) |
+| Étiquettes, boutons, touches | Silkscreen 700, capitales | `--fs-tag` (17px), 16 à 18px |
+| Dialogue | Patrick Hand, capitales, approche 0.03em | `--fs-dialog` (≈ 24px) |
+| Texte courant | Patrick Hand | `--fs-body` (20px) |
+| Mentions | Silkscreen 400 | `--fs-small` (14px) |
+
+## Couleurs
+
+| Token | Valeur | Usage |
+|---|---|---|
+| `--sky` | #65c1bc | Fond |
+| `--sky-light` | #9ee5d5 | Poussières, halo |
+| `--sky-deep` | #2a8490 | Eau, section d'appel |
+| `--cream`, `--cream-side` | #eef2e4, #b8b7a2 | Blocs du logo et leur tranche |
+| `--paper` | #fdfdfd | Dialogue, chargement |
+| `--ink` | #333d3f | Contours, texte |
+| `--yellow`, `--yellow-side` | #f2cf59, #c9a23a | Bouton-bloc, fiche active |
+| `--blue` | #66bee6 | Étiquette du nom, flèche |
+| `--red`, `--orange`, `--green`, `--green-light`, `--wall`… | — | Couleurs de la planète |
+
+## Mise en page
+
+- Écran-titre : la planète (≈ 45 % de la largeur), son logo, le bouton ; rien d'autre.
+- Page de présentation : la planète reste à l'écran et glisse à gauche, une colonne de 520px à droite (fiches de quartier, dialogue) ; puis une section crème et une section d'appel.
+- Détail et mobile : `references/layouts.md`.
+
+## Mouvement
+
+**Observé** sur le site : écran de chargement blanc, volet turquoise incliné, planète qui grossit, blocs qui se posent, bouton en dernier, dialogue lettre à lettre. **Proposé** : les durées et les courbes, la rotation lente de la planète, le pivot vers un quartier, le glissement au défilement, les touches qui s'enfoncent. Détail, code et mesures : `references/motion.md`.
 
 ## Images et 3D
 
-Pas de photo : le cœur du style est une **petite planète low-poly en Three.js**, toute ronde, avec herbe, chemins de pierre, maisons à toit rouge, arbres et rochers posés selon la normale, en ombrage cel 3 tons aux couleurs des tokens. On la fait **tourner au glisser** (inertie, rotation lente au repos) et la caméra zoome au lancement du jeu. Repli : capture du rendu, sinon un simple disque token. Jamais de dessin CSS/SVG à la place d'une maison, d'un arbre ou d'un personnage. Recette complète dans `references/assets.md`.
+- **La 3D est le sujet** : une planète Three.js faite de formes simples, matériaux à trois paliers, contour d'encre par coque inversée, géométries fusionnées.
+- **Canvas à la taille de la planète** (620px au plus), rendu à la demande à 30 images/s, arrêté hors écran ; repli en disque à contour sans WebGL.
+- **Pas de photo** dans ce style. Si un projet en a, elles vivent plus bas, en petites vignettes à contour d'encre.
+- Un vrai projet remplace la planète de la démo par son propre modèle : voir `references/assets.md`.
 
-## Signature
+## Accessibilité
 
-**Le logo posé sur la planète** : lettres-blocs crème disposées en grille 3×3 par-dessus la planète, avec une ombre portée vers le centre comme si elles étaient des bâtiments.
+- Le nom du jeu est un `h1` hors écran ; les blocs du logo sont décoratifs.
+- Le canvas porte un nom accessible qui décrit la planète et le geste.
+- Dialogue en `aria-live="polite"` ; le bouton « suivant » est libellé ; fiches de quartier en `aria-pressed`.
+- Contrastes vérifiés dans `tokens.css` (`@contrast`) ; l'étiquette bleue porte du texte sombre.
+- `prefers-reduced-motion` : plus de rotation automatique, de chute ni de frappe ; tout reste utilisable.
 
-## À éviter
+## À ne pas faire
 
-- Ajouter une barre de navigation, un pied de page chargé ou du texte autour de l'écran-titre.
-- Des ombres floues : les reliefs sont pleins et nets.
-- Des couleurs saturées criardes : tout est un peu poudré.
-- Reproduire le monde, le logo ou les personnages de la référence.
+- Remplir l'écran-titre : pas de navigation, pas de paragraphe, pas d'image.
+- Mettre le canvas en plein écran ou le redessiner en continu quand rien ne bouge.
+- Lisser le rendu (dégradés, reflets, ombres douces).
+- Écrire de longs textes dans la police en blocs ou en pixels.
+- Animer les poussières.
 
-## Adaptation React / React Native
+## Vérification
 
-- Planète : `react-three-fiber` sur le web ; en natif, `expo-gl` + `@react-three/fiber/native`, ou une capture du rendu qui tourne (`Animated` rotate).
-- Bouton relief : `Pressable` avec `translateY` de 4px à l'appui et une `View` sœur décalée pour le bord.
-- Polices : `@expo-google-fonts/bungee`, `silkscreen`, `nunito`.
-
-## Avant de livrer
-
-- [ ] Un seul élément central, un seul bouton d'action.
-- [ ] Aucune couleur pure (ni blanc, ni noir).
-- [ ] Reliefs pleins, éléments penchés.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Version sans WebGL fonctionnelle, mouvement réduit respecté.
-- [ ] Testé à 375px et 1440px.
+1. `python3 tools/check.py tiny-planet-toy` passe.
+2. À 1440px et à 390px : pas de défilement horizontal, aucune erreur dans la console.
+3. La planète s'affiche, tourne à la main et pivote vers chaque quartier.
+4. Sans WebGL ou sans script, la page reste lisible (repli, pas de volet bloquant).
+5. Mouvement réduit : rien ne bouge seul.

@@ -1,39 +1,63 @@
 /*
  * Tiny Planet Toy — tokens
- * Couleurs relevées sur captures (rendu WebGL, non mesurable par script), voir source.md.
- * @contrast text:bg muted:paper text:paper on-accent:accent
+ * MESURÉS le 2026-10-03 par lecture des pixels sur des captures du site (messenger.abeto.co, 1440 × 900) : écran-titre, chargement, rue, boîte de dialogue.
+ * Le site est rendu entièrement en WebGL : aucun style calculé n'existe. Tailles lues sur les captures ; durées observées à l'œil ou proposées.
+ * @contrast ink:sky ink:sky-light ink:cream ink:paper ink:yellow ink:blue ink:card soft:paper soft:cream cream:sky-deep:large paper:ink
  */
 :root {
-  /* Couleurs */
-  --bg: #63c5be;            /* turquoise de l'espace autour de la planète */
-  --bg-deep: #4fb3ac;
-  --speck: rgb(255 255 255 / 0.35);  /* poussières qui flottent */
-  --paper: #f6f1e4;         /* lettres du logo, panneaux, bulles */
-  --text: #173b3a;          /* encre vert sapin */
-  --muted: #4a5a58;
-  --accent: #f4c84a;        /* bouton jaune « BEGIN » */
-  --accent-edge: #c9952a;   /* bord inférieur du bouton (relief) */
-  --on-accent: #2b2118;
-  --grass: #4c9a5a; --roof: #d0644a; --stone: #b9b5a6; --sky-shadow: rgb(23 59 58 / 0.18);
+  /* ---- Couleurs ---- */
+  --sky: #65c1bc;           /* mesuré : fond de l'écran-titre (99 184 points), ciel du jeu */
+  --sky-light: #9ee5d5;     /* mesuré : nuages plats, poussières, halos autour de la planète */
+  --sky-deep: #2a8490;      /* mesuré : eau, ombres du ciel */
+  --cream: #eef2e4;         /* mesuré : lettres-blocs du logo */
+  --cream-side: #b8b7a2;    /* mesuré : tranche des lettres-blocs */
+  --paper: #fdfdfd;         /* mesuré : panneau de dialogue, écran de chargement */
+  --card: #f4f6ec;          /* choisi : fiches sur fond turquoise */
+  --ink: #333d3f;           /* mesuré : contours d'encre, texte (#333d3f à #3a383b) */
+  --soft: #55615f;          /* choisi : texte secondaire */
+  --yellow: #f2cf59;        /* mesuré : bouton « BEGIN » (#eaca65 à #f2cf59) */
+  --yellow-side: #c9a23a;   /* lu : tranche du bouton */
+  --blue: #66bee6;          /* mesuré : étiquette du nom, flèche « suivant » */
+  --red: #b75758;           /* mesuré : veste du personnage */
+  --orange: #e0803c;        /* lu : phare, toits, bouée */
+  --green: #306840;         /* mesuré : arbres de la planète */
+  --green-light: #61a78d;   /* mesuré : pont, herbe claire */
+  --wall: #98a898;          /* mesuré : murs gris-vert des maisons */
+  --wall-warm: #a8a098;     /* mesuré : murs gris chaud */
+  --road: #6f9190;          /* mesuré : chaussée */
+  --shadow: rgb(51 61 63 / 0.28);          /* choisi : ombre douce sous la planète */
 
-  /* Typographie */
-  --font-display: 'Bungee', 'Rubik Mono One', system-ui, sans-serif;  /* lettres-blocs du logo */
-  --font-ui: 'Silkscreen', ui-monospace, monospace;                   /* bouton, étiquettes de jeu */
-  --font-body: 'Nunito', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 2rem;
-  --text-logo: clamp(3rem, 10vw, 7rem);
+  /* ---- Typographie ---- */
+  --font-block: 'Rubik Mono One', 'Arial Black', sans-serif;   /* site : lettres-blocs dessinées en 3D, pas une police */
+  --font-pixel: 'Silkscreen', 'Courier New', monospace;        /* site : étiquettes en lettres carrées, dessinées */
+  --font-hand: 'Patrick Hand', 'Comic Sans MS', cursive;       /* site : texte des dialogues en capitales tracées à la main */
+  --fs-block: clamp(1.6rem, 4.4vw, 3.9rem);      /* lu : lettre d'un bloc du logo */
+  --fs-h2: clamp(1.5rem, 3vw, 2.6rem);
+  --fs-dialog: clamp(1.25rem, 1.9vw, 1.6rem);    /* lu : texte du dialogue ≈ 24px */
+  --fs-body: 1.25rem;       /* choisi : texte courant, la police à main levée est petite d'œil */
+  --fs-tag: 1.0625rem;      /* lu : étiquette du nom ≈ 17px */
+  --fs-small: 0.875rem;
 
-  /* Espace */
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+  /* ---- Formes ---- */
+  --bw: 3px;                /* lu : trait d'encre des panneaux */
+  --drop: 5px 5px 0 0 var(--ink);          /* lu : ombre décalée de l'étiquette et du bouton « suivant » */
+  --r: 4px;                 /* lu : angles presque vifs */
+  --depth: 8px;             /* lu : épaisseur du bouton et des blocs */
+  --tilt: -4deg;            /* lu : inclinaison du bouton jaune */
+  --wipe: -7deg;            /* lu : pente du volet turquoise à l'entrée */
 
-  /* Formes */
-  --radius-sm: 4px; --radius-md: 10px; --radius-lg: 20px;
-  --tilt: -3deg;            /* bouton et bulles légèrement penchés */
-  --press: 4px;             /* hauteur du relief des boutons */
-  --outline: 2px solid var(--text);
+  /* ---- Grille ---- */
+  --page: 1200px;
+  --gutter: clamp(16px, 5vw, 64px);
+  --planet: clamp(280px, 46vw, 620px);     /* lu : la planète et son logo occupent ≈ 45 % de la largeur à 1440 */
+  --dialog-w: 720px;        /* mesuré : panneau ≈ 715 × 122px, étiquette ≈ 210 × 50px */
+  --dialog-h: 122px;
 
-  /* Mouvement */
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
-  --dur-fast: 150ms; --dur: 350ms; --spin: 60s;
+  /* ---- Mouvement ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-drop: cubic-bezier(0.34, 1.56, 0.64, 1);   /* proposé : rebond des blocs qui tombent */
+  --dur-fast: 160ms;
+  --dur: 450ms;
+  --dur-wipe: 900ms;        /* observé à l'œil : le volet traverse l'écran en un peu moins d'une seconde */
+  --type-speed: 28ms;       /* observé à l'œil : une lettre toutes les 30ms environ */
 }

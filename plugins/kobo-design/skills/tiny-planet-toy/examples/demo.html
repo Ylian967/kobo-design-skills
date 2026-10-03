@@ -3,90 +3,262 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Postillon — Tiny Planet Toy (démo)</title>
+<title>Estafette — un jeu de tournée sur une toute petite planète</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Silkscreen&family=Nunito:wght@600;800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik+Mono+One&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #63c5be; --bg-deep: #4fb3ac; --speck: rgb(255 255 255 / 0.35); --paper: #f6f1e4; --text: #173b3a; --muted: #4a5a58;
-  --accent: #f4c84a; --accent-edge: #c9952a; --on-accent: #2b2118; --grass: #4c9a5a; --roof: #d0644a; --stone: #b9b5a6; --sky-shadow: rgb(23 59 58 / 0.18);
-  --font-display: 'Bungee', 'Rubik Mono One', system-ui, sans-serif; --font-ui: 'Silkscreen', ui-monospace, monospace; --font-body: 'Nunito', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 2rem; --text-logo: clamp(2.2rem, 7vw, 4.4rem);
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
-  --radius-sm: 4px; --radius-md: 10px; --radius-lg: 20px; --tilt: -3deg; --press: 4px; --outline: 2px solid var(--text);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1); --ease: cubic-bezier(0.25, 0.8, 0.25, 1); --dur-fast: 150ms; --dur: 350ms; --spin: 60s;
+  --sky: #65c1bc; --sky-light: #9ee5d5; --sky-deep: #2a8490; --cream: #eef2e4; --cream-side: #b8b7a2; --paper: #fdfdfd; --card: #f4f6ec; --ink: #333d3f; --soft: #55615f;
+  --yellow: #f2cf59; --yellow-side: #c9a23a; --blue: #66bee6; --red: #b75758; --orange: #e0803c; --green: #306840; --green-light: #61a78d; --wall: #98a898;
+  --wall-warm: #a8a098; --road: #6f9190; --shadow: rgb(51 61 63 / 0.28); --font-block: 'Rubik Mono One', 'Arial Black', sans-serif;
+  --font-pixel: 'Silkscreen', 'Courier New', monospace; --font-hand: 'Patrick Hand', 'Comic Sans MS', cursive; --fs-block: clamp(1.6rem, 4.4vw, 3.9rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2.6rem); --fs-dialog: clamp(1.25rem, 1.9vw, 1.6rem); --fs-body: 1.25rem; --fs-tag: 1.0625rem; --fs-small: 0.875rem; --bw: 3px;
+  --drop: 5px 5px 0 0 var(--ink); --r: 4px; --depth: 8px; --tilt: -4deg; --wipe: -7deg; --page: 1200px; --gutter: clamp(16px, 5vw, 64px);
+  --planet: clamp(280px, 46vw, 620px); --dialog-w: 720px; --dialog-h: 122px; --ease: cubic-bezier(0.22, 1, 0.36, 1); --ease-drop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 160ms; --dur: 450ms; --dur-wipe: 900ms; --type-speed: 28ms;
 }
-* { box-sizing: border-box; }
-html, body { height: 100%; overflow: hidden; }
-body { margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 600 var(--text-base)/1.5 var(--font-body); }
-:focus-visible { outline: 3px solid var(--text); outline-offset: 4px; }
-.scene { position: relative; height: 100%; display: grid; place-items: center; align-content: center; gap: var(--space-8); }
-.specks i { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--speck); animation: drift var(--d, 30s) linear infinite; }
-.specks i:nth-child(3n) { width: 0; height: 0; border-radius: 0; background: none; border: 6px solid transparent; border-bottom-color: var(--speck); }
-.specks i:nth-child(4n) { width: 22px; height: 22px; opacity: .6; }
-.stage { position: relative; display: grid; place-items: center; }
-.planet { position: relative; width: min(84vw, 520px); aspect-ratio: 1; touch-action: none; cursor: grab; animation: pop 700ms var(--ease-bounce) both; }
-.planet:active { cursor: grabbing; }
-.planet canvas { position: absolute; inset: 0; z-index: 1; display: block; }
-/* Repli sans WebGL : disque aux couleurs des tokens (à remplacer par une capture du rendu) */
-.planet__fallback { position: absolute; inset: 12%; border-radius: 50%; background: radial-gradient(circle at 38% 32%, var(--stone), var(--grass) 70%); box-shadow: 0 0 0 18px var(--bg-deep), inset -20px -30px 0 var(--sky-shadow); transition: opacity var(--dur) var(--ease), transform 900ms var(--ease); }
-.planet.is-3d-ready .planet__fallback { opacity: 0; }
-.logo { position: absolute; display: grid; grid-template-columns: repeat(3, auto); gap: 2px 6px; margin: 0; font: 400 var(--text-logo)/0.95 var(--font-display); color: var(--paper); -webkit-text-stroke: 2px var(--text); paint-order: stroke; text-shadow: 4px 6px 0 var(--sky-shadow); pointer-events: none; z-index: 2; }
-.logo span { display: block; animation: drop 500ms var(--ease-bounce) both; animation-delay: calc(400ms + var(--i) * 60ms); }
-.logo span:nth-child(odd) { transform: rotate(1deg) translateY(1px); }
-.toy-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 var(--space-8); border: var(--outline); border-radius: var(--radius-sm); background: var(--accent); color: var(--on-accent); font: 400 var(--text-base)/1 var(--font-ui); text-transform: uppercase; cursor: pointer; transform: rotate(var(--tilt)); box-shadow: 0 var(--press) 0 var(--accent-edge); transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
-.toy-btn:hover { transform: rotate(var(--tilt)) translateY(-2px); box-shadow: 0 calc(var(--press) + 2px) 0 var(--accent-edge); }
-.toy-btn:active { transform: rotate(var(--tilt)) translateY(var(--press)); box-shadow: 0 0 0 var(--accent-edge); }
-.hud { position: absolute; inset: var(--space-4) var(--space-4) auto; display: flex; justify-content: space-between; pointer-events: none; }
-.hud > * { pointer-events: auto; }
-.pill { padding: 6px 12px; background: var(--paper); border: var(--outline); border-radius: 999px; font: 400 var(--text-sm) var(--font-ui); }
-.round { width: 44px; height: 44px; border-radius: 50%; background: var(--paper); border: var(--outline); font-size: 18px; cursor: pointer; }
-.bubble { position: absolute; left: 50%; bottom: var(--space-8); width: min(520px, calc(100% - 32px)); transform: translateX(-50%) scale(.6); opacity: 0; padding: var(--space-6); background: var(--paper); border: var(--outline); border-radius: var(--radius-md); transition: transform var(--dur) var(--ease-bounce), opacity var(--dur) var(--ease); }
-.bubble.is-open { transform: translateX(-50%) scale(1); opacity: 1; }
-.bubble b { position: absolute; top: -14px; left: 20px; padding: 2px 8px; background: var(--accent); border: var(--outline); font: 400 var(--text-xs) var(--font-ui); text-transform: uppercase; }
-.bubble p { margin: 0; }
-.hint { position: absolute; bottom: var(--space-4); left: 0; right: 0; text-align: center; font: 400 var(--text-xs) var(--font-ui); color: var(--text); opacity: .7; }
-body.is-playing .logo { transform: translateY(-60vh); transition: transform 900ms var(--ease); }
-body.is-playing .planet:not(.is-3d-ready) .planet__fallback { transform: scale(1.6); }
-body.is-playing #begin { visibility: hidden; }
-@keyframes pop { from { scale: .8; opacity: 0; } }
-@keyframes drop { from { transform: translateY(-80px); opacity: 0; } }
-@keyframes drift { from { transform: translate(0, 0) rotate(0); } to { transform: translate(120px, -80px) rotate(1turn); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } .specks { display: none; } }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--sky); color: var(--ink); font: 400 var(--fs-body)/1.45 var(--font-hand); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; border: 0; background: none; padding: 0; cursor: pointer; }
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.wrap { width: min(100%, calc(var(--page) + 2 * var(--gutter))); margin-inline: auto; padding-inline: var(--gutter); }
+.pixel { font-family: var(--font-pixel); text-transform: uppercase; letter-spacing: 0.04em; }
+h2 { font: 400 var(--fs-h2)/1.1 var(--font-block); text-transform: uppercase; }
+
+/* ---------- Chargement et volet d'entrée ---------- */
+.loader { position: fixed; z-index: 50; left: -30%; top: -40%; width: 160%; height: 180%; display: grid; place-items: center; background: var(--paper); transform: rotate(var(--wipe)); transition: transform var(--dur-wipe) cubic-bezier(0.65, 0, 0.35, 1); }
+.loader > div { display: grid; justify-items: center; gap: 8px; transform: rotate(calc(var(--wipe) * -1)); font-size: var(--fs-small); letter-spacing: 0.2em; }
+.loader svg { width: 34px; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+.is-ready .loader { transform: rotate(var(--wipe)) translateY(-115%); }
+html:not(.js) .loader { display: none; }
+
+/* ---------- Monde : la planète reste à l'écran pendant deux sections ---------- */
+.world { position: relative; }
+.dust { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.dust i { position: absolute; width: var(--s); height: var(--s); border-radius: var(--r, 50%); background: var(--sky-light); opacity: var(--o, 0.8); transform: rotate(var(--a, 0deg)); }
+.planet { position: sticky; z-index: 3; top: calc(50vh - var(--planet) / 2 - 30px); width: var(--planet); height: var(--planet); margin: 0 auto calc(var(--planet) * -1); transform: translate3d(calc(var(--p, 0) * var(--shift, -24vw)), 0, 0) scale(calc(1 - var(--p, 0) * 0.12)); }
+.planet-in::before { content: ""; position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(closest-side, var(--sky-light) 72%, transparent 100%); opacity: 0.55; }
+.planet-in { position: absolute; inset: 0; transform: scale(0.18) translateY(-90%); transition: transform 1400ms var(--ease) 500ms; }
+.is-ready .planet-in { transform: none; }
+.planet canvas { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: pan-y; }
+.planet canvas:active { cursor: grabbing; }
+.fallback { position: absolute; inset: 14%; border: var(--bw) solid var(--ink); border-radius: 50%; background: radial-gradient(circle at 34% 30%, var(--green-light), var(--green) 70%); }
+.has-3d .fallback { display: none; }
+
+/* Logo : neuf lettres-blocs posées sur la planète */
+.logo { position: absolute; z-index: 2; left: 50%; top: 47%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5%; width: 58%; aspect-ratio: 1; transform: translate(-50%, -50%); pointer-events: none; transition: opacity var(--dur) ease, transform var(--dur) var(--ease); }
+.logo span { display: grid; place-items: center; border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--cream); box-shadow: 0 var(--depth) 0 0 var(--cream-side), 0 var(--depth) 0 var(--bw) var(--ink); font: 400 var(--fs-block)/1 var(--font-block); transform: translateY(-140vh) rotate(var(--a, 0deg)); transition: transform 700ms var(--ease-drop) var(--d, 0ms); }
+.is-ready .logo span { transform: rotate(var(--a, 0deg)); }
+.begin { position: absolute; z-index: 2; left: 50%; bottom: -9%; height: 52px; padding-inline: 30px; display: grid; place-items: center; border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--yellow); box-shadow: 0 var(--depth) 0 0 var(--yellow-side), 0 var(--depth) 0 var(--bw) var(--ink); font: 700 1.125rem var(--font-pixel); letter-spacing: 0.08em; text-transform: uppercase; transform: translateX(-50%) rotate(var(--tilt)) scale(0); transition: transform 500ms var(--ease-drop) 1700ms, box-shadow var(--dur-fast), opacity var(--dur); }
+.is-ready .planet .begin { transform: translateX(-50%) rotate(var(--tilt)); }
+.is-done .planet .begin { transition: transform var(--dur) var(--ease-drop), box-shadow var(--dur-fast), opacity var(--dur); }
+.is-done .planet .begin:hover { transform: translateX(-50%) rotate(2deg) translateY(-3px); }
+.is-done .planet .begin:active { transform: translateX(-50%) rotate(var(--tilt)) translateY(var(--depth)); box-shadow: 0 0 0 0 var(--yellow-side), 0 0 0 var(--bw) var(--ink); }
+.is-away .logo, .is-away .planet .begin { opacity: 0; pointer-events: none; }
+.is-away .logo { transform: translate(-50%, -62%); }
+
+.hero { position: relative; height: max(100vh, 660px); }
+.hint { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); font-size: var(--fs-small); opacity: 0.8; }
+
+/* ---------- Quartiers ---------- */
+.districts { position: relative; z-index: 4; min-height: max(100vh, 720px); display: grid; align-items: center; padding-block: 60px; pointer-events: none; }
+.districts .col { width: min(100%, 520px); margin-left: auto; pointer-events: auto; }
+.districts p.lead { margin-top: 14px; }
+.tabs { display: grid; gap: 14px; margin-top: 28px; }
+.tab { display: grid; grid-template-columns: 54px 1fr auto; align-items: center; gap: 14px; width: 100%; padding: 12px 16px 12px 12px; border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--card); box-shadow: var(--drop); text-align: left; transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur-fast); }
+.tab:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0 0 var(--ink); }
+.tab[aria-pressed="true"] { background: var(--yellow); }
+.tab i { display: grid; place-items: center; width: 54px; height: 54px; border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--c); font: 400 1.25rem var(--font-block); font-style: normal; }
+.tab b { display: block; font: 700 1rem var(--font-pixel); text-transform: uppercase; letter-spacing: 0.04em; }
+.tab small { display: block; font-size: 1.0625rem; line-height: 1.25; color: var(--soft); }
+.tab[aria-pressed="true"] small { color: var(--ink); }
+.tab em { font-style: normal; font-size: 1.4rem; transition: transform var(--dur) var(--ease); }
+.tab:hover em, .tab[aria-pressed="true"] em { transform: translateX(4px); }
+
+/* ---------- Boîte de dialogue ---------- */
+.dialog { position: relative; margin-top: 44px; }
+.dialog .name { position: relative; z-index: 1; display: inline-grid; place-items: center; height: 46px; margin-left: -14px; padding-inline: 24px; border: var(--bw) solid var(--ink); background: var(--blue); box-shadow: var(--drop); font-weight: 700; font-size: var(--fs-tag); transform: rotate(-1.5deg); }
+.dialog .say { position: relative; min-height: var(--dialog-h); margin-top: -10px; padding: 26px 70px 22px 28px; border: var(--bw) solid var(--ink); background: var(--paper); box-shadow: var(--drop); font-size: var(--fs-dialog); line-height: 1.3; text-transform: uppercase; letter-spacing: 0.03em; clip-path: polygon(0 0, 100% 3%, 100% 100%, 1% 100%); filter: none; }
+.dialog .shadow { position: absolute; inset: 36px -6px -6px 6px; background: var(--ink); clip-path: polygon(0 0, 100% 3%, 100% 100%, 1% 100%); }
+.dialog .next { position: absolute; z-index: 1; right: -12px; bottom: -14px; display: grid; place-items: center; width: 46px; height: 46px; border: var(--bw) solid var(--ink); background: var(--paper); box-shadow: var(--drop); transition: transform var(--dur) var(--ease-drop); }
+.dialog .next:hover { transform: translateX(4px) rotate(4deg); }
+.dialog .next:active { transform: translate(5px, 5px); box-shadow: 0 0 0 0 var(--ink); }
+.dialog .next svg { width: 20px; fill: var(--blue); stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; }
+.caret { display: inline-block; width: 0.5em; height: 0.9em; margin-left: 2px; vertical-align: -0.1em; background: var(--ink); }
+.is-typing .caret { animation: blink 500ms steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Comment jouer ---------- */
+.how { position: relative; z-index: 4; padding-block: clamp(60px, 8vw, 110px); background: var(--cream); border-block: var(--bw) solid var(--ink); }
+.how h2 { text-align: center; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+.step { padding: 26px 22px 28px; border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--paper); box-shadow: var(--drop); text-align: center; }
+.keys { display: flex; justify-content: center; align-items: flex-end; gap: 8px; height: 104px; }
+.key { display: grid; place-items: center; min-width: 44px; height: 44px; padding-inline: 10px; border: var(--bw) solid var(--ink); border-radius: var(--r); background: var(--c, var(--cream)); box-shadow: 0 6px 0 0 var(--cream-side), 0 6px 0 var(--bw) var(--ink); font: 700 1rem var(--font-pixel); transition: transform var(--dur-fast), box-shadow var(--dur-fast); }
+.key.up { margin-bottom: 52px; margin-inline: -52px; }
+.step:hover .key { animation: tap 900ms var(--ease) var(--d, 0ms); }
+@keyframes tap { 30% { transform: translateY(6px); box-shadow: 0 0 0 0 var(--cream-side), 0 0 0 var(--bw) var(--ink); } }
+.step h3 { margin-top: 22px; font: 700 1.0625rem var(--font-pixel); text-transform: uppercase; }
+.step p { margin-top: 8px; color: var(--soft); }
+
+/* ---------- Appel et pied ---------- */
+.cta { position: relative; z-index: 4; padding-block: clamp(60px, 8vw, 110px); background: var(--sky-deep); color: var(--cream); text-align: center; }
+.cta p { max-width: 520px; margin: 14px auto 0; font-size: 1.5rem; line-height: 1.3; }
+.cta .begin { position: static; display: inline-grid; margin-top: 34px; color: var(--ink); transform: rotate(var(--tilt)); transition: transform var(--dur) var(--ease-drop), box-shadow var(--dur-fast); }
+.cta .begin:hover { transform: rotate(2deg) translateY(-3px); }
+.cta .begin:active { transform: rotate(var(--tilt)) translateY(var(--depth)); box-shadow: 0 0 0 0 var(--yellow-side), 0 0 0 var(--bw) var(--ink); }
+.foot { position: relative; z-index: 4; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding: 22px var(--gutter); background: var(--ink); color: var(--paper); font-size: var(--fs-small); }
+
+/* ---------- Apparitions ---------- */
+.js .rise { opacity: 0; transform: translateY(20px); transition: opacity 600ms ease var(--d, 0ms), transform 700ms var(--ease) var(--d, 0ms); }
+.js .in .rise { opacity: 1; transform: none; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+  .planet { position: relative; top: auto; margin: 90px auto calc(var(--planet) * -1 - 90px); --shift: 0vw; transform: none; }
+  .is-away .logo, .is-away .planet .begin { opacity: 1; pointer-events: auto; }
+  .is-away .logo { transform: translate(-50%, -50%); }
+  .hero { height: calc(var(--planet) + 190px); min-height: 480px; }
+  .hint { display: none; }
+  .districts { min-height: 0; }
+  .districts .col { margin-inline: auto; }
+  .steps { grid-template-columns: 1fr; }
+  .dialog .name { margin-left: 0; }
+  .dialog .next { right: -6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .js .rise { opacity: 1; transform: none; }
+  .planet { transform: translate3d(calc(var(--p, 0) * var(--shift, -24vw)), 0, 0); }
+}
 </style>
 </head>
 <body>
-<main class="scene">
-  <div class="specks" aria-hidden="true">
-    <i style="left:8%;top:12%;--d:34s"></i><i style="left:22%;top:70%;--d:26s"></i><i style="left:40%;top:20%;--d:40s"></i><i style="left:63%;top:82%;--d:30s"></i>
-    <i style="left:78%;top:30%;--d:24s"></i><i style="left:90%;top:60%;--d:36s"></i><i style="left:12%;top:45%;--d:28s"></i><i style="left:55%;top:8%;--d:32s"></i>
-    <i style="left:70%;top:50%;--d:38s"></i><i style="left:33%;top:88%;--d:22s"></i><i style="left:85%;top:12%;--d:30s"></i><i style="left:4%;top:85%;--d:42s"></i>
-  </div>
-  <div class="hud"><span class="pill">LETTRES 0/12</span><button class="round" aria-label="Couper le son">♪</button></div>
-  <div class="stage">
-    <div class="planet" data-3d data-slot="planet" aria-hidden="true">
-      <div class="planet__fallback"></div>
+<script>document.documentElement.classList.add('js');</script>
+
+<div class="loader pixel" aria-hidden="true"><div><svg viewBox="0 0 34 26"><rect x="2" y="2" width="30" height="22" rx="2"/><path d="M2 4l15 11L32 4"/></svg>Chargement</div></div>
+
+<main>
+<div class="world" id="world">
+  <div class="dust" id="dust" aria-hidden="true"></div>
+
+  <div class="planet" id="planet">
+    <div class="planet-in">
+      <div class="fallback" aria-hidden="true"></div>
+      <canvas id="scene" role="img" aria-label="Petite planète en volume couverte de maisons, d'arbres et d'un phare. Glissez pour la faire tourner."></canvas>
     </div>
-    <h1 class="logo" aria-label="Postillon"><span style="--i:0">P</span><span style="--i:1">O</span><span style="--i:2">S</span><span style="--i:3">T</span><span style="--i:4">I</span><span style="--i:5">L</span><span style="--i:6">L</span><span style="--i:7">O</span><span style="--i:8">N</span></h1>
+    <div class="logo" aria-hidden="true">
+      <span style="--a:-3deg;--d:900ms">E</span><span style="--a:2deg;--d:980ms">S</span><span style="--a:-1deg;--d:1060ms">T</span>
+      <span style="--a:2deg;--d:1140ms">A</span><span style="--a:-2deg;--d:1220ms">F</span><span style="--a:3deg;--d:1300ms">E</span>
+      <span style="--a:-2deg;--d:1380ms">T</span><span style="--a:1deg;--d:1460ms">T</span><span style="--a:-3deg;--d:1540ms">E</span>
+    </div>
+    <a class="begin" href="#quartiers">Entrer</a>
   </div>
-  <button class="toy-btn" id="begin">Commencer</button>
-  <div class="bubble" id="bubble" role="dialog" aria-live="polite"><b>Facteur</b><p id="say"></p></div>
-  <p class="hint">Glisser pour tourner · toucher pour parler · 3D : Three.js</p>
+
+  <section class="hero" aria-labelledby="titre">
+    <h1 class="sr" id="titre">Estafette — un jeu de tournée sur une toute petite planète</h1>
+    <p class="hint pixel" aria-hidden="true">Glissez la planète · défilez pour visiter</p>
+  </section>
+
+  <section class="districts wrap" id="quartiers" data-in>
+    <div class="col">
+      <h2 class="rise">Trois quartiers, une tournée</h2>
+      <p class="lead rise" style="--d:80ms">Vous portez le courrier d'une planète qu'on traverse à pied en dix minutes. Choisissez où commencer.</p>
+      <div class="tabs rise" style="--d:160ms" role="group" aria-label="Choisir un quartier">
+        <button class="tab" aria-pressed="true" data-spot="0"><i style="--c:var(--blue)">1</i><span><b>Le port</b><small>Un bateau en cale sèche, des caisses, un chat.</small></span><em>→</em></button>
+        <button class="tab" aria-pressed="false" data-spot="1"><i style="--c:var(--orange)">2</i><span><b>Le phare</b><small>On le voit de partout. Lui aussi vous voit.</small></span><em>→</em></button>
+        <button class="tab" aria-pressed="false" data-spot="2"><i style="--c:var(--green-light)">3</i><span><b>La vieille ville</b><small>Des toits serrés et une boîte aux lettres par porte.</small></span><em>→</em></button>
+      </div>
+      <div class="dialog rise" style="--d:260ms">
+        <span class="name pixel">Estafette</span>
+        <div class="shadow" aria-hidden="true"></div>
+        <p class="say" id="say" aria-live="polite"><span id="line"></span><span class="caret" aria-hidden="true"></span></p>
+        <button class="next" id="next" aria-label="Réplique suivante"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3l12 7-12 7z"/></svg></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="how" data-in>
+  <div class="wrap">
+    <h2 class="rise">Comment jouer</h2>
+    <div class="steps">
+      <article class="step rise" style="--d:80ms"><div class="keys"><span class="key">Q</span><span class="key up" style="--d:120ms">Z</span><span class="key" style="--d:60ms">S</span><span class="key" style="--d:180ms">D</span></div><h3>Marcher</h3><p>Quatre touches et l'horizon qui tourne sous vos pieds.</p></article>
+      <article class="step rise" style="--d:160ms"><div class="keys"><span class="key" style="--c:var(--blue);min-width:150px">Espace</span></div><h3>Parler</h3><p>Chaque habitant a une lettre à donner, ou une histoire à la place.</p></article>
+      <article class="step rise" style="--d:240ms"><div class="keys"><span class="key" style="--c:var(--yellow)">E</span><span class="key" style="--c:var(--yellow);--d:120ms">↵</span></div><h3>Livrer</h3><p>Trouvez la bonne porte avant que le soleil ait fait le tour.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cta" data-in>
+  <div class="wrap">
+    <h2 class="rise">Votre tournée commence</h2>
+    <p class="rise" style="--d:80ms">Gratuit, dans le navigateur, sans compte. Dix minutes suffisent pour faire le tour.</p>
+    <a class="begin" href="#world">Jouer maintenant</a>
+  </div>
+</section>
 </main>
+
+<footer class="foot pixel"><span>Estafette · jeu fictif, page de démonstration</span><span>© 2026</span></footer>
+
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const line = "Bonjour ! Douze lettres attendent d'être livrées sur cette petite planète. Tu m'aides ?";
-  const say = document.getElementById('say'), bubble = document.getElementById('bubble');
-  document.getElementById('begin').addEventListener('click', () => {
-    document.body.classList.add('is-playing'); bubble.classList.add('is-open');
-    if (reduce) { say.textContent = line; return; }
-    let i = 0; const t = setInterval(() => { say.textContent = line.slice(0, ++i); if (i >= line.length) clearInterval(t); }, 30);
-    bubble.addEventListener('click', () => { clearInterval(t); say.textContent = line; }, { once: true });
-  });
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement, planet = $('#planet');
+
+  // Poussières : posées une fois, immobiles
+  let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  $('#dust').innerHTML = Array.from({ length: 70 }, () => { const s = 3 + rnd() * 9 | 0;
+    return `<i style="left:${(rnd() * 100).toFixed(1)}%;top:${(rnd() * 100).toFixed(1)}%;--s:${s}px;--o:${(0.35 + rnd() * 0.5).toFixed(2)};--r:${rnd() > 0.6 ? '2px' : '50%'};--a:${rnd() * 90 | 0}deg"></i>`; }).join('');
+
+  // Entrée : le volet part quand la scène est prête, après 0.6s au moins et 1.5s au plus
+  const ready = () => { if (root.classList.contains('is-ready')) return; root.classList.add('is-ready'); setTimeout(() => root.classList.add('is-done'), 2400); };
+  const t0 = performance.now();
+  addEventListener('planet-ready', () => setTimeout(ready, Math.max(0, 600 - (performance.now() - t0)))); setTimeout(ready, 1500);
+
+  // Apparitions
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.15 });
+  $$('[data-in]').forEach(s => io.observe(s));
+
+  // Défilement : la planète glisse sur le côté, le logo s'efface
+  let tick = false;
+  const onScroll = () => { tick = false; const p = Math.min(1, scrollY / innerHeight);
+    planet.style.setProperty('--p', p.toFixed(3)); root.classList.toggle('is-away', p > 0.12); };
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(onScroll); } }, { passive: true }); onScroll();
+
+  // Dialogue : machine à écrire, une réplique à la fois
+  const lines = [
+    ['On dirait que j\'ai trop dormi… La tournée du port ne va pas se faire toute seule.', 'Le capitaine attend un colis depuis mardi. Il prétend que non, mais il regarde la route.', 'Attention au chat : il signe à la place des gens.'],
+    ['Le phare, c\'est cent douze marches. Je les ai comptées en montant, pas en descendant.', 'La gardienne ne reçoit jamais rien. Alors je lui écris, moi.'],
+    ['Dans la vieille ville, toutes les portes se ressemblent. Les boîtes aux lettres, non.', 'Celle au couvercle jaune est pour vous. Si, si. Regardez le nom.'],
+  ];
+  const lineEl = $('#line'), say = $('#say'); let spot = 0, n = 0, timer = 0, full = '';
+  const type = text => { clearInterval(timer); full = text;
+    if (still) { lineEl.textContent = text; return; }
+    let i = 0; lineEl.textContent = ''; say.classList.add('is-typing');
+    timer = setInterval(() => { lineEl.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(timer); say.classList.remove('is-typing'); } }, 28); };
+  const speak = () => type(lines[spot][n]);
+  $('#next').addEventListener('click', () => {
+    if (lineEl.textContent.length < full.length) { clearInterval(timer); lineEl.textContent = full; say.classList.remove('is-typing'); return; }
+    n = (n + 1) % lines[spot].length; speak(); });
+  const tabs = $$('.tab');
+  tabs.forEach(t => t.addEventListener('click', () => { tabs.forEach(o => o.setAttribute('aria-pressed', o === t));
+    spot = +t.dataset.spot; n = 0; speak(); dispatchEvent(new CustomEvent('planet-spot', { detail: spot })); }));
+  new IntersectionObserver(([e], o) => { if (e.isIntersecting) { speak(); o.disconnect(); } }, { threshold: 0.6 }).observe(say);
 })();
 </script>
+
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
@@ -95,146 +267,96 @@ body.is-playing #begin { visibility: hidden; }
 </script>
 <script type="module">
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
-const host = document.querySelector('[data-3d]');
+const canvas = document.querySelector('#scene'), holder = document.querySelector('#planet');
 const css = getComputedStyle(document.documentElement);
-const tok = (name) => new THREE.Color(css.getPropertyValue(name).trim());   // couleurs lues dans les tokens (hex)
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const col = name => new THREE.Color(css.getPropertyValue(name).trim());
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-let renderer;
-try {
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-} catch (e) { host.classList.add('no-webgl'); throw e; }
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-host.appendChild(renderer.domElement);
-renderer.domElement.setAttribute('aria-hidden', 'true');
-
-const C = { grass: tok('--grass'), stone: tok('--stone'), paper: tok('--paper'), roof: tok('--roof'),
-  accent: tok('--accent'), edge: tok('--accent-edge'), deep: tok('--bg-deep'), text: tok('--text') };
-const leaf = C.grass.clone().lerp(C.text, 0.25);          // vert plus sombre, dérivé des tokens
-
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
-camera.position.set(0, 0, 5.2);
+const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50); camera.position.set(0, 0, 6.3);
+scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(-3, 4, 5); scene.add(sun);
 
-scene.add(new THREE.HemisphereLight(C.paper, C.deep, 1.6));
-const sun = new THREE.DirectionalLight(C.paper, 2.2); sun.position.set(-3, 4, 4); scene.add(sun);
+// Dégradé en trois paliers : l'ombrage « dessin animé »
+const ramp = new THREE.DataTexture(new Uint8Array([120, 120, 120, 255, 200, 200, 200, 255, 255, 255, 255, 255]), 3, 1);
+ramp.minFilter = ramp.magFilter = THREE.NearestFilter; ramp.needsUpdate = true;
+const toon = name => new THREE.MeshToonMaterial({ color: col(name), gradientMap: ramp });
 
-// Ombrage cel en 3 paliers
-const grad = new THREE.DataTexture(new Uint8Array([90, 170, 255]), 3, 1, THREE.RedFormat);
-grad.minFilter = grad.magFilter = THREE.NearestFilter; grad.needsUpdate = true;
-const toon = (color) => new THREE.MeshToonMaterial({ color, gradientMap: grad });
-const flat = (g) => { const n = g.toNonIndexed(); n.computeVertexNormals(); return n; };   // facettes visibles (le toon n'a pas d'option flatShading)
-const M = { grass: toon(C.grass), stone: toon(C.stone), paper: toon(C.paper), roof: toon(C.roof), leaf: toon(leaf), trunk: toon(C.edge), door: toon(C.accent) };
+// Tout est posé sur la sphère puis fusionné par couleur : une dizaine de maillages en tout
+const R = 1, up = new THREE.Vector3(0, 1, 0), world = new THREE.Group(); scene.add(world);
+const bins = {}, outline = [];
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const dirOf = (lat, lon) => new THREE.Vector3(Math.cos(lat) * Math.sin(lon), Math.sin(lat), Math.cos(lat) * Math.cos(lon));
+const put = (geo, mat, dir, h = 0, s = 1, twist = 0, ink = 1.14) => {
+  const q = new THREE.Quaternion().setFromUnitVectors(up, dir).multiply(new THREE.Quaternion().setFromAxisAngle(up, twist));
+  const m = new THREE.Matrix4().compose(dir.clone().multiplyScalar(R + h), q, new THREE.Vector3(s, s, s));
+  const g = geo.index ? geo.toNonIndexed() : geo.clone();
+  (bins[mat] ||= []).push(g.clone().applyMatrix4(m));
+  if (ink) outline.push(g.clone().scale(ink, 1 + (ink - 1) * 0.6, ink).applyMatrix4(m));
+};
+const spots = [dirOf(0.25, 0.3), dirOf(1.05, 2.4), dirOf(-0.35, -1.9)];   // port, phare, vieille ville
+const water = [{ d: dirOf(0.1, 0.75), a: 0.42 }, { d: dirOf(-0.9, 2.9), a: 0.3 }];
+const wet = d => water.some(w => d.angleTo(w.d) < w.a + 0.06);
 
-let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+water.forEach(w => { const cap = new THREE.SphereGeometry(R * 1.006, 28, 8, 0, Math.PI * 2, 0, w.a).translate(0, -R, 0); put(cap, '--sky-deep', w.d, 0, 1, 0, 0); });
+const box = new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0), roof = new THREE.ConeGeometry(0.78, 0.6, 4).rotateY(Math.PI / 4).translate(0, 0.3, 0);
+const trunk = new THREE.CylinderGeometry(0.12, 0.16, 0.5, 5).translate(0, 0.25, 0), leaf = new THREE.IcosahedronGeometry(0.42, 0).translate(0, 0.75, 0);
+const walls = ['--cream', '--wall', '--wall-warm'], roofs = ['--orange', '--red', '--road'];
+const house = (d, s, t) => { const w = 0.8 + rnd() * 0.5, h = 0.6 + rnd() * 0.9;
+  put(box.clone().scale(w, h, 1), walls[rnd() * 3 | 0], d, -0.01, s, t);
+  put(roof.clone().scale(w, 1, 1).translate(0, h, 0), roofs[rnd() * 3 | 0], d, -0.01, s, t); };
+const tree = (d, s) => { put(trunk, '--wall-warm', d, -0.01, s, 0, 0); put(leaf.clone().scale(1, 0.9 + rnd() * 0.5, 1), rnd() > 0.5 ? '--green' : '--green-light', d, -0.01, s, rnd() * 3); };
+for (let i = 0; i < 150; i++) { const d = dirOf(Math.asin(rnd() * 2 - 1), rnd() * Math.PI * 2); if (wet(d)) continue;
+  const town = spots[2].angleTo(d) < 0.75 || spots[0].angleTo(d) < 0.5;
+  if (rnd() < (town ? 0.75 : 0.25)) house(d, 0.13 + rnd() * 0.07, rnd() * 3); else tree(d, 0.16 + rnd() * 0.1); }
+// Le phare : fût rayé, lanterne, toit
+for (let i = 0; i < 4; i++) put(new THREE.CylinderGeometry(0.34 - i * 0.03, 0.37 - i * 0.03, 0.5, 10).translate(0, 0.25 + i * 0.5, 0), i % 2 ? '--cream' : '--orange', spots[1], -0.01, 0.24, 0, 1.1);
+put(new THREE.CylinderGeometry(0.3, 0.3, 0.3, 10).translate(0, 2.15, 0), '--yellow', spots[1], -0.01, 0.24, 0, 1.1);
+put(new THREE.ConeGeometry(0.4, 0.4, 10).translate(0, 2.5, 0), '--red', spots[1], -0.01, 0.24, 0, 1.1);
+// Le bateau du port : coque et cabine
+put(new THREE.BoxGeometry(1.7, 0.45, 0.6).translate(0, 0.3, 0), '--paper', spots[0], 0, 0.2, 0.6);
+put(new THREE.BoxGeometry(1.7, 0.2, 0.62).translate(0, 0.1, 0), '--blue', spots[0], 0, 0.2, 0.6, 0);
+put(new THREE.BoxGeometry(0.6, 0.4, 0.4).translate(0.2, 0.72, 0), '--cream', spots[0], 0, 0.2, 0.6);
 
-const planet = new THREE.Group(); scene.add(planet);
+const ground = new THREE.Mesh(new THREE.IcosahedronGeometry(R, 5), toon('--green-light')); world.add(ground);
+world.add(new THREE.Mesh(new THREE.IcosahedronGeometry(R * 1.022, 5), new THREE.MeshBasicMaterial({ color: col('--ink'), side: THREE.BackSide })));
+for (const [name, list] of Object.entries(bins)) world.add(new THREE.Mesh(mergeGeometries(list), toon(name)));
+world.add(new THREE.Mesh(mergeGeometries(outline), new THREE.MeshBasicMaterial({ color: col('--ink'), side: THREE.BackSide })));
 
-// Halo derrière la planète
-const halo = new THREE.Mesh(new THREE.SphereGeometry(1.2, 48, 24), new THREE.MeshBasicMaterial({ color: C.deep, side: THREE.BackSide }));
-scene.add(halo);
+// Rendu à la demande : 30 images par seconde au plus, seulement si la planète est visible
+const front = new THREE.Vector3(0, 0.28, 1).normalize(), spin = new THREE.Quaternion();
+let visible = true, dragging = false, last = 0, idle = !still, tween = null, raf = 0, lx = 0, ly = 0;
+const size = () => { const s = holder.clientWidth; renderer.setSize(s, s, false); };
+const frame = t => { raf = 0; if (!visible) return;
+  if (t - last < 33) { raf = requestAnimationFrame(frame); return; }
+  const dt = Math.min(0.1, (t - last) / 1000); last = t;
+  if (tween) { const k = Math.min(1, (t - tween.t0) / 1100), e = 1 - Math.pow(1 - k, 3); world.quaternion.slerpQuaternions(tween.from, tween.to, e); if (k >= 1) tween = null; }
+  else if (idle && !dragging) world.rotateOnWorldAxis(up, dt * 0.16);
+  renderer.render(scene, camera);
+  if (tween || (idle && !dragging)) raf = requestAnimationFrame(frame); };
+const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+world.quaternion.setFromUnitVectors(spots[0], front);
+size(); addEventListener('resize', () => { size(); kick(); });
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) kick(); }).observe(holder);
+document.addEventListener('visibilitychange', () => { visible = !document.hidden; if (visible) kick(); });
 
-// Sol bosselé low-poly (déformation fonction de la position : pas de fissure entre faces)
-const groundGeo = new THREE.IcosahedronGeometry(1, 3);
-const gp = groundGeo.attributes.position, v = new THREE.Vector3();
-for (let i = 0; i < gp.count; i++) {
-  v.fromBufferAttribute(gp, i);
-  const k = 1 + 0.018 * Math.sin(5 * v.x + 1.1) * Math.sin(4 * v.y + 0.3) * Math.sin(6 * v.z + 2.2);
-  v.multiplyScalar(k); gp.setXYZ(i, v.x, v.y, v.z);
-}
-groundGeo.computeVertexNormals();
-planet.add(new THREE.Mesh(groundGeo, M.grass));
+// Glisser pour tourner ; choisir un quartier l'amène face à soi
+canvas.addEventListener('pointerdown', e => { dragging = true; tween = null; lx = e.clientX; ly = e.clientY; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointermove', e => { if (!dragging) return;
+  spin.setFromEuler(new THREE.Euler((e.clientY - ly) * 0.006, (e.clientX - lx) * 0.006, 0)); world.quaternion.premultiply(spin); lx = e.clientX; ly = e.clientY; kick(); });
+const drop = () => { dragging = false; kick(); };
+canvas.addEventListener('pointerup', drop); canvas.addEventListener('pointercancel', drop);
+addEventListener('planet-spot', e => { idle = false;
+  tween = { from: world.quaternion.clone(), to: new THREE.Quaternion().setFromUnitVectors(spots[e.detail], front), t0: performance.now() };
+  if (still) { world.quaternion.copy(tween.to); tween = null; } kick(); });
 
-// Deux chemins qui font le tour
-const roads = [new THREE.Vector3(0.25, 1, 0.2).normalize(), new THREE.Vector3(1, -0.3, 0.45).normalize()];
-for (const n of roads) {
-  const road = new THREE.Mesh(flat(new THREE.TorusGeometry(1.0, 0.045, 4, 96)), M.stone);
-  road.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), n);       // l'axe du tore = normale du plan du chemin
-  planet.add(road);
-}
-const onRoad = (p) => roads.some((n) => Math.abs(p.dot(n)) < 0.11);
-
-// Objets posés sur la surface, « haut » = normale
-const UP = new THREE.Vector3(0, 1, 0);
-function place(obj, dir, lift = 0.99) {
-  obj.position.copy(dir).multiplyScalar(lift);
-  obj.quaternion.setFromUnitVectors(UP, dir);
-  obj.rotateY(rnd() * Math.PI * 2);
-  planet.add(obj);
-}
-const houseBody = new THREE.BoxGeometry(0.13, 0.1, 0.12), houseRoof = flat(new THREE.ConeGeometry(0.115, 0.09, 4)), door = new THREE.BoxGeometry(0.03, 0.05, 0.005);
-houseBody.translate(0, 0.05, 0); houseRoof.rotateY(Math.PI / 4); houseRoof.translate(0, 0.145, 0); door.translate(0, 0.025, 0.061);
-const house = () => { const g = new THREE.Group(); g.add(new THREE.Mesh(houseBody, M.paper), new THREE.Mesh(houseRoof, M.roof), new THREE.Mesh(door, M.door)); return g; };
-const trunk = flat(new THREE.CylinderGeometry(0.012, 0.018, 0.06, 5)); trunk.translate(0, 0.03, 0);
-const ball = new THREE.IcosahedronGeometry(0.065, 0); ball.translate(0, 0.1, 0);
-const cone = flat(new THREE.ConeGeometry(0.06, 0.16, 6)); cone.translate(0, 0.13, 0);
-const tree = (round) => { const g = new THREE.Group(); g.add(new THREE.Mesh(trunk, M.trunk), new THREE.Mesh(round ? ball : cone, M.leaf)); g.scale.setScalar(0.8 + rnd() * 0.5); return g; };
-const rockGeo = new THREE.DodecahedronGeometry(0.04, 0);
-
-const COUNT = 90, golden = Math.PI * (3 - Math.sqrt(5));
-for (let i = 0; i < COUNT; i++) {                         // points de Fibonacci répartis sur la sphère
-  const y = 1 - (i / (COUNT - 1)) * 2, r = Math.sqrt(1 - y * y), th = golden * i;
-  const dir = new THREE.Vector3(Math.cos(th) * r, y, Math.sin(th) * r);
-  dir.x += (rnd() - 0.5) * 0.08; dir.z += (rnd() - 0.5) * 0.08; dir.normalize();
-  if (onRoad(dir)) continue;
-  const roll = rnd();
-  if (roll < 0.3) place(house(), dir);
-  else if (roll < 0.85) place(tree(roll < 0.55), dir);
-  else { const m = new THREE.Mesh(rockGeo, M.stone); m.scale.set(1, 0.6, 1); place(m, dir, 1.0); }
-}
-planet.rotation.set(0.35, -0.6, 0);
-
-function resize() {
-  const w = host.clientWidth, h = host.clientHeight;
-  renderer.setSize(w, h, false);
-  renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
-  camera.aspect = w / h; camera.updateProjectionMatrix();
-  if (reduce) render();
-}
-
-// Glisser pour tourner (avec inertie)
-let dragging = false, lx = 0, ly = 0, vx = 0, vy = 0, idle = 0;
-const AX = new THREE.Vector3(0, 1, 0), AY = new THREE.Vector3(1, 0, 0);
-function spin(dx, dy) { planet.rotateOnWorldAxis(AX, dx); planet.rotateOnWorldAxis(AY, dy); }
-host.addEventListener('pointerdown', (e) => { dragging = true; lx = e.clientX; ly = e.clientY; vx = vy = 0; host.setPointerCapture(e.pointerId); });
-host.addEventListener('pointermove', (e) => {
-  if (!dragging) return;
-  const k = 3 / host.clientWidth, dx = (e.clientX - lx) * k, dy = (e.clientY - ly) * k;
-  lx = e.clientX; ly = e.clientY; vx = dx; vy = dy; idle = 0; spin(dx, dy);
-  if (reduce) render();
-});
-const release = () => { dragging = false; if (reduce) vx = vy = 0; };
-host.addEventListener('pointerup', release); host.addEventListener('pointercancel', release);
-
-// Zoom caméra au lancement du jeu (pas de scale CSS sur le canvas)
-let zoomFrom = 1, zoomTo = 1, zoomT = 1;
-document.getElementById('begin').addEventListener('click', () => {
-  zoomFrom = camera.zoom; zoomTo = 1.6; zoomT = 0;
-  if (reduce) { camera.zoom = zoomTo; zoomT = 1; camera.updateProjectionMatrix(); render(); }
-});
-const easeOut = (x) => 1 - Math.pow(1 - x, 3);
-
-function render() { renderer.render(scene, camera); }
-new ResizeObserver(resize).observe(host); resize();
-
-const clock = new THREE.Clock();
-const spinRate = (Math.PI * 2) / (parseFloat(css.getPropertyValue('--spin')) || 60);   // un tour en --spin
-function tick() {
-  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
-  if (!dragging) {
-    spin(vx, vy); vx *= 0.92; vy *= 0.92;
-    idle += dt; if (idle > 1.2) planet.rotateOnWorldAxis(AX, spinRate * dt);
-  }
-  const s = t < 0.7 ? 0.8 + 0.2 * (1 + 2.70158 * Math.pow(t / 0.7 - 1, 3) + 1.70158 * Math.pow(t / 0.7 - 1, 2)) : 1;   // rebond d'apparition
-  planet.scale.setScalar(s);
-  if (zoomT < 1) { zoomT = Math.min(zoomT + dt / 0.9, 1); camera.zoom = zoomFrom + (zoomTo - zoomFrom) * easeOut(zoomT); camera.updateProjectionMatrix(); }
-  render();
-  requestAnimationFrame(tick);
-}
-reduce ? render() : tick();
-host.classList.add('is-3d-ready');
+document.documentElement.classList.add('has-3d');
+renderer.render(scene, camera); kick();
+dispatchEvent(new Event('planet-ready'));
 </script>
 </body>
 </html>

@@ -1,38 +1,68 @@
 # Tiny Planet Toy — mises en page
 
-## Écran-titre (plein écran, pas de défilement)
+## Écran-titre (vu sur le site)
 
 ```
-┌──────────────────────────────────────┐
-│ ·        ·            ·        ·     │  poussières
-│            ( planète + logo )         │  centre, 60–70 % de la hauteur
-│                 [ BEGIN ]             │  bouton jaune penché sous la planète
-│ ·    ·                    ·          │
-└──────────────────────────────────────┘
+┌──────────────────────────────────────────────┐  fond --sky, poussières
+│                                              │
+│               ┌───┬───┬───┐                  │
+│            ·  │ E │ S │ T │  ·               │  logo 3 × 3 sur la planète
+│          ( planète en volume )               │  ≈ 45 % de la largeur à 1440
+│               │ T │ T │ E │                  │
+│               └───┴───┴───┘                  │
+│                 [ ENTRER ]                   │  bloc jaune penché, sous la planète
+│                                              │
+│      glissez la planète · défilez            │
+└──────────────────────────────────────────────┘
 ```
-Hauteur `100dvh` (ou `height: 100%` sur html/body), centrage en grid, aucun autre texte visible.
 
-## Écran d'exploration
+Rien d'autre : pas de barre de navigation, pas de texte. Le site de référence s'arrête là avant de lancer le jeu.
 
-La planète grossit et la caméra se rapproche ; HUD dans les coins ; bulles de dialogue ancrées en bas au centre (max 520px).
+## Page de présentation (proposée)
 
-## Pages d'information (crédits, à propos)
+Le skill prolonge l'écran-titre par une page, pour présenter un jeu ou un projet :
 
-Panneau crème centré (max 560px) sur fond turquoise, titre Bungee, texte Nunito, bouton « Retour » relief. Ouvert par-dessus la scène, la planète continue de tourner derrière (floutée 4px).
+```
+│  écran-titre (100 % de la hauteur)             │
+├────────────────────────────────────────────────┤
+│  ( planète, glissée à gauche )   TROIS QUARTIERS│  la planète reste à l'écran
+│                                  texte          │
+│                                  [1 Le port   →]│  fiches de quartier
+│                                  [2 Le phare  →]│
+│                                  [3 Vieille…  →]│
+│                                  ┌ESTAFETTE┐    │
+│                                  │ dialogue │▶  │  boîte de dialogue
+├────────────────────────────────────────────────┤ crème, filets d'encre
+│               COMMENT JOUER                     │
+│   [touches]      [touche]      [touches]        │  trois fiches
+├────────────────────────────────────────────────┤ --sky-deep
+│          VOTRE TOURNÉE COMMENCE                 │
+│              [ JOUER MAINTENANT ]               │
+└────────────────────────────────────────────────┘
+```
 
-## Mobile
+- La planète est **collante** (`position: sticky`) sur les deux premières sections : en défilant elle glisse de 24 % de la largeur vers la gauche et rétrécit un peu, pendant que le logo s'efface. Choisir un quartier la fait pivoter.
+- Colonne de texte de 520px à droite ; contenu de 1200px au plus.
 
-- Planète à 80vw, logo réduit, bouton à 70 % de la hauteur.
-- Interaction au doigt : glisser pour tourner, toucher pour parler.
-- Orientation portrait privilégiée ; en paysage, la planète à gauche et les bulles à droite.
+## Mobile (proposé — sous 900px)
 
----
+- La planète n'est plus collante : elle reste dans l'écran-titre, avec son logo et son bouton.
+- Quartiers, dialogue, fiches : une colonne. Choisir un quartier change le dialogue ; la planète, plus haut, pivote quand même.
+- Les trois fiches de « Comment jouer » s'empilent.
 
-## Séquence réelle (observée sur le site, 2026-10-03)
+## Autres écrans (proposés)
 
-1. **Chargement** blanc (enveloppe dessinée + « CHARGEMENT ») ~10s.
-2. **Volet turquoise incliné** qui recouvre le blanc par le bas, planète minuscule au centre.
-3. La planète **grandit** en tournant, les poussières apparaissent, puis les **blocs du logo** tombent un à un ; le **bloc de départ** jaune apparaît dessous (~10s après le volet).
-4. Clic → retour au **chargement** blanc → volet incliné → **scène de jeu** plein écran, sans interface.
+**Menu de pause.** Panneau `--paper` à contour d'encre, de travers d'un degré, liste de boutons-blocs empilés (reprendre, carte, options, quitter).
 
-Sur un écran étroit (612px), la composition reste centrée : planète et logo occupent ~80 % de la largeur, bloc de départ à ~85 % de la hauteur.
+**Carte.** La planète en grand, des pastilles numérotées posées dessus ; la fiche du lieu choisi dans une boîte de dialogue.
+
+**Inventaire.** Grille de cases carrées à contour d'encre et tranche, un objet par case, étiquette `--blue` pour le nom.
+
+**Fin de partie.** Fond `--sky-deep`, titre en `--font-block` crème, compteur en `--font-pixel`, bouton-bloc pour rejouer.
+
+## Règles
+
+- **Une seule planète**, et rien ne la concurrence : pas de photo, pas d'illustration à côté.
+- Le fond de l'écran-titre reste uni ; les sections suivantes alternent turquoise, crème et bleu-vert profond.
+- Les titres sont courts : la police en blocs est large.
+- Pas de barre de navigation sur l'écran-titre.
