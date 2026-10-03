@@ -54,7 +54,7 @@ Un site **animé** (HTML et CSS, sans canvas) : écran de chargement, carrousels
 ## Non vu
 
 - La **version mobile** : le site sert une page différente selon l'appareil.
-- Les pages internes n'ont **pas été rouvertes** le 2026-10-03 : `layouts.md` reprend le relevé du 2026-10-02 (actualités, article, univers, personnage). `examples/actus.html` n'a pas été refait et garde l'ancien jeu de tokens.
+- Les pages internes n'ont **pas été rouvertes** le 2026-10-03 : `layouts.md` reprend le relevé du 2026-10-02 (actualités, article, univers, personnage). L'ancienne page d'exemple `actus.html` a été supprimée : seule `demo.html` illustre le skill.
 - Le menu « Plus », la connexion, le lecteur de musique.
 
 ## Écarts assumés

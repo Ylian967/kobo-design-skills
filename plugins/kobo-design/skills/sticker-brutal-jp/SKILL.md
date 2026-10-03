@@ -34,7 +34,6 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/motion.md` | Survols mesurés, arrivée des autocollants, changement de langue, performance, mouvement réduit. |
 | `references/assets.md` | Avant de placer une image : portrait, photos de projet, pictogrammes, polices. |
 | `examples/demo.html` | Page d'accueil complète, bilingue français / japonais (designer fictive « Mio Arata »). |
-| `examples/projets.html`, `examples/contact.html` | Pages de la première version du skill, non refaites. |
 | `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie

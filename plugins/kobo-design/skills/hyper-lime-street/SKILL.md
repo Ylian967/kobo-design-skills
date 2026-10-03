@@ -35,7 +35,6 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/motion.md` | Entrées le long de la diagonale, carrousels, texte défilant, performance, mouvement réduit. |
 | `references/assets.md` | Avant de placer une image : sujets, découpe, personnages détourés, formes en CSS. |
 | `examples/demo.html` | Accueil complet animé (jeu fictif « NEON DISTRICT »). |
-| `examples/actus.html` | Page d'actualités de la version précédente, non refaite (ancien jeu de tokens). |
 | `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie

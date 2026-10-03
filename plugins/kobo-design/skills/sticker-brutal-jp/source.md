@@ -86,5 +86,4 @@ Deux autres images visibles sur la page du shot appartiennent à d'autres projet
 ## Limites connues
 
 - Le japonais de la démo a été rédigé pour l'exemple : à faire relire avant tout usage réel.
-- `examples/projets.html` et `examples/contact.html` datent de la première version et utilisent les anciens tokens.
 - Seule la page d'accueil du site a été mesurée, et seulement à 1440px.

@@ -47,7 +47,7 @@ Hauteurs relevées : accueil 865px, puis 690, 667, 687, 599, 861px ; page de 514
 | Univers | Image floutée plein écran, cartes en éventail (centrale noire, voisines assombries), flèches en pilules |
 | Personnage | Badge de section **bleu**, rendu du personnage à gauche, nom 48px sur filigrane, citation, cartes de factions |
 
-Ces pages sont décrites d'après le relevé précédent ; `examples/actus.html` en est l'illustration et utilise encore l'ancien jeu de tokens.
+Ces pages sont décrites d'après le relevé précédent ; elles n'ont pas de page d'exemple.
 
 ## Mobile (390px, proposé)
 

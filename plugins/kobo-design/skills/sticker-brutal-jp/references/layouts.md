@@ -61,8 +61,6 @@ Le site en ligne en a d'autres (services, boutique, blog) qui n'ont pas été me
 
 **Contact.** La section de contact seule, avec une courte liste de questions fréquentes en fiches dépliables.
 
-Le dossier `examples/` contient aussi `projets.html` et `contact.html`, écrites pour la **première version** du skill : elles n'ont pas été refaites avec ces tokens.
-
 ## Règles
 
 - Le cadre entoure toute la page ; aucune section n'en sort.
