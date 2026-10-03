@@ -1,99 +1,106 @@
 ---
 name: chrome-atelier
-description: Direction artistique « Chrome Atelier » pour fiches produit de luxe et landings de pré-lancement (bijou, joaillerie, horlogerie, objet design, parfum, accessoire haut de gamme), inspirée d'un concept Dribbble de bijou d'oreille sculptural en rendu 3D. Fond blanc cassé traversé de filets gris (diagonales et croix passant par le centre), grand cercle fin autour de la pièce posée au centre, étiquettes entre crochets en mono, titres en capitales Regular sur deux à quatre lignes décalées, légendes reliées à la pièce par un trait (« • OR JAUNE »), bouton pilule à contour, variante nuit en photo bleu-gris profond avec barre de caractéristiques en trois colonnes. À utiliser pour une page produit premium, une liste d'attente, un lancement en série limitée ou une app e-commerce au style « luxe technique, chrome et or, galerie, minimal ».
+description: Direction artistique « Chrome Atelier » pour fiches produit de luxe et landings de pré-lancement (bijou, joaillerie, horlogerie, objet design, parfum, accessoire haut de gamme), inspirée d'un concept Dribbble de bijou d'oreille sculptural et du site en ligne de la marque. Héros nuit en photo bleu-gris profond avec cercles de cadrage fins, titre en capitales Regular sur quatre lignes en escalier, barre de trois caractéristiques ; puis planche blanche traversée de filets gris qui passent par le centre, grand cercle fin autour de la pièce en 3D, étiquettes entre crochets en mono, titres sur deux lignes décalées, légendes de métal posées sur le cercle, pilules à contour fin. Animée — chargement tracé au compas avec pourcentage, cellules de la barre qui montent en cartes photo, planche qui se dessine, pièce qui tourne et change d'or au défilement, presse au survol. À utiliser pour une page produit premium, une liste d'attente, un lancement en série limitée ou une app e-commerce au style « luxe technique, chrome et or, galerie, minimal ».
 ---
 
 # Chrome Atelier
 
-> Une pièce d'orfèvrerie posée sur une planche d'architecte : filets fins, cercle de cadrage, chrome et or qui brillent seuls au milieu du blanc.
+> Une pièce d'orfèvrerie posée sur une planche d'architecte : des filets fins, un cercle de cadrage, et l'or qui brille seul au milieu du blanc.
 
 ## L'idée
 
-La page est une **planche de présentation** : un fond blanc cassé, des **filets gris** qui se croisent exactement au centre (deux diagonales, une verticale, une horizontale) et un **grand cercle fin** qui cadre la pièce. Le produit, en rendu 3D métallique, est le seul élément coloré ; tout le reste est noir, gris et typographique. Le texte se range à gauche : petite **étiquette entre crochets**, titre en **capitales larges sur deux lignes décalées**, trois lignes de texte, deux pilules. À droite, des **légendes techniques** reliées à la pièce par un trait. Une seconde ambiance, **nuit**, reprend la même grammaire sur une photo bleu-gris très sombre : titre en escalier, cercles-guides, barre de caractéristiques en trois colonnes.
+Deux ambiances qui partagent la même grammaire de **traits fins et de cercles** :
+1. **La nuit** — une photo bleu-gris très sombre du bijou porté, cadrée par des cercles et deux axes ; le titre descend en escalier à gauche ; une barre de trois chiffres ferme l'écran.
+2. **L'atelier** — une page blanche où quatre filets se croisent au centre, un grand cercle entoure la **pièce en 3D**, et les noms des métaux se rangent sur le cercle comme sur un cadran.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (filets, cercle, crochets, capitales décalées, légendes), jamais l'identité : pas de nom de marque, de logo, de photo, de rendu 3D ni de texte d'origine.
+Tout le reste est minuscule et calme : texte de 13px, capitales en Regular (jamais de gras), étiquettes mono entre crochets, pilules à contour de 0,8px. Le seul objet coloré de la page, c'est le métal.
+
+Le mouvement prolonge l'idée de planche : tout **se trace**, puis la pièce **tourne avec le défilement**. Détail et sources dans `references/motion.md`.
+
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : ni le nom, ni le logo, ni la pièce, ni les photos, ni les textes de la marque.
 
 ## Règles prioritaires
 
-1. **Le produit est seul en couleur.** Interface en noir `--ink`, gris `--muted` et filets `--line` ; l'or et le chrome n'existent que dans la pièce (et en pastille de légende).
-2. **Tout converge au centre** : filets diagonaux + croix + grand cercle ont le même centre que la pièce. Les filets sont décoratifs, à 1px, jamais plus foncés que `--line`.
-3. **Titres en capitales larges, lignes décalées** : chaque ligne suivante est indentée (`--indent-step`), jamais centrée.
-4. **Micro-typographie technique** : étiquettes en mono 11px capitales `[ entre crochets ]`, valeurs (10K, 6 MICRONS) en mono ou en display.
-5. **Interactifs en pilule à contour 1px** ; une seule pilule pleine (noire) par écran.
-6. **Beaucoup de vide** : la pièce occupe ~40 % de la largeur, le texte ~30 %, le reste respire.
-7. Contraste : texte courant `--muted` sur `--bg` 6:1 ; or en petit texte seulement via `--gold-ink` (5,1:1) ; nuit : `--on-night` 15,8:1, `--muted-night` 7,3:1.
-8. Accessibilité : cibles ≥ 44px (même les « 10K, 14K » minuscules ont une zone de 44px), focus visible, `prefers-reduced-motion` respecté.
-9. Aucune valeur en dur : tout vient de `references/tokens.css`.
+1. **Tout passe par le centre** : filets, cercle, pièce, axes du héros. Un seul centre par écran.
+2. **Regular partout** : titres en capitales 400, petits (26px dans le héros, 20px ailleurs à 1440), sur 2 lignes décalées ou 4 en escalier. Jamais de gras, jamais de grande taille.
+3. **Une étiquette entre crochets** en mono au-dessus de chaque titre.
+4. **Traits de 0,8px** : contours des pilules, filets, cercles, barre. Aucun arrondi sauf les pilules.
+5. **Deux palettes seulement** : blanc + `--ink` + `--body` (atelier), `--night` + blanc + `--soft` (nuit). La couleur vient du métal et de la peau.
+6. **Une vraie pièce** : modèle 3D, vidéo ou séquence de rendus ; jamais un dessin.
+7. **Beaucoup de vide** : un bloc de texte par écran, 34 à 36 caractères par ligne.
+8. **Lisibilité** : le site descend à 8–10px ; le skill tient 13px pour le texte et 11px pour les libellés, cibles de 44px. `--soft` et `--ghost` ne servent jamais de texte sur blanc.
+9. **Fluide** : 3D rendue à la demande, une seule boucle de défilement, pas de flou d'arrière-plan qui bouge (`motion.md`, « Performance »).
+10. **Accessibilité** : `prefers-reduced-motion` ouvre sur l'état final et rend la scène non collante ; légendes, logos de presse et questions sont des boutons ; `aria-live` sur l'article et le formulaire.
+11. **Aucune valeur en dur** : tout vient de `references/tokens.css` (les couleurs des métaux sont lues dans les variables CSS par la scène 3D).
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Pilules, navigation, étiquette crochets, titre décalé, filets + cercle, légendes, sélecteur de titre d'or, barre de caractéristiques, champ, puces, panneau, confirmation ; puis, **relevés sur le site et la vidéo du shot** : barre de caractéristiques mesurée, navigation verticale du héros, cartes qui montent de la barre, presse à cartes révélées, galerie décalée, FAQ, pied noir, écran d'intro au compas. |
-| `references/layouts.md` | Page produit « atelier », scène nuit, presse, communauté / liste d'attente, mobile ; **ordre réel de la page** (7 sections) et galerie. |
-| `references/motion.md` | Flottement de la pièce, orbite du cercle, montée des titres, tracé des légendes ; **durées mesurées** (0.3s / 0.45s ease, flottement 3s) et séquences vues dans la vidéo du shot. |
-| `references/assets.md` | Avant de placer la pièce 3D ou une photo : recette Three.js (forme, métaux, lumière, titre d'or), portraits nuit, sources, prompts IA. |
-| `examples/demo.html` | Page complète (marque fictive « Ossel »). |
-| `source.md` | Shot, vidéo du shot, site en ligne de la marque (mesuré / observé), écarts. |
+| `references/tokens.css` | Toujours, en premier : couleurs, métaux, tailles, grille, durées mesurées. |
+| `references/motion.md` | **Toujours** : les 8 mouvements signature, ce qui est mesuré, observé ou proposé, le code, la performance. |
+| `references/components.md` | Étiquette, titre décalé, pilules, navigation, héros, barre, cartes, planche et roue des légendes, pièce, presse, galerie, questions, liste d'attente, états. |
+| `references/layouts.md` | Ordre et mesures de la page, schéma, mobile. |
+| `references/assets.md` | Avant de choisir une image ou de monter la 3D : sujets, cadrages, trois façons de montrer la pièce. |
+| `examples/demo.html` | Page complète animée (marque fictive « Ossel »). |
+| `source.md` | Ce qui a été mesuré, observé, proposé ; écarts. |
 
 ## Typographie
 
 | Rôle | Police (Google Fonts) | Réglages |
 |---|---|---|
-| Titres, valeurs de la barre | **Inter** 400 (mesuré : grotesque suisse Regular, chasse normale) | capitales, `--text-title` ou `--text-hero`, interligne 1.0–1.1, ~0 ; lignes **décalées** (indentation croissante) |
-| Logo | Archivo 600, `font-stretch: 125%` | capitales, +0.18em, une lettre remplacée par un cercle |
-| Étiquettes `[ … ]`, légendes, titres d'or | **IBM Plex Mono** 400 | 0.75rem, **minuscules** entre crochets, approche serrée (−0.1em mesuré) |
-| Texte courant, navigation | **Inter** 400 | 0.75rem / 1.39 (mesuré) ; liens de nav 0.625rem capitales +0.08em ; racine fluide `html { font-size: 0.9vw }` |
-
-Mesuré sur le site en ligne de la marque : **Suisse Int'l** 300/400/700 et **Suisse Mono** 400 (payantes). Inter 400 et IBM Plex Mono en sont les équivalents gratuits. Le premier jet utilisait Archivo élargie (impression du shot) : les titres sont en réalité en Regular, chasse normale.
+| Titres, texte, boutons, libellés | **Inter** 400 (site : Suisse Int'l) | titres en capitales ; héros `--fs-hero` / 1.1 ; sections `--fs-h2` / 1 ; texte 13px / 1.385 ; boutons et libellés 11px capitales espacées |
+| Étiquettes, pourcentage, compteur | **IBM Plex Mono** 400 (site : Suisse Mono) | 13px, approche −0.108em |
 
 ## Couleurs
 
-| Rôle | Token | Usage |
-|---|---|---|
-| Fond atelier | `--bg` | page produit, presse |
-| Panneau | `--paper` | carte communauté, confirmation, menu mobile |
-| Encre | `--ink` / `--on-ink` | titres, logo, pilule pleine |
-| Texte secondaire | `--muted` | texte, liens, étiquettes |
-| Filets | `--line`, `--line-strong` | diagonales, cercle (clair) ; traits de légende, champs |
-| Or lisible | `--gold-ink` | erreur de champ, mise en avant en petit texte |
-| Nuit | `--night`, `--night-2`, `--night-3` | fond photo, reflets |
-| Texte nuit | `--on-night`, `--muted-night`, `--line-night` | titres, étiquettes, guides |
-| Métaux | `--gold*`, `--chrome*`, `--white-gold` | rendu de la pièce, pastilles de légende — jamais du texte sur clair |
+| Rôle | Token |
+|---|---|
+| Fond clair, barre de navigation | `--paper` |
+| Fond du chargement | `--mist` |
+| Titres, contours, logo | `--ink` |
+| Texte courant, étiquettes | `--body` |
+| Filets, cercles | `--rule` |
+| Éléments non choisis (logos de presse, métaux) | `--ghost` |
+| Photo de nuit, pied | `--night`, `--black` |
+| Texte secondaire sur nuit | `--soft` |
+| Barre de caractéristiques | `--bar`, `--bar-line` |
+| Métaux de la pièce | `--gold`, `--white-gold`, `--rose` (+ `-lo`, `-hi`) |
+| Message d'erreur | `--gold-ink` |
 
 ## Images et 3D
 
-La pièce centrale est une **vraie scène 3D** (Three.js ou React Three Fiber) : métal poli à réflexions d'environnement, forme organique, rotation au glisser, et le sélecteur de titre d'or change la teinte du métal en direct. Une photo de repli reste sous le canvas. Les sections nuit et communauté utilisent de **vraies photos de portrait** en N&B virées bleu-gris par un calque `--night-3`, fondues vers le texte. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou du bijou : recette et sources dans `references/assets.md`.
+Photos : un **gros plan du bijou porté** sur fond bleu-gris sombre pour le héros, des portraits et des détails de peau et de métal pour les cartes, la presse et la galerie, une macro de métal liquide pour les questions. La **pièce** est en vraie 3D : modèle `.glb` du produit, vidéo pré-rendue ou, en attendant, le volume procédural de la démo (Three.js), avec les couleurs de métal des tokens. Filets, cercles, arcs et logo sont des signes et restent en CSS / SVG ; jamais un bijou dessiné. Détails dans `references/assets.md`.
 
 ## Signature
 
-**La planche cadrée** : filets diagonaux et croix qui passent par le centre exact de la pièce, grand cercle fin autour d'elle (avec un point qui orbite lentement), et deux ou trois légendes « • OR JAUNE » reliées par un trait. Une fois par page, en héros. La variante nuit reprend les **cercles-guides** en filet sur la photo.
+**La planche au cercle** : sur du blanc, quatre filets qui se croisent, un grand cercle fin, la pièce de métal au centre, et le nom de l'or choisi accroché au cercle par un trait.
 
 ## À éviter
 
-- Des cartes à ombres, des dégradés colorés ou des fonds teintés dans l'interface : la couleur appartient au métal.
-- Des titres centrés ou en minuscules ; des polices serif « luxe » classiques.
-- Des filets épais ou contrastés qui concurrencent la pièce.
-- Remplir le vide (badges, prix géants, bandeaux promo).
-- Reprendre le nom, le logo, les rendus 3D, les photos ou les textes du shot de référence.
+- Des titres gras ou grands ; du texte centré.
+- Des coins arrondis, des ombres, des cartes à fond gris.
+- Des couleurs d'accent : l'or ne sert jamais de couleur de bouton.
+- Un bijou dessiné, une icône de diamant, un rendu 3D mat.
+- Plusieurs centres ou des filets qui ne passent par aucun.
+- Des animations qui jouent seules dans la scène : c'est le défilement qui commande.
+- Le nom, le logo, la pièce ou les textes de la marque d'origine.
 
 ## Adaptation React / React Native
 
-- Filets et cercle : `react-native-svg` (`Line`, `Circle` avec `strokeWidth={StyleSheet.hairlineWidth}`), en `absoluteFill`, `pointerEvents="none"`.
-- Pièce 3D : `expo-gl` + `three` / `@react-three/fiber/native` avec un `MeshPhysicalMaterial` métallique et une HDRI studio ; à défaut, un PNG détouré.
-- Flottement et orbite : Reanimated (`withRepeat(withTiming(...), -1, true)`), coupés si `AccessibilityInfo.isReduceMotionEnabled()`.
-- Pilule : `Pressable` avec `borderWidth: 1`, `borderRadius: 999`, `minHeight: 44`, inversion de couleurs en `pressed`.
-- `font-stretch` n'existe pas en natif : charger `Archivo_500Medium` de `@expo-google-fonts/archivo` et ajouter `letterSpacing: 1` ; ou embarquer la variante « SemiExpanded » statique.
-- `backdrop-filter` de la barre nuit : `BlurView` d'`expo-blur`.
+- Scène collante : composant `<Stage>` avec un hook `useScrollProgress(ref)` ; la 3D dans `@react-three/fiber` (`frameloop="demand"`, `invalidate()` quand la progression change).
+- Roue des légendes : état `metal`, variable CSS `--rot`.
+- React Native : `react-native-reanimated` (`useScrollViewOffset`), `react-native-svg` pour filets, cercles et arcs, pièce en vidéo (`expo-video`) plutôt qu'en 3D.
+- Polices : `@expo-google-fonts/inter`, `@expo-google-fonts/ibm-plex-mono`.
 
 ## Avant de livrer
 
-- [ ] Tokens importés, aucune couleur en dur.
-- [ ] Filets, croix et cercle centrés sur la pièce ; la pièce est le seul élément coloré.
-- [ ] Titre en capitales larges, lignes décalées ; étiquette `[ crochets ]` en mono.
-- [ ] Légendes reliées par un trait ; sélecteur de titre d'or avec cibles de 44px.
-- [ ] Une seule pilule pleine par écran ; états survol, appui, focus, désactivé présents.
-- [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
+- [ ] Tokens importés, aucune valeur en dur.
+- [ ] Un centre par écran ; filets, cercle et pièce alignés dessus.
+- [ ] Titres en Regular, décalés ; étiquette entre crochets au-dessus.
+- [ ] Vraie pièce (3D, vidéo ou rendus) et vraies photos, avec replis.
+- [ ] Les 8 mouvements de `motion.md` présents là où la page en a besoin, coupés en mouvement réduit.
+- [ ] Règles « Performance » respectées (3D à la demande).
+- [ ] Contrastes vérifiés (`python3 tools/check.py chrome-atelier`).
+- [ ] Testé à 390px et 1440px, sans débordement horizontal.
 - [ ] Aucun élément de la marque d'origine.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.

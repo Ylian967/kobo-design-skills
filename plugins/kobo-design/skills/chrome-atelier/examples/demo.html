@@ -6,509 +6,477 @@
 <title>Ossel — Chrome Atelier (démo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&family=Bodoni+Moda:ital,wght@0,500;1,500&display=swap">
 <style>
 :root {
-  --bg: #f2f2f0; --paper: #fbfbf9; --ink: #10191e; --on-ink: #f2f2f0; --muted: #3f464a; --line: #c9c9c4; --line-strong: #9c9c96; --gold-ink: #7f6127;
-  --night: #0e1216; --night-2: #1b232b; --night-3: #2c3742; --on-night: #ecebe6; --muted-night: #9aa2a8; --line-night: #3a444e;
-  --gold: #c9a45c; --gold-hi: #f3dca0; --gold-lo: #6e5121; --chrome-hi: #ffffff; --chrome: #c7ccd1; --chrome-lo: #4d555d; --white-gold: #e7e3da;
-  --font-display: 'Inter', 'Archivo', 'Helvetica Neue', Arial, sans-serif; --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
-  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
-  --text-title: clamp(1.6rem, 2.05vw, 2.2rem); --text-hero: clamp(2.2rem, 3.8vw, 3.8rem);
-  --leading-tight: 1.02; --leading-body: 1.6; --tracking-caps: 0.14em; --tracking-title: 0.01em; --stretch-display: 100%; --weight-display: 400; --indent-step: 2.4em;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --edge: clamp(20px, 4vw, 56px); --container: 1360px; --ring-size: min(68vh, 620px);
-  --radius-pill: 999px; --radius-card: 4px; --hairline: 1px solid var(--line); --hairline-night: 1px solid var(--line-night);
-  --shadow-piece: 0 40px 60px -30px rgb(17 17 17 / 0.35); --shadow-card: 0 30px 80px -40px rgb(0 0 0 / 0.6);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-inout: cubic-bezier(0.65, 0, 0.35, 1); --dur-fast: 180ms; --dur-base: 420ms; --dur-slow: 900ms; --dur-spin: 24s;
+  --paper: #ffffff; --mist: #eaeaea; --panel: #f3f3f3; --ink: #10191e; --body: #3f464a; --rule: #e0e0e0; --ghost: #cacccd; --night: #1c2c39; --night-2: #293339;
+  --black: #000201; --soft: #b3b3b3; --bar: rgb(2 2 2 / 0.2); --bar-line: rgb(255 255 255 / 0.16); --pill-ghost: rgb(255 255 255 / 0.04);
+  --gold-lo: #523d0d; --gold: #c3a23e; --gold-hi: #eddfa4; --white-gold-lo: #5b5b5b; --white-gold: #bbbbbb; --white-gold-hi: #e6e6e6;
+  --rose-lo: #5b2217; --rose: #b77f6b; --rose-hi: #edd1c2; --gold-ink: #7a5d14; /* ---- Typographie ----
+  * Le site règle html { font-size: 0.9vw } (12,97px à 1440) et écrit tout en rem : le texte courant y fait 9,7px.
+  * Le skill garde les rapports mais remonte les planchers pour rester lisible (écart assumé). */ --font-display: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace; --weight: 400; --fs-hero: clamp(1.375rem, 1.8vw, 2.5rem); --lh-hero: 1.1; --ls-hero: 0.0125em;
+  --fs-h2: clamp(1.25rem, 1.35vw, 1.875rem); --lh-h2: 1; --ls-h2: -0.01em; --fs-body: 0.8125rem; --lh-body: 1.385; --ls-body: 0.033em; --fs-label: 0.6875rem;
+  --ls-label: 0.08em; --fs-btn: 0.6875rem; --ls-btn: 0.092em; --fs-value: clamp(1rem, 1.04vw, 1.25rem); --ls-mono: -0.108em; --indent: 1.55em;
+  --edge: clamp(20px, 4.6vw, 67px); --edge-hero: clamp(16px, 2.2vw, 32px); --nav-h: 44px; --bar-h: 58px; --pill-h: 44px; --ring: min(75vh, 47vw); --hairline: 0.8px;
+  --r-pill: 999px; --card-w: clamp(180px, 26.2vw, 377px); --cell-w: clamp(150px, 16.3vw, 235px); --blur: 4px;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px; --container: 1280px; --ease: ease; --ease-io: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --dur-nav: 200ms; --dur-ui: 300ms; --dur-move: 450ms; --dur-fade: 500ms; --dur-shift: 1000ms; --dur-draw: 3000ms;
+  --dur-float: 3s; --float-y: -15px;
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { overflow-x: clip; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--text-sm)/var(--leading-body) var(--font-body); -webkit-font-smoothing: antialiased; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--body); font: var(--weight) var(--fs-body)/var(--lh-body) var(--font-display); letter-spacing: var(--ls-body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body.is-loading { overflow: hidden; }
 a { color: inherit; text-decoration: none; }
-button, input { font: inherit; color: inherit; }
+button, input { font: inherit; color: inherit; letter-spacing: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+img { display: block; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, p { margin: 0; font-weight: var(--weight); }
 :focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+::selection { background: var(--ink); color: var(--paper); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.mono { font-family: var(--font-mono); font-size: var(--text-2xs); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.tag { font: 400 var(--fs-body)/1 var(--font-mono); letter-spacing: var(--ls-mono); color: var(--body); }
+.label { font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; line-height: 1; }
+.h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); letter-spacing: var(--ls-h2); text-transform: uppercase; color: var(--ink); }
+.h2 span { display: block; } .h2 span + span { padding-left: var(--indent); }
+.txt { max-width: 34ch; margin-top: var(--space-3); padding-left: calc(var(--indent) * 1.55); }
+.pill { display: inline-flex; align-items: center; justify-content: center; min-height: var(--pill-h); padding: 0 1.8em; border: var(--hairline) solid currentColor; border-radius: var(--r-pill); font-size: var(--fs-btn); letter-spacing: var(--ls-btn); text-transform: uppercase; line-height: 1; white-space: nowrap; color: var(--ink); transition: background-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease); }
+.pill:hover, .pill:focus-visible { background: var(--ink); color: var(--paper); }
+.pill--light { color: var(--paper); background: var(--pill-ghost); } .pill--light:hover, .pill--light:focus-visible { background: var(--paper); color: var(--ink); }
+.pill--full { background: var(--paper); color: var(--ink); border-color: var(--paper); } .pill--full:hover, .pill--full:focus-visible { background: transparent; color: var(--paper); }
+.pill[aria-busy="true"] { opacity: .5; cursor: progress; }
+.under { font-size: var(--fs-btn); letter-spacing: var(--ls-btn); text-transform: uppercase; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; display: inline-flex; align-items: center; min-height: var(--pill-h); }
+.acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-4); margin-top: var(--space-6); }
+.logo { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: .75rem; letter-spacing: .34em; text-transform: uppercase; color: inherit; }
+.logo svg { width: 46px; height: 12px; }
 
-/* ---------- Navigation ---------- */
-.nav { position: absolute; inset: 0 0 auto; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-6) var(--edge); }
-.logo { display: inline-flex; align-items: center; gap: 2px; min-height: 44px; font: 600 1.15rem/1 var(--font-display); font-stretch: 125%; letter-spacing: .18em; }
-.logo i { width: .95em; height: .95em; border: 2px solid currentColor; border-radius: 50%; position: relative; margin-right: .18em; }
-.logo i::after { content: ""; position: absolute; inset: 22% 46%; background: currentColor; }
-.nav__links { display: flex; align-items: center; gap: var(--space-8); }
-.nav__links a:not(.pill) { position: relative; display: inline-flex; align-items: center; min-height: 44px; font: 500 var(--text-2xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--muted); transition: color var(--dur-fast) var(--ease-out); }
-.nav__links a:not(.pill)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 12px; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform var(--dur-base) var(--ease-out); }
-.nav__links a:not(.pill):hover { color: var(--ink); }
-.nav__links a:not(.pill):hover::after { transform: scaleX(1); transform-origin: left; }
-.burger { display: none; width: 44px; height: 44px; border: var(--hairline); border-color: var(--line-strong); border-radius: 50%; background: none; cursor: pointer; place-items: center; }
-.burger span { width: 16px; height: 1px; background: currentColor; box-shadow: 0 -5px currentColor, 0 5px currentColor; }
+/* ================= Chargement au compas ================= */
+.loader { position: fixed; inset: 0; z-index: 100; background: var(--mist); color: var(--ink); display: grid; place-items: center; transition: opacity var(--dur-fade) var(--ease); }
+.loader.is-off { opacity: 0; pointer-events: none; }
+.loader svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--ghost); stroke-width: 1; overflow: visible; }
+.loader .arc { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.loader.is-draw .arc { stroke-dashoffset: 0; transition: stroke-dashoffset 1.3s var(--ease-io) var(--d, 0s); }
+.loader g { transition: transform var(--dur-shift) var(--ease); }
+.loader.is-join .up { transform: translateY(4%); } .loader.is-join .down { transform: translateY(-4%); }
+.loader .dot { fill: var(--ink); stroke: none; opacity: 0; transition: opacity var(--dur-fade) var(--ease); }
+.loader.is-join .dot { opacity: 1; }
+.loader__pct { position: relative; }
 
-/* ---------- Bouton pilule ---------- */
-.pill { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-6); border: 1px solid currentColor; border-radius: var(--radius-pill); background: transparent; font: 500 var(--text-2xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-.pill:hover { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
-.pill:active { transform: scale(.97); }
-.pill--solid { background: var(--ink); color: var(--on-ink); border-color: var(--ink); }
-.pill--solid:hover { background: transparent; color: var(--ink); }
-.night .pill:hover { background: var(--on-night); color: var(--night); border-color: var(--on-night); }
-.pill[disabled] { opacity: .4; cursor: not-allowed; }
-.pill .arr { transition: transform var(--dur-fast) var(--ease-out); }
-.pill:hover .arr { transform: translateX(3px); }
+/* ================= Navigation ================= */
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-4); background: var(--paper); color: var(--ink); transform: translateY(-101%); transition: transform var(--dur-move) var(--ease); }
+.nav.is-on { transform: none; }
+.nav ul { display: flex; align-items: center; gap: var(--space-4); }
+.nav ul a { display: inline-flex; align-items: center; min-height: 44px; transition: opacity var(--dur-ui) var(--ease); }
+.nav ul a:hover { opacity: .55; }
+.nav .pill { min-height: 28px; padding: 0 1.2em; }
+.nav__burger { display: none; width: 44px; height: 44px; }
+.nav__burger i { display: block; width: 18px; height: 6px; margin: auto; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; }
 
-/* ---------- Héros produit (atelier) ---------- */
-.atelier { position: relative; min-height: max(100vh, 760px); overflow: hidden; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr) minmax(0, .75fr); align-items: center; padding: 120px var(--edge) 96px; }
-.guides { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.guides line { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.ring { position: absolute; left: 50%; top: 50%; width: var(--ring-size); z-index: -1; aspect-ratio: 1; translate: -50% -50%; border: var(--hairline); border-radius: 50%; pointer-events: none; }
-.ring::before { content: ""; position: absolute; inset: 9%; border: 1px dashed var(--line); border-radius: 50%; opacity: .7; }
-.ring::after { content: ""; position: absolute; left: 50%; top: -3px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--ink); transform-origin: 50% calc(var(--ring-size) / 2 + 3px); animation: orbit var(--dur-spin) linear infinite; }
-@keyframes orbit { to { transform: rotate(360deg); } }
+/* ================= Héros nuit ================= */
+.hero { position: relative; height: 100svh; min-height: 620px; overflow: hidden; background: var(--night); color: var(--paper); isolation: isolate; }
+.hero__photo { position: absolute; inset: -4% 0; z-index: -3; will-change: transform; }
+.hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 40%; }
+.hero__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--night) 4%, color-mix(in srgb, var(--night) 72%, transparent) 34%, color-mix(in srgb, var(--black) 18%, transparent) 62%, color-mix(in srgb, var(--black) 46%, transparent)), linear-gradient(180deg, color-mix(in srgb, var(--black) 34%, transparent), transparent 30%, transparent 70%, color-mix(in srgb, var(--black) 55%, transparent)); }
+/* cercles et axes de cadrage (signes) */
+.guides { position: absolute; inset: 0; z-index: -2; pointer-events: none; --cx: 60%; --cy: 44%; }
+.guides i { position: absolute; left: var(--cx); top: var(--cy); width: var(--s); aspect-ratio: 1; margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border: var(--hairline) solid var(--bar-line); border-radius: 50%; }
+.guides b { position: absolute; background: var(--bar-line); }
+.guides b:nth-of-type(1) { left: var(--cx); top: 0; bottom: 0; width: var(--hairline); } .guides b:nth-of-type(2) { top: var(--cy); left: 0; right: 0; height: var(--hairline); }
+.hero__logo { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); }
+.hero__copy { position: absolute; left: var(--edge-hero); top: 50%; transform: translateY(-50%); }
+.hero__title { font-size: var(--fs-hero); line-height: var(--lh-hero); letter-spacing: var(--ls-hero); text-transform: uppercase; }
+.hero__title span { display: block; white-space: nowrap; padding-left: var(--i); }
+.hero__sub { padding-left: 4.75em; }
+.hero__sub p { max-width: 36ch; margin-top: var(--space-2); color: var(--soft); }
+.hero__sub em { display: block; margin-top: var(--space-3); color: var(--soft); }
+.hero__nav { position: absolute; right: var(--edge-hero); top: 50%; display: flex; gap: var(--space-4); transition: transform var(--dur-move) var(--ease), opacity var(--dur-move) var(--ease); }
+.hero__nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.hero.is-away .hero__nav { transform: translateY(-40px); opacity: 0; }
+.scrolldown { position: absolute; left: 50%; bottom: calc(var(--bar-h) + 18px); translate: -50% 0; color: var(--soft); animation: floatY var(--dur-float) ease-in-out infinite; }
+@keyframes floatY { 50% { transform: translateY(var(--float-y)); } }
+.specs { position: absolute; left: 0; right: 0; bottom: 0; height: var(--bar-h); display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; background: var(--bar); border-top: var(--hairline) solid var(--bar-line); text-align: center; }
+.specs dt { color: var(--soft); } .specs dd { margin: 5px 0 0; font-size: var(--fs-value); letter-spacing: var(--ls-h2); text-transform: uppercase; line-height: 1.1; }
+.specs dl { margin: 0; }
+/* entrées (posées par JS) */
+.js .hero [data-in] { opacity: 0; transform: translateY(14px); }
+.js .hero.is-in [data-in] { opacity: 1; transform: none; transition: opacity 900ms var(--ease-out) var(--d, 0ms), transform 900ms var(--ease-out) var(--d, 0ms); }
+.js .guides i { transform: scale(.86); opacity: 0; } .js .hero.is-in .guides i { transform: none; opacity: 1; transition: transform 1.4s var(--ease-out) var(--d, 0ms), opacity 1.4s var(--ease-out) var(--d, 0ms); }
 
-.intro { position: relative; z-index: 3; min-width: 0; }
-.intro .lede, .intro .intro__cta { max-width: 400px; }
-.tag { display: inline-block; margin-bottom: var(--space-6); color: var(--muted); }
-.title { margin: 0 0 var(--space-6); font: var(--weight-display) var(--text-title)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); letter-spacing: var(--tracking-title); text-transform: uppercase; }
-.title { max-width: 100%; }
-/* Retour à la ligne permis : la vraie police (Archivo élargie) est plus large que le repli, le titre ne doit jamais passer sous la colonne 3D */
-.title span { display: block; white-space: normal; overflow-wrap: anywhere; }
-.title span + span { padding-left: min(var(--indent-step), 8%); }
-.lede { max-width: 32ch; margin: 0 0 var(--space-8); color: var(--muted); }
-.intro__cta { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+/* ================= Cartes issues de la barre ================= */
+.cards { position: relative; z-index: 3; height: clamp(420px, 44vw, 640px); pointer-events: none; }
+.spec-card { position: absolute; top: 0; left: var(--x); width: var(--card-w); aspect-ratio: 9 / 16; overflow: hidden; background: var(--night-2); color: var(--paper); text-align: center; will-change: transform; }
+.spec-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.spec-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--black) 55%, transparent), transparent 42%); }
+.spec-card div { position: relative; z-index: 1; padding-top: 12%; }
+.spec-card dt { color: var(--paper); } .spec-card dd { margin: 6px 0 0; font-size: calc(var(--fs-value) * 1.25); text-transform: uppercase; letter-spacing: var(--ls-h2); line-height: 1; }
 
-.stage { position: relative; z-index: 1; height: var(--ring-size); display: grid; place-items: center; }
-/* Pièce : vraie scène Three.js (canvas transparent) ; photo de repli dans le cercle tant que la 3D n'est pas prête */
-.piece { position: absolute; inset: 0; z-index: 1; cursor: grab; touch-action: pan-y; }
-.piece:active { cursor: grabbing; }
-.piece canvas { position: absolute; inset: 0; display: block; filter: drop-shadow(0 34px 30px color-mix(in srgb, var(--ink) 22%, transparent)); }
-.piece .fallback { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: calc(var(--ring-size) * .82); max-width: 100%; aspect-ratio: 1; height: auto; object-fit: cover; border-radius: 50%; background: var(--white-gold); color: transparent;
-  --k: saturate(1) brightness(1); filter: var(--k) contrast(1.05); transition: opacity var(--dur-slow) var(--ease-out), filter var(--dur-base) var(--ease-inout); }
-.piece.is-3d-ready .fallback { opacity: 0; }
-.piece.no-webgl { cursor: default; }
-.floor { position: absolute; left: 50%; bottom: 4%; width: 44%; height: 18px; translate: -50% 0; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--ink) 18%, transparent), transparent); }
+/* ================= Atelier : scène collante ================= */
+.atelier { height: 330vh; }
+.stage { position: sticky; top: 0; height: 100svh; min-height: 560px; overflow: hidden; }
+.stage__text { position: absolute; left: var(--edge); top: calc(var(--nav-h) + 26px); z-index: 2; }
+.stage__text .tag { display: block; margin-bottom: var(--space-6); }
+.lines { position: absolute; left: 50%; top: 54%; width: 0; height: 0; }
+.lines i { position: absolute; left: -75vw; width: 150vw; height: var(--hairline); background: var(--rule); transform: rotate(var(--a)) scaleX(var(--p, 0)); will-change: transform; }
+.ring { position: absolute; left: 50%; top: 54%; width: var(--ring); aspect-ratio: 1; margin: calc(var(--ring) / -2) 0 0 calc(var(--ring) / -2); border: var(--hairline) solid var(--rule); border-radius: 50%; transform: scale(var(--p, 0)); opacity: var(--p, 0); will-change: transform; }
+.piece { position: absolute; left: 50%; top: 54%; width: calc(var(--ring) * .72); aspect-ratio: 1; translate: -50% -50%; cursor: grab; touch-action: pan-y; }
+.piece canvas, .piece img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.piece img { object-fit: contain; display: none; } .piece.no-webgl img { display: block; }
+/* roue des légendes : tourne d'un cran à chaque métal, les libellés restent droits */
+.wheel { position: absolute; left: 50%; top: 54%; width: 0; height: 0; transform: rotate(var(--rot, 0deg)); transition: transform 900ms var(--ease-io); }
+.wheel button { position: absolute; left: 0; top: 0; width: 0; height: 0; transform: rotate(var(--a)) translateX(calc(var(--ring) / 2)); }
+.wheel button span { position: absolute; left: 14px; top: -22px; display: flex; align-items: center; min-height: 44px; white-space: nowrap; color: var(--ghost); transform: rotate(calc(var(--a) * -1 - var(--rot, 0deg))); transform-origin: -14px 22px; transition: color var(--dur-ui) var(--ease), transform 900ms var(--ease-io); }
+.wheel button::before { content: ""; position: absolute; left: -3px; top: -3px; width: 5px; height: 5px; border-radius: 50%; background: var(--ghost); transition: background-color var(--dur-ui) var(--ease); }
+.wheel button::after { content: ""; position: absolute; right: 0; top: 0; width: calc(var(--ring) * .3); height: var(--hairline); background: var(--body); transform: scaleX(0); transform-origin: right; transition: transform var(--dur-move) var(--ease); }
+.wheel button[aria-pressed="true"] span { color: var(--ink); } .wheel button[aria-pressed="true"]::before { background: var(--ink); } .wheel button[aria-pressed="true"]::after { transform: scaleX(1); transition-delay: 500ms; }
+.karats { position: absolute; left: 50%; bottom: 26px; translate: -50% 0; color: var(--ink); white-space: nowrap; }
+.count { position: absolute; left: var(--edge); bottom: 26px; }
+.js .stage [data-fade] { opacity: var(--p2, 0); }
 
-.callouts { position: relative; z-index: 2; height: 100%; }
-.callout { position: absolute; display: flex; align-items: center; gap: var(--space-3); color: var(--ink); white-space: nowrap; }
-.callout::before { content: ""; width: clamp(40px, 9vw, 150px); height: 1px; background: var(--line-strong); transform-origin: right; }
-.callout b { width: 7px; height: 7px; border-radius: 50%; flex: none; }
-.callout--yg { top: 30%; left: -36%; }
-.callout--yg b { background: var(--gold); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 25%, transparent); }
-.callout--wg { top: 62%; left: -22%; }
-.callout--wg b { background: var(--white-gold); border: 1px solid var(--line-strong); }
-.callout--note { top: 76%; left: 4%; flex-direction: column; align-items: flex-start; white-space: normal; max-width: 220px; color: var(--muted); }
-.callout--note::before { display: none; }
+/* ================= Presse ================= */
+.press { padding: var(--space-24) 0 0; }
+.press__head { padding: 0 var(--edge); } .press__head .tag { display: block; margin-bottom: var(--space-6); }
+.press__article { position: relative; height: 150px; margin: var(--space-12) 0 var(--space-4); }
+.press__article article { position: absolute; left: var(--ax, 14%); bottom: 0; width: min(250px, 70vw); opacity: 0; visibility: hidden; transition: opacity var(--dur-ui) var(--ease), visibility 0s var(--dur-ui); }
+.press__article article.is-on { opacity: 1; visibility: visible; transition: opacity var(--dur-fade) var(--ease) 120ms; }
+.press__article h3 { font-size: var(--fs-body); text-transform: uppercase; color: var(--ink); line-height: 1.15; } .press__article p { margin-top: 6px; } .press__article i { display: block; margin-top: 8px; font-size: var(--fs-label); }
+.press__row { display: flex; justify-content: center; border-top: var(--hairline) solid var(--rule); border-bottom: var(--hairline) solid var(--rule); }
+.press__row button { position: relative; flex: 0 0 var(--cell-w); aspect-ratio: 235 / 365; display: grid; place-items: center; border-left: var(--hairline) solid var(--rule); color: var(--ghost); overflow: hidden; transition: color var(--dur-ui) var(--ease); }
+.press__row button:last-child { border-right: var(--hairline) solid var(--rule); }
+.press__row img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity var(--dur-fade) var(--ease), transform 1.2s var(--ease-out); }
+.press__row b { position: relative; font-weight: 400; }
+.press__row button[aria-pressed="true"] { color: var(--paper); } .press__row button[aria-pressed="true"] img { opacity: 1; transform: none; }
+.press__row button[aria-pressed="true"]::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--black) 34%, transparent); } .press__row button[aria-pressed="true"] b { z-index: 1; }
+.wm1 { font: 500 1.9rem/1 'Bodoni Moda', Georgia, serif; letter-spacing: .04em; } .wm2 { font: 500 1rem/1 var(--font-display); letter-spacing: .32em; } .wm3 { font: italic 500 1.7rem/1 'Bodoni Moda', Georgia, serif; } .wm4 { font: 400 1.05rem/1 var(--font-mono); letter-spacing: .1em; }
 
-.carats { position: absolute; left: 50%; bottom: 40px; z-index: 3; translate: -50% 0; display: flex; align-items: center; gap: var(--space-1); }
-.carats legend { float: left; margin-right: var(--space-3); color: var(--muted); }
-.carat { min-width: 44px; min-height: 44px; padding: 0 var(--space-2); border: 0; background: none; cursor: pointer; font: 500 var(--text-2xs) var(--font-mono); letter-spacing: .08em; color: var(--muted); position: relative; transition: color var(--dur-fast) var(--ease-out); }
-.carat:not(:last-child)::after { content: ","; position: absolute; right: -2px; }
-.carat:hover { color: var(--ink); }
-.carat[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 6px; }
-.corner { position: absolute; z-index: 2; color: var(--muted); }
-.corner--bl { left: var(--edge); bottom: 52px; }
-.corner--br { right: var(--edge); bottom: 52px; }
+/* ================= Galerie ================= */
+.gallery { position: relative; display: grid; grid-template-columns: 1fr minmax(0, 50%); gap: var(--space-8); padding: var(--space-24) var(--space-4) var(--space-24) 0; overflow: hidden; }
+.gallery__curve { position: absolute; left: -6%; top: 4%; width: 52%; height: 80%; fill: none; stroke: var(--rule); stroke-width: 1; overflow: visible; }
+.gallery__text { position: relative; align-self: start; padding: 16vw 0 0 calc(var(--edge) + 8vw); }
+.gallery__text .tag { position: absolute; left: var(--edge); top: 12vw; }
+.gallery__cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); align-items: start; }
+.gallery__cols ul { display: grid; gap: var(--space-2); will-change: transform; } .gallery__cols ul + ul { margin-top: 13vw; }
+.gallery__cols li { overflow: hidden; background: var(--panel); aspect-ratio: var(--r, 3 / 4); }
+.gallery__cols img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
+.gallery__cols li:hover img { transform: scale(1.04); }
 
-/* ---------- Pièce (SVG) ---------- */
-/* Repli photo : le titre d'or agit sur la saturation ; en 3D, il change la teinte du métal (script plus bas) */
-.stage[data-k="10"] .fallback { --k: saturate(.45) brightness(1.08); }
-.stage[data-k="14"] .fallback { --k: saturate(.75) brightness(1.04); }
-.stage[data-k="22"] .fallback { --k: saturate(1.35) brightness(.96); }
+/* ================= FAQ ================= */
+.faq { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
+.faq__img { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--night-2); } .faq__img img { width: 100%; height: 100%; object-fit: cover; }
+.faq__body { padding: 22vh var(--edge) var(--space-24) 9.5vw; } .faq__body .tag { display: block; margin: 0 0 var(--space-8) -2.4em; }
+.faq__list { margin-top: var(--space-12); max-width: 420px; }
+.faq__list button { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; text-align: left; color: var(--ink); font-weight: 500; }
+.faq__list button svg { flex: none; width: 9px; height: 9px; transition: transform var(--dur-ui) var(--ease-io); } .faq__list button[aria-expanded="true"] svg { transform: rotate(-180deg); }
+.faq__panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-ui) var(--ease-io); } .faq__panel > div { overflow: hidden; } .faq__panel p { padding: 0 0 var(--space-4) 21px; }
+.faq__list button[aria-expanded="true"] + .faq__panel { grid-template-rows: 1fr; }
 
-/* ---------- Scène nuit ---------- */
-.night { position: relative; min-height: max(100vh, 760px); overflow: hidden; background: var(--night); color: var(--on-night); display: flex; flex-direction: column; justify-content: space-between; padding: 120px var(--edge) 0; }
-/* Portrait nuit : photo réelle, N&B virée bleu-gris par un calque token, fondu vers la gauche pour le titre */
-.portrait { position: absolute; inset: 0; margin: 0; pointer-events: none; background: var(--night); }
-.portrait__img { position: absolute; top: 0; right: 0; width: 68%; height: 100%; background: var(--night-2); }
-.portrait__img img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 35%; display: block; color: transparent; filter: grayscale(1) contrast(1.15) brightness(.62); }
-.portrait__img::after { content: ""; position: absolute; inset: 0; background: var(--night-3); mix-blend-mode: color; }
-.portrait__img::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, var(--night) 0%, color-mix(in srgb, var(--night) 40%, transparent) 35%, transparent 60%), linear-gradient(0deg, var(--night) 0%, transparent 30%); }
-.portrait .guide-c, .portrait .guide-x { z-index: 2; }
-.guide-c { position: absolute; border: var(--hairline-night); border-radius: 50%; pointer-events: none; }
-.guide-c--1 { width: 52vw; aspect-ratio: 1; right: 6%; top: 8%; }
-.guide-c--2 { width: 24vw; aspect-ratio: 1; right: 20%; top: 30%; border-style: dashed; }
-.guide-x { position: absolute; left: 0; right: 0; top: 50%; border-top: var(--hairline-night); }
-.night__copy { position: relative; z-index: 2; }
-.hero-title span { white-space: nowrap; }
-.hero-title { margin: 0 0 var(--space-8); font: var(--weight-display) var(--text-hero)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; letter-spacing: var(--tracking-title); }
-.hero-title span { display: block; }
-.hero-title span:nth-child(2) { padding-left: calc(var(--indent-step) * 1.2); }
-.hero-title span:nth-child(3) { padding-left: calc(var(--indent-step) * .5); }
-.hero-title span:nth-child(4) { padding-left: calc(var(--indent-step) * 1.6); color: var(--muted-night); }
-.night .tag { color: var(--muted-night); }
-.specs { position: relative; z-index: 2; background: color-mix(in srgb, var(--night) 55%, transparent); backdrop-filter: blur(6px); display: grid; grid-template-columns: repeat(3, 1fr); margin: var(--space-16) calc(var(--edge) * -1) 0; border-top: var(--hairline-night); }
-.spec { padding: var(--space-6) var(--edge) var(--space-8); }
-.spec + .spec { border-left: var(--hairline-night); }
-.spec dt { color: var(--muted-night); margin-bottom: var(--space-2); }
-.spec dd { margin: 0; font: var(--weight-display) var(--text-xl)/1 var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
-.spec dd small { font-size: .55em; vertical-align: super; }
+/* ================= Liste d'attente ================= */
+.wait { position: relative; display: grid; place-items: center; min-height: 100svh; padding: var(--space-24) var(--space-4); background: var(--black); color: var(--paper); overflow: hidden; isolation: isolate; }
+.wait > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; opacity: .5; } .wait::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(60% 60% at 50% 50%, transparent, var(--black)); }
+.wait__card { width: min(420px, 100%); padding: var(--space-8); background: var(--paper); color: var(--body); }
+.wait__card .h2 { font-size: clamp(1.125rem, 1.3vw, 1.5rem); } .wait__card p { margin-top: var(--space-3); }
+.field { display: block; margin-top: var(--space-6); } .field span { display: block; color: var(--body); }
+.field input { width: 100%; height: 44px; border: 0; border-bottom: var(--hairline) solid var(--body); background: transparent; color: var(--ink); outline: 0; font-size: 1rem; letter-spacing: 0; transition: border-color var(--dur-ui) var(--ease); }
+.field input:focus { border-color: var(--ink); box-shadow: 0 1px 0 var(--ink); } .field input[aria-invalid="true"] { border-color: var(--gold-ink); }
+.hint { min-height: 1.4em; margin-top: var(--space-3); color: var(--gold-ink); }
+.wait__card .pill { margin-top: var(--space-6); background: var(--ink); color: var(--paper); } .wait__card .pill:hover { background: transparent; color: var(--ink); }
+.wait__n { margin-top: var(--space-6); color: var(--soft); text-align: center; } .wait__n b { font-weight: 400; color: var(--paper); font-variant-numeric: tabular-nums; }
+footer { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-24) var(--space-4) var(--space-4); background: var(--black); color: var(--soft); }
 
-/* ---------- Presse ---------- */
-.press { padding: var(--space-16) var(--edge); display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: var(--space-8); border-bottom: var(--hairline); }
-.press ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-6) var(--space-12); color: var(--muted); }
-.press li { display: flex; align-items: center; min-height: 44px; transition: color var(--dur-fast) var(--ease-out); }
-.press li:hover { color: var(--ink); }
-.w1 { font: 300 1.5rem var(--font-display); font-stretch: 62%; letter-spacing: .2em; text-transform: uppercase; }
-.w2 { font: italic 500 1.35rem var(--font-display); font-stretch: 100%; }
-.w3 { font: 500 .95rem var(--font-mono); letter-spacing: .3em; }
-.w4 { font: 700 1.35rem var(--font-display); font-stretch: 125%; letter-spacing: -.02em; }
-.w5 { font: 400 1.2rem var(--font-body); letter-spacing: .02em; }
-
-/* ---------- Communauté ---------- */
-.community { position: relative; padding: var(--space-24) var(--edge); }
-.community__photo { position: absolute; left: 0; right: 0; top: 0; height: 74%; overflow: hidden; margin: 0; background: var(--night); }
-.community__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; color: transparent; filter: grayscale(1) contrast(1.1) brightness(.6); }
-.community__photo::after { content: ""; position: absolute; inset: 0; background: var(--night-3); mix-blend-mode: color; }
-.community__photo .guide-c--1 { width: 40vw; left: 4%; top: 10%; z-index: 1; }
-.panel { position: relative; z-index: 2; margin-left: auto; margin-top: var(--space-16); width: min(620px, 100%); background: var(--paper); padding: var(--space-12); box-shadow: var(--shadow-card); }
-.panel h2 { margin: 0 0 var(--space-4); font: 500 var(--text-xl)/1.05 var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
-.panel p { margin: 0 0 var(--space-8); color: var(--muted); max-width: 44ch; }
-.field { display: grid; gap: var(--space-2); margin-bottom: var(--space-6); }
-.field label { color: var(--muted); }
-.field input { min-height: 48px; padding: 0 0 0; border: 0; border-bottom: 1px solid var(--line-strong); background: transparent; font-size: var(--text-base); transition: border-color var(--dur-fast) var(--ease-out); }
-.field input::placeholder { color: var(--muted); opacity: .8; }
-.field input:hover { border-bottom-color: var(--ink); }
-.field input:focus-visible { outline: none; border-bottom: 2px solid var(--ink); }
-.field input[aria-invalid="true"] { border-bottom-color: var(--gold-ink); }
-.field .err { color: var(--gold-ink); font-size: var(--text-xs); min-height: 1.2em; }
-.chips { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-8); border: 0; padding: 0; }
-.chips legend { width: 100%; margin-bottom: var(--space-2); color: var(--muted); }
-.chip { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border: var(--hairline); border-radius: var(--radius-pill); cursor: pointer; font: 500 var(--text-2xs) var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); transition: border-color var(--dur-fast), color var(--dur-fast); }
-.chip input { position: absolute; opacity: 0; pointer-events: none; }
-.chip b { width: 8px; height: 8px; border-radius: 50%; }
-.chip:hover { border-color: var(--ink); color: var(--ink); }
-.chip:has(input:checked) { border-color: var(--ink); color: var(--ink); background: var(--bg); }
-.chip:has(input:focus-visible) { outline: 1px solid var(--ink); outline-offset: 3px; }
-.confirm { position: relative; z-index: 2; display: grid; grid-template-columns: auto 1fr; gap: var(--space-6); align-items: center; }
-.confirm[hidden] { display: none; }
-.confirm .seal { width: 72px; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; font: 500 var(--text-lg) var(--font-display); }
-.confirm h3 { margin: 0 0 var(--space-1); font: 500 var(--text-lg) var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
-.confirm p { margin: 0; }
-
-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding: var(--space-8) var(--edge); border-top: var(--hairline); color: var(--muted); }
-
-/* ---------- Apparitions ---------- */
-@keyframes rise { from { opacity: 0; transform: translateY(28px); } }
-.title span, .hero-title span { overflow: hidden; }
-@keyframes line-up { from { transform: translateY(105%); } }
-@keyframes draw { from { transform: scaleX(0); } }
-.title span b { display: block; font-weight: inherit; animation: line-up var(--dur-slow) var(--ease-out) both; }
-.title span:nth-child(2) b { animation-delay: 90ms; }
-.hero-title span b { display: block; font-weight: inherit; }
-.callout::before { animation: draw var(--dur-slow) var(--ease-out) 400ms both; }
-.intro .tag, .intro .lede, .intro__cta, .callout, .carats { animation: rise var(--dur-slow) var(--ease-out) both; }
-.intro .lede { animation-delay: 200ms; } .intro__cta { animation-delay: 300ms; } .carats { animation-delay: 500ms; }
-
-/* ---------- Mobile ---------- */
-@media (max-width: 900px) {
-  :root { --ring-size: min(84vw, 420px); }
-  .nav__links { display: none; }
-  .nav__links.is-open { display: flex; position: absolute; top: 84px; left: var(--edge); right: var(--edge); flex-direction: column; align-items: stretch; gap: 0; padding: var(--space-4) var(--space-6); background: var(--paper); border: var(--hairline); }
-  .nav__links.is-open .pill { margin-top: var(--space-3); }
-  .burger { display: grid; }
-  .atelier { grid-template-columns: 1fr; padding-top: 112px; padding-bottom: 120px; gap: var(--space-8); }
-  .intro { max-width: none; }
-  .title span + span { padding-left: 1.2em; }
-  .callouts { position: absolute; inset: auto 0 0; height: var(--ring-size); top: auto; bottom: 120px; pointer-events: none; }
-  .callout--yg { top: 18%; left: auto; right: var(--edge); flex-direction: row-reverse; }
-  .callout--wg { top: 70%; left: var(--edge); }
-  .callout::before { width: 28px; }
-  .callout--note { display: none; }
-  .corner { display: none; }
-  .carats { bottom: 32px; width: max-content; max-width: calc(100% - 2 * var(--edge)); flex-wrap: wrap; justify-content: center; }
-  .carats legend { float: none; width: 100%; text-align: center; margin: 0; }
-  .night { min-height: 980px; }
-  .portrait__img { top: 38%; width: 100%; height: 62%; }
-  .portrait__img::before { background: linear-gradient(180deg, var(--night) 0%, transparent 35%), linear-gradient(0deg, var(--night) 0%, transparent 30%); }
-  .guide-c--1 { width: 110vw; right: -30%; }
-  .guide-c--2 { width: 60vw; right: -4%; top: 52%; }
-  .hero-title span { white-space: normal; }
-  .hero-title span:nth-child(n) { padding-left: 0; }
-  .hero-title span:nth-child(2), .hero-title span:nth-child(4) { padding-left: .9em; }
-  .specs { grid-template-columns: 1fr; }
-  .spec { display: flex; justify-content: space-between; align-items: baseline; padding: var(--space-4) var(--edge); }
-  .spec + .spec { border-left: 0; border-top: var(--hairline-night); }
-  .spec dt { margin: 0; }
-  .press { grid-template-columns: 1fr; }
-  .press ul { justify-content: flex-start; gap: var(--space-2) var(--space-8); }
-  .panel { padding: var(--space-8) var(--space-6); margin-top: 180px; }
-  .community__photo { height: 340px; }
-  .community__photo .guide-c--1 { width: 90vw; }
+/* ================= Mobile ================= */
+@media (max-width: 767px) {
+  :root { --ring: 86vw; --card-w: 62vw; --cell-w: 100vw; }
+  .nav ul { display: none; } .nav__burger { display: block; }
+  .hero__photo img { object-position: 58% 30%; }
+  .hero__photo::after { background: linear-gradient(180deg, color-mix(in srgb, var(--black) 30%, transparent), transparent 30%, color-mix(in srgb, var(--black) 80%, transparent) 62%, var(--black) 86%); }
+  .guides { --cx: 50%; --cy: 30%; }
+  .hero__logo { left: var(--space-4); transform: none; } .hero__nav { display: none; }
+  .hero__copy { top: auto; bottom: calc(var(--bar-h) + 22px); transform: none; left: var(--space-4); right: var(--space-4); }
+  .hero__title span { padding-left: 0; white-space: normal; } .hero__sub { padding-left: 0; }
+  .scrolldown { display: none; }
+  .cards { height: auto; display: grid; gap: var(--space-4); justify-items: center; padding: var(--space-12) 0; margin-top: 0; }
+  .spec-card { position: relative; left: auto; }
+  .atelier { height: 300vh; } .stage__text { top: calc(var(--nav-h) + 14px); left: var(--space-4); right: var(--space-4); }
+  .lines, .ring, .piece, .wheel { top: 60%; }
+  .wheel { position: absolute; left: 0; right: 0; top: auto; bottom: 54px; width: auto; height: auto; transform: none; display: flex; justify-content: center; gap: var(--space-2); }
+  .wheel button { position: static; width: auto; height: auto; transform: none; } .wheel button span { position: static; transform: none; padding: 0 8px; } .wheel button::before, .wheel button::after { content: none; }
+  .karats { bottom: 22px; } .count { display: none; }
+  .press__article { height: auto; min-height: 150px; margin: var(--space-8) var(--space-4) var(--space-4); } .press__article article { position: static; display: none; } .press__article article.is-on { display: block; }
+  .press__row { overflow-x: auto; scroll-snap-type: x mandatory; justify-content: flex-start; } .press__row button { scroll-snap-align: start; aspect-ratio: 4 / 5; }
+  .gallery { grid-template-columns: 1fr; padding: var(--space-16) var(--space-4); } .gallery__text { padding: var(--space-8) 0 0 var(--space-4); } .gallery__text .tag { left: 0; top: 0; } .gallery__curve { width: 120%; }
+  .faq { grid-template-columns: 1fr; } .faq__img { position: static; height: 62vw; } .faq__body { padding: var(--space-12) var(--space-4) var(--space-16) var(--space-8); }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0ms !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .atelier { height: auto; } .stage { position: relative; }
 }
 </style>
 </head>
-<body>
-<header class="nav">
-  <a class="logo" href="#" aria-label="Ossel, accueil"><i aria-hidden="true"></i>SSEL</a>
-  <nav class="nav__links" id="menu" aria-label="Principale">
-    <a href="#nuit">À propos</a>
-    <a href="#presse">Vu dans</a>
-    <a href="#nuit">Photos &amp; films</a>
-    <a href="#liste">FAQ</a>
-    <a class="pill" href="#liste">Liste d'attente</a>
-  </nav>
-  <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><span></span></button>
+<body class="is-loading">
+
+<div class="loader" id="loader" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <g class="up"><path class="arc" pathLength="1" d="M 220 450 A 500 500 0 0 1 1220 450"/><path class="arc" pathLength="1" style="--d:.15s" d="M 0 80 A 720 720 0 0 0 1440 80"/></g>
+    <g class="down"><path class="arc" pathLength="1" style="--d:.1s" d="M 220 450 A 500 500 0 0 0 1220 450"/><path class="arc" pathLength="1" style="--d:.25s" d="M 0 820 A 720 720 0 0 1 1440 820"/></g>
+    <path class="arc" pathLength="1" style="--d:.3s" d="M 720 0 V 900"/><path class="arc" pathLength="1" style="--d:.3s" d="M 0 450 H 1440"/>
+    <circle class="dot" cx="220" cy="450" r="3"/><circle class="dot" cx="1220" cy="450" r="3"/><circle class="dot" cx="720" cy="450" r="3"/><circle class="dot" cx="296" cy="184" r="3"/><circle class="dot" cx="1144" cy="184" r="3"/><circle class="dot" cx="296" cy="716" r="3"/><circle class="dot" cx="1144" cy="716" r="3"/>
+  </svg>
+  <span class="tag loader__pct">[<span id="pct">0</span>%]</span>
+</div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Ossel, accueil"><svg viewBox="0 0 46 12" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 1.5h30M0 6h46M0 10.5h30M34 1.5h12M34 10.5h12"/></svg></a>
+  <ul class="label"><li><a href="#atelier">La pièce</a></li><li><a href="#presse">Presse</a></li><li><a href="#galerie">Galerie</a></li><li><a href="#faq">Questions</a></li><li><a class="pill" href="#attente">Liste d'attente</a></li></ul>
+  <a class="nav__burger" href="#attente" aria-label="Rejoindre la liste d'attente"><i></i></a>
 </header>
 
-<main>
-  <!-- 1. Page produit : atelier -->
-  <section class="atelier" aria-labelledby="t-atelier">
-    <svg class="guides" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-      <line x1="0" y1="0" x2="100" y2="100"/><line x1="100" y1="0" x2="0" y2="100"/>
-      <line x1="50" y1="0" x2="50" y2="100"/><line x1="0" y1="50" x2="100" y2="50"/>
-    </svg>
-
-    <div class="intro">
-      <span class="tag mono">[ pièce signature ]</span>
-      <h1 class="title" id="t-atelier"><span><b>Matières magnifiques</b></span><span><b>Savoir-faire superbe</b></span></h1>
-      <p class="lede">Une sculpture d'oreille coulée d'une seule pièce, polie à la main pendant onze heures. Portée seule, elle dessine la ligne du visage.</p>
-      <div class="intro__cta"><a class="pill pill--solid" href="#liste">Réserver la pièce <span class="arr" aria-hidden="true">→</span></a><a class="pill" href="#nuit">Voir portée</a></div>
+<main id="top">
+  <section class="hero" id="hero" aria-labelledby="t-hero">
+    <div class="hero__photo" id="heroPhoto"><img fetchpriority="high" src="https://images.unsplash.com/photo-1560577938-a5ed9b19fe12?auto=format&fit=crop&w=2000&q=75" width="2000" height="1333" alt="Gros plan d'une oreille portant plusieurs bijoux, sur fond bleu-gris" data-slot="hero-portrait"></div>
+    <div class="guides" aria-hidden="true"><i style="--s:62vh"></i><i style="--s:118vh;--d:120ms"></i><b></b><b></b></div>
+    <a class="logo hero__logo" href="#top" aria-label="Ossel" data-in><svg viewBox="0 0 46 12" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 1.5h30M0 6h46M0 10.5h30M34 1.5h12M34 10.5h12"/></svg></a>
+    <div class="hero__copy">
+      <h1 class="hero__title" id="t-hero"><span style="--i:.8em;--d:0ms" data-in>Des années de main,</span><span style="--i:0em;--d:90ms" data-in>de technique</span><span style="--i:3em;--d:180ms" data-in>et de dessin</span><span style="--i:3.8em;--d:270ms" data-in>nous ont menés ici.</span></h1>
+      <div class="hero__sub">
+        <p data-in style="--d:400ms">Pour la première fois, les pièces d'oreille Ossel, moulées sur mesure, sont proposées au public. Série numérotée.</p>
+        <div class="acts" data-in style="--d:500ms"><a class="pill pill--full" href="#attente">Rejoindre la liste</a><a class="pill pill--light" href="#atelier">Voir la pièce</a></div>
+        <em class="label" data-in style="--d:600ms">Vu dans Maison Vague, Lumen et Atelier&nbsp;N.</em>
+      </div>
     </div>
+    <nav class="hero__nav label" aria-label="Sections" data-in style="--d:500ms"><a href="#atelier">La pièce</a><a href="#presse">Presse</a><a href="#galerie">Galerie</a><a href="#faq">Questions</a></nav>
+    <span class="tag scrolldown" aria-hidden="true">Défiler pour explorer</span>
+    <div class="specs" data-in style="--d:700ms">
+      <dl><dt class="label">Épaisseur</dt><dd><span data-count="6">6</span> microns</dd></dl>
+      <dl><dt class="label">À partir de</dt><dd><span data-count="980">980</span> €</dd></dl>
+      <dl><dt class="label">Volume moyen</dt><dd><span data-count="0.7" data-dec="1">0,7</span> cm³</dd></dl>
+    </div>
+  </section>
 
-    <div class="stage" data-k="18" data-slot="product-3d" role="img" aria-label="Sculpture d'oreille en or et chrome, rendu 3D interactif : glisser pour la faire tourner">
+  <section class="cards" id="cards" aria-label="Trois repères">
+    <dl class="spec-card" style="--x:3.6vw" data-from="70" data-to="-170"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1708389827899-990e74c0cc6c?auto=format&fit=crop&w=760&h=1350&q=70" width="760" height="1350" alt="Oreille portant une manchette dorée" data-slot="spec-card"><div><dt class="label">Épaisseur</dt><dd>6 microns</dd></div></dl>
+    <dl class="spec-card" style="--x:36.9vw" data-from="24" data-to="-300"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1669110659348-b8c2e8bad4fd?auto=format&fit=crop&w=760&h=1350&q=70" width="760" height="1350" alt="Oreille avec un petit anneau, cheveux tirés" data-slot="spec-card"><div><dt class="label">À partir de</dt><dd>980 €</dd></div></dl>
+    <dl class="spec-card" style="--x:70.2vw" data-from="130" data-to="-110"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1692220527262-094906b793e5?auto=format&fit=crop&w=760&h=1350&q=70" width="760" height="1350" alt="Oreille avec trois anneaux et un tatouage dans le cou" data-slot="spec-card"><div><dt class="label">Volume moyen</dt><dd>0,7 cm³</dd></div></dl>
+  </section>
+
+  <section class="atelier" id="atelier" aria-labelledby="t-atelier">
+    <div class="stage" id="stage">
+      <div class="lines" aria-hidden="true"><i style="--a:0deg"></i><i style="--a:90deg"></i><i style="--a:45deg"></i><i style="--a:-45deg"></i></div>
       <div class="ring" aria-hidden="true"></div>
-      <div class="piece" data-3d>
-        <img class="fallback" src="https://images.unsplash.com/photo-1735816415206-e971124e0336?auto=format&fit=crop&w=800&h=800&q=80" width="800" height="800" alt="" fetchpriority="high">
+      <div class="stage__text"><span class="tag">[variations]</span><h2 class="h2" id="t-atelier"><span>Trois ors,</span><span>une seule main</span></h2><p class="txt">Chaque pièce est moulée sur votre oreille, puis coulée en or jaune, blanc ou rose. Aucune n'a de jumelle.</p><div class="acts" style="padding-left:calc(var(--indent) * 1.55 - 1.8em)"><a class="pill" href="#attente">Réserver</a><a class="under" href="#galerie">Portée par</a></div></div>
+      <div class="piece" id="piece" data-fade role="img" aria-label="Pièce d'oreille sculpturale en or, modèle 3D que l'on peut faire tourner"><img loading="lazy" src="https://images.unsplash.com/photo-1680968921762-9a4e0fda3e51?auto=format&fit=crop&w=900&q=75" width="900" height="900" alt="" data-slot="piece-3d"></div>
+      <div class="wheel label" id="wheel" role="group" aria-label="Choisir l'or" data-fade>
+        <button type="button" style="--a:-40deg" aria-pressed="true" data-metal="0"><span>Or jaune</span></button>
+        <button type="button" style="--a:0deg" aria-pressed="false" data-metal="1"><span>Or blanc</span></button>
+        <button type="button" style="--a:40deg" aria-pressed="false" data-metal="2"><span>Or rose</span></button>
       </div>
-      <span class="floor" aria-hidden="true"></span>
+      <p class="karats label" data-fade>10K, 14K, 18K, 22K</p>
+      <p class="count tag" data-fade aria-hidden="true"><span id="countN">1</span>/3</p>
     </div>
-
-    <div class="callouts" aria-label="Matières">
-      <span class="callout callout--yg mono"><b></b>Or jaune</span>
-      <span class="callout callout--wg mono"><b></b>Or blanc</span>
-      <span class="callout callout--note"><span class="mono">Poids</span><span>14,2 g — fermoir invisible, ajustable sur trois points.</span></span>
-    </div>
-
-    <fieldset class="carats" style="border:0;padding:0;margin:0">
-      <legend class="mono">Titre</legend>
-      <button class="carat" aria-pressed="false">10K</button>
-      <button class="carat" aria-pressed="false">14K</button>
-      <button class="carat" aria-pressed="true">18K</button>
-      <button class="carat" aria-pressed="false">22K</button>
-    </fieldset>
-    <span class="corner corner--bl mono">01 / 04</span>
-    <span class="corner corner--br mono">Défiler ↓</span>
   </section>
 
-  <!-- 2. Scène nuit -->
-  <section class="night" id="nuit" aria-labelledby="t-nuit">
-    <figure class="portrait" data-slot="portrait-photo">
-      <div class="portrait__img"><img src="https://images.unsplash.com/photo-1616121341778-0dd435d03d23?auto=format&fit=crop&w=1600&q=80" width="1600" height="1600" alt="Profil d'une femme dans la pénombre, une boucle d'oreille sculpturale à l'oreille" loading="lazy"></div>
-      <span class="guide-c guide-c--1" aria-hidden="true"></span><span class="guide-c guide-c--2" aria-hidden="true"></span><span class="guide-x" aria-hidden="true"></span>
-    </figure>
-    <div class="night__copy">
-      <span class="tag mono">[ manifeste ]</span>
-      <h2 class="hero-title" id="t-nuit"><span><b>Des années de</b></span><span><b>technique humaine</b></span><span><b>et de dessin</b></span><span><b>nous ont menés ici.</b></span></h2>
-      <a class="pill" href="#liste">Rejoindre la liste <span class="arr" aria-hidden="true">→</span></a>
+  <section class="press" id="presse" aria-labelledby="t-press">
+    <div class="press__head"><span class="tag">[articles]</span><h2 class="h2" id="t-press"><span>Saluée par les voix</span><span>qui comptent.</span></h2></div>
+    <div class="press__article" id="articles" aria-live="polite">
+      <article class="is-on" style="--ax:calc(50% - var(--cell-w) * 2)"><h3>Ossel, le bijou que vous n'avez encore jamais porté</h3><p>Entre ingénierie et joaillerie, une pièce coulée sur l'oreille de chacun.</p><i>Par Jeanne Soria — maisonvague.fr</i></article>
+      <article style="--ax:calc(50% - var(--cell-w))"><h3>Le cabinet de curiosités du printemps</h3><p>Une sculpture d'oreille en or blanc, pensée comme un objet de vitrine.</p><i>Par Nils Patrin — lumen-mag.fr</i></article>
+      <article style="--ax:50%"><h3>Quand la technique rencontre le bijou</h3><p>Scanner, cire perdue, polissage miroir : trois semaines pour une seule pièce.</p><i>Par Camille Devaux — ellipse.fr</i></article>
+      <article style="--ax:calc(50% + var(--cell-w))"><h3>Remarquée à la semaine du bijou</h3><p>La pièce qui a fait tourner les têtes, littéralement.</p><i>Par la rédaction — atelier-n.fr</i></article>
     </div>
-    <dl class="specs">
-      <div class="spec"><dt class="mono">Épaisseur</dt><dd>6 microns</dd></div>
-      <div class="spec"><dt class="mono">Prix</dt><dd>1 000 €</dd></div>
-      <div class="spec"><dt class="mono">Volume</dt><dd>0,7 cm<small>3</small></dd></div>
-    </dl>
+    <div class="press__row" id="pressRow" role="group" aria-label="Articles de presse">
+      <button type="button" aria-pressed="true"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1646703299875-98091b04e512?auto=format&fit=crop&w=600&h=930&q=70" width="600" height="930" alt="" data-slot="press-photo"><b class="wm1">VAGUE</b></button>
+      <button type="button" aria-pressed="false"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1602509380108-a47060db0a97?auto=format&fit=crop&w=600&h=930&q=70" width="600" height="930" alt="" data-slot="press-photo"><b class="wm2">LUMEN</b></button>
+      <button type="button" aria-pressed="false"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1598218940656-7126545fd283?auto=format&fit=crop&w=600&h=930&q=70" width="600" height="930" alt="" data-slot="press-photo"><b class="wm3">Ellipse</b></button>
+      <button type="button" aria-pressed="false"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1735816415206-e971124e0336?auto=format&fit=crop&w=600&h=930&q=70" width="600" height="930" alt="" data-slot="press-photo"><b class="wm4">ATELIER/N</b></button>
+    </div>
   </section>
 
-  <!-- 3. Presse -->
-  <section class="press" id="presse" aria-labelledby="t-presse">
-    <h2 class="mono" id="t-presse" style="margin:0;font-weight:500">[ vu dans ]</h2>
-    <ul>
-      <li class="w1">Nocturne</li><li class="w2">Maison Revue</li><li class="w3">L'OBJET</li><li class="w4">FORME/10</li><li class="w5">atelier.mag</li>
-    </ul>
+  <section class="gallery" id="galerie" aria-labelledby="t-gal">
+    <svg class="gallery__curve" viewBox="0 0 600 700" preserveAspectRatio="none" aria-hidden="true"><path d="M-40 180C120 40 420 60 520 240S480 620 300 700"/><path d="M40 700C-20 520 30 330 120 240"/></svg>
+    <div class="gallery__text"><span class="tag">[galerie]</span><h2 class="h2" id="t-gal"><span>Portée partout,</span><span>jamais deux fois la même</span></h2><p class="txt">Chaque pièce épouse une seule oreille. Elle se porte comme un bijou, elle se regarde comme une sculpture.</p><div class="acts" style="padding-left:calc(var(--indent) * 1.55 - 1.8em)"><a class="pill" href="#attente">Réserver</a></div></div>
+    <div class="gallery__cols" id="cols">
+      <ul data-speed="-50"><li><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1616121341778-0dd435d03d23?auto=format&fit=crop&w=800&q=70" width="800" height="1067" alt="Femme de profil, cheveux attachés, boucle d'oreille fine" data-slot="gallery"></li><li style="--r:1/1"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1723986071829-42d53407ae38?auto=format&fit=crop&w=800&h=800&q=70" width="800" height="800" alt="Oreille percée de petits anneaux" data-slot="gallery"></li><li><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1725114073768-b437fb81e26c?auto=format&fit=crop&w=800&q=70" width="800" height="1067" alt="Longue boucle d'oreille en perles sur un pull blanc" data-slot="gallery"></li></ul>
+      <ul data-speed="40"><li style="--r:4/5"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1664661143286-20c2e0d8118c?auto=format&fit=crop&w=800&q=70" width="800" height="1000" alt="Nuque et oreille avec boucle, tatouage discret" data-slot="gallery"></li><li><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1588251376911-830bcaa0e8af?auto=format&fit=crop&w=800&q=70" width="800" height="1067" alt="Portrait en noir et blanc d'un homme qui lève le visage" data-slot="gallery"></li><li style="--r:1/1"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1709136331907-f6a4537f57c1?auto=format&fit=crop&w=800&h=800&q=70" width="800" height="800" alt="Femme de profil, chignon, boucle d'oreille dorée" data-slot="gallery"></li></ul>
+    </div>
   </section>
 
-  <!-- 4. Communauté / liste d'attente -->
-  <section class="community" id="liste" aria-labelledby="t-liste">
-    <figure class="community__photo" data-slot="community-photo"><img src="https://images.unsplash.com/photo-1712153483492-cab99d90ca71?auto=format&fit=crop&w=2000&q=80" width="2000" height="1333" alt="Homme dans l'obscurité, visage sculpté par une lumière latérale" loading="lazy"><span class="guide-c guide-c--1" aria-hidden="true"></span></figure>
-    <div class="panel">
-      <form id="wait" novalidate>
-        <span class="tag mono">[ communauté ]</span>
-        <h2 id="t-liste">Première série :<br>120 pièces</h2>
-        <p>Inscrivez-vous pour recevoir une invitation à l'atelier et réserver votre titre d'or avant l'ouverture publique.</p>
-        <div class="field">
-          <label class="mono" for="mail">Adresse e-mail</label>
-          <input id="mail" type="email" placeholder="vous@exemple.fr" autocomplete="email" aria-describedby="mail-err">
-          <span class="err" id="mail-err" aria-live="polite"></span>
-        </div>
-        <fieldset class="chips">
-          <legend class="mono">Métal préféré</legend>
-          <label class="chip"><input type="radio" name="m" checked><b style="background:var(--gold)"></b>Or jaune</label>
-          <label class="chip"><input type="radio" name="m"><b style="background:var(--white-gold);border:1px solid var(--line-strong)"></b>Or blanc</label>
-          <label class="chip"><input type="radio" name="m"><b style="background:var(--chrome)"></b>Les deux</label>
-        </fieldset>
-        <button class="pill pill--solid" type="submit">Rejoindre la liste <span class="arr" aria-hidden="true">→</span></button>
+  <section class="faq" id="faq" aria-labelledby="t-faq">
+    <div class="faq__img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1594896733292-9a77b5809c63?auto=format&fit=crop&w=1400&q=70" width="1400" height="933" alt="Matière dorée froissée en très gros plan" data-slot="faq-macro"></div>
+    <div class="faq__body"><span class="tag">[questions]</span><h2 class="h2" id="t-faq"><span>Les questions</span><span>qu'on nous pose</span></h2>
+      <div class="faq__list" id="faqList"></div>
+    </div>
+  </section>
+
+  <section class="wait" id="attente" aria-labelledby="t-wait">
+    <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1626362073981-75205f952cf3?auto=format&fit=crop&w=1800&q=65" width="1800" height="1200" alt="" data-slot="waitlist-bg">
+    <div>
+      <form class="wait__card" id="form" novalidate>
+        <h2 class="h2" id="t-wait"><span>Rejoindre le cercle</span><span>de celles et ceux qui redéfinissent le bijou.</span></h2>
+        <p id="formTxt">Les pièces sont coulées à la demande. Laissez votre nom : nous vous écrivons quand votre place s'ouvre.</p>
+        <label class="field"><span class="label">Prénom</span><input id="fname" autocomplete="given-name"></label>
+        <label class="field"><span class="label">E-mail</span><input id="fmail" type="email" autocomplete="email" aria-describedby="hint"></label>
+        <p class="hint label" id="hint" aria-live="polite"></p>
+        <button class="pill" type="submit">Rejoindre la liste</button>
       </form>
-      <div class="confirm" id="ok" hidden tabindex="-1">
-        <span class="seal" aria-hidden="true">✓</span>
-        <div><h3>Vous êtes sur la liste</h3><p class="mono" style="color:var(--muted)">Place n° 0412 · invitation sous 10 jours</p></div>
-      </div>
+      <p class="wait__n label"><b data-count="312">312</b> pièces numérotées pour la première série</p>
     </div>
   </section>
 </main>
-<footer><span class="mono">© Ossel (fictif) — démo Kōbō · Photos : Unsplash · 3D : Three.js</span><span class="mono">Atelier · Entretien · Contact</span></footer>
+<footer class="label"><span>2026 Ossel (marque fictive) — démo Kōbō · Photos : Unsplash</span><span>Mentions · Contact</span></footer>
 
 <script>
 (() => {
-  const burger = document.querySelector('.burger'), menu = document.getElementById('menu');
-  burger.addEventListener('click', () => { const o = menu.classList.toggle('is-open'); burger.setAttribute('aria-expanded', o); });
-  document.querySelectorAll('.carat').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.carat').forEach(x => x.setAttribute('aria-pressed', x === b));
-    const stage = document.querySelector('.stage'); stage.dataset.k = parseInt(b.textContent, 10);
-    stage.dispatchEvent(new CustomEvent('carat', { detail: +stage.dataset.k }));
+  const root = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const clamp01 = x => Math.max(0, Math.min(1, x)), wait = t => new Promise(r => setTimeout(r, t));
+  const fr = (n, d = 0) => n.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
+  root.classList.add('js');
+
+  /* ---------- Compteurs (le site utilise CountUp) ---------- */
+  function count(el, dur = 1400) {
+    const to = +el.dataset.count, dec = +el.dataset.dec || 0; if (reduce) { el.textContent = fr(to, dec); return; }
+    const t0 = performance.now(); (function tick(now) { const p = clamp01((now - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = fr(to * e, dec); if (p < 1) requestAnimationFrame(tick); })(t0);
+  }
+
+  /* ---------- Chargement au compas : les arcs se tracent, le pourcentage monte, les deux moitiés se rejoignent ---------- */
+  const loader = $('#loader'), hero = $('#hero');
+  async function intro() {
+    const enter = () => { document.body.classList.remove('is-loading'); hero.classList.add('is-in'); setTimeout(() => $$('.specs [data-count]').forEach(n => count(n)), reduce ? 0 : 700); };
+    if (reduce) { loader.remove(); root.classList.remove('js'); enter(); return; }
+    loader.classList.add('is-draw');
+    const pct = $('#pct'), t0 = performance.now(), dur = 1500;
+    await new Promise(res => (function tick(now) { const p = clamp01((now - t0) / dur); pct.textContent = Math.round(p * 100); p < 1 ? requestAnimationFrame(tick) : res(); })(t0));
+    loader.classList.add('is-join'); await wait(700);
+    loader.classList.add('is-off'); enter(); setTimeout(() => loader.remove(), 600);
+  }
+
+  /* ---------- Une seule boucle : nav, héros, cartes, scène de l'atelier, galerie ---------- */
+  const nav = $('#nav'), heroPhoto = $('#heroPhoto'), cardsSec = $('#cards'), cards = $$('.spec-card'), atelier = $('#atelier'), stage = $('#stage'), cols = $$('#cols ul'), wheel = $('#wheel'), wheelBtns = $$('#wheel button'), countN = $('#countN');
+  let sy = scrollY, H = innerHeight, last = -1, metal = 0, seen = { hero: true, cards: false, atelier: false, gal: false };
+  const mobile = () => innerWidth < 768;
+  addEventListener('scroll', () => { sy = scrollY; }, { passive: true });
+  addEventListener('resize', () => { H = innerHeight; last = -1; });
+  const watch = (el, key) => new IntersectionObserver(es => es.forEach(e => { seen[key] = e.isIntersecting; last = -1; }), { rootMargin: '20% 0px' }).observe(el);
+  watch(hero, 'hero'); watch(cardsSec, 'cards'); watch(atelier, 'atelier'); watch($('#galerie'), 'gal');
+  function setMetal(m) {
+    if (m === metal) return; metal = m;
+    wheelBtns.forEach((b, i) => b.setAttribute('aria-pressed', String(i === m)));
+    wheel.style.setProperty('--rot', (-40 * m) + 'deg'); countN.textContent = m + 1;
+    stage.dispatchEvent(new CustomEvent('metal', { detail: m }));
+  }
+  wheelBtns.forEach((b, i) => b.addEventListener('click', () => {   // un clic amène le défilement sur le métal choisi
+    const r = atelier.getBoundingClientRect(), span = r.height - H; scrollTo({ top: sy + r.top + span * (.24 + i * .28), behavior: reduce ? 'auto' : 'smooth' });
+    if (reduce) setMetal(i);
   }));
-  
-  const f = document.getElementById('wait'), mail = document.getElementById('mail'), err = document.getElementById('mail-err');
-  f.addEventListener('submit', e => {
-    e.preventDefault();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(mail.value)) { mail.setAttribute('aria-invalid', 'true'); err.textContent = 'Adresse e-mail incomplète.'; mail.focus(); return; }
-    f.hidden = true; const ok = document.getElementById('ok'); ok.hidden = false; ok.focus();
+  function frame() {
+    requestAnimationFrame(frame);
+    if (sy === last) return; last = sy;
+    nav.classList.toggle('is-on', sy > H * .9); hero.classList.toggle('is-away', sy > H * .25);
+    if (reduce) return;
+    if (seen.hero) heroPhoto.style.transform = 'translate3d(0,' + Math.round(sy * .12) + 'px,0)';
+    if (seen.cards && !mobile()) { const r = cardsSec.getBoundingClientRect(), p = clamp01((H - r.top) / (H * .9));   // les cellules de la barre montent en cartes
+      cards.forEach(c => { c.style.transform = 'translate3d(0,' + Math.round(+c.dataset.from + (+c.dataset.to - +c.dataset.from) * p) + 'px,0)'; }); }
+    if (seen.atelier) { const r = atelier.getBoundingClientRect(), p = clamp01(-r.top / (r.height - H)), open = clamp01((H * .6 - r.top) / (H * .7));
+      stage.style.setProperty('--p', open.toFixed(3)); stage.style.setProperty('--p2', clamp01((open - .55) / .45).toFixed(3));
+      stage.dataset.p = p.toFixed(4); setMetal(p < .38 ? 0 : p < .68 ? 1 : 2); }
+    if (seen.gal && !mobile()) { const r = cols[0].parentElement.getBoundingClientRect(), p = (H - r.top) / (H + r.height) - .5; cols.forEach(u => { u.style.transform = 'translate3d(0,' + Math.round(p * +u.dataset.speed) + 'px,0)'; }); }
+  }
+  if (reduce) { stage.style.setProperty('--p', 1); stage.style.setProperty('--p2', 1); }
+
+  /* ---------- Presse : survol, focus ou clic d'un logo ---------- */
+  const pressBtns = $$('#pressRow button'), arts = $$('#articles article');
+  const setPress = i => { pressBtns.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i))); arts.forEach((a, k) => a.classList.toggle('is-on', k === i)); };
+  pressBtns.forEach((b, i) => ['pointerenter', 'focus', 'click'].forEach(ev => b.addEventListener(ev, () => setPress(i))));
+
+  /* ---------- FAQ : accordéon 0,3s, chevron à −180° ---------- */
+  const QA = [['Qu\'est-ce qu\'une pièce Ossel ?', 'Un bijou d\'oreille sculptural, moulé sur votre oreille puis coulé en or. Chaque pièce est unique et numérotée.'], ['Comment en obtenir une ?', 'En rejoignant la liste d\'attente. Nous ouvrons quelques places par mois et vous écrivons à votre tour.'], ['Peut-on la porter des deux côtés ?', 'Non : elle épouse une seule oreille, celle qui a été moulée.'], ['Gêne-t-elle l\'audition ?', 'Elle laisse le conduit libre. Vous entendez normalement.'], ['Est-elle compatible avec des piercings ?', 'Oui, nous en tenons compte au moment du moulage.'], ['Quels ors proposez-vous ?', 'Or jaune, blanc ou rose, du 10 au 22 carats.'], ['Combien coûte une pièce ?', 'À partir de 980 €, selon l\'or et le volume.'], ['Livrez-vous hors de France ?', 'Oui, le moulage se fait à distance avec un kit envoyé chez vous.']];
+  $('#faqList').innerHTML = QA.map(([q, a], i) => '<h3><button type="button" aria-expanded="' + (i === 0) + '" aria-controls="fa' + i + '"><svg viewBox="0 0 10 10" fill="none" stroke="currentColor" aria-hidden="true"><path d="M1 3l4 4 4-4"/></svg>' + q + '</button><div class="faq__panel" id="fa' + i + '"><div><p>' + a + '</p></div></div></h3>').join('');
+  $('#faqList').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const open = b.getAttribute('aria-expanded') === 'true'; $$('#faqList button').forEach(o => o.setAttribute('aria-expanded', 'false')); b.setAttribute('aria-expanded', String(!open)); });
+
+  /* ---------- Liste d'attente ---------- */
+  const form = $('#form'), mail = $('#fmail'), hint = $('#hint');
+  form.addEventListener('submit', e => {
+    e.preventDefault(); const btn = form.querySelector('button');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim())) { hint.textContent = 'Adresse incomplète : prenom@exemple.fr'; mail.setAttribute('aria-invalid', 'true'); mail.focus(); return; }
+    hint.textContent = ''; mail.removeAttribute('aria-invalid'); btn.setAttribute('aria-busy', 'true');
+    setTimeout(() => { const n = ($('#fname').value.trim() || '').replace(/[<>&]/g, ''); form.innerHTML = '<h2 class="h2"><span>Merci' + (n ? ', ' + n : '') + '.</span><span>Vous êtes sur la liste.</span></h2><p>Vous faites un pas de plus vers votre pièce. Nous vous écrirons dès qu\'une place s\'ouvre.</p><a class="pill" href="#top">Revenir en haut</a>'; }, reduce ? 0 : 800);
   });
+  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { o.disconnect(); e.target.querySelectorAll('[data-count]').forEach(n => count(n)); } }), { threshold: .4 }).observe($('.wait__n'));
+
+  frame(); intro();
 })();
 </script>
-<!-- Pièce 3D : Three.js r170 (voir references/assets.md § 5). Sans WebGL ou sans réseau, la photo de repli reste visible. -->
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-} }
-</script>
+
+<!-- Pièce en 3D : volume procédural (à remplacer par le modèle .glb du projet). Les couleurs viennent des tokens. -->
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
 <script type="module">
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-
-const host = document.querySelector('[data-3d]');
-const stage = host.closest('.stage');
-const css = getComputedStyle(document.documentElement);
-const tok = (name) => new THREE.Color(css.getPropertyValue(name).trim());   // couleurs : uniquement les tokens
+const host = document.getElementById('piece'), stage = document.getElementById('stage');
+const css = getComputedStyle(document.documentElement), tok = n => new THREE.Color(css.getPropertyValue(n).trim());
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 let renderer;
-try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
-catch (e) { host.classList.add('no-webgl'); throw e; }
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.1;
-renderer.setClearColor(0x000000, 0);
-host.appendChild(renderer.domElement);
-renderer.domElement.setAttribute('aria-hidden', 'true');
-
-const scene = new THREE.Scene();
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-camera.position.set(0, 0, 8);
-
-// Tube organique : un trait 3D dont l'épaisseur varie (profil) et dont la section ondule (bruit doux)
-function sculpt(points, radius, segs, profile, wobble) {
-  const curve = new THREE.CatmullRomCurve3(points.map((p) => new THREE.Vector3(...p)), false, 'catmullrom', 0.5);
-  const radial = 40;
-  const geo = new THREE.TubeGeometry(curve, segs, radius, radial, false);
-  const pos = geo.attributes.position, v = new THREE.Vector3(), c = new THREE.Vector3();
-  for (let i = 0; i <= segs; i++) {
-    const u = i / segs; curve.getPointAt(u, c);
-    const s = profile(u);
-    for (let j = 0; j <= radial; j++) {
-      const k = i * (radial + 1) + j, a = (j / radial) * Math.PI * 2;
-      const n = 1 + wobble * (Math.sin(a * 3 + u * 17) * 0.5 + Math.sin(a * 2 - u * 23) * 0.35);
-      v.fromBufferAttribute(pos, k).sub(c).multiplyScalar(s * n).add(c);
-      pos.setXYZ(k, v.x, v.y, v.z);
+try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (e) { host.classList.add('no-webgl'); throw e; }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5)); renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.15;
+renderer.domElement.setAttribute('aria-hidden', 'true'); host.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.03).texture;
+const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50); camera.position.set(0, 0, 6.7);
+// Bijou d'oreille : trois joncs de métal entrelacés, terminés par des perles (forme inventée ; à remplacer par le modèle .glb du projet).
+// Un jonc = un tube le long d'une courbe, plus épais au milieu, à section légèrement ondulée pour accrocher les reflets.
+function jonc(points, radius, profile, wobble) {
+  const curve = new THREE.CatmullRomCurve3(points.map(q => new THREE.Vector3(...q)), false, 'catmullrom', .5), SEG = 200, RADIAL = 40;
+  const geo = new THREE.TubeGeometry(curve, SEG, radius, RADIAL, false), pos = geo.attributes.position, v = new THREE.Vector3(), c = new THREE.Vector3();
+  for (let i = 0; i <= SEG; i++) {
+    const u = i / SEG, k = profile(u); curve.getPointAt(u, c);
+    for (let j = 0; j <= RADIAL; j++) {
+      const n = i * (RADIAL + 1) + j, a = j / RADIAL * Math.PI * 2, w = 1 + wobble * (Math.sin(a * 3 + u * 17) * .5 + Math.sin(a * 2 - u * 23) * .35);
+      v.fromBufferAttribute(pos, n).sub(c).multiplyScalar(k * w).add(c); pos.setXYZ(n, v.x, v.y, v.z);
     }
   }
   geo.computeVertexNormals();
-  // soude la couture (j = 0 et j = radial) pour éviter une ligne visible dans les reflets
-  const nrm = geo.attributes.normal, a = new THREE.Vector3(), b = new THREE.Vector3();
-  for (let i = 0; i <= segs; i++) {
-    const k0 = i * (radial + 1), k1 = k0 + radial;
-    a.fromBufferAttribute(nrm, k0).add(b.fromBufferAttribute(nrm, k1)).normalize();
-    nrm.setXYZ(k0, a.x, a.y, a.z); nrm.setXYZ(k1, a.x, a.y, a.z);
-  }
+  const nr = geo.attributes.normal, p1 = new THREE.Vector3(), p2 = new THREE.Vector3();          // soude la couture du tube
+  for (let i = 0; i <= SEG; i++) { const k0 = i * (RADIAL + 1), k1 = k0 + RADIAL; p1.fromBufferAttribute(nr, k0).add(p2.fromBufferAttribute(nr, k1)).normalize(); nr.setXYZ(k0, p1.x, p1.y, p1.z); nr.setXYZ(k1, p1.x, p1.y, p1.z); }
   return { geo, curve };
 }
-
-const gold = new THREE.MeshPhysicalMaterial({ color: tok('--gold'), metalness: 1, roughness: 0.16, clearcoat: 0.6, clearcoatRoughness: 0.12 });
-const chrome = new THREE.MeshPhysicalMaterial({ color: tok('--chrome'), metalness: 1, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.05 });
-const whiteGold = new THREE.MeshPhysicalMaterial({ color: tok('--white-gold'), metalness: 1, roughness: 0.22 });
-
-const piece = new THREE.Group();
-const swell = (min, max) => (u) => min + (max - min) * Math.sin(Math.PI * u);   // fin aux extrémités, plein au milieu
-const parts = [
-  { pts: [[0.6, 1.55, 0], [-0.3, 1.25, 0.35], [-0.85, 0.35, 0.2], [-0.55, -0.45, -0.15], [-0.1, -0.9, 0.2], [-0.25, -1.4, 0.1], [0.3, -1.65, -0.1]], r: 0.24, prof: swell(0.5, 1), wob: 0.12, mat: gold },
-  { pts: [[0.5, 1.0, 0.25], [0.0, 0.8, 0.45], [-0.38, 0.2, 0.35], [-0.15, -0.3, 0.3], [0.12, -0.55, 0.12]], r: 0.13, prof: swell(0.55, 1), wob: 0.08, mat: chrome },
-  { pts: [[0.95, 1.3, -0.1], [1.2, 0.6, 0.05], [1.05, -0.1, 0.12], [0.72, -0.35, 0]], r: 0.08, prof: swell(0.7, 1), wob: 0.05, mat: whiteGold },
+const METALS = ['--gold', '--white-gold', '--rose'].map(tok), ROUGH = [.1, .05, .11];
+const metal = (color, roughness) => new THREE.MeshStandardMaterial({ color, metalness: 1, roughness, envMapIntensity: 1.6 });
+const mat = metal(METALS[0].clone(), ROUGH[0]);                 // jonc principal : l'or choisi
+const mirror = metal(tok('--white-gold-hi'), .03);              // jonc poli miroir
+const accent = metal(METALS[1].clone(), .08);                   // fil fin et perles : un autre or que le principal
+const swell = (min, max) => u => min + (max - min) * Math.pow(Math.sin(Math.PI * u), .8);
+const PARTS = [
+  { pts: [[.62, 1.6, 0], [-.3, 1.3, .38], [-.9, .36, .22], [-.58, -.46, -.16], [-.08, -.92, .22], [-.26, -1.42, .1], [.34, -1.7, -.1]], r: .3, prof: swell(.42, 1), wob: .14, mat, pearl: accent },
+  { pts: [[.52, 1.02, .28], [0, .82, .5], [-.4, .2, .4], [-.16, -.3, .34], [.14, -.58, .14]], r: .15, prof: swell(.5, 1), wob: .09, mat: mirror, pearl: mat },
+  { pts: [[.98, 1.34, -.1], [1.24, .62, .06], [1.08, -.1, .14], [.74, -.38, 0]], r: .075, prof: swell(.7, 1), wob: .05, mat: accent, pearl: mirror },
 ];
-for (const p of parts) {
-  const { geo, curve } = sculpt(p.pts, p.r, 220, p.prof, p.wob);
-  piece.add(new THREE.Mesh(geo, p.mat));
-  for (const u of [0, 1]) {                                     // perles aux extrémités : ferment le tube
-    const ball = new THREE.Mesh(new THREE.SphereGeometry(p.r * (u ? 0.9 : 1.15), 48, 32), p.mat === gold ? chrome : gold);
-    ball.position.copy(curve.getPointAt(u)); piece.add(ball);
-  }
+const piece = new THREE.Group();
+for (const q of PARTS) {
+  const { geo, curve } = jonc(q.pts, q.r, q.prof, q.wob); piece.add(new THREE.Mesh(geo, q.mat));
+  for (const u of [0, 1]) { const pearl = new THREE.Mesh(new THREE.SphereGeometry(q.r * q.prof(u) * (u ? 1.5 : 1.9), 40, 28), q.pearl); pearl.position.copy(curve.getPointAt(u)); piece.add(pearl); }
 }
-piece.rotation.z = -0.12;
-scene.add(piece);
-
-const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(3, 4, 5); scene.add(key);
-const rim = new THREE.DirectionalLight(0xffffff, 1.2); rim.position.set(-4, 1, -3); scene.add(rim);
-
-// Titre d'or : 10K pâle (plus d'alliage), 22K plus jaune et saturé
-const base = tok('--gold'), pale = tok('--white-gold');
-const tint = (k) => {
-  if (k === 10) return base.clone().lerp(pale, 0.55);
-  if (k === 14) return base.clone().lerp(pale, 0.3);
-  if (k === 22) return base.clone().offsetHSL(0, 0.15, -0.03);
-  return base.clone();
-};
-let target = tint(+stage.dataset.k || 18);
-gold.color.copy(target);
-stage.addEventListener('carat', (e) => { target = tint(e.detail); if (reduce) { gold.color.copy(target); draw(); } });
-
-function resize() {
-  const w = host.clientWidth, h = host.clientHeight;
-  if (!w || !h) return;
-  renderer.setSize(w, h, false);
-  renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
-  camera.aspect = w / h;
-  camera.position.z = w < h ? 8 * (h / w) * 0.85 : 8;          // garde la pièce entière en colonne étroite
-  camera.updateProjectionMatrix();
-  draw();
+piece.rotation.z = -.12; piece.scale.setScalar(.92); scene.add(piece);
+const key = new THREE.DirectionalLight(tok('--paper'), 1.6); key.position.set(3, 4, 5); scene.add(key);
+let target = 0, yaw = .5, drag = 0, dragging = false, lastX = 0, visible = false, lastDraw = 0, dirty = true;
+stage.addEventListener('metal', e => { target = e.detail; dirty = true; });
+function resize() { const w = host.clientWidth; if (!w) return; renderer.setSize(w, w, false); dirty = true; }
+new ResizeObserver(resize).observe(host);
+new IntersectionObserver(es => es.forEach(e => visible = e.isIntersecting)).observe(host);
+host.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; host.setPointerCapture(e.pointerId); });
+host.addEventListener('pointermove', e => { if (!dragging) return; drag += (e.clientX - lastX) / host.clientWidth * 4; lastX = e.clientX; dirty = true; });
+['pointerup', 'pointercancel'].forEach(ev => host.addEventListener(ev, () => dragging = false));
+function loop(t) {
+  requestAnimationFrame(loop);
+  if (!visible || document.hidden || t - lastDraw < 32) return;                      // 30 images/s, seulement à l'écran
+  const p = +stage.dataset.p || 0, want = .5 + p * Math.PI * 2.2 + drag + (reduce ? 0 : t * .00012);
+  const other = METALS[(target + 1) % 3], dc = mat.color.clone().lerp(METALS[target], .12), moved = Math.abs(want - yaw) > .0008 || !dc.equals(mat.color);
+  if (!moved && !dirty) return; dirty = false; lastDraw = t;
+  yaw += (want - yaw) * (reduce ? 1 : .14); mat.color.copy(dc); accent.color.lerp(other, .12); mat.roughness += (ROUGH[target] - mat.roughness) * .12;
+  piece.position.y = reduce ? 0 : Math.sin(t * .0009) * .06;                          // léger flottement
+  piece.rotation.y = yaw; renderer.render(scene, camera);
 }
-
-// Glisser pour tourner (avec inertie), sinon rotation lente
-let yaw = 0.4, vel = 0, dragging = false, lastX = 0, tilt = 0;
-host.addEventListener('pointerdown', (e) => { dragging = true; lastX = e.clientX; host.setPointerCapture(e.pointerId); });
-host.addEventListener('pointermove', (e) => {
-  const r = host.getBoundingClientRect();
-  tilt = ((e.clientY - r.top) / r.height - 0.5) * 0.4;
-  if (!dragging) return;
-  const dx = (e.clientX - lastX) / r.width * 4; lastX = e.clientX;
-  yaw += dx; vel = dx; if (reduce) draw();
-});
-const stop = () => { dragging = false; };
-host.addEventListener('pointerup', stop); host.addEventListener('pointercancel', stop);
-
-function draw() {
-  piece.rotation.y = yaw;
-  piece.rotation.x = tilt;
-  renderer.render(scene, camera);
-}
-
-let visible = true;
-new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(host);
-const clock = new THREE.Clock();
-function tick() {
-  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
-  if (visible) {
-    if (!dragging) { vel *= 0.94; yaw += vel + dt * 0.25; }
-    piece.position.y = Math.sin(t * 0.9) * 0.08;               // flottement
-    gold.color.lerp(target, 0.08);
-    draw();
-  }
-  requestAnimationFrame(tick);
-}
-new ResizeObserver(resize).observe(host); resize();
-if (reduce) draw(); else tick();
-host.classList.add('is-3d-ready');
+resize(); requestAnimationFrame(loop);
 </script>
 </body>
 </html>

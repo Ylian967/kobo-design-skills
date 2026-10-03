@@ -1,65 +1,66 @@
 # Chrome Atelier — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un personnage ou un objet : le bijou est une **vraie scène 3D** (ou un vrai rendu), les portraits sont de **vraies photos**. Seuls les filets, cercles et pastilles restent en CSS/SVG : ce sont des éléments graphiques de la planche.
+> Les visuels font la moitié du style. **Jamais** de bijou, d'oreille ou de matière dessinés en CSS ou SVG : de **vraies photos** et une **vraie pièce en 3D** (ou sa vidéo). Restent dessinés, parce que ce sont des signes : le logo, les filets, les cercles, les arcs du chargement, la courbe de la galerie, le chevron.
 
-## 1. Ce que montrent les images
+## 1. Ce que montrent les images de référence (relevé le 2026-10-03)
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `product-3d` (héros atelier) | La pièce seule : bijou sculptural or + chrome | Centrée sur l'intersection des filets, ~40 % de la largeur, dans le cercle `--ring-size` | Studio neutre, reflets nets, fond transparent sur `--bg` | Scène Three.js (§ 5) ; repli = photo du bijou porté recadrée en disque dans le cercle |
-| `portrait-photo` (scène nuit) | Gros plan de profil, la pièce portée à l'oreille | Plein cadre, visage et oreille dans les deux tiers droits, zone sombre à gauche pour le titre | Basse lumière, une source latérale qui fait briller le métal | N&B `brightness(.62)` + calque `--night-3` en `mix-blend-mode: color`, fondu `--night` vers la gauche et le bas |
-| `community-photo` | Visage ou buste dans l'obscurité, lumière latérale | 16:9 ou plus large, sujet à gauche (le panneau blanc chevauche la droite) | Clair-obscur | Même virage bleu-gris que la scène nuit |
+| Emplacement (`data-slot`) | Sur la référence | Cadrage | Traitement |
+|---|---|---|---|
+| `hero-portrait` | gros plan d'une oreille d'homme portant la pièce chromée, peau éclairée de côté, fond bleu-gris très sombre | paysage, oreille au centre-droit, **gauche de l'image sombre et vide** pour le titre | aucun filtre ; voile `--night` à gauche, noir léger en haut et en bas |
+| `spec-card` (×3) | mains gantées tenant la pièce, oreilles en très gros plan, pièce dans la paume | portrait 9:16 | voile noir en haut pour le libellé |
+| `piece-3d` | la pièce seule : masse lisse et pliée, métal poli, en or jaune, blanc ou rose | sur blanc, au centre du cercle | reflets clairs, pas d'ombre portée |
+| `press-photo` (×4) | photos des articles : pièce posée sur un galet, sur une main, sur une oreille | portrait 235 / 365 | voile noir à 34 % sous le logo blanc |
+| `gallery` (×6 ou plus) | portraits de profil, oreilles avec la pièce, détails de mains ; tons chauds de peau, fonds neutres | 3:4, 4:5 et carrés mêlés | aucun |
+| `faq-macro` | très gros plan de métal liquide or et chrome sur fond vert sombre | portrait ou carré | aucun |
+| `waitlist-bg` | pièce sombre posée dans une lumière rasante | plein écran | opacité 50 % sur noir, vignette |
 
-**Règle de cohérence** : la seule couleur chaude de la page est le métal. Les photos sont toujours désaturées et virées bleu-gris (`--night-3`), jamais de peau dorée ni de fond coloré ; le blanc cassé `--bg` n'accueille que la pièce 3D.
+**Règle de cohérence** : deux mondes seulement — **peau et métal** en lumière douce (photos), **blanc et filets** (planche). Pas de décor, pas de couleur vive : la seule couleur vient de l'or et de la peau.
 
 ## 2. Où les trouver
 
-1. **Les images du projet** : rendus 3D du bijou (fichier `.glb` du CAO joaillier : Rhino/Matrix exporte en glTF), photos de campagne portées. Toujours en priorité.
-2. **Banques gratuites** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Mots-clés :
-   - FR : « boucle d'oreille sculpturale », « bijou porté profil », « portrait clair-obscur », « profil femme bijou noir et blanc », « homme lumière latérale fond noir ».
-   - EN : « sculptural earring », « ear cuff close up », « jewelry portrait dark », « profile earring black and white », « chiaroscuro portrait », « side lit face dark background ».
-3. **Génération IA** (Midjourney, Flux, Firefly…) — prompts de départ :
-   - Pièce (repli ou texture) : > *studio product render of an avant-garde sculptural ear cuff, flowing organic shape combining polished yellow gold and mirror chrome, small spheres at the tips, centered, soft studio reflections, plain off-white background, 50mm, ultra sharp, no text, no logo*
-   - Portrait nuit : > *cinematic close-up profile of a woman in near darkness wearing a sculptural chrome and gold ear cuff, single cold side light, deep blue-grey shadows, desaturated, negative space on the left, 85mm, fine film grain, no text*
-   - Communauté : > *moody black and white portrait of a man emerging from darkness, hard side light sculpting the face, wide 16:9 frame, subject on the left, cool blue-grey tone, no text*
-4. **À éviter** : bijoux sur velours ou fond coloré, mannequins souriants, éclairage chaud doré, plusieurs bijoux à la fois, photos de la campagne de référence, faux détourage (une photo « détourée » à la main sur `--bg`) : utiliser la 3D ou un vrai rendu sur fond uni.
+1. **Les images du projet** : rendus 3D du produit sur fond blanc (un par finition), portraits portés, macros. Toujours en priorité.
+2. **Banques gratuites** : [Unsplash](https://unsplash.com) (licence Unsplash, usage commercial permis). Mots-clés : « ear piercing close up », « ear cuff », « earring portrait dark », « silver jewelry hand », « liquid metal », « liquid gold », « chrome abstract ».
+3. **Génération IA** — prompts de départ :
+   - Héros : > *extreme close-up photo of a human ear wearing a sculptural liquid-chrome ear cuff, side light on skin, very dark blue-grey background, empty dark space on the left, shallow depth of field, 3:2, no text*
+   - Pièce : > *studio render of a single sculptural ear cuff shaped like folded liquid metal, polished yellow gold, soft reflections, pure white background, no shadow, centered, 1:1, no text*
+   - Macro : > *macro photo of molten gold and chrome flowing together, dark green background, sharp reflections, no text*
+4. **À éviter** : bijoux de catalogue sur présentoir, fonds colorés, photos posées souriantes, pierres de couleur, rendus 3D mats.
 
-## 3. Traitements (code)
+## 3. La pièce en 3D
+
+Le site joue une **séquence d'images** d'un rendu 3D au défilement. Trois façons de faire, de la plus fidèle à la plus légère :
+
+| Option | Quand | Comment |
+|---|---|---|
+| **Modèle `.glb`** du produit | on a le fichier 3D | Three.js : `GLTFLoader`, `MeshStandardMaterial` métal (`metalness: 1`, `roughness` 0.06 à 0.12), environnement clair (`RoomEnvironment`), `envMapIntensity` 1.5, fond transparent |
+| **Vidéo ou séquence** pré-rendue | on a seulement des rendus | une vidéo par finition, avancée avec `video.currentTime = p × durée`, ou 60 images par tour |
+| **Volume procédural** (démo) | rien encore | trois joncs de métal entrelacés (un épais dans l'or choisi, un poli miroir, un fil fin), terminés par des perles : des tubes le long de courbes, plus épais au milieu, à section légèrement ondulée ; à remplacer dès que le modèle existe |
+
+```js
+const METALS = ['--gold', '--white-gold', '--rose'].map(n => new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue(n).trim()));
+const mat = new THREE.MeshStandardMaterial({ color: METALS[0].clone(), metalness: 1, roughness: .1, envMapIntensity: 1.5 });
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.03).texture;
+// à chaque rendu : mat.color.lerp(METALS[cible], .12)
+```
+Règles : rendu **à la demande** (voir `motion.md`, « Performance »), rapport de pixels ≤ 1,5, repli photo si WebGL manque, `role="img"` et `aria-label` sur le conteneur.
+
+## 4. Traitements (code)
 
 ```css
-/* Portrait nuit : N&B virée bleu-gris + fondu vers le texte */
-.portrait { position: absolute; inset: 0; background: var(--night); }
-.portrait__img { position: absolute; top: 0; right: 0; width: 68%; height: 100%; background: var(--night-2); }
-.portrait__img img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 35%;
-  filter: grayscale(1) contrast(1.15) brightness(.62); }
-.portrait__img::after { content: ""; position: absolute; inset: 0; background: var(--night-3); mix-blend-mode: color; }
-.portrait__img::before { content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(90deg, var(--night) 0%, color-mix(in srgb, var(--night) 40%, transparent) 35%, transparent 60%),
-              linear-gradient(0deg, var(--night) 0%, transparent 30%); }
-
-/* Pièce : canvas 3D + photo de repli en disque dans le cercle */
-.piece { position: absolute; inset: 0; cursor: grab; touch-action: pan-y; }
-.piece canvas { position: absolute; inset: 0; filter: drop-shadow(0 34px 30px color-mix(in srgb, var(--ink) 22%, transparent)); }
-.piece .fallback { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: calc(var(--ring-size) * .82);
-  aspect-ratio: 1; height: auto; object-fit: cover; border-radius: 50%; background: var(--white-gold); transition: opacity var(--dur-slow) var(--ease-out); }
-.piece.is-3d-ready .fallback { opacity: 0; }
+/* Héros : assombrir la gauche pour le titre, garder le bijou net */
+.hero__photo::after { background:
+  linear-gradient(90deg, var(--night) 4%, color-mix(in srgb, var(--night) 72%, transparent) 34%, color-mix(in srgb, var(--black) 18%, transparent) 62%, color-mix(in srgb, var(--black) 46%, transparent)),
+  linear-gradient(180deg, color-mix(in srgb, var(--black) 34%, transparent), transparent 30%, transparent 70%, color-mix(in srgb, var(--black) 55%, transparent)); }
+/* Carte : voile haut pour le libellé */
+.spec-card::after { background: linear-gradient(180deg, color-mix(in srgb, var(--black) 55%, transparent), transparent 42%); }
+/* Presse : photo révélée dans la cellule active */
+.press__row img { opacity: 0; transform: scale(1.06); }
+.press__row button[aria-pressed="true"] img { opacity: 1; transform: none; }
 ```
 
-## 4. Intégration
+## 5. Intégration
 
-- `<img>` avec `width`/`height`, `alt` qui décrit la personne et le bijou (« Profil d'une femme dans la pénombre, une boucle d'oreille sculpturale »), `loading="lazy"` sauf l'image de repli du héros (`fetchpriority="high"`, `alt=""` car le conteneur `role="img"` porte déjà la description).
-- Formats : AVIF/WebP via `<picture>` ou CDN ; portrait nuit ≤ 300 Ko.
-- Repli : `background: var(--night)` / `var(--night-2)` sur chaque conteneur photo ; le titre reste lisible (`--on-night` 15,8:1).
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder` blurhash, `transition={300}`) ; le virage bleu-gris se fait dans l'image source (pas de `mix-blend-mode` en natif) ; le fondu par `expo-linear-gradient` en `absoluteFill`.
-
-## 5. 3D — recette complète
-
-- **Quoi** : un bijou d'oreille sculptural, trois brins entrelacés (or jaune épais, chrome fin, or blanc très fin) terminés par des perles. Dans la démo, il est **procédural** : `TubeGeometry` le long d'une `CatmullRomCurve3`, rayon modulé (fin aux extrémités, plein au milieu) et section qui ondule (bruit sinusoïdal doux) pour un aspect coulé main, puis `computeVertexNormals()` et soudure de la couture. Variante plus simple : `TorusKnotGeometry` déformée par bruit, ou `LatheGeometry` torsadée.
-- **Matières** : `MeshPhysicalMaterial` `metalness: 1` ; or `roughness .16`, `clearcoat .6` ; chrome `roughness .06`, `clearcoat 1` ; or blanc `roughness .22`. Couleurs **lues dans les tokens** (`getComputedStyle(...).getPropertyValue('--gold')`), jamais en dur.
-- **Lumière** : `scene.environment` = `RoomEnvironment` via `PMREMGenerator` (indispensable : un métal sans environnement est noir), une directionnelle clé (3, 4, 5) intensité 2,2, un contre-jour (-4, 1, -3) intensité 1,2 ; `ACESFilmicToneMapping`, exposition 1,1 ; fond transparent (`alpha: true`) pour laisser voir filets et cercle.
-- **Caméra** : perspective 35°, z = 8 (reculée si la colonne est plus haute que large) ; la pièce mesure ~3,3 unités de haut.
-- **Interaction** : glisser horizontal = rotation (avec inertie), inclinaison légère selon la position verticale du pointeur, rotation lente automatique + flottement ; `touch-action: pan-y` pour ne pas bloquer le défilement mobile. **Titre d'or** : un événement `carat` change la couleur cible du matériau or (10K = `--gold` mêlé à 55 % de `--white-gold`, 14K = 30 %, 18K = `--gold`, 22K = `--gold` plus saturé) et la couleur glisse vers elle (`color.lerp(cible, .08)` par image). Pause hors écran (`IntersectionObserver`).
-- **Modèles** : le `.glb` du projet (compressé Draco/Meshopt, ≤ 1,5 Mo), chargé par `GLTFLoader` + `DRACOLoader` ; remplacer les matériaux par ceux ci-dessus pour garder les tokens. Modèles libres pour maquetter : [Poly Pizza](https://poly.pizza) (CC0/CC-BY), [Sketchfab](https://sketchfab.com/search?features=downloadable&licenses=7c23a1ba438d4306920229c12afcb5f9&q=earring) (filtre CC, chercher « earring », « ring », « jewelry »), [Kenney](https://kenney.nl/assets) et [Quaternius](https://quaternius.com) (CC0, peu de bijoux). Vérifier la licence, créditer si CC-BY.
-- **Web (React)** : React Three Fiber + drei : `<Canvas gl={{ alpha: true }}>`, `<Environment preset="studio" />` ou `<Environment><Lightformer …/></Environment>`, `<Float speed={1} rotationIntensity={.3}>`, `<PresentationControls>` pour le glisser, `useGLTF('/piece.glb')`.
-- **React Native** : `expo-gl` + `@react-three/fiber/native` + `@react-three/drei/native` (`useGLTF` avec un asset local) ; sur appareil faible, une suite de rendus pré-calculés (24 vues) qu'on fait défiler au glisser.
-- **Repli** : la photo sous le canvas reste visible si le module ne charge pas ou si WebGL manque (`.no-webgl`) ; avec `prefers-reduced-motion`, la scène est rendue une fois, sans rotation ni flottement, et se redessine seulement au glisser ou au changement de titre.
+- Vrai `alt` sur le héros, les cartes et la galerie ; `alt=""` sur les photos de presse (le bouton porte le logo) et sur le fond de la liste d'attente.
+- `object-position` du héros réglé pour garder le bijou sous le centre des cercles (`--cx`, `--cy`).
+- Poids : héros 2000px ≤ 350 Ko ; cartes 760 × 1350 ; galerie 800px ; tout sauf le héros en `loading="lazy"`.
+- **React Native / Expo** : `expo-image` ; pièce en vidéo (`expo-video`) ou `expo-gl` + three ; filets et cercles avec `react-native-svg`.

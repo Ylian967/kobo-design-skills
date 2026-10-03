@@ -1,85 +1,85 @@
 /*
  * Chrome Atelier — tokens
- * Valeurs estimées sur le shot Dribbble, puis corrigées par les mesures du site en ligne de la marque (2026-10-03, voir source.md) : encre, gris, graisse et largeur des titres, pilules, durées.
- * Deux ambiances : « atelier » (blanc cassé, filets gris) et « nuit » (bleu-gris profond, photo).
- * @contrast ink:bg muted:bg gold-ink:bg ink:paper muted:paper on-ink:ink
- * @contrast on-night:night muted-night:night gold:night on-night:night-2 ink:on-night
+ * MESURÉS le 2026-10-03 sur le site en ligne de la marque (Chrome 1440×900 : styles calculés, variables et feuille de style du site)
+ * et sur les captures du site et des images du shot (couleurs des métaux et de la photo). « choisi » = décidé par le skill. Voir source.md.
+ * Deux ambiances : « atelier » (blanc, filets gris) et « nuit » (photo bleu-gris profond).
+ * @contrast ink:paper body:paper ink:mist body:mist ink:panel paper:ink paper:night paper:night-2 paper:black
+ * @contrast soft:night soft:black gold-ink:paper ink:gold ink:white-gold ink:rose-hi
  */
 :root {
-  /* Couleurs — atelier (clair) */
-  --bg: #f2f2f0;            /* blanc cassé de la page produit */
-  --paper: #fbfbf9;         /* panneau blanc (communauté, confirmation) */
-  --ink: #10191e;           /* mesuré : titres, logo, bouton plein (encre bleu-noir) */
-  --on-ink: #f2f2f0;
-  --muted: #3f464a;         /* mesuré : texte courant, étiquettes [ ] */
-  --faint: #b3b3b3;         /* mesuré : libellés sur photo nuit (« ACCÈS »), « Défiler » — jamais sur clair */
-  --line: #c9c9c4;          /* filets : diagonales, croix, anneau (décoratif, jamais du texte) */
-  --line-strong: #9c9c96;   /* filets des légendes (callouts) */
-  --gold-ink: #7f6127;      /* or lisible en petit texte sur clair */
+  /* ---- Atelier (clair) ---- */
+  --paper: #ffffff;         /* mesuré : fond des sections claires, barre de navigation */
+  --mist: #eaeaea;          /* mesuré (--gray-v3) : fond de l'écran de chargement */
+  --panel: #f3f3f3;         /* mesuré (--gray) : fonds gris très clairs */
+  --ink: #10191e;           /* mesuré (--dark) : titres, logo, contour des pilules sur clair */
+  --body: #3f464a;          /* mesuré (--body) : texte courant, étiquettes [entre crochets] */
+  --rule: #e0e0e0;          /* mesuré (--gray-v2) : filets, cercle, séparateurs — jamais du texte */
+  --ghost: #cacccd;         /* mesuré : logos de presse inactifs, libellés de métal non choisis — jamais du texte utile */
 
-  /* Couleurs — nuit (sombre) */
-  --night: #0e1216;         /* fond « photo » bleu-gris très profond */
-  --night-2: #1b232b;       /* reflets, panneau sombre */
-  --night-3: #2c3742;       /* lumière de bord de la photo */
-  --on-night: #ecebe6;
-  --muted-night: #9aa2a8;
-  --line-night: #3a444e;    /* filets et cercles-guides sur la photo */
+  /* ---- Nuit (sombre) ---- */
+  --night: #1c2c39;         /* mesuré (capture) : bleu-gris profond de la photo du héros */
+  --night-2: #293339;       /* mesuré (--dark-blue) */
+  --black: #000201;         /* mesuré (--dark-bg) : pied de page, zones noires de la photo */
+  --soft: #b3b3b3;          /* mesuré (--gray) : paragraphe et libellés sur la photo de nuit — jamais sur clair */
+  --bar: rgb(2 2 2 / 0.2);              /* mesuré : fond de la barre de caractéristiques (+ flou 4px) */
+  --bar-line: rgb(255 255 255 / 0.16);  /* mesuré : contour de la barre, cercles-guides sur la photo */
+  --pill-ghost: rgb(255 255 255 / 0.04);/* mesuré : fond de la pilule secondaire sur photo */
 
-  /* Métaux (dégradés de la pièce — jamais du texte, sauf --gold sur nuit) */
-  --gold: #c9a45c;
-  --gold-hi: #f3dca0;
-  --gold-lo: #6e5121;
-  --chrome-hi: #ffffff;
-  --chrome: #c7ccd1;
-  --chrome-lo: #4d555d;
-  --white-gold: #e7e3da;
+  /* ---- Métaux (mesurés sur les captures de la pièce : ombre, ton moyen, reflet) ---- */
+  --gold-lo: #523d0d; --gold: #c3a23e; --gold-hi: #eddfa4;
+  --white-gold-lo: #5b5b5b; --white-gold: #bbbbbb; --white-gold-hi: #e6e6e6;
+  --rose-lo: #5b2217; --rose: #b77f6b; --rose-hi: #edd1c2;
+  --gold-ink: #7a5d14;      /* choisi : or lisible en petit texte sur blanc */
 
-  /* Typographie */
-  --font-display: 'Inter', 'Archivo', 'Helvetica Neue', Arial, sans-serif;  /* mesuré : grotesque suisse 400 à chasse normale (Suisse Int'l sur le site) */
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;          /* étiquettes [ entre crochets ], valeurs techniques */
-  --text-2xs: 0.6875rem;    /* 11px : liens de navigation, étiquettes */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.75rem;
-  --text-title: clamp(2rem, 3.6vw, 3.25rem);    /* titre produit 2 lignes décalées */
-  --text-hero: clamp(2.4rem, 5.4vw, 5rem);      /* titre de la scène nuit, 4 lignes */
-  --leading-tight: 1.02;
-  --leading-body: 1.6;
-  --tracking-caps: 0.14em;
-  --tracking-title: 0.01em;
-  --stretch-display: 100%;  /* mesuré : chasse normale (le shot semblait plus large) */
-  --weight-display: 400;    /* mesuré : titres en Regular, jamais en gras */
-  --root-fluid: 0.9vw;      /* mesuré : html { font-size } = 0.9vw (13.84px à 1536px) ; tout le site est en rem */
-  --indent-step: 2.4em;     /* décalage d'une ligne de titre à l'autre */
+  /* ---- Typographie ----
+   * Le site règle html { font-size: 0.9vw } (12,97px à 1440) et écrit tout en rem : le texte courant y fait 9,7px.
+   * Le skill garde les rapports mais remonte les planchers pour rester lisible (écart assumé). */
+  --font-display: 'Inter', 'Helvetica Neue', Arial, sans-serif;   /* site : Suisse Int'l 400 (payante) */
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;          /* site : Suisse Mono 400 (payante) */
+  --weight: 400;            /* mesuré : tout est en Regular, titres compris */
+  --fs-hero: clamp(1.375rem, 1.8vw, 2.5rem);     /* mesuré 2rem / 1.1 : titre du héros, 4 lignes en escalier */
+  --lh-hero: 1.1;
+  --ls-hero: 0.0125em;                            /* mesuré 0.025rem sur 2rem */
+  --fs-h2: clamp(1.25rem, 1.35vw, 1.875rem);     /* mesuré 1.5rem / 1 : titres de section, 2 lignes dont une décalée */
+  --lh-h2: 1;
+  --ls-h2: -0.01em;                               /* mesuré −0.015rem sur 1.5rem */
+  --fs-body: 0.8125rem;                           /* choisi 13px (site : 0.75rem ≈ 9,7px) ; interligne mesuré 1.385 */
+  --lh-body: 1.385;
+  --ls-body: 0.033em;                             /* mesuré 0.025rem sur 0.75rem */
+  --fs-label: 0.6875rem;                          /* choisi 11px (site : 0.625rem ≈ 8px) : nav, libellés de la barre */
+  --ls-label: 0.08em;                             /* mesuré 0.05rem sur 0.625rem */
+  --fs-btn: 0.6875rem;                            /* choisi 11px (site : 0.75rem) */
+  --ls-btn: 0.092em;                              /* mesuré 0.06875rem sur 0.75rem */
+  --fs-value: clamp(1rem, 1.04vw, 1.25rem);       /* mesuré 1.15rem : valeurs de la barre de caractéristiques */
+  --ls-mono: -0.108em;                            /* mesuré : étiquettes mono très resserrées */
+  --indent: 1.55em;                               /* mesuré : décalage de la 2e ligne d'un titre de section (30px pour un corps de 19,5px) */
 
-  /* Espace (base 4px) */
+  /* ---- Grille (1440 × 900) ---- */
+  --edge: clamp(20px, 4.6vw, 67px);       /* mesuré : marge gauche des sections claires (67px) */
+  --edge-hero: clamp(16px, 2.2vw, 32px);  /* mesuré : bord gauche du titre du héros (32px) */
+  --nav-h: 44px;                          /* choisi (site : 39px) */
+  --bar-h: 58px;                          /* mesuré : barre de caractéristiques (4.5rem) */
+  --pill-h: 44px;                         /* choisi (site : 37px) : cible tactile */
+  --ring: min(75vh, 47vw);                /* mesuré : cercle de l'atelier ≈ 678px à 1440 × 900 */
+  --hairline: 0.8px;                      /* mesuré : contours des pilules et de la barre */
+  --r-pill: 999px;                        /* mesuré : seul rayon du site */
+  --card-w: clamp(180px, 26.2vw, 377px);  /* mesuré : cartes photo issues de la barre (377px), ratio 9:16 */
+  --cell-w: clamp(150px, 16.3vw, 235px);  /* mesuré : cellule de logo de presse */
+  --blur: 4px;                            /* mesuré : flou de la barre */
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
-  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --edge: clamp(20px, 4vw, 56px);
-  --container: 1360px;
-  --ring-size: min(68vh, 620px); /* grand cercle autour du produit */
+  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+  --container: 1280px;                    /* mesuré : 80rem */
 
-  /* Formes */
-  --radius-pill: 999px;
-  --radius-card: 4px;
-  --hairline-w: 0.8px;      /* mesuré : contours des pilules et de la barre de caractéristiques */
-  --hairline: 1px solid var(--line);
-  --hairline-night: 1px solid var(--line-night);
-  --shadow-piece: 0 40px 60px -30px rgb(17 17 17 / 0.35);
-  --shadow-card: 0 30px 80px -40px rgb(0 0 0 / 0.6);
-
-  /* Mouvement */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 180ms;
-  --dur-base: 420ms;
-  --dur-slow: 900ms;
-  --dur-spin: 24s;
-  --ease-site: ease;        /* mesuré : all 0.3s ease, transform 0.45s ease */
-  --dur-ui: 300ms;          /* mesuré */
-  --dur-move: 450ms;        /* mesuré : transform */
-  --dur-float: 3s;          /* mesuré : animation floatY 3s ease-in-out */          /* rotation lente de la pièce / des reflets */
+  /* ---- Mouvement ---- */
+  --ease: ease;                           /* mesuré : toutes les transitions CSS du site */
+  --ease-io: cubic-bezier(0.45, 0, 0.55, 1);   /* mesuré : power1.inOut de GSAP (accordéon) */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);   /* choisi : entrées de texte */
+  --dur-nav: 200ms;         /* mesuré : barre de navigation */
+  --dur-ui: 300ms;          /* mesuré : fond des pilules, logo et liens, accordéon */
+  --dur-move: 450ms;        /* mesuré : glissement de la nav du héros */
+  --dur-fade: 500ms;        /* mesuré : points et cercle central du chargement */
+  --dur-shift: 1000ms;      /* mesuré : les deux arcs du chargement se rejoignent */
+  --dur-draw: 3000ms;       /* mesuré : tracé d'un groupe d'arcs au chargement (la démo l'accélère) */
+  --dur-float: 3s;          /* mesuré : « défiler » qui flotte de 15px */
+  --float-y: -15px;
 }
