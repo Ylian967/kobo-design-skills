@@ -1,110 +1,289 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Helios Air — Retro Mission Poster (démo)</title>
+<title>HÉLIOS — du carburant tiré de l'air</title>
+<meta name="description" content="Démo du style Retro Mission Poster : récit de marque fictif en cinq chapitres.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Jost:wght@400;500;600&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Jost:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #1a1412; --cream: #f4ead8; --on-cream: #1a1412; --text: #f4ead8; --muted: #c9b9a0; --accent: #e24b33; --on-accent: #1a1412; --sky: #2779a7;
-  --sand: #c4643c; --rust: #9a4a2e; --dusk: #f2a07a; --grain-opacity: 0.18;
-  --font-display: 'Big Shoulders Display', 'Oswald', sans-serif; --font-body: 'Jost', 'Futura', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-title: clamp(3.5rem, 9vw, 8.5rem); --text-giant: clamp(5rem, 16vw, 15rem); --tracking-caps: 0.12em;
-  --frame: 12px; --edge: 32px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
-  --radius: 0; --ring: 120px; --tilt: -6deg; --ease: cubic-bezier(0.33, 1, 0.68, 1); --dur-fast: 250ms; --dur: 900ms; --dur-scene: 1600ms;
+  --bg: #161616; --cream: #fdf0e1; --soft: #d8d8d8; --red: #e74833; --red-hot: #ee2f22; --red-text: #f0604c; --ink: #161616; --sky: #285868; --sky-pale: #98b0b0;
+  --rust: #885040; --rust-deep: #4a2a22; --sand: #e8d8c0; --veil-0: rgb(22 22 22 / 0); --veil-1: rgb(22 22 22 / 0.5);
+  --font-display: 'Big Shoulders Display', 'Oswald', 'Arial Narrow', sans-serif; --font-body: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+  --fs-title: clamp(4rem, 8.33vw, 7.5rem); --lh-title: 0.84; --fs-giant: clamp(7rem, 26vw, 23rem); --fs-card: 2.5rem; --fs-head: 1.25rem; --fs-body: 1.125rem;
+  --lh-body: 1.34; --fs-small: 0.875rem; --fs-tiny: 0.75rem; --ls-chapter: 0.42em; --tilt: -13deg; --frame: clamp(6px, 0.63vw, 9px); --edge: clamp(20px, 3.4vw, 50px);
+  --r-card: 12px; --r-pill: 35px; --line: 2px; --ring: clamp(110px, 10.4vw, 150px); --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-fade: cubic-bezier(0.455, 0.03, 0.515, 0.955); --dur-ui: 300ms; --dur-fade: 500ms; --dur-move: 1000ms; --spin: 50s; --draw: 4s;
 }
-* { box-sizing: border-box; }
-html { scroll-snap-type: y mandatory; overflow-x: clip; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-base)/1.5 var(--font-body); }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--cream); outline-offset: 4px; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.frame { position: fixed; inset: 0; z-index: 50; pointer-events: none; border: var(--frame) solid var(--cream); }
-.top { position: fixed; left: calc(var(--frame) + var(--edge)); right: calc(var(--frame) + var(--edge)); top: calc(var(--frame) + 20px); z-index: 40; display: flex; justify-content: space-between; align-items: center; }
-.logo { font: 600 1.4rem/1 var(--font-body); letter-spacing: .14em; color: var(--accent); text-decoration: none; }
-.burger { width: 44px; height: 44px; background: none; border: 0; display: grid; gap: 5px; align-content: center; justify-items: end; cursor: pointer; }
-.burger i { width: 32px; height: 1.5px; background: var(--cream); }
 
-.chapter { position: relative; height: 100vh; height: 100dvh; scroll-snap-align: start; overflow: hidden; }
-.layer { position: absolute; inset: -6%; will-change: transform; transition: transform var(--dur-scene) var(--ease); }
-.grain::after { content: ""; position: absolute; inset: 0; z-index: 2; filter: url(#grain); opacity: var(--grain-opacity); mix-blend-mode: overlay; pointer-events: none; }
-/* Photos traitées en affiche (voir references/assets.md) */
-.media { overflow: hidden; background: var(--rust); isolation: isolate; }
-.media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.poster img { filter: saturate(1.3) contrast(1.1) url(#posterize); }
-.duo { background: var(--dusk); }
-.duo img { filter: grayscale(1) contrast(1.25) url(#posterize); mix-blend-mode: multiply; }
-.duo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--rust); mix-blend-mode: lighten; pointer-events: none; }
-.duo--night { background: var(--sky); }
-.duo--night::before { background: var(--bg); }
-/* Chapitre 1 : désert + carte de collage */
-.c1 .back img { object-position: 50% 60%; }
-.collage { position: absolute; left: 8%; bottom: 10%; width: 20%; aspect-ratio: 4/5; border: 6px solid var(--cream); rotate: -3deg; box-shadow: 0 24px 40px rgb(26 20 18 / .45); }
-.title { position: absolute; right: calc(var(--frame) + 6%); top: 14%; margin: 0; text-align: center; transform: rotate(var(--tilt)); }
-.title small { display: block; margin-bottom: 4px; font: 500 var(--text-xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
-.title span { display: block; overflow: hidden; font: 800 var(--text-title)/0.85 var(--font-display); text-transform: uppercase; text-shadow: 0 2px 20px rgb(26 20 18 / .25); }
-.title span b { display: block; font-weight: inherit; transition: transform var(--dur) var(--ease); }
-html.js .chapter:not(.is-in) .title span b { transform: translateY(100%); }
-.title span:nth-of-type(2) b { transition-delay: 90ms; }
-.pitch { position: absolute; right: calc(var(--frame) + var(--edge) + 20px); bottom: calc(var(--frame) + 40px); width: min(280px, 70vw); text-align: right; }
-.pitch h3 { margin: 0 0 6px; font: 600 var(--text-lg) var(--font-body); text-transform: uppercase; letter-spacing: .02em; }
-.pitch p { margin: 0 0 var(--space-4); font-size: var(--text-sm); }
-.btn-cream { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; background: var(--cream); color: var(--on-cream); font: 600 var(--text-xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; transition: background var(--dur-fast) var(--ease); }
-.btn-cream:hover { background: var(--accent); }
-.ring-btn { position: absolute; left: 50%; bottom: calc(var(--frame) - var(--ring) / 2.6); translate: -50% 0; width: var(--ring); aspect-ratio: 1; border-radius: 50%; border: 1.5px dashed currentColor; background: none; color: var(--accent); display: grid; place-items: center; cursor: pointer; font-size: 2rem; transition: rotate var(--dur-fast) var(--ease); z-index: 5; }
-.ring-btn:hover { rotate: 20deg; }
-/* Chapitre mission */
-.c2 .back img { object-position: 50% 35%; }
-.giant { position: absolute; left: 0; right: 0; top: 30%; margin: 0; text-align: center; font: 900 var(--text-giant)/0.85 var(--font-display); color: var(--accent); text-transform: uppercase; transition: transform var(--dur-scene) var(--ease); }
-.c2 .front { inset: auto -6% -6%; height: 52%; background: var(--rust); -webkit-mask-image: linear-gradient(transparent, black 32%); mask-image: linear-gradient(transparent, black 32%); }
-.c2 .front img { filter: saturate(1.2) contrast(1.15) brightness(.7) url(#posterize); object-position: 50% 25%; }
-.ch-label { position: absolute; left: calc(var(--frame) + var(--edge)); bottom: calc(var(--frame) + 30px); font: 500 var(--text-xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--muted); }
-.chapter.is-in .back { transform: translateY(-2%); } .chapter.is-in .front { transform: translateY(-4%); } .chapter.is-in .giant { transform: translateY(-3%); }
-footer { position: relative; scroll-snap-align: end; padding: 80px calc(var(--frame) + var(--edge)); text-align: center; color: var(--muted); font-size: var(--text-sm); }
-@media (max-width: 700px) {
-  :root { --frame: 8px; --edge: 20px; --ring: 90px; --tilt: -3deg; }
-  .title { left: calc(var(--frame) + var(--edge)); right: auto; text-align: left; top: 16%; }
-  .title span { font-size: 3.4rem; }
-  .pitch { left: calc(var(--frame) + var(--edge)); right: calc(var(--frame) + var(--edge)); width: auto; text-align: left; bottom: 120px; }
-  .giant { font-size: 22vw; top: 38%; }
-  .collage { left: auto; right: 10%; width: 38%; bottom: 32%; }
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--cream); font: 500 var(--fs-body)/var(--lh-body) var(--font-body); -webkit-font-smoothing: antialiased; }
+body.menu-open { overflow: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3, p, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: var(--line) solid var(--cream); outline-offset: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.caps { text-transform: uppercase; }
+.display { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; line-height: var(--lh-title); }
+
+/* ---------- Cadre crème, logo, menu : fixes ---------- */
+.frame { position: fixed; inset: 0; z-index: 30; border: var(--frame) solid var(--cream); pointer-events: none; }
+.logo { position: fixed; z-index: 31; top: calc(var(--frame) + var(--edge) * 0.6); left: calc(var(--frame) + var(--edge) * 0.6); color: var(--red); font: 700 clamp(1.25rem, 1.9vw, 1.7rem)/1 var(--font-body); letter-spacing: 0.08em; }
+.burger { position: fixed; z-index: 41; top: calc(var(--frame) + var(--edge) * 0.4); right: calc(var(--frame) + var(--edge) * 0.4); display: grid; align-content: center; gap: 5px; width: 48px; height: 48px; padding: 0 6px; }
+.burger i { display: block; height: var(--line); background: var(--cream); transition: transform var(--dur-ui) var(--ease), opacity var(--dur-ui) var(--ease); }
+.burger:hover i:nth-child(2) { transform: scaleX(0.6); }
+.menu-open .burger i:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-open .burger i:nth-child(2) { opacity: 0; }
+.menu-open .burger i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Chargement ---------- */
+.loader { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--bg); transition: opacity var(--dur-fade) var(--ease-fade) var(--dur-fade), visibility 0s calc(var(--dur-fade) * 2); }
+.loader b { color: var(--red); font: 700 clamp(1.5rem, 3vw, 2.6rem)/1 var(--font-body); letter-spacing: 0.12em; }
+.loader svg { width: var(--ring); height: var(--ring); margin-top: 26px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+.loader circle { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw var(--draw) linear forwards infinite; }
+@keyframes draw { 60%, 100% { stroke-dashoffset: 0; } }
+.loaded .loader { opacity: 0; visibility: hidden; }
+
+/* ---------- Chapitres ---------- */
+.chapter { position: relative; height: 100svh; min-height: 620px; overflow: hidden; scroll-snap-align: start; isolation: isolate; background: var(--rust-deep); }
+.chapter .bg { position: absolute; inset: 0; z-index: -3; }
+.chapter::after { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, var(--veil-0) 55%, var(--veil-1)); pointer-events: none; }
+
+.title { position: absolute; right: 6%; top: 15%; width: min(44%, 620px); transform: rotate(var(--tilt)) skewX(var(--tilt)); transform-origin: left bottom; }
+.title.left { right: auto; left: 8%; }
+.title small { display: block; margin: 0 0 0.9em 40%; font: 500 var(--fs-small)/1 var(--font-body); letter-spacing: var(--ls-chapter); text-transform: uppercase; }
+.title h1, .title h2 { font: 800 var(--fs-title)/var(--lh-title) var(--font-display); text-transform: uppercase; }
+.title span { display: block; overflow: hidden; padding-top: 0.06em; }
+.title b { display: block; font-weight: 800; transform: translateY(105%); transition: transform var(--dur-move) var(--ease); transition-delay: calc(var(--i) * 120ms + 150ms); }
+.chapter.in .title b { transform: none; }
+.title small { opacity: 0; transition: opacity var(--dur-move) var(--ease) 150ms; }
+.chapter.in .title small { opacity: 1; }
+
+.giant { position: absolute; z-index: -2; left: -2%; top: 16%; color: var(--red); font: 800 var(--fs-giant)/0.8 var(--font-display); text-transform: uppercase; white-space: nowrap; will-change: transform; user-select: none; }
+
+.pitch { position: absolute; right: calc(var(--frame) + var(--edge)); bottom: calc(var(--frame) + var(--edge) * 1.1); display: grid; justify-items: end; gap: 8px; max-width: min(360px, 78%); text-align: right; opacity: 0; transform: translateY(24px); transition: opacity var(--dur-move) var(--ease) 400ms, transform var(--dur-move) var(--ease) 400ms; }
+.chapter.in .pitch { opacity: 1; transform: none; }
+.pitch h3 { font: 700 var(--fs-head)/1.15 var(--font-body); text-transform: uppercase; letter-spacing: 0.02em; }
+.btn { display: inline-grid; place-items: center; min-height: 44px; margin-top: 14px; padding: 0 30px; background: var(--cream); color: var(--ink); font: 700 var(--fs-small)/1 var(--font-body); letter-spacing: 0.06em; text-transform: uppercase; transition: background-color var(--dur-ui) var(--ease), color var(--dur-ui) var(--ease), transform var(--dur-ui) var(--ease); }
+.btn:hover { background: var(--red); transform: translateY(-2px); }
+
+/* anneau dentelé et flèche */
+.next { position: absolute; left: 50%; bottom: calc(var(--frame) + 6px); width: var(--ring); height: var(--ring); margin-left: calc(var(--ring) / -2); color: var(--red); }
+.next svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; }
+.next .teeth { animation: rotate var(--spin) linear forwards infinite; transform-origin: 50% 50%; }
+@keyframes rotate { to { transform: rotate(360deg); } }
+.next .arrow { transition: transform var(--dur-ui) var(--ease); }
+.next:hover .arrow { transform: translateY(8px); }
+.next:hover { color: var(--cream); }
+
+/* liste de faits (chapitre du procédé) */
+.facts { position: absolute; left: calc(var(--frame) + var(--edge)); bottom: calc(var(--frame) + var(--edge) * 1.1); display: grid; gap: 14px; width: min(340px, 44%); }
+.facts li { padding-top: 12px; border-top: 1px solid var(--red); font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.04em; opacity: 0; transform: translateX(-20px); transition: opacity var(--dur-move) var(--ease), transform var(--dur-move) var(--ease); transition-delay: calc(var(--i) * 120ms + 500ms); }
+.facts b { display: block; font: 800 var(--fs-card)/0.9 var(--font-display); letter-spacing: 0; }
+.chapter.in .facts li { opacity: 1; transform: none; }
+
+/* ---------- Menu plein écran ---------- */
+.menu { position: fixed; inset: 0; z-index: 40; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; padding: clamp(90px, 12vw, 160px) clamp(24px, 7vw, 100px) clamp(40px, 7vw, 90px); background: var(--bg); color: var(--soft); opacity: 0; visibility: hidden; transition: opacity var(--dur-fade) var(--ease-fade), visibility 0s var(--dur-fade); }
+.menu-open .menu { opacity: 1; visibility: visible; transition-delay: 0s; }
+.menu ol { align-self: center; display: grid; gap: 6px; }
+.menu ol a { display: inline-block; font: 800 clamp(2.5rem, 6vw, 5.4rem)/0.9 var(--font-display); text-transform: uppercase; color: var(--cream); transform: translateY(40px); opacity: 0; transition: transform var(--dur-move) var(--ease), opacity var(--dur-move) var(--ease), color var(--dur-ui) var(--ease); transition-delay: calc(var(--i) * 70ms), calc(var(--i) * 70ms), 0s; }
+.menu-open .menu ol a { transform: none; opacity: 1; }
+.menu ol a:hover, .menu ol a[aria-current] { color: var(--red); }
+.signup h2 { color: var(--red-text); font: 700 var(--fs-head)/1.2 var(--font-body); }
+.signup p { margin: 14px 0 26px; max-width: 24em; font-size: 1rem; line-height: 1.6; }
+.signup form { display: flex; align-items: center; gap: 12px; border-bottom: var(--line) solid var(--soft); }
+.signup input { flex: 1; min-width: 0; height: 52px; border: 0; background: none; font-weight: 700; }
+.signup input::placeholder { color: var(--soft); opacity: 0.8; }
+.signup button { width: 48px; height: 48px; display: grid; place-items: center; transition: transform var(--dur-ui) var(--ease); }
+.signup button:hover { transform: translateX(6px); }
+.signup button svg { width: 34px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+.social { display: flex; gap: 12px; margin-top: 30px; }
+.social a { display: grid; place-items: center; width: 52px; height: 52px; border: var(--line) solid var(--soft); border-radius: var(--r-pill); font: 700 var(--fs-tiny)/1 var(--font-body); transition: all var(--dur-ui) var(--ease); }
+.social a:hover { border-color: var(--red); color: var(--red-text); }
+
+/* ---------- Journal (page sombre) ---------- */
+.news { padding: clamp(70px, 9vw, 130px) clamp(24px, 9vw, 130px) clamp(80px, 10vw, 150px); background: var(--bg); scroll-snap-align: start; }
+.news > h2 { color: var(--red); font: 800 var(--fs-title)/var(--lh-title) var(--font-display); text-transform: uppercase; text-align: center; margin-bottom: 0.5em; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px 40px; }
+.card { position: relative; }
+.card .pic { aspect-ratio: 1 / 0.627; border-radius: var(--r-card); overflow: hidden; margin-bottom: 26px; background: var(--rust-deep); transition: box-shadow var(--dur-ui) var(--ease); }
+.card:hover .pic { box-shadow: 0 0 0 var(--line) var(--red); }
+.card time { display: block; margin-bottom: 14px; font-size: var(--fs-small); text-transform: uppercase; }
+.card h3 { margin-bottom: 22px; font: 800 var(--fs-card)/0.85 var(--font-display); text-transform: uppercase; }
+.card h3 a::after { content: ""; position: absolute; inset: 0; }
+.card hr { margin: 0; border: 0; height: 1px; background: var(--red); transform-origin: left; transition: transform var(--dur-move) var(--ease); }
+.card:hover hr { transform: scaleX(0.4); }
+.legal { margin-top: 70px; text-align: center; color: var(--soft); font-size: var(--fs-small); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  .title, .title.left { left: 8%; right: 4%; top: 17%; width: auto; }
+  .title small { margin-left: 20%; }
+  .facts { position: relative; left: auto; bottom: auto; width: auto; margin: 46svh 30px 0; }
+  .facts b { font-size: 2rem; }
+  .pitch { left: 30px; right: 30px; bottom: calc(var(--ring) + 26px); max-width: none; justify-items: start; text-align: left; }
+  .has-facts .pitch { display: none; }
+  .menu { grid-template-columns: 1fr; align-items: start; overflow-y: auto; }
+  .cards { grid-template-columns: 1fr; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } html { scroll-snap-type: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .title b, .menu ol a { transform: none; }
+  .title small, .pitch, .facts li { opacity: 1; transform: none; }
+  .loader circle { stroke-dashoffset: 0; }
+}
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js');</script>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><filter id="posterize" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="discrete" tableValues="0 .25 .5 .75 1"/><feFuncG type="discrete" tableValues="0 .25 .5 .75 1"/><feFuncB type="discrete" tableValues="0 .25 .5 .75 1"/></feComponentTransfer></filter></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="teeth" viewBox="0 0 100 100"><path id="teethPath"/></symbol>
+  <symbol id="down" viewBox="0 0 100 100"><path d="M50 30v40M38 58l12 12 12-12"/></symbol>
+</svg>
+
+<div class="loader" aria-hidden="true"><div style="display:grid;justify-items:center"><b>HÉLIOS</b><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" pathLength="1"/></svg></div></div>
 <div class="frame" aria-hidden="true"></div>
-<header class="top"><a class="logo" href="#">HELI◎S</a><button class="burger" aria-label="Ouvrir le menu"><i></i><i></i><i></i></button></header>
+<a class="logo" href="#c1" aria-label="Hélios, début du récit">HÉLIOS</a>
+<button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i></i><i></i><i></i></button>
+
+<nav class="menu" id="menu" aria-label="Chapitres" inert>
+  <ol>
+    <li><a style="--i:0" href="#c1">Du carburant tiré de l'air</a></li>
+    <li><a style="--i:1" href="#c2">La mission</a></li>
+    <li><a style="--i:2" href="#c3">Le procédé</a></li>
+    <li><a style="--i:3" href="#c4">Voler sans carbone</a></li>
+    <li><a style="--i:4" href="#c5">La suite</a></li>
+    <li><a style="--i:5" href="#journal">Journal</a></li>
+  </ol>
+  <div class="signup">
+    <h2 class="caps">Recevoir les nouvelles de la mission</h2>
+    <p>Une lettre par mois : avancées du procédé, premiers pleins, ouvertures de sites.</p>
+    <form onsubmit="return false"><label class="sr" for="mail">Adresse e-mail</label><input id="mail" type="email" required autocomplete="email" placeholder="VOTRE E-MAIL"><button aria-label="S'inscrire"><svg viewBox="0 0 34 20"><path d="M0 10h32M23 1l9 9-9 9"/></svg></button></form>
+    <ul class="social"><li><a href="#" aria-label="Instagram">IG</a></li><li><a href="#" aria-label="LinkedIn">IN</a></li><li><a href="#" aria-label="YouTube">YT</a></li></ul>
+  </div>
+</nav>
 
 <main>
-  <section class="chapter c1" id="c1" aria-labelledby="t1">
-    <div class="layer back media poster grain" data-slot="desert"><img src="https://images.unsplash.com/photo-1614935981447-893ce3858657?auto=format&fit=crop&w=2000&q=80" alt="Un désert orange au crépuscule, sous un ciel immense" width="2000" height="1333" fetchpriority="high"></div>
-    <div class="layer front"><div class="collage media duo grain" data-slot="vehicle"><img src="https://images.unsplash.com/photo-1628126235206-5260b9ea6441?auto=format&fit=crop&w=800&h=1000&q=80" alt="Une navette décolle dans un ciel rose" width="800" height="1000" loading="lazy"></div></div>
-    <h1 class="title" id="t1"><small>Chapitre 1</small><span><b>Du carburant</b></span><span><b>tiré de l'air</b></span></h1>
-    <div class="pitch"><h3>Zéro carbone net</h3><p>Nous captons le CO2 de l'air et le transformons en essence et en kérosène.</p><a class="btn-cream" href="#c2">Notre mission</a></div>
-    <button class="ring-btn" data-next="#c2" aria-label="Chapitre suivant">↓</button>
+  <section class="chapter" id="c1">
+    <div class="bg"><img data-poster alt="Voiture ancienne claire arrêtée dans un désert de roche rouge" fetchpriority="high" crossorigin="anonymous" src="https://images.unsplash.com/photo-1765211003684-d09c736eebe7?auto=format&fit=crop&w=1600&h=1000&q=70"></div>
+    <div class="title"><small>Chapitre 1</small><h1 aria-label="Du carburant tiré de l'air"><span aria-hidden="true"><b style="--i:0">Du carburant</b></span><span aria-hidden="true"><b style="--i:1">tiré de l'air</b></span></h1></div>
+    <div class="pitch"><h3>Zéro carbone net</h3><p>Nous captons le CO₂ de l'air et nous en faisons de l'essence et du kérosène.</p><a class="btn" href="#c2">La mission</a></div>
+    <a class="next" href="#c2" aria-label="Chapitre suivant"><svg class="teeth" aria-hidden="true"><use href="#teeth"/></svg><svg class="arrow" aria-hidden="true"><use href="#down"/></svg></a>
   </section>
 
-  <section class="chapter c2" id="c2" aria-labelledby="t2">
-    <div class="layer back media duo duo--night grain" data-slot="planet"><img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=2000&q=80" alt="Une fusée s'élève au-dessus d'un immense nuage de fumée" width="2000" height="1333" loading="lazy"></div>
-    <p class="giant" aria-hidden="true">Mission</p>
-    <h2 class="sr-only" id="t2">Mission</h2>
-    <div class="layer front media grain" data-slot="horizon"><img src="https://images.unsplash.com/photo-1682687980961-78fa83781450?auto=format&fit=crop&w=2000&h=1000&q=80" alt="" width="2000" height="1000" loading="lazy"></div>
-    <span class="ch-label">Chapitre 2 · 2030</span>
-    <button class="ring-btn" data-next="#end" aria-label="Section suivante" style="color:var(--cream)">↓</button>
+  <section class="chapter" id="c2">
+    <div class="bg"><img data-poster loading="lazy" alt="Route droite vers des falaises de grès rouge" crossorigin="anonymous" src="https://images.unsplash.com/photo-1770816149208-60206f8527aa?auto=format&fit=crop&w=1600&h=1000&q=70"></div>
+    <p class="giant" aria-hidden="true" data-slide>Mission</p>
+    <div class="title left"><small>Chapitre 2</small><h2 aria-label="Rouler sans rien déterrer"><span aria-hidden="true"><b style="--i:0">Rouler sans</b></span><span aria-hidden="true"><b style="--i:1">rien déterrer</b></span></h2></div>
+    <div class="pitch"><h3>Le même plein, sans pétrole</h3><p>Un carburant qui va dans les moteurs d'aujourd'hui, au prix de la pompe, sans forage.</p><a class="btn" href="#c3">Le procédé</a></div>
+    <a class="next" href="#c3" aria-label="Chapitre suivant"><svg class="teeth" aria-hidden="true"><use href="#teeth"/></svg><svg class="arrow" aria-hidden="true"><use href="#down"/></svg></a>
+  </section>
+
+  <section class="chapter has-facts" id="c3">
+    <div class="bg"><img data-poster loading="lazy" alt="Colonnes et cuves d'une usine au soleil couchant" crossorigin="anonymous" src="https://images.unsplash.com/photo-1786532852011-443cba5dc9fe?auto=format&fit=crop&w=1600&h=1000&q=70"></div>
+    <div class="title"><small>Chapitre 3</small><h2 aria-label="De l'air, de l'eau, du soleil"><span aria-hidden="true"><b style="--i:0">De l'air, de l'eau,</b></span><span aria-hidden="true"><b style="--i:1">du soleil</b></span></h2></div>
+    <ul class="facts"><li style="--i:0"><b>01 — Capter</b>le CO₂ est aspiré dans l'air ambiant</li><li style="--i:1"><b>02 — Assembler</b>l'électricité solaire le lie à l'hydrogène de l'eau</li><li style="--i:2"><b>03 — Filtrer</b>une membrane sépare le carburant, sans distillation</li></ul>
+    <div class="pitch"><h3>Trois étapes, pas de flamme</h3><a class="btn" href="#c4">Et dans le ciel ?</a></div>
+    <a class="next" href="#c4" aria-label="Chapitre suivant"><svg class="teeth" aria-hidden="true"><use href="#teeth"/></svg><svg class="arrow" aria-hidden="true"><use href="#down"/></svg></a>
+  </section>
+
+  <section class="chapter" id="c4">
+    <div class="bg"><img data-poster loading="lazy" alt="Avion de ligne vu d'en dessous, traînées dans un ciel bleu-vert" crossorigin="anonymous" src="https://images.unsplash.com/photo-1517258922744-606330ad6639?auto=format&fit=crop&w=1600&h=1000&q=70"></div>
+    <p class="giant" aria-hidden="true" data-slide style="top:40%">Altitude</p>
+    <div class="title left"><small>Chapitre 4</small><h2 aria-label="Voler sans carbone"><span aria-hidden="true"><b style="--i:0">Voler</b></span><span aria-hidden="true"><b style="--i:1">sans carbone</b></span></h2></div>
+    <div class="pitch"><h3>Du kérosène fait d'air</h3><p>Les avions n'ont pas à changer. Seul change ce qu'il y a dans leurs ailes.</p><a class="btn" href="#c5">La suite</a></div>
+    <a class="next" href="#c5" aria-label="Chapitre suivant"><svg class="teeth" aria-hidden="true"><use href="#teeth"/></svg><svg class="arrow" aria-hidden="true"><use href="#down"/></svg></a>
+  </section>
+
+  <section class="chapter" id="c5">
+    <div class="bg"><img data-poster loading="lazy" alt="Soleil rouge au-dessus d'un désert au crépuscule" crossorigin="anonymous" src="https://images.unsplash.com/photo-1621025975976-54ffaad6b8a5?auto=format&fit=crop&w=1600&h=1000&q=70"></div>
+    <div class="title"><small>Chapitre 5</small><h2 aria-label="Le premier plein en 2027"><span aria-hidden="true"><b style="--i:0">Le premier plein</b></span><span aria-hidden="true"><b style="--i:1">en 2027</b></span></h2></div>
+    <div class="pitch"><h3>Embarquez</h3><p>Une première usine pilote dans le désert, puis une par région.</p><a class="btn" href="#journal">Suivre la mission</a></div>
+    <a class="next" href="#journal" aria-label="Vers le journal"><svg class="teeth" aria-hidden="true"><use href="#teeth"/></svg><svg class="arrow" aria-hidden="true"><use href="#down"/></svg></a>
+  </section>
+
+  <section class="news" id="journal">
+    <h2>Journal</h2>
+    <div class="cards">
+      <article class="card"><div class="pic"><img data-poster loading="lazy" alt="Coupé ancien stationné devant des montagnes" crossorigin="anonymous" src="https://images.unsplash.com/photo-1765211003564-c13a09328f0a?auto=format&fit=crop&w=900&h=565&q=70"></div><time datetime="2026-09-18">18 septembre 2026</time><h3><a href="#journal">Mille kilomètres avec un plein tiré de l'air</a></h3><hr></article>
+      <article class="card"><div class="pic"><img data-poster loading="lazy" alt="Raffinerie éclairée à la tombée du jour" crossorigin="anonymous" src="https://images.unsplash.com/photo-1786532852258-8305f40f9925?auto=format&fit=crop&w=900&h=565&q=70"></div><time datetime="2026-08-02">2 août 2026</time><h3><a href="#journal">L'usine pilote sort de terre</a></h3><hr></article>
+    </div>
+    <p class="legal">© 2026 Hélios — entreprise fictive, page de démonstration. Photos Unsplash.</p>
   </section>
 </main>
-<footer id="end">© Helios Air (fictif) — démo Kōbō · Presse · Carrières · Contact · Photos : Unsplash</footer>
+
 <script>
 (() => {
-  document.querySelectorAll('[data-next]').forEach(b => b.addEventListener('click', () => document.querySelector(b.dataset.next).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })));
-  const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('is-in', e.isIntersecting)), { threshold: .5 });
-  document.querySelectorAll('.chapter').forEach(c => io.observe(c));
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement, css = getComputedStyle(root);
+  const rgb = n => { const h = css.getPropertyValue(n).trim().slice(1); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+
+  // Anneau dentelé : 44 dents tracées une fois
+  const pts = []; for (let i = 0; i < 88; i++) { const a = i / 88 * Math.PI * 2, r = i % 2 ? 46 : 42.5; pts.push(`${(50 + r * Math.cos(a)).toFixed(2)} ${(50 + r * Math.sin(a)).toFixed(2)}`); }
+  document.getElementById('teethPath').setAttribute('d', 'M' + pts.join('L') + 'Z');
+
+  // Affiche : chaque photo est redessinée UNE fois dans un canvas — peu de niveaux, trois tons (ombre, terre, lumière), un ciel sarcelle
+  // et un grain cuit dans l'image. Le résultat redevient une simple image : plus aucun calque animé par-dessus.
+  const dark = rgb('--rust-deep'), mid = rgb('--rust'), light = rgb('--sand'), sky = rgb('--sky'), pale = rgb('--sky-pale');
+  const mix = (a, b, t) => a + (b - a) * t;
+  function poster(img) {
+    try {
+      const w = Math.min(1200, img.naturalWidth), h = Math.round(w * img.naturalHeight / img.naturalWidth);
+      const c = document.createElement('canvas'); c.width = w; c.height = h; c.className = 'poster';
+      const x = c.getContext('2d'); x.drawImage(img, 0, 0, w, h);
+      const d = x.getImageData(0, 0, w, h), p = d.data, LEVELS = 7;
+      for (let i = 0; i < p.length; i += 4) {
+        const r = p[i], gr = p[i + 1], b = p[i + 2];
+        let l = (r * 0.299 + gr * 0.587 + b * 0.114) / 255;
+        l = Math.round(l * LEVELS) / LEVELS;                       // aplats
+        const cool = Math.max(0, Math.min(1, (b - r) / 70 + 0.15)); // les zones bleues deviennent le ciel
+        const n = (Math.random() - 0.5) * 34;
+        for (let k = 0; k < 3; k++) {
+          const warm = l < 0.5 ? mix(dark[k], mid[k], l * 2) : mix(mid[k], light[k], (l - 0.5) * 2);
+          const cold = mix(sky[k], pale[k], l);
+          p[i + k] = mix(mix(warm, cold, cool), p[i + k], 0.22) + n;   // on garde 22 % de la photo, plus le grain
+        }
+      }
+      x.putImageData(d, 0, 0);
+      c.toBlob(b => { img.removeAttribute('crossorigin'); img.src = URL.createObjectURL(b); }, 'image/jpeg', 0.86);
+    } catch (e) { /* image protégée : on garde la photo telle quelle */ }
+  }
+  $('img[data-poster]').forEach(img => { const go = () => { img.removeAttribute('data-poster'); poster(img); }; if (img.complete && img.naturalWidth) go(); else img.addEventListener('load', go, { once: true }); });
+
+  addEventListener('load', () => setTimeout(() => document.body.classList.add('loaded'), reduced ? 0 : 700));
+  setTimeout(() => document.body.classList.add('loaded'), 3500);
+
+  // Entrée des chapitres ; chapitre en cours dans le menu
+  const chapters = $('.chapter, .news'), links = $('.menu ol a');
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    links.forEach(a => a.getAttribute('href') === '#' + e.target.id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+  }), { threshold: 0.45 });
+  chapters.forEach(c => io.observe(c));
+
+  // Mot géant : glisse à l'horizontale avec le défilement
+  const slides = $('[data-slide]'); let raf = 0;
+  const move = () => { raf = 0; slides.forEach(s => { const r = s.parentElement.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight) s.style.transform = `translateX(${Math.round(r.top * 0.35)}px)`; }); };
+  if (!reduced) { addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(move); }, { passive: true }); move(); }
+
+  // Menu
+  const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  const setMenu = on => { document.body.classList.toggle('menu-open', on); menu.inert = !on; burger.setAttribute('aria-expanded', on); burger.setAttribute('aria-label', on ? 'Fermer le menu' : 'Menu'); };
+  burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  menu.addEventListener('click', e => { if (e.target.closest('ol a')) setMenu(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') { setMenu(false); burger.focus(); } });
 })();
 </script>
 </body>

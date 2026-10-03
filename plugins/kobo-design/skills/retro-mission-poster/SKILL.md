@@ -1,77 +1,95 @@
 ---
 name: retro-mission-poster
-description: Direction artistique « Retro Mission Poster » pour récits de marque et landings narratives (énergie, climat, spatial, mobilité, startup « mission »), inspirée des sites primés au style affiche rétro-futuriste des années 70. Écran encadré d'un filet crème, paysages désertiques granuleux en collage, titres de chapitre en capitales hautes et étroites qui montent en biais, mot géant pris entre deux plans de l'image, anneau dentelé rouge pour défiler, petits boutons crème rectangulaires. À utiliser pour une page « notre mission », un storytelling produit, une landing d'entreprise tech engagée ou une app éditoriale au style « affiche vintage, conquête spatiale, désert, grain ».
+description: Direction artistique « Retro Mission Poster » pour un récit de marque ou de mission (énergie, climat, industrie, mobilité, aérospatial, startup à grande ambition, manifeste, rapport annuel raconté, campagne), d'après un site primé à l'esthétique d'affiche de voyage rétro. Chaque écran est une affiche plein cadre - image en aplats granuleux dans une gamme terre rouge et ciel sarcelle, cadre crème tout autour de l'écran, titre géant en capitales très hautes et étroites incliné vers le haut, petit « Chapitre N » espacé, mot rouge géant derrière le titre, accroche en capitales grasses façon Futura en bas à droite avec bouton crème rectangulaire, anneau dentelé rouge qui tourne autour d'une flèche, logo rouge. Menu et journal sur fond presque noir avec titres rouges géants et filets rouges. À utiliser pour une landing en chapitres, un récit de mission, une page de lancement ou un site au style « affiche vintage, années 60, désert, optimiste, cinématographique ».
 ---
 
 # Retro Mission Poster
 
-> Une affiche de 1974 qui raconte l'avenir : désert rouge, grain d'impression, grandes lettres étroites et une mission écrite en géant.
+> Une affiche de voyage des années 60 pour une idée d'aujourd'hui : un désert rouge, un ciel sarcelle, un titre qui grimpe en biais.
 
 ## L'idée
 
-Chaque chapitre est une **affiche** plein écran, encadrée par un **filet crème** qui fait tout le tour de l'écran. L'image est un **collage granuleux** (désert, ciel strié, planète, silhouettes) ; le texte de chapitre est en **capitales hautes et étroites**, crème, qui montent légèrement (-6°). Sur les écrans forts, un **mot géant rouge** passe **entre deux plans** de l'image (derrière les personnages, devant le décor). La navigation tient en un logo, un burger, un **anneau dentelé** avec une flèche pour avancer, et de petits boutons crème rectangulaires.
+On ne lit pas une page, on feuillette **une série d'affiches**. Chaque chapitre est une image plein écran aux **aplats granuleux**, enfermée dans un **cadre crème** comme un tirage. Le titre, en capitales immenses et étroites, **monte en diagonale** ; derrière lui, parfois, un mot rouge géant à moitié hors cadre. En bas à droite, une accroche courte et un bouton rectangulaire ; au centre, un **anneau dentelé** qui tourne autour d'une flèche et invite à descendre. Le ton est optimiste et un peu héroïque : une mission, des chapitres, un cap.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de logo, de textes ni d'illustrations d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, logo, visuels ni textes du site d'origine.
 
 ## Règles prioritaires
 
-1. **Le cadre crème** (12px) entoure toujours l'écran ; il ne défile pas.
-2. **Grain partout** sur les images (bruit SVG en `mix-blend-mode: overlay`, 18 %).
-3. **Typo d'affiche** : Big Shoulders Display, capitales, très haute ; un chapitre = 2–4 mots.
-4. **Profondeur** : le mot géant est placé entre un calque de fond et un calque de premier plan (silhouettes détourées).
-5. **Rouge = signature** (logo, mot géant, anneau) ; le bleu ciel vient des images, pas de l'interface.
-6. **Contraste** : crème sur nuit 15:1, noir sur crème ; le rouge en texte seulement en grand (4,6:1).
-7. **Accessibilité** : l'anneau de défilement est un vrai bouton « Chapitre suivant » ; le texte du mot géant est aussi présent pour les lecteurs d'écran.
+1. **Un chapitre = une affiche plein écran.** Une image, un titre, une accroche. Rien d'autre.
+2. **Le cadre crème** entoure toujours l'écran.
+3. **Le titre est incliné de 13°** et tient sur deux lignes ; il alterne droite / gauche d'un chapitre à l'autre.
+4. **Trois encres** : crème, rouge, noir chaud. Les images restent en terre rouge et sarcelle.
+5. **Images traitées en aplats avec grain**, calculées une fois ; jamais de filtre en direct.
+6. **Capitales partout** dans l'interface ; texte courant seulement dans l'accroche et le journal.
+7. **Le rouge en grand** (logo, mots géants, titres du journal, filets) ; pas de petit texte rouge sur sombre sans `--red-text`.
 8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Cadre, grain, titre de chapitre, mot entre deux plans, anneau dentelé, bouton crème, bloc d'accroche, chargement. |
-| `references/layouts.md` | Chapitres plein écran, écran « mission », mobile. |
-| `references/motion.md` | Parallaxe des calques, montée des titres, anneau. |
-| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, postérisation, duotone, grain, détourage, sources, prompts IA, idée 3D. |
-| `examples/demo.html` | Page d'exemple complète. |
-| `source.md` | Observations et écarts. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Cadre, logo et menu, titre de chapitre, mot géant, accroche, anneau, liste de faits, carte du journal, inscription. |
+| `references/layouts.md` | Un chapitre, déroulé, journal et article, menu, mobile. |
+| `references/motion.md` | Entrées, anneau, mot géant, menu, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : sujets, effet d'affiche, sources, 3D optionnelle. |
+| `examples/demo.html` | Récit complet animé (entreprise fictive « Hélios », cinq chapitres et un journal). |
+| `source.md` | Référence, ce qui a pu être mesuré, ce qui est proposé, écarts. |
 
 ## Typographie
 
 | Rôle | Police | Réglages |
 |---|---|---|
-| Titres de chapitre, mot géant | **Big Shoulders Display** 700–900 | capitales, interligne 0.85, -6° pour les titres |
-| Surtitres (« CHAPITRE 1 ») | Jost 500 | 12px, capitales, +0.12em |
-| Accroche, boutons | **Jost** 400/600 | 14–18px |
+| Titres, mots géants | **Big Shoulders Display** 800 (site : Mars Condensed) | 120px, interligne 0.84, capitales ; mot géant jusqu'à 368px |
+| Titres du journal | Big Shoulders Display 800 | 40px / 34px |
+| Accroches, boutons, logo | **Jost** 700 (site : Futura LT Bold) | 20px et 14px, capitales |
+| Texte | Jost 500 (site : Futura LT Medium) | 18px / 24px |
+| Dates, « Chapitre N » | Jost 500 | 14px, capitales, espacées |
+
+## Couleurs
+
+| Token | Valeur | Usage |
+|---|---|---|
+| `--bg` | #161616 | Chargement, menu, journal |
+| `--cream` | #fdf0e1 | Cadre, titres, texte, bouton |
+| `--red` / `--red-text` | #e74833 / #f0604c | Logo, mots géants, filets / petit texte rouge |
+| `--soft` | #d8d8d8 | Texte et traits du menu |
+| `--rust-deep`, `--rust`, `--sand` | #4a2a22, #885040, #e8d8c0 | Ombre, terre, lumière des affiches |
+| `--sky`, `--sky-pale` | #285868, #98b0b0 | Ciel des affiches |
 
 ## Images et 3D
 
-Les affiches sont des **collages de vraies photos** (désert, ciel, lancement, machine, silhouettes) traitées en impression rétro : postérisation, duotone chaud rouille → pêche, grain partout. Le premier plan du « mot entre deux plans » est une photo détourée (ou, à défaut, fondue par le haut). Le cadre, l'anneau et le logo restent en CSS/SVG ; jamais de dessin CSS/SVG à la place d'une photo, d'un véhicule, d'une personne ou d'un paysage. La 3D est optionnelle (planète en ombrage « toon »). Détails et code dans `references/assets.md`.
+De **vraies photos** — véhicule ancien dans un désert, route et falaises, usine, avion, soleil bas — redessinées une fois en **affiches** : aplats, trois tons chauds, ciel sarcelle, grain. Le cadre, l'anneau dentelé, les flèches et les traits sont des signes en CSS / SVG ; jamais un paysage ou un véhicule dessiné. 3D optionnelle (c'était la forme du site d'origine) avec repli sur les affiches fixes. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le mot entre deux plans** : un mot géant rouge (« MISSION ») posé derrière des silhouettes et devant le paysage — trois calques empilés (fond, texte, premier plan détouré).
+1. Le **titre géant incliné** en capitales étroites.
+2. Le **cadre crème** autour de l'écran.
+3. Les **images en aplats granuleux**, terre rouge et sarcelle.
+4. L'**anneau dentelé** rouge et sa flèche.
+5. Le **mot rouge géant** derrière le titre.
 
 ## À éviter
 
-- Des images propres et lisses : sans grain, le style s'effondre.
-- Des boutons arrondis ou colorés : ils sont rectangulaires et crème.
-- Un menu visible en permanence : burger seulement.
-- Reprendre le logo, les illustrations, la voiture ou les textes de la référence.
+- Des photos brutes, nettes, non traitées ; des couleurs hors gamme.
+- Un titre droit, centré ou en bas de casse.
+- Plus d'un bloc de texte par chapitre.
+- Des boutons arrondis, des ombres, du verre dépoli.
+- Un grain ou un filtre appliqué en direct sur tout l'écran (voir « Performance » dans `motion.md`).
+- Du rouge en petit texte sur fond sombre.
 
 ## Adaptation React / React Native
 
-- Calques : trois `Image`/`View` absolues avec parallaxe Reanimated selon le défilement.
-- Grain : image PNG de bruit en `opacity: 0.18` par-dessus.
-- Cadre : `View` absolue avec bordure crème et `pointerEvents="none"`.
-- Big Shoulders Display : `@expo-google-fonts/big-shoulders-display`.
+- **React** : `PosterImage` (calcule l'affiche une fois, met le résultat en cache, ou reçoit une image déjà traitée), `Chapter` (titre, accroche, anneau ; classe `in` par observateur), `Frame`, `ToothRing`, `ChapterMenu`, `NewsCard`.
+- **React Native** : chapitres en `FlatList` verticale paginée (`pagingEnabled`) ; affiches **préparées à l'avance** (pas de calcul de pixels sur l'appareil) ; titre incliné avec `transform: [{ rotate: '-13deg' }, { skewX: '-13deg' }]` ; anneau en `react-native-svg` avec rotation Reanimated ; cadre en `View` à bordure posé au-dessus.
 
 ## Avant de livrer
 
-- [ ] Cadre crème permanent, grain sur toutes les images.
-- [ ] Titres d'affiche étroits et montants.
-- [ ] Au moins un mot entre deux plans.
-- [ ] Anneau de défilement accessible.
-- [ ] Testé à 375px et 1440px, mouvement réduit respecté.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Aucun élément de la marque d'origine.
+- [ ] `:root` copié de `tokens.css`, aucune couleur en dur ailleurs.
+- [ ] Chaque titre lisible sur son image (zone calme, sombre ou moyenne).
+- [ ] Images traitées une fois ; aucun filtre ni grain en direct.
+- [ ] Le cadre reste visible à toutes les tailles.
+- [ ] Menu au clavier (Échap, focus) ; anneau et boutons de 44px au moins.
+- [ ] `prefers-reduced-motion` : titres en place, anneau fixe, pas d'aimant.
+- [ ] Pas de défilement horizontal à 390px.
+- [ ] Nom, images et textes propres au projet.

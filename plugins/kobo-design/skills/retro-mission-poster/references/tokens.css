@@ -1,40 +1,56 @@
 /*
  * Retro Mission Poster — tokens
- * Palette de la fiche Awwwards (#2779a7, #D14836, #ffffff) ajustée sur captures (crème, terre), voir source.md.
- * @contrast text:bg on-cream:cream accent:bg on-accent:accent muted:bg sky:cream:large
+ * MESURÉS le 2026-10-03 dans la feuille de style de l'ancien site, retrouvée dans l'archive du web (capture de janvier 2022),
+ * et sur la capture officielle de la fiche Awwwards (1290×700). L'expérience elle-même ne se lance plus : voir source.md.
+ * @contrast cream:bg soft:bg red-text:bg ink:cream cream:rust cream:sky ink:red:large
  */
 :root {
-  /* Couleurs */
-  --bg: #1a1412;            /* nuit / chargement */
-  --cream: #f4ead8;         /* cadre de l'écran, boutons, titres sur paysage */
-  --on-cream: #1a1412;
-  --text: #f4ead8;
-  --muted: #c9b9a0;
-  --accent: #e24b33;        /* rouge-orangé (logo, « MISSION », anneau) — #D14836 de la fiche, éclairci */
-  --on-accent: #1a1412;
-  --sky: #2779a7;           /* ciel bleu acier */
-  --sand: #c4643c; --rust: #9a4a2e; --dusk: #f2a07a;
-  --grain-opacity: 0.18;
+  /* ---- Couleurs ---- */
+  --bg: #161616;            /* mesuré : fond du site, menu, pages d'articles */
+  --cream: #fdf0e1;         /* mesuré : cadre de l'écran, titres, texte */
+  --soft: #d8d8d8;          /* mesuré : texte et traits du menu */
+  --red: #e74833;           /* mesuré : logo, grands titres rouges, filets, contour des images */
+  --red-hot: #ee2f22;       /* mesuré : état actif */
+  --red-text: #f0604c;      /* choisi : rouge pour un petit texte sur fond sombre (--red y fait 4,4:1) */
+  --ink: #161616;
+  /* affiche : tons lus sur la capture (ciel, terre, lumière) — servent à teinter les photos */
+  --sky: #285868;           /* lu : ciel sarcelle profond */
+  --sky-pale: #98b0b0;      /* lu : bas du ciel */
+  --rust: #885040;          /* lu : terre rouge */
+  --rust-deep: #4a2a22;     /* choisi : ombres de la terre */
+  --sand: #e8d8c0;          /* lu : montagnes éclairées, route claire */
+  --veil-0: rgb(22 22 22 / 0);
+  --veil-1: rgb(22 22 22 / 0.5);
 
-  /* Typographie */
-  --font-display: 'Big Shoulders Display', 'Oswald', sans-serif;   /* capitales hautes et étroites */
-  --font-body: 'Jost', 'Futura', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem;
-  --text-title: clamp(3.5rem, 9vw, 8.5rem);
-  --text-giant: clamp(5rem, 16vw, 15rem);
-  --tracking-caps: 0.12em;
+  /* ---- Typographie ---- */
+  --font-display: 'Big Shoulders Display', 'Oswald', 'Arial Narrow', sans-serif;  /* site : Mars Condensed (payante), capitales très hautes et étroites */
+  --font-body: 'Jost', 'Futura', 'Century Gothic', sans-serif;                    /* site : Futura LT Bold et Medium */
+  --fs-title: clamp(4rem, 8.33vw, 7.5rem);     /* mesuré : 12rem = 120px à 1440 (le site règle 1rem = largeur / 144) */
+  --lh-title: 0.84;                             /* mesuré : 10rem pour 12rem */
+  --fs-giant: clamp(7rem, 26vw, 23rem);         /* lu sur capture : mot rouge géant entre les plans */
+  --fs-card: 2.5rem;        /* mesuré : 4rem / 3.4rem, titres d'articles */
+  --fs-head: 1.25rem;       /* mesuré : 2rem, Futura Bold, capitales (accroche, titre d'inscription) */
+  --fs-body: 1.125rem;      /* mesuré : 1.8rem / 2.4rem */
+  --lh-body: 1.34;
+  --fs-small: 0.875rem;     /* mesuré : 1.4rem, capitales (dates, libellés) */
+  --fs-tiny: 0.75rem;
+  --ls-chapter: 0.42em;     /* lu : « CHAPTER 1 » très espacé */
+  --tilt: -13deg;           /* lu sur capture : le titre monte de gauche à droite d'environ 13° */
 
-  /* Cadre */
-  --frame: 12px;            /* bordure crème autour de tout l'écran */
-  --edge: 32px;
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
+  /* ---- Formes ---- */
+  --frame: clamp(6px, 0.63vw, 9px);   /* mesuré sur capture : cadre crème de 8px pour 1290px de large */
+  --edge: clamp(20px, 3.4vw, 50px);   /* lu : marge du logo et du menu à l'intérieur du cadre */
+  --r-card: 12px;           /* mesuré : 1.2rem (images), 1.5rem pour l'image à la une */
+  --r-pill: 35px;           /* mesuré : 3.5rem, boutons ronds */
+  --line: 2px;              /* mesuré : contours 2px */
+  --ring: clamp(110px, 10.4vw, 150px); /* lu : anneau dentelé de la flèche ≈ 135px */
 
-  /* Formes */
-  --radius: 0;
-  --ring: 120px;            /* anneau dentelé (défilement / chargement) */
-  --tilt: -6deg;            /* titres de chapitre légèrement montants */
-
-  /* Mouvement */
-  --ease: cubic-bezier(0.33, 1, 0.68, 1);
-  --dur-fast: 250ms; --dur: 900ms; --dur-scene: 1600ms;
+  /* ---- Mouvement ---- */
+  --ease: cubic-bezier(0.19, 1, 0.22, 1);            /* mesuré : toutes les transitions */
+  --ease-fade: cubic-bezier(0.455, 0.03, 0.515, 0.955); /* mesuré : fondu des pages */
+  --dur-ui: 300ms;          /* mesuré : survols */
+  --dur-fade: 500ms;        /* mesuré */
+  --dur-move: 1000ms;       /* mesuré : entrées (retard 150ms) */
+  --spin: 50s;              /* mesuré : rotation de l'anneau */
+  --draw: 4s;               /* mesuré : tracé en boucle */
 }

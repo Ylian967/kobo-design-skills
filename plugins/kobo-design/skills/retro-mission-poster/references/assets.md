@@ -1,94 +1,60 @@
 # Retro Mission Poster — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un véhicule, une personne ou un paysage : on utilise de vraies photos (ou rendus) **traitées en affiche imprimée** — grain, couleurs réduites, duotone chaud. Seuls le cadre crème, l'anneau dentelé et le symbole du logo restent en CSS/SVG : ce sont des éléments graphiques.
+> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer un paysage, un véhicule ou une machine. Seuls les signes restent en CSS / SVG : cadre, anneau dentelé, flèches, traits du menu, filets.
+
+Sur le site d'origine, chaque chapitre était une **scène 3D stylisée** (désert rouge, voiture ancienne, ciel strié) au rendu d'affiche de voyage. Le skill obtient ce rendu à partir de **photos**, redessinées en aplats.
 
 ## 1. Ce que montrent les images
 
-Une affiche de mission des années 70 : **désert, ciel immense, une machine, quelques humains minuscules**. Chaque chapitre est un collage de deux ou trois photos.
+| Chapitre | Sujet | Ce qu'il faut dans la photo |
+|---|---|---|
+| Ouverture | Un **véhicule ancien** dans un désert de roche rouge | Le sujet dans la moitié gauche ou au centre bas ; une zone unie (ciel, colline) pour le titre |
+| Mission | Une route droite vers des falaises | Un grand ciel bleu : il deviendra sarcelle |
+| Procédé | Une installation industrielle : colonnes, cuves, tuyaux | Des silhouettes nettes sur un ciel clair |
+| Ciel | Un avion vu d'en dessous, des traînées | Un ciel uni ; le mot géant passe derrière |
+| Conclusion | Un soleil bas sur l'horizon | De grandes masses simples |
+| Journal | Les mêmes sujets, cadrés plus serré | Ratio 1 : 0.627 |
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `desert` (fond chapitre 1) | Désert, dunes ou plateau au crépuscule, ciel dégagé | Plein écran 16:9, horizon au tiers bas, ciel libre en haut à droite pour le titre | Soleil rasant, orange et ocre, ciel bleu acier qui vire au pêche | Postérisation (5 niveaux par canal) + saturation 1,3 + grain |
-| `vehicle` (collage chapitre 1) | La machine du récit : fusée, navette, voiture, éolienne, usine | Carte 4:5 posée de biais dans l'affiche (≈ 30 % de la largeur), bord crème de 6px | Ciel coloré, fumée, contre-jour | Duotone `--rust` → `--dusk` + grain |
-| `planet` (fond chapitre « mission ») | Ciel, lancement, planète, nuage de fumée : ce qui est « là-haut » | Plein écran, sujet dans la moitié haute | Crépuscule, contraste fort | Duotone nuit `--bg` → `--sky` (le bleu acier de l'affiche, sur lequel le rouge du mot géant claque) + grain |
-| `silhouettes` / `horizon` (premier plan « mission ») | Personnes en silhouette sur une crête, ou à défaut la ligne de dunes | Bande basse (≈ 45 % de la hauteur), bord supérieur détouré ou fondu | Contre-jour | Postérisé, très sombre, grain |
-
-**Règle de cohérence** : toutes les images ont **le même grain, la même gamme réduite** (ocre, rouille, pêche, et le bleu acier `--sky` pour les ciels de nuit) et **aucune n'est nette et lisse** ; une photo moderne non traitée casse instantanément l'affiche.
+**Contraintes** : paysage, 1600px de large ; **de grandes masses et peu de détails** (l'effet d'affiche écrase les textures fines) ; lumière franche ; pas de personnes en gros plan.
 
 ## 2. Où les trouver
 
-1. **Les images du projet** (photos de l'usine, du véhicule, de l'équipe) : en priorité, traitées avec les filtres du §3.
-2. **Banques gratuites** : [Unsplash](https://unsplash.com) et [Pexels](https://www.pexels.com) (licences gratuites, usage commercial permis ; créditer le photographe est apprécié) ; archives de la NASA ([images.nasa.gov](https://images.nasa.gov), domaine public pour la plupart, sans logo NASA). Mots-clés :
-   - FR : « désert crépuscule », « dunes ocre », « lancement fusée », « navette décollage », « silhouettes crête désert », « route désert ».
-   - EN : « desert dusk », « orange dunes », « rocket launch smoke », « space shuttle liftoff », « people silhouette ridge sunset », « vintage car desert road ».
-3. **Génération IA** — prompts de départ :
-   - `desert` :
-     > 1970s retro-futurist travel poster, vast red desert at dusk, striated steel-blue sky fading to peach, long shadows, limited color palette of rust, ochre, peach and navy, visible print grain and halftone, gouache texture, lots of empty sky top right, no text, no logo
-   - `vehicle` :
-     > vintage 1970s photograph of a rocket lifting off from a desert launch pad, huge billowing smoke cloud, warm dusk light, faded film colors, heavy grain, no text, no logo
-   - `silhouettes` (sur fond uni pour détourage facile) :
-     > a row of six small human silhouettes standing on a desert ridge, seen from below against a plain flat light background, backlit, simple shapes, no text
-4. **À éviter** : photos HDR nettes, ciels bleus saturés modernes, images de la référence (voiture, logo, illustrations), dégradés « techno » violets, emojis de fusée, silhouettes dessinées en CSS.
+1. **Les images du projet** : photos de sites, de véhicules, rendus 3D. Toujours en priorité.
+2. **Banques libres** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Recherches utiles : `vintage car desert road`, `desert highway red rock`, `refinery industrial sunset`, `airplane sky contrail`, `desert dunes sunset`.
+3. **Génération** — prompt de départ :
+   > Vintage travel poster illustration, a 1960s muscle car seen from behind on a red desert road, streaked teal sky, distant pale mesas, flat colour areas with a coarse print grain, limited palette of rust, cream and deep teal, no text, 16:10
+4. **À éviter** : photos de nuit, images très détaillées (foules, feuillages), couleurs hors gamme (vert vif, violet), logos de marques sur les véhicules.
 
-## 3. Traitements (code)
+## 3. L'effet d'affiche (calculé une fois)
 
-Les filtres SVG s'appliquent aux images (même cross-origin) : on les déclare une fois dans la page.
-
-```html
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <!-- Grain d'impression -->
-  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
-  <!-- Postérisation : 5 niveaux par canal, effet sérigraphie -->
-  <filter id="posterize" color-interpolation-filters="sRGB"><feComponentTransfer>
-    <feFuncR type="discrete" tableValues="0 .25 .5 .75 1"/><feFuncG type="discrete" tableValues="0 .25 .5 .75 1"/><feFuncB type="discrete" tableValues="0 .25 .5 .75 1"/>
-  </feComponentTransfer></filter>
-</svg>
+```js
+// Pour chaque pixel : luminance réduite à 7 niveaux, puis trois tons (ombre → terre → lumière) ;
+// les zones bleues de la photo deviennent le ciel sarcelle ; on garde 22 % de la photo et on ajoute le grain.
+let l = Math.round((r * .299 + g * .587 + b * .114) / 255 * 7) / 7;
+const cool = Math.max(0, Math.min(1, (b - r) / 70 + .15));
+const warm = l < .5 ? mix(dark, mid, l * 2) : mix(mid, light, (l - .5) * 2);
+const cold = mix(sky, pale, l);
+pixel = mix(mix(warm, cold, cool), original, .22) + grain;
 ```
+
+- Les cinq tons viennent des tokens (`--rust-deep`, `--rust`, `--sand`, `--sky`, `--sky-pale`) : changer la palette change toutes les affiches.
+- L'image est chargée avec `crossorigin="anonymous"` (nécessaire pour lire ses pixels) ; le canvas est ensuite converti en image (`toBlob`) qui remplace la photo. Si la lecture échoue, la photo d'origine reste affichée.
+- Canvas de 1200px de large au plus : suffisant sous le grain.
+- Pour un site en production : **préparer les affiches à l'avance** (même calcul dans un script, ou dans un logiciel d'image : postérisation + courbe de transfert de dégradé + grain) et servir des JPEG.
+
+## 4. Autres traitements
 
 ```css
-/* Conteneur : repli = terre, l'affiche reste cohérente sans image */
-.media { position: absolute; inset: 0; overflow: hidden; background: var(--rust); isolation: isolate; }
-.media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-/* Postérisé chaud (fonds de paysage) */
-.poster img { filter: saturate(1.3) contrast(1.1) url(#posterize); }
-
-/* Duotone chaud : ombres = --rust, lumières = --dusk */
-.duo { background: var(--dusk); }
-.duo img { filter: grayscale(1) contrast(1.25) url(#posterize); mix-blend-mode: multiply; }
-.duo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--rust); mix-blend-mode: lighten; pointer-events: none; }
-/* Duotone nuit (chapitre « mission ») : ombres = --bg, lumières = --sky */
-.duo--night { background: var(--sky); }
-.duo--night::before { background: var(--bg); }
-
-/* Grain par-dessus toutes les images */
-.grain::after { content: ""; position: absolute; inset: 0; z-index: 2; filter: url(#grain); opacity: var(--grain-opacity); mix-blend-mode: overlay; pointer-events: none; }
-
-/* Premier plan fondu (à défaut de PNG détouré) : le haut de la photo disparaît */
-.fade-top { -webkit-mask-image: linear-gradient(transparent, #000 35%); mask-image: linear-gradient(transparent, #000 35%); }
-
-/* Carte de collage : bord crème, légère rotation */
-.collage { position: absolute; border: 6px solid var(--cream); rotate: -3deg; box-shadow: 0 20px 40px rgb(0 0 0 / .35); }
+.chapter::after { background: linear-gradient(180deg, var(--veil-0) 55%, var(--veil-1)); }   /* sous l'accroche */
+.frame { border: var(--frame) solid var(--cream); }
 ```
 
-**Le mot entre deux plans** demande un premier plan **détouré** : PNG/WebP à fond transparent obtenu avec Photoshop (« Sélectionner le sujet »), [remove.bg](https://www.remove.bg), `rembg` (libre, en ligne de commande) ou Figma (Remove background). À défaut, la démo utilise une photo de dunes dont le haut est fondu (`.fade-top`) : l'horizon passe devant le mot.
+Texte alternatif : ce que montre l'image (« Voiture ancienne claire arrêtée dans un désert de roche rouge »). `fetchpriority="high"` pour la première, `loading="lazy"` ensuite.
 
-## 4. Intégration
+## 5. 3D (optionnel)
 
-- `<img>` avec `width`/`height`, `alt` qui décrit la scène (« Une navette décolle dans un ciel rose »), `loading="lazy"` sauf le fond du chapitre 1 (`fetchpriority="high"`). Le premier plan détouré décoratif reçoit `alt=""` si le mot est déjà donné en `<h2 class="sr-only">`.
-- Formats : AVIF/WebP via `<picture>` ou un CDN d'images ; fonds ≤ 300 Ko (le grain ajouté en CSS évite d'alourdir les fichiers) ; PNG détouré → WebP avec transparence.
-- Couleur de repli = `background: var(--rust)` ou `var(--dusk)` sur chaque conteneur : crème et rouge restent lisibles.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder` en blurhash, `transition={300}`) ; pas de filtres SVG en natif : exporter les images **déjà postérisées / duotone** (Photoshop « Isohélie » + « Courbe de transfert de dégradé », ou `sharp` côté build), grain = PNG de bruit en `opacity: 0.18`.
+C'était la forme d'origine : une scène WebGL par chapitre, caméra qui avance au défilement, rendu en aplats avec grain. À n'envisager qu'avec de vrais modèles (véhicule, décor) : Three.js, matériaux « toon » à trois tons pris dans les tokens, pas d'ombres dynamiques, 30 images/s au plus, rendu arrêté hors écran, repli sur les affiches fixes décrites ici.
 
-## 5. 3D
+## 6. Photos de la démo (Unsplash, licence libre)
 
-**Optionnelle.** Usage sobre qui marche : pour le chapitre « mission », une **planète** en Three.js qui monte lentement derrière le mot géant, rendue comme une affiche.
-
-- **Quoi** : une sphère (`SphereGeometry(1, 64, 64)`) avec une texture de planète libre ([Solar System Scope](https://www.solarsystemscope.com/textures/), CC-BY ; ou NASA, domaine public), éventuellement un anneau.
-- **Matières et lumière** : `MeshToonMaterial` avec un `gradientMap` à 3 tons (couleurs lues dans `--rust`, `--sand`, `--dusk`) pour l'aspect sérigraphié ; une seule `DirectionalLight` rasante ; pas d'environnement réfléchissant.
-- **Caméra** : perspective 30°, fixe ; la planète monte de 10 % et tourne de 5° pendant l'entrée du chapitre.
-- **Grain** : garder le `.grain::after` CSS au-dessus du canvas (ou un `ShaderPass` de bruit en post-traitement).
-- **Modèles** : véhicule ou fusée en `.glb` (compressé Draco/Meshopt) depuis [Poly Pizza](https://poly.pizza) (CC0/CC-BY), [Kenney Space Kit](https://kenney.nl/assets) (CC0), [Quaternius](https://quaternius.com) (CC0) ; vérifier la licence et créditer si CC-BY.
-- **Web** : Three.js ou React Three Fiber + drei (`useTexture`, `Float`).
-- **React Native** : `expo-gl` + `@react-three/fiber/native`, ou une image pré-rendue.
-- **Repli** : la photo `planet` traitée reste sous le canvas ; elle s'affiche si WebGL est absent ou si `prefers-reduced-motion` est actif.
+`photo-1765211003684-d09c736eebe7` (voiture ancienne), `1770816149208-60206f8527aa` (route et falaises), `1786532852011-443cba5dc9fe` (usine), `1517258922744-606330ad6639` (avion), `1621025975976-54ffaad6b8a5` (soleil sur le désert) ; journal : `1765211003564-c13a09328f0a`, `1786532852258-8305f40f9925`. À remplacer par les images du projet.

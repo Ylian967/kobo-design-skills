@@ -1,60 +1,63 @@
 # Retro Mission Poster — composants
 
+Valeurs dans `tokens.css`. « Mesuré » = lu dans la feuille de style de l'ancien site (archive du web) ou sur la capture officielle ; le reste est proposé. Code complet dans `examples/demo.html`.
+
+## Règles communes
+
+- **Une affiche par écran** : image plein cadre traitée en aplats granuleux, cadre crème, titre en biais.
+- **Trois couleurs d'encre** : crème `--cream`, rouge `--red`, noir chaud `--bg`. Les images restent dans une gamme terre / sarcelle.
+- **Deux polices** : des capitales très hautes et étroites (`--font-display`) pour les titres ; une géométrique façon Futura (`--font-body`), en gras capitales pour les accroches, en médium pour le texte.
+- Aucun arrondi sur les boutons ; 12px sur les images du journal ; boutons ronds à contour de 2px.
+
 ## Cadre
 
-```css
-.frame { position: fixed; inset: 0; z-index: 50; pointer-events: none; border: var(--frame) solid var(--cream); }
-```
-
-## Grain
-
-```html
-<svg width="0" height="0"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
-```
-```css
-.grain::after { content: ""; position: absolute; inset: 0; filter: url(#grain); opacity: var(--grain-opacity); mix-blend-mode: overlay; pointer-events: none; }
-```
-
-## Titre de chapitre
-
-Surtitre « CHAPITRE 1 » (Jost 12px +0.12em crème), puis 2–4 mots en Big Shoulders Display 800, crème, interligne 0.85, rotation `--tilt`, aligné à droite de l'écran. Ombre très légère pour détacher du ciel.
-
-## Mot entre deux plans (signature)
-
-```html
-<div class="layers">
-  <div class="layer layer--back duo grain" data-slot="planet"><img src="…" alt="…"></div>
-  <p class="giant" aria-hidden="true">MISSION</p>
-  <div class="layer layer--front grain" data-slot="silhouettes"><img src="silhouettes-detourees.webp" alt=""></div>
-</div>
-<h2 class="sr-only">Mission</h2>
-```
-`.giant` : Big Shoulders Display 900, `--text-giant`, `--accent`, centré ; `.layer--front` est une image réelle détourée (PNG/WebP transparent) au-dessus, ou à défaut une photo fondue par le haut (`mask-image`) ; jamais des silhouettes dessinées en CSS/SVG. Voir `assets.md`.
-
-## Anneau dentelé
-
-Cercle `--ring` dessiné en pointillés fins (`stroke-dasharray: 2 4`) rouge ou crème, flèche ↓ fine au centre. Sur le chargement, l'anneau entoure le logo et se « remplit » (la partie parcourue passe en rouge plein).
-```css
-.ring-btn { width: var(--ring); aspect-ratio: 1; border-radius: 50%; border: 1px dashed currentColor; background: none; color: var(--accent); display: grid; place-items: center; cursor: pointer; transition: transform var(--dur-fast) var(--ease); }
-.ring-btn:hover { transform: rotate(20deg); }
-```
-
-## Bouton crème
-
-Rectangle crème, texte `--on-cream` Jost 600 12px capitales +0.12em, padding 10px 22px, coins droits. Survol : fond `--accent`.
-
-## Bloc d'accroche
-
-En bas à droite : titre en Jost 600 18px capitales crème (« ZÉRO CARBONE NET »), 2 lignes Jost 400 14px, bouton crème. Aligné à droite.
+Bordure crème fixe sur les quatre côtés (`--frame`, ≈ 9px à 1440), au-dessus de tout, sans capter les clics. C'est lui qui fait « affiche imprimée ».
 
 ## Logo et menu
 
-Logo en capitales espacées rouge en haut à gauche (avec une lettre remplacée par un symbole), burger à 3 traits crème fins en haut à droite. Sur les chapitres suivants, le logo devient le symbole seul.
+Logo en capitales grasses rouges, espacées, en haut à gauche. Menu : trois traits crème de 2px en haut à droite ; ils se croisent quand le menu est ouvert.
 
-## Chargement
+## Titre de chapitre
 
-Fond `--bg`, carte sombre arrondie au centre (rayon 12px), anneau dentelé avec le symbole rouge au centre ; la dentelure se remplit avec la progression.
+```html
+<div class="title"><small>Chapitre 1</small>
+  <h1 aria-label="Du carburant tiré de l'air"><span aria-hidden="true"><b>Du carburant</b></span><span aria-hidden="true"><b>tiré de l'air</b></span></h1></div>
+```
 
-## États
+- Capitales étroites de 120px, interligne 0.84, crème, sur deux lignes.
+- **Incliné** : `rotate(-13deg) skewX(-13deg)` — le titre monte vers la droite et ses verticales restent d'aplomb.
+- Au-dessus, « CHAPITRE 1 » en petites capitales très espacées (0.42em).
+- Dans la moitié droite ou gauche, sur une zone calme de l'image.
 
-- **Image manquante** : fond `--rust` + grain (le style reste cohérent) ; en production, toujours une image réelle traitée selon `assets.md`.
+## Mot géant
+
+Un mot en rouge, capitales étroites de très grande taille, placé derrière le titre, à moitié hors cadre. Décoratif (`aria-hidden`).
+
+## Accroche
+
+En bas à droite, alignée à droite : titre en capitales grasses 20px, deux lignes de texte 18px, puis un **bouton crème rectangulaire** (44px de haut, texte noir 14px gras espacé). Survol : fond rouge.
+
+## Anneau dentelé
+
+Cercle à 44 dents en trait rouge de 1.5px, ≈ 150px, posé à cheval sur le bord bas ; une flèche fine au centre. Il tourne lentement. C'est le lien vers le chapitre suivant.
+
+## Liste de faits
+
+Trois lignes séparées par un filet rouge de 1px : intitulé en capitales étroites 40px, une ligne en petites capitales 14px.
+
+## Carte du journal
+
+Image 1 : 0.627 aux coins de 12px ; date en capitales 14px ; titre en capitales étroites 40px / 34px ; filet rouge. Survol : contour rouge de 2px autour de l'image.
+
+## Inscription (menu)
+
+Titre rouge en capitales grasses, texte gris `--soft`, champ sans fond souligné de 2px avec une flèche pour envoyer, trois boutons ronds de 52px à contour de 2px.
+
+## Accessibilité
+
+- Crème sur l'image : toujours sur une zone sombre ou moyenne (terre, ciel profond) ; un dégradé sombre renforce le bas de l'écran sous l'accroche.
+- Le rouge `--red` sur fond sombre fait 4,4:1 : réservé aux grands titres et aux traits ; petit texte rouge en `--red-text`.
+- Titres découpés en lignes : texte entier dans `aria-label`.
+- Chaque image traitée garde son texte alternatif.
+- Menu : `inert` quand il est fermé, Échap ferme, le bouton annonce son état (`aria-expanded`).
+- Cibles de 44px au moins (menu, bouton, anneau, champ).
