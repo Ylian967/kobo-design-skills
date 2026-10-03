@@ -1,62 +1,52 @@
-# Nocturne Architecture — mises en page
+# Nocturne Architecture — gabarits
 
-Conteneur `--container` 1440px, marges `--gutter` (16px mobile → 40px), sections séparées par `--space-24` (96px) et par l'alternance `--bg` / `--surface`, jamais par des bordures.
+Grille **mesurée** sur la maquette : page de 1440px, marges de 40px, héros de 1000px, cartes de 438px écartées de 23px. Le contenu occupe toute la largeur ; la plupart des sections sont en **deux colonnes inégales** (≈ 31 % / 69 %) : un libellé ou un texte court à gauche, le contenu à droite.
 
-## Héros nocturne (ouverture)
-
-```
-Studio  Projets  Services  Journal              MER 1 OCT \ 21:40 \ 18°C  (Parlons-en →)
-(▶) VOIR LE SHOWREEL
-Court paragraphe 3 lignes, 300px
-                     [ photo de ville la nuit, plein écran ]
-                                                    Architecture, intérieurs — villes
-o  r  s  e  l   ← mot-marque géant, bord à bord, coupé d'un quart en bas
-```
-- Hauteur `max(640px, 100svh)`, `overflow: hidden`, photo en fond absolu + `--shade-hero` (noir 55 % en haut pour la barre, noir 90 % en bas pour faire le lien avec la section suivante).
-- Texte d'intro à 48px sous la barre, colonne de 300px, ombre de texte douce.
-- Ligne de localisation en 12px à droite, posée juste au-dessus du mot-marque.
-
-## « À propos »
+## Héros (1440 × 1000)
 
 ```
-• À PROPOS        Grande phrase bicolore sur 4–5 lignes, blanc → gris
-©2026
-[ photo 1fr ]     [ 15+ | 120+ ]
-                  [ 08  | 34k  ]   ← grille 2×2 sur filets
+┌───────────────────────────────────────────────────────────────┐
+│ Studio  Projets  Méthode  Journal     LUN 2 DÉC \ 09:12 \ 12°C │ (Parlons-en)
+│───────────────────────────────────────────────────────────────│  filet
+│ ● VOIR LE FILM                                                 │
+│ Nous écoutons d'abord, nous                                    │  paragraphe 440px
+│ dessinons ensuite…                                             │
+│                                                                │
+│                 photo de ville, la nuit                        │
+│  n  o  c  t  u  a                                              │  mot-marque d'un bord à l'autre : haut à 52 %
+│  ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔     │  de la hauteur, coupé par le bas
+└───────────────────────────────────────────────────────────────┘
 ```
-Grille `1fr 2.2fr`, puis rangée `1fr 1.4fr` (photo + stats) à 64px en dessous.
 
-## Carrousel de projets
+## Page d'accueil (ordre de la maquette)
 
-```
-Résidences d'exception
-signées orsel (gris)                                      (‹) (›)
-[ROUGE 4:5] [photo 4:5] [photo 4:5] [photo 4:5] [photo… coupée au bord]
-━━━━━━━━━━━━──────────────────────────────────────────── 01 / 06
-```
-Fond `--surface`. Les cartes débordent à droite pour signaler le défilement ; la première est rouge. Ligne de progression rouge sur filet gris.
+| # | Section | Disposition |
+|---|---|---|
+| 1 | Héros | Photo plein cadre, barre, bouton lecture + paragraphe, mot-marque géant |
+| 2 | À propos | Gauche : libellé, « ©2026 », petit texte + pilule en bas. Droite : grande phrase en deux tons, grille de chiffres 2 × 2 |
+| 3 | Bandeau de mots | Pleine largeur |
+| 4 | Réalisations | Libellé, titre à gauche et texte court à droite ; rail de cartes ; boutons et ligne de progression |
+| 5 | Processus | Libellé à gauche, titre à droite ; lignes numérotées sur toute la largeur |
+| 6 | Méthode | Panneau `--panel` en deux colonnes |
+| 7 | Bandeau de catégories | Pleine largeur |
+| 8 | Film | Grande carte photo |
+| 9 | Journal | Libellé, titre, pilule à contour à droite ; deux cartes |
+| 10 | Pied | Signe, colonnes, mot-marque géant |
 
-## Méthode (étapes)
+Pas de changement de fond entre les sections (sauf le panneau et le pied, à peine plus clairs) : ce sont les **filets** et les **blancs** qui séparent. Espacement entre sections ≈ 130px.
 
-```
-• MÉTHODE                01  Terrain et faisabilité                (×)
-Faire de vos projets         [ photo 4:3 ]   Points clés
-immobiliers une réalité                      • …  • …  • …
-Paragraphe gris                              (Réserver une visite →)
-                         02  Esquisse et lumière                   (+)
-                         03  Chantier suivi                        (+)
-```
-Grille `1fr 2fr` ; le corps de l'étape ouverte est indenté de 80px pour s'aligner sur le titre.
+## Autres pages (proposées, la maquette ne montre que l'accueil)
 
-## Contact + pied de page
+- **Projet** : photo plein cadre de 1000px avec le nom en mot géant coupé ; fiche en deux colonnes (caractéristiques à filets à gauche, texte à droite) ; galerie en rail.
+- **Studio** : grande phrase en deux tons, chiffres, portraits en grille de 3 à coins de 12px, panneau « méthode ».
+- **Journal** : grille de cartes d'article à 2 colonnes, filtres en pilules à contour.
+- **Contact** : phrase géante, formulaire à champs soulignés d'un filet, pilule rouge.
 
-Grande phrase bicolore en `clamp(40px, 6vw, 88px)` à gauche, champ e-mail à droite ; 96px plus bas, filet puis quatre colonnes de liens (titres en capitales 11px). Rappel du mot-marque en `--raised` (presque invisible), coupé par le bas de page.
+## Mobile (390px, proposé)
 
-## Mobile (≤ 640px)
-
-- Barre : bouton menu rond à gauche, pilule rouge à droite ; horloge masquée.
-- Héros : intro sous la barre, ligne de localisation alignée à gauche au-dessus du mot-marque, mot-marque à 44vw (toujours bord à bord).
-- Toutes les grilles passent en une colonne (≤ 900px) ; libellé et ©2026 sur une ligne.
-- Carrousel : cartes à 78 % de largeur, défilement au doigt avec aimantation, flèches au-dessus.
-- Étapes : colonne numéro 40px, titres 20px, corps sans retrait (photo puis liste).
-- Pied : deux colonnes de liens.
+- Barre : date, heure, température et pilule ; pas de liens.
+- Héros de 600px ; mot-marque toujours d'un bord à l'autre.
+- Toutes les sections en une colonne ; chiffres en 2 colonnes.
+- Rail de cartes de 260px, défilement au doigt ; boutons et barre conservés.
+- Étape ouverte : la photo d'abord, les points clés dessous.
+- Carte film : bouton lecture en haut à droite pour laisser la place à la phrase.

@@ -1,50 +1,78 @@
 # Nocturne Architecture — mouvement
 
-## Principes
-
-**Lent, nocturne, sans rebond.** Comme une pose longue : les lumières glissent, les lettres montent, les photos respirent. Courbe principale `--ease-out` (départ vif, arrivée très douce), survols courts (`--dur-fast` 180ms), apparitions longues (`--dur-slow` 900ms, `--dur-reveal` 1200ms). Le shot de référence étant une image fixe, ces mouvements sont une proposition (voir `source.md`).
+**La référence est une suite d'images fixes** (cinq captures d'une maquette) : aucune animation n'y est visible. Tout ce qui suit est **proposé** par le skill, dans le ton du visuel : lent, sobre, sans rebond — comme une pose longue. Deux éléments de la maquette appellent le mouvement : les bandeaux de texte coupés aux deux bords (défilement) et la ligne rouge sous le carrousel (progression).
 
 ## Catalogue
 
-| Moment | Effet | Durée | Courbe | Notes |
-|---|---|---|---|---|
-| Chargement | Lettres du mot-marque qui montent de 60 % en fondu, décalées de 70ms | 1200ms | `--ease-out` | démarre à 200ms |
-| Héros (continu) | Photo qui zoome très lentement (1 → 1.06), comme une pose longue | 40s | `--ease-inout` | aller-retour, en pause pendant le showreel |
-| Héros (continu) | Feu rouge d'antenne qui clignote | 2.4s | `steps(1)` | |
-| Survol lien | Soulignement 1px qui se dessine de gauche à droite | 360ms | `--ease-out` | |
-| Survol pilule | Fond éclairci, flèche qui pivote de -45° et avance de 3px | 180ms | `--ease-out` | appui `scale(.97)` |
-| Survol lecture | Disque rouge à 1.1 | 360ms | `--ease-out` | |
-| Survol carte | Photo à 1.04, bouton ↗ qui descend de 6px en fondu | 900ms / 360ms | `--ease-out` | aussi au focus |
-| Carrousel | Défilement doux d'une carte, ligne rouge qui s'allonge | navigateur / 360ms | `--ease-out` | |
-| Étape | Corps en fondu + 8px, « + » qui tourne de 45° et passe au rouge | 360ms | `--ease-out` | une seule ouverte |
-| Apparition au défilement (option) | Bloc qui monte de 32px en fondu à l'entrée dans l'écran | 900ms | `--ease-out` | IntersectionObserver, uniquement sous la ligne de flottaison |
+| Moment | Effet | Durée / courbe |
+|---|---|---|
+| Arrivée du héros | La photo dézoome de 1.08 à 1 ; les lettres du mot-marque montent une à une (70ms d'écart) | 2400ms et 1300ms `--ease` |
+| Grande phrase | Les mots passent du gris au blanc un à un, **au fil du défilement** | lié au défilement ; couleur 500ms |
+| Chiffres | Comptent de 0 à leur valeur quand ils entrent à l'écran | 1500ms, ralenti en fin |
+| Blocs | Montée de 32px en fondu, une fois | `--dur-slow` (1000ms) `--ease` |
+| Bandeau de mots | Défile vers la gauche en boucle ; un mot sur deux est éteint | `--dur-marquee` (30s) linéaire |
+| Bandeau de catégories | Défile dans l'autre sens | idem |
+| Pilule rouge | Un fond blanc monte du bas, le texte passe au noir | 500ms `--ease` |
+| Bouton rond | Se remplit de blanc ; s'écrase à 0.92 au clic | 200ms / 500ms |
+| Bouton lecture | La pastille grossit à 1.25 | 500ms `--ease` |
+| Carte de bien, d'article | La photo zoome à 1.05 (1.04) dans son cadre | 1000ms `--ease` |
+| Carrousel | Défilement natif aimanté ; la ligne rouge s'allonge avec la position | 500ms `--ease` |
+| Étape | La ligne s'ouvre en hauteur, les autres se referment ; le titre rougit au survol | 700ms `--ease` |
 
-## Code de référence
+## Code
 
 ```css
-@keyframes rise { from { transform: translateY(60%); opacity: 0; } }
-.wordmark span { display: inline-block; animation: rise var(--dur-reveal) var(--ease-out) both; animation-delay: calc(var(--i) * 70ms + 200ms); }
+/* Mot-marque : chaque lettre monte */
+.word span { display: inline-block; transform: translateY(60%); opacity: 0;
+  transition: transform 1300ms var(--ease), opacity 600ms linear; transition-delay: calc(var(--i) * 70ms + 200ms); }
+.loaded .word span { transform: none; opacity: 1; }
 
-@keyframes breathe { to { transform: scale(1.06); } }
-.city img { transform-origin: 50% 70%; animation: breathe 40s var(--ease-inout) infinite alternate; }  /* vraie photo, voir assets.md */
-.hero.is-paused .city img { animation-play-state: paused; }
+/* Phrase en deux tons */
+.phrase span { color: var(--dim); transition: color var(--dur) linear; }
+.phrase span.lit { color: var(--text); }
 
-.card .photo { transition: transform var(--dur-slow) var(--ease-out); }
-.card:hover .photo { transform: scale(1.04); }
+/* Pilule : le fond blanc monte */
+.pill::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: var(--paper); transform: translateY(101%); transition: transform var(--dur) var(--ease); }
+.pill:hover::before { transform: none; }
+
+/* Étape : hauteur animée sans la mesurer */
+.step .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 700ms var(--ease); }
+.step.open .body { grid-template-rows: 1fr; }
+.step .inner { overflow: hidden; }
 ```
 
 ```js
-// Apparition au défilement (option) : ne masquer que ce qui est sous la ligne de flottaison
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }));
-document.querySelectorAll('.reveal').forEach(el => el.getBoundingClientRect().top > innerHeight ? io.observe(el) : el.classList.add('is-in'));
+// Mots allumés : proportion de la phrase déjà passée dans l'écran
+const t = Math.min(1, Math.max(0, (innerHeight * 0.85 - rect.top) / (innerHeight * 0.5 + rect.height)));
+const n = Math.round(t * words.length);
+if (n !== lit) words.forEach((w, i) => w.classList.toggle('lit', i < n));     // rien si le compte n'a pas changé
+
+// Barre de progression du carrousel
+bar.style.transform = `scaleX(${0.25 + 0.75 * rail.scrollLeft / (rail.scrollWidth - rail.clientWidth)})`;
 ```
+
+## Performance
+
+- Seuls `transform`, `opacity` et `color` sont animés, plus `grid-template-rows` sur une ligne d'étape.
+- **Deux animations continues seulement**, les bandeaux : des bandes de 60 à 80px de haut, jamais du plein écran. La photo du héros ne bouge qu'à l'arrivée.
+- La phrase en deux tons ne modifie des classes **que si le nombre de mots allumés change** ; un `requestAnimationFrame` au plus par image.
+- Le carrousel est un défilement natif (`scroll-snap`) : aucun script pendant le glissement, sauf la mise à jour de la barre.
+- Aucun filtre ni flou ; les voiles sur photo sont des dégradés fixes.
+- Mesuré dans un Chrome sans carte graphique (rendu logiciel, écran 144 Hz), 1440×900 : arrivée du héros 62 images/s, héros au repos 145, défilement de la page 139, section avec bandeau 145, carrousel 142, ouverture d'une étape 143.
 
 ## Mouvement réduit
 
 ```css
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .rise { opacity: 1; transform: none; }
+  .hero > img { transform: none; }
+  .marquee { flex-wrap: wrap; white-space: normal; }
+  .marquee > div + div { display: none; }
+  .phrase span { color: var(--text); }
 }
 ```
-Mot-marque affiché d'un coup, photo du héros fixe, pas d'apparition au défilement, carrousel sans défilement animé ; les changements d'état (étape ouverte, bouton rouge) restent visibles.
+
+Le mot-marque et la photo sont en place, la phrase est entièrement blanche, les chiffres affichent leur valeur, les bandeaux deviennent des listes fixes sur plusieurs lignes, les étapes s'ouvrent sans glissement.

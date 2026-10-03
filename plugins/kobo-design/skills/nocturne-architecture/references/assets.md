@@ -1,75 +1,52 @@
 # Nocturne Architecture — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un bâtiment, une ville ou un intérieur : on utilise de vraies photos d'architecture (ou des rendus 3D d'archi photoréalistes) et, au besoin, une vraie scène 3D.
+> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo de ville, de maison ou d'intérieur. Seuls les signes restent en SVG ou CSS : triangle de lecture, chevrons, signe du studio, points, filets.
 
-Ici l'image **est** l'ambiance : une ville ou une maison **la nuit**, bleutée, avec quelques fenêtres chaudes et des traînées de phares. L'interface reste noire, blanche et rouge ; le bleu et l'ambre n'existent que dans les photos.
+Toute la page est noire ; ce sont les photos qui apportent la lumière. Elles sont prises **à la tombée de la nuit ou de nuit** : ciel bleu profond, fenêtres allumées, reflets.
 
 ## 1. Ce que montrent les images
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `hero-night-city` | Ville la nuit en **pose longue** : tours éclairées, autoroute ou avenue avec traînées rouges et ambrées | Plein écran (16:9 sur ordinateur, recadré au centre en 9:16 sur mobile) ; ligne d'horizon au tiers bas, ciel dégagé en haut pour la barre, zone calme en bas pour le mot-marque | Heure bleue ou nuit, ciel bleu marine, fenêtres ambrées, aucune lumière blanche dure | `--grade-night` + voile `--shade-hero` (noir en haut et en bas) + zoom très lent |
-| `studio-photo` | Maison d'architecte aux baies vitrées allumées | 3:2 ou 4:3, bâtiment entier, légère contre-plongée | Crépuscule, intérieur chaud, ciel bleu profond | `--grade-night` + teinte nuit |
-| `project-1` … `project-n` | Une résidence par carte : villa, tour, maison sur la côte, intérieur | **4:5** vertical, sujet centré dans le tiers haut, bas assez sombre pour le nom en blanc | Nuit ou crépuscule ; un intérieur de jour est accepté s'il passe dans la teinte nuit | `--grade-night` + teinte nuit + voile bas `--shade-card` |
-| `process-1` … `process-4` | Étapes : terrain au crépuscule, maquette ou séjour, chantier ou tour de nuit, maison livrée éclairée | **4:3** horizontal | Même famille que les cartes | `--grade-night` + teinte nuit |
+| Emplacement | Sujet | Cadrage | Lumière |
+|---|---|---|---|
+| `hero` | Une ville la nuit : immeubles aux fenêtres éclairées, traînées de phares en pose longue | Paysage 3:2, 2200px ; le **tiers bas plutôt sombre ou simple** (le mot-marque blanc s'y pose), le coin haut gauche calme (texte) | Dominante bleue, quelques points chauds |
+| Cartes de biens | Une maison par carte, entière, de trois quarts | ≈ 19:20 (presque carré), sujet au centre haut ; le bas reçoit le nom | Heure bleue, intérieur éclairé |
+| Étapes | Une vue large et calme : piscine, terrasse, façade | Paysage 15:7 | Crépuscule |
+| Panneau « méthode » | Un détail d'architecture : angle de verre, façade | 5:4, petite | **De jour** : c'est l'une des deux respirations claires |
+| Carte film | Un intérieur sombre, matières visibles | Paysage 5:3, 2000px ; bas gauche lisible sous la phrase | Très sombre, lumière rasante |
+| Articles | Architecture blanche, minimaliste | ≈ 4:3 | **De jour**, ciel clair : contraste voulu avec le reste de la page |
 
-**Règle de cohérence** : toutes les photos sont **nocturnes et froides** (bleu marine dominant, seules les fenêtres et les phares sont chauds) ; jamais de ciel bleu de midi, de verdure saturée ou de personnes souriantes au premier plan.
+**Cohérence** : pas de personnages au premier plan, verticales droites, pas d'images HDR. Les photos de nuit dominent ; le jour n'apparaît que dans le panneau « méthode » et le journal.
 
 ## 2. Où les trouver
 
-1. **Les images du projet** : photos d'architecte et rendus 3D du programme (ils existent presque toujours). Demander les versions « nuit » ou « heure bleue ».
-2. **Banques gratuites** : [Unsplash](https://unsplash.com) et [Pexels](https://www.pexels.com) (licences gratuites, usage commercial permis ; créditer le photographe est apprécié). Mots-clés qui marchent :
-   - EN : « city night long exposure », « light trails skyline », « modern house night », « architecture blue hour », « villa pool dusk », « concrete house lit windows », « luxury interior night ».
-   - FR : « ville nuit pose longue », « traînées lumineuses », « maison d'architecte nuit », « villa crépuscule », « heure bleue architecture ».
-3. **Génération IA** (Midjourney, Flux, DALL·E, Firefly…) — prompts de départ (puis appliquer le traitement CSS) :
-   - Héros :
-     > Long exposure photograph of a modern city skyline at night, glass towers with warm amber windows, a curving highway with red and amber light trails in the foreground, deep navy blue sky, calm empty top third, shot on a full-frame camera with a 24mm lens, tripod, f/8, 20-second exposure, subtle film grain, cinematic, no text, no logo, no people
-   - Carte de projet :
-     > Architectural photograph of a minimalist concrete villa at blue hour, floor-to-ceiling glass glowing with warm interior light, infinity pool reflecting the house, dark navy sky, vertical 4:5 composition with the house in the upper half and dark foreground, 35mm lens, high dynamic range, no text, no people
-   - Étape « chantier » :
-     > Night photograph of a residential tower under construction, tower crane silhouette, scattered work lights, deep blue sky, long exposure, quiet and moody, 4:3, no text, no logo
-4. **À éviter** : photos de jour au ciel bleu vif, HDR criard, fisheye, foules, agents immobiliers souriants, images de stock à fond blanc, et toute photo ou rendu du shot de référence (droits d'auteur).
+1. **Les photos du studio** : reportages de fin de chantier, faits à l'heure bleue. Toujours en priorité.
+2. **Banques libres** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Recherches utiles : `city long exposure night traffic`, `city night apartment building blue`, `modern house night exterior`, `house pool dusk`, `dark interior living room`, `white architecture minimal`, `glass building corner sky`.
+3. **Génération** — prompts de départ :
+   > Night cityscape, long exposure, light trails of traffic curving along a wide avenue, tall apartment blocks with scattered lit windows, cold deep blue tones, light mist, shot from a rooftop, no text, 3:2
 
-## 3. Traitements (code)
+   > Architectural photograph of a contemporary dark timber house at blue hour, warm interior lights on, pool in the foreground, deep blue sky, straight verticals, no people, almost square
+4. **À éviter** : photos de plein jour dans le héros ou les cartes de biens, néons multicolores, rendus 3D trop lisses, images d'un studio ou d'un promoteur existant.
+
+## 3. Traitements
 
 ```css
-/* Tokens (dans :root) */
---grade-night: saturate(0.8) contrast(1.08) brightness(0.82);  /* étalonnage commun */
-
-/* Conteneur photo : couleur de repli = ciel de nuit */
-.photo { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--radius-card); background: var(--night); }
-.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: var(--grade-night); }
-
-/* Teinte nuit : ramène toutes les photos (même de jour) vers le bleu marine */
-.photo::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--night-3); mix-blend-mode: color; opacity: .22; pointer-events: none; }
-
-/* Voile bas pour la lisibilité du nom de projet */
-.photo::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade-card); pointer-events: none; }
-
-/* Héros : voile haut/bas + zoom « pose longue » très lent */
-.city { position: absolute; inset: 0; z-index: -1; background: var(--night); overflow: hidden; }
-.city img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-night); animation: breathe 40s var(--ease-inout) infinite alternate; }
-.city::after { content: ""; position: absolute; inset: 0; background: var(--shade-hero); }
-@keyframes breathe { to { transform: scale(1.06); } }
-.hero.is-paused .city img { animation-play-state: paused; }
-@media (prefers-reduced-motion: reduce) { .city img { animation: none; } }
+/* Voile fixe sous le texte : en haut et à gauche du héros, en bas des cartes */
+.hero::after { background: linear-gradient(180deg, var(--veil), var(--veil-0) 30%), linear-gradient(90deg, var(--veil), var(--veil-0) 55%); }
+.card::after  { background: linear-gradient(0deg, var(--veil), var(--veil-0) 45%); }
+.reel::after  { background: linear-gradient(0deg, var(--veil), var(--veil-0) 55%); }
+img { width: 100%; height: 100%; object-fit: cover; }
 ```
 
-Pour des **traînées de phares vivantes**, utiliser une **vraie vidéo** en boucle (pose longue en timelapse, 6–10 s, `muted autoplay loop playsinline`, poster = la photo du héros), jamais des lignes dessinées en CSS.
+- **Aucun filtre de couleur** : choisir des photos déjà sombres et bleues plutôt que d'assombrir en CSS.
+- Le mot-marque blanc doit rester lisible : si le bas de la photo du héros est clair, changer de photo ou la recadrer.
+- Fond de repli des conteneurs : `--night` (héros) ou `--panel` (cartes).
+- Tailles : 2200px (héros), 2000px (film), 1500px (étapes), 900px (cartes). `fetchpriority="high"` pour le héros, `loading="lazy"` ailleurs.
+- Texte alternatif : le lieu et la lumière (« Chalet contemporain éclairé à la tombée de la nuit »).
 
-## 4. Intégration
+## 4. 3D (optionnel)
 
-- `<img>` avec `width`/`height` (ou `aspect-ratio` sur le conteneur), `alt` qui décrit l'image en français (« Villa basse aux baies vitrées éclairées, piscine au crépuscule »), `loading="lazy"` partout sauf l'image du héros (`fetchpriority="high"`, pas de lazy).
-- Formats : AVIF/WebP via `<picture>` ou un CDN d'images (`?auto=format&w=2000` pour le héros, `w=800` pour une carte 4:5, `w=1200` pour une photo 4:3) ; héros ≤ 300 Ko.
-- Couleur de repli : `background: var(--night)` sur chaque conteneur ; le texte blanc reste lisible si l'image ne charge pas.
-- Le conteneur garde son `data-slot` pour qu'on retrouve où remplacer l'image.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder={{ blurhash }}`, `transition={300}`), teinte nuit = `View` absolue `backgroundColor: night3, opacity: .22` (pas de `mix-blend-mode` en natif : pré-étalonner les images si possible), voile = `expo-linear-gradient`.
+Le style n'en a pas besoin. Si le studio possède une **maquette 3D d'un projet** (`.glb`), elle peut remplacer la photo d'une étape ou la carte film : Three.js, fond `--bg`, matériaux mats, une seule lumière chaude venant de l'intérieur du bâtiment, rotation lente au glisser, 30 images/s au plus, rendu arrêté hors écran.
 
-## 5. 3D
+## 5. Photos de la démo (Unsplash, licence libre)
 
-**Optionnelle.** Le style vit de photos ; une scène 3D n'a de sens que si le promoteur a la **maquette du programme**. Usage sobre conseillé : dans la carte rouge ou l'étape « Esquisse et lumière », une maquette blanche (`.glb` fourni par l'architecte) posée sur un socle noir, éclairée par une seule lumière ambrée qui tourne lentement comme le soleil puis s'éteint pour laisser les fenêtres allumées (matériau émissif `--window`). Caméra fixe en 3/4, rotation au pointeur limitée à ±15°.
-
-- **Web** : Three.js (`GLTFLoader` + `DRACOLoader`, `RoomEnvironment`, tone mapping ACES) ou React Three Fiber + drei (`useGLTF`, `ContactShadows`).
-- **Modèles** : uniquement la maquette du projet (exports SketchUp, Revit, Rhino → `.glb` compressé Draco).
-- **React Native** : image pré-rendue (plus fiable) ou `expo-gl` + `@react-three/fiber/native`.
-- **Repli** : la photo du projet si WebGL est absent ou si `prefers-reduced-motion` est actif.
+Héros : `photo-1470723710355-95304d8aece4`. Biens : `1568605114967-8130f3a36994`, `1706164971302-e30c0640cc3b`, `1608619769165-25647672335f`, `1544984243-ec57ea16fe25`. Étapes : `1598924957326-0446ac30341e`, `1748063578185-3d68121b11ff`, `1706164971309-fb4785fe6ceb`. Méthode : `1550136513-548af4445338`. Film : `1790193719924-864e0c4d22af`. Journal : `1543067362-3756ae0bafa7`, `1483366774565-c783b9f70e2c`. À remplacer par les images du projet.
