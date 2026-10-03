@@ -1,45 +1,83 @@
 # Source — Zigzag Snack Pop
 
-- **Site de référence** : https://dribbble.com/shots/27735034-ONE-Protein-Bar-Performance-Snack-Landing-Page (shot Dribbble « ONE Protein Bar — Performance Snack Landing Page »)
-- **Famille** : Food / marque snack énergique
-- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, les deux vidéos du shot image par image
-- **[URL choisie par recherche, plusieurs shots « ONE Protein Bar » existent]** : l'URL exacte du shot n'a pas été confirmée par l'utilisateur.
+- **Référence** : https://dribbble.com/shots/27735034-ONE-Protein-Bar-Performance-Snack-Landing-Page (« ONE — Protein Bar Performance Snack Landing Page », par Farzan Faruk pour Rylic Studio)
+- **Famille** : Food / marque de snack énergique
+- **Analysé le** : 2026-10-01 (première version, à l'œil) ; **2026-10-03, réécriture complète** : image téléchargée en pleine résolution (4800 × 3600), couleurs **lues au pixel**, tailles mesurées ; vidéo du shot examinée sur douze images.
+- **Ce qui plaît** : l'énergie de l'orange et du jaune, les bandes déchirées en dents de scie, les boutons-autocollants.
 
-## Ce qui a été vu
+> L'adresse du shot a été retenue à partir d'une recherche (plusieurs shots « ONE Protein Bar » existent) : elle n'a pas été confirmée par l'utilisateur.
 
-- **Héros** : fond orange vif (~#ff6a13) avec montagnes en aplats d'orange plus foncé, silhouettes d'aventure brun foncé (grimpeur, cycliste, skateur) ; titre centré en grotesque condensée très grasse, capitales blanches, un mot en jaune (~#ffe415).
-- **Appels à l'action** : bouton rectangulaire jaune, texte noir gras en capitales avec chevron, aspect « autocollant » à ombre décalée sombre ; champ de recherche blanc à ombre dure.
-- **Navigation** : barre brun foncé (~#4a2a1a), petits liens blancs en capitales avec chevrons de menu déroulant.
-- **Séparateurs** : bandes blanches/crème à bords en dents de scie en haut et en bas.
-- **Ingrédients** : rangée de pastilles rondes colorées (jaune pâle, rose, beige, brun) avec icônes et libellés gras sur deux lignes.
-- **Sections brunes** (~#5a3121) avec texture de traces de pneu, titres blancs lourds, pilule jaune « SHOP NOW », accent en italique gras « 20G PROTEIN ».
-- **Cartes produit** : rayon ~8px, fond coloré par saveur (vert, bleu, beige), nom en capitales grasses, barre « ADD TO CART » en contour avec prix en orange ; carte du milieu surélevée et plus grande.
-- **Avis** : cartes de notation ; tampon rond « HIGH QUALITY » à texte circulaire tournant.
-- **Pied de page** : mot display géant en contour jaune.
+## Ce que contient la référence
 
-## Pages explorées (2026-10-03)
+- **Une image fixe** : la page d'accueil entière, présentée sur deux colonnes ; la page y fait 2742px de large, soit 1440px à l'échelle 1.9.
+- **Une vidéo de 15s** (2902 × 2176) : la même page qui défile de haut en bas.
+- Une seconde vidéo (bandeau promotionnel du studio), sans rapport avec ce style.
+- Aucun site en ligne.
 
-| Source | Relevé |
+Sections de la page : barre, héros orange, bande d'ingrédients, section brune « pour tout le monde », saveurs populaires, section brune « parcours » (avis, personnes), mosaïque « croquant », lettre d'information, pied au mot géant.
+
+## Mesuré (lecture des pixels ; tailles ramenées à 1440px)
+
+| Élément | Valeur |
 |---|---|
-| Vidéo 1 (800×600, 15s) | Observé : défilement de toute la landing ; nouveaux éléments : pastille « coach », pile de produits, carte « carburant », section « parcours » avec personnes détourées, bento « testé par des coachs », bandeau lettre d'info, pied détaillé ; bande d'ingrédients en défilement horizontal. |
-| Vidéo 2 (800×226, 16s) | Bande promotionnelle du studio (« Let's work together » sur d'autres projets) : rien sur ce style. |
-| Site en ligne | Aucun lien dans le shot. |
+| Fond autour de la page | #351c12 |
+| Barre, sections brunes | #62382e |
+| Orange du héros | ≈ #fd7c24 ; montagnes #ff6011 |
+| Jaune | #ffeb33 (boutons, mot géant) ; #ffff39 (mot du titre) |
+| Ombre dure | #531f10 |
+| Titres sur blanc | #3e2617 |
+| Pastilles d'ingrédients | #e8f69b, #fff068, #f3e4df, #dcc1a1, #ffe6b5 |
+| Fiches de saveur | #b3ce20, #428fce, #a48b87 |
+| Fiche d'avis, tuiles | #f6ece9, #f9eae5 |
+| Barre de navigation | 47px de haut |
+| Titre du héros | capitales de 92px de haut (≈ 124px de corps) |
+| Bouton principal | ≈ 236 × 56px, 244 × 61 avec son ombre |
+| Dents de scie | le blanc commence à ≈ 4px sous la pointe ; dents lues à ≈ 22 × 11px |
 
-## Non mesuré
+## Observé sur la vidéo (non mesuré)
 
-- Il s'agit d'une **maquette Dribbble**, pas d'un site en ligne : aucune extraction de styles possible.
-- **Analyse visuelle des images uniquement** : couleurs, tailles, espacements et rayons sont **estimés** à l'œil.
-- **Polices choisies à l'œil** (Anton, Archivo) : la police d'origine n'a pas été identifiée.
-- Les animations ne sont pas visibles sur un shot statique : `references/motion.md` est une proposition cohérente avec le style, pas un relevé.
+- La bande d'ingrédients **défile à l'horizontale**.
+- Les produits **se posent** sur les fiches de saveur après l'arrivée de celles-ci.
+- Le produit de la section « croquant » **grossit** en entrant.
+- Les silhouettes du héros se déplacent.
+- Le mot géant du pied est **plein** et en italique (et non en contour, comme le notait la première version).
+
+Durées, courbes et états survolés ne sont pas lisibles sur une vidéo.
+
+## Lu à l'œil
+
+Tailles des titres de section, des libellés, des fiches, des tuiles ; rayons ; taille des pastilles.
+
+## Polices
+
+Trois caractères **non identifiés** : une grotesque condensée très grasse, une semi-étroite arrondie pour les libellés, une grotesque en italique gras. Anton, Barlow Semi Condensed et Barlow sont choisies à l'œil.
+
+## Proposé par le skill
+
+- **Toutes les durées et les courbes**, les survols, l'appui des boutons, l'arrivée du titre, le tampon qui tourne, le compteur du panier.
+- La fusion des photos dans leur couleur (`multiply`), le cadre penché, les arches.
+- `--orange`, `--sky`, `--taupe`, `--orange-ink`, `--soft`.
+- Les versions tablette et mobile, les autres pages.
+- Les images par seconde de `motion.md`, mesurées dans un Chrome sans carte graphique, à 1440px seulement.
 
 ## Écarts assumés
 
-| Élément de la maquette | Dans le skill | Raison |
+| Maquette | Dans le skill | Raison |
 |---|---|---|
-| Orange de fond #ff6a13 avec titres blancs (2,9:1) | `--orange` #e85a0c (3,6:1, titres ≥ 24px uniquement) ; #ff6a13 gardé en décor | Contraste |
-| Mot jaune directement sur orange (2,2:1) | Mot jaune avec contour + ombre brune `--ink` (13,4:1 sur le contour) | Lisibilité |
-| Prix orange sur fond clair | `--orange-ink` #b84300 (5,5:1) | Contraste |
-| Nom de marque, logo, emballages, photos produit | Marque fictive « Trailo », autres photos de produit libres dans des cadres autocollants (`data-slot`) | Marque et droits d'auteur |
-| Illustrations d'aventuriers | Vraies photos d'escalade passées en duotone brun → orange et découpées en crêtes | Droits d'auteur ; garder l'esprit « affiche » avec des images réelles |
-| Textes anglais (« GRAB YOUR'S », « SHOP NOW »…) | Textes français inventés | Identité, langue |
-| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans images propriétaires |
+| Marque « ONE », emballages, textes anglais | Marque fictive « ZIG », textes français | Identité, droits |
+| Emballage détouré tenu dans une main | Photo de barres dans un cadre blanc penché | Pas de détourage ni d'emballage de marque |
+| Ingrédients et produits détourés | Photos sur fond blanc fondues dans la couleur | Idem |
+| Personnes détourées | Photos en arche avec pilule-étiquette | Idem |
+| Silhouettes d'aventure dessinées | Non reprises | Pas d'illustration reprise ni redessinée |
+| Héros #fd7c24 à titre blanc (2,6:1) | `--orange` #ee6410 (3,3:1, grand titre seulement) | Contraste |
+| Fiches #428fce et #a48b87 à texte blanc | #2f78b7 et #84685f | Contraste |
+| Prix orange vif sur blanc | `--orange-ink` #c2410c | Contraste |
+| Texte gris clair des libellés | `--ink` et `--soft` | Contraste |
+| Bouton orange à texte blanc | Texte `--ink` | Contraste |
+| Une seule largeur | Tailles en `clamp()`, tablette et mobile | Rendre le skill utilisable |
+
+## Limites connues
+
+- Les produits des fiches de saveur sont posés dans un encart pâle, pas directement sur la couleur comme dans le shot : sans détourage, la couleur foncée les teinterait.
+- Les montagnes du héros sont plus simples que celles du shot.
+- La fluidité à 390px n'a pas été mesurée.

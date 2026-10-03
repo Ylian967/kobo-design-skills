@@ -1,86 +1,69 @@
 # Zigzag Snack Pop — mises en page
 
-Conteneur `--container` (1200px), marges `--gutter`. Rythme vertical en `--space-16` / `--space-24`.
+Page de 1440px, marges de 60px, posée sur un fond sombre avec 16px de marge.
 
-## Page d'accueil produit
+## Page d'accueil (vue dans la référence)
 
 ```
-┌─ nav brune ──────────────────────────────────────────┐
-│ ▲MARQUE      BARRES ▾  INGRÉDIENTS ▾  SORTIES  AVIS  (🛍2) │
-├─ héros orange ───────────────────────────────────────┤
-│              [ NOUVELLE RECETTE ]                     │
-│                 VRAIES                                │
-│            [PROTÉINES], (jaune autocollant)           │
-│              ZÉRO DÉTOUR                              │
-│          accroche 2 lignes, centrée                   │
-│      [ J'EN PRENDS › ]  [🔍 chercher…      ]          │
-│   ▲▲ photos d’aventure en duotone, découpées en crêtes ▲▲ │
-│ 🛹 ▲▲▲▲▲▲ 2e plan ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲        │
-└╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱┘
-  bande crème : (●) 20 G DE   (●) SANS SUCRE  (●) …  ×5
- ╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲
-┌─ section brune + traces de pneu ─────────────────────┐
-│ (BOUTIQUE)                    ╭──────────╮            │
-│ LE CARBURANT DES              │ emballage │ disque    │
-│ SORTIES LONGUES               │  incliné  │ orange    │
-│ 20 g protéines (italique)     ╰──────────╯            │
-│ texte · [ COMPOSER MA BOX › ]                          │
-└──────────────────────────────────────────────────────┘
-  CHOISIS TA SAVEUR                     texte court
-  [carte vert]  [CARTE BEIGE ↑ plus grande]  [carte bleue]
-  ILS L'ONT MISE DANS LE SAC                  (tampon ⟳)
-  [avis]  [avis ↻1°]  [avis ↺1°]
- ╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲╱╲
-┌─ pied brun ──────────────────────────────────────────┐
-│ REJOINS LA CORDÉE          [e-mail      ] [S'INSCRIRE]│
-│ liens…                                                 │
-│        M A R Q U E  (contour jaune géant, coupé)      │
-└──────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐ brun, 47px
+│ ZIG   Nos barres ⌄  Ingrédients ⌄  Parcours   [Rechercher] Panier│
+├──────────────────────────────────────────────────────────────┤ orange
+│              PURE PROTÉINE, (jaune)                           │
+│              INGRÉDIENTS NETS                                 │
+│        (tampon)  [ photo du produit, penchée ]  20 G…         │
+│                    [ PRENDS LA TIENNE › ]          montagnes  │
+│▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲│ blanc
+│   (○)      (○)      (○)      (○)      (○)      (○)   →        │ bande qui défile
+│▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼│ brun
+│ ZIG PROTÉINE POUR      [ pile de   ]   20 G DE PROTÉINES      │
+│ [COMMANDER] TOUT LE    [ produits  ]   texte                  │
+│ MONDE !  (portrait)                    [fiche « carburant »]  │
+│▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲│ blanc
+│ LES SAVEURS PRÉFÉRÉES                          [ TOUT VOIR › ]│
+│   [ fiche ]  [[ FICHE DU MILIEU ]]  [ fiche ]                 │
+│▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼│ brun
+│ [fiche d'avis]                      NOTRE CHEMIN ZIG-ZAG      │
+│ « citation »                        (portrait)  (portrait)    │
+│▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲│ blanc
+│           LE CROQUANT QUI NOURRIT TON FEU INTÉRIEUR           │
+│                    [ PRENDS LA TIENNE › ]                     │
+│   [texte]  [ photo ]  [ titre        | photo ]                │ mosaïque
+│▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼│ brun
+│ SOIS AU COURANT…                 [adresse e-mail][S'abonner]  │
+│ ZIG    liens      liens      liens                            │
+│ ZIG PROTÉINE (mot géant, jaune, italique)                     │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-## Héros
+Repères mesurés ou lus sur le shot : barre de 47px ; titre du héros aux capitales de 92px ; bouton ≈ 236 × 56px ; cinq pastilles visibles à la fois ; trois fiches de saveur, celle du milieu plus haute de ≈ 44px ; mosaïque sur trois colonnes inégales.
 
-- `padding-bottom: calc(var(--scene) + 70px)` : le texte ne descend jamais dans la zone des montagnes.
-- `.scene` absolue en bas (`--scene` : clamp 220–340px) contient : soleil (disque `--orange-bright` flouté par un dégradé radial), bande photo arrière (100 % de la scène) et bande photo avant (58 %) : vraies photos d'aventure en duotone, découpées en crêtes par `clip-path` (image réelle, voir `assets.md`).
-- Le bas du héros porte `.zz-bottom`, la bande crème suivante remonte de `--zigzag-h`.
+## Tablette (proposée — sous 980px)
 
-## Bande ingrédients
+- Menu replié derrière un bouton carré jaune ; le champ de recherche disparaît.
+- Sections brunes sur une colonne.
+- Mosaïque sur deux colonnes, la tuile large en dessous.
+- Tampon et mention remontent contre la photo.
 
-Grille de 5 colonnes (pastille + libellé à droite). 2 colonnes sous 960px, la dernière pleine largeur ; sous 560px, libellé centré sous la pastille.
+## Mobile (proposé — sous 640px)
 
-## Section brune
+- Fiches de saveur empilées, toutes à la même taille.
+- Pastilles de 110px.
+- Mosaïque sur une colonne ; la tuile large empile son titre et sa photo.
+- Le bouton glissé dans le titre passe à la ligne.
 
-Grille 1.1fr / 1fr : texte à gauche, photo produit dans un disque orange à droite. Traces de pneu en fond (2–3 bandes). Passe en une colonne sous 960px.
+## Autres pages (proposées — non vues dans la référence)
 
-## Grille produits
+**Boutique.** En-tête orange court (titre sur une ligne, montagnes), bande blanche de filtres en boutons `.btn--s`, grille de fiches de saveur sur trois colonnes sans fiche agrandie.
 
-3 colonnes, `align-items: center` pour que la carte surélevée dépasse en haut et en bas. Sous 960px : une colonne, la carte « best-seller » remonte en premier (`order: -1`) et perd son échelle.
+**Fiche produit.** Moitié gauche de la couleur de la saveur avec la photo-autocollant ; moitié droite blanche : nom en `--font-display`, tampon, prix, sélecteur de quantité à ombre dure, bouton jaune. Dessous, la bande d'ingrédients.
 
-## Avis
+**Ingrédients.** Section blanche à grandes pastilles (220px) sur trois colonnes, chacune avec deux lignes de texte ; section brune « ce qu'on n'y met pas » en liste barrée.
 
-Titre à gauche, tampon tournant en haut à droite (absolu ; en flux sous 960px), 3 cartes en grille → une colonne sur mobile.
+**Panier.** Lignes sur blanc séparées par un filet, total dans une fiche brune à texte blanc, bouton jaune sur toute la largeur.
 
-## Pied de page
+## Règles
 
-Fond `--bar` avec `.zz-both`, inscription à la lettre d'info, liens 12px capitales, mot géant en contour coupé par le bas, mention légale centrée.
-
-## Mobile (390px)
-
-- Nav : logo + burger + panier.
-- Titre héros 54px, boutons et champ pleine largeur, ombre du mot autocollant à 3px.
-- Scène 170px ; les bandes photo restent, recadrées au centre.
-- Pastilles 64px, disque produit ramené à la largeur de la colonne.
-- Aucune largeur fixe > 360px ; vérifier `scrollWidth === 390`.
-
----
-
-## Ordre complet observé dans la vidéo du shot
-
-1. Navigation brune (logo, « Points de vente », menus ▾, FAQ, Contact, recherche blanche, Panier).
-2. Héros orange (titre, main + barre, tampon tournant, cycliste « 20 G PROTÉINES », bouton jaune).
-3. Dents de scie → bande d'ingrédients blanche (pastilles rondes, **défilement horizontal**).
-4. Section brune « UNE PROTÉINE POUR TOUS » : titre + pilule jaune, coach détouré + pastille, pile de produits, texte « 20 G », carte carburant.
-5. Dents de scie → « SAVEURS LES PLUS POPULAIRES » + bouton orange « Voir les saveurs → » ; 3 cartes produit, celle du milieu surélevée.
-6. Section brune « parcours » : carte d'avis, citation, personnes détourées.
-7. Bento blanc « testé par des coachs » (3 tuiles).
-8. Section brune : lettre d'info, puis pied de page.
+- Les fonds alternent ; deux sections de même couleur ne se suivent jamais, et chaque passage du blanc à une couleur se fait par les dents de scie.
+- Un seul mot jaune par titre.
+- Une seule fiche agrandie par rangée.
+- Le héros reste centré ; les sections brunes sont asymétriques.

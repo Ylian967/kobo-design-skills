@@ -3,350 +3,391 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trailo — Zigzag Snack Pop (démo)</title>
+<title>ZIG — barres protéinées, ingrédients nets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,600;0,800;1,800;1,900&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,700;1,800&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --orange: #e85a0c; --orange-bright: #ff6a13; --orange-deep: #c94a00; --orange-ink: #b84300;
-  --yellow: #ffe415; --ink: #2a160c; --bar: #4a2a1a; --brown: #5a3121; --brown-deep: #3f2015;
-  --white: #ffffff; --cream: #fff6e0; --cream-text: #f3e3cf; --muted: #7a5a48;
-  --flavor-lemon: #f7d9a8; --flavor-berry: #ffc9d6; --flavor-mint: #bfe3a1; --flavor-sky: #a9d4f5; --flavor-oat: #e9d3b8;
-  --font-display: 'Anton', 'Bebas Neue', Impact, sans-serif; --font-body: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
-  --text-h2: clamp(2.25rem, 5vw, 4rem); --text-hero: clamp(3.25rem, 9vw, 7.5rem); --text-giant: clamp(5rem, 22vw, 20rem);
-  --leading-display: 0.92; --tracking-caps: 0.06em;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --container: 1200px; --gutter: clamp(16px, 4vw, 48px);
-  --radius-sm: 4px; --radius: 8px; --radius-pill: 999px; --zigzag: 18px; --zigzag-h: 12px; --badge: 88px; --stamp: 132px; --stroke: 3px;
-  --shadow-hard: 4px 4px 0 var(--ink); --shadow-hard-lg: 6px 6px 0 var(--ink); --shadow-press: 1px 1px 0 var(--ink);
-  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-fast: 140ms; --dur: 280ms; --dur-slow: 600ms; --dur-stamp: 14s;
-  --grade-pop: saturate(1.15) contrast(1.06);
+  --outer: #351c12; --brown: #62382e; --brown-deep: #531f10; --ink: #3e2617; --soft: #6b5449; --white: #ffffff; --blush: #f6ece9; --orange: #ee6410;
+  --orange-light: #fd7c24; --orange-hot: #ff6011; --orange-ink: #c2410c; --yellow: #ffeb33; --lime: #b3ce20; --sky: #2f78b7; --taupe: #84685f; --c1: #e8f69b; --c2: #fff068;
+  --c3: #f3e4df; --c4: #dcc1a1; --c5: #ffe6b5; --track: rgb(53 28 18 / 0.35); --lift: rgb(53 28 18 / 0.35); --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
+  --font: 'Barlow', 'Helvetica Neue', Arial, sans-serif; --font-label: 'Barlow Semi Condensed', 'Barlow', sans-serif; --fs-hero: clamp(3rem, 8.5vw, 7.75rem);
+  --fs-h2: clamp(2.1rem, 4.4vw, 3.9rem); --fs-h3: clamp(1.5rem, 2.3vw, 2rem); --fs-giant: clamp(4rem, 15.5vw, 14rem); --fs-label: 1.375rem; --fs-body: 1.0625rem;
+  --fs-small: 0.875rem; --fs-nav: 0.8125rem; --page: 1440px; --gutter: clamp(16px, 4.2vw, 60px); --frame: clamp(0px, 1.1vw, 16px); --nav-h: 47px; --btn-h: 56px;
+  --hard: 5px 5px 0 0 var(--brown-deep); --hard-up: 8px 8px 0 0 var(--brown-deep); --r: 4px; --r-card: 10px; --zig: 22px; --circle: 148px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); --dur-fast: 150ms; --dur: 450ms; --dur-slow: 800ms; --marquee: 36s;
 }
-* { box-sizing: border-box; }
-html { overflow-x: clip; }
-body { margin: 0; background: var(--cream); color: var(--ink); font: 400 var(--text-base)/1.5 var(--font-body); }
-img, svg { display: block; }
-a { color: inherit; }
-:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; box-shadow: 0 0 0 6px var(--ink); }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.wrap { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
-.display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: var(--leading-display); letter-spacing: 0.01em; margin: 0; }
 
-/* ---------- Zigzag (signature) ---------- */
-.zz-bottom { mask: conic-gradient(from -45deg at bottom, transparent, var(--ink) 1deg 89deg, transparent 90deg) bottom / var(--zigzag) var(--zigzag-h) repeat-x, linear-gradient(var(--ink) 0 0) top / 100% calc(100% - var(--zigzag-h) + 1px) no-repeat; }
-.zz-both { mask: conic-gradient(from 135deg at top, transparent, var(--ink) 1deg 89deg, transparent 90deg) top / var(--zigzag) var(--zigzag-h) repeat-x,
-                  conic-gradient(from -45deg at bottom, transparent, var(--ink) 1deg 89deg, transparent 90deg) bottom / var(--zigzag) var(--zigzag-h) repeat-x,
-                  linear-gradient(var(--ink) 0 0) center / 100% calc(100% - 2 * var(--zigzag-h) + 2px) no-repeat; }
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; padding: var(--frame); background: var(--outer); color: var(--ink); font: 400 var(--fs-body)/1.5 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+h1, h2, h3, p, ul, figure, blockquote { margin: 0; padding: 0; }
+ul { list-style: none; }
+:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.light :focus-visible { outline-color: var(--ink); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.page { width: min(100%, var(--page)); margin-inline: auto; overflow: hidden; }
+.wrap { padding-inline: var(--gutter); }
+.display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: 1; letter-spacing: 0.01em; }
+.y { color: var(--yellow); }
+.ital { font: italic 800 clamp(1.4rem, 2.2vw, 2rem)/1 var(--font); text-transform: uppercase; letter-spacing: -0.01em; }
+
+/* ---------- Boutons : rectangles à ombre dure ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 18px; height: var(--btn-h); padding-inline: 28px; border: 0; border-radius: var(--r); background: var(--yellow); color: var(--ink); box-shadow: var(--hard); font: 400 1.125rem var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; cursor: pointer; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+.btn::after { content: "›"; font: 700 1.3rem/1 var(--font); transition: transform var(--dur) var(--ease); }
+.btn:hover { transform: translate(-3px, -3px); box-shadow: var(--hard-up); }
+.btn:hover::after { transform: translateX(4px); }
+.btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 0 var(--brown-deep); }
+.btn--s { height: 40px; padding-inline: 18px; font-size: 0.9375rem; gap: 12px; }
+.btn--orange { background: var(--orange-hot); color: var(--ink); }
+.btn--line { background: var(--white); box-shadow: 4px 4px 0 0 var(--ink); border: 2px solid var(--ink); width: 100%; height: 44px; font-size: 0.9375rem; justify-content: space-between; }
+.btn--line b { font-weight: 400; color: var(--orange-ink); }
+.btn--line:hover { box-shadow: 7px 7px 0 0 var(--ink); }
+.btn--line:active { box-shadow: 0 0 0 0 var(--ink); }
+
+/* ---------- Bords en dents de scie ---------- */
+.zig { position: relative; z-index: 2; }
+.zig::before, .zig::after { content: ""; position: absolute; left: 0; right: 0; height: calc(var(--zig) / 2); background: linear-gradient(-45deg, var(--zc, var(--white)) 7.8px, transparent 0), linear-gradient(45deg, var(--zc, var(--white)) 7.8px, transparent 0); background-size: var(--zig) var(--zig); background-position: left bottom; background-repeat: repeat-x; }
+.zig::before { bottom: 100%; }
+.zig::after { top: 100%; transform: scaleY(-1); }
 
 /* ---------- Navigation ---------- */
-.nav { background: var(--bar); color: var(--white); position: sticky; top: 0; z-index: 20; }
-.nav .wrap { display: flex; align-items: center; gap: var(--space-6); min-height: 64px; }
-.logo { font: 400 1.75rem/1 var(--font-display); color: var(--yellow); text-decoration: none; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
-.logo i { width: 18px; height: 18px; background: var(--orange-bright); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.nav nav { flex: 1; }
-.nav ul { display: flex; justify-content: center; gap: var(--space-2); list-style: none; margin: 0 auto; padding: 0; }
-.nav ul a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 var(--space-3); font: 600 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; border-radius: var(--radius-sm); transition: background var(--dur-fast); }
-.nav ul a:hover { background: var(--brown); }
-.chev { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
-.cart { position: relative; width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--white); background: none; color: var(--white); display: grid; place-items: center; cursor: pointer; }
-.cart svg { width: 20px; height: 20px; }
-.cart b { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; border-radius: var(--radius-pill); background: var(--yellow); color: var(--ink); font: 800 11px/20px var(--font-body); text-align: center; }
+.nav { position: relative; z-index: 5; display: flex; align-items: center; gap: 30px; min-height: var(--nav-h); padding: 6px var(--gutter); background: var(--brown); color: var(--white); font: 500 var(--fs-nav) var(--font-label); letter-spacing: 0.06em; text-transform: uppercase; }
+.brand { font: 400 1.9rem/1 var(--font-display); letter-spacing: 0.02em; }
+.nav-links { display: flex; gap: 26px; }
+.nav-links a { display: inline-flex; gap: 6px; padding-block: 6px; border-bottom: 2px solid transparent; transition: border-color var(--dur-fast); }
+.nav-links a:hover { border-color: var(--yellow); }
+.search { display: flex; align-items: center; gap: 8px; height: 30px; width: 190px; margin-left: auto; padding-inline: 12px; border-radius: var(--r); background: var(--white); color: var(--ink); box-shadow: 3px 3px 0 0 var(--outer); }
+.search input { width: 100%; border: 0; outline: 0; background: none; font-size: 0.8125rem; }
+.search:focus-within { outline: 3px solid var(--yellow); outline-offset: 2px; }
+.search svg, .cart svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.cart { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; color: inherit; cursor: pointer; font: inherit; letter-spacing: inherit; text-transform: inherit; }
+.cart b { display: grid; place-items: center; min-width: 22px; height: 22px; border-radius: 50%; background: var(--yellow); color: var(--ink); font-weight: 700; }
+.cart b.is-bump { animation: bump 420ms var(--ease-pop); }
+@keyframes bump { 40% { transform: scale(1.5) rotate(-12deg); } }
 .burger { display: none; }
 
-/* ---------- Boutons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 52px; padding: 0 var(--space-6); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm);
-  font: 800 var(--text-sm)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer;
-  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out), background var(--dur-fast); }
-.btn--yellow { background: var(--yellow); color: var(--ink); box-shadow: var(--shadow-hard-lg); }
-.btn--yellow:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
-.btn--yellow:active { transform: translate(5px, 5px); box-shadow: var(--shadow-press); }
-.btn .arrow { font-size: 1.1em; }
-.pill { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-6); background: var(--yellow); color: var(--ink); border-radius: var(--radius-pill); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: transform var(--dur) var(--ease-pop); }
-.pill:hover { transform: rotate(-4deg) scale(1.05); }
-
 /* ---------- Héros ---------- */
-.hero { --scene: clamp(220px, 24vw, 340px); position: relative; background: var(--orange); color: var(--white); overflow: hidden; padding: var(--space-16) 0 calc(var(--scene) + 70px); }
-.scene { position: absolute; left: 0; right: 0; bottom: 0; height: var(--scene); }
-.hero .sun { position: absolute; left: 50%; top: 55%; width: min(70vw, 760px); aspect-ratio: 1; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, var(--orange-bright) 0 55%, transparent 70%); opacity: .9; }
-.duo { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; isolation: isolate; background: var(--orange-deep); }
-.duo img { width: 100%; height: 100%; object-fit: cover; color: transparent; filter: grayscale(1) contrast(1.25) brightness(1.05); mix-blend-mode: multiply; }
-.duo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--orange-bright); }
-.duo::after { content: ""; position: absolute; inset: 0; background: var(--brown-deep); mix-blend-mode: lighten; }
-.duo--back { height: 100%; clip-path: polygon(0 60%, 9% 30%, 17% 52%, 27% 8%, 38% 48%, 46% 30%, 55% 56%, 66% 12%, 76% 44%, 85% 26%, 100% 50%, 100% 100%, 0 100%); }
-.duo--back img { object-position: 50% 30%; }
-.duo--front { height: 58%; clip-path: polygon(0 40%, 12% 10%, 22% 46%, 34% 30%, 50% 62%, 63% 24%, 74% 44%, 88% 4%, 100% 32%, 100% 100%, 0 100%); }
-.duo--front::before { background: var(--orange); }
-.duo--front img { object-position: 50% 45%; }
-.hero-copy { position: relative; z-index: 3; text-align: center; }
-.kicker { display: inline-block; margin-bottom: var(--space-4); padding: 6px 12px; background: var(--ink); color: var(--yellow); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.14em; text-transform: uppercase; transform: rotate(-2deg); }
-.hero h1 { font-size: var(--text-hero); }
-.sticker-word { color: var(--yellow); -webkit-text-stroke: var(--stroke) var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--ink); }
-.hero p.lead { max-width: 30rem; margin: var(--space-6) auto var(--space-8); font: 600 var(--text-lg)/1.35 var(--font-body); color: var(--white); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: center; align-items: center; }
-.search { display: flex; align-items: center; gap: var(--space-2); min-height: 52px; width: min(320px, 100%); padding: 0 var(--space-4); background: var(--white); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-hard-lg); }
-.search svg { width: 20px; height: 20px; color: var(--ink); flex: none; }
-.search input { flex: 1; min-width: 0; min-height: 44px; border: 0; background: none; font: 600 var(--text-sm) var(--font-body); color: var(--ink); }
-.search input::placeholder { color: var(--muted); }
-.search input:focus { outline: none; }
-.search:focus-within { box-shadow: var(--shadow-hard-lg), 0 0 0 4px var(--yellow); }
+.hero { position: relative; padding: clamp(36px, 5vw, 70px) var(--gutter) clamp(70px, 8vw, 120px); background: var(--orange); color: var(--white); text-align: center; overflow: hidden; }
+.peaks { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 62%; }
+.peaks .a { fill: var(--orange-light); }
+.peaks .b { fill: var(--orange-hot); }
+.hero h1 { position: relative; font-size: var(--fs-hero); }
+.hero h1 .ln { display: block; }
+.hero h1 .w { display: inline-block; }
+.sticker-word { color: var(--yellow); text-shadow: 4px 4px 0 var(--brown-deep); }
+.js .hero h1 .w { transform: translateY(40px) rotate(-6deg) scale(1.25); opacity: 0; transition: transform 700ms var(--ease-pop) var(--d, 0ms), opacity 300ms ease var(--d, 0ms); }
+.js .hero.in h1 .w { transform: none; opacity: 1; }
+.pack { position: relative; width: min(74%, 520px); aspect-ratio: 1.55; margin: clamp(-34px, -2.4vw, -12px) auto 0; }
+.pack figure { position: absolute; inset: 0; border: 8px solid var(--white); border-radius: 14px; overflow: hidden; box-shadow: 10px 10px 0 0 var(--brown-deep); transform: rotate(-6deg); }
+.js .pack figure { transform: translateY(60px) rotate(8deg) scale(0.8); opacity: 0; transition: transform 900ms var(--ease-pop) 350ms, opacity 400ms ease 350ms; }
+.js .hero.in .pack figure { transform: rotate(-6deg); opacity: 1; }
+.stamp { position: absolute; left: -24%; top: 8%; width: 30%; min-width: 96px; transform: rotate(calc(-14deg + var(--turn, 0deg))); }
+.stamp circle { fill: var(--orange-hot); stroke: var(--white); stroke-width: 2.5; }
+.stamp .in { fill: none; stroke-width: 1.5; stroke-dasharray: 3 4; }
+.stamp text { fill: var(--white); font: 400 15px var(--font-display); letter-spacing: 0.14em; }
+.stamp .mid { font-size: 20px; letter-spacing: 0.04em; }
+.claim { position: absolute; right: -30%; bottom: 6%; color: var(--yellow); text-shadow: 3px 3px 0 var(--brown-deep); transform: rotate(-4deg); white-space: nowrap; }
+.hero .btn { position: relative; margin-top: clamp(28px, 3.4vw, 46px); }
+.js .pop { transform: scale(0); transition: transform 600ms var(--ease-pop) var(--d, 600ms); }
+.js .in .pop { transform: none; }
 
-/* ---------- Bande ingrédients (zigzag) ---------- */
-.ingredients { position: relative; z-index: 4; margin-top: calc(-1 * var(--zigzag-h)); background: var(--cream); padding: calc(var(--space-12) + var(--zigzag-h)) 0; }
-.ing-list { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-6); list-style: none; margin: 0; padding: 0; }
-.ing { display: flex; align-items: center; gap: var(--space-4); }
-.ing .badge { flex: none; width: var(--badge); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); color: var(--ink); }
-.ing .badge svg { width: 40px; height: 40px; }
-.ing strong { font: 800 var(--text-base)/1.1 var(--font-body); text-transform: uppercase; letter-spacing: 0.02em; }
+/* ---------- Ingrédients : bande qui défile ---------- */
+.strip { padding-block: clamp(30px, 4vw, 48px); background: var(--white); }
+.track { display: flex; width: max-content; animation: slide var(--marquee) linear infinite; }
+.strip:hover .track, .strip.is-off .track, .strip:focus-within .track { animation-play-state: paused; }
+@keyframes slide { to { transform: translateX(-50%); } }
+.ing { flex: none; display: grid; justify-items: center; gap: 16px; width: clamp(180px, 17.5vw, 250px); text-align: center; font: 600 var(--fs-label)/1.15 var(--font-label); }
+.ing span { display: block; width: var(--circle); height: var(--circle); border-radius: 50%; overflow: hidden; background: var(--c); transition: transform var(--dur) var(--ease-pop); }
+.ing img { mix-blend-mode: multiply; }
+.ing:hover span { transform: scale(1.08) rotate(-6deg); }
 
-/* ---------- Section brune (traces de pneu) ---------- */
-.trail { position: relative; background: var(--brown); color: var(--white); padding: var(--space-24) 0; overflow: hidden; }
-.tyre { position: absolute; top: -10%; bottom: -10%; width: 90px; background: conic-gradient(from 135deg at 50% 70%, var(--brown-deep) 90deg, transparent 0) 0 0 / 30px 26px; opacity: .8; transform: rotate(14deg); }
-.tyre--a { left: 8%; } .tyre--b { left: calc(8% + 120px); opacity: .5; } .tyre--c { right: 4%; transform: rotate(-20deg); }
-.trail .wrap { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-12); align-items: center; }
-.trail h2 { font-size: var(--text-h2); margin: var(--space-4) 0; }
-.big-italic { display: block; font: 900 italic clamp(2.5rem, 6vw, 4.5rem)/1 var(--font-body); color: var(--yellow); letter-spacing: -0.01em; }
-.trail p { color: var(--cream-text); max-width: 34rem; font-size: var(--text-lg); line-height: 1.45; }
-.trail .row { display: flex; gap: var(--space-4); align-items: center; flex-wrap: wrap; margin-top: var(--space-6); }
-.trail .note { font: 800 italic var(--text-sm) var(--font-body); color: var(--cream-text); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
-.pack-stage { position: relative; display: grid; place-items: center; min-height: 340px; }
-.disc { position: relative; width: min(78%, 400px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--orange); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-lg); }
-.disc img { width: 100%; height: 100%; object-fit: cover; color: transparent; filter: var(--grade-pop); }
-.disc-tag { position: absolute; right: 6%; bottom: 14%; padding: 8px 14px; background: var(--yellow); color: var(--ink); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); font: 900 italic var(--text-sm)/1 var(--font-body); text-transform: uppercase; transform: rotate(-6deg); }
+/* ---------- Sections brunes ---------- */
+.dark { position: relative; background: var(--brown); color: var(--white); padding-block: clamp(60px, 7vw, 100px); }
+.dark::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(115deg, transparent 0 9px, var(--track) 9px 12px, transparent 12px 21px, var(--track) 21px 23px); -webkit-mask: linear-gradient(100deg, transparent 8%, black 22%, black 34%, transparent 46%, transparent 62%, black 76%, transparent 92%); mask: linear-gradient(100deg, transparent 8%, black 22%, black 34%, transparent 46%, transparent 62%, black 76%, transparent 92%); opacity: 0.5; }
+.dark > * { position: relative; }
+.everyone { display: grid; grid-template-columns: 1fr 1.05fr 0.95fr; gap: clamp(20px, 3vw, 44px); align-items: center; }
+.everyone h2 { font-size: var(--fs-h2); line-height: 1.08; }
+.everyone h2 .thin { -webkit-text-stroke: 0; font-family: var(--font-label); font-weight: 500; letter-spacing: -0.02em; }
+.everyone h2 .btn { vertical-align: middle; margin-inline: 8px; }
+.person { position: relative; margin-top: 30px; width: min(100%, 300px); }
+.person figure { aspect-ratio: 1 / 1.05; border-radius: 160px 160px var(--r-card) var(--r-card); overflow: hidden; }
+.tagpill { position: absolute; right: -8%; bottom: 14%; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px 0 6px; border-radius: 99px; background: var(--white); color: var(--ink); box-shadow: 4px 4px 0 0 var(--brown-deep); font: 400 0.9375rem var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+.tagpill i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--orange-hot); font-style: normal; font-size: 0.8rem; }
+.stack { border-radius: var(--r-card); overflow: hidden; aspect-ratio: 1 / 1.1; box-shadow: 10px 10px 0 0 var(--outer); transform: rotate(2deg); }
+.fuel p { margin-top: 12px; max-width: 290px; }
+.fuel-card { margin-top: 30px; padding: 22px 22px 0; border-radius: var(--r-card); background: var(--white); color: var(--ink); text-align: center; }
+.fuel-card h3 { font-size: var(--fs-h3); }
+.fuel-card p { margin: 8px auto 16px; font-size: var(--fs-small); color: var(--soft); }
+.fuel-card figure { height: 170px; border-radius: 120px 120px 0 0; overflow: hidden; }
 
-/* ---------- Cartes produit ---------- */
-.shop { padding: var(--space-24) 0 var(--space-16); }
-.sec-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-6); flex-wrap: wrap; margin-bottom: var(--space-12); }
-.sec-head h2 { font-size: var(--text-h2); }
-.sec-head h2 em { font-style: normal; color: var(--orange-ink); }
-.sec-head p { margin: 0; max-width: 22rem; color: var(--muted); font-weight: 600; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); align-items: center; list-style: none; margin: 0; padding: 0; }
-.card { position: relative; border: var(--stroke) solid var(--ink); border-radius: var(--radius); background: var(--flavor); box-shadow: var(--shadow-hard-lg); padding: var(--space-6); transition: transform var(--dur) var(--ease-pop); }
-.card:hover { transform: translateY(-6px) rotate(-1deg); }
-.card--featured { padding: var(--space-8) var(--space-6); transform: scale(1.06); z-index: 1; }
-.card--featured:hover { transform: scale(1.06) translateY(-6px) rotate(-1deg); }
-.card .tag { position: absolute; top: -16px; left: var(--space-6); padding: 6px 12px; background: var(--ink); color: var(--yellow); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; border-radius: var(--radius-sm); }
-.card .art { aspect-ratio: 4 / 3; overflow: hidden; border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); background: var(--cream); box-shadow: var(--shadow-hard); transform: rotate(-3deg); }
-.card:nth-child(2) .art { transform: rotate(2deg); }
-.card .art img { width: 100%; height: 100%; object-fit: cover; color: transparent; filter: var(--grade-pop); }
-.card h3 { margin: var(--space-4) 0 var(--space-1); font: 400 var(--text-xl)/1 var(--font-display); text-transform: uppercase; letter-spacing: 0.01em; }
-.card .meta { margin: 0 0 var(--space-4); font: 600 var(--text-sm) var(--font-body); }
-.add { display: flex; width: 100%; min-height: 48px; border: 2px solid var(--ink); border-radius: var(--radius-sm); background: var(--white); color: var(--ink); font: 800 var(--text-xs)/1 var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; padding: 0; overflow: hidden; transition: background var(--dur-fast); }
-.add span { flex: 1; display: grid; place-items: center; }
-.add .price { flex: none; padding: 0 var(--space-4); border-left: 2px solid var(--ink); color: var(--orange-ink); font-size: var(--text-sm); }
-.add:hover { background: var(--yellow); }
-.add:hover .price { color: var(--ink); }
-.add:active { transform: translateY(2px); }
-.add[aria-pressed="true"] { background: var(--ink); color: var(--yellow); }
-.add[aria-pressed="true"] .price { color: var(--yellow); border-color: var(--yellow); }
+/* ---------- Saveurs ---------- */
+.light { background: var(--white); padding-block: clamp(56px, 7vw, 96px); }
+.head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+.head h2, .center h2 { font-size: var(--fs-h2); }
+.flavors { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; margin-top: clamp(40px, 5vw, 70px); }
+.flavor { position: relative; padding: 18px 18px 20px; border-radius: var(--r-card); background: var(--c); color: var(--t, var(--white)); transition: transform var(--dur) var(--ease-pop), box-shadow var(--dur) var(--ease); }
+.flavor.is-top { z-index: 2; margin: -22px -14px; padding: 22px 24px 26px; box-shadow: 0 26px 40px -18px var(--lift); }
+.flavor:hover { transform: translateY(-8px) rotate(-1deg); }
+.flavor figure { aspect-ratio: 1.75; border-radius: 6px; overflow: hidden; background: color-mix(in srgb, var(--c) 24%, white); }
+.flavor img { mix-blend-mode: multiply; }
+.js .flavor img { transform: translateY(-46px) rotate(-9deg) scale(0.86); opacity: 0; transition: transform 800ms var(--ease-pop) var(--d, 0ms), opacity 300ms ease var(--d, 0ms); }
+.js .in .flavor img { transform: none; opacity: 1; }
+.flavor h3 { margin-top: 14px; font-size: 1.5rem; letter-spacing: 0.03em; }
+.flavor p { font-size: var(--fs-small); margin-bottom: 14px; }
 
-/* ---------- Avis + tampon ---------- */
-.reviews { position: relative; padding: var(--space-16) 0 var(--space-24); }
-.reviews .wrap { position: relative; }
-.reviews h2 { font-size: var(--text-h2); margin-bottom: var(--space-8); }
-.rev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-.rev { background: var(--white); border: var(--stroke) solid var(--ink); border-radius: var(--radius); padding: var(--space-6); box-shadow: var(--shadow-hard); margin: 0; }
-.rev:nth-child(2) { transform: rotate(1.2deg); } .rev:nth-child(3) { transform: rotate(-1deg); }
-.stars { display: flex; gap: 3px; margin-bottom: var(--space-3); color: var(--orange); }
-.stars i { width: 18px; height: 18px; background: currentColor; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
-.rev blockquote { margin: 0 0 var(--space-4); font: 600 var(--text-base)/1.45 var(--font-body); }
-.rev figcaption { font: 800 var(--text-xs) var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.stamp { position: absolute; right: 0; top: -40px; width: var(--stamp); aspect-ratio: 1; border-radius: 50%; background: var(--yellow); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard); color: var(--ink); display: grid; place-items: center; }
-.stamp svg { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); animation: spin var(--dur-stamp) linear infinite; }
-.stamp text { font: 800 11.5px var(--font-body); letter-spacing: 0.18em; fill: currentColor; text-transform: uppercase; }
-.stamp b { width: 34px; height: 34px; background: var(--orange); clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
-@keyframes spin { to { transform: rotate(360deg); } }
+/* ---------- Parcours ---------- */
+.path { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 60px); align-items: start; }
+.review { padding: 22px; border-radius: var(--r-card); background: var(--blush); color: var(--ink); max-width: 420px; }
+.review p { font-weight: 500; line-height: 1.4; }
+.who { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-weight: 700; font-size: var(--fs-small); }
+.who img { width: 44px; height: 44px; border-radius: 8px; }
+.who small { display: block; font-weight: 400; color: var(--soft); }
+.who b { margin-left: auto; font: 400 1.6rem var(--font-display); }
+.path h2 { font-size: var(--fs-h2); line-height: 1.1; text-align: right; }
+.duo { display: grid; grid-template-columns: 0.8fr 1fr; gap: 22px; align-items: end; margin-top: 30px; }
+.duo .person { margin-top: 0; width: auto; }
+.quote { margin-top: 34px; max-width: 300px; font: 400 1.125rem/1.25 var(--font-display); letter-spacing: 0.03em; text-transform: uppercase; }
+.quote::before { content: "“"; display: block; color: var(--orange-hot); font-size: 2.6rem; line-height: 0.6; }
+.quote small { display: block; margin-top: 10px; font: 400 var(--fs-small) var(--font); text-transform: none; letter-spacing: 0; }
 
-/* ---------- Pied de page ---------- */
-.foot { background: var(--bar); color: var(--white); padding: calc(var(--space-16) + var(--zigzag-h)) 0 0; margin-top: calc(-1 * var(--zigzag-h)); overflow: hidden; }
-.foot-top { display: flex; justify-content: space-between; gap: var(--space-8); flex-wrap: wrap; }
-.foot h3 { margin: 0 0 var(--space-3); font: 400 var(--text-xl)/1 var(--font-display); text-transform: uppercase; color: var(--yellow); }
-.foot p { margin: 0; color: var(--cream-text); max-width: 26rem; }
-.foot form { display: flex; gap: var(--space-3); flex-wrap: wrap; }
-.foot form .search { width: min(280px, 100%); box-shadow: 4px 4px 0 var(--yellow); }
-.foot nav { display: flex; gap: var(--space-2) var(--space-6); flex-wrap: wrap; margin-top: var(--space-8); }
-.foot nav a { display: inline-flex; align-items: center; min-height: 44px; font: 600 var(--text-xs) var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; }
-.foot nav a:hover { color: var(--yellow); }
-.foot .giant { max-width: none; margin: var(--space-8) 0 calc(-0.18 * var(--text-giant)); text-align: center; font: 400 var(--text-giant)/1 var(--font-display); text-transform: uppercase; color: transparent; -webkit-text-stroke: 3px var(--yellow); letter-spacing: 0.02em; user-select: none; }
-.legal { position: relative; padding: var(--space-4) 0 var(--space-6); font-size: var(--text-xs); color: var(--cream-text); text-align: center; }
+/* ---------- Croquant : mosaïque ---------- */
+.center { text-align: center; }
+.center .btn { margin-top: 22px; }
+.bento { display: grid; grid-template-columns: 0.75fr 1fr 1.7fr; gap: 16px; margin-top: clamp(36px, 5vw, 60px); }
+.cell { position: relative; min-height: 230px; border-radius: var(--r-card); overflow: hidden; background: var(--blush); }
+.cell.pad { padding: 20px; display: flex; flex-direction: column; }
+.cell h3 { font: 600 1.125rem var(--font-label); }
+.faces { display: flex; margin-top: 12px; }
+.faces img { width: 38px; height: 38px; border: 3px solid var(--blush); border-radius: 50%; }
+.faces img + img { margin-left: -10px; }
+.cell .more { margin-top: 10px; font-size: var(--fs-small); font-weight: 700; }
+.cell.wide { display: grid; grid-template-columns: 1fr 0.8fr; }
+.cell.wide > div { padding: 22px; display: flex; flex-direction: column; justify-content: flex-end; }
+.chip { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 30px; padding-inline: 12px; border-radius: 99px; background: var(--white); font: 600 var(--fs-small) var(--font-label); margin-bottom: auto; }
+.chip::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--orange-hot); }
+.cell.wide h3 { font: 400 var(--fs-h3)/1.05 var(--font-display); text-transform: uppercase; letter-spacing: 0.02em; margin-top: 18px; }
+.cell img { transition: transform var(--dur-slow) var(--ease); }
+.cell:hover img { transform: scale(1.06); }
+.cell.pad:hover img { transform: none; }
+
+/* ---------- Lettre et pied ---------- */
+.news { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 40px; }
+.news h2 { font-size: clamp(1.4rem, 2.4vw, 2.1rem); line-height: 1.15; max-width: 520px; }
+.news form { display: flex; box-shadow: var(--hard); border-radius: var(--r); }
+.news input { width: min(52vw, 260px); height: 46px; padding-inline: 14px; border: 0; border-radius: var(--r) 0 0 var(--r); background: var(--white); color: var(--ink); }
+.news input::placeholder { color: var(--soft); opacity: 1; }
+.news button { height: 46px; padding-inline: 20px; border: 0; border-radius: 0 var(--r) var(--r) 0; background: var(--orange-hot); color: var(--ink); font-weight: 700; cursor: pointer; }
+.foot { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 24px; margin-top: 56px; padding-top: 34px; border-top: 1px solid var(--track); font-size: var(--fs-small); }
+.foot li + li { margin-top: 8px; }
+.foot a:hover { color: var(--yellow); }
+.foot .brand { display: block; margin-bottom: 8px; }
+.legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 34px; font-size: 0.75rem; opacity: 0.85; }
+.giant { display: block; margin: 20px 0 -0.16em; font: italic 800 var(--fs-giant)/0.9 var(--font); letter-spacing: -0.03em; text-transform: uppercase; color: var(--yellow); white-space: nowrap; text-align: center; }
+.js .giant { transform: translateY(60%); transition: transform 1100ms var(--ease); }
+.js .in .giant { transform: none; }
+.dark.last { padding-bottom: 0; overflow: hidden; }
+
+/* ---------- Apparitions ---------- */
+.js .rise { opacity: 0; transform: translateY(26px); transition: opacity 600ms ease var(--d, 0ms), transform 700ms var(--ease) var(--d, 0ms); }
+.js .in .rise { opacity: 1; transform: none; }
 
 /* ---------- Mobile ---------- */
-@media (max-width: 960px) {
-  .nav ul { display: none; }
-  .burger { display: grid; margin-left: auto; width: 44px; height: 44px; place-content: center; gap: 5px; background: none; border: 0; cursor: pointer; }
-  .burger i { width: 24px; height: 3px; background: var(--white); }
-  .ing-list { grid-template-columns: repeat(2, 1fr); }
-  .ing:last-child { grid-column: 1 / -1; }
-  .trail .wrap { grid-template-columns: 1fr; }
-  .cards, .rev-grid { grid-template-columns: 1fr; }
-  .card--featured { transform: none; order: -1; }
-  .card--featured:hover { transform: translateY(-6px); }
-  .stamp { position: relative; top: 0; margin: 0 0 var(--space-6) auto; }
+@media (max-width: 980px) {
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 8px var(--gutter) 16px; background: var(--brown); }
+  .nav.is-open .nav-links { display: flex; }
+  .nav-links a { padding-block: 12px; }
+  .burger { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: var(--r); background: var(--yellow); color: var(--ink); cursor: pointer; }
+  .burger svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+  .search { display: none; }
+  .cart { margin-left: auto; }
+  .everyone, .path { grid-template-columns: 1fr; }
+  .path h2 { text-align: left; }
+  .stamp { left: -6%; top: -8%; }
+  .claim { right: -4%; bottom: -12%; }
+  .bento { grid-template-columns: 1fr 1fr; }
+  .cell.wide { grid-column: 1 / -1; }
+  .foot { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 560px) {
-  :root { --badge: 64px; --stamp: 112px; }
-  .hero { --scene: 170px; padding: var(--space-12) 0 calc(var(--scene) + 56px); }
-  .hero h1 { font-size: 3.4rem; }
-  .sticker-word { text-shadow: 3px 3px 0 var(--ink); }
-  .hero p.lead { font-size: var(--text-base); }
-  .hero-actions .btn, .search { width: 100%; }
-  .ing { flex-direction: column; text-align: center; gap: var(--space-2); }
-  .ing .badge svg { width: 30px; height: 30px; }
-  .ing strong { font-size: var(--text-sm); }
-  .pack-stage { min-height: 260px; }
+@media (max-width: 640px) {
+  :root { --circle: 110px; --fs-label: 1.125rem; }
+  .flavors { grid-template-columns: 1fr; gap: 18px; }
+  .flavor.is-top { margin: 0; padding: 18px 18px 20px; }
+  .duo { grid-template-columns: 1fr 1fr; }
+  .tagpill { right: 4%; }
+  .bento { grid-template-columns: 1fr; }
+  .cell.wide { grid-template-columns: 1fr; }
+  .cell.wide figure { height: 200px; }
+  .everyone h2 .btn { margin: 8px 0; }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
-  .rise { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .js .rise, .js .hero h1 .w, .js .flavor img { opacity: 1; transform: none; }
+  .js .pack figure { opacity: 1; transform: rotate(-6deg); }
+  .js .pop, .js .giant { transform: none; }
+  .stamp { transform: rotate(-14deg); }
+  .strip { overflow-x: auto; }
 }
-/* Entrée du héros (au chargement) */
-.rise { animation: rise var(--dur-slow) var(--ease-pop) both; }
-.rise:nth-child(2) { animation-delay: 80ms; } .rise:nth-child(3) { animation-delay: 160ms; } .rise:nth-child(4) { animation-delay: 240ms; }
-@keyframes rise { from { opacity: 0; transform: translateY(24px) rotate(-2deg); } }
 </style>
 </head>
 <body>
-<a class="sr-only" href="#main">Aller au contenu</a>
+<script>document.documentElement.classList.add('js');</script>
 
+<div class="page">
 <header class="nav">
-  <div class="wrap">
-    <a class="logo" href="#" aria-label="Trailo, accueil"><i></i>TRAILO</a>
-    <nav aria-label="Navigation principale">
-      <ul>
-        <li><a href="#shop">Barres <span class="chev" aria-hidden="true"></span></a></li>
-        <li><a href="#ingredients">Ingrédients <span class="chev" aria-hidden="true"></span></a></li>
-        <li><a href="#trail">Sorties</a></li>
-        <li><a href="#reviews">Avis</a></li>
-      </ul>
-    </nav>
-    <button class="burger" aria-label="Ouvrir le menu"><i></i><i></i><i></i></button>
-    <button class="cart" aria-label="Panier, 2 articles">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8h14l-1.4 11H6.4z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
-      <b id="cart-count">2</b>
-    </button>
-  </div>
+  <a class="brand" href="#haut">ZIG</a>
+  <nav class="nav-links" id="menu" aria-label="Navigation principale">
+    <a href="#saveurs">Nos barres <span aria-hidden="true">⌄</span></a>
+    <a href="#ingredients">Ingrédients <span aria-hidden="true">⌄</span></a>
+    <a href="#parcours">Parcours</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg><span class="sr">Rechercher</span><input type="search" placeholder="Rechercher"></label>
+  <button class="cart" aria-label="Panier"><span>Panier</span><b id="count" aria-live="polite">0</b></button>
+  <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </header>
 
-<main id="main">
-  <section class="hero zz-bottom" aria-labelledby="hero-title">
-    <div class="sun" aria-hidden="true"></div>
-    <div class="scene">
-      <div class="duo duo--back" data-slot="mountains-back" aria-hidden="true"><img src="https://images.unsplash.com/photo-1601224748193-d24f166b5c77?auto=format&fit=crop&w=2000&h=700&q=80" alt="" width="2000" height="700" fetchpriority="high" decoding="async"></div>
-      <div class="duo duo--front" data-slot="mountains-front" aria-hidden="true"><img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=2000&h=500&q=80" alt="" width="2000" height="500" fetchpriority="high" decoding="async"></div>
-    </div>
-    <div class="wrap hero-copy">
-      <span class="kicker rise">Nouvelle recette · Cacahuète crunch</span>
-      <h1 class="display rise" id="hero-title">Vraies <span class="sticker-word">protéines</span>,<br>zéro détour</h1>
-      <p class="lead rise">Une barre dense, salée-sucrée, pensée pour les sorties qui durent : 20 g de protéines, six ingrédients, aucun sirop.</p>
-      <div class="hero-actions rise">
-        <a class="btn btn--yellow" href="#shop">J'en prends <span class="arrow" aria-hidden="true">›</span></a>
-        <label class="search">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-          <span class="sr-only">Chercher une saveur</span>
-          <input type="search" placeholder="Chercher une saveur…">
-        </label>
-      </div>
-    </div>
-  </section>
-
-  <section class="ingredients zz-both" id="ingredients" aria-label="Ce qu'il y a dedans">
-    <div class="wrap">
-      <ul class="ing-list">
-        <li class="ing"><span class="badge" style="background:var(--flavor-lemon)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M8 28c0-10 8-18 24-20-2 16-10 24-20 24"/><path d="M8 32l14-14"/></svg></span><strong>20 g de<br>protéines</strong></li>
-        <li class="ing"><span class="badge" style="background:var(--flavor-berry)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><rect x="9" y="12" width="22" height="18" rx="3"/><path d="M6 6l28 28"/></svg></span><strong>Sans sucre<br>ajouté</strong></li>
-        <li class="ing"><span class="badge" style="background:var(--flavor-oat)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 36V10"/><path d="M20 14c-6 0-9-4-9-8 6 0 9 4 9 8zm0 8c-6 0-9-4-9-8 6 0 9 4 9 8zm0 8c-6 0-9-4-9-8 6 0 9 4 9 8zm0-16c6 0 9-4 9-8-6 0-9 4-9 8zm0 8c6 0 9-4 9-8-6 0-9 4-9 8zm0 8c6 0 9-4 9-8-6 0-9 4-9 8z"/></svg></span><strong>Avoine<br>complète</strong></li>
-        <li class="ing"><span class="badge" style="background:var(--flavor-mint)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><ellipse cx="20" cy="20" rx="9" ry="14"/><path d="M20 6c-4 6-4 22 0 28"/></svg></span><strong>Cacao<br>équitable</strong></li>
-        <li class="ing"><span class="badge" style="background:var(--flavor-sky)"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6l12 5v9c0 8-5 12-12 14-7-2-12-6-12-14v-9z"/><path d="M14 20l4 4 8-8"/></svg></span><strong>Testée en<br>labo</strong></li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="trail" id="trail" aria-labelledby="trail-title">
-    <div class="tyre tyre--a" aria-hidden="true"></div><div class="tyre tyre--b" aria-hidden="true"></div><div class="tyre tyre--c" aria-hidden="true"></div>
-    <div class="wrap">
-      <div>
-        <a class="pill" href="#shop">Boutique</a>
-        <h2 class="display" id="trail-title">Le carburant des<br>sorties longues</h2>
-        <span class="big-italic">20 g protéines</span>
-        <p>Du col au skatepark, la même recette : de la cacahuète grillée, de l'avoine, du cacao et rien pour faire semblant.</p>
-        <div class="row"><a class="btn btn--yellow" href="#shop">Composer ma box <span class="arrow" aria-hidden="true">›</span></a><span class="note">Livraison offerte dès 24 barres</span></div>
-      </div>
-      <div class="pack-stage">
-        <div class="disc" data-slot="product-hero"><img src="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&w=1000&h=1000&q=80" alt="Barre de céréales posée sur un fond blanc" width="1000" height="1000" loading="lazy" decoding="async"></div>
-        <span class="disc-tag">20 g protéines</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="shop" id="shop" aria-labelledby="shop-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="display" id="shop-title">Choisis ta <em>saveur</em></h2>
-        <p>Trois recettes, une même règle : on doit pouvoir lire la liste d'ingrédients en une respiration.</p>
-      </div>
-      <ul class="cards">
-        <li class="card" style="--flavor:var(--flavor-oat)">
-          <div class="art" data-slot="product-oat"><img src="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&w=800&h=600&q=80" alt="Barre de céréales à l'avoine, gros plan" width="800" height="600" loading="lazy" decoding="async"></div>
-          <h3>Avoine nature</h3><p class="meta">18 g protéines · 198 kcal</p>
-          <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
-        </li>
-        <li class="card card--featured" style="--flavor:var(--flavor-lemon)">
-          <span class="tag">Best-seller</span>
-          <div class="art" data-slot="product-peanut"><img src="https://images.unsplash.com/photo-1564988208558-9270de7c5848?auto=format&fit=crop&w=800&h=600&q=80" alt="Pot de beurre de cacahuète entouré de cacahuètes grillées" width="800" height="600" loading="lazy" decoding="async"></div>
-          <h3>Cacahuète crunch</h3><p class="meta">21 g protéines · 220 kcal</p>
-          <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
-        </li>
-        <li class="card" style="--flavor:var(--flavor-berry)">
-          <div class="art" data-slot="product-cacao"><img src="https://images.unsplash.com/photo-1622484212850-eb596d769edc?auto=format&fit=crop&w=800&h=600&q=80" alt="Morceaux de barre au chocolat noir" width="800" height="600" loading="lazy" decoding="async"></div>
-          <h3>Cacao intense</h3><p class="meta">20 g protéines · 214 kcal</p>
-          <button class="add" aria-pressed="false"><span>Ajouter au panier</span><span class="price">2,90 €</span></button>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="reviews" id="reviews" aria-labelledby="rev-title">
-    <div class="wrap">
-      <div class="stamp" aria-hidden="true">
-        <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#circ" textLength="286" lengthAdjust="spacing">Haute qualité · 100 % testée · </textPath></text></svg>
-        <b></b>
-      </div>
-      <h2 class="display" id="rev-title">Ils l'ont mise<br>dans le sac</h2>
-      <div class="rev-grid">
-        <figure class="rev"><div class="stars" role="img" aria-label="5 sur 5"><i></i><i></i><i></i><i></i><i></i></div><blockquote>« Seule barre qui ne fond pas dans la poche au bout de 80 km. Et on sent vraiment la cacahuète. »</blockquote><figcaption>Inès · cycliste longue distance</figcaption></figure>
-        <figure class="rev"><div class="stars" role="img" aria-label="5 sur 5"><i></i><i></i><i></i><i></i><i></i></div><blockquote>« Je la garde dans le baudrier. Pas écœurante, pas collante, juste efficace. »</blockquote><figcaption>Malo · grimpeur</figcaption></figure>
-        <figure class="rev"><div class="stars" role="img" aria-label="4 sur 5"><i></i><i></i><i></i><i></i></div><blockquote>« L'avoine nature entre deux sessions, c'est devenu un rituel avec toute l'équipe. »</blockquote><figcaption>Sacha · skate</figcaption></figure>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="foot zz-both">
-  <div class="wrap">
-    <div class="foot-top">
-      <div><h3>Rejoins la cordée</h3><p>Une recette inédite par saison et −10 % sur ta première box. Pas de spam, promis.</p></div>
-      <form onsubmit="event.preventDefault()">
-        <label class="search"><span class="sr-only">Ton e-mail</span><input type="email" placeholder="ton@email.fr"></label>
-        <button class="btn btn--yellow" type="submit">S'inscrire <span class="arrow" aria-hidden="true">›</span></button>
-      </form>
-    </div>
-    <nav aria-label="Pied de page"><a href="#">Barres</a><a href="#">Box</a><a href="#">Revendeurs</a><a href="#">FAQ</a><a href="#">Contact</a></nav>
-    <p class="giant" aria-hidden="true">Trailo</p>
+<main id="haut">
+<section class="hero" data-in>
+  <svg class="peaks" viewBox="0 0 1440 520" preserveAspectRatio="none" aria-hidden="true">
+    <path class="a" d="M0 520V300l150-150 110 110 140-190 170 230 120-120 180 200 150-240 190 250 110-110 120 130v210z"/>
+    <path class="b" d="M0 520V400l120-90 90 70 150-170 120 150 100-80 160 150 170-200 150 190 120-100 130 120 130-130v290z"/>
+  </svg>
+  <h1 class="display">
+    <span class="ln"><span class="w">Pure</span> <span class="w sticker-word" style="--d:90ms">protéine,</span></span>
+    <span class="ln"><span class="w" style="--d:180ms">ingrédients</span> <span class="w" style="--d:270ms">nets</span></span>
+  </h1>
+  <div class="pack">
+    <figure><img src="https://images.unsplash.com/photo-1622484212850-eb596d769edc?auto=format&fit=crop&w=1000&h=650&q=75" alt="Barres chocolat et caramel empilées, saupoudrées de cacao"></figure>
+    <svg class="stamp pop" viewBox="0 0 120 120" aria-hidden="true" style="--d:800ms"><defs><path id="ring" d="M60 60m-40 0a40 40 0 1 1 80 0a40 40 0 1 1-80 0"/></defs><circle cx="60" cy="60" r="56"/><circle class="in" cx="60" cy="60" r="29"/><text><textPath href="#ring" textLength="244" lengthAdjust="spacing">★ HAUTE QUALITÉ ★ CUITE NET</textPath></text><text class="mid" x="60" y="67" text-anchor="middle">20 G</text></svg>
+    <span class="claim ital pop" style="--d:950ms" aria-hidden="true">20 g de protéines</span>
   </div>
-  <p class="legal">© 2026 Trailo (marque fictive) — démo Kōbō · Photos : Unsplash</p>
-</footer>
+  <a class="btn pop" style="--d:1100ms" href="#saveurs">Prends la tienne</a>
+</section>
+
+<section class="strip zig" id="ingredients" aria-label="Ingrédients">
+  <ul class="track">
+    <li class="ing"><span style="--c:var(--c1)"><img src="https://images.unsplash.com/photo-1554721388-3db53bf7a24a?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Amandes<br>grillées</li>
+    <li class="ing"><span style="--c:var(--c2)"><img src="https://images.unsplash.com/photo-1639070863891-a20035caf05a?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Cacahuètes<br>entières</li>
+    <li class="ing"><span style="--c:var(--c3)"><img src="https://images.unsplash.com/photo-1640958899669-12f9b327d38f?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Cacao<br>sans sucre</li>
+    <li class="ing"><span style="--c:var(--c4)"><img src="https://images.unsplash.com/photo-1655169947079-5b2a38815147?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Miel<br>de fleurs</li>
+    <li class="ing"><span style="--c:var(--c5)"><img src="https://images.unsplash.com/photo-1691657917109-c6e027eac44a?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Dattes<br>entières</li>
+    <li class="ing"><span style="--c:var(--c1)"><img src="https://images.unsplash.com/photo-1633101142524-695abcd282c8?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Noix<br>du Périgord</li>
+    <li class="ing" aria-hidden="true"><span style="--c:var(--c1)"><img src="https://images.unsplash.com/photo-1554721388-3db53bf7a24a?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Amandes<br>grillées</li>
+    <li class="ing" aria-hidden="true"><span style="--c:var(--c2)"><img src="https://images.unsplash.com/photo-1639070863891-a20035caf05a?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Cacahuètes<br>entières</li>
+    <li class="ing" aria-hidden="true"><span style="--c:var(--c3)"><img src="https://images.unsplash.com/photo-1640958899669-12f9b327d38f?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Cacao<br>sans sucre</li>
+    <li class="ing" aria-hidden="true"><span style="--c:var(--c4)"><img src="https://images.unsplash.com/photo-1655169947079-5b2a38815147?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Miel<br>de fleurs</li>
+    <li class="ing" aria-hidden="true"><span style="--c:var(--c5)"><img src="https://images.unsplash.com/photo-1691657917109-c6e027eac44a?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Dattes<br>entières</li>
+    <li class="ing" aria-hidden="true"><span style="--c:var(--c1)"><img src="https://images.unsplash.com/photo-1633101142524-695abcd282c8?auto=format&fit=crop&w=300&h=300&q=70" alt="" loading="lazy"></span>Noix<br>du Périgord</li>
+  </ul>
+</section>
+
+<section class="dark" data-in>
+  <div class="wrap everyone">
+    <div>
+      <h2 class="display rise"><span class="thin">Zig</span> protéine pour <a class="btn btn--s" href="#saveurs">Commander</a> tout le monde&nbsp;!</h2>
+      <div class="person rise" style="--d:120ms"><figure><img src="https://images.unsplash.com/photo-1758875568932-0eefd3e60090?auto=format&fit=crop&crop=faces&w=520&h=560&q=72" alt="Coach sportif souriant, bras croisés, en salle" loading="lazy"></figure><span class="tagpill"><i aria-hidden="true">★</i>Coach sportif</span></div>
+    </div>
+    <figure class="stack rise" style="--d:100ms"><img src="https://images.unsplash.com/photo-1704650312560-4414980bab95?auto=format&fit=crop&w=760&h=840&q=72" alt="Deux barres chocolatées posées sur de la poudre de protéine" loading="lazy"></figure>
+    <div class="fuel">
+      <p class="ital y rise">20 g de protéines</p>
+      <p class="rise" style="--d:80ms">Une barre pour aller plus loin, se refaire après l'effort et tenir jusqu'au sommet.</p>
+      <div class="fuel-card rise" style="--d:180ms"><h3 class="display">Carburant</h3><p>Des protéines pour les muscles, du goût pour le moral.</p><figure><img src="https://images.unsplash.com/photo-1558022045-7e3227c153f5?auto=format&fit=crop&w=520&h=340&q=72" alt="Main qui ouvre l'emballage d'une barre" loading="lazy"></figure></div>
+    </div>
+  </div>
+</section>
+
+<section class="light zig" id="saveurs" data-in>
+  <div class="wrap">
+    <div class="head"><h2 class="display rise">Les saveurs préférées</h2><a class="btn btn--s btn--orange rise" style="--d:80ms" href="#saveurs">Tout voir</a></div>
+    <div class="flavors">
+      <article class="flavor rise" style="--c:var(--lime);--t:var(--ink)"><figure><img src="https://images.unsplash.com/photo-1772986509919-61b14bf702fa?auto=format&fit=crop&w=700&h=400&q=72" alt="Barres au chocolat blanc et aux amandes" loading="lazy" style="--d:150ms"></figure><h3 class="display">Amande blanche</h3><p>Amande et vanille (12 barres)</p><button class="btn btn--line add"><span>Ajouter — <b>34,90 €</b></span></button></article>
+      <article class="flavor is-top rise" style="--c:var(--sky);--d:80ms"><figure><img src="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&w=700&h=400&q=72" alt="Barre de céréales aux fruits secs" loading="lazy" style="--d:260ms"></figure><h3 class="display">Fruits des crêtes</h3><p>Céréales, cranberry, noisette (12 barres)</p><button class="btn btn--line add"><span>Ajouter — <b>34,90 €</b></span></button></article>
+      <article class="flavor rise" style="--c:var(--taupe);--d:160ms"><figure><img src="https://images.unsplash.com/photo-1772984960561-89f57b996449?auto=format&fit=crop&w=700&h=400&q=72" alt="Éclats de nougatine aux noix" loading="lazy" style="--d:370ms"></figure><h3 class="display">Caramel croquant</h3><p>Noix caramélisées (12 barres)</p><button class="btn btn--line add"><span>Ajouter — <b>34,90 €</b></span></button></article>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="parcours" data-in>
+  <div class="wrap path">
+    <div>
+      <blockquote class="review rise"><p>Dix-huit grammes de vraies protéines, du beurre de cacahuète, une texture fondante et un goût franc. Rien à redire.</p><div class="who"><img src="https://images.unsplash.com/photo-1758875568932-0eefd3e60090?auto=format&fit=crop&crop=faces&w=100&h=100&q=70" alt="" loading="lazy"><span>Noé Delcourt<small>Préparateur physique</small></span><b>5,0</b></div></blockquote>
+      <p class="quote rise" style="--d:120ms">Une barre tout-en-un, taillée pour les journées qui ne s'arrêtent pas.<small>Nina Roman — guide de montagne</small></p>
+    </div>
+    <div>
+      <h2 class="display rise">Notre chemin <span class="y">zig</span>-zag</h2>
+      <div class="duo">
+        <div class="person rise" style="--d:100ms"><figure><img src="https://images.unsplash.com/photo-1729653824492-0504ec9cb137?auto=format&fit=crop&w=440&h=520&q=72" alt="Randonneuse de dos, sac sur les épaules, face à la vallée" loading="lazy"></figure></div>
+        <div class="person rise" style="--d:200ms"><figure><img src="https://images.unsplash.com/photo-1486432155089-343c871b640f?auto=format&fit=crop&w=560&h=600&q=72" alt="Surfeur portant sa planche sous le bras" loading="lazy"></figure><span class="tagpill"><i aria-hidden="true">≈</i>Gens de vagues</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light zig" data-in>
+  <div class="wrap">
+    <div class="center"><h2 class="display rise">Le croquant qui nourrit<br>ton feu intérieur</h2><a class="btn btn--s rise" style="--d:80ms" href="#saveurs">Prends la tienne</a></div>
+    <div class="bento">
+      <div class="cell pad rise"><h3>Testée par des coachs</h3><div class="faces"><img src="https://images.unsplash.com/photo-1758875568932-0eefd3e60090?auto=format&fit=crop&crop=faces&w=80&h=80&q=70" alt="" loading="lazy"><img src="https://images.unsplash.com/photo-1729653824492-0504ec9cb137?auto=format&fit=crop&w=80&h=80&q=70" alt="" loading="lazy"><img src="https://images.unsplash.com/photo-1486432155089-343c871b640f?auto=format&fit=crop&crop=faces&w=80&h=80&q=70" alt="" loading="lazy"></div><a class="more" href="#saveurs">Voir les saveurs ›</a></div>
+      <figure class="cell rise" style="--d:80ms"><img src="https://images.unsplash.com/photo-1678875525705-1952dd9dd430?auto=format&fit=crop&w=600&h=460&q=72" alt="Sportif qui croque dans une barre" loading="lazy"></figure>
+      <div class="cell wide rise" style="--d:160ms"><div><span class="chip">20 g de protéines</span><h3>Une barre cuite net pour les gens qui ont faim</h3></div><figure><img src="https://images.unsplash.com/photo-1639070863891-a20035caf05a?auto=format&fit=crop&w=600&h=460&q=72" alt="Cacahuètes décortiquées en gros plan" loading="lazy"></figure></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark last" id="contact" data-in>
+  <div class="wrap">
+    <div class="news">
+      <h2 class="display rise">Sois au courant avant tout le monde : nouvelles saveurs et bons plans&nbsp;!</h2>
+      <form class="rise" style="--d:100ms" onsubmit="event.preventDefault(); this.querySelector('button').textContent = 'Merci !';"><label class="sr" for="mail">Adresse e-mail</label><input id="mail" type="email" placeholder="Ton adresse e-mail" required><button type="submit">S'abonner</button></form>
+    </div>
+    <div class="foot">
+      <div><a class="brand" href="#haut">ZIG</a><p class="display" style="font-size:1.05rem;line-height:1.2">Pure protéine,<br>goût nature</p></div>
+      <ul><li><a href="#saveurs">Boutique</a></li><li><a href="#contact">Contact</a></li></ul>
+      <ul><li><a href="#parcours">À propos</a></li><li><a href="#">Points de vente</a></li></ul>
+      <ul><li><a href="#ingredients">Nos protéines</a></li><li><a href="#">Questions fréquentes</a></li></ul>
+    </div>
+    <div class="legal"><span>© 2026 ZIG — marque fictive, page de démonstration.</span><span>Confidentialité · Conditions de vente</span></div>
+  </div>
+  <span class="giant" aria-hidden="true">Zig protéine</span>
+</section>
+</main>
+</div>
 
 <script>
 (() => {
-  const count = document.getElementById('cart-count');
-  document.querySelectorAll('.add').forEach(b => b.addEventListener('click', () => {
-    const on = b.getAttribute('aria-pressed') !== 'true';
-    b.setAttribute('aria-pressed', on);
-    b.firstElementChild.textContent = on ? 'Dans le panier ✓' : 'Ajouter au panier';
-    count.textContent = +count.textContent + (on ? 1 : -1);
-  }));
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  // Entrées : chaque section reçoit .in une fois
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.18 });
+  $$('[data-in]').forEach(s => io.observe(s));
+
+  // Menu mobile
+  const nav = $('.nav'), burger = $('.burger');
+  burger.addEventListener('click', () => burger.setAttribute('aria-expanded', nav.classList.toggle('is-open')));
+  $$('.nav-links a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('is-open'); burger.setAttribute('aria-expanded', false); }));
+
+  // Bande d'ingrédients : arrêtée dès qu'elle sort de l'écran
+  const strip = $('.strip');
+  new IntersectionObserver(([e]) => strip.classList.toggle('is-off', !e.isIntersecting)).observe(strip);
+
+  // Tampon du héros : tourne avec le défilement
+  const stamp = $('.stamp'); let tick = false;
+  if (!still) addEventListener('scroll', () => { if (tick) return; tick = true;
+    requestAnimationFrame(() => { tick = false; if (scrollY < innerHeight * 1.2) stamp.style.setProperty('--turn', (scrollY * 0.25).toFixed(1) + 'deg'); }); }, { passive: true });
+
+  // Panier
+  const count = $('#count'); let n = 0;
+  $$('.add').forEach(b => b.addEventListener('click', () => { count.textContent = ++n; count.classList.remove('is-bump'); count.offsetWidth; count.classList.add('is-bump');
+    const label = b.querySelector('span'), old = label.innerHTML; label.textContent = 'Ajoutée !'; setTimeout(() => label.innerHTML = old, 1100); }));
 })();
 </script>
 </body>

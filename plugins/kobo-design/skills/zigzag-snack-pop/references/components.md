@@ -1,185 +1,81 @@
 # Zigzag Snack Pop — composants
 
-Tous les exemples supposent le `:root` de `tokens.css`. Contour = `var(--stroke) solid var(--ink)`, ombre = dure.
+Toutes les valeurs viennent de `tokens.css`. Le code complet est dans `examples/demo.html`.
 
-## Bord en dents de scie (signature)
+## Page
 
-```css
-/* dents en bas seulement (héros) */
-.zz-bottom { mask:
-  conic-gradient(from -45deg at bottom, transparent, var(--ink) 1deg 89deg, transparent 90deg) bottom / var(--zigzag) var(--zigzag-h) repeat-x,
-  linear-gradient(var(--ink) 0 0) top / 100% calc(100% - var(--zigzag-h) + 1px) no-repeat; }
-/* dents en haut et en bas (bande crème, pied de page) */
-.zz-both { mask:
-  conic-gradient(from 135deg at top, transparent, var(--ink) 1deg 89deg, transparent 90deg) top / var(--zigzag) var(--zigzag-h) repeat-x,
-  conic-gradient(from -45deg at bottom, transparent, var(--ink) 1deg 89deg, transparent 90deg) bottom / var(--zigzag) var(--zigzag-h) repeat-x,
-  linear-gradient(var(--ink) 0 0) center / 100% calc(100% - 2 * var(--zigzag-h) + 2px) no-repeat; }
-```
-La couleur dans `mask` ne sert qu'à l'opacité. La section suivante remonte de `--zigzag-h` (`margin-top: calc(-1 * var(--zigzag-h))`) pour que les dents mordent dans la précédente.
+La page (1440px au plus) est posée sur un fond `--outer` avec 16px de marge. Elle alterne trois fonds : **orange** (héros), **blanc** (ingrédients, saveurs, mosaïque) et **brun** (sections fortes, pied).
 
-## Navigation
+## Bord en dents de scie
 
-Barre `--bar` collante, 64px. Logo Anton jaune à gauche (petit triangle orange = « sommet »), liens centrés Archivo 600 12px capitales blancs + chevron, panier rond à droite (contour blanc 2px, compteur jaune).
-
-```html
-<header class="nav"><div class="wrap">
-  <a class="logo" href="/"><i></i>MARQUE</a>
-  <nav aria-label="Navigation principale"><ul>
-    <li><a href="#">Barres <span class="chev" aria-hidden="true"></span></a></li>…
-  </ul></nav>
-  <button class="cart" aria-label="Panier, 2 articles">…<b>2</b></button>
-</div></header>
-```
-```css
-.nav ul a { min-height: 44px; padding: 0 var(--space-3); font: 600 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
-.nav ul a:hover { background: var(--brown); }
-.chev { width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
-```
-Mobile (< 960px) : liens masqués, burger 3 traits blancs de 3px.
-
-## Bouton jaune « autocollant »
+Chaque section blanche mord sur ses voisines par une rangée de dents (22px de large, 11px de haut), en haut et en bas : deux pseudo-éléments remplis de dégradés.
 
 ```css
-.btn { min-height: 52px; padding: 0 var(--space-6); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm);
-  font: 800 var(--text-sm)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase;
-  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
-.btn--yellow { background: var(--yellow); color: var(--ink); box-shadow: var(--shadow-hard-lg); }
-.btn--yellow:hover  { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }   /* se décolle */
-.btn--yellow:active { transform: translate(5px, 5px); box-shadow: var(--shadow-press); }      /* s'écrase */
-.btn:focus-visible  { outline: 3px solid var(--yellow); outline-offset: 3px; box-shadow: 0 0 0 6px var(--ink); }
-.btn:disabled { background: var(--cream); color: var(--muted); box-shadow: none; cursor: not-allowed; }
-```
-Libellé court + chevron « › ». **Un seul bouton jaune plein par écran.**
-
-## Pilule « Boutique »
-
-Pilule jaune 44px, Archivo 800 12px +0.1em, posée au-dessus d'un titre sur brun. Survol : `rotate(-4deg) scale(1.05)` avec `--ease-pop`.
-
-## Champ de recherche / e-mail
-
-```css
-.search { display: flex; align-items: center; gap: var(--space-2); min-height: 52px; padding: 0 var(--space-4);
-  background: var(--white); border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-hard-lg); }
-.search input { flex: 1; min-width: 0; border: 0; background: none; font: 600 var(--text-sm) var(--font-body); color: var(--ink); }
-.search input::placeholder { color: var(--muted); }
-.search:focus-within { box-shadow: var(--shadow-hard-lg), 0 0 0 4px var(--yellow); }
-.search[aria-invalid="true"] { border-color: var(--orange-ink); }
-```
-Sur fond brun, l'ombre dure passe en jaune (`4px 4px 0 var(--yellow)`).
-
-## Mot autocollant
-
-```css
-.sticker-word { color: var(--yellow); -webkit-text-stroke: var(--stroke) var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--ink); }
-```
-Un seul mot par titre. Sur mobile, ombre ramenée à 3px.
-
-## Pastille ingrédient
-
-Cercle `--badge` (88px, 64px mobile), fond `--flavor-*`, contour brun, ombre dure 4px, icône trait 3px au centre. Libellé à droite : Archivo 800 16px capitales sur **deux lignes** (`<br>`).
-
-```html
-<li class="ing"><span class="badge" style="background:var(--flavor-mint)"><svg …/></span><strong>Cacao<br>équitable</strong></li>
+.zig::before, .zig::after { content: ""; position: absolute; left: 0; right: 0; height: calc(var(--zig) / 2);
+  background: linear-gradient(-45deg, var(--white) 7.8px, transparent 0), linear-gradient(45deg, var(--white) 7.8px, transparent 0);
+  background-size: var(--zig) var(--zig); background-position: left bottom; background-repeat: repeat-x; }
+.zig::before { bottom: 100%; }
+.zig::after { top: 100%; transform: scaleY(-1); }
 ```
 
-## Carte produit
+## Barre de navigation
 
-```css
-.card { border: var(--stroke) solid var(--ink); border-radius: var(--radius); background: var(--flavor); box-shadow: var(--shadow-hard-lg); padding: var(--space-6);
-  transition: transform var(--dur) var(--ease-pop); }
-.card:hover { transform: translateY(-6px) rotate(-1deg); }
-.card--featured { transform: scale(1.06); z-index: 1; }   /* carte du milieu, surélevée */
-.card .tag { position: absolute; top: -16px; left: var(--space-6); background: var(--ink); color: var(--yellow); … }
-```
-Contenu : photo produit collée (voir ci-dessous), nom Anton 28px capitales, méta Archivo 600 14px, puis **barre d'ajout** :
+Mesurée : 47px de haut, fond `--brown`. Nom de marque en `--font-display`, liens en petites capitales espacées (13px) avec chevron, **champ de recherche blanc** à ombre dure, panier avec compteur rond jaune.
 
-```css
-.add { display: flex; min-height: 48px; border: 2px solid var(--ink); border-radius: var(--radius-sm); background: var(--white); font: 800 var(--text-xs)/1 var(--font-body); text-transform: uppercase; }
-.add .price { padding: 0 var(--space-4); border-left: 2px solid var(--ink); color: var(--orange-ink); }
-.add:hover { background: var(--yellow); }  .add:hover .price { color: var(--ink); }
-.add[aria-pressed="true"] { background: var(--ink); color: var(--yellow); }   /* ajouté */
-```
+## Titre du héros
 
-## Photo produit (disque et photo collée)
+`--font-display` (Anton), capitales, `--fs-hero` (124px), interligne 1, centré sur deux lignes. Blanc, avec **un mot en `--yellow`** traité en autocollant (ombre dure brune de 4px). La seconde ligne passe en partie **sous** la photo du produit.
 
-Le produit est toujours une **vraie photo** (image réelle, voir `assets.md`), jamais un emballage dessiné. Section brune : photo ronde dans un disque `--orange` (contour `--stroke`, ombre `--shadow-hard-lg`) + étiquette jaune inclinée « 20 g protéines ». Cartes : photo 4:3 « collée » (contour 3px, rayon 4px, ombre dure, rotation -3° / +2°), couleurs `--grade-pop`. Toujours un `data-slot` et un fond token en repli.
+## Bouton
 
-```css
-.disc { width: min(78%, 400px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: var(--orange); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-lg); }
-.card .art { aspect-ratio: 4 / 3; overflow: hidden; border: var(--stroke) solid var(--ink); border-radius: var(--radius-sm); background: var(--cream); box-shadow: var(--shadow-hard); transform: rotate(-3deg); }
-.disc img, .card .art img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-pop); }
-```
+Mesuré : ≈ 236 × 56px. Rectangle `--yellow` presque sans arrondi, texte `--ink` en `--font-display`, chevron « › », **ombre dure** brune décalée de 5px.
 
-## Tampon tournant
+| Variante | Rendu | Usage |
+|---|---|---|
+| `.btn` | jaune | action principale |
+| `.btn--s` | 40px de haut | dans un titre, en tête de section |
+| `.btn--orange` | fond `--orange-hot` | action secondaire sur blanc |
+| `.btn--line` | blanc, contour et ombre `--ink`, prix en `--orange-ink` | « Ajouter — 34,90 € » dans une fiche |
 
-```html
-<div class="stamp" aria-hidden="true">
-  <svg viewBox="0 0 120 120"><defs><path id="c" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs>
-    <text><textPath href="#c">Haute qualité · Haute qualité · Haute qualité ·</textPath></text></svg>
-  <b></b><!-- étoile orange -->
-</div>
-```
-Disque jaune `--stamp`, contour et ombre dure, texte Archivo 800 11.5px +0.18em, rotation `--dur-stamp` linéaire.
+## Photo-autocollant du produit
 
-## Carte d'avis
+La photo du produit dans un cadre blanc de 8px, rayon 14px, **penchée de −6°**, avec une ombre dure de 10px. Autour : le tampon et une mention en italique gras jaune (« 20 g de protéines »).
 
-Blanc, contour brun, rayon 8px, ombre dure 4px, légère rotation alternée (±1°). Étoiles orange en `clip-path`, citation Archivo 600 16px, signature 12px capitales `--muted`.
+## Tampon rond
 
-## Section brune « traces de pneu »
+Disque `--orange-hot` cerclé de blanc, texte qui suit le cercle (`textPath`), chiffre au centre dans un anneau en pointillé. Penché de −14°.
 
-```css
-.tyre { position: absolute; top: -10%; bottom: -10%; width: 90px; transform: rotate(14deg);
-  background: conic-gradient(from 135deg at 50% 70%, var(--brown-deep) 90deg, transparent 0) 0 0 / 30px 26px; }
-```
-2–3 bandes en arrière-plan, à faible contraste. Le titre est blanc, l'accent en Archivo 900 italique jaune.
+## Pastille d'ingrédient
 
-## Mot géant du pied de page
+Cercle de 148px de couleur pâle (`--c1` à `--c5`) contenant une **vraie photo** de l'ingrédient fondue dans la couleur (`multiply`) ; dessous, un libellé de deux lignes en `--font-label` (22px, graisse 600). Les pastilles forment une bande qui défile.
 
-```css
-.giant { font: 400 var(--text-giant)/1 var(--font-display); text-transform: uppercase; color: transparent; -webkit-text-stroke: 3px var(--yellow); margin-bottom: calc(-0.18 * var(--text-giant)); }
-```
-`aria-hidden="true"`, coupé par le bas de la page.
+## Section brune
 
-## États communs
+Fond `--brown`, texte blanc, **traces de pneu** en diagonale (dégradé répété, masqué par endroits). Titres en `--font-display` ; un mot peut être en `--yellow` ; la mention en italique gras jaune sert d'accroche.
 
-- **Chargement** : pastille qui tourne avec l'étoile orange au centre.
-- **Vide** (panier) : pictogramme de sac brun + bouton jaune « Choisir une saveur ».
-- **Erreur** : contour `--orange-ink`, message Archivo 600 14px `--orange-ink` sous le champ.
+## Portrait à étiquette
 
----
+Photo dans un cadre à **sommet arrondi** (arche), avec une pilule blanche à ombre dure qui dépasse : pastille orange + rôle en `--font-display` (« Coach sportif »).
 
-# Relevés sur la vidéo du shot (2026-10-03)
+## Fiche de saveur
 
-La première vidéo du shot (800×600, 15s) défile toute la page ; la seconde est une bande promotionnelle du studio (sans rapport avec le style). Valeurs **observées** (≈).
+Fiche de couleur (`--lime`, `--sky`, `--taupe`), rayon 10px : photo du produit fondue dans un encart à la teinte pâle de la fiche, nom en `--font-display` (24px), une ligne de détail, bouton `.btn--line` sur toute la largeur. **Celle du milieu est plus grande**, déborde sur ses voisines et porte une ombre douce.
 
-## Pastille « coach » (chip photo)
+Texte `--ink` sur le vert, blanc sur le bleu et le brun.
 
-Pilule blanche à fine ombre posée sur la photo d'un athlète : rond orange avec pictogramme blanc + libellé capitales grasses 11–12px (« COACH SPORTIF »). Sert de légende flottante à côté d'une personne détourée.
+## Fiche d'avis
 
-## Carte « carburant » (encart produit)
+Fond `--blush`, texte de 17px en graisse 500, puis une ligne : portrait carré, nom et rôle, note en `--font-display`.
 
-Petite carte blanche arrondie (~8px) en bas à droite de la section brune : titre capitales très grasses (« CARBURANT MUSCLE »), 2 lignes de texte, photo de la main tenant la barre qui **déborde** du haut de la carte, pastille verte ronde à icône en coin.
+## Mosaïque
 
-## Pile de produits
+Trois tuiles de 230px : une tuile de texte (`--blush`, portraits ronds qui se chevauchent, lien), une photo pleine, une tuile large en deux moitiés (pastille + titre en `--font-display`, photo).
 
-Les emballages du produit sont **empilés en pyramide** (5–6 étuis), légèrement inclinés, posés sur un socle bleu à motif en zigzag ; à gauche l'athlète détouré tenant une barre.
+## Lettre et pied
 
-## Avis « parcours » (personnes détourées)
+Sur brun : titre de deux lignes, champ blanc et bouton orange soudés avec ombre dure ; colonnes de liens ; ligne légale ; puis le **mot géant** en italique gras `--yellow` (`--fs-giant`), sur toute la largeur, coupé par le bas de la page.
 
-Section brune « NOTRE PARCOURS UNIQUE » (un mot en orange, petit trait d'éclat orange) : à gauche une **carte d'avis blanche** (texte 3 lignes en gras, avatar rond, nom, rôle, note « 5.0 » à droite) ; dessous une **citation** en capitales blanches avec guillemet orange ; personnes **détourées** en pied (randonneuse, surfeuse) qui chevauchent les bords de la section ; pastille blanche « SURFEURS » sur la planche.
+## États
 
-## Bento « testé par des coachs »
-
-Rangée de 3 tuiles arrondies sur fond blanc : tuile pêche (avatars ronds empilés, « Testé par des coachs », lien « Voir les saveurs → », photo de barre coupée en bas, pastille verte), tuile photo sombre (mains qui tiennent deux barres), grande tuile pêche (étiquette pilule « 20 g de protéines », titre capitales grasses 3 lignes, photo du produit sur cacahuètes à droite).
-
-## Bandeau lettre d'info
-
-Sur brun : titre capitales blanches 2 lignes avec éclat orange et petite icône d'enveloppe jaune inclinée ; à droite, champ blanc + bouton **orange** « S'abonner » collés, ombre dure.
-
-## Pied de page (observé)
-
-Logo blanc + slogan capitales 2 lignes, filet vertical, 3 colonnes de liens blancs 12px ; filet, icônes sociales à gauche, mention au centre, liens légaux à droite ; montagne en aplat brun plus clair en fond.
-
-## Cartes produit (état actif observé)
-
-La carte du milieu est **plus haute** et passe devant ; au survol la barre « AJOUTER AU PANIER — 40,50 € » prend une ombre dure et le curseur la pousse. Chaque carte a un fond de couleur de saveur avec **illustrations d'ingrédients** (amandes, feuilles) qui débordent.
+- Focus clavier : contour de 3px, jaune sur brun et orange, `--ink` sur blanc.
+- Survol et appui : voir `motion.md`.
