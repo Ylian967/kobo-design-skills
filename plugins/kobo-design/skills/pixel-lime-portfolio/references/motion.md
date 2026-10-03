@@ -1,66 +1,72 @@
 # Pixel Lime Portfolio — mouvement
 
-## Principes
-
-Le mouvement imite deux gestes : **l'écran 8-bit** (les pixels s'allument par à-coups, sans fondu doux) et **la main** (traits qui se dessinent, fiches qu'on redresse). Le reste de l'interface réagit vite et sec (160ms). Aucune animation continue en dehors du carré « disponible » qui clignote.
-
-Rien de ceci n'est visible sur le shot (images fixes) : c'est une proposition cohérente avec le langage visuel.
+**La référence est une suite d'images fixes** (trois captures d'une maquette) : aucune animation n'y est visible. Tout ce qui suit est **proposé** par le skill, à partir de ce que le visuel suggère : des pixels qui se posent, des traits de feutre qui se tracent, des autocollants qui se collent. Deux registres : le **saccadé** (pixels, surlignages : par pas) et le **vivant** (traits à la main, autocollants : souple).
 
 ## Catalogue
 
-| Moment | Effet | Durée | Courbe |
-|---|---|---|---|
-| Chargement du héros | Les pixels de la grappe s'allument un à un, ordre pseudo-aléatoire (`--i` × 18ms, départ 300ms) | 160ms chacun | `--ease-step` (`steps(6)`) |
-| Nom | Chaque ligne monte depuis un masque (`translateY(105%)` → 0), 2e ligne +120ms | 900ms | `--ease` |
-| Indicateur « dispo » | Carré lime qui clignote | 1.2s, infini | `steps()` |
-| Surlignage pilule (énoncé) | La pilule s'étire de gauche à droite à l'entrée dans l'écran | 900ms | `--ease` |
-| Cercle / soulignement | Tracé du chemin (`stroke-dashoffset` 1 → 0) à l'entrée dans l'écran | 1.2s | `--ease` |
-| Fiches | Apparition liée au défilement ; survol : rotation → 0 et montée de 6px | 420ms | `--ease` |
-| Carte projet | Zoom 1.03 de la vignette, mini-grappe qui apparaît, pilule sous le titre | 900ms / 420ms | `--ease` |
-| Bouton | Flèche → glisse de 4px ; appui : décalage 1px | 420ms / 160ms | `--ease` |
-| Ligne de service | Fond lime qui monte (`scaleY`) ; flèche pivote de -45° | 420ms | `--ease` |
+| Moment | Effet | Durée / courbe |
+|---|---|---|
+| Arrivée du héros | Les blocs lime de la mosaïque apparaissent par paquets, dans un ordre tiré au hasard ; les deux lignes du nom montent derrière un cache | ≈ 0.9s (26 paquets à 34ms) ; 900ms `--ease`, 120ms d'écart |
+| Mosaïque au repos | Cinq blocs changent d'état toutes les 900ms ; à l'arrêt hors écran | minuterie, pas d'animation continue |
+| Blocs de section | Montée de 26px en fondu, une fois | `--dur-slow` (900ms) `--ease` |
+| Surlignage lime | Le fond se déploie de gauche à droite **en quatre pas** | 900ms `steps(4)`, retard 250ms |
+| Ovale à la main | Le trait se trace autour des mots | `--dur-draw` (1100ms) `--ease`, retard 350ms |
+| Autocollant | Passe de 0 à sa taille en tournant, l'un après l'autre | 450ms `--ease`, retards de 600 à 900ms |
+| Fiche | Au survol, pivote de 1 à 1.5° et monte de 6px ; son lien se décale de 8px | 450ms `--ease` |
+| Bouton mono | Fond et texte s'inversent **par pas** ; la flèche avance de 4px | 150ms `steps(4)` ; 450ms |
+| Ligne de récompense | Devient noire ; deux carrés lime se posent en biais à ses extrémités | 150ms `steps(4)` ; 450ms |
+| Vignette de projet | Zoom à 1.04 | 900ms `--ease` |
+| Nom géant du pied | Étiquettes et autocollants s'y collent à l'entrée | 450ms, retards de 300 à 700ms |
 
 ## Code
 
 ```css
-@keyframes pix-in { from { opacity: 0; } to { opacity: 1; } }
-@keyframes rise   { from { transform: translateY(105%); } }
-@keyframes draw   { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-@keyframes grow   { from { transform: scaleX(0); } }
-@keyframes blink  { 50% { opacity: 0; } }
+/* Ovale tracé à la main : un chemin SVG de longueur 1, étiré sur les mots */
+.ring svg { position: absolute; left: -7%; top: -22%; width: 114%; height: 150%; fill: none; stroke: var(--lime); stroke-width: 2.5; }
+.ring path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset var(--dur-draw) var(--ease) 350ms; }
+.in .ring path { stroke-dashoffset: 0; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero .mosaic b { animation: pix-in var(--dur-fast) var(--ease-step) both; animation-delay: calc(var(--i) * 18ms + 300ms); }
-  .name span { overflow: hidden; }
-  .name span > * { display: inline-block; animation: rise var(--dur-slow) var(--ease) both; }
-  .name span + span > * { animation-delay: 120ms; }
-  .drawn path { stroke-dasharray: 1; animation: draw 1.2s var(--ease) both; }
-  .think .hl::before { animation: grow var(--dur-slow) var(--ease) both; }
+/* Surlignage par pas */
+.mark::before { content: ""; position: absolute; inset: 4% 0; z-index: -1; background: var(--lime);
+  transform: scaleX(0); transform-origin: left; transition: transform var(--dur-slow) var(--ease-step) 250ms; }
+.in .mark::before { transform: none; }
 
-  /* Déclenchement au défilement, sans JS, là où c'est supporté */
-  @supports (animation-timeline: view()) {
-    .drawn path, .think .hl::before { animation-timeline: view(); animation-range: entry 20% cover 45%; }
-    .note { animation: pix-in linear both; animation-timeline: view(); animation-range: entry 0% entry 50%; }
-  }
-}
+/* Autocollant */
+.sticker { transform: rotate(var(--rot, -12deg)) scale(0); transition: transform var(--dur) var(--ease) var(--sd, 600ms); }
+.in .sticker { transform: rotate(var(--rot, -12deg)); }
 ```
 
-Sans `animation-timeline`, les tracés jouent au chargement ; pour les déclencher à l'entrée dans l'écran, ajouter une classe via `IntersectionObserver` (`threshold: .4`) et démarrer l'animation sur `.is-in`. Ne **jamais** masquer un contenu en attendant le JS : l'état de départ invisible ne s'applique que si l'animation tourne.
+```js
+// Mosaïque : les cases sont tirées une fois (graine fixe), plus denses au milieu de la bande
+const mid = 1 - Math.abs((r + 0.5) / rows - 0.5) * 2;
+if (rnd() < density * (0.15 + mid * 1.1)) cells.push({ r, c, on: false });
 
-Grappe plus vivante (option) : toutes les 4–6 s, éteindre 2 ou 3 pixels au hasard pendant 120ms (`steps(1)`), jamais plus.
+// Apparition par paquets, puis quelques blocs qui clignotent
+const step = () => { for (let k = 0; k < per && i < cells.length; k++) paint(cells[i++], true);
+  if (i < cells.length) setTimeout(step, 34); else flicker(); };
+```
+
+## Performance
+
+- **La mosaïque est un canvas dessiné une fois** : chaque bloc est un `fillRect`. Au repos, cinq `fillRect` ou `clearRect` toutes les 900ms, rien entre deux. Pas de boucle `requestAnimationFrame`.
+- Le clignotement est **coupé hors écran** (IntersectionObserver) et la mosaïque est reconstruite au redimensionnement.
+- Noir et blanc des photos fait par le serveur d'images (`sat=-100`), pas par `filter`.
+- Quadrillage et perforations : des dégradés CSS fixes.
+- Seuls `transform`, `opacity`, `stroke-dashoffset` et des couleurs sont animés ; tout se joue une fois à l'entrée, puis au survol.
+- Mesuré dans un Chrome sans carte graphique (rendu logiciel, écran 144 Hz), 1440×900 : apparition de la mosaïque et du nom 139 images/s, héros au repos (mosaïque qui clignote) 145. Le défilement de la page n'a pas pu être mesuré de façon fiable : la fenêtre de test était recouverte pendant la mesure.
 
 ## Mouvement réduit
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
   html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .rise { opacity: 1; transform: none; }
+  .name b { transform: none; }
+  .ring path { stroke-dashoffset: 0; }
+  .mark::before { transform: none; }
+  .sticker { transform: rotate(var(--rot, -12deg)); }
 }
 ```
-Pixels, nom, pilules et tracés sont affichés directement dans leur état final ; le carré « dispo » est fixe ; les fiches gardent leur inclinaison mais ne bougent plus.
 
-## React Native
-
-- Pixels : `Animated.stagger(18, pixels.map(p => Animated.timing(p, { toValue: 1, duration: 1, useNativeDriver: true })))`.
-- Tracés : `react-native-svg` + `Animated` sur `strokeDashoffset`.
-- `AccessibilityInfo.isReduceMotionEnabled()` → tout afficher sans animation.
+La mosaïque est dessinée d'un coup et ne clignote plus ; ovales, surlignages et autocollants sont en place d'emblée.

@@ -1,110 +1,98 @@
 ---
 name: pixel-lime-portfolio
-description: Direction artistique « Pixel Lime Portfolio » pour portfolios personnels et sites de créatifs indépendants (designer, directeur artistique, photographe, développeur créatif, studio solo), inspirée d'un concept Dribbble de portfolio éditorial audacieux. Héros photo noir et blanc granuleuse avec mosaïque de pixels lime acide façon glitch 8-bit, nom en bas de casse géant sur deux lignes décalées, petites étiquettes noires, bouton lime en mono capitales, navigation mono soulignée étalée sur toute la largeur. Sections gris clair à grille fine avec énoncé mêlant regular et gras, surlignages lime en pilule, cercle et soulignement tracés à la main, petits autocollants ; section nuit avec cartes-notes inclinées (lime, blanc, lime) en mono avec cases à cocher ; grille de projets aux titres en minuscules. À utiliser pour un portfolio, une page « à propos », une liste de projets, un CV en ligne ou une app perso au style « éditorial, brut, lime, pixel, noir et blanc, mono ».
+description: Direction artistique « Pixel Lime Portfolio » pour le portfolio et l'édition créative (designer, directeur artistique, journaliste, photographe, indépendant, studio, CV en ligne, agence), mesurée sur une maquette Dribbble de portfolio personnel. Héros en photo noir et blanc traversée d'une mosaïque de pixels lime acide, étiquettes noires posées sur l'image, nom en bas de casse sur deux lignes décalées, navigation mono soulignée répartie sur la largeur. Sections à quadrillage fin - grands énoncés avec mots en gras, surlignage lime, ovales tracés au feutre et petits autocollants ; fiches de carnet perforées en texte mono ; grille de projets à filets ; liste de récompenses dont la ligne survolée devient noire ; bloc contact entièrement lime avec formulaire sur feuille de carnet ; pied noir au nom géant couvert d'étiquettes. Aucun arrondi, une seule couleur. À utiliser pour un portfolio, une page personnelle ou un site de studio au style « éditorial, brutaliste doux, fait main, noir et blanc et fluo ».
 ---
 
 # Pixel Lime Portfolio
 
-> Un portrait en noir et blanc que quelques pixels lime viennent « pirater » : tout le reste est gris, noir, mono — et très sûr de lui.
+> Une photo en noir et blanc, une pluie de pixels fluo, et des annotations au feutre comme dans un carnet de travail.
 
 ## L'idée
 
-Le site est un **carnet de créatif** : une photo N&B granuleuse en ouverture, un nom écrit en **grand bas de casse** comme une signature, puis des pages de papier gris clair quadrillées où la personne explique **comment elle pense**, et une page nuit où elle **épingle ses principes** sur des fiches. Une seule couleur, le **lime acide**, sert à tout ce qui est vivant : les **pixels** qui grignotent la photo, le bouton, les **surlignages** derrière les mots, les fiches et les autocollants. Le reste se tait : texte noir ou blanc, petites étiquettes mono, grille à peine visible. La personnalité vient du **geste** (cercle tracé à la main, fiches de travers, pixels) et non d'une palette chargée.
+Le portfolio se présente comme **un carnet ouvert sur un écran** : une photo granuleuse en noir et blanc, traversée d'une **mosaïque de carrés lime** ; un nom écrit tout en minuscules ; puis de grandes phrases annotées — un mot surligné, deux autres entourés d'un ovale au feutre, un autocollant collé de travers. Les services sont des **fiches perforées** tapées à la machine. Tout est à angles vifs, posé sur un quadrillage discret. Une seule couleur, le lime, qui fait tout : pixels, boutons, surlignages, et une section entière pour le contact.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (photo N&B + pixels, bas de casse, mono, surlignage, fiches), jamais l'identité : pas de nom, photo, texte ni projet du shot d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, photos ni textes de la maquette d'origine.
 
 ## Règles prioritaires
 
-1. **Une seule couleur : `--lime`.** Tout le reste est `--ink`, `--paper`, `--white` et les gris de la photo. Jamais de deuxième accent, jamais de dégradé coloré.
-2. **Deux voix seulement** : Inter Tight (nom, énoncés, titres, en **bas de casse**) et JetBrains Mono (nav, étiquettes, boutons, notes, en **capitales espacées**, 11–12px).
-3. **Le nom est l'affiche** : `--text-name`, poids 400, interlignage 0.86, deuxième ligne décalée de ~0.9em vers la droite. Rien d'autre n'est aussi grand, sauf le titre de contact.
-4. **Les mots importants sont travaillés, pas colorés** : gras (700), pilule lime derrière le mot, cercle ou soulignement tracé. Au plus 3 traitements par énoncé.
-5. **Matières alternées** : héros photo → papier quadrillé (`--paper` + grille 64px) → nuit quadrillée (`--ink`) → papier → nuit. Pas de section blanche pure.
-6. **Formes** : étiquettes, boutons et pixels **carrés** ; seules les pilules (surlignage, filtres) et les fiches (6px) sont arrondies.
-7. **Mouvement en pas** : les pixels apparaissent par à-coups (`steps()`), les traits se dessinent, les fiches se redressent au survol. Rien ne flotte en continu sauf le carré « disponible ».
-8. **Contraste** : texte courant ≥ 4,5:1 (paires vérifiées dans `references/tokens.css`) ; sur lime, toujours `--on-lime` ; le lime en texte uniquement sur `--ink` ou `--card-dark`.
-9. **Accessibilité** : cibles ≥ 44px (liens de nav compris), `:focus-visible` lime, `prefers-reduced-motion` coupe pixels animés et tracés ; la photo a un `aria-label`, mosaïques et autocollants sont `aria-hidden`.
-10. **Aucune valeur en dur** : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
+1. **Une seule couleur : le lime.** Tout le reste est noir, blanc, gris clair ; les photos sont en noir et blanc.
+2. **Aucun arrondi** (sauf les petites étiquettes en pilule du pied).
+3. **Bas de casse pour les noms et les titres**, capitales mono pour la navigation, les boutons et les fiches.
+4. **La mosaïque de pixels** traverse la photo du héros, visage compris ; blocs de 0.4 case du quadrillage.
+5. **Des gestes de carnet, avec mesure** : un surlignage, un ovale, un ou deux autocollants par paragraphe, pas plus.
+6. **Texte noir sur lime**, jamais de lime en texte sur fond clair ; sur noir, le lime sert aux mots forts.
+7. **Les sections se touchent** : photo → clair → noir → clair → lime → noir.
+8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton, la nav, une étiquette, la mosaïque, un surlignage, un tracé, une fiche, une carte projet, un filtre, un champ. |
-| `references/layouts.md` | Avant de construire une page : héros photo, énoncé, fiches, grille de projets, services, contact, mobile. |
-| `references/assets.md` | Avant de placer une image : portrait N&B du héros, vignettes de projets, placement de la grappe, sources, prompts IA, traitements. |
-| `references/motion.md` | Avant d'ajouter une animation ou une transition. |
-| `examples/demo.html` | Pour voir le résultat attendu (portfolio fictif « noé valin ») et reprendre des morceaux. |
-| `source.md` | Shot de référence, ce qui a été vu, écarts. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Mosaïque, navigation, étiquette, nom, bouton mono, énoncé et ses gestes, fiche de carnet, grille de projets, récompenses, contact, pied. |
+| `references/layouts.md` | Héros, ordre et hauteur des sections, grille de projets, autres pages, mobile. |
+| `references/motion.md` | Apparition de la mosaïque, tracé des ovales, surlignage par pas, autocollants, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : portraits, vignettes, traitement noir et blanc, code des gestes graphiques. |
+| `examples/demo.html` | Portfolio complet animé (créatif fictif « noé valin »). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Réglages |
+| Rôle | Police | Réglages |
 |---|---|---|
-| Nom du héros | **Inter Tight** 400 (300 pour une variante plus fine) | `--text-name` 72–208px, interligne 0.86, approche -0.045em, bas de casse |
-| Énoncés (« comment je pense ») | Inter Tight 400 + 700 | `--text-statement` 28–48px, interligne 1.28, approche -0.02em, bas de casse |
-| Titres de section, projets | Inter Tight 400/500 | 40–88px (`--text-section`) / 22px (`--text-lg`), bas de casse |
-| Nav, étiquettes, boutons, méta | **JetBrains Mono** 500 | 11–12px, capitales, +0.08em |
-| Fiches (listes à cocher) | JetBrains Mono 400 | 14px / 28px (aligné sur les lignes de la fiche) |
-| Texte courant | Inter Tight 400 | 14–16px / 1.5 |
-
-La grotesque du shot n'est pas identifiée : Inter Tight en est l'équivalent le plus proche à l'œil (serrée, neutre, bons bas de casse). Pour la mono, Space Mono donne un rendu plus « rétro » si on le souhaite.
+| Nom (héros) | **Inter Tight** 400 | 58px, bas de casse, approche −0.03em, 2 lignes décalées |
+| Énoncés | Inter Tight 400 / 600 | 52px / 1.22 ; italique 600 pour les mots surlignés |
+| Titres, noms de projets | Inter Tight 400 | 46px et 42px, bas de casse |
+| Nom géant (pied) | Inter Tight 500 | d'un bord à l'autre |
+| Navigation, boutons | **JetBrains Mono** 500 | 12px, capitales, soulignés |
+| Fiches | JetBrains Mono 400 | 11px ; phrase 17px |
+| Texte | Inter Tight 400 | 15px et 13px |
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Nuit | `--ink` | sections sombres, texte sur papier, étiquettes |
-| Papier | `--paper` + `--line` | sections claires quadrillées |
-| Blanc | `--white` | nom sur photo, fiche blanche, vignettes, puces |
-| Accent | `--lime` / `--on-lime` | pixels, bouton principal, surlignages, fiches, autocollants |
-| Accent doux | `--lime-soft` | survol d'un surlignage, fond de puce active secondaire |
-| Surfaces nuit | `--card-dark`, `--rule-dark` | champs, cartes sur nuit |
-| Secondaire | `--muted` (sur clair), `--muted-dark` (sur nuit) | méta, aides, descriptions |
-| Photo | `--photo-0` → `--photo-5` | couleurs de repli N&B sous les vraies photos |
-
-Règle de l'accent : sur un écran donné, le lime occupe **moins de 10 % de la surface** — sauf les fiches, qui sont l'exception assumée de la section nuit.
+| `--ink` | #000000 | Sections sombres, texte, étiquettes, bouton plein |
+| `--paper` | #f2f2f2 | Sections claires |
+| `--white` | #f8f8f8 | Fiche blanche, feuille du formulaire, texte sur noir |
+| `--lime` | #c9f852 | Pixels, boutons, surlignages, fiche, section contact |
+| `--lime-deep` | #8cbc18 | Troisième fiche |
+| `--grey-bar` | #c4c4c4 | Filets de la grille, barre de lien |
+| `--muted` / `--soft` | #6a6a6a / #a8a8a8 | Secondaire sur clair / sur noir |
 
 ## Images et 3D
 
-Le héros est un **vrai portrait** de la personne, passé en noir et blanc dur avec grain, sujet au centre-droit ; les **pixels lime restent en CSS** et viennent mordre le visage ou le contour du sujet. Les vignettes de projets sont de vraies images (captures, campagnes, objets) dans le même N&B, avec une mini-grappe au survol. Pas de 3D attendue. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un objet ; détails dans `references/assets.md`.
+De **vraies photos en noir et blanc** : un portrait pris sur le vif pour le héros (le visage au centre, derrière la mosaïque), un second pour les récompenses, des visuels de projets sans couleur dans la grille. Le gris est fait dans le fichier ou par le serveur d'images. Mosaïque, ovales, surlignages, autocollants, perforations et quadrillage sont des gestes graphiques en canvas / SVG / CSS ; jamais un portrait ou un projet dessiné. 3D optionnelle pour un objet dans la grille. Détails dans `references/assets.md`.
 
 ## Signature
 
-**La mosaïque de pixels lime sur la photo N&B** : une grappe de 30 à 60 carrés `--pixel` (14–24px), irrégulière, posée sur le visage ou le bord du sujet, avec 1 ou 2 pixels noirs/blancs et un pixel en contour. Une grappe principale dans le héros + 1 ou 2 petites grappes d'écho (près du nom, dans un coin, au contact). On la rappelle en petit au survol des vignettes de projets.
-
-Deuxième marque : **l'énoncé travaillé** (gras + pilule lime + cercle tracé + soulignement tracé), une fois par page.
+1. La **mosaïque de pixels lime** sur une photo noir et blanc.
+2. L'**ovale au feutre** et le **surlignage** dans un énoncé géant.
+3. Les **fiches de carnet perforées** en mono.
+4. La **navigation mono soulignée** étalée sur toute la largeur.
+5. Le **nom géant** du pied couvert d'étiquettes et d'autocollants.
 
 ## À éviter
 
-- Ajouter une deuxième couleur (bleu, rose, orange) ou des photos en couleurs : le N&B + lime est le style.
-- Un portrait ou des objets dessinés en dégradés CSS à la place d'une vraie photo.
-- Des pixels réguliers en damier ou en dégradé : la grappe doit être organique, comme un glitch.
-- Mettre le nom en capitales ou en gras : il est en bas de casse, poids normal.
-- Des cartes à grosse ombre ou à gros rayon : seules les fiches ont une ombre, et elles sont de travers.
-- Surligner plus de trois mots par énoncé : l'effet devient un surligneur d'étudiant.
-- Du texte lime sur papier ou sur blanc (1,2:1) : illisible.
-- Reprendre le nom, la photo, les textes ou les projets du shot de référence.
+- Une deuxième couleur, des dégradés, des ombres portées, des coins arrondis.
+- Des photos en couleur ; un filtre CSS pour les désaturer.
+- Des titres en capitales grasses : ici les grands textes sont en bas de casse et légers.
+- Trop d'annotations (chaque paragraphe a un seul surlignage et un seul ovale).
+- Du texte lime sur gris clair ou sur blanc.
+- Une mosaïque animée en continu (voir « Performance » dans `motion.md`).
 
 ## Adaptation React / React Native
 
-- **Mosaïque** : composant `<PixelCluster pattern="..xx/.xxx" size={18} />` qui mappe chaque caractère vers une `View` carrée absolue ; apparition échelonnée avec Reanimated (`withDelay(i * 18, withTiming(1, { duration: 1 }))` pour l'effet « pas »).
-- **Photo N&B** : en web `filter: grayscale(1) contrast(1.1)` ; en natif, image déjà traitée, ou `@shopify/react-native-skia` (`ColorMatrix` en niveaux de gris). Grain : PNG de bruit en `opacity: 0.2` par-dessus.
-- **Grille de fond** : en web `background-image` (deux `linear-gradient`) ; en natif, un SVG `Pattern` (`react-native-svg`) ou un PNG répété.
-- **Surlignage pilule** : en natif, `Text` imbriqué ne prend pas de rayon : envelopper le mot dans une `View` lime `borderRadius: 999` (ligne à part) ou dessiner le fond en SVG.
-- **Tracés à la main** : `react-native-svg` `Path` + `strokeDasharray`/`strokeDashoffset` animés.
-- **Fiches inclinées** : `transform: [{ rotate: '-3deg' }]`, redressées au `Pressable` `onPressIn`.
-- Polices : `@expo-google-fonts/inter-tight`, `@expo-google-fonts/jetbrains-mono`.
+- **React** : `PixelMosaic` (canvas, props `rows`, `density`, `seed`), `Ring`, `Mark`, `Sticker` (composants en ligne), `NoteCard`, `WorkGrid`, `AwardList`, `PaperForm`. Un seul IntersectionObserver pour les apparitions.
+- **React Native** : mosaïque en `react-native-skia` ou en grille de `View` générée une fois ; ovale en `react-native-svg` avec `strokeDashoffset` animé (Reanimated) ; fiches en `ScrollView` horizontal aimanté ; polices Inter Tight et JetBrains Mono chargées avec `expo-font` ; liste de récompenses en `Pressable` dont le fond passe au noir à l'appui.
 
 ## Avant de livrer
 
-- [ ] Tokens importés, aucune couleur hors `:root` ; lime seul accent.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Héros : photo N&B granuleuse, grappe de pixels, 2 étiquettes, nom bas de casse décalé, bouton lime mono.
-- [ ] Nav mono soulignée, liens ≥ 44px de haut.
-- [ ] Un énoncé travaillé (gras, pilule, tracé), sur papier quadrillé.
-- [ ] Fiches inclinées sur nuit, cases à cocher en mono.
-- [ ] Boutons : repos, survol, appui, focus, désactivé, chargement (`aria-busy`).
-- [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
-- [ ] Aucun élément du portfolio d'origine (nom, photo, textes, projets).
+- [ ] `:root` copié de `tokens.css`, aucune couleur en dur ailleurs.
+- [ ] Une seule couleur ; toutes les photos en noir et blanc, sans filtre CSS.
+- [ ] Aucun arrondi ; texte sur lime en noir.
+- [ ] Nom et navigation lisibles sur la photo (voile en haut et en bas).
+- [ ] Mosaïque, ovales et autocollants en `aria-hidden` ; formulaire avec libellés.
+- [ ] `prefers-reduced-motion` : mosaïque fixe, gestes en place.
+- [ ] Pas de défilement horizontal à 390px.
+- [ ] Nom, photos, projets et textes propres à la personne.

@@ -1,44 +1,73 @@
 # Source — Pixel Lime Portfolio
 
-- **Site de référence** : https://dribbble.com/shots/27766428-CH-Bold-Editorial-Creative-Personal-Portfolio-Website-UI-Design (LAIN)
+- **Référence** : https://dribbble.com/shots/27766428-CH-Bold-Editorial-Creative-Personal-Portfolio-Website-UI-Design (« CH — Bold Editorial Creative Personal Portfolio », par LAIN)
 - **Famille** : Portfolio / éditorial créatif
-- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
+- **Analysé le** : 2026-10-01 (première version, à l'œil, sur une seule image) ; **2026-10-03, réécriture complète** : les **trois** images du shot téléchargées en pleine résolution, couleurs **lues au pixel**, tailles et positions mesurées par balayage des pixels sur la page entière.
+- **Ce qui plaît** : les pixels lime sur la photo noir et blanc, les annotations au feutre, les fiches de carnet.
 
-> [URL choisie par recherche « personal portfolio » récent] : le shot a été retenu à partir d'une recherche, pas d'un lien fourni ; vérifier qu'il s'agit bien de celui visé.
+> L'adresse du shot a été retenue à partir d'une recherche, pas d'un lien fourni : elle n'a pas été confirmée par l'utilisateur.
+> La première version notait « une seule image » : le shot en contient trois, dont la page entière.
 
-## Ce qui a été vu
+## Ce que contient la référence
 
-- **Héros** : photo noir et blanc désaturée et granuleuse ; par-dessus, une mosaïque de carrés lime acide (~#c6f432) façon blocs glitch 8-bit ; deux petites étiquettes noires posées sur la photo (« creative », « designer »).
-- **Nom** : en bas de casse, grotesque blanche de graisse légère à moyenne, sur deux lignes décalées ; petit bouton lime avec texte mono capitales « DISCOVER MORE → ».
-- **Navigation** : liens mono capitales minuscules (WORK, ABOUT, SERVICES, CONTACT), soulignés, répartis sur toute la largeur en haut.
-- **Section claire** : fond gris clair (~#ececec) avec grille fine ; grand énoncé (~28px) mêlant mots regular et gras, pilules lime derrière certains mots, soulignement et cercle tracés à la main, petits autocollants lime ; étiquette noire « how I think ».
-- **Section sombre** : fond ~#0f0f0f avec grille ; trois « fiches » (lime, blanche, lime) en texte mono avec liste à cocher, légèrement inclinées ; énoncé avec mots en gras lime.
-- **Travaux** : cartes claires, nom du projet en bas de casse, vignettes.
-- **Polices** : grotesque type Inter Tight + mono type JetBrains / Space Mono.
+Trois **images fixes**, aucune vidéo, aucun site en ligne :
+1. Mise en scène en perspective du héros et du début de la page (2400 × 1800).
+2. La **page d'accueil entière** : 2652 × 10331px, soit une page de 2592px de large dans un cadre gris — une page de 1440px à l'échelle 1.8.
+3. Une vignette de présentation (1600 × 1200).
 
-## Pages explorées (2026-10-03)
+**Aucune animation n'est visible** : tout le mouvement décrit dans `motion.md` est proposé par le skill.
 
-| Source | Relevé |
+## Sections de la page (image 2)
+
+Héros (photo, mosaïque, étiquettes, nom, navigation) · énoncé « how I work » sur gris clair quadrillé · « A few things I do » sur noir quadrillé (trois fiches, grand énoncé, bouton) · grille de projets à filets · « recognitions & awards » (titre, photo à mosaïque, liste) · contact sur lime (texte, formulaire sur feuille) · pied noir (question, colonnes de liens, nom géant couvert d'étiquettes).
+
+## Mesures (image 2 ; valeurs ramenées à une page de 1440px)
+
+| Élément | Valeur |
 |---|---|
-| Shot Dribbble | Une seule image (2400×1800). Relue : rien de plus. |
-| Autres shots du même projet / site en ligne | Aucun trouvé (recherche Dribbble par nom de projet, description du shot sans lien). |
+| Page | 2592px de large dans l'image (échelle 1.8) ; marges de 17px |
+| Lime | #c9f852 (13 188 points relevés sur la mosaïque) ; section contact #c8f850 |
+| Fonds | noir #000000 ; gris clair #f1f1f1 à #f3f3f3 ; papier #f4f4f4 à #f8f8f8 |
+| Fiches | lime #c0f048, blanche #f4f4f4, sombre #8cbc18 ; barres de lien #84e000, #c4c4c4, #709414 |
+| Quadrillage | 17 colonnes sur la largeur (152.5px dans l'image, 84.7px à 1440) ; trait #1c1c10 sur noir |
+| Blocs de la mosaïque | 61px dans l'image, soit 34px : 0.4 case du quadrillage |
+| Hauteurs | héros 932px ; énoncé 773px ; services 1358px ; projets + récompenses 1509px ; contact 562px ; pied 571px |
+| Navigation | capitales de 9.4px de haut (≈ 12px) ; premier lien à 17px du bord |
+| Nom du héros | 2 lignes au pas de 58px, 462px de large, bord gauche à 20px |
+| Énoncé | lignes de 52px au pas de 64px ; retrait gauche de 303px (290px pour la section noire) |
+| Fiche | 304 × 353px, écart de 33px |
+| Grille de projets | 4 colonnes, filets #c4c4c4 |
+| Liste de récompenses | lignes au pas de 49px ; ligne mise en avant : fond noir |
+| Texte secondaire | #808080 sur clair ; #a8a8a8 sur noir |
 
-## Non mesuré
+## Lu à l'œil (non mesuré au pixel)
 
-- Il s'agit d'un **mockup Dribbble** : analyse visuelle des images uniquement, aucun site en ligne, aucun code inspecté.
-- Toutes les valeurs (couleurs, tailles, espacements, pas de grille, taille des pixels, angles des fiches) sont **estimées à l'œil**.
-- Les polices ne sont pas identifiées : Inter Tight et JetBrains Mono sont **choisies à l'œil**.
-- Les sections services et contact, les filtres de projets et les états (survol, focus, erreur) ne figurent pas sur les captures : ils prolongent le langage du shot et sont proposés par le skill.
-- Aucune animation n'est visible sur des images fixes : le mouvement (`motion.md`) est une proposition.
+- Tailles des titres (≈ 46px), des noms de projets (≈ 42px), du texte courant (≈ 13 à 15px), du texte des fiches (≈ 11 et 17px).
+- Le quadrillage sur gris clair (trop pâle pour être relevé de façon fiable).
+- Inclinaison des autocollants, forme des ovales.
+
+## Police
+
+Néo-grotesque serrée (proche de Neue Haas / Helvetica Now) et mono de type machine à écrire : **non identifiées**. Inter Tight et JetBrains Mono sont choisies à l'œil.
+
+## Proposé par le skill
+
+- **Toutes les animations** et tous les états (survol des fiches, des boutons, des lignes ; focus des champs).
+- Le tirage au hasard de la mosaïque (la maquette en montre un dessin précis), sa densité, son clignotement.
+- `--muted` (#6a6a6a), `--field`, `--veil`, `--grid`.
+- Les autres pages (`layouts.md`) et **toute la version mobile**.
+- Les images par seconde de `motion.md`, mesurées dans un Chrome sans carte graphique (arrivée et repos du héros seulement ; le défilement n'a pas pu être mesuré).
 
 ## Écarts assumés
 
-| Élément du shot | Dans le skill | Raison |
+| Maquette | Dans le skill | Raison |
 |---|---|---|
-| Nom de la personne, textes, projets | Portfolio fictif « noé valin », textes et projets inventés en français | Identité et droits d'auteur |
-| Photo du portrait | Autre portrait N&B (Unsplash) + grain SVG, emplacement `data-slot="portrait-bw"` | Droit à l'image ; à remplacer par votre photo traitée |
-| Vignettes de projets | Photos N&B (poste de travail, campagne, vêtement) + une composition graphique pour un logo, `data-slot="project-cover"` | Droits d'auteur |
-| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo |
-| Gris secondaires très clairs sur gris clair | `--muted` #555555 (6,3:1 sur papier), `--muted-dark` #9a9a9a (6,8:1 sur nuit) | Contraste ≥ 4,5:1 |
-| Liens de nav minuscules | Zone cliquable portée à 44px de haut, taille visuelle conservée | Accessibilité |
-| Lime en texte | Uniquement sur `--ink` / `--card-dark` (≥ 13:1), jamais sur papier | Lisibilité |
+| Nom « creagen hayes », textes anglais | Créatif fictif « noé valin », textes français | Identité |
+| Photos et visuels de projets de la maquette | Photos Unsplash passées en noir et blanc | Droits |
+| Noms de prix et de concours réels dans la liste | Intitulés génériques inventés | Ne pas attribuer de vraies récompenses à une personne fictive |
+| Texte secondaire #808080 sur #f2f2f2 (3,6:1) | #6a6a6a (4,8:1) | Contraste |
+| Champs du formulaire presque invisibles | Fond #ececec et ombre intérieure légère | Lisibilité |
+| Nom géant de 13 signes | Taille réglable (`--giant`), ici pour 9 signes | Le nom change |
+| Dessin fixe de la mosaïque | Tirage au hasard à graine fixe | S'adapter à toutes les largeurs |
+| Colonnes du pied (liens de produit) | Liens du portfolio | Cohérence du contenu |
+| Une seule largeur | Tailles en `clamp()` et en fractions de largeur, version mobile | Rendre le skill utilisable |

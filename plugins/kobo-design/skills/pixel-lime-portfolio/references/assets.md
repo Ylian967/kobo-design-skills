@@ -1,65 +1,71 @@
 # Pixel Lime Portfolio — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un personnage ou un objet : le portrait est une **vraie photo** passée en noir et blanc, les projets montrent de **vrais visuels** (photos, captures, mises en situation). Les **pixels lime**, les étiquettes, les tracés à la main et les autocollants restent en CSS/SVG : ce sont les gestes graphiques du style, posés **par-dessus** le réel.
+> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer un portrait ou un visuel de projet. Restent en CSS / SVG / canvas les **gestes graphiques** : mosaïque de pixels, ovales au feutre, surlignages, autocollants, perforations, quadrillage.
+
+Toutes les photos sont en **noir et blanc** : la seule couleur de la page est le lime, et elle n'appartient jamais à une image.
 
 ## 1. Ce que montrent les images
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `portrait-bw` (héros) | La personne elle-même, pas un modèle : visage ou buste, une main au visage, dans un lieu à elle (voiture, atelier, rue) | Plein cadre 100svh, sujet au **centre-droit** (`object-position: 62% 35%`), vide à gauche et en bas pour le nom | Lumière dure, une seule source (fenêtre, contre-jour), ombres profondes | N&B : `grayscale(1) contrast(1.15) brightness(.88)`, grain SVG en `overlay` à `--grain-opacity`, voiles sombres haut/bas ; **grappe de pixels lime posée sur le visage ou le bord du sujet** |
-| `project-cover` (grille de projets) | Le projet en situation : capture d'écran sur un poste, affiche dans la rue, objet ou vêtement porté, photo de campagne | 4:3, rayon 6px | Neutre ou dure, toujours la même famille que le portrait | N&B (`grayscale(1) contrast(1.1)`) par défaut ; mini-grappe de pixels au survol. Un logo pur peut rester une composition graphique (ce n'est pas un objet réel) |
-| `about-portrait` (page « À propos ») | Second portrait, plus proche ou de dos, au travail | 3:4 | Idem héros | Idem héros, grappe plus petite |
-| `project-hero` (page projet) | Le visuel le plus fort du projet | 16:9 plein cadre | — | N&B sauf si la couleur **est** le projet ; alors couleur sans filtre, mais aucune autre couleur que le lime dans l'interface autour |
+| Emplacement | Sujet | Cadrage | Notes |
+|---|---|---|---|
+| `hero` | **Un portrait pris sur le vif** : la personne dans une voiture, à une fenêtre, dans la rue ; de profil ou de trois quarts, pas de pose | Paysage 3:2, 1800px ; visage au centre de l'image, à mi-hauteur : la mosaïque passe devant | Noir et blanc contrasté, grain ; bas de l'image sombre (le nom blanc s'y pose) |
+| Vignettes de projets | Le travail réalisé : affiche, spécimen typographique, écran de téléphone, emballage, identité | ≈ carré (20:19), 700px | En noir et blanc, sur fond neutre ; **pas de logos de marques existantes** |
+| Photo des récompenses | Second portrait, même série que le héros | ≈ carré, 700px | Reçoit une petite mosaïque |
 
-**Règle de cohérence** : tout ce qui est photo est **noir et blanc, contrasté et granuleux** ; la seule couleur à l'écran est le lime des pixels et de l'interface. Jamais une photo en couleur à côté d'une photo N&B dans la même vue.
+**Cohérence** : mêmes noirs profonds et même grain sur tous les portraits ; les vignettes de projets peuvent être plus nettes, mais restent sans couleur.
 
 ## 2. Où les trouver
 
-1. **Les photos de la personne et de ses projets** : toujours en priorité. Pour le héros, une séance au téléphone suffit (mode portrait, lumière de fenêtre, fond qui raconte quelque chose).
-2. **Banques gratuites** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com) (licences gratuites, usage commercial permis ; créditer est apprécié). Mots-clés :
-   - FR : « portrait noir et blanc », « homme voiture noir et blanc », « portrait lumière dure », « bureau designer écrans », « pull noir détail ».
-   - EN : « black and white portrait hand on face », « moody monochrome portrait car », « designer workstation monitors », « monochrome fashion knit close-up », « film grain portrait ».
-3. **Génération IA** — prompts de départ :
-   - Héros : > *Black and white editorial portrait of a creative director in their thirties sitting in a parked car, hand resting against the face, looking out of frame, hard window light from the right, deep shadows, subject on the right third with empty dark space on the left, 35mm film grain, high contrast, no text, no logo.*
-   - Projet : > *Monochrome photo of a designer's desk with two monitors showing editorial layouts, late evening light, shallow depth of field, high contrast, film grain, no readable brand names, no text overlay.*
-4. **À éviter** : portraits de stock souriants face caméra sur fond blanc ; photos en couleur « juste désaturées » trop plates (sans noirs profonds) ; filtres sépia ou duotone colorés ; un visage dessiné ou une silhouette en dégradés CSS ; maquettes d'écran génériques avec logos de marques ; la photo du portfolio d'origine.
+1. **Les images de la personne** : un reportage d'une demi-journée en noir et blanc suffit (deux ou trois portraits sur le vif). Les visuels de projets sont les siens.
+2. **Banques libres** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Recherches utiles : `portrait cap car window`, `portrait black and white street candid`, `poster typography design`, `phone app mockup`, `stationery branding black`, `brand identity mockup`.
+3. **Génération** — prompts de départ :
+   > Black and white candid photograph, young person in a baseball cap sitting in the passenger seat of an old car, looking out of the window, rear-view mirror in frame, strong grain, high contrast, 35mm, shot from the back seat, no text, 3:2
 
-## 3. Traitements (code)
+   > Black and white product shot of a brand identity system: posters, business cards and a phone screen arranged on a dark surface, bold geometric logo, studio light, square
+4. **À éviter** : portraits posés de studio, photos en couleur, selfies, visuels de projets remplis de couleurs (les désaturer), logos de marques réelles.
 
-```css
-/* Portrait N&B plein cadre + voiles + grain */
-.photo { position: absolute; inset: 0; z-index: -2; margin: 0;
-  background: radial-gradient(ellipse 60% 70% at 64% 38%, var(--photo-3), var(--photo-1) 64%, var(--photo-0)); } /* repli */
-.photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 35%;
-  filter: grayscale(1) contrast(1.15) brightness(0.88); }
-.photo::after { content: ""; position: absolute; inset: 0;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--photo-0) 45%, transparent), transparent 22%, transparent 50%, color-mix(in srgb, var(--photo-0) 78%, transparent)); }
-.grain::before { content: ""; position: absolute; inset: 0; z-index: 3; filter: url(#grain); opacity: var(--grain-opacity); mix-blend-mode: overlay; pointer-events: none; }
-/* <svg><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3"/><feColorMatrix type="saturate" values="0"/></filter></svg> */
+## 3. Traitements
 
-/* Grappe de pixels posée sur le visage : position en % du héros, à régler sur la vraie photo */
-.m-face { position: absolute; left: 58%; top: 18%; }
-
-/* Vignette projet N&B */
-.thumb-photo { background: var(--photo-1); }
-.thumb-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); }
-
-/* Image cassée : texte alternatif masqué à l'écran, le dégradé de repli reste */
-.photo img, .thumb-photo img { color: transparent; }
+```js
+// Noir et blanc par le serveur d'images
+`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1800&h=1170&q=75&sat=-100`
 ```
 
-**Variante pixellisation** (optionnelle, pour qu'un coin de la photo se « désagrège » en vrais pixels de l'image) : dessiner la photo dans un `<canvas>` réduit (`ctx.drawImage(img, 0, 0, w / 16, h / 16)`) puis l'agrandir avec `image-rendering: pixelated` dans un masque carré (`clip-path: inset(...)`) placé sous la grappe lime. La photo doit venir du même domaine ou d'un CDN qui envoie les en-têtes CORS (`crossorigin="anonymous"`).
+```css
+.hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero::after { background: linear-gradient(0deg, var(--veil), var(--veil-0) 40%), linear-gradient(180deg, var(--veil), var(--veil-0) 16%); }  /* sous le nom et la navigation */
+```
 
-**Placer la grappe** : la grappe principale mord le visage ou le contour du sujet (yeux, tempe, main), jamais le fond vide. Régler `left`/`top` après avoir choisi la photo, à 1440px **et** à 390px (l'`object-position` change le cadrage).
+- Avec des fichiers locaux : exporter en niveaux de gris, contraste relevé, un léger grain dans le fichier.
+- Aucun `filter` CSS, aucun mode de fusion sur les photos.
+- `fetchpriority="high"` pour le portrait du héros, `loading="lazy"` ailleurs.
+- Texte alternatif : ce que montre l'image (« Portrait en noir et blanc : une personne en casquette regarde par la vitre d'une voiture »).
 
-## 4. Intégration
+## 4. Gestes graphiques (code, pas des images)
 
-- `<figure class="photo" data-slot="portrait-bw"><img … fetchpriority="high" alt="…"></figure>` ; `alt` qui décrit la scène (« un homme assis au volant, la main contre le visage »), pas « photo de moi ».
-- Vignettes : `loading="lazy"`, `width`/`height` 1200×900, `alt` qui dit ce que montre le projet.
-- Formats : AVIF/WebP via `<picture>` ou CDN (`?auto=format`) ; héros ≤ 300 Ko (2000px de large suffit, le grain masque la compression). Exporter déjà en N&B quand c'est possible : le `filter` reste comme garantie.
-- Couleur de repli = tokens `--photo-0` → `--photo-3` (dégradé du conteneur) ; le nom blanc reste lisible dessus.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `contentPosition={{ left: '62%', top: '35%' }}`, `placeholder={{ blurhash }}`, `transition={300}`) ; N&B via image pré-traitée ou `@shopify/react-native-skia` (`ColorMatrix` niveaux de gris) ; grain = PNG de bruit `opacity: 0.2` par-dessus ; grappe = `View` carrées absolues.
+```html
+<!-- Ovale au feutre : un seul symbole SVG, étiré sur n'importe quel groupe de mots -->
+<symbol id="oval" viewBox="0 0 200 60" preserveAspectRatio="none">
+  <path pathLength="1" vector-effect="non-scaling-stroke"
+        d="M14 34C8 14 60 4 112 5c52 1 82 12 80 28-2 17-54 24-104 22C44 53 4 46 9 28c3-10 30-17 62-20"/>
+</symbol>
+<span class="ring">peu plus belles<svg aria-hidden="true"><use href="#oval"/></svg></span>
+```
 
-## 5. 3D
+```css
+/* Quadrillage de 17 colonnes */
+.gridded { background-image: linear-gradient(var(--g) 1px, transparent 1px), linear-gradient(90deg, var(--g) 1px, transparent 1px);
+  background-size: var(--cell) var(--cell); }
+/* Perforations d'une fiche */
+.note::before { background: radial-gradient(circle, var(--ink) 3.2px, transparent 3.6px) 0 9px / 7px 43px repeat-y; }
+```
 
-Optionnelle. Usage sobre possible : sur la page « À propos », un **cube de pixels lime** (`InstancedMesh` de petits cubes reprenant le motif de la grappe) qui flotte devant le portrait et se désassemble par à-coups (`steps`) au défilement, en `MeshStandardMaterial` couleur `--lime` lue dans les tokens, lumière unique dure, caméra orthographique pour garder l'aspect 8-bit. Pas de modèle externe nécessaire (géométrie procédurale) ; si besoin, voxels CC0 de [Kenney](https://kenney.nl/assets) ou [Poly Pizza](https://poly.pizza). Web : Three.js ou React Three Fiber (`<Instances>` de drei) ; React Native : `expo-gl` + `@react-three/fiber/native`. Repli : la grappe CSS habituelle. Jamais de 3D pour le portrait lui-même.
+La **mosaïque** est tirée au hasard avec une graine fixe (le dessin est le même à chaque visite) ; pour une forme précise (un mot, une silhouette), remplacer le tirage par une matrice de 0 et de 1.
+
+## 5. 3D (optionnel)
+
+Le style n'en a pas besoin. Si un projet du portfolio est un objet (emballage, produit), il peut être montré en 3D dans une case de la grille : Three.js, fond `--paper`, matériaux gris (pas de couleur), rotation au survol, 30 images/s au plus, rendu arrêté hors écran.
+
+## 6. Photos de la démo (Unsplash, licence libre)
+
+Héros : `photo-1780909863720-07b2acbc2cad`. Récompenses : `1763674999861-2672aa24e969`. Projets : `1610454059909-f9a5a6eb4e58`, `1627542557169-5ed71c66ed85`, `1696603975280-74ac56b87bc9`. À remplacer par les images du projet.
