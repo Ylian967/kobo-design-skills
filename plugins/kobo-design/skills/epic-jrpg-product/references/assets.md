@@ -12,6 +12,7 @@ Sur une vraie page de jeu, ces emplacements reçoivent les **visuels officiels d
 | `trailer` | Image d'attente de la bande-annonce : personnage ou armure en plan rapproché | 16:9, coins `--radius-xs`, sujet au centre (le bouton lecture le recouvre) | Clair-obscur, fond rouge sombre | Voile `--scrim` léger pour faire ressortir le bouton blanc |
 | `feature-1`, `feature-2`… | Une capture par caractéristique (combat, exploration, personnage) | 16:9, sujet au tiers opposé à la plaque dorée | Action, feu, contraste fort | Image nette ; les photos N&B passent en **duotone braise** |
 | `edition-art` | Visuel de l'édition (coffret, jaquette, contenu) | 16:9, objet centré sur fond sombre | Studio sombre, reflets chauds | Aucun, ou vignette douce |
+| Fond « lave » (page Acheter, newsletter) | Braises / roche incandescente, flammes sur noir | Plein écran, `object-fit: cover` | Rouge-orange profond sur noir | Opacité 0,3 sur `--lava` + deux halos radiaux (braise, rouge) |
 | Fond « braises » des sections | Texture de braises / particules incandescentes | Plein cadre, fixe ou très étiré | Points orange sur noir | Opacité 0,25–0,35 sous un dégradé `--bg-warm` |
 
 **Règle de cohérence** : toutes les images sont **chaudes et sombres** (noir, rouille, orange, or) — jamais de ciel bleu vif, de lumière de jour plate ni de couleurs pastel ; le texte n'est jamais posé directement sur une zone claire de l'image.

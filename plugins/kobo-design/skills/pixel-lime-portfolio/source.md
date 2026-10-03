@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27766428-CH-Bold-Editorial-Creative-Personal-Portfolio-Website-UI-Design (LAIN)
 - **Famille** : Portfolio / éditorial créatif
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
 
 > [URL choisie par recherche « personal portfolio » récent] : le shot a été retenu à partir d'une recherche, pas d'un lien fourni ; vérifier qu'il s'agit bien de celui visé.
 
@@ -15,6 +15,13 @@
 - **Section sombre** : fond ~#0f0f0f avec grille ; trois « fiches » (lime, blanche, lime) en texte mono avec liste à cocher, légèrement inclinées ; énoncé avec mots en gras lime.
 - **Travaux** : cartes claires, nom du projet en bas de casse, vignettes.
 - **Polices** : grotesque type Inter Tight + mono type JetBrains / Space Mono.
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Shot Dribbble | Une seule image (2400×1800). Relue : rien de plus. |
+| Autres shots du même projet / site en ligne | Aucun trouvé (recherche Dribbble par nom de projet, description du shot sans lien). |
 
 ## Non mesuré
 

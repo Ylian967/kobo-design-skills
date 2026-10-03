@@ -29,3 +29,18 @@ function frame() { const p = curve.getPointAt(progress); camera.position.lerp(p,
 ## Mouvement réduit
 
 Coupes franches entre chapitres (pas de travelling), texte affiché directement, pas de neige ni de particules.
+
+---
+
+## Observé sur le site (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Défilement | Caméra pilotée par le scroll (recul, traversée du brouillard) | Observé |
+| Mouvement rapide | **Aberration chromatique** (franges RVB) et léger flou de mouvement en post-traitement, qui disparaissent à l'arrêt | Observé |
+| Logo / textes | Brouillage de lettres pendant les changements de scène | Observé, ≈ 300–600ms |
+| Blocs du portfolio | Rotation lente sur eux-mêmes, entrée par le bas | Observé |
+| Symbole | Segments d'anneau qui convergent puis flou radial | Observé, lié au défilement |
+| Sculpture finale | Particules qui se réorganisent d'une forme à l'autre au changement de lien | Observé |
+
+Mouvement réduit : désactiver aberration et flou radial, remplacer les trajets de caméra par des fondus entre plans fixes.

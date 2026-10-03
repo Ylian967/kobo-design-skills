@@ -28,3 +28,14 @@ Narratif et posé : les éléments arrivent quand le chapitre commence, avec une
 ## Mouvement réduit
 
 Logo affiché plein directement, pas de parallaxe, lignes visibles sans montée, terminal affiché d'un coup.
+
+---
+
+## Relevé sur le site (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Labels mono, pied | Décodage lettre par lettre (caractères aléatoires qui se fixent) | Observé dans le DOM, durée estimée |
+| Navigation | Libellé doublé qui roule au survol | Mesuré (structure) |
+| Grands numéros | Chiffres qui changent (03 → 07 → 10) au défilement | Observé |
+| Graisse | Police variable (125–950) chargée : la graisse du manifeste peut varier | Mesuré (polices), animation supposée |

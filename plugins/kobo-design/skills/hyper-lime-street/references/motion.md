@@ -16,6 +16,21 @@ Une seule courbe pour presque tout : **easeOutCubic** `cubic-bezier(0.215, 0.61,
 | Bouton musique | Disque qui tourne + battement | 0.8s / 6s | ease / linéaire |
 | Pagination latérale | Le numéro roule vers le haut | 300ms | `--ease` |
 
+
+### Pages internes (observées le 2026-10-02 ; durées **estimées**, non mesurées par script, sauf mention)
+
+| Moment | Effet | Durée | Courbe |
+|---|---|---|---|
+| Chargement d'une page interne | La bande rayée entre en glissant le long de sa diagonale, puis le badge se déplie depuis la gauche (`clip-path` inset 100 % → 0), le numéro monte de 30px | 600ms + 500ms (décalé 150ms) | `--ease` |
+| Filigrane | Fondu + glissement de 60px vers la gauche, une fois | 800ms | `--ease` |
+| Changement d'onglet | Le parallélogramme blanc se déplie (`scaleX` 0 → 1) sous le nouvel onglet ; la grille passe en fondu (sortie 150ms, entrée 300ms avec montée de 12px, cartes décalées de 40ms) | 400ms | `--ease` |
+| Carrousel bannière | Glissement horizontal d'une carte, point actif qui grossit | 500ms | `--ease` |
+| Survol carte d'actu | Image `scale(1.05)` | 500ms | `--ease` |
+| Coverflow Univers | Les cartes changent de position (translation + scale + luminosité) ; le fond flouté fait un fondu croisé | 600ms / 800ms | `--ease` |
+| Interrupteur JP/EN | Le segment lime glisse d'un côté à l'autre | 300ms | `--ease` (mesuré : courbe dominante du site) |
+| Onglet latéral « Retour » | Survol : fond lime, flèche monte de 4px | 300ms | `--ease` |
+| Bouton newsletter | `all 0.2s linear` | 200ms | linéaire (mesuré sur l'accueil) |
+
 ## Code de référence
 
 ```css
@@ -25,9 +40,17 @@ Une seule courbe pour presque tout : **easeOutCubic** `cubic-bezier(0.215, 0.61,
 @keyframes wordsLoop { to { transform: translateX(-100%); } }
 .reveal-in { animation: slideIn var(--dur-4) var(--ease) both; }
 @keyframes slideIn { from { transform: translate(-80px, 80px); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .marquee > span, .reveal-in { animation: none; } }
+/* Pages internes : dépliage du badge, onglet en parallélogramme */
+.badge { animation: badgeIn var(--dur-4) var(--ease) 150ms both; }
+@keyframes badgeIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.page-head__band { animation: bandIn var(--dur-4) var(--ease) both; }
+@keyframes bandIn { from { translate: -30% 0; opacity: 0; } }
+.grid.is-leaving { opacity: 0; transition: opacity 150ms linear; }
+.grid.is-entering > * { animation: cardUp var(--dur-1) var(--ease) both; animation-delay: calc(var(--i, 0) * 40ms); }
+@keyframes cardUp { from { opacity: 0; transform: translateY(12px); } }
+@media (prefers-reduced-motion: reduce) { .marquee > span, .reveal-in, .badge, .page-head__band, .grid.is-entering > * { animation: none; } }
 ```
 
 ## Mouvement réduit
 
-Rubans et blocs affichés directement ; défilant figé (texte tronqué avec « … ») ; pas de disque qui tourne.
+Rubans, badge et bande affichés directement ; changement d'onglet et coverflow sans glissement (contenu remplacé, fondu de 150ms au plus) ; carrousel bannière sans défilement automatique ; défilant figé (texte tronqué avec « … ») ; pas de disque qui tourne.

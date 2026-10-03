@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27776445-ThreatIQ-Next-Gen-Data-Security-Website (Subash Chandra)
 - **Famille** : Tech / cybersécurité
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
 
 ## Ce qui a été vu
 
@@ -13,6 +13,13 @@
 - **Surtitre** « MILITARY-GRADE ENCRYPTION » en jaune-citron (~#e0ff3a), capitales ; petit paragraphe pâle en haut à droite.
 - **Navigation** : logo anneau + nom à gauche, liens minuscules en capitales espacées au centre, bouton carré vert clair translucide « GET PROTECTED » à droite.
 - **Carte CTA** : carré vert sombre avec icône cadenas et « START PROTECTING », encadré de crochets d'angle en L.
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Shot Dribbble | Une seule image (3200×2400, héros). Relue à pleine résolution : rien de plus que ce qui est décrit. |
+| Autres shots du même projet / site en ligne | Aucun trouvé (recherche Dribbble par nom de projet, description du shot sans lien). |
 
 ## Non mesuré
 

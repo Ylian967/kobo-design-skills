@@ -1,6 +1,6 @@
 ---
 name: glass-frame-estate
-description: Direction artistique « Glass Frame Estate » pour l'immobilier haut de gamme et les annonces de biens (agence, promoteur, location de villas, chalets, architecture, hôtellerie boutique), inspirée des templates Dribbble d'annonces immobilières. Héros photo encadré d'un filet blanc fin à coins légèrement arrondis posé sur la même photo floutée, mot-marque géant blanc en dégradé vers la transparence placé derrière le bâtiment, petite navigation en capitales (heure, ville, MENU + bouton rond à points), titre léger en capitales en bas à gauche, petit bouton blanc rectangulaire « → », carte conseiller en verre dépoli, puis pages blanches éditoriales : grille 2×2 d'annonces, bande noire de chiffres et logos, équipe en 4×2 portraits, journal, lettre d'info, pied de page noir avec mot-marque géant estompé. À utiliser pour une landing d'agence, une fiche de bien, un catalogue d'annonces, une app de location ou un site au style « luxe calme, golden hour, verre, minimal, Inter ».
+description: Direction artistique « Glass Frame Estate » pour l'immobilier haut de gamme et les annonces de biens (agence, promoteur, location de villas, chalets, architecture, hôtellerie boutique), inspirée des templates Dribbble d'annonces immobilières. Héros photo encadré d'un filet blanc fin à coins légèrement arrondis posé sur la même photo floutée, mot-marque géant blanc en dégradé vers la transparence placé derrière le bâtiment, petite navigation en capitales (heure, ville, MENU + bouton rond à points), titre Inter 500 en capitales en bas à gauche, bouton rectangulaire à flèche, carte conseiller en verre, puis pages blanches éditoriales : surtitres « // », cartes grises à 10px, compteurs odomètre, règle graduée, grille 2×2 d'annonces à étiquettes, services sur fond noir, pile d'étapes collantes, témoignages en mosaïque, FAQ, pied noir avec mot-marque géant. Couvre aussi les pages internes mesurées sur le site en ligne du template : menu plein écran flouté, héros de page à titre 100px, fiche de bien avec encarts latéraux, détail de service, quartier, journal, article, contact, 404. À utiliser pour une landing d'agence, une fiche de bien, un catalogue d'annonces, une app de location ou un site au style « luxe calme, golden hour, verre, minimal, Inter ».
 ---
 
 # Glass Frame Estate
@@ -9,7 +9,7 @@ description: Direction artistique « Glass Frame Estate » pour l'immobilier hau
 
 ## L'idée
 
-Le héros est une **photo dans un cadre** : un filet blanc de 1px, coins à 6px, posé à quelques pixels du bord de l'écran sur **la même photo floutée** — l'image semble sous verre. Derrière le bâtiment, un **mot-marque géant** blanc qui s'efface vers le bas, comme gravé dans le ciel. L'interface tient en lignes fines et petites capitales : heure locale, ville, « MENU » et un rond blanc à points. Le texte est **léger** (Inter 300) et la seule matière en relief est la **carte conseiller en verre dépoli**. Sous le héros, la page devient un catalogue éditorial blanc rythmé par une bande noire.
+Le héros est une **photo dans un cadre** : un filet blanc de 1px, coins à 6px, posé à quelques pixels du bord de l'écran sur **la même photo floutée** — l'image semble sous verre. Derrière le bâtiment, un **mot-marque géant** blanc qui s'efface vers le bas, comme gravé dans le ciel. L'interface tient en lignes fines et petites capitales : heure locale, ville, « MENU » et un rond blanc à points. Le texte est **net et moyen** (Inter 500 en capitales, mesuré) et la seule matière en relief est la **carte conseiller en verre dépoli**. Sous le héros, la page devient un catalogue éditorial blanc rythmé par une bande noire.
 
 Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, logo, photos ni textes du template d'origine.
 
@@ -17,7 +17,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 
 1. **Le cadre** : `border: 1px solid var(--frame-line)`, `border-radius: var(--radius-frame)`, marge `--frame-inset`, photo floutée (`--blur-bg`) visible tout autour.
 2. **Mot-marque derrière le sujet** : ciel → mot-marque → colline/maison. Le sommet du bâtiment mord dans le bas des lettres.
-3. **Texte léger, petit, en capitales** : titres Inter 300, nav et méta en 11px +0.08em. Aucun gras au-delà de 600.
+3. **Titres Inter 500 en capitales** (`--weight-title`, interligne 1.1, `--tracking-title`), surtitres « // » 16px, texte 16px/1.6 `--muted`. Rien au-delà de 600 (le mot-marque).
 4. **Deux matières seulement** dans le héros : photo et verre (`--glass` + `backdrop-filter`). Ailleurs : blanc, `--surface`, noir `--ink`.
 5. **Ambre « golden hour »** (`--accent`) réservé aux prix et aux liens « Lire → » ; jamais de fond ambré.
 6. **Contraste** : le texte blanc du héros repose toujours sur le voile `--shade` (bas de photo) ; repli opaque `--glass-solid` si `backdrop-filter` manque.
@@ -29,22 +29,35 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Cadre photo, mot-marque, barre du haut, boutons (tous états), carte verre, puces de filtre, carte d'annonce, bande de chiffres, portrait d'équipe, carte d'article, champ de lettre d'info, pied de page. |
-| `references/layouts.md` | Héros encadré, catalogue 2×2, bande noire, équipe 4×2, journal, mobile. |
-| `references/motion.md` | Mise au point de la photo, montée du texte, survols, mouvement réduit. |
+| `references/components.md` | Cadre photo, mot-marque, barre du haut, boutons, carte verre, carte d'annonce… puis la partie **mesurée sur le site** : surtitre « // », bouton à flèche, compteurs odomètre, règle graduée, ligne de service, carte de quartier, pile d'étapes, mosaïque de témoignages, carte d'agent, formulaire gris, FAQ, encarts de fiche, menu plein écran, héros de page interne. |
+| `references/layouts.md` | Héros encadré, catalogue 2×2… puis l'**accueil réel en 13 sections**, les **10 pages internes** et le mobile observé. |
+| `references/motion.md` | Mise au point de la photo, montée du texte, survols ; transition de couleur **mesurée** (400ms), titres qui se remplissent, odomètres, étapes collantes. |
 | `references/assets.md` | Avant de placer une image : sujets, cadrages, lumière dorée, grade et voile, détourage pour le mot-marque, sources, prompts IA, maquette 3D optionnelle. |
 | `examples/demo.html` | Page d'exemple complète (agence fictive). |
-| `source.md` | Référence, observations et écarts. |
+| `source.md` | Référence, site en ligne, pages explorées (mesuré / observé) et écarts. |
+
+## Pages couvertes
+
+| Page | Gabarit (`layouts.md`) | Composants clés |
+|---|---|---|
+| Accueil | Accueil réel (13 sections) | Héros + carte conseiller, compteurs, annonces, services noirs, quartiers, étapes, témoignages, FAQ |
+| À propos | Pages internes | Héros de page centré, logos clients en cases grises, cartes de chiffres à indicateur, agents |
+| Services / détail | Pages internes | Lignes de service, colonne 750px |
+| Biens / fiche | Pages internes | Cartes d'annonce ; encarts prix noir, visite, formulaire ; galerie 2×2 |
+| Quartier, Journal, Article | Pages internes | Carte de quartier, carte d'article, colonne 800px |
+| Contact, 404 | Pages internes | Formulaire gris, « 404 » géant translucide |
+| Menu | — | Menu plein écran flouté 5px |
 
 ## Typographie
 
 | Rôle | Police (Google Fonts) | Réglages |
 |---|---|---|
-| Mot-marque géant | **Inter Tight** 700 | 80–300px, capitales, interligne 0.8, −0.04em, dégradé blanc → transparent |
-| Titre du héros | **Inter** 300 | 28–44px, capitales, interligne 1.05 |
-| Titres de section | Inter Tight 500 | 32–52px, capitales, −0.03em |
+| Mot-marque géant | **Inter** 600 (ou Inter Tight 700) | 280px mesuré, capitales, −0.04em, dégradé blanc → transparent |
+| Titre du héros | **Inter** 500 | 80px desktop / 40px mobile (mesuré), capitales, interligne 1.1, −0.02em |
+| Titre de page interne | Inter 600 | 100px (mesuré), capitales, −0.02em |
+| Titres de section | Inter 500 | 48px (mesuré) / 32px mobile, capitales, −0.02em ; sous-titres 32, 24, 20px |
 | Chiffres | Inter Tight 400 | 40–64px, −0.04em |
-| Nav, méta, boutons | Inter 500 | 11–12px, capitales, +0.08em |
+| Nav, surtitres « // », boutons, étiquettes | Inter 500 | 16px (mesuré), capitales, sans approche |
 | Texte | Inter 400 | 14–16px / 1.55 |
 
 ## Couleurs
@@ -68,8 +81,8 @@ Le style vit de **vraies photos d'architecture en lumière dorée** (fin de jour
 
 ## À éviter
 
-- Des ombres portées sur les cartes d'annonce, des coins arrondis > 6px, des boutons pilule colorés.
-- Un titre de héros en gras ou centré : il est léger, en bas à gauche.
+- Des ombres portées, des coins arrondis > 10px (mesuré : 4px boutons, 6px cadre, 10px cartes), des boutons pilule colorés.
+- Un titre de héros en gras 700+ ou centré sur l'accueil : il est en 500, en bas à gauche (les pages internes, elles, peuvent centrer leur titre).
 - Du verre dépoli partout : une carte en verre par écran, sur une photo.
 - Des photos froides ou en plein jour : la lumière est dorée, rasante.
 - Copier le nom, le logo ou les photos du template d'origine.

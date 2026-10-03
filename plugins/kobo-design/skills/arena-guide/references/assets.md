@@ -12,6 +12,11 @@
 | `map` (derrière le grand médaillon) | Carte de jeu vue de dessus, ou à défaut un terrain (roche, forêt vue d'en haut) | Carré ou 3:2, centre à 60 % / 45 % | Neutre | `saturate(.5) brightness(.7)`, teinte `--bg` en `mix-blend-mode: color`, masque radial |
 | `objective` + médaillons | L'objectif ou le lieu (base alliée, base ennemie, monstre, héros) | Carré 1:1, sujet centré (recadré en cercle) | Lisible en 92px | Aucun filtre ; l'anneau cyan / rouge dit le camp |
 | `tutorial-video` + vignettes | Boucle de 6 s du geste expliqué ; poster = image fixe | 16:9 ; vignettes 126×72 | Identique au jeu | Vignettes à 70 % d'opacité, 100 % si actives |
+| `champion-card` (liste) | Le personnage en pied ou buste, pose héroïque | 2:3 portrait (332×502), visage dans le tiers haut | Splash art coloré, fond peint | Aucun filtre ; bandeau nom navy par-dessus |
+| `splash` (fiche) | Splash art large du personnage | Plein écran ≈ 16:9, sujet au tiers droit ; mobile recadré 16:9 sur le visage | Crépuscule, lumière dorée | `--veil-left` + `--veil-bottom` |
+| icônes de compétences + `skill-video` | Icône carrée de l'effet ; boucle de 6 s de la compétence | 1:1 (96px) ; 16:9 | Effets lumineux sur fond sombre | Icônes à 60 % d'opacité si inactives |
+| `skin-splash` + vignettes | Variante du personnage (skin) | 16:9 | Celle du skin | Aucun filtre |
+| `news-N` | Image d'article ou de vidéo | 16:9, sans arrondi | — | Aucun filtre ; pastille `--panel` 44px |
 | `final-backdrop` | Paysage épique (paroi, sommet, porte de forteresse) | Plein cadre | Sombre, contrasté | `saturate(.6)` + dégradé nuit de haut en bas |
 
 **Règle de cohérence** : un monde de fantasy héroïque sous un ciel de crépuscule ; toutes les images passent sous un voile bleu nuit, le texte ne repose jamais directement sur une image claire.

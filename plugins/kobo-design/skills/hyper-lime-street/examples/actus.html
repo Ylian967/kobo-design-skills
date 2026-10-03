@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actu &amp; infos — NEON DISTRICT (démo Hyper Lime Street)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap">
+<style>
+:root {
+  --bg: #efefef; --surface: #ffffff; --ink: #111111; --ink-2: #000000; --on-ink: #ffffff; --text: #222122; --muted: #6b6b6b; --muted-dark: #919191;
+  --accent: #d8fa00; --accent-2: #c6e800; --on-accent: #000000; --stroke: #767678; --hatch: rgb(255 255 255 / 0.06);
+  --accent-blue: #1f6bff; --field: #222222; --watermark: rgb(0 0 0 / 0.06); --watermark-ink: rgb(255 255 255 / 0.08); --veil: rgb(17 17 17 / 0.55);
+  --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif; --font-body: 'Inter', system-ui, sans-serif;
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 0.9rem; --text-md: 1.2rem; --text-lg: 1.575rem; --text-xl: 2.4375rem; --text-2xl: 3.3rem; --text-num: clamp(4rem, 8vw, 7.5rem); --leading-tight: 1;
+  --text-2xs: 0.625rem; --text-card: 1.0625rem; --text-article: 1.75rem; --text-name: 3rem; --text-mark: clamp(4rem, 12vw, 11rem);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --section-pad: 117px; --nav-h: 60px;
+  --radius-sm: 8.4px; --radius-md: 24px; --radius-track: 72px; --radius-pill: 999px; --stroke-w: 4.8px; --cut: 45deg;
+  --radius-lg: 16px; --radius-asym: var(--radius-md) 0 var(--radius-md) 0; --skew-tab: -16deg; --badge-w: 340px;
+  --ease: cubic-bezier(0.215, 0.61, 0.355, 1); --dur-1: 300ms; --dur-2: 400ms; --dur-3: 500ms; --dur-4: 600ms; --marquee: 20s;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-sm)/1.5 var(--font-body); }
+a { color: inherit; }
+img { display: block; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Nav (identique à l'accueil) */
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--nav-h); background: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: var(--space-8); padding: 0 var(--space-6); }
+.logo { font: 400 1.5rem/1 var(--font-display); color: var(--on-ink); letter-spacing: .08em; text-decoration: none; }
+.nav ul { display: flex; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
+.nav ul a { display: block; color: var(--muted-dark); font: 700 var(--text-sm)/1.1 var(--font-body); text-decoration: none; text-align: center; padding: 4px 12px; border-radius: var(--radius-pill); transition: all var(--dur-1) var(--ease); }
+.nav ul a:hover { color: var(--on-ink); }
+.nav ul a[aria-current="page"] { background: var(--surface); color: var(--text); }
+.btn-dl { background: var(--accent); color: var(--on-accent); border-radius: var(--radius-pill); padding: 8px 12px; font: 700 var(--text-sm)/1 var(--font-body); text-decoration: none; white-space: nowrap; }
+.burger { display: none; width: 44px; height: 44px; border: 2px solid var(--stroke); border-radius: 50%; background: none; color: var(--on-ink); font-size: 18px; cursor: pointer; }
+
+/* Badge de section (signature des pages internes) */
+.page-head { position: relative; padding: calc(var(--nav-h) + var(--space-12)) 0 var(--space-12); overflow: hidden; }
+.page-head__band { position: absolute; left: -10%; right: -10%; top: calc(var(--nav-h) + 56px); height: 90px; transform: rotate(-6deg);
+  background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px); animation: bandIn var(--dur-4) var(--ease) both; }
+.badge { position: relative; z-index: 1; width: min(var(--badge-w), calc(100% - 16px)); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 0 var(--space-4);
+  padding: var(--space-4) var(--space-8) var(--space-4) var(--space-6); background: var(--accent); color: var(--on-accent); border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  animation: badgeIn var(--dur-4) var(--ease) 150ms both; }
+.badge h1 { margin: 0; font: 700 1rem/1.2 var(--font-body); }
+.badge span { grid-column: 1; font: 700 var(--text-2xs)/1 var(--font-body); letter-spacing: .12em; }
+.badge b { grid-column: 2; grid-row: 1 / 3; font: 400 var(--text-num)/.85 var(--font-display); }
+.watermark { position: absolute; right: -2vw; top: calc(var(--nav-h) + 4px); margin: 0; white-space: nowrap; pointer-events: none;
+  font: italic 400 var(--text-mark)/1 var(--font-display); color: var(--watermark); animation: markIn 800ms var(--ease) both; }
+
+.wrap { width: min(1200px, calc(100% - 32px)); margin: 0 auto; }
+
+/* Carrousel bannière */
+.banner { display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 900px); gap: var(--space-4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; scroll-behavior: smooth; }
+.banner::-webkit-scrollbar { display: none; }
+.slide { position: relative; scroll-snap-align: start; aspect-ratio: 16/9; border-radius: var(--radius-md); overflow: hidden; background: var(--ink); color: var(--on-ink); text-decoration: none; }
+.slide img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(.9); transition: transform var(--dur-3) var(--ease); }
+.slide:hover img { transform: scale(1.03); }
+.slide__cap { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-4) var(--space-6); background: var(--veil); }
+.slide__cap strong { font: 400 var(--text-lg)/1.1 var(--font-display); }
+.bdots { display: flex; justify-content: center; gap: var(--space-2); margin: var(--space-4) 0 var(--space-12); }
+.bdots button { width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.bdots button::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--ink); transition: all var(--dur-2) var(--ease); }
+.bdots button:hover::before { background: var(--stroke); }
+.bdots button[aria-current="true"]::before { background: var(--accent); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
+
+/* Barre d'onglets */
+.tabrow { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-8); }
+.tabbar { display: inline-flex; gap: var(--space-1); padding: 6px; background: var(--ink-2); border-radius: var(--radius-pill); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.tabbar [role="tab"] { position: relative; isolation: isolate; min-height: 44px; padding: 0 var(--space-6); border: 0; background: none; color: var(--muted-dark); font: 700 var(--text-sm) var(--font-body); cursor: pointer; white-space: nowrap; transition: color var(--dur-1) var(--ease); }
+.tabbar [role="tab"]::before { content: ""; position: absolute; inset: 4px 0; z-index: -1; background: var(--surface); transform: skewX(var(--skew-tab)) scaleX(0); transition: transform var(--dur-2) var(--ease); }
+.tabbar [role="tab"]:hover { color: var(--on-ink); }
+.tabbar [role="tab"][aria-selected="true"] { color: var(--text); }
+.tabbar [role="tab"][aria-selected="true"]::before { transform: skewX(var(--skew-tab)) scaleX(1); }
+.tabbar [role="tab"]:disabled { opacity: .4; cursor: not-allowed; }
+.count { font: 400 var(--text-md)/1 var(--font-display); color: var(--muted); }
+
+/* Grille de cartes à coins asymétriques */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-8) var(--space-6); transition: opacity 150ms linear; }
+.grid.is-leaving { opacity: 0; }
+.grid.is-entering > * { animation: cardUp var(--dur-1) var(--ease) both; animation-delay: calc(var(--i, 0) * 40ms); }
+.ncard { display: grid; gap: var(--space-2); align-content: start; color: var(--text); text-decoration: none; min-width: 0; }
+.ncard[hidden] { display: none; }
+.ncard__img { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius-asym); background: var(--ink); }
+.ncard__img img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1); transition: transform var(--dur-3) var(--ease); }
+.ncard:hover .ncard__img img { transform: scale(1.05); }
+.ncard:hover .ncard__title { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.ncard__meta { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-2); font: 700 var(--text-sm) var(--font-body); }
+.tag { display: inline-block; padding: 2px 10px; background: var(--ink-2); color: var(--accent); font: normal 700 11px/1.4 var(--font-body); transform: skewX(var(--skew-tab)); }
+.ncard__title { font: 700 var(--text-card)/1.3 var(--font-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ncard__ex { font-size: var(--text-xs); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ncard--soon .ncard__img img { filter: grayscale(1) contrast(1.1); }
+
+.pill { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-ink); border: var(--stroke-w) solid var(--stroke); font: 400 var(--text-md)/1 var(--font-display); text-decoration: none; cursor: pointer; transition: all var(--dur-1) var(--ease); }
+.pill:hover { background: var(--accent); color: var(--on-accent); border-color: var(--ink); }
+.more { display: flex; justify-content: center; margin: var(--space-12) 0 var(--space-16); }
+
+/* Onglet latéral « Retour » */
+.back { position: fixed; right: 0; top: 40%; z-index: 40; display: grid; justify-items: center; gap: 6px; width: 50px; padding: 14px 0; background: var(--ink-2); color: var(--accent); border: 2px solid var(--stroke); border-right: 0; border-radius: 12px 0 0 12px; text-decoration: none; font: 400 1.1rem/1 var(--font-display); transition: all var(--dur-1) var(--ease); }
+.back span { writing-mode: vertical-rl; letter-spacing: .1em; }
+.back i { font-style: normal; transition: transform var(--dur-1) var(--ease); }
+.back:hover { background: var(--accent); color: var(--on-accent); }
+.back:hover i { transform: translateY(-4px); }
+
+/* Bas de page + newsletter */
+footer { background: var(--ink); color: var(--muted-dark); padding: var(--space-12) 0 var(--space-8); }
+.foot { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-12); align-items: start; }
+.socials { display: flex; flex-wrap: wrap; gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.socials a { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 2px solid var(--stroke); color: var(--muted-dark); text-decoration: none; font: 700 var(--text-xs) var(--font-body); transition: all var(--dur-1) var(--ease); }
+.socials a:hover { color: var(--on-ink); border-color: var(--on-ink); }
+.nl { display: grid; gap: var(--space-4); }
+.nl h2 { margin: 0; font: 700 1.625rem/1.2 var(--font-body); color: var(--on-ink); }
+.nl p { margin: 0; }
+.nl__row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.nl input[type="email"] { flex: 1 1 220px; min-width: 0; min-height: 48px; padding: 0 var(--space-6); border: 2px solid transparent; border-radius: var(--radius-pill); background: var(--field); color: var(--on-ink); font: 400 var(--text-sm) var(--font-body); }
+.nl input[type="email"]::placeholder { color: var(--muted-dark); }
+.nl input[type="email"]:focus { outline: none; border-color: var(--accent); }
+.nl button { min-height: 48px; padding: 0 var(--space-6); border: 0; border-radius: var(--radius-pill); background: var(--accent); color: var(--on-accent); font: 700 var(--text-sm) var(--font-body); cursor: pointer; transition: all 0.2s linear; }
+.nl button:hover:not(:disabled) { filter: brightness(1.08); }
+.nl button:disabled { opacity: .45; cursor: not-allowed; }
+.nl label { display: flex; gap: var(--space-2); align-items: flex-start; font-size: var(--text-xs); }
+.nl input[type="checkbox"] { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; flex: none; }
+.nl a { color: var(--accent); }
+.nl__msg { min-height: 1.2em; color: var(--accent); font-size: var(--text-xs); }
+.legal { margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--field); font-size: var(--text-xs); text-align: center; }
+
+@keyframes badgeIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes bandIn { from { translate: -30% 0; opacity: 0; } }
+@keyframes markIn { from { translate: 60px 0; opacity: 0; } }
+@keyframes cardUp { from { opacity: 0; transform: translateY(12px); } }
+
+@media (max-width: 1023px) {
+  .nav { justify-content: space-between; gap: var(--space-3); padding: 0 var(--space-4); }
+  .burger { display: grid; place-items: center; }
+  .nav ul { display: none; position: fixed; inset: var(--nav-h) 0 auto; flex-direction: column; gap: var(--space-2); padding: var(--space-6) var(--space-4); background: var(--ink-2); }
+  .nav.is-open ul { display: flex; }
+  .nav ul a { padding: 12px 16px; font-size: var(--text-md); text-align: left; }
+  .nav ul a br { display: none; }
+  .page-head__band { height: 48px; top: calc(var(--nav-h) + 60px); }
+  .badge b { font-size: 4rem; }
+  .watermark { font-size: 4rem; top: calc(var(--nav-h) + 110px); }
+  .banner { grid-auto-columns: 88%; }
+  .slide__cap strong { font-size: var(--text-md); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .back { display: none; }
+  .foot { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .tabrow .count { display: none; }
+  .nl__row { flex-direction: column; }
+  .nl input[type="email"] { flex-basis: auto; }
+}
+@media (max-width: 374px) { .btn-dl { display: none; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <a class="logo" href="demo.html">N·D</a>
+  <ul id="menu">
+    <li><a href="demo.html">Accueil</a></li><li><a href="demo.html#perso">Personnages</a></li><li><a href="demo.html#video">Vidéos</a></li><li><a href="actus.html" aria-current="page">Actus &amp;<br>infos</a></li><li><a href="#">Univers<br>du jeu</a></li>
+  </ul>
+  <a class="btn-dl" href="#">Télécharger maintenant</a>
+  <button class="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu">≡</button>
+</header>
+
+<a class="back" href="demo.html" aria-label="Retour à l'accueil"><i aria-hidden="true">↑</i><span>RETOUR</span></a>
+
+<main>
+  <header class="page-head">
+    <div class="page-head__band" aria-hidden="true"></div>
+    <div class="badge"><h1>Actu &amp; infos</h1><span>NEWS &amp; INFO</span><b>04</b></div>
+    <p class="watermark" aria-hidden="true">NEWS &amp; INFO</p>
+  </header>
+
+  <div class="wrap">
+    <section aria-roledescription="carrousel" aria-label="À la une">
+      <div class="banner" id="banner">
+        <a class="slide" href="#" data-slot="banner-image"><img src="https://images.unsplash.com/photo-1562292657-2dc74a21b520?auto=format&fit=crop&w=1600&h=900&q=80" alt="Ruelle couverte de graffitis colorés" width="1600" height="900" fetchpriority="high"><span class="slide__cap"><i class="tag">Événements</i><strong>Festival du quartier nord : la ruelle s'allume</strong></span></a>
+        <a class="slide" href="#" data-slot="banner-image"><img src="https://images.unsplash.com/photo-1720461307190-32a77e4d96b6?auto=format&fit=crop&w=1600&h=900&q=80" alt="Tunnel sombre couvert de graffitis, éclairé d'une lumière jaune" width="1600" height="900" loading="lazy"><span class="slide__cap"><i class="tag">Actus</i><strong>Version 2.4 « Sous le pont » disponible</strong></span></a>
+        <a class="slide" href="#" data-slot="banner-image"><img src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=1600&h=900&q=80" alt="Skateur en plein saut sur fond de ciel bleu" width="1600" height="900" loading="lazy"><span class="slide__cap"><i class="tag">Avis</i><strong>Tournoi de figures : inscriptions ouvertes</strong></span></a>
+      </div>
+      <div class="bdots" id="bdots" role="group" aria-label="Choisir une diapositive">
+        <button aria-current="true" aria-label="Diapositive 1"></button><button aria-current="false" aria-label="Diapositive 2"></button><button aria-current="false" aria-label="Diapositive 3"></button>
+      </div>
+    </section>
+
+    <section aria-labelledby="listTitle">
+      <h2 id="listTitle" class="sr">Toutes les actualités</h2>
+      <div class="tabrow">
+        <div class="tabbar" role="tablist" aria-label="Catégories">
+          <button role="tab" aria-selected="true" data-cat="all">Dernières</button><button role="tab" aria-selected="false" data-cat="actus">Actus</button><button role="tab" aria-selected="false" data-cat="events">Événements</button><button role="tab" aria-selected="false" data-cat="avis">Avis</button>
+        </div>
+        <span class="count" id="count" aria-live="polite">6 articles</span>
+      </div>
+
+      <div class="grid" id="grid" role="tabpanel">
+        <a class="ncard" href="#" data-cat="events" data-slot="news-image"><span class="ncard__img"><img src="https://images.unsplash.com/photo-1517776832751-0a7e6993de03?auto=format&fit=crop&w=800&h=450&q=75" alt="Porte couverte de graffitis et d'autocollants" width="800" height="450" loading="lazy"></span><span class="ncard__meta"><time datetime="2026-10-01">2026/10/01</time><i class="tag">Événements</i></span><strong class="ncard__title">Fond d'écran calendrier pour octobre 2026</strong><span class="ncard__ex">Téléchargez le fond du mois en trois formats et partagez vos captures du quartier avec l'étiquette du festival.</span></a>
+        <a class="ncard" href="#" data-cat="actus" data-slot="news-image"><span class="ncard__img"><img src="https://images.unsplash.com/photo-1720461307190-32a77e4d96b6?auto=format&fit=crop&w=800&h=450&q=75" alt="Tunnel couvert de graffitis sous une lampe jaune" width="800" height="450" loading="lazy"></span><span class="ncard__meta"><time datetime="2026-09-29">2026/09/29</time><i class="tag">Actus</i></span><strong class="ncard__title">Notes de version 2.4 « Sous le pont » : nouvelle zone et équilibrage</strong><span class="ncard__ex">Un réseau de tunnels s'ouvre sous l'échangeur. Trois agents rejoignent la rotation et les combos aériens sont revus.</span></a>
+        <a class="ncard" href="#" data-cat="avis" data-slot="news-image"><span class="ncard__img"><img src="https://images.unsplash.com/photo-1542357091-d4cd9ad6ba02?auto=format&fit=crop&w=800&h=450&q=75" alt="Deux skateurs, pieds posés sur leurs planches" width="800" height="450" loading="lazy"></span><span class="ncard__meta"><time datetime="2026-09-27">2026/09/27</time><i class="tag">Avis</i></span><strong class="ncard__title">Maintenance des serveurs le 3 octobre</strong><span class="ncard__ex">Les serveurs seront indisponibles de 6h à 11h. Une compensation de 300 jetons sera envoyée par messagerie.</span></a>
+        <a class="ncard" href="#" data-cat="events" data-slot="news-image"><span class="ncard__img"><img src="https://images.unsplash.com/photo-1642345843526-6279c8880a49?auto=format&fit=crop&w=800&h=450&q=75" alt="Rue sombre et mouillée sous un néon rouge" width="800" height="450" loading="lazy"></span><span class="ncard__meta"><time datetime="2026-09-24">2026/09/24</time><i class="tag">Événements</i></span><strong class="ncard__title">Nuit rouge : défis chronométrés dans les ruelles</strong><span class="ncard__ex">Battez le chrono de Kaze sur cinq parcours nocturnes pour débloquer une planche exclusive.</span></a>
+        <a class="ncard" href="#" data-cat="actus" data-slot="news-image"><span class="ncard__img"><img src="https://images.unsplash.com/photo-1604315841269-a1f298321670?auto=format&fit=crop&w=800&h=450&q=75" alt="Rue de nuit baignée de lumière cyan et magenta" width="800" height="450" loading="lazy"></span><span class="ncard__meta"><time datetime="2026-09-20">2026/09/20</time><i class="tag">Actus</i></span><strong class="ncard__title">Découverte de l'agent : Mona, chevalière à remontoir</strong><span class="ncard__ex">Son style, ses combos et la musique de sa bande-annonce, racontés par l'équipe du studio.</span></a>
+        <a class="ncard ncard--soon" href="#" data-cat="events" data-slot="news-image"><span class="ncard__img"><img src="https://images.unsplash.com/photo-1673092147872-5ddb03194341?auto=format&fit=crop&w=800&h=450&q=75" alt="Homme en sweat à capuche noir contre un mur de brique" width="800" height="450" loading="lazy"></span><span class="ncard__meta"><time datetime="2026-10-10">Bientôt</time><i class="tag">Événements</i></span><strong class="ncard__title">Collection d'hiver : vestes de crew</strong><span class="ncard__ex">Annonce prévue le 10 octobre.</span></a>
+      </div>
+      <div class="more"><button class="pill" type="button">Charger plus <span aria-hidden="true">›</span></button></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <ul class="socials" aria-label="Réseaux sociaux">
+        <li><a href="#" aria-label="Vidéo">▶</a></li><li><a href="#" aria-label="Messagerie">✉</a></li><li><a href="#" aria-label="Forum">#</a></li><li><a href="#" aria-label="Photos">◎</a></li><li><a href="#" aria-label="Musique">♫</a></li>
+      </ul>
+      <form class="nl" id="nl" novalidate>
+        <h2>M'abonner aux messages</h2>
+        <p>Recevez les actus, les codes et les dates d'événements avant tout le monde.</p>
+        <div class="nl__row">
+          <label class="sr" for="email">Adresse e-mail</label>
+          <input id="email" type="email" placeholder="Votre adresse e-mail" autocomplete="email" required>
+          <button type="submit" id="nlBtn" disabled>M'abonner maintenant</button>
+        </div>
+        <label><input type="checkbox" id="consent"> <span>J'accepte de recevoir des messages du studio. <a href="#">Détails &gt;&gt;</a></span></label>
+        <p class="nl__msg" id="nlMsg" aria-live="polite"></p>
+      </form>
+    </div>
+    <p class="legal">© Studio fictif — démo Kōbō. Contenu inventé. Photos : Unsplash · <a href="demo.html">Accueil</a> · <a href="actus.html" aria-current="page">Actu &amp; infos</a></p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Menu mobile
+  const nav = document.getElementById('nav'), burger = nav.querySelector('.burger');
+  burger.addEventListener('click', () => { const o = nav.classList.toggle('is-open'); burger.setAttribute('aria-expanded', o); burger.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { burger.click(); burger.focus(); } });
+
+  // Carrousel bannière : points + défilement auto (arrêté au survol/focus, absent en mouvement réduit)
+  const banner = document.getElementById('banner'), dots = [...document.querySelectorAll('#bdots button')], slides = [...banner.children];
+  let cur = 0, timer;
+  const go = i => { cur = (i + slides.length) % slides.length; banner.scrollTo({ left: slides[cur].offsetLeft - banner.offsetLeft, behavior: reduce ? 'auto' : 'smooth' }); };
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  banner.addEventListener('scroll', () => { const i = Math.round(banner.scrollLeft / (slides[1].offsetLeft - slides[0].offsetLeft)); dots.forEach((d, j) => d.setAttribute('aria-current', j === i)); cur = i; }, { passive: true });
+  const start = () => { if (!reduce) timer = setInterval(() => go(cur + 1), 5000); }, stop = () => clearInterval(timer);
+  const zone = banner.parentElement; zone.addEventListener('mouseenter', stop); zone.addEventListener('mouseleave', start); zone.addEventListener('focusin', stop); zone.addEventListener('focusout', start);
+  start();
+
+  // Onglets : filtre de la grille avec sortie/entrée
+  const tabs = [...document.querySelectorAll('[role="tab"]')], grid = document.getElementById('grid'), cards = [...grid.children], count = document.getElementById('count');
+  const select = t => {
+    tabs.forEach(x => { x.setAttribute('aria-selected', x === t); x.tabIndex = x === t ? 0 : -1; });
+    const apply = () => {
+      let n = 0; cards.forEach(c => { const show = t.dataset.cat === 'all' || c.dataset.cat === t.dataset.cat; c.hidden = !show; if (show) c.style.setProperty('--i', n++); });
+      count.textContent = n + (n > 1 ? ' articles' : ' article');
+      grid.classList.remove('is-leaving', 'is-entering'); void grid.offsetWidth; grid.classList.add('is-entering');
+    };
+    if (reduce) apply(); else { grid.classList.add('is-leaving'); setTimeout(apply, 150); }
+  };
+  tabs.forEach((t, i) => {
+    t.tabIndex = t.getAttribute('aria-selected') === 'true' ? 0 : -1;
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { const n = tabs[(i + d + tabs.length) % tabs.length]; n.focus(); select(n); } });
+  });
+
+  // Newsletter : bouton actif seulement avec consentement
+  const consent = document.getElementById('consent'), btn = document.getElementById('nlBtn'), email = document.getElementById('email'), msg = document.getElementById('nlMsg');
+  consent.addEventListener('change', () => { btn.disabled = !consent.checked; });
+  document.getElementById('nl').addEventListener('submit', e => { e.preventDefault(); msg.textContent = email.checkValidity() ? 'C’est noté : premier message dans votre boîte très bientôt.' : 'Adresse invalide.'; });
+})();
+</script>
+</body>
+</html>

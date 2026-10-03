@@ -12,13 +12,15 @@
   --bg: #000000; --bg-warm: #1a0c08; --paper: #ffffff; --text: #ffffff; --muted: #b5bdc1; --ink: #263238;
   --gold: #f1c66f; --on-gold: #1e244d; --navy: #1e244d; --red: #b0030d; --red-brand: #e20613; --on-red: #ffffff; --ember: #d2691e;
   --line-gold: rgb(241 198 111 / 0.8); --scrim: rgb(0 0 0 / 0.6);
-  --stripe-1: #1565c0; --stripe-2: #00a5a8; --stripe-3: #e8a317; --stripe-4: #d9415b;
+  --lava: #240a04; --field: #ffffff; --glass: rgb(0 0 0 / 0.55); --glass-line: rgb(255 255 255 / 0.14); --line: rgb(255 255 255 / 0.9);
+  --press-1: #0d1a5c; --press-2: #1e48c8;
+  --stripe-1: #d9415b; --stripe-2: #e8a317; --stripe-3: #1565c0; --stripe-4: #00a5a8; --stripe-h: 3px;
   --font: 'Montserrat', 'Metropolis', system-ui, sans-serif;
-  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.5rem; --text-2xl: 2.25rem; --text-hero: 2.8125rem;
+  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 0.9375rem; --text-base: 1rem; --text-nav: 1.0625rem; --text-lg: 1.125rem; --text-xl: 1.5rem; --text-2xl: 2.25rem; --text-hero: 2.8125rem;
   --tracking: -0.03em; --tracking-caps: 0.08em; --leading: 1.25;
   --space-1: 6px; --space-2: 12px; --space-3: 19px; --space-4: 25px; --space-5: 30px; --space-6: 35px; --space-8: 50px;
-  --cta-min: 44px; --nav-h: 70px; --nav-h-top: 140px; --container: 1100px;
-  --radius-xs: 4px; --radius-sm: 5px; --radius-md: 7px; --radius-lg: 20px; --shadow: 0 0 29px rgb(0 0 0 / 0.5);
+  --cta-min: 44px; --nav-h: 70px; --nav-h-top: 140px; --bar-h: 44px; --tile-h: 54px; --tile-w: 244px; --select-h: 54px; --buy-w: 126px; --fab: 60px; --fab-m: 48px; --border-w: 0.8px; --container: 1100px;
+  --radius-xs: 4px; --radius-sm: 5px; --radius-glass: 8px; --radius-md: 7px; --radius-lg: 20px; --shadow: 0 0 29px rgb(0 0 0 / 0.5);
   --ease: ease; --dur-faster: 100ms; --dur-fast: 200ms; --dur: 300ms; --dur-slow: 500ms;
   color-scheme: dark;
 }
@@ -37,15 +39,17 @@ a { color: inherit; }
 .media--ember::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--gold); mix-blend-mode: soft-light; opacity: .35; pointer-events: none; }
 
 /* En-tête */
-.top { height: var(--nav-h); display: flex; justify-content: flex-end; align-items: center; gap: var(--space-5); padding: 0 var(--space-6); background: var(--bg); font: 600 var(--text-xs) var(--font); letter-spacing: .15em; }
+.top { height: var(--bar-h); border-bottom: var(--stripe-h) solid; border-image: linear-gradient(90deg, var(--stripe-1) 0 25%, var(--stripe-2) 25% 50%, var(--stripe-3) 50% 75%, var(--stripe-4) 75%) 1; display: flex; justify-content: flex-end; align-items: center; gap: var(--space-5); padding: 0 var(--space-6); background: var(--bg); font: 600 var(--text-xs) var(--font); letter-spacing: .15em; }
 .publisher { border: 2px solid var(--text); padding: 4px 8px; font: 700 var(--text-xs)/1 var(--font); }
 .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; height: var(--nav-h); display: flex; align-items: center; gap: var(--space-6); padding: 0 var(--space-8); background: var(--bg); }
-.nav::before { content: ""; position: absolute; left: 28%; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--stripe-1) 0 25%, var(--stripe-2) 25% 50%, var(--stripe-3) 50% 75%, var(--stripe-4) 75%); }
 .game-logo { font: 300 1.2rem/1 var(--font); letter-spacing: .12em; text-transform: uppercase; }
 .game-logo b { font-weight: 700; }
 .nav ul { display: flex; gap: var(--space-5); margin: 0 auto 0 var(--space-6); padding: 0; list-style: none; }
-.nav ul a { text-decoration: none; font-size: var(--text-base); transition: color var(--dur-fast) var(--ease); }
-.nav ul a:hover, .nav ul a[aria-current] { color: var(--gold); }
+.nav ul a { position: relative; display: grid; place-items: center; min-height: var(--cta-min); text-decoration: none; font: 300 var(--text-nav)/1 var(--font); transition: color var(--dur-fast) var(--ease); }
+.nav ul a::after { content: "✦ ✦ ✦"; position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%); font-size: 7px; letter-spacing: 2px; white-space: nowrap; color: var(--gold); opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.nav ul a:hover { color: var(--gold); }
+.nav ul a:hover::after, .nav ul a[aria-current]::after { opacity: 1; }
+.nav .btn-gold { min-width: var(--buy-w); }
 .btn-gold { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--cta-min); padding: 12px 25px; background: var(--gold); color: var(--on-gold); border: 0.8px solid var(--gold); border-radius: var(--radius-md); font: 600 var(--text-sm)/1 var(--font); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer; transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
 .btn-gold:hover { background: transparent; color: var(--gold); }
 .btn-line { display: inline-flex; align-items: center; gap: var(--space-4); min-height: 50px; padding: 0 var(--space-4); border: 0.8px solid var(--gold); border-radius: var(--radius-xs); color: var(--gold); font: 600 var(--text-sm) var(--font); text-decoration: none; transition: background-color var(--dur-fast) var(--ease); }
@@ -58,6 +62,9 @@ a { color: inherit; }
 .hero__slot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, var(--bg) 96%), radial-gradient(80% 70% at 50% 40%, transparent 50%, var(--scrim)); }
 .hero h1 { position: relative; margin: 0; font: 300 clamp(2.5rem, 6vw, 4.5rem)/1 var(--font); letter-spacing: .06em; text-transform: uppercase; text-shadow: 0 0 30px var(--bg); }
 .hero h1 b { font-weight: 900; }
+.hero__meta { position: relative; margin: var(--space-3) 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1) var(--space-3); font: 500 var(--text-sm)/1.4 var(--font); }
+.hero__meta b { color: var(--gold); font-weight: 700; }
+.hero__meta a { font-weight: 700; }
 
 /* Pitch */
 .wrap { width: min(var(--container), calc(100% - 40px)); margin: 0 auto; }
@@ -80,7 +87,7 @@ a { color: inherit; }
 .date { font: 600 var(--text-xs) var(--font); }
 
 /* Notes */
-.scores { width: min(1000px, calc(100% - 40px)); margin: 0 auto var(--space-8); padding: var(--space-5); border-radius: var(--radius-xs); background: linear-gradient(90deg, #0d1a5c, #1e48c8 40%, #0d1a5c); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); text-align: center; }
+.scores { width: min(1000px, calc(100% - 40px)); margin: 0 auto var(--space-8); padding: var(--space-5); border-radius: var(--radius-xs); background: linear-gradient(90deg, var(--press-1), var(--press-2) 40%, var(--press-1)); display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); text-align: center; }
 .scores b { display: block; font: 700 var(--text-xl) var(--font); text-shadow: 0 0 12px rgb(130 180 255 / .9); }
 .scores span { font: 600 var(--text-xs) var(--font); letter-spacing: .04em; text-transform: uppercase; }
 
@@ -120,8 +127,8 @@ details ul { margin: 0 0 var(--space-3); padding-left: 20px; color: var(--muted)
 
 /* Flottants */
 .fab { position: fixed; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: grid; gap: 10px; }
-.fab a { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); color: var(--gold); box-shadow: var(--shadow); text-decoration: none; font-size: 22px; }
-.fab a:last-child { background: var(--gold); color: var(--paper); }
+.fab a { width: var(--fab); height: var(--fab); border-radius: 50%; display: grid; place-items: center; background: var(--paper); color: var(--on-gold); box-shadow: var(--shadow); text-decoration: none; font-size: 22px; }
+.fab a:last-child { background: var(--gold); color: var(--on-gold); }
 
 footer { background: var(--gold); color: var(--on-gold); padding: var(--space-8) 20px; text-align: center; font: 600 var(--text-sm) var(--font); background-image: repeating-linear-gradient(60deg, rgb(255 255 255 / .12) 0 1px, transparent 1px 40px); }
 
@@ -129,12 +136,12 @@ footer { background: var(--gold); color: var(--on-gold); padding: var(--space-8)
 @keyframes fade-in { from { opacity: 0; } }
 
 @media (max-width: 1023px) {
-  .nav ul { display: none; } .nav { padding: 0 20px; justify-content: space-between; } .top { display: none; }
+  .nav ul, .nav > .btn-gold { display: none; } .nav { padding: 0 20px; justify-content: space-between; } .top { padding: 0 20px; }
   .pitch, .feat, .buy { grid-template-columns: 1fr; }
   .feat--rev .feat__img { order: 0; }
   .plate, .feat--rev .plate { display: block; padding: 14px 20px; text-align: left; }
   .scores { grid-template-columns: repeat(2, 1fr); }
-  .fab a { width: 48px; height: 48px; font-size: 18px; }
+  .fab a { width: var(--fab-m); height: var(--fab-m); font-size: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
 </style>
@@ -145,15 +152,16 @@ footer { background: var(--gold); color: var(--on-gold); padding: var(--space-8)
 <div class="top"><span>◯</span><span>FR</span><span class="publisher">ÉDITEUR</span></div>
 <header class="nav">
   <span class="game-logo">Chroniques <b>d'Ember</b></span>
-  <ul><li><a href="#features" aria-current="true">Caractéristiques</a></li><li><a href="#">Musique</a></li><li><a href="#">Média</a></li><li><a href="#">Wiki</a></li><li><a href="#">Extension</a></li></ul>
+  <ul><li><a href="#features" aria-current="page">Caractéristiques</a></li><li><a href="#">Musique</a></li><li><a href="#">Média</a></li><li><a href="#">Wiki</a></li><li><a href="#">Extension</a></li></ul>
   <span aria-hidden="true">⌕</span>
-  <a class="btn-gold" href="#buy">Acheter</a>
+  <a class="btn-gold" href="achat.html">Acheter</a>
 </header>
 
 <main>
   <section class="hero">
     <div class="hero__slot media" data-slot="key-visual"><img src="https://images.unsplash.com/photo-1627571795816-b565f55efdb8?auto=format&fit=crop&w=2000&q=80" alt="Silhouette d'un héros à contre-jour devant une lumière orange incandescente" width="2000" height="1333" fetchpriority="high"></div>
-    <h1>Chroniques <b>d'Ember</b></h1>
+    <div><h1>Chroniques <b>d'Ember</b></h1>
+    <p class="hero__meta"><span><b>Date de sortie :</b> 22/05/2026</span><span><b>Genres :</b> RPG</span><span><b>Développeur :</b> Studio Braise (fictif)</span><a href="#">Kit presse</a></p></div>
   </section>
 
   <div class="embers">
@@ -177,7 +185,7 @@ footer { background: var(--gold); color: var(--on-gold); padding: var(--space-8)
       <div class="badges"><span class="badge">Console A</span><span class="badge">Console B</span><span class="badge">PC</span></div>
       <span class="date">22/05/2026</span>
       <div class="badges"><span class="badge">Console portable</span></div>
-      <a class="btn-gold" href="#buy" style="min-width:225px">🛍 Acheter</a>
+      <a class="btn-gold" href="achat.html" style="min-width:225px">🛍 Acheter</a>
       <a class="btn-line" href="#">♡ Ajouter à la liste de souhaits</a>
     </section>
 
@@ -207,14 +215,14 @@ footer { background: var(--gold); color: var(--on-gold); padding: var(--space-8)
       <div class="edition">
         <div class="edition__img media" data-slot="edition-art"><img src="https://images.unsplash.com/photo-1504470695779-75300268aa0e?auto=format&fit=crop&w=1200&q=80&h=675" alt="Braises incandescentes qui s'envolent dans la nuit, visuel de l'édition Aube éternelle" width="1200" height="675" loading="lazy"><button aria-label="Agrandir">⤢</button></div>
         <h3>Chroniques d'Ember — Édition Aube éternelle</h3>
-        <a class="btn-gold" href="#" style="min-width:300px;min-height:54px">⤓ Dématérialisé</a>
+        <a class="btn-gold" href="achat.html" style="min-width:min(300px,100%);min-height:54px">⤓ Dématérialisé</a>
         <details><summary>Voir le contenu de l'édition</summary><ul><li>Le jeu complet</li><li>L'extension « Aube éternelle »</li><li>Pack de tenues de voyage</li></ul></details>
       </div>
     </section>
   </div>
 </main>
-<footer>© Éditeur fictif — démo Kōbō · Mentions légales · Confidentialité · Photos : Unsplash</footer>
-<nav class="fab" aria-label="Actions rapides"><a href="#" aria-label="Newsletter">✉</a><a href="#" aria-label="Vidéos">▶</a><a href="#buy" aria-label="Acheter">🛍</a></nav>
+<footer>© Éditeur fictif — démo Kōbō · <a href="achat.html">Page Acheter (exemple 2)</a> · Mentions légales · Confidentialité · Photos : Unsplash</footer>
+<nav class="fab" aria-label="Actions rapides"><a href="achat.html#newsletter" aria-label="Newsletter">✉</a><a href="achat.html" aria-label="Acheter">🛍</a></nav>
 <script>
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .2 });
 document.querySelectorAll('.fade').forEach(el => io.observe(el));

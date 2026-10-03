@@ -37,3 +37,22 @@ Lent, photographique, sans rebond. La photo fait sa **mise au point** (léger d�
 }
 ```
 La photo est affichée nette d'emblée, les textes sont visibles sans montée, les survols changent de couleur sans mouvement.
+
+---
+
+## Relevé sur le site en ligne (2026-10-03)
+
+| Moment | Effet | Durée / courbe | Statut |
+|---|---|---|---|
+| Survol des liens, boutons, lignes de service | Changement de **couleur** seulement | 400ms `cubic-bezier(0.44, 0, 0.56, 1)` (`--dur-color`, `--ease-color`) | **Mesuré** (seule transition CSS de la page, ×23) |
+| Titres de section | Texte d'abord gris clair, se remplit en noir mot à mot au défilement | lié au défilement | Observé |
+| Compteurs | Chaque chiffre défile verticalement (odomètre) jusqu'à la valeur | ≈ 1.2s | Observé |
+| Étapes | Section collante : les cartes photo s'empilent, les index « 01. 02. 03. » se rangent en haut | lié au défilement | Observé |
+| Menu | Voile flouté 5px + liens centrés en fondu ; MENU → FERMER | ≈ 400ms | Flou mesuré, durée estimée |
+| Héros | Photo plein écran, mot-marque légèrement plus bas au chargement puis en place | ≈ 1s | Observé |
+
+```css
+.reveal-words span { color: var(--line); transition: color var(--dur-color) var(--ease-color); }
+.reveal-words span.is-in { color: var(--ink); }   /* classe ajoutée mot par mot par IntersectionObserver */
+```
+Mouvement réduit : titres directement noirs, compteurs à leur valeur finale, étapes affichées les unes sous les autres sans section collante.

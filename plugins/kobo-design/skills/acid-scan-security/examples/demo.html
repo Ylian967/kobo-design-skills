@@ -226,7 +226,7 @@ footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: va
 <main>
   <section class="hero" aria-labelledby="t-hero">
     <!-- data-eye = position des yeux dans la photo source (fractions x y), data-face = largeur du visage / largeur de la photo : à régler pour chaque photo -->
-    <div class="photo" data-slot="portrait-duotone" data-eye="0.5 0.42" data-face="0.36" role="img" aria-label="Portrait en gros plan d'une femme aux cheveux sombres qui regarde l'objectif, traité en duotone vert acide tramé, bande de scan sur les yeux">
+    <div class="photo" data-slot="portrait-duotone" data-eye="0.5 0.30" data-face="0.36" role="img" aria-label="Portrait en gros plan d'une femme aux cheveux sombres qui regarde l'objectif, traité en duotone vert acide tramé, bande de scan sur les yeux">
       <img id="portraitSrc" crossorigin="anonymous" src="https://images.unsplash.com/photo-1552699611-e2c208d5d9cf?auto=format&fit=crop&crop=faces&w=1200&h=1500&q=80" width="1200" height="1500" alt="" fetchpriority="high">
       <span class="photo__tint" aria-hidden="true"></span>
       <canvas id="portrait" aria-hidden="true"></canvas>
@@ -344,13 +344,13 @@ footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: va
 
   // Portrait : une vraie photo (CORS autorisé par Unsplash) lue dans un canvas, quantifiée sur la rampe des tokens
   const photo = document.querySelector('.photo'), src = document.getElementById('portraitSrc');
-  const [ex, ey] = (photo.dataset.eye || '0.5 0.42').split(' ').map(Number), face = +photo.dataset.face || .36;
+  const [ex, ey] = (photo.dataset.eye || '0.5 0.30').split(' ').map(Number), face = +photo.dataset.face || .36;
   const ar = (+src.getAttribute('width')) / (+src.getAttribute('height'));
   let ready = false;
 
   function geom() {                                    // place la photo : yeux à 40 % de la hauteur, visage centré
     const W = hero.clientWidth, H = hero.clientHeight, mobile = W < 860;
-    const dh = H * (mobile ? .78 : 1.15), dw = dh * ar;
+    const dh = H * (mobile ? .78 : 1.3), dw = dh * ar;   // avec crop=faces (4:5) les yeux sont vers 30 % de la photo : 1.3 garde le haut couvert (dy = .40H - .30 × 1.3H ≈ 0)
     const cx = W * (mobile ? .56 : .5), eyeY = H * .4;
     return { W, H, cx, eyeY, dx: cx - ex * dw, dy: eyeY - ey * dh, dw, dh, bw: face * dw * 1.05 };
   }
@@ -373,6 +373,10 @@ footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: va
         const gr = ctx.createLinearGradient(a, 0, b, 0); gr.addColorStop(0, 'rgba(0,0,0,1)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = gr; ctx.fillRect(Math.min(a, b), 0, Math.abs(b - a), h);
       });
+      if (Y > 0) {                                                       // haut de la photo fondu dans le noir s'il ne touche pas le bord
+        const gt = ctx.createLinearGradient(0, Y, 0, Y + DH * .12); gt.addColorStop(0, 'rgba(0,0,0,1)'); gt.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = gt; ctx.fillRect(0, Y, w, DH * .12);
+      }
       const img = ctx.getImageData(0, 0, w, h), d = img.data;   // lève SecurityError si la photo n'est pas CORS
       const b0x = Math.round(bx / px), b1x = Math.round((bx + g.bw) / px), b0y = Math.round(by / px), b1y = Math.round((by + bh) / px);
       for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {

@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27767056-WayWild-Adventure-Travel-Website (Subash Chandra)
 - **Famille** : Voyage / aventure
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
 
 ## Ce qui a été vu
 
@@ -13,6 +13,13 @@
 - **Bas droite** : « 4.8/5 » avec étoile jaune + « AVERAGE RATING ».
 - **Bouton rond en verre** (~110px) : dégradé bleu dépoli, bordure claire 1px, flèche ↗ et « EXPLORE ADVENTURES ».
 - **Puces** en contour blanc 1px : « MOUNTAIN TREKS », « WILD CAMPING ».
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Shot Dribbble | Une seule image (3200×2400, héros). Relue : note « 4.8/5 » avec étoile ambre, puces contour « Mountain treks / Wild camping », bulle ronde en verre « Explore adventures ↗ » — déjà couverts. |
+| Autres shots du même projet / site en ligne | Aucun trouvé (recherche Dribbble par nom de projet, description du shot sans lien). |
 
 ## Non mesuré
 

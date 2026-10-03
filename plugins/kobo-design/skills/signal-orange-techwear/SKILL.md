@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Navigation, empilement de titre, boutons (tous états), lien souligné, icônes rondes, panneau produit, tableau de specs, interrupteur, index de section, onglets, carte produit, bandeau défilant, texte vertical. |
+| `references/components.md` | Navigation, empilement de titre, boutons (tous états), lien souligné, icônes rondes, panneau produit, tableau de specs, interrupteur, index de section, onglets, carte produit, bandeau défilant, texte vertical. Puis : cartes « système », étiquette de série, carte produit détaillée, fiche produit claire (relevées sur les 5 images du shot). |
 | `references/layouts.md` | Héros en 3 colonnes, collection, mobile. |
 | `references/motion.md` | Découpe des titres, ligne de scan, balayage des cartes, clignotant, mouvement réduit. |
 | `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, traitement N&B sombre + lueur orange, sources, prompts IA, recette du mannequin 3D `.glb`. |

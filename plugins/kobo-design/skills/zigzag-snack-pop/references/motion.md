@@ -38,3 +38,13 @@ N'utiliser l'entrée qu'au chargement (héros) : les sections plus bas restent v
 }
 ```
 Le tampon reste fixe, les états de survol changent sans déplacement perceptible, le héros est affiché d'emblée.
+
+---
+
+## Vu dans la vidéo du shot (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Bande d'ingrédients | Défilement horizontal continu des pastilles (marquee), pastilles coupées aux bords | Observé, vitesse estimée ≈ 40px/s |
+| Carte produit au survol | La carte se soulève, la barre d'achat prend son ombre dure | Observé, durée estimée `--dur` |
+| Tampon | Rotation continue | Observé (déjà dans le catalogue) |

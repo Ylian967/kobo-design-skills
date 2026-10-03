@@ -1,6 +1,6 @@
 /*
  * Chrome Atelier — tokens
- * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
+ * Valeurs estimées sur le shot Dribbble, puis corrigées par les mesures du site en ligne de la marque (2026-10-03, voir source.md) : encre, gris, graisse et largeur des titres, pilules, durées.
  * Deux ambiances : « atelier » (blanc cassé, filets gris) et « nuit » (bleu-gris profond, photo).
  * @contrast ink:bg muted:bg gold-ink:bg ink:paper muted:paper on-ink:ink
  * @contrast on-night:night muted-night:night gold:night on-night:night-2 ink:on-night
@@ -9,9 +9,10 @@
   /* Couleurs — atelier (clair) */
   --bg: #f2f2f0;            /* blanc cassé de la page produit */
   --paper: #fbfbf9;         /* panneau blanc (communauté, confirmation) */
-  --ink: #111111;           /* titres, logo, bouton plein */
+  --ink: #10191e;           /* mesuré : titres, logo, bouton plein (encre bleu-noir) */
   --on-ink: #f2f2f0;
-  --muted: #5c5c58;         /* texte courant, liens de navigation */
+  --muted: #3f464a;         /* mesuré : texte courant, étiquettes [ ] */
+  --faint: #b3b3b3;         /* mesuré : libellés sur photo nuit (« ACCÈS »), « Défiler » — jamais sur clair */
   --line: #c9c9c4;          /* filets : diagonales, croix, anneau (décoratif, jamais du texte) */
   --line-strong: #9c9c96;   /* filets des légendes (callouts) */
   --gold-ink: #7f6127;      /* or lisible en petit texte sur clair */
@@ -34,7 +35,7 @@
   --white-gold: #e7e3da;
 
   /* Typographie */
-  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;  /* capitales larges (font-stretch 112%) */
+  --font-display: 'Inter', 'Archivo', 'Helvetica Neue', Arial, sans-serif;  /* mesuré : grotesque suisse 400 à chasse normale (Suisse Int'l sur le site) */
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;          /* étiquettes [ entre crochets ], valeurs techniques */
   --text-2xs: 0.6875rem;    /* 11px : liens de navigation, étiquettes */
@@ -49,7 +50,9 @@
   --leading-body: 1.6;
   --tracking-caps: 0.14em;
   --tracking-title: 0.01em;
-  --stretch-display: 112%;
+  --stretch-display: 100%;  /* mesuré : chasse normale (le shot semblait plus large) */
+  --weight-display: 400;    /* mesuré : titres en Regular, jamais en gras */
+  --root-fluid: 0.9vw;      /* mesuré : html { font-size } = 0.9vw (13.84px à 1536px) ; tout le site est en rem */
   --indent-step: 2.4em;     /* décalage d'une ligne de titre à l'autre */
 
   /* Espace (base 4px) */
@@ -62,6 +65,7 @@
   /* Formes */
   --radius-pill: 999px;
   --radius-card: 4px;
+  --hairline-w: 0.8px;      /* mesuré : contours des pilules et de la barre de caractéristiques */
   --hairline: 1px solid var(--line);
   --hairline-night: 1px solid var(--line-night);
   --shadow-piece: 0 40px 60px -30px rgb(17 17 17 / 0.35);
@@ -73,5 +77,9 @@
   --dur-fast: 180ms;
   --dur-base: 420ms;
   --dur-slow: 900ms;
-  --dur-spin: 24s;          /* rotation lente de la pièce / des reflets */
+  --dur-spin: 24s;
+  --ease-site: ease;        /* mesuré : all 0.3s ease, transform 0.45s ease */
+  --dur-ui: 300ms;          /* mesuré */
+  --dur-move: 450ms;        /* mesuré : transform */
+  --dur-float: 3s;          /* mesuré : animation floatY 3s ease-in-out */          /* rotation lente de la pièce / des reflets */
 }

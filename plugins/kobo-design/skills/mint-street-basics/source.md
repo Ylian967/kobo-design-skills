@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27774954-Modern-Fashion-E-commerce-Website (shofipy, « SeroWear »)
 - **Famille** : Mode / e-commerce streetwear
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, relecture de la page complète (1600×7106)
 
 > [URL non confirmée : choisie par recherche] — le lien du shot a été retrouvé par recherche et n'a pas pu être confirmé comme celui que l'utilisateur avait en tête.
 
@@ -13,6 +13,14 @@
 - **Corps** : fond menthe (~#e3f3e3) ; titres condensés bleu nuit (~#2a2d4a) « CAREFULLY CURATED COLLECTIONS » ; cartes produit arrondies (~16px) sur fond menthe pâle ou blanc, nom en petites capitales condensées, prix, pastilles de couleur.
 - **Fiche produit** : étoiles d'avis, puces de taille en carré arrondi (la choisie en blanc), pilule verte « Add to Cart » et bouton favori carré.
 - **Pied de page** bleu nuit avec un collage de cercles « VERSATILE ESSENTIALS » et un logotype à empattements géant sur une carte menthe.
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Image 1 (3200×2400) | Mise en scène du héros (vue de présentation). |
+| Image 2 — page complète (1600×7106) | Relue en entier : héros bleu nuit, bandeau vert, « Carefully curated collections » (carte photo + encart blanc « Oversized warm hoodies », flèches rondes blanches), « Explore products » (rangée 1 : grande carte 2 colonnes + carte simple ; rangée 2 : 3 cartes ; pastilles de couleur au-dessus du nom ; lien « Explore more → » aligné à droite), fiche produit, « Versatile essentials » (arc menthe + rayures, disque vert « High-quality, sustainable fabrics », pilule « Shop now »), pied menthe arrondi (adresse, 2 colonnes de liens, lettre d'info avec bouton noir « Submit », icônes sociales) et logotype géant. |
+| Autres shots / site en ligne | Aucun trouvé. |
 
 ## Non mesuré
 

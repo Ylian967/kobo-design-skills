@@ -20,9 +20,25 @@
 - **Points de rupture** : max-width 1024px (×143), 600px (×62), 768px, 420px, 640px
 - **Médias** : 67 images, 2 vidéos, 37 SVG
 
+## Pages explorées (2026-10-02)
+
+« Mesuré » = valeur lue dans le navigateur ; « observé » = relevé à l'œil sur capture (valeurs marquées ≈).
+
+| URL | Relevé |
+|---|---|
+| `/fr-fr/how-to-play/` | Déjà mesurée (ci-dessus). |
+| Barre globale (toutes pages) | Observé : barre #111 ~80px, liens capitales 14px/600 espacés avec ▾ (CHAMPIONS, ACTUALITÉS, DÉCOUVRIR, PLUS) ; recherche = bouton carré arrondi gris foncé ; globe ; pilule cyan ≈ #1fa2d8 « JOUER » texte navy. |
+| Menu déroulant (survol ACTUALITÉS ▾) | Mesuré : panneau #1e2328. Observé : onglet survolé sur fond gris foncé, bord haut cyan 2px, liens petites capitales blanches 12px espacées, ~36px par ligne. |
+| `/fr-fr/champions/` | Mesuré : cartes 332×502, sans arrondi ; bandeau nom #0a1428 ; survol bandeau #3c4452 ; titre « CHAMPION » Beaufort 900 italique 57px #0a1428. Observé : « CHOISISSEZ VOTRE » petites capitales navy, intro 2 lignes centrée, grille 4 colonnes, zoom léger de l'image au survol, nom blanc italique gras ~16px. |
+| `/fr-fr/champions/<fiche>/` | Mesuré : nom H1 Beaufort 700 italique 75px blanc ; or #c8aa6e ; fond compétences #0a1428 ; H2 900 italique 57px. Observé : sous-titre doré ~30px, bio 16px, 2 cartes info carrées à bord or, 5 icônes ~96px en onglets (actif blanc, inactifs gris), vidéo dans un double filet doré (marge ~24px), skins : grande image + 5 vignettes 16:9, active cadre or décollé 4px + nom or, ligne de progression + flèches dorées. |
+| `/fr-fr/news/` | Mesuré : bandeau #0a1428, or #c8aa6e. Observé : bandeau ~290px, « ACTUS » 900 italique blanc à gauche ; grille 3 colonnes ; image 16:9 sans arrondi + pastille gris foncé 44px (↗ ou ▶ centré) ; méta catégorie or 13px \| date grise ; titre gras navy ~22px/1.4 ; extrait gris 15px. |
+| Mobile (cadre 390px) | Observé : logos à gauche, globe + hamburger carré gris arrondi à droite, JOUER masqué ; héros recadré sur le visage, bouton or plein « REGARDEZ » coins droits ; fiche : splash 16:9 en haut puis bloc navy (sous-titre doré, nom, bio, cartes info). |
+
 ## Non mesuré
 
-- Mobile non mesuré (déduit). Rouge `--enemy` relevé à l'œil sur les anneaux adverses. Le `--muted` (#a09b8c) est choisi pour l'onglet inactif observé en gris chaud.
+- Mobile : observé à 390px sur l'accueil du guide et la fiche champion ; la liste (2 colonnes) et les actus (1 colonne) en mobile sont déduites.
+- Barre de recherche et filtres de rôle de la liste : non relevés, proposés.
+- Durées du menu déroulant, des skins et du héros de fiche : estimées (≈ dans `motion.md`). Rouge `--enemy` relevé à l'œil sur les anneaux adverses. Le `--muted` (#a09b8c) est choisi pour l'onglet inactif observé en gris chaud.
 
 ## Écarts assumés
 
@@ -31,4 +47,7 @@
 | Beaufort for LOL (propriétaire) | Spectral 800 italique | Licence ; même serif robuste |
 | Spiegel (propriétaire) | Source Sans 3 | Licence ; sans humaniste |
 | Champions, carte, logos, vidéos | Emplacements et formes | Droits d'auteur |
+| Catégorie d'actu or #c8aa6e sur fond clair (2,2:1) | `--gold-deep` #7f6430 | Contraste |
+| Date grise #7e7e7e / #999 sur blanc | `--ink-muted` | Contraste |
+| Noms de champions, skins, compétences, actus | Contenu inventé | Identité du jeu |
 | Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |

@@ -42,3 +42,36 @@ Coins de l'écran uniquement : en haut à gauche un compteur (Silkscreen dans un
 
 - **Chargement** : le repli (capture du rendu) s'affiche immédiatement ; un petit compteur Silkscreen « 42 % » sous le bouton tant que le WebGL charge.
 - **Pas de WebGL** : on reste sur le repli, sans message d'erreur.
+
+---
+
+# Relevés sur le site en ligne (2026-10-03)
+
+L'expérience a été lancée jusqu'au bout cette fois (navigateur intégré, ~612px de large, clic réel sur le bloc de départ). Tout est rendu en WebGL : **aucun texte DOM**, donc rien n'est mesurable par script ; tout ce qui suit est **observé** (≈).
+
+## Écran de chargement dessiné
+
+Fond **blanc** plein écran, au centre une **enveloppe dessinée à la main** (trait noir irrégulier, ~44px) et dessous le mot « CHARGEMENT » en **capitales manuscrites** (trait fin, ~12px, lettres un peu dansantes). Rien d'autre. Réutilisé entre l'écran-titre et la scène de jeu.
+
+```html
+<div class="loader" role="status" aria-live="polite">
+  <img src="enveloppe-dessinee.svg" alt="" width="44">  <!-- dessin réel au trait, pas une icône géométrique -->
+  <p class="hand">Chargement</p>
+</div>
+```
+```css
+.loader { position: fixed; inset: 0; display: grid; place-content: center; gap: 10px; background: #fff; text-align: center; }
+.hand { font: 400 0.8rem/1 'Gochi Hand', 'Patrick Hand', cursive; letter-spacing: .12em; text-transform: uppercase; color: var(--text); }
+```
+
+## Bloc de départ 3D
+
+Le bouton « BEGIN » n'est pas un bouton plat : c'est un **pavé jaune en 3D** posé sous la planète, libellé pixel sur la face avant, qui **tourne lentement sur lui-même** (on voit tour à tour la face libellée et une face nue). Au clic, il lance le chargement de la scène. En HTML (repli ou interface hors WebGL), garder le `Bouton relief` du skill avec une légère oscillation `rotateY` de ±12°.
+
+## Logo en blocs (observé)
+
+Les lettres sont de **gros cubes crème** avec contour d'encre et hachures d'ombre dessinées, empilés en grille 3×3 **devant** la planète ; les lettres sont formées de rainures à angles droits (labyrinthe). Ils arrivent un à un en tombant sur la planète.
+
+## Scène de jeu (observée)
+
+Vue à la troisième personne, caméra derrière l'épaule ; rue de quartier résidentiel (distributeur de boissons, miroir de rue orange, poteaux, glissière blanche, enseignes) ; **rendu cel-shading** : aplats sans dégradé, **contours noirs irréguliers** comme à l'encre, nuages en formes plates turquoise foncé ; personnage aux proportions simples avec un **sac rouge** (seule couleur saturée de l'écran). La courbure de la petite planète se voit à l'horizon. **Aucun HUD** à l'écran au départ : l'interface est absente tant que le joueur n'interagit pas.

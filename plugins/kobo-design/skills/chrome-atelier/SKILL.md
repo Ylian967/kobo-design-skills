@@ -1,6 +1,6 @@
 ---
 name: chrome-atelier
-description: Direction artistique « Chrome Atelier » pour fiches produit de luxe et landings de pré-lancement (bijou, joaillerie, horlogerie, objet design, parfum, accessoire haut de gamme), inspirée d'un concept Dribbble de bijou d'oreille sculptural en rendu 3D. Fond blanc cassé traversé de filets gris (diagonales et croix passant par le centre), grand cercle fin autour de la pièce posée au centre, étiquettes entre crochets en mono, titres en capitales larges sur deux lignes décalées, légendes reliées à la pièce par un trait (« • OR JAUNE »), bouton pilule à contour, variante nuit en photo bleu-gris profond avec barre de caractéristiques en trois colonnes. À utiliser pour une page produit premium, une liste d'attente, un lancement en série limitée ou une app e-commerce au style « luxe technique, chrome et or, galerie, minimal ».
+description: Direction artistique « Chrome Atelier » pour fiches produit de luxe et landings de pré-lancement (bijou, joaillerie, horlogerie, objet design, parfum, accessoire haut de gamme), inspirée d'un concept Dribbble de bijou d'oreille sculptural en rendu 3D. Fond blanc cassé traversé de filets gris (diagonales et croix passant par le centre), grand cercle fin autour de la pièce posée au centre, étiquettes entre crochets en mono, titres en capitales Regular sur deux à quatre lignes décalées, légendes reliées à la pièce par un trait (« • OR JAUNE »), bouton pilule à contour, variante nuit en photo bleu-gris profond avec barre de caractéristiques en trois colonnes. À utiliser pour une page produit premium, une liste d'attente, un lancement en série limitée ou une app e-commerce au style « luxe technique, chrome et or, galerie, minimal ».
 ---
 
 # Chrome Atelier
@@ -30,23 +30,23 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (filets, cercle, cr
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Pilules, navigation, étiquette crochets, titre décalé, filets + cercle, légendes, sélecteur de titre d'or, barre de caractéristiques, champ, puces, panneau, confirmation. |
-| `references/layouts.md` | Page produit « atelier », scène nuit, presse, communauté / liste d'attente, mobile. |
-| `references/motion.md` | Flottement de la pièce, orbite du cercle, montée des titres, tracé des légendes. |
+| `references/components.md` | Pilules, navigation, étiquette crochets, titre décalé, filets + cercle, légendes, sélecteur de titre d'or, barre de caractéristiques, champ, puces, panneau, confirmation ; puis, **relevés sur le site et la vidéo du shot** : barre de caractéristiques mesurée, navigation verticale du héros, cartes qui montent de la barre, presse à cartes révélées, galerie décalée, FAQ, pied noir, écran d'intro au compas. |
+| `references/layouts.md` | Page produit « atelier », scène nuit, presse, communauté / liste d'attente, mobile ; **ordre réel de la page** (7 sections) et galerie. |
+| `references/motion.md` | Flottement de la pièce, orbite du cercle, montée des titres, tracé des légendes ; **durées mesurées** (0.3s / 0.45s ease, flottement 3s) et séquences vues dans la vidéo du shot. |
 | `references/assets.md` | Avant de placer la pièce 3D ou une photo : recette Three.js (forme, métaux, lumière, titre d'or), portraits nuit, sources, prompts IA. |
 | `examples/demo.html` | Page complète (marque fictive « Ossel »). |
-| `source.md` | Shot de référence, ce qui a été vu, écarts. |
+| `source.md` | Shot, vidéo du shot, site en ligne de la marque (mesuré / observé), écarts. |
 
 ## Typographie
 
 | Rôle | Police (Google Fonts) | Réglages |
 |---|---|---|
-| Titres, valeurs de la barre | **Archivo** 500, `font-stretch: 112%` | capitales, `--text-title` (28–42px) ou `--text-hero` (35–61px), interligne 1.02, +0.01em |
+| Titres, valeurs de la barre | **Inter** 400 (mesuré : grotesque suisse Regular, chasse normale) | capitales, `--text-title` ou `--text-hero`, interligne 1.0–1.1, ~0 ; lignes **décalées** (indentation croissante) |
 | Logo | Archivo 600, `font-stretch: 125%` | capitales, +0.18em, une lettre remplacée par un cercle |
-| Étiquettes, légendes, titres d'or | **IBM Plex Mono** 400/500 | 11px, capitales, +0.14em |
-| Texte courant, navigation | **Inter** 400/500 | 14px / 1.6 ; liens de nav 11px capitales +0.14em |
+| Étiquettes `[ … ]`, légendes, titres d'or | **IBM Plex Mono** 400 | 0.75rem, **minuscules** entre crochets, approche serrée (−0.1em mesuré) |
+| Texte courant, navigation | **Inter** 400 | 0.75rem / 1.39 (mesuré) ; liens de nav 0.625rem capitales +0.08em ; racine fluide `html { font-size: 0.9vw }` |
 
-La police d'origine n'est pas identifiée : Archivo élargie rend la grotesque large et nette des captures. À défaut : Helvetica Neue étendue, Syne 500.
+Mesuré sur le site en ligne de la marque : **Suisse Int'l** 300/400/700 et **Suisse Mono** 400 (payantes). Inter 400 et IBM Plex Mono en sont les équivalents gratuits. Le premier jet utilisait Archivo élargie (impression du shot) : les titres sont en réalité en Regular, chasse normale.
 
 ## Couleurs
 

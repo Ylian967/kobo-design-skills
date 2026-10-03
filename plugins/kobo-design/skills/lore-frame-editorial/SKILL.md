@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Cadre et rail, étoile-boussole, nav mono, manifeste géant, vignette à coin coupé, logo tracé, terminal « initialisation ». |
+| `references/components.md` | Cadre et rail, étoile-boussole, nav mono, manifeste géant, vignette à coin coupé, logo tracé, terminal « initialisation ». Puis, mesurés sur le site : écran « RESIZE », échelle fluide, libellés doublés, texte qui se décode, index du manifeste. |
 | `references/layouts.md` | Ouverture, chapitre illustré, page éditoriale, factions, mobile. |
 | `references/motion.md` | Tracé du logo, révélations au défilement, parallaxe des vignettes. |
 | `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, teinte violette, sources, prompts IA, idée 3D. |
@@ -40,7 +40,8 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 
 | Rôle | Police | Réglages |
 |---|---|---|
-| Manifeste, titres | **Inter Tight** 900 (ABC Whyte d'origine, payante) | capitales, -0.055em, interligne 0.86 |
+| Manifeste, titres | **Inter Tight** 900 (ABC Whyte Plus d'origine, payante, variable) | capitales, -0.055em, interligne 0.86 ; phrases-chapitres mesurées à 3.25vw graisse 650 |
+| Grands numéros, mot-titre | **Tektur** 700 (Hexaframe d'origine, payante) | 19–26vw, capitales |
 | Labels, nav, numéros | **IBM Plex Mono** 400/500 | 10–12px, capitales, +0.04em |
 | Paragraphes | Inter Tight 500 | 13–14px, interligne 1.4, colonne 260px |
 

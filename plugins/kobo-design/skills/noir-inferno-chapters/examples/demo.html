@@ -6,7 +6,7 @@
 <title>Neuf Cercles — Noir Inferno Chapters (démo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@900&family=Playfair+Display:wght@400&family=Josefin+Sans:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400&family=Playfair+Display:wght@400&family=Josefin+Sans:wght@400&display=swap">
 <style>
 :root {
   --bg: #000000; --text: #ffffff; --muted: #9c9c9c; --mid: #2a2a2a; --haze: rgb(255 255 255 / 0.08);
@@ -33,10 +33,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .scene::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade); }
 .scene::after { content: ""; position: absolute; inset: 0; z-index: 2; filter: url(#grain); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
 .haze { position: absolute; inset: -20%; background: radial-gradient(40% 30% at 30% 60%, var(--haze), transparent 70%), radial-gradient(35% 25% at 70% 40%, var(--haze), transparent 70%); animation: drift var(--drift) linear infinite alternate; pointer-events: none; }
-.ch-title { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; width: min(90vw, 900px); font: 900 var(--text-title)/1 var(--font-title); text-align: center; text-shadow: 0 0 40px var(--bg); opacity: 0; filter: blur(8px); transition: opacity var(--dur-title) var(--ease), filter var(--dur-title) var(--ease); }
+.ch-title { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; width: min(90vw, 900px); font: 400 var(--text-title)/1 var(--font-title); text-align: center; text-shadow: 0 0 40px var(--bg); opacity: 0; filter: blur(8px); transition: opacity var(--dur-title) var(--ease), filter var(--dur-title) var(--ease); }
 .chapter.is-active .ch-title { opacity: 1; filter: none; transition-delay: var(--dur); }
 .corner { position: fixed; z-index: 10; }
-.tl { left: var(--edge); top: var(--edge); font: 900 1rem/1 var(--font-title); letter-spacing: 0; text-transform: none; }
+.tl { left: var(--edge); top: var(--edge); font: 400 1rem/1 var(--font-title); letter-spacing: 0; text-transform: none; }
 .tc { left: 50%; top: var(--edge); translate: -50% 0; }
 .tr { right: var(--edge); top: var(--edge); display: flex; gap: var(--space-4); align-items: center; }
 .bl { left: var(--edge); bottom: var(--edge); display: flex; gap: var(--space-4); }
@@ -48,7 +48,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .toc.is-open { opacity: 1; visibility: visible; }
 .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); counter-reset: c; }
 .toc li { counter-increment: c; }
-.toc button { font: 900 1.5rem/1 var(--font-title); color: var(--muted); }
+.toc button { font: 400 1.5rem/1 var(--font-title); color: var(--muted); }
 .toc button::before { content: counter(c) "  "; font: 400 1rem var(--font-number); }
 .toc button[aria-current] { color: var(--text); }
 .toc .close { position: absolute; right: var(--edge); top: var(--edge); }

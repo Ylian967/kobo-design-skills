@@ -26,7 +26,7 @@
 ## 3. Traitements (code)
 
 ```html
-<div class="photo" data-slot="portrait-duotone" data-eye="0.5 0.42" data-face="0.36" role="img" aria-label="Portrait … traité en duotone vert acide tramé">
+<div class="photo" data-slot="portrait-duotone" data-eye="0.5 0.30" data-face="0.36" role="img" aria-label="Portrait … traité en duotone vert acide tramé">
   <img id="portraitSrc" crossorigin="anonymous" src="…?auto=format&fit=crop&crop=faces&w=1200&h=1500&q=80" width="1200" height="1500" alt="" fetchpriority="high">
   <span class="photo__tint" aria-hidden="true"></span>
   <canvas id="portrait" aria-hidden="true"></canvas>

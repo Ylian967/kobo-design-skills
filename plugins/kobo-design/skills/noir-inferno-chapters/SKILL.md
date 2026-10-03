@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Scène peinte, titre de chapitre, numéro, coins d'interface, sommaire, brume et particules. |
+| `references/components.md` | Scène peinte, titre de chapitre, numéro, coins d'interface, sommaire, brume et particules. Puis, relevés sur le site en ligne : cercle à glisser (navigation), citation d'accueil, texte de scène, panneau « à propos » blanc, sortie. |
 | `references/layouts.md` | Ouverture, chapitre, sommaire, fin, mobile. |
 | `references/motion.md` | Fondus au noir, dérive, apparition du titre. |
 | `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, N&B contrasté, grain, vignettage, sources, prompts IA, idée 3D. |
@@ -40,9 +40,9 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 
 | Rôle | Police | Réglages |
 |---|---|---|
-| Titres de chapitre | **Playfair Display SC** 900 (équivalent choisi à l'œil) | 28–48px, capitales, interligne 1, centré |
-| Interface | **Josefin Sans** 400 | 10px, capitales, +0.28em |
-| Numéro | Playfair Display 400 | 32–44px |
+| Titres de chapitre | **Playfair Display SC** 400 (site : Parkinson Condensed 400, mesuré) | 28–48px, capitales, interligne 1, centré ; citation d'accueil 20px +0.03em |
+| Interface | **Josefin Sans** 400 | 10px, capitales, +0.1 à +0.2em (mesuré 1–2px) ; texte de scène ~13px casse normale |
+| Numéro | Playfair Display 400 | 40px / 35px (mesuré) |
 
 ## Images et 3D
 

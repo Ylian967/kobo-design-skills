@@ -18,3 +18,15 @@ Lent et grave. Les passages se font par le noir, comme au cinéma. Catégories d
 ## Mouvement réduit
 
 Coupes franches entre chapitres, pas de Ken Burns ni de brume animée, titre affiché directement.
+
+---
+
+## Observé sur le site (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Accueil | Halo du cercle qui pulse en boucle ; grain et poussières qui scintillent | Observé (≈ 2,4s par pulsation) |
+| Passage de scène | Tirer le cercle jusqu'à la cible → fondu au noir, nouvelle peinture, titre et texte qui apparaissent | Observé, ≈ 1,5–2s |
+| Scène | Plans de la peinture qui se décalent légèrement (profondeur), premier plan flou | Observé |
+
+Toutes les transitions CSS de l'interface sont `all` (durée non lue). Mouvement réduit : pas de pulsation, passage de scène en fondu simple.

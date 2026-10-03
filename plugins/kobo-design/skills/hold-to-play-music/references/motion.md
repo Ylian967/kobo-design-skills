@@ -26,3 +26,15 @@ addEventListener('keyup', e => { if (e.code === 'Space') held = false; });
 ## Mouvement réduit
 
 Pas de flash ni de saut des lettres ; l'appui reste nécessaire mais un clic simple déclenche directement.
+
+---
+
+## Observé sur le site (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Fond | Grain de film animé en continu sur le noir | Observé |
+| Titre | Traits de pinceau dispersés qui glissent et s'assemblent en lettres | Observé, ≈ 6–10s pendant le chargement |
+| Progression | Anneau fin qui se remplit | Observé |
+
+Mouvement réduit : grain fixe, titre affiché assemblé.

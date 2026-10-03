@@ -62,3 +62,21 @@ Une ligne mono 11px : mention à gauche, liens à droite, filet haut.
 - Scène nuit : titre en haut, portrait recadré en bas à droite, barre de caractéristiques en liste (étiquette à gauche, valeur à droite).
 - Presse : liste en flux, alignée à gauche.
 - Communauté : photo 340px, panneau pleine largeur qui chevauche le bas de la photo.
+
+---
+
+## Ordre réel de la page (site en ligne, 1536px, ~7 100px)
+
+1. **Héros nuit** plein écran : photo gros plan, titre décalé 4 lignes à gauche, 2 pilules, mention presse 0.75rem, nav empilée à droite, barre de caractéristiques en bas.
+2. **Atelier** épinglé (fond blanc) : étiquette, titre 2 lignes, texte, pilule « Acheter » + lien souligné « Collection privée » ; pièce au centre du cercle, légendes, titres d'or.
+3. **Presse** : étiquette `[presse]`, titre 2 lignes, rangée de logos défilante, cartes d'article révélées.
+4. **Galerie** : texte à gauche, deux colonnes de photos décalées à droite.
+5. **Inscription** : écran nuit + carte blanche de formulaire.
+6. **FAQ** : titre à gauche, 11 questions.
+7. **Pied** noir 285px.
+
+Racine fluide : `html { font-size: 0.9vw }` (desktop) — toutes les tailles en rem suivent la largeur ; à figer par `clamp()` sous 992px. Points de rupture mesurés (Webflow) : 991px, 767px, 479px.
+
+## Mobile observé (vidéo du shot)
+
+Confirmation en plein écran : photo en haut (40 %), titre 2 lignes, texte, pilule encre en bas à gauche. Les écrans en mobile suivent l'ordre desktop, en une colonne.

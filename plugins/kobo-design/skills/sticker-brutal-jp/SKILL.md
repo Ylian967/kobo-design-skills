@@ -1,6 +1,6 @@
 ---
 name: sticker-brutal-jp
-description: Direction artistique « Sticker Brutal JP » — néo-brutalisme joyeux à la japonaise pour portfolios de freelance, sites de designer, studios, landings de service ou pages « à propos » bilingues japonais / anglais. Page pêche, contenu posé dans un grand cadre façon fenêtre de navigateur à contour noir épais, autocollants plats (demi-cercles, carrés arrondis, étoiles) à contour noir et ombre décalée sans flou, titre latin énorme très gras, sous-titres japonais en Noto Sans JP 900, katakana vertical jaune contouré de noir, portrait noir et blanc découpé en hexagone sur fond rose, bulles et pastilles inclinées, bouton jaune qui s'enfonce au clic. À utiliser quand on demande : néo-brutalisme, neubrutalism, brutalist, sticker, autocollant, ombre dure, hard shadow, contour noir, style japonais, Japan, kawaii pop, site en japonais, localisation japonaise, portfolio coloré, freelance, personal brand. Fournit tokens, composants, mises en page, animations et une page d'exemple.
+description: Direction artistique « Sticker Brutal JP » — néo-brutalisme joyeux à la japonaise pour portfolios de freelance, sites de designer, studios, landings de service ou pages « à propos » bilingues japonais / anglais. Page pêche, contenu posé dans un grand cadre façon fenêtre de navigateur à contour noir épais, autocollants plats (demi-cercles, carrés arrondis, étoiles) à contour noir et ombre décalée sans flou, titre latin énorme très gras, sous-titres japonais en Noto Sans JP 900, katakana vertical jaune contouré de noir, portrait noir et blanc découpé en hexagone sur fond rose, bulles et pastilles inclinées, bouton jaune qui s'enfonce au clic. À utiliser quand on demande : néo-brutalisme, neubrutalism, brutalist, sticker, autocollant, ombre dure, hard shadow, contour noir, style japonais, Japan, kawaii pop, site en japonais, localisation japonaise, portfolio coloré, freelance, personal brand. Fournit tokens, composants, mises en page, animations et trois pages d'exemple (accueil, projets avec filtres et fiche en modale, contact avec formulaire et FAQ).
 ---
 
 # Sticker Brutal JP
@@ -30,12 +30,26 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton, une carte, la navigation, une puce, un champ, une bulle, une pastille, le portrait hexagonal ou le katakana vertical. |
-| `references/layouts.md` | Avant de construire une page : cadre navigateur, héros deux colonnes, sections, bande défilante, contact, mobile. |
-| `references/motion.md` | Avant d'ajouter une animation : appui « écrasé », apparition « pop », flottement, bande. |
-| `references/assets.md` | Avant de placer le portrait ou une image : sujet, cadrage, N&B + `multiply` sur le rose, détourage, sources, prompt IA, 3D optionnelle. |
-| `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
-| `source.md` | Pour connaître le shot de référence, ce qui a été vu et les écarts. |
+| `references/components.md` | Avant de coder un bouton, une carte, la navigation, une puce, une bulle, une pastille, le portrait hexagonal, le katakana vertical — et pour les pages internes : filtres, carte projet, fiche en modale, champs / pilules à choix / erreurs / succès, FAQ en accordéon. |
+| `references/layouts.md` | Avant de construire une page : cadre navigateur, héros deux colonnes, sections, bande défilante, contact ; gabarits **Projets** et **Contact** ; mobile 390px. |
+| `references/motion.md` | Avant d'ajouter une animation : appui « écrasé », apparition « pop », flottement, bande, coin décollé, ouverture de fiche, focus / erreur / envoi / succès, FAQ. |
+| `references/assets.md` | Avant de placer le portrait ou une image : sujet, cadrage, N&B en rendu normal dans l'hexagone (et pourquoi pas `multiply`), vignettes de projets, détourage, sources, prompt IA, 3D optionnelle. |
+| `examples/demo.html` | Accueil : héros à portrait, services, chiffres, bloc contact. |
+| `examples/projets.html` | Page Projets (proposée) : filtres en pilules, grille de cartes-autocollants, fiche projet en `<dialog>`, état vide. |
+| `examples/contact.html` | Page Contact (proposée) : formulaire néo-brutal avec validation, budget en pilules, succès, colonne d'infos, FAQ en accordéon. |
+| `source.md` | Pour connaître le shot de référence, ce qui a été **vu** et ce qui est **proposé**, et les écarts. |
+
+## Pages couvertes
+
+Le shot de référence ne montre qu'**une** page (l'accueil). Les deux autres sont des **propositions** cohérentes pour un site de freelance bilingue japonais / anglais (détail dans `source.md`). Les trois pages partagent le même `:root`, le cadre navigateur, la navigation (lien courant en pilule noire), le sélecteur de langue JA/EN (`data-en`) et le pied de page.
+
+| Page | Fichier | Contenu | Statut |
+|---|---|---|---|
+| Accueil | `examples/demo.html` | Héros (portrait hexagonal + katakana), bande défilante, 4 services, chiffres, sujets, bloc contact jaune | observé (shot) + sections complétées |
+| Projets / 実績 | `examples/projets.html` | En-tête SELECTED WORKS + ワークス, filtres en pilules avec compteurs, 9 cartes-autocollants (étiquette à cheval, coin décollé), fiche en modale (photo, méta, 2 chiffres, précédent / suivant), état vide, bandeau jaune vers Contact | proposé |
+| Contact / お問い合わせ | `examples/contact.html` | En-tête SAY HELLO + ハロー, formulaire (nom, société, e-mail, sujets en cases, budget en pilules radio, délai, message + compteur, accord), récapitulatif d'erreurs, envoi `aria-busy`, succès ; carte profil, infos, étapes ; FAQ en `<details>` | proposé |
+
+Pour un autre site : garder **une seule** signature portrait (accueil), un katakana vertical par page, une zone jaune dominante par écran ; les pages internes s'ouvrent sur un en-tête « 2 mots latins dont un surligné + sous-titre japonais ».
 
 ## Typographie
 
@@ -67,11 +81,11 @@ Règle d'usage : **jaune = l'action**, une seule zone jaune dominante par écran
 
 ## Images et 3D
 
-La seule image indispensable est un **vrai portrait** de la personne, en noir et blanc sur fond blanc, découpé dans l'hexagone rose tramé : `grayscale` + `mix-blend-mode: multiply` fait prendre au fond blanc la couleur de la forme, ou un détourage PNG laisse dépasser la personne en bas. Les autocollants (formes, bulles, pastilles, tuiles, katakana) sont du graphisme et restent en CSS/SVG. La 3D est optionnelle (un seul autocollant en jeton 3D). Jamais de dessin CSS/SVG à la place d'une photo ou d'un personnage : détails dans `references/assets.md`.
+La seule image indispensable est un **vrai portrait** de la personne, en noir et blanc sur fond blanc, posé en rendu **normal** dans un hexagone intérieur à filet noir, le rose tramé faisant cadre autour (ou détourage PNG qui dépasse en bas). **Pas de `mix-blend-mode: multiply`** : il rendait le portrait invisible (voir `references/assets.md`). Sur la page Projets, les vignettes sont aussi de vraies photos (couleurs naturelles, 4:3), avec un aplat tramé de la couleur de catégorie en repli. Les autocollants (formes, bulles, pastilles, tuiles, katakana) sont du graphisme et restent en CSS/SVG. La 3D est optionnelle (un seul autocollant en jeton 3D). Jamais de dessin CSS/SVG à la place d'une photo ou d'un personnage : détails dans `references/assets.md`.
 
 ## Signature
 
-**Le portrait-autocollant** : un portrait en noir et blanc découpé en hexagone sur fond rose (trame de points), contour noir + ombre dure, entouré de 4–5 autocollants inclinés (bulle du prénom pervenche, tuile sarcelle, pastille jaune ronde, pastille verte « ✓ 受付中 ») et d'un **katakana vertical** jaune contouré qui déborde du cadre. Une fois par page, dans le héros. Ailleurs, les autocollants restent décoratifs et rares (2–5 autour du cadre).
+**Le portrait-autocollant** : un portrait en noir et blanc découpé en hexagone, encadré de rose tramé, contour noir + ombre dure, entouré de 4–5 autocollants inclinés (bulle du prénom pervenche, tuile sarcelle, pastille jaune ronde, pastille verte « ✓ 受付中 ») et d'un **katakana vertical** jaune contouré qui déborde du cadre. Une fois par page, dans le héros. Ailleurs, les autocollants restent décoratifs et rares (2–5 autour du cadre).
 
 ## À éviter
 
@@ -99,7 +113,9 @@ La seule image indispensable est un **vrai portrait** de la personne, en noir et
 - [ ] Texte noir partout (sauf katakana contouré) ; contrastes vérifiés.
 - [ ] Page dans un cadre, 2 à 5 autocollants autour, inclinaisons variées.
 - [ ] Japonais réel, relu, `lang="ja"` ; titres latins en Archivo 900.
-- [ ] Testé à 375px et 1440px sans défilement horizontal ; autocollants coupés proprement par `overflow-x: clip`.
+- [ ] Testé à 375–390px et 1440px sans défilement horizontal, **sur chaque page** ; autocollants coupés proprement par `overflow-x: clip`.
+- [ ] Pages internes : filtre au clavier, fiche en `<dialog>` (Échap, retour du focus), champs avec `aria-invalid` + message texte, succès qui reçoit le focus, FAQ en `<details>`.
+- [ ] Portrait visible avec la vraie photo (pas de `multiply`).
 - [ ] Mouvement réduit respecté (pas de flottement ni de bande défilante).
 - [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
 - [ ] Aucun élément du shot d'origine (portrait, nom, logo, textes).

@@ -62,3 +62,28 @@ document.querySelectorAll('.reveal').forEach(el => {
 - Pièce immobile, point d'orbite fixe en haut du cercle.
 - Survols : changement de couleur instantané, sans déplacement de flèche.
 - Rendu 3D : pas d'auto-rotation ; la rotation reste possible au glisser.
+
+---
+
+## Relevé sur le site en ligne et la vidéo du shot (2026-10-03)
+
+| Moment | Effet | Durée / courbe | Statut |
+|---|---|---|---|
+| Survols (pilules, liens) | `all` / `background-color` | 0.3s `ease` | **Mesuré** |
+| Déplacements (cartes, panneaux) | `transform` | 0.45s `ease` | **Mesuré** |
+| Pièce posée | `floatY` : flottement vertical continu | 3s `ease-in-out`, infini | **Mesuré** |
+| Traits de légende | `stroke-dashoffset` piloté par le défilement | 0.1s linéaire (suit le scroll) | **Mesuré** |
+| Intro | Cercles et axes tracés au compas, nœuds qui apparaissent, puis fondu vers le héros | ≈ 1–2s | Observé (vidéo) |
+| Barre → cartes | Les 3 cellules montent en cartes photo, vitesses différentes (parallaxe) | lié au défilement | Observé (vidéo) |
+| Atelier | Section épinglée ; la pièce tourne et change de métal par étape | lié au défilement | Observé |
+| Presse | Logos défilants ; carte d'article qui se déploie au-dessus du logo actif | ≈ 0.45s | Observé |
+| Barre de navigation | Devient une barre claire collante après le héros | ≈ 0.3s | Observé |
+
+Bibliothèques détectées : GSAP et Swiper (pas de canvas : la pièce du site est une **vidéo** détourée, pas une scène WebGL — la scène Three.js du skill reste une option).
+
+```css
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.piece { animation: floatY var(--dur-float) ease-in-out infinite; }
+.pill { transition: background-color var(--dur-ui) var(--ease-site), color var(--dur-ui) var(--ease-site); }
+```
+Mouvement réduit : pas d'intro, pas de flottement, cartes de la barre affichées en place, section atelier non épinglée.

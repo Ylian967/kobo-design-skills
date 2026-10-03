@@ -1,6 +1,6 @@
 ---
 name: anime-x-slash
-description: Direction artistique « Anime X Slash » pour sites et apps d'anime ou de jeu d'action, inspirée des sites officiels de séries animées japonaises/chinoises récentes. Gris papier, noir, rouge signal, grands titres condensés rouges, découpes diagonales en X, cartes-parallélogrammes de classement, chiffres géants. À utiliser pour une page de série, de personnages, de classement, de casting, une landing d'anime, un fan-site ou une app au style « héros / ranking / manga d'action ».
+description: Direction artistique « Anime X Slash » pour sites et apps d'anime ou de jeu d'action, inspirée des sites officiels de séries animées japonaises/chinoises récentes. Gris papier, noir, rouge signal, grands titres condensés rouges, découpes diagonales en X, cartes-parallélogrammes de classement, chiffres géants. Couvre l'accueil et les pages internes : menu plein écran, liste de personnages en parallélogrammes, fiche personnage sur fond noir, actualités, histoire (sélecteur d'épisodes), vidéos (filtres à encoche), musique (accordéon), mobile. À utiliser pour une page de série, de personnages, de classement, de casting, une landing d'anime, un fan-site ou une app au style « héros / ranking / manga d'action ».
 ---
 
 # Anime X Slash
@@ -29,12 +29,30 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Avant de coder menu, boutons, liste d'actualités, cartes de classement, fiches casting, tags. |
-| `references/layouts.md` | Avant de construire une page : écran de chargement, héros, intro, sections, pied de page, mobile. |
-| `references/motion.md` | Avant d'ajouter une animation. |
+| `references/components.md` | Avant de coder menu (bouton + plein écran), boutons, actualités, cartes de classement, casting, tags ; puis composants internes : titre de page, onglets, grille de personnages, fiche, bande d'épisode, liste News, sélecteur d'épisodes, filtres à encoche, carte vidéo, accordéon, bannière. |
+| `references/layouts.md` | Avant de construire une page : chargement, héros, sections, pied de page, **gabarits internes** (personnages, fiche, actualités, histoire, vidéos, musique, spécial) et **mobile observé**. |
+| `references/motion.md` | Avant d'ajouter une animation (accueil + pages internes, durées mesurées ou estimées). |
 | `references/assets.md` | Avant de placer une image : sujets, cadrages, traitement N&B + couleur personnage, sources, prompts IA, 3D optionnelle. |
-| `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
-| `source.md` | Mesures relevées et écarts assumés. |
+| `examples/demo.html` | Accueil : loader, héros X, actualités, intro, casting, classement. |
+| `examples/personnage.html` | Page interne : menu plein écran ouvert, titre coupé, onglets, fiche noire, grille filtrée, bande et lignes d'épisode. |
+| `examples/medias.html` | Pages internes : liste News 96px, sélecteur d'épisodes, filtres à encoche + cartes vidéo, accordéon musique. |
+| `source.md` | Mesures relevées, pages explorées (mesuré / observé) et écarts assumés. |
+
+## Pages couvertes
+
+| Page | Gabarit (`layouts.md`) | Composants clés (`components.md`) | Exemple |
+|---|---|---|---|
+| Accueil | Héros, actualités, intro, casting, classement | Bouton MENU, X découpé, carte de classement | `demo.html` |
+| Menu ouvert | Navigation plein écran | Overlay N&B, liens 2 colonnes, CLOSE rouge | `personnage.html` (bouton MENU) |
+| Personnages (liste) | Gabarit « Personnages » | Titre coupé, onglets, grille parallélogrammes | `personnage.html` |
+| Fiche personnage | Gabarit « Fiche » | Fiche noire, éclats, boutons ronds, grille filtrée, bande d'épisode | `personnage.html` |
+| Actualités | Gabarit « Actualités » | Barres 96px, date rouge, pagination | `medias.html` |
+| Histoire | Gabarit « Histoire » | Sélecteur d'épisodes, bloc épisode | `medias.html` |
+| Vidéos / Musique | Gabarits « Vidéos », « Musique » | Filtres à encoche, carte vidéo, accordéon | `medias.html` |
+| Spécial | Gabarit « Spécial » | Carte bannière mot-clé | — |
+| Mobile | Section « Mobile » (observée à 390px) | MENU à droite, grille 2 par rangée | toutes les pages d'exemple |
+
+Pages internes : fond `--bg-inner`, logotype noir centré, titre rouge géant coupé au bord gauche. Sur la fiche, le fond passe au noir et la couleur du personnage (`--c`) devient la seule couleur d'appoint.
 
 ## Typographie
 

@@ -10,9 +10,16 @@
 - **Fiche Awwwards** : palette d'une couleur #6D64A3 ; catégories art & illustration, expérimental, animation, coloré, défilement, illustration, storytelling, design d'interaction.
 - **Captures officielles de la fiche** (3 images) : ouverture avec portrait illustré plein cadre et manifeste géant blanc en escalier ; page éditoriale blanche avec titre serré, vignettes à coin coupé et grande illustration à droite ; paysage sombre avec un grand symbole blanc au centre ; cadre fin et étoile sur le rail gauche visibles sur les trois.
 
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Accueil, 1440×900 émulé (navigateur intégré) | Mesuré sur toute la hauteur (16 410px) : échelle fluide (13.5 / 18.9 / 46.8 / 135.9 / 273.6 / 369px), graisses 400 / 650, Hexaframe 700 pour numéros et mot-titre, IBM Plex Mono 9–12.6px, libellés doublés, états de décodage du texte, ordre des sections. Pas de captures (émulation), positions reconstituées. |
+| Fenêtre étroite (612px) | Observé : écran « RESIZE » (site non pris en charge). |
+
 ## Non mesuré
 
-- Tailles, espacements et durées estimés sur captures (le contenu n'a pas pu être passé au script).
+- Tailles désormais mesurées (voir ci-dessus) ; espacements et durées restent estimés.
 - La couleur `--signal` (lueur verte) est relevée à l'œil sur l'illustration d'ouverture.
 
 ## Écarts assumés

@@ -1,6 +1,6 @@
 ---
 name: arena-guide
-description: Direction artistique « Arena Guide » pour pages de guide, tutoriel et présentation de jeu compétitif, inspirée des pages « comment jouer » des grands MOBA. Bleu nuit, or et cyan, titres à empattements très gras en italique capitales, sections centrées qui alternent texte et visuel, médaillons circulaires à anneau (allié cyan / adversaire rouge) servant d'onglets, carte de jeu en fond fondu, vidéos courtes avec sélecteur. À utiliser pour un guide de jeu, un onboarding, une page « règles du jeu », une page de présentation de mode, une app d'apprentissage ou un wiki au style « arène fantasy compétitive ».
+description: Direction artistique « Arena Guide » pour pages de guide, tutoriel et présentation de jeu compétitif, inspirée des pages « comment jouer » des grands MOBA. Bleu nuit, or et cyan, titres à empattements très gras en italique capitales, sections centrées qui alternent texte et visuel, médaillons circulaires à anneau (allié cyan / adversaire rouge) servant d'onglets, carte de jeu en fond fondu, vidéos courtes avec sélecteur. Couvre aussi les pages internes : barre globale avec menus déroulants, liste de personnages jouables en cartes portrait, fiche personnage (héros splash, compétences en onglets avec vidéo à double cadre doré, carrousel de skins), page d'actualités en grille, mobile. À utiliser pour un guide de jeu, un roster ou une fiche de héros, un hub d'actus de jeu, un onboarding, une page « règles du jeu », une page de présentation de mode, une app d'apprentissage ou un wiki au style « arène fantasy compétitive ».
 ---
 
 # Arena Guide
@@ -29,12 +29,27 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Navigation, boutons, titres, médaillons-onglets, bloc vidéo + vignettes, carte en fond, héros vidéo. |
-| `references/layouts.md` | Héros cinématique, intro blanche, sections « objectif », sections vidéo, mobile. |
-| `references/motion.md` | Courbe « snap » mesurée, changements d'onglet, apparitions. |
+| `references/components.md` | Navigation, boutons, titres, médaillons-onglets, bloc vidéo + vignettes, carte en fond, héros vidéo ; puis **menu déroulant**, en-tête de liste, recherche/filtres, carte champion, héros de fiche + cartes info, onglets de compétences + double cadre doré, carrousel de skins, bandeau et carte d'actu. |
+| `references/layouts.md` | Guide (héros, intro blanche, objectifs, vidéos) + gabarits **liste**, **fiche**, **actus** et **mobile observé**. |
+| `references/motion.md` | Courbe « snap » mesurée, onglets, apparitions, survols de cartes, menu déroulant, skins. |
 | `references/assets.md` | Avant de placer une image : paysages fantasy, médaillons, carte fondue, voiles, sources, prompts IA, 3D optionnelle. |
-| `examples/demo.html` | Page d'exemple complète. |
-| `source.md` | Mesures et écarts. |
+| `examples/demo.html` | Page guide « comment jouer ». |
+| `examples/champions.html` | Liste : barre globale + menu déroulant, en-tête « Choisissez votre », recherche/filtres, grille de cartes portrait, actus en grille. |
+| `examples/champion.html` | Fiche : héros splash + cartes info, compétences en onglets + vidéo à double cadre doré, carrousel de skins. |
+| `source.md` | Mesures, pages explorées (mesuré / observé) et écarts. |
+
+## Pages couvertes
+
+| Page | Gabarit (`layouts.md`) | Composants clés (`components.md`) | Exemple |
+|---|---|---|---|
+| Guide « comment jouer » | Structure d'une page guide | Médaillons-onglets, bloc vidéo + vignettes, carte en fond | `demo.html` |
+| Barre globale + menus | Barre globale | Menu déroulant (panneau `--nav-panel`, bord cyan), pilule JOUER | `champions.html`, `champion.html` |
+| Liste des personnages | Gabarit « Liste » | En-tête « Choisissez votre », recherche/filtres (proposés), carte champion | `champions.html` |
+| Fiche personnage | Gabarit « Fiche » | Héros splash + cartes info, onglets de compétences, double cadre doré, carrousel de skins | `champion.html` |
+| Actualités | Gabarit « Actualités » | Bandeau navy, carte d'actu avec pastille | `champions.html` (section actus) |
+| Mobile | Section « Mobile » (observée à 390px) | Hamburger carré gris, bouton or plein, splash 16:9 + bloc navy | toutes les pages d'exemple |
+
+Les pages de liste et d'actus sont **claires** (fond `--paper-2`, titres navy) ; la fiche reste **sombre** (navy, or, blanc). L'or y marque la sélection (compétence, skin) exactement comme le médaillon actif du guide.
 
 ## Typographie
 
@@ -76,4 +91,5 @@ Les visuels sont de vraies images : captures, cinématiques et splash arts du pr
 - [ ] Contrastes vérifiés, rouge seulement en grand.
 - [ ] Testé à 375px et 1440px, mouvement réduit respecté.
 - [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
+- [ ] Sur fond clair : or remplacé par `--gold-deep` pour le texte, contour de focus `--ink`.
 - [ ] Aucun élément du jeu d'origine.

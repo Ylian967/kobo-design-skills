@@ -50,3 +50,16 @@ Héros en 2 colonnes (texte + mannequin), panneaux en 2 colonnes dessous ; grill
 - Ordre : texte (titre empilé ~34px) → mannequin (380px de haut) → panneaux en une colonne.
 - Grille produits 2 colonnes serrées (`gap: 8px`), méta sur deux lignes ; pied en 2 colonnes.
 - Vérifier : aucune ligne de l'empilement ne dépasse (`white-space: nowrap` + taille `clamp`), `scrollWidth === 390`.
+
+---
+
+## Écrans relevés sur les images du shot
+
+| Écran | Composition |
+|---|---|
+| Héros « Nightfall » | 3 colonnes (déjà décrit). |
+| Collection « Chaque couche » | Index orange « 01 / LA COLLECTION — NIGHTFALL », titre 3 lignes à gauche (plein orange / contour orange / blanc), sujet de dos au centre, rubriques + 3 cartes système, étiquette de série à droite, « DÉFILER » + chevron au centre bas. |
+| Équipement « Construis ton uniforme » | Index « 02 / ÉQUIPEMENT CHOISI », titre 3 lignes, onglets, **3 cartes produit** sur la gauche (≈ 65 %), sujet à droite. |
+| Fiche produit claire | Panneau gris clair à gauche, photo à droite, carte « produit suivant », panneau de specs + bouton orange. |
+
+Chaque écran est **un plein écran sur une photo sombre** du même univers ; les blocs flottent sur la photo (pas de sections pleines).

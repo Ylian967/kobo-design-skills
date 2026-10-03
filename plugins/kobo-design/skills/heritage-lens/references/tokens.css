@@ -9,6 +9,7 @@
   --text: #fbf3e4;            /* ivoire */
   --muted: #c9b69a;
   --gold: #ecd06f;            /* or des anneaux, titres de lieu */
+  --gold-soft: #f6cea0;       /* mesuré sur le site : pourcentage de chargement, anneaux du bouton défiler */
   --on-gold: #1c140e;
   --earth: #987654;           /* pierre, terre */
   --terracotta: #d14836;      /* rouge des colonnes, fonds de présentation */
@@ -19,9 +20,9 @@
   --ring: rgb(251 243 228 / 0.85);
 
   /* Typographie */
-  --font-display: 'Gilda Display', 'Bodoni Moda', Georgia, serif;   /* titres de lieu, très contrastés */
+  --font-display: 'Gilda Display', 'Bodoni Moda', Georgia, serif;   /* titres de lieu (site : Maghfirea 400, display à empattements fins et formes calligraphiques, mesuré) */
   --font-text: 'Crimson Pro', Georgia, serif;                         /* récit */
-  --font-ui: 'Inter', system-ui, sans-serif;                          /* boutons, aide */
+  --font-ui: 'Inter', system-ui, sans-serif;                          /* boutons, aide (site : Graphik 400 13px, mesuré) */
   --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1.0625rem; --text-lg: 1.25rem;
   --text-title: clamp(2.5rem, 5vw, 4.5rem);
   --text-hero: clamp(4rem, 12vw, 10rem);

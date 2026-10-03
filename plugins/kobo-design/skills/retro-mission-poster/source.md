@@ -10,6 +10,13 @@
 - **Fiche Awwwards** : palette #2779a7, #D14836, #ffffff ; catégories : entreprise, technologie, animation, épuré, coloré, plein écran, storytelling, filtres et effets, WebGL ; description : histoire interactive stylisée sur la fabrication de carburant à partir de l'air.
 - **Captures officielles de la fiche** (4 images) : chapitre 1 avec voiture vintage dans un désert rouge, ciel strié, titre en capitales hautes et étroites crème en biais, accroche en bas à droite avec petit bouton crème, anneau dentelé avec flèche, cadre crème autour de l'écran ; écran « MISSION » avec planète géante, silhouettes au premier plan et mot rouge géant entre les plans ; écrans de chargement avec anneau dentelé et symbole rouge sur carte sombre.
 
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| https://www.prometheusfuels.com/ | Ouvert (navigateur intégré) : **redirige vers un nouveau site** (prometheusfuels.ai) entièrement refait — héros photo de champ solaire au coucher, titres capitales sans empattement, accent rouge, fond noir. **L'expérience récompensée en 2021 n'existe plus** : rien de ce nouveau site n'est repris dans le skill. |
+| Fiche Awwwards | Reste la seule source du style (4 captures officielles, déjà analysées). |
+
 ## Non mesuré
 
 - Aucune valeur calculée : couleurs ajustées à l'œil (crème #f4ead8, rouge éclairci #e24b33), polices équivalentes choisies à l'œil (Big Shoulders Display, Jost).

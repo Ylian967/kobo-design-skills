@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Chargeur ASCII, crochets, texte brouillé, bouton son, panneau de contenu, carrousel 3D sur socle, défilant. |
+| `references/components.md` | Chargeur ASCII, crochets, texte brouillé, bouton son, panneau de contenu, carrousel 3D sur socle, défilant. Puis, observés sur le site : interface aux 4 coins, constellation de données, étiquette de portfolio, anneaux qui s'assemblent, socle à particules et carrousel à crochets. |
 | `references/layouts.md` | Scène plein écran, chapitres au défilement, panneau de contenu, mobile. |
 | `references/motion.md` | Caméra, brouillage, transitions de chapitre, Three.js. |
 | `references/assets.md` | Avant de construire la scène ou de placer une image : recette 3D complète (éclats de glace, matières, lumière, caméra), photos de repli, traitements, prompts IA. |

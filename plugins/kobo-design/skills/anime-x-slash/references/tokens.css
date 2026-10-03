@@ -1,7 +1,10 @@
 /*
  * Anime X Slash — tokens
- * Mesurés sur la page d'accueil de référence (1536×730), voir source.md.
+ * Mesurés sur la page d'accueil de référence (1536×730), puis sur les pages internes
+ * (personnages, fiche, news, story, movie, music, special), voir source.md.
  * @contrast text:bg text:surface muted:bg on-accent:accent on-ink:ink accent-text:bg:large
+ * @contrast text:bg-inner muted:bg-inner accent-text:ink on-accent:accent-text on-ink:panel on-ink:menu-close
+ * @contrast ink:chara-1 ink:chara-2 on-ink:chara-3 ink:chara-4 ink:chara-5 ink:chara-6 ink:chara-7 ink:chara-8
  */
 :root {
   /* Couleurs */
@@ -19,6 +22,16 @@
   --line-ghost: rgb(0 0 0 / 0.08);
   --veil: rgb(0 0 0 / 0.55); /* voile sur les visuels découpés */
 
+  /* Pages internes (relevé le 2026-10-02) */
+  --bg-inner: #f3f3f3;      /* fond gris des pages internes (personnages, news, story…) */
+  --panel: #111111;         /* barres d'accordéon et filtres (observé : noir légèrement adouci) */
+  --menu-close: #c8100d;    /* carré CLOSE du menu ouvert (observé rouge ; assombri pour porter du blanc 14px) */
+  --menu-veil: rgb(0 0 0 / 0.72);       /* voile sur l'illustration N&B du menu plein écran */
+  --line-grey: rgb(0 0 0 / 0.14);       /* parallélogrammes gris du fond des pages internes */
+  --dim: rgb(0 0 0 / 0.55);             /* cartes inactives de la grille sous la fiche */
+  --fade: rgb(255 255 255 / 0.85);      /* fondu blanc en bas des cartes (sous le chiffre) */
+  --halftone: rgb(255 255 255 / 0.22);  /* points de trame sur les visuels */
+
   /* Couleurs de personnages (une par fiche, jamais deux à la fois) */
   --chara-1: #eaf4fc;
   --chara-2: #f8e58c;
@@ -28,6 +41,7 @@
   --chara-6: #eb6ea0;
   --chara-7: #00fa9a;
   --chara-8: #008db7;
+  /* Texte sur couleur de personnage (bande « Épisode de … ») : --ink partout, sauf --on-ink sur --chara-3. */
 
   /* Typographie */
   --font-display: 'Oswald', 'Arial Narrow', sans-serif;
@@ -39,6 +53,12 @@
   --text-xl: 2rem;        /* 32px : sous-titres */
   --text-title: clamp(3.5rem, 6vw, 5.75rem);   /* 91px mesuré : titres de section */
   --text-number: clamp(4rem, 7vw, 6.5rem);     /* chiffres de classement */
+  --text-page: clamp(3.5rem, 7vw, 5.625rem);   /* ~90px observé : titre de page interne, coupé au bord gauche */
+  --text-menu: clamp(2rem, 3.2vw, 2.75rem);    /* ~44px observé : liens du menu plein écran */
+  --text-tab: 1.25rem;    /* 20px mesuré : onglets / filtres Oswald */
+  --text-h3: 1.5rem;      /* 24px mesuré : bande « Épisode de … » (Oswald 500) */
+  --text-chara: clamp(3rem, 7vw, 6rem);        /* nom du personnage sur la fiche noire (observé) */
+  --text-quote: clamp(2.5rem, 6vw, 5rem);      /* titre musical entre 「 」 (observé) */
   --leading-body: 2;      /* 20px / 40px mesuré */
   --leading-tight: 1;
   --tracking-body: 0.04em; /* 0.8px sur 20px */
@@ -53,6 +73,10 @@
   --space-20: 80px;       /* padding vertical des sections mesuré */
   --container: 1146px;    /* largeur de la liste d'actualités mesurée */
   --text-column: 720px;
+  --menu-size: 80px;      /* bouton MENU mesuré 80×80 sur les pages internes (82px relevé à l'accueil) */
+  --news-row: 96px;       /* hauteur d'une ligne d'actualité (page News, mesuré) */
+  --accordion-row: 110px; /* barre d'accordéon de la page Music (observé ~110px) */
+  --story-cell-w: 30px;   /* case du sélecteur d'épisodes (mesuré 30×16 de texte) */
 
   /* Formes */
   --slant: 33deg;         /* angle des découpes en X */
@@ -60,6 +84,8 @@
   --border-thin: 0.8px;
   --border-bold: 1.6px;
   --bar: 4px;             /* filet rouge des listes */
+  --notch: 10px;          /* encoche triangulaire sous l'onglet actif (Movie, Music, observé) */
+  --round: 44px;          /* boutons ronds (voix, rotation, accordéon) */
 
   /* Mouvement */
   --ease: ease;

@@ -12,6 +12,8 @@ Sur un vrai portail d'éditeur, ces emplacements reçoivent les **key arts et ca
 | `featured-game` | Key art du jeu à la une | Plein cadre ≈ 700px de haut, 16:9 → 21:9 ; sujet **à gauche**, tiers droit calme pour la pile d'encarts | Vive, saturée, contraste fort | Plein cadre, léger dégradé sombre à droite seulement si l'image est claire |
 | `playtest` | Ambiance d'atelier ou de salle de jeu sombre | Plein cadre ≈ 460px, détail lumineux à droite | Sombre, néon | Dégradé `--ink` → transparent de gauche à droite (60 %) pour le texte blanc |
 | `release-1…n` | Jaquette / capture de chaque sortie | 4:3, sujet au centre-haut (le bas porte le nom et la date) | Couleurs du jeu | Masque bulle, dégradé noir sur le bas (45 %), zoom 1,04 au survol |
+| `featured-1…2`, `game-1…n` (catalogue) | Key art / capture de chaque jeu | 16:10 (vedettes), 16:9 (rangées), sujet au centre-haut | Couleurs du jeu | Rayon `--radius-card`, dégradé noir sur le bas, zoom 1,04 au survol |
+| `news-1…n` (actualités) | Capture ou visuel de l'annonce | 16:10, bas libre pour la pastille date et le j'aime | Vive | Rayon 16px, aucun voile (pastilles blanches lisibles) |
 | Collage (fenêtre d'inscription) | 3–4 vignettes de jeux mêlées aux aplats noirs/rouges | Carré 1:1, tournées de -15° | Variées mais saturées | Coins arrondis différents par tuile (forme de bulle) |
 
 **Règle de cohérence** : des images **franches, saturées et lumineuses**, toujours enfermées dans une bulle (ou plein cadre sous une bulle) ; jamais d'image posée sans rayon, jamais de filtre N&B ni de teinte qui écraserait le rouge de marque.

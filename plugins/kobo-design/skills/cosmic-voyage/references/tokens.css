@@ -2,6 +2,8 @@
  * Cosmic Voyage — tokens
  * Mesurés sur l'accueil, la page personnages et la page actualités de la référence (1536×674), voir source.md.
  * @contrast text:bg text:surface muted:bg muted:surface on-accent:accent gold:surface link:nav text:glass
+ * Pages Mondes, fiche d'un monde et accueil mobile : relevés à l'œil (2026-10-02), voir source.md « Pages explorées ».
+ * @contrast text:map-bg text-soft:map-bg on-accent:cta-yellow on-accent:pill on-cookie:cookie-blue text:label-bg
  */
 :root {
   /* Couleurs */
@@ -25,6 +27,27 @@
   --line-dark: #323339;
   --quote-strip: rgb(0 0 0 / 0.72);
 
+  /* Carte stellaire « Mondes » et fiche d'un monde (observé) */
+  --map-bg: #061230;          /* nuit bleu profond de la carte des mondes (estimé sur capture) */
+  --map-bg-2: #0d2358;        /* cœur plus clair du dégradé radial de la carte (estimé) */
+  --orbit: rgb(255 255 255 / 0.38);      /* anneau orbital plein */
+  --orbit-dim: rgb(255 255 255 / 0.16);  /* anneau orbital pointillé, lointain */
+  --halo: rgb(91 157 255 / 0.55);        /* halo bleu autour des mondes */
+  --label-bg: #0b1324;        /* petit cadre sombre de l'étiquette « Mondes » */
+  --veil-world: rgb(6 18 48 / 0.62);     /* voile sur l'illustration floutée de la fiche d'un monde */
+  --dim-side: rgb(0 0 0 / 0.55);         /* assombrit les images voisines du carrousel de lieux */
+
+  /* Accueil mobile (observé à 375px) */
+  --pill: #ffffff;            /* pilule « Télécharger maintenant » de la barre mobile */
+  --cta-yellow: #ffd93b;      /* gros bouton « Télécharger maintenant » du héros mobile */
+  --cta-yellow-edge: #c9962b; /* bord doré du bouton jaune (estimé) */
+  --cta-glow: rgb(255 217 59 / 0.45);
+  --ring-a: #8b5cf6;          /* anneau dégradé du bouton lecture : violet → bleu → orange (estimé) */
+  --ring-b: #5b9dff;
+  --ring-c: #ff9d3c;
+  --cookie-blue: #2a63d4;     /* boutons pleine largeur de la bannière cookies (estimé, assombri pour le texte blanc) */
+  --on-cookie: #ffffff;
+
   /* Typographie (polices système sur la référence : Microsoft YaHei / équivalents) */
   --font-ui: 'Noto Sans', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
   --font-title: 'Noto Sans', 'Noto Sans SC', system-ui, sans-serif;
@@ -36,6 +59,8 @@
   --text-lg: 1.5rem;      /* 24px */
   --text-xl: 1.875rem;    /* 30px : nom de personnage */
   --text-hero: 3.125rem;  /* 50px */
+  --text-orbit: 0.6875rem; /* 11px : libellé d'un monde sur la carte (observé) */
+  --text-world: 2.25rem;   /* 36px : titre centré de la fiche d'un monde (estimé) */
   --leading: 1.6;
 
   /* Espace (échelle --global-spacing mesurée) */
@@ -43,6 +68,8 @@
   --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
   --nav-h: 58px;
   --container: 880px;
+  --nav-h-mobile: 52px;
+  --world-icon: 64px;      /* icône ronde d'un monde sur la carte (estimé) */
 
   /* Rayons (échelle --global-radius mesurée) */
   --radius-1: 6px; --radius-2: 12px; --radius-3: 16px; --radius-4: 20px; --radius-5: 28px;

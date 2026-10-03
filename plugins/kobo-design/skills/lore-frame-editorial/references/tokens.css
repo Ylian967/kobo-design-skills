@@ -25,6 +25,14 @@
   --text-sm: 0.875rem;     /* paragraphes courts */
   --text-lg: clamp(1.75rem, 3.4vw, 3rem);     /* titres de chapitre */
   --text-hero: clamp(3.5rem, 9vw, 9rem);      /* manifeste géant */
+  /* Mesuré sur le site (2026-10-03, 1440px) : toutes les tailles suivent la largeur */
+  --text-body-fluid: 0.9375vw;   /* 13.5px à 1440 : paragraphes */
+  --text-story: 1.3125vw;        /* 18.9px : récit long */
+  --text-statement: 3.25vw;      /* 46.8px, graisse 650, capitales : phrases-chapitres */
+  --text-manifest: 9.44vw;       /* 135.9px, interligne 0.84, approche -0.094em */
+  --text-counter: 25.6vw;        /* 369px : grands numéros en police hexagonale (Hexaframe 700) */
+  --text-label: 0.6875vw;        /* 9.9px : micro-labels mono */
+  --font-hex: 'Tektur', 'Chakra Petch', var(--font-mono);   /* équivalent libre de Hexaframe (payante) */
   --tracking-display: -0.055em;
   --leading-display: 0.86;
   --tracking-mono: 0.04em;

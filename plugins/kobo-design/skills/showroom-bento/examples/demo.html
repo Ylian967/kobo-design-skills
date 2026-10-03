@@ -69,10 +69,12 @@ button { font: inherit; color: inherit; }
 .bike { display: block; width: 100%; aspect-ratio: 16 / 9; margin: 0; position: relative; z-index: 2; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black); box-shadow: var(--shadow-pop); }
 .bike img, .side img, .visual img { display: block; width: 100%; height: 100%; object-fit: cover; color: transparent; }
 .floor { position: absolute; left: 50%; bottom: -18px; width: 96%; height: 46px; translate: -50% 0; background: var(--shadow-floor); z-index: 1; }
-.side { position: absolute; top: 50%; width: min(560px, 42vw); aspect-ratio: 16 / 9; translate: 0 -54%; opacity: .5; filter: saturate(.55) blur(1px); z-index: 1; cursor: pointer; border: 0; padding: 0; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black); transition: opacity var(--dur-base) var(--ease-out); }
-.side:hover { opacity: .75; }
-.side--prev { left: calc(var(--pad) * -1 - 24%); }
-.side--next { right: calc(var(--pad) * -1 - 24%); }
+/* Voisins : la photo doit se lire (estompée, pas vide) : carte plus petite, ~80 % visible, img en calque plein cadre */
+.side { position: absolute; top: 50%; width: min(440px, 30vw); aspect-ratio: 16 / 9; translate: 0 -54%; opacity: .62; filter: saturate(.7) blur(.5px); z-index: 1; cursor: pointer; border: 0; padding: 0; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black); transition: opacity var(--dur-base) var(--ease-out); }
+.side:hover { opacity: .85; }
+.side img { position: absolute; inset: 0; z-index: 0; opacity: 1; }
+.side--prev { left: calc(var(--pad) * -1 - 6%); }
+.side--next { right: calc(var(--pad) * -1 - 6%); }
 .carousel { position: absolute; left: 50%; bottom: 0; translate: -50% 0; z-index: 3; display: flex; align-items: center; gap: var(--space-1); padding: 4px; border-radius: var(--radius-pill); background: var(--tile); box-shadow: var(--shadow-tile); }
 .carousel .icon-btn { width: 40px; height: 40px; background: var(--soft); }
 .carousel .icon-btn:hover { background: var(--ink); color: var(--on-ink); }
@@ -137,8 +139,8 @@ button { font: inherit; color: inherit; }
   .acc { grid-column: 1 / span 2; grid-row: auto; }
   .color { grid-column: 3; grid-row: 1 / span 1; }
   .hero-bike { width: min(760px, 78vw); }
-  .side { width: 48vw; }
-  .side--prev { left: -36%; } .side--next { right: -36%; }
+  .side { width: 36vw; }
+  .side--prev { left: -18%; } .side--next { right: -18%; }
 }
 /* ---------- Mobile ---------- */
 @media (max-width: 720px) {
@@ -195,10 +197,10 @@ button { font: inherit; color: inherit; }
   </div>
 
   <section class="stage" aria-label="Modèles" aria-roledescription="carrousel">
-    <button class="side side--prev" data-dir="-1" aria-label="Modèle précédent"><img id="side-prev" src="https://images.unsplash.com/photo-1610645888304-8d56f2ad24b1?auto=format&fit=crop&w=1120&h=630&q=80" width="1120" height="630" alt="" loading="lazy"></button>
+    <button class="side side--prev" data-dir="-1" aria-label="Modèle précédent"><img id="side-prev" src="https://images.unsplash.com/photo-1610645888304-8d56f2ad24b1?auto=format&fit=crop&w=1120&h=630&q=80" width="1120" height="630" alt="" decoding="async"></button>
     <div class="hero-bike"><span class="floor" aria-hidden="true"></span>
       <figure class="bike" id="bike-main" data-slot="product-side"><img id="bike-img" src="https://images.unsplash.com/photo-1698695067900-2bcfca3d2071?auto=format&fit=crop&w=1600&h=900&q=80" width="1600" height="900" alt="Ardente : moto sportive rouge en studio sombre, vue de trois-quarts" fetchpriority="high"></figure></div>
-    <button class="side side--next" data-dir="1" aria-label="Modèle suivant"><img id="side-next" src="https://images.unsplash.com/photo-1568772585471-4f4169aed2a2?auto=format&fit=crop&w=1120&h=630&q=80" width="1120" height="630" alt="" loading="lazy"></button>
+    <button class="side side--next" data-dir="1" aria-label="Modèle suivant"><img id="side-next" src="https://images.unsplash.com/photo-1568772585471-4f4169aed2a2?auto=format&fit=crop&w=1120&h=630&q=80" width="1120" height="630" alt="" decoding="async"></button>
     <div class="carousel">
       <button class="icon-btn" data-dir="-1" aria-label="Modèle précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <output id="m-index" aria-live="polite">01 / 03</output>

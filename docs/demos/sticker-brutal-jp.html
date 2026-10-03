@@ -12,6 +12,7 @@
 :root {
   --bg: #fde9dc; --paper: #fbf3ec; --card: #ffffff; --ink: #111111; --muted: #4a4440;
   --yellow: #f6c744; --pink: #f0458f; --peri: #8c9cf0; --teal: #1f9e8f; --green: #3bd16f; --mint: #bfe9d6; --red: #e5322d;
+  --pink-soft: #ffd3e6; --yellow-soft: #fff1c2; --green-soft: #d3f5df; --backdrop: color-mix(in srgb, var(--ink) 62%, transparent);
   --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', system-ui, sans-serif;
   --font-jp: 'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
   --font-sticker: 'Dela Gothic One', 'Noto Sans CJK JP Black', 'Hiragino Sans', sans-serif;
@@ -22,9 +23,9 @@
   --container: 1240px; --frame-gap: clamp(12px, 3vw, 48px);
   --stroke: 3px; --stroke-sm: 2px; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 24px; --radius-pill: 999px;
   --shadow-hard: 5px 5px 0 0 var(--ink); --shadow-hard-sm: 3px 3px 0 0 var(--ink); --shadow-hard-lg: 8px 8px 0 0 var(--ink);
-  --tilt: -6deg;
+  --tilt: -6deg; --field-h: 52px; --peel: 22px;
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1); --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --dur-fast: 120ms; --dur-base: 240ms; --dur-slow: 600ms;
+  --dur-fast: 120ms; --dur-base: 240ms; --dur-slow: 600ms; --dur-modal: 320ms;
 }
 
 * { box-sizing: border-box; }
@@ -60,6 +61,7 @@ img, svg { display: block; }
 .nav ul { display: flex; gap: var(--space-2); margin: 0 auto; padding: 0; list-style: none; }
 .nav ul a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-3); font: 700 var(--text-sm)/1 var(--font-jp); text-decoration: none; border-radius: var(--radius-pill); border: var(--stroke-sm) solid transparent; transition: border-color var(--dur-fast), background var(--dur-fast); }
 .nav ul a:hover { border-color: var(--ink); background: var(--card); }
+.nav ul a[aria-current="page"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .lang { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); background: var(--pink); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-pill); box-shadow: var(--shadow-hard-sm); font: 700 var(--text-sm)/1 var(--font-jp); cursor: pointer; color: var(--ink); transition: translate var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
 .lang::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--red); border: var(--stroke-sm) solid var(--ink); }
 .lang:active { translate: 3px 3px; box-shadow: 0 0 0 0 var(--ink); }
@@ -89,8 +91,10 @@ img, svg { display: block; }
 .hex { width: 100%; height: 100%; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background:
   radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--paper) 35%, transparent) 0 1.5px, transparent 2px) 0 0 / 14px 14px,
   var(--pink); position: relative; overflow: hidden; }
-/* Portrait : vraie photo N&B (voir references/assets.md). multiply : le fond blanc de la photo prend le rose tramé de l'hexagone */
-.hex img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; color: transparent; filter: grayscale(1) contrast(1.2) brightness(1.08); mix-blend-mode: multiply; }
+/* Portrait : vraie photo N&B en rendu NORMAL (pas de mix-blend-mode), posée dans un hexagone intérieur à filet noir.
+   Le rose tramé reste visible tout autour, comme un cadre. Voir references/assets.md (« pourquoi pas multiply »). */
+.hex__photo { position: absolute; inset: 9% 9% 7%; clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); background: var(--ink); }
+.hex__photo img { position: absolute; inset: var(--stroke); width: calc(100% - 2 * var(--stroke)); height: calc(100% - 2 * var(--stroke)); clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); object-fit: cover; object-position: 50% 22%; color: transparent; background: var(--paper); filter: grayscale(1) contrast(1.12); }
 
 .visual .kana { position: absolute; right: -2%; top: 4%; margin: 0; writing-mode: vertical-rl; font: 400 clamp(3rem, 6.4vw, 5.6rem)/1 var(--font-sticker); color: var(--yellow); -webkit-text-stroke: var(--stroke) var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--ink); letter-spacing: -0.02em; }
 .tag { position: absolute; display: inline-flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-4); border: var(--stroke) solid var(--ink); box-shadow: var(--shadow-hard-sm); font: 900 var(--text-base)/1.2 var(--font-jp); white-space: nowrap; }
@@ -157,6 +161,7 @@ img, svg { display: block; }
 @keyframes bob { to { translate: 0 -10px; } }
 @keyframes tape { to { transform: translateX(-50%); } }
 @keyframes pop { from { opacity: 0; scale: 0.6; } }
+@keyframes drop { from { opacity: 0; translate: 0 -8px; rotate: 1deg; } }
 .pop { animation: pop var(--dur-slow) var(--ease-spring) both; }
 .pop:nth-child(2) { animation-delay: 80ms; } .pop:nth-child(3) { animation-delay: 160ms; } .pop:nth-child(4) { animation-delay: 240ms; } .pop:nth-child(5) { animation-delay: 320ms; }
 
@@ -172,8 +177,10 @@ img, svg { display: block; }
   .stage { padding: var(--space-12) var(--frame-gap) var(--space-8); }
   .chrome { padding: var(--space-2) var(--space-4); }
   .chrome span { display: none; }
-  .nav { padding: var(--space-3) var(--space-4); gap: var(--space-3); }
-  .nav ul { display: none; }
+  .nav { position: relative; padding: var(--space-3) var(--space-4); gap: var(--space-3); }
+  .nav ul { display: none; position: absolute; z-index: 5; top: 100%; left: var(--space-4); right: var(--space-4); flex-direction: column; gap: var(--space-1); padding: var(--space-3); background: var(--paper); border: var(--stroke) solid var(--ink); border-radius: var(--radius-md); box-shadow: var(--shadow-hard); }
+  .nav.is-open ul { display: flex; animation: drop var(--dur-base) var(--ease-spring) both; }
+  .nav ul a { width: 100%; font-size: var(--text-lg); font-weight: 900; }
   .logo { margin-right: auto; }
   .lang span { display: none; }
   .menu-btn { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--card); border: var(--stroke-sm) solid var(--ink); border-radius: var(--radius-sm); box-shadow: var(--shadow-hard-sm); cursor: pointer; }
@@ -224,40 +231,40 @@ img, svg { display: block; }
   <div class="frame">
     <div class="chrome" aria-hidden="true"><i></i><i></i><i></i><span>arata-mio.design / ja</span></div>
 
-    <header class="nav">
-      <a class="logo" href="#"><b aria-hidden="true"></b>ARATA MIO</a>
-      <nav aria-label="メインメニュー"><ul>
-        <li><a href="#services">サービス</a></li>
-        <li><a href="#works">実績</a></li>
-        <li><a href="#about">プロフィール</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
+    <header class="nav" data-nav>
+      <a class="logo" href="demo.html"><b aria-hidden="true"></b>ARATA MIO</a>
+      <nav aria-label="メインメニュー"><ul id="menu">
+        <li><a href="demo.html" aria-current="page" data-en="Home">ホーム</a></li>
+        <li><a href="#services" data-en="Services">サービス</a></li>
+        <li><a href="projets.html" data-en="Works">実績</a></li>
+        <li><a href="contact.html" data-en="Contact">お問い合わせ</a></li>
       </ul></nav>
-      <button class="lang" aria-label="言語を切り替える（現在：日本語）"><span>日本語</span>JA</button>
-      <button class="menu-btn" aria-label="メニューを開く"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <button class="lang" type="button" aria-label="言語を切り替える（現在：日本語）"><span>日本語</span>JA</button>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="メニューを開く"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero__text">
-          <p class="hello">こんにちは！デザイナーの荒田ミオです</p>
+          <p class="hello" data-en="Hi! I'm Mio Arata, a designer">こんにちは！デザイナーの荒田ミオです</p>
           <h1 id="hero-title">Loud <span class="hl">Brand</span><br>Design</h1>
-          <h2>売れるブランドを、<br>いちばん目立つ形で。</h2>
-          <p class="lead">スタートアップや小さなお店のために、ロゴ・ウェブサイト・SNSのビジュアルをまとめてデザインします。打ち合わせは日本語・英語どちらでも大丈夫です。</p>
+          <h2><span data-en="Brands that sell,">売れるブランドを、</span><br><span data-en="shaped to stand out.">いちばん目立つ形で。</span></h2>
+          <p class="lead" data-en="Logos, websites and social visuals for startups and small shops, designed as one system. Meetings in Japanese or English.">スタートアップや小さなお店のために、ロゴ・ウェブサイト・SNSのビジュアルをまとめてデザインします。打ち合わせは日本語・英語どちらでも大丈夫です。</p>
           <div class="actions">
-            <a class="btn btn--primary" href="#contact">無料で相談する<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-            <a class="btn btn--ghost" href="#works">実績を見る</a>
+            <a class="btn btn--primary" href="contact.html"><span data-en="Free consultation">無料で相談する</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn--ghost" href="projets.html"><span data-en="See works">実績を見る</span></a>
           </div>
         </div>
 
         <div class="visual">
-          <div class="hex-wrap pop"><div class="hex" data-slot="portrait">
-            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1000&h=1000&q=80" lang="fr" alt="Portrait en noir et blanc d'une femme souriante" width="1000" height="1000" fetchpriority="high" decoding="async">
-          </div></div>
+          <div class="hex-wrap pop"><div class="hex"><div class="hex__photo" data-slot="portrait">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1000&h=1000&q=80" alt="笑顔の女性の白黒ポートレート" width="1000" height="1000" fetchpriority="high" decoding="async">
+          </div></div></div>
           <p class="kana pop" aria-hidden="true">ブランド</p>
-          <span class="tag tag--name pop">ミオです！</span>
+          <span class="tag tag--name pop" data-en="I'm Mio!">ミオです！</span>
           <span class="tile tile--chart pop" aria-hidden="true"><svg><use href="#i-chart"/></svg></span>
           <span class="tile tile--eye pop" aria-hidden="true"><svg><use href="#i-eye"/></svg></span>
-          <span class="tag tag--open pop"><svg aria-hidden="true"><use href="#i-check"/></svg>新規ご依頼 受付中</span>
+          <span class="tag tag--open pop"><svg aria-hidden="true"><use href="#i-check"/></svg><span data-en="Open for new projects">新規ご依頼 受付中</span></span>
         </div>
       </section>
 
@@ -269,14 +276,14 @@ img, svg { display: block; }
       <section class="section" id="services" aria-labelledby="svc-title">
         <div class="sec-head">
           <span class="kicker">Services</span>
-          <h2 id="svc-title">できること</h2>
-          <p>ひとりのデザイナーが、最初のロゴから公開後の改善まで伴走します。</p>
+          <h2 id="svc-title" data-en="What I do">できること</h2>
+          <p data-en="One designer, from the very first logo to improvements after launch.">ひとりのデザイナーが、最初のロゴから公開後の改善まで伴走します。</p>
         </div>
         <div class="cards">
-          <a class="card" href="#contact"><span class="ico" style="background:var(--peri)"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Branding<small>ロゴ・ブランド設計</small></h3><p>名前の響きから色・書体まで、覚えてもらえる顔をつくります。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-          <a class="card" href="#contact"><span class="ico" style="background:var(--yellow)"><svg aria-hidden="true"><use href="#i-layout"/></svg></span><h3>Web Design<small>ウェブサイト制作</small></h3><p>スマホで読みやすく、問い合わせにつながる構成で設計します。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-          <a class="card" href="#contact"><span class="ico" style="background:var(--teal)"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Growth<small>改善・分析</small></h3><p>公開して終わりにしない。数字を見ながら毎月すこしずつ育てます。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
-          <a class="card" href="#contact"><span class="ico" style="background:var(--pink)"><svg aria-hidden="true"><use href="#i-spark"/></svg></span><h3>Social<small>SNSビジュアル</small></h3><p>投稿テンプレートとバナーを、ブランドの声に合わせて揃えます。</p><span class="more">詳しく<svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="projets.html#branding"><span class="ico" style="background:var(--peri)"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Branding<small data-en="Logo & identity">ロゴ・ブランド設計</small></h3><p data-en="From the sound of the name to colours and type: a face people remember.">名前の響きから色・書体まで、覚えてもらえる顔をつくります。</p><span class="more"><span data-en="More">詳しく</span><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="projets.html#web"><span class="ico" style="background:var(--yellow)"><svg aria-hidden="true"><use href="#i-layout"/></svg></span><h3>Web Design<small data-en="Websites">ウェブサイト制作</small></h3><p data-en="Easy to read on a phone, built to turn visits into enquiries.">スマホで読みやすく、問い合わせにつながる構成で設計します。</p><span class="more"><span data-en="More">詳しく</span><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="contact.html"><span class="ico" style="background:var(--teal)"><svg aria-hidden="true"><use href="#i-chart"/></svg></span><h3>Growth<small data-en="Analytics & tuning">改善・分析</small></h3><p data-en="Launch is not the end: we grow it a little every month, numbers in hand.">公開して終わりにしない。数字を見ながら毎月すこしずつ育てます。</p><span class="more"><span data-en="More">詳しく</span><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+          <a class="card" href="projets.html#sns"><span class="ico" style="background:var(--pink)"><svg aria-hidden="true"><use href="#i-spark"/></svg></span><h3>Social<small data-en="Social visuals">SNSビジュアル</small></h3><p data-en="Post templates and banners that match the brand's voice.">投稿テンプレートとバナーを、ブランドの声に合わせて揃えます。</p><span class="more"><span data-en="More">詳しく</span><svg width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
         </div>
       </section>
 
@@ -284,22 +291,22 @@ img, svg { display: block; }
         <div class="proof">
           <div>
             <span class="kicker">Numbers</span>
-            <h3 id="works-title">これまでの実績</h3>
+            <h3 id="works-title" data-en="Track record">これまでの実績</h3>
             <div class="stats">
-              <div class="stat"><b>120+</b><span>プロジェクト</span></div>
-              <div class="stat"><b>8年</b><span>デザイン歴</span></div>
-              <div class="stat"><b>×2.4</b><span>平均CV改善</span></div>
+              <div class="stat"><b>120+</b><span data-en="projects">プロジェクト</span></div>
+              <div class="stat"><b>8年</b><span data-en="years">デザイン歴</span></div>
+              <div class="stat"><b>×2.4</b><span data-en="avg. CVR">平均CV改善</span></div>
             </div>
           </div>
           <div>
             <span class="kicker">Topics</span>
-            <h3>相談したいことは？</h3>
+            <h3 data-en="What do you need?">相談したいことは？</h3>
             <ul class="chips" aria-label="相談内容を選ぶ">
-              <li><button class="chip" aria-pressed="true">ロゴ</button></li>
-              <li><button class="chip" aria-pressed="false">ウェブサイト</button></li>
-              <li><button class="chip" aria-pressed="false">名刺・印刷物</button></li>
-              <li><button class="chip" aria-pressed="false">SNS</button></li>
-              <li><button class="chip" aria-pressed="false">まだ決めていない</button></li>
+              <li><button class="chip" type="button" aria-pressed="true" data-en="Logo">ロゴ</button></li>
+              <li><button class="chip" type="button" aria-pressed="false" data-en="Website">ウェブサイト</button></li>
+              <li><button class="chip" type="button" aria-pressed="false" data-en="Print">名刺・印刷物</button></li>
+              <li><button class="chip" type="button" aria-pressed="false">SNS</button></li>
+              <li><button class="chip" type="button" aria-pressed="false" data-en="Not sure yet">まだ決めていない</button></li>
             </ul>
           </div>
         </div>
@@ -307,25 +314,41 @@ img, svg { display: block; }
 
       <section class="cta" id="contact" aria-labelledby="cta-title">
         <div style="position:relative;z-index:1">
-          <h2 id="cta-title">まずは気軽に<br>お話ししましょう。</h2>
-          <p>30分のオンライン相談は無料です。2営業日以内にお返事します。</p>
+          <h2 id="cta-title"><span data-en="Let's have">まずは気軽に</span><br><span data-en="a quick chat.">お話ししましょう。</span></h2>
+          <p data-en="The 30-minute online call is free. I reply within 2 business days.">30分のオンライン相談は無料です。2営業日以内にお返事します。</p>
         </div>
-        <form class="form" onsubmit="event.preventDefault()">
-          <div class="field"><label for="mail">メールアドレス</label><input class="input" id="mail" type="email" placeholder="you@example.jp" autocomplete="email"></div>
-          <button class="btn" type="submit">送信する<svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <form class="form" action="contact.html" method="get">
+          <div class="field"><label for="mail" data-en="Email">メールアドレス</label><input class="input" id="mail" name="mail" type="email" placeholder="you@example.jp" autocomplete="email"></div>
+          <button class="btn" type="submit"><span data-en="Next">送信する</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </form>
       </section>
     </main>
 
     <footer class="foot" id="about">
       <span>© 荒田ミオ（架空の人物）— Kōbō デモ · Photos : Unsplash</span>
-      <nav aria-label="フッター"><a href="#">Instagram</a><a href="#">note</a><a href="#">English</a></nav>
+      <nav aria-label="フッター"><a href="projets.html" data-en="Works">実績</a><a href="contact.html" data-en="Contact">お問い合わせ</a><a href="#">Instagram</a></nav>
     </footer>
   </div>
 </div>
 <script>
+/* Puces */
 document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') !== 'true')));
-document.querySelector('.lang').addEventListener('click', e => { const b = e.currentTarget; const ja = b.lastChild.textContent === 'JA'; b.lastChild.textContent = ja ? 'EN' : 'JA'; b.firstElementChild.textContent = ja ? 'English' : '日本語'; });
+/* Menu mobile */
+const nav = document.querySelector('[data-nav]'), menuBtn = nav.querySelector('.menu-btn');
+menuBtn.addEventListener('click', () => { const open = menuBtn.getAttribute('aria-expanded') !== 'true'; menuBtn.setAttribute('aria-expanded', open); nav.classList.toggle('is-open', open); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { menuBtn.click(); menuBtn.focus(); } });
+/* Bilingue JA / EN : chaque texte traduit porte data-en (et data-en-ph pour les placeholders) ; le choix suit sur les 3 pages */
+const langBtn = document.querySelector('.lang');
+function setLang(en) {
+  document.documentElement.lang = en ? 'en' : 'ja';
+  document.querySelectorAll('[data-en]').forEach(el => { if (el.dataset.ja == null) el.dataset.ja = el.textContent; el.textContent = en ? el.dataset.en : el.dataset.ja; });
+  document.querySelectorAll('[data-en-ph]').forEach(el => { if (el.dataset.jaPh == null) el.dataset.jaPh = el.placeholder; el.placeholder = en ? el.dataset.enPh : el.dataset.jaPh; });
+  langBtn.firstElementChild.textContent = en ? 'English' : '日本語'; langBtn.lastChild.textContent = en ? 'EN' : 'JA';
+  langBtn.setAttribute('aria-label', en ? 'Switch language (current: English)' : '言語を切り替える（現在：日本語）');
+  try { localStorage.setItem('sbj-lang', en ? 'en' : 'ja'); } catch (e) {}
+}
+langBtn.addEventListener('click', () => setLang(document.documentElement.lang === 'ja'));
+try { if (localStorage.getItem('sbj-lang') === 'en') setLang(true); } catch (e) {}
 </script>
 </body>
 </html>

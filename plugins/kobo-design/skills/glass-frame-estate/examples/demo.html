@@ -9,17 +9,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700&display=swap">
 <style>
 :root {
-  --white: #ffffff; --ink: #0d0d0d; --surface: #f4f3f0; --muted: #5e5e5e; --line: #e3e1dc; --on-dark-muted: #a3a3a3; --line-dark: #6a6a6a; --accent: #a8641f; --accent-2: #9c5a1c;
+  --white: #ffffff; --ink: #000000; --surface: #f2f2f2; --surface-2: #fafafa; --muted: #555555; --line: #e3e3e3; --on-dark-muted: #a3a3a3; --line-dark: #6a6a6a; --accent: #a8641f; --accent-2: #9c5a1c;
   --frame-line: rgb(255 255 255 / 0.85); --glass: rgb(255 255 255 / 0.14); --glass-line: rgb(255 255 255 / 0.45); --glass-solid: #e9ecef;
   --shade: #2a3424; --shade-2: #3b4a36; --wordmark-from: rgb(255 255 255 / 0.72); --wordmark-to: rgb(255 255 255 / 0);
   --sky-top: #5d7ea8; --sky-mid: #c9a27c; --sky-glow: #f2b56b; --sun: #ffe1a8; --hill: #4f7a3a; --hill-dark: #2f4f25; --hill-light: #7aa356; --wood: #2b211b; --window: #ffcf86; --stone: #cfc6b8;
   --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif; --font-body: 'Inter', system-ui, sans-serif;
   --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
-  --text-h2: clamp(2rem, 4vw, 3.25rem); --text-hero: clamp(1.75rem, 3.2vw, 2.75rem); --text-wordmark: clamp(5rem, 19vw, 19rem);
-  --tracking-caps: 0.08em; --tracking-wordmark: -0.04em; --weight-light: 300;
+  --text-h2: clamp(2rem, 4vw, 3.25rem); --text-hero: clamp(2.5rem, 5.5vw, 5rem); --text-wordmark: clamp(5rem, 19vw, 17.5rem);
+  --tracking-caps: 0.08em; --tracking-wordmark: -0.04em; --weight-light: 300; --weight-title: 500; --tracking-title: -0.02em;
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --frame-inset: clamp(12px, 2vw, 28px); --container: 1280px; --gutter: clamp(16px, 4vw, 56px);
-  --radius-frame: 6px; --radius-btn: 2px; --radius-card: 4px; --radius-round: 999px; --blur-bg: 22px; --blur-glass: 18px;
+  --frame-inset: clamp(12px, 2vw, 28px); --container: 1200px; --gutter: clamp(16px, 4vw, 56px);
+  --radius-frame: 6px; --radius-btn: 4px; --radius-card: 10px; --radius-round: 999px; --blur-bg: 22px; --blur-glass: 18px;
   --shadow-glass: 0 20px 50px rgb(13 13 13 / 0.25); --shadow-card: 0 1px 0 var(--line);
   --ease: cubic-bezier(0.22, 1, 0.36, 1); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); --dur-fast: 180ms; --dur: 420ms; --dur-slow: 900ms; --dur-photo: 1400ms;
 }
@@ -46,6 +46,9 @@ a { color: inherit; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: blur(var(--blur-bg)) saturate(1.1); }
 .frame { position: relative; height: 100%; border: 1px solid var(--frame-line); border-radius: var(--radius-frame); overflow: hidden; isolation: isolate; }
 .frame .media img { animation: settle var(--dur-photo) var(--ease) both; }
+/* Héros : la photo est un calque plein cadre explicite au-dessus du dégradé de repli (fond du conteneur) et sous le mot-marque (z 2) et le voile (z 3) */
+.frame .media > picture { position: absolute; inset: 0; z-index: 0; display: block; }
+.frame .media > picture img { z-index: 0; opacity: 1; visibility: visible; }
 .wordmark { position: absolute; z-index: 2; left: 0; right: 0; top: 12%; margin: 0; text-align: center; font: 700 var(--text-wordmark)/0.8 var(--font-display); letter-spacing: var(--tracking-wordmark); text-transform: uppercase;
   background: linear-gradient(180deg, var(--wordmark-from) 10%, var(--wordmark-to) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; }
 .topbar { position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: var(--space-4) var(--space-6); }
@@ -60,7 +63,7 @@ a { color: inherit; }
 .dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
 .menu-btn:hover .dots { transform: rotate(45deg); }
 .hero-title { position: absolute; z-index: 4; left: var(--space-8); bottom: var(--space-8); max-width: 34rem; animation: up var(--dur-slow) var(--ease) 200ms both; }
-.hero-title h1 { margin: 0 0 var(--space-3); font: var(--weight-light) var(--text-hero)/1.05 var(--font-body); letter-spacing: -0.01em; text-transform: uppercase; }
+.hero-title h1 { margin: 0 0 var(--space-3); font: var(--weight-title) var(--text-hero)/1.1 var(--font-body); letter-spacing: var(--tracking-title); text-transform: uppercase; }
 .hero-title p { margin: 0 0 var(--space-6); max-width: 26rem; font-size: var(--text-sm); color: var(--white); opacity: .9; }
 .btn { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-btn); border: 1px solid transparent;
   font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer;
@@ -341,6 +344,13 @@ footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0
   const t = document.getElementById('clock');
   const tick = () => { const d = new Date(); t.textContent = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }); t.dateTime = d.toISOString(); };
   tick(); setInterval(tick, 30000);
+  // Photo du héros : si l'URL principale échoue, on bascule sur une autre maison en A (jamais le dégradé seul)
+  const FALLBACK = 'https://images.unsplash.com/photo-1697462248408-25479e5acfb0?auto=format&fit=crop&w=2000&h=1200&q=80';
+  document.querySelectorAll('.frame .media picture img, .hero-bg img').forEach(img => {
+    const swap = () => { if (img.dataset.fb) return; img.dataset.fb = '1'; img.closest('picture')?.querySelectorAll('source').forEach(s => s.remove()); img.src = FALLBACK; };
+    img.addEventListener('error', swap);
+    if (img.complete && img.naturalWidth === 0 && img.currentSrc) swap();
+  });
   document.querySelectorAll('.chips .chip').forEach(c => c.addEventListener('click', () => {
     c.parentElement.querySelectorAll('.chip').forEach(o => o.setAttribute('aria-pressed', o === c));
   }));

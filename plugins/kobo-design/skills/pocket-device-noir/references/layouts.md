@@ -56,3 +56,13 @@ Grande tuile à coins de 20px : vraie photo d'intérieur chaleureux en fond, fon
 - Fonctions et avis : une colonne ; tuile roche 420px.
 - Appel final : 660px de haut, texte en haut, objet 3D en bas sur 300px (fondu noir du haut vers le bas).
 - Pas de défilement horizontal : les rayons et les photos débordent dans des sections en `overflow: hidden`.
+
+---
+
+## Écrans relevés dans la vidéo du shot
+
+- **Pourquoi** (après le manifeste) : fond noir, en-tête centré (étiquette + titre 2 lignes), bande de 5 photos avec sélection centrale, paragraphe centré.
+- **En vedette** : 2 colonnes égales, panneau de verre à gauche, photo à droite, carrousel (barre segmentée + flèche ronde).
+- **Appel final** (remplace la version extrapolée) : photo plein cadre de l'objet en main, texte centré au-dessus de l'objet, bouton blanc centré sous l'objet, voile sombre en haut pour la lisibilité.
+
+Tous les écrans de la vidéo sont présentés dans un **cadre arrondi à fin contour gris** sur fond noir (mise en scène du shot, pas forcément du site).

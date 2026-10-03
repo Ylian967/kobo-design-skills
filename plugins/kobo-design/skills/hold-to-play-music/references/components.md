@@ -42,3 +42,38 @@ Ligne Fira Mono 10px : « © 2026 Label · À propos · Site du label » à gauc
 
 - **Chargement** : noir, logo dessiné au trait en blanc au centre, petit compteur.
 - **Son coupé** : icône barrée dans le pied de page.
+
+---
+
+# Relevés sur le site en ligne (2026-10-03)
+
+Le site de 2015 est **toujours en ligne** (rendu PixiJS dans un canvas, interface en HTML) ; ouvert dans le navigateur intégré (612px). « Mesuré » = style calculé ; « observé » = à l'œil.
+
+## Chargement (observé)
+
+Fond **noir avec grain de film animé** ; en haut au centre le logo du label (petit personnage-robot dessiné au trait + nom en lettrage manuscrit blanc) et « présente » en **Inconsolata 12px gris #858585** (mesuré) ; dessous un **anneau de progression** fin blanc. Autour, des **coups de pinceau** isolés (barres, points, arcs) bleu Klein, orange et blanc flottent puis **s'assemblent** pour écrire le titre en lettres peintes, avec texture de pinceau sec visible dans chaque trait.
+
+## Choix d'écoute (mesuré)
+
+Avant de commencer : deux choix en Camphor 17px 400, « haut-parleurs » en **orange #e47839** et « casque » en **bleu #002fa7**, puis le bouton « commencer » en Camphor 16px **200** noir (sur fond clair). Reprendre l'idée : une question d'écoute en deux mots colorés, puis un bouton très fin.
+
+```html
+<fieldset class="listen"><legend class="sr-only">Comment écoutez-vous ?</legend>
+  <label><input type="radio" name="out" value="hp"> <span class="o">haut-parleurs</span></label>
+  <label><input type="radio" name="out" value="casque"> <span class="b">casque</span></label>
+</fieldset>
+<button class="start">commencer</button>
+```
+```css
+.listen span { font: 400 1.0625rem/1.3 var(--font-ui); }
+.listen .o { color: var(--orange); }  .listen .b { color: var(--blue-light); }  /* bleu Klein illisible sur noir : version claire */
+.start { font: var(--weight-light) var(--text-base) var(--font-ui); background: var(--paper); color: var(--ink); border: 0; min-height: 44px; padding: 0 var(--space-6); }
+```
+
+## Générique (mesuré)
+
+Page de crédits en Camphor **26px 400** : rôles en **orange**, noms en **blanc**, la ligne d'en-tête et les remerciements en **bleu Klein** ; un seul nom par ligne, centré, long défilement. Phrase d'intro en blanc 26px, mots clés en couleur.
+
+## Pied de page (mesuré)
+
+Liens 13px 400 blancs : « À propos », site du label, mot-dièse, « Partagez ». Message d'orientation 13px : « Tournez votre appareil s'il vous plaît. » (l'expérience est **paysage uniquement** sur mobile).

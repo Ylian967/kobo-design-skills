@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27769939-Architecture-Studio-Website-Design-Baraka (shot Dribbble « Architecture Studio Website Design — Baraka »)
 - **Famille** : Architecture / immobilier de luxe
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
 
 ## Ce qui a été vu
 
@@ -13,6 +13,13 @@
 - **À propos** : petit libellé précédé d'un point (« • ABOUT US »), « ©2025 » à gauche, grande phrase en deux tons (blanc puis gris ~#777). Grille de chiffres 2×2 : grands nombres fins (« 15+ » avec « + » gris), petit libellé, filets de séparation.
 - **Propriétés** : titre « Exclusive properties by … », cartes horizontales ~4:5 ; la première est un aplat rouge avec une pilule blanche « View Work » et trois caractéristiques, les autres sont des photos avec le nom en bas à gauche ; bouton rond « précédent » et ligne de progression rouge.
 - **Processus** : titre « Turning your real-estate dreams true », lignes numérotées 01 / 02 / 03 séparées par des filets ; la ligne ouverte montre une photo, une liste « Key Features » à puces et une pilule rouge.
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Shot Dribbble | Une seule image (2400×1800). Relue : rien de plus. |
+| Autres shots du même projet / site en ligne | Aucun trouvé (recherche Dribbble par nom de projet, description du shot sans lien). |
 
 ## Non mesuré
 

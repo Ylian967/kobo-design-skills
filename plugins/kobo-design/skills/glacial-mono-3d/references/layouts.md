@@ -18,3 +18,15 @@
 - Interface réduite à : logo, rubrique (1 ligne), son, flèches du carrousel.
 - Paragraphes du manifeste dans un tiroir qui s'ouvre via `⌜ Lire ⌟`.
 - Scène 3D allégée (moins de particules, pas d'ombres) ou vidéo en boucle.
+
+---
+
+## Parcours réel (observé, 2026-10-03)
+
+1. **Accueil** : igloo de glace aux joints lumineux dans un paysage enneigé gris, interface aux 4 coins.
+2. **Recul de caméra** au défilement : l'igloo s'éloigne, aberration chromatique (franges arc-en-ciel) pendant le mouvement, l'interface des coins s'efface.
+3. **Portfolio** : brouillard gris uni ; une suite de **blocs de glace** qui passent au premier plan un par un, chacun avec son étiquette ; on traverse le brouillard entre deux blocs.
+4. **Symbole** : anneaux qui s'assemblent puis flou radial.
+5. **Fin** : socle lumineux, sculpture de particules, carrousel de liens à crochets.
+
+Pas de sections HTML : un seul plan 3D piloté par le défilement, l'interface reste fixe aux coins. Sur écran étroit, mêmes positions de coin, textes ~11px.

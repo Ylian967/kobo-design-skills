@@ -18,3 +18,14 @@ Lent, solennel, comme un travelling de documentaire. Technologies listées par l
 ## Mouvement réduit
 
 Pas de travelling : coupes en fondu de 200ms ; lentille fixe (pas de suivi de souris) ; titres affichés d'un coup.
+
+---
+
+## Observé sur le site (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Prologue | Phrase qui se fond dans la suivante à chaque cran de défilement | Observé, ≈ 600ms |
+| Lumière | Étalonnage du décor qui passe de l'aube bleue à l'or au fil du prologue | Observé, lié au défilement |
+| Entrée | Clic « Entrez » → caméra qui avance vers la cité | Observé, ≈ 3s |
+| Progression | Fine barre orange sur le bord droit | Observé |

@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27771993-Noda-AI-Companion-Website-Design (shot Dribbble « Noda — AI Companion Website Design »)
 - **Famille** : Produit tech / objet connecté
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome (image) ; 2026-10-03, vidéo du shot image par image
 
 ## Ce qui a été vu
 
@@ -15,13 +15,21 @@
 - **Témoignages** : rangée de petites cartes avec avatar, nom et rôle.
 - **Photos d'ambiance** : tissu orange chaud, roche noire. Palette relevée : #000, #0d0d0d, #1a1a1a, blanc, gris #8a8a8a, rouge #e5343a, tons chauds des photos.
 
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Image principale (2400×1800) | Déjà analysée (ci-dessus). |
+| Vidéo du shot (800×600, 2,4s) | Observé : section « pourquoi » (bande de 5 photos, sélection centrale à contour pointillé), panneau « en vedette » en verre flouté avec icône rouge et barre segmentée + photo avec flèche ronde, appel final photo avec bouton blanc centré. |
+| Autres shots du même projet | Aucun trouvé (recherche Dribbble). Pas de site en ligne lié. |
+
 ## Non mesuré
 
 - Il s'agit d'un **mockup Dribbble** : analyse visuelle des images uniquement, aucun site en ligne, aucun code inspecté.
 - Toutes les valeurs (couleurs, tailles, rayons, flous) sont **estimées à l'œil** et arrondies sur une échelle de 4px.
 - La police n'est pas identifiée : **Geist** et **Geist Mono** sont choisies à l'œil.
 - Aucune animation n'est visible sur des images fixes : le mouvement (`motion.md`) est une proposition.
-- L'appel final et le pied de page ne sont pas visibles dans les notes : ils sont extrapolés.
+- L'appel final est désormais **observé** dans la vidéo ; le pied de page reste extrapolé.
 
 ## Écarts assumés
 

@@ -13,7 +13,7 @@
   --accent: #e8601c; --on-accent: #111111; --accent-glow: rgb(232 96 28 / 0.18); --scrim: rgb(18 18 18 / 0.72);
   --font-display: 'Michroma', 'Syncopate', 'Orbitron', sans-serif; --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --text-2xs: 0.625rem; --text-xs: 0.6875rem; --text-sm: 0.8125rem; --text-base: 0.9375rem; --text-lg: 1.125rem; --text-h3: 1.25rem;
-  --text-h2: clamp(2rem, 6vw, 5.5rem); --text-hero: clamp(1.9rem, 4.4vw, 4rem); --tracking-display: 0.02em; --tracking-label: 0.22em; --leading-display: 1.02;
+  --text-h2: clamp(2rem, 6vw, 5.5rem); --text-hero: clamp(1.6rem, 3.1vw, 3rem); --tracking-display: 0.02em; --tracking-label: 0.22em; --leading-display: 1.02;
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
   --container: 1360px; --gutter: clamp(16px, 3.5vw, 48px);
   --radius: 2px; --radius-panel: 6px; --radius-pill: 999px; --border: 1px solid var(--line-strong); --cut: 14px;
@@ -53,7 +53,9 @@ svg { display: block; }
 .intro .label { display: inline-flex; align-items: center; gap: var(--space-3); color: var(--muted); }
 .intro .label::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
 .stack { margin: var(--space-6) 0; font: 400 var(--text-hero)/var(--leading-display) var(--font-display); letter-spacing: var(--tracking-display); text-transform: uppercase; }
-.stack span { display: block; white-space: nowrap; animation: slice var(--dur-slow) var(--ease) both; }
+.stack { max-width: 100%; }
+/* Michroma est très large : taille calée sur la colonne + retour à la ligne permis ; le clip-path final déborde largement pour ne jamais rogner un mot */
+.stack span { display: block; white-space: normal; overflow-wrap: anywhere; animation: slice var(--dur-slow) var(--ease) both; }
 .stack span:nth-child(2) { animation-delay: 90ms; } .stack span:nth-child(3) { animation-delay: 180ms; } .stack span:nth-child(4) { animation-delay: 270ms; }
 .stack .slash { display: flex; align-items: center; gap: 0.3em; color: var(--accent); }
 .stack .slash i { display: inline-block; width: 1.9em; height: 0.42em; border-radius: var(--radius-pill); background: var(--accent); }
@@ -72,10 +74,12 @@ svg { display: block; }
 .shot::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, var(--accent-glow), transparent 45%), radial-gradient(circle at 85% 15%, var(--accent-glow), transparent 40%); mix-blend-mode: screen; }
 
 /* Mannequin (photo) */
-.model { position: relative; align-self: stretch; min-height: 520px; }
-.model::before { content: ""; position: absolute; left: 50%; top: 42%; width: 120%; aspect-ratio: 1; translate: -50% -50%; background: radial-gradient(circle, var(--accent-glow), transparent 62%); }
-.model .shot { position: absolute; inset: 0; background: transparent; -webkit-mask-image: radial-gradient(ellipse 62% 72% at 50% 46%, black 55%, transparent 100%); mask-image: radial-gradient(ellipse 62% 72% at 50% 46%, black 55%, transparent 100%); }
-.model .shot img { object-position: 50% 20%; transition: filter var(--dur) var(--ease); }
+.model { position: relative; z-index: 1; align-self: stretch; min-height: 520px; isolation: isolate; }
+.model::before { content: ""; position: absolute; left: 50%; top: 42%; width: 120%; aspect-ratio: 1; translate: -50% -50%; z-index: 0; background: radial-gradient(circle, var(--accent-glow), transparent 62%); }
+/* La photo est un calque explicite au-dessus de la lueur (z 1) ; masque doux seulement sur les bords */
+.model .shot { position: absolute; inset: 0; z-index: 1; background: transparent; -webkit-mask-image: radial-gradient(ellipse 75% 85% at 50% 45%, black 65%, transparent 100%); mask-image: radial-gradient(ellipse 75% 85% at 50% 45%, black 65%, transparent 100%); }
+.model .shot img { z-index: 0; opacity: 1; object-position: 50% 20%; filter: grayscale(1) contrast(1.08) brightness(1.05); transition: filter var(--dur) var(--ease); }
+.model .shot::after { z-index: 1; }
 .model.is-flat .shot::after { opacity: 0; }
 .vertical { position: absolute; right: 2%; top: 6%; z-index: 2; writing-mode: vertical-rl; font: 400 var(--text-sm)/1 var(--font-display); letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
 .vertical b { font-weight: 400; color: var(--accent); }
@@ -162,7 +166,7 @@ footer.site { padding: var(--space-16) 0 var(--space-8); }
 .foot li a:hover { color: var(--text); }
 .legal { margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; color: var(--dim); }
 
-@keyframes slice { from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-12px); } to { opacity: 1; clip-path: inset(0 0 0 0); transform: none; } }
+@keyframes slice { from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-12px); } to { opacity: 1; clip-path: inset(-20% -100vw -20% -20%); transform: none; } }
 @keyframes scan { from { top: 10%; } to { top: 86%; } }
 @keyframes blink { 50% { opacity: .3; } }
 @keyframes nudge { 50% { transform: translateY(4px); } }

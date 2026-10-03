@@ -51,7 +51,7 @@ Archivo 500 étirée, capitales, interligne 1.02. Une `<span>` par ligne ; chaqu
 <h1 class="title"><span><b>Matières magnifiques</b></span><span><b>Savoir-faire superbe</b></span></h1>
 ```
 ```css
-.title { font: 500 var(--text-title)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
+.title { font: var(--weight-display) var(--text-title)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
 .title span { display: block; overflow: hidden; white-space: nowrap; }
 .title span + span { padding-left: var(--indent-step); }
 ```
@@ -129,3 +129,54 @@ Remplace le formulaire : sceau rond 72px à contour `--ink` avec ✓, titre « V
 - **Rendu 3D en chargement** : le cercle et les filets sont déjà là ; la pièce apparaît en fondu + montée de 12px.
 - **Image manquante** : fond `--night` (ou `--night-2`) et cercles-guides seuls ; la page reste cohérente. Les photos elles-mêmes sont réelles, voir `assets.md`.
 - **Erreur de formulaire** : message en `--gold-ink` sous le champ, focus renvoyé au champ.
+
+---
+
+# Relevés sur le site en ligne et la vidéo du shot (2026-10-03)
+
+Le concept du shot a été mis en ligne par la marque ; on y a **mesuré** les styles calculés (Chrome 1536px), et la **vidéo** du shot (15,7s) a montré les écrans absents des images. On reprend la grammaire, jamais les textes, noms ni visuels.
+
+## Pilule (mesurée)
+
+40px de haut (≥ 44px de cible avec la marge), contour **0.8px** (`--hairline-w`), rayon pilule, padding `1rem 1.25rem`, libellé 0.75rem capitales +0.09em, Regular. Sur photo nuit : pleine blanche texte noir (« Acheter ») + contour blanc sur blanc 4 % (« Collection privée »). En barre de navigation : pilule contour encre, 0.625rem. Transition `background-color 0.3s ease`.
+
+## Navigation (mesurée)
+
+- **Barre claire collante** (apparaît après le héros) : logo à gauche ; à droite liens 0.625rem capitales +0.08em `--ink` (À propos, Presse, Photos & films, FAQ) + pilule contour « Liste d'attente ».
+- **Dans le héros nuit** : logo centré en haut, et liens **empilés à droite à mi-hauteur** sur une seule ligne horizontale qui prolonge le filet horizontal de la photo (0.625rem blancs). « Défiler » en mono `--faint` en bas au centre.
+
+## Barre de caractéristiques (mesurée)
+
+Pleine largeur en bas du héros, 62px, fond noir 20 %, contour haut 0.8px blanc 16 %, 3 cellules séparées par des filets : libellé 0.625rem capitales +0.04em `--faint` au-dessus, valeur 1.15rem Regular blanche (« MONDE », « 980 € », « À DISTANCE »). Au défilement, les trois cellules **se détachent en cartes photo** qui montent à des vitesses différentes (celle du centre plus haut), chaque carte gardant son libellé et sa valeur en haut, sur un gros plan de la pièce tenue en main (observé dans la vidéo).
+
+## Titre décalé (mesuré)
+
+Hero : 2rem/1.1 Regular blanc, 4 lignes, chaque ligne **indentée un peu plus** que la précédente (≈ 0, 0.6em, 1.4em, 1.8em) ; sous-titre 0.75rem. Sections claires : 1.5rem/1.0 Regular `--ink`, −0.01em, deux lignes dont la seconde indentée. L'étiquette mono `[section]` en minuscules précède toujours le titre.
+
+## Section « atelier » épinglée
+
+Le bloc produit reste épinglé pendant que la pièce (vidéo détourée sur blanc, ou scène 3D) tourne au centre du grand cercle ; les légendes (« • OR JAUNE », « OR ROSE ») et les traits apparaissent ; la pièce **change de métal** (or jaune → or rose → argent) d'une étape de défilement à l'autre ; « 10K, 14K, 18K, 22K » en bas au centre.
+
+## Presse à cartes révélées
+
+Fond clair, étiquette `[presse]` + titre 2 lignes à gauche. Une **rangée de logos** de médias séparés par des filets verticaux, en défilement horizontal (Swiper). Au survol / à l'activation d'un logo, une **carte d'article** se déploie au-dessus de la cellule : titre de l'article en capitales 0.75rem, extrait 3 lignes, « Par Auteur », domaine du média, puis une photo portrait. Les cartes voisines restent estompées. Accessible : chaque logo est un bouton qui révèle la carte (`aria-expanded`).
+
+## Galerie « photos & films »
+
+Colonne gauche : étiquette, titre 3 lignes décalées, phrase, pilule contour, et une **longue courbe fine** (arc de compas) qui traverse la colonne. Droite : **deux colonnes de photos décalées verticalement** (la seconde commence ~25 % plus bas), photos portrait sans rayon, portés réels (oreilles, mains), quelques vidéos courtes en boucle.
+
+## FAQ
+
+Étiquette `[FAQ]` + titre « Questions / fréquentes » décalé à gauche ; liste de questions 0.75rem `--ink` séparées par des filets, « + » à droite ; réponse en `--muted`.
+
+## Pied noir
+
+Bandeau noir (#000201) ~285px, une ligne 0.75rem blanche « année + marque », logo-mot géant possible. Rien d'autre : la page se termine sur le noir.
+
+## Écran d'intro « compas »
+
+Fond gris clair `--bg`, grands cercles fins qui se croisent, axes, petits nœuds aux intersections et une étiquette mono au centre : la page **se construit au compas** avant d'afficher le héros (vu au début et au milieu de la vidéo). Version accessible : affiché ≤ 1,2s, sauté en mouvement réduit.
+
+## Inscription (liste d'attente) et confirmation
+
+Écran nuit avec la pièce en gros plan : carte **blanche** à gauche (titre 3 lignes, phrase, champs soulignés Prénom / Nom / E-mail / Téléphone, pilule encre « Rejoindre »). Confirmation mobile : photo N&B de la pièce en haut, titre « Merci… » 2 lignes, texte, pilule encre « Confirmer ».

@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Navigation, boutons (tous états), champ de recherche, bord zigzag, pastille ingrédient, étiquette pilule, carte produit, photo produit sur disque, tampon tournant, carte d'avis, mot géant. |
+| `references/components.md` | Navigation, boutons (tous états), champ de recherche, bord zigzag, pastille ingrédient, étiquette pilule, carte produit, photo produit sur disque, tampon tournant, carte d'avis, mot géant. Puis, vus dans la vidéo du shot : pastille coach, carte carburant, pile de produits, avis « parcours », bento, lettre d'info, pied. |
 | `references/layouts.md` | Héros affiche, bande ingrédients, section brune, grille produits, avis, pied de page, mobile. |
 | `references/motion.md` | Rebonds, pression des boutons, tampon, entrée du héros, mouvement réduit. |
 | `references/assets.md` | Avant de placer une image ou une scène 3D : photos d'aventure en duotone découpées en crêtes, photos produit en cadre autocollant, sources, prompts IA, 3D optionnelle. |

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acheter — Chroniques d'Ember (démo Epic JRPG Product)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap">
+<style>
+:root {
+  --bg: #000000; --bg-warm: #1a0c08; --paper: #ffffff; --text: #ffffff; --muted: #b5bdc1; --ink: #263238;
+  --gold: #f1c66f; --on-gold: #1e244d; --navy: #1e244d; --red: #b0030d; --red-brand: #e20613; --on-red: #ffffff; --ember: #d2691e;
+  --line-gold: rgb(241 198 111 / 0.8); --scrim: rgb(0 0 0 / 0.6);
+  --lava: #240a04; --field: #ffffff; --glass: rgb(0 0 0 / 0.55); --glass-line: rgb(255 255 255 / 0.14); --line: rgb(255 255 255 / 0.9);
+  --stripe-1: #d9415b; --stripe-2: #e8a317; --stripe-3: #1565c0; --stripe-4: #00a5a8; --stripe-h: 3px;
+  --font: 'Montserrat', 'Metropolis', system-ui, sans-serif;
+  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 0.9375rem; --text-base: 1rem; --text-nav: 1.0625rem; --text-lg: 1.125rem; --text-xl: 1.5rem; --text-2xl: 2.25rem; --text-hero: 2.8125rem;
+  --tracking: -0.03em; --tracking-caps: 0.08em; --leading: 1.25;
+  --space-1: 6px; --space-2: 12px; --space-3: 19px; --space-4: 25px; --space-5: 30px; --space-6: 35px; --space-8: 50px;
+  --cta-min: 44px; --nav-h: 70px; --nav-h-top: 140px; --bar-h: 44px; --tile-h: 54px; --tile-w: 244px; --select-h: 54px; --buy-w: 126px; --fab: 60px; --fab-m: 48px; --border-w: 0.8px;
+  --container: 1100px;
+  --radius-xs: 4px; --radius-sm: 5px; --radius-glass: 8px; --radius-md: 7px; --radius-lg: 20px; --shadow: 0 0 29px rgb(0 0 0 / 0.5);
+  --ease: ease; --dur-faster: 100ms; --dur-fast: 200ms; --dur: 300ms; --dur-slow: 500ms;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 500 var(--text-base)/var(--leading) var(--font); letter-spacing: var(--tracking); }
+body.menu-open { overflow: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.icon { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* Barre éditeur + filet 3px pleine largeur */
+.pubbar { height: var(--bar-h); display: flex; justify-content: flex-end; align-items: center; gap: var(--space-5); padding: 0 var(--space-6); background: var(--bg); font: 600 var(--text-xs) var(--font); letter-spacing: .15em;
+  border-bottom: var(--stripe-h) solid; border-image: linear-gradient(90deg, var(--stripe-1) 0 25%, var(--stripe-2) 25% 50%, var(--stripe-3) 50% 75%, var(--stripe-4) 75%) 1; }
+.pubbar .icon { width: 18px; height: 18px; }
+.publisher { border: 2px solid var(--text); padding: 4px 8px; font: 700 var(--text-2xs)/1 var(--font); }
+
+/* Nav produit */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; height: var(--nav-h); display: flex; align-items: center; gap: var(--space-5); padding: 0 var(--space-8); background: var(--bg); }
+.game-logo { font: 300 1.15rem/1 var(--font); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+.game-logo b { font-weight: 700; }
+.navlinks { display: flex; gap: var(--space-5); margin: 0 auto 0 var(--space-6); padding: 0; list-style: none; }
+.navlinks a { position: relative; display: grid; place-items: center; min-height: var(--cta-min); font: 300 var(--text-nav)/1 var(--font); text-decoration: none; transition: color var(--dur-fast) var(--ease); }
+.navlinks a::after { content: "✦ ✦ ✦"; position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%); font-size: 7px; letter-spacing: 2px; white-space: nowrap; color: var(--gold); opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
+.navlinks a:hover { color: var(--gold); }
+.navlinks a:hover::after, .navlinks a[aria-current]::after { opacity: 1; }
+.iconbtn { display: grid; place-items: center; width: var(--cta-min); height: var(--cta-min); background: none; border: 0; color: var(--text); cursor: pointer; border-radius: var(--radius-xs); }
+.burger { display: none; }
+.btn-gold { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--cta-min); padding: 12px 25px; background: var(--gold); color: var(--on-gold); border: var(--border-w) solid var(--gold); border-radius: var(--radius-md); font: 600 var(--text-sm)/1 var(--font); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer; transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+.btn-gold:hover { background: transparent; color: var(--gold); }
+.nav .btn-gold { min-width: var(--buy-w); }
+.nav .btn-gold[aria-current] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--gold); }
+
+/* Menu mobile */
+.menu { position: fixed; inset: calc(var(--bar-h) + var(--stripe-h) + var(--nav-h)) 0 0; z-index: 49; display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6) 20px calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); background: var(--bg-warm); overflow-y: auto;
+  opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility 0s linear var(--dur); }
+.menu.is-open { opacity: 1; visibility: visible; transform: none; transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.menu ul a { display: inline-block; position: relative; padding: var(--space-1) 0 var(--space-2); font: 300 var(--text-xl)/1.2 var(--font); text-decoration: none; }
+.menu ul a[aria-current]::after { content: "✦ ✦ ✦"; position: absolute; left: 0; bottom: 0; font-size: 8px; letter-spacing: 3px; color: var(--gold); }
+.menu .btn-gold { margin-top: auto; width: 100%; min-height: var(--select-h); }
+
+/* Fond lave plein écran */
+.lava { position: relative; isolation: isolate; background: radial-gradient(45% 35% at 15% 25%, rgb(210 105 30 / .28), transparent 70%), radial-gradient(40% 35% at 85% 75%, rgb(176 3 13 / .3), transparent 70%), var(--lava); }
+.lava__bg { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; opacity: .3; pointer-events: none; }
+.wrap { width: min(var(--container), calc(100% - 40px)); margin: 0 auto; }
+
+.shop-title { display: flex; align-items: center; justify-content: center; gap: var(--space-3); padding: var(--space-8) 0 var(--space-5); margin: 0; font: 900 var(--text-2xl)/1 var(--font); }
+.shop-title .icon { width: 56px; height: 56px; stroke-width: 1.3; }
+
+/* Configurateur */
+.config { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-8); align-items: start; padding-bottom: 80px; }
+.field-label { display: block; text-align: center; font: 900 var(--text-lg)/1.2 var(--font); margin: var(--space-5) 0 var(--space-2); }
+.config > form > .field-label:first-child { margin-top: 0; }
+.select-wrap { position: relative; }
+.select-wrap::after { content: ""; position: absolute; right: 18px; top: 50%; width: 9px; height: 9px; border: solid var(--gold); border-width: 0 2px 2px 0; transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+.select { width: 100%; min-height: var(--select-h); padding: 0 48px 0 var(--space-3); appearance: none; background: transparent; color: var(--text); border: var(--border-w) solid var(--line); border-radius: var(--radius-xs); font: 500 var(--text-base) var(--font); cursor: pointer; transition: border-color var(--dur-fast) var(--ease); }
+.select:hover { border-color: var(--gold); }
+.select option { color: var(--ink); background: var(--paper); }
+.platforms { display: grid; grid-template-columns: repeat(2, minmax(0, var(--tile-w))); justify-content: center; gap: var(--space-2); border: 0; padding: 0; margin: 0; min-width: 0; }
+.platforms { margin-top: var(--space-5); }
+.platforms legend { width: 100%; padding: 0; margin-top: 0; }
+.platforms label { position: relative; }
+.platforms input { position: absolute; opacity: 0; inset: 0; }
+.platforms span { display: grid; place-items: center; gap: 2px; min-height: var(--tile-h); padding: var(--space-1); border: var(--border-w) solid var(--line); border-radius: var(--radius-xs); font: 700 var(--text-base)/1.1 var(--font); text-align: center; cursor: pointer; transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.platforms span small { font: 500 var(--text-2xs) var(--font); letter-spacing: .04em; text-transform: uppercase; }
+.platforms span:hover { border-color: var(--gold); }
+.platforms input:checked + span { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.platforms input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 3px; }
+.platforms input:disabled + span { border-style: dashed; color: var(--muted); cursor: not-allowed; }
+.platforms input:disabled + span:hover { border-color: var(--line); }
+.choice { margin: var(--space-4) 0 0; text-align: center; color: var(--muted); font-size: var(--text-sm); }
+.choice b { color: var(--gold); font-weight: 700; }
+
+/* Carte d'édition (verre sombre) */
+.edition { display: grid; gap: var(--space-3); justify-items: center; text-align: center; padding: var(--space-5); background: var(--glass); border: 1px solid var(--glass-line); border-radius: var(--radius-glass); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.media { position: relative; overflow: hidden; background: var(--bg-warm); }
+.media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: opacity var(--dur-fast) var(--ease); }
+.edition__img { width: 100%; aspect-ratio: 16/9; border-radius: var(--radius-xs); }
+.edition__img button { position: absolute; right: 10px; bottom: 10px; width: var(--cta-min); height: var(--cta-min); display: grid; place-items: center; background: var(--bg); color: var(--text); border: 0; border-radius: var(--radius-xs); cursor: pointer; }
+.edition h2 { margin: 0; font: 700 var(--text-lg)/1.3 var(--font); transition: opacity var(--dur-fast) var(--ease); }
+.is-swapping img, .is-swapping + h2 { opacity: 0; }
+.price { margin: 0; font: 900 var(--text-xl) var(--font); color: var(--gold); }
+.edition .btn-gold { width: min(300px, 100%); min-height: var(--select-h); }
+details { width: 100%; text-align: left; border-bottom: 1px solid var(--line-gold); }
+summary { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); min-height: 48px; cursor: pointer; font: 500 var(--text-base) var(--font); list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--gold); font-size: 1.5rem; transition: transform var(--dur) var(--ease); }
+details[open] summary::after { transform: rotate(45deg); }
+details ul { margin: 0 0 var(--space-3); padding-left: 20px; color: var(--muted); line-height: 1.6; }
+
+/* Configuration requise */
+.reqs { padding-bottom: 80px; }
+.reqs h2 { margin: 0 0 var(--space-5); font: 900 var(--text-2xl)/1.15 var(--font); }
+.reqs__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.reqs h3 { margin: 0 0 var(--space-2); font: 500 var(--text-lg) var(--font); }
+.reqbox { border: var(--border-w) solid var(--line); border-radius: var(--radius-xs); padding: var(--space-4); }
+.reqbox ul { margin: 0; padding-left: 18px; font-size: var(--text-md); line-height: 1.6; }
+.reqbox b { font-weight: 700; }
+
+/* Bas de page commun */
+.signup { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.signup > * { padding: 70px var(--space-8); min-height: 360px; display: flex; flex-direction: column; justify-content: center; gap: var(--space-3); }
+.signup h2 { margin: 0; font: 900 var(--text-2xl)/1.1 var(--font); }
+.signup p { margin: 0; line-height: 1.5; }
+.signup__form { display: flex; gap: var(--space-2); margin-top: var(--space-2); max-width: 520px; }
+.signup__form input { flex: 1; min-width: 0; min-height: var(--select-h); padding: 0 var(--space-3); border: 0; border-radius: var(--radius-xs); background: var(--field); color: var(--ink); font: 500 var(--text-base) var(--font); }
+.signup__form input:focus-visible { outline-offset: 2px; }
+.signup__form .btn-gold { min-height: var(--select-h); }
+.thanks { font: 700 var(--text-lg) var(--font); color: var(--gold); animation: fade-in var(--dur) var(--ease) both; }
+.follow { background: var(--gold) repeating-linear-gradient(60deg, rgb(255 255 255 / .12) 0 1px, transparent 1px 40px); color: var(--on-gold); }
+.follow :focus-visible { outline-color: var(--on-gold); }
+.socials { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.socials a { width: var(--cta-min); height: var(--cta-min); border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--on-gold); color: var(--on-gold); transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+.socials a:hover { background: var(--on-gold); color: var(--gold); }
+.legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2); padding: var(--space-4) var(--space-8) 100px; background: var(--bg); color: var(--muted); font: 500 var(--text-xs) var(--font); }
+.legal nav { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.legal a { text-decoration: none; } .legal a:hover { color: var(--gold); }
+
+/* Flottants */
+.fab { position: fixed; right: 20px; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); z-index: 60; display: grid; gap: 10px; }
+.fab a { width: var(--fab); height: var(--fab); border-radius: 50%; display: grid; place-items: center; background: var(--paper); color: var(--on-gold); box-shadow: var(--shadow); transition: transform var(--dur-fast) var(--ease); }
+.fab a:last-child { background: var(--gold); }
+.fab a:hover { transform: translateY(-2px); }
+
+@keyframes fade-in { from { opacity: 0; } }
+
+@media (max-width: 1023px) {
+  .navlinks, .nav > .btn-gold { display: none; }
+  .burger { display: grid; }
+  .nav { padding: 0 20px; gap: var(--space-1); justify-content: space-between; }
+  .nav .game-logo { margin-right: auto; }
+  .pubbar { padding: 0 20px; }
+  .config, .reqs__grid, .signup { grid-template-columns: minmax(0, 1fr); }
+  .signup > * { padding: var(--space-8) 20px; min-height: 0; }
+  .fab a { width: var(--fab-m); height: var(--fab-m); }
+  .legal { padding: var(--space-4) 20px 140px; }
+}
+@media (max-width: 767px) {
+  .shop-title { font-size: 1.875rem; padding-top: var(--space-6); }
+  .shop-title .icon { width: 44px; height: 44px; }
+  .platforms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .signup__form { flex-direction: column; }
+  .reqs h2 { font-size: 1.75rem; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><circle cx="12" cy="13.5" r="3.5"/><path d="M9 7l1.5-3h3L15 7"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="10" r="2.5"/><path d="M3 20c.8-3.5 3-5 6-5s5.2 1.5 6 5M15 15.5c2.5-.3 4.8.9 6 4.5"/></symbol>
+</svg>
+
+<div class="pubbar"><a class="iconbtn" href="#" aria-label="Mon compte"><svg class="icon"><use href="#i-user"/></svg></a><span>FR</span><span class="publisher">ÉDITEUR</span></div>
+<header class="nav">
+  <a class="game-logo" href="demo.html">Chroniques <b>d'Ember</b></a>
+  <ul class="navlinks">
+    <li><a href="demo.html#features">Caractéristiques</a></li><li><a href="#">Musique</a></li><li><a href="#">Média</a></li><li><a href="#">Wiki</a></li><li><a href="#">Extension</a></li>
+  </ul>
+  <button class="iconbtn" aria-label="Rechercher"><svg class="icon"><use href="#i-search"/></svg></button>
+  <button class="iconbtn burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  <a class="btn-gold" href="achat.html" aria-current="page">Acheter</a>
+</header>
+<nav class="menu" id="menu" aria-label="Menu principal">
+  <ul>
+    <li><a href="demo.html">Accueil du jeu</a></li><li><a href="demo.html#features">Caractéristiques</a></li><li><a href="#">Musique</a></li><li><a href="#">Média</a></li><li><a href="#">Wiki</a></li><li><a href="achat.html" aria-current="page">Acheter</a></li>
+  </ul>
+  <a class="btn-gold" href="#config">Acheter</a>
+</nav>
+
+<main class="lava">
+  <img class="lava__bg" src="https://images.unsplash.com/photo-1504470695779-75300268aa0e?auto=format&fit=crop&w=2000&q=80" alt="" aria-hidden="true" width="2000" height="1333" fetchpriority="high">
+  <h1 class="shop-title"><svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>Acheter</h1>
+
+  <section class="wrap config" id="config" aria-label="Configurateur d'achat">
+    <form id="buyForm" onsubmit="return false">
+      <label class="field-label" for="country">Sélectionnez votre pays</label>
+      <div class="select-wrap"><select class="select" id="country"><option>France</option><option>Belgique</option><option>Suisse</option><option>Luxembourg</option><option>Canada</option></select></div>
+
+      <label class="field-label" for="edition">Choisir l'édition</label>
+      <div class="select-wrap"><select class="select" id="edition">
+        <option value="std">Édition standard</option>
+        <option value="dawn" selected>Édition Aube éternelle</option>
+        <option value="col">Édition collector Cendres</option>
+      </select></div>
+
+      <fieldset class="platforms">
+        <legend class="field-label">Sélectionnez la plateforme</legend>
+        <label><input type="radio" name="pf" value="Console A" checked><span>Console A</span></label>
+        <label><input type="radio" name="pf" value="Console A+"><span>Console A+</span></label>
+        <label><input type="radio" name="pf" value="PC"><span>PC</span></label>
+        <label><input type="radio" name="pf" value="Console B"><span>Console B</span></label>
+        <label><input type="radio" name="pf" value="Console B+"><span>Console B+</span></label>
+        <label><input type="radio" name="pf" value="Portable" disabled><span>Portable <small>bientôt</small></span></label>
+      </fieldset>
+      <p class="choice" aria-live="polite">Votre choix : <b id="sumEd">Édition Aube éternelle</b> · <b id="sumPf">Console A</b></p>
+    </form>
+
+    <article class="edition" aria-labelledby="edTitle">
+      <div class="edition__img media" id="edImg" data-slot="edition-art"><img src="https://images.unsplash.com/photo-1600081522768-cb2e80ed4491?auto=format&fit=crop&w=1200&q=80&h=675" alt="Casque et armure de chevalier sur fond rouge sombre, visuel de l'édition" width="1200" height="675"><button aria-label="Agrandir le visuel"><svg class="icon"><use href="#i-expand"/></svg></button></div>
+      <h2 id="edTitle">Chroniques d'Ember — Édition Aube éternelle</h2>
+      <p class="price" id="edPrice">69,99 €</p>
+      <a class="btn-gold" href="#"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>Dématérialisé</a>
+      <details><summary>Voir le contenu de l'édition</summary><ul id="edList"><li>Le jeu complet</li><li>L'extension « Aube éternelle »</li><li>Pack de tenues de voyage</li></ul></details>
+    </article>
+  </section>
+
+  <section class="wrap reqs" aria-labelledby="reqTitle">
+    <h2 id="reqTitle">Configuration requise :</h2>
+    <div class="reqs__grid">
+      <div><h3>Minimum</h3><div class="reqbox"><ul><li><b>Système :</b> 64 bits, version récente</li><li><b>Processeur :</b> 4 cœurs, 3,0 GHz</li><li><b>Mémoire :</b> 8 Go de RAM</li><li><b>Graphismes :</b> 4 Go de mémoire vidéo</li><li><b>Stockage :</b> 45 Go disponibles</li></ul></div></div>
+      <div><h3>Recommandée</h3><div class="reqbox"><ul><li><b>Système :</b> 64 bits, version récente</li><li><b>Processeur :</b> 6 cœurs, 3,6 GHz</li><li><b>Mémoire :</b> 16 Go de RAM</li><li><b>Graphismes :</b> 8 Go de mémoire vidéo</li><li><b>Stockage :</b> 45 Go disponibles (SSD)</li></ul></div></div>
+    </div>
+  </section>
+</main>
+
+<section class="signup" id="newsletter" aria-label="Newsletter et réseaux">
+  <div class="lava">
+    <img class="lava__bg" src="https://images.unsplash.com/photo-1678185058395-ea4778917f13?auto=format&fit=crop&w=1400&q=80" alt="" aria-hidden="true" width="1400" height="933" loading="lazy">
+    <h2>Reste informé</h2>
+    <p>Inscris-toi pour recevoir les dernières nouvelles, offres et sorties de l'éditeur.</p>
+    <form class="signup__form" id="nlForm"><label class="sr-only" for="email">Adresse e-mail</label><input id="email" type="email" required placeholder="ton.adresse@exemple.fr" autocomplete="email"><button class="btn-gold" type="submit">Je m'abonne</button></form>
+  </div>
+  <div class="follow">
+    <h2>Nous suivre</h2>
+    <p>Rejoins notre communauté</p>
+    <div class="socials"><a href="#" aria-label="Forum"><svg class="icon"><use href="#i-chat"/></svg></a><a href="#" aria-label="Chaîne vidéo"><svg class="icon"><use href="#i-play"/></svg></a><a href="#" aria-label="Galerie photo"><svg class="icon"><use href="#i-camera"/></svg></a><a href="#" aria-label="Communauté"><svg class="icon"><use href="#i-people"/></svg></a></div>
+  </div>
+</section>
+<footer class="legal"><span>© Éditeur fictif — démo Kōbō · Photos : Unsplash</span><nav aria-label="Liens légaux"><a href="demo.html">Page du jeu</a><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Cookies</a></nav></footer>
+<div class="fab"><a href="#newsletter" aria-label="Newsletter"><svg class="icon"><use href="#i-mail"/></svg></a><a href="#config" aria-label="Acheter"><svg class="icon"><use href="#i-bag"/></svg></a></div>
+
+<script>
+const EDITIONS = {
+  std:  { t: "Chroniques d'Ember — Édition standard", p: '59,99 €', img: 'photo-1460194436988-671f763436b7', alt: "Chevalier en cotte de mailles tenant son épée", items: ['Le jeu complet'] },
+  dawn: { t: "Chroniques d'Ember — Édition Aube éternelle", p: '69,99 €', img: 'photo-1600081522768-cb2e80ed4491', alt: "Casque et armure de chevalier sur fond rouge sombre", items: ['Le jeu complet', "L'extension « Aube éternelle »", 'Pack de tenues de voyage'] },
+  col:  { t: "Chroniques d'Ember — Édition collector Cendres", p: '129,99 €', img: 'photo-1627571795816-b565f55efdb8', alt: "Silhouette à contre-jour devant une lumière orange", items: ['Le jeu complet', "L'extension « Aube éternelle »", 'Artbook relié', 'Bande originale numérique'] }
+};
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const edSel = document.getElementById('edition'), box = document.getElementById('edImg');
+edSel.addEventListener('change', () => {
+  const e = EDITIONS[edSel.value];
+  const apply = () => {
+    const img = box.querySelector('img');
+    img.src = 'https://images.unsplash.com/' + e.img + '?auto=format&fit=crop&w=1200&q=80&h=675'; img.alt = e.alt + ', visuel de l\'édition';
+    document.getElementById('edTitle').textContent = e.t; document.getElementById('edPrice').textContent = e.p;
+    document.getElementById('edList').innerHTML = e.items.map(i => '<li>' + i + '</li>').join('');
+    document.getElementById('sumEd').textContent = edSel.options[edSel.selectedIndex].text;
+    box.classList.remove('is-swapping');
+  };
+  if (reduce) return apply();
+  box.classList.add('is-swapping'); setTimeout(apply, 200);
+});
+document.querySelectorAll('input[name=pf]').forEach(r => r.addEventListener('change', () => { document.getElementById('sumPf').textContent = r.value; }));
+
+const burger = document.getElementById('burger'), menu = document.getElementById('menu');
+const setMenu = open => { menu.classList.toggle('is-open', open); burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu'); burger.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu'); document.body.classList.toggle('menu-open', open); };
+burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
+menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('is-open')) { setMenu(false); burger.focus(); } });
+
+document.getElementById('nlForm').addEventListener('submit', e => { e.preventDefault(); const f = e.target; const p = document.createElement('p'); p.className = 'thanks'; p.setAttribute('role', 'status'); p.textContent = 'Merci ! Ton inscription est confirmée.'; f.replaceWith(p); });
+</script>
+</body>
+</html>

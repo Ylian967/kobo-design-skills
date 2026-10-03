@@ -1,6 +1,6 @@
 ---
 name: hyper-lime-street
-description: Direction artistique « Hyper Lime Street » pour sites et apps de jeu d'action urbain, inspirée des sites officiels de jeux d'action « street / néo-urbain » récents. Béton clair, blocs noirs rayés en forme de piste aux extrémités arrondies et coupées à 45°, lime fluo, titres condensés type Impact, numéros de section géants, pellicule photo, boutons pilule à gros contour, défilant de texte. À utiliser pour une landing de jeu, une page de personnages, une page vidéos/actus, une app ou un site au style « urbain, fluo, cassette, rue, zine numérique ».
+description: Direction artistique « Hyper Lime Street » pour sites et apps de jeu d'action urbain, inspirée des sites officiels de jeux d'action « street / néo-urbain » récents. Béton clair, blocs noirs rayés en forme de piste aux extrémités arrondies et coupées à 45°, lime fluo, titres condensés type Impact, numéros de section géants, pellicule photo, boutons pilule à gros contour, défilant de texte. Couvre l'accueil et les pages internes : liste d'actualités (badge de section numéroté, onglets en parallélogramme, cartes à coins asymétriques), article, univers en coverflow, fiche personnage avec pilule de doublage, newsletter, et une adaptation mobile. À utiliser pour une landing de jeu, une page de personnages, une page vidéos/actus, une app ou un site au style « urbain, fluo, cassette, rue, zine numérique ».
 ---
 
 # Hyper Lime Street
@@ -10,6 +10,8 @@ description: Direction artistique « Hyper Lime Street » pour sites et apps de 
 ## L'idée
 
 La page est un **circuit** : de grands rubans sombres (« pistes ») traversent l'écran en zigzag, avec des extrémités arrondies (72px) et des coupes à 45°. Ils sont rayés en diagonale très finement. Entre eux, des **zones lime fluo** et des **panneaux blancs arrondis** portent le contenu. Chaque section est numérotée (01 → 06) avec un chiffre condensé géant. Le texte display est **Impact-like** partout : titres, liens, boutons, dates.
+
+Sur les **pages internes**, le bloc numéroté devient un **badge de section** : une pilule lime (bleue pour Personnages) posée sur une bande noire rayée qui traverse l'écran en biais, avec le numéro de rubrique géant et, à droite, le mot anglais en filigrane géant. Les coins 72px laissent place à des **coins asymétriques** (deux coins opposés arrondis) et à des **parallélogrammes** pour tout ce qui est actif.
 
 Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de logo, personnage ou nom du jeu d'origine.
 
@@ -29,11 +31,12 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Navigation, boutons pilule, ruban « piste », bloc numéroté, carrousel de vignettes, pellicule, pagination latérale, défilant. |
-| `references/layouts.md` | Héros, sections numérotées en zigzag, mobile. |
-| `references/motion.md` | Courbe easeOutCubic, défilant, entrées en glissement. |
+| `references/components.md` | Accueil : navigation, boutons pilule, ruban « piste », bloc numéroté, carrousel de vignettes, pellicule, pagination latérale, défilant. Pages internes : badge de section, barre d'onglets, carrousel bannière, carte d'actu asymétrique, en-tête d'article, onglet « Retour », coverflow, fiche personnage, newsletter. |
+| `references/layouts.md` | Héros, sections numérotées en zigzag, gabarits Actus / Article / Univers / Personnage / Vidéo, mobile (proposé). |
+| `references/motion.md` | Courbe easeOutCubic, défilant, entrées en glissement, dépliage du badge, onglets, coverflow. |
 | `references/assets.md` | Avant de placer une image : photos de rue, duotone noir → lime, sources, prompts IA, 3D optionnelle. |
-| `examples/demo.html` | Page d'exemple complète. |
+| `examples/demo.html` | Exemple : page d'accueil complète. |
+| `examples/actus.html` | Exemple : page Actu & infos (badge 04, filigrane, bannière, onglets, grille de cartes asymétriques, onglet « Retour », newsletter). |
 | `source.md` | Mesures et écarts. |
 
 ## Typographie
@@ -46,6 +49,18 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 ## Images et 3D
 
 Les visuels sont de vraies images : key art et personnages du projet en priorité, sinon photos de rue (skate en action, murs de graffitis et d'autocollants, tunnels, ruelles), contrastées et légèrement désaturées. Sur un bloc lime, l'image passe en **duotone noir → lime** (N&B en `multiply` sur `--accent`) ; ailleurs elle garde ses couleurs, recouverte au besoin des rayures à 45°. Rubans, rayures, pellicule et autocollants restent des formes CSS ; jamais de personnage, de skate ou de décor dessiné en CSS/SVG à la place d'une photo. 3D optionnelle. Détails : `references/assets.md`.
+
+## Pages couvertes
+
+| Page | Gabarit | Composants clés | Exemple |
+|---|---|---|---|
+| Accueil | `layouts.md` § Héros, Sections 02 → 06 | ruban-piste, bloc numéroté, vignettes, pellicule | `examples/demo.html` |
+| Actu & infos (liste) | `layouts.md` § Actu & infos | badge de section, bannière, onglets, carte asymétrique | `examples/actus.html` |
+| Article | `layouts.md` § Article | en-tête d'article, barre fil d'Ariane, onglet « Retour » | — |
+| Univers du jeu | `layouts.md` § Univers | coverflow, fond flouté | — |
+| Fiche personnage | `layouts.md` § Personnages | badge bleu, pilule de doublage, bio défilante, cartes factions | — |
+| Documents vidéo | `layouts.md` § Documents vidéo | badge 03, carte de liste | — |
+| Mobile | `layouts.md` § Mobile (adaptation proposée, non observée) | tiroir, onglets défilants | les deux exemples à 390px |
 
 ## Signature
 
@@ -68,7 +83,7 @@ Les visuels sont de vraies images : key art et personnages du projet en priorit�
 ## Avant de livrer
 
 - [ ] Trois matières seulement, toutes les coupes et rayures à 45°.
-- [ ] Sections numérotées 01, 02… avec numéro géant.
+- [ ] Sections numérotées 01, 02… avec numéro géant ; pages internes avec badge de section + filigrane.
 - [ ] Un seul bouton lime plein par écran.
 - [ ] Défilant pausable, mouvement réduit respecté.
 - [ ] Testé à 375px et 1440px.

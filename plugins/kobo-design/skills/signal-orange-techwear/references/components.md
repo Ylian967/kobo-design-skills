@@ -127,3 +127,30 @@ Filets haut/bas, Michroma 18px `--dim`, « // » en orange entre les mots, conte
 - **Chargement** : panneaux vides avec ligne de scan orange qui descend.
 - **Rupture** : carte à 50 % d'opacité, étiquette « Épuisé » en `--dim`, bouton `disabled`.
 - **Erreur de champ** : filet orange, message `.label` orange sous le champ.
+
+---
+
+# Relevés sur les 5 images du shot (2026-10-03)
+
+Le shot compte 5 images (une planche 2580×1925 et quatre écrans 1800×1200) ; trois écrans n'étaient pas détaillés dans le premier jet. Valeurs **observées** (≈).
+
+## Cartes « système » (collection)
+
+Sous le titre « CHAQUE COUCHE. // UN BUT. », une ligne de rubriques mono séparées par des barres obliques (« VÊTEMENTS / ÉQUIPEMENT / ESSENTIELS ») puis **3 cartes sombres translucides** côte à côte : en tête « SYSTÈME / 01 » en orange mono + flèche ↗ à droite, titre capitales display blanc (« COUCHES EXTÉRIEURES »), 2 lignes de texte gris. Fond `--scrim` sur la photo, contour 1px `--line-strong`, coins droits. Lien orange souligné « EXPLORER LA COLLECTION » dessous.
+
+## Étiquette de série verticale
+
+À droite du sujet : « INDÉPENDANT PAR DESIGN » + « // CR-BB5 » en petites capitales blanches, à côté du texte vertical « Techwear 26' ».
+
+## Carte produit (détail observé)
+
+Carte sombre à **coins coupés**, photo en haut ; en haut à gauche une **étiquette code** sur fond sombre (« 03-03 / ACCESSOIRES ») ; en bas à droite de la photo un **bouton rond +** à contour ; sous la photo : nom en orange capitales display + prix blanc à droite, ligne de description grise, puis deux liens : « ☐ Réserver » à gauche, « Voir le détail ↗ » souligné à droite. Onglets au-dessus : « TOUT » orange plein, les autres en contour.
+
+## Fiche produit claire (variante)
+
+Écran **partagé** : à gauche un panneau **gris clair translucide** (≈ 40 % de la largeur) sur la photo floutée — étiquette « ● Meilleure vente » orange, titre empilé (« NOM // MODÈLE » en gris contour, nom en noir, catégorie en **orange**), paragraphe noir 4 lignes ; à droite la photo du produit en très gros plan. En haut à droite : carte « Produit suivant ↗ » (vignette + libellé). En dessous : **panneau de specs blanc** (titre « Specs », lignes étiquette orange / valeur grise) avec bouton **orange plein** « ACHETER ↗ » aligné à droite. Le logo garde « CYBER » orange, mais la nav passe en encre sombre.
+
+```css
+.pdp-light .side { background: rgb(242 242 242 / .82); backdrop-filter: blur(18px); color: var(--on-accent); }
+.pdp-light .cat { color: var(--accent); }   /* grand corps seulement : orange sur gris clair ≈ 3:1 */
+```

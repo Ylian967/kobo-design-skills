@@ -16,6 +16,19 @@ Doux et « flottant ». Mesuré : `opacity 0.2s ease`, `opacity 0.3s ease-out`, 
 | Survol carte | Décalage 4px + fond plus clair | 300ms | ease |
 | Bouton lecture | Anneau dégradé qui tourne | 6s | linéaire |
 
+### Mondes et mobile (observés le 2026-10-02 ; durées **estimées**)
+
+| Moment | Effet | Durée | Courbe |
+|---|---|---|---|
+| Arrivée sur la carte | Orbites tracées (`stroke-dashoffset` de la longueur à 0), puis les mondes apparaissent en fondu + `scale(.6 → 1)` décalés de 80ms | 1200ms + 400ms | `--ease-out` |
+| Dérive de la carte | Le champ d'étoiles 3D tourne très lentement, parallaxe au pointeur ; les orbites et les mondes restent fixes (sinon les mondes quittent leur orbite) | continu | linéaire |
+| Survol d'un monde | Halo qui grandit, icône `scale(1.12)` | 300ms | `--ease-out` |
+| Ouverture d'une fiche | Fondu au noir 200ms, la fiche entre en fondu, le titre monte de 16px | 500ms | ease-in-out (mesuré : transitions de panneau 0.5s ease-in-out) |
+| Carrousel de lieux | Les images glissent d'une position ; la nouvelle centrale perd son voile | 500ms | ease-in-out |
+| Menu mobile | Hamburger → croix ; tiroir en fondu + glissement de 12px | 300ms | `--ease` |
+| Bouton jaune mobile | Lueur qui pulse (24px ↔ 36px) | 2.4s en boucle | ease-in-out |
+| Chevron ⌄ | Descend de 6px et revient (proche de `moreDown` relevé dans les keyframes) | 1.6s en boucle | ease-in-out |
+
 ## Code de référence
 
 ```js
@@ -31,6 +44,18 @@ function warp(canvas, ms = 2500) {
 }
 ```
 
+## Code de référence — orbites tracées
+
+```css
+/* <ellipse class="o" pathLength="1"> pour les orbites pleines ; les pointillées n'ont pas de pathLength */
+.orbits .o:not(.o--dim) { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.2s var(--ease-out) forwards; }
+.orbits .o--dim { stroke-dasharray: 4 8; stroke-dashoffset: 0; animation: fadeIn 1.2s var(--ease-out) both; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.world { animation: pop .4s var(--ease-out) both; animation-delay: calc(1s + var(--i) * 80ms); }
+@keyframes pop { from { opacity: 0; scale: .6; } }
+@media (prefers-reduced-motion: reduce) { .orbits .o, .world { animation: none; stroke-dashoffset: 0; } }
+```
+
 ## Mouvement réduit
 
-Pas d'intro (affichage direct), pas de flottement ni d'anneau qui tourne ; changement de personnage en fondu simple de 150ms.
+Carte des mondes affichée d'emblée (orbites tracées, pas de dérive ni de parallaxe) ; carrousel de lieux sans glissement ; bouton jaune sans pulsation, chevron fixe. Pas d'intro (affichage direct), pas de flottement ni d'anneau qui tourne ; changement de personnage en fondu simple de 150ms.

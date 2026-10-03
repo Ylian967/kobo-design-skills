@@ -11,6 +11,11 @@
 | `cut-visual` (bande découpée) | Décor : rue de nuit, toits, ville néon, scène de combat large | Panoramique 16:9 à 21:9, horizon bas | Nuit, enseignes, contrastes forts | Désaturé à 60 %, voile `--veil`, masque à deux bandes diagonales à `--slant` |
 | `chara-N` (cartes de classement) | Un personnage par carte, buste ou plan américain | 3:4, cadrage serré ; `object-position` réglé par carte (`--pos`) | Contre-jour ou studio | N&B + calque `--c` (couleur du personnage) en `multiply` + trame blanche à 22 % + fondu blanc en bas pour le chiffre |
 | fiche personnage (modal) | Le personnage en pied | 2:3 | Studio | N&B + liseré couleur `--c` |
+| `chara-full` (page fiche) | Le personnage en pied ou plan américain, pose forte | 3:4, découpé en parallélogramme | Studio, contre-jour | N&B + `--c` en multiply 35 %, sur éclats CSS de sa couleur |
+| `menu-visual` (menu ouvert) | Groupe de personnages ou foule | Plein écran | Peu importe | N&B + `--menu-veil` (72 % noir) |
+| `chara-movie-N`, `video-N`, `episode-N` | Image fixe de la vidéo / de l'épisode | 16:9 | Celle de la scène | N&B (ou désaturé 60 %), voile `--veil` + ▶ |
+| `episode-still` (Story) | Plan large de l'épisode | 16:9 | Nuit, néons | Désaturé 60 % |
+| `cover-N` (Music) | Pochette du single | 1:1 | — | N&B (la pochette reste en couleur si c'est l'image officielle) |
 
 **Règle de cohérence** : toutes les images sont ramenées au noir et blanc dur ; la couleur ne vient jamais de la photo mais des tokens (`--c`, `--accent`, `--veil`), une couleur de personnage par image.
 

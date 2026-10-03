@@ -28,7 +28,7 @@ Inspiré de : voir `source.md`. On reprend le principe (planète-diorama, palett
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Planète (Three.js et repli), logo en blocs, bouton relief, bulles de dialogue, HUD minimal, poussières. |
+| `references/components.md` | Planète (Three.js et repli), logo en blocs, bouton relief, bulles de dialogue, HUD minimal, poussières. Puis, observés sur le site : écran de chargement dessiné, bloc de départ 3D, scène de jeu cel-shading. |
 | `references/layouts.md` | Écran-titre, écran de jeu / exploration, pages d'info, mobile. |
 | `references/motion.md` | Rotation lente, flottement, rebonds, transition titre → jeu. |
 | `references/assets.md` | Avant de construire la planète ou de placer un visuel : recette 3D complète (géométrie, matières toon, lumière, caméra, glisser), modèles libres, repli, prompts IA. |

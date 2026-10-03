@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27776418-CyberRonin-TechWear-website-concept (shot Dribbble « CyberRonin — TechWear website concept »)
 - **Famille** : Mode / techwear cyberpunk
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, relecture des 5 images du shot à pleine résolution
 - **[URL choisie par recherche : 3 shots « Cyber Ronin » existent]** : l'URL exacte du shot n'a pas été confirmée par l'utilisateur.
 
 ## Ce qui a été vu
@@ -14,6 +14,16 @@
 - **Colonne de droite** : panneau sombre translucide à filet fin avec vignette produit, petite étiquette orange « CR-01 SNEAKER », description et bouton contour orange « WATCH PRODUCT FILM ↗ » ; tableau « Operative Specs » : lignes avec étiquettes orange espacées (VISION, NERVE, REFLEX, ARMOR) et valeurs grises à droite, filets, pied « ● DEPTH ON ».
 - **Navigation** : logo « CYBER » orange + « RONIN » blanc, liens au centre avec soulignement orange sur l'actif, « Bag » + compteur rond.
 - **Sections** : index orange « 01 / THE COLLECTION —NIGHTFALL », titre display géant orange « EVERY LAYER. », onglets de filtre (rectangle orange plein « FULL ITEMS » + contours), cartes produit avec étiquette « CR-03 / ACCESSORIES », chevron de défilement centré.
+
+## Pages explorées (2026-10-03)
+
+| Image | Relevé |
+|---|---|
+| Planche 2580×1925 | Les 4 écrans réunis (vue d'ensemble). |
+| Écran 1 — héros | Déjà analysé. |
+| Écran 2 — « Every layer. // A purpose. » | Observé : rubriques mono à barres obliques, 3 cartes « SYSTEM / 0x » translucides, lien « Explore the collection », étiquette « Independent by design // CR-BB5 ». |
+| Écran 3 — « Build your own uniform » | Observé : onglets (plein orange + contours), 3 cartes produit avec étiquette code, bouton rond +, prix, « Reserve » / « View details ↗ ». |
+| Écran 4 — fiche produit claire | Observé : panneau gris clair translucide, catégorie en orange, « Next product ↗ », panneau de specs blanc, bouton orange « BUY NOW ↗ ». |
 
 ## Non mesuré
 

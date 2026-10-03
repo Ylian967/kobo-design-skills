@@ -1,8 +1,8 @@
 # Source — Serif Bistro Green
 
-- **Site de référence** : https://dribbble.com/shots/27769189--Vesta-Dining-Restaurant-Landing-Page-UI-UX-Design (auteur : non relevé sur la capture du shot)
+- **Site de référence** : https://dribbble.com/shots/27769189--Vesta-Dining-Restaurant-Landing-Page-UI-UX-Design (auteur : Nazmul Haque)
 - **Famille** : Restaurant / food
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, relecture des 2 images à pleine résolution
 - **Ce qui plaît dans ce shot** : l'association vert profond / crème / orange, la grande serif d'affiche avec un personnage glissé entre les mots, et les cartes de plats reliées comme un carnet.
 
 ## Ce qui a été vu
@@ -18,12 +18,20 @@ Captures du shot (maquette de landing page de restaurant) :
 - **Newsletter** : bandeau orange avec **dessins au trait** crème (aliments, ustensiles), titre serif crème « Stay Connected », champ + bouton en pilule.
 - **Pied de page** vert avec le **nom du restaurant en serif crème géante**.
 
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Image 1 (3200×2400) | Héros, « Signature Favorites », puis colonne droite : bande de cartes orange à prix (« 20 $ » + pilule « Commander → ») au-dessus de « Exclusive Dining Experiences », newsletter, pied. |
+| Image 2 (3200×2400) | Même maquette recadrée (variante de mise en scène) : aucune section supplémentaire. |
+| Pied de page (relu à pleine résolution) | Observé : logo + phrase + pastilles sociales rondes, 3 colonnes « Navigation », « Contact », « Horaires d'ouverture » (jours en gras crème, heures en crème atténué), filet, mentions, puis nom géant en serif crème. |
+| Autres shots / site en ligne | Aucun trouvé (recherche Dribbble, pas de lien dans la description). |
+
 ## Non mesuré
 
 - **Maquette Dribbble**, pas un site en ligne : rien n'a pu être passé au script d'extraction (pas de DOM, pas de CSS).
 - **Analyse visuelle des images uniquement** : couleurs relevées à l'œil puis arrondies ; tailles, espacements, rayons et ombres **estimés**.
 - **Polices choisies à l'œil** : DM Serif Display et DM Sans sont des équivalents Google Fonts proposés, pas les polices identifiées du shot.
-- L'auteur du shot n'apparaissait pas dans les notes d'analyse : à compléter depuis la page Dribbble.
 - Aucune animation visible sur une image fixe : `motion.md` est une proposition cohérente avec le genre, pas une observation.
 
 ## Écarts assumés

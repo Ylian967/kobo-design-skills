@@ -71,3 +71,16 @@ Fond `--bar` avec `.zz-both`, inscription à la lettre d'info, liens 12px capita
 - Scène 170px ; les bandes photo restent, recadrées au centre.
 - Pastilles 64px, disque produit ramené à la largeur de la colonne.
 - Aucune largeur fixe > 360px ; vérifier `scrollWidth === 390`.
+
+---
+
+## Ordre complet observé dans la vidéo du shot
+
+1. Navigation brune (logo, « Points de vente », menus ▾, FAQ, Contact, recherche blanche, Panier).
+2. Héros orange (titre, main + barre, tampon tournant, cycliste « 20 G PROTÉINES », bouton jaune).
+3. Dents de scie → bande d'ingrédients blanche (pastilles rondes, **défilement horizontal**).
+4. Section brune « UNE PROTÉINE POUR TOUS » : titre + pilule jaune, coach détouré + pastille, pile de produits, texte « 20 G », carte carburant.
+5. Dents de scie → « SAVEURS LES PLUS POPULAIRES » + bouton orange « Voir les saveurs → » ; 3 cartes produit, celle du milieu surélevée.
+6. Section brune « parcours » : carte d'avis, citation, personnes détourées.
+7. Bento blanc « testé par des coachs » (3 tuiles).
+8. Section brune : lettre d'info, puis pied de page.

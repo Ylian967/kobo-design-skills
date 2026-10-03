@@ -6,16 +6,16 @@
 <title>Ossel — Chrome Atelier (démo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,300..700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap">
 <style>
 :root {
-  --bg: #f2f2f0; --paper: #fbfbf9; --ink: #111111; --on-ink: #f2f2f0; --muted: #5c5c58; --line: #c9c9c4; --line-strong: #9c9c96; --gold-ink: #7f6127;
+  --bg: #f2f2f0; --paper: #fbfbf9; --ink: #10191e; --on-ink: #f2f2f0; --muted: #3f464a; --line: #c9c9c4; --line-strong: #9c9c96; --gold-ink: #7f6127;
   --night: #0e1216; --night-2: #1b232b; --night-3: #2c3742; --on-night: #ecebe6; --muted-night: #9aa2a8; --line-night: #3a444e;
   --gold: #c9a45c; --gold-hi: #f3dca0; --gold-lo: #6e5121; --chrome-hi: #ffffff; --chrome: #c7ccd1; --chrome-lo: #4d555d; --white-gold: #e7e3da;
-  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif; --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: 'Inter', 'Archivo', 'Helvetica Neue', Arial, sans-serif; --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
-  --text-title: clamp(1.75rem, 2.5vw, 2.6rem); --text-hero: clamp(2.2rem, 3.8vw, 3.8rem);
-  --leading-tight: 1.02; --leading-body: 1.6; --tracking-caps: 0.14em; --tracking-title: 0.01em; --stretch-display: 112%; --indent-step: 2.4em;
+  --text-title: clamp(1.6rem, 2.05vw, 2.2rem); --text-hero: clamp(2.2rem, 3.8vw, 3.8rem);
+  --leading-tight: 1.02; --leading-body: 1.6; --tracking-caps: 0.14em; --tracking-title: 0.01em; --stretch-display: 100%; --weight-display: 400; --indent-step: 2.4em;
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
   --edge: clamp(20px, 4vw, 56px); --container: 1360px; --ring-size: min(68vh, 620px);
   --radius-pill: 999px; --radius-card: 4px; --hairline: 1px solid var(--line); --hairline-night: 1px solid var(--line-night);
@@ -64,13 +64,14 @@ button, input { font: inherit; color: inherit; }
 .ring::after { content: ""; position: absolute; left: 50%; top: -3px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--ink); transform-origin: 50% calc(var(--ring-size) / 2 + 3px); animation: orbit var(--dur-spin) linear infinite; }
 @keyframes orbit { to { transform: rotate(360deg); } }
 
-.intro { position: relative; z-index: 2; }
+.intro { position: relative; z-index: 3; min-width: 0; }
 .intro .lede, .intro .intro__cta { max-width: 400px; }
 .tag { display: inline-block; margin-bottom: var(--space-6); color: var(--muted); }
-.title { margin: 0 0 var(--space-6); font: 500 var(--text-title)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); letter-spacing: var(--tracking-title); text-transform: uppercase; }
-.title span { display: block; white-space: nowrap; }
-@media (max-width: 900px) { .title span { white-space: normal; } }
-.title span + span { padding-left: var(--indent-step); }
+.title { margin: 0 0 var(--space-6); font: var(--weight-display) var(--text-title)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); letter-spacing: var(--tracking-title); text-transform: uppercase; }
+.title { max-width: 100%; }
+/* Retour à la ligne permis : la vraie police (Archivo élargie) est plus large que le repli, le titre ne doit jamais passer sous la colonne 3D */
+.title span { display: block; white-space: normal; overflow-wrap: anywhere; }
+.title span + span { padding-left: min(var(--indent-step), 8%); }
 .lede { max-width: 32ch; margin: 0 0 var(--space-8); color: var(--muted); }
 .intro__cta { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 
@@ -127,7 +128,7 @@ button, input { font: inherit; color: inherit; }
 .guide-x { position: absolute; left: 0; right: 0; top: 50%; border-top: var(--hairline-night); }
 .night__copy { position: relative; z-index: 2; }
 .hero-title span { white-space: nowrap; }
-.hero-title { margin: 0 0 var(--space-8); font: 500 var(--text-hero)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; letter-spacing: var(--tracking-title); }
+.hero-title { margin: 0 0 var(--space-8); font: var(--weight-display) var(--text-hero)/var(--leading-tight) var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; letter-spacing: var(--tracking-title); }
 .hero-title span { display: block; }
 .hero-title span:nth-child(2) { padding-left: calc(var(--indent-step) * 1.2); }
 .hero-title span:nth-child(3) { padding-left: calc(var(--indent-step) * .5); }
@@ -137,7 +138,7 @@ button, input { font: inherit; color: inherit; }
 .spec { padding: var(--space-6) var(--edge) var(--space-8); }
 .spec + .spec { border-left: var(--hairline-night); }
 .spec dt { color: var(--muted-night); margin-bottom: var(--space-2); }
-.spec dd { margin: 0; font: 500 var(--text-xl)/1 var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
+.spec dd { margin: 0; font: var(--weight-display) var(--text-xl)/1 var(--font-display); font-stretch: var(--stretch-display); text-transform: uppercase; }
 .spec dd small { font-size: .55em; vertical-align: super; }
 
 /* ---------- Presse ---------- */

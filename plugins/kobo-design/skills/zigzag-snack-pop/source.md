@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27735034-ONE-Protein-Bar-Performance-Snack-Landing-Page (shot Dribbble « ONE Protein Bar — Performance Snack Landing Page »)
 - **Famille** : Food / marque snack énergique
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, les deux vidéos du shot image par image
 - **[URL choisie par recherche, plusieurs shots « ONE Protein Bar » existent]** : l'URL exacte du shot n'a pas été confirmée par l'utilisateur.
 
 ## Ce qui a été vu
@@ -16,6 +16,14 @@
 - **Cartes produit** : rayon ~8px, fond coloré par saveur (vert, bleu, beige), nom en capitales grasses, barre « ADD TO CART » en contour avec prix en orange ; carte du milieu surélevée et plus grande.
 - **Avis** : cartes de notation ; tampon rond « HIGH QUALITY » à texte circulaire tournant.
 - **Pied de page** : mot display géant en contour jaune.
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Vidéo 1 (800×600, 15s) | Observé : défilement de toute la landing ; nouveaux éléments : pastille « coach », pile de produits, carte « carburant », section « parcours » avec personnes détourées, bento « testé par des coachs », bandeau lettre d'info, pied détaillé ; bande d'ingrédients en défilement horizontal. |
+| Vidéo 2 (800×226, 16s) | Bande promotionnelle du studio (« Let's work together » sur d'autres projets) : rien sur ce style. |
+| Site en ligne | Aucun lien dans le shot. |
 
 ## Non mesuré
 

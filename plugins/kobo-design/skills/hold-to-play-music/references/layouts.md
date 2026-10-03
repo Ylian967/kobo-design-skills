@@ -13,3 +13,15 @@ Fond blanc ou vidéo, portrait central, logo en haut à gauche, titre en petit e
 - Consigne remplacée par « Maintenez la touche » ; la touche est un grand bouton (min 56px de haut).
 - Titre peint à 18vw.
 - Vignette réduite à 64px, pied de page réduit au partage.
+
+---
+
+## Séquence réelle (observée, 2026-10-03)
+
+1. Chargement noir à grain : logo du label + « présente », anneau de progression, traits de pinceau qui s'assemblent en titre peint.
+2. Choix d'écoute (haut-parleurs / casque) + « commencer ».
+3. Accueil « maintenir pour lancer » (vu sur les captures Awwwards).
+4. Pages d'artistes (captures Awwwards).
+5. Générique : rôles orange / noms blancs, 26px, centré.
+
+Mobile : écran « Tournez votre appareil » en portrait ; l'expérience ne se joue qu'en paysage. En largeur 612px le titre peint déborde des deux côtés (coupé), assumé.

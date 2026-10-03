@@ -15,6 +15,27 @@ Mesuré : `transform, filter 0.3s ease` (×24, survols), `all 0.2s linear` (×10
 | Apparition de section | Titre qui monte de 24px + fondu | 600ms | `--ease-snap` |
 | Bouton | Luminosité | 200ms | linéaire |
 
+## Pages internes (observé le 2026-10-02)
+
+Durées mesurées quand la feuille de style les donne (0.3s ease, 0.2s linéaire, courbe snap), sinon **estimées (≈)**.
+
+| Moment | Effet | Durée | Courbe |
+|---|---|---|---|
+| Survol carte champion | Image zoom 1.05 ; bandeau navy → ardoise `--card-hover` | 300ms (mesuré `transform, filter 0.3s ease`) | ease |
+| Ouverture menu déroulant | Onglet → fond gris foncé ; panneau en fondu + glissement de 4px vers le bas | ≈ 200ms | linéaire |
+| Survol lien du menu | Blanc → or | 200ms | linéaire |
+| Changement de compétence | Icône active : bord or ; nom gris → blanc (1s, `--ease-snap`) ; vidéo en fondu croisé | 300ms (vidéo) / 1s (couleur) | `--ease-snap` |
+| Changement de skin | Grande image en fondu croisé + léger zoom 1.02 → 1 ; cadre or qui saute sur la vignette ; barre de progression qui s'allonge | ≈ 500ms | `--ease-snap` |
+| Héros fiche champion | Splash qui se décale de 24px vers la gauche à l'arrivée, texte qui monte de 24px | ≈ 800ms | `--ease-snap` |
+| Survol carte d'actu | Image zoom 1.05, titre souligné | 300ms | ease |
+
+```css
+.dropdown:not([hidden]) { animation: drop var(--dur-fast) linear both; }
+@keyframes drop { from { opacity: 0; transform: translateY(-4px); } }
+.skins__stage img { transition: opacity var(--dur-base) var(--ease-snap), transform 500ms var(--ease-snap); }
+.skins__stage img.is-out { opacity: 0; transform: scale(1.02); }
+```
+
 ## Code de référence
 
 ```js
@@ -29,4 +50,4 @@ document.querySelectorAll('[role=tablist]').forEach(list => {
 
 ## Mouvement réduit
 
-Changements d'onglet sans fondu, vidéos en pause par défaut avec bouton lecture, pas d'apparition animée.
+Changements d'onglet, de compétence et de skin sans fondu ni zoom, vidéos en pause par défaut avec bouton lecture, pas d'apparition animée ; le menu déroulant s'ouvre sans glissement.

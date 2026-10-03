@@ -42,3 +42,13 @@
 }
 ```
 Tout est affiché d'emblée ; la scène 3D est rendue une fois (objet immobile, voyant fixe, onde figée, heure redessinée toutes les 30 s), rayons immobiles ; les changements d'état (écoute / veille, « Réservé ✓ ») restent visibles.
+
+---
+
+## Vu dans la vidéo du shot (2026-10-03)
+
+| Moment | Effet | Statut |
+|---|---|---|
+| Bande de films | La sélection (photo agrandie + contour pointillé) passe d'une photo à la voisine | Observé, durée estimée ≈ 450ms |
+| Panneau en vedette | Carrousel : le segment actif de la barre se remplit pendant l'affichage (≈ 5s), puis la diapositive suivante glisse | Observé, durées estimées |
+| Enchaînement des sections | Fondu enchaîné rapide entre écrans dans la vidéo (montage, pas forcément le site) | Observé |

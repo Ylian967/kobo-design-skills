@@ -52,3 +52,29 @@ Chaque lieu devient une carte arrondie (24px) plein écran : titre centré, bout
 
 - **Chargement** : fond `--bg`, nom du site en Gilda Display qui apparaît lettre par lettre en fondu, puis le bouton Entrer.
 - **Sans WebGL** : images fixes pour chaque scène (photos ou rendus réels, voir `assets.md`), mêmes interactions.
+
+---
+
+# Relevés sur le site en ligne (2026-10-03)
+
+Site ouvert dans le navigateur intégré (612px, version française) ; interface HTML mesurée, décor 3D en canvas.
+
+## Prologue en phrases (mesuré + observé)
+
+Avant l'écran-titre, **une phrase à la fois** au centre de l'écran, en display **30px/30px 400 blanc**, 2 à 4 lignes centrées ; chaque cran de défilement remplace la phrase par la suivante (fondu) pendant que le paysage passe de la **brume bleu-gris de l'aube** à la **lumière dorée**. Une fine **barre de progression orange** sur le bord droit indique l'avancée.
+
+## Bouton « défiler » à double anneau (observé, mesuré)
+
+En bas au centre : deux cercles concentriques fins **dorés** (`--gold-soft`, mesuré #f6cea0 pour le chargement) avec une flèche ↓ fine au centre ; libellé **Graphik 13px/15px blanc** dessous (« Faire défiler pour continuer », puis « Faire défiler pour explorer » dans les chapitres). Le bouton « Entrez » de l'écran-titre a la même forme : un anneau ivoire, libellé display **24px/21.6px capitales**.
+
+## Écran-titre (observé)
+
+Titre display géant blanc en casse mixte, **sous-titre décalé à droite sous la dernière lettre** (« Reimagined » en ~20px), anneau « Entrez » sous le titre, aide 13px en bas.
+
+## Médaillon de chapitre (observé)
+
+Au-dessus de chaque titre de lieu : un **médaillon rond orné** (frise de motifs fins dorés en couronne) avec le numéro du chapitre au centre ; titre de lieu display ~56px blanc sur 2 lignes, centré.
+
+## Barre du haut (observé)
+
+À gauche deux **pastilles rondes blanches** 28px (réglages, son) ; au centre le logo de l'institution en blanc ; à droite, dans les chapitres, un **bouton rond doré plein** 44px avec un pictogramme (carte / menu des lieux).

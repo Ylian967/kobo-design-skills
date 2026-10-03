@@ -1,16 +1,17 @@
 /*
  * Glass Frame Estate — tokens
- * Valeurs estimées sur les images d'un shot Dribbble (héros photo encadré d'un filet blanc, verre dépoli, pages blanches et bandes noires), voir source.md.
+ * Valeurs mesurées sur le site Framer en ligne du template (2026-10-03, Chrome 1536px, extract-design.js) quand elles existent ; le reste est estimé sur le shot Dribbble. Voir source.md.
  * Le texte blanc du héros est toujours posé sur le voile sombre --shade (bas de la photo), jamais sur le ciel clair.
  * @contrast white:shade white:shade-2 ink:white muted:white ink:surface muted:surface accent:white accent-2:surface white:ink on-dark-muted:ink line-dark:ink:large ink:glass-solid
  */
 :root {
   /* Couleurs — interface */
   --white: #ffffff;
-  --ink: #0d0d0d;             /* texte, bande de chiffres, pied de page, bouton plein sur fond clair */
-  --surface: #f4f3f0;         /* sections claires alternées, fond des champs */
-  --muted: #5e5e5e;           /* texte secondaire sur blanc / surface */
-  --line: #e3e1dc;            /* filets sur fond clair */
+  --ink: #000000;             /* texte, bande de chiffres, pied de page, bouton plein sur fond clair */
+  --surface: #f2f2f2;         /* sections claires alternées, fond des champs */
+  --muted: #555555;           /* texte secondaire sur blanc / surface */
+  --surface-2: #fafafa;       /* mesuré : fond de section très clair */
+  --line: #e3e3e3;            /* filets sur fond clair */
   --on-dark-muted: #a3a3a3;   /* texte secondaire sur --ink */
   --line-dark: #6a6a6a;       /* logos atténués (grands) et filets sur --ink */
   --accent: #a8641f;          /* ambre « golden hour » : prix, puce active (sur blanc) */
@@ -40,27 +41,37 @@
   --text-base: 1rem;     /* 16 */
   --text-lg: 1.25rem;    /* 20 */
   --text-xl: 1.75rem;    /* 28 */
-  --text-h2: clamp(2rem, 4vw, 3.25rem);
-  --text-hero: clamp(1.75rem, 3.2vw, 2.75rem);   /* titre bas gauche, léger */
-  --text-wordmark: clamp(5rem, 19vw, 19rem);     /* mot-marque derrière le bâtiment */
+  --text-h3: 2rem;       /* 32 — mesuré (titres de service, menu, nom du bien) */
+  --text-h2: clamp(2rem, 4vw, 3rem);    /* mesuré 48px desktop, 32px mobile */
+  --text-page: clamp(3rem, 7vw, 6.25rem); /* mesuré 100px : titre des pages internes */
+  --text-hero: clamp(2.5rem, 5.5vw, 5rem);       /* mesuré 80px desktop / 40px mobile */
+  --text-wordmark: clamp(5rem, 19vw, 17.5rem);   /* mesuré 280px */     /* mot-marque derrière le bâtiment */
   --tracking-caps: 0.08em;
   --tracking-wordmark: -0.04em;
-  --weight-light: 300;
+  --weight-light: 300;        /* réservé aux grands chiffres décoratifs */
+  --weight-title: 500;        /* mesuré : TOUS les titres (héros 80px, H2 48px, H3 32px, H6 20px) */
+  --weight-wordmark: 600;     /* mesuré : mot-marque 280px */
+  --tracking-title: -0.02em;  /* mesuré : -1.6px/80, -0.96px/48, -0.64px/32 */
+  --leading-title: 1.1;       /* mesuré */
 
   /* Espace */
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
   --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
   --frame-inset: clamp(12px, 2vw, 28px);   /* marge entre l'écran et le cadre */
-  --container: 1280px;
+  --container: 1200px;   /* mesuré : contenu 1200px */
+  --section-y: 140px;    /* mesuré : padding vertical des sections */
   --gutter: clamp(16px, 4vw, 56px);
 
   /* Formes */
   --radius-frame: 6px;
-  --radius-btn: 2px;
-  --radius-card: 4px;
+  --radius-btn: 4px;     /* mesuré : boutons, étiquettes, champs, FAQ */
+  --radius-card: 10px;   /* mesuré : cartes, photos, panneaux */
+  --pad-card: 10px;      /* mesuré : photo inset dans une carte grise */
+  --pad-panel: 30px;     /* mesuré : témoignage, formulaire, encart prix */
   --radius-round: 999px;
   --blur-bg: 22px;        /* photo floutée hors du cadre */
   --blur-glass: 18px;
+  --blur-menu: 5px;      /* mesuré : voile du menu plein écran */
 
   /* Ombres */
   --shadow-glass: 0 20px 50px rgb(13 13 13 / 0.25);
@@ -69,5 +80,7 @@
   /* Mouvement */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-color: cubic-bezier(0.44, 0, 0.56, 1);   /* mesuré : transitions de couleur */
+  --dur-color: 400ms;    /* mesuré */
   --dur-fast: 180ms; --dur: 420ms; --dur-slow: 900ms; --dur-photo: 1400ms;
 }

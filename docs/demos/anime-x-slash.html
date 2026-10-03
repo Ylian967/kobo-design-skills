@@ -158,8 +158,8 @@ footer { position: relative; z-index: 1; background: var(--ink); color: var(--on
 .hero__logo.is-in { animation: glitch var(--dur-base) steps(3) 1; }
 
 @media (max-width: 768px) {
-  .menu-btn { width: 60px; height: 60px; gap: 10px; }
-  .rail, .selector { display: none; }
+  .menu-btn { inset: 0 0 auto auto; width: 60px; height: 60px; gap: 10px; } /* observé : MENU en haut à droite sur mobile */
+  .rail, .selector, .lang { display: none; }
   .lead { font-size: var(--text-base); }
   .col { margin-left: 20px; }
   .news a { padding: 24px 20px; } .news time { left: 20px; }
@@ -190,6 +190,8 @@ footer { position: relative; z-index: 1; background: var(--ink); color: var(--on
     <li><a href="#intro">Introduction</a></li>
     <li><a href="#credits">Staff &amp; casting</a></li>
     <li><a href="#ranking">Classement</a></li>
+    <li><a href="personnage.html">Personnages (page interne)</a></li>
+    <li><a href="medias.html">Actualités &amp; médias (page interne)</a></li>
   </ol>
 </nav>
 <div class="lang">LANGUE<div><button aria-pressed="false">JP</button><button aria-pressed="true">FR</button></div></div>
@@ -261,7 +263,7 @@ footer { position: relative; z-index: 1; background: var(--ink); color: var(--on
 <footer>
   <div class="brand">Rank Zero</div>
   <a class="tag-btn" href="#">Réseaux officiels</a>
-  <ul class="sns"><li><a href="#">Compte FR</a></li><li><a href="#">Compte JP</a></li><li><a href="#">Chaîne vidéo</a></li></ul>
+  <ul class="sns"><li><a href="personnage.html">Personnages</a></li><li><a href="medias.html">Actualités &amp; médias</a></li><li><a href="#">Compte FR</a></li><li><a href="#">Compte JP</a></li><li><a href="#">Chaîne vidéo</a></li></ul>
   <div class="legal"><span><a href="#">Aide</a> | <a href="#">Confidentialité</a></span><span>© Studio fictif — démo Kōbō · Photos : Unsplash</span></div>
 </footer>
 

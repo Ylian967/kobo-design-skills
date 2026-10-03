@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Bouton Entrer, lentille avant/après, points de chapitre, titre de lieu, bulle de lieu, réglages/son, panneau « À propos ». |
+| `references/components.md` | Bouton Entrer, lentille avant/après, points de chapitre, titre de lieu, bulle de lieu, réglages/son, panneau « À propos ». Puis, relevés sur le site : prologue en phrases au défilement, bouton « défiler » à double anneau, médaillon de chapitre, bouton carte doré. |
 | `references/layouts.md` | Écran d'accueil, scène de lieu, version mobile en cartes. |
 | `references/motion.md` | Travellings, révélation de la lentille, transitions. |
 | `references/assets.md` | Avant de placer une image ou une scène 3D : paires reconstitution / aujourd'hui, traitements, sources, prompts IA, recette de reconstitution IA et 3D. |
@@ -40,8 +40,8 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 
 | Rôle | Police | Réglages |
 |---|---|---|
-| Titre d'accueil et de lieu | **Gilda Display** | 64–160px, interligne 1.02, ivoire ou or |
-| Récit | **Crimson Pro** 400 | 17px / 1.45, colonne 340px, centré sous le titre |
+| Titre d'accueil et de lieu | **Gilda Display** (site : Maghfirea 400, payante) | 64–160px, interligne 1.02, ivoire ou or |
+| Récit | **Crimson Pro** 400 | 17px / 1.45, colonne 340px, centré sous le titre ; sur le site, les phrases d'intro sont en display 30px/1.0 blanc, centrées |
 | Interface | **Inter** 400/500 | 12–14px |
 
 ## Images et 3D

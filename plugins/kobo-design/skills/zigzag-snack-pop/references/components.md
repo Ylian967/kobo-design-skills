@@ -145,3 +145,41 @@ Blanc, contour brun, rayon 8px, ombre dure 4px, légère rotation alternée (±1
 - **Chargement** : pastille qui tourne avec l'étoile orange au centre.
 - **Vide** (panier) : pictogramme de sac brun + bouton jaune « Choisir une saveur ».
 - **Erreur** : contour `--orange-ink`, message Archivo 600 14px `--orange-ink` sous le champ.
+
+---
+
+# Relevés sur la vidéo du shot (2026-10-03)
+
+La première vidéo du shot (800×600, 15s) défile toute la page ; la seconde est une bande promotionnelle du studio (sans rapport avec le style). Valeurs **observées** (≈).
+
+## Pastille « coach » (chip photo)
+
+Pilule blanche à fine ombre posée sur la photo d'un athlète : rond orange avec pictogramme blanc + libellé capitales grasses 11–12px (« COACH SPORTIF »). Sert de légende flottante à côté d'une personne détourée.
+
+## Carte « carburant » (encart produit)
+
+Petite carte blanche arrondie (~8px) en bas à droite de la section brune : titre capitales très grasses (« CARBURANT MUSCLE »), 2 lignes de texte, photo de la main tenant la barre qui **déborde** du haut de la carte, pastille verte ronde à icône en coin.
+
+## Pile de produits
+
+Les emballages du produit sont **empilés en pyramide** (5–6 étuis), légèrement inclinés, posés sur un socle bleu à motif en zigzag ; à gauche l'athlète détouré tenant une barre.
+
+## Avis « parcours » (personnes détourées)
+
+Section brune « NOTRE PARCOURS UNIQUE » (un mot en orange, petit trait d'éclat orange) : à gauche une **carte d'avis blanche** (texte 3 lignes en gras, avatar rond, nom, rôle, note « 5.0 » à droite) ; dessous une **citation** en capitales blanches avec guillemet orange ; personnes **détourées** en pied (randonneuse, surfeuse) qui chevauchent les bords de la section ; pastille blanche « SURFEURS » sur la planche.
+
+## Bento « testé par des coachs »
+
+Rangée de 3 tuiles arrondies sur fond blanc : tuile pêche (avatars ronds empilés, « Testé par des coachs », lien « Voir les saveurs → », photo de barre coupée en bas, pastille verte), tuile photo sombre (mains qui tiennent deux barres), grande tuile pêche (étiquette pilule « 20 g de protéines », titre capitales grasses 3 lignes, photo du produit sur cacahuètes à droite).
+
+## Bandeau lettre d'info
+
+Sur brun : titre capitales blanches 2 lignes avec éclat orange et petite icône d'enveloppe jaune inclinée ; à droite, champ blanc + bouton **orange** « S'abonner » collés, ombre dure.
+
+## Pied de page (observé)
+
+Logo blanc + slogan capitales 2 lignes, filet vertical, 3 colonnes de liens blancs 12px ; filet, icônes sociales à gauche, mention au centre, liens légaux à droite ; montagne en aplat brun plus clair en fond.
+
+## Cartes produit (état actif observé)
+
+La carte du milieu est **plus haute** et passe devant ; au survol la barre « AJOUTER AU PANIER — 40,50 € » prend une ombre dure et le curseur la pousse. Chaque carte a un fond de couleur de saveur avec **illustrations d'ingrédients** (amandes, feuilles) qui débordent.

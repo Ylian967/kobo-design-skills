@@ -1,7 +1,9 @@
 /*
  * Arena Guide — tokens
- * Mesurés sur la page « Comment jouer » de référence (1536×674, 11716px), voir source.md.
+ * Mesurés sur la page « Comment jouer » de référence (1536×674, 11716px), puis sur les pages
+ * liste des champions, fiche champion et actualités (2026-10-02), voir source.md.
  * @contrast text:bg text:bg-2 muted:bg ink:paper ink-muted:paper on-accent:accent on-accent:accent-2 gold:bg on-gold:gold enemy:bg:large
+ * @contrast text:nav-panel text:card-hover text:panel gold:nav-panel gold-deep:paper on-accent:play ink:play ink:paper-2 ink-muted:paper-2 gold-deep:paper-2
  */
 :root {
   /* Couleurs */
@@ -21,6 +23,16 @@
   --on-accent: #111111;
   --enemy: #e84057;         /* rouge : adversaire (≥ 24px ou en anneau) */
   --line: rgb(255 255 255 / 0.22);
+
+  /* Pages internes (relevé le 2026-10-02) */
+  --nav-panel: #1e2328;     /* panneau du menu déroulant (mesuré) */
+  --card-hover: #3c4452;    /* bandeau nom d'une carte champion au survol (mesuré) */
+  --play: #1fa2d8;          /* pilule JOUER de la barre globale (observé, ≈) */
+  --gold-deep: #7f6430;     /* or lisible sur blanc (catégorie d'actu) — l'or mesuré #c8aa6e ne fait que 2,2:1 sur blanc */
+  --paper-2: #f3f3f3;       /* fond des pages claires (liste, actus) — observé gris très clair */
+  --veil-left: linear-gradient(90deg, rgb(10 20 40 / 0.95) 0%, rgb(10 20 40 / 0.75) 35%, transparent 70%); /* dégradé navy du héros champion */
+  --veil-bottom: linear-gradient(0deg, rgb(10 20 40 / 1) 0%, transparent 60%);
+  --shade: rgb(10 20 40 / 0.8);  /* badge sur vidéo */
   --grad-cta: linear-gradient(315deg, var(--accent) 0%, var(--accent-2) 100%);
 
   /* Typographie */
@@ -33,6 +45,13 @@
   --text-lg: 1.375rem;      /* 22px */
   --text-xl: 1.5rem;        /* 24px : sous-titres italiques */
   --text-title: clamp(2.25rem, 4vw, 3.571rem);  /* 57px mesuré */
+  --text-hero: clamp(2.75rem, 5vw, 4.6875rem);  /* 75px mesuré : nom du champion (700 italique) */
+  --text-kicker: clamp(1.25rem, 2.2vw, 1.875rem); /* ~30px observé : sous-titre doré du champion */
+  --text-card: 1rem;        /* ~16px observé : nom sur carte champion (italique gras capitales) */
+  --text-news: 1.375rem;    /* ~22px observé : titre de carte d'actu (= --text-lg), interligne 1.4 */
+  --text-excerpt: 0.9375rem;/* 15px observé : extrait d'actu */
+  --text-meta: 0.8125rem;   /* 13px observé : catégorie | date */
+  --text-menu: 0.75rem;     /* 12px observé : liens du menu déroulant, espacés */
   --leading-body: 1.556;    /* 28 / 18 */
   --leading-title: 1.125;
   --tracking-ui: 0.08em;    /* 1.04px sur 13px */
@@ -42,12 +61,19 @@
   --container: 1208px;      /* largeur du cadre vidéo mesurée */
   --text-col: 880px;
   --nav-h: 80px;
+  --card-ratio: 332 / 502;  /* carte champion mesurée 332×502 (≈ 2:3) */
+  --skill-icon: 96px;       /* icônes de compétences (observé ~96px) */
+  --news-badge: 44px;       /* pastille carrée sur l'image d'actu (observé) */
+  --menu-row: 36px;         /* hauteur d'une ligne du menu déroulant (observé) */
+  --page-band: 290px;       /* bandeau navy en tête des actus (observé ~290px) */
 
   /* Formes */
   --radius-sm: 6.4px;
   --radius-md: 8px;
   --radius-lg: 12px;        /* boutons (dominant) */
   --ring: 4px;              /* anneau des médaillons */
+  --radius-pill: 999px;     /* pilule JOUER de la barre globale */
+  --frame-gap: 24px;        /* écart entre les deux filets dorés du cadre vidéo de compétence (observé) */
 
   /* Mouvement */
   --ease-snap: cubic-bezier(0.06, 0.81, 0, 0.98);  /* mesuré sur les boutons et onglets */

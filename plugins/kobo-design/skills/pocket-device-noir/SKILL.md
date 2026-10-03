@@ -29,12 +29,12 @@ Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythm
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton, la navigation, une étiquette, la carte de verre, l'emplacement 3D de l'objet, un panneau de fonction, un témoignage. |
+| `references/components.md` | Avant de coder un bouton, la navigation, une étiquette, la carte de verre, l'emplacement 3D de l'objet, un panneau de fonction, un témoignage ; bande de films à sélection centrale, panneau « en vedette », appel final photo (vus dans la vidéo du shot). |
 | `references/layouts.md` | Avant de construire une page : héros bureau, manifeste à rayons, révélation produit, grille de fonctions, avis, appel final, mobile. |
 | `references/motion.md` | Avant d'ajouter une animation ou une transition. |
 | `references/assets.md` | Avant de placer une photo ou l'objet : photos chaudes (bureau, roche, tissu), étalonnage, sources, prompts IA, **recette 3D complète de l'objet** (Three.js, R3F, React Native). |
 | `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
-| `source.md` | Pour connaître le shot de référence et ce qui a été estimé. |
+| `source.md` | Pour connaître le shot de référence, sa vidéo et ce qui a été estimé. |
 
 ## Typographie
 

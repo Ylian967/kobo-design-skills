@@ -107,3 +107,27 @@ Tuile à coins de 20px (roche, tissu orange ou `--surface`), vraie photo de text
 ## Témoignage miniature
 
 Carte `--surface`, contour `--line`, rayon 12px, padding 20px : citation 14px entre guillemets français, puis avatar rond 36px (initiales en mono sur dégradé de couleur chaude), nom 14px 500 et rôle 12px `--muted`. Survol : contour blanc à 20 %.
+
+---
+
+# Relevés sur la vidéo du shot (2026-10-03)
+
+La seconde pièce jointe du shot est une courte vidéo (800×600, 2,4s) qui fait défiler trois écrans absents de l'image principale. Valeurs **observées** (≈), pas mesurées.
+
+## Bande de films « pourquoi » (sélection centrale)
+
+Section noire centrée : étiquette grise arrondie (« Pourquoi … ? »), titre blanc 2 lignes (~32px, grotesque serrée), puis **rangée de 5 photos** d'usage en paysage (~4:3, rayon ~4px, tons chauds). La photo du **centre** est plus grande, en portrait, entourée d'un **contour pointillé fin** clair : c'est l'élément actif ; les voisines sont assombries. Paragraphe gris centré dessous (3 lignes, ~13px). Au défilement ou au clic, la sélection glisse d'une photo à l'autre.
+
+```css
+.reel { display: flex; justify-content: center; align-items: center; gap: var(--space-2); }
+.reel img { width: 120px; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); filter: brightness(.7); transition: all var(--dur-base) var(--ease-out); }
+.reel .is-active img { width: 132px; aspect-ratio: 3 / 4; filter: none; outline: 1px dashed rgb(255 255 255 / .5); outline-offset: 4px; }
+```
+
+## Panneau « en vedette » (moitié floutée)
+
+Écran partagé : à gauche, un **panneau de verre sombre** (même photo floutée derrière) avec étiquette « En vedette », **petite icône rouge** (ondes sonores), titre blanc 3 lignes (~28px), texte gris, petit bouton blanc « En savoir plus », et en bas une **barre de progression segmentée** (4–5 segments fins, le premier blanc) ; à droite, la photo nette de l'objet en main sur un bureau, une **étiquette blanche** en haut à droite, une **flèche ronde** de navigation sur le bord droit et une légende grise 2 lignes en bas à droite. C'est un carrousel de cas d'usage.
+
+## Appel final photo
+
+Photo plein cadre (main tenant l'objet dans une lumière rasante, ombres de fenêtre), titre blanc centré 2 lignes (~32px), sous-titre gris, **petit bouton blanc** « Précommander … » centré sous l'objet, micro-texte gris dessous.

@@ -17,7 +17,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 
 1. **Un seul geste** au centre de l'expérience, toujours expliqué par la phrase « Maintenez [touche] pour … » au-dessus du pied de page.
 2. **La touche se remplit** pendant l'appui (`--hold`) ; relâcher trop tôt la vide en douceur.
-3. **Lettrage peint** pour le titre seulement, 3 couleurs qui alternent par lettre ; le reste en Fira Sans.
+3. **Lettrage peint** pour le titre seulement, 3 couleurs qui alternent par lettre ; le reste en Figtree (le site : Camphor, fine et ronde).
 4. **Images en noir et blanc** (filtre si besoin) ; la couleur n'existe que dans le lettrage et l'état d'appui.
 5. **Alternative au geste** : bouton cliquable et touches fléchées, le geste n'est jamais obligatoire.
 6. **Contraste** : le bleu `--blue` seulement en lettrage ≥ 32px (3,9:1) ; pour du petit texte bleu, `--blue-light`.
@@ -29,7 +29,7 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Touche « maintenir », lettrage peint (filtre SVG), page d'artiste, vignette, pied de page, aide. |
+| `references/components.md` | Touche « maintenir », lettrage peint (filtre SVG), page d'artiste, vignette, pied de page, aide. Puis, relevés sur le site en ligne : chargement à grain et pinceaux, choix d'écoute, générique, pied. |
 | `references/layouts.md` | Accueil, page d'artiste, transitions, mobile. |
 | `references/motion.md` | Remplissage, bascule d'artiste, vidéo. |
 | `references/assets.md` | Avant de placer une photo ou une vidéo : triptyque N&B, portraits en contre-jour, pochettes, passage photo → vidéo. |
@@ -41,8 +41,8 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Rôle | Police | Réglages |
 |---|---|---|
 | Titre peint | **Londrina Solid** 900 + filtre SVG « pinceau » | capitales, 56–144px, une couleur par lettre |
-| Consigne, interface | **Fira Sans** 500/700 | 12–18px |
-| Pied de page | **Fira Mono** 400 | 10px |
+| Consigne, interface | **Figtree** 200/400 (site : Camphor, mesuré) | 13–17px ; générique 26px 400 (rôles orange, noms blancs) |
+| « présente », pied technique | **Inconsolata** 400 (mesuré, identique au site) | 12px, gris #858585 |
 
 ## Images et 3D
 

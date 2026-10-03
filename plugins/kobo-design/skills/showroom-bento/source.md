@@ -2,7 +2,7 @@
 
 - **Site de référence** : https://dribbble.com/shots/27766449-Motorcycle-E-Commerce-Website-Design (Nixtio)
 - **Famille** : E-commerce / showroom produit
-- **Analysé le** : 2026-10-01, Chrome
+- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, vérification de toutes les pièces jointes du shot
 
 ## Ce qui a été vu
 
@@ -12,6 +12,14 @@
 - **Titre** à gauche en grotesque géométrique grasse (~44px) « Model V4 » + nom de marque en rouge (~#d42a2a), légende grise 11px dessous ; à droite, prix géant de même graisse, symbole monétaire en gris.
 - **Carrousel** : motos voisines plus petites et estompées, coupées aux bords gauche et droit ; pilule blanche centrée sous la moto avec flèches ← →.
 - **Rangée bento** en bas : tuiles blanches (rayon ~8px, écart ~3px) — carte accessoire (texte, prix « $350.5 », pilule noire « Buy Now », image de casque), six tuiles caractéristiques (icône, valeur grasse « Petrol », petite étiquette « Fuel type »), carte couleur (texte, moto vue de face, colonne verticale de pastilles rouge / jaune / bleu / gris / noir, sélection cochée, « +$140.5 »).
+
+## Pages explorées (2026-10-03)
+
+| Source | Relevé |
+|---|---|
+| Image (3200×2400) | Déjà analysée. |
+| Vidéo du shot (801×358, 12s) | Bandeau promotionnel du studio (« Free estimate », main robotique) : rien sur ce style. |
+| Site lié | Seulement le site de l'agence, pas le produit. |
 
 ## Non mesuré
 
