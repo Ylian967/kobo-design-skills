@@ -64,8 +64,6 @@ En bref :
 | [`acid-scan-security`](plugins/kobo-design/skills/acid-scan-security/) — Acid Scan Security | Tech / cybersécurité | [Dribbble](https://dribbble.com/shots/27776445-ThreatIQ-Next-Gen-Data-Security-Website) |
 | [`alpine-glass-expedition`](plugins/kobo-design/skills/alpine-glass-expedition/) — Alpine Glass Expedition | Voyage / aventure | [Dribbble](https://dribbble.com/shots/27767056-WayWild-Adventure-Travel-Website) |
 | [`anime-x-slash`](plugins/kobo-design/skills/anime-x-slash/) — Anime X Slash | Jeu vidéo & anime | [tbhx.net](https://tbhx.net/en/) |
-| [`arena-guide`](plugins/kobo-design/skills/arena-guide/) — Arena Guide | Jeu vidéo | [leagueoflegends.com](https://www.leagueoflegends.com/fr-fr/how-to-play/) |
-| [`bubble-publisher-hub`](plugins/kobo-design/skills/bubble-publisher-hub/) — Bubble Publisher Hub | Jeu vidéo | [fr.bandainamcoent.eu](https://fr.bandainamcoent.eu/) |
 | [`chrome-atelier`](plugins/kobo-design/skills/chrome-atelier/) — Chrome Atelier | Luxe / bijou produit 3D | [Dribbble](https://dribbble.com/shots/27491195-Website-Design-for-Avant-Garde-Jewelry-Product) |
 | [`cosmic-voyage`](plugins/kobo-design/skills/cosmic-voyage/) — Cosmic Voyage | Jeu vidéo & gacha | [hsr.hoyoverse.com](https://hsr.hoyoverse.com/fr-fr/home) |
 | [`epic-jrpg-product`](plugins/kobo-design/skills/epic-jrpg-product/) — Epic JRPG Product | Jeu vidéo | [fr.bandainamcoent.eu](https://fr.bandainamcoent.eu/tales-of/tales-of-arise) |
