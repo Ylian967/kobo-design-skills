@@ -1,33 +1,57 @@
 /*
  * Noir Inferno Chapters — tokens
- * Palette de la fiche Awwwards (#000, #9C9C9C, #fff), voir source.md.
- * @contrast text:bg muted:bg text:mid
+ * MESURÉS le 2026-10-03 sur le site de référence (Chrome 1440×900 : styles calculés, feuille de style et script de la page, captures).
+ * Le décor et les titres du site sont dessinés dans un canvas WebGL : leurs tailles sont lues sur captures. « choisi » = décidé par le skill.
+ * @contrast text:bg text:shade soft:bg ink:paper ink-soft:paper signal:bg:large
  */
 :root {
-  /* Couleurs : noir et blanc stricts */
-  --bg: #000000;
-  --text: #ffffff;
-  --muted: #9c9c9c;
-  --mid: #2a2a2a;            /* gris foncé des scènes, sous les titres */
-  --haze: rgb(255 255 255 / 0.08);  /* brume, particules */
-  --shade: radial-gradient(70% 60% at 50% 45%, transparent 40%, rgb(0 0 0 / .65));  /* vignettage */
+  /* ---- Couleurs : noir, blanc, et un seul rouge à la toute fin ---- */
+  --bg: #0d0d0d;            /* mesuré : fond de la page */
+  --text: #ffffff;          /* mesuré : tout le texte et tous les traits */
+  --soft: #9c9c9c;          /* fiche Awwwards : gris de la palette ; texte secondaire */
+  --half: rgb(255 255 255 / 0.5);    /* mesuré : langue inactive, éléments en retrait (grands ou décoratifs) */
+  --faint: rgb(255 255 255 / 0.22);  /* choisi : pointillés, cible du cercle */
+  --shade: #1a1a1a;         /* choisi : ton moyen du voile sous les titres (repli et contraste) */
+  --veil-0: rgb(13 13 13 / 0);
+  --veil-1: rgb(13 13 13 / 0.6);
+  --veil-2: rgb(13 13 13 / 0.9);
+  --paper: #dedede;         /* mesuré : panneau « à propos » */
+  --ink: #000000;           /* mesuré : texte du panneau */
+  --ink-soft: #5a5a5a;      /* mesuré : gris de l'appel final ; liens secondaires du panneau */
+  --signal: #d0202a;        /* lu sur capture : rouge de la main de la dernière scène (≈ #c41c24 sur une capture compressée) — décor et grand texte seulement */
 
-  /* Typographie */
-  --font-title: 'Playfair Display SC', 'Bodoni Moda', Georgia, serif;   /* titres : serif romaine Regular 400 (site : « Parkinson Cond » 400, mesuré) */
-  --font-ui: 'Josefin Sans', system-ui, sans-serif;                     /* navigation, capitales espacées */
-  --font-number: 'Playfair Display', Georgia, serif;
-  --text-2xs: 0.625rem;   /* 10px nav */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-title: clamp(1.75rem, 3.6vw, 3rem);   /* titres sobres, centrés */
-  --text-number: clamp(2rem, 3vw, 2.75rem);
-  --tracking-ui: 0.2em;     /* mesuré : 10px capitales, 1–2px */
+  /* ---- Typographie ---- */
+  --font-title: 'Instrument Serif', 'Times New Roman', serif;   /* site : Parkinson Condensed 400 (payante), serif étroite */
+  --font-ui: 'Inter', system-ui, sans-serif;                    /* site : police de texte non nommée (« bodyFont ») */
+  --fs-title: clamp(2rem, 5vmin, 3.25rem);    /* mesuré : 5vmin (45px à 1440×900), capitales, centré */
+  --fs-quote: 1.25rem;      /* mesuré : 20px, capitales, approche 0.6px */
+  --ls-quote: 0.03em;
+  --fs-number: 2.5rem;      /* mesuré : 40px, numéro de scène */
+  --fs-text: 0.8125rem;     /* lu : paragraphe de scène ≈ 13px, 3 lignes centrées */
+  --fs-ui: 0.625rem;        /* mesuré : 10px, capitales */
+  --ls-ui: 0.14em;          /* mesuré : 1.4px sur 10px (0.2em pour les titres de section, 0.1em pour les boutons) */
+  --lh-ui: 1.8;             /* mesuré : 18px */
+  --fs-panel: 0.75rem;      /* mesuré : 12px / 20px, noir, panneau « à propos » */
+  --fs-final: 1.9125rem;    /* mesuré : 30.6px, appel de la dernière scène */
 
-  /* Espace */
-  --edge: 40px;
-  --space-2: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
+  /* ---- Grille (1440 × 900) ---- */
+  --edge: clamp(18px, 3.2vw, 46px);   /* mesuré : éléments de coin à ≈ 46px des bords */
+  --circle: 52px;           /* mesuré : cercle à tirer, contour 0.8px */
+  --circle-small: 26px;     /* mesuré : cercle sous un titre de scène */
+  --target: 65px;           /* mesuré : cible en tirets */
+  --pull: 160px;            /* mesuré : ligne pointillée entre le cercle et sa cible */
+  --hair: 0.8px;            /* mesuré */
+  --close: 20px;            /* mesuré : croix de 20px à 60px du haut */
+  --close-top: 60px;
+  --col-text: 500px;        /* mesuré : colonne du panneau « à propos » (80 % au plus) */
+  --col-scene: 30rem;       /* lu : paragraphe de scène ≈ 480px */
 
-  /* Mouvement */
-  --ease: cubic-bezier(0.7, 0, 0.3, 1);
-  --dur: 1200ms; --dur-title: 1800ms; --drift: 40s;
+  /* ---- Mouvement ---- */
+  --ease-line: cubic-bezier(0.95, 0.05, 0.795, 0.035);   /* mesuré : soulignement des liens (0.6s) */
+  --ease: cubic-bezier(0.7, 0, 0.3, 1);                   /* choisi : passages de scène */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);             /* choisi : retour du cercle */
+  --dur-line: 600ms;        /* mesuré */
+  --dur-fade: 700ms;        /* choisi : textes */
+  --dur-scene: 1400ms;      /* observé : fondu d'une scène à l'autre ≈ 1 à 2s */
+  --dur-dust: 900ms;        /* observé : le titre se défait en poussière en moins d'une seconde */
 }

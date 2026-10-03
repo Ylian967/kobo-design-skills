@@ -1,83 +1,73 @@
 # Noir Inferno Chapters — composants
 
-## Scène peinte
+Valeurs dans `tokens.css`. Les dimensions sont **mesurées** sur le site de référence à 1440×900 sauf mention « proposé » ou « lu ». Code complet dans `examples/demo.html`.
 
-Image réelle plein écran (photo ou illustration peinte, voir `assets.md`) en niveaux de gris très contrastés (`filter: grayscale(1) contrast(1.4) brightness(.85)` si la source est en couleur), recouverte de : vignettage (`--shade`), brume (2 dégradés blancs à 6–10 % qui dérivent), grain léger. `role="img"` + `aria-label` qui décrit la scène.
+## Règles communes
 
-## Titre de chapitre
+- **Noir et blanc stricts.** Aucune couleur, sauf un rouge unique réservé au dernier geste du récit.
+- **L'image occupe tout l'écran** ; l'interface est minuscule : capitales de 10px très espacées, traits de 0.8 à 1px.
+- **Un seul texte à la fois, centré** : un titre serif en capitales, puis au plus trois lignes.
+- **Trois états** : ouverture (citation + cercle), **titre** (texte lisible, image assombrie), **vue** (texte masqué, image entière, interface de coin).
+- Tout est rond ou linéaire : cercles, pointillés, filets. Pas de carte, pas de fond de bouton (sauf un bouton à contour).
 
-```css
-.ch-title { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; font: 400 var(--text-title)/1 var(--font-title); color: var(--text); text-align: center; text-shadow: 0 0 40px var(--bg); }
-```
-Texte en capitales (SC), terminé par un point.
+## Cercle à tirer
 
-## Numéro
-
-En bas au centre : un petit point blanc 3px, puis le chiffre en Playfair Display 32–44px. Change en fondu.
-
-## Coins d'interface
-
-- **Haut gauche** : nom du projet en Playfair Display SC 400 16px.
-- **Haut centre** : « EN SAVOIR PLUS SUR LE PROJET. » (Josefin 10px +0.2em, mesuré : 10px capitales, approche 1–2px), ouvre un panneau.
-- **Haut droite** : langues « DE · EN » + bouton son (barres).
-- **Bas gauche** : icônes de réseaux, blanches, 12px.
-- **Bas droite** : « À PROPOS DU GROUPE » (ou de l'auteur).
-
-## Sommaire
-
-Panneau noir plein écran : liste numérotée des chapitres (numéro + titre en Playfair SC 24px), l'actif en blanc, les autres en `--muted`. Ouvert par la touche « S » ou un lien « SOMMAIRE ».
-
-## Brume et particules
-
-```css
-.haze { position: absolute; inset: -20%; background: radial-gradient(40% 30% at 30% 60%, var(--haze), transparent 70%), radial-gradient(35% 25% at 70% 40%, var(--haze), transparent 70%); animation: drift var(--drift) linear infinite alternate; pointer-events: none; }
-@keyframes drift { to { transform: translate(6%, -3%); } }
+```html
+<div class="pull"><button class="handle" aria-label="Scène suivante : tirer le cercle vers le bas, ou appuyer sur Entrée"></button></div>
 ```
 
-## États
+- Cercle de 52px, contour 0.8px blanc, un point au centre.
+- Sous lui, une **ligne pointillée** de 160px, puis une **cible** de 65px en tirets.
+- Sous un titre de scène, le cercle est réduit de moitié (26px).
+- Dans la dernière scène, il est rouge (`--signal`).
+- C'est un `<button>` : Entrée ou Espace valide sans tirer.
 
-- **Chargement** : écran noir, numéro « 0 » qui clignote lentement.
-- **Image manquante** : fond `--mid` + vignettage ; le titre et le numéro suffisent (pas de silhouettes dessinées).
+## Citation d'ouverture
 
----
+Trois lignes centrées, serif 20px en capitales, approche 0.6px, largeur 300px, à 17 % du haut. En bas, la consigne en capitales de 10px sur deux lignes (260px).
 
-# Relevés sur le site en ligne (2026-10-03)
+## Titre de scène
 
-Le site est toujours en ligne à une **nouvelle adresse** (voir `source.md`) ; ouvert dans le navigateur intégré (612px), interface HTML mesurée, scènes en canvas (3 canvas).
+Serif en capitales, `5vmin` (45px à 1440×900), centré, terminé par un point (« LE BORD DU MONDE. »). Dessous, à 18px : un paragraphe sans de 13px, blanc, 480px au plus, centré. L'image est assombrie (`--veil-1`) tant que le texte est affiché.
 
-## Cercle de navigation (signature, mesuré)
+## Croix
 
-On n'avance pas en défilant : on **attrape un cercle et on le tire vers une cible**.
-- Cercle principal : 52px, contour **0.8px** blanc, vide.
-- Halo « pulsation » : 149px, contour 0.8px blanc, qui grandit et s'efface en boucle autour du cercle.
-- Ligne **pointillée** verticale (points de 1px) qui mène à la **cible** : cercle 65px en **tirets** blancs, plus bas.
-- Consigne sous l'ensemble : « Cliquez et tirez le cercle pour naviguer », 10px capitales +1.4px, blanc, 2 lignes centrées.
-Accessible : le cercle est un bouton (Entrée / flèche bas = scène suivante), la consigne est son libellé.
+Deux traits de 20px à 60px du haut, centrés. Zone de clic de 44px. Elle masque le texte et passe en mode « vue ».
 
-```css
-.drag-dot { width: 52px; aspect-ratio: 1; border: .8px solid var(--text); border-radius: 50%; background: none; cursor: grab; touch-action: none; }
-.drag-dot::after { content: ""; position: absolute; inset: -48px; border: .8px solid var(--text); border-radius: 50%; animation: pulse 2.4s var(--ease) infinite; }
-.drag-line { width: 1px; height: 120px; background: repeating-linear-gradient(var(--text) 0 1px, transparent 1px 5px); }
-.drag-target { width: 65px; aspect-ratio: 1; border: 1px dashed var(--text); border-radius: 50%; }
-@keyframes pulse { from { transform: scale(.35); opacity: 1; } to { transform: scale(1); opacity: 0; } }
-```
+## Interface de coin (mode « vue »)
 
-## Citation d'accueil (mesuré)
+| Coin | Élément |
+|---|---|
+| Haut gauche | Nom du média en serif étroite 28px |
+| Haut centre | « EN SAVOIR PLUS SUR *titre de l'œuvre* » |
+| Haut droite | Langues, l'inactive à 50 % |
+| Bas gauche | Réseaux |
+| Bas droite | « À PROPOS » |
+| Bas centre | Numéros de scène |
 
-Sur fond noir à grain et étoiles éparses : une phrase de 3 lignes centrée en **serif romaine 20px capitales +0.6px** blanche, au-dessus du cercle.
+Tout en capitales de 10px, approche 0.14em, à 46px des bords. Survol : un filet de 1px se trace dessous.
 
-## Texte de scène (observé)
+## Numéros de scène
 
-Sous le titre de chapitre (serif capitales blanches ~48px, centré, qui **déborde** volontairement en écran étroit), un paragraphe de 2–3 lignes en sans-serif ~13px blanc, casse normale, centré ; un petit cercle 20px en dessous rappelle le geste. Croix fine « × » en haut au centre pour fermer la scène.
+Serif. Le numéro courant fait 40px ; en mode « vue », les autres apparaissent autour en 18px à 50 %. Chaque numéro est un bouton nommé (« Scène 3 : Ceux qui regardent. »).
 
-## Panneau « à propos » (mesuré)
+## Bouton « Lire la scène »
 
-Panneau **blanc** (inversion) : texte 12px/20px noir +0.24px, rôles du générique en 10px capitales (« Agence : », « Illustration : »…), lien d'abonnement et « Retour au début » en 10px capitales noires.
+Seul bouton à contour : 1px blanc, capitales de 10px, approche 0.1em, padding 15px 26px, à 10 % du bas. Survol : fond blanc, texte noir. Visible en mode « vue ».
 
-## Fin (mesuré)
+## Panneau « à propos »
 
-Dernière scène : consigne « Cliquez et tirez la main vers le bas », et un appel en serif condensée **30px gris #5a5a5a** (« Sortez-moi d'ici ! »). Conseil d'écoute : « utilisez un casque pour la meilleure expérience » en 10px capitales.
+Plein écran, fond `--paper` (#dedede), texte noir : titre serif géant, colonne de 500px en 12px / 20px, crédits en capitales de 10px `--ink-soft` en bas, croix noire en haut. `role="dialog"`, Échap ferme.
 
-## Langues (mesuré)
+## Grain et poussière
 
-« DE / EN » en 10px capitales +2px ; la langue inactive à **opacité 0.5**.
+Un grain fixe à 13 % sur tout l'écran, un vignettage (bords et bas plus sombres), une quinzaine de points blancs de 2px qui dérivent. Ils unifient des images de sources différentes.
+
+## Accessibilité
+
+- Trois façons d'avancer : tirer le cercle, la molette, le clavier (Entrée sur le cercle, flèches, page suivante).
+- Le texte de la scène est dans une zone `aria-live="polite"` : il est annoncé à chaque changement.
+- Texte blanc sur image assombrie ; en mode « vue », il n'y a plus de texte courant sur l'image.
+- Cibles de 44px pour la croix, de 34 × 54px pour les numéros ; le cercle réduit (26px) garde une zone de saisie de 46px.
+- Le rouge `--signal` n'est jamais un petit texte (3,6:1).
+- Chaque image de scène porte un texte alternatif qui décrit ce qu'on voit (« Falaise et sapins émergeant d'une mer de brouillard ») ; grain, poussière et voiles sont décoratifs.

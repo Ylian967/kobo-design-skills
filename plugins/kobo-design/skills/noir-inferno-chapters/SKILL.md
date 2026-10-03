@@ -1,75 +1,95 @@
 ---
 name: noir-inferno-chapters
-description: Direction artistique « Noir Inferno Chapters » pour récits illustrés en chapitres (clip, album, court-métrage, campagne engagée, livre, jeu narratif), inspirée des expériences primées en noir et blanc peint qui traversent une suite de « cercles ». Noir et blanc strict, scènes peintes plein écran avec brume et vignettage, un titre court en capitales serif au centre, numéro de chapitre en bas au centre, navigation minuscule en capitales très espacées, aucun autre élément. À utiliser pour une landing de clip ou d'album, un manifeste, une campagne de sensibilisation, un roman graphique web ou une app de lecture au style « noir, cinéma, gravure, solennel ».
+description: Direction artistique « Noir Inferno Chapters » pour le récit illustré et l'édition (journal, magazine, campagne éditoriale, documentaire, album, roman graphique, exposition, manifeste), mesurée sur un récit interactif primé en noir et blanc. Expérience plein écran sans défilement, scène par scène - images en noir et blanc brumeuses avec grain, vignettage et poussière, citation d'ouverture en serif étroite, cercle fin à tirer vers une cible en tirets pour avancer, titre de scène centré en capitales serif suivi de trois lignes de texte, croix qui défait le titre en poussière pour laisser voir l'image, interface minuscule en capitales de 10px dans les coins, numéros de scène en bas, panneau « à propos » gris clair, un seul rouge pour le dernier geste. À utiliser pour un récit en chapitres, une landing éditoriale, une page de campagne ou un site au style « sombre, cinéma, noir et blanc, contemplatif, littéraire ».
 ---
 
 # Noir Inferno Chapters
 
-> Un film muet en neuf cercles : une image peinte en noir et blanc, un titre, un numéro. Puis le suivant.
+> Un livre d'images que l'on feuillette en tirant sur un cercle : une scène, une phrase, le noir, puis la suivante.
 
 ## L'idée
 
-Chaque chapitre est **une seule image** en noir et blanc, peinte, brumeuse, plein écran. Au centre, **un titre très court** en capitales serif blanches, terminé par un point (« LES MARIONNETTES DU POUVOIR. »). En bas au centre, le **numéro du chapitre**. Aux quatre coins, une interface minuscule en capitales très espacées. On avance chapitre par chapitre (défilement, flèches, clic), comme on tourne les pages d'un livre sombre. Rien d'autre : pas de couleur, pas de bouton, pas de texte long.
+Chaque écran est **une image en noir et blanc**, brumeuse, granuleuse, sombre sur les bords. Au centre, **un titre en capitales serif** et quelques lignes — jamais plus. Pour avancer, on ne clique pas sur « suivant » : on **tire un petit cercle** vers une cible, comme on descend d'un cran. Une croix efface le texte, qui **se défait en poussière**, et l'image apparaît entière avec une interface minuscule dans les coins. Aucune couleur, sauf un rouge qui n'arrive qu'une fois, à la fin.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas d'illustrations, de titres ni du nom de l'œuvre d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, logo, illustrations ni textes du site d'origine.
 
 ## Règles prioritaires
 
-1. **Noir et blanc strict** : trois valeurs (`--bg`, `--muted`, `--text`) plus les gris des images. Zéro couleur.
-2. **Un titre, un numéro, une image** par écran. Titre ≤ 4 mots, terminé par un point.
-3. **Interface aux coins**, en capitales minuscules espacées de 0.28em.
-4. **Atmosphère** : brume (dégradés blancs très transparents), vignettage, grain léger, particules qui dérivent.
-5. **Navigation séquentielle** : défilement, flèches clavier, molette ; un chapitre à la fois.
-6. **Contraste** : blanc sur scène sombre avec vignettage ; si l'image est claire, ajouter une ombre portée large au titre (`0 0 40px #000`).
-7. **Accessibilité** : chaque chapitre a un texte alternatif qui décrit la scène ; un sommaire accessible au clavier liste tous les chapitres.
+1. **Noir et blanc.** Un seul rouge (`--signal`), une seule fois, pour le dernier geste.
+2. **Une scène = une image plein écran + un titre + trois lignes au plus.** Pas de défilement.
+3. **On avance en tirant le cercle** ; la molette, les flèches et Entrée font la même chose.
+4. **Interface minuscule** : capitales de 10px espacées, traits de 1px, rien dans les coins tant que le texte est affiché.
+5. **Texte toujours centré**, titre terminé par un point.
+6. **Images brumeuses et sombres**, grain et vignettage par-dessus ; gris fait dans le fichier ou par le serveur, jamais en filtre CSS.
+7. **Lenteur** : fondus de plus d'une seconde, aucun rebond.
 8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Scène peinte, titre de chapitre, numéro, coins d'interface, sommaire, brume et particules. Puis, relevés sur le site en ligne : cercle à glisser (navigation), citation d'accueil, texte de scène, panneau « à propos » blanc, sortie. |
-| `references/layouts.md` | Ouverture, chapitre, sommaire, fin, mobile. |
-| `references/motion.md` | Fondus au noir, dérive, apparition du titre. |
-| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, N&B contrasté, grain, vignettage, sources, prompts IA, idée 3D. |
-| `examples/demo.html` | Démo de 4 chapitres en photos N&B. |
-| `source.md` | Observations et écarts. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Cercle à tirer, citation, titre de scène, croix, interface de coin, numéros, bouton, panneau, grain et poussière. |
+| `references/layouts.md` | Les trois états d'un écran, déroulé, mobile, variantes. |
+| `references/motion.md` | Geste, fondus, poussière du titre, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : sujets par scène, sources, traitements, plans en profondeur. |
+| `examples/demo.html` | Récit complet animé (« La Descente », sept scènes). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
 | Rôle | Police | Réglages |
 |---|---|---|
-| Titres de chapitre | **Playfair Display SC** 400 (site : Parkinson Condensed 400, mesuré) | 28–48px, capitales, interligne 1, centré ; citation d'accueil 20px +0.03em |
-| Interface | **Josefin Sans** 400 | 10px, capitales, +0.1 à +0.2em (mesuré 1–2px) ; texte de scène ~13px casse normale |
-| Numéro | Playfair Display 400 | 40px / 35px (mesuré) |
+| Titre de scène | **Instrument Serif** (site : Parkinson Condensed) | 5vmin (45px), capitales, centré, point final |
+| Citation d'ouverture | Instrument Serif | 20px, capitales, approche 0.6px |
+| Numéro de scène | Instrument Serif | 40px (les autres 18px) |
+| Texte de scène | **Inter** 400 | 13px / 1.6, 480px au plus |
+| Interface | Inter 400 | 10px / 18px, capitales, approche 0.14em |
+| Panneau | Inter 400 | 12px / 20px, noir |
+
+## Couleurs
+
+| Token | Valeur | Usage |
+|---|---|---|
+| `--bg` | #0d0d0d | Fond, voiles |
+| `--text` | #ffffff | Texte, traits, cercles |
+| `--soft` | #9c9c9c | Texte secondaire |
+| `--half` / `--faint` | blanc 50 % / 22 % | Éléments en retrait / pointillés, cible |
+| `--paper` / `--ink` / `--ink-soft` | #dedede / #000000 / #5a5a5a | Panneau « à propos » |
+| `--signal` | #d0202a | Le cercle de la dernière scène, rien d'autre |
 
 ## Images et 3D
 
-Chaque chapitre est **une vraie image** (photo ou illustration peinte) en noir et blanc très contrasté : noirs bouchés, blancs francs, grain, vignettage et brume par-dessus. Les sujets sont humains et graves (foule, geste, visage, silhouette dans le noir). La brume, le vignettage et le grain restent en CSS ; jamais de dessin CSS/SVG à la place d'une photo, d'une foule, d'un visage ou d'un lieu. La 3D est optionnelle (parallaxe 2,5D par carte de profondeur). Détails et code dans `references/assets.md`.
+De **vraies images** en noir et blanc, une par scène, plein écran : rue dans la brume, falaise au-dessus du brouillard, silhouettes à contre-jour, forêt, escalier, mer d'orage, tunnel. Idéalement des illustrations peintes livrées en plans séparés ; sinon des photos passées en gris par le serveur d'images. Cercles, pointillés, croix, grain et poussière sont des signes et restent en CSS ; jamais une scène dessinée. 3D (WebGL) optionnelle pour animer des plans en profondeur. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le numéro de chapitre seul en bas au centre**, avec un petit point au-dessus, qui change en fondu à chaque chapitre.
+1. Le **cercle à tirer** le long d'une ligne pointillée.
+2. Le **titre qui se défait en poussière**.
+3. L'**image noir et blanc** brumeuse, granuleuse, vignettée.
+4. Les **capitales de 10px** dans les coins et le **numéro serif** en bas.
+5. Le **rouge unique** de la dernière scène.
 
 ## À éviter
 
-- Ajouter une couleur, même en accent.
-- Écrire des paragraphes dans les chapitres (un panneau « À propos » peut les contenir).
-- Des transitions rapides ou bondissantes.
-- Reprendre les illustrations, titres ou le nom de l'œuvre d'origine.
+- De la couleur, même discrète, avant la fin.
+- Plusieurs blocs de texte, des listes, des cartes, des boutons pleins.
+- Un bouton « suivant » à la place du cercle (l'issue au clavier suffit).
+- `filter: grayscale()` ou un zoom animé sur des images plein écran (voir « Performance » dans `motion.md`).
+- Des images nettes, lumineuses, détaillées.
+- Des transitions rapides ou des rebonds.
 
 ## Adaptation React / React Native
 
-- Chapitres : `FlatList` verticale paginée (`pagingEnabled`), images plein écran `resizeMode="cover"`.
-- Brume : `expo-linear-gradient` blanc à 8 % animé lentement.
-- Polices : `@expo-google-fonts/playfair-display-sc`, `josefin-sans`.
+- **React** : une machine à trois états (`intro`, `title`, `view`) et un index de scène dans un seul `useReducer` ; `PullCircle` (événements pointeur + clavier), `SceneStack` (images empilées, classe active), `DustTitle` (canvas temporaire), `CornerHud`, `AboutPanel`.
+- **React Native** : `PanGestureHandler` + Reanimated pour le cercle (seuil à 80 %, retour en `withTiming`), retour haptique au franchissement du seuil ; images en `Image` superposées avec opacité animée ; poussière du titre avec `react-native-skia` ou remplacée par un simple fondu ; interface de coin en `Text` de 10px `letterSpacing: 1.4`.
 
 ## Avant de livrer
 
-- [ ] Zéro couleur.
-- [ ] Un titre court + un numéro par chapitre.
-- [ ] Interface uniquement aux coins.
-- [ ] Sommaire clavier et textes alternatifs.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Testé à 375px et 1440px, mouvement réduit respecté.
+- [ ] `:root` copié de `tokens.css`, aucune couleur en dur ailleurs.
+- [ ] On peut tout parcourir au clavier (Entrée, flèches, numéros) et à la molette.
+- [ ] Chaque texte de scène est lisible sur son image (voile présent) ; trois lignes au plus.
+- [ ] Images en gris dans le fichier ou par le serveur, toutes dans la même gamme.
+- [ ] Le rouge n'apparaît qu'à la dernière scène.
+- [ ] `prefers-reduced-motion` : pas de poussière, pas de fondu long.
+- [ ] Titre, images et textes propres au projet.

@@ -1,78 +1,63 @@
 # Noir Inferno Chapters — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, une foule, un visage ou un lieu : chaque chapitre est **une vraie image** (photo, illustration peinte, gravure, rendu) en noir et blanc très contrasté. Seuls la brume, le vignettage, le grain et le point du numéro restent en CSS : ce sont des effets d'atmosphère, pas des représentations.
+> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une scène. Seuls les signes restent en CSS : cercles, pointillés, croix, filets, grain, points de poussière.
+
+Sur le site de référence, chaque scène est une **peinture numérique en noir et blanc**, découpée en plans (premier plan flou, sujet, fond brumeux) et animée. Le skill fonctionne avec des illustrations si le projet en a, sinon avec des **photos en noir et blanc**.
 
 ## 1. Ce que montrent les images
 
-Une image par chapitre, comme une gravure ou un photogramme de film muet. Les sujets sont **humains et graves** : une foule, un visage, une silhouette, une rue vide.
+Une image par scène, plein écran, qui raconte **un lieu et une situation**, pas un détail :
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `chapter-1` (ouverture) | Une foule, une rue, un lieu collectif | Plein écran 16:9 (portrait 9:16 en mobile), sujet centré, zone calme au centre pour le titre des chapitres suivants | Ciel blanc ou nuit, contraste fort | N&B dur (`grayscale(1) contrast(1.4) brightness(.85)`) + vignettage + grain |
-| `chapter-n` (foule / geste) | Un geste collectif : poings levés, mains, pancartes sans texte lisible | Plein écran, ligne d'horizon haute, centre dégagé | Contre-jour ou lumière dure | Idem, plus brume |
-| `chapter-n` (visage) | Un visage en gros plan, regard caméra ou baissé | Plein écran, yeux au tiers haut, titre posé sur le bas du visage ou l'ombre | Clair-obscur, une seule source | Idem, `object-position` sur les yeux |
-| `chapter-last` | Une silhouette ou un visage presque englouti par le noir | Plein écran, sujet petit ou de côté, beaucoup de noir | Low key, 80 % de l'image dans l'ombre | N&B très sombre (`brightness(.6)`), vignettage renforcé |
+| Type de scène | Sujet | Ce qu'il faut dans l'image |
+|---|---|---|
+| Rue, ville | Une rue la nuit, des réverbères dans la brume, une voiture | Une source de lumière diffuse, beaucoup de noir autour |
+| Hauteur, vide | Falaise, promontoire, arbre isolé au-dessus du brouillard | Une grande zone claire et vide (le brouillard) |
+| Foule | Silhouettes alignées, de dos ou à contre-jour | Des formes noires nettes sur un ciel gris |
+| Forêt, labyrinthe | Troncs dans le brouillard | De la profondeur : plans de plus en plus pâles |
+| Descente | Escalier, tunnel, couloir vers une lumière | Un point de fuite central |
+| Menace | Mer d'orage, machine, ciel chargé | Du mouvement figé |
+| Fin | Une silhouette seule dans une ouverture lumineuse | Un seul sujet, au centre |
 
-**Règle de cohérence** : **noir et blanc strict, noirs bouchés, blancs francs**, grain visible, jamais une couleur, même résiduelle (une photo couleur passe toujours par `grayscale(1)`). Les images doivent avoir l'air de la même pellicule : même contraste, même grain.
+**Contraintes communes**
+- **Paysage**, 16:10, 1800px de large ; le centre de l'image doit rester lisible sous un texte blanc assombri.
+- **Bords sombres** : un vignettage est ajouté, mais l'image doit déjà s'éteindre vers les bords.
+- **Brume, contre-jour, silhouettes** : peu de détails, de grandes masses. Pas de visages reconnaissables.
+- Toutes les images dans la **même gamme de gris** (ni sépia, ni bleuté).
 
 ## 2. Où les trouver
 
-1. **Les images du projet** (photos de tournage, illustrations peintes de l'artiste, pochettes) : en priorité. Si un illustrateur est disponible, lui commander des scènes peintes au lavis ou au fusain : c'est le registre d'origine.
-2. **Banques gratuites** : [Unsplash](https://unsplash.com) et [Pexels](https://www.pexels.com) (licences gratuites, usage commercial permis ; créditer le photographe est apprécié) ; archives du domaine public (Library of Congress, Wikimedia Commons, Rawpixel domaine public) pour les gravures. Mots-clés :
-   - FR : « foule noir et blanc », « manifestation N&B », « portrait clair-obscur », « visage noir et blanc gros plan », « rue la nuit brouillard », « silhouette dans le noir ».
-   - EN : « black and white crowd », « protest fists black and white », « low key portrait », « monochrome face close up », « foggy street night », « figure in darkness », « film noir ».
-3. **Génération IA** — prompts de départ (ajouter `--ar 16:9`) :
-   - foule :
-     > black and white painted illustration of a dense crowd raising their fists under a white misty sky, charcoal and ink wash, heavy film grain, strong contrast, crushed blacks, solemn atmosphere, calm empty area in the center of the frame, no text, no signs, no logo
-   - visage :
-     > monochrome close-up portrait of a woman emerging from deep shadow, single hard side light, high contrast black and white, film grain, painterly, cinematic still from a silent film, no text, no logo
-   - lieu :
-     > black and white ink painting of an empty city street at night in heavy fog, parked cars, a single streetlight, dramatic vignette, grain, no text, no logo
-4. **À éviter** : couleur (même un sépia léger), photos de stock lisses ou souriantes, HDR, slogans lisibles sur les pancartes (ils écrasent le titre), images de la référence, scènes reconnaissables de personnes réelles identifiables sans leur accord dans un contexte militant.
+1. **Les illustrations du projet** : idéalement des peintures livrées en plans séparés (PNG transparents : premier plan, sujet, fond) pour retrouver la profondeur du site.
+2. **Banques libres** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Recherches utiles : `foggy street night black and white`, `fog cliff black and white`, `crowd silhouette black and white`, `dark forest fog black and white`, `staircase dark black and white`, `stormy sea black and white`, `tunnel light silhouette`.
+3. **Génération** — prompts de départ :
+   > Black and white digital painting, night street in a foggy city, an old sedan stopped under a streetlight, a cyclist passing, large dark road sign in the foreground out of focus, soft volumetric light, visible brush texture, film grain, cinematic wide shot, no text, 16:10
 
-## 3. Traitements (code)
+   > Black and white digital painting, lone twisted pine on a cliff above a sea of fog, tiny figure at the edge, huge empty pale sky, soft painterly shapes, grain, 16:10
+4. **À éviter** : photos en couleur simplement désaturées en CSS, images nettes et détaillées de type reportage, portraits de face, illustrations au trait.
 
-```html
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
-</svg>
+## 3. Traitements
+
+```js
+// Noir et blanc fait par le serveur d'images
+const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1800&h=1125&q=70&sat=-100`;
 ```
 
 ```css
-/* Scène : repli = gris foncé, le titre blanc reste lisible */
-.scene { position: absolute; inset: 0; overflow: hidden; background: var(--mid); }
-.scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(1) contrast(1.4) brightness(.85);
-  transform: scale(1); transition: transform 20s linear; }          /* Ken Burns */
-.chapter.is-active .scene img { transform: scale(1.06); }
-.scene--dark img { filter: grayscale(1) contrast(1.5) brightness(.6); }
-
-/* Vignettage + grain par-dessus */
-.scene::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade); }
-.scene::after { content: ""; position: absolute; inset: 0; z-index: 2; filter: url(#grain); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
-
-/* Brume qui dérive (au-dessus de la scène, sous le titre) */
-.haze { position: absolute; inset: -20%; background: radial-gradient(40% 30% at 30% 60%, var(--haze), transparent 70%), radial-gradient(35% 25% at 70% 40%, var(--haze), transparent 70%); animation: drift var(--drift) linear infinite alternate; pointer-events: none; }
+/* Vignettage et assombrissement : des dégradés fixes, pas de filtre */
+.stage::after { background:
+  radial-gradient(ellipse 75% 70% at 50% 50%, var(--veil-0) 35%, var(--veil-1)),
+  linear-gradient(180deg, var(--veil-1), var(--veil-0) 22%, var(--veil-0) 72%, var(--veil-2)); }
+.dim { background: var(--veil-1); }          /* posé sous le texte en état « titre » */
+.grain { opacity: .13; }                     /* tuile de bruit de 200px, répétée */
 ```
 
-Si une image est claire au centre (ciel blanc), garder l'ombre large du titre (`text-shadow: 0 0 40px var(--bg)`) et renforcer `--shade` plutôt que d'assombrir toute l'image.
+- Avec des fichiers locaux : exporter les images **déjà en niveaux de gris**, contraste légèrement relevé, noirs à 5 % plutôt qu'à 0.
+- Illustrations en plans : empiler les PNG dans la scène et donner à chacun un décalage à la souris différent (4, 10, 20px) ; flouter le premier plan **dans le fichier**, pas en CSS.
+- La première image en `fetchpriority="high"`, les suivantes en `loading="lazy"`.
 
-## 4. Intégration
+## 4. 3D (optionnel)
 
-- `<img>` avec `width`/`height`, `alt` qui décrit la scène (c'est le seul « texte » du chapitre pour un lecteur d'écran : « Une foule, poings levés, sous un ciel blanc »). L'image du chapitre 1 a `fetchpriority="high"` ; les suivantes `loading="lazy"`, et on précharge la suivante pendant la lecture (`new Image().src = …`) pour que le fondu ne tombe pas sur du vide.
-- `object-position` par image pour garder le sujet au centre en portrait (mobile) : visage `50% 30%`, foule `50% 40%`.
-- Formats : AVIF/WebP via `<picture>` ou un CDN d'images ; ≤ 300 Ko par chapitre ; une version N&B pré-traitée évite le coût du filtre sur mobile.
-- Couleur de repli = `background: var(--mid)` sur chaque scène : titre et numéro blancs restent lisibles.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder` en blurhash, `transition={600}` pour le fondu) ; pas de `filter` en natif : exporter les images déjà en N&B contrasté ; vignettage = `expo-linear-gradient` radial simulé ou PNG ; grain = PNG de bruit à 14 %.
+Le site d'origine utilise WebGL pour animer ses peintures (plans en profondeur, particules, personnages en boucle). À n'envisager que si le projet fournit des **illustrations découpées en plans** : Three.js, un plan texturé par calque, caméra qui glisse de quelques unités avec la souris, particules en `Points` ; 30 images/s au plus, résolution adaptée, rendu arrêté quand le panneau « à propos » est ouvert. Toujours garder le repli en images fixes décrit ici.
 
-## 5. 3D
+## 5. Photos de la démo (Unsplash, licence libre)
 
-**Optionnelle.** Usage sobre qui marche : une **parallaxe 2,5D** de la photo du chapitre, qui donne l'impression d'un plan de cinéma, plutôt qu'un objet 3D.
-
-- **Quoi** : la photo du chapitre plaquée sur un plan subdivisé (`PlaneGeometry(16, 9, 256, 144)`), déformé par sa **carte de profondeur** (générée avec Depth Anything V2 ou MiDaS, ou peinte à la main) ; la caméra glisse de quelques centimètres (travelling très lent, ±2°) et réagit à peine au pointeur.
-- **Matières et lumière** : `MeshBasicMaterial` avec la photo en `map` (déjà N&B) et `displacementMap` = carte de profondeur (`displacementScale` 0,3–0,6) ; pas de lumière. Ajouter des **particules de poussière/cendre** (`Points`, 400 points, `PointsMaterial` blanc couleur lue dans `--text`, taille 0,02, opacité 0,4) qui dérivent lentement.
-- **Caméra** : perspective 30°, immobile sauf le travelling ; aucune orbite.
-- **Modèles** : pas de modèle nécessaire. Pour une scène peinte en vrai volume, modèles libres sur [Poly Pizza](https://poly.pizza) (CC0/CC-BY) ou [Sketchfab](https://sketchfab.com/search?features=downloadable&licenses=7c23a1ba438d4306920229c12afcb5f9) (filtre CC), rendus en N&B avec brouillard (`FogExp2` couleur `--bg`). Vérifier la licence et créditer si CC-BY.
-- **Web** : Three.js ou React Three Fiber + drei (`useTexture`, `Points`/`Sparkles` en blanc).
-- **React Native** : `expo-gl` + `@react-three/fiber/native`, ou rester en image fixe avec Ken Burns (`Animated` scale 1 → 1.06).
-- **Repli** : l'image N&B reste sous le canvas ; elle s'affiche si WebGL est absent ou si `prefers-reduced-motion` est actif (pas de travelling ni de particules).
+`photo-1607963090318-248f0f9065db` (rue dans la brume), `1568172253813-045eb1b4cd14` (falaise), `1607210173206-5de6655b67c8` (silhouettes), `1673083636285-9bed2bf9a884` (forêt), `1743469347507-69f5cc7adb8f` (escalier), `1514695307237-bfad60f67684` (mer d'orage), `1490668219599-a79d4d90cf66` (tunnel). À remplacer par les images du projet.

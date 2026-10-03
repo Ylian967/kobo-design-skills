@@ -1,94 +1,285 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Neuf Cercles — Noir Inferno Chapters (démo)</title>
+<title>La Descente — récit en sept scènes</title>
+<meta name="description" content="Démo du style Noir Inferno Chapters : un récit fictif en noir et blanc, scène par scène.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400&family=Playfair+Display:wght@400&family=Josefin+Sans:wght@400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #000000; --text: #ffffff; --muted: #9c9c9c; --mid: #2a2a2a; --haze: rgb(255 255 255 / 0.08);
-  --shade: radial-gradient(70% 60% at 50% 45%, transparent 40%, rgb(0 0 0 / .65));
-  --font-title: 'Playfair Display SC', 'Bodoni Moda', Georgia, serif; --font-ui: 'Josefin Sans', system-ui, sans-serif; --font-number: 'Playfair Display', Georgia, serif;
-  --text-2xs: 0.625rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-title: clamp(1.75rem, 3.6vw, 3rem); --text-number: clamp(2rem, 3vw, 2.75rem); --tracking-ui: 0.28em;
-  --edge: 40px; --space-2: 8px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
-  --ease: cubic-bezier(0.7, 0, 0.3, 1); --dur: 1200ms; --dur-title: 1800ms; --drift: 40s;
-  color-scheme: dark;
+  --bg: #0d0d0d; --text: #ffffff; --soft: #9c9c9c; --half: rgb(255 255 255 / 0.5); --faint: rgb(255 255 255 / 0.22); --shade: #1a1a1a; --veil-0: rgb(13 13 13 / 0);
+  --veil-1: rgb(13 13 13 / 0.6); --veil-2: rgb(13 13 13 / 0.9); --paper: #dedede; --ink: #000000; --ink-soft: #5a5a5a; --signal: #d0202a;
+  --font-title: 'Instrument Serif', 'Times New Roman', serif; --font-ui: 'Inter', system-ui, sans-serif; --fs-title: clamp(2rem, 5vmin, 3.25rem); --fs-quote: 1.25rem;
+  --ls-quote: 0.03em; --fs-number: 2.5rem; --fs-text: 0.8125rem; --fs-ui: 0.625rem; --ls-ui: 0.14em; --lh-ui: 1.8; --fs-panel: 0.75rem; --fs-final: 1.9125rem;
+  --edge: clamp(18px, 3.2vw, 46px); --circle: 52px; --circle-small: 26px; --target: 65px; --pull: 160px; --hair: 0.8px; --close: 20px; --close-top: 60px; --col-text: 500px;
+  --col-scene: 30rem; --ease-line: cubic-bezier(0.95, 0.05, 0.795, 0.035); --ease: cubic-bezier(0.7, 0, 0.3, 1); --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-line: 600ms; --dur-fade: 700ms; --dur-scene: 1400ms; --dur-dust: 900ms;
 }
-* { box-sizing: border-box; }
-html, body { height: 100%; overflow: hidden; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-sm)/1.5 var(--font-ui); }
-button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
-:focus-visible { outline: 1px solid var(--text); outline-offset: 4px; }
-.ui { font: 400 var(--text-2xs)/1 var(--font-ui); letter-spacing: var(--tracking-ui); text-transform: uppercase; }
-.chapter { position: fixed; inset: 0; opacity: 0; visibility: hidden; transition: opacity calc(var(--dur) / 2) var(--ease), visibility 0s calc(var(--dur) / 2); }
-.chapter.is-active { opacity: 1; visibility: visible; transition-delay: calc(var(--dur) / 2), 0s; }
-/* Scènes : vraies photos en N&B très contrasté (voir references/assets.md) */
-.scene { position: absolute; inset: 0; overflow: hidden; background: var(--mid); }
-.scene img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.4) brightness(.85); transform: scale(1); transition: transform 20s linear; }
-.chapter.is-active .scene img { transform: scale(1.06); }
-.scene--dark img { filter: grayscale(1) contrast(1.5) brightness(.6); }
-.scene::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--shade); }
-.scene::after { content: ""; position: absolute; inset: 0; z-index: 2; filter: url(#grain); opacity: .14; mix-blend-mode: overlay; pointer-events: none; }
-.haze { position: absolute; inset: -20%; background: radial-gradient(40% 30% at 30% 60%, var(--haze), transparent 70%), radial-gradient(35% 25% at 70% 40%, var(--haze), transparent 70%); animation: drift var(--drift) linear infinite alternate; pointer-events: none; }
-.ch-title { position: absolute; left: 50%; top: 50%; translate: -50% -50%; margin: 0; width: min(90vw, 900px); font: 400 var(--text-title)/1 var(--font-title); text-align: center; text-shadow: 0 0 40px var(--bg); opacity: 0; filter: blur(8px); transition: opacity var(--dur-title) var(--ease), filter var(--dur-title) var(--ease); }
-.chapter.is-active .ch-title { opacity: 1; filter: none; transition-delay: var(--dur); }
-.corner { position: fixed; z-index: 10; }
-.tl { left: var(--edge); top: var(--edge); font: 400 1rem/1 var(--font-title); letter-spacing: 0; text-transform: none; }
-.tc { left: 50%; top: var(--edge); translate: -50% 0; }
-.tr { right: var(--edge); top: var(--edge); display: flex; gap: var(--space-4); align-items: center; }
-.bl { left: var(--edge); bottom: var(--edge); display: flex; gap: var(--space-4); }
-.br { right: var(--edge); bottom: var(--edge); }
-.number { position: fixed; left: 50%; bottom: calc(var(--edge) - 8px); translate: -50% 0; z-index: 10; text-align: center; font: 400 var(--text-number)/1 var(--font-number); }
-.number::before { content: ""; display: block; width: 3px; height: 3px; margin: 0 auto 10px; border-radius: 50%; background: var(--text); }
-.number span { display: inline-block; transition: opacity 600ms var(--ease); }
-.toc { position: fixed; inset: 0; z-index: 30; background: var(--bg); display: grid; place-items: center; opacity: 0; visibility: hidden; transition: opacity 600ms var(--ease), visibility 600ms; }
-.toc.is-open { opacity: 1; visibility: visible; }
-.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); counter-reset: c; }
-.toc li { counter-increment: c; }
-.toc button { font: 400 1.5rem/1 var(--font-title); color: var(--muted); }
-.toc button::before { content: counter(c) "  "; font: 400 1rem var(--font-number); }
-.toc button[aria-current] { color: var(--text); }
-.toc .close { position: absolute; right: var(--edge); top: var(--edge); }
-.toc .credit { position: absolute; left: 0; right: 0; bottom: var(--edge); text-align: center; color: var(--muted); }
-@keyframes drift { to { transform: translate(6%, -3%); } }
-@media (max-width: 700px) { :root { --edge: 20px; } .tc, .bl, .br { display: none; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; } }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 400 var(--fs-text)/1.6 var(--font-ui); -webkit-font-smoothing: antialiased; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, p, ul, ol { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 1px solid var(--text); outline-offset: 6px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.caps { font: 400 var(--fs-ui)/var(--lh-ui) var(--font-ui); letter-spacing: var(--ls-ui); text-transform: uppercase; }
+.serif { font-family: var(--font-title); font-weight: 400; text-transform: uppercase; }
+
+/* ---------- Scènes : des images plein écran qui se fondent par le noir ---------- */
+.stage { position: fixed; inset: 0; overflow: hidden; }
+/* fondu seul : ajouter un zoom sur deux images plein écran faisait tomber le passage à 48 images/s */
+.scene { position: absolute; inset: -14px; opacity: 0; visibility: hidden; transition: opacity var(--dur-scene) var(--ease), visibility 0s var(--dur-scene); }
+.scene.on { opacity: 1; visibility: visible; transition-delay: 0s; }
+.scene img { translate: var(--px, 0) var(--py, 0); transition: translate 900ms var(--ease-out); }
+.stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 75% 70% at 50% 50%, var(--veil-0) 35%, var(--veil-1)), linear-gradient(180deg, var(--veil-1), var(--veil-0) 22%, var(--veil-0) 72%, var(--veil-2)); }
+.dim { position: absolute; inset: 0; background: var(--veil-1); opacity: 0; transition: opacity var(--dur-fade) linear; pointer-events: none; }
+[data-mode="title"] .dim, [data-mode="intro"] .dim { opacity: 1; }
+.grain { position: fixed; inset: 0; opacity: 0.13; pointer-events: none; }
+/* poussière : quelques points qui dérivent, chacun sur son propre calque minuscule */
+.dust i { position: fixed; left: var(--x); top: var(--y); width: 2px; height: 2px; border-radius: 50%; background: var(--text); opacity: 0; animation: dust var(--t) linear var(--d) infinite; pointer-events: none; }
+@keyframes dust { 0% { opacity: 0; transform: translate(0, 0); } 15% { opacity: 0.5; } 85% { opacity: 0.35; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)); } }
+
+/* ---------- Coins (mode « vue ») ---------- */
+.hud { position: fixed; z-index: 5; opacity: 0; visibility: hidden; transition: opacity var(--dur-fade) linear, visibility 0s var(--dur-fade); }
+[data-mode="view"] .hud { opacity: 1; visibility: visible; transition-delay: 0s; }
+.brand { top: var(--edge); left: var(--edge); font: 400 1.75rem/1 var(--font-title); letter-spacing: 0.02em; text-transform: uppercase; }
+.more { top: var(--edge); left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 10px 0; }
+.lang { top: var(--edge); right: var(--edge); display: flex; gap: 14px; padding: 10px 0; }
+.lang span { opacity: 0.5; }
+.social { left: var(--edge); bottom: var(--edge); display: flex; gap: 4px; }
+.about-btn { right: var(--edge); bottom: var(--edge); }
+.hud a, .hud button { position: relative; display: inline-block; padding: 14px 4px; }
+.hud a::after, .hud button::after { content: ""; position: absolute; left: 4px; right: 4px; bottom: 10px; height: 1px; background: var(--text); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-line) var(--ease-line); }
+.hud a:hover::after, .hud button:hover::after { transform: none; }
+.brand.hud { padding: 0; }
+
+/* ---------- Texte de scène ---------- */
+.copy { position: fixed; inset: 0; z-index: 4; display: grid; align-content: center; justify-items: center; gap: 18px; padding: 0 var(--edge) 6vh; text-align: center; pointer-events: none; }
+.copy h1 { position: relative; font: 400 var(--fs-title)/1.05 var(--font-title); text-transform: uppercase; letter-spacing: 0.01em; }
+.copy p { max-width: var(--col-scene); }
+.copy h1, .copy p { opacity: 0; transition: opacity var(--dur-fade) linear, transform var(--dur-fade) var(--ease-out); transform: translateY(10px); }
+[data-mode="title"] .copy.ready h1, [data-mode="title"] .copy.ready p { opacity: 1; transform: none; }
+[data-mode="title"] .copy.ready p { transition-delay: 250ms; }
+.copy canvas { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.intro-quote { position: fixed; z-index: 4; left: 50%; top: 17vh; width: min(300px, 80vw); transform: translateX(-50%); text-align: center; font: 400 var(--fs-quote)/1.12 var(--font-title); letter-spacing: var(--ls-quote); text-transform: uppercase; opacity: 0; transition: opacity var(--dur-scene) linear; pointer-events: none; }
+[data-mode="intro"].loaded .intro-quote { opacity: 1; }
+.tip { position: fixed; z-index: 4; left: 50%; bottom: 17vh; width: min(260px, 80vw); transform: translateX(-50%); text-align: center; opacity: 0; transition: opacity var(--dur-fade) linear; pointer-events: none; }
+[data-mode="intro"].loaded .tip { opacity: 1; }
+.close { position: fixed; z-index: 6; top: calc(var(--close-top) - 22px); left: 50%; width: 44px; height: 44px; margin-left: -22px; opacity: 0; visibility: hidden; transition: opacity var(--dur-fade) linear, transform var(--dur-line) var(--ease), visibility 0s var(--dur-fade); }
+.close::before, .close::after { content: ""; position: absolute; left: 12px; top: 22px; width: var(--close); height: 1px; background: var(--text); transform: rotate(45deg); }
+.close::after { transform: rotate(-45deg); }
+.close:hover { transform: rotate(90deg); }
+[data-mode="title"] .close { opacity: 1; visibility: visible; transition-delay: 0s, 0s, 0s; }
+
+/* ---------- Le cercle à tirer ---------- */
+.pull { position: fixed; z-index: 6; left: 50%; top: 40vh; width: var(--target); height: calc(var(--pull) + var(--target)); margin-left: calc(var(--target) / -2); transition: top var(--dur-scene) var(--ease), opacity var(--dur-fade) linear; }
+[data-mode="title"] .pull, [data-mode="view"] .pull { top: calc(100vh - var(--pull) - var(--target) - 78px); }
+.pull::before { content: ""; position: absolute; left: 50%; top: 30px; bottom: var(--target); width: 0; border-left: 1px dotted var(--faint); }
+.pull::after { content: ""; position: absolute; left: 0; bottom: 0; width: var(--target); height: var(--target); border-radius: 50%; border: var(--hair) dashed var(--faint); transition: transform var(--dur-fade) var(--ease-out), border-color var(--dur-fade) linear; }
+.pull.near::after { border-color: var(--text); transform: scale(1.12); }
+.handle { position: absolute; left: 50%; top: 4px; width: var(--circle); height: var(--circle); margin-left: calc(var(--circle) / -2); border-radius: 50%; border: var(--hair) solid var(--text); cursor: grab; touch-action: none; transform: translateY(var(--pull-y, 0px)) scale(var(--s, 1)); transition: transform 600ms var(--ease-out), background-color var(--dur-fade) linear, border-color var(--dur-fade) linear; }
+.handle::after { content: ""; position: absolute; left: 50%; top: 50%; width: 3px; height: 3px; margin: -1.5px; border-radius: 50%; background: currentColor; }
+/* zone de saisie élargie : elle reste d'au moins 44px quand le cercle est réduit de moitié */
+.handle::before { content: ""; position: absolute; inset: -20px; border-radius: 50%; }
+.handle.drag { cursor: grabbing; transition: none; --s: 0.9; }
+.handle:hover { --s: 1.08; }
+[data-mode="title"] .handle, [data-mode="view"] .handle { --s: 0.5; }
+[data-mode="title"] .handle:hover, [data-mode="view"] .handle:hover { --s: 0.62; }
+.last .handle { border-color: var(--signal); color: var(--signal); }
+.busy .pull { opacity: 0; pointer-events: none; }
+
+/* ---------- Numéros ---------- */
+.nums { position: fixed; z-index: 5; left: 50%; bottom: calc(var(--edge) - 14px); display: flex; align-items: baseline; gap: 6px; transform: translateX(-50%); transition: opacity var(--dur-fade) linear; }
+[data-mode="intro"] .nums { opacity: 0; pointer-events: none; }
+.nums button { min-width: 34px; height: 54px; font: 400 1.125rem/54px var(--font-title); opacity: 0; pointer-events: none; transition: opacity var(--dur-fade) linear, font-size var(--dur-fade) var(--ease-out); }
+[data-mode="view"] .nums button { opacity: 0.5; pointer-events: auto; }
+[data-mode="view"] .nums button:hover { opacity: 1; }
+.nums button[aria-current="true"] { font-size: var(--fs-number); opacity: 1 !important; }
+body:not([data-mode="view"]) .nums button:not([aria-current="true"]) { display: none; }
+.open { position: fixed; z-index: 5; left: 50%; bottom: 10vh; transform: translateX(-50%); padding: 15px 26px; border: 1px solid var(--text); letter-spacing: 0.1em; opacity: 0; visibility: hidden; transition: opacity var(--dur-fade) linear, background-color var(--dur-fade) linear, color var(--dur-fade) linear, visibility 0s var(--dur-fade); }
+.open:hover { background: var(--text); color: var(--bg); }
+
+/* ---------- Panneau « à propos » ---------- */
+.about { position: fixed; inset: 0; z-index: 20; display: grid; align-content: center; justify-items: center; gap: 20px; padding: var(--edge); background: var(--paper); color: var(--ink); transform: translateY(-100%); visibility: hidden; transition: transform var(--dur-scene) var(--ease), visibility 0s var(--dur-scene); }
+.about.open-panel { transform: none; visibility: visible; transition-delay: 0s; }
+.about h2 { font: 400 clamp(2.5rem, 7vw, 4.5rem)/0.95 var(--font-title); text-transform: uppercase; text-align: center; }
+.about .text { width: min(var(--col-text), 80%); display: grid; gap: 12px; font: 400 var(--fs-panel)/1.667 var(--font-ui); letter-spacing: 0.02em; }
+.about .credits { position: absolute; bottom: 20px; left: 10%; right: 10%; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; color: var(--ink-soft); font-size: var(--fs-ui); letter-spacing: 0.02em; text-transform: uppercase; }
+.about .x { position: absolute; top: calc(var(--close-top) - 22px); left: 50%; width: 44px; height: 44px; margin-left: -22px; }
+.about .x::before, .about .x::after { content: ""; position: absolute; left: 12px; top: 22px; width: var(--close); height: 1px; background: var(--ink); transform: rotate(45deg); }
+.about .x::after { transform: rotate(-45deg); }
+.about :focus-visible { outline-color: var(--ink); }
+
+@media (max-width: 700px) {
+  .more { display: none; }
+  .nums { gap: 0; }
+  .nums button { min-width: 28px; }
+  .social { display: none; }
+  .copy { padding-bottom: 16vh; }
+  .pull { --pull: 110px; }
+  .about-btn { bottom: auto; top: calc(var(--edge) + 30px); }
+  .open { bottom: 15vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .scene img { translate: none; }
+  .dust { display: none; }
+}
 </style>
 </head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></svg>
-<div class="corner tl">Neuf Cercles</div>
-<button class="corner tc ui" id="openToc">Sommaire du projet.</button>
-<div class="corner tr ui"><span>FR · EN</span><button aria-label="Son coupé" aria-pressed="false">▮▯▮</button></div>
-<div class="corner bl ui"><a href="#" style="color:inherit">X</a><a href="#" style="color:inherit">IG</a><span>Photos : Unsplash</span></div>
-<a class="corner br ui" href="#" style="color:inherit;text-decoration:none">À propos du groupe</a>
+<body data-mode="intro">
 
-<main>
-  <section class="chapter is-active" aria-label="Chapitre 1"><div class="scene" data-slot="chapter-1"><img src="https://images.unsplash.com/photo-1591848478625-de43268e6fb8?auto=format&fit=crop&w=2000&q=80" alt="Une manifestation en noir et blanc, des poings levés au-dessus de la foule" width="2000" height="1333" fetchpriority="high" style="object-position:50% 40%"></div><div class="haze"></div></section>
-  <section class="chapter" aria-label="Chapitre 2"><div class="scene" data-slot="chapter-2"><img src="https://images.unsplash.com/photo-1591817414324-78965f740086?auto=format&fit=crop&w=2000&q=80" alt="Une foule en noir et blanc, un poing levé au premier plan" width="2000" height="1333" loading="lazy" style="object-position:50% 40%"></div><div class="haze"></div><h2 class="ch-title">Les voix levées.</h2></section>
-  <section class="chapter" aria-label="Chapitre 3"><div class="scene" data-slot="chapter-3"><img src="https://images.unsplash.com/photo-1540172777610-b15b605dd68d?auto=format&fit=crop&w=2000&q=80" alt="Le visage d'une femme en gros plan, en noir et blanc, dans un clair-obscur" width="2000" height="1333" loading="lazy" style="object-position:50% 30%"></div><div class="haze"></div><h2 class="ch-title">Les visages prêtés.</h2></section>
-  <section class="chapter" aria-label="Chapitre 4"><div class="scene scene--dark" data-slot="chapter-last"><img src="https://images.unsplash.com/photo-1638638977172-9f7169a77930?auto=format&fit=crop&w=2000&q=80" alt="Une femme presque engloutie par l'obscurité, en noir et blanc" width="2000" height="1333" loading="lazy" style="object-position:50% 30%"></div><div class="haze"></div><h2 class="ch-title">Le silence, enfin.</h2></section>
+<div class="stage" id="stage"><div class="dim"></div></div>
+<div class="grain" id="grain" aria-hidden="true"></div>
+<div class="dust" id="dust" aria-hidden="true"></div>
+
+<a class="hud brand" href="#" id="brand" aria-label="La Descente, revenir au début">Veille</a>
+<button class="hud more caps" data-about>En savoir plus sur <b style="font-weight:500">La Descente.</b></button>
+<p class="hud lang caps" aria-label="Langue"><b style="font-weight:400" aria-current="true">FR</b><span>EN</span></p>
+<ul class="hud social caps"><li><a href="#">Tw</a></li><li><a href="#">Fb</a></li></ul>
+<button class="hud about-btn caps" data-about>À propos</button>
+
+<p class="intro-quote">Seul celui qui ose descendre au plus profond en revient plus riche.</p>
+<p class="tip caps" id="tip">Cliquez et tirez le cercle pour avancer dans le récit</p>
+
+<main class="copy" id="copy" aria-live="polite">
+  <h1 id="title"></h1>
+  <p id="text"></p>
 </main>
-<div class="number" aria-live="polite"><span id="num">1</span></div>
+<button class="close" id="close" aria-label="Masquer le texte et regarder la scène"></button>
 
-<nav class="toc" id="toc" aria-label="Sommaire"><button class="close ui" id="closeToc">Fermer</button><ol><li><button data-go="0" aria-current="true">La foule.</button></li><li><button data-go="1">Les voix levées.</button></li><li><button data-go="2">Les visages prêtés.</button></li><li><button data-go="3">Le silence, enfin.</button></li></ol><p class="credit ui">Photos : Unsplash</p></nav>
+<div class="pull" id="pull">
+  <button class="handle" id="handle" aria-label="Scène suivante : tirer le cercle vers le bas, ou appuyer sur Entrée"></button>
+</div>
+<button class="open caps" id="open">Lire la scène</button>
+<nav class="nums" id="nums" aria-label="Scènes"></nav>
+
+<aside class="about" id="about" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" inert>
+  <button class="x" id="aboutClose" aria-label="Fermer"></button>
+  <h2 id="aboutTitle">La Descente</h2>
+  <div class="text">
+    <p>« La Descente » est un récit fictif en sept scènes, écrit pour montrer le style Noir Inferno Chapters. Un veilleur de nuit quitte sa rue, traverse la brume et descend, scène après scène, vers ce qu'il ne voulait pas voir.</p>
+    <p>On avance en tirant le cercle vers le bas, à la molette ou avec les flèches. La croix masque le texte pour regarder l'image ; les numéros mènent à chaque scène.</p>
+  </div>
+  <p class="credits"><span>Récit et page : démonstration</span><span>Photographies : Unsplash</span><span>Sans son</span></p>
+</aside>
+
 <script>
 (() => {
-  const chs = [...document.querySelectorAll('.chapter')], num = document.getElementById('num'); let i = 0, lock = false;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const go = n => { if (lock || n === i || n < 0 || n >= chs.length) return; lock = true; chs[i].classList.remove('is-active'); i = n; chs[i].classList.add('is-active');
-    num.style.opacity = 0; setTimeout(() => { num.textContent = i + 1; num.style.opacity = 1; }, reduce ? 0 : 600);
-    document.querySelectorAll('[data-go]').forEach(b => b.toggleAttribute('aria-current', +b.dataset.go === i)); setTimeout(() => lock = false, reduce ? 0 : 1200); };
-  addEventListener('wheel', e => go(i + (e.deltaY > 0 ? 1 : -1)), { passive: true });
-  addEventListener('keydown', e => { if (['ArrowDown', 'PageDown', ' '].includes(e.key)) go(i + 1); if (['ArrowUp', 'PageUp'].includes(e.key)) go(i - 1); if (e.key.toLowerCase() === 's') toc.classList.add('is-open'); if (e.key === 'Escape') toc.classList.remove('is-open'); });
-  let y0 = null; addEventListener('touchstart', e => y0 = e.touches[0].clientY, { passive: true }); addEventListener('touchend', e => { if (y0 === null) return; const d = y0 - e.changedTouches[0].clientY; if (Math.abs(d) > 40) go(i + (d > 0 ? 1 : -1)); y0 = null; });
-  const toc = document.getElementById('toc');
-  document.getElementById('openToc').addEventListener('click', () => toc.classList.add('is-open'));
-  document.getElementById('closeToc').addEventListener('click', () => toc.classList.remove('is-open'));
-  document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { toc.classList.remove('is-open'); go(+b.dataset.go); }));
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+  const body = document.body, reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css = getComputedStyle(document.documentElement), num = n => parseFloat(css.getPropertyValue(n));
+  const SCENE = num('--dur-scene'), DUST = num('--dur-dust'), PULL = () => parseFloat(getComputedStyle(pull).getPropertyValue('--pull'));
+  const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1800&h=1125&q=70&sat=-100`;
+
+  const scenes = [
+    { t: 'La Descente.', p: 'Seul celui qui ose aller tout en bas en revient plus riche.', id: '1607963090318-248f0f9065db', alt: 'Rue déserte dans la brume, éclairée par des réverbères' },
+    { t: 'Le bord du monde.', p: 'Au matin, la ville avait disparu. Il ne restait qu\'une falaise, et sous elle un blanc sans fond où les oiseaux refusaient d\'aller.', id: '1568172253813-045eb1b4cd14', alt: 'Falaise et sapins émergeant d\'une mer de brouillard' },
+    { t: 'Ceux qui regardent.', p: 'Ils étaient déjà là, alignés face au vide. Personne ne parlait. Chacun attendait qu\'un autre fasse le premier pas.', id: '1607210173206-5de6655b67c8', alt: 'Silhouettes de personnes alignées devant un ciel nuageux' },
+    { t: 'La forêt sans chemin.', p: 'En bas, les arbres poussaient serrés comme des barreaux. On y marche longtemps avant de comprendre qu\'on tourne.', id: '1673083636285-9bed2bf9a884', alt: 'Forêt nue noyée dans le brouillard' },
+    { t: 'Cent marches.', p: 'L\'escalier descendait sous la terre. Il compta les marches à voix haute, puis s\'aperçut qu\'il avait cessé de compter.', id: '1743469347507-69f5cc7adb8f', alt: 'Escalier sombre montant vers une verrière lumineuse' },
+    { t: 'La mer d\'en dessous.', p: 'Il y avait une mer sous la ville, noire et patiente. Elle montait d\'une vague chaque fois qu\'on mentait.', id: '1514695307237-bfad60f67684', alt: 'Vague sombre sous un ciel d\'orage' },
+    { t: 'Remonter.', p: 'Au bout du tunnel, quelqu\'un l\'attendait à contre-jour. C\'était lui, plus léger. Tirez le cercle une dernière fois.', id: '1490668219599-a79d4d90cf66', alt: 'Silhouette debout à la sortie d\'un tunnel, à contre-jour' },
+  ];
+
+  // Scènes, grain, poussière, numéros
+  const stage = document.getElementById('stage');
+  const els = scenes.map((s, i) => { const d = document.createElement('div'); d.className = 'scene'; d.innerHTML = `<img alt="${s.alt}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'} src="${U(s.id)}">`; stage.prepend(d); return d; });
+  const tile = document.createElement('canvas'); tile.width = tile.height = 200; const g = tile.getContext('2d'), nd = g.createImageData(200, 200);
+  for (let i = 0; i < nd.data.length; i += 4) { nd.data[i] = nd.data[i + 1] = nd.data[i + 2] = Math.random() * 255; nd.data[i + 3] = 255; }
+  g.putImageData(nd, 0, 0); document.getElementById('grain').style.backgroundImage = `url(${tile.toDataURL()})`;
+  const r = (a, b) => a + Math.random() * (b - a);
+  document.getElementById('dust').innerHTML = Array.from({ length: 14 }, () => `<i style="--x:${r(4, 96).toFixed(1)}vw;--y:${r(8, 92).toFixed(1)}vh;--dx:${r(-90, 90).toFixed(0)}px;--dy:${r(-70, 30).toFixed(0)}px;--t:${r(9, 18).toFixed(1)}s;--d:${r(-18, 0).toFixed(1)}s"></i>`).join('');
+  const nums = document.getElementById('nums');
+  nums.innerHTML = scenes.map((s, i) => `<button class="serif" aria-label="Scène ${i + 1} : ${s.t}">${i + 1}</button>`).join('');
+  const numBtns = $('button', nums);
+
+  const copy = document.getElementById('copy'), title = document.getElementById('title'), text = document.getElementById('text');
+  const pull = document.getElementById('pull'), handle = document.getElementById('handle'), openBtn = document.getElementById('open');
+  let i = -1, busy = false;
+  const mode = m => { body.dataset.mode = m; openBtn.style.opacity = m === 'view' ? 1 : 0; openBtn.style.visibility = m === 'view' ? 'visible' : 'hidden'; };
+
+  // Changer de scène : fondu par le noir, puis le titre et le texte
+  function go(n) {
+    if (busy || n === i || n < 0 || n >= scenes.length) return;
+    busy = true; body.classList.add('busy'); copy.classList.remove('ready');
+    els.forEach((e, k) => e.classList.toggle('on', k === n));
+    numBtns.forEach((b, k) => b.setAttribute('aria-current', k === n));
+    body.classList.toggle('last', n === scenes.length - 1);
+    i = n;
+    setTimeout(() => {
+      title.textContent = scenes[i].t; text.textContent = scenes[i].p; mode('title');
+      requestAnimationFrame(() => copy.classList.add('ready'));
+      handle.setAttribute('aria-label', i === scenes.length - 1 ? 'Revenir au début : tirer le cercle vers le bas, ou appuyer sur Entrée' : 'Scène suivante : tirer le cercle vers le bas, ou appuyer sur Entrée');
+      busy = false; body.classList.remove('busy');
+    }, reduced ? 0 : SCENE * 0.75);
+  }
+  const next = () => go(i === scenes.length - 1 ? 0 : i + 1);
+
+  // Le titre se défait en poussière quand on masque le texte
+  function dissolve() {
+    if (reduced) return;
+    const box = title.getBoundingClientRect(), pad = 60, w = Math.ceil(box.width + pad * 2), h = Math.ceil(box.height + pad * 2);
+    const c = document.createElement('canvas'), ratio = Math.min(2, devicePixelRatio || 1);
+    c.width = w * ratio; c.height = h * ratio; c.style.width = w + 'px'; c.style.height = h + 'px';
+    const x = c.getContext('2d'); x.scale(ratio, ratio);
+    const st = getComputedStyle(title); x.font = `${st.fontWeight} ${st.fontSize} ${st.fontFamily}`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = st.color;
+    x.fillText(title.textContent.toUpperCase(), w / 2, h / 2);
+    const data = x.getImageData(0, 0, c.width, c.height).data, pts = [], stepPx = Math.max(2, Math.round(ratio * 2));
+    for (let py = 0; py < c.height; py += stepPx) for (let px = 0; px < c.width; px += stepPx) if (data[(py * c.width + px) * 4 + 3] > 120) pts.push({ x: px / ratio, y: py / ratio, vx: r(0.2, 1.6), vy: r(-0.9, 0.5), d: r(0, 0.35) });
+    title.append(c); const t0 = performance.now(), white = st.color;
+    const frame = t => {
+      const p = (t - t0) / DUST; x.clearRect(0, 0, w, h); x.fillStyle = white;
+      for (const q of pts) { const k = Math.max(0, p - q.d) / (1 - q.d); if (k >= 1) continue; x.globalAlpha = 1 - k; x.fillRect(q.x + q.vx * k * 70, q.y + q.vy * k * 50 + Math.sin(k * 6 + q.x) * 3, 1.4, 1.4); }
+      if (p < 1) requestAnimationFrame(frame); else c.remove();
+    };
+    requestAnimationFrame(frame);
+  }
+  document.getElementById('close').addEventListener('click', () => { dissolve(); title.firstChild && (title.style.color = 'transparent'); mode('view'); setTimeout(() => { title.style.color = ''; }, DUST); handle.focus({ preventScroll: true }); });
+  openBtn.addEventListener('click', () => { mode('title'); copy.classList.add('ready'); document.getElementById('close').focus(); });
+  numBtns.forEach((b, k) => b.addEventListener('click', () => go(k)));
+
+  // Tirer le cercle : on suit le doigt, on valide passé 80 % de la course
+  let startY = 0, dragging = false, y = 0;
+  const setY = v => { y = Math.min(PULL(), Math.max(0, v)); handle.style.setProperty('--pull-y', y + 'px'); pull.classList.toggle('near', y > PULL() * 0.8); };
+  handle.addEventListener('pointerdown', e => { if (busy) return; dragging = true; startY = e.clientY - y; handle.setPointerCapture(e.pointerId); handle.classList.add('drag'); });
+  handle.addEventListener('pointermove', e => { if (dragging) setY(e.clientY - startY); });
+  const release = () => { if (!dragging) return; dragging = false; handle.classList.remove('drag'); const done = y > PULL() * 0.8; setY(0); pull.classList.remove('near'); if (done) next(); };
+  handle.addEventListener('pointerup', release); handle.addEventListener('pointercancel', release);
+  handle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); next(); } });
+
+  // Molette et flèches
+  let wheelLock = 0;
+  addEventListener('wheel', e => { if (about.classList.contains('open-panel') || Date.now() < wheelLock || Math.abs(e.deltaY) < 20) return; wheelLock = Date.now() + SCENE + 400; e.deltaY > 0 ? next() : go(i - 1); }, { passive: true });
+  addEventListener('keydown', e => {
+    if (about.classList.contains('open-panel')) { if (e.key === 'Escape') toggleAbout(false); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') next();
+    else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') go(i - 1);
+  });
+
+  // Léger décalage de l'image avec la souris
+  let raf = 0, mx = 0, my = 0;
+  if (!reduced) addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; const el = els[Math.max(0, i)].firstChild; el.style.setProperty('--px', (-mx * 20).toFixed(1) + 'px'); el.style.setProperty('--py', (-my * 14).toFixed(1) + 'px'); }); });
+
+  // Panneau « à propos »
+  const about = document.getElementById('about'); let opener = null;
+  function toggleAbout(on, from) { about.classList.toggle('open-panel', on); about.inert = !on; if (on) { opener = from; document.getElementById('aboutClose').focus(); } else if (opener) opener.focus(); }
+  $('[data-about]').forEach(b => b.addEventListener('click', () => toggleAbout(true, b)));
+  document.getElementById('aboutClose').addEventListener('click', () => toggleAbout(false));
+  document.getElementById('brand').addEventListener('click', e => { e.preventDefault(); go(0); });
+
+  // Ouverture : la première image est prête derrière le voile
+  els[0].classList.add('on');
+  requestAnimationFrame(() => body.classList.add('loaded'));
 })();
 </script>
 </body>
