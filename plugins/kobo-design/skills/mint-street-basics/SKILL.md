@@ -1,103 +1,97 @@
 ---
 name: mint-street-basics
-description: Direction artistique « Mint Street Basics » pour e-commerce de mode et de vêtements de tous les jours (basiques, streetwear, sweat, t-shirt, marque textile éthique, drop de collection), inspirée d'un concept Dribbble de boutique de mode moderne. Héros bleu nuit avec titre géant en capitales condensées très grasses (type Anton), chiffres « 120+ » au « + » vert, mannequin devant un grand arc vert qui passe du vert franc au menthe, pilule blanche « Explorer », logotype à empattements ; bandeau défilant vert ; corps de page menthe pâle, cartes produit arrondies 16px blanches ou vert pâle, noms en capitales condensées, prix et pastilles de couleur ; fiche produit avec étoiles, puces de taille carrées arrondies (choisie en blanc), pilule verte « Ajouter au panier » et bouton favori carré ; pied de page bleu nuit avec collage de cercles et logotype géant sur carte menthe. À utiliser pour une boutique en ligne, une fiche produit, une page collection, un lancement de marque de vêtements ou une app shopping au style « frais, sportif, condensé, vert et bleu nuit ».
+description: Direction artistique « Mint Street Basics » pour la mode et le e-commerce (boutique de sweats, basiques, streetwear doux, sport, enfant, marque éthique, lancement de collection), mesurée sur une maquette Dribbble de boutique en ligne. Héros bleu nuit en dégradé avec titre géant en capitales condensées blanc vers gris, chiffres clés à « + » vert, grand disque vert et disque clair derrière une photo en arche, pilule blanche à anneau clair, bandeau défilant vert. Corps menthe pâle - titres condensés en dégradé bleu nuit vers ardoise, pile de cartes de collections avec encart blanc, grille de produits à carte double, pastilles de couleur, fiche produit sur carte aqua avec puces de taille et bouton vert, pied bleu nuit à disque aqua, titre géant derrière un mannequin et logotype serif géant. À utiliser pour une boutique en ligne, une page de collection ou une fiche produit au style « frais, pastel, rond, sportif, apaisant ».
 ---
 
 # Mint Street Basics
 
-> Une vitrine de basiques qui crie en capitales condensées sur bleu nuit, puis respire sur un fond menthe où tout ce qui se vend est vert.
+> Un vestiaire de sweats pastel présenté comme une affiche de sport : des lettres énormes, des ronds partout, du vert qui respire.
 
 ## L'idée
 
-Le visiteur doit sentir une marque **jeune, nette et rassurante** : des vêtements simples présentés avec l'énergie d'une affiche de sport. Le langage vient des boutiques de mode en ligne récentes : **ouverture bleu nuit** avec un titre géant en **capitales condensées**, un **mannequin détouré devant un arc vert**, puis un **corps menthe pâle** où les produits flottent sur des cartes arrondies. Le style vit dans les titres condensés, l'arc vert, le **bandeau défilant** et le **vert d'action** ; les cartes, les prix et les textes restent sobres et lisibles. Le logotype à empattements apporte une note « maison » qui adoucit le tout.
+La page s'ouvre et se ferme en **bleu nuit**, et vit entre les deux sur un **menthe très pâle**. Les titres sont des **capitales condensées immenses**, légèrement dégradées. Derrière les mannequins, des **formes rondes** — un grand disque vert, un disque clair, des arches, des pilules — remplacent tout décor. Le vert vif signale ce qui vend : le bandeau d'offre, le « + » des chiffres, le bouton d'achat. Les vêtements sont pastel, les fonds aussi : rien n'agresse, tout est net.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythme, traitements), jamais l'identité : pas de nom de marque, de logotype, de photo ni de texte du shot d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, logo, photos ni textes de la maquette d'origine.
 
 ## Règles prioritaires
 
-1. **Deux mondes, un vert** : bleu nuit `--navy` pour l'ouverture et la clôture, menthe `--mint` pour le corps ; le vert relie les deux (arc, « + », bandeau, bouton d'achat).
-2. **Les titres crient, le reste parle** : capitales condensées Anton pour le héros, les titres de section et les noms de produit ; tout le reste en DM Sans 400–700, petit et calme.
-3. Contraste : texte courant ≥ 4,5:1 ; le vert franc `--green` ne porte que du **grand** texte blanc (bandeau en 24px) ; les boutons d'achat utilisent `--green-strong` ; le vert en petit texte sur menthe est `--green-ink` (paires vérifiées dans `references/tokens.css`).
-4. **Formes** : pilules pour les actions, cartes à 16px, puces de taille et bouton favori en carré arrondi 8px, cercles pour le collage et l'arc. Pas d'angles vifs.
-5. **Le produit flotte** : vraie photo du vêtement, packshot détouré sur fond blanc ou vert pâle (légère ombre portée) ou photo cadrée en passe-partout dans la carte ; jamais de photo d'ambiance pleine carte.
-6. **Mouvement vif et élastique** : bandeau qui défile en continu, arc qui tourne en entrant, badge du panier qui rebondit, cartes qui montent de 4px au survol.
-7. Accessibilité : cibles ≥ 44px (pastilles de couleur comprises), focus visible (vert vif sur bleu nuit, vert foncé sur menthe), `prefers-reduced-motion` respecté, groupes de taille et de couleur au clavier (flèches).
-8. Aucune valeur en dur : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
+1. **Bleu nuit en ouverture et en clôture, menthe au milieu.** Pas d'autre fond de section.
+2. **Titres en capitales condensées**, interligne ≈ 1, en dégradé vertical (blanc → gris sur bleu nuit, bleu nuit → ardoise sur menthe).
+3. **Des ronds, pas des rectangles** : disques, arches, pilules, coins de 28px. Aucune ombre portée.
+4. **Le vert vend** : bandeau, « + », bouton d'achat, disques. Le texte posé sur le vert est **bleu nuit**.
+5. **Une photo par forme** : mannequin sur fond uni, dans une arche ou une carte arrondie ; jamais de photo à bords vifs.
+6. **Noms de produits en police d'affiche**, prix et texte en sans 16px.
+7. **Un encart blanc** peut chevaucher une photo ; c'est le seul blanc pur avec les boutons ronds.
+8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder une pilule, la navigation, une carte produit, des pastilles, des puces de taille, le bandeau, l'arc, un champ. |
-| `references/layouts.md` | Avant de construire une page : héros, collection, fiche produit, pied de page, mobile. |
-| `references/motion.md` | Avant d'ajouter une animation ou une transition. |
-| `references/assets.md` | Avant de placer une image ou une scène 3D : portés, packshots, fenêtre ronde du héros, passe-partout des cartes, sources, prompts IA, 3D optionnelle. |
-| `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
-| `source.md` | Pour connaître le shot de référence et ce qui a été estimé. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Barre, titre et scène du héros, chiffres, bandeau, pilules, pile de collections, carte produit, fiche produit, bloc essentiels, carte du pied. |
+| `references/layouts.md` | Héros, ordre des sections, grille de produits, autres pages, mobile. |
+| `references/motion.md` | Arrivée du héros, pile de cartes, bandeau, sélections, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : sujets, fonds, détourage, formes en CSS. |
+| `examples/demo.html` | Accueil complet animé (boutique fictive « Verveine »). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Poids | Taille | Interligne | Espacement |
-|---|---|---|---|---|---|
-| Titre du héros | **Anton** | 400 (déjà très gras) | `--text-hero` 56–120px | 0.92 | capitales |
-| Titres de section | Anton | 400 | `--text-title` 36–72px | 0.92 | capitales, un mot en vert possible |
-| Chiffres clés | Anton | 400 | `--text-stat` 36–52px | 1 | « + » en `--green-bright` |
-| Nom produit | Anton | 400 | 16–18px | 1.1 | capitales |
-| Logotype | **DM Serif Display** | 400 | 32px (barre), jusqu'à 320px (pied) | 0.78 | -0.03em, minuscules + point vert |
-| Texte, prix, boutons | **DM Sans** | 400 / 500 / 700 | 12–18px | 1.55 | boutons et surtitres en capitales +0.1em |
-
-La police du shot ressemble à Anton / Bebas Neue ; Anton est l'équivalent gratuit choisi à l'œil. La pile de secours (`'Arial Narrow', Impact`) garde l'effet condensé si Google Fonts ne charge pas.
+| Rôle | Police | Réglages |
+|---|---|---|
+| Titre du héros | **Anton** | 174px (capitales de 153px), interligne 1, dégradé blanc → gris |
+| Titres de section | Anton | 101px ; titre centré 91px ; titre de fiche 83px ; interligne 0.98 |
+| Chiffres clés | Anton | 80px, « + » vert |
+| Nom de produit, encart | Anton | 32px et 34px |
+| Logotype | **DM Serif Display** | 32px dans la barre, ≈ 310px dans le pied |
+| Texte | **DM Sans** 400 | 16px / 1.5 ; liens de navigation 13px capitales |
+| Bandeau | DM Sans 700 | 20px |
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Ouverture / clôture | `--navy` #15162e, `--navy-2` | Héros, pied, puce de filtre active |
-| Corps | `--mint` #e3f3e3 | Fond de toutes les sections produit |
-| Cartes | `--card` blanc, `--card-alt` vert pâle | En alternance dans la grille |
-| Texte | `--ink` #2a2d4a, `--muted` #4f5466 | Sur menthe et sur cartes |
-| Texte inversé | `--text-inv`, `--muted-inv` | Sur bleu nuit |
-| Vert de marque | `--green` #22a650 → `--green-light` | Bandeau, arc, bulle du collage |
-| Vert d'action | `--green-strong` #18823f | « Ajouter au panier », « S'inscrire » |
-| Vert vif | `--green-bright` | « + », pastilles, focus sur bleu nuit |
-
-**Règle de l'accent** : le vert signale ce qui fait vendre ou avancer (achat, promo, chiffres). Jamais en fond de carte produit.
+| `--navy` → `--navy-2` | #1c1d36 → #040521 | Héros et pied (dégradé), texte sur vert |
+| `--mint` | #e5f2e5 | Corps de page, carte du pied |
+| `--green` / `--green-2` / `--green-3` | #08a863 / #29c279 / #269357 | Bouton, disques, bandeau |
+| `--aqua` / `--aqua-2` | #a1dddf / #80d0d0 | Carte de fiche, disque et rayures du pied |
+| `--ink` → `--ink-2` | #1b1b35 → #4d5161 | Titres et texte sur menthe |
+| `--white` → `--silver` | #ffffff → #d3d3d3 | Titre du héros |
+| `--card` / `--card-soft` | #ffffff / #f0f0f0 | Encart, boutons ronds / fond des photos |
 
 ## Images et 3D
 
-Les vêtements et le mannequin sont de **vraies photos** : porté net en lumière du jour dans la fenêtre ronde du héros, packshots détourés ou photos en passe-partout dans les cartes 4:5, une vraie photo par coloris sur la fiche, portés variés dans les cercles du collage. Couleurs naturelles, jamais de filtre vert sur le vêtement ; chaque conteneur garde un fond token (`--card`, `--card-alt`, `--navy-2`) en repli. La 3D est optionnelle (vue 360° du modèle `.glb` du produit sur la fiche). Jamais de dessin CSS/SVG à la place d'une photo, d'un mannequin ou d'un vêtement : détails dans `references/assets.md`.
+De **vraies photos de mode** sur fond uni et clair : un mannequin dans une arche pour le héros, des gros plans de matière pour les collections, un mannequin de face par carte produit, un portrait à lunettes pour le pied. Aucun filtre. Les disques, arches, rayures et pilules sont des formes de décor en CSS ; jamais un vêtement ou une personne dessinés. Des PNG détourés sont l'idéal pour le héros et la fiche. 3D optionnelle pour un vêtement en fiche produit. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le héros à l'arc vert** : titre condensé géant sur trois lignes à gauche, chiffres « 120+ / 15k+ » et pilule blanche « Explorer » dessous ; à droite, la photo d'un mannequin dans une fenêtre ronde, coupée par le bas du héros, entourée d'un **anneau vert en dégradé** (vert franc → menthe, ouvert sur un quart) posé sur un disque plus sombre. Suivi immédiatement du **bandeau vert défilant**. Une fois par page.
+1. Le **titre géant condensé** en dégradé sur bleu nuit.
+2. Le **grand disque vert** et la photo en arche.
+3. La **pilule blanche à anneau clair**.
+4. Les **pastilles de couleur** au-dessus des noms de produits.
+5. Le **logotype serif géant** sur la carte menthe du pied.
 
 ## À éviter
 
-- Des titres en minuscules ou en graisse normale : le condensé capitale fait le style.
-- Le vert franc avec du petit texte blanc (3,2:1) : passer à `--green-strong` ou agrandir.
-- Des cartes produit à fond photo, des ombres lourdes, des rayons différents d'une carte à l'autre.
-- Plus d'un bandeau défilant par page, ou un bandeau qui ne s'arrête pas au survol.
-- Le logotype en sans-serif : il doit rester à empattements, avec le point vert.
-- Copier des assets, logos, textes ou interfaces du shot de référence.
+- Du texte blanc sur le vert vif ou sur l'aqua (contraste insuffisant).
+- Des cartes à coins vifs, des ombres portées, des bordures épaisses.
+- Une police d'affiche large ou arrondie ; des titres en bas de casse.
+- Des photos de rue sombres dans la grille de produits.
+- Un troisième fond de section (gris, blanc pur) entre le héros et le pied.
+- Plusieurs bandeaux défilants.
 
 ## Adaptation React / React Native
 
-- Arc du héros : `react-native-svg` (`Circle` avec `strokeDasharray` et `LinearGradient` vert → menthe), rotation d'entrée avec Reanimated.
-- Bandeau : deux copies du texte dans une `Animated.View` translatée en boucle (`withRepeat(withTiming(-width))`), arrêt quand l'écran perd le focus.
-- Cartes : `FlatList` à 2 colonnes, `borderRadius: 16`, photo via `expo-image` (`contentFit="contain"` pour un détouré, `"cover"` en passe-partout).
-- Puces de taille et pastilles : `Pressable` 44×44 avec `accessibilityRole="radio"` et `accessibilityState={{ checked, disabled }}`.
-- Badge du panier : `withSpring` sur l'échelle à chaque ajout ; retour haptique léger (`expo-haptics`).
-- Polices : `@expo-google-fonts/anton`, `@expo-google-fonts/dm-serif-display`, `@expo-google-fonts/dm-sans`.
+- **React** : `HeroStage` (disques + arche + pilule), `Ticker`, `CollectionDeck` (état `top`, rang `--k` en style), `ProductCard`, `Swatches` et `SizeChips` (groupes de boutons `aria-pressed`), `AddToCart` (état « ajouté » temporaire). Un seul observateur pour les apparitions.
+- **React Native** : titres avec `MaskedView` + dégradé ; disques et arches en `View` à `borderRadius` ; pile de collections avec Reanimated (rang → translation, échelle, opacité) et geste de balayage ; bandeau avec `withRepeat` linéaire ; retour haptique léger à l'ajout au panier ; grille en `FlatList` à 2 colonnes.
 
 ## Avant de livrer
 
-- [ ] Tokens importés, aucune valeur en dur.
-- [ ] Héros bleu nuit : titre condensé, chiffres au « + » vert, pilule blanche, photo du mannequin dans l'arc vert.
-- [ ] Bandeau vert défilant (texte ≥ 24px), en pause au survol, figé en mouvement réduit.
-- [ ] Corps menthe : cartes 16px alternées blanc / vert pâle, noms condensés, prix, pastilles 44px.
-- [ ] Fiche produit : étoiles, puces de taille (choisie en blanc, épuisée barrée), pilule verte + favori carré.
-- [ ] Pied bleu nuit : collage de cercles, inscription, logotype géant sur carte menthe.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md` (portés, packshots, une photo par coloris), avec `alt` et couleur de repli.
-- [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
-- [ ] Aucun élément du shot d'origine (nom, logotype, photos, textes).
+- [ ] `:root` copié de `tokens.css`, aucune couleur en dur ailleurs.
+- [ ] Texte sur vert et sur aqua en bleu nuit ; titre du héros lisible devant la photo.
+- [ ] Toutes les photos sont dans une forme arrondie, sur fond uni.
+- [ ] Pastilles et puces utilisables au clavier, état annoncé ; panier annoncé.
+- [ ] `prefers-reduced-motion` : héros en place, bandeau figé.
+- [ ] Pas de défilement horizontal à 390px ; grille de produits en 2 colonnes.
+- [ ] Nom, logotype, photos et textes propres au projet.

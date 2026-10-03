@@ -1,84 +1,71 @@
 /*
  * Mint Street Basics — tokens
- * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
- * Bleu nuit en ouverture et en clôture, corps menthe, un vert franc pour tout ce qui vend.
- * @contrast text-inv:navy muted-inv:navy green:navy:large green-bright:navy on-green:green:large on-green:green-strong navy:mint ink:mint muted:mint green-ink:mint ink:card muted:card ink:card-alt muted:card-alt navy:paper ink:paper muted:paper navy:green
+ * MESURÉS le 2026-10-03 par lecture des pixels sur les deux images du shot Dribbble (page de 1440px présentée à l'échelle 1).
+ * La référence est une image fixe : couleurs, tailles et positions sont mesurées ; tout le mouvement est proposé. « choisi » = décidé par le skill.
+ * @contrast white:navy white:navy-2 soft:navy green:navy:large aqua:navy ink:mint ink-2:mint muted:mint ink:card ink:aqua navy:green navy:green-2 navy:aqua green-ink:mint
  */
 :root {
-  /* Couleurs — surfaces */
-  --navy: #15162e;          /* héros, pied de page, texte le plus fort */
-  --navy-2: #22244a;        /* cartes sur fond bleu nuit, survols */
-  --mint: #e3f3e3;          /* fond du corps de page */
-  --card: #ffffff;          /* cartes produit claires, puce de taille choisie */
-  --card-alt: #d3ebd4;      /* cartes produit vert pâle, puces au repos */
-  --paper: #ffffff;         /* pilule blanche « Explorer » */
+  /* ---- Couleurs ---- */
+  --navy: #1c1d36;          /* mesuré : haut du héros et du pied (dégradé vertical) */
+  --navy-2: #040521;        /* mesuré : bas du héros et du pied, encre du logotype géant */
+  --mint: #e5f2e5;          /* mesuré : fond du corps de page et de la carte du pied */
+  --card: #ffffff;          /* mesuré : encart blanc, boutons ronds, puce de taille choisie, pilule « Explorer » */
+  --card-soft: #f0f0f0;     /* mesuré : fond des cartes produit claires */
+  --aqua: #a1dddf;          /* mesuré : carte de la fiche produit (haut #80d0d0 → bas #a1dddf), disque et rayures du pied */
+  --aqua-2: #80d0d0;
+  --green: #08a863;         /* mesuré : bouton « Ajouter au panier », disque du héros (≈ #00a860 à #00c070) */
+  --green-2: #29c279;       /* mesuré : haut du bandeau défilant (bas : #269357) */
+  --green-3: #269357;
+  --green-ink: #0b6b41;     /* choisi : vert lisible en petit texte sur menthe */
+  --ink: #1b1b35;           /* mesuré : haut des titres sur menthe (dégradé vers --ink-2) */
+  --ink-2: #4d5161;         /* mesuré : bas des titres sur menthe */
+  --muted: #555a6a;         /* choisi : texte secondaire sur menthe */
+  --white: #ffffff;         /* mesuré : texte sur bleu nuit, haut du titre du héros */
+  --silver: #d3d3d3;        /* mesuré : bas du titre du héros (dégradé blanc → gris) */
+  --soft: #b9bbd0;          /* choisi : texte secondaire sur bleu nuit */
+  --line: #c9dfcb;          /* choisi : filets sur menthe */
+  --star: #f2b200;          /* lu sur l'image : étoiles d'avis (jamais du texte) */
+  --halo: rgb(161 221 223 / 0.55);   /* lu sur l'image : anneau clair autour des pilules blanches */
+  /* coloris des pastilles (jamais du texte) */
+  --c-cream: #ecdcc0; --c-slate: #4a4f63; --c-sage: #a9d3a6; --c-lilac: #d9c2e6; --c-sky: #a9c4e0; --c-white: #f4f2ec;
 
-  /* Texte */
-  --ink: #2a2d4a;           /* titres condensés et texte sur menthe */
-  --muted: #4f5466;         /* prix barré, légendes, avis */
-  --text-inv: #ffffff;      /* texte sur bleu nuit */
-  --muted-inv: #b8bad0;     /* texte secondaire sur bleu nuit */
-
-  /* Vert — tout ce qui vend */
-  --green: #22a650;         /* bandeau défilant, arc du héros, « + » des chiffres */
-  --green-bright: #3ddc84;  /* « + » sur bleu nuit, pastille « nouveau » */
-  --green-light: #b9ecc6;   /* fin de l'arc (vert → menthe clair) */
-  --green-strong: #18823f;  /* pilule « Ajouter au panier » (texte blanc 4,9:1) */
-  --green-ink: #0f5f2c;     /* vert en petit texte sur menthe */
-  --on-green: #ffffff;
-  --line: #c3dcc5;          /* filets sur menthe */
-  --line-inv: #34365a;      /* filets sur bleu nuit */
-  --star: #f2b200;          /* étoiles d'avis (jamais du texte) */
-
-  /* Coloris (pastilles de couleur, jamais du texte ni un filtre sur les photos) */
-  --cloth-white: #f4f2ec;
-  --cloth-sand: #d9c7a7;
-  --cloth-olive: #6f7d4f;
-  --cloth-navy: #2b3366;
-  --cloth-black: #1e1e24;
-  --cloth-rust: #b5583a;
-
-  /* Typographie */
-  --font-display: 'Anton', 'Bebas Neue', 'Arial Narrow', Impact, sans-serif;           /* capitales condensées très grasses */
-  --font-logo: 'DM Serif Display', Georgia, serif;                     /* logotype à empattements */
+  /* ---- Typographie ---- */
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;   /* shot : capitales condensées très grasses ; Anton choisie (rapport largeur / hauteur 3.9 pour 3.84 mesuré) */
+  --font-logo: 'DM Serif Display', Georgia, serif;                 /* shot : logotype à empattements gras */
   --font-body: 'DM Sans', system-ui, sans-serif;
-  --text-2xs: 0.6875rem;
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-card: 1.125rem;                         /* nom produit condensé */
-  --text-band: 1.5rem;                           /* bandeau défilant (24px = grand texte) */
-  --text-title: clamp(2.25rem, 5vw, 4.5rem);     /* « COLLECTIONS SOIGNEUSEMENT CHOISIES » */
-  --text-hero: clamp(3.5rem, 8vw, 7.5rem);       /* « DES BASIQUES PENSÉS… » */
-  --text-stat: clamp(2.25rem, 3.6vw, 3.25rem);   /* « 120+ » */
-  --text-logo-xl: clamp(5rem, 22vw, 20rem);      /* logotype géant du pied */
-  --leading-display: 0.92;
-  --leading-body: 1.55;
-  --tracking-display: 0.005em;
-  --tracking-caps: 0.1em;
+  --fs-hero: clamp(3.75rem, 12.1vw, 10.9rem);   /* mesuré : capitales de 153px de haut, soit 174px en Anton ; pas de ligne 175px */
+  --lh-hero: 1;
+  --fs-h2: clamp(2.75rem, 7vw, 6.3rem);         /* mesuré : capitales de 89px (101px), pas de 99px */
+  --lh-h2: 0.98;
+  --fs-h2-center: clamp(2.5rem, 6.3vw, 5.7rem); /* mesuré : « Explore products », capitales de 80px (91px) */
+  --fs-pdp: clamp(2.25rem, 5.75vw, 5.2rem);     /* mesuré : titre de la fiche, capitales de 73px (83px) */
+  --fs-stat: clamp(3rem, 5.5vw, 5rem);          /* mesuré : chiffres du héros, 70px de haut (80px) */
+  --fs-inset: 2.125rem;     /* mesuré : titre de l'encart blanc, 30px de haut (34px) */
+  --fs-name: clamp(1.375rem, 2.2vw, 2rem);      /* mesuré : nom de produit, 28px de haut (32px) */
+  --fs-body: 1rem;          /* lu sur l'image : texte ≈ 16px, 14px de haut de ligne visible */
+  --fs-small: 0.875rem;
+  --fs-nav: 0.8125rem;      /* lu : liens de navigation en capitales ≈ 13px */
+  --fs-ticker: 1.25rem;     /* lu : bandeau ≈ 20px */
 
-  /* Espace (base 4px) */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
-  --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --gutter: clamp(16px, 3vw, 48px);
-  --container: 1360px;
+  /* ---- Grille (1440 de large) ---- */
+  --page: 1440px;
+  --gutter: clamp(20px, 5.55vw, 80px);   /* mesuré : marges de 80px */
+  --gap: 24px;              /* mesuré : écart entre cartes */
+  --hero-h: clamp(640px, 76.8vw, 1106px);/* mesuré : héros de 1106px */
+  --ticker-h: 82px;         /* mesuré */
+  --card-h: clamp(300px, 32vw, 461px);   /* mesuré : photo de carte produit, 461px ; grande carte 845px, simple 411px */
+  --r-card: 28px;           /* lu sur l'image : coins des cartes ≈ 28px */
+  --r-inset: 22px;          /* lu : encart blanc */
+  --r-chip: 14px;           /* lu : puces de taille */
+  --r-pill: 999px;
+  --btn-h: 62px;            /* mesuré : bouton « Ajouter au panier » 352 × 62 */
+  --round: 64px;            /* lu : boutons ronds des flèches */
 
-  /* Formes */
-  --radius-sm: 8px;         /* puces de taille (carré arrondi), bouton favori */
-  --radius-card: 16px;      /* cartes produit */
-  --radius-xl: 28px;        /* carte du logotype, grands panneaux */
-  --radius-pill: 999px;
-  --control: 48px;          /* hauteur des pilules principales */
-  --target: 44px;           /* minimum tactile */
-  --shadow-card: 0 1px 2px rgb(21 22 46 / 0.06);
-  --shadow-pop: 0 18px 40px -18px rgb(21 22 46 / 0.35);
-
-  /* Mouvement */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --dur-fast: 160ms;
-  --dur-base: 300ms;
-  --dur-slow: 700ms;
-  --dur-marquee: 28s;
+  /* ---- Mouvement (proposé : la référence est fixe) ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur: 450ms;
+  --dur-slow: 900ms;
+  --dur-ticker: 26s;
 }

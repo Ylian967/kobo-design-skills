@@ -1,56 +1,62 @@
-# Mint Street Basics — mises en page
+# Mint Street Basics — gabarits
 
-Conteneur `--container` 1360px, marges `--gutter` (16px → 48px), sections espacées de `--space-24` (96px ; 64px sur mobile). Ordre type : bleu nuit → bandeau vert → menthe → bleu nuit.
+Grille **mesurée** sur la maquette : page de 1440px, marges de 80px, cartes écartées de 24px. Hauteurs relevées : héros 1106px, bandeau 82px, corps menthe 3886px, pied 1872px (page de 6946px).
 
-## Héros (bleu nuit)
-
-```
-brume.            ( Nouveautés ) Hauts  Bas  Accessoires        (🔍)(👤)(👜²)
-● COLLECTION AUTOMNE 2026                                   ┌ Sweat Nuage · 59 € ┐
-DES BASIQUES                                     ╭── arc vert ──╮
-PENSÉS POUR                                     │   mannequin    │
-CHAQUE JOUR                                     │   coupé à la   │
-(EXPLORER →)   120+ | 15k+                      │   taille       │
-━━━━━━━━━━━━━━━━━━━━━━━ bandeau vert défilant ━━━━━━━━━━━━━━━━━━━━━━━
-```
-Grille `1.15fr 1fr`, alignée en bas ; la scène de droite fait au moins 520px de haut et coupe la photo du mannequin. Le bandeau colle au bas du héros.
-
-## Collection (menthe)
+## Héros (1440 × 1106)
 
 ```
-COLLECTIONS                                   (Tout) (Hauts) (Bas) (Accessoires)
-SOIGNEUSEMENT (vert)
-CHOISIES
-[carte blanche] [carte vert pâle] [carte blanche] [carte vert pâle]
-NOM CONDENSÉ    NOM CONDENSÉ      …
-29 €     ○ ● ●  59 € 79 €  ● ○ ●
+┌───────────────────────────────────────────────────────────────┐
+│ Verveine  HOMME FEMME ENFANT SPORT                    ○ ○ ○ ○ │  marge 80px, 4 boutons ronds
+│                                                               │
+│ DES BASIQUES                              Des coupes justes…  │  texte d'accroche 270px
+│ PENSÉS POUR            ╭──────╮                               │
+│ TOUS LES JOURS        │ photo  │                              │  titre 3 lignes, devant la photo
+│                   ╭───┤        ├────╮                         │
+│ 120+             │ disque vert  (EXPLORER)                    │
+│ Boutiques…       │                   │                        │
+│ 10 000+          │                   │                        │
+│ Pièces…                                                       │
+├───────────────────────────────────────────────────────────────┤
+│ ▓▓ Offre d'automne — livraison offerte… ▓▓ Offre d'automne ▓▓ │  bandeau vert 82px
 ```
-Titre à gauche (12 caractères de large au plus), filtres alignés en bas à droite ; grille de 4 colonnes, écart 20px.
 
-## Fiche produit (menthe)
+## Page d'accueil (ordre de la maquette)
+
+| # | Section | Fond | Disposition |
+|---|---|---|---|
+| 1 | Héros | bleu nuit (dégradé) | Titre à gauche, chiffres dessous, scène ronde à droite |
+| 2 | Bandeau | vert | Texte défilant |
+| 3 | Collections | menthe | 2 colonnes : titre + texte + flèches / pile de cartes + encart blanc |
+| 4 | Produits | menthe | Titre centré ; rangée 1 : carte double + carte simple ; rangée 2 : trois cartes ; lien à droite |
+| 5 | Fiche produit | menthe | 2 colonnes : photo sur carte aqua / informations et achat |
+| 6 | Essentiels | bleu nuit | Disque aqua, titre géant, photo en arche, disque vert, rayures |
+| 7 | Pied | carte menthe sur bleu nuit | Coordonnées, liens, abonnement, logotype géant |
+
+Rythme : le bleu nuit **ouvre et ferme** la page ; entre les deux, tout est menthe, sans autre fond de section. Les sections sont séparées par ≈ 150px.
+
+## Grille de produits
 
 ```
-[▢]  [  grand visuel carré, rayon 28px  ]     HAUTS / SWEATS
-[▢]  [  photo réelle (voir assets.md)     ]     SWEAT À CAPUCHE NUAGE
-[▢]  [  (étiquette taille mannequin)     ]     ★★★★★ 4,8 · 126 avis
-                                               59 €  79 €
-                                               Description 2–3 lignes
-                                               TAILLE            Guide des tailles
-                                               [XS][S][M][L][XL][X̶X̶L̶]
-                                               (AJOUTER AU PANIER)  [🔖]
-                                               ✓ Livraison  ✓ Retours  ✓ Origine
+┌──────────────────────────────┐ ┌─────────────┐
+│        carte double          │ │   simple    │   photos de 461px de haut
+└──────────────────────────────┘ └─────────────┘
+       ○ ○ ○ ○  NOM  prix            ○ ○ NOM prix
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│             │ │             │ │             │
+└─────────────┘ └─────────────┘ └─────────────┘
+                                   VOIR PLUS ↗
 ```
-Grille `1.1fr 1fr` ; vignettes 80px en colonne à gauche du grand visuel.
 
-## Pied de page (bleu nuit)
+## Autres pages (proposées, la maquette ne montre que l'accueil)
 
-Grille `1fr 1fr` : titre « ESSENTIELS POLYVALENTS » (second mot en vert vif), accroche, champ d'inscription | collage de cercles. Puis quatre colonnes de liens (titres Anton 18px), puis la **carte menthe du logotype géant** à 12–48px des bords.
+- **Catalogue** : titre centré, filtres en pilules à contour, grille de 3 colonnes où une carte sur cinq est double.
+- **Fiche produit seule** : la section 5 en haut de page, puis une rangée « Vous aimerez aussi » de trois cartes.
+- **Panier** : sur menthe, lignes blanches à coins de 22px (vignette, nom en police d'affiche, pastille, quantité), récapitulatif dans une carte aqua, bouton vert.
 
-## Mobile (≤ 760px)
+## Mobile (390px, proposé)
 
-- Barre : logotype + icônes ; liens dans un menu.
-- Héros empilé : texte, pilule et chiffres, puis la scène (380px) avec la photo du mannequin et l'arc.
-- Collection : filtres sous le titre (retour à la ligne), grille 2 colonnes écart 12px, prix et pastilles sur deux lignes.
-- Fiche produit : grand visuel en premier, vignettes en ligne dessous, puces de taille sur 3 colonnes, pilule + favori sur une ligne.
-- Pied : une colonne ; liens en 2 colonnes ; logotype à 22vw.
-- Aucun défilement horizontal : la grille du pied utilise `minmax(0, 1fr)`.
+- Héros en colonne : titre (60px), accroche, chiffres côte à côte, puis la scène ronde sur toute la largeur.
+- Collections et fiche produit en une colonne ; l'encart blanc reste sur le coin de la pile.
+- Produits : 2 colonnes, la carte double sur toute la largeur.
+- Essentiels : disque aqua plus large que l'écran, photo centrée, disque vert réduit à son titre, pas de rayures.
+- Pied : coordonnées et abonnement sur toute la largeur, liens sur 2 colonnes ; le logotype géant reste sur une ligne.

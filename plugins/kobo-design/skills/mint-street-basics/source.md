@@ -1,45 +1,69 @@
 # Source — Mint Street Basics
 
-- **Site de référence** : https://dribbble.com/shots/27774954-Modern-Fashion-E-commerce-Website (shofipy, « SeroWear »)
+- **Référence** : https://dribbble.com/shots/27774954-Modern-Fashion-E-commerce-Website (shofipy, maquette « SeroWear »)
 - **Famille** : Mode / e-commerce streetwear
-- **Analysé le** : 2026-10-01, Chrome ; 2026-10-03, relecture de la page complète (1600×7106)
+- **Analysé le** : 2026-10-01 (première version, à l'œil) ; **2026-10-03, réécriture complète** : les deux images du shot téléchargées en pleine résolution, couleurs **lues au pixel**, hauteurs de texte et positions mesurées par balayage des pixels.
+- **Ce qui plaît** : le titre géant sur bleu nuit, le disque vert, la fraîcheur du menthe, les formes rondes.
 
-> [URL non confirmée : choisie par recherche] — le lien du shot a été retrouvé par recherche et n'a pas pu être confirmé comme celui que l'utilisateur avait en tête.
+> L'adresse du shot a été retrouvée par recherche lors de la première version : elle n'a pas été confirmée par l'utilisateur comme étant celle qu'il avait en tête. La maquette qu'elle montre est bien celle décrite ici.
 
-## Ce qui a été vu
+## Ce que contient la référence
 
-- **Héros** : fond bleu nuit (~#15162e), titre géant en capitales condensées très grasses (type Anton / Bebas) blanc « ELEVATED BASICS FOR EVERY DAY », grands chiffres « 120+ » avec un « + » vert, arc de cercle vert (~#1fa34a vers un menthe clair) derrière un mannequin, pilule blanche « EXPLORE ». Logotype à empattements en haut à gauche.
-- **Bandeau défilant** vert (~#22a650) avec texte blanc (« Halloween Sale – Free Shipping… »).
-- **Corps** : fond menthe (~#e3f3e3) ; titres condensés bleu nuit (~#2a2d4a) « CAREFULLY CURATED COLLECTIONS » ; cartes produit arrondies (~16px) sur fond menthe pâle ou blanc, nom en petites capitales condensées, prix, pastilles de couleur.
-- **Fiche produit** : étoiles d'avis, puces de taille en carré arrondi (la choisie en blanc), pilule verte « Add to Cart » et bouton favori carré.
-- **Pied de page** bleu nuit avec un collage de cercles « VERSATILE ESSENTIALS » et un logotype à empattements géant sur une carte menthe.
+**Deux images fixes**, aucune vidéo, aucun site en ligne :
+1. Une mise en scène (3200 × 2400) montrant le héros et des morceaux de page.
+2. La **page d'accueil entière** (1600 × 7106) : une page de 1440px présentée à l'échelle 1 dans un cadre gris de 80px.
 
-## Pages explorées (2026-10-03)
+**Aucune animation n'est visible** : tout le mouvement décrit dans `motion.md` est proposé par le skill.
 
-| Source | Relevé |
+## Mesures (image 2, pixels = pixels de la page)
+
+| Élément | Valeur |
 |---|---|
-| Image 1 (3200×2400) | Mise en scène du héros (vue de présentation). |
-| Image 2 — page complète (1600×7106) | Relue en entier : héros bleu nuit, bandeau vert, « Carefully curated collections » (carte photo + encart blanc « Oversized warm hoodies », flèches rondes blanches), « Explore products » (rangée 1 : grande carte 2 colonnes + carte simple ; rangée 2 : 3 cartes ; pastilles de couleur au-dessus du nom ; lien « Explore more → » aligné à droite), fiche produit, « Versatile essentials » (arc menthe + rayures, disque vert « High-quality, sustainable fabrics », pilule « Shop now »), pied menthe arrondi (adresse, 2 colonnes de liens, lettre d'info avec bouton noir « Submit », icônes sociales) et logotype géant. |
-| Autres shots / site en ligne | Aucun trouvé. |
+| Page | 1440px de large, marges de 80px ; cadre gris #dfdfdf |
+| Héros | de 0 à 1106px ; dégradé vertical #1c1d36 (haut) → #13142e (milieu) → #040521 (bas) |
+| Bandeau | 82px ; dégradé #29c279 → #28b26d → #279f5f → #269357 |
+| Corps | menthe #e5f2e5 sur 3886px |
+| Pied | 1872px ; même dégradé bleu nuit ; carte menthe #e5f2e5 |
+| Titre du héros | 3 lignes, capitales de 153px de haut, pas de 175px ; « ELEVATED » fait 587px de large ; dégradé #ffffff (haut) → #d3d3d3 (bas) |
+| Titre de section | capitales de 89px, pas de 99px ; dégradé #1b1b35 → #4d5161 ; bloc de 481px de large |
+| Titre centré | capitales de 80px, 731px de large |
+| Titre de fiche | capitales de 73px |
+| Chiffres clés | 70px de haut |
+| Nom de produit / encart | 28px / 30px de haut |
+| Cartes produit | carte double 845px, carte simple 411px, écart 24px, photo de 461px de haut |
+| Carte de fiche | 738px de large, dégradé #80d0d0 → #a1dddf |
+| Bouton d'achat | 352 × 62px, #08a863 (dégradé ≈ #00c070 → #00a860) |
+| Verts du disque | ≈ #00a860 à #00b068 |
+| Logotype du pied | ≈ 1222px de large, encre #04051f |
 
-## Non mesuré
+## Police
 
-- Il s'agit d'un **mockup Dribbble** : analyse visuelle des images uniquement, aucun site en ligne, aucun code inspecté.
-- Toutes les valeurs (couleurs, tailles, rayons, espacements) sont **estimées à l'œil** et arrondies sur une échelle de 4px.
-- Les polices ne sont pas identifiées : **Anton**, **DM Serif Display** et **DM Sans** sont choisies à l'œil.
-- Aucune animation n'est visible sur des images fixes : le mouvement (`motion.md`) est une proposition.
-- Le shot ne montre pas d'états (survol, erreur, épuisé) : ils sont extrapolés.
+Le titre est une capitale condensée très grasse. Rapport largeur / hauteur de « ELEVATED » mesuré : 3.84. Comparé à cinq polices libres : Anton 3.9, Bebas Neue 4.04, Big Shoulders Display 4.26, League Gothic 3.47, Oswald 4.7 → **Anton**. Le logotype (serif gras à forts contrastes) et le texte courant (sans géométrique) n'ont pas été identifiés : DM Serif Display et DM Sans sont choisis à l'œil.
+
+## Lu à l'œil (non mesuré au pixel)
+
+- Rayons : cartes ≈ 28px, encart ≈ 22px, puces ≈ 14px.
+- Tailles du texte courant (≈ 16px), des liens de navigation (≈ 13px), du bandeau (≈ 20px).
+- L'anneau clair autour des pilules, la couleur des étoiles.
+- Les coloris des pastilles.
+
+## Proposé par le skill
+
+- **Toutes les animations** et tous les états (survol, taille choisie, « ajouté au panier », favori).
+- `--muted`, `--soft`, `--line`, `--green-ink`.
+- La pile de cartes animée (la maquette montre une carte et le bord de la suivante).
+- Les autres pages (`layouts.md`) et **toute la version mobile**.
+- Les images par seconde de `motion.md`, mesurées dans un Chrome sans carte graphique.
 
 ## Écarts assumés
 
-| Élément du shot | Dans le skill | Raison |
+| Maquette | Dans le skill | Raison |
 |---|---|---|
-| Nom de marque, logotype, textes en anglais | Marque fictive « brume. », produits et textes inventés en français | Marque et droits d'auteur |
-| Photos du mannequin et des vêtements | Autres photos libres (portés et sweats) dans des emplacements `data-slot`, cadrées selon `references/assets.md` | Droits d'auteur ; à remplacer par vos packshots et portés |
-| Texte blanc sur vert #22a650 (3,2:1) | Bandeau gardé en 24px (paire `:large`) ; boutons en `--green-strong` #18823f (4,9:1) | Contraste ≥ 4,5:1 pour le petit texte |
-| Vert en petit texte sur menthe | `--green-ink` #0f5f2c (6,8:1) | Contraste |
-| Promo « Halloween » | « Soldes d'automne », livraison offerte dès 60 € | Contenu localisé, saison neutre |
-| Prix en dollars | Euros au format français (« 59 € ») | Contenu localisé |
-| Pastilles de couleur ~16px | Pastille 16px dans une zone cliquable 44×44px | Cible tactile |
-| Composition ordinateur uniquement | Version mobile (grille 2 colonnes, héros empilé, puces de taille sur 3 colonnes) | Adaptation |
-| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans images propriétaires |
+| Nom « SeroWear », textes anglais, prix en dollars | Boutique fictive « Verveine », textes français, euros | Identité |
+| Photos de la maquette (mannequins détourés) | Photos Unsplash sur fond uni, dans des arches et des cartes | Droits ; le détourage est décrit dans `assets.md` |
+| Texte **blanc** sur le bandeau vert et sur le bouton d'achat (2,3:1 à 4:1) | Texte **bleu nuit** | Contraste |
+| Mannequin détouré qui dépasse du disque | Photo dans une arche | Pas de PNG détouré libre |
+| « 10,000+ Cups Brewed Each Month » (légende sans rapport avec la mode) | « Pièces recyclées chaque mois » | Cohérence du contenu |
+| Titre de fiche coupé au milieu d'un mot (« ECOESSENTI / ALS ») | Césure propre | Lisibilité |
+| Logos de réseaux sociaux | Non repris | Marques |
+| Une seule largeur (1440px) | Tailles en `clamp()`, version mobile | Rendre le skill utilisable |
