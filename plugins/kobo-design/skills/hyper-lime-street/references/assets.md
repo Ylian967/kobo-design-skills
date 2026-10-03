@@ -1,63 +1,63 @@
 # Hyper Lime Street — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un personnage ou un objet : on utilise de vraies images (key art, illustrations, photos de rue). Les matières graphiques du style (rubans-pistes rayés, rayures à 45°, pellicule, pastilles, étiquettes) restent en CSS.
+> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer un personnage, un décor ou une capture de jeu. Seuls les **signes** sont en CSS ou SVG : bandes inclinées, blocs lime, pellicule, flèches, pictogrammes, logo.
+
+Sur le site de référence, les images sont des **illustrations du jeu** : un visuel clé, des personnages détourés, des vignettes de vidéos, des bannières. La démo les remplace par des photos de rue.
 
 ## 1. Ce que montrent les images
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `key-art` (héros) | Personnage(s) en action : saut de skate, course, pose de groupe | Paysage ≈ 2,3:1 dans un cadre au bord gauche coupé ; sujet au centre-haut, le bas laisse la place au logo | Plein jour dur ou néon, ciel ou mur coloré | Couleurs conservées, `contrast(1.12) saturate(.9)`, rayures `--hatch` à 45° + dégradé sombre en bas |
-| `character-art` (bloc lime numéroté) | Le personnage actif, plan large | Remplit le bloc, sujet à gauche (le numéro est à droite) | Contre-jour, silhouette lisible | **Duotone noir → lime** : N&B contrasté en `mix-blend-mode: multiply` sur `--accent`, fondu lime vers la droite |
-| vignettes du carrousel | Visage ou pose du personnage | 16:9 en parallélogramme (`skewX(-12deg)`, image contre-biaisée) | Identique | Couleurs ; contour lime si actif |
-| `video-cover` | Lieu de l'histoire : tunnel, ruelle, toit, parking la nuit | Paysage, horizon au milieu (la bande d'infos passe à 30 %) | Sombre, une source chaude (jaune, sodium) | `contrast(1.1) saturate(.85)`, bande `rgb(17 17 17 / .78)` |
-| `news-image` | Mur d'autocollants, affiche, détail urbain | 2:1, coins 24px, bas réservé au défilant | Jour | `contrast(1.1)` + étiquette lime en haut à gauche |
+| Emplacement | Sujet | Cadrage | Notes |
+|---|---|---|---|
+| `hero` | Le visuel clé : une rue, une scène d'action, plusieurs personnages | Paysage 5:3, 2000px ; tiers bas un peu sombre (accroche et boutons) | Couleurs saturées : rose, cyan, néons |
+| Personnage | Un personnage par fiche, **visage et buste**, regard fort | Paysage 14:9 ; le sujet au centre gauche, il sera vu dans une bande inclinée | Idéalement un PNG détouré qui dépasse du panneau ; sinon une photo découpée |
+| Vignettes | Le même visuel, réduit | 120 × 80px | — |
+| Vidéo | Image arrêtée d'une scène d'action (saut, course, combat) | 2:1 ; sujet à gauche, le bord droit est coupé en diagonale | Voile en bas pour la légende |
+| Actualité | Bannière d'annonce | 2:1, 1400px | Laisser le coin haut gauche libre (étiquette) |
+| Univers | Un lieu du jeu : ruelle, quartier, salle | 16:9 | Voile en bas pour le nom du lieu |
+| Caractéristique | Capture de jeu spectaculaire | 2:1 ; le bas droit reçoit un titre lime | Image plutôt sombre ou bleue : le lime doit ressortir |
 
-**Règle de cohérence** : des lieux et des gens de la rue, vus de près, jamais propres ni « stock » ; le lime n'apparaît dans une image que par le duotone ou les étiquettes, jamais par une photo déjà verte fluo.
+**Cohérence** : ville la nuit, néons, béton, mouvement. Pas de paysage naturel, pas de photo de studio sur fond blanc (sauf personnage détouré), pas d'image pastel.
 
 ## 2. Où les trouver
 
-1. **Les images du projet** : key art, rendus des personnages, captures du jeu. Toujours en priorité.
-2. **Banques gratuites** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com) (usage commercial permis, crédit apprécié). Mots-clés :
-   - FR : « skate saut », « graffiti ruelle », « tunnel graffiti », « autocollants porte », « rue nuit néon », « parking béton ».
-   - EN : « skateboard trick sky », « graffiti alley », « graffiti tunnel », « sticker covered door », « urban night street », « concrete skatepark », « streetwear crew ».
-3. **Génération IA** — prompts de départ :
-   - `key-art` :
-     > Stylized urban action key visual, young street fighter mid-jump over a concrete wall, graffiti and sticker-covered city behind, strong midday sun, cel-shaded anime look with bold outlines, high contrast, wide 21:9, no text, no logo
-   - `character-art` :
-     > Full-body character in streetwear and headphones, dynamic pose, plain light grey background, hard rim light, high-contrast black and white, clean silhouette for duotone, 4:3, no text, no logo
-   - `video-cover` :
-     > Dark graffiti-covered underpass at night lit by one sodium-yellow lamp, wet floor reflections, cinematic wide 16:9, gritty, no people, no legible text, no logo
-4. **À éviter** : personnages, logos ou captures d'un jeu existant ; photos de stock souriantes en studio ; tags lisibles portant un nom de marque ; images à dominante verte (elles se battent avec le lime) ; skate ou personnage dessiné en CSS.
+1. **Les visuels du projet** : illustrations, rendus des personnages (PNG détourés), captures et bandes-annonces. Toujours en priorité.
+2. **Banques libres** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Recherches utiles : `tokyo street night neon`, `techwear portrait`, `streetwear fashion portrait urban`, `skateboarder trick`, `graffiti alley`, `arcade neon`, `parkour urban`.
+3. **Génération** — prompts de départ :
+   > Anime-style key visual, three young characters in techwear sitting on the hood of a white 80s car in a neon-lit city street at night, dynamic low angle, saturated pink and cyan signs, crisp cel shading, no text, 5:3
 
-## 3. Traitements (code)
+   > Full-body character render, urban fox-eared swordsman in a long dark coat, confident pose, flat cel shading, transparent background, 3:4
+4. **À éviter** : visuels d'un jeu existant, logos de plateformes ou de consoles sans autorisation (la démo écrit « PC », « Console », « iOS », « Android » en toutes lettres), photos floues ou ternes.
+
+## 3. Traitements
 
 ```css
-/* Duotone noir → lime sur le bloc numéroté */
-.char-art { position: absolute; inset: 0; overflow: hidden; border-radius: inherit; background: var(--accent); }
-.char-art img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%;
-  filter: grayscale(1) contrast(1.35) brightness(1.1); mix-blend-mode: multiply; }
-.char-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, var(--accent) 10%, transparent 60%); } /* le numéro reste sur du lime pur */
-
-/* Héros : photo + rayures 45° de la matière « piste » */
-.hero__frame { position: relative; overflow: hidden; background: var(--ink); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%); }
-.hero__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.12) saturate(.9); }
-.hero__frame::after { content: ""; position: absolute; inset: 0;
-  background: repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 14px), linear-gradient(0deg, rgb(17 17 17 / .45), transparent 40%); }
-
-/* Vignette en parallélogramme, image contre-biaisée */
-.thumb { overflow: hidden; transform: skewX(-12deg); background: var(--muted); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; transform: skewX(12deg) scale(1.2); }
+/* Une photo n'est jamais inclinée : elle est découpée à l'angle commun */
+.cut { position: absolute; inset: 0 -30vw 0 0;
+  clip-path: polygon(calc(var(--panel-h) * var(--slant)) 0, 100% 0, 100% 100%, 0 100%); }
+.cut::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--veil), transparent 50%); }  /* sous un texte */
+.world .card { border-radius: var(--r-shape); box-shadow: 10px 10px 0 var(--accent); }                                       /* ombre lime pleine */
 ```
 
-Changement de personnage : l'image du bloc lime passe à opacité 0 (200ms `--ease`), change de `src`/`alt`, revient ; immédiat en mouvement réduit.
+- **Aucun filtre de couleur** : les images gardent leurs teintes ; c'est le lime et le noir autour qui font l'identité.
+- Personnage détouré (PNG) : le poser dans le panneau avec `object-fit: contain`, ancré en bas, et le laisser dépasser de 8 à 15 % au-dessus (`inset-block: -12% 0`), sans `clip-path`.
+- Tailles : 2000px pour le visuel clé, 1400–1600px pour les panneaux, 120px pour les vignettes ; `loading="lazy"` partout sauf le visuel clé.
+- Texte alternatif : ce que montre l'image ; vide pour les vignettes (le bouton porte le nom).
 
-## 4. Intégration
+## 4. Formes (CSS, pas des images)
 
-- `<img>` avec `width`/`height`, `alt` qui décrit l'image (« Skateur en plein saut sur fond de ciel bleu »), `loading="lazy"` sauf le héros (`fetchpriority="high"`). Vignettes : `alt=""`, le bouton porte le nom.
-- Formats : AVIF/WebP via `<picture>` ou un CDN ; héros ≤ 300 Ko.
-- Repli : fond token sur chaque conteneur (`--ink` pour le héros, la vidéo et l'actu, `--accent` pour le duotone, `--muted` pour les vignettes) ; texte toujours sur bande ou étiquette pleine, donc lisible sans image.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder` blurhash, `transition={200}`). Duotone : image N&B pré-traitée (CDN `?sat=-100`) posée sur une `View` `backgroundColor: accent` avec `mixBlendMode: 'multiply'` (RN ≥ 0.77), sinon un duotone pré-calculé côté serveur.
+Le site utilise des PNG pour ses bandes et ses blocs (`bg-nav`, `chara-panel`, `panel`, `fill-film-bar`). Le skill les refait en CSS pour qu'ils s'adaptent à toutes les largeurs :
 
-## 5. 3D
+```css
+.shape { border-radius: var(--r-shape); transform: skewX(calc(var(--angle) * -1)); }            /* 41° */
+.slab  { background: var(--ink) repeating-linear-gradient(135deg, var(--hatch) 0 2px, transparent 2px 6px); }
+.film  { height: 26px; transform: rotate(calc(var(--angle) - 90deg));
+  background: var(--ink) repeating-linear-gradient(90deg, transparent 0 14px, var(--bg) 14px 28px) 0 50% / 100% 12px no-repeat; }
+```
 
-Optionnelle. Usage sobre qui sert le style : dans le bloc lime « Personnages », un modèle `.glb` du personnage en pose idle, rendu en `MeshToonMaterial` noir et blanc à 2 tons (pour rester dans le duotone) sur fond `--accent` transparent, qui tourne de ±25° en suivant le pointeur ; ou une planche de skate `.glb` qui fait un kickflip au survol du bouton « En savoir plus ». Modèles : ceux du projet, ou libres sur [Poly Pizza](https://poly.pizza) (rechercher « skateboard », CC0/CC-BY), [Quaternius](https://quaternius.com) (personnages CC0), [Kenney](https://kenney.nl/assets) (CC0). Web : Three.js ou React Three Fiber + drei (`useGLTF`, `Float`) ; React Native : `expo-gl` + `@react-three/fiber/native`. Repli : la photo duotone si WebGL est absent ou en mouvement réduit.
+## 5. 3D (optionnel)
+
+Le style n'en a pas besoin. Si le projet a un **modèle 3D d'un personnage** (`.glb`), il peut remplacer la photo de la fiche : Three.js, fond transparent posé sur le panneau blanc, rotation au glisser, éclairage à plat (matériaux sans reflets) pour rester proche du dessin, 30 images/s au plus, rendu arrêté hors écran.
+
+## 6. Photos de la démo (Unsplash, licence libre)
+
+Visuel clé : `photo-1551641506-ee5bf4cb45f1` (rue aux néons). Personnages : `1769414761120-a186e3bad614`, `1769414761122-6ca0d27fa504`, `1563879749063-046655493341`, `1785414671439-e220425de0e5`. Vidéos : `1723236900134-63561e5832b3`, `1663243216708-a7831e1a9c55`, `1597019558926-3eef445fdf60`. Les autres identifiants sont dans `examples/demo.html`. À remplacer par les visuels du projet.

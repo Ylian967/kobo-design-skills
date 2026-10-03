@@ -1,53 +1,71 @@
 # Source — Hyper Lime Street
 
-- **Site de référence** : https://zenless.hoyoverse.com/fr-fr/main (site officiel d'un jeu d'action urbain)
+- **Référence** : https://zenless.hoyoverse.com/fr-fr/main (site officiel d'un jeu d'action urbain)
 - **Famille** : Jeu vidéo
-- **Analysé le** : 2026-10-01, Chrome, 1536×674, page d'accueil complète (5441px)
-- **Méthode** : `extract-design.js` + captures de chaque section
+- **Analysé le** : 2026-10-01 et 2026-10-02 (première version et pages internes) ; **2026-10-03, réécriture complète de l'accueil** : Chrome 1440×900, page parcourue en entier (5141px), ≈ 20 captures, styles calculés des éléments clés, feuilles de style de la page (≈ 580 000 caractères) lues par script, images de formes du site téléchargées et mesurées.
+- **Ce qui plaît** : les formes inclinées, le lime, les numéros géants, l'énergie.
 
-## Mesures brutes
+## Ce que contient la référence
 
-- **Polices chargées** : Impact (« en impact »), icomoon ; texte secondaire en police système (« meSubFont », Inter, system-ui)
-- **Tailles** : 25.2px (dominant, display), 12px, 52.8px, 14.4px, 14px, 24px, 60px, 39px, 19.2px, 48px
-- **Textes** : #222122 (dominant), #919191, #ccd0d2, #000000, #ffffff, #787878
-- **Fonds** : #111111 (dominant), #000000, #ffffff, #c6e800, #d8fa00 ; fond de page #efefef
-- **Bordures** : 4.8px solid #767678 (boutons pilule), 2.4px #646464, 0.8px #c6e800
-- **Rayons** : 8.4px (×18), 72px (×7), 100%, 24px, 3px
-- **Padding de section** : 117px 0 (×62)
-- **Transitions** : all 0.3/0.4/0.5/0.6s cubic-bezier(0.215, 0.61, 0.355, 1) (~250 éléments), transform 0.3s ease-in-out
-- **Animations** : wordsLoop 20s linear, heartbeat 0.8s ; keyframes rotation, tada, wordsLoopMob, swiper-preloader-spin
-- **Bouton plein** : « M'abonner maintenant » fond #c6e800, rayon 24px, padding 14px 16px, all 0.2s linear
-- **Points de rupture** : min-width 1025px, 1024px, max-width 1023px, 1024–1365px, max-width 374px
+Un site **animé** (HTML et CSS, sans canvas) : écran de chargement, carrousels, texte défilant, entrées au défilement. Les formes (bandes noires, blocs lime, panneaux) sont des **images PNG** en fond.
 
-## Pages explorées (2026-10-02)
+## Mesuré (1440×900)
 
-Exploration en navigateur des pages internes, menus et survols. **Mesuré** = valeur lue par script dans le navigateur ; **observé** = relevé à l'œil sur capture.
+| Élément | Valeur |
+|---|---|
+| Base | `html { font-size: 56.25px }` = largeur / 25.6 ; tout le site suit la largeur |
+| Polices | Impact (« en impact ») pour l'affiche ; police système et Inter pour le reste |
+| Fond de page | #efefef |
+| Barre | 56px, noire ; liens 11.25px gras #787878 ; onglet actif : pilule blanche 78 × 28px, rayon 67.5px, `scale(1.12)`, texte noir ; pilule lime #d8fa00 148 × 25px |
+| Contenu | 1080px de large |
+| Sections | hauteurs 865, 690, 667, 687, 599, 861px |
+| Bloc titre | image de 475 × 442px ; titre 36.56px, sous-titre anglais 18px, numéro 104.6px, texte #222122, à 218px du bord gauche |
+| Panneau | 1161 × 442px (images `chara-panel`, `panel`) |
+| Angle | **41°** par rapport à la verticale (bord diagonal de `bg-nav.png`, mesuré au pixel) |
+| Mot géant | 406px / 320px, `rgba(239,239,239,.1)` |
+| Nom de personnage | 49.5px, #222122, bloc de 349px aligné à droite |
+| Pilule de vignettes | 374 × 43px, fond #222122, rayon 21.4px ; vignettes au pas de 90px |
+| Bouton « En savoir plus » | 138 × 43px, texte 13.5px #d6d6d6 en police d'affiche |
+| Titre sur image | 45px, `rgba(216,250,0,.9)` |
+| Texte défilant | 22.5px / 32.6px, `wordsLoop 20s linear infinite` |
+| Onglet latéral | 46 × 201px, #0a0a0a, rayon 8.44px à gauche ; numéro 27px blanc |
+| Pied | titre 24px / 28px gras #ccd0d2 ; bouton 195 × 48px #c6e800, rayon 24px ; champ en pilule #222 |
+| Couleurs les plus fréquentes | #fff (66), #000 (33), #61636b (19), #323339 (17), #333 (14), #222122 (12), #d8fa00 (9), #2d2e33 (9), #ccd0d2 (8), #111 (7), #c6e800 (6) |
+| Courbes | `cubic-bezier(0.15, 0.59, 0.45, 0.89)` (102 règles sur la couleur de fond, 40 sur les transformations, 30 sur l'opacité) ; `ease-in-out` sur les glissements (44 règles) ; opacité en `ease-out` avec 0.05s de retard |
+| Animations | `wordsLoop 20s`, `heartbeat .8s` (échelle 1.097 relevée en cours), `all .4s ease-out`, `all 300ms`, fenêtres 200ms |
+| Rayons | 8.44px (cartes, onglet), 67.5px (pilules), 24px (bouton), ≈ 22px sur les grandes formes (lu sur les images) |
 
-| URL | Relevé | Nature |
-|---|---|---|
-| `/fr-fr/main` | Accueil (voir « Mesures brutes ») | mesuré |
-| (navigation, toutes pages) | Barre noire ~60px ; libellés gris clair 13px gras sur 2 lignes centrés ; actif = pilule blanche texte noir ; « Plus ▾ » ; bouton pilule lime « Télécharger maintenant » ; icône musique ronde | observé (sauf hauteur et couleurs déjà mesurées sur l'accueil) |
-| `/fr-fr/news` | Badge de section lime « Actu & infos / NEWS & INFO / 04 » sur bande diagonale noire rayée ; filigrane « NEWS & INFO » géant italique gris pâle ; carrousel bannière 16:9 rayon ~24px + points (actif lime cerclé) ; barre d'onglets pilule noire, actif = parallélogramme blanc ; grille 3 colonnes de cartes à image aux coins asymétriques (haut-gauche + bas-droit 24px), date 14px gras + étiquette catégorie parallélogramme noir texte lime 11px, titre 17px gras 1 ligne, extrait gris 12px 2 lignes | observé |
-| `/fr-fr/news/166535` (article) | Titre centré gras ~28px ; barre pilule noire (fil d'Ariane blanc / date) ; texte centré 13px ; onglet latéral fixe vertical « Retour » noir/lime | observé |
-| `/fr-fr/video` | Badge « 03 », filigrane « VIDEO » | observé |
-| `/fr-fr/world` | Badge « 05 » ; fond = image floutée plein écran ; coverflow : carte centrale noire (rayon ~16px, titre condensé blanc ~40px, sous-titre lime, image en bandes diagonales), voisines plus petites et assombries ; flèches dans des pilules noires à contour blanc aux bords | observé |
-| `/fr-fr/character?id=…` | Badge **bleu** #1f6bff « 02 » ; rendu du personnage à gauche ; nom ~48px gras + filigrane du nom ; pilule de doublage (micro, nom, interrupteur JP/EN) ; citation en gras ; texte gris dans un bloc défilant à barre fine ; colonne de cartes noires verticales à emblèmes (factions) + pilule lime « Plus de factions » | observé |
-| (bas de page) | Icônes réseaux grises sur #111 ; « M'abonner aux messages » 26px gras blanc ; champ pilule #222 ; bouton pilule lime ; case de consentement + lien lime « Détails >> » | observé |
-| mobile (390px) | **Non observable** : le site sert une version mobile selon l'appareil ; l'iframe de 390px affiche la version bureau réduite | — |
+## Observé sur captures
 
-Toutes les durées d'animation des pages internes sont **estimées** (`references/motion.md`) ; les nouveaux tokens (`--accent-blue`, `--field`, `--radius-lg`, `--radius-asym`, tailles 10/17/28/48px) sont observés, pas mesurés.
+- Écran de chargement blanc, « NOW LOADING » en bas à droite.
+- Visuel clé à coins arrondis, logo et « Télécharger maintenant » en autocollants inclinés, rangée de boutons de plateformes, QR code.
+- Pellicule en diagonale derrière les sections ; bande noire tramée ; alternance bloc lime à gauche / à droite.
+- Les sections se décalent légèrement au défilement (transformation verticale relevée : −27px).
 
-## Non mesuré
+## Proposé par le skill (non mesuré)
 
-- Mobile non mesuré ni observable (version mobile servie selon l'appareil) : adaptation déduite des points de rupture, voir `references/layouts.md` § Mobile.
-- Les rayures fines des rubans et la pellicule ont été relevées sur captures (ce sont des images sur la référence) ; elles sont recodées en CSS.
+- **Les durées et distances des entrées** : sur le site elles sont posées par script (les règles n'indiquent que la courbe). `--dur-in` 700ms, glissements de 40 à 70 %.
+- Les formes **refaites en CSS** (`skewX`, `border-radius`, `clip-path`) au lieu des PNG ; la trame des bandes (dégradé répété).
+- La dérive du mot géant, le survol des vignettes et des boutons, la sortie de l'écran de chargement.
+- `--nav-idle` (#878787 au lieu de #787878), `--watermark`, `--veil`, `--hatch`.
+- Toute la version mobile.
+- Les images par seconde de `motion.md`, mesurées dans un Chrome sans carte graphique.
+
+## Non vu
+
+- La **version mobile** : le site sert une page différente selon l'appareil.
+- Les pages internes n'ont **pas été rouvertes** le 2026-10-03 : `layouts.md` reprend le relevé du 2026-10-02 (actualités, article, univers, personnage). `examples/actus.html` n'a pas été refait et garde l'ancien jeu de tokens.
+- Le menu « Plus », la connexion, le lecteur de musique.
 
 ## Écarts assumés
 
-| Élément du site | Dans le skill | Raison |
+| Référence | Dans le skill | Raison |
 |---|---|---|
-| Impact (police système) | Anton (Google Fonts) | Disponible partout, même structure condensée |
-| Gris #787878 sur béton | #6b6b6b | 3,8:1 → 4,6:1 |
-| Logo, personnages, illustrations | Emplacements `data-slot` | Droits d'auteur |
-| Rendus de personnages, emblèmes de factions, illustrations de l'univers | Photos de rue Unsplash et emplacements `data-slot` dans `examples/actus.html` | Droits d'auteur |
-| Visuels de la démo | Photos Unsplash libres (licence Unsplash), à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |
+| Nom, logo, personnages, illustrations du jeu | Jeu fictif « NEON DISTRICT », personnages inventés, photos Unsplash de rue | Identité et droits |
+| Impact | Anton | Police libre, disponible partout |
+| Personnages détourés (illustrations) | Photos découpées en bande inclinée | Pas d'illustrations libres ; le détourage est décrit dans `assets.md` |
+| Formes en images PNG | Formes en CSS | S'adapter à toutes les largeurs, pas de fichiers |
+| Logos de plateformes et QR code | Libellés « PC », « Console », « iOS », « Android » | Marques |
+| Liens de la barre #787878 (4,4:1) | #878787 | Contraste |
+| Tout le site proportionnel à la largeur | Tailles bornées par `clamp()` | Lisibilité sur petit et très grand écran |
+| Icônes de réseaux | Sigles en lettres | Marques |

@@ -1,269 +1,104 @@
 # Hyper Lime Street — composants
 
-## Barre de navigation (fixe, 60px, noire)
+Valeurs dans `tokens.css`. Les dimensions sont **mesurées** sur le site de référence à 1440×900 sauf mention « proposé ». Code complet dans `examples/demo.html`.
 
-Logo à gauche (emplacement). Liens en Inter 700 12–14px gris `--muted-dark`, sur deux lignes si besoin, centrés. **Lien actif = pilule blanche** (texte noir). « Plus ▾ ». À droite : bouton **« Télécharger maintenant »** pilule lime (Inter 700 14px noir), puis trois icônes rondes (musique, partage, compte) blanches.
+## Règles communes
 
-```css
-.nav a[aria-current="page"] { background: var(--surface); color: var(--text); border-radius: var(--radius-pill); padding: 4px 14px; }
-.btn-dl { background: var(--accent); color: var(--on-accent); border-radius: var(--radius-pill); padding: 6px 10px; font: 700 var(--text-sm)/1 var(--font-body); }
-```
+- **Un seul angle** : toutes les diagonales font 41° avec la verticale (`--angle`). Blocs, bandes, panneaux, découpes d'image, pellicule.
+- **Trois matières** : béton clair `--bg`, noir tramé `--ink`, lime `--accent`. Le blanc sert aux panneaux.
+- **Police d'affiche condensée** (`--font-display`) pour tout ce qui se voit de loin : titres, numéros, noms, boutons. Texte courant et barre de navigation en `--font-body` gras.
+- Coins **arrondis** sur les grandes formes (22px), pilules pour les commandes.
+- Chaque section porte un **numéro à deux chiffres** (01 à 06) et un **sous-titre anglais en capitales**.
 
-## Bouton pilule « En savoir plus »
+## Formes inclinées
 
-```html
-<a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a>
-```
-```css
-.pill { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 20px; border-radius: var(--radius-pill);
-  background: var(--ink); color: var(--on-ink); border: var(--stroke-w) solid var(--stroke); font: 400 var(--text-md)/1 var(--font-display);
-  text-decoration: none; transition: all var(--dur-1) var(--ease); }
-.pill:hover { background: var(--accent); color: var(--on-accent); border-color: var(--ink); }
-```
-
-## Bouton plein lime (abonnement)
-
-Fond `--accent-2`, texte noir, rayon 24px, padding 14px 16px, bordure 0.8px de la même couleur, `all 0.2s linear` (mesuré). Un seul par écran.
-
-## Ruban « piste » (signature)
-
-Grand bloc sombre à extrémités arrondies, coupé à 45°, rayé.
-```css
-.track { position: relative; background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px);
-  border-radius: 0 var(--radius-track) var(--radius-track) 0; }
-.track--cut { clip-path: polygon(0 0, 100% 0, 100% 100%, 220px 100%); } /* coupe à 45° côté gauche : hauteur = largeur coupée */
-```
-Les rubans se superposent légèrement d'une section à l'autre et changent de côté (zigzag).
-
-## Bloc de section numéroté
-
-Bloc lime à extrémité arrondie (72px), qui contient en haut à droite le **titre de section** (Anton 53px noir), en dessous un **sous-titre anglais** en capitales (Anton 19px), puis le **numéro géant** (Anton `--text-num`).
-
-```html
-<div class="sec-label"><h2>Documents vidéo</h2><span>VIDEO</span><b>03</b></div>
-```
-
-## Carrousel de vignettes
-
-Barre pilule noire à contour gris contenant : flèche ← (cercle gris clair), 3 vignettes en **parallélogramme** (coins 8.4px, inclinées), flèche → (cercle blanc). Vignette active : contour lime 3px. Le titre de l'élément actif s'affiche au-dessus avec une étiquette lime en Anton (« Découverte du personnage ») et la date en gris.
-
-## Pellicule photo
-
-Bande noire avec une rangée de perforations carrées blanches arrondies (rayon 4px, 28px, espacées de 28px). Elle peut être droite ou partir en diagonale à 45°. Décor uniquement (`aria-hidden`).
-```css
-.film { height: 40px; background-color: var(--ink-2);
-  background-image: linear-gradient(90deg, var(--surface) 0 28px, transparent 28px 56px);
-  background-size: 56px 22px; background-repeat: repeat-x; background-position: 14px center; }
-```
-
-## Pagination latérale
-
-Onglet fixé au bord droit de l'écran : noir avec bord gauche arrondi, numéro de section courant en Anton lime vertical (01), flèches ⇤ ⇥ lime, numéro suivant plus petit en dessous. Il change pendant le défilement.
-
-## Carte d'actualité
-
-Panneau blanc à grand rayon (72px côté extérieur), image réelle 16:9 à coins 24px (voir `assets.md`), un **défilant** noir sur le bas de l'image (texte Anton italique gris clair), date Inter 700 12px, titre Inter 700 14px, points de pagination (le point actif est lime), bouton pilule à droite.
-
-## Défilant (marquee)
-
-Texte Anton qui défile en boucle (20s linéaire). S'arrête au survol et quand le mouvement est réduit.
-
-## États
-
-- **Chargement** : barre lime qui remplit un ruban noir rayé (easeOutCubic), numéro « 00 ».
-- **Vide** : bloc numéroté avec « 00 » et une phrase.
-- **Erreur** : ruban noir, texte lime « HORS SERVICE », bouton pilule « Réessayer ».
-
----
-
-# Composants des pages internes
-
-> Relevés lors de l'exploration des pages Actu & infos, article, Univers du jeu, Personnages et du bas de page (2026-10-02, voir `source.md`). Les valeurs marquées « observé » sont lues à l'œil sur capture, pas mesurées par script.
-
-## Badge de section (signature des pages internes)
-
-**Rôle** : remplace le bloc numéroté de l'accueil en haut de chaque page interne ; dit où l'on est et donne le numéro de la rubrique (02 Personnages, 03 Vidéo, 04 Actus, 05 Univers).
-
-**Anatomie** (observé) :
-- une **bande diagonale noire rayée** (matière « piste ») qui traverse tout l'écran en biais derrière le badge ;
-- posé dessus en haut à gauche, un bloc `--accent` (ou `--accent-blue` pour Personnages) dont le **bord droit est arrondi en pilule** ;
-- dedans : titre FR (Inter 700 16px noir), sous-titre EN en capitales (10px, `--text-2xs`), et le **numéro géant** en Anton ;
-- à droite de la page, un **filigrane** : le mot EN géant en Anton italique, `--watermark` (≈ 6 % de noir), qui sort du cadre.
-
-**États** : statique. Pas de survol (ce n'est pas un lien). Le filigrane est `aria-hidden`.
-
-```html
-<header class="page-head">
-  <div class="page-head__band" aria-hidden="true"></div>
-  <div class="badge"><h1>Actu &amp; infos</h1><span>NEWS &amp; INFO</span><b>04</b></div>
-  <p class="watermark" aria-hidden="true">NEWS &amp; INFO</p>
-</header>
-```
-```css
-.page-head { position: relative; padding: calc(var(--nav-h) + var(--space-8)) 0 var(--space-8); overflow: hidden; }
-.page-head__band { position: absolute; left: -10%; right: -10%; top: calc(var(--nav-h) + 40px); height: 90px; transform: rotate(-8deg);
-  background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px); }
-.badge { position: relative; width: min(var(--badge-w), 85vw); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 0 var(--space-4);
-  padding: var(--space-4) var(--space-8) var(--space-4) var(--space-6); background: var(--accent); color: var(--on-accent);
-  border-radius: 0 var(--radius-pill) var(--radius-pill) 0; }
-.badge--blue { background: var(--accent-blue); }
-.badge h1 { margin: 0; font: 700 1rem/1.2 var(--font-body); }
-.badge span { grid-column: 1; font: 700 var(--text-2xs)/1 var(--font-body); letter-spacing: .12em; }
-.badge b { grid-column: 2; grid-row: 1 / 3; font: 400 var(--text-num)/.85 var(--font-display); }
-.watermark { position: absolute; right: -2vw; top: calc(var(--nav-h) + 10px); margin: 0; white-space: nowrap; pointer-events: none;
-  font: italic 400 var(--text-mark)/1 var(--font-display); color: var(--watermark); }
-```
-
-## Barre d'onglets (pilule noire, actif en parallélogramme)
-
-**Rôle** : filtrer une liste (Dernières / Actus / Événements / Avis).
-**Anatomie** : une pilule `--ink-2` contenant 4 onglets (Inter 700 14px `--muted-dark`) ; l'onglet actif est un **parallélogramme blanc** incliné (`--skew-tab`), texte noir non incliné.
-
-| État | Rendu |
-|---|---|
-| Repos | texte `--muted-dark` |
-| Survol | texte `--on-ink` (300ms `--ease`) |
-| Actif (`aria-selected="true"`) | parallélogramme `--surface`, texte `--text` |
-| Focus | contour 3px `--accent` |
-| Désactivé | opacité .4, `cursor: not-allowed` |
-
-```html
-<div class="tabbar" role="tablist" aria-label="Catégories">
-  <button role="tab" aria-selected="true">Dernières</button><button role="tab" aria-selected="false">Actus</button>…
-</div>
-```
-```css
-.tabbar { display: inline-flex; gap: var(--space-1); padding: 6px; background: var(--ink-2); border-radius: var(--radius-pill); max-width: 100%; overflow-x: auto; }
-.tabbar [role="tab"] { position: relative; min-height: 44px; padding: 0 var(--space-6); border: 0; background: none; color: var(--muted-dark);
-  font: 700 var(--text-sm) var(--font-body); cursor: pointer; white-space: nowrap; transition: color var(--dur-1) var(--ease); }
-.tabbar [role="tab"]::before { content: ""; position: absolute; inset: 4px 0; z-index: -1; background: var(--surface); transform: skewX(var(--skew-tab)) scaleX(0);
-  transition: transform var(--dur-2) var(--ease); }
-.tabbar [role="tab"] { isolation: isolate; }
-.tabbar [role="tab"]:hover { color: var(--on-ink); }
-.tabbar [role="tab"][aria-selected="true"] { color: var(--text); }
-.tabbar [role="tab"][aria-selected="true"]::before { transform: skewX(var(--skew-tab)) scaleX(1); }
-.tabbar [role="tab"]:disabled { opacity: .4; cursor: not-allowed; }
-```
-
-## Carrousel bannière (actus)
-
-**Anatomie** : cartes 16:9 de rayon `--radius-md` (≈ 24px observé) qui défilent horizontalement, la carte voisine dépasse à droite ; dessous, des **points** : point inactif `--ink`, point actif lime cerclé (anneau 2px `--ink` + 2px d'écart).
-**États** : point au survol = `--stroke` ; focus = contour lime ; défilement auto toutes les 5s (estimé), arrêté au survol, au focus et en mouvement réduit.
+Une forme est un rectangle arrondi incliné par `skewX`, qui sort de l'écran d'un côté :
 
 ```css
-.banner { display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 900px); gap: var(--space-4); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-.banner > a { scroll-snap-align: start; aspect-ratio: 16/9; border-radius: var(--radius-md); overflow: hidden; background: var(--ink); }
-.banner img { width: 100%; height: 100%; object-fit: cover; }
-.bdots button { width: 12px; height: 12px; padding: 0; border-radius: 50%; border: 0; background: var(--ink); }
-.bdots button[aria-current="true"] { background: var(--accent); box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--ink); }
+.shape { position: absolute; border-radius: var(--r-shape); transform: skewX(calc(var(--angle) * -1)); }
+.slab  { height: var(--panel-h); left: 18%; right: -40vw;                      /* bande noire */
+  background: var(--ink) repeating-linear-gradient(135deg, var(--hatch) 0 2px, transparent 2px 6px); }
 ```
 
-## Carte d'actualité de liste (coins asymétriques)
+| Forme | Rôle | Dimensions |
+|---|---|---|
+| **Bande noire** (`.slab`) | Passe derrière le panneau, décalée de 35 % vers le bas, sort à droite ou à gauche | hauteur 442px |
+| **Bloc lime** (`.block`) | Porte le titre de section ; sort de l'écran du côté opposé | 475 × 442px |
+| **Panneau** (`.panel`) | Fond blanc (ou noir) du contenu, doublé d'un liseré lime de 8px dessous | ≈ 1161 × 442px |
+| **Pellicule** (`.film`) | Ruban noir à perforations, posé en diagonale derrière les sections | 26px d'épaisseur |
 
-**Rôle** : élément de la grille 3 colonnes de la page Actu & infos.
-**Anatomie** (observé) : image 16:9 aux **coins asymétriques** (haut-gauche et bas-droit 24px, autres coins droits : `--radius-asym`) ; ligne méta = date Inter 700 14px + **étiquette catégorie en parallélogramme noir, texte lime 11px** ; titre Inter 700 17px tronqué sur 1 ligne ; extrait gris 12px sur 2 lignes.
+Le contenu n'est **jamais dans l'élément incliné** : il est posé par-dessus, droit.
 
-| État | Rendu |
-|---|---|
-| Repos | comme ci-dessus |
-| Survol | image `scale(1.05)` (500ms `--ease`), titre souligné |
-| Focus | contour 3px `--accent` autour de la carte |
-| Désactivé / à venir | image en niveaux de gris, étiquette « Bientôt » |
+## Image découpée
 
-```html
-<a class="ncard" href="#">
-  <span class="ncard__img"><img src="…" alt="…" width="640" height="360" loading="lazy"></span>
-  <span class="ncard__meta"><time datetime="2026-10-01">2026/10/01</time><i class="tag">Événements</i></span>
-  <strong class="ncard__title">Titre tronqué sur une ligne</strong>
-  <span class="ncard__ex">Extrait sur deux lignes maximum…</span>
-</a>
-```
-```css
-.ncard { display: grid; gap: var(--space-2); color: var(--text); text-decoration: none; min-width: 0; }
-.ncard__img { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius-asym); background: var(--ink); }
-.ncard__img img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-3) var(--ease); }
-.ncard:hover img { transform: scale(1.05); }
-.ncard__meta { display: flex; align-items: center; gap: var(--space-3); font: 700 var(--text-sm) var(--font-body); }
-.tag { padding: 2px 10px; background: var(--ink-2); color: var(--accent); font: normal 700 11px/1.4 var(--font-body); transform: skewX(var(--skew-tab)); }
-.ncard__title { font: 700 var(--text-card)/1.3 var(--font-body); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ncard__ex { font-size: var(--text-xs); color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-```
-
-## En-tête d'article
-
-**Anatomie** (observé) : titre centré Inter 700 28px (`--text-article`) ; dessous, une **barre pilule noire** sur toute la largeur du contenu : fil d'Ariane blanc à gauche (« Actu & infos › Actus »), date `--muted-dark` à droite ; corps centré 13px. Largeur de lecture ≈ 760px (estimé).
+Une photo dans un panneau garde ses proportions ; elle est coupée au même angle :
 
 ```css
-.article h1 { text-align: center; font: 700 var(--text-article)/1.25 var(--font-body); }
-.crumbbar { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) var(--space-6); background: var(--ink-2); color: var(--on-ink); border-radius: var(--radius-pill); font: 700 var(--text-xs) var(--font-body); }
-.crumbbar time { color: var(--muted-dark); }
+.cut { position: absolute; inset: 0 -30vw 0 0;
+  clip-path: polygon(calc(var(--panel-h) * var(--slant)) 0, 100% 0, 100% 100%, 0 100%); }   /* --slant = tan(41°) */
 ```
 
-## Onglet latéral « Retour »
+Pour un personnage : une bande en parallélogramme (les deux côtés coupés), qui dépasse le panneau de 8 % en haut.
 
-**Anatomie** : languette fixée au bord droit, noire, bord gauche arrondi (12px), texte vertical lime « RETOUR » (Anton) et flèche ↑. Variante de la pagination latérale de l'accueil.
-**États** : survol = fond lime / texte noir (300ms) ; focus = contour lime décalé ; masquée sous 1023px (remplacée par un lien en haut de l'article).
+## Bloc titre de section
 
-## Coverflow « Univers du jeu »
-
-**Rôle** : parcourir les lieux / factions de l'univers.
-**Anatomie** (observé) : fond = image plein écran **floutée** (`blur(16px)`) + voile `--veil` ; au centre une grande **carte noire** (rayon `--radius-lg`, 16px) : emblème en haut, titre condensé blanc ~40px (Anton), sous-titre lime, image en **bandes diagonales** (l'image est découpée en 3–4 bandes inclinées à 45° séparées par des filets noirs) ; à gauche et à droite, les cartes voisines **plus petites et assombries** ; flèches ← → dans des **pilules noires à contour blanc** collées aux bords de l'écran.
-
-| État | Rendu |
-|---|---|
-| Carte centrale | `scale(1)`, opacité 1, `z-index` le plus haut |
-| Voisines | `scale(.78)`, `brightness(.45)`, décalées de ±62 % |
-| Survol d'une voisine | `brightness(.7)` ; clic = elle devient centrale |
-| Flèches survol | fond `--accent`, texte noir |
-| Flèches désactivées (bout de liste) | opacité .35 |
-
-```css
-.cover { position: absolute; left: 50%; top: 50%; width: min(520px, 80vw); aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; background: var(--ink);
-  transform: translate(calc(-50% + var(--x, 0%)), -50%) scale(var(--s, 1)); filter: brightness(var(--b, 1)); transition: transform var(--dur-4) var(--ease), filter var(--dur-4) var(--ease); }
-.cover[data-pos="-1"] { --x: -62%; --s: .78; --b: .45; } .cover[data-pos="1"] { --x: 62%; --s: .78; --b: .45; }
-.cover__strips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; transform: skewX(calc(var(--cut) * -0.3)); }
-.cf-arrow { min-width: 56px; min-height: 44px; border-radius: var(--radius-pill); background: var(--ink-2); color: var(--on-ink); border: 2px solid var(--on-ink); }
+```
+Personnages        ← 36.5px
+CHARACTERS         ← 18px, capitales
+02                 ← 104.6px
 ```
 
-## Fiche personnage
+Texte `--text` sur lime, aligné à gauche, calé dans la partie haute du bloc (là où le lime est le plus large). Version à droite (`.block.right`) : texte aligné à droite, calé en bas.
 
-**Anatomie** (observé), sur béton :
-1. Rendu du personnage à gauche (image réelle détourée, `data-slot="character-render"`), qui touche le bas de l'écran.
-2. À droite : **nom énorme** Anton/Inter 700 ~48px noir (`--text-name`) avec, derrière, le **même nom en filigrane** géant `--watermark`.
-3. **Pilule de doublage** : pilule `--ink-2`, icône micro dans un cercle, nom du doubleur, **interrupteur JP / EN** (deux segments, l'actif en lime).
-4. **Citation** en Inter 700 16px.
-5. Texte gris 13px dans un **bloc défilant** (hauteur fixe ≈ 160px) avec une barre de défilement fine (3px, pouce `--ink`).
-6. Colonne de droite : **cartes noires verticales** (≈ 90×150px, rayon `--radius-sm`) portant un emblème (image), une par faction ; active = contour lime ; puis un bouton pilule lime « Plus de factions ».
+## Barre de navigation
 
-**États** : interrupteur JP/EN = `role="radiogroup"` ; segment actif lime, survol `--stroke`, focus contour lime. Cartes faction : survol `translateY(-4px)`, actif contour 3px `--accent`.
+Noire, 56px, contenu centré : logo, liens sur une ou deux lignes (11.25px gras, `--nav-idle`), **onglet actif en pilule blanche** (28px, agrandie à 1.12, texte noir), pilule lime « Télécharger maintenant » (25px de haut), bouton rond de son. Sous 1024px : logo, pilule lime et son seulement.
 
-```css
-.va-pill { display: inline-flex; align-items: center; gap: var(--space-3); padding: 6px 6px 6px 8px; background: var(--ink-2); color: var(--on-ink); border-radius: var(--radius-pill); font: 700 var(--text-xs) var(--font-body); }
-.va-switch { display: inline-flex; background: var(--field); border-radius: var(--radius-pill); }
-.va-switch button { min-width: 44px; min-height: 32px; border: 0; border-radius: var(--radius-pill); background: none; color: var(--muted-dark); font: inherit; }
-.va-switch button[aria-checked="true"] { background: var(--accent); color: var(--on-accent); }
-.bio { max-height: 160px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--ink) transparent; color: var(--muted); }
-```
+## Onglet latéral
 
-## Newsletter du bas de page
+Collé au bord droit, centré en hauteur : 46px de large, fond `--tab`, coins gauches à 8.4px ; flèche lime, numéro blanc 27px, flèche lime. Masqué sous 1024px.
 
-**Anatomie** (observé), sur `--ink` : rangée d'icônes réseaux grises (cercles 36px) ; titre « M'abonner aux messages » Inter 700 26px `--on-ink`, texte `--muted-dark` ; **champ pilule sombre** `--field` (texte blanc, placeholder `--muted-dark`) + **bouton pilule lime** « M'abonner maintenant » texte noir ; **case à cocher** de consentement avec lien lime « Détails >> ».
+## Visuel d'accueil
 
-| État | Rendu |
-|---|---|
-| Champ focus | contour 2px `--accent` |
-| Champ invalide | contour 2px `--accent`, message lime sous le champ « Adresse invalide » (le lime est lisible sur noir) |
-| Bouton survol | `filter: brightness(1.08)` ; désactivé tant que la case n'est pas cochée (opacité .45) |
-| Case cochée | carré lime, coche noire |
+Grande image à coins de 22px sur le béton. Par-dessus : **autocollants** inclinés de ±8° (logo sur fond noir à ombre lime, « Télécharger maintenant » sur fond blanc à ombre noire, ombres décalées de 4px sans flou), accroche en capitales dont la seconde ligne est lime, rangée de boutons de plateformes (41px, noirs, coins 8px). Mot géant vertical au bord droit, pellicule en diagonale.
 
-```css
-.nl { display: grid; gap: var(--space-4); max-width: 640px; }
-.nl h2 { margin: 0; font: 700 1.625rem/1.2 var(--font-body); color: var(--on-ink); }
-.nl__row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-.nl input[type="email"] { flex: 1 1 220px; min-height: 48px; padding: 0 var(--space-6); border: 2px solid transparent; border-radius: var(--radius-pill); background: var(--field); color: var(--on-ink); font: 400 var(--text-sm) var(--font-body); }
-.nl input[type="email"]:focus { outline: none; border-color: var(--accent); }
-.nl button { min-height: 48px; padding: 0 var(--space-6); border: 0; border-radius: var(--radius-pill); background: var(--accent); color: var(--on-accent); font: 700 var(--text-sm) var(--font-body); }
-.nl button:disabled { opacity: .45; }
-.nl input[type="checkbox"] { accent-color: var(--accent); width: 18px; height: 18px; }
-.nl a { color: var(--accent); }
-```
+## Fiche de personnage
+
+Dans le panneau blanc : photo en bande inclinée à gauche ; à droite, aligné à droite, la faction (18px), le **nom en 49.5px**, deux lignes de texte `--muted`. Derrière, sur la bande noire, le prénom en **mot géant** (406px, `--watermark-ink`). Sous le panneau : pilule de vignettes et bouton « En savoir plus ».
+
+## Pilule de vignettes
+
+Barre `--text` de 43px, rayon plein, contenant une flèche ronde, des vignettes de 54 × 33px (coins 6px, 50 % d'opacité), la vignette choisie à 100 % avec un contour lime de 2px, puis une flèche. `role="tablist"`, flèches du clavier.
+
+## Bouton « En savoir plus »
+
+Pilule `--text` de 43px, texte `--soft` en police d'affiche 13.5px, pastille lime de 22px avec chevron. Survol : fond lime, texte noir, pastille noire.
+
+## Carte vidéo
+
+Panneau noir à liseré lime, image découpée du côté droit, voile en bas, **bouton lecture rond lime** de 64px, légende (catégorie lime + titre) et pilule de vignettes sous l'image.
+
+## Actualités
+
+Dans le panneau blanc : bannière à coins de 8.4px avec **étiquette de catégorie** (parallélogramme noir, texte lime 11px capitales), puis date, titre en gras, points de pagination (9px, actif lime cerclé de noir) et bouton. Sous le panneau, le **texte défilant** en police d'affiche 22.5px `--muted`.
+
+## Carte « univers »
+
+Image 16:9 à coins de 22px, **ombre lime pleine décalée de 10px**, légende blanche en bas à gauche. À côté : titre, numéro, petite carte lime « radio » (pastille noire avec triangle), bouton.
+
+## Bannière de caractéristique
+
+Panneau noir, image découpée, titre **lime 45px aligné à droite** en bas, points de pagination blancs.
+
+## Pied de page
+
+Fond `--ink` : onglet blanc « TOP » qui dépasse en haut à gauche, rangée de réseaux (ronds de 44px), « M'abonner aux messages » (24px gras, `--soft`) + texte, champ en pilule `--field` de 48px, bouton lime `--accent-2` (rayon 24px), case de consentement avec lien lime. Dessous, bande noire : logo, liens légaux, mentions.
+
+## Accessibilité
+
+- Noir sur lime (17,6:1) et blanc sur noir partout ; jamais de texte lime sur blanc ou sur béton.
+- Le texte posé sur une photo a toujours un voile `--veil` dessous.
+- Cibles de 44px (liens de la barre, flèches de l'onglet, réseaux) ; les points de pagination ont une zone de 24px.
+- Carrousels : `role="tablist"` / `tab`, `aria-selected`, flèches gauche et droite.
+- La section en cours est signalée par `aria-current` dans la barre.
+- Les mots géants, la pellicule et les formes sont `aria-hidden`.

@@ -1,70 +1,66 @@
 /*
  * Hyper Lime Street — tokens
- * Mesurés sur la page d'accueil de référence (1536×674, 5441px de haut) ; tokens des pages internes
- * (actus, article, univers, personnage, pied de page) relevés à l'œil, voir source.md « Pages explorées ».
- * @contrast text:bg text:surface muted:bg on-accent:accent on-ink:ink accent:ink muted-dark:ink
- * @contrast on-accent:accent-blue on-ink:field muted-dark:field accent:ink-2
+ * MESURÉS le 2026-10-03 sur le site de référence (Chrome 1440×900 : styles calculés, feuilles de style et images de formes du site).
+ * Le site règle html { font-size: 100vw / 25.6 } (56.25px à 1440) : toutes ses tailles suivent la largeur. « choisi » = décidé par le skill.
+ * @contrast text:bg text:surface muted:bg on-accent:accent on-accent:accent-2 on-ink:ink soft:ink accent:ink nav-idle:black on-ink:black soft:field accent:black
  */
 :root {
-  /* Couleurs */
-  --bg: #efefef;            /* gris béton clair */
-  --surface: #ffffff;       /* panneaux blancs arrondis */
-  --ink: #111111;           /* blocs « piste » sombres, bas de page */
-  --ink-2: #000000;         /* barre de navigation, pellicule */
+  /* ---- Couleurs ---- */
+  --bg: #efefef;            /* mesuré : gris béton de la page */
+  --surface: #ffffff;       /* mesuré : panneaux blancs, pilule de l'onglet actif */
+  --text: #222122;          /* mesuré : titres de section, noms, numéros */
+  --muted: #61636b;         /* mesuré : texte secondaire sur clair */
+  --ink: #111111;           /* mesuré : bandes noires diagonales, pied de page */
+  --black: #000000;         /* mesuré : barre de navigation */
+  --tab: #0a0a0a;           /* mesuré : onglet latéral */
   --on-ink: #ffffff;
-  --text: #222122;
-  --muted: #6b6b6b;         /* gris lisible sur béton (le #787878 mesuré ne fait que 3,8:1) */
-  --muted-dark: #919191;
-  --accent: #d8fa00;        /* lime fluo : grands aplats */
-  --accent-2: #c6e800;      /* lime du bouton « M'abonner » */
+  --soft: #ccd0d2;          /* mesuré : texte clair sur sombre (pied, bouton « En savoir plus » ≈ #d6d6d6) */
+  --nav-idle: #878787;      /* choisi : libellés inactifs de la barre (le site : #787878, 4,4:1 sur noir) */
+  --accent: #d8fa00;        /* mesuré : lime des aplats, de la pilule de téléchargement, des titres sur image */
+  --accent-2: #c6e800;      /* mesuré : lime du bouton d'abonnement */
   --on-accent: #000000;
-  --stroke: #767678;        /* contour épais des boutons pilule */
-  --hatch: rgb(255 255 255 / 0.06); /* rayures diagonales sur les blocs sombres */
+  --field: #222222;         /* mesuré : champ en pilule du pied, pilule de vignettes */
+  --hatch: rgb(255 255 255 / 0.05);      /* choisi : trame carbone des bandes noires (image sur le site) */
+  --watermark: rgb(34 33 34 / 0.06);     /* choisi : mot géant sur béton (le site : #efefef à 10 % sur bande noire) */
+  --watermark-ink: rgb(239 239 239 / 0.1); /* mesuré : mot géant sur bande noire */
+  --veil: rgb(17 17 17 / 0.5);
 
-  /* Pages internes (observé à l'œil, 2026-10-02) */
-  --accent-blue: #1f6bff;   /* variante du badge de section pour la page Personnages (02) */
-  --field: #222222;         /* champ pilule de la newsletter */
-  --watermark: rgb(0 0 0 / 0.06);        /* mot anglais géant en filigrane sur béton (décor, pas du texte à lire) */
-  --watermark-ink: rgb(255 255 255 / 0.08); /* même filigrane sur fond sombre */
-  --veil: rgb(17 17 17 / 0.55);          /* voile sur l'image floutée de la page Univers */
+  /* ---- Typographie ---- */
+  --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif;   /* site : Impact */
+  --font-body: 'Inter', system-ui, sans-serif;                          /* site : police système + Inter */
+  --fs-num: clamp(4.5rem, 7.27vw, 6.54rem);     /* mesuré 104.6px : numéro de section 01–06 */
+  --fs-title: clamp(1.6rem, 2.54vw, 2.285rem);  /* mesuré 36.56px : nom de la section */
+  --fs-en: clamp(0.8125rem, 1.25vw, 1.125rem);  /* mesuré 18px : sous-titre anglais en capitales */
+  --fs-name: clamp(2rem, 3.44vw, 3.1rem);       /* mesuré 49.5px : nom du personnage */
+  --fs-feature: clamp(1.75rem, 3.125vw, 2.8rem);/* mesuré 45px : titre lime posé sur une image */
+  --fs-ticker: clamp(1rem, 1.56vw, 1.4rem);     /* mesuré 22.5px : texte qui défile */
+  --fs-btn: clamp(0.8125rem, 0.94vw, 0.844rem); /* mesuré 13.5px : boutons en police d'affiche */
+  --fs-nav: 0.72rem;        /* mesuré 11.25px, gras : barre de navigation (remonté à 11.5px) */
+  --fs-mark: clamp(7rem, 28.2vw, 25.4rem);      /* mesuré 406px : mot géant en filigrane */
+  --fs-foot-title: 1.5rem;  /* mesuré 24px / 28px, gras */
+  --fs-body: 0.875rem;      /* choisi 14px */
 
-  /* Typographie */
-  --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif;  /* Impact mesuré */
-  --font-body: 'Inter', system-ui, sans-serif;
-  --text-xs: 0.75rem;      /* 12px */
-  --text-sm: 0.875rem;     /* 14px */
-  --text-base: 0.9rem;     /* 14.4px */
-  --text-md: 1.2rem;       /* 19.2px */
-  --text-lg: 1.575rem;     /* 25.2px : texte display dominant */
-  --text-xl: 2.4375rem;    /* 39px */
-  --text-2xl: 3.3rem;      /* 52.8px : titres de section */
-  --text-num: clamp(4rem, 8vw, 7.5rem);  /* numéro de section 01–06 */
-  --text-2xs: 0.625rem;    /* 10px : sous-titre anglais du badge, étiquettes (observé) */
-  --text-card: 1.0625rem;  /* 17px : titre de carte d'actualité (observé) */
-  --text-article: 1.75rem; /* 28px : titre d'article (observé) */
-  --text-name: 3rem;       /* 48px : nom du personnage (observé) */
-  --text-mark: clamp(4rem, 12vw, 11rem); /* filigrane géant */
-  --leading-tight: 1;
+  /* ---- Formes (1440 de large) ---- */
+  --angle: 41deg;           /* mesuré sur les images de formes : toutes les diagonales sont à 41° de la verticale */
+  --slant: 0.869;           /* tan(41°) : décalage horizontal par unité de hauteur */
+  --container: min(1080px, 75vw);        /* mesuré : contenu de 1080px, soit 75 % de la largeur */
+  --nav-h: 56px;            /* mesuré */
+  --panel-h: clamp(300px, 30.7vw, 442px);/* mesuré : panneau, bloc lime et bande = 442px de haut */
+  --block-w: clamp(240px, 33vw, 475px);  /* mesuré : bloc lime du titre de section, 475px */
+  --r-shape: clamp(12px, 1.5vw, 22px);   /* lu sur les images : rayon des grandes formes ≈ 22px */
+  --r-card: 8.4px;          /* mesuré : cartes, onglet latéral */
+  --r-pill: 999px;          /* mesuré : 67.5px sur la barre */
+  --btn-h: 43px;            /* mesuré : bouton « En savoir plus » 138 × 43, pilule de vignettes 374 × 43 */
+  --pill-h: 25px;           /* mesuré : pilules de la barre (active : 28px, agrandie ×1.12) */
+  --tab-w: 46px;            /* mesuré : onglet latéral 46 × 201 */
+  --underline: 8px;         /* lu sur l'image : liseré lime sous le panneau blanc */
 
-  /* Espace */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px;
-  --section-pad: 117px;    /* padding vertical mesuré (×62) */
-  --nav-h: 60px;
-
-  /* Formes */
-  --radius-sm: 8.4px;      /* vignettes, cartes (dominant) */
-  --radius-md: 24px;
-  --radius-track: 72px;    /* extrémités des « pistes » */
-  --radius-pill: 999px;
-  --stroke-w: 4.8px;       /* contour des boutons pilule mesuré */
-  --cut: 45deg;            /* angle des coupes et des rayures */
-  --radius-lg: 16px;       /* carte centrale du coverflow Univers (observé) */
-  --radius-asym: var(--radius-md) 0 var(--radius-md) 0; /* image de carte d'actu : haut-gauche + bas-droit arrondis */
-  --skew-tab: -16deg;      /* onglet actif en parallélogramme, étiquettes catégorie (estimé) */
-  --badge-w: 340px;        /* largeur du badge de section des pages internes (estimé) */
-
-  /* Mouvement (easeOutCubic mesuré sur ~250 éléments) */
-  --ease: cubic-bezier(0.215, 0.61, 0.355, 1);
-  --dur-1: 300ms; --dur-2: 400ms; --dur-3: 500ms; --dur-4: 600ms;
-  --marquee: 20s;
+  /* ---- Mouvement ---- */
+  --ease: cubic-bezier(0.15, 0.59, 0.45, 0.89);   /* mesuré : courbe des entrées (durées posées par script, non lisibles) */
+  --ease-io: ease-in-out;                          /* mesuré : glissements des carrousels */
+  --dur-fast: 200ms;        /* mesuré : fenêtres, boutons */
+  --dur: 400ms;             /* mesuré : all .4s ease-out */
+  --dur-in: 700ms;          /* choisi : entrée d'une forme */
+  --dur-ticker: 20s;        /* mesuré : wordsLoop 20s linéaire */
+  --dur-beat: 0.8s;         /* mesuré : heartbeat de l'icône de son */
 }

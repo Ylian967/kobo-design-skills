@@ -1,221 +1,504 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NEON DISTRICT — Hyper Lime Street (démo)</title>
+<title>NEON DISTRICT — site officiel (démo Hyper Lime Street)</title>
+<meta name="description" content="Démo du style Hyper Lime Street : site d'un jeu d'action urbain fictif.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #efefef; --surface: #ffffff; --ink: #111111; --ink-2: #000000; --on-ink: #ffffff; --text: #222122; --muted: #6b6b6b; --muted-dark: #919191;
-  --accent: #d8fa00; --accent-2: #c6e800; --on-accent: #000000; --stroke: #767678; --hatch: rgb(255 255 255 / 0.06);
-  --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif; --font-body: 'Inter', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 0.9rem; --text-md: 1.2rem; --text-lg: 1.575rem; --text-xl: 2.4375rem; --text-2xl: 3.3rem; --text-num: clamp(4rem, 8vw, 7.5rem); --leading-tight: 1;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --section-pad: 117px; --nav-h: 60px;
-  --radius-sm: 8.4px; --radius-md: 24px; --radius-track: 72px; --radius-pill: 999px; --stroke-w: 4.8px; --cut: 45deg;
-  --ease: cubic-bezier(0.215, 0.61, 0.355, 1); --dur-1: 300ms; --dur-2: 400ms; --dur-3: 500ms; --dur-4: 600ms; --marquee: 20s;
+  --bg: #efefef; --surface: #ffffff; --text: #222122; --muted: #61636b; --ink: #111111; --black: #000000; --tab: #0a0a0a; --on-ink: #ffffff; --soft: #ccd0d2;
+  --nav-idle: #878787; --accent: #d8fa00; --accent-2: #c6e800; --on-accent: #000000; --field: #222222; --hatch: rgb(255 255 255 / 0.05); --watermark: rgb(34 33 34 / 0.06);
+  --watermark-ink: rgb(239 239 239 / 0.1); --veil: rgb(17 17 17 / 0.5); --font-display: 'Anton', 'Impact', 'Haettenschweiler', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif; --fs-num: clamp(4.5rem, 7.27vw, 6.54rem); --fs-title: clamp(1.6rem, 2.54vw, 2.285rem);
+  --fs-en: clamp(0.8125rem, 1.25vw, 1.125rem); --fs-name: clamp(2rem, 3.44vw, 3.1rem); --fs-feature: clamp(1.75rem, 3.125vw, 2.8rem);
+  --fs-ticker: clamp(1rem, 1.56vw, 1.4rem); --fs-btn: clamp(0.8125rem, 0.94vw, 0.844rem); --fs-nav: 0.72rem; --fs-mark: clamp(7rem, 28.2vw, 25.4rem);
+  --fs-foot-title: 1.5rem; --fs-body: 0.875rem; --angle: 41deg; --slant: 0.869; --container: min(1080px, 75vw); --nav-h: 56px; --panel-h: clamp(300px, 30.7vw, 442px);
+  --block-w: clamp(240px, 33vw, 475px); --r-shape: clamp(12px, 1.5vw, 22px); --r-card: 8.4px; --r-pill: 999px; --btn-h: 43px; --pill-h: 25px; --tab-w: 46px;
+  --underline: 8px; --ease: cubic-bezier(0.15, 0.59, 0.45, 0.89); --ease-io: ease-in-out; --dur-fast: 200ms; --dur: 400ms; --dur-in: 700ms; --dur-ticker: 20s;
+  --dur-beat: 0.8s;
 }
-* { box-sizing: border-box; }
-html { overflow-x: clip; scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-sm)/1.5 var(--font-body); }
-a { color: inherit; }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--fs-body)/1.5 var(--font-body); -webkit-font-smoothing: antialiased; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.on-light :focus-visible { outline-color: var(--text); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.display { font-family: var(--font-display); font-weight: 400; line-height: 1; }
+svg.i { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+main { overflow-x: clip; }
 
-/* Nav */
-.nav { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--nav-h); background: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: var(--space-8); padding: 0 var(--space-6); }
-.logo { font: 400 1.5rem/1 var(--font-display); color: var(--on-ink); letter-spacing: .08em; }
-.nav ul { display: flex; gap: var(--space-6); margin: 0; padding: 0; list-style: none; }
-.nav ul a { display: block; color: var(--muted-dark); font: 700 var(--text-sm)/1.1 var(--font-body); text-decoration: none; text-align: center; padding: 4px 12px; border-radius: var(--radius-pill); transition: all var(--dur-1) var(--ease); }
-.nav ul a:hover { color: var(--on-ink); }
-.nav ul a[aria-current="page"] { background: var(--surface); color: var(--text); }
-.btn-dl { background: var(--accent); color: var(--on-accent); border-radius: var(--radius-pill); padding: 8px 12px; font: 700 var(--text-sm)/1 var(--font-body); text-decoration: none; white-space: nowrap; }
-.icons { display: flex; gap: var(--space-3); }
-.icons span { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--stroke); display: grid; place-items: center; color: var(--on-ink); font-size: 14px; }
-.icons span:first-child { animation: rotation 6s linear infinite; }
+/* ---------- Chargement ---------- */
+.loader { position: fixed; inset: 0; z-index: 60; display: grid; align-content: end; justify-items: end; padding: 6vh 6vw; background: var(--surface); transition: transform var(--dur-in) var(--ease), visibility 0s var(--dur-in); }
+.loader b { font: italic 400 clamp(1.5rem, 3vw, 2.25rem)/1 var(--font-display); letter-spacing: 0.02em; }
+.loader span { font: 800 0.625rem/1 var(--font-body); letter-spacing: 0.5em; margin-top: 6px; }
+.loader i { display: block; width: 190px; height: 6px; margin-top: 12px; background: var(--text); transform-origin: left; animation: load 0.9s var(--ease) both; }
+@keyframes load { from { transform: scaleX(0); } }
+.ready .loader { transform: translateY(-100%); visibility: hidden; }
 
-/* Pagination latérale */
-.pager { position: fixed; right: 0; top: 30%; z-index: 40; width: 50px; padding: 12px 0; background: var(--ink-2); border: 2px solid var(--stroke); border-right: 0; border-radius: 12px 0 0 12px; display: grid; justify-items: center; gap: 6px; color: var(--accent); font: 400 1.4rem/1 var(--font-display); }
-.pager b { writing-mode: vertical-rl; font-weight: 400; }
-.pager small { writing-mode: vertical-rl; font-size: 1rem; color: var(--on-ink); opacity: .7; }
+/* ---------- Barre de navigation ---------- */
+.nav { position: fixed; z-index: 40; inset: 0 0 auto; height: var(--nav-h); display: flex; align-items: center; justify-content: center; gap: clamp(8px, 1.6vw, 26px); padding: 0 16px; background: var(--black); color: var(--on-ink); }
+.brand { display: inline-flex; align-items: center; gap: 8px; font: 400 1.25rem/1 var(--font-display); letter-spacing: 0.04em; margin-right: clamp(0px, 2vw, 30px); }
+.brand i { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 7px; background: var(--on-ink); color: var(--black); font: 400 1.125rem/1 var(--font-display); transform: rotate(-8deg); }
+.nav ul { display: flex; align-items: center; gap: clamp(2px, 1vw, 14px); }
+.nav li a { display: grid; place-items: center; min-height: 44px; }
+.nav li span { display: grid; place-items: center; min-height: var(--pill-h); padding: 0 10px; border-radius: var(--r-pill); color: var(--nav-idle); font: 800 var(--fs-nav)/1.05 var(--font-body); text-align: center; transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.nav li a:hover span { color: var(--on-ink); }
+.nav li a[aria-current] span { background: var(--surface); color: var(--black); transform: scale(1.12); }
+.cta { display: inline-grid; place-items: center; min-height: var(--pill-h); padding: 6px 12px; border-radius: var(--r-pill); background: var(--accent); color: var(--on-accent); font: 800 var(--fs-nav)/1 var(--font-body); white-space: nowrap; transition: transform var(--dur-fast) linear; }
+.cta:hover { transform: scale(1.06); }
+.beat { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--field); color: var(--soft); }
+.beat[aria-pressed="true"] { color: var(--accent); animation: heartbeat var(--dur-beat) infinite; }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.12); } }
 
-/* Matières */
-.track { position: relative; background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px); }
-.lime { background: var(--accent); color: var(--on-accent); }
-.film { height: 40px; background-color: var(--ink-2); background-image: linear-gradient(90deg, var(--surface) 0 28px, transparent 28px 56px); background-size: 56px 22px; background-repeat: repeat-x; background-position: 14px center; }
+/* ---------- Onglet latéral ---------- */
+.tab { position: fixed; z-index: 30; right: 0; top: 50%; transform: translateY(-50%); display: grid; justify-items: center; gap: 2px; width: var(--tab-w); padding: 10px 0; border-radius: var(--r-card) 0 0 var(--r-card); background: var(--tab); color: var(--on-ink); }
+.tab button { display: grid; place-items: center; width: 44px; height: 44px; color: var(--accent); }
+.tab button svg { width: 18px; height: 18px; }
+.tab b { font: 400 1.6875rem/1.2 var(--font-display); }
 
-/* Héros */
-.hero { position: relative; padding: calc(var(--nav-h) + 24px) 0 0; min-height: 720px; }
-.hero__frame { position: relative; margin: 0 6% 0 12%; height: 560px; overflow: hidden; background: var(--ink); clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%); }
-/* Photo de rue contrastée + rayures 45° par-dessus (matière du style) */
-.hero__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; filter: contrast(1.12) saturate(.9); }
-.hero__frame::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 14px), linear-gradient(0deg, rgb(17 17 17 / .45), transparent 40%); pointer-events: none; }
-.hero__logo { position: absolute; left: 10%; bottom: 40px; z-index: 2; background: var(--ink-2); color: var(--on-ink); font: 400 clamp(3rem, 7vw, 6rem)/0.85 var(--font-display); padding: 12px 24px; transform: rotate(-4deg); box-shadow: 10px 10px 0 var(--accent); }
-.stores { position: absolute; right: 8%; bottom: 30px; display: flex; gap: var(--space-3); flex-wrap: wrap; justify-content: flex-end; }
-.stores a { min-height: 44px; display: grid; place-items: center; padding: 0 var(--space-6); background: var(--ink-2); color: var(--on-ink); border-radius: var(--radius-sm); text-decoration: none; font: 700 var(--text-sm) var(--font-body); }
+/* ---------- Formes : tout est incliné du même angle ---------- */
+.sec { position: relative; padding: clamp(60px, 8vw, 117px) 0 0; }
+.wrap { position: relative; width: var(--container); margin-inline: auto; }
+.shape { position: absolute; border-radius: var(--r-shape); transform: skewX(calc(var(--angle) * -1)); }
+/* bande noire : part de la gauche du contenu et sort de l'écran à droite (ou l'inverse) */
+.slab { top: calc(var(--panel-h) * 0.35); height: var(--panel-h); left: 18%; right: -40vw; background: var(--ink) repeating-linear-gradient(135deg, var(--hatch) 0 2px, transparent 2px 6px); }
+.slab.left { left: -40vw; right: 30%; }
+/* panneau blanc à liseré lime */
+.panel { position: relative; height: var(--panel-h); margin-left: calc(var(--block-w) * 0.6); }
+.panel .shape { inset: 0 -30vw 0 0; }
+.panel .lime { background: var(--accent); translate: 0 var(--underline); }
+.panel .white { background: var(--surface); }
+.panel.dark .white { background: var(--ink); }
+/* une image dans un panneau : découpée au même angle, jamais déformée */
+.cut { position: absolute; inset: 0 -30vw 0 0; clip-path: polygon(calc(var(--panel-h) * var(--slant)) 0, 100% 0, 100% 100%, 0 100%); }
+/* bloc lime du titre de section */
+.block { position: absolute; z-index: 2; top: 0; left: calc(var(--block-w) * -0.42); width: var(--block-w); height: var(--panel-h); display: grid; align-content: start; padding: clamp(14px, 1.6vw, 24px) 0 0 calc(var(--block-w) * 0.46); }
+.block::before { content: ""; position: absolute; inset: 0 0 0 -60vw; border-radius: var(--r-shape); background: var(--accent); transform: skewX(calc(var(--angle) * -1)); transform-origin: top; z-index: -1; }
+.block.right { left: auto; right: calc(var(--block-w) * -0.3); align-content: end; justify-items: end; padding: 0 calc(var(--block-w) * 0.34) 14px 0; text-align: right; }
+.block.right::before { inset: 0 -60vw 0 0; transform-origin: bottom; }
+.block h2 { font: 400 var(--fs-title)/1 var(--font-display); }
+.block small { display: block; margin-top: 4px; font: 400 var(--fs-en)/1 var(--font-display); text-transform: uppercase; }
+.block b { display: block; font: 400 var(--fs-num)/1 var(--font-display); }
+/* pellicule en diagonale */
+.film { position: absolute; width: 150vh; height: 26px; top: 20%; right: -40vh; transform: rotate(calc(var(--angle) - 90deg)); background: var(--ink) repeating-linear-gradient(90deg, transparent 0 14px, var(--bg) 14px 28px) 0 50% / 100% 12px no-repeat; pointer-events: none; }
+.mark { position: absolute; left: 0; top: 4%; font: 400 var(--fs-mark)/0.8 var(--font-display); color: var(--watermark); white-space: nowrap; pointer-events: none; user-select: none; will-change: transform; }
+.mark.ink { color: var(--watermark-ink); }
 
-/* Section */
-.section { position: relative; padding: var(--space-16) 0; }
-.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
-.track--right { margin-left: 6%; height: 260px; border-radius: var(--radius-track) 0 0 var(--radius-track); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0); }
-.track--right::after { content: ""; position: absolute; right: 0; top: 0; width: 260px; height: 100%; background: var(--bg); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
-.track--left { margin-right: 44%; height: 220px; border-radius: 0 var(--radius-track) var(--radius-track) 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 220px 100%, 0 calc(100% - 220px)); }
-.sec-label { position: relative; display: grid; justify-items: end; align-content: end; padding: var(--space-8) var(--space-12); border-radius: 0 0 0 var(--radius-track); min-height: 280px; }
-.sec-label.left { justify-items: start; border-radius: 0 0 var(--radius-track) 0; }
-.sec-label h2 { margin: 0; font: 400 var(--text-2xl)/var(--leading-tight) var(--font-display); }
-.sec-label span { font: 400 var(--text-md)/1 var(--font-display); letter-spacing: .04em; }
-.sec-label b { font: 400 var(--text-num)/0.9 var(--font-display); }
-.panel { background: var(--surface); border-radius: var(--radius-track) 0 0 var(--radius-track); padding: var(--space-8) var(--space-12); display: grid; gap: var(--space-4); align-content: center; }
-.panel.right { border-radius: 0 var(--radius-track) var(--radius-track) 0; }
+/* entrée : les formes glissent le long de leur diagonale, le contenu suit */
+.sec .block, .sec .panel, .sec .slab { transition: transform var(--dur-in) var(--ease), opacity var(--dur) ease-out; }
+.sec:not(.in) .block { transform: translate(-70%, 0); opacity: 0; }
+.sec:not(.in) .block.right { transform: translate(70%, 0); }
+.sec:not(.in) .panel { transform: translate(40%, 0); opacity: 0; }
+.sec:not(.in) .slab { transform: skewX(calc(var(--angle) * -1)) translateX(60%); }
+.sec:not(.in) .slab.left { transform: skewX(calc(var(--angle) * -1)) translateX(-60%); }
+.sec .panel { transition-delay: 120ms; }
 
-/* Personnages */
-.carousel { display: inline-flex; align-items: center; gap: var(--space-2); padding: 6px; background: var(--ink-2); border: var(--stroke-w) solid var(--stroke); border-radius: var(--radius-pill); }
-.carousel .arr { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--bg); font: 400 1.4rem var(--font-display); cursor: pointer; }
-.carousel .arr:last-child { background: var(--surface); }
-.thumb { width: 86px; height: 48px; flex: none; overflow: hidden; border-radius: var(--radius-sm); transform: skewX(-12deg); border: 3px solid transparent; cursor: pointer; padding: 0; background: var(--muted); transition: all var(--dur-2) var(--ease); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transform: skewX(12deg) scale(1.2); }
-.thumb[aria-pressed="true"] { border-color: var(--accent); transform: skewX(-12deg) scale(1.06); }
-/* Duotone noir → lime : photo N&B en multiply sur le bloc lime */
-.char-art { position: absolute; inset: 0; z-index: 0; overflow: hidden; border-radius: inherit; background: var(--accent); }
-.char-art img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 40%; filter: grayscale(1) contrast(1.35) brightness(1.1); mix-blend-mode: multiply; transition: opacity var(--dur-2) var(--ease); }
-.char-art img.is-swapping { opacity: 0; }
-.char-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(270deg, var(--accent) 10%, transparent 60%); }
-.sec-label > :not(.char-art) { position: relative; }
-.pill { justify-self: start; display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-ink); border: var(--stroke-w) solid var(--stroke); font: 400 var(--text-md)/1 var(--font-display); text-decoration: none; transition: all var(--dur-1) var(--ease); }
-.pill:hover { background: var(--accent); color: var(--on-accent); border-color: var(--ink); }
-.label { justify-self: start; display: inline-block; background: var(--accent); color: var(--on-accent); font: 400 var(--text-sm)/1 var(--font-display); padding: 3px 10px; border-radius: var(--radius-pill); }
-.meta { font: 700 var(--text-xs) var(--font-body); color: var(--muted); }
-.title { margin: 0; font: 400 var(--text-lg)/1.1 var(--font-display); }
+/* ---------- Boutons ---------- */
+.more { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 12px; height: var(--btn-h); padding: 0 12px 0 22px; border-radius: var(--r-pill); background: var(--text); color: var(--soft); font: 400 var(--fs-btn)/1 var(--font-display); letter-spacing: 0.02em; transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+.more i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--on-accent); transition: transform var(--dur) var(--ease); }
+.more:hover { background: var(--accent); color: var(--on-accent); }
+.more:hover i { background: var(--black); color: var(--accent); transform: translateX(4px); }
+.thumbs { position: relative; z-index: 3; display: inline-flex; align-items: center; gap: 6px; height: var(--btn-h); padding: 0 6px; border-radius: var(--r-pill); background: var(--text); }
+.thumbs button { width: 54px; height: 33px; border-radius: 6px; overflow: hidden; opacity: 0.5; outline-offset: 1px; transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.thumbs button[aria-selected="true"] { opacity: 1; box-shadow: 0 0 0 2px var(--accent); }
+.thumbs button:hover { opacity: 1; transform: translateY(-2px); }
+.thumbs .arrow { width: 33px; border-radius: 50%; opacity: 1; color: var(--soft); display: grid; place-items: center; }
+.thumbs .arrow:hover { color: var(--accent); }
+.dots { display: flex; gap: 4px; }
+.dots button { display: grid; place-items: center; width: 24px; height: 24px; }
+.dots button::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--text); transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+.dots button[aria-selected="true"]::before { background: var(--accent); box-shadow: 0 0 0 2px var(--text); transform: scale(1.1); }
 
-/* Vidéo */
-.video { position: relative; min-height: 300px; border-radius: 0 0 var(--radius-track) 0; overflow: hidden; background: var(--ink); }
-.video > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(.85); }
-.video__bar { position: absolute; left: 0; right: 0; top: 30%; display: flex; align-items: center; gap: var(--space-6); padding: var(--space-4) var(--space-8); background: rgb(17 17 17 / .78); color: var(--on-ink); flex-wrap: wrap; }
-.video__bar .meta { color: var(--muted-dark); }
-.play { position: absolute; left: var(--space-8); bottom: var(--space-6); display: flex; gap: var(--space-3); }
-.play button { width: 46px; height: 46px; background: var(--accent); border: var(--stroke-w) solid var(--stroke); border-radius: var(--radius-sm); font-size: 16px; cursor: pointer; }
+/* carrousels : une diapositive visible, les autres attendent à droite */
+.slide { transition: opacity var(--dur) ease-out, transform var(--dur-in) var(--ease); }
+.slide:not(.is-on) { opacity: 0; transform: translateX(40px); pointer-events: none; visibility: hidden; transition: opacity var(--dur-fast) ease-out, transform 0s var(--dur-fast), visibility 0s var(--dur-fast); }
+.fill { position: absolute; inset: 0; }
+.stack { display: grid; }
+.stack > * { grid-area: 1 / 1; }
 
-/* Actus */
-.news-img { position: relative; aspect-ratio: 16/8; border-radius: var(--radius-md); overflow: hidden; background: var(--ink); }
-.news-img > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1); }
-.news-img .label { position: absolute; left: var(--space-4); top: var(--space-4); font-size: var(--text-md); }
-.marquee { position: absolute; left: 0; right: 0; bottom: 0; background: var(--ink-2); color: var(--muted-dark); overflow: hidden; white-space: nowrap; font: 400 var(--text-lg)/1.6 var(--font-display); font-style: italic; }
-.marquee span { display: inline-block; padding-right: 2em; animation: wordsLoop var(--marquee) linear infinite; }
-.marquee:hover span { animation-play-state: paused; }
-.dots { display: flex; gap: var(--space-4); }
-.dots i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); border: 2px solid var(--stroke); }
-.dots i:first-child { background: var(--accent); }
-.sub { justify-self: start; display: inline-flex; min-height: 48px; align-items: center; padding: 14px 16px; background: var(--accent-2); color: var(--on-accent); border: 0.8px solid var(--accent-2); border-radius: var(--radius-md); font: 400 1rem var(--font-body); text-decoration: none; transition: all 0.2s linear; }
+/* ---------- 01 Accueil ---------- */
+.hero { padding-top: calc(var(--nav-h) + clamp(16px, 2.4vw, 34px)); min-height: min(100svh, 900px); }
+.hero .mark { top: auto; bottom: 2%; left: auto; right: 1%; writing-mode: vertical-rl; font-size: clamp(3rem, 8vw, 7rem); }
+.key { position: relative; height: clamp(360px, 44vw, 640px); border-radius: var(--r-shape); overflow: hidden; background: var(--ink); isolation: isolate; }
+.key::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--veil)); }
+.sticker { position: absolute; z-index: 2; padding: 10px 16px; border-radius: 10px; background: var(--surface); color: var(--text); font: 400 clamp(1.25rem, 2.4vw, 2.1rem)/0.95 var(--font-display); text-transform: uppercase; transform: rotate(-8deg); box-shadow: 4px 4px 0 var(--black); }
+.sticker.logo { top: -14px; left: -18px; padding: 12px 18px; background: var(--black); color: var(--on-ink); font-size: clamp(2rem, 4.4vw, 3.9rem); box-shadow: 4px 4px 0 var(--accent); }
+.sticker.get { top: 8%; right: 3%; transform: rotate(7deg); }
+.sticker.get small { display: block; font: 800 0.625rem/1.6 var(--font-body); letter-spacing: 0.22em; }
+.stores { position: absolute; z-index: 2; right: 3%; bottom: 5%; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; max-width: 520px; }
+.stores a { display: inline-flex; align-items: center; gap: 8px; height: 41px; padding: 0 18px; border-radius: 8px; background: var(--black); color: var(--on-ink); font: 800 0.75rem/1 var(--font-body); letter-spacing: 0.04em; text-transform: uppercase; box-shadow: inset 0 0 0 1px var(--muted); transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+.stores a:hover { background: var(--accent); color: var(--on-accent); }
+.hero .film { top: 58%; }
+.hero h1 { position: absolute; z-index: 2; left: 4%; bottom: 7%; max-width: 9em; color: var(--on-ink); font: 400 clamp(1.75rem, 4vw, 3.4rem)/1 var(--font-display); text-transform: uppercase; }
+.hero h1 em { font-style: normal; color: var(--accent); }
 
-footer { margin-top: var(--space-16); padding: var(--space-12) var(--space-6) var(--space-8); background: var(--ink) repeating-linear-gradient(var(--cut), var(--hatch) 0 2px, transparent 2px 9px); color: var(--muted-dark); text-align: center; font-size: var(--text-xs); }
-footer .marquee { position: static; margin: calc(var(--space-12) * -1) calc(var(--space-6) * -1) var(--space-8); background: var(--accent); color: var(--on-accent); font-style: normal; }
+/* ---------- 02 Personnages ---------- */
+.chara .who { position: absolute; z-index: 2; right: 2%; top: 14%; width: min(349px, 44%); text-align: right; }
+.chara .who small { display: block; font: 400 var(--fs-en)/1.2 var(--font-display); }
+.chara .who h3 { font: 400 var(--fs-name)/1 var(--font-display); }
+.chara .who p { margin-top: 14px; color: var(--muted); }
+.chara .cut { right: 36%; left: -2%; inset-block: -8% 0; clip-path: polygon(calc(var(--panel-h) * var(--slant) * 1.08) 0, 100% 0, calc(100% - var(--panel-h) * var(--slant) * 1.08) 100%, 0 100%); }
+.row { position: relative; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-left: calc(var(--block-w) * 0.6); margin-top: calc(var(--btn-h) * -1 - 16px); padding: 0 2% 16px 5%; }
 
-.reveal.is-in { animation: slideIn var(--dur-4) var(--ease) both; }
-@keyframes slideIn { from { transform: translate(-80px, 40px); opacity: 0; } }
+/* ---------- 03 Vidéos ---------- */
+.video .panel { margin-left: 0; margin-right: calc(var(--block-w) * 0.55); }
+.video .panel .shape { inset: 0 0 0 -30vw; }
+.video .cut { inset: 0 0 0 -30vw; clip-path: polygon(0 0, 100% 0, calc(100% - var(--panel-h) * var(--slant)) 100%, 0 100%); }
+.video .cut::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--veil), transparent 45%); }
+.play { position: absolute; z-index: 2; left: 30vw; top: 50%; display: grid; place-items: center; width: 64px; height: 64px; margin: -32px 0 0 8%; border-radius: 50%; background: var(--accent); color: var(--on-accent); transition: transform var(--dur) var(--ease); }
+.play:hover { transform: scale(1.1); }
+.play svg { width: 22px; height: 22px; fill: currentColor; stroke: none; }
+.video .row { margin: calc(var(--btn-h) * -1 - 16px) calc(var(--block-w) * 0.55 + var(--panel-h) * var(--slant)) 0 0; padding: 0 0 16px 3%; color: var(--on-ink); }
+.video .cap { font: 800 0.8125rem/1.3 var(--font-body); }
+.video .cap small { display: block; color: var(--accent); font: 800 0.6875rem/1.6 var(--font-body); }
+
+/* ---------- 04 Actus ---------- */
+.news .inner { position: absolute; z-index: 2; inset: 6% 2% 6% calc(var(--panel-h) * var(--slant) * 0.55); display: grid; grid-template-rows: 1fr auto; gap: 12px; }
+.news .banner { position: relative; height: 100%; border-radius: var(--r-card); overflow: hidden; background: var(--ink); }
+.news .banner b { position: absolute; left: 14px; top: 14px; padding: 6px 10px; background: var(--black); color: var(--accent); font: 800 0.6875rem/1 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; transform: skewX(-12deg); }
+.news .meta { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.news .meta p { font: 800 0.8125rem/1.3 var(--font-body); }
+.news .meta time { display: block; color: var(--muted); font-size: 0.75rem; }
+.ticker { margin-top: clamp(20px, 3vw, 40px); overflow: hidden; white-space: nowrap; color: var(--muted); font: 400 var(--fs-ticker)/1.45 var(--font-display); }
+.ticker span { display: inline-block; padding-right: 3em; animation: wordsLoop var(--dur-ticker) linear infinite; }
 @keyframes wordsLoop { to { transform: translateX(-100%); } }
-@keyframes rotation { to { transform: rotate(1turn); } }
 
+/* ---------- 05 Univers ---------- */
+.world .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(20px, 4vw, 60px); align-items: center; min-height: var(--panel-h); }
+.world .card { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-shape); overflow: hidden; background: var(--ink); box-shadow: 10px 10px 0 var(--accent); }
+.world .card figcaption { position: absolute; left: 16px; bottom: 14px; color: var(--on-ink); font: 400 clamp(1.25rem, 2.2vw, 1.9rem)/1 var(--font-display); }
+.world .card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--veil), transparent 50%); }
+.world .card figcaption { z-index: 1; }
+.world .side { position: relative; display: grid; gap: 18px; justify-items: start; }
+.world .side h2 { font: 400 var(--fs-title)/1 var(--font-display); }
+.world .side small { display: block; font: 400 var(--fs-en)/1.3 var(--font-display); }
+.world .side b { display: block; font: 400 var(--fs-num)/1 var(--font-display); }
+.world .tv { display: inline-flex; align-items: center; gap: 12px; padding: 8px 18px 8px 8px; border-radius: 14px; background: var(--accent); color: var(--on-accent); font: 400 1.125rem/1 var(--font-display); }
+.world .tv span { display: grid; place-items: center; width: 64px; height: 44px; border-radius: 8px; background: var(--black); color: var(--accent); }
+
+/* ---------- 06 Caractéristiques ---------- */
+.feat .cut::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--veil), transparent 55%); }
+.feat h3 { position: absolute; z-index: 2; right: 4%; bottom: 12%; max-width: 12em; color: var(--accent); font: 400 var(--fs-feature)/1 var(--font-display); text-align: right; }
+.feat .dots { position: absolute; z-index: 3; left: calc(var(--panel-h) * var(--slant) * 0.25); bottom: 10px; }
+.feat .dots button::before { background: var(--surface); }
+.feat .dots button[aria-selected="true"]::before { background: var(--accent); box-shadow: 0 0 0 2px var(--black); }
+
+/* ---------- Pied ---------- */
+.foot { position: relative; margin-top: clamp(80px, 10vw, 140px); background: var(--ink); color: var(--soft); }
+.foot .wrap { width: min(1296px, 100% - 40px); }
+.top { position: absolute; top: -26px; left: clamp(20px, 6vw, 86px); display: grid; place-items: center; gap: 2px; width: 58px; height: 72px; border-radius: 12px 12px 0 0; background: var(--surface); color: var(--black); font: 400 0.9375rem/1 var(--font-display); }
+.top svg { width: 22px; height: 22px; }
+.social { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 26px 70px 10px; }
+.social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; font: 800 0.75rem/1 var(--font-body); transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+.social a:hover { background: var(--accent); color: var(--on-accent); }
+.sub { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: start; padding: 26px 0 40px; }
+.sub h2 { color: var(--soft); font: 800 var(--fs-foot-title)/1.17 var(--font-body); margin-bottom: 10px; }
+.sub p { max-width: 34em; font-size: 0.8125rem; }
+.sub form { display: grid; gap: 12px; width: min(518px, 100%); }
+.sub .line { display: flex; gap: 8px; }
+.sub input[type="email"] { flex: 1; min-width: 0; height: 48px; padding: 0 20px; border: 1px solid transparent; border-radius: var(--r-pill); background: var(--field); color: var(--on-ink); }
+.sub input[type="email"]::placeholder { color: var(--soft); opacity: 0.8; }
+.sub input[type="email"]:focus-visible { outline: 0; border-color: var(--accent-2); }
+.sub button { height: 48px; padding: 0 20px; border-radius: 24px; background: var(--accent-2); color: var(--on-accent); font-size: 1rem; white-space: nowrap; transition: transform var(--dur-fast) linear; }
+.sub button:hover { transform: scale(1.04); }
+.sub label { display: flex; gap: 10px; font-size: 0.75rem; }
+.sub label a { color: var(--accent-2); }
+.legal { padding: 34px 20px 44px; background: var(--black); text-align: center; font-size: 0.75rem; }
+.legal .brand { color: var(--on-ink); font-size: 1.75rem; margin: 0 0 18px; }
+.legal ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px; margin-bottom: 16px; }
+.legal a { display: inline-block; padding: 6px 0; }
+.legal a:hover { color: var(--accent); }
+
+/* ---------- Mobile ---------- */
 @media (max-width: 1023px) {
-  .nav ul, .icons { display: none; } .nav { justify-content: space-between; }
-  .pager { display: none; }
-  .row { grid-template-columns: 1fr; }
-  .sec-label, .sec-label.left { min-height: 0; justify-items: start; border-radius: 0 0 36px 0; padding: var(--space-6); }
-  .sec-label b { font-size: 4.5rem; }
-  .panel, .panel.right { border-radius: 0 0 36px 36px; padding: var(--space-6); }
-  .track--right, .track--left { height: 40px; margin: 0; border-radius: 0 36px 36px 0; }
-  .hero { min-height: 0; padding-bottom: var(--space-6); } .hero__frame { margin: 0 16px; height: 380px; } .hero__logo { position: relative; left: auto; bottom: auto; display: inline-block; margin: -40px 0 0 24px; } .stores { position: static; justify-content: flex-start; margin: var(--space-6) 16px 0; } .track--right::after { display: none; }
-  .carousel { max-width: 100%; overflow-x: auto; } .thumb { width: 64px; }
-  .video { border-radius: 0; }
+  :root { --container: calc(100% - 32px); }
+  .nav { justify-content: space-between; }
+  .nav ul { display: none; }
+  .tab { display: none; }
+  .block { position: relative; left: 0; width: auto; height: auto; padding: 14px 0 18px; margin-bottom: 10px; grid-template-columns: auto 1fr; column-gap: 14px; align-items: end; }
+  .block::before { inset: 0 30% 0 -60vw; }
+  .block.right { right: 0; padding: 14px 0 18px; justify-items: start; text-align: left; }
+  .block.right::before { inset: 0 30% 0 -60vw; transform-origin: top; }
+  .block b { grid-row: 1 / 3; font-size: 4rem; }
+  .block h2 { align-self: end; }
+  .panel, .video .panel { margin: 0; }
+  .row, .video .row { margin: 12px 0 0; padding: 0; flex-wrap: wrap; color: var(--text); }
+  .video .cap small { color: var(--muted); }
+  .chara .who { right: 5%; top: auto; bottom: 8%; width: 70%; text-align: right; color: var(--on-ink); }
+  .chara .who p { display: none; }
+  .chara .cut::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--veil), transparent 60%); }
+  .sec:not(.hero) .film { display: none; }
+  .chara .cut { inset: 0 -30vw 0 0; clip-path: polygon(calc(var(--panel-h) * var(--slant) * 0.5) 0, 100% 0, 100% 100%, 0 100%); }
+  .video .cut { clip-path: polygon(0 0, 100% 0, calc(100% - var(--panel-h) * var(--slant) * 0.5) 100%, 0 100%); }
+  .play { margin-left: 4%; }
+  .news .inner { left: calc(var(--panel-h) * var(--slant) * 0.3); }
+  .news .meta { flex-wrap: wrap; }
+  .world .grid { grid-template-columns: 1fr; }
+  .world .side { order: -1; }
+  .feat h3 { font-size: 1.5rem; }
+  .slab { top: 46%; height: calc(var(--panel-h) * 0.8); }
+  .sub { grid-template-columns: 1fr; }
+  .sub .line { flex-direction: column; }
+  .stores { left: 3%; justify-content: flex-start; }
+  .hero h1 { bottom: auto; top: 30%; }
+  .key { height: 460px; }
+  .sticker.get { display: none; }
+  .sticker.logo { left: -6px; }
+  .thumbs button:not(.arrow) { width: 44px; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .sec:not(.in) .block, .sec:not(.in) .panel { transform: none; opacity: 1; }
+  .sec:not(.in) .slab, .sec:not(.in) .slab.left { transform: skewX(calc(var(--angle) * -1)); }
+  .ticker { white-space: normal; }
+}
 </style>
 </head>
-<body>
+<body class="on-light">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chev" viewBox="0 0 14 14"><path d="M5 2.500 9.500 7 5 11.500"/></symbol>
+  <symbol id="up" viewBox="0 0 14 14"><path d="M2.500 9 7 4.500 11.500 9"/></symbol>
+  <symbol id="tri" viewBox="0 0 22 22"><path d="M6 3v16l13-8z"/></symbol>
+</svg>
+
+<div class="loader" aria-hidden="true"><div><b>NOW LOADING</b><span>NEON DISTRICT</span><i></i></div></div>
+
 <header class="nav">
-  <span class="logo">N·D</span>
-  <ul>
-    <li><a href="#" aria-current="page">Accueil</a></li><li><a href="#perso">Personnages</a></li><li><a href="#video">Vidéos</a></li><li><a href="actus.html">Actus &amp;<br>infos</a></li><li><a href="#">Univers<br>du jeu</a></li>
-  </ul>
-  <a class="btn-dl" href="#">Télécharger maintenant</a>
-  <div class="icons" aria-hidden="true"><span>♫</span><span>⚭</span><span>◯</span></div>
+  <a class="brand" href="#accueil" aria-label="Neon District, accueil"><i aria-hidden="true">N</i>N·D</a>
+  <nav aria-label="Principale"><ul>
+    <li><a href="#accueil" aria-current="true"><span>Page<br>d'accueil</span></a></li>
+    <li><a href="#personnages"><span>Personnages</span></a></li>
+    <li><a href="#videos"><span>Documents<br>vidéo</span></a></li>
+    <li><a href="#actus"><span>Actu &amp;<br>infos</span></a></li>
+    <li><a href="#univers"><span>Univers<br>du jeu</span></a></li>
+    <li><a href="#jeu"><span>Caracté-<br>ristiques</span></a></li>
+  </ul></nav>
+  <a class="cta" href="#accueil">Télécharger maintenant</a>
+  <button class="beat" id="beat" aria-pressed="false" aria-label="Musique (inactive dans la démo)"><svg class="i" viewBox="0 0 14 14" aria-hidden="true"><path d="M5 10.500V3l6-1.200v7.200M5 10.500a1.600 1.600 0 1 1-1.600-1.600M11 9a1.600 1.600 0 1 1-1.600-1.600"/></svg></button>
 </header>
-<aside class="pager" aria-label="Section courante"><span>⇤</span><b id="pagerNum">01</b><span>⇥</span><small id="pagerNext">02</small></aside>
+
+<aside class="tab" aria-label="Section en cours">
+  <button id="prevSec" aria-label="Section précédente"><svg class="i" viewBox="0 0 14 14" aria-hidden="true"><use href="#up"/></svg></button>
+  <b id="secNum">01</b>
+  <button id="nextSec" aria-label="Section suivante"><svg class="i" viewBox="0 0 14 14" aria-hidden="true" style="transform:rotate(180deg)"><use href="#up"/></svg></button>
+</aside>
 
 <main>
-  <section class="hero" data-n="01" aria-label="Accueil">
-    <div class="hero__frame" data-slot="key-art"><img src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=2000&q=80" alt="Skateur en plein saut sur fond de ciel bleu" width="2000" height="1333" fetchpriority="high"></div>
-    <div class="hero__logo">NEON<br>DISTRICT</div>
-    <div class="stores"><a href="#">Console</a><a href="#">Console X</a><a href="#">App Store</a><a href="#">Play Store</a></div>
-  </section>
-
-  <div class="track track--right reveal" aria-hidden="true"></div>
-
-  <section class="section" id="perso" data-n="02">
-    <div class="row">
-      <div class="panel right">
-        <span class="label">Agent de la semaine</span>
-        <h3 class="title">Kaze — Lame du quartier nord</h3>
-        <p class="meta">Spécialité : attaque rapide · Faction : Les Rouages</p>
-        <div class="carousel" role="group" aria-label="Choisir un agent">
-          <button class="arr" aria-label="Précédent">←</button>
-          <button class="thumb" aria-pressed="true" aria-label="Kaze" data-src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=1200&q=80" data-alt="Skateur en plein saut sur fond de ciel bleu"><img src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=200&h=120&q=70" alt="" width="86" height="48" loading="lazy"></button>
-          <button class="thumb" aria-pressed="false" aria-label="Mona" data-src="https://images.unsplash.com/photo-1542357091-d4cd9ad6ba02?auto=format&fit=crop&w=1200&q=80" data-alt="Deux skateurs, pieds sur leurs planches"><img src="https://images.unsplash.com/photo-1542357091-d4cd9ad6ba02?auto=format&fit=crop&w=200&h=120&q=70" alt="" width="86" height="48" loading="lazy"></button>
-          <button class="thumb" aria-pressed="false" aria-label="Dex" data-src="https://images.unsplash.com/photo-1562292657-2dc74a21b520?auto=format&fit=crop&w=1200&q=80" data-alt="Ruelle couverte de graffitis colorés"><img src="https://images.unsplash.com/photo-1562292657-2dc74a21b520?auto=format&fit=crop&w=200&h=120&q=70" alt="" width="86" height="48" loading="lazy"></button>
-          <button class="arr" aria-label="Suivant">→</button>
-        </div>
-        <a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a>
-      </div>
-      <div class="sec-label lime"><div class="char-art" data-slot="character-art"><img id="charImg" src="https://images.unsplash.com/photo-1571677594976-153c59b7ee67?auto=format&fit=crop&w=1200&q=80" alt="Skateur en plein saut sur fond de ciel bleu" width="1200" height="800" loading="lazy"></div><h2>Personnages</h2><span>CHARACTERS</span><b>02</b></div>
-    </div>
-  </section>
-
+<!-- ============ 01 Accueil ============ -->
+<section class="sec hero in" id="accueil" data-num="01">
+  <p class="mark" aria-hidden="true">NEON DISTRICT</p>
   <div class="film" aria-hidden="true"></div>
-
-  <section class="section" id="video" data-n="03">
-    <div class="row">
-      <div class="video" data-slot="video-cover"><img src="https://images.unsplash.com/photo-1720461307190-32a77e4d96b6?auto=format&fit=crop&w=1200&q=80" alt="Tunnel sombre couvert de graffitis, éclairé d'une lumière jaune" width="1200" height="800" loading="lazy">
-        <div class="video__bar"><span class="label">Découverte du personnage</span><span class="meta">29/09/2026</span><span class="title" style="font-size:var(--text-md)">Mona — « Chevalière à remontoir »</span></div>
-        <div class="play"><button aria-label="Lire la vidéo">▶</button><a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a></div>
-      </div>
-      <div class="sec-label lime"><h2>Documents vidéo</h2><span>VIDEO</span><b>03</b></div>
-    </div>
-  </section>
-
-  <div class="track track--left reveal" aria-hidden="true"></div>
-
-  <section class="section" id="actus" data-n="04">
-    <div class="row">
-      <div class="sec-label lime left"><h2>Actus &amp; infos</h2><span>NEWS</span><b>04</b></div>
-      <div class="panel">
-        <div class="news-img" data-slot="news-image"><img src="https://images.unsplash.com/photo-1517776832751-0a7e6993de03?auto=format&fit=crop&w=1200&q=80" alt="Porte couverte de graffitis et d'autocollants" width="1200" height="600" loading="lazy"><span class="label">Calendrier 10/2026</span><div class="marquee" aria-hidden="true"><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span><span>Proxys, téléchargez le fond d'écran du mois et partagez vos captures — </span></div></div>
-        <p class="meta">01/10/2026</p>
-        <h3 class="title" style="font: 700 var(--text-sm) var(--font-body)">Fond d'écran calendrier pour octobre 2026</h3>
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap"><div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><a class="pill" href="#">En savoir plus <span aria-hidden="true">›</span></a></div>
-        <a class="sub" href="#">M'abonner maintenant</a>
+  <div class="wrap">
+    <div class="key">
+      <img data-slot="hero" alt="Rue de nuit bordée d'enseignes au néon roses et bleues" fetchpriority="high" src="https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?auto=format&fit=crop&w=2000&h=1200&q=75">
+      <h1>La ville ne dort pas.<br><em>Toi non plus.</em></h1>
+      <div class="stores">
+        <a href="#accueil">PC</a><a href="#accueil">Console</a><a href="#accueil">iOS</a><a href="#accueil">Android</a>
       </div>
     </div>
-  </section>
+    <p class="sticker logo" aria-hidden="true">N·D</p>
+    <a class="sticker get" href="#accueil"><small>GRATUIT · SAISON 3</small>Télécharger<br>maintenant</a>
+  </div>
+</section>
+
+<!-- ============ 02 Personnages ============ -->
+<section class="sec chara" id="personnages" data-num="02">
+  <div class="shape slab" aria-hidden="true"></div>
+  <p class="mark ink" aria-hidden="true" data-drift id="charaMark">Sélène</p>
+  <div class="wrap">
+    <div class="block"><h2>Personnages</h2><small>Characters</small><b>02</b></div>
+    <div class="panel" data-group="chara">
+      <div class="shape lime"></div><div class="shape white"></div>
+      <div class="stack fill">
+        <div class="slide is-on" data-mark="Sélène"><div class="cut"><img loading="lazy" alt="Sélène, veste blanche à col montant et lunettes fines" src="https://images.unsplash.com/photo-1769414761120-a186e3bad614?auto=format&fit=crop&w=1400&h=900&q=75"></div>
+          <div class="who"><small>Brigade des toits</small><h3>Sélène Varga</h3><p>Coursière le jour, cartographe la nuit. Personne ne connaît mieux les passerelles du quartier haut.</p></div></div>
+        <div class="slide" data-mark="Octave"><div class="cut"><img loading="lazy" alt="Octave, veste blanche et lunettes de soleil rectangulaires" src="https://images.unsplash.com/photo-1769414761122-6ca0d27fa504?auto=format&fit=crop&w=1400&h=900&q=75"></div>
+          <div class="who"><small>Brigade des toits</small><h3>Octave Lenz</h3><p>Ancien régleur de néons. Il coupe le courant d'une rue entière en trois gestes.</p></div></div>
+        <div class="slide" data-mark="Bastien"><div class="cut"><img loading="lazy" alt="Bastien, accroupi, capuche jaune et noire" src="https://images.unsplash.com/photo-1563879749063-046655493341?auto=format&fit=crop&w=1400&h=900&q=75"></div>
+          <div class="who"><small>Les Dockers</small><h3>Bastien Roque</h3><p>Il parle peu, il encaisse beaucoup. Toujours le premier au sol, toujours le dernier debout.</p></div></div>
+        <div class="slide" data-mark="Maïa"><div class="cut"><img loading="lazy" alt="Maïa, assise sur un muret, lunettes noires" src="https://images.unsplash.com/photo-1785414671439-e220425de0e5?auto=format&fit=crop&w=1400&h=900&q=75"></div>
+          <div class="who"><small>Les Dockers</small><h3>Maïa Stern</h3><p>Elle répare ce que les autres cassent, puis elle l'améliore. Ne lui prêtez pas votre planche.</p></div></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="thumbs" role="tablist" aria-label="Choisir un personnage" data-for="chara">
+        <button class="arrow" data-step="-1" aria-label="Précédent"><svg class="i" viewBox="0 0 14 14" style="transform:rotate(180deg)"><use href="#chev"/></svg></button>
+        <button role="tab" aria-selected="true" aria-label="Sélène"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1769414761120-a186e3bad614?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button role="tab" aria-selected="false" aria-label="Octave"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1769414761122-6ca0d27fa504?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button role="tab" aria-selected="false" aria-label="Bastien"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1563879749063-046655493341?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button role="tab" aria-selected="false" aria-label="Maïa"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1785414671439-e220425de0e5?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button class="arrow" data-step="1" aria-label="Suivant"><svg class="i" viewBox="0 0 14 14"><use href="#chev"/></svg></button>
+      </div>
+      <a class="more" href="#personnages">En savoir plus <i><svg class="i" viewBox="0 0 14 14" aria-hidden="true"><use href="#chev"/></svg></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 Vidéos ============ -->
+<section class="sec video" id="videos" data-num="03">
+  <div class="film" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="block right"><h2>Documents vidéo</h2><small>Video</small><b>03</b></div>
+    <div class="panel dark" data-group="video">
+      <div class="shape lime"></div><div class="shape white"></div>
+      <div class="stack fill">
+        <div class="slide is-on" data-cap="Bande-annonce de la saison 3|Découverte"><div class="cut"><img loading="lazy" alt="Skateur en plein saut sous un ciel bleu" src="https://images.unsplash.com/photo-1723236900134-63561e5832b3?auto=format&fit=crop&w=1600&h=800&q=75"></div></div>
+        <div class="slide" data-cap="Présentation de personnage : Bastien|Personnage"><div class="cut"><img loading="lazy" alt="Saut au-dessus d'un muret, pantalon orange" src="https://images.unsplash.com/photo-1663243216708-a7831e1a9c55?auto=format&fit=crop&w=1600&h=800&q=75"></div></div>
+        <div class="slide" data-cap="Le bowl des Dockers au coucher du soleil|Lieu"><div class="cut"><img loading="lazy" alt="Skateur au-dessus d'un bowl au coucher du soleil" src="https://images.unsplash.com/photo-1597019558926-3eef445fdf60?auto=format&fit=crop&w=1600&h=800&q=75"></div></div>
+      </div>
+      <button class="play" aria-label="Lire la vidéo"><svg viewBox="0 0 22 22" aria-hidden="true"><use href="#tri"/></svg></button>
+    </div>
+    <div class="row">
+      <p class="cap" id="videoCap"><small>Découverte</small>Bande-annonce de la saison 3</p>
+      <div class="thumbs" role="tablist" aria-label="Choisir une vidéo" data-for="video">
+        <button role="tab" aria-selected="true" aria-label="Bande-annonce"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1723236900134-63561e5832b3?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button role="tab" aria-selected="false" aria-label="Bastien"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1663243216708-a7831e1a9c55?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button role="tab" aria-selected="false" aria-label="Le bowl"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1597019558926-3eef445fdf60?auto=format&fit=crop&w=120&h=80&q=60"></button>
+        <button class="arrow" data-step="1" aria-label="Suivante"><svg class="i" viewBox="0 0 14 14"><use href="#chev"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 Actus ============ -->
+<section class="sec news" id="actus" data-num="04">
+  <div class="shape slab left" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="block"><h2>Actu &amp; infos</h2><small>News &amp; info</small><b>04</b></div>
+    <div class="panel" data-group="news">
+      <div class="shape lime"></div><div class="shape white"></div>
+      <div class="inner">
+        <div class="stack">
+          <a class="slide is-on banner" href="#actus" data-cap="Fond d'écran calendrier d'octobre 2026|01/10/2026"><img loading="lazy" alt="Escalier couvert de graffitis multicolores" src="https://images.unsplash.com/photo-1608308889970-3afe4d92ddc1?auto=format&fit=crop&w=1400&h=700&q=75"><b>Cadeau</b></a>
+          <a class="slide banner" href="#actus" data-cap="Mise à jour 3.2 : le quartier des arcades ouvre ses portes|24/09/2026"><img loading="lazy" alt="Enseigne ARCADE au néon rouge" src="https://images.unsplash.com/photo-1574661569551-8374cd0465e2?auto=format&fit=crop&w=1400&h=700&q=75"><b>Mise à jour</b></a>
+          <a class="slide banner" href="#actus" data-cap="Concours de fresques : envoyez vos créations|16/09/2026"><img loading="lazy" alt="Fresque turquoise et rouge sur un mur de brique" src="https://images.unsplash.com/photo-1521684497690-b384ea6d0a85?auto=format&fit=crop&w=1400&h=700&q=75"><b>Événement</b></a>
+        </div>
+        <div class="meta">
+          <div><p id="newsCap"><time>01/10/2026</time>Fond d'écran calendrier d'octobre 2026</p>
+            <div class="dots" role="tablist" aria-label="Choisir une actualité" data-for="news"><button role="tab" aria-selected="true" aria-label="Actualité 1"></button><button role="tab" aria-selected="false" aria-label="Actualité 2"></button><button role="tab" aria-selected="false" aria-label="Actualité 3"></button></div></div>
+          <a class="more" href="#actus">En savoir plus <i><svg class="i" viewBox="0 0 14 14" aria-hidden="true"><use href="#chev"/></svg></i></a>
+        </div>
+      </div>
+    </div>
+    <p class="ticker" aria-label="Chers riverains, n'hésitez pas à nous suivre pour ne rien manquer de la saison 3."><span aria-hidden="true">Chers riverains, n'hésitez pas à nous suivre pour ne rien manquer de la saison 3 — nouvelles zones, nouveaux visages, nouvelles planches.</span><span aria-hidden="true">Chers riverains, n'hésitez pas à nous suivre pour ne rien manquer de la saison 3 — nouvelles zones, nouveaux visages, nouvelles planches.</span></p>
+  </div>
+</section>
+
+<!-- ============ 05 Univers ============ -->
+<section class="sec world" id="univers" data-num="05">
+  <div class="shape slab" aria-hidden="true" style="left:64%;top:58%"></div>
+  <div class="wrap grid">
+    <figure class="card"><img loading="lazy" alt="Ruelle étroite éclairée d'enseignes vertes et rouges" src="https://images.unsplash.com/photo-1535913917396-518c020c6a1f?auto=format&fit=crop&w=1400&h=790&q=75"><figcaption>La rue des Lanternes</figcaption></figure>
+    <div class="side">
+      <div><h2>Univers du jeu</h2><small>BACKGROUND</small><b>05</b></div>
+      <a class="tv" href="#univers"><span><svg viewBox="0 0 22 22" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="#tri"/></svg></span>Radio du quartier</a>
+      <a class="more" href="#univers">Explorer la carte <i><svg class="i" viewBox="0 0 14 14" aria-hidden="true"><use href="#chev"/></svg></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 Caractéristiques ============ -->
+<section class="sec feat" id="jeu" data-num="06">
+  <div class="film" aria-hidden="true"></div>
+  <div class="shape slab left" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="block"><h2>Caractéristiques du jeu</h2><small>Features</small><b>06</b></div>
+    <div class="panel dark" data-group="feat">
+      <div class="shape lime"></div><div class="shape white"></div>
+      <div class="stack fill">
+        <div class="slide is-on"><div class="cut"><img loading="lazy" alt="Avenue sous la pluie, reflets bleus des enseignes" src="https://images.unsplash.com/photo-1671877297416-1b15b5de5b1e?auto=format&fit=crop&w=1600&h=800&q=75"></div><h3>Deux équipes,<br>une seule rue</h3></div>
+        <div class="slide"><div class="cut"><img loading="lazy" alt="Carrefour de nuit vu d'en haut, lumières rouges et bleues" src="https://images.unsplash.com/photo-1604604994333-f1b0e9471186?auto=format&fit=crop&w=1600&h=800&q=75"></div><h3>Chaque toit<br>est un raccourci</h3></div>
+        <div class="slide"><div class="cut"><img loading="lazy" alt="Salle d'arcade aux bornes éclairées de violet" src="https://images.unsplash.com/photo-1636070759654-5c93bbca2862?auto=format&fit=crop&w=1600&h=800&q=75"></div><h3>Trente mini-jeux<br>dans les arcades</h3></div>
+      </div>
+      <div class="dots" role="tablist" aria-label="Choisir une caractéristique" data-for="feat"><button role="tab" aria-selected="true" aria-label="Caractéristique 1"></button><button role="tab" aria-selected="false" aria-label="Caractéristique 2"></button><button role="tab" aria-selected="false" aria-label="Caractéristique 3"></button></div>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer>
-  <div class="marquee" aria-hidden="true"><span>NEON DISTRICT · DISPONIBLE MAINTENANT · NEON DISTRICT · DISPONIBLE MAINTENANT · </span><span>NEON DISTRICT · DISPONIBLE MAINTENANT · NEON DISTRICT · DISPONIBLE MAINTENANT · </span></div>
-  <p>© Studio fictif — démo Kōbō. Aide · Confidentialité · Conditions · Photos : Unsplash · Exemples : <a href="demo.html" aria-current="page">Accueil</a> · <a href="actus.html">Actu &amp; infos</a></p>
+<footer class="foot">
+  <a class="top" href="#accueil"><svg class="i" viewBox="0 0 14 14" aria-hidden="true"><use href="#up"/></svg>TOP</a>
+  <div class="wrap">
+    <ul class="social" aria-label="Réseaux"><li><a href="#" aria-label="X">X</a></li><li><a href="#" aria-label="YouTube">YT</a></li><li><a href="#" aria-label="TikTok">TK</a></li><li><a href="#" aria-label="Discord">DC</a></li><li><a href="#" aria-label="Instagram">IG</a></li><li><a href="#" aria-label="Twitch">TW</a></li></ul>
+    <div class="sub">
+      <div><h2>M'abonner aux messages</h2><p>Recevez les infos des événements, les bandes-annonces, des fonds d'écran et des autocollants.</p></div>
+      <form onsubmit="return false">
+        <div class="line"><label class="sr" for="mail">Adresse e-mail</label><input id="mail" type="email" required autocomplete="email" placeholder="Adresse e-mail"><button>M'abonner maintenant</button></div>
+        <label><input type="checkbox" required><span>J'accepte de recevoir des invitations à des événements et d'autres informations sur le jeu. <a href="#">Détails &gt;&gt;</a></span></label>
+      </form>
+    </div>
+  </div>
+  <div class="legal">
+    <p class="brand"><i aria-hidden="true">N</i>NEON DISTRICT</p>
+    <ul><li><a href="#">Confidentialité</a></li><li><a href="#">Accord utilisateur</a></li><li><a href="#">Qui sommes-nous ?</a></li><li><a href="#">Contact</a></li><li><a href="#">Assistance</a></li></ul>
+    <p>Jeu et studio fictifs — page de démonstration du style Hyper Lime Street. Photos Unsplash.</p>
+  </div>
 </footer>
 
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, charImg = document.getElementById('charImg');
-  document.querySelectorAll('.thumb').forEach(t => t.addEventListener('click', () => {
-    document.querySelectorAll('.thumb').forEach(x => x.setAttribute('aria-pressed', x === t));
-    charImg.classList.add('is-swapping');
-    setTimeout(() => { charImg.src = t.dataset.src; charImg.alt = t.dataset.alt; charImg.classList.remove('is-swapping'); }, reduce ? 0 : 200);
-  }));
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .3 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  const num = document.getElementById('pagerNum'), next = document.getElementById('pagerNext');
-  const so = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const n = +e.target.dataset.n; num.textContent = String(n).padStart(2, '0'); next.textContent = String(n + 1).padStart(2, '0'); } }), { threshold: .5 });
-  document.querySelectorAll('[data-n]').forEach(s => so.observe(s));
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  addEventListener('load', () => setTimeout(() => document.body.classList.add('ready'), reduced ? 0 : 900));
+  setTimeout(() => document.body.classList.add('ready'), 3000);
+
+  // Entrée des sections et section en cours (barre, onglet latéral)
+  const secs = $('.sec'), links = $('.nav li a'), num = document.getElementById('secNum');
+  const enter = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); enter.unobserve(e.target); } }), { rootMargin: '0px 0px -18% 0px' });
+  secs.forEach(s => enter.observe(s));
+  let current = 0;
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    current = secs.indexOf(e.target); num.textContent = e.target.dataset.num;
+    links.forEach(a => a.getAttribute('href') === '#' + e.target.id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(s => spy.observe(s));
+  const go = d => secs[Math.min(secs.length - 1, Math.max(0, current + d))].scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  document.getElementById('prevSec').addEventListener('click', () => go(-1));
+  document.getElementById('nextSec').addEventListener('click', () => go(1));
+
+  // Carrousels : vignettes, points et flèches pilotent un groupe de diapositives
+  const captions = {
+    video: s => { const [t, k] = s.dataset.cap.split('|'); document.getElementById('videoCap').innerHTML = `<small>${k}</small>${t}`; },
+    news: s => { const [t, d] = s.dataset.cap.split('|'); document.getElementById('newsCap').innerHTML = `<time>${d}</time>${t}`; },
+    chara: s => { document.getElementById('charaMark').textContent = s.dataset.mark; },
+  };
+  $('[data-for]').forEach(ctrl => {
+    const name = ctrl.dataset.for, slides = $(`[data-group="${name}"] .slide`), tabs = $('[role="tab"]', ctrl);
+    let i = 0;
+    const set = n => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle('is-on', k === i));
+      tabs.forEach((t, k) => t.setAttribute('aria-selected', k === i));
+      captions[name]?.(slides[i]);
+    };
+    tabs.forEach((t, k) => t.addEventListener('click', () => set(k)));
+    $('[data-step]', ctrl).forEach(b => b.addEventListener('click', () => set(i + +b.dataset.step)));
+    ctrl.addEventListener('keydown', e => { if (e.key === 'ArrowRight') set(i + 1); else if (e.key === 'ArrowLeft') set(i - 1); else return; tabs[i].focus(); });
+  });
+
+  const beat = document.getElementById('beat');
+  beat.addEventListener('click', () => beat.setAttribute('aria-pressed', beat.getAttribute('aria-pressed') !== 'true'));
+
+  // Le mot géant dérive avec le défilement (transform seulement, une mise à jour par image)
+  const drift = $('[data-drift]');
+  let raf = 0;
+  const move = () => { raf = 0; drift.forEach(m => { const r = m.parentElement.getBoundingClientRect(); if (r.bottom > 0 && r.top < innerHeight) m.style.transform = `translateX(${Math.round(-r.top * 0.18)}px)`; }); };
+  if (!reduced) { addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(move); }, { passive: true }); move(); }
 })();
 </script>
 </body>

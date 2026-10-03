@@ -1,56 +1,72 @@
 # Hyper Lime Street — mouvement
 
-## Principes
-
-Une seule courbe pour presque tout : **easeOutCubic** `cubic-bezier(0.215, 0.61, 0.355, 1)`, mesurée sur ~250 éléments, à 300 / 400 / 500 / 600ms selon la taille de l'élément. Animations nommées : `wordsLoop` (défilant 20s linéaire), `heartbeat` (0.8s, bouton musique), `tada` (attention), `rotation` (disque musique).
+Le site de référence est nerveux mais simple : les grandes formes **glissent le long de leur diagonale**, les carrousels changent d'un coup sec, un texte défile en continu, une icône bat. Les courbes « mesuré » viennent des feuilles de style du site ; ses durées d'entrée sont posées par script et n'ont pas pu être lues : celles de ce fichier sont proposées (voir `source.md`).
 
 ## Catalogue
 
-| Moment | Effet | Durée | Courbe |
+| Moment | Effet | Durée / courbe | Statut |
 |---|---|---|---|
-| Entrée d'une section | Le ruban glisse de 80px sur l'axe de sa diagonale, le bloc lime suit 100ms après | 600ms | `--ease` |
-| Numéro de section | Monte de 30px + fondu | 500ms | `--ease` |
-| Changement de vignette | Vignette active : contour lime + scale 1.06 ; image principale en fondu croisé | 400ms | `--ease` |
-| Survol pilule | Passe en lime, texte noir | 300ms | `--ease` |
-| Défilant | Translation continue | 20s | linéaire |
-| Bouton musique | Disque qui tourne + battement | 0.8s / 6s | ease / linéaire |
-| Pagination latérale | Le numéro roule vers le haut | 300ms | `--ease` |
+| Chargement | Écran blanc, « NOW LOADING » en italique en bas à droite, barre qui se remplit ; l'écran part vers le haut | 0.9s puis 700ms `--ease` | Écran observé ; sortie proposée |
+| Entrée d'une section | Le bloc lime arrive de son côté, le panneau blanc du côté opposé (120ms plus tard), la bande noire glisse dans son axe | `--dur-in` (700ms) `--ease` ; opacité 400ms ease-out | Courbe **mesurée** (`cubic-bezier(.15,.59,.45,.89)`, opacité en ease-out) ; durée et distances proposées |
+| Barre de navigation | L'onglet de la section en cours devient une pilule blanche agrandie à 1.12 | 400ms `--ease` | Échelle 1.12 **mesurée** ; durée proposée |
+| Carrousel | La diapositive sortante s'efface (200ms), l'entrante arrive de 40px à droite | 700ms `--ease` + opacité 400ms | Courbes **mesurées** (transform + opacité) ; valeurs proposées |
+| Vignettes | La vignette choisie prend un contour lime ; au survol elle monte de 2px | 400ms | Proposé |
+| Bouton « En savoir plus » | Fond et texte s'inversent en lime, la pastille avance de 4px | 400ms `--ease` | `background-color` avec `--ease` **mesuré** ; pastille proposée |
+| Texte défilant | Une phrase défile de droite à gauche, en boucle | `--dur-ticker` (20s) linéaire | **Mesuré** (`wordsLoop 20s linear infinite`) |
+| Icône de son | Bat à 1.12 quand le son est actif | `--dur-beat` (0.8s) | **Mesuré** (`heartbeat .8s infinite`, échelle ≈ 1.1 relevée) |
+| Mot géant | Dérive horizontalement avec le défilement (18 % de la distance) | lié au défilement | Observé (sections décalées au défilement) ; valeur proposée |
+| Onglet latéral | Le numéro suit la section ; les flèches font défiler jusqu'à la suivante | défilement doux | Observé |
+| Pilules lime | Grossissent à 1.04–1.06 | 200ms linéaire | **Mesuré** (`all .2s linear`) |
 
-
-### Pages internes (observées le 2026-10-02 ; durées **estimées**, non mesurées par script, sauf mention)
-
-| Moment | Effet | Durée | Courbe |
-|---|---|---|---|
-| Chargement d'une page interne | La bande rayée entre en glissant le long de sa diagonale, puis le badge se déplie depuis la gauche (`clip-path` inset 100 % → 0), le numéro monte de 30px | 600ms + 500ms (décalé 150ms) | `--ease` |
-| Filigrane | Fondu + glissement de 60px vers la gauche, une fois | 800ms | `--ease` |
-| Changement d'onglet | Le parallélogramme blanc se déplie (`scaleX` 0 → 1) sous le nouvel onglet ; la grille passe en fondu (sortie 150ms, entrée 300ms avec montée de 12px, cartes décalées de 40ms) | 400ms | `--ease` |
-| Carrousel bannière | Glissement horizontal d'une carte, point actif qui grossit | 500ms | `--ease` |
-| Survol carte d'actu | Image `scale(1.05)` | 500ms | `--ease` |
-| Coverflow Univers | Les cartes changent de position (translation + scale + luminosité) ; le fond flouté fait un fondu croisé | 600ms / 800ms | `--ease` |
-| Interrupteur JP/EN | Le segment lime glisse d'un côté à l'autre | 300ms | `--ease` (mesuré : courbe dominante du site) |
-| Onglet latéral « Retour » | Survol : fond lime, flèche monte de 4px | 300ms | `--ease` |
-| Bouton newsletter | `all 0.2s linear` | 200ms | linéaire (mesuré sur l'accueil) |
-
-## Code de référence
+## Code
 
 ```css
-.marquee { overflow: hidden; white-space: nowrap; }
-.marquee > span { display: inline-block; padding-right: 2em; animation: wordsLoop var(--marquee) linear infinite; }
-.marquee:hover > span { animation-play-state: paused; }
+/* Les formes glissent dans leur axe : la bande reste inclinée pendant qu'elle se déplace */
+.sec .block, .sec .panel, .sec .slab { transition: transform var(--dur-in) var(--ease), opacity var(--dur) ease-out; }
+.sec:not(.in) .block { transform: translate(-70%, 0); opacity: 0; }
+.sec:not(.in) .panel { transform: translate(40%, 0); opacity: 0; }
+.sec:not(.in) .slab  { transform: skewX(calc(var(--angle) * -1)) translateX(60%); }
+.sec .panel { transition-delay: 120ms; }
+
+/* Carrousel : une diapositive visible, les autres attendent à droite */
+.slide { transition: opacity var(--dur) ease-out, transform var(--dur-in) var(--ease); }
+.slide:not(.is-on) { opacity: 0; transform: translateX(40px); visibility: hidden;
+  transition: opacity var(--dur-fast) ease-out, transform 0s var(--dur-fast), visibility 0s var(--dur-fast); }
+
+.ticker span { display: inline-block; padding-right: 3em; animation: wordsLoop var(--dur-ticker) linear infinite; }
 @keyframes wordsLoop { to { transform: translateX(-100%); } }
-.reveal-in { animation: slideIn var(--dur-4) var(--ease) both; }
-@keyframes slideIn { from { transform: translate(-80px, 80px); opacity: 0; } }
-/* Pages internes : dépliage du badge, onglet en parallélogramme */
-.badge { animation: badgeIn var(--dur-4) var(--ease) 150ms both; }
-@keyframes badgeIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
-.page-head__band { animation: bandIn var(--dur-4) var(--ease) both; }
-@keyframes bandIn { from { translate: -30% 0; opacity: 0; } }
-.grid.is-leaving { opacity: 0; transition: opacity 150ms linear; }
-.grid.is-entering > * { animation: cardUp var(--dur-1) var(--ease) both; animation-delay: calc(var(--i, 0) * 40ms); }
-@keyframes cardUp { from { opacity: 0; transform: translateY(12px); } }
-@media (prefers-reduced-motion: reduce) { .marquee > span, .reveal-in, .badge, .page-head__band, .grid.is-entering > * { animation: none; } }
 ```
+
+```js
+// Entrée : une fois, quand la section dépasse le bas de l'écran de 18 %
+const enter = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); enter.unobserve(e.target); }
+}), { rootMargin: '0px 0px -18% 0px' });
+
+// Section en cours : une bande d'observation au milieu de l'écran
+const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setCurrent(e.target); }),
+  { rootMargin: '-45% 0px -50% 0px' });
+```
+
+## Performance
+
+- **Les formes sont des blocs CSS inclinés** (`skewX`) à fond uni : aucune image, aucun masque à recalculer. Les photos, elles, ne sont jamais inclinées : elles sont découpées par un `clip-path` fixe.
+- Seuls `transform` et `opacity` sont animés ; les entrées se jouent une fois.
+- **Une seule animation continue**, le texte défilant : une ligne de texte, pas une zone plein écran. Le battement de l'icône ne tourne que si le son est actif.
+- Le mot géant est le seul élément lié au défilement : un `requestAnimationFrame` au plus par image, et seulement quand sa section est à l'écran.
+- La trame des bandes noires est un `repeating-linear-gradient` fixe.
+- Mesuré dans un Chrome sans carte graphique (rendu logiciel, écran 144 Hz), 1440×900 : accueil au repos 145 images/s, défilement de toute la page 130, section avec texte défilant 145, changement de diapositive 136.
 
 ## Mouvement réduit
 
-Rubans, badge et bande affichés directement ; changement d'onglet et coverflow sans glissement (contenu remplacé, fondu de 150ms au plus) ; carrousel bannière sans défilement automatique ; défilant figé (texte tronqué avec « … ») ; pas de disque qui tourne.
+```css
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .sec:not(.in) .block, .sec:not(.in) .panel { transform: none; opacity: 1; }
+  .sec:not(.in) .slab { transform: skewX(calc(var(--angle) * -1)); }
+  .ticker { white-space: normal; }
+}
+```
+
+Les formes sont en place d'emblée, le texte défilant devient un paragraphe fixe, le mot géant ne dérive plus, l'écran de chargement s'efface sans attendre.
