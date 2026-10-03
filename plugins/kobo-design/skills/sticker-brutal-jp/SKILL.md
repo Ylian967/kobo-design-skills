@@ -1,121 +1,109 @@
 ---
 name: sticker-brutal-jp
-description: Direction artistique « Sticker Brutal JP » — néo-brutalisme joyeux à la japonaise pour portfolios de freelance, sites de designer, studios, landings de service ou pages « à propos » bilingues japonais / anglais. Page pêche, contenu posé dans un grand cadre façon fenêtre de navigateur à contour noir épais, autocollants plats (demi-cercles, carrés arrondis, étoiles) à contour noir et ombre décalée sans flou, titre latin énorme très gras, sous-titres japonais en Noto Sans JP 900, katakana vertical jaune contouré de noir, portrait noir et blanc découpé en hexagone sur fond rose, bulles et pastilles inclinées, bouton jaune qui s'enfonce au clic. À utiliser quand on demande : néo-brutalisme, neubrutalism, brutalist, sticker, autocollant, ombre dure, hard shadow, contour noir, style japonais, Japan, kawaii pop, site en japonais, localisation japonaise, portfolio coloré, freelance, personal brand. Fournit tokens, composants, mises en page, animations et trois pages d'exemple (accueil, projets avec filtres et fiche en modale, contact avec formulaire et FAQ).
+description: Direction artistique « Sticker Brutal JP » — néo-brutalisme joyeux à la japonaise pour portfolios de freelance, sites de designer, studios, landings de service ou pages « à propos » bilingues japonais / français ou anglais. Page pêche, contenu posé dans un grand cadre à contour noir épais, autocollants plats (demi-anneaux, carré à étoile, spirale, tampon rouge) à contour noir et ombre décalée sans flou, titre latin énorme très gras, titres japonais en Mochiy Pop One, katakana vertical jaune cerné de noir, portrait noir et blanc découpé en écusson sur fond rose, bulles et pastilles inclinées, pilule de langue qui bascule toute la page, fiches blanches à ombre dure qui se « décollent » au survol, projets en damier texte / image, bande jaune. À utiliser quand on demande : néo-brutalisme, neubrutalism, brutalist, sticker, autocollant, ombre dure, hard shadow, contour noir, style japonais, Japan, kawaii pop, site en japonais, localisation japonaise, portfolio coloré, freelance, personal brand. Fournit tokens, composants, mises en page, animations et une page d'exemple bilingue.
 ---
 
 # Sticker Brutal JP
 
-> Un carnet de stickers collé sur une fenêtre de navigateur : noir franc, couleurs bonbon, et du japonais qui tape fort.
+> Un néo-brutalisme qui sourit : contours noirs, ombres dures, couleurs de bonbon — et le japonais traité comme une matière graphique.
 
 ## L'idée
 
-Le visiteur doit sentir une **personne** derrière la page, drôle et sûre d'elle. Le langage vient du néo-brutalisme web (contours noirs épais, ombres décalées sans flou, aplats saturés) adouci par des coins arrondis et une palette pastel-bonbon, puis **localisé en japonais** : titres latins massifs pour l'impact, mais tout le sens passe par du japonais très gras et lisible. Le style vit dans les **autocollants** (formes, bulles, pastilles, tuiles d'icône) et dans le **cadre** qui contient la page ; le texte courant reste sobre, noir sur papier crème.
+Le visiteur rencontre **une personne**, pas une agence : un portrait découpé sur un écusson rose, entouré de bulles et de pastilles comme une planche d'autocollants. Tout ce qui se clique est un **autocollant** — contour sombre, ombre dure sans flou — qui se **décolle** quand on l'approche. Le texte joue sur deux écritures : un **titre latin** énorme et très gras, des **titres japonais** ronds et dodus, un **katakana vertical** jaune qui mord sur le portrait. La page entière tient dans un **cadre** à gros contour, avec des formes collées à cheval sur son bord.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythme, traitements), jamais l'identité : pas de logo, de portrait, de nom ni de texte du shot d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, portrait ni textes de l'autrice d'origine.
 
 ## Règles prioritaires
 
-1. **Tout ce qui est « objet » est un autocollant** : aplat de couleur + contour `--ink` 2–3px + ombre `--shadow-hard` (décalée, flou 0). Jamais d'ombre floue, jamais de dégradé sur un autocollant.
-2. **Le texte est toujours noir** (`--ink`) ; les couleurs vives sont des fonds. Seule exception : le katakana vertical jaune, contouré de noir.
-3. **Un cadre** : la page est un grand panneau `--paper` à contour 3px et rayon 24px posé sur la page pêche `--bg`, avec des autocollants qui débordent autour.
-4. **Hiérarchie** : un mot latin énorme (Archivo 900) crie ; le sous-titre japonais (Noto Sans JP 900) explique ; le corps japonais (500, interlignage 1.85) se tait en `--muted`.
-5. **Inclinaisons** : les autocollants penchent (-12° à +10°, jamais tous dans le même sens) ; les cartes et boutons restent droits au repos.
-6. **Mouvement physique** : au survol, l'objet monte (`translate -2px`) et son ombre grandit ; à l'appui, il s'écrase sur son ombre (`translate 5px`, ombre 0).
-7. **Contraste** : texte noir sur toutes les couleurs de la palette (≥ 5:1, paires vérifiées dans `references/tokens.css`) ; jamais de blanc sur rose ou sarcelle.
-8. **Accessibilité** : cibles ≥ 44px, focus = contour noir 3px décalé, `prefers-reduced-motion` coupe flottement et bande défilante, `lang="ja"` sur la page (ou sur les blocs japonais).
-9. **Aucune valeur en dur** : couleurs, polices, tailles, rayons, ombres et durées viennent de `references/tokens.css`.
+1. **Contour sombre + ombre dure** sur tout ce qui est interactif : 1px et `3px 3px 0`, jamais de flou.
+2. **Le survol décolle** (`translate(-4px, -4px)`, ombre `6px 6px 0`), **l'appui enfonce**.
+3. **Texte toujours `--ink`** sur les couleurs vives ; les couleurs ne servent jamais de couleur de texte.
+4. **Deux écritures** : titre latin en capitales très grasses, titres japonais en Mochiy Pop One, texte courant en Noto Sans JP.
+5. **Un cadre pour toute la page**, sur fond pêche, avec des autocollants sur ses bords.
+6. **Portrait en noir et blanc** sur aplat rose, découpé en écusson ; jamais de portrait dessiné.
+7. **Couleurs en aplats** : jaune, rose, bleu, violet, vert — pas de dégradé.
+8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton, une carte, la navigation, une puce, une bulle, une pastille, le portrait hexagonal, le katakana vertical — et pour les pages internes : filtres, carte projet, fiche en modale, champs / pilules à choix / erreurs / succès, FAQ en accordéon. |
-| `references/layouts.md` | Avant de construire une page : cadre navigateur, héros deux colonnes, sections, bande défilante, contact ; gabarits **Projets** et **Contact** ; mobile 390px. |
-| `references/motion.md` | Avant d'ajouter une animation : appui « écrasé », apparition « pop », flottement, bande, coin décollé, ouverture de fiche, focus / erreur / envoi / succès, FAQ. |
-| `references/assets.md` | Avant de placer le portrait ou une image : sujet, cadrage, N&B en rendu normal dans l'hexagone (et pourquoi pas `multiply`), vignettes de projets, détourage, sources, prompt IA, 3D optionnelle. |
-| `examples/demo.html` | Accueil : héros à portrait, services, chiffres, bloc contact. |
-| `examples/projets.html` | Page Projets (proposée) : filtres en pilules, grille de cartes-autocollants, fiche projet en `<dialog>`, état vide. |
-| `examples/contact.html` | Page Contact (proposée) : formulaire néo-brutal avec validation, budget en pilules, succès, colonne d'infos, FAQ en accordéon. |
-| `source.md` | Pour connaître le shot de référence, ce qui a été **vu** et ce qui est **proposé**, et les écarts. |
-
-## Pages couvertes
-
-Le shot de référence ne montre qu'**une** page (l'accueil). Les deux autres sont des **propositions** cohérentes pour un site de freelance bilingue japonais / anglais (détail dans `source.md`). Les trois pages partagent le même `:root`, le cadre navigateur, la navigation (lien courant en pilule noire), le sélecteur de langue JA/EN (`data-en`) et le pied de page.
-
-| Page | Fichier | Contenu | Statut |
-|---|---|---|---|
-| Accueil | `examples/demo.html` | Héros (portrait hexagonal + katakana), bande défilante, 4 services, chiffres, sujets, bloc contact jaune | observé (shot) + sections complétées |
-| Projets / 実績 | `examples/projets.html` | En-tête SELECTED WORKS + ワークス, filtres en pilules avec compteurs, 9 cartes-autocollants (étiquette à cheval, coin décollé), fiche en modale (photo, méta, 2 chiffres, précédent / suivant), état vide, bandeau jaune vers Contact | proposé |
-| Contact / お問い合わせ | `examples/contact.html` | En-tête SAY HELLO + ハロー, formulaire (nom, société, e-mail, sujets en cases, budget en pilules radio, délai, message + compteur, accord), récapitulatif d'erreurs, envoi `aria-busy`, succès ; carte profil, infos, étapes ; FAQ en `<details>` | proposé |
-
-Pour un autre site : garder **une seule** signature portrait (accueil), un katakana vertical par page, une zone jaune dominante par écran ; les pages internes s'ouvrent sur un en-tête « 2 mots latins dont un surligné + sous-titre japonais ».
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Effet autocollant, cadre, autocollants, navigation, pilule de langue, titre, bouton, portrait, katakana, fiches, étiquettes, damier, formulaire. |
+| `references/layouts.md` | Ordre des sections, repères, tablette, mobile, autres pages. |
+| `references/motion.md` | Survols mesurés, arrivée des autocollants, changement de langue, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : portrait, photos de projet, pictogrammes, polices. |
+| `examples/demo.html` | Page d'accueil complète, bilingue français / japonais (designer fictive « Mio Arata »). |
+| `examples/projets.html`, `examples/contact.html` | Pages de la première version du skill, non refaites. |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Poids | Taille | Interlignage | Espacement |
-|---|---|---|---|---|---|
-| Titre latin du héros | **Archivo** | 900 | `--text-hero` (52 → 120px) | 0.92 | -0.01em, capitales |
-| Titres de carte, kicker, chiffres | Archivo | 900 | 12–48px | 1–1.1 | +0.04em, capitales |
-| Sous-titre / titres de section japonais | **Noto Sans JP** | 900 | `--text-2xl` (28 → 40px) | 1.3–1.35 | 0 |
-| Corps japonais | Noto Sans JP | 500 | 16px | 1.85 | 0 |
-| Boutons, puces, liens | Noto Sans JP | 700–900 | 14–16px | 1 | 0 |
-| Katakana vertical (signature) | **Dela Gothic One** | 400 | 48 → 90px | 1 | -0.02em, `writing-mode: vertical-rl` |
-
-Le shot utilise une grotesque noire du type Archivo Black ; on prend **Archivo variable en 900** pour garder des graisses cohérentes et un repli lourd (Arial Black). Ne jamais mettre le japonais en italique ni en capitales espacées ; pour l'emphase, passer en 900 ou poser un fond d'autocollant derrière le mot.
+| Rôle | Police | Taille |
+|---|---|---|
+| Titre latin du héros | Outfit 800, capitales, approche −2px | `--fs-h1` (104px, interligne 1) |
+| Sous-titre japonais | Mochiy Pop One | `--fs-h1-jp` (36px) |
+| Titre de section | Mochiy Pop One | `--fs-h2` (48px) |
+| Titre de fiche | Outfit 600, capitales | `--fs-h3` (32px) |
+| Titre d'article | Mochiy Pop One | `--fs-h4` (24px) |
+| Chapeau, salutation | Noto Sans JP 400 | `--fs-lead` (20px) |
+| Texte | Noto Sans JP 400 | `--fs-body` (18px), 16px dans les fiches |
+| Navigation, étiquettes | Outfit 500 | `--fs-nav` (17px), 16px |
+| Bouton | Noto Sans JP 800 | 18px |
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Page | `--bg` pêche | autour du cadre uniquement |
-| Papier | `--paper` crème | intérieur du cadre |
-| Carte | `--card` blanc | cartes, champs, logo, barre du navigateur |
-| Encre | `--ink` | tout le texte, contours, ombres |
-| Action | `--yellow` | bouton principal, katakana, bande défilante, bloc contact |
-| Identité | `--pink` | fond du portrait, sélecteur de langue |
-| Décor | `--peri`, `--teal`, `--green`, `--mint` | autocollants, tuiles d'icône, chiffres, surlignage du titre |
-| Statut | `--red` | point du sélecteur de langue seulement |
+| `--peach` | #fceee3 | Fond autour du cadre |
+| `--paper` | #f9f5f2 | Intérieur du cadre |
+| `--card` | #ffffff | Fiches, champs, bande des témoignages |
+| `--ink` | #282825 | Texte, contours, ombres |
+| `--body` | #52514e | Texte secondaire |
+| `--yellow` | #f7cb45 | Bouton, bande du journal, katakana |
+| `--pink` | #ff91e7 | Portrait, pilule de langue, étiquette |
+| `--blue`, `--purple`, `--green`, `--mint` | #91a8ed, #b196ff, #22a094, #3aee81 | Bulles, étiquettes, tuiles, autocollants |
+| `--red` | #e8332c | Point du drapeau, tampon — décoratif |
 
-Règle d'usage : **jaune = l'action**, une seule zone jaune dominante par écran (bouton du héros ou bloc contact). Les autres couleurs tournent sans hiérarchie, mais jamais deux autocollants voisins de la même couleur.
+## Mise en page
+
+- Contenu de 1248px dans un cadre à contour de 3px et coins de 40px.
+- Héros en deux colonnes : texte à gauche, portrait et ses autocollants à droite.
+- Puis : bande blanche de témoignages, trois fiches de service, projets en damier, bande jaune du journal, contact avec formulaire.
+- Détail, tablette et mobile : `references/layouts.md`.
+
+## Mouvement
+
+**Mesuré** sur le site en ligne : tous les survols (250ms, `cubic-bezier(0.645, 0.045, 0.355, 1)`), et l'absence de toute animation d'entrée. **Proposé** : les autocollants arrivent un à un en tournant, le katakana se dévoile, la pilule de langue fait rebondir les textes qu'elle remplace, les autocollants glissent légèrement au défilement, les boutons s'enfoncent à l'appui. Rien ne tourne en continu. Détail, code et mesures : `references/motion.md`.
 
 ## Images et 3D
 
-La seule image indispensable est un **vrai portrait** de la personne, en noir et blanc sur fond blanc, posé en rendu **normal** dans un hexagone intérieur à filet noir, le rose tramé faisant cadre autour (ou détourage PNG qui dépasse en bas). **Pas de `mix-blend-mode: multiply`** : il rendait le portrait invisible (voir `references/assets.md`). Sur la page Projets, les vignettes sont aussi de vraies photos (couleurs naturelles, 4:3), avec un aplat tramé de la couleur de catégorie en repli. Les autocollants (formes, bulles, pastilles, tuiles, katakana) sont du graphisme et restent en CSS/SVG. La 3D est optionnelle (un seul autocollant en jeton 3D). Jamais de dessin CSS/SVG à la place d'une photo ou d'un personnage : détails dans `references/assets.md`.
+- **Pas de 3D** dans ce style.
+- **Vraies photos** : portrait en noir et blanc (`sat=-100`) fondu dans l'aplat rose et découpé par un masque ; portraits ronds pour les témoignages ; photos en couleur pour les projets et les articles.
+- Bulles, pastilles et katakana sont du **texte** autour du portrait, pas une image : ils se traduisent avec la page.
+- Autocollants et pictogrammes : formes simples en SVG, sans logo de marque ni illustration figurative.
+- Identifiants et conseils de choix : `references/assets.md`.
 
-## Signature
+## Accessibilité
 
-**Le portrait-autocollant** : un portrait en noir et blanc découpé en hexagone, encadré de rose tramé, contour noir + ombre dure, entouré de 4–5 autocollants inclinés (bulle du prénom pervenche, tuile sarcelle, pastille jaune ronde, pastille verte « ✓ 受付中 ») et d'un **katakana vertical** jaune contouré qui déborde du cadre. Une fois par page, dans le héros. Ailleurs, les autocollants restent décoratifs et rares (2–5 autour du cadre).
+- Contrastes vérifiés dans `tokens.css` (`@contrast`) : `--ink` sur chaque aplat.
+- La pilule de langue change l'attribut `lang` de la page, son propre libellé et son nom accessible ; le point coloré n'est jamais seul à informer.
+- Autocollants, bulles et katakana vertical sont décoratifs (`aria-hidden`).
+- Champs étiquetés ; focus visible de 3px.
+- `prefers-reduced-motion` : tout est en place d'emblée, plus de décalage au défilement.
 
-## À éviter
+## À ne pas faire
 
-- Ombres floues, dégradés, verre dépoli : le style devient « SaaS générique ».
-- Texte blanc sur couleur, ou texte coloré sur papier.
-- Contours fins (1px) ou gris : le contour est noir et épais, partout.
-- Tout incliner : les blocs de lecture (cartes, formulaires) restent droits.
-- Un japonais traduit automatiquement ou mis en Archivo : utiliser une vraie police japonaise et faire relire.
-- Des autocollants partout : au-delà de 6 dans un écran, ça devient du bruit.
-- Copier le portrait, le nom, le logo ou les textes du shot de référence.
+- Flouter une ombre, arrondir un contour jusqu'à le perdre, ajouter un dégradé.
+- Écrire en couleur vive sur fond clair.
+- Faire flotter les autocollants en boucle.
+- Recouvrir un texte avec un autocollant.
+- Remplacer le portrait par une illustration.
 
-## Adaptation React / React Native
+## Vérification
 
-- Ombre dure en natif : pas de `shadowRadius: 0` fiable sur Android ; dessiner une `View` noire décalée (`position: absolute`, `top: 5`, `left: 5`) derrière l'autocollant, et l'animer à l'appui avec `Pressable` + Reanimated (`translateX/Y` 0 → 5).
-- Contours : `borderWidth: 3`, `borderColor: ink` ; les formes (demi-cercle, étoile, hexagone) en `react-native-svg`.
-- Katakana vertical : React Native n'a pas `writing-mode` ; empiler un caractère par ligne dans une `View` en colonne (attention aux petits kana et au « ー » qu'il faut tourner de 90°), ou utiliser un SVG.
-- Contour de texte : pas de `text-stroke` en natif ; superposer 4 `Text` noirs décalés de ±2px sous le `Text` jaune, ou SVG `<Text stroke>`.
-- Polices : `@expo-google-fonts/archivo`, `@expo-google-fonts/noto-sans-jp`, `@expo-google-fonts/dela-gothic-one`.
-- Web React : tout passe par les tokens CSS ; un composant `<Sticker color tilt>` qui applique contour, ombre et rotation évite les répétitions.
-
-## Avant de livrer
-
-- [ ] Tokens importés, aucune valeur en dur.
-- [ ] Chaque objet interactif a contour noir + ombre dure + états survol / appui / focus / désactivé.
-- [ ] Texte noir partout (sauf katakana contouré) ; contrastes vérifiés.
-- [ ] Page dans un cadre, 2 à 5 autocollants autour, inclinaisons variées.
-- [ ] Japonais réel, relu, `lang="ja"` ; titres latins en Archivo 900.
-- [ ] Testé à 375–390px et 1440px sans défilement horizontal, **sur chaque page** ; autocollants coupés proprement par `overflow-x: clip`.
-- [ ] Pages internes : filtre au clavier, fiche en `<dialog>` (Échap, retour du focus), champs avec `aria-invalid` + message texte, succès qui reçoit le focus, FAQ en `<details>`.
-- [ ] Portrait visible avec la vraie photo (pas de `multiply`).
-- [ ] Mouvement réduit respecté (pas de flottement ni de bande défilante).
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Aucun élément du shot d'origine (portrait, nom, logo, textes).
+1. `python3 tools/check.py sticker-brutal-jp` passe.
+2. À 1440px et à 390px : pas de défilement horizontal, aucune erreur dans la console.
+3. La pilule de langue bascule tous les textes dans les deux sens.
+4. Chaque élément cliquable se décolle au survol et s'enfonce à l'appui.
+5. Mouvement réduit : la page est entièrement lisible et utilisable.

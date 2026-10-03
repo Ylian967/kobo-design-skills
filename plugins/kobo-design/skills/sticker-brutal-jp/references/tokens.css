@@ -1,80 +1,66 @@
 /*
  * Sticker Brutal JP — tokens
- * Valeurs estimées à l'œil sur les images du shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
- * Règle : tout texte est en --ink (noir). Les couleurs vives sont des fonds d'autocollants, jamais du texte.
- * @contrast ink:bg ink:paper ink:card muted:paper muted:card ink:yellow ink:pink ink:peri ink:teal ink:green ink:mint paper:ink
- * @contrast muted:bg card:ink ink:pink-soft muted:pink-soft ink:yellow-soft ink:green-soft
- * @contrast muted:yellow-soft muted:green-soft muted:mint
- * (pages Projets / Contact : placeholder --muted sur un champ au focus --yellow-soft, texte d’aide --muted sur --green-soft ou --mint)
+ * MESURÉS le 2026-10-03 : styles calculés sur le site en ligne (kristi.digital/jp, 1440px) ; cadre, fond pêche et autocollants lus au pixel sur les images du shot Dribbble.
+ * Mouvement : les survols sont mesurés sur le site ; tout le reste est proposé.
+ * @contrast ink:page ink:paper ink:card body:paper body:card ink:yellow ink:pink ink:blue ink:purple ink:green ink:mint ink:peach paper:ink
  */
 :root {
-  /* Couleurs — page et papier */
-  --bg: #fde9dc;            /* pêche de la page, autour du cadre */
-  --paper: #fbf3ec;         /* intérieur du cadre « navigateur » */
-  --card: #ffffff;          /* cartes de service */
-  --ink: #111111;           /* texte, contours, ombres dures */
-  --muted: #4a4440;         /* texte secondaire (corps japonais long) */
+  /* ---- Couleurs ---- */
+  --peach: #fceee3;         /* mesuré (shot) : fond autour du cadre */
+  --paper: #f9f5f2;         /* mesuré (site) : fond de page, intérieur du cadre */
+  --page: #f9f5f2;
+  --card: #ffffff;          /* mesuré : fiches, champs, bande des témoignages */
+  --ink: #282825;           /* mesuré : titres, contours, ombres */
+  --body: #52514e;          /* mesuré : texte courant secondaire */
+  --yellow: #f7cb45;        /* mesuré : bouton, bande du blog, katakana */
+  --pink: #ff91e7;          /* mesuré : fond du portrait, étiquette, pilule de langue */
+  --blue: #91a8ed;          /* mesuré : bulle du prénom, étiquette */
+  --purple: #b196ff;        /* mesuré : étiquette */
+  --green: #22a094;         /* mesuré : étiquette, bulle au graphique */
+  --mint: #3aee81;          /* mesuré (shot) : pastille « disponible » */
+  --red: #e8332c;           /* mesuré (shot) : point du drapeau ; décoratif, jamais du texte */
+  --focus: #5c5b66;         /* mesuré : contour d'un champ actif */
 
-  /* Couleurs — autocollants (fonds plats, toujours contour --ink) */
-  --yellow: #f6c744;        /* bouton principal, katakana vertical, pastille œil */
-  --pink: #f0458f;          /* rose vif : fond du portrait, sélecteur de langue */
-  --peri: #8c9cf0;          /* pervenche : bulle du prénom */
-  --teal: #1f9e8f;          /* sarcelle : tuile graphique */
-  --green: #3bd16f;         /* vert : pastille « disponible » */
-  --mint: #bfe9d6;          /* pastel doux pour fonds de tuiles secondaires */
-  --red: #e5322d;           /* point de statut uniquement (pas de texte) */
-  --pink-soft: #ffd3e6;     /* fond du message d'erreur d'un champ (texte --ink) */
-  --yellow-soft: #fff1c2;   /* fond d'un champ au focus */
-  --green-soft: #d3f5df;    /* fond du panneau de succès */
-  --backdrop: color-mix(in srgb, var(--ink) 62%, transparent);   /* voile derrière une modale */
+  /* ---- Contour et ombre ---- */
+  --bw: 1px;                /* mesuré (site) : contour des fiches, boutons, étiquettes */
+  --bw-frame: 3px;          /* mesuré (shot) : contour du cadre (≈ 9px dans une image à l'échelle 2.2) */
+  --bw-sticker: 2.5px;      /* lu (shot) : contour des autocollants */
+  --shadow: 3px 3px 0 0 var(--ink);        /* mesuré : ombre dure au repos */
+  --shadow-up: 6px 6px 0 0 var(--ink);     /* mesuré : ombre au survol */
+  --lift: -4px;             /* mesuré : translate(-4px, -4px) au survol ; −2px pour la navigation */
+  --r-card: 20px;           /* mesuré */
+  --r-btn: 12px;            /* mesuré : bouton et champs */
+  --r-pill: 100px;          /* mesuré */
+  --r-frame: 40px;          /* lu (shot) */
 
-  /* Typographie */
-  --font-display: 'Archivo', 'Arial Black', 'Helvetica Neue', system-ui, sans-serif;          /* titres latins énormes, toujours en 900 */
-  --font-jp: 'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;       /* tout le japonais, 400 → 900 */
-  --font-sticker: 'Dela Gothic One', 'Noto Sans CJK JP Black', 'Hiragino Sans', sans-serif;             /* katakana vertical, gros mots */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.75rem;
-  --text-2xl: clamp(1.75rem, 3.2vw, 2.5rem);
-  --text-hero: clamp(3.25rem, 8.4vw, 7.5rem);
-  --leading-tight: 0.92;
-  --leading-jp: 1.85;      /* le japonais respire plus que le latin */
-  --tracking-caps: 0.04em;
+  /* ---- Typographie ---- */
+  --font-latin: 'Outfit', 'Unigeo 32', Arial, sans-serif;        /* site : Unigeo 32 (payante) ; Outfit est le remplaçant libre */
+  --font-jp-display: 'Mochiy Pop One', 'Noto Sans JP', sans-serif;   /* mesuré : la police du site */
+  --font: 'Noto Sans JP', 'Outfit', sans-serif;                  /* mesuré : la police du site */
+  --fs-h1: clamp(3.25rem, 7.2vw, 6.5rem);        /* mesuré : 104px / 104px, graisse 700, approche −2px */
+  --fs-h1-jp: clamp(1.5rem, 2.5vw, 2.25rem);     /* mesuré : 36px / 43.2px */
+  --fs-h2: clamp(1.75rem, 3.3vw, 3rem);          /* mesuré : 48px / 57.6px */
+  --fs-h3: clamp(1.5rem, 2.2vw, 2rem);           /* mesuré : 32px / 38.4px, graisse 600 */
+  --fs-h4: 1.5rem;          /* mesuré : titre de fiche de blog 24px / 28.8px */
+  --fs-lead: 1.25rem;       /* mesuré : salutation et chapeau 20px / 28px */
+  --fs-body: 1.125rem;      /* mesuré : 18px / 25.2px */
+  --fs-small: 1rem;         /* mesuré : texte des fiches et étiquettes 16px */
+  --fs-nav: 1.0625rem;      /* mesuré : 17px, graisse 500, approche 0.4px */
+  --fs-vertical: clamp(2.4rem, 4.6vw, 4.1rem);   /* lu (shot) : katakana vertical ≈ 66px */
 
-  /* Espace (base 4px) */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-24: 96px;
-  --container: 1240px;
-  --frame-gap: clamp(12px, 3vw, 48px);   /* marge entre la page pêche et le cadre */
+  /* ---- Grille (1440) ---- */
+  --page-w: 1248px;         /* mesuré : contenu de 96 à 1344px */
+  --gutter: clamp(18px, 6.6vw, 96px);
+  --nav-h: 89px;            /* mesuré */
+  --btn-h: 60px;            /* mesuré : bouton 197 × 60, marge intérieure 0 32px */
+  --field-h: 54px;          /* mesuré */
+  --card-pad: 32px 24px;    /* mesuré */
+  --icon: 160px;            /* mesuré : image de 160px en tête de fiche */
+  --frame-gap: clamp(8px, 2.4vw, 34px);   /* lu (shot) : distance du cadre au bord */
 
-  /* Formes */
-  --stroke: 3px;            /* contour du cadre et des autocollants */
-  --stroke-sm: 2px;         /* contour des cartes et puces */
-  --radius-sm: 8px;
-  --radius-md: 12px;        /* cartes */
-  --radius-lg: 24px;        /* cadre navigateur */
-  --radius-pill: 999px;
-  --shadow-hard: 5px 5px 0 0 var(--ink);    /* ombre décalée sans flou */
-  --shadow-hard-sm: 3px 3px 0 0 var(--ink);
-  --shadow-hard-lg: 8px 8px 0 0 var(--ink);
-  --tilt: -6deg;            /* inclinaison type des autocollants (varier -12° → 10°) */
-  --field-h: 52px;          /* hauteur des champs et boutons */
-  --peel: 22px;             /* coin « décollé » d'une carte-autocollant au survol */
-
-  /* Mouvement */
-  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --dur-fast: 120ms;
-  --dur-base: 240ms;
-  --dur-slow: 600ms;
-  --dur-modal: 320ms;       /* ouverture de la fiche projet */
+  /* ---- Mouvement ---- */
+  --ease: cubic-bezier(0.645, 0.045, 0.355, 1);   /* mesuré */
+  --dur: 250ms;             /* mesuré */
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);  /* proposé : arrivée des autocollants */
+  --dur-pop: 600ms;         /* proposé */
 }
