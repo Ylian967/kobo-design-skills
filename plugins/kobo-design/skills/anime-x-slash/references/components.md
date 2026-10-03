@@ -1,148 +1,107 @@
 # Anime X Slash — composants
 
-Valeurs mesurées sur la référence (voir `source.md`), exprimées en tokens.
+Toutes les valeurs viennent de `tokens.css`. « Mesuré » = lu dans le navigateur ou dans le code du site ; « observé » = relevé sur capture ; « proposé » = ajouté par le skill. Code complet de l'accueil dans `examples/demo.html`, des pages internes dans `examples/personnage.html` et `examples/medias.html`.
 
-## Bouton MENU (carré noir fixe)
+# Accueil (mesuré le 2026-10-03)
 
-- **Rôle** : ouvre la navigation plein écran. Toujours en haut à gauche, fixe.
-- **Anatomie** : carré noir 80×80px (`--menu-size` ; 82px relevé à l'accueil, 80px sur les pages internes), **deux** traits blancs fins (hamburger de 40px), mot « MENU » en Oswald 14px dessous.
-- **États** : survol → les traits s'écartent de 2px ; ouvert → les traits deviennent une croix fine, le carré passe au rouge `--menu-close` et le mot devient « CLOSE » ; focus → contour rouge 2px décalé de 3px.
-- **Mobile** (observé à 390px) : le carré passe en haut **à droite**, le logo en haut à gauche.
+## 1. Bouton MENU
 
-```html
-<button class="menu-btn" aria-expanded="false" aria-controls="nav">
-  <span class="menu-btn__lines" aria-hidden="true"></span>
-  <span class="menu-btn__label">MENU</span>
-</button>
-```
-```css
-.menu-btn { position: fixed; inset: 0 auto auto 0; z-index: 60; width: var(--menu-size); height: var(--menu-size);
-  display: grid; place-content: center; gap: var(--space-2); background: var(--ink); color: var(--on-ink);
-  border: 0; cursor: pointer; font: 500 var(--text-sm)/1 var(--font-display); letter-spacing: var(--tracking-caps); }
-.menu-btn__lines, .menu-btn__lines::before, .menu-btn__lines::after { display: block; width: 40px; height: 1.6px; background: currentColor;
-  transition: transform var(--dur-base) var(--ease); }
-.menu-btn__lines { position: relative; justify-self: center; background: transparent; } /* deux traits seulement */
-.menu-btn__lines::before, .menu-btn__lines::after { content: ""; position: absolute; left: 0; }
-.menu-btn__lines::before { top: -5px; } .menu-btn__lines::after { top: 5px; }
-.menu-btn:hover .menu-btn__lines::before { transform: translateY(-2px); }
-.menu-btn:hover .menu-btn__lines::after { transform: translateY(2px); }
-.menu-btn[aria-expanded="true"] { background: var(--menu-close); }
-.menu-btn[aria-expanded="true"] .menu-btn__lines::before { transform: translateY(5px) rotate(33deg); }
-.menu-btn[aria-expanded="true"] .menu-btn__lines::after { transform: translateY(-5px) rotate(-33deg); }
-.menu-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-```
-
-## Navigation plein écran (relevée sur le site, menu ouvert)
-
-- **Rôle** : navigation principale de toutes les pages ; s'ouvre depuis le carré MENU.
-- **Anatomie** (observé) : overlay plein écran ; en fond, une illustration de groupe passée en **N&B et assombrie** (`--menu-veil`) ; liens en **2 colonnes**, capitales condensées blanches très grandes (~44px, `--text-menu`) ; logotype blanc à droite ; sélecteur de langue JP / FR en haut à droite (actif sur pastille rouge) ; en bas à gauche, mot « OFFICIEL » vertical + icônes sociales empilées.
-- Le bouton MENU devient un **carré rouge « CLOSE »** avec une croix fine (`--menu-close`, texte blanc).
-- **États** : lien au repos blanc ; survol / focus → rouge `--accent-text` (300ms) ; lien de la page courante → rouge + `aria-current="page"` ; focus → contour rouge 2px décalé.
-
-```html
-<button class="menu-btn" aria-expanded="false" aria-controls="nav"><span class="menu-btn__lines" aria-hidden="true"></span><span class="menu-btn__label">MENU</span></button>
-<nav class="menu" id="nav" aria-label="Navigation principale" hidden>
-  <div class="menu__bg" aria-hidden="true"><img src="…" alt=""></div>
-  <ul class="menu__links">
-    <li><a href="index.html">Accueil</a></li><li><a href="actus.html">Actualités</a></li>
-    <li><a href="personnages.html" aria-current="page">Personnages</a></li><li><a href="#">Histoire</a></li>
-  </ul>
-  <p class="menu__brand" aria-hidden="true">RANK ZERO</p>
-  <div class="menu__lang"><button aria-pressed="false">JP</button><button aria-pressed="true">FR</button></div>
-  <div class="menu__sns"><span>OFFICIEL</span><a href="#" aria-label="Réseau 1">X</a></div>
-</nav>
-```
-```css
-.menu { position: fixed; inset: 0; z-index: 55; display: grid; grid-template-columns: 1fr auto; align-items: center;
-  padding: var(--space-20) clamp(24px, 10vw, 160px); color: var(--on-ink); background: var(--ink); }
-.menu[hidden] { display: none; }
-.menu__bg { position: absolute; inset: 0; z-index: -1; }
-.menu__bg img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.2); }
-.menu__bg::after { content: ""; position: absolute; inset: 0; background: var(--menu-veil); }
-.menu__links { display: grid; grid-template-columns: repeat(2, max-content); gap: var(--space-4) var(--space-20); margin: 0; padding: 0; list-style: none; }
-.menu__links a { font: 500 var(--text-menu)/1.1 var(--font-display); text-transform: uppercase; text-decoration: none; transition: color var(--dur-fast) var(--ease); }
-.menu__links a:hover, .menu__links a:focus-visible, .menu__links a[aria-current] { color: var(--accent-text); }
-.menu-btn[aria-expanded="true"] { background: var(--menu-close); }   /* carré rouge CLOSE */
-```
-Le libellé du bouton passe de « MENU » à « CLOSE » (ou « FERMER ») par script. `Échap` ferme, le focus revient au bouton. Mobile : une seule colonne, liens 32px.
-
-## Sélecteur de langue
-
-Label « LANGUAGE » Oswald 11px au-dessus, deux petites cases 26×20 : inactive = fond blanc texte noir, active = fond `--accent` texte `--on-accent`.
-
-## Bouton d'action (étiquette biseautée)
-
-- **Rôle** : appel à l'action ou en-tête de bloc (« OFFICIAL SNS », « VOIR TOUT »).
-- **Anatomie** : aplat rouge en parallélogramme, texte Noto Sans JP 700 14–16px capitales.
-```css
-.tag-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-6);
-  background: var(--accent); color: var(--on-accent); font: 700 var(--text-base)/1 var(--font-body);
-  letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none;
-  clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); transition: background var(--dur-fast) var(--ease); }
-.tag-btn:hover { background: var(--accent-deep); }
-.tag-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-```
-
-## Liste d'actualités (barres noires)
-
-- Conteneur noir pleine largeur du container (≈ 1146px), chaque ligne : padding 30px 40px, titre blanc Noto Sans JP 700 16px, chevron fin à droite.
-- **Date** : petite étiquette rouge collée sur le filet rouge de 4px qui sépare deux lignes, texte Oswald 14px noir.
-- Survol : le titre se décale de 8px à droite, le chevron passe en rouge (300ms).
-
-```html
-<ul class="news">
-  <li><a href="#"><time class="news__date">2025.11.11</time><span>Changement d'horaire de diffusion</span><i aria-hidden="true">›</i></a></li>
-</ul>
-```
-
-## Visuel découpé en X
-
-Image réelle (photo ou illustration du projet, voir `assets.md`) dans un conteneur, masquée par un `clip-path` qui dessine deux bandes diagonales, avec un voile `--veil`. Un grand mot Oswald (titre de la section suivante) dépasse en bas, en gris translucide.
-Le plus simple : un masque en dégradé net à l'angle `--slant` (deux bandes opaques séparées par une fente transparente).
-```css
-.x-cut { position: relative; aspect-ratio: 16/9; overflow: hidden; }
-.x-cut__img { position: absolute; inset: 0; background: var(--ink) center/cover;
-  -webkit-mask-image: linear-gradient(57deg, transparent 0 18%, #000 18% 40%, transparent 40% 43%, #000 43% 66%, transparent 66%);
-          mask-image: linear-gradient(57deg, transparent 0 18%, #000 18% 40%, transparent 40% 43%, #000 43% 66%, transparent 66%); }
-.x-cut__img::after { content: ""; position: absolute; inset: 0; background: var(--veil); }
-```
-(Les `#000` du masque ne sont pas des couleurs affichées : seule leur opacité compte.)
-
-## Carte de classement (parallélogramme)
-
-- **Anatomie** : parallélogramme (`--skew`), visuel réel du personnage en fond (photo/illustration N&B + calque `--c` en multiply, voir `assets.md`), dégradé blanc vers le bas, **chiffre géant Oswald rouge** (01, 02…) en bas à gauche, étiquette noire « RANKING No. » au-dessus du chiffre, étiquette noire « HERO NAME » + nom blanc en haut à droite.
-- Les cartes s'emboîtent sans gouttière, bordure claire 1.6px ; des triangles noirs pleins comblent les extrémités de la rangée.
-- Survol : le visuel zoome à 1.05 (500ms `--ease-snap`), la couleur du personnage apparaît en liseré.
+Carré **noir de 80 × 80px** fixe en haut à gauche (`--menu-size`), deux traits blancs de 38px espacés de 14px, « MENU » en Oswald 16px blanc dessous. Ouvert : fond rouge, traits croisés à ±20°, libellé « CLOSE ». Mobile : 60px, en haut à droite.
 
 ```css
-.rank-card { position: relative; transform: skewX(var(--skew)); overflow: hidden; border: var(--border-bold) solid rgb(255 255 255 / .6); }
-.rank-card > * { transform: skewX(calc(var(--skew) * -1)); }
-.rank-card__num { font: 400 var(--text-number)/1 var(--font-display); color: var(--accent-text); }
-.rank-card__label { background: var(--ink); color: var(--on-ink); font: 500 var(--text-xs)/1 var(--font-display); padding: 2px 4px; }
+.menu-btn { position: fixed; left: 0; top: 0; width: var(--menu-size); height: var(--menu-size); background: var(--ink); color: var(--on-ink); }
+.menu-btn[aria-expanded="true"] { background: var(--menu-close); }        /* rouge assombri : porte du blanc en 16px */
+.menu-btn[aria-expanded="true"] i::before { transform: rotate(20deg); }  .menu-btn[aria-expanded="true"] i::after { transform: rotate(-20deg); }
 ```
 
-## Liste staff / casting
+## 2. Menu plein écran
 
-Deux colonnes. À gauche, le rôle (Noto Sans JP 700 italique 16px noir, aligné à droite). À droite, le nom (Noto Sans JP 700 italique 20–24px, `--accent`). Casting : bouton rond 32px (contour noir 0.8px, icône agrandir) pour ouvrir la fiche.
+Panneau noir sur une **image de groupe en niveaux de gris** assombrie (`--menu-veil`). Liens sur **2 colonnes**, Oswald capitales ≈ 44px (`--text-menu`), blancs ; lien courant et survol sur **aplat rouge** (`--accent-text`, texte noir). Logotype blanc à droite des liens. Langue en haut à droite, réseaux en bas à gauche. Mobile : une colonne centrée.
 
-## Bouton rond
+## 3. Sélecteur de langue
 
-Cercle 32–44px, contour `--border-thin` noir, icône fine. Survol : fond noir, icône blanche.
+Libellé Oswald 11px au-dessus de deux cases **40 × 24px** blanches, Oswald 14px ; case active rouge.
 
-## Rail latéral
+## 4. Logotype et glitch
 
-À gauche, texte vertical « OFFICIAL » (Oswald 11px, `writing-mode: vertical-rl`) suivi des icônes sociales noires dans des carrés. À droite dans le héros : « VISUAL SELECTER » vertical + vignettes carrées 40px à bordure noire pour changer de visuel.
+Le logotype est un **signe typographique** (Oswald 700 italique, biais −12°, barre oblique rouge) : il reste en texte. Il existe en trois tailles : chargement, héros (≈ 44 % de la largeur sur le site), pied. Il porte la classe `.glitch` et son texte en `data-text` (voir `motion.md`).
+
+## 5. Héros : visuel en éclats (signature)
+
+- Fond `--bg-hero`. Derrière tout, le **logotype géant en `--pop`** (magenta), plein en haut, **tramé de points** en bas.
+- Des **éclats triangulaires** aux couleurs des personnages partent du centre.
+- Le visuel : sur le site, une illustration de groupe. Dans le skill, **5 éclats photo** en parallélogrammes (`skewX(var(--skew))`), hauteurs 330 / 430 / 540 / 430 / 330px, 10px d'écart, filet blanc intérieur.
+- Par-dessus, en bas : le logotype noir, puis la **bande d'annonce** noire biaisée (700 × 41px), texte Oswald blanc avec la date en rouge.
+- Rails : à gauche « OFFICIAL » vertical + 3 carrés noirs de réseaux ; à droite « VISUAL SELECTOR » vertical + vignettes carrées (active = contour rouge, les autres en gris).
+
+```css
+.shard { position: absolute; width: var(--w); height: var(--h); transform: skewX(var(--skew)); overflow: hidden; background: var(--surface); }
+.shard > div { position: absolute; top: 0; left: -72.5%; width: 247.5%; height: 100%; transform: skewX(var(--slant)); }   /* contre-biais : la photo reste droite */
+.shard img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 30%); }
+```
+Les valeurs `-72.5%` / `247.5%` sont celles du site pour ses cartes : elles couvrent exactement un parallélogramme de 160 × 320px à 36,4°.
+
+## 6. Titre de section
+
+Oswald 500 capitales `--accent-text`, **capitales de 80px** (`--text-title`), **collé au bord gauche de l'écran** (aucune marge). Sur le site ce sont des images ; ici du texte.
+
+## 7. Bouton contour (« ARCHIVE »)
+
+**200 × 40px**, bord 2px noir, Oswald 14px capitales, placé à droite du titre (à 80px du bord, 40px sous le haut de la section). Survol : fond noir, texte blanc.
+
+## 8. Bande-annonce découpée en X (signature)
+
+Bloc 16:9 pleine largeur. La vidéo (ici une photo de rue de nuit, voile noir à 80 % sur le site) n'est visible **qu'à travers un grand X** ; deux traits noirs parallèles au biais coupent le coin droit ; logotype gris translucide au centre. Titre rouge en haut à gauche, bouton contour en haut à droite, partage vertical à gauche. Deux **panneaux biaisés** ferment le bloc et s'ouvrent à l'arrivée. Tout le bloc est un lien ; le curseur rond s'y affiche.
+
+```css
+.trailer__x { background: var(--ink); clip-path: polygon(8% 0, 30% 0, 50% 36%, 70% 0, 92% 0, 63% 50%, 92% 100%, 70% 100%, 50% 64%, 30% 100%, 8% 100%, 37% 50%); }
+```
+Le X du site est une forme propre à son logo ; celui-ci est un X générique à redessiner pour chaque projet.
+
+## 9. Liste d'actualités
+
+Liste de **1052px** centrée. Chaque ligne : barre noire de **96px**, **bord haut rouge de 4px**, marge intérieure 30px 80px 30px 40px, titre blanc 16px (interligne 2). **Date** : étiquette rouge de 16px de haut collée sur le bord haut, texte noir Oswald 14px, retrait de 40px. Chevron blanc à 40px du bord droit. Survol : voir `motion.md`.
+
+## 10. Texte d'introduction
+
+Colonne de **880px** centrée. Noto Sans JP **700, 20px / 40px**, espacement 0.8px. Accroche finale en **32px / 1.875 rouge**. Puis un **bloc noir pleine largeur** (marges 80px) avec le même texte en blanc et son accroche rouge.
+
+## 11. Staff et casting
+
+Deux colonnes. Sous-titres Oswald noir ≈ 46px. **Staff** : rôle à droite d'une colonne de 160px (italique gras, petit), nom en **italique gras 20px rouge `--accent`** ; 42px entre les lignes. **Casting** : nom du héros (capitales italiques), interprète en rouge sur 2 lignes, **bouton rond** (cercle fin, 9 points) qui ouvre le message de l'interprète.
+
+## 12. Carte de personnage et grille (signature)
+
+Grille de **840px**, 5 cartes par rangée. Carte : **160 × 320px**, `skewX(-36.4deg)`, fond blanc (le filet entre cartes est la marge de 8px), cadre intérieur blanc à 40 % ; photo contre-biaisée ; dégradés noirs à 50 % en haut et en bas. En haut à droite : étiquette noire 11px « HERO NAME » + nom blanc gras 16px. En bas à gauche : étiquette « RANKING No. » + **numéro Oswald 91px rouge**. La première et la dernière carte de chaque rangée ont derrière elles un **bloc noir biaisé dans l'autre sens** : il dessine les triangles noirs des bouts. La 2e rangée est décalée de 70px vers la gauche et descendue de 6px.
+
+```css
+.cards li { position: relative; width: 20%; }
+.cards li:nth-child(5n)::before, .cards li:nth-child(5n+1)::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: var(--card-h); background: var(--ink); transform: skewX(var(--slant)); }
+.card { position: relative; z-index: 1; display: block; height: var(--card-h); margin-left: var(--card-gap); background: var(--surface); transform: skewX(var(--skew)); }
+.card__name, .card__num { position: absolute; transform: skewX(var(--slant)); }      /* le texte reste droit */
+```
+
+## 13. Curseur rond
+
+Disque de **110px** : texte circulaire Oswald qui tourne + triangle blanc (28 × 32px) décalé de 5px à droite. Visible seulement au survol de la bande-annonce. Sur le site il est en `mix-blend-mode: difference` ; ici disque noir opaque (voir `motion.md`, « Performance »). Masqué sur mobile.
+
+## 14. Filets de fond
+
+Derrière toutes les sections, deux dessins fixes de **lignes fines** au même angle (rouge `--line-accent`, gris `--line-grey`), l'un calé à gauche, l'autre à droite. Ce sont des signes : ils restent en SVG.
+
+## 15. Pied de page
+
+Fond noir, centré : logotype(s), étiquette rouge biaisée « OFFICIAL SNS » (texte noir), liens blancs 14px, mentions grises 11px. Bouton « haut de page » 80 × 40px noir posé sur le bord supérieur droit.
 
 ## États
 
-- **Chargement** : voir `layouts.md` (logo qui se remplit + pourcentage).
-- **Vide** : grand mot Oswald gris translucide + phrase en Noto Sans JP + tag-btn.
-- **Erreur** : barre noire avec date rouge remplacée par « ERREUR », message clair, tag-btn « Réessayer ».
+- **Chargement** : écran noir, compteur, logo qui se remplit (voir `motion.md`).
+- **Image absente** : chaque éclat et chaque carte garde son fond (`--surface`, couleur du personnage `--c`) ; numéros et noms restent lisibles grâce aux dégradés.
+- **Focus clavier** : contour 2px `--accent-text` décalé de 3px ; dans la grille, le focus déclenche le même effet que le survol.
+- **Lien courant** : aplat rouge dans le menu ; `aria-current`.
+- **Cibles tactiles** : 44px au moins (rails, boutons ronds, liens du menu).
 
-
----
-
-# Pages internes (relevé le 2026-10-02)
+# Pages internes (relevé le 2026-10-02, transitions vérifiées le 2026-10-03)
 
 ## Titre de page coupé au bord
 
@@ -179,7 +138,7 @@ Cercle 32–44px, contour `--border-thin` noir, icône fine. Survol : fond noir,
 
 - **Rôle** : page liste « Personnages » et pied de la fiche (navigation entre fiches).
 - **Anatomie** (observé) : rangée de cartes en parallélogrammes inclinés, séparées par de **fins traits blancs**, avec des **triangles noirs pleins** aux deux extrémités de la rangée. Chaque carte : tag noir « NOM » + nom blanc gras en haut ; tag noir « RANG » + **numéro rouge géant** condensé en bas (01…10). Reprend le composant « Carte de classement » ci-dessus.
-- **États** : repos (couleur personnage) ; survol (zoom 1.05) ; **sous une fiche** : les autres cartes passent en N&B (`--dim`), la carte active garde sa couleur et porte `aria-current="true"` ; focus (contour rouge sur le lien de carte).
+- **États** : repos (couleur personnage) ; survol (image 1.1, les autres cartes en niveaux de gris) ; **sous une fiche** : les autres cartes passent en N&B (`--dim`), la carte active garde sa couleur et porte `aria-current="true"` ; focus (contour rouge sur le lien de carte).
 
 ```css
 .chara-row { display: grid; grid-template-columns: var(--tri) repeat(5, 1fr) var(--tri); --tri: 6%; gap: 2px; background: var(--surface); }
@@ -315,3 +274,4 @@ Vignette 16:9 réelle ; **bandeau titre en haut** de la vignette (fond noir, Osw
 ## Carte bannière « mot-clé » (Special)
 
 Rectangle rouge + parallélogramme noir + X en filet, texte blanc condensé encadré de deux filets fins, légende 12px dessous. Lien entier cliquable ; survol : le parallélogramme noir glisse de 8px. Texte blanc uniquement sur la partie noire (contraste).
+

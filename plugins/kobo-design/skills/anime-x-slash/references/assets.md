@@ -1,71 +1,68 @@
 # Anime X Slash — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un personnage ou un objet : on utilise de vraies images (illustrations du projet, photos, rendus). Les formes graphiques du style (X géant, trames, éclats, filets diagonaux) restent en CSS.
+> Les visuels font la moitié du style. **Jamais** de personnage, d'arme ou de décor dessiné en CSS, SVG ou canvas : ce sont de **vraies images** (illustrations du projet en priorité, photos sinon). Restent dessinés, parce que ce sont des signes : le logotype, le X découpé, les éclats triangulaires, les trames de points, les filets de fond, les étiquettes.
 
-## 1. Ce que montrent les images
+## 1. Ce que montrent les images du site de référence (relevé le 2026-10-03)
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
+Le site est celui d'une série animée : toutes les images sont des **illustrations de personnages très colorées**, au trait net, sur fond clair ou sur éclats de couleur vive.
+
+| Emplacement (`data-slot`) | Sur le site | Dans le skill | Cadrage | Traitement |
 |---|---|---|---|---|
-| `key-visual` (héros) | Le ou les héros en pose d'action (sabre sur l'épaule, garde haute) | 3:4 vertical, personnage centré, tête dans le tiers haut ; l'image est contre-biaisée dans un cadre en parallélogramme | Fond uni clair ou gris, lumière dure latérale | N&B contrasté (`grayscale(1) contrast(1.25)`) + voile `--accent` en multiply à 18 % |
-| vignettes du sélecteur | Les 3 à 5 variantes du visuel principal | Carré 1:1, 44px, visage ou arme au centre | Identique au héros | N&B, bordure noire 1.6px, actif = contour rouge |
-| `cut-visual` (bande découpée) | Décor : rue de nuit, toits, ville néon, scène de combat large | Panoramique 16:9 à 21:9, horizon bas | Nuit, enseignes, contrastes forts | Désaturé à 60 %, voile `--veil`, masque à deux bandes diagonales à `--slant` |
-| `chara-N` (cartes de classement) | Un personnage par carte, buste ou plan américain | 3:4, cadrage serré ; `object-position` réglé par carte (`--pos`) | Contre-jour ou studio | N&B + calque `--c` (couleur du personnage) en `multiply` + trame blanche à 22 % + fondu blanc en bas pour le chiffre |
-| fiche personnage (modal) | Le personnage en pied | 2:3 | Studio | N&B + liseré couleur `--c` |
-| `chara-full` (page fiche) | Le personnage en pied ou plan américain, pose forte | 3:4, découpé en parallélogramme | Studio, contre-jour | N&B + `--c` en multiply 35 %, sur éclats CSS de sa couleur |
-| `menu-visual` (menu ouvert) | Groupe de personnages ou foule | Plein écran | Peu importe | N&B + `--menu-veil` (72 % noir) |
-| `chara-movie-N`, `video-N`, `episode-N` | Image fixe de la vidéo / de l'épisode | 16:9 | Celle de la scène | N&B (ou désaturé 60 %), voile `--veil` + ▶ |
-| `episode-still` (Story) | Plan large de l'épisode | 16:9 | Nuit, néons | Désaturé 60 % |
-| `cover-N` (Music) | Pochette du single | 1:1 | — | N&B (la pochette reste en couleur si c'est l'image officielle) |
+| `hero-chara` (héros) | une illustration de groupe : 10 personnages en éventail autour d'un héros central en costume blanc, éclats triangulaires multicolores, sur un logotype magenta géant | **5 portraits** dans des éclats en parallélogramme, le sujet d'action au centre | portrait 3:4, sujet centré ; `--pos` par photo | **couleur d'origine**, aucun filtre |
+| vignettes du sélecteur | 4 variantes du visuel | 3 variantes du visuel central | carré 44px | niveaux de gris, la vignette active en couleur |
+| `trailer` | vidéo de la bande-annonce sous un voile noir à 80 % | rue de nuit, enseignes | 16:9 ou plus large | opacité 32 % sur noir, vue à travers le X |
+| `chara-card` (grille) | un personnage par carte, buste, couleurs vives, fond propre à chacun | portraits éclairés au néon, armures, danseurs | 3:4 serré, visage dans le tiers haut | **couleur** ; les autres cartes passent en gris au survol |
+| menu ouvert | illustration de groupe | photo de groupe ou de combat | plein écran | niveaux de gris + voile `--menu-veil` |
+| fiche personnage | personnage en pied sur éclats de sa couleur | photo en pied | 3:4 | couleur ; grille du bas en gris sauf l'actif |
+| épisodes, vidéos | image fixe 16:9 | idem | 16:9 | gris au repos, couleur au survol (épisodes) |
 
-**Règle de cohérence** : toutes les images sont ramenées au noir et blanc dur ; la couleur ne vient jamais de la photo mais des tokens (`--c`, `--accent`, `--veil`), une couleur de personnage par image.
+**Règle de cohérence** : les images sont **vives et saturées** (magenta, cyan, jaune, violet), c'est l'interface qui est stricte (gris papier, noir, rouge). Le noir et blanc n'est pas un style d'image : c'est un **état** (carte non survolée, vignette non choisie, fond du menu).
 
 ## 2. Où les trouver
 
-1. **Les images du projet** : key visuals, illustrations de personnages en PNG détouré, captures d'épisodes. Toujours en priorité (avec les droits).
-2. **Banques gratuites** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com) (usage commercial permis, crédit apprécié). Mots-clés :
-   - FR : « silhouette sabre », « katana contre-jour », « cosplay épée », « rue Tokyo nuit », « samouraï noir et blanc », « combat arts martiaux ».
-   - EN : « katana silhouette », « sword backlight », « samurai black and white », « tokyo street night neon », « cosplay sword studio », « martial arts action ».
-3. **Génération IA** (Midjourney, Flux, DALL·E, Firefly) — prompts de départ :
-   - `key-visual` :
-     > Anime-style key visual of a lone hero in a black coat resting a katana on his shoulder, dynamic low angle, plain light grey background, hard side light, cel-shaded, bold ink lines, high contrast black and white with no color, vertical 3:4, no text, no logo
-   - `cut-visual` :
-     > Wide night street in a Japanese city, red vertical neon signs, wet asphalt reflections, cinematic 21:9, deep shadows, high contrast, slightly desaturated, no people in focus, no text legible, no logo
-   - `chara-N` :
-     > Half-body portrait of an original anime action hero, confident pose, backlit rim light, plain background, monochrome high-contrast cel shading, 3:4, no text, no logo
-4. **À éviter** : personnages, logos ou captures d'une série existante ; photos de stock souriantes ; images déjà très colorées qu'on laisserait en couleur (elles cassent la règle des trois couleurs) ; fonds chargés derrière les personnages des cartes (le chiffre devient illisible).
+1. **L'art du projet** : visuel clé, personnages détourés en PNG, images d'épisodes. Toujours en priorité, avec les droits. Demander un personnage par fichier, fond transparent ou uni : ils se placent directement dans les éclats du héros.
+2. **Banques gratuites** (en attendant l'art) : [Unsplash](https://unsplash.com) (licence Unsplash, usage commercial permis). Chercher des portraits **très colorés** : « neon portrait », « cyberpunk portrait », « cosplay portrait », « samurai armor », « street dancer », « kendo », « tokyo night street ».
+3. **Génération IA** — prompts de départ :
+   - Personnage : > *anime key visual of an original action hero, half-body, confident pose, vivid saturated colors, clean cel shading, bold ink lines, plain bright background, 3:4, no text, no logo*
+   - Visuel de groupe : > *anime key visual, ten original heroes fanned out around a central figure in a white suit, colorful triangular shards bursting behind them, light grey background, dynamic low angle, no text, no logo*
+   - Décor : > *wide night street in a Japanese city, vertical neon signs, wet asphalt, cinematic 16:9, high contrast, no legible text*
+4. **À éviter** : personnages ou logos d'une série existante ; photos ternes ou beiges ; portraits de face souriants façon banque d'images ; fonds chargés derrière le sujet des cartes (le numéro et le nom doivent rester lisibles).
 
 ## 3. Traitements (code)
 
 ```css
-/* Héros : photo N&B contre-biaisée dans un cadre en parallélogramme + voile rouge */
-.hero__slot { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--muted); transform: skewX(var(--skew)); border: var(--border-bold) solid var(--ink); }
-.hero__slot img { position: absolute; top: 0; left: -35%; width: 170%; height: 100%; object-fit: cover; transform: skewX(calc(var(--skew) * -1)); filter: grayscale(1) contrast(1.25); }
-.hero__slot::after { content: ""; position: absolute; inset: 0; background: var(--accent); mix-blend-mode: multiply; opacity: .18; pointer-events: none; }
+/* Éclat ou carte : parallélogramme, photo contre-biaisée */
+.card { transform: skewX(var(--skew)); background: var(--surface); }
+.card__img { position: absolute; inset: 0; overflow: hidden; background: var(--c, var(--ink)); }       /* --c : couleur du personnage, visible si l'image manque */
+.card__img > div { position: absolute; top: 0; left: -72.5%; width: 247.5%; height: 100%; transform: skewX(var(--slant)); }
+.card__img img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 25%); }
+/* lisibilité du nom (haut) et du numéro (bas) */
+.card__img::before { top: 0; height: 30%; background: linear-gradient(color-mix(in srgb, var(--ink) 50%, transparent) 43%, transparent); }
+.card__img::after  { bottom: 0; height: 30%; background: linear-gradient(transparent, color-mix(in srgb, var(--ink) 50%, transparent) 57%); }
 
-/* Carte de classement : N&B + couleur du personnage + trame */
-.rank-card__art { position: absolute; inset: -10% -30%; background: var(--ink); transform: skewX(calc(var(--skew) * -1)); }
-.rank-card__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 30%); filter: grayscale(1) contrast(1.3); }
-.rank-card__art::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--c); mix-blend-mode: multiply; }
-.rank-card__art::after { content: ""; position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle, rgb(255 255 255 / .22) 30%, transparent 32%) 0 0/10px 10px; }
+/* État « non choisi » */
+.cards:hover .card__img > div { filter: grayscale(1); }
+.cards .card:hover .card__img > div { filter: none; }
 
-/* Bande découpée en X : photo de décor masquée par deux bandes à l'angle --slant */
-.x-cut { position: absolute; inset: 0; background: var(--ink);
-  -webkit-mask-image: linear-gradient(57deg, transparent 0 14%, #000 14% 38%, transparent 38% 41%, #000 41% 64%, transparent 64%);
-          mask-image: linear-gradient(57deg, transparent 0 14%, #000 14% 38%, transparent 38% 41%, #000 41% 64%, transparent 64%); }
-.x-cut img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.6) contrast(1.2); }
-.x-cut::after { content: ""; position: absolute; inset: 0; background: var(--veil); }
+/* Bande-annonce : image sombre vue à travers le X */
+.trailer__x { background: var(--ink); clip-path: polygon(…); }
+.trailer__x img { opacity: .32; filter: grayscale(.4); }
+
+/* Menu : groupe en niveaux de gris sous un voile */
+.menu > img { filter: grayscale(1) contrast(1.2); }  .menu::after { background: var(--menu-veil); }
+
+/* Grand logotype tramé du héros : la moitié basse passe en points */
+.ghost span:last-child { clip-path: inset(58% 0 0 0); mask: radial-gradient(circle, black 42%, transparent 46%) 0 0 / 12px 12px; }
 ```
-
-Changement de visuel (sélecteur) : fondu de l'image à 0 en 250ms, changement de `src`/`alt`, retour à 1 ; immédiat si `prefers-reduced-motion`.
 
 ## 4. Intégration
 
-- `<img>` avec `width`/`height`, `alt` qui décrit l'image (« Homme vêtu de noir, sabre posé sur l'épaule »), `loading="lazy"` sauf le visuel du héros (`fetchpriority="high"`). Les vignettes du sélecteur ont `alt=""` : le bouton porte le libellé.
-- Bande découpée décorative : conteneur `aria-hidden="true"`, `alt=""`.
-- Formats : AVIF/WebP via `<picture>` ou un CDN d'images ; héros ≤ 300 Ko ; cartes 600px de large suffisent.
-- Repli : chaque conteneur a un fond token (`--muted` pour le héros, `--ink` pour les cartes et la bande) ; avec le calque `--c`, une carte sans image reste une carte de couleur lisible.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder` blurhash, `transition={250}`) ; N&B via une version pré-traitée côté serveur ou `react-native-color-matrix-image-filters` (`Grayscale`) ; le calque couleur = une `View` absolue `backgroundColor: c` avec `mixBlendMode: 'multiply'` (RN ≥ 0.77) ou opacité 0.45 sinon.
+- Les images du héros ont `alt=""` ; le conteneur des éclats porte `role="img"` et un `aria-label` qui décrit l'ensemble. Les cartes ont un `aria-label` sur le lien (« Rang 3 : Dragon »).
+- Visuel central : `fetchpriority="high"`, 1000px de large ; éclats latéraux 700 à 800px ; cartes 640px ; tout le reste en `loading="lazy" decoding="async"`.
+- Régler `--pos` (ou `object-position`) carte par carte pour garder le visage entre le nom et le numéro.
+- **React / Next** : mêmes classes ; `next/image` avec `fill` dans le conteneur contre-biaisé.
+- **React Native / Expo** : `expo-image` ; parallélogramme = `View` avec `transform: [{ skewX: '-36.4deg' }]` et `overflow: 'hidden'`, image dans une `View` contre-biaisée ; gris via une image déjà traitée ou `react-native-color-matrix-image-filters`.
 
 ## 5. 3D
 
-Optionnelle. Seul usage sobre qui sert le style : dans la fiche d'un personnage, un modèle `.glb` cel-shadé (`MeshToonMaterial` avec une rampe à 3 tons, contour par `OutlineEffect` de three/addons) qui tourne de ±20° au pointeur, fond `--bg`, posé dans le même parallélogramme que les cartes. Modèles : ceux du projet, ou libres sur [Quaternius](https://quaternius.com) (CC0), [Poly Pizza](https://poly.pizza), [Sketchfab](https://sketchfab.com) filtre CC (créditer si CC-BY). Web : Three.js ou React Three Fiber + drei (`useGLTF`) ; React Native : `expo-gl` + `@react-three/fiber/native`. Repli : l'illustration N&B de la fiche si WebGL est absent ou en mouvement réduit.
+Optionnelle. Usage qui sert le style : sur la fiche d'un personnage, un modèle `.glb` en rendu « cel » (`MeshToonMaterial`, rampe à 3 tons, contour) qui tourne de ±20° au pointeur, à la place de l'image en pied ; le bouton rond de rotation du site (demi-tour au survol) le commande. Repli : l'image. Ne jamais remplacer un personnage par une forme 3D générique.

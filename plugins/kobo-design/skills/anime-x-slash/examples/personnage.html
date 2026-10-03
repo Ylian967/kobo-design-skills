@@ -9,93 +9,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap">
 <style>
 :root {
-  /* Couleurs */
-  --bg: #f4f4f4;            /* gris papier : 70 % de la surface mesurée */
-  --surface: #ffffff;
-  --ink: #000000;           /* blocs noirs : menu, news, pied de page */
-  --on-ink: #ffffff;
-  --text: #000000;
-  --muted: #555555;
-  --accent: #ff211e;        /* rouge signal : aplats, tags, active */
-  --accent-text: #ff4040;   /* rouge des grands titres (texte ≥ 24px uniquement) */
-  --accent-deep: #ed2215;   /* rouge d'appui / survol */
-  --on-accent: #000000;     /* texte sur aplat rouge : noir (blanc = 3,9:1, gros texte seulement) */
-  --line-accent: rgb(255 64 64 / 0.55);  /* filets diagonaux décoratifs */
-  --line-ghost: rgb(0 0 0 / 0.08);
-  --veil: rgb(0 0 0 / 0.55); /* voile sur les visuels découpés */
-
-  /* Pages internes (relevé le 2026-10-02) */
-  --bg-inner: #f3f3f3;      /* fond gris des pages internes (personnages, news, story…) */
-  --panel: #111111;         /* barres d'accordéon et filtres (observé : noir légèrement adouci) */
-  --menu-close: #c8100d;    /* carré CLOSE du menu ouvert (observé rouge ; assombri pour porter du blanc 14px) */
-  --menu-veil: rgb(0 0 0 / 0.72);       /* voile sur l'illustration N&B du menu plein écran */
-  --line-grey: rgb(0 0 0 / 0.14);       /* parallélogrammes gris du fond des pages internes */
-  --dim: rgb(0 0 0 / 0.55);             /* cartes inactives de la grille sous la fiche */
-  --fade: rgb(255 255 255 / 0.85);      /* fondu blanc en bas des cartes (sous le chiffre) */
-  --halftone: rgb(255 255 255 / 0.22);  /* points de trame sur les visuels */
-
-  /* Couleurs de personnages (une par fiche, jamais deux à la fois) */
-  --chara-1: #eaf4fc;
-  --chara-2: #f8e58c;
-  --chara-3: #7f1184;
-  --chara-4: #fcc800;
-  --chara-5: #ff9933;
-  --chara-6: #eb6ea0;
-  --chara-7: #00fa9a;
-  --chara-8: #008db7;
-  /* Texte sur couleur de personnage (bande « Épisode de … ») : --ink partout, sauf --on-ink sur --chara-3. */
-
-  /* Typographie */
-  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
-  --font-body: 'Noto Sans JP', system-ui, sans-serif;
-  --text-xs: 0.6875rem;   /* 11px : tags RANKING No. */
-  --text-sm: 0.875rem;    /* 14px : nav, langue */
-  --text-base: 1rem;      /* 16px */
-  --text-lg: 1.25rem;     /* 20px : texte courant de l'intro */
-  --text-xl: 2rem;        /* 32px : sous-titres */
-  --text-title: clamp(3.5rem, 6vw, 5.75rem);   /* 91px mesuré : titres de section */
-  --text-number: clamp(4rem, 7vw, 6.5rem);     /* chiffres de classement */
-  --text-page: clamp(3.5rem, 7vw, 5.625rem);   /* ~90px observé : titre de page interne, coupé au bord gauche */
-  --text-menu: clamp(2rem, 3.2vw, 2.75rem);    /* ~44px observé : liens du menu plein écran */
-  --text-tab: 1.25rem;    /* 20px mesuré : onglets / filtres Oswald */
-  --text-h3: 1.5rem;      /* 24px mesuré : bande « Épisode de … » (Oswald 500) */
-  --text-chara: clamp(3rem, 7vw, 6rem);        /* nom du personnage sur la fiche noire (observé) */
-  --text-quote: clamp(2.5rem, 6vw, 5rem);      /* titre musical entre 「 」 (observé) */
-  --leading-body: 2;      /* 20px / 40px mesuré */
-  --leading-tight: 1;
-  --tracking-body: 0.04em; /* 0.8px sur 20px */
-  --tracking-caps: 0.06em;
-
-  /* Espace */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-10: 40px;
-  --space-20: 80px;       /* padding vertical des sections mesuré */
-  --container: 1146px;    /* largeur de la liste d'actualités mesurée */
-  --text-column: 720px;
-  --menu-size: 80px;      /* bouton MENU mesuré 80×80 sur les pages internes (82px relevé à l'accueil) */
-  --news-row: 96px;       /* hauteur d'une ligne d'actualité (page News, mesuré) */
-  --accordion-row: 110px; /* barre d'accordéon de la page Music (observé ~110px) */
-  --story-cell-w: 30px;   /* case du sélecteur d'épisodes (mesuré 30×16 de texte) */
-
-  /* Formes */
-  --slant: 33deg;         /* angle des découpes en X */
-  --skew: -24deg;         /* parallélogrammes des cartes */
-  --border-thin: 0.8px;
-  --border-bold: 1.6px;
-  --bar: 4px;             /* filet rouge des listes */
-  --notch: 10px;          /* encoche triangulaire sous l'onglet actif (Movie, Music, observé) */
-  --round: 44px;          /* boutons ronds (voix, rotation, accordéon) */
-
-  /* Mouvement */
-  --ease: ease;
-  --ease-snap: cubic-bezier(0.47, 0.53, 0.18, 1);
-  --dur-fast: 300ms;
-  --dur-base: 400ms;
-  --dur-slow: 500ms;
-  --dur-reveal: 1000ms;
+  --bg: #f4f4f4; --bg-hero: #ededed; --pop: #ee00bd; --surface: #ffffff; --ink: #000000; --on-ink: #ffffff; --text: #000000; --muted: #555555; --accent: #ff211e;
+  --accent-text: #ff4040; --accent-deep: #ed2215; --on-accent: #000000; --line-accent: rgb(255 64 64 / 0.55); --line-ghost: rgb(0 0 0 / 0.08); --veil: rgb(0 0 0 / 0.55);
+  --bg-inner: #f3f3f3; --panel: #111111; --menu-close: #c8100d; --menu-veil: rgb(0 0 0 / 0.72); --line-grey: rgb(0 0 0 / 0.14); --dim: rgb(0 0 0 / 0.55);
+  --fade: rgb(255 255 255 / 0.85); --halftone: rgb(255 255 255 / 0.22); --chara-1: #eaf4fc; --chara-2: #f8e58c; --chara-3: #7f1184; --chara-4: #fcc800; --chara-5: #ff9933;
+  --chara-6: #eb6ea0; --chara-7: #00fa9a; --chara-8: #008db7; --font-display: 'Oswald', 'Arial Narrow', sans-serif; --font-body: 'Noto Sans JP', system-ui, sans-serif;
+  --text-xs: 0.6875rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 2rem; --text-title: clamp(3.5rem, 6.86vw, 6.175rem);
+  --text-number: clamp(4rem, 7vw, 6.5rem); --text-page: clamp(3.5rem, 7vw, 5.625rem); --text-menu: clamp(2rem, 3.2vw, 2.75rem); --text-tab: 1.25rem; --text-h3: 1.5rem;
+  --text-chara: clamp(3rem, 7vw, 6rem); --text-quote: clamp(2.5rem, 6vw, 5rem); --leading-body: 2; --leading-tight: 1; --tracking-body: 0.04em; --tracking-caps: 0.06em;
+  --space-1: 4px; --space-2: 8px; --space-4: 16px; --space-6: 24px; --space-10: 40px; --space-20: 80px; --container: 1146px; --text-column: 720px; --menu-size: 80px;
+  --news-row: 96px; --accordion-row: 110px; --story-cell-w: 30px; --slant: 36.4deg; --skew: -36.4deg; --band-skew: -25deg; --card-h: 320px; --card-gap: 8px;
+  --grid-w: 840px; --text-w: 880px; --news-w: 1052px; --title-h: 80px; --cursor: 110px; --btn-w: 200px; --border-thin: 0.8px; --border-bold: 1.6px; --bar: 4px;
+  --notch: 10px; --round: 44px; --ease: ease; --ease-snap: cubic-bezier(0.47, 0.53, 0.18, 1); --ease-slam: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1); --dur-xs: 200ms; --dur-fast: 300ms; --dur-base: 400ms; --dur-slow: 500ms; --dur-reveal: 1000ms; --dur-glitch: 500ms;
+  --glitch-every: 5s; --dur-stroke: 3s; --dur-spin: 10s; --hover-shift: 15px;
 }
 * { box-sizing: border-box; }
 html { overflow-x: clip; scroll-behavior: smooth; }

@@ -1,54 +1,40 @@
 # Anime X Slash — mises en page
 
-## Grille
+Mesures prises à 1440px de large le 2026-10-03. Le site est construit sur une base de 1200px : chaque taille s'écrit `min(valeur / 1200 × 100vw, valeur)`, donc tout rétrécit en proportion sous 1200px et reste fixe au-dessus.
 
-- Fond `--bg` sur toute la page ; sections séparées par l'espace (padding vertical 80px mesuré), jamais par des traits horizontaux.
-- Container du contenu : 1146px max. Colonne de texte : 720px qui démarre vers 20 % de la largeur (≈ 330px sur 1536px).
-- Les titres de section ne respectent pas le container : ils partent du bord gauche de l'écran.
-- Décor de fond fixe : 3 à 6 **filets diagonaux** au même angle (1px, `--line-accent` et `--line-ghost`) qui dessinent un grand X en contour. Ils restent derrière tout, `pointer-events: none`.
-- Points de rupture mesurés : 768px (mobile ≤ 768, desktop ≥ 769).
+## Accueil — ordre et mesures
 
-## Écran de chargement
+| # | Section | Hauteur à 1440 × 900 | Fond | Contenu |
+|---|---|---|---|---|
+| 0 | Chargement | plein écran | noir | logo au centre (un tiers de la largeur), « LOADING » en bas à gauche, pourcentage en bas à droite (marges 3,33vw) |
+| 1 | Héros | 765px (53 % de la largeur, au plus la hauteur de l'écran) | `--bg-hero` | visuel en éclats, logotype magenta derrière, logotype noir en bas (à 5,8vw du bas), bande d'annonce, rails |
+| 2 | Bande-annonce | 807px (16:9) | `--bg` | titre à gauche, bouton à droite, X découpé, portes diagonales |
+| 3 | Actualités | 568px | `--bg` | titre, bouton, liste de 1052px (160px sous le haut) |
+| 4 | Introduction | ≈ 2000px | `--bg` puis noir | titre, colonne de 880px, accroche rouge, bloc noir |
+| 5 | Staff et casting | ≈ 1370px | `--bg` | titre, 2 colonnes |
+| 6 | Personnages | ≈ 1050px | `--bg` | titre, bouton, grille de 840px |
+| 7 | Pied | 431px | noir | logotypes, réseaux, mentions |
 
-Fond noir plein écran. Au centre, le logotype en gris foncé (#333 observé) qui **se remplit de blanc de bas en haut** pendant que le trait du X se dessine, au fil du pourcentage (masque). En bas à gauche « LOADING » (Oswald 11px blanc), en bas à droite le pourcentage. Sortie : une **bande rouge diagonale** traverse le logo avec un texte qui défile (observé), puis fondu noir 500ms. Le contenu doit rester accessible même si le script échoue (le loader disparaît après 4s maximum).
+```
+┌MENU┐                                              LANGUE [FR][JP]
+│    │            ◢ éclats photo en biais ◣
+└────┘       ◢◤  ◢◤  ◢◤ visuel central ◥◣  ◥◣  ◥◣         V
+ O        (grand logotype magenta tramé derrière)          I
+ F                                                         S  ← vignettes
+ F ■                  RANK ZERO/                           ■
+   ■        ▰▰ Tous les dimanches… dès avril ▰▰            ■
+TITRE (collé à gauche)                          [ ARCHIVE ]
+        ╲            ╱
+         ╲  vidéo   ╱        ← visible seulement dans le X
+         ╱    X     ╲
+```
 
-## En-tête
-
-Pas de barre : seulement le **carré MENU** fixe en haut à gauche, le **sélecteur de langue** en haut à droite, le rail « OFFICIAL » + icônes sociales fixe en bas à gauche.
-
-## Héros (pleine hauteur)
-
-1. Fond `--bg`.
-2. Derrière : une **lettre X géante** en aplat magenta/rouge tramé (halftone en `radial-gradient`) et éclats colorés.
-3. Devant : le visuel principal (groupe de personnages) centré, qui déborde en haut.
-4. En bas au centre : le logotype noir en italique condensé, qui chevauche le visuel.
-5. À droite : « VISUAL SELECTER » vertical + 4 vignettes.
-
-Le visuel principal est toujours une image réelle (illustration officielle du projet, photo de cosplay/acteur, rendu) dans `data-slot="key-visual"` : voir `assets.md`. Le X géant, la trame et les éclats restent des formes graphiques CSS ; jamais de personnage dessiné en CSS/SVG.
-
-## Bande visuelle découpée
-
-Section noire avec un grand visuel découpé en X (voir `components.md`), voile sombre, gros mot Oswald gris translucide qui sort en bas (titre de la section suivante, ex. « INTRODUCTION »).
-
-## Actualités
-
-Liste noire centrée dans le container, juste après le héros, chevauchant légèrement la section suivante.
-
-## Introduction
-
-Titre « INTRODUCTION » rouge géant à gauche → colonne de texte gras 20px/40px → une phrase d'accroche en rouge 32px gras → bande noire pleine largeur avec le pitch en blanc (même colonne).
-
-## Staff & casting
-
-Deux colonnes égales, titres « STAFF » / « CAST » en Oswald noir 48px, listes en italique (voir composants).
-
-## Classement / personnages
-
-Deux rangées de 5 cartes-parallélogrammes emboîtées ; triangles noirs aux extrémités ; la 2ᵉ rangée est décalée d'une demi-carte vers la gauche.
-
-## Pied de page
-
-Noir. Logos partenaires au centre, tag-btn « OFFICIAL SNS », liens sociaux en ligne, copyright 11px, mentions en gris 14px alignées à droite, liens SUPPORT | PRIVACY à gauche.
+Règles :
+- **Titres collés au bord gauche**, sans marge ; le bouton contour est à 80px du bord droit.
+- **Colonnes centrées** de largeur fixe : 1052px (actualités), 880px (texte), 840px (grille), ≈ 1050px (staff et casting).
+- **80px** au-dessus de chaque titre, **80px** entre le titre et le contenu (160px pour les actualités).
+- Les **filets de fond** sont fixes derrière le contenu : ils ne défilent pas.
+- En-tête : seul le bouton MENU est fixe. Sur l'accueil il n'y a pas de logo en haut ; sur les pages internes, logotype noir centré à 40px du haut.
 
 ## Pages internes — socle commun (observé le 2026-10-02)
 
@@ -104,11 +90,13 @@ Relevé dans un cadre de 390px de large (points de rupture mesurés : `max-width
 - **En-tête** : logotype noir **en haut à gauche**, bouton MENU carré noir **en haut à droite** (60px). Le sélecteur de langue et le rail social passent dans le menu.
 - **Menu ouvert** : une seule colonne de liens (32px), langue en haut, réseaux en ligne en bas.
 - **Titre de page** : rouge, pleine largeur (≈ 56px), toujours collé à gauche.
-- **Grille personnages** : **2 cartes par rangée**, parallélogrammes conservés avec triangles noirs aux extrémités ; numéros rouges plus petits (≈ 56px). Le biais peut être réduit à `-12deg` pour garder les noms lisibles (choix du skill, non observé).
+- **Grille personnages** : **2 cartes par rangée**, parallélogrammes conservés avec triangles noirs aux extrémités ; numéros rouges plus petits (≈ 56px). Le biais reste le même qu'en grand écran.
 - Colonne de texte : pleine largeur avec 20px de marge, texte 16px/32px.
 - Fiche : une colonne — nom + rang, illustration, CV + accroche (alignée à gauche), description, vidéos en 1 colonne.
 - Actualités : barres de hauteur auto (min 96px), padding 20px, date au même endroit.
 - Filtres Movie : 2 colonnes × 4 rangées ; onglets Music : 3 colonnes conservées (texte 16px).
 - Accordéon : panneau en une colonne (pochette au-dessus du titre, titre 40px).
 - Sélecteur d'épisodes : 5 cases par rangée.
-- Visuel découpé de l'accueil : une seule bande diagonale.
+- Héros : visuel en hauteur (≈ 150 % de la largeur), logotype et bande d'annonce en bas, vignettes du sélecteur en haut à droite sous le bouton MENU, réseaux en haut à gauche.
+- Bande-annonce : bloc 4:5, X plus large ; boutons contour sous les titres, alignés à droite.
+

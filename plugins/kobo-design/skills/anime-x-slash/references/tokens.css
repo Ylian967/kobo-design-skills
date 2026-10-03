@@ -1,21 +1,25 @@
 /*
  * Anime X Slash — tokens
- * Mesurés sur la page d'accueil de référence (1536×730), puis sur les pages internes
- * (personnages, fiche, news, story, movie, music, special), voir source.md.
+ * MESURÉS sur le site de référence le 2026-10-03 (Chrome 1440×900) : styles calculés, variables CSS,
+ * et lecture directe de ses feuilles de style et scripts (durées, courbes, angles). Voir source.md.
+ * « observé » = relevé sur capture ; « choisi » = décidé par le skill.
  * @contrast text:bg text:surface muted:bg on-accent:accent on-ink:ink accent-text:bg:large
  * @contrast text:bg-inner muted:bg-inner accent-text:ink on-accent:accent-text on-ink:panel on-ink:menu-close
+ * @contrast ink:pop ink:bg-hero text:bg-hero
  * @contrast ink:chara-1 ink:chara-2 on-ink:chara-3 ink:chara-4 ink:chara-5 ink:chara-6 ink:chara-7 ink:chara-8
  */
 :root {
   /* Couleurs */
-  --bg: #f4f4f4;            /* gris papier : 70 % de la surface mesurée */
+  --bg: #f4f4f4;            /* mesuré : gris papier, fond de toutes les sections */
+  --bg-hero: #ededed;       /* mesuré : fond du héros, un ton plus sombre */
+  --pop: #ee00bd;           /* mesuré (capture) : magenta du grand logotype tramé derrière le visuel du héros */
   --surface: #ffffff;
   --ink: #000000;           /* blocs noirs : menu, news, pied de page */
   --on-ink: #ffffff;
   --text: #000000;
   --muted: #555555;
-  --accent: #ff211e;        /* rouge signal : aplats, tags, active */
-  --accent-text: #ff4040;   /* rouge des grands titres (texte ≥ 24px uniquement) */
+  --accent: #ff211e;        /* mesuré (--color-red03) : bande du chargement, rideau de la bande-annonce, noms du générique */
+  --accent-text: #ff4040;   /* mesuré (--color-red01) : titres de section, dates, filets, numéros, survol du menu (texte ≥ 24px) */
   --accent-deep: #ed2215;   /* rouge d'appui / survol */
   --on-accent: #000000;     /* texte sur aplat rouge : noir (blanc = 3,9:1, gros texte seulement) */
   --line-accent: rgb(255 64 64 / 0.55);  /* filets diagonaux décoratifs */
@@ -51,7 +55,7 @@
   --text-base: 1rem;      /* 16px */
   --text-lg: 1.25rem;     /* 20px : texte courant de l'intro */
   --text-xl: 2rem;        /* 32px : sous-titres */
-  --text-title: clamp(3.5rem, 6vw, 5.75rem);   /* 91px mesuré : titres de section */
+  --text-title: clamp(3.5rem, 6.86vw, 6.175rem); /* 99px : capitales de 80px mesurées (Oswald : capitale = 0,81 × corps) */
   --text-number: clamp(4rem, 7vw, 6.5rem);     /* chiffres de classement */
   --text-page: clamp(3.5rem, 7vw, 5.625rem);   /* ~90px observé : titre de page interne, coupé au bord gauche */
   --text-menu: clamp(2rem, 3.2vw, 2.75rem);    /* ~44px observé : liens du menu plein écran */
@@ -79,19 +83,36 @@
   --story-cell-w: 30px;   /* case du sélecteur d'épisodes (mesuré 30×16 de texte) */
 
   /* Formes */
-  --slant: 33deg;         /* angle des découpes en X */
-  --skew: -24deg;         /* parallélogrammes des cartes */
+  --slant: 36.4deg;       /* mesuré : angle unique de tous les biais (cartes skewX(±36.4deg), rideau −37deg) */
+  --skew: -36.4deg;       /* mesuré : parallélogrammes des cartes */
+  --band-skew: -25deg;    /* mesuré : bande rouge du chargement (seule exception à l'angle) */
+  --card-h: 320px;        /* mesuré : carte de personnage 160 × 320, 5 par rangée dans 840px */
+  --card-gap: 8px;        /* mesuré : filet blanc entre deux cartes */
+  --grid-w: 840px;        /* mesuré : largeur de la grille de personnages */
+  --text-w: 880px;        /* mesuré : colonne de texte de l'introduction, centrée */
+  --news-w: 1052px;       /* mesuré à 1440 : liste d'actualités */
+  --title-h: 80px;        /* mesuré : hauteur des capitales des titres de section */
+  --cursor: 110px;        /* mesuré : curseur rond (texte tournant + triangle) */
+  --btn-w: 200px;         /* mesuré : bouton « ARCHIVE » 200 × 40, bord 2px */
   --border-thin: 0.8px;
   --border-bold: 1.6px;
   --bar: 4px;             /* filet rouge des listes */
   --notch: 10px;          /* encoche triangulaire sous l'onglet actif (Movie, Music, observé) */
   --round: 44px;          /* boutons ronds (voix, rotation, accordéon) */
 
-  /* Mouvement */
+  /* Mouvement (tout est mesuré dans les feuilles de style et scripts du site) */
   --ease: ease;
-  --ease-snap: cubic-bezier(0.47, 0.53, 0.18, 1);
-  --dur-fast: 300ms;
-  --dur-base: 400ms;
-  --dur-slow: 500ms;
-  --dur-reveal: 1000ms;
+  --ease-snap: cubic-bezier(0.47, 0.53, 0.18, 1);   /* parallaxe : transition 0.5s */
+  --ease-slam: cubic-bezier(0.86, 0, 0.07, 1);      /* entrée des personnages du héros : 0.4s */
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1); /* défilement vers une ancre : 1s */
+  --dur-xs: 200ms;        /* bande rouge et accroche du chargement */
+  --dur-fast: 300ms;      /* survols : boutons, actualités, cartes, onglets */
+  --dur-base: 400ms;      /* liens, entrée des personnages, curseur */
+  --dur-slow: 500ms;      /* menu, rideau de la bande-annonce, fondu du chargement, modales */
+  --dur-reveal: 1000ms;   /* attente après la bande rouge, défilement vers une ancre */
+  --dur-glitch: 500ms;    /* un passage de glitch (0.4 à 1s selon la couche) */
+  --glitch-every: 5s;     /* le logo du héros « glitche » toutes les 5s */
+  --dur-stroke: 3s;       /* filets du fond qui se retracent en boucle */
+  --dur-spin: 10s;        /* texte circulaire qui tourne (6s sur mobile) */
+  --hover-shift: 15px;    /* glissement du titre et du chevron d'une actualité au survol */
 }
