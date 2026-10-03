@@ -1,62 +1,62 @@
-# Showroom Bento — images et 3D
+# Showroom Bento — images et pictogrammes
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un personnage ou un objet : la moto, le casque et les vues de teinte sont de **vraies photos ou de vrais rendus**. Seuls le monogramme, les icônes des caractéristiques et les pastilles de couleur restent en SVG/CSS.
+## Ce que montre la référence
 
-## 1. Ce que montrent les images
+Des **rendus détourés** d'une moto (vue de profil au centre, deux voisines, une vue de face dans la tuile de teinte) et d'un casque, posés sur le gris de l'écran avec une ombre au sol.
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `product-side` (carrousel, centre) | Le modèle affiché, en entier | **Idéal** : rendu détouré vu de profil strict, roues posées sur la ligne de l'ombre, ~60 % de la largeur du cadre. **À défaut** : photo studio 16:9, moto entière, trois-quarts avant, sujet centré | Studio : lumière douce enveloppante, reflets longs sur le carénage | Détouré : `drop-shadow` léger + ellipse `--shadow-floor`. Photo : cadre arrondi `--radius-frame`, `--shadow-pop` |
-| voisins (`.side`, ×2) | Modèles précédent et suivant | Même cadrage que le centre (même angle, même échelle) | Idem | `opacity: .5`, `saturate(.55)`, `blur(1px)`, coupés par le cadre |
-| `accessory-image` | Un accessoire seul : casque, gants, blouson | 6:7 vertical, objet centré, petit espace autour | Fond clair uni (blanc, gris très clair) | Photo recadrée `cover` sur `--soft`, survol `rotate(-4deg) scale(1.04)` |
-| `product-paint` (tuile couleur) | Le modèle dans la teinte choisie | 3:2, même angle pour toutes les teintes | Identique pour toutes les teintes | Une image par teinte, fondu enchaîné |
+## Le produit : une image détourée
 
-**Règle de cohérence** : toutes les vues produit partagent le même angle, la même focale, la même lumière et la même hauteur d'horizon ; on doit pouvoir passer d'un modèle ou d'une teinte à l'autre sans que la moto « saute ». Fonds neutres (gris, blanc, noir studio) : jamais de décor qui concurrence la couleur du carénage.
+Le style demande un produit **sans fond**, posé sur le gris. Par ordre de préférence :
 
-## 2. Où les trouver
+1. **Images détourées fournies par le projet** (PNG ou WebP transparents, une par modèle et par teinte). C'est le cas normal : les placer directement dans `.model img`.
+2. **À défaut, une photo sur fond uni**, détourée une fois dans la page (ce que fait la démo). Ça ne marche que si la photo remplit ces conditions :
+   - fond **uni** (blanc, gris clair ou couleur franche), sans décor ;
+   - produit **sombre** et entier, bien détaché du fond ;
+   - **peu ou pas d'ombre portée** (un produit suspendu ou vu de dessus sur fond clair) ;
+   - pas de marque lisible.
+3. **Sinon**, la photo entière dans un cadre arrondi. Jamais de produit dessiné en CSS ou en SVG.
 
-1. **Les images du projet** : rendus constructeur (CGI) détourés par teinte, packshots studio, photos d'accessoires sur fond blanc. Toujours en priorité ; demander un **jeu complet par teinte** au même angle.
-2. **Banques gratuites** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Mots-clés :
-   - FR : « moto sportive studio », « moto de profil fond uni », « casque intégral fond blanc », « moto rouge fond sombre ».
-   - EN : « sport motorcycle studio », « motorcycle side view isolated », « superbike dark studio », « full face helmet white background », « motorcycle gloves product shot ».
-   - Les photos de banque sont rarement de profil strict : les présenter dans un cadre arrondi plutôt que de les détourer à la main.
-3. **Génération IA** (Midjourney, Flux, Firefly…) — prompts de départ :
-   - Moto : > *studio product render of a modern sport motorcycle in strict side profile, glossy red fairing, black wheels, soft overhead softbox lighting with long reflections, seamless light grey background, centered, wheels on the ground plane, 16:9, photorealistic, no brand logos, no text*
-   - Teintes : même prompt en remplaçant *glossy red* par *solar yellow*, *track blue*, *titanium grey*, *matte black* (même seed pour garder l'angle).
-   - Casque : > *product photo of a full-face motorcycle helmet, white shell, iridescent visor, three-quarter front view, plain off-white background, soft shadow, centered, no logos*
-4. **À éviter** : photos d'action floues ou en virage, motos encombrées de décor (parking, rue) quand on peut avoir du studio, angles différents d'un modèle à l'autre, logos de constructeurs visibles, détourages approximatifs (halo blanc), les rendus du shot de référence.
+### Détourage dans la page (démo)
 
-## 3. Traitements (code)
+Fait une seule fois par photo, dans un canvas :
 
-```css
-/* A. Rendu détouré (production) : posé sur l'ombre */
-.bike img { display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 14px color-mix(in srgb, var(--ink) 18%, transparent)); }
-.floor { position: absolute; left: 50%; bottom: -18px; width: 96%; height: 46px; translate: -50% 0; background: var(--shadow-floor); }
+1. Recadrer sur le produit (`crop` : x, y, largeur, hauteur en fractions de la photo).
+2. Estimer la couleur du fond en chaque point à partir des **quatre coins** du recadrage.
+3. Opacité = écart entre le point et ce fond, passé par un seuil doux (`matte`, par défaut de 34 à 84 sur 255 ; plus haut pour un fond coloré).
+4. Rendre transparents les points clairs (reflets, reste d'ombre) : sur le gris de l'écran, ils se lisent comme des reflets.
+5. Assombrir la frange à demi transparente pour ne pas garder un liseré de la couleur du fond.
 
-/* B. Photo non détourée (démo) : cadre studio arrondi */
-.bike { aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black); box-shadow: var(--shadow-pop); }
-.bike img, .side img, .visual img { width: 100%; height: 100%; object-fit: cover; }
+### Teintes
 
-/* Voisins estompés */
-.side { aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--radius-frame); background: var(--paint-black);
-  opacity: .5; filter: saturate(.55) blur(1px); }
+Pour un produit noir, chaque teinte est calculée à partir de la photo détourée : la couleur de la pastille remplace le noir, **modulée par la luminosité de la photo** (les ombres restent sombres, les arêtes claires tirent vers le blanc). La teinte « noir » est la photo passée en gris neutre. Chaque résultat est gardé en image : on ne recalcule jamais.
 
-/* Teinte : une image par teinte, empilées, fondu enchaîné */
-.paint-stack { display: grid; }
-.paint-stack img { grid-area: 1 / 1; opacity: 0; transition: opacity var(--dur-base) var(--ease-inout); }
-.paint-stack img.is-active { opacity: 1; }
-```
+Limite : c'est une **simulation**. Avec de vraies photos par teinte, les utiliser à la place.
 
-La démo n'a qu'une photo rouge : elle simule les autres teintes par `filter: hue-rotate()` sur la tuile couleur (`.visual[data-paint="yellow"] img { filter: hue-rotate(48deg) … }`). C'est un raccourci de maquette : il recolore aussi le fond et les reflets ; en production, une image par teinte.
+## Photos de la démo (Unsplash)
 
-## 4. Intégration
+| Rôle | Identifiant | Fond d'origine |
+|---|---|---|
+| Halo S2 (centre) | `photo-1641048930621-ab5d225ae5b0` | blanc cassé, produit suspendu |
+| Arc Pro | `photo-1600086827875-a63b01f1335c` | blanc |
+| Nomade | `photo-1684703147716-014da6a31aa3` | jaune uni |
+| Étui (tuile accessoire) | `photo-1628202926206-c63a34b1618f` | photo entière, non détourée |
 
-- `<img>` avec `width`/`height` (ou `aspect-ratio` sur le cadre), `alt` qui nomme le modèle et décrit la vue (« Ardente : moto sportive rouge en studio, vue de trois-quarts ») ; mis à jour à chaque changement de modèle. Voisins : `alt=""` (le bouton porte « Modèle précédent / suivant »).
-- `fetchpriority="high"` sur la photo centrale, `loading="lazy"` ailleurs ; précharger la photo du modèle suivant (`new Image().src = …`) pour un carrousel sans trou.
-- Formats : rendus détourés en **WebP/AVIF avec transparence** (pas de PNG de 3 Mo), 1600px de large au plus ; photo centrale ≤ 250 Ko.
-- Repli : chaque cadre a un `background` token (`--paint-black` pour le produit, `--soft` pour l'accessoire) et garde ses proportions : la vitrine ne bouge pas si une image manque.
-- **React Native / Expo** : `expo-image` (`contentFit="contain"` pour un rendu détouré, `"cover"` pour une photo, `placeholder` blurhash, `transition={300}` pour le fondu de teinte) ; carrousel en `FlatList` horizontale `pagingEnabled`, image suivante préchargée par `Image.prefetch`.
+Les photos à détourer sont chargées avec `crossorigin="anonymous"` (sinon le canvas ne peut pas être lu).
 
-## 5. 3D
+## Photo d'accessoire
 
-Optionnelle, et précise : un **configurateur à 360°** à la place de la photo centrale, quand le constructeur fournit un modèle. Three.js (`GLTFLoader` + `DRACOLoader`, `.glb` ≤ 4 Mo) ou React Three Fiber + drei (`useGLTF`, `<Environment preset="studio" />`, `<ContactShadows>` qui remplace l'ellipse `--shadow-floor`, `<PresentationControls>` limité à la rotation horizontale). Le matériau du carénage (`MeshPhysicalMaterial`, `clearcoat: 1`) prend sa couleur dans les tokens `--paint-*` au clic sur une pastille : c'est le seul cas où la teinte se calcule au lieu d'être photographiée. Caméra fixe en profil au repos, fond transparent sur le cadre studio. Modèles libres pour maquetter : [Sketchfab](https://sketchfab.com/search?features=downloadable&licenses=7c23a1ba438d4306920229c12afcb5f9&q=motorcycle) (filtre CC, chercher « motorcycle », « helmet »), [Poly Pizza](https://poly.pizza) (CC0/CC-BY) ; vérifier la licence et créditer si CC-BY. React Native : `expo-gl` + `@react-three/fiber/native`. Repli : la photo de profil, et une suite de 36 vues pré-rendues si l'appareil est faible ou si `prefers-reduced-motion` est actif.
+Photo entière, recadrée en `cover` dans un cadre de rayon 8px, sur la droite de la tuile. Tons neutres ou froids, pour ne pas concurrencer le rouge.
+
+## Pictogrammes
+
+Tracés SVG en ligne, 22px, trait de 1.5, bouts ronds, sans remplissage, couleur du texte : panier, compte, flèches, et un pictogramme par caractéristique. Le monogramme est une forme pleine en `--accent`.
+
+## Police
+
+**Outfit** (Google Fonts) 300, 400, 500, 600 : tout le texte. Graisse 600 pour le titre, le prix et les valeurs ; 300 pour les légendes.
+
+## Interdits
+
+- Pas de produit dessiné, pas d'émoji.
+- Pas de photo d'ambiance en fond de scène : le fond reste le gris de l'écran.
+- Pas d'ombre portée dure sous les tuiles au repos.
