@@ -1,37 +1,58 @@
-# Heritage Lens — mises en page
+# Heritage Lens — gabarits
 
-## Accueil
+Le site de référence n'a pas de page au sens habituel : c'est une **suite de scènes plein écran**. Marge des éléments fixes : 31px (16px en mobile). Point de rupture du site : 920px (puis 640px et 1920px pour les tailles de texte).
 
-Photo réelle plein écran au soleil bas (voir `assets.md`), voile en bas ; titre géant centré (1 mot) avec un sous-titre en plus petit calé à droite sous le titre ; bouton Entrer au centre sous le titre ; aide en bas au centre ; logo en haut à gauche ; réglages et son en bas à droite.
-
-## Scène de lieu
+## Écran type (1440 × 900)
 
 ```
-logo                                         nom du lieu (●)
-                                              ·
-     TITRE DU LIEU          ( lentille )      ·
-     récit 3 lignes                           ◎  points
-                                              ·
-À propos →                                (⚙) (🔊)
+┌──────────────────────────────────────────────────────────────┐
+│ Séléné                                                   (◆) │  nom · bouton de plan
+│                                                              │
+│                       ( médaillon I )                        │
+│                         LE  SIQ                            · │  titre géant centré
+│                                                            ◉ │  puces à droite, centrées
+│                                                            · │
+│                                                              │
+│                           ( ↓ )                              │
+│                 Faire défiler pour continuer                 │  aide à 80px du bas
+│ À propos de ce projet →                              (⚙) (♪) │
+└──────────────────────────────────────────────────────────────┘
 ```
-Le titre et le récit occupent le tiers gauche, la lentille flotte au centre-droit sur l'élément à comparer.
 
-## Navigation
+Rien ne touche les bords à moins de 31px. Le centre de l'écran appartient au texte ; les coins, aux commandes.
 
-Défilement vertical (ou molette) = passage d'un lieu au suivant par travelling. Points cliquables à droite. Flèches clavier haut/bas.
+## Déroulé (ordre observé sur le site)
 
-## Mobile
+| # | Scène | Longueur (écrans) | Contenu |
+|---|---|---|---|
+| 0 | Chargement | — | Anneau + pourcentage |
+| 1 | Prologue | 5 | Photo de nuit sous brume bleue → photo dorée ; 3 phrases puis « *L'institution* présente » |
+| 2 | Titre | 1.6 | Mot géant, sous-titre or, bouton d'entrée |
+| 3 | Chapitre I | 5 | Ouverture (0–24 %) · récit (30–52 %) · changement de photo (50–66 %) · point d'intérêt (à partir de 70 %) |
+| 4 | Chapitre II, III… | 5 chacun | Même découpage |
+| 5 | Fin | 1 | À propos, crédits, retour |
 
-Cartes arrondies plein écran (marge 12px), titre centré au milieu, lentille plus petite (160px), bandeau du lieu suivant en bas. Réglages masqués dans un menu.
+Les pourcentages sont ceux de la démo (proposés) ; l'ordre ouverture → récit → point d'intérêt est celui du site. Sur le site, un chapitre compte plusieurs points d'intérêt (une puce chacun) ; la démo en montre un par chapitre.
 
----
+## Fenêtres
 
-## Séquence réelle (observée, 2026-10-03)
+| Fenêtre | Disposition |
+|---|---|
+| Vue révélée | Photo plein écran, légende en bas à gauche, fermer en haut à droite |
+| Page éditoriale | Bande horizontale : image 38 % · titre + texte (420px) · œuvre + légende · citation (680px) · œuvre · texte (380px) ; écarts de 60 à 140px ; fermer en haut à droite |
+| Plan | Liste des chapitres sous le bouton de plan (le site ouvre une carte du lieu, non reproduite) |
 
-1. Chargement (pourcentage display or #f6cea0, 37px).
-2. **Prologue** : 4–5 phrases successives, paysage qui se lève (brume → or), bouton défiler.
-3. **Écran-titre** : titre + sous-titre décalé + anneau « Entrez ».
-4. Phrases de transition sur la vue d'ensemble de la cité, puis caméra qui s'approche.
-5. **Chapitre 1** : médaillon numéroté, titre de lieu, bouton défiler « pour explorer », bouton carte doré en haut à droite.
+## Mobile (390px)
 
-En largeur étroite : tout reste centré, phrases sur 4 lignes, aucune colonne.
+- Titres : la formule `--fs-hero` descend à 75px ; phrases à 28px.
+- Point d'intérêt : lentille centrée (132px), puis **carte arrondie** en bas avec titre, récit, pilule.
+- Puces réduites au bord droit, sans bulle ; le lien « À propos » ne garde que sa flèche.
+- Page éditoriale : une colonne, image en tête sur 46 % de la hauteur, bouton fermer sans libellé.
+- Page de fin : photo au-dessus, texte dessous.
+
+La version mobile du site n'a pas pu être ouverte ; ces choix reprennent ce que montre la capture mobile de sa fiche Awwwards (cartes arrondies) et restent une proposition.
+
+## Autres pages possibles
+
+- **Index des œuvres** (présent sur le site, non visité) : grille de vignettes 3:4 sur `--bg`, onglets par chapitre, fiche en fenêtre.
+- **Page d'accueil d'une institution** utilisant ce style : une seule scène (photo + mot géant + bouton d'entrée), puis les chapitres en cartes plein écran.

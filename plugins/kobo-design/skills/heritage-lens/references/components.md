@@ -1,80 +1,95 @@
 # Heritage Lens — composants
 
-## Bouton « Entrer » (double anneau)
+Valeurs dans `tokens.css`. Les dimensions sont **mesurées** sur le site de référence à 1440×900 sauf mention « proposé ». Code complet dans `examples/demo.html`.
 
-```css
-.enter { position: relative; width: var(--enter); aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ring); background: none; color: var(--text);
-  font: 400 var(--text-lg) var(--font-display); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: transform var(--dur-fast) var(--ease); }
-.enter::before { content: ""; position: absolute; inset: -10px; border-radius: 50%; border: 1px solid var(--ring); opacity: .6; transition: inset var(--dur-fast) var(--ease); }
-.enter:hover::before { inset: -16px; }
-```
-Sous le bouton : « Cliquer sur Entrer pour continuer », Inter 12px.
+## Règles communes
 
-## Lentille avant / après (signature)
+- **Trois voix** : la police d'affiche (`--font-display`) pour tout ce qui se dit fort (titres, phrases du prologue, citations, numéros, « ENTREZ ») ; le serif de lecture (`--font-text`) pour le récit ; la sans (`--font-ui`) pour l'aide, les boutons, les légendes.
+- **Deux couleurs sur les scènes** : blanc pour le texte, or `--gold` pour les ornements, les anneaux et les titres de lieu.
+- Tout ce qui est rond est **cerclé d'un filet d'or de 1px**, sans fond. Seul le bouton de plan est plein.
+- Le texte est **centré**, même dans la colonne de droite d'un point d'intérêt.
 
-- Conteneur rond `--lens`, image réelle « aujourd'hui » à l'intérieur (`object-fit: cover`, même cadrage que la reconstitution, voir `assets.md`), anneau festonné SVG autour (24 petits arcs).
-- Sur ordinateur, elle suit la souris dans la zone de la scène (lissage 0.15) ; sur mobile, elle est fixe et se déplace au doigt.
-- Légende sous la lentille : « Cliquer pour voir l'état actuel », Inter 500 12px blanc avec ombre.
-- Clic / Entrée : la lentille s'agrandit en plein écran (transition `clip-path: circle()`), second clic pour revenir.
-- Équivalent clavier : bouton texte « Voir aujourd'hui » visible au focus.
+## Ornement en dentelle
 
-```css
-.lens { position: absolute; width: var(--lens); aspect-ratio: 1; border-radius: 50%; overflow: hidden; translate: -50% -50%; box-shadow: 0 0 0 6px rgb(251 243 228 / .25); }
-.scene.is-today .today { clip-path: circle(150% at var(--x) var(--y)); }
-.today { position: absolute; inset: 0; clip-path: circle(calc(var(--lens) / 2) at var(--x) var(--y)); transition: clip-path var(--dur) var(--ease); }
+Le motif du site : un anneau de cercles qui se chevauchent. Il sert au chargement, au médaillon de chapitre et à la lentille. C'est un signe, il reste en SVG, tracé par quelques lignes de script (`data-lace="22"` = 22 cercles) :
+
+```js
+const n = 22, R = 40, r = R * Math.sin(Math.PI / n) * 1.9;   // viewBox -50 -50 100 100
+// n cercles de rayon r posés sur un cercle de rayon R, plus un cercle intérieur
 ```
 
-## Titre de lieu
+`stroke: currentColor`, 1px (`vector-effect: non-scaling-stroke`), rotation lente continue.
 
-Gilda Display 64–72px, or ou ivoire, 2 lignes, ombre douce (`0 2px 30px rgb(28 20 14 / .6)`), suivi du récit en Crimson Pro centré sous le titre (colonne 340px).
+## Écran de chargement
 
-## Bulle de lieu (haut droite)
+Fond `--bg`, anneau de 190px, pourcentage en `--font-display` 37px or au centre. Le compte suit le vrai chargement des premières images.
 
-Nom du lieu en Inter 500 13px + médaillon rond or 44px avec un motif (rosette ✦). Clic : ouvre la liste des lieux.
+## Éléments fixes (marge 31px)
 
-## Points de chapitre
+| Emplacement | Élément |
+|---|---|
+| Haut gauche | Nom de l'institution, `--font-display` 24px |
+| Haut droite | **Bouton de plan** : rond plein or de 51px, icône sombre, halo blanc qui pulse |
+| Bas gauche | « À propos de ce projet » + petite flèche cerclée (22px) |
+| Bas droite | Deux boutons ronds cerclés de 51px : réglages, son |
+| Droite, centré | **Puces** : points de 4px espacés de 39px ; la puce active a un anneau en pointillé de 24px qui tourne ; au survol, bulle `--mist` à texte `--bronze` à gauche |
 
-Colonne de 7 points ivoire 6px à droite, espacés de 28px ; l'actif est un anneau de 14px. Libellé du lieu au survol.
+Les puces et le lien du bas sont masqués pendant le prologue et sur la page de fin.
 
-## Boutons ronds
+## Boutons
 
-Réglages (engrenage) et son (haut-parleur) : cercles 44px, contour 1px `--ring`, icônes fines, en bas à droite, espacés de 12px.
+- **Rond** (`.round`) : 51px, filet or, icône 16px. Survol : disque or qui monte, icône sombre.
+- **Pilule** (`.pill`) : hauteur 51px, padding 34px, texte sans 14px / 500. Même survol.
+- **Entrée** (`.enter`) : 122px, **double anneau** (filet or + second anneau à 50 % à 8px à l'intérieur), « ENTREZ » en `--font-display` 27.75px capitales.
+- **Fermer** : libellé « Fermer » + bouton rond avec croix, en haut à droite.
 
-## « À propos du projet »
+## Phrase du prologue
 
-En bas à gauche, Inter 13px + cercle avec flèche → ; ouvre un panneau parchemin (`--parchment`, texte `--ink`) à droite, 420px, avec crédits et sources.
+`--font-display` 48.75px, interligne 1, blanche, centrée, 1008px de large au plus, une seule à l'écran. Sous elle, en bas : l'aide « Faire défiler pour continuer » (sans 14px) et son bouton rond à flèche.
 
-## Version mobile (cartes)
+## Titre du site
 
-Chaque lieu devient une carte arrondie (24px) plein écran : titre centré, bouton rond ↓ « Défiler pour explorer », lentille au centre de l'image ; un bandeau sombre en bas porte le titre de la carte suivante.
+Mot géant `--fs-hero` (153px à 1440, interligne 0.9), sous-titre or en `--fs-phrase` décalé vers la droite, bouton d'entrée dessous.
 
-## États
+## Ouverture de chapitre
 
-- **Chargement** : fond `--bg`, nom du site en Gilda Display qui apparaît lettre par lettre en fondu, puis le bouton Entrer.
-- **Sans WebGL** : images fixes pour chaque scène (photos ou rendus réels, voir `assets.md`), mêmes interactions.
+Médaillon de 96px (deux dentelles concentriques, chiffre romain blanc 26px) au-dessus du titre géant, centré sur la photo.
 
----
+## Récit
 
-# Relevés sur le site en ligne (2026-10-03)
+Paragraphe `--font-text` 19.75px / 1.2, blanc, centré, 30em au plus, posé sur le voile radial ; ombre de texte `--shade` pour les photos claires.
 
-Site ouvert dans le navigateur intégré (612px, version française) ; interface HTML mesurée, décor 3D en canvas.
+## Point d'intérêt
 
-## Prologue en phrases (mesuré + observé)
+```
+        ╭─────────╮          Titre du lieu        ← --fs-place (77.5px), or
+        │ lentille │      Récit centré, 373px
+        ╰─────────╯        ( Pilule vers la page éditoriale )
+   Cliquez pour révéler…
+```
 
-Avant l'écran-titre, **une phrase à la fois** au centre de l'écran, en display **30px/30px 400 blanc**, 2 à 4 lignes centrées ; chaque cran de défilement remplace la phrase par la suivante (fondu) pendant que le paysage passe de la **brume bleu-gris de l'aube** à la **lumière dorée**. Une fine **barre de progression orange** sur le bord droit indique l'avancée.
+- Colonne de texte de 426px dont le centre est à 70 % de la largeur ; lentille à sa gauche (centre vers 40 %).
+- Voile latéral sombre à droite (`.veil.side`) pour le contraste.
+- Mobile : lentille de 132px au-dessus, texte dans une **carte arrondie** (rayon 20px, fond `--veil-2`) en bas de l'écran.
 
-## Bouton « défiler » à double anneau (observé, mesuré)
+## Lentille
 
-En bas au centre : deux cercles concentriques fins **dorés** (`--gold-soft`, mesuré #f6cea0 pour le chargement) avec une flèche ↓ fine au centre ; libellé **Graphik 13px/15px blanc** dessous (« Faire défiler pour continuer », puis « Faire défiler pour explorer » dans les chapitres). Le bouton « Entrez » de l'écran-titre a la même forme : un anneau ivoire, libellé display **24px/21.6px capitales**.
+Bouton rond de ≈ 210px : dentelle or qui tourne, fenêtre circulaire (60 % du diamètre) montrant une **autre vue du même lieu**, légende sans 14px / 500 dessous (« Cliquez pour révéler la vue de nuit »). Au clic, la vue s'ouvre en plein écran avec une légende en bas à gauche et un bouton fermer.
 
-## Écran-titre (observé)
+C'est un vrai `<button>` : il se déclenche au clavier, Échap referme, le focus revient sur la lentille.
 
-Titre display géant blanc en casse mixte, **sous-titre décalé à droite sous la dernière lettre** (« Reimagined » en ~20px), anneau « Entrez » sous le titre, aide 13px en bas.
+## Page éditoriale
 
-## Médaillon de chapitre (observé)
+Fenêtre plein écran sur `--bg`, **défilement horizontal** : grande image sur 38 % de la largeur, titre or + fil d'Ariane (« Chapitre — *lieu* ») + deux paragraphes, puis en alternance des œuvres (image 3:4, légende à droite en bas : titre en sans, date en serif capitales), une grande citation `--soft` en `--font-display`, d'autres paragraphes. Mobile : une colonne verticale.
 
-Au-dessus de chaque titre de lieu : un **médaillon rond orné** (frise de motifs fins dorés en couronne) avec le numéro du chapitre au centre ; titre de lieu display ~56px blanc sur 2 lignes, centré.
+## Page de fin
 
-## Barre du haut (observé)
+Deux moitiés : photo à gauche, à droite titre or, texte, liste à filets `--line` (libellé à gauche, valeur `--soft` à droite), pilule de retour.
 
-À gauche deux **pastilles rondes blanches** 28px (réglages, son) ; au centre le logo de l'institution en blanc ; à droite, dans les chapitres, un **bouton rond doré plein** 44px avec un pictogramme (carte / menu des lieux).
+## Accessibilité
+
+- Texte blanc toujours sur un voile (`--veil-1` au moins) ; l'or ne sert jamais à un petit texte sur photo claire.
+- Cibles de 44px au moins (les puces de 20px ont une zone de clic élargie à 44px).
+- Fenêtres : `role="dialog"`, `inert` quand elles sont fermées, Échap, retour du focus.
+- Titres découpés en lettres : le mot entier est dans `aria-label`, les lettres sont `aria-hidden`.
+- Bouton « réduire les animations » en plus de `prefers-reduced-motion`.

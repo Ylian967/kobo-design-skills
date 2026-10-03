@@ -1,45 +1,68 @@
 /*
  * Heritage Lens — tokens
- * Palette de la fiche Awwwards (#987654, #D14836, #ECD06F) + valeurs relevées sur captures, voir source.md.
- * @contrast text:bg gold:bg muted:bg on-gold:gold ink:parchment ink-muted:parchment
+ * MESURÉS le 2026-10-03 sur le site de référence (Chrome 1440×900 : styles calculés et feuille de style du site).
+ * « choisi » = décidé par le skill. Voir source.md.
+ * @contrast white:bg gold:bg soft:bg white:night gold:night white:shade gold:shade bronze:mist bg:gold
  */
 :root {
-  /* Couleurs */
-  --bg: #1c140e;              /* nuit chaude derrière les scènes */
-  --text: #fbf3e4;            /* ivoire */
-  --muted: #c9b69a;
-  --gold: #ecd06f;            /* or des anneaux, titres de lieu */
-  --gold-soft: #f6cea0;       /* mesuré sur le site : pourcentage de chargement, anneaux du bouton défiler */
-  --on-gold: #1c140e;
-  --earth: #987654;           /* pierre, terre */
-  --terracotta: #d14836;      /* rouge des colonnes, fonds de présentation */
-  --parchment: #f3e6cc;       /* panneaux de lecture */
-  --ink: #1c140e;
-  --ink-muted: #6b5440;
-  --veil: linear-gradient(180deg, rgb(28 20 14 / 0) 40%, rgb(28 20 14 / .75));
-  --ring: rgb(251 243 228 / 0.85);
+  /* ---- Couleurs ---- */
+  --bg: #252525;            /* mesuré : fond du site, écran de chargement, pages éditoriales */
+  --night: #314757;         /* mesuré : bleu de la brume du prologue */
+  --white: #ffffff;         /* mesuré : tout le texte posé sur les scènes */
+  --gold: #f6cea0;          /* mesuré : ornements, anneaux, titres de lieu, pourcentage (53 emplois) */
+  --gold-half: rgb(246 206 160 / 0.5);   /* mesuré : anneaux secondaires */
+  --soft: #c4c4c4;          /* mesuré : grandes citations des pages éditoriales */
+  --half: rgb(255 255 255 / 0.5);        /* mesuré : légendes (blanc à 50 %) — grandes tailles ou décor seulement */
+  --bronze: #79644b;        /* mesuré : texte des bulles d'aide */
+  --mist: #eae8e5;          /* mesuré : fond des bulles d'aide */
+  --line: rgb(255 255 255 / 0.2);        /* mesuré : filets des listes de réglages */
+  --shade: #17120e;         /* choisi : ton du voile sombre posé sous les textes */
+  --veil-0: rgb(23 18 14 / 0);
+  --veil-1: rgb(23 18 14 / 0.55);        /* mesuré sur le site : voiles de lisibilité à 45–55 % de noir */
+  --veil-2: rgb(23 18 14 / 0.82);
+  --night-veil: rgb(49 71 87 / 0.78);    /* choisi : brume bleue du prologue posée sur la photo */
 
-  /* Typographie */
-  --font-display: 'Gilda Display', 'Bodoni Moda', Georgia, serif;   /* titres de lieu (site : Maghfirea 400, display à empattements fins et formes calligraphiques, mesuré) */
-  --font-text: 'Crimson Pro', Georgia, serif;                         /* récit */
-  --font-ui: 'Inter', system-ui, sans-serif;                          /* boutons, aide (site : Graphik 400 13px, mesuré) */
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1.0625rem; --text-lg: 1.25rem;
-  --text-title: clamp(2.5rem, 5vw, 4.5rem);
-  --text-hero: clamp(4rem, 12vw, 10rem);
-  --leading-title: 1.02;
-  --leading-text: 1.45;
+  /* ---- Typographie ---- */
+  --font-display: 'Viaoda Libre', 'Cormorant Infant', Georgia, serif;  /* site : Maghfirea 400 (payante) */
+  --font-text: 'EB Garamond', Georgia, serif;                          /* site : Sabon Next */
+  --font-ui: 'Inter', system-ui, sans-serif;                           /* site : Graphik 400 */
+  --fs-hero: min(20vh, max(75px, calc(12.5px + 9.766vw)));  /* mesuré (formule du site) : 153px à 1440 — titre du site et des chapitres */
+  --lh-hero: 0.9;                                            /* mesuré */
+  --fs-place: clamp(2.75rem, 2.5vw + 2.6rem, 5.25rem);      /* mesuré 77.5px / 69.75 à 1440 : titre doré d'un point d'intérêt */
+  --fs-phrase: clamp(1.75rem, 2.2vw + 1.07rem, 3.4rem);     /* mesuré 48.75px / 48.75 : phrases du prologue, citations */
+  --fs-body: clamp(1.0625rem, 0.47vw + 0.8rem, 1.35rem);    /* mesuré 19.75px / 23.7 : récit */
+  --lh-body: 1.2;                                            /* mesuré */
+  --fs-ui: clamp(0.8125rem, 0.156vw + 0.75rem, 0.9375rem);  /* mesuré 14.25px / 19 : aide, boutons, légendes */
+  --lh-ui: 1.333;
+  --fs-enter: 1.734rem;     /* mesuré 27.75px : « ENTREZ », capitales */
+  --fs-num: 1.64rem;        /* mesuré 26.25px : numéro de chapitre */
+  --fs-pct: 2.3125rem;      /* mesuré 37px : pourcentage de chargement */
 
-  /* Espace */
-  --edge: 24px;
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px;
-  --text-col: 340px;
+  /* ---- Grille (1440 × 900) ---- */
+  --edge: clamp(16px, 2.15vw, 31px);      /* mesuré : marge des éléments fixes (31px) */
+  --btn: clamp(46px, 3.54vw, 54px);       /* mesuré : boutons ronds de 51px */
+  --enter: 7.63rem;                       /* mesuré : bouton d'entrée, 4.4em × 27.75px = 122px */
+  --medal: 6rem;                          /* mesuré : médaillon de chapitre, 96px */
+  --lens: clamp(150px, 14.6vw, 210px);    /* mesuré sur capture : lentille ≈ 210px ornement compris, fenêtre ≈ 60 % */
+  --bullet: 20px;                         /* mesuré : puce de navigation ; pas de 39px */
+  --bullet-step: 39px;
+  --col-text: 373px;                      /* mesuré : colonne du récit d'un point d'intérêt */
+  --col-phrase: 1008px;                   /* mesuré : largeur des phrases du prologue */
+  --r-pill: 999px;                        /* mesuré : boutons en pilule (hauteur 51px) */
+  --r-card: 20px;                         /* choisi : cartes arrondies de la version mobile */
 
-  /* Formes */
-  --btn-round: 44px;
-  --enter: 120px;            /* bouton ENTRER à double anneau */
-  --lens: 220px;             /* lentille avant/après */
-
-  /* Mouvement */
-  --ease: cubic-bezier(0.45, 0, 0.15, 1);
-  --dur-fast: 250ms; --dur: 800ms; --dur-cam: 2400ms;
+  /* ---- Mouvement ---- */
+  --ease: cubic-bezier(0.455, 0.03, 0.515, 0.955);   /* mesuré : courbe dominante (couleurs, fondus) */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* mesuré : entrées, points d'intérêt */
+  --ease-expo: cubic-bezier(0.2, 0, 0, 1);           /* mesuré : remplissage des boutons, grandes ouvertures */
+  --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53);  /* mesuré : sorties */
+  --dur-fast: 300ms;        /* mesuré : couleurs, sorties */
+  --dur-hot: 400ms;         /* mesuré : anneau d'un point d'intérêt */
+  --dur-fill: 650ms;        /* mesuré : remplissage d'un bouton (450ms pour le bouton d'entrée) */
+  --dur-text: 800ms;        /* mesuré : apparition des barres du menu ; repris pour les textes */
+  --dur-open: 1100ms;       /* choisi : ouverture de la vue actuelle et de la page éditoriale */
+  --spin-slow: 60s;         /* mesuré : ornement du médaillon (couche du milieu : 30s à l'envers) */
+  --spin-mid: 30s;
+  --spin-fast: 20s;         /* mesuré : anneau des points d'intérêt et de la puce active */
+  --pulse: 1.5s;            /* mesuré : halo d'appel du bouton de plan */
 }

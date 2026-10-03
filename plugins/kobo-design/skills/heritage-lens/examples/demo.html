@@ -1,138 +1,525 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ourouk retrouvée — Heritage Lens (démo)</title>
+<title>Pétra, la cité rose — Fondation Séléné</title>
+<meta name="description" content="Démo du style Heritage Lens : visite guidée fictive de Pétra, au fil du défilement.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Crimson+Pro:wght@400&family=Inter:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Viaoda+Libre&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #1c140e; --text: #fbf3e4; --muted: #c9b69a; --gold: #ecd06f; --on-gold: #1c140e; --earth: #987654; --terracotta: #d14836; --parchment: #f3e6cc; --ink: #1c140e; --ink-muted: #6b5440;
-  --veil: linear-gradient(180deg, rgb(28 20 14 / 0) 40%, rgb(28 20 14 / .75)); --ring: rgb(251 243 228 / 0.85);
-  --font-display: 'Gilda Display', 'Bodoni Moda', Georgia, serif; --font-text: 'Crimson Pro', Georgia, serif; --font-ui: 'Inter', system-ui, sans-serif;
-  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1.0625rem; --text-lg: 1.25rem; --text-title: clamp(2.5rem, 5vw, 4.5rem); --text-hero: clamp(4rem, 12vw, 10rem);
-  --leading-title: 1.02; --leading-text: 1.45; --edge: 24px;
-  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --text-col: 340px;
-  --btn-round: 44px; --enter: 120px; --lens: 220px; --ease: cubic-bezier(0.45, 0, 0.15, 1); --dur-fast: 250ms; --dur: 800ms; --dur-cam: 2400ms;
-  color-scheme: dark;
+  --bg: #252525; --night: #314757; --white: #ffffff; --gold: #f6cea0; --gold-half: rgb(246 206 160 / 0.5); --soft: #c4c4c4; --half: rgb(255 255 255 / 0.5);
+  --bronze: #79644b; --mist: #eae8e5; --line: rgb(255 255 255 / 0.2); --shade: #17120e; --veil-0: rgb(23 18 14 / 0); --veil-1: rgb(23 18 14 / 0.55);
+  --veil-2: rgb(23 18 14 / 0.82); --night-veil: rgb(49 71 87 / 0.78); --font-display: 'Viaoda Libre', 'Cormorant Infant', Georgia, serif;
+  --font-text: 'EB Garamond', Georgia, serif; --font-ui: 'Inter', system-ui, sans-serif; --fs-hero: min(20vh, max(75px, calc(12.5px + 9.766vw))); --lh-hero: 0.9;
+  --fs-place: clamp(2.75rem, 2.5vw + 2.6rem, 5.25rem); --fs-phrase: clamp(1.75rem, 2.2vw + 1.07rem, 3.4rem); --fs-body: clamp(1.0625rem, 0.47vw + 0.8rem, 1.35rem);
+  --lh-body: 1.2; --fs-ui: clamp(0.8125rem, 0.156vw + 0.75rem, 0.9375rem); --lh-ui: 1.333; --fs-enter: 1.734rem; --fs-num: 1.64rem; --fs-pct: 2.3125rem;
+  --edge: clamp(16px, 2.15vw, 31px); --btn: clamp(46px, 3.54vw, 54px); --enter: 7.63rem; --medal: 6rem; --lens: clamp(150px, 14.6vw, 210px); --bullet: 20px;
+  --bullet-step: 39px; --col-text: 373px; --col-phrase: 1008px; --r-pill: 999px; --r-card: 20px; --ease: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94); --ease-expo: cubic-bezier(0.2, 0, 0, 1); --ease-in: cubic-bezier(0.55, 0.085, 0.68, 0.53); --dur-fast: 300ms;
+  --dur-hot: 400ms; --dur-fill: 650ms; --dur-text: 800ms; --dur-open: 1100ms; --spin-slow: 60s; --spin-mid: 30s; --spin-fast: 20s; --pulse: 1.5s;
 }
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-body { margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font: 400 var(--text-base)/var(--leading-text) var(--font-text); }
-button { font: inherit; color: inherit; }
-:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
-.screen { position: fixed; inset: 0; transition: opacity var(--dur) var(--ease), transform var(--dur-cam) var(--ease); }
-.screen[hidden] { display: block !important; opacity: 0; pointer-events: none; }
-/* Accueil */
-.home { background: var(--bg); overflow: hidden; }
-/* Images réelles (voir references/assets.md) */
-.home__img, .layer img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.home__img { filter: sepia(.25) saturate(1.3) contrast(1.05); }
-.home::after { content: ""; position: absolute; inset: 0; background: var(--veil); pointer-events: none; }
-.home > :not(img) { z-index: 1; }
-.credit { position: absolute; left: var(--edge); bottom: var(--edge); margin: 0; font: 400 var(--text-xs) var(--font-ui); color: var(--muted); }
-.home.is-leaving { transform: scale(1.15); opacity: 0; }
-.home__title { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); margin: 0; text-align: center; font: 400 var(--text-hero)/0.9 var(--font-display); text-shadow: 0 2px 40px rgb(28 20 14 / .5); white-space: nowrap; }
-.home__title small { display: block; margin: 4px 0 0 40%; font-size: 0.28em; text-align: left; }
-.enter { position: absolute; left: 50%; top: 72%; transform: translate(-50%, -50%); width: var(--enter); aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--ring); background: none; font: 400 var(--text-lg) var(--font-display); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; }
-.enter::before { content: ""; position: absolute; inset: -10px; border-radius: 50%; border: 1px solid var(--ring); opacity: .6; transition: inset var(--dur-fast) var(--ease); }
-.enter:hover::before { inset: -16px; }
-.help { position: absolute; left: 0; right: 0; bottom: var(--edge); text-align: center; font: 400 var(--text-xs) var(--font-ui); }
-.brand { position: fixed; left: var(--edge); top: var(--edge); z-index: 10; font: 400 1.4rem var(--font-display); }
-.corner { position: fixed; right: var(--edge); bottom: var(--edge); z-index: 10; display: flex; gap: var(--space-3); }
-.round { width: var(--btn-round); height: var(--btn-round); border-radius: 50%; border: 1px solid var(--ring); background: rgb(28 20 14 / .25); cursor: pointer; display: grid; place-items: center; font-family: var(--font-ui); }
-/* Scène */
-.scene { overflow: hidden; cursor: none; }
-.layer { position: absolute; inset: 0; overflow: hidden; background: var(--bg); isolation: isolate; }
-/* « Reconstitué » : même photo, réchauffée, saturée, lumière dorée */
-.past img { filter: sepia(.35) saturate(1.6) contrast(1.08) brightness(1.06) hue-rotate(-6deg); }
-.past::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(70% 60% at 25% 20%, var(--gold), transparent 70%); mix-blend-mode: soft-light; opacity: .8; }
-.past::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--veil); pointer-events: none; }
-/* « Aujourd'hui » : neutre, plus froid et pâle */
-.today img { filter: saturate(.6) contrast(1.02) brightness(1.02); }
-.today { clip-path: circle(calc(var(--lens) / 2) at var(--x, 70%) var(--y, 50%)); }
-.scene.anim .today { transition: clip-path var(--dur) var(--ease); }
-.scene.is-today .today { clip-path: circle(150% at var(--x, 70%) var(--y, 50%)); }
-.lace { position: absolute; z-index: 2; left: var(--x, 70%); top: var(--y, 50%); width: calc(var(--lens) + 40px); aspect-ratio: 1; translate: -50% -50%; pointer-events: none; color: var(--parchment); }
-.lens-hint { position: absolute; z-index: 2; left: var(--x, 70%); top: var(--y, 50%); translate: -50% calc(var(--lens) / 2 + 34px); font: 500 var(--text-xs) var(--font-ui); text-align: center; text-shadow: 0 1px 6px rgb(28 20 14 / .8); pointer-events: none; white-space: nowrap; }
-.scene.is-today .lace, .scene.is-today .lens-hint { opacity: 0; }
-.story { position: absolute; z-index: 2; left: 12%; top: 26%; width: min(var(--text-col), 80vw); text-align: center; }
-.story h2 { margin: 0 0 var(--space-4); font: 400 var(--text-title)/var(--leading-title) var(--font-display); color: var(--gold); text-shadow: 0 2px 30px rgb(28 20 14 / .6); }
-.story h2 span { display: inline-block; animation: letter 600ms var(--ease) both; }
-.story p { margin: 0; text-shadow: 0 1px 12px rgb(28 20 14 / .8); }
-.place { position: fixed; right: var(--edge); top: var(--edge); z-index: 10; display: flex; align-items: center; gap: var(--space-3); font: 500 var(--text-sm) var(--font-ui); }
-.medal { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--on-gold); display: grid; place-items: center; box-shadow: 0 0 0 4px rgb(236 208 111 / .35); }
-.dots { position: fixed; right: calc(var(--edge) + 18px); top: 50%; translate: 0 -50%; z-index: 10; display: grid; gap: 22px; justify-items: center; }
-.dots button { width: 6px; height: 6px; padding: 0; border-radius: 50%; border: 0; background: var(--text); cursor: pointer; position: relative; }
-.dots button::after { content: ""; position: absolute; inset: -16px; }
-.dots button[aria-current] { width: 14px; height: 14px; background: none; border: 1px solid var(--text); }
-.about { position: fixed; left: var(--edge); bottom: var(--edge); z-index: 10; display: flex; align-items: center; gap: var(--space-3); background: none; border: 0; cursor: pointer; font: 400 var(--text-sm) var(--font-ui); min-height: 44px; }
-.about i { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--ring); display: grid; place-items: center; font-style: normal; }
-.today-btn { position: absolute; z-index: 2; left: 12%; top: calc(26% + 300px); background: none; border: 1px solid var(--ring); border-radius: 999px; padding: 8px 16px; font: 500 var(--text-xs) var(--font-ui); cursor: pointer; min-height: 44px; }
-.panel { position: fixed; right: 0; top: 0; bottom: 0; z-index: 20; width: min(420px, 100%); padding: var(--space-12) var(--space-8); background: var(--parchment); color: var(--ink); transform: translateX(100%); transition: transform var(--dur) var(--ease); overflow-y: auto; }
-.panel.is-open { transform: none; }
-.panel h3 { font: 400 2rem/1.1 var(--font-display); margin: 0 0 var(--space-4); }
-.panel p { color: var(--ink-muted); }
-.panel .round { border-color: var(--ink); color: var(--ink); background: none; position: absolute; right: var(--space-6); top: var(--space-6); }
-@keyframes letter { from { opacity: 0; filter: blur(6px); } }
-@media (max-width: 760px) {
-  :root { --lens: 160px; }
-  .story { left: 8%; right: 8%; width: auto; top: 14%; }
-  .today-btn { left: 50%; translate: -50% 0; top: auto; bottom: 90px; }
-  .dots { display: none; }
-  .home__title small { margin-left: 30%; }
-  .help { bottom: calc(var(--edge) + var(--btn-round) + var(--space-3)); }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--white); font: 400 var(--fs-ui)/var(--lh-ui) var(--font-ui); -webkit-font-smoothing: antialiased; }
+body.locked { overflow: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.display { font-family: var(--font-display); font-weight: 400; }
+svg.lace { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1; }
+svg.lace * { vector-effect: non-scaling-stroke; }
+svg.ico { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes cw { to { transform: rotate(360deg); } }
+@keyframes ccw { to { transform: rotate(-360deg); } }
+
+/* ---------- Chargement ---------- */
+.loader { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; background: var(--bg); transition: opacity var(--dur-text) var(--ease), visibility 0s var(--dur-text); }
+.loaded .loader { opacity: 0; visibility: hidden; }
+.loader-ring { position: relative; display: grid; place-items: center; width: 190px; height: 190px; color: var(--gold); }
+.loader-ring svg { position: absolute; inset: 0; animation: cw var(--spin-slow) linear infinite; }
+.loader-pct { font: 400 var(--fs-pct)/1 var(--font-display); color: var(--gold); }
+
+/* ---------- Éléments fixes ---------- */
+.hud { position: fixed; z-index: 10; }
+.brand { top: var(--edge); left: var(--edge); font: 400 1.5rem/1 var(--font-display); }
+.round { position: relative; isolation: isolate; overflow: hidden; display: inline-grid; place-items: center; width: var(--btn); height: var(--btn); border-radius: 50%; box-shadow: inset 0 0 0 1px var(--gold); transition: color var(--dur-fast) var(--ease); }
+.round::before, .pill::before { content: ""; position: absolute; left: 50%; top: 100%; z-index: -1; width: 140%; aspect-ratio: 1; border-radius: 50%; background: var(--gold); transform: translate(-50%, 0) scale(0.4); transition: transform var(--dur-fill) var(--ease-expo); }
+.round:hover, .round:focus-visible, .pill:hover, .pill:focus-visible, .round[aria-pressed="true"] { color: var(--bg); }
+.round:hover::before, .round:focus-visible::before, .pill:hover::before, .pill:focus-visible::before, .round[aria-pressed="true"]::before { transform: translate(-50%, -85%) scale(1); }
+.round.full { color: var(--bg); background: var(--gold); }
+.plan { top: var(--edge); right: var(--edge); }
+.plan .round::after { content: ""; position: absolute; inset: 1px; border-radius: 50%; border: 1px solid var(--white); opacity: 0; animation: pulse var(--pulse) linear 0.5s infinite; }
+@keyframes pulse { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(1.5); } }
+.plan .round { overflow: visible; }
+.plan .round::before { display: none; }
+.plan-list { position: absolute; top: calc(100% + 12px); right: 0; min-width: 230px; padding: 8px 0; border-radius: 14px; background: var(--mist); color: var(--bronze); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease-out), visibility 0s var(--dur-fast); }
+.plan.open .plan-list { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.plan-list a { display: block; padding: 12px 18px; }
+.plan-list a:hover, .plan-list a:focus-visible { background: var(--white); }
+.tools { right: var(--edge); bottom: var(--edge); display: flex; gap: 8px; }
+.about-link { left: var(--edge); bottom: var(--edge); display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.about-link i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--gold); transition: transform var(--dur-hot) var(--ease-out); }
+.about-link:hover i { transform: translateX(4px); }
+.hud.about-link, .hud.tools, .bullets { transition: opacity var(--dur-text) var(--ease); }
+.at-end .about-link, .at-end .bullets, .intro-zone .bullets, .intro-zone .about-link { opacity: 0; pointer-events: none; }
+
+/* Puces de navigation */
+.bullets { top: 50%; right: var(--edge); transform: translateY(-50%); display: grid; gap: calc(var(--bullet-step) - var(--bullet)); width: var(--btn); justify-items: center; }
+.bullets a { position: relative; display: grid; place-items: center; width: var(--bullet); height: var(--bullet); }
+.bullets a::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--white); transition: transform var(--dur-hot) var(--ease-out); }
+.bullets a::after { content: ""; position: absolute; inset: -12px; }
+.bullets a svg { position: absolute; inset: -2px; width: 24px; height: 24px; color: var(--white); opacity: 0; transition: opacity var(--dur-fast) linear; animation: cw var(--spin-fast) linear infinite; animation-play-state: paused; }
+.bullets a.on svg { opacity: 1; animation-play-state: running; }
+.bullets a.on::before { transform: scale(1.6); }
+.bullets a span { position: absolute; right: calc(100% + 14px); top: 50%; padding: 9px 16px; border-radius: var(--r-pill); background: var(--mist); color: var(--bronze); white-space: nowrap; transform: translateY(-50%) scale(0.9); transform-origin: right center; opacity: 0; pointer-events: none; transition: opacity var(--dur-fast) var(--ease), transform var(--dur-hot) var(--ease-out); }
+.bullets a:hover span, .bullets a:focus-visible span { opacity: 1; transform: translateY(-50%); }
+
+/* ---------- Scènes ---------- */
+.scene { position: relative; height: calc(var(--len) * 100svh); }
+.stage { position: sticky; top: 0; height: 100svh; overflow: hidden; background: var(--bg); }
+.layer { position: absolute; inset: 0; will-change: transform, opacity; }
+.layer.b { opacity: 0; }
+.veil { position: absolute; inset: 0; pointer-events: none; }
+.veil.night { background: var(--night-veil); }
+.veil.read { background: radial-gradient(ellipse 60% 55% at 50% 52%, var(--veil-1), var(--veil-0) 70%), linear-gradient(180deg, var(--veil-1), var(--veil-0) 22%, var(--veil-0) 70%, var(--veil-2)); }
+.veil.side { background: linear-gradient(90deg, var(--veil-0) 30%, var(--veil-1) 62%, var(--veil-2)); opacity: 0; transition: opacity var(--dur-text) var(--ease); }
+.veil.side.on { opacity: 1; }
+.center { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 1.5rem; padding: 0 var(--edge); text-align: center; pointer-events: none; }
+/* un bloc de texte : caché, puis visible quand le défilement est dans sa plage */
+.beat { opacity: 0; transform: translateY(18px); transition: opacity var(--dur-text) var(--ease), transform var(--dur-text) var(--ease-out); }
+.beat.on { opacity: 1; transform: none; }
+.beat.gone { opacity: 0; transform: translateY(-18px); transition-duration: var(--dur-fast); transition-timing-function: var(--ease-in); }
+.phrase { max-width: min(var(--col-phrase), 100%); font: 400 var(--fs-phrase)/1 var(--font-display); text-wrap: balance; }
+.hint { position: absolute; left: 50%; bottom: max(80px, calc(60px + 3.125vw)); transform: translateX(-50%); display: grid; justify-items: center; gap: 14px; text-align: center; transition: opacity var(--dur-text) var(--ease); }
+.hint .round { animation: bob 3s var(--ease) infinite; pointer-events: none; }
+@keyframes bob { 50% { transform: translateY(8px); } }
+.hint.off { opacity: 0; }
+
+/* Titre du site et des chapitres : lettres qui montent une à une */
+.hero-title { font: 400 var(--fs-hero)/var(--lh-hero) var(--font-display); text-wrap: balance; }
+.hero-title .w { display: inline-block; white-space: nowrap; }
+.hero-title .l { display: inline-block; opacity: 0; transform: translateY(0.35em); transition: opacity var(--dur-text) var(--ease), transform var(--dur-text) var(--ease-out); transition-delay: calc(var(--i) * 28ms); }
+.on > .hero-title .l, .hero-title.on .l { opacity: 1; transform: none; }
+.sub { font: 400 var(--fs-phrase)/1 var(--font-display); color: var(--gold); margin-top: -0.2em; padding-left: 38%; }
+.enter { position: relative; isolation: isolate; overflow: hidden; display: grid; place-items: center; width: var(--enter); height: var(--enter); margin-top: 1rem; border-radius: 50%; font: 400 var(--fs-enter)/1 var(--font-display); text-transform: uppercase; pointer-events: auto; transition: color var(--dur-fast) var(--ease); }
+.enter::after { content: ""; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--gold), inset 0 0 0 8px var(--veil-0), inset 0 0 0 9px var(--gold-half); }
+.enter::before { content: ""; position: absolute; left: 50%; top: 100%; z-index: -1; width: 120%; aspect-ratio: 1; border-radius: 50%; background: var(--gold); transform: translate(-50%, 0) scale(0.4); transition: transform 450ms var(--ease-expo); }
+.enter:hover, .enter:focus-visible { color: var(--bg); }
+.enter:hover::before, .enter:focus-visible::before { transform: translate(-50%, -92%) scale(1); }
+
+/* Médaillon de chapitre */
+.medal { position: relative; display: grid; place-items: center; width: var(--medal); height: var(--medal); color: var(--gold); font: 400 var(--fs-num)/1 var(--font-display); }
+.medal b { font-weight: 400; color: var(--white); }
+.medal svg { position: absolute; inset: 0; animation: cw var(--spin-slow) linear infinite; }
+.medal svg + svg { inset: 14%; width: 72%; height: 72%; animation: ccw var(--spin-mid) linear infinite; }
+.center .story { text-shadow: 0 1px 14px var(--shade), 0 0 2px var(--shade); }
+.story { max-width: 30em; font: 400 var(--fs-body)/var(--lh-body) var(--font-text); text-wrap: pretty; }
+
+/* Point d'intérêt : lentille à gauche, récit à droite */
+.stop { position: absolute; inset: 0; display: grid; grid-template-columns: 6.7fr minmax(0, 426px) 1fr; align-items: center; padding: 0 calc(var(--edge) + var(--btn) + 24px) 0 var(--edge); pointer-events: none; }
+.stop > * { pointer-events: auto; }
+.lens { justify-self: end; margin-right: clamp(20px, 6vw, 110px); display: grid; justify-items: center; gap: 14px; width: var(--lens); text-align: center; }
+.lens-eye { position: relative; width: var(--lens); height: var(--lens); color: var(--gold); }
+.lens-eye svg { position: absolute; inset: 0; animation: cw var(--spin-slow) linear infinite; }
+.lens-eye span { position: absolute; inset: 20%; border-radius: 50%; overflow: hidden; transition: transform var(--dur-fill) var(--ease-expo); }
+.lens:hover .lens-eye span, .lens:focus-visible .lens-eye span { transform: scale(1.12); }
+.lens small { font-size: var(--fs-ui); font-weight: 500; max-width: 9em; }
+.stop-text { display: grid; justify-items: center; gap: 1.6rem; text-align: center; }
+.place { font: 400 var(--fs-place)/0.9 var(--font-display); color: var(--gold); text-wrap: balance; }
+.stop-text .story { max-width: var(--col-text); }
+.pill { position: relative; isolation: isolate; overflow: hidden; display: inline-grid; place-items: center; height: var(--btn); padding: 0 34px; border-radius: var(--r-pill); box-shadow: inset 0 0 0 1px var(--gold); font-weight: 500; transition: color var(--dur-fast) var(--ease); }
+.pill::before { width: 110%; }
+
+/* ---------- Vue actuelle : simple fondu plein écran (un zoom ou un cercle qui s'ouvre coûtait deux fois plus cher) ---------- */
+.present { position: fixed; inset: 0; z-index: 30; margin: 0; visibility: hidden; opacity: 0; will-change: opacity; transition: opacity var(--dur-hot) var(--ease-in), visibility 0s var(--dur-hot); }
+.present.open { visibility: visible; opacity: 1; transition: opacity var(--dur-text) var(--ease); }
+.present figcaption { position: absolute; left: var(--edge); bottom: var(--edge); max-width: 26em; padding: 12px 18px; border-radius: 14px; background: var(--veil-2); }
+/* pendant qu'une fenêtre est ouverte, les ornements de la scène s'arrêtent */
+.locked main svg, .locked .hud svg, .locked .hint .round { animation-play-state: paused; }
+.close { position: absolute; top: var(--edge); right: var(--edge); display: inline-flex; align-items: center; gap: 12px; font-weight: 500; }
+.present .round, .editorial .round { background: var(--veil-1); }
+
+/* ---------- Page éditoriale (défilement horizontal) ---------- */
+.editorial { position: fixed; inset: 0; z-index: 40; background: var(--bg); visibility: hidden; transform: translateY(100%); transition: transform var(--dur-open) var(--ease-expo), visibility 0s var(--dur-open); }
+.editorial.open { visibility: visible; transform: none; transition-delay: 0s; }
+.ed-track { display: flex; align-items: center; gap: clamp(60px, 8vw, 140px); height: 100%; padding-right: max(120px, calc(42.5px + 12.1vw)); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+.ed-track::-webkit-scrollbar { display: none; }
+.ed-track > * { flex: none; }
+.ed-hero { align-self: stretch; width: 38vw; }
+.ed-head { width: min(420px, 80vw); }
+.ed-head h2 { font: 400 var(--fs-place)/0.9 var(--font-display); color: var(--gold); }
+.ed-head .crumb { margin: 1.4rem 0 5rem; font-weight: 500; }
+.ed-head .crumb span { font: italic 400 1em var(--font-text); }
+.ed-copy { display: grid; gap: 1.2em; width: min(380px, 80vw); font: 400 var(--fs-body)/var(--lh-body) var(--font-text); }
+.ed-fig { display: flex; align-items: flex-end; gap: 28px; }
+.ed-fig .pic { width: clamp(220px, 22vw, 320px); aspect-ratio: 3 / 4; }
+.ed-fig figcaption { width: 13em; }
+.ed-fig figcaption b { display: block; font-weight: 500; }
+.ed-fig figcaption span { font: 400 1em var(--font-text); text-transform: uppercase; }
+.ed-quote { width: min(680px, 86vw); font: 400 var(--fs-phrase)/1 var(--font-display); color: var(--soft); }
+
+/* ---------- Fin ---------- */
+.end { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; background: var(--bg); }
+.end-pic { position: relative; min-height: 50svh; }
+.end-pic img { position: absolute; inset: 0; }
+.end-txt { display: grid; align-content: center; gap: 2rem; padding: 15vh clamp(24px, 7vw, 110px); }
+.end-txt h2 { font: 400 var(--fs-place)/0.9 var(--font-display); color: var(--gold); }
+.end-txt .story { max-width: 26em; }
+.end-txt ul { display: grid; gap: 0; max-width: 26em; }
+.end-txt li { display: flex; justify-content: space-between; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+.end-txt li:first-child { border-top: 1px solid var(--line); }
+.end-txt li span { color: var(--soft); text-align: right; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 919px) {
+  .bullets { right: 4px; width: 32px; }
+  .bullets a span { display: none; }
+  .center { padding: 0 40px; }
+  .sub { padding-left: 20%; }
+  .stop { grid-template-columns: 1fr; align-content: end; justify-items: center; gap: 14px; padding: 0 12px calc(var(--edge) + 62px); }
+  .lens { justify-self: center; margin: 0; --lens: 132px; }
+  .lens small { max-width: none; }
+  /* le récit passe dans une carte arrondie en bas de l'écran */
+  .stop-text { width: 100%; padding: 24px 20px; border-radius: var(--r-card); background: var(--veil-2); gap: 1rem; }
+  .veil.side { background: linear-gradient(180deg, var(--veil-0) 20%, var(--veil-1) 60%); }
+  .editorial { overflow-y: auto; }
+  .ed-track { display: grid; height: auto; gap: 48px; padding: 0 20px 80px; overflow: visible; }
+  .ed-hero { width: auto; height: 46svh; margin: 0 -20px; }
+  .ed-head .crumb { margin-bottom: 0; }
+  .ed-head, .ed-copy, .ed-quote { width: auto; }
+  .ed-fig { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .ed-fig .pic { width: 70%; }
+  .end { grid-template-columns: 1fr; }
+  .end-txt { padding: 60px 20px 110px; }
+  .about-link span { display: none; }
+  .editorial .close { font-size: 0; }
+  .veil.read { background: radial-gradient(ellipse 120% 40% at 50% 50%, var(--veil-1), var(--veil-0) 75%), linear-gradient(180deg, var(--veil-1), var(--veil-0) 22%, var(--veil-0) 70%, var(--veil-2)); }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .layer { transform: none !important; }
+}
+.calm *, .calm *::before, .calm *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+.calm .layer { transform: none !important; }
 </style>
 </head>
-<body>
-<span class="brand">Musée fictif</span>
-<section class="screen home" id="home" aria-label="Accueil">
-  <img class="home__img" data-slot="home" src="https://images.unsplash.com/photo-1580706486641-ebec9f673d36?auto=format&fit=crop&w=2000&q=80" alt="Des colonnes antiques à contre-jour, au coucher du soleil" width="2000" height="1333" fetchpriority="high">
-  <h1 class="home__title">Ourouk<small>retrouvée</small></h1>
-  <button class="enter" id="enter">Entrer</button>
-  <p class="help">Cliquer sur Entrer pour continuer</p>
-  <p class="credit">Photos : Unsplash</p>
+<body class="locked intro-zone">
+
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="loader-ring"><svg class="lace" data-lace="26" aria-hidden="true"></svg><span class="loader-pct" id="pct">1</span><span class="sr"> % chargé</span></div>
+</div>
+
+<a class="hud brand display" href="#top" aria-label="Fondation Séléné, début de la visite">Séléné</a>
+
+<div class="hud plan" id="plan">
+  <button class="round full" id="planBtn" aria-expanded="false" aria-controls="planList" aria-label="Plan de la visite"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.500 10 6l3.500 2L10 10l-2 3.500L6 10 2.500 8 6 6z"/></svg></button>
+  <ul class="plan-list" id="planList">
+    <li><a href="#siq">I — Le Siq</a></li>
+    <li><a href="#khazneh">II — Le Trésor</a></li>
+    <li><a href="#deir">III — Le Monastère</a></li>
+    <li><a href="#apropos">À propos de ce projet</a></li>
+  </ul>
+</div>
+
+<nav class="hud bullets" aria-label="Étapes de la visite">
+  <a href="#siq" data-stop="siq"><svg class="lace" viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" stroke-dasharray="2.200 2.500"/></svg><span>Le Siq</span></a>
+  <a href="#khazneh" data-stop="khazneh"><svg class="lace" viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" stroke-dasharray="2.200 2.500"/></svg><span>Le Trésor</span></a>
+  <a href="#deir" data-stop="deir"><svg class="lace" viewBox="-12 -12 24 24" aria-hidden="true"><circle r="9" stroke-dasharray="2.200 2.500"/></svg><span>Le Monastère</span></a>
+</nav>
+
+<a class="hud about-link" href="#apropos"><span>À propos de ce projet</span><i><svg class="ico" viewBox="0 0 16 16" aria-hidden="true" style="width:10px;height:10px"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a>
+
+<div class="hud tools">
+  <button class="round" id="calmBtn" aria-pressed="false" aria-label="Réduire les animations"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.500"/><circle cx="8" cy="8" r="2"/></svg></button>
+  <button class="round" id="soundBtn" aria-pressed="false" aria-label="Son d'ambiance (inactif dans la démo)"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6.500v3h2.500L9 12V4L5.500 6.500zM11.500 6.500a2.500 2.500 0 0 1 0 3"/></svg></button>
+</div>
+
+<main id="top">
+<!-- ============ Prologue ============ -->
+<section class="scene" style="--len:5" data-scene="prologue">
+  <div class="stage">
+    <div class="layer a" data-zoom="1.1"><img alt="Un arbre seul dans le désert, sous la brume" fetchpriority="high" src="https://images.unsplash.com/photo-1543964198-d54e4f0e44e3?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="layer b" data-fade="0.42 0.78" data-zoom="1.06"><img alt="Le désert au soleil couchant, falaises rouges au loin" src="https://images.unsplash.com/photo-1709599349283-9e207d6b2d99?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="veil night" data-fade="0.7 0.3"></div>
+    <div class="veil read"></div>
+    <div class="center">
+      <p class="phrase beat" data-on="0 0.2" style="grid-area:1/1">Il y a deux mille ans, au fond d'un désert de grès, des caravaniers taillèrent une ville dans la montagne.</p>
+      <p class="phrase beat" data-on="0.26 0.46" style="grid-area:1/1">Capitale des Nabatéens, elle tenait la route de l'encens entre l'Arabie et la Méditerranée.</p>
+      <p class="phrase beat" data-on="0.52 0.72" style="grid-area:1/1">Nous l'appelons aujourd'hui Pétra.</p>
+      <p class="phrase beat" data-on="0.8 0.97" style="grid-area:1/1">La Fondation Séléné<br>présente</p>
+    </div>
+    <div class="hint" id="hint"><span class="round"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span><span>Faire défiler pour continuer</span></div>
+  </div>
 </section>
 
-<section class="screen scene" id="scene" hidden aria-label="Visite">
-  <div class="layer past" data-slot="reconstruction"><img id="imgPast" src="https://images.unsplash.com/photo-1654849476646-b23bd8597bae?auto=format&fit=crop&w=2000&q=80" alt="La salle des colonnes reconstituée : portes et piliers baignés de lumière dorée" width="2000" height="1333" loading="lazy"></div>
-  <div class="layer today" data-slot="today"><img id="imgToday" src="https://images.unsplash.com/photo-1654849476646-b23bd8597bae?auto=format&fit=crop&w=2000&q=80" alt="La même salle aujourd'hui : portes et piliers en ruines, à ciel ouvert" width="2000" height="1333" loading="lazy"></div>
-  <svg class="lace" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.2"></g></svg>
-  <span class="lens-hint">Cliquer pour voir l'état actuel</span>
-  <div class="story"><h2 id="placeTitle">Salle des colonnes</h2><p>Le roi y recevait les délégations venues de tout l'empire. Soixante-douze colonnes peintes portaient un plafond de cèdre ; il n'en reste que treize aujourd'hui.</p></div>
-  <button class="today-btn" id="todayBtn" aria-pressed="false">Voir aujourd'hui</button>
-  <div class="place">Palais royal <span class="medal" aria-hidden="true">✦</span></div>
-  <nav class="dots" aria-label="Lieux"><button aria-label="Porte des nations" data-img="1624991721151-e746c489fedf" data-alt="les ruines de la porte sous un ciel nuageux"></button><button aria-label="Escalier d'honneur" data-img="1580706486641-ebec9f673d36" data-alt="les colonnes de l'escalier face au soleil couchant"></button><button aria-current="true" aria-label="Salle des colonnes" data-img="1654849476646-b23bd8597bae" data-alt="les portes et les piliers de la salle"></button><button aria-label="Trésor" data-img="1686028731741-d5771a9f665e" data-alt="un pilier de pierre sculpté du trésor"></button><button aria-label="Tombeaux" data-img="1624991721151-e746c489fedf" data-alt="le plateau des tombeaux et ses ruines"></button></nav>
-  <button class="about" id="aboutBtn"><span>À propos du projet</span><i aria-hidden="true">→</i></button>
+<!-- ============ Titre ============ -->
+<section class="scene" style="--len:1.6" data-scene="title">
+  <div class="stage">
+    <div class="layer a" data-zoom="1.06 1.12"><img alt="" src="https://images.unsplash.com/photo-1709599349283-9e207d6b2d99?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="veil read"></div>
+    <div class="center beat" data-on="-1 2">
+      <h1 class="hero-title" data-split>Pétra</h1>
+      <p class="sub">la cité rose</p>
+      <a class="enter" href="#siq">Entrez</a>
+    </div>
+  </div>
 </section>
-<div class="corner"><button class="round" aria-label="Réglages">⚙</button><button class="round" id="sound" aria-pressed="false" aria-label="Activer le son">🔈</button></div>
-<aside class="panel" id="panel" aria-label="À propos"><button class="round" id="closePanel" aria-label="Fermer">×</button><h3>À propos</h3><p>Cette visite est une démonstration du skill Heritage Lens : la cité, les lieux et les textes sont inventés. Une vraie visite s'appuierait sur des relevés archéologiques, des historiens et des sources citées ici.</p><p>Photos : Unsplash (licence Unsplash). La « reconstitution » est la même photo retraitée (chaleur, saturation, lumière dorée) : un vrai projet utiliserait une reconstitution 3D ou IA validée par des archéologues.</p></aside>
+
+<!-- ============ Chapitre I ============ -->
+<section class="scene chapter" id="siq" style="--len:5" data-scene="siq">
+  <div class="stage">
+    <div class="layer a" data-zoom="1 1.3"><img loading="lazy" alt="Le défilé du Siq, deux parois sombres et une fente de lumière" src="https://images.unsplash.com/photo-1714577744181-735bd0b2dff7?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="layer b" data-fade="0.5 0.66" data-zoom="1.12 1"><img loading="lazy" alt="Parois de grès du Siq, veinées d'orange et de rouge" src="https://images.unsplash.com/photo-1643388820565-ddf8532d30ae?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="veil read"></div><div class="veil side" data-on="0.66 2"></div>
+    <div class="center">
+      <div class="beat" data-on="0.02 0.24" style="grid-area:1/1; display:grid; justify-items:center; gap:1.5rem">
+        <div class="medal"><svg class="lace" data-lace="18" aria-hidden="true"></svg><svg class="lace" data-lace="10" aria-hidden="true"></svg><b>I</b></div>
+        <h2 class="hero-title" data-split>Le Siq</h2>
+      </div>
+      <p class="story beat" data-on="0.3 0.52" style="grid-area:1/1">On entrait dans Pétra par une faille longue de plus d'un kilomètre, parfois large de trois mètres à peine. Les parois montent à quatre-vingts mètres ; un canal taillé dans la roche y portait l'eau jusqu'à la ville.</p>
+    </div>
+    <div class="stop beat" data-on="0.7 2">
+      <button class="lens" data-present="https://images.unsplash.com/photo-1774793265269-0567836bb21d?auto=format&fit=crop&w=1600&q=75" data-caption="Le Siq, au milieu du défilé.">
+        <span class="lens-eye"><svg class="lace" data-lace="22" aria-hidden="true"></svg><span><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1774793265269-0567836bb21d?auto=format&fit=crop&w=400&h=400&q=70"></span></span>
+        <small>Cliquez pour révéler le défilé</small>
+      </button>
+      <div class="stop-text">
+        <h3 class="place">Parois de grès</h3>
+        <p class="story">Le grès de Pétra est veiné d'oxydes de fer et de manganèse : rouge, orange, violet, blanc. Les Nabatéens n'ont rien peint ici, la couleur est celle de la pierre.</p>
+        <button class="pill" data-editorial>La route de l'encens</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Chapitre II ============ -->
+<section class="scene chapter" id="khazneh" style="--len:5" data-scene="khazneh">
+  <div class="stage">
+    <div class="layer a" data-zoom="1 1.25"><img loading="lazy" alt="Le Trésor aperçu au bout du Siq" src="https://images.unsplash.com/photo-1764869870536-66a550424d32?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="layer b" data-fade="0.5 0.66" data-zoom="1.12 1"><img loading="lazy" alt="Façade du Trésor, colonnes et fronton taillés dans la falaise rose" src="https://images.unsplash.com/photo-1691783639104-806ca12a9a8f?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="veil read"></div><div class="veil side" data-on="0.66 2"></div>
+    <div class="center">
+      <div class="beat" data-on="0.02 0.24" style="grid-area:1/1; display:grid; justify-items:center; gap:1.5rem">
+        <div class="medal"><svg class="lace" data-lace="18" aria-hidden="true"></svg><svg class="lace" data-lace="10" aria-hidden="true"></svg><b>II</b></div>
+        <h2 class="hero-title" data-split>Le Trésor</h2>
+      </div>
+      <p class="story beat" data-on="0.3 0.52" style="grid-area:1/1">Au bout du défilé, la falaise s'ouvre d'un coup sur une façade de quarante mètres. Les Bédouins l'appelaient Al-Khazneh, « le Trésor », persuadés que l'urne du sommet cachait l'or d'un pharaon.</p>
+    </div>
+    <div class="stop beat" data-on="0.7 2">
+      <button class="lens" data-present="https://images.unsplash.com/photo-1606210122158-eeb10e0823bf?auto=format&fit=crop&w=1600&q=75" data-caption="Le Trésor éclairé à la bougie, lors d'une visite de nuit.">
+        <span class="lens-eye"><svg class="lace" data-lace="22" aria-hidden="true"></svg><span><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1606210122158-eeb10e0823bf?auto=format&fit=crop&w=400&h=400&q=70"></span></span>
+        <small>Cliquez pour révéler la vue de nuit</small>
+      </button>
+      <div class="stop-text">
+        <h3 class="place">Al-Khazneh</h3>
+        <p class="story">Sans doute le tombeau du roi Arétas IV, taillé de haut en bas au premier siècle. Colonnes corinthiennes, fronton brisé, tholos : un vocabulaire grec, sculpté dans une falaise d'Arabie.</p>
+        <button class="pill" data-editorial>La route de l'encens</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Chapitre III ============ -->
+<section class="scene chapter" id="deir" style="--len:5" data-scene="deir">
+  <div class="stage">
+    <div class="layer a" data-zoom="1 1.25"><img loading="lazy" alt="Le Monastère vu de loin, au pied de la montagne" src="https://images.unsplash.com/photo-1783696663079-cf5b55122031?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="layer b" data-fade="0.5 0.66" data-zoom="1.12 1"><img loading="lazy" alt="Façade du Monastère sous un ciel bleu" src="https://images.unsplash.com/photo-1677752512557-a29806af5c38?auto=format&fit=crop&w=2000&q=75"></div>
+    <div class="veil read"></div><div class="veil side" data-on="0.66 2"></div>
+    <div class="center">
+      <div class="beat" data-on="0.02 0.24" style="grid-area:1/1; display:grid; justify-items:center; gap:1.5rem">
+        <div class="medal"><svg class="lace" data-lace="18" aria-hidden="true"></svg><svg class="lace" data-lace="10" aria-hidden="true"></svg><b>III</b></div>
+        <h2 class="hero-title" data-split>Le Monastère</h2>
+      </div>
+      <p class="story beat" data-on="0.3 0.52" style="grid-area:1/1">Huit cents marches plus haut, loin de la ville basse, se dresse le plus grand monument de Pétra. Sa porte seule mesure huit mètres ; on s'y réunissait pour honorer le roi Obodas, devenu dieu.</p>
+    </div>
+    <div class="stop beat" data-on="0.7 2">
+      <button class="lens" data-present="https://images.unsplash.com/photo-1783696674045-3fad49aadb7b?auto=format&fit=crop&w=1600&q=75" data-caption="Le Monastère vu du pied de la façade.">
+        <span class="lens-eye"><svg class="lace" data-lace="22" aria-hidden="true"></svg><span><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1783696674045-3fad49aadb7b?auto=format&fit=crop&w=400&h=400&q=70"></span></span>
+        <small>Cliquez pour lever les yeux</small>
+      </button>
+      <div class="stop-text">
+        <h3 class="place">Ad-Deir</h3>
+        <p class="story">Quarante-sept mètres de large, presque autant de haut. La façade est restée nue : ni statues, ni frise. Les niches attendaient des sculptures que le temps a emportées.</p>
+        <button class="pill" data-editorial>La route de l'encens</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Fin ============ -->
+<section class="end" id="apropos">
+  <div class="end-pic"><img loading="lazy" alt="Tombeaux taillés dans la falaise, à la tombée du jour" src="https://images.unsplash.com/photo-1701223555020-054e2beabbaf?auto=format&fit=crop&w=1400&q=75"></div>
+  <div class="end-txt">
+    <h2>À propos de ce projet</h2>
+    <p class="story">« Pétra, la cité rose » est une visite fictive, conçue pour montrer le style Heritage Lens. La Fondation Séléné n'existe pas ; les textes sont écrits pour la démonstration.</p>
+    <ul>
+      <li>Durée de la visite<span>6 minutes</span></li>
+      <li>Chapitres<span>Le Siq, le Trésor, le Monastère</span></li>
+      <li>Photographies<span>Unsplash, licence libre</span></li>
+    </ul>
+    <a class="pill" href="#top" style="justify-self:start">Revenir au début</a>
+  </div>
+</section>
+</main>
+
+<!-- Vue actuelle -->
+<figure class="present" id="present" role="dialog" aria-modal="true" aria-label="Vue révélée" inert>
+  <img id="presentImg" alt="">
+  <figcaption id="presentCap"></figcaption>
+  <button class="close" id="presentClose"><span class="sr">Fermer</span><span class="round"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></span></button>
+</figure>
+
+<!-- Page éditoriale -->
+<article class="editorial" id="editorial" role="dialog" aria-modal="true" aria-labelledby="edTitle" inert>
+  <div class="ed-track" id="edTrack" tabindex="0">
+    <div class="ed-hero"><img loading="lazy" alt="Façade d'un tombeau taillé dans le grès rose" src="https://images.unsplash.com/photo-1717939240084-1f80094d4562?auto=format&fit=crop&w=1200&h=1500&q=75"></div>
+    <header class="ed-head">
+      <h2 id="edTitle">La route de l'encens</h2>
+      <p class="crumb">Le Trésor — <span>Al-Khazneh</span></p>
+      <div class="ed-copy">
+        <p>L'encens et la myrrhe venaient du sud de l'Arabie. Il fallait soixante-cinq étapes à dos de chameau pour atteindre Gaza, et Pétra se trouvait exactement au croisement des pistes.</p>
+        <p>Les Nabatéens ne produisaient rien : ils offraient l'eau, la sécurité et des entrepôts, et prélevaient un quart de la valeur des marchandises.</p>
+      </div>
+    </header>
+    <figure class="ed-fig"><div class="pic"><img loading="lazy" alt="Tombeau à étages creusé dans la falaise" src="https://images.unsplash.com/photo-1605647852200-bdd8c390b8f2?auto=format&fit=crop&w=700&h=930&q=75"></div><figcaption><b>Tombeau à étages</b><span>Ier siècle av. J.-C.</span></figcaption></figure>
+    <p class="ed-quote">Cette richesse a payé les façades : chaque famille de marchands voulait la sienne, plus haute que celle du voisin, taillée par des sculpteurs venus d'Alexandrie.</p>
+    <figure class="ed-fig"><div class="pic"><img loading="lazy" alt="Tombeaux royaux taillés dans la falaise" src="https://images.unsplash.com/photo-1605647851614-974467137eca?auto=format&fit=crop&w=700&h=930&q=75"></div><figcaption><b>Tombeaux royaux</b><span>Ier siècle</span></figcaption></figure>
+    <div class="ed-copy">
+      <p>Quand Rome annexe le royaume en 106, les caravanes passent déjà par la mer Rouge. La ville décline lentement ; un séisme, en 363, détruit la moitié de ses bâtiments.</p>
+      <p>Seules les façades, taillées dans la masse, ont traversé les siècles.</p>
+    </div>
+  </div>
+  <button class="close" id="edClose">Fermer <span class="round"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8M12 4l-8 8"/></svg></span></button>
+</article>
 
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const g = document.querySelector('.lace g');
-  for (let i = 0; i < 24; i++) { const a = i / 24 * Math.PI * 2, x = 50 + Math.cos(a) * 46, y = 50 + Math.sin(a) * 46; const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('cx', x.toFixed(2)); c.setAttribute('cy', y.toFixed(2)); c.setAttribute('r', '4.5'); g.appendChild(c); }
-  const ring = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); ring.setAttribute('cx', 50); ring.setAttribute('cy', 50); ring.setAttribute('r', 41); g.appendChild(ring);
-  const home = document.getElementById('home'), scene = document.getElementById('scene');
-  document.getElementById('enter').addEventListener('click', () => { home.classList.add('is-leaving'); setTimeout(() => { home.hidden = true; scene.hidden = false; const t = document.getElementById('placeTitle'); let k = 0; t.innerHTML = t.textContent.split(' ').map(w => `<span style="display:inline-block;white-space:nowrap;animation:none">${[...w].map(c => `<span style="animation-delay:${k++ * 30}ms">${c}</span>`).join('')}</span>`).join(' '); }, reduce ? 0 : 900); });
-  let tx = 70, ty = 50, x = 70, y = 50;
-  scene.addEventListener('pointermove', e => { tx = e.clientX / innerWidth * 100; ty = e.clientY / innerHeight * 100; });
-  (function loop() { x += (tx - x) * (reduce ? 1 : .15); y += (ty - y) * (reduce ? 1 : .15); scene.style.setProperty('--x', x + '%'); scene.style.setProperty('--y', y + '%'); requestAnimationFrame(loop); })();
-  const toggle = () => { scene.classList.add('anim'); setTimeout(() => scene.classList.remove('anim'), 850); const on = scene.classList.toggle('is-today'); document.getElementById('todayBtn').setAttribute('aria-pressed', on); document.getElementById('todayBtn').textContent = on ? 'Revenir à la reconstitution' : "Voir aujourd'hui"; };
-  scene.addEventListener('click', e => { if (!e.target.closest('button')) toggle(); });
-  document.getElementById('todayBtn').addEventListener('click', toggle);
-  document.querySelectorAll('.dots button').forEach(b => b.addEventListener('click', () => { document.querySelectorAll('.dots button').forEach(x => x.toggleAttribute('aria-current', x === b)); document.getElementById('placeTitle').textContent = b.getAttribute('aria-label');
-    const src = `https://images.unsplash.com/photo-${b.dataset.img}?auto=format&fit=crop&w=2000&q=80`, past = document.getElementById('imgPast'), today = document.getElementById('imgToday');
-    past.src = src; today.src = src; past.alt = `Reconstitution : ${b.dataset.alt}, sous la lumière dorée`; today.alt = `Aujourd'hui : ${b.dataset.alt}`; }));
-  const panel = document.getElementById('panel');
-  document.getElementById('aboutBtn').addEventListener('click', () => panel.classList.add('is-open'));
-  document.getElementById('closePanel').addEventListener('click', () => panel.classList.remove('is-open'));
-  const s = document.getElementById('sound'); s.addEventListener('click', () => { const on = s.getAttribute('aria-pressed') !== 'true'; s.setAttribute('aria-pressed', on); s.setAttribute('aria-label', on ? 'Couper le son' : 'Activer le son'); s.textContent = on ? '🔊' : '🔈'; });
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+  const body = document.body;
+  let calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Ornement en dentelle : n cercles qui se chevauchent autour d'un anneau
+  $('svg[data-lace]').forEach(svg => {
+    const n = +svg.dataset.lace, R = 40, r = R * Math.sin(Math.PI / n) * 1.9;
+    svg.setAttribute('viewBox', '-50 -50 100 100');
+    svg.innerHTML = Array.from({ length: n }, (_, i) => {
+      const a = i / n * Math.PI * 2;
+      return `<circle cx="${(R * Math.cos(a)).toFixed(2)}" cy="${(R * Math.sin(a)).toFixed(2)}" r="${r.toFixed(2)}"/>`;
+    }).join('') + `<circle r="${(R - r * 0.55).toFixed(2)}"/>`;
+  });
+
+  // Titres : une lettre = un span
+  $('[data-split]').forEach(h => {
+    let i = 0;
+    h.setAttribute('aria-label', h.textContent);
+    h.innerHTML = h.textContent.split(' ').map(w => `<span class="w" aria-hidden="true">${[...w].map(c => `<span class="l" style="--i:${i++}">${c}</span>`).join('')}</span>`).join(' ');
+  });
+
+  // Chargement : vrai compte des premières images, 1,6 s au moins, 6 s au plus
+  const pct = document.getElementById('pct');
+  const first = $('main img').slice(0, 3);
+  let done = 0, shown = 1, t0 = performance.now();
+  first.forEach(im => { if (im.complete) done++; else im.addEventListener('load', () => done++, { once: true }); });
+  const count = setInterval(() => {
+    const time = Math.min(1, (performance.now() - t0) / 1600);
+    const target = Math.round(100 * Math.min(time, (done + 0.3) / first.length));
+    shown = Math.min(100, Math.max(shown, Math.min(target, shown + 3)));
+    pct.textContent = shown;
+    if (shown >= 100 || performance.now() - t0 > 6000) { clearInterval(count); pct.textContent = 100; body.classList.add('loaded'); body.classList.remove('locked'); update(); }
+  }, 40);
+
+  // Scènes : la progression du défilement active les blocs et déplace les photos
+  const scenes = $('.scene').map(el => ({
+    el, id: el.dataset.scene,
+    beats: $('[data-on]', el).map(b => ({ b, on: b.dataset.on.split(' ').map(Number) })),
+    fades: $('[data-fade]', el).map(f => ({ f, at: f.dataset.fade.split(' ').map(Number) })),
+    zooms: $('[data-zoom]', el).map(z => ({ z, s: z.dataset.zoom.split(' ').map(Number) })),
+  }));
+  const hint = document.getElementById('hint'), bullets = $('.bullets a');
+  const end = document.querySelector('.end');
+  const lerp = (a, b, t) => a + (b - a) * Math.min(1, Math.max(0, t));
+  let raf = 0;
+  function update() {
+    raf = 0;
+    const vh = innerHeight; let current = '';
+    scenes.forEach(s => {
+      const r = s.el.getBoundingClientRect();
+      if (r.bottom < -vh * 0.2 || r.top > vh * 1.2) return;
+      const p = Math.min(1, Math.max(0, -r.top / (r.height - vh)));
+      if (r.top <= vh * 0.5 && r.bottom > vh * 0.5) current = s.id;
+      const inView = r.top < vh * 0.6;
+      s.beats.forEach(({ b, on }) => {
+        b.classList.toggle('on', inView && p >= on[0] && p <= on[1]);
+        b.classList.toggle('gone', p > on[1]);
+      });
+      s.fades.forEach(({ f, at }) => { f.style.opacity = at[0] < at[1] ? lerp(0, 1, (p - at[0]) / (at[1] - at[0])) : lerp(1, 0, (p - at[1]) / (at[0] - at[1])); });
+      if (!calm) s.zooms.forEach(({ z, s: k }) => { z.style.transform = `scale(${lerp(k[0], k[1] ?? k[0], p).toFixed(4)})`; });
+    });
+    hint.classList.toggle('off', scrollY > vh * 0.6);
+    body.classList.toggle('intro-zone', current === 'prologue' || current === 'title' || current === '');
+    body.classList.toggle('at-end', end.getBoundingClientRect().top < vh * 0.5);
+    bullets.forEach(a => a.classList.toggle('on', a.dataset.stop === current));
+  }
+  const ask = () => { if (!raf) raf = requestAnimationFrame(update); };
+  addEventListener('scroll', ask, { passive: true });
+  addEventListener('resize', ask);
+
+  // Ancres : arriver sur le point d'intérêt d'un chapitre (70 % de sa course), pas sur son début
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const target = document.querySelector(a.getAttribute('href')); if (!target) return;
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + scrollY;
+    const jump = target.classList.contains('chapter') && a.closest('.bullets') ? (target.offsetHeight - innerHeight) * 0.82 : target.classList.contains('chapter') ? (target.offsetHeight - innerHeight) * 0.08 : 0;
+    scrollTo({ top: top + jump, behavior: calm ? 'auto' : 'smooth' });
+    plan.classList.remove('open'); planBtn.setAttribute('aria-expanded', 'false');
+  });
+
+  // Plan
+  const plan = document.getElementById('plan'), planBtn = document.getElementById('planBtn');
+  planBtn.addEventListener('click', () => planBtn.setAttribute('aria-expanded', plan.classList.toggle('open')));
+
+  // Réglages
+  const calmBtn = document.getElementById('calmBtn');
+  const setCalm = on => { calm = on; body.classList.toggle('calm', on); calmBtn.setAttribute('aria-pressed', on); update(); };
+  calmBtn.addEventListener('click', () => setCalm(!calm));
+  if (calm) setCalm(true);
+  const soundBtn = document.getElementById('soundBtn');
+  soundBtn.addEventListener('click', () => soundBtn.setAttribute('aria-pressed', soundBtn.getAttribute('aria-pressed') !== 'true'));
+
+  // Fenêtres : vue révélée et page éditoriale
+  let opener = null;
+  const show = (box, focusEl) => { box.inert = false; box.classList.add('open'); body.classList.add('locked'); focusEl.focus({ preventScroll: true }); };
+  const hide = box => { box.classList.remove('open'); box.inert = true; body.classList.remove('locked'); if (opener) opener.focus({ preventScroll: true }); };
+  const present = document.getElementById('present'), presentImg = document.getElementById('presentImg'), presentCap = document.getElementById('presentCap');
+  $('.lens').forEach(l => l.addEventListener('click', () => {
+    presentImg.src = l.dataset.present; presentImg.alt = l.dataset.caption; presentCap.textContent = l.dataset.caption;
+    opener = l; show(present, document.getElementById('presentClose'));
+  }));
+  document.getElementById('presentClose').addEventListener('click', () => hide(present));
+  const editorial = document.getElementById('editorial'), track = document.getElementById('edTrack');
+  $('[data-editorial]').forEach(b => b.addEventListener('click', () => { opener = b; track.scrollLeft = 0; editorial.scrollTop = 0; show(editorial, document.getElementById('edClose')); }));
+  document.getElementById('edClose').addEventListener('click', () => hide(editorial));
+  // la molette verticale fait défiler la page éditoriale à l'horizontale
+  track.addEventListener('wheel', e => { if (matchMedia('(min-width: 920px)').matches && Math.abs(e.deltaY) > Math.abs(e.deltaX)) { track.scrollLeft += e.deltaY; e.preventDefault(); } }, { passive: false });
+  addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (present.classList.contains('open')) hide(present);
+    else if (editorial.classList.contains('open')) hide(editorial);
+    else { plan.classList.remove('open'); planBtn.setAttribute('aria-expanded', 'false'); }
+  });
+
+  update();
 })();
 </script>
 </body>
