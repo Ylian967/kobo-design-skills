@@ -1,359 +1,724 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Halden — Glass Frame Estate (démo)</title>
+<title>Halden — Maisons d'architecte en Haute-Savoie</title>
+<meta name="description" content="Démo du style Glass Frame Estate : agence immobilière fictive Halden.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --white: #ffffff; --ink: #000000; --surface: #f2f2f2; --surface-2: #fafafa; --muted: #555555; --line: #e3e3e3; --on-dark-muted: #a3a3a3; --line-dark: #6a6a6a; --accent: #a8641f; --accent-2: #9c5a1c;
-  --frame-line: rgb(255 255 255 / 0.85); --glass: rgb(255 255 255 / 0.14); --glass-line: rgb(255 255 255 / 0.45); --glass-solid: #e9ecef;
-  --shade: #2a3424; --shade-2: #3b4a36; --wordmark-from: rgb(255 255 255 / 0.72); --wordmark-to: rgb(255 255 255 / 0);
-  --sky-top: #5d7ea8; --sky-mid: #c9a27c; --sky-glow: #f2b56b; --sun: #ffe1a8; --hill: #4f7a3a; --hill-dark: #2f4f25; --hill-light: #7aa356; --wood: #2b211b; --window: #ffcf86; --stone: #cfc6b8;
-  --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif; --font-body: 'Inter', system-ui, sans-serif;
-  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.25rem; --text-xl: 1.75rem;
-  --text-h2: clamp(2rem, 4vw, 3.25rem); --text-hero: clamp(2.5rem, 5.5vw, 5rem); --text-wordmark: clamp(5rem, 19vw, 17.5rem);
-  --tracking-caps: 0.08em; --tracking-wordmark: -0.04em; --weight-light: 300; --weight-title: 500; --tracking-title: -0.02em;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --frame-inset: clamp(12px, 2vw, 28px); --container: 1200px; --gutter: clamp(16px, 4vw, 56px);
-  --radius-frame: 6px; --radius-btn: 4px; --radius-card: 10px; --radius-round: 999px; --blur-bg: 22px; --blur-glass: 18px;
-  --shadow-glass: 0 20px 50px rgb(13 13 13 / 0.25); --shadow-card: 0 1px 0 var(--line);
-  --ease: cubic-bezier(0.22, 1, 0.36, 1); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); --dur-fast: 180ms; --dur: 420ms; --dur-slow: 900ms; --dur-photo: 1400ms;
+  --white: #ffffff; --ink: #000000; --surface: #f2f2f2; --surface-2: #fafafa; --muted: #555555; --soft: #cccccc; --tick: rgb(17 17 17 / 0.3);
+  --rule-dark: rgb(255 255 255 / 0.16); --rule: rgb(0 0 0 / 0.1); --veil: rgb(23 23 23 / 0.2); --shade: #2b2d27; --shade-0: rgb(0 0 0 / 0); --shade-1: rgb(0 0 0 / 0.62);
+  --glass: rgb(0 0 0 / 0.05); --glass-edge: rgb(255 255 255 / 0.5); --glass-solid: rgb(43 45 39 / 0.72); --frame-line: rgb(255 255 255 / 0.9);
+  --word-from: rgb(255 255 255 / 0.62); --word-to: rgb(255 255 255 / 0); --word-dark: rgb(255 255 255 / 0.34); --font: 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace; --w-text: 400; --w-title: 500; --w-word: 600; --fs-word: clamp(5.25rem, 19.4vw, 17.5rem);
+  --fs-hero: clamp(2.5rem, 5.56vw, 5rem); --fs-page: clamp(3rem, 7vw, 6.25rem); --fs-h2: clamp(2rem, 3.34vw, 3rem); --fs-h3: clamp(1.375rem, 2.2vw, 2rem); --fs-h4: 1.5rem;
+  --fs-h5: clamp(1rem, 1.4vw, 1.25rem); --fs-body: 1rem; --fs-label: 1rem; --fs-label-s: 0.875rem; --lh-title: 1.1; --lh-body: 1.6; --ls-title: -0.02em; --ls-word: -0.04em;
+  --container: 1200px; --gutter: clamp(20px, 2.1vw, 30px); --section-y: clamp(60px, 9.7vw, 140px); --gap: 10px; --gap-row: 30px; --gap-head: 80px; --pad-card: 10px;
+  --pad-panel: 30px; --btn-h: 50px; --tag-h: 34px; --chip-h: 32px; --step-h: 380px; --step-top: 40px; --frame-inset: clamp(8px, 1.4vw, 20px); --r-frame: 10px;
+  --r-card: 10px; --r-inner: 6px; --r-btn: 4px; --blur-glass: 2px; --blur-menu: 5px; --blur-back: 28px; --ease-color: cubic-bezier(0.44, 0, 0.56, 1);
+  --ease-spring: linear(0, 0.219, 0.449, 0.614, 0.729, 0.811, 0.868, 0.908, 0.937, 0.957, 0.971, 0.981, 0.988, 0.992, 0.996, 0.998, 1); --dur-color: 400ms; --dur-ui: 300ms;
+  --dur-menu: 500ms; --dur-rise: 1100ms; --rise: 80px; --flip-y: 288px; --dur-odo: 1400ms;
 }
-* { box-sizing: border-box; }
-html { overflow-x: clip; }
-body { margin: 0; background: var(--white); color: var(--ink); font: 400 var(--text-base)/1.55 var(--font-body); -webkit-font-smoothing: antialiased; }
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.hero :focus-visible, .dark :focus-visible { outline-color: var(--white); }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.wrap { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
-.caps { font: 500 var(--text-2xs)/1.2 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
 
-/* ---------- Photos (vraies images, voir references/assets.md) ---------- */
-.media { position: absolute; inset: 0; overflow: hidden; isolation: isolate; background: linear-gradient(180deg, var(--sky-top), var(--sky-mid) 55%, var(--shade)); }
-.media img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; } /* color : masque le texte alt si l'image ne charge pas */
-.media--warm img { filter: saturate(1.06) contrast(1.03); }
-.media--warm::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(200deg, color-mix(in srgb, var(--sky-glow) 30%, transparent), transparent 55%); mix-blend-mode: soft-light; }
-.media .veil { position: absolute; inset: 0; z-index: 3; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--shade) 80%, transparent) 88%, var(--shade)); }
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--white); color: var(--ink); font: var(--w-text) var(--fs-body)/var(--lh-body) var(--font); -webkit-font-smoothing: antialiased; }
+body.menu-open { overflow: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+svg.i { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+.wrap { width: min(var(--container), 100% - 2 * var(--gutter)); margin-inline: auto; }
+.sec { padding-block: var(--section-y); }
+.sec.flush { padding-top: 0; }
+.sec.grey { background: var(--surface); }
+.sec.dark { background: var(--ink); color: var(--white); }
+.caps, h1, h2, h3, h4 { text-transform: uppercase; }
+h1, h2, h3, h4 { font-weight: var(--w-title); line-height: var(--lh-title); letter-spacing: var(--ls-title); text-wrap: balance; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+.label { font-size: var(--fs-label); font-weight: var(--w-title); line-height: 1; text-transform: uppercase; }
+.eyebrow { display: block; margin-bottom: 18px; }
+.muted { color: var(--muted); }
+.dark .muted, .foot .muted { color: var(--soft); }
+.head { display: grid; gap: 0; margin-bottom: var(--gap-head); }
+.head.center { text-align: center; justify-items: center; }
+.head.center h2 { max-width: 14em; }
+.head.split { grid-template-columns: 1fr auto; align-items: end; column-gap: 40px; }
+.head.split .eyebrow { grid-column: 1 / -1; }
+.ph { overflow: hidden; border-radius: var(--r-card); background: var(--surface); }
+
+/* Apparition : montée de 80px au ressort, une fois */
+[data-rise] { opacity: 0; transform: translateY(var(--rise)); transition: opacity var(--dur-rise) var(--ease-spring), transform var(--dur-rise) var(--ease-spring); transition-delay: var(--d, 0ms); }
+[data-rise].in { opacity: 1; transform: none; }
+
+/* ---------- Bouton ---------- */
+.btn { position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: space-between; gap: 80px; min-height: var(--btn-h); padding: 13px 12px 13px 18px; border: 0; border-radius: var(--r-btn); background: var(--surface); color: var(--ink); cursor: pointer; transition: color var(--dur-ui) var(--ease-color); }
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--ink); transform: translateY(101%); transition: transform var(--dur-ui) var(--ease-color); }
+.btn:hover, .btn:focus-visible { color: var(--white); }
+.btn:hover::before, .btn:focus-visible::before { transform: none; }
+.btn.ink { background: var(--ink); color: var(--white); }
+.btn.ink::before { background: var(--surface); }
+.btn.ink:hover, .btn.ink:focus-visible { color: var(--ink); }
+.btn.line { background: var(--white); box-shadow: inset 0 0 0 1px var(--rule); }
+.btn.wide { display: flex; width: 100%; }
+.more { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.more svg, .btn svg { transition: transform var(--dur-ui) var(--ease-color); }
+.more:hover svg, .btn:hover svg { transform: translateX(4px); }
 
 /* ---------- Héros encadré ---------- */
-.hero { position: relative; height: 100vh; height: 100svh; min-height: 640px; max-height: 960px; padding: var(--frame-inset); overflow: hidden; color: var(--white); background: var(--shade); }
-.hero-bg { position: absolute; inset: calc(-2 * var(--blur-bg)); background: var(--shade); }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: blur(var(--blur-bg)) saturate(1.1); }
-.frame { position: relative; height: 100%; border: 1px solid var(--frame-line); border-radius: var(--radius-frame); overflow: hidden; isolation: isolate; }
-.frame .media img { animation: settle var(--dur-photo) var(--ease) both; }
-/* Héros : la photo est un calque plein cadre explicite au-dessus du dégradé de repli (fond du conteneur) et sous le mot-marque (z 2) et le voile (z 3) */
-.frame .media > picture { position: absolute; inset: 0; z-index: 0; display: block; }
-.frame .media > picture img { z-index: 0; opacity: 1; visibility: visible; }
-.wordmark { position: absolute; z-index: 2; left: 0; right: 0; top: 12%; margin: 0; text-align: center; font: 700 var(--text-wordmark)/0.8 var(--font-display); letter-spacing: var(--tracking-wordmark); text-transform: uppercase;
-  background: linear-gradient(180deg, var(--wordmark-from) 10%, var(--wordmark-to) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; }
-.topbar { position: absolute; z-index: 5; left: 0; right: 0; top: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: var(--space-4) var(--space-6); }
-.brand { justify-self: start; display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; text-decoration: none; font: 600 var(--text-base)/1 var(--font-display); letter-spacing: 0.18em; }
-.brand .x { position: relative; width: 22px; height: 22px; }
-.brand .x::before, .brand .x::after { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 2px; background: currentColor; rotate: 45deg; }
-.brand .x::after { rotate: -45deg; }
-.clock { font-variant-numeric: tabular-nums; }
-.top-right { justify-self: end; display: flex; align-items: center; gap: var(--space-6); }
-.menu-btn { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; padding: 0; background: none; border: 0; color: inherit; cursor: pointer; }
-.dots { width: 36px; height: 36px; border-radius: 50%; background: var(--white); display: grid; grid-template-columns: repeat(2, 4px); gap: 4px; place-content: center; transition: transform var(--dur) var(--ease); }
-.dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
-.menu-btn:hover .dots { transform: rotate(45deg); }
-.hero-title { position: absolute; z-index: 4; left: var(--space-8); bottom: var(--space-8); max-width: 34rem; animation: up var(--dur-slow) var(--ease) 200ms both; }
-.hero-title h1 { margin: 0 0 var(--space-3); font: var(--weight-title) var(--text-hero)/1.1 var(--font-body); letter-spacing: var(--tracking-title); text-transform: uppercase; }
-.hero-title p { margin: 0 0 var(--space-6); max-width: 26rem; font-size: var(--text-sm); color: var(--white); opacity: .9; }
-.btn { display: inline-flex; align-items: center; gap: var(--space-3); min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-btn); border: 1px solid transparent;
-  font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; text-decoration: none; cursor: pointer;
-  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
-.btn .arr { display: inline-block; transition: transform var(--dur) var(--ease); }
-.btn:hover .arr { transform: translateX(4px); }
-.btn--white { background: var(--white); color: var(--ink); }
-.btn--white:hover { background: var(--surface); }
-.btn--white:active, .btn--ink:active { transform: translateY(1px); }
-.btn--ink { background: var(--ink); color: var(--white); }
-.btn--ink:hover { background: var(--shade); }
-.btn--ghost { border-color: var(--ink); color: var(--ink); background: none; }
-.btn--ghost:hover { background: var(--ink); color: var(--white); }
-.btn[disabled] { background: var(--line); color: var(--muted); cursor: not-allowed; }
+.hero { position: relative; padding: var(--frame-inset); background: var(--shade); overflow: hidden; }
+.hero-back { position: absolute; top: -40px; left: -40px; width: calc(100% + 80px); height: calc(100% + 80px); }
+.frame { --hero-h: max(640px, 100svh - 2 * var(--frame-inset)); position: relative; height: var(--hero-h); overflow: hidden; border: 1px solid var(--frame-line); border-radius: var(--r-frame); color: var(--white); background: var(--shade); }
+/* la photo est posée deux fois : entière, puis détourée (la maison) devant le mot-marque */
+.shot { position: absolute; top: 0; left: 50%; width: max(100%, var(--hero-h) * 1.3323); aspect-ratio: 1600 / 1201; transform: translateX(-50%); }
+.shot.front { clip-path: polygon(56.9% 4.9%, 77.5% 33.6%, 98% 74%, 33% 72.4%); }
+.frame::after { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--veil), var(--veil)), linear-gradient(180deg, var(--shade-0) 46%, var(--shade-1) 96%); pointer-events: none; }
+.word { position: absolute; top: clamp(84px, 11vh, 100px); left: 0; right: 0; text-align: center; font-size: var(--fs-word); font-weight: var(--w-word); line-height: 1.1; letter-spacing: var(--ls-word); text-transform: uppercase; white-space: nowrap; color: transparent; background: linear-gradient(0deg, var(--word-to) 19%, var(--word-from) 100%); -webkit-background-clip: text; background-clip: text; user-select: none; }
+.top { position: absolute; z-index: 3; inset: 0 0 auto; display: flex; align-items: center; gap: 80px; padding: 20px clamp(16px, 7vw, 92px) 0; min-height: 68px; }
+.logo { display: inline-flex; align-items: center; gap: 6px; margin-right: auto; font-size: 1.375rem; font-weight: var(--w-title); letter-spacing: var(--ls-title); text-transform: uppercase; }
+.logo svg { width: 20px; height: 20px; fill: currentColor; }
+.clock { position: absolute; left: 50%; transform: translateX(-50%); font: 500 var(--fs-label)/1 var(--font-mono); }
+.menu-btn { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+.dots { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--white); color: var(--ink); transition: transform var(--dur-menu) var(--ease-color); }
+.dots svg { width: 14px; height: 14px; fill: currentColor; }
+.menu-btn:hover .dots, .menu-open .menu .dots { transform: rotate(90deg); }
+.hero-body { position: absolute; z-index: 2; inset: auto 0 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; padding: 0 clamp(16px, 7vw, 92px) 48px; }
+.hero-body h1 { font-size: var(--fs-hero); max-width: 8.5em; margin-bottom: 60px; }
+.hero-body .btn { min-width: 238px; }
+.cells { display: flex; }
+.cell { position: relative; padding: var(--pad-card); border-radius: var(--r-card); background: var(--glass-solid); box-shadow: inset 1.5px 1.5px 1px var(--glass-edge), inset -1.5px -1.5px 1.5px var(--glass-edge); }
+@supports ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .cell { background: var(--glass); -webkit-backdrop-filter: blur(var(--blur-glass)); backdrop-filter: blur(var(--blur-glass)); }
+}
+.cell.face { width: 160px; height: 140px; }
+.cell.face img { border-radius: var(--r-inner); }
+.cell.call { display: grid; align-content: space-between; gap: 14px; width: 259px; padding: 20px; }
+.cell.call .tel { font-size: var(--fs-h4); font-weight: var(--w-title); line-height: 1.1; letter-spacing: var(--ls-title); }
+.cell.call .btn { min-width: 0; gap: 20px; }
+/* entrée : le contenu monte de 80px, la photo ne bouge pas */
+.intro .word, .intro .hero-body > * { animation: rise var(--dur-rise) var(--ease-spring) both; }
+.intro .hero-body > :nth-child(2) { animation-delay: 120ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(var(--rise)); } }
 
-/* Carte agent en verre dépoli */
-.agent { position: absolute; z-index: 4; right: var(--space-8); bottom: var(--space-8); width: 300px; padding: var(--space-3); border-radius: var(--radius-frame); border: 1px solid var(--glass-line);
-  background: var(--glass); -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(1.2); backdrop-filter: blur(var(--blur-glass)) saturate(1.2); box-shadow: var(--shadow-glass);
-  animation: up var(--dur-slow) var(--ease) 380ms both; }
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .agent { background: var(--glass-solid); color: var(--ink); } .agent .btn--white { background: var(--ink); color: var(--white); } }
-.agent-row { display: flex; gap: var(--space-3); align-items: stretch; margin-bottom: var(--space-3); }
-.agent .portrait { width: 84px; flex: none; aspect-ratio: 1; border-radius: var(--radius-btn); }
-.agent .info { display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
-.agent .info strong { font: 500 var(--text-base)/1.2 var(--font-body); }
-.agent .info a { font: 400 var(--text-sm)/1.2 var(--font-body); text-decoration: none; font-variant-numeric: tabular-nums; }
-.agent .btn { width: 100%; justify-content: space-between; }
+/* ---------- Menu plein écran ---------- */
+.menu { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 120px 30px 80px; background: var(--shade-1); color: var(--white); opacity: 0; visibility: hidden; transition: opacity var(--dur-menu) var(--ease-color), visibility 0s var(--dur-menu); }
+/* le flou de 5px est posé d'un coup sur le héros, une fois le fondu terminé : jamais de flou plein écran pendant une animation */
+.menu-open .hero { filter: blur(var(--blur-menu)); transition: filter 0s calc(var(--dur-menu) + 300ms); }
+.menu-open .menu { opacity: 1; visibility: visible; transition-delay: 0s; }
+.menu ul { display: grid; gap: 30px; text-align: center; }
+.menu a { display: inline-block; font-size: clamp(1.75rem, 3vw, 2rem); font-weight: var(--w-title); line-height: var(--lh-title); letter-spacing: var(--ls-title); text-transform: uppercase; opacity: 0; transform: translateY(20px); transition: opacity var(--dur-menu) var(--ease-color), transform var(--dur-menu) var(--ease-color), color var(--dur-color) var(--ease-color); }
+.menu-open .menu a { opacity: 1; transform: none; transition-delay: calc(var(--i) * 40ms), calc(var(--i) * 40ms), 0s; }
+.menu a:hover { color: var(--soft); }
+.menu-close { position: absolute; top: calc(var(--frame-inset) + 20px); right: calc(var(--frame-inset) + clamp(16px, 7vw, 92px)); }
 
-/* Portraits (vraies photos) */
-.portrait { position: relative; overflow: hidden; background: var(--stone); }
-.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; color: transparent; }
+/* ---------- À propos ---------- */
+.about { display: grid; grid-template-columns: 1fr 0.69fr; gap: 100px; align-items: center; }
+.about p.lead { max-width: 30em; margin-top: 24px; }
+.stats { display: flex; gap: clamp(24px, 5vw, 60px); margin-block: 80px 60px; }
+.stat b { display: flex; font-size: var(--fs-h2); font-weight: var(--w-title); line-height: 1.1; letter-spacing: var(--ls-title); }
+.stat .label { display: block; margin-top: 14px; }
+.odo { position: relative; display: inline-block; height: 1.1em; overflow: hidden; }
+.odo .sz { visibility: hidden; }
+.odo i { position: absolute; top: 0; left: 0; display: block; font-style: normal; transition: transform var(--dur-odo) var(--ease-spring); transition-delay: var(--d, 0ms); }
+.odo i span { display: block; height: 1.1em; }
+.in .odo i { transform: translateY(calc(var(--n) * -1.1em)); }
+.about-foot { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+.about .ph { aspect-ratio: 490 / 730; }
+/* règle graduée entre deux sections */
+.ruler { height: 16px; margin-top: var(--section-y); background: repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 50px) bottom / 100% 16px no-repeat, repeating-linear-gradient(90deg, var(--tick) 0 1px, transparent 1px 10px) bottom / 100% 10px no-repeat; }
 
-/* ---------- Sections ---------- */
-section.block { padding: var(--space-24) 0; }
-.sec-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-6); flex-wrap: wrap; margin-bottom: var(--space-12); }
-.sec-head h2 { margin: var(--space-3) 0 0; font: 500 var(--text-h2)/1.02 var(--font-display); letter-spacing: -0.03em; text-transform: uppercase; }
-.eyebrow { color: var(--muted); }
-.chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-.chip { min-height: 44px; padding: 0 var(--space-4); border-radius: var(--radius-round); border: 1px solid var(--line); background: var(--white); color: var(--ink); font: 500 var(--text-xs)/1 var(--font-body); letter-spacing: var(--tracking-caps); text-transform: uppercase; cursor: pointer; transition: border-color var(--dur-fast), background var(--dur-fast); }
-.chip:hover { border-color: var(--ink); }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
+/* ---------- Annonces ---------- */
+.listings { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap-row) 40px; }
+.listing { position: relative; display: grid; gap: 16px; }
+.listing .ph { aspect-ratio: 580 / 460; }
+.listing .ph img { transition: transform 900ms var(--ease-color); }
+.listing:hover .ph img { transform: scale(1.04); }
+.tags { position: absolute; top: 20px; left: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { display: inline-flex; align-items: center; gap: 4px; height: var(--tag-h); padding-inline: 12px; border-radius: var(--r-btn); background: var(--white); color: var(--ink); }
+.tag.ink { background: var(--ink); color: var(--white); }
+.listing h3 { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; font-size: var(--fs-h5); }
+.listing h3 a::after { content: ""; position: absolute; inset: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: var(--gap); }
+.chip { display: inline-flex; align-items: center; gap: 10px; height: var(--chip-h); padding-inline: 12px; border-radius: var(--r-btn); box-shadow: inset 0 0 0 1px var(--rule); }
+.center-row { display: flex; justify-content: center; margin-top: 60px; }
 
-/* Annonces */
-.listings { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-12) var(--space-8); list-style: none; margin: 0; padding: 0; }
-.listing a { display: block; text-decoration: none; }
-.listing .pic { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius-card); overflow: hidden; }
-.listing .pic img { transition: transform var(--dur-slow) var(--ease); }
-.listing a:hover .pic img { transform: scale(1.04); }
-.listing .badge { position: absolute; z-index: 2; left: var(--space-4); top: var(--space-4); padding: 8px 12px; border-radius: var(--radius-btn); background: var(--white); color: var(--ink); }
-.listing .fav { position: absolute; z-index: 2; right: var(--space-4); top: var(--space-4); width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-line); background: var(--glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--white); display: grid; place-items: center; cursor: pointer; }
-.listing .fav svg { width: 18px; height: 18px; }
-.listing .fav[aria-pressed="true"] svg { fill: currentColor; }
-.listing .row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); padding: var(--space-4) 0 var(--space-2); border-bottom: 1px solid var(--line); }
-.listing h3 { margin: 0; font: 500 var(--text-lg)/1.25 var(--font-body); }
-.listing .price { font: 500 var(--text-lg)/1 var(--font-display); color: var(--accent); white-space: nowrap; }
-.listing .specs { display: flex; gap: var(--space-4); flex-wrap: wrap; padding-top: var(--space-3); color: var(--muted); font-size: var(--text-sm); }
+/* ---------- Services (noir) ---------- */
+.svc-head { display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px; margin-bottom: var(--gap-head); }
+.svc-head h2 { max-width: 12em; }
+.svc { position: relative; isolation: isolate; display: grid; grid-template-columns: 62px 300px 1fr auto; align-items: center; gap: 0 20px; padding: 40px 0; border-top: 1px solid var(--rule-dark); transition: color var(--dur-ui) var(--ease-color); }
+.svc:last-child { border-bottom: 1px solid var(--rule-dark); }
+.svc::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--white); transform: scaleY(0); transform-origin: bottom; transition: transform var(--dur-ui) var(--ease-color); }
+.svc > * { transition: transform var(--dur-ui) var(--ease-color); }
+.svc .n { align-self: start; }
+.svc .thumbs { display: flex; gap: var(--gap); padding-left: clamp(0px, 9vw, 140px); }
+.svc .thumbs .ph { width: 80px; height: 80px; border-radius: var(--r-inner); }
+.svc a::after { content: ""; position: absolute; inset: 0; }
+@media (hover: hover) {
+  .svc:hover { color: var(--ink); }
+  .svc:hover::before { transform: none; }
+  .svc:hover > :not(:last-child) { transform: translateX(20px); }
+  .svc:hover > :last-child { transform: translateX(-20px); }
+}
 
-/* Bande noire de chiffres */
-.dark { background: var(--ink); color: var(--white); }
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8); padding: var(--space-16) 0 var(--space-12); border-bottom: 1px solid var(--line-dark); }
-.stat b { display: block; font: 400 clamp(2.5rem, 5vw, 4rem)/1 var(--font-display); letter-spacing: -0.04em; }
-.stat span { display: block; margin-top: var(--space-3); color: var(--on-dark-muted); font-size: var(--text-sm); }
-.press { display: flex; justify-content: space-between; align-items: center; gap: var(--space-6) var(--space-8); flex-wrap: wrap; padding: var(--space-8) 0 var(--space-12); color: var(--line-dark); }
-.press span { font: 600 var(--text-lg)/1 var(--font-display); letter-spacing: 0.02em; }
-.press span:nth-child(2) { font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; font-size: var(--text-base); }
-.press span:nth-child(3) { font-style: italic; font-family: var(--font-body); }
-.press span:nth-child(4) { letter-spacing: -0.05em; font-weight: 700; font-size: var(--text-xl); }
+/* ---------- Quartiers ---------- */
+.hoods { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+.hood { position: relative; display: grid; gap: 23px; padding: var(--pad-card) var(--pad-card) 23px; border-radius: var(--r-card); background: var(--surface); }
+.hood .ph { aspect-ratio: 270 / 250; border-radius: var(--r-inner); }
+.hood .ph img { transition: transform 900ms var(--ease-color); }
+.hood:hover .ph img { transform: scale(1.04); }
+.hood a { display: flex; align-items: center; gap: 4px; padding-inline: 10px; }
+.hood a::after { content: ""; position: absolute; inset: 0; }
+.film { position: relative; aspect-ratio: 1200 / 700; }
+.film .ph, .film img { height: 100%; }
 
-/* Équipe */
-.team { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-8) var(--space-6); list-style: none; margin: 0; padding: 0; }
-.member .portrait { aspect-ratio: 4 / 5; border-radius: var(--radius-card); }
-.member .portrait img { filter: grayscale(.35); transition: filter var(--dur) var(--ease); }
-.member:hover .portrait img { filter: none; }
-.member strong { display: block; margin-top: var(--space-3); font-weight: 500; }
-.member span { color: var(--muted); font-size: var(--text-sm); }
+/* ---------- Étapes : carte collante, les suivantes basculent par-dessus ---------- */
+.steps { height: calc(100svh + 1500px); }
+.steps-pin { position: sticky; top: var(--step-top); }
+.steps .head { margin-bottom: 60px; }
+.deck { position: relative; height: var(--step-h); border-radius: var(--r-card); overflow: hidden; background: var(--ink); }
+.step { position: absolute; inset: 0; display: grid; grid-template-columns: 470px 1fr; gap: 60px; padding: var(--pad-card); border-radius: var(--r-card); background: var(--ink); color: var(--white); transform-origin: 50% 50%; will-change: transform; }
+.step .ph { border-radius: var(--r-inner); background: var(--shade); }
+.step-txt { display: grid; align-content: space-between; padding: 20px 14px 50px 0; }
+.step-txt h3 { margin-bottom: 14px; }
+.step-txt p { color: var(--soft); max-width: 44em; }
 
-/* Journal */
-.surface { background: var(--surface); }
-.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-8); list-style: none; margin: 0; padding: 0; }
-.post a { display: block; text-decoration: none; }
-.post .pic { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-card); overflow: hidden; margin-bottom: var(--space-4); }
-.post .meta { color: var(--muted); }
-.post h3 { margin: var(--space-2) 0 var(--space-3); font: 500 var(--text-lg)/1.3 var(--font-body); }
-.post .more { color: var(--accent-2); font-size: var(--text-sm); font-weight: 500; }
-.post a:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+/* ---------- Témoignages ---------- */
+.mosaic { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.say { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; min-height: 428px; padding: var(--pad-panel); border-radius: var(--r-card); background: var(--surface); overflow: hidden; }
+.say blockquote { display: grid; gap: 50px; }
+.say h3 { font-size: var(--fs-h5); }
+.say.photo { justify-content: flex-end; gap: 20px; color: var(--white); background: var(--shade); isolation: isolate; }
+.say.photo img { position: absolute; inset: 0; z-index: -2; }
+.say.photo::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--shade-0) 40%, var(--ink) 96%); }
+.who { display: flex; align-items: center; gap: 12px; }
+.who .ph { width: 44px; height: 44px; border-radius: var(--r-btn); flex: none; }
+.who b { display: block; font-weight: var(--w-title); text-transform: uppercase; line-height: 1.2; }
+.who span { font-size: 0.875rem; }
 
-/* Lettre d'info */
-.news { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-12); align-items: end; padding-top: var(--space-16); margin-top: var(--space-16); border-top: 1px solid var(--line); }
-.news > * { min-width: 0; }
-.news h2 { margin: 0; font: 500 var(--text-h2)/1.02 var(--font-display); letter-spacing: -0.03em; text-transform: uppercase; }
-.field { display: flex; border-bottom: 1px solid var(--ink); }
-.field .btn { flex: none; }
-.field input { flex: 1; min-width: 0; min-height: 52px; border: 0; background: none; font: 400 var(--text-base) var(--font-body); color: var(--ink); }
-.field input::placeholder { color: var(--muted); }
-.field input:focus { outline: none; }
-.field:focus-within { border-bottom-width: 2px; }
-.news small { display: block; margin-top: var(--space-3); color: var(--muted); }
+/* ---------- Agents ---------- */
+.agents { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.agent { position: relative; aspect-ratio: 380 / 399; border-radius: var(--r-card); overflow: hidden; background: var(--white); }
+.agent-card { position: absolute; inset: var(--pad-card); display: flex; flex-direction: column; justify-content: space-between; padding: var(--pad-panel); border-radius: var(--r-card); background: var(--white); clip-path: inset(0 100% 0 0 round var(--r-card)); transition: clip-path var(--dur-menu) var(--ease-color); }
+.agent:hover .agent-card, .agent:focus-within .agent-card { clip-path: inset(0 round var(--r-card)); }
+.agent-card b { display: block; margin-bottom: 8px; }
+.agent-card ul { display: flex; gap: 6px; }
+.agent-card li + li::before { content: "/"; margin-right: 6px; color: var(--muted); }
+.agent-card a { display: inline-block; padding-block: 12px; transition: color var(--dur-color) var(--ease-color); }
+.agent-card a:hover { color: var(--muted); }
 
-/* Pied de page */
-footer.dark { position: relative; overflow: hidden; padding: var(--space-16) 0 0; }
-.foot-cols { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: var(--space-8); }
-.foot-cols p { margin: var(--space-4) 0 0; color: var(--on-dark-muted); max-width: 22rem; font-size: var(--text-sm); }
-.foot-cols h4 { margin: 0 0 var(--space-3); color: var(--on-dark-muted); }
-.foot-cols ul { list-style: none; margin: 0; padding: 0; }
-.foot-cols li a { display: inline-flex; align-items: center; min-height: 36px; text-decoration: none; font-size: var(--text-sm); }
-.foot-cols li a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.foot-word { margin: var(--space-12) 0 calc(-0.12 * var(--text-wordmark)); text-align: center; font: 700 var(--text-wordmark)/0.9 var(--font-display); letter-spacing: var(--tracking-wordmark); text-transform: uppercase;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--white) 30%, transparent), transparent 85%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; }
-.legal { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; padding: var(--space-6) 0; color: var(--on-dark-muted); font-size: var(--text-xs); position: relative; }
+/* ---------- Contact ---------- */
+.contact { display: grid; grid-template-columns: 1fr 1.15fr; gap: 60px; align-items: start; }
+.contact dl { display: grid; gap: 22px; margin: 60px 0 0; }
+.contact dt { font-weight: var(--w-title); text-transform: uppercase; line-height: 1; margin-bottom: 8px; }
+.contact dd { margin: 0; color: var(--muted); }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: var(--pad-panel); border-radius: var(--r-card); background: var(--surface); }
+.field { display: grid; gap: 10px; }
+.field.full, .form .btn { grid-column: 1 / -1; }
+.field input, .field select, .field textarea { width: 100%; min-height: 48px; padding: 12px 16px; border: 1px solid transparent; border-radius: var(--r-btn); background: var(--white); }
+.field textarea { min-height: 120px; resize: vertical; }
+.field :is(input, select, textarea):focus-visible { outline: 0; border-color: var(--ink); }
+::placeholder { color: var(--muted); opacity: 1; }
 
-@keyframes settle { from { transform: scale(1.08); } }
-@keyframes up { from { opacity: 0; transform: translateY(16px); } }
+/* ---------- Journal ---------- */
+.posts { display: grid; grid-template-columns: 1fr 1.26fr; gap: var(--gap); }
+.posts .side { display: grid; gap: var(--gap); }
+.post { position: relative; display: grid; gap: 20px; padding: var(--pad-card); border-radius: var(--r-card); background: var(--surface); }
+.post .ph { border-radius: var(--r-inner); aspect-ratio: 510 / 300; }
+.post.row { grid-template-columns: 0.72fr 1fr; align-items: center; }
+.post.row .ph { aspect-ratio: auto; height: 100%; min-height: 200px; }
+.post-txt { display: grid; gap: 20px; padding: 0 10px 14px; }
+.post.row .post-txt { padding: 14px 20px 14px 0; }
+.post h3 { font-size: clamp(1.125rem, 1.7vw, var(--fs-h4)); }
+.post h3 a::after { content: ""; position: absolute; inset: 0; }
+.meta { display: flex; align-items: center; gap: 16px; }
+.meta span + span { padding-left: 16px; border-left: 1px solid var(--tick); color: var(--muted); font-weight: var(--w-text); text-transform: none; }
+
+/* ---------- FAQ ---------- */
+.faq { display: grid; grid-template-columns: 1fr 580px; gap: 40px; }
+.faq-left { display: flex; flex-direction: column; justify-content: space-between; gap: 60px; align-items: flex-start; }
+.mini { display: flex; align-items: center; gap: 16px; padding: var(--pad-card) 24px var(--pad-card) var(--pad-card); border-radius: var(--r-card); background: var(--white); }
+.mini .ph { width: 76px; height: 76px; border-radius: var(--r-inner); }
+.mini small { display: block; color: var(--muted); font-size: 0.875rem; line-height: 1.3; }
+.mini b { display: block; font-weight: var(--w-title); text-transform: uppercase; line-height: 1.4; }
+.qa { display: grid; gap: var(--gap); }
+.q { border-radius: var(--r-btn); background: var(--white); }
+.q button { display: flex; justify-content: space-between; align-items: center; gap: 30px; width: 100%; padding: 22px 20px; border: 0; background: none; text-align: left; cursor: pointer; }
+.q button svg { transition: transform var(--dur-ui) var(--ease-color); }
+.q button[aria-expanded="true"] svg { transform: rotate(180deg); }
+.q .a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-ui) var(--ease-color); }
+.q button[aria-expanded="true"] + .a { grid-template-rows: 1fr; }
+.q .a > div { overflow: hidden; }
+.q .a p { padding: 0 60px 22px 20px; color: var(--muted); }
+
+/* ---------- Appel final + pied ---------- */
+.cta { position: relative; isolation: isolate; display: grid; align-content: center; justify-items: start; gap: 60px; min-height: 500px; padding: clamp(30px, 6vw, 80px); border-radius: var(--r-card); overflow: hidden; color: var(--white); background: var(--shade); }
+.cta img { position: absolute; inset: 0; z-index: -2; }
+.cta::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(270deg, var(--shade-0) 12%, var(--ink) 103%); }
+.cta h2 { max-width: 10.5em; }
+.foot { position: relative; isolation: isolate; overflow: hidden; padding: var(--section-y) 0 0; background: var(--ink); color: var(--white); }
+.foot > img { position: absolute; inset: 0; z-index: -1; opacity: 0.28; filter: grayscale(1); }
+.foot-top { display: grid; grid-template-columns: 1.6fr repeat(3, auto); gap: 40px 80px; }
+.foot-top p { max-width: 18em; margin-block: 20px 30px; }
+.foot h3 { font-size: var(--fs-label); line-height: 1; letter-spacing: 0; margin-bottom: 30px; }
+.foot li { margin-bottom: 4px; }
+.foot li a { display: inline-block; padding-block: 6px; color: var(--soft); transition: color var(--dur-color) var(--ease-color); }
+.foot li a:hover { color: var(--white); }
+.legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 30px; margin-top: 90px; color: var(--soft); }
+.foot .word { position: static; margin-top: 40px; line-height: 0.86; background-image: linear-gradient(0deg, var(--word-to) 8%, var(--word-dark) 100%); }
 
 /* ---------- Mobile ---------- */
-@media (max-width: 900px) {
-  .listings, .posts { grid-template-columns: 1fr; }
-  .team { grid-template-columns: repeat(2, 1fr); }
-  .stats { grid-template-columns: repeat(2, 1fr); }
-  .news, .foot-cols { grid-template-columns: 1fr; }
+@media (max-aspect-ratio: 1/1) {
+  .shot { transform: translateX(-57%); }
 }
-@media (max-width: 640px) {
-  .topbar { grid-template-columns: 1fr auto; padding: var(--space-3) var(--space-4); }
-  .topbar .clock, .topbar .city { display: none; }
-  .wordmark { top: 16%; }
-  .hero-title { left: var(--space-4); right: var(--space-4); bottom: calc(var(--space-4) + 156px); }
-  .hero-title p { display: none; }
-  .agent { left: var(--space-3); right: var(--space-3); bottom: var(--space-3); width: auto; }
-  .agent .portrait { width: 60px; }
-  .agent-row { margin-bottom: var(--space-2); }
-  .press span:nth-child(n+4) { display: none; }
+@media (max-width: 1199px) {
+  .about { gap: 50px; }
+  .faq { grid-template-columns: 1fr 1.2fr; }
+  .step { grid-template-columns: 38% 1fr; gap: 30px; }
+  .svc { grid-template-columns: 50px 240px 1fr auto; }
+  .svc .thumbs { padding-left: 0; }
 }
+@media (max-width: 809px) {
+  .clock, .city { display: none; }
+  .top { gap: 20px; }
+  .hero-body { flex-direction: column; align-items: stretch; padding-bottom: 20px; }
+  .hero-body h1 { margin-bottom: 30px; }
+  .cell.face { width: 110px; height: auto; }
+  .cell.call { flex: 1; width: auto; padding: 16px; }
+  .cell.call .tel { font-size: 1.25rem; }
+  .label { font-size: var(--fs-label-s); }
+  .btn { gap: 30px; }
+  .head.split, .about, .svc-head, .contact, .posts, .faq, .form { grid-template-columns: 1fr; }
+  .head.split { row-gap: 30px; justify-items: start; }
+  .about .ph { aspect-ratio: 4 / 3; }
+  .stats { margin-block: 50px 40px; }
+  .listings, .mosaic, .agents { grid-template-columns: 1fr; }
+  .hoods { grid-template-columns: 1fr 1fr; }
+  .svc { grid-template-columns: auto 1fr; gap: 20px 12px; padding: 30px 0; }
+  .svc .thumbs { grid-column: 1 / -1; }
+  .svc .thumbs .ph { flex: 1; width: auto; height: auto; aspect-ratio: 1; }
+  .svc > :last-child { grid-column: 1 / -1; }
+  .film { aspect-ratio: 4 / 3; }
+  /* étapes : plus de carte collante, les cartes se suivent */
+  .steps { height: auto; }
+  .steps-pin { position: static; }
+  .deck { height: auto; display: grid; gap: var(--gap); background: none; border-radius: 0; overflow: visible; }
+  .step { position: static; grid-template-columns: 1fr; gap: 0; transform: none !important; }
+  .step .ph { aspect-ratio: 315 / 250; }
+  .step-txt { gap: 24px; padding: 20px 10px 20px; }
+  .say { min-height: 340px; }
+  .agent-card { inset: auto var(--pad-card) var(--pad-card); padding: 16px; clip-path: none; }
+  .agent-card ul { display: none; }
+  .post.row { grid-template-columns: 1fr; }
+  .post.row .ph { aspect-ratio: 510 / 300; min-height: 0; }
+  .post.row .post-txt { padding: 0 10px 14px; }
+  .field { grid-column: 1 / -1; }
+  .foot-top { grid-template-columns: 1fr 1fr; gap: 40px 20px; }
+  .foot .word { text-align: center; }
+  .foot-top > :first-child { grid-column: 1 / -1; }
+  .cta { min-height: 420px; }
+}
+@media (hover: none) {
+  .agent-card { inset: auto var(--pad-card) var(--pad-card); padding: 16px; clip-path: none; }
+  .agent-card ul { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  [data-rise] { opacity: 1; transform: none; }
+  .steps { height: auto; }
+  .steps-pin { position: static; }
+  .deck { height: auto; display: grid; gap: var(--gap); background: none; overflow: visible; }
+  .step { position: static; transform: none !important; }
 }
 </style>
 </head>
-<body>
-<a class="sr-only" href="#main">Aller au contenu</a>
+<body class="intro">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="arrow" viewBox="0 0 18 18"><path d="M3 9h12M10 4l5 5-5 5"/></symbol>
+  <symbol id="pin" viewBox="0 0 18 18"><path d="M9 16s5-4.6 5-8.5a5 5 0 0 0-10 0C4 11.400 9 16 9 16z"/><circle cx="9" cy="7.500" r="1.800"/></symbol>
+  <symbol id="bed" viewBox="0 0 18 18"><path d="M2 14V5m0 6h14v3M2 11V8.500h6.500V11M8.500 8.500H14a2 2 0 0 1 2 2V11"/></symbol>
+  <symbol id="bath" viewBox="0 0 18 18"><path d="M2 9.500h14v1.500a3.500 3.500 0 0 1-3.500 3.500h-7A3.500 3.500 0 0 1 2 11zM4.500 9.500V4.800a1.800 1.800 0 0 1 3.500-.6M5 14.500 4.300 16m8.700-1.500.7 1.500"/></symbol>
+  <symbol id="area" viewBox="0 0 18 18"><rect x="2.500" y="3.500" width="13" height="11" rx="1.500"/><path d="M5.500 9V6.500H8M12.500 9v2.500H10"/></symbol>
+  <symbol id="chev" viewBox="0 0 18 18"><path d="m4.500 7 4.500 4.500L13.500 7"/></symbol>
+  <symbol id="mark" viewBox="0 0 20 20"><path d="M2 2h5l3 5 3-5h5l-5.500 8L18 18h-5l-3-5-3 5H2l5.500-8z"/></symbol>
+  <symbol id="grid" viewBox="0 0 14 14"><path d="M1 1h3v3H1zm9 0h3v3h-3zM5.500 5.500h3v3h-3zM1 10h3v3H1zm9 0h3v3h-3z"/></symbol>
+</svg>
 
-<header class="hero" aria-labelledby="hero-title">
-  <!-- Fond flouté : la même photo, hors du cadre -->
-  <div class="hero-bg" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1666934209832-f8daf644f622?auto=format&fit=crop&w=400&q=80" alt="" width="400" height="267" decoding="async">
-  </div>
-
+<!-- ============ Héros ============ -->
+<header class="hero">
+  <img class="hero-back" data-slot="hero-back" alt="" src="https://images.unsplash.com/photo-1720876988024-bbc62e64f02e?auto=format&fit=crop&w=480&blur=160&q=50">
   <div class="frame">
-    <div class="media media--warm" data-slot="hero-photo">
-      <picture>
-        <source media="(max-width: 640px)" srcset="https://images.unsplash.com/photo-1666934209832-f8daf644f622?auto=format&fit=crop&w=900&h=1600&q=80">
-        <img src="https://images.unsplash.com/photo-1666934209832-f8daf644f622?auto=format&fit=crop&w=2000&q=80" alt="Maison en A en bois au pignon entièrement vitré, au cœur de la nature" width="2000" height="1333" fetchpriority="high" decoding="async">
-      </picture>
-      <p class="wordmark" aria-hidden="true">Halden</p>
-      <div class="veil"></div>
-    </div>
+    <div class="shot"><img data-slot="hero-photo" alt="Maison en A en bois sombre, grande façade vitrée, terrasse et bassin, sous un ciel bleu" fetchpriority="high" src="https://images.unsplash.com/photo-1720876988024-bbc62e64f02e?auto=format&fit=crop&w=2000&q=80"></div>
+    <p class="word" aria-hidden="true">Halden</p>
+    <div class="shot front" aria-hidden="true"><img alt="" src="https://images.unsplash.com/photo-1720876988024-bbc62e64f02e?auto=format&fit=crop&w=2000&q=80"></div>
 
-    <div class="topbar">
-      <a class="brand" href="#" aria-label="Halden, accueil"><span class="x" aria-hidden="true"></span>HALDEN</a>
-      <span class="caps clock"><time id="clock">10:30</time></span>
-      <div class="top-right">
-        <span class="caps city">Paris, FR</span>
-        <button class="menu-btn caps" aria-label="Ouvrir le menu" aria-expanded="false"><span>Menu</span><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></button>
+    <nav class="top label" aria-label="Principale">
+      <a class="logo" href="#" aria-label="Halden, accueil"><svg aria-hidden="true"><use href="#mark"/></svg>Halden</a>
+      <time class="clock" id="clock" aria-label="Heure à Annecy">18:42</time>
+      <span class="city">Annecy, Haute-Savoie</span>
+      <button class="menu-btn label" id="menuOpen" aria-expanded="false" aria-controls="menu">Menu <span class="dots"><svg aria-hidden="true"><use href="#grid"/></svg></span></button>
+    </nav>
+
+    <div class="hero-body">
+      <div>
+        <h1>Des maisons d'exception</h1>
+        <a class="btn label" href="#biens">Découvrir <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></a>
+      </div>
+      <div class="cells">
+        <div class="cell face"><img data-slot="agent-portrait" alt="Marc Vasseur, conseiller Halden" src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?auto=format&fit=facearea&facepad=3&w=320&h=280&q=80"></div>
+        <div class="cell call">
+          <span class="tel">04 50 55 01 48</span>
+          <a class="btn label" href="tel:+33450550148">Appeler <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></a>
+        </div>
       </div>
     </div>
-
-    <div class="hero-title">
-      <h1 id="hero-title">Propriétés<br>d'exception</h1>
-      <p>Maisons d'architecte, chalets et domaines hors marché, sélectionnés un par un.</p>
-      <a class="btn btn--white" href="#main">En savoir plus <span class="arr" aria-hidden="true">→</span></a>
-    </div>
-
-    <aside class="agent" aria-label="Votre contact">
-      <div class="agent-row">
-        <div class="portrait" data-slot="agent-portrait"><img src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?auto=format&fit=crop&w=200&h=200&q=80" alt="Portrait d'un conseiller en costume, bras croisés" width="200" height="200" decoding="async"></div>
-        <div class="info"><span class="caps">Votre contact</span><strong>Camille Vasseur</strong><a href="tel:+33100000000">+33 1 00 00 00 00</a></div>
-      </div>
-      <a class="btn btn--white" href="tel:+33100000000">Appeler <span class="arr" aria-hidden="true">→</span></a>
-    </aside>
   </div>
 </header>
 
-<main id="main">
-  <section class="block" aria-labelledby="l-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <div><span class="caps eyebrow">01 — Sélection</span><h2 id="l-title">Biens à la une</h2></div>
-        <div class="chips" role="group" aria-label="Filtrer">
-          <button class="chip" aria-pressed="true">Tous</button><button class="chip" aria-pressed="false">Maisons</button><button class="chip" aria-pressed="false">Appartements</button><button class="chip" aria-pressed="false">Terrains</button>
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" inert>
+  <button class="menu-btn label menu-close" id="menuClose">Fermer <span class="dots"><svg aria-hidden="true"><use href="#grid"/></svg></span></button>
+  <ul>
+    <li><a style="--i:0" href="#top">Accueil</a></li>
+    <li><a style="--i:1" href="#apropos">À propos</a></li>
+    <li><a style="--i:2" href="#services">Services</a></li>
+    <li><a style="--i:3" href="#biens">Biens</a></li>
+    <li><a style="--i:4" href="#quartiers">Quartiers</a></li>
+    <li><a style="--i:5" href="#journal">Journal</a></li>
+    <li><a style="--i:6" href="#contact">Contact</a></li>
+  </ul>
+</div>
+
+<main id="top">
+<!-- ============ À propos ============ -->
+<section class="sec" id="apropos">
+  <div class="wrap">
+    <div class="about" data-rise>
+      <div>
+        <span class="label eyebrow">// À propos</span>
+        <h2>Votre allié pour acheter en Haute-Savoie</h2>
+        <p class="lead muted">Nous présentons peu de biens, mais nous les connaissons tous : leur lumière, leurs voisins, leur chauffage. Une équipe de six conseillers, du premier appel à la remise des clés.</p>
+        <div class="stats">
+          <div class="stat"><b><span class="odo" data-odo="14"></span>+</b><span class="label muted">Ans d'expérience</span></div>
+          <div class="stat"><b><span class="odo" data-odo="98"></span>&nbsp;%</b><span class="label muted">Clients satisfaits</span></div>
+          <div class="stat"><b><span class="odo" data-odo="120"></span>+</b><span class="label muted">Biens à la vente</span></div>
+        </div>
+        <div class="about-foot">
+          <a class="btn ink label" href="#agents">L'agence <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></a>
+          <span class="label">12 quai des Clarisses<br>74000 Annecy / France</span>
         </div>
       </div>
-      <ul class="listings">
-        <li class="listing"><a href="#">
-          <div class="pic"><div class="media media--warm" data-slot="listing-1"><img src="https://images.unsplash.com/photo-1631645033513-15144f920557?auto=format&fit=crop&w=800&h=500&q=80" alt="Maison contemporaine sur une colline sous un ciel bleu profond" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Nouveau</span></div>
-          <div class="row"><h3>Le Refuge du Plateau</h3><span class="price">1 240 000 €</span></div>
-          <div class="specs"><span>Vercors</span><span>4 ch.</span><span>3 sdb</span><span>210 m²</span></div>
-        </a></li>
-        <li class="listing"><a href="#">
-          <div class="pic"><div class="media media--warm" data-slot="listing-2"><img src="https://images.unsplash.com/photo-1660361338517-8c8fbb3ac264?auto=format&fit=crop&w=800&h=500&q=80" alt="Villa blanche aux lignes pures avec piscine" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Vue mer</span></div>
-          <div class="row"><h3>Villa Cap Lumière</h3><span class="price">3 450 000 €</span></div>
-          <div class="specs"><span>Côte basque</span><span>5 ch.</span><span>4 sdb</span><span>320 m²</span></div>
-        </a></li>
-        <li class="listing"><a href="#">
-          <div class="pic"><div class="media media--warm" data-slot="listing-3"><img src="https://images.unsplash.com/photo-1698994705178-d244d73ea573?auto=format&fit=crop&w=800&h=500&q=80" alt="Maison moderne en bois et béton" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Exclusivité</span></div>
-          <div class="row"><h3>Maison des Pins</h3><span class="price">890 000 €</span></div>
-          <div class="specs"><span>Landes</span><span>3 ch.</span><span>2 sdb</span><span>165 m²</span></div>
-        </a></li>
-        <li class="listing"><a href="#">
-          <div class="pic"><div class="media media--warm" data-slot="listing-4"><img src="https://images.unsplash.com/photo-1750271329214-a7dbce880e85?auto=format&fit=crop&w=800&h=500&q=80" alt="Villa éclairée au crépuscule, piscine au premier plan" width="800" height="500" loading="lazy" decoding="async"></div><span class="badge caps">Sous offre</span></div>
-          <div class="row"><h3>Domaine du Couchant</h3><span class="price">2 100 000 €</span></div>
-          <div class="specs"><span>Luberon</span><span>6 ch.</span><span>5 sdb</span><span>280 m²</span></div>
-        </a></li>
-      </ul>
+      <div class="ph"><img data-slot="about" loading="lazy" alt="Maison contemporaine en béton clair, baies vitrées et jardin planté" src="https://images.unsplash.com/photo-1685514823717-7e1ff6ee0563?auto=format&fit=crop&w=1000&h=1480&q=80"></div>
     </div>
-  </section>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+</section>
 
-  <section class="dark" aria-label="Halden en chiffres">
-    <div class="wrap">
-      <div class="stats">
-        <div class="stat"><b>1 200+</b><span>biens vendus depuis 2009</span></div>
-        <div class="stat"><b>48 h</b><span>pour une première estimation</span></div>
-        <div class="stat"><b>96 %</b><span>du prix demandé obtenu en moyenne</span></div>
-        <div class="stat"><b>14</b><span>agences en France et en Suisse</span></div>
+<!-- ============ Annonces ============ -->
+<section class="sec flush" id="biens">
+  <div class="wrap">
+    <div class="head center" data-rise>
+      <span class="label eyebrow">// Biens à la une</span>
+      <h2>Nos biens du moment</h2>
+    </div>
+    <div class="listings" data-rise>
+      <article class="listing">
+        <div class="ph"><img data-slot="listing-1" loading="lazy" alt="Villa blanche de plain-pied avec piscine" src="https://images.unsplash.com/photo-1670589953882-b94c9cb380f5?auto=format&fit=crop&w=1200&h=950&q=80"></div>
+        <div class="tags label"><span class="tag"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Veyrier-du-Lac</span><span class="tag ink">À vendre</span></div>
+        <h3><a href="#">Villa des Roselières</a><span>2 300 000 €</span></h3>
+        <ul class="chips label"><li class="chip"><svg class="i" aria-hidden="true"><use href="#bed"/></svg>5 chambres</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#bath"/></svg>3 bains</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#area"/></svg>240 m²</li></ul>
+      </article>
+      <article class="listing">
+        <div class="ph"><img data-slot="listing-2" loading="lazy" alt="Séjour clair avec canapé vert olive et grande baie" src="https://images.unsplash.com/photo-1738168246881-40f35f8aba0a?auto=format&fit=crop&w=1200&h=950&q=80"></div>
+        <div class="tags label"><span class="tag"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Annecy</span><span class="tag ink">À louer</span></div>
+        <h3><a href="#">Appartement du Pâquier</a><span>3 200 € / mois</span></h3>
+        <ul class="chips label"><li class="chip"><svg class="i" aria-hidden="true"><use href="#bed"/></svg>2 chambres</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#bath"/></svg>2 bains</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#area"/></svg>86 m²</li></ul>
+      </article>
+      <article class="listing">
+        <div class="ph"><img data-slot="listing-3" loading="lazy" alt="Maison d'architecte éclairée à la tombée du jour" src="https://images.unsplash.com/photo-1748063578185-3d68121b11ff?auto=format&fit=crop&w=1200&h=950&q=80"></div>
+        <div class="tags label"><span class="tag"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Talloires</span><span class="tag ink">À vendre</span></div>
+        <h3><a href="#">Maison des Granges</a><span>1 850 000 €</span></h3>
+        <ul class="chips label"><li class="chip"><svg class="i" aria-hidden="true"><use href="#bed"/></svg>4 chambres</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#bath"/></svg>2 bains</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#area"/></svg>205 m²</li></ul>
+      </article>
+      <article class="listing">
+        <div class="ph"><img data-slot="listing-4" loading="lazy" alt="Maison en brique rouge sur une pelouse en pente" src="https://images.unsplash.com/photo-1696237461860-630be53f179c?auto=format&fit=crop&w=1200&h=950&q=80"></div>
+        <div class="tags label"><span class="tag"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Sevrier</span><span class="tag ink">À vendre</span></div>
+        <h3><a href="#">Maison du Verger</a><span>1 240 000 €</span></h3>
+        <ul class="chips label"><li class="chip"><svg class="i" aria-hidden="true"><use href="#bed"/></svg>4 chambres</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#bath"/></svg>2 bains</li><li class="chip"><svg class="i" aria-hidden="true"><use href="#area"/></svg>178 m²</li></ul>
+      </article>
+    </div>
+    <div class="center-row"><a class="btn ink label" href="#">Voir plus <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></a></div>
+  </div>
+</section>
+
+<!-- ============ Services ============ -->
+<section class="sec dark" id="services">
+  <div class="wrap" data-rise>
+    <div class="svc-head">
+      <span class="label">// Savoir-faire</span>
+      <h2>Des services taillés pour vous</h2>
+    </div>
+    <ol>
+      <li class="svc"><span class="n label">01.</span><h3>Maisons et villas</h3>
+        <div class="thumbs"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1777115470083-950377731c61?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1706855203772-c249b75fe016?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1678575326996-a1bf09b86158?auto=format&fit=crop&w=200&h=200&q=70"></div></div>
+        <a class="more label" href="#">Voir le détail</a></li>
+      <li class="svc"><span class="n label">02.</span><h3>Locaux et bureaux</h3>
+        <div class="thumbs"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1724582586529-62622e50c0b3?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1686164748261-33e13eef70b6?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1622015663319-e97e697503ee?auto=format&fit=crop&w=200&h=200&q=70"></div></div>
+        <a class="more label" href="#">Voir le détail</a></li>
+      <li class="svc"><span class="n label">03.</span><h3>Gestion locative</h3>
+        <div class="thumbs"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1704457031803-2c39a23e9faa?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1706164971309-fb4785fe6ceb?auto=format&fit=crop&w=200&h=200&q=70"></div></div>
+        <a class="more label" href="#">Voir le détail</a></li>
+      <li class="svc"><span class="n label">04.</span><h3>Achat et revente</h3>
+        <div class="thumbs"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1778205063665-23257f2dc408?auto=format&fit=crop&w=200&h=200&q=70"></div><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1699239116624-85268dce7377?auto=format&fit=crop&w=200&h=200&q=70"></div></div>
+        <a class="more label" href="#">Voir le détail</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ Quartiers ============ -->
+<section class="sec" id="quartiers">
+  <div class="wrap">
+    <div class="head split" data-rise>
+      <span class="label eyebrow">// Quartiers</span>
+      <h2>Les plus belles adresses, de la ville au lac</h2>
+      <a class="btn line label" href="#">Tous les quartiers <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></a>
+    </div>
+    <ul class="hoods" data-rise>
+      <li class="hood"><div class="ph"><img loading="lazy" alt="Vieille ville d'Annecy et son canal" src="https://images.unsplash.com/photo-1590274853934-90bff4d9ba9e?auto=format&fit=crop&w=600&h=560&q=75"></div><a class="label" href="#"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Annecy</a></li>
+      <li class="hood"><div class="ph"><img loading="lazy" alt="Quais de Lyon et colline de Fourvière" src="https://images.unsplash.com/photo-1674644098961-12311e9d7aff?auto=format&fit=crop&w=600&h=560&q=75"></div><a class="label" href="#"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Lyon</a></li>
+      <li class="hood"><div class="ph"><img loading="lazy" alt="Grand Théâtre de Bordeaux" src="https://images.unsplash.com/photo-1655574282152-f39e3a5925f3?auto=format&fit=crop&w=600&h=560&q=75"></div><a class="label" href="#"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Bordeaux</a></li>
+      <li class="hood"><div class="ph"><img loading="lazy" alt="Immeubles haussmanniens à Paris" src="https://images.unsplash.com/photo-1595591330979-bf94c70da6d6?auto=format&fit=crop&w=600&h=560&q=75"></div><a class="label" href="#"><svg class="i" aria-hidden="true"><use href="#pin"/></svg>Paris</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec flush">
+  <div class="wrap">
+    <div class="film" data-rise><div class="ph"><img data-slot="film" loading="lazy" alt="Longue villa basse au toit végétal, terrasse et piscine" src="https://images.unsplash.com/photo-1778205063665-23257f2dc408?auto=format&fit=crop&w=2000&h=1170&q=80"></div></div>
+  </div>
+</section>
+
+<!-- ============ Étapes ============ -->
+<section class="sec flush steps" id="etapes">
+  <div class="wrap steps-pin">
+    <div class="head center">
+      <span class="label eyebrow">// Comment ça marche</span>
+      <h2>Quatre étapes vers votre maison</h2>
+    </div>
+    <ol class="deck">
+      <li class="step"><div class="ph"><img loading="lazy" alt="Séjour gris clair ouvert sur le jardin" src="https://images.unsplash.com/photo-1724582586529-62622e50c0b3?auto=format&fit=crop&w=1000&h=760&q=80"></div>
+        <div class="step-txt"><span class="label">01.</span><div><h3>Dites-nous ce que vous cherchez</h3><p>Lieu, budget, type de bien, mode de vie : un premier rendez-vous d'une heure, chez nous ou chez vous.</p></div></div></li>
+      <li class="step"><div class="ph"><img loading="lazy" alt="Maison blanche à étage dans un jardin tropical" src="https://images.unsplash.com/photo-1678575326996-a1bf09b86158?auto=format&fit=crop&w=1000&h=760&q=80"></div>
+        <div class="step-txt"><span class="label">02.</span><div><h3>Visitez</h3><p>Nous sélectionnons trois à cinq biens et organisons des visites privées, accompagnées par votre conseiller.</p></div></div></li>
+      <li class="step"><div class="ph"><img loading="lazy" alt="Maquette de maison et trousseau de clés sur une table" src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1000&h=760&q=80"></div>
+        <div class="step-txt"><span class="label">03.</span><div><h3>Faites une offre</h3><p>Le bon bien est trouvé ? Nous préparons l'offre avec vous et menons la négociation.</p></div></div></li>
+      <li class="step"><div class="ph"><img loading="lazy" alt="Main qui tend un trousseau de clés" src="https://images.unsplash.com/photo-1722487631997-cf1e0f92c2c4?auto=format&fit=crop&w=1000&h=760&q=80"></div>
+        <div class="step-txt"><span class="label">04.</span><div><h3>Signez l'esprit tranquille</h3><p>Diagnostics, notaire, financement : nous suivons le dossier jusqu'à la remise des clés.</p></div></div></li>
+    </ol>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============ Témoignages ============ -->
+<section class="sec flush" id="avis">
+  <div class="wrap">
+    <div class="head" data-rise>
+      <span class="label eyebrow">// Témoignages</span>
+      <h2 style="max-width:11em">Ils ont acheté avec Halden</h2>
+    </div>
+    <div class="mosaic" data-rise>
+      <figure class="say photo"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1701096351544-7de3c7fa0272?auto=format&fit=crop&w=800&h=900&q=75"><h3>« Exactement ce que nous cherchions »</h3><figcaption class="label">— Olivia Brun · Annecy</figcaption></figure>
+      <figure class="say"><blockquote><h3>« Un achat sans la moindre friction »</h3><p class="muted">L'équipe a compris tout de suite ce que nous voulions et nous a trouvé une maison lumineuse à dix minutes du lac. Tout a paru simple.</p></blockquote>
+        <figcaption class="who"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1667053508464-eb11b394df83?auto=format&fit=crop&w=120&h=120&q=70"></div><div><b>Clara Tournier</b><span class="muted">Acheteuse · Sevrier</span></div></figcaption></figure>
+      <figure class="say photo"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1554518468-ed6760c88c15?auto=format&fit=crop&w=800&h=900&q=75"><h3>« Une vraie connaissance du terrain »</h3><figcaption class="label">— Daniel Wilson · Talloires</figcaption></figure>
+      <figure class="say"><blockquote><h3>« Ils ont compris notre projet »</h3><p class="muted">Nous cherchions un pied-à-terre facile à louer. Trois visites, une offre, et un dossier bouclé en six semaines.</p></blockquote>
+        <figcaption class="who"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1715192133412-ce5f56ce4375?auto=format&fit=crop&w=120&h=120&q=70"></div><div><b>Émile Jossin</b><span class="muted">Investisseur · Lyon</span></div></figcaption></figure>
+      <figure class="say photo"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1662850886700-4ec19bd30d11?auto=format&fit=crop&w=800&h=900&q=75"><h3>« Sérieux du début à la fin »</h3><figcaption class="label">— Inès Thomas · Veyrier-du-Lac</figcaption></figure>
+      <figure class="say"><blockquote><h3>« Disponibles et de bon conseil »</h3><p class="muted">De la première visite à la signature, toujours quelqu'un pour répondre. Je n'ai jamais eu l'impression d'être seul.</p></blockquote>
+        <figcaption class="who"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1762753674498-73ec49feafc4?auto=format&fit=crop&w=120&h=120&q=70"></div><div><b>Michel Cartier</b><span class="muted">Acheteur · Annecy-le-Vieux</span></div></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Agents ============ -->
+<section class="sec grey" id="agents">
+  <div class="wrap">
+    <div class="head center" data-rise>
+      <span class="label eyebrow">// L'équipe</span>
+      <h2>Vos conseillers</h2>
+    </div>
+    <ul class="agents" data-rise>
+      <li class="agent" tabindex="0"><img loading="lazy" alt="Portrait de Raphaël Évrard" src="https://images.unsplash.com/photo-1749793716288-a5ab5ed3b0e1?auto=format&fit=crop&w=800&h=840&q=75"><div class="agent-card"><div><b class="label">Raphaël Évrard</b><span class="muted">Directeur de l'agence</span></div><ul class="label"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div></li>
+      <li class="agent" tabindex="0"><img loading="lazy" alt="Portrait de Hélène Marchal" src="https://images.unsplash.com/photo-1780733058439-b8952315e59c?auto=format&fit=crop&w=800&h=840&q=75"><div class="agent-card"><div><b class="label">Hélène Marchal</b><span class="muted">Conseillère · rive ouest</span></div><ul class="label"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div></li>
+      <li class="agent" tabindex="0"><img loading="lazy" alt="Portrait de David Anselme" src="https://images.unsplash.com/photo-1767175620484-1ed37931a0d1?auto=format&fit=crop&w=800&h=840&q=75"><div class="agent-card"><div><b class="label">David Anselme</b><span class="muted">Conseiller · rive est</span></div><ul class="label"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div></li>
+      <li class="agent" tabindex="0"><img loading="lazy" alt="Portrait de Léa Fontanel" src="https://images.unsplash.com/photo-1608875848903-06eec0bd71e2?auto=format&fit=crop&w=800&h=840&q=75"><div class="agent-card"><div><b class="label">Léa Fontanel</b><span class="muted">Gestion locative</span></div><ul class="label"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div></li>
+      <li class="agent" tabindex="0"><img loading="lazy" alt="Portrait de Samir Haddad" src="https://images.unsplash.com/photo-1656399910161-8efafd973a29?auto=format&fit=crop&w=800&h=840&q=75"><div class="agent-card"><div><b class="label">Samir Haddad</b><span class="muted">Locaux et bureaux</span></div><ul class="label"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div></li>
+      <li class="agent" tabindex="0"><img loading="lazy" alt="Portrait de Claire Dunand" src="https://images.unsplash.com/photo-1780733064206-4f200e41daa8?auto=format&fit=crop&w=800&h=840&q=75"><div class="agent-card"><div><b class="label">Claire Dunand</b><span class="muted">Estimations</span></div><ul class="label"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ Contact ============ -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="contact" data-rise>
+      <div>
+        <span class="label eyebrow">// Contact</span>
+        <h2>Une question sur un bien ?</h2>
+        <dl>
+          <div><dt>Téléphone</dt><dd>04 50 55 01 48</dd></div>
+          <div><dt>Agence</dt><dd>12 quai des Clarisses, 74000 Annecy</dd></div>
+          <div><dt>Horaires</dt><dd>Du lundi au vendredi, 9 h – 18 h<br>Samedi, 10 h – 16 h</dd></div>
+        </dl>
       </div>
-      <div class="press" aria-label="Ils parlent de nous"><span>Maison&nbsp;Vive</span><span>Habiter</span><span>Le Seuil</span><span>atlas</span><span>NORD/SUD</span></div>
+      <form class="form" onsubmit="return false">
+        <label class="field"><span class="label">Nom *</span><input required autocomplete="name" placeholder="Camille Martin"></label>
+        <label class="field"><span class="label">E-mail *</span><input required type="email" autocomplete="email" placeholder="vous@exemple.fr"></label>
+        <label class="field full"><span class="label">Téléphone</span><input type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></label>
+        <label class="field full"><span class="label">Type de bien</span><select><option>Maison</option><option>Appartement</option><option>Local professionnel</option></select></label>
+        <label class="field full"><span class="label">Votre message *</span><textarea required placeholder="Dites-nous ce que vous cherchez…"></textarea></label>
+        <button class="btn ink wide label">Envoyer <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></button>
+      </form>
     </div>
-  </section>
+    <div class="ruler" aria-hidden="true"></div>
+  </div>
+</section>
 
-  <section class="block" aria-labelledby="t-title">
-    <div class="wrap">
-      <div class="sec-head"><div><span class="caps eyebrow">02 — L'équipe</span><h2 id="t-title">Nos conseillers</h2></div><a class="btn btn--ghost" href="#">Nous rejoindre <span class="arr" aria-hidden="true">→</span></a></div>
-      <ul class="team">
-        <li class="member"><div class="portrait" data-slot="team-1"><img src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?auto=format&fit=crop&w=600&h=750&q=80" alt="Conseiller en costume, bras croisés" width="600" height="750" loading="lazy" decoding="async"></div><strong>Camille Vasseur</strong><span>Direction, Paris</span></li>
-        <li class="member"><div class="portrait" data-slot="team-2"><img src="https://images.unsplash.com/photo-1656399910161-8efafd973a29?auto=format&fit=crop&w=600&h=750&q=80" alt="Conseiller souriant, la ville en arrière-plan" width="600" height="750" loading="lazy" decoding="async"></div><strong>Sacha Meyer</strong><span>Montagne</span></li>
-        <li class="member"><div class="portrait" data-slot="team-3"><img src="https://images.unsplash.com/photo-1552699611-e2c208d5d9cf?auto=format&fit=crop&w=600&h=750&q=80" alt="Femme aux cheveux sombres, regard vers l'objectif" width="600" height="750" loading="lazy" decoding="async"></div><strong>Inès Barre</strong><span>Littoral</span></li>
-        <li class="member"><div class="portrait" data-slot="team-4"><img src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=600&h=750&q=80" alt="Homme en sweat beige dans la rue" width="600" height="750" loading="lazy" decoding="async"></div><strong>Paul Okafor</strong><span>Estimation</span></li>
-        <li class="member"><div class="portrait" data-slot="team-5"><img src="https://images.unsplash.com/photo-1667053508464-eb11b394df83?auto=format&fit=crop&w=600&h=750&q=80" alt="Femme photographiée sur fond gris" width="600" height="750" loading="lazy" decoding="async"></div><strong>Léa Fontaine</strong><span>Genève</span></li>
-        <li class="member"><div class="portrait" data-slot="team-6"><img src="https://images.unsplash.com/photo-1611817757591-c3f345024273?auto=format&fit=crop&w=600&h=750&q=80" alt="Jeune homme en sweat taupe" width="600" height="750" loading="lazy" decoding="async"></div><strong>Marc Delorme</strong><span>Domaines viticoles</span></li>
-        <li class="member"><div class="portrait" data-slot="team-7"><img src="https://images.unsplash.com/photo-1662850886700-4ec19bd30d11?auto=format&fit=crop&w=600&h=750&q=80" alt="Femme souriante aux cheveux bouclés" width="600" height="750" loading="lazy" decoding="async"></div><strong>Sofia Reyes</strong><span>Clientèle internationale</span></li>
-        <li class="member"><div class="portrait" data-slot="team-8"><img src="https://images.unsplash.com/photo-1535732278552-5a8a57552b63?auto=format&fit=crop&w=600&h=750&q=80" alt="Homme en long manteau noir devant un mur gris" width="600" height="750" loading="lazy" decoding="async"></div><strong>Hugo Lambert</strong><span>Juridique</span></li>
-      </ul>
+<!-- ============ Journal ============ -->
+<section class="sec flush" id="journal">
+  <div class="wrap">
+    <div class="head center" data-rise>
+      <span class="label eyebrow">// Journal</span>
+      <h2>Conseils et regards sur l'immobilier</h2>
     </div>
-  </section>
-
-  <section class="block surface" aria-labelledby="j-title">
-    <div class="wrap">
-      <div class="sec-head"><div><span class="caps eyebrow">03 — Journal</span><h2 id="j-title">Vivre autrement</h2></div><a class="btn btn--ghost" href="#">Tous les articles <span class="arr" aria-hidden="true">→</span></a></div>
-      <ul class="posts">
-        <li class="post"><a href="#"><div class="pic"><div class="media media--warm" data-slot="post-1"><img src="https://images.unsplash.com/photo-1697462248408-25479e5acfb0?auto=format&fit=crop&w=800&h=600&q=80" alt="Cabane en A noire au milieu de la forêt, vue du ciel" width="800" height="600" loading="lazy" decoding="async"></div></div><span class="caps meta">Architecture · 6 min</span><h3>Pourquoi la maison en A revient en force</h3><span class="more">Lire →</span></a></li>
-        <li class="post"><a href="#"><div class="pic"><div class="media media--warm" data-slot="post-2"><img src="https://images.unsplash.com/photo-1696393800648-662c06289a5e?auto=format&fit=crop&w=800&h=600&q=80" alt="Maison cubique moderne, fenêtres éclairées" width="800" height="600" loading="lazy" decoding="async"></div></div><span class="caps meta">Marché · 4 min</span><h3>Résidences secondaires : ce qui change en 2027</h3><span class="more">Lire →</span></a></li>
-        <li class="post"><a href="#"><div class="pic"><div class="media media--warm" data-slot="post-3"><img src="https://images.unsplash.com/photo-1491824989090-cc2d0b57eb0d?auto=format&fit=crop&w=800&h=600&q=80" alt="Collines baignées de brouillard doré" width="800" height="600" loading="lazy" decoding="async"></div></div><span class="caps meta">Guide · 8 min</span><h3>Acheter un terrain en montagne, pas à pas</h3><span class="more">Lire →</span></a></li>
-      </ul>
-
-      <div class="news">
-        <h2>Les biens hors marché, avant tout le monde</h2>
-        <form onsubmit="event.preventDefault()">
-          <label class="sr-only" for="nl">Adresse e-mail</label>
-          <div class="field"><input id="nl" type="email" placeholder="Votre adresse e-mail" autocomplete="email"><button class="btn btn--ink" type="submit">S'inscrire <span class="arr" aria-hidden="true">→</span></button></div>
-          <small>Une lettre par mois. Désinscription en un clic.</small>
-        </form>
+    <div class="posts" data-rise>
+      <article class="post"><div class="ph"><img loading="lazy" alt="Maison au bardage bois sombre sous un ciel bleu" src="https://images.unsplash.com/photo-1704457031803-2c39a23e9faa?auto=format&fit=crop&w=1000&h=590&q=75"></div>
+        <div class="post-txt"><p class="meta label"><span>Guide d'achat</span><span>20 sept. 2026</span></p><h3><a href="#">Acheter autour du lac : ce qu'il faut savoir avant de visiter</a></h3></div></article>
+      <div class="side">
+        <article class="post row"><div class="ph"><img loading="lazy" alt="Séjour crème avec cuisine ouverte" src="https://images.unsplash.com/photo-1682184805271-11671b7ecf4c?auto=format&fit=crop&w=700&h=560&q=75"></div>
+          <div class="post-txt"><p class="meta label"><span>Guide d'achat</span><span>12 sept. 2026</span></p><h3><a href="#">Les sept points à vérifier lors d'une visite</a></h3><span class="more label">Lire <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></span></div></article>
+        <article class="post row"><div class="ph"><img loading="lazy" alt="Salon aux fauteuils de cuir et mur de cadres" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=700&h=560&q=75"></div>
+          <div class="post-txt"><p class="meta label"><span>Vendre</span><span>3 sept. 2026</span></p><h3><a href="#">Préparer sa maison avant les photos</a></h3><span class="more label">Lire <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></span></div></article>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec grey" id="faq">
+  <div class="wrap faq" data-rise>
+    <div class="faq-left">
+      <div><span class="label eyebrow">// Questions</span><h2 style="max-width:9em">Les réponses aux questions courantes</h2></div>
+      <div class="mini"><div class="ph"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1718209881007-c0ecdfc00f9d?auto=format&fit=facearea&facepad=3&w=160&h=160&q=70"></div><div><small>Conseiller</small><b>Marc Vasseur</b><span>04 50 55 01 48</span></div></div>
+    </div>
+    <div class="qa">
+      <div class="q"><button class="label" aria-expanded="true">Dans quels secteurs travaillez-vous ?<svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><div class="a"><div><p>Tout le tour du lac d'Annecy, les Aravis, et sur demande Lyon, Bordeaux et Paris pour les investissements.</p></div></div></div>
+      <div class="q"><button class="label" aria-expanded="false">Accompagnez-vous un premier achat ?<svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><div class="a"><div><p>Oui : simulation de financement, choix du notaire et relecture du compromis sont compris.</p></div></div></div>
+      <div class="q"><button class="label" aria-expanded="false">Peut-on organiser une visite privée ?<svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><div class="a"><div><p>Toutes nos visites le sont. Comptez quarante-huit heures pour fixer un créneau, samedi compris.</p></div></div></div>
+      <div class="q"><button class="label" aria-expanded="false">Proposez-vous des locations ?<svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><div class="a"><div><p>Une vingtaine de biens à l'année, et la gestion locative complète pour les propriétaires.</p></div></div></div>
+      <div class="q"><button class="label" aria-expanded="false">Travaillez-vous avec des investisseurs ?<svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><div class="a"><div><p>Oui, avec une étude de rendement chiffrée pour chaque bien présenté.</p></div></div></div>
+      <div class="q"><button class="label" aria-expanded="false">Peut-on acheter à distance ?<svg class="i" aria-hidden="true"><use href="#chev"/></svg></button><div class="a"><div><p>Visite filmée, signature électronique et procuration chez le notaire : un tiers de nos ventes se fait ainsi.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta" data-rise>
+      <img loading="lazy" alt="" src="https://images.unsplash.com/photo-1706164971309-fb4785fe6ceb?auto=format&fit=crop&w=2000&h=900&q=80">
+      <div><span class="label eyebrow">// Passer à l'action</span><h2>Prêt à trouver votre place au bord du lac ?</h2></div>
+      <a class="btn label" href="#biens">Voir les biens <svg class="i" aria-hidden="true"><use href="#arrow"/></svg></a>
+    </div>
+  </div>
+</section>
 </main>
 
-<footer class="dark">
+<footer class="foot">
+  <img loading="lazy" alt="" src="https://images.unsplash.com/photo-1589381897309-7cbc7b3621b0?auto=format&fit=crop&w=1800&h=1100&q=60">
   <div class="wrap">
-    <div class="foot-cols">
-      <div><a class="brand" href="#"><span class="x" aria-hidden="true"></span>HALDEN</a><p>Agence immobilière de biens d'exception. Marque fictive créée pour la démo Kōbō.</p></div>
-      <div><h4 class="caps">Acheter</h4><ul><li><a href="#">Maisons</a></li><li><a href="#">Appartements</a></li><li><a href="#">Terrains</a></li></ul></div>
-      <div><h4 class="caps">Vendre</h4><ul><li><a href="#">Estimation</a></li><li><a href="#">Nos honoraires</a></li><li><a href="#">Témoignages</a></li></ul></div>
-      <div><h4 class="caps">Agence</h4><ul><li><a href="#">Équipe</a></li><li><a href="#">Journal</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div class="foot-top">
+      <div><a class="logo" href="#"><svg aria-hidden="true"><use href="#mark"/></svg>Halden</a><p class="muted">Des maisons d'exception, et des conseils que l'on peut suivre.</p><ul class="label" style="display:flex;gap:16px"><li><a href="#">Fb</a></li><li><a href="#">Ig</a></li><li><a href="#">Ln</a></li></ul></div>
+      <div><h3>Liens</h3><ul><li><a href="#top">Accueil</a></li><li><a href="#apropos">À propos</a></li><li><a href="#biens">Biens</a></li><li><a href="#journal">Journal</a></li><li><a href="#quartiers">Quartiers</a></li></ul></div>
+      <div><h3>Services</h3><ul><li><a href="#">Maisons et villas</a></li><li><a href="#">Locaux et bureaux</a></li><li><a href="#">Gestion locative</a></li><li><a href="#">Achat et revente</a></li></ul></div>
+      <div><h3>Contact</h3><ul><li><a href="tel:+33450550148">04 50 55 01 48</a></li><li><a href="mailto:bonjour@halden.example">bonjour@halden.example</a></li><li><a href="#">12 quai des Clarisses,<br>74000 Annecy</a></li></ul></div>
     </div>
-    <p class="foot-word" aria-hidden="true">Halden</p>
+    <p class="legal"><span>© 2026 Halden. Agence fictive, page de démonstration.</span><span>Mentions légales · Confidentialité</span></p>
+    <p class="word" aria-hidden="true">Halden</p>
   </div>
-  <div class="wrap legal"><span>© 2026 Halden (fictif) · Photos : Unsplash</span><span>Mentions légales · Confidentialité</span></div>
 </footer>
 
 <script>
 (() => {
-  const t = document.getElementById('clock');
-  const tick = () => { const d = new Date(); t.textContent = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }); t.dateTime = d.toISOString(); };
+  const $ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Heure locale de l'agence
+  const clock = document.getElementById('clock');
+  const tick = () => { clock.textContent = new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' }).format(new Date()); };
   tick(); setInterval(tick, 30000);
-  // Photo du héros : si l'URL principale échoue, on bascule sur une autre maison en A (jamais le dégradé seul)
-  const FALLBACK = 'https://images.unsplash.com/photo-1697462248408-25479e5acfb0?auto=format&fit=crop&w=2000&h=1200&q=80';
-  document.querySelectorAll('.frame .media picture img, .hero-bg img').forEach(img => {
-    const swap = () => { if (img.dataset.fb) return; img.dataset.fb = '1'; img.closest('picture')?.querySelectorAll('source').forEach(s => s.remove()); img.src = FALLBACK; };
-    img.addEventListener('error', swap);
-    if (img.complete && img.naturalWidth === 0 && img.currentSrc) swap();
+
+  // Compteurs odomètre : une colonne 0-9 par chiffre
+  $('.odo').forEach(o => {
+    o.setAttribute('aria-label', o.dataset.odo);
+    o.innerHTML = [...o.dataset.odo].map((d, i) => `<span class="odo" aria-hidden="true"><span class="sz">${d}</span><i style="--n:${d};--d:${i * 120}ms">${'0123456789'.replace(/\d/g, n => `<span>${n}</span>`)}</i></span>`).join('');
+    o.classList.remove('odo');
   });
-  document.querySelectorAll('.chips .chip').forEach(c => c.addEventListener('click', () => {
-    c.parentElement.querySelectorAll('.chip').forEach(o => o.setAttribute('aria-pressed', o === c));
+
+  // Apparitions : une fois, dès que le bloc entre dans l'écran
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+  $('[data-rise]').forEach(el => io.observe(el));
+
+  // Menu plein écran
+  const menu = document.getElementById('menu'), open = document.getElementById('menuOpen'), close = document.getElementById('menuClose');
+  const setMenu = on => {
+    document.body.classList.toggle('menu-open', on);
+    menu.inert = !on; open.setAttribute('aria-expanded', on);
+    (on ? close : open).focus();
+  };
+  open.addEventListener('click', () => setMenu(true));
+  close.addEventListener('click', () => setMenu(false));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.inert) setMenu(false); });
+
+  // FAQ : une seule réponse ouverte
+  $('.q button').forEach(b => b.addEventListener('click', () => {
+    const was = b.getAttribute('aria-expanded') === 'true';
+    $('.q button').forEach(o => o.setAttribute('aria-expanded', 'false'));
+    b.setAttribute('aria-expanded', String(!was));
   }));
+
+  // Étapes : chaque carte bascule (rotateX 90° → 0, 288px → 0) au fil du défilement
+  const steps = document.querySelector('.steps'), pin = steps.querySelector('.steps-pin'), cards = $('.step', steps).slice(1);
+  const wide = matchMedia('(min-width: 810px)');
+  let live = false, raf = 0;
+  const flipY = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--flip-y'));
+  const draw = () => {
+    raf = 0;
+    if (!wide.matches || reduced) { cards.forEach(c => c.style.transform = ''); return; }
+    const range = steps.offsetHeight - pin.offsetHeight - parseFloat(getComputedStyle(steps).paddingBottom);
+    const t = Math.min(1, Math.max(0, -steps.getBoundingClientRect().top / range)) * cards.length;
+    cards.forEach((c, k) => {
+      const p = Math.min(1, Math.max(0, t - k));
+      c.style.transform = `translateY(${Math.round(flipY * (1 - p))}px) rotateX(${(90 * (1 - p)).toFixed(2)}deg)`;
+      c.style.visibility = p ? 'visible' : 'hidden';
+    });
+  };
+  const ask = () => { if (live && !raf) raf = requestAnimationFrame(draw); };
+  new IntersectionObserver(([e]) => { live = e.isIntersecting; ask(); }).observe(steps);
+  addEventListener('scroll', ask, { passive: true });
+  addEventListener('resize', () => { live = true; ask(); });
+  draw();
 })();
 </script>
 </body>

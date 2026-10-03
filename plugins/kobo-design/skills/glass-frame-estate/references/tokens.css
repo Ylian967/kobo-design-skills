@@ -1,86 +1,85 @@
 /*
  * Glass Frame Estate — tokens
- * Valeurs mesurées sur le site Framer en ligne du template (2026-10-03, Chrome 1536px, extract-design.js) quand elles existent ; le reste est estimé sur le shot Dribbble. Voir source.md.
- * Le texte blanc du héros est toujours posé sur le voile sombre --shade (bas de la photo), jamais sur le ciel clair.
- * @contrast white:shade white:shade-2 ink:white muted:white ink:surface muted:surface accent:white accent-2:surface white:ink on-dark-muted:ink line-dark:ink:large ink:glass-solid
+ * MESURÉS le 2026-10-03 sur le site en ligne du template (Chrome 1440×900 et 390×844 : styles calculés, feuilles de style et scripts du site).
+ * « choisi » = décidé par le skill. Le site est entièrement noir, blanc et gris : aucune couleur d'accent. Voir source.md.
+ * @contrast white:shade white:ink ink:white ink:surface ink:surface-2 muted:white muted:surface muted:surface-2 soft:ink soft:shade
  */
 :root {
-  /* Couleurs — interface */
-  --white: #ffffff;
-  --ink: #000000;             /* texte, bande de chiffres, pied de page, bouton plein sur fond clair */
-  --surface: #f2f2f2;         /* sections claires alternées, fond des champs */
-  --muted: #555555;           /* texte secondaire sur blanc / surface */
-  --surface-2: #fafafa;       /* mesuré : fond de section très clair */
-  --line: #e3e3e3;            /* filets sur fond clair */
-  --on-dark-muted: #a3a3a3;   /* texte secondaire sur --ink */
-  --line-dark: #6a6a6a;       /* logos atténués (grands) et filets sur --ink */
-  --accent: #a8641f;          /* ambre « golden hour » : prix, puce active (sur blanc) */
-  --accent-2: #9c5a1c;        /* même ambre sur --surface */
+  /* ---- Couleurs ---- */
+  --white: #ffffff;         /* mesuré : fond dominant, texte sur photo et sur noir, étiquette de lieu */
+  --ink: #000000;           /* mesuré : texte, section services, carte d'étape, pied, bouton plein, étiquette de statut */
+  --surface: #f2f2f2;       /* mesuré : sections grises, cartes de quartier et de témoignage, bouton clair, champs */
+  --surface-2: #fafafa;     /* mesuré : fond très clair (champs sur gris) */
+  --muted: #555555;         /* mesuré : texte secondaire sur clair */
+  --soft: #cccccc;          /* mesuré : blanc à 80 % sur noir (texte secondaire sur sombre) */
+  --tick: rgb(17 17 17 / 0.3);          /* mesuré : graduations de la règle (1px) — jamais du texte */
+  --rule-dark: rgb(255 255 255 / 0.16); /* choisi : filets entre les lignes de service sur noir */
+  --rule: rgb(0 0 0 / 0.1);             /* choisi : contour des puces de caractéristiques */
 
-  /* Couleurs — verre et cadre (héros) */
-  --frame-line: rgb(255 255 255 / 0.85);   /* filet 1px du cadre */
-  --glass: rgb(255 255 255 / 0.14);         /* carte agent en verre dépoli */
-  --glass-line: rgb(255 255 255 / 0.45);
-  --glass-solid: #e9ecef;                    /* repli opaque quand backdrop-filter n'existe pas */
-  --shade: #2a3424;                          /* voile sombre en bas de la photo (sous le titre) */
-  --shade-2: #3b4a36;                        /* voile derrière la carte agent */
-  --wordmark-from: rgb(255 255 255 / 0.72); /* mot-marque géant : dégradé vertical vers transparent */
-  --wordmark-to: rgb(255 255 255 / 0);
+  /* ---- Photo, verre, cadre ---- */
+  --veil: rgb(23 23 23 / 0.2);          /* mesuré : voile posé sur la photo du héros */
+  --shade: #2b2d27;                      /* choisi : ton du bas de la photo sous le dégradé (repli et contraste du titre) */
+  --shade-0: rgb(0 0 0 / 0);
+  --shade-1: rgb(0 0 0 / 0.62);          /* choisi : bas du dégradé du héros (le site va jusqu'au noir sur ses cartes) */
+  --glass: rgb(0 0 0 / 0.05);            /* mesuré : fond des cellules en verre */
+  --glass-edge: rgb(255 255 255 / 0.5);  /* mesuré : liseré intérieur blanc (ombres internes ±1.5px à 50 %) */
+  --glass-solid: rgb(43 45 39 / 0.72);   /* choisi : repli sans backdrop-filter */
+  --frame-line: rgb(255 255 255 / 0.9);  /* mesuré sur le shot : filet blanc du cadre */
+  --word-from: rgb(255 255 255 / 0.62);  /* mesuré : mot-marque, dégradé vertical (blanc à 170 % → transparent à 19 %) */
+  --word-to: rgb(255 255 255 / 0);
+  --word-dark: rgb(255 255 255 / 0.34);  /* mesuré : mot-marque du pied (0.4 à 116 % → 0 à 8 %) */
 
-  /* Couleurs — repli des photos (fond des conteneurs avant chargement) et grade doré, voir assets.md */
-  --sky-top: #5d7ea8; --sky-mid: #c9a27c; --sky-glow: #f2b56b; --sun: #ffe1a8;
-  --hill: #4f7a3a; --hill-dark: #2f4f25; --hill-light: #7aa356;
-  --wood: #2b211b; --window: #ffcf86; --stone: #cfc6b8;
+  /* ---- Typographie (tout est en capitales, sauf les paragraphes) ---- */
+  --font: 'Inter', system-ui, sans-serif;            /* mesuré : Inter 400 / 500 / 600 */
+  --font-mono: 'Geist Mono', ui-monospace, monospace; /* mesuré : Geist Mono 500, l'heure de la barre du haut */
+  --w-text: 400; --w-title: 500; --w-word: 600;
+  --fs-word: clamp(5.25rem, 19.4vw, 17.5rem);   /* mesuré 280px / 308, approche −11.2px */
+  --fs-hero: clamp(2.5rem, 5.56vw, 5rem);    /* mesuré 80px / 88 (40px / 44 en mobile) */
+  --fs-page: clamp(3rem, 7vw, 6.25rem);      /* mesuré 100px / 110, graisse 600 : titre des pages internes */
+  --fs-h2: clamp(2rem, 3.34vw, 3rem);        /* mesuré 48px / 52.8 (32px en mobile) */
+  --fs-h3: clamp(1.375rem, 2.2vw, 2rem);     /* mesuré 32px / 35.2 (22px en mobile) : service, étape, liens du menu */
+  --fs-h4: 1.5rem;                           /* mesuré 24px / 26.4 : téléphone, titre d'article */
+  --fs-h5: clamp(1rem, 1.4vw, 1.25rem);      /* mesuré 20px / 22 (16px en mobile) : nom du bien, citation */
+  --fs-body: 1rem;                           /* mesuré 16px / 25.6 */
+  --fs-label: 1rem;                          /* mesuré 16px / 16, graisse 500 : nav, surtitres, boutons, étiquettes */
+  --fs-label-s: 0.875rem;                    /* mesuré 14px : surtitres en mobile */
+  --lh-title: 1.1;                           /* mesuré : tous les titres */
+  --lh-body: 1.6;
+  --ls-title: -0.02em;                       /* mesuré : −1.6px sur 80, −0.96 sur 48, −0.64 sur 32 */
+  --ls-word: -0.04em;                        /* mesuré : −11.2px sur 280 */
 
-  /* Typographie */
-  --font-display: 'Inter Tight', 'Inter', system-ui, sans-serif;   /* mot-marque géant, titres */
-  --font-body: 'Inter', system-ui, sans-serif;
-  --text-2xs: 0.6875rem; /* 11 — nav, méta en capitales */
-  --text-xs: 0.75rem;    /* 12 */
-  --text-sm: 0.875rem;   /* 14 */
-  --text-base: 1rem;     /* 16 */
-  --text-lg: 1.25rem;    /* 20 */
-  --text-xl: 1.75rem;    /* 28 */
-  --text-h3: 2rem;       /* 32 — mesuré (titres de service, menu, nom du bien) */
-  --text-h2: clamp(2rem, 4vw, 3rem);    /* mesuré 48px desktop, 32px mobile */
-  --text-page: clamp(3rem, 7vw, 6.25rem); /* mesuré 100px : titre des pages internes */
-  --text-hero: clamp(2.5rem, 5.5vw, 5rem);       /* mesuré 80px desktop / 40px mobile */
-  --text-wordmark: clamp(5rem, 19vw, 17.5rem);   /* mesuré 280px */     /* mot-marque derrière le bâtiment */
-  --tracking-caps: 0.08em;
-  --tracking-wordmark: -0.04em;
-  --weight-light: 300;        /* réservé aux grands chiffres décoratifs */
-  --weight-title: 500;        /* mesuré : TOUS les titres (héros 80px, H2 48px, H3 32px, H6 20px) */
-  --weight-wordmark: 600;     /* mesuré : mot-marque 280px */
-  --tracking-title: -0.02em;  /* mesuré : -1.6px/80, -0.96px/48, -0.64px/32 */
-  --leading-title: 1.1;       /* mesuré */
+  /* ---- Grille ---- */
+  --container: 1200px;      /* mesuré */
+  --gutter: clamp(20px, 2.1vw, 30px);   /* mesuré : 30px (20px en mobile) */
+  --section-y: clamp(60px, 9.7vw, 140px); /* mesuré : 140px (60px en mobile) */
+  --gap: 10px;              /* mesuré : écart dominant (cartes, mosaïque, cellules) */
+  --gap-row: 30px;          /* mesuré : entre deux rangées d'annonces */
+  --gap-head: 80px;         /* mesuré : entre un titre de section et son contenu */
+  --pad-card: 10px;         /* mesuré : photo en retrait dans une carte grise ou noire */
+  --pad-panel: 30px;        /* mesuré : témoignage, formulaire, carte d'agent */
+  --btn-h: 50px;            /* mesuré : boutons (padding 13 / 12 / 13 / 18) */
+  --tag-h: 34px;            /* mesuré : étiquettes sur photo (padding 9 / 12) */
+  --chip-h: 32px;           /* mesuré : puces de caractéristiques */
+  --step-h: 380px;          /* mesuré : carte d'étape (1200 × 380), collée à 40px du haut */
+  --step-top: 40px;
+  --frame-inset: clamp(8px, 1.4vw, 20px);   /* choisi : marge du cadre (le shot le montre à 6 % : mise en scène) */
+  --r-frame: 10px;          /* choisi : même rayon que les cartes */
+  --r-card: 10px;           /* mesuré : cartes, photos, cellules en verre */
+  --r-inner: 6px;          /* mesuré : photo à l'intérieur d'une carte */
+  --r-btn: 4px;             /* mesuré : boutons, étiquettes, puces, champs, lignes de FAQ */
+  --blur-glass: 2px;        /* mesuré : cellules du héros */
+  --blur-menu: 5px;         /* mesuré : voile du menu plein écran */
+  --blur-back: 28px;        /* choisi : photo floutée derrière le cadre */
 
-  /* Espace */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px;
-  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --frame-inset: clamp(12px, 2vw, 28px);   /* marge entre l'écran et le cadre */
-  --container: 1200px;   /* mesuré : contenu 1200px */
-  --section-y: 140px;    /* mesuré : padding vertical des sections */
-  --gutter: clamp(16px, 4vw, 56px);
-
-  /* Formes */
-  --radius-frame: 6px;
-  --radius-btn: 4px;     /* mesuré : boutons, étiquettes, champs, FAQ */
-  --radius-card: 10px;   /* mesuré : cartes, photos, panneaux */
-  --pad-card: 10px;      /* mesuré : photo inset dans une carte grise */
-  --pad-panel: 30px;     /* mesuré : témoignage, formulaire, encart prix */
-  --radius-round: 999px;
-  --blur-bg: 22px;        /* photo floutée hors du cadre */
-  --blur-glass: 18px;
-  --blur-menu: 5px;      /* mesuré : voile du menu plein écran */
-
-  /* Ombres */
-  --shadow-glass: 0 20px 50px rgb(13 13 13 / 0.25);
-  --shadow-card: 0 1px 0 var(--line);
-
-  /* Mouvement */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-color: cubic-bezier(0.44, 0, 0.56, 1);   /* mesuré : transitions de couleur */
-  --dur-color: 400ms;    /* mesuré */
-  --dur-fast: 180ms; --dur: 420ms; --dur-slow: 900ms; --dur-photo: 1400ms;
+  /* ---- Mouvement ---- */
+  --ease-color: cubic-bezier(0.44, 0, 0.56, 1);   /* mesuré : toutes les transitions du site */
+  --ease-spring: linear(0, 0.219, 0.449, 0.614, 0.729, 0.811, 0.868, 0.908, 0.937, 0.957, 0.971, 0.981, 0.988, 0.992, 0.996, 0.998, 1);
+                            /* mesuré : ressort d'apparition (raideur 250, amortissement 54, masse 1) recalculé en courbe */
+  --dur-color: 400ms;       /* mesuré : couleur des liens */
+  --dur-ui: 300ms;          /* mesuré : fonds de survol, FAQ */
+  --dur-menu: 500ms;        /* mesuré : ouverture du menu */
+  --dur-rise: 1100ms;       /* mesuré : durée du ressort (stable à 1.06s) */
+  --rise: 80px;             /* mesuré : montée des sections */
+  --flip-y: 288px;          /* mesuré : départ d'une carte d'étape (avec rotateX 90°) */
+  --dur-odo: 1400ms;        /* choisi : défilement des chiffres */
 }

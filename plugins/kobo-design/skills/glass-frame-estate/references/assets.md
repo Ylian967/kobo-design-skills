@@ -1,91 +1,78 @@
 # Glass Frame Estate — images et 3D
 
-> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo, un personnage ou un objet : on utilise de vraies images (photos d'architecture, portraits) et, si le projet en a, une maquette 3D du bien.
+> Les visuels font la moitié du style. On n'utilise **jamais** de dessin CSS ou SVG pour remplacer une photo de maison, d'intérieur ou de personne. Seuls les signes restent en SVG : logo, flèche, épingle, pictogrammes des puces, chevron.
 
-Ici, tout le style repose sur **une photo d'architecture en lumière dorée**, encadrée et posée sur elle-même floutée. Une mauvaise photo (plein midi, ciel blanc, grand-angle déformant) casse le héros quel que soit le CSS.
+Le style est **noir, blanc et gris** : toute la couleur vient des photos. Il en faut beaucoup (la démo en montre une quarantaine) et elles doivent se ressembler.
 
 ## 1. Ce que montrent les images
 
-| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière et ambiance | Traitement |
-|---|---|---|---|---|
-| `hero-photo` | Une maison d'architecte entière (A-frame, chalet vitré, villa) dans son paysage | Plein cadre ≈ 16:9 (portrait 9:16 en mobile via `<picture>`), bâtiment centré ou au tiers, **ciel dégagé sur le tiers haut** (le mot-marque s'y pose), sol dans le quart bas (le voile s'y pose) | Golden hour, soleil rasant ou contre-jour, fenêtres allumées si possible | Grade chaud léger + voile `--shade` en bas ; même photo floutée (`--blur-bg`) hors du cadre |
-| `agent-portrait` | Conseiller·ère en tenue sobre, regard caméra ou trois-quarts | Carré 1:1, épaules dans le cadre, visage au tiers haut | Lumière douce naturelle, fond neutre ou ville floue | Aucun (couleurs naturelles), rayon 2px |
-| `listing-1…4` | Un bien par carte : façade, piscine, vue d'ensemble | 16:10, bâtiment entier, horizon droit | Fin de journée de préférence, ciel bleu profond accepté | Grade chaud léger, zoom 1.04 au survol |
-| `team-1…8` | Portraits de l'équipe, même fond et même distance pour tous | 4:5, buste, tête au tiers haut | Douce, homogène | `grayscale(.35)` retiré au survol |
-| `post-1…3` | Détail d'architecture, intérieur, paysage (terrain, montagne) | 4:3 | Dorée ou brume | Grade chaud léger |
+| Emplacement (`data-slot`) | Sujet | Cadrage / ratio | Lumière |
+|---|---|---|---|
+| `hero-photo` | **Un seul bâtiment à la silhouette simple** (maison en A, pignon, cube) devant un **ciel dégagé** | Paysage 4:3 ou 16:9, sommet du bâtiment dans le quart haut, ciel uni autour du sommet, sol sombre en bas | Jour franc ou fin de journée ; ciel bleu ou doré, jamais blanc |
+| `hero-back` | La même photo, floutée | Même fichier en 480px avec flou serveur | — |
+| `agent-portrait` | Le conseiller, visage cadré serré | ≈ 8:7, 320px | Fond neutre |
+| `about` | Détail d'architecture vertical (angle de façade, terrasse, végétation) | 2:3 | Naturelle |
+| `listing-1…4` | Un bien par carte : façade entière, piscine, ou séjour pour un appartement | 5:4 (580 × 460) | Ciel bleu ou heure bleue ; pas de nuit noire |
+| Vignettes de service | Trois biens par service | Carré, 200px | Variées |
+| Quartiers | Une vue reconnaissable par ville : canal, quai, place, toits | ≈ 1:1 (270 × 250) | Jour |
+| `film` | Grande vue d'ensemble d'une villa (ou vidéo de visite) | 12:7, 2000px | Fin de journée |
+| Étapes | Une scène par étape : séjour vide, façade, maquette et clés, clés en main | 4:3 | Douce |
+| Témoignages | Portraits en situation, souriants, cadrés poitrine | 8:9 | Extérieur doux |
+| Agents | Portraits de studio, buste, **fond gris neutre**, même distance | ≈ 1:1 (380 × 399) | Studio |
+| Articles | Façades et intérieurs | 5:3 et 5:4 | Jour |
+| Pied de page | Tour ou façade graphique en contre-plongée | Paysage | Convertie en gris, 28 % d'opacité |
 
-**Règle de cohérence** : toutes les photos de biens partagent la **même heure du jour** (fin d'après-midi, lumière chaude et rasante) ; les portraits partagent **le même fond et la même distance**. Jamais de photo de plein midi à côté d'un coucher de soleil.
+**Cohérence** : pas de grand-angle déformant, horizons droits, pas de personnages dans les photos de biens ; les six portraits d'agents sur le même type de fond.
 
-## 2. Où les trouver
+## 2. La photo du héros et son détourage
 
-1. **Les images du projet** (photos du photographe de l'agence, portraits de l'équipe) : toujours en priorité. Demander au photographe une version « ciel dégagé » du héros pour le mot-marque.
-2. **Banques gratuites** : [Unsplash](https://unsplash.com) et [Pexels](https://www.pexels.com) (licences gratuites, usage commercial permis ; créditer le photographe est apprécié). Mots-clés qui marchent :
-   - FR : « maison en A coucher de soleil », « chalet vitré forêt », « villa architecte piscine crépuscule », « maison bois béton », « portrait professionnel costume ».
-   - EN : « a-frame house golden hour », « glass cabin forest dusk », « modern villa pool sunset », « architect house hillside », « real estate agent portrait », « professional headshot neutral background ».
-3. **Génération IA** (Midjourney, Flux, DALL·E, Firefly…) — prompts de départ :
-   - Héros :
-     > Architectural photograph of a contemporary timber A-frame house with a fully glazed gable, standing alone on a gentle green hillside, golden hour, low warm sun behind the house, windows glowing amber, clear soft gradient sky occupying the upper third, 35mm lens at eye level, straight verticals, natural colors, subtle film grain, no people, no text, no logo, 16:9
-   - Annonce :
-     > Real estate listing photo of a modern villa with wood and concrete volumes and a long pool, late afternoon warm side light, deep blue sky, wide but undistorted 24mm tilt-shift look, crisp details, no people, no text, 16:10
-   - Portrait :
-     > Professional portrait of a real estate advisor in a dark tailored jacket, chest-up, soft window light, neutral warm grey background, calm confident expression, 85mm lens, shallow depth of field, natural skin tones, no text, square crop
-4. **À éviter** : photos de plein midi aux ombres dures, ciels blancs brûlés (le mot-marque blanc y disparaît), HDR surchargé, grands-angles qui font pencher les murs, intérieurs encombrés, portraits de stock au sourire figé sur fond blanc pur, photos ou noms d'un template ou d'une agence existante.
-
-## 3. Traitements (code)
+Le mot-marque passe **derrière** le bâtiment. Pour cela la photo est posée deux fois et la copie du dessus est découpée au contour du bâtiment :
 
 ```css
-/* Conteneur : repli = dégradé de ciel en tokens, visible si l'image ne charge pas */
-.media { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--sky-top), var(--sky-mid) 55%, var(--shade)); }
-.media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-/* Grade « golden hour » léger : un peu de chaleur, jamais un filtre visible */
-.media--warm img { filter: saturate(1.06) contrast(1.03); }
-.media--warm::after { content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(200deg, color-mix(in srgb, var(--sky-glow) 30%, transparent), transparent 55%);
-  mix-blend-mode: soft-light; }
-
-/* Voile de lisibilité du héros (le texte blanc repose dessus) */
-.veil { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--shade) 80%, transparent) 88%, var(--shade)); }
-
-/* Même photo, floutée, hors du cadre */
-.hero-bg { position: absolute; inset: calc(-2 * var(--blur-bg)); background: var(--shade); }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: blur(var(--blur-bg)) saturate(1.1); }
-
-/* Mise au point à l'arrivée (voir motion.md) */
-.frame .media img { animation: settle var(--dur-photo) var(--ease) both; }
-
-/* Portraits d'équipe */
-.member img { filter: grayscale(.35); transition: filter var(--dur) var(--ease); }
-.member:hover img { filter: none; }
+.shot { position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: max(100%, var(--hero-h) * 1.3323);   /* 1.3323 = largeur / hauteur de la photo */
+  aspect-ratio: 1600 / 1201; }
+.shot.front { clip-path: polygon(56.9% 4.9%, 77.5% 33.6%, 98% 74%, 33% 72.4%); }
 ```
 
-**Mot-marque derrière le bâtiment** : avec une photo normale, le mot-marque se place **dans le ciel, au-dessus du toit, sans le toucher**. Pour qu'il passe vraiment *derrière* le toit, il faut un deuxième calque : la même photo détourée en PNG/WebP transparent (sujet seul), posée au-dessus du mot-marque :
+Relever le polygone d'une nouvelle photo :
+1. Ouvrir la photo, noter ses dimensions (ici 1600 × 1201) et reporter le ratio dans `.shot`.
+2. Relever en pixels les points du contour du bâtiment **au-dessus de la ligne où finissent les lettres** (ici : le sommet, un point sur le pan droit, les deux pieds du toit). Diviser par la largeur et la hauteur pour obtenir des pourcentages.
+3. Vérifier en grand que le bord du toit n'est ni rogné ni doublé d'un liseré de ciel.
 
-```html
-<div class="media" data-slot="hero-photo">
-  <img src="maison.jpg" alt="…">                       <!-- ciel + maison -->
-  <p class="wordmark" aria-hidden="true">Marque</p>
-  <img class="cutout" src="maison-detouree.webp" alt="">  <!-- maison seule, même cadrage -->
-  <div class="veil"></div>
-</div>
+Choisir une photo qui s'y prête : **arêtes droites** (trois à six points suffisent), pas d'arbre ni de fil devant le bâtiment à hauteur des lettres. Si la silhouette est complexe, fournir à la place un PNG détouré du bâtiment, posé au même endroit.
+
+Écran étroit : `.shot` couvre en hauteur ; le recentrer sur le bâtiment (`translateX(-57%)` ici, le sommet étant à 57 % de la largeur).
+
+## 3. Où les trouver
+
+1. **Les photos du projet** : reportage du photographe de l'agence, portraits de l'équipe sur un même fond.
+2. **Banques libres** : [Unsplash](https://unsplash.com), [Pexels](https://www.pexels.com). Recherches utiles : `a-frame house`, `modern villa exterior`, `modern house exterior evening`, `modern interior living room`, `house keys`, `professional headshot grey background`, `real estate agent portrait`, plus le nom de chaque ville.
+3. **Génération** — prompts de départ :
+   > Architectural photograph of a dark timber A-frame house with a fully glazed gable, seen from the front three-quarter, clean triangular silhouette against a clear deep blue sky, a few pine trees on the left, wooden deck in the foreground, natural daylight, 35mm, straight verticals, no people, no text, 4:3
+
+   > Studio portrait of a real estate advisor, chest-up, dark blazer, neutral mid-grey seamless background, soft key light from the left, calm friendly expression, 85mm, 1:1
+4. **À éviter** : ciel blanc ou brûlé (le mot-marque y disparaît), HDR, intérieurs encombrés, portraits sur fond blanc pur, photos d'un template ou d'une agence existante.
+
+## 4. Traitements
+
+```css
+.ph { overflow: hidden; border-radius: var(--r-card); background: var(--surface); }   /* repli pendant le chargement */
+img { width: 100%; height: 100%; object-fit: cover; }
+.frame::after { background: linear-gradient(var(--veil), var(--veil)),
+  linear-gradient(180deg, var(--shade-0) 46%, var(--shade-1) 96%); }                  /* voile du héros */
+.say.photo::before { background: linear-gradient(180deg, var(--shade-0) 40%, var(--ink) 96%); }
+.foot > img { opacity: 0.28; filter: grayscale(1); }
 ```
-Le détourage se fait dans Photoshop (« Sélectionner le sujet »), Photopea ou `rembg` ; ne jamais le simuler avec un `clip-path` dessiné.
 
-## 4. Intégration
+- **Aucun filtre de couleur** sur les photos de biens : le site les montre telles quelles.
+- Paramètres d'image (Unsplash / imgix) : `fit=crop&w=…&h=…` au ratio de l'emplacement ; `fit=facearea&facepad=3` pour recadrer un portrait sur le visage ; `blur=160` pour le fond du héros.
+- `loading="lazy"` partout sauf la photo du héros (`fetchpriority="high"`). Texte alternatif descriptif pour les biens, vide pour les vignettes décoratives.
 
-- `<img>` avec `width`/`height` ou `aspect-ratio`, `alt` qui décrit le bien (« Maison en A en bois et verre sur une colline au coucher du soleil »), `loading="lazy"` sauf l'image du héros (`fetchpriority="high"`, `decoding="async"`). La copie floutée hors cadre a `alt=""` et `aria-hidden="true"`.
-- Héros : `<picture>` avec une source portrait pour mobile (`media="(max-width: 640px)"`), AVIF/WebP, ≤ 300 Ko. La copie floutée peut être une version 400px (le flou masque la définition).
-- Couleur de repli (`background` du conteneur) = un token (`--shade`, dégradé `--sky-*`), pour que le titre blanc reste lisible si l'image ne charge pas.
-- **React Native / Expo** : `expo-image` (`contentFit="cover"`, `placeholder={{ blurhash }}`, `transition={300}`) ; fond flouté = la même `Image` avec `blurRadius={22}` ; voile = `expo-linear-gradient`.
+## 5. 3D (optionnel)
 
-## 5. 3D
+Le style n'en a pas besoin. Si le projet possède une **maquette 3D d'un bien** (`.glb`), elle peut remplacer la photo de la section « film » ou la galerie d'une fiche : Three.js, fond `--surface`, lumière douce, rotation lente au glisser, 30 images/s au plus, rendu arrêté hors écran. Jamais dans le héros, qui reste une photo.
 
-Optionnelle : **la maquette du bien** sur une fiche d'annonce, jamais dans le héros (la photo reste la signature).
+## 6. Photos de la démo (Unsplash, licence libre)
 
-- **Quoi** : maquette blanche du bâtiment (export SketchUp/Revit/Blender en `.glb`, compressé Draco), posée sur un socle, dans une carte 16:10 « Visite 3D » à côté de la galerie photo.
-- **Matières et lumière** : `MeshStandardMaterial` blanc mat (couleur `--white`, rugosité 0.9), vitrages `MeshPhysicalMaterial` (`transmission` 0.9, teinte `--sky-top`), une `DirectionalLight` chaude rasante (couleur `--sun`, ombres douces) qui rejoue la golden hour, `RoomEnvironment` faible, tone mapping ACES.
-- **Caméra et interaction** : vue trois-quarts à hauteur d'œil, `OrbitControls` limités (pas de passage sous le sol, zoom borné), rotation lente au repos.
-- **Modèles** : le modèle de l'architecte en priorité ; pour une maquette : [Poly Pizza](https://poly.pizza) (CC0/CC-BY), [Kenney](https://kenney.nl/assets) (CC0), [Sketchfab](https://sketchfab.com/search?features=downloadable&licenses=7c23a1ba438d4306920229c12afcb5f9) (filtre CC). Vérifier la licence et créditer si CC-BY.
-- **Web** : Three.js (`GLTFLoader` + `DRACOLoader`) ou React Three Fiber + drei (`useGLTF`, `Environment`, `ContactShadows`, `OrbitControls`).
-- **React Native** : `expo-gl` + `@react-three/fiber/native`, ou une série d'images pré-rendues (rotation par glissement) sur appareil modeste.
-- **Repli** : la photo principale du bien si WebGL est absent ou si `prefers-reduced-motion` est actif (pas de rotation automatique).
+Héros : `photo-1720876988024-bbc62e64f02e` (maison en A). Annonces : `1670589953882-b94c9cb380f5`, `1738168246881-40f35f8aba0a`, `1748063578185-3d68121b11ff`, `1696237461860-630be53f179c`. Les autres identifiants sont dans `examples/demo.html`. À remplacer par les images du projet.

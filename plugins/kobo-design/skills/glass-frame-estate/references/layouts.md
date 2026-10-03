@@ -1,102 +1,66 @@
-# Glass Frame Estate — mises en page
+# Glass Frame Estate — gabarits
 
-Conteneur `--container` (1200px mesuré), marges `--gutter`, sections `--section-y` (140px mesuré) en vertical. Points de rupture mesurés : **1200px** et **768px**.
+Grille **mesurée** sur le site de référence : contenu de 1200px, marges de 30px (20px en mobile), sections séparées par 140px (60px en mobile), 80px entre un titre de section et son contenu, écart de 10px entre cartes. Points de rupture du site : 1200px et 810px.
 
-## Accueil
+## Héros (1440 × 900)
 
 ```
-┌──────────────── photo floutée ────────────────┐
-│ ┌──────────── cadre 1px, rayon 6 ───────────┐ │
-│ │ ✕ MARQUE          10:30     PARIS · MENU ⠿│ │
-│ │        M A R Q U E  (blanc → transparent) │ │
-│ │                 /\                        │ │
-│ │   colline      /██\  maison    🌲          │ │
-│ │ PROPRIÉTÉS                ┌─ verre ─────┐ │ │
-│ │ D'EXCEPTION               │ ▣ conseiller│ │ │
-│ │ [EN SAVOIR PLUS →]        │ [APPELER →] │ │ │
-│ └───────────────────────────└─────────────┘─┘ │
-└───────────────────────────────────────────────┘
- 01 — SÉLECTION                  (TOUS)(MAISONS)…
- BIENS À LA UNE
- [photo 16:10]          [photo 16:10]
- titre ........ prix    titre ........ prix
- [photo]                [photo]
-█████████████ bande noire █████████████████████████
- 1 200+     48 h     96 %     14
- logo   logo   logo   logo   logo
-████████████████████████████████████████████████████
- 02 — L'ÉQUIPE / NOS CONSEILLERS      [NOUS REJOINDRE →]
- [▯][▯][▯][▯]
- [▯][▯][▯][▯]
-░░ surface ░░ 03 — JOURNAL : 3 cartes ░░ lettre d'info ░░
-█ pied noir : colonnes + M A R Q U E estompé █
+┌──────────────────────────────────────────────────────────────┐  ← photo floutée, marge --frame-inset
+│ ╭──────────────────────────────────────────────────────────╮ │
+│ │ ✕ HALDEN            18:42        ANNECY, …      MENU (⁙) │ │  libellés 16px, à 34px du haut
+│ │                                                          │ │
+│ │      H  A  L  ◢◣  E  N        ← mot-marque 280px,        │ │  haut à 100px, derrière la maison
+│ │              ◢██◣                                        │ │
+│ │ DES MAISONS ◢████◣                                       │ │  titre 80px, bord gauche = contenu
+│ │ D'EXCEPTION              ┌──────┐┌───────────────┐       │ │
+│ │ [ DÉCOUVRIR        → ]   │ photo ││ 04 50 …       │       │ │  cellules en verre 160 + 259 × 140
+│ │                          └──────┘│ [ APPELER  → ]│       │ │
+│ ╰──────────────────────────────────────────────────────────╯ │  bas des blocs à 48px du bord
+└──────────────────────────────────────────────────────────────┘
 ```
 
-## Héros
+- Titre et bouton en bas à gauche, cellules en bas à droite, alignés sur leur bord inférieur.
+- Le bâtiment occupe le centre ou le tiers droit, **son sommet mord dans les lettres**.
+- Mobile : barre réduite au logo et au menu ; titre 40px, bouton, puis les deux cellules côte à côte sur toute la largeur.
 
-- Hauteur `100svh`, bornée 640–960px ; marge `--frame-inset` autour du cadre.
-- Plans dans la photo réelle (voir `assets.md`) : ciel → mot-marque (haut, 12 %) → sujet (détourage optionnel) → voile.
-- Titre à `--space-8` du bas et de la gauche ; carte verre à `--space-8` du bas et de la droite. Les deux reposent sur le voile.
+## Accueil (ordre mesuré sur le site, 13 sections)
 
-## Catalogue
+| # | Section | Fond | Disposition |
+|---|---|---|---|
+| 1 | Héros | photo | voir ci-dessus |
+| 2 | À propos | blanc | 2 colonnes : texte (surtitre, titre 48px, paragraphe, 3 compteurs, bouton + adresse) / photo verticale 490 × 730. Règle graduée dessous |
+| 3 | Annonces | blanc | titre centré, grille 2 × 2, bouton « Voir plus » centré |
+| 4 | Services | **noir** | surtitre à gauche, titre décalé à droite ; 4 lignes de service |
+| 5 | Quartiers | blanc | titre à gauche + bouton à droite ; 4 cartes grises |
+| 6 | Film | blanc | une vidéo ou photo de 1200 × 700, rayon 10px |
+| 7 | Étapes | blanc | titre centré + carte noire collante ; règle graduée dessous |
+| 8 | Témoignages | blanc | titre à gauche ; mosaïque 3 × 2 en damier |
+| 9 | Agents | **gris** | titre centré ; 6 portraits en 3 colonnes |
+| 10 | Contact | blanc | 2 colonnes : titre + coordonnées / formulaire gris. Règle graduée dessous |
+| 11 | Journal | blanc | titre centré ; 1 grande carte + 2 cartes horizontales |
+| 12 | FAQ | **gris** | 2 colonnes : titre + mini-carte du conseiller / 6 questions (580px) |
+| 13 | Appel final + pied | blanc puis **noir** | carte photo ; pied à 4 colonnes et mot-marque géant |
 
-Grille 2 colonnes, `gap: 48px 32px`. En-tête de section : surtitre numéroté (« 01 — Sélection ») + titre en capitales à gauche, filtres ou bouton contour à droite (`flex-wrap`).
+Rythme des fonds : blanc dominant, **un seul bloc noir** (services) avant le pied, deux blocs gris. Les titres alternent centré / à gauche.
 
-## Bande noire
+## Pages internes (mesurées)
 
-Pleine largeur, 4 colonnes de chiffres puis logos, sans titre (étiquette `aria-label`).
-
-## Équipe
-
-4 colonnes × 2 rangées, portraits 4:5.
-
-## Journal + lettre d'info
-
-Section `--surface` : 3 cartes, puis bloc 2 colonnes séparé par un filet (titre à gauche, champ à droite, alignés en bas).
-
-## Mobile (390px)
-
-- Cadre à 12px du bord ; barre : logo + « MENU » ⠿.
-- Mot-marque à ~80px, à 16 % ; photo du héros en recadrage portrait (`<picture>`, voir `assets.md`).
-- Carte verre pleine largeur collée en bas du cadre ; titre et bouton juste au-dessus (accroche masquée).
-- Annonces, articles : 1 colonne. Équipe et chiffres : 2 colonnes. Lettre d'info et pied : 1 colonne.
-- Toujours `min-width: 0` sur les enfants de grille qui contiennent un champ.
-
----
-
-## Accueil réel (mesuré sur le site, 1536px, ~15 900px de haut)
-
-1. **Héros** plein écran (photo pleine page ; sur le shot Dribbble il est présenté dans un cadre — garder le cadre comme signature, mais il est aussi juste de le retirer sur mobile).
-2. **À propos** : 2 colonnes — à gauche surtitre « // », titre 48px, texte, 3 compteurs odomètre, bouton noir + adresse en 16px capitales ; à droite photo 480px rayon 10px. Puis **règle graduée**.
-3. **Biens à la une** : en-tête centré (surtitre + titre 48px sur 2 lignes), grille 2×2 de cartes d'annonce, gouttière 40px.
-4. **Services** : section **noire**, titre 48px à droite de l'en-tête, 4 lignes de service.
-5. **Quartiers** : en-tête à gauche + bouton transparent « Plus de quartiers → » à droite, 4 cartes grises.
-6. **Étapes** : en-tête centré, pile d'étapes collantes dans un panneau noir. Règle graduée.
-7. **Témoignages** : en-tête à gauche, mosaïque 3×2.
-8. **Agents** : section `--surface`, en-tête centré, grille 3×2 de portraits.
-9. **Contact** : 2 colonnes (titre + coordonnées / formulaire gris). Règle graduée.
-10. **Journal** : en-tête centré, 3 cartes d'article.
-11. **FAQ** : 2 colonnes (titre + carte agent / accordéon).
-12. **Appel final** : bandeau photo assombri, titre 48px blanc, bouton gris « Explorer les biens → ».
-13. **Pied** noir : phrase + liens sociaux textuels, 3 colonnes de liens (titres 16px 500 blancs, liens 32px 500 pour les services), mentions, puis **mot-marque géant** en bas.
-
-Les titres de section apparaissent d'abord en **gris clair** et se « remplissent » en noir au défilement (voir `motion.md`).
-
-## Pages internes (toutes : héros 700px + titre 100px)
-
-| Page | Contenu sous le héros |
+| Page | Gabarit |
 |---|---|
-| À propos | Bande « Nos clients » : 8 logos dans des cases grises 4×2 (rayon 10px) ; « // Qui nous sommes » à gauche + grande phrase 32px à droite ; 4 cartes de chiffres à indicateur de carrés ; grande photo 1200px rayon 10px ; agents ; témoignages (grille 380px, 2 rangées). |
-| Services | Liste de 6 lignes de service sur blanc (1200px). |
-| Détail d'un service | Colonne de 750px : titre 40px, texte, puis 9 blocs (sous-titre 32px + paragraphe) ; colonne latérale à droite (≈ liste des autres services + contact). |
-| Biens | Grille 2 colonnes de cartes d'annonce (≈ 2 730px pour 8 biens). |
-| Fiche d'un bien | Titre aligné à gauche dans le héros. 2 colonnes : contenu 650px (description, caractéristiques, équipements, galerie 2×2, carte) / encarts 460px (prix noir, visite, formulaire). Gap 60px entre blocs. |
-| Quartier | Héros au nom du quartier, puis les biens de ce quartier en cartes d'annonce. |
-| Journal | 3 colonnes de cartes d'article (≈ 1 400px). |
-| Article | Colonne de 800px centrée : catégorie, titre 48px, paragraphes 16px/1.6, intertitres 32px. |
-| Contact | Héros « Prenez contact », bloc contact 2 colonnes (e-mails, téléphone, adresse, horaires + formulaire), puis carte. |
-| 404 | Héros seul : « 404 » géant translucide centré + message. |
+| À propos, Contact, Quartier | Héros photo de 700px, titre `--fs-page` (100px, graisse 600) centré ; puis sections de l'accueil |
+| Biens | Grille d'annonces 2 colonnes sur toute la page |
+| Fiche d'un bien | Titre 100px ; colonne de texte de 650px (blocs espacés de 60px) + colonne de 460px : encart **prix** noir (padding 30px, « PRIX » 24px, montant 32px), encarts gris (visite, formulaire) ; galerie 2 × 2 |
+| Services | 6 lignes de service de 1200px |
+| Détail d'un service | Titre 40px, colonne de 750px, sous-titres 32px |
+| Journal | 3 cartes d'article (titre 24px) |
+| Article | Titre 48px, colonne de 800px, intertitres 32px |
+| 404 | « 404 » de 340px, blanc translucide sur photo assombrie, message 16px dessous |
 
-## Mobile observé (612px, Framer ≤ 767px)
+## Mobile (390px, mesuré)
 
-Titre du héros **40px**, titres de section **32px**, nom de bien **16px** ; cartes d'annonce en **1 colonne**, photo pleine largeur rayon 10px, étiquettes conservées ; cases de caractéristiques sur une ligne. Mot-marque géant conservé à 280px (il déborde volontairement et se coupe).
+- Tout passe en **une colonne** : annonces, témoignages, agents, articles. Les quartiers restent en 2 colonnes (proposé ; le site les empile).
+- Sections à 60px, marges de 20px ; titres 32px, surtitres 14px, nom de bien 16px.
+- Services : numéro + titre 22px, les trois vignettes sur toute la largeur, lien dessous.
+- **Étapes : plus de carte collante**, quatre cartes noires l'une sous l'autre (photo en haut, texte dessous).
+- Agents : la carte blanche devient un bandeau fixe en bas du portrait.
+- Le mot-marque reste très grand et dépasse du cadre sur le site ; ici il est réduit pour tenir (84px au moins).

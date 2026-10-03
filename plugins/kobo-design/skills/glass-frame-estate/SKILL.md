@@ -1,107 +1,100 @@
 ---
 name: glass-frame-estate
-description: Direction artistique « Glass Frame Estate » pour l'immobilier haut de gamme et les annonces de biens (agence, promoteur, location de villas, chalets, architecture, hôtellerie boutique), inspirée des templates Dribbble d'annonces immobilières. Héros photo encadré d'un filet blanc fin à coins légèrement arrondis posé sur la même photo floutée, mot-marque géant blanc en dégradé vers la transparence placé derrière le bâtiment, petite navigation en capitales (heure, ville, MENU + bouton rond à points), titre Inter 500 en capitales en bas à gauche, bouton rectangulaire à flèche, carte conseiller en verre, puis pages blanches éditoriales : surtitres « // », cartes grises à 10px, compteurs odomètre, règle graduée, grille 2×2 d'annonces à étiquettes, services sur fond noir, pile d'étapes collantes, témoignages en mosaïque, FAQ, pied noir avec mot-marque géant. Couvre aussi les pages internes mesurées sur le site en ligne du template : menu plein écran flouté, héros de page à titre 100px, fiche de bien avec encarts latéraux, détail de service, quartier, journal, article, contact, 404. À utiliser pour une landing d'agence, une fiche de bien, un catalogue d'annonces, une app de location ou un site au style « luxe calme, golden hour, verre, minimal, Inter ».
+description: Direction artistique « Glass Frame Estate » pour l'immobilier et les annonces de biens (agence, promoteur, location de villas, chalets, architecture, hôtellerie), mesurée sur un template immobilier en ligne. Héros photo encadré d'un filet blanc sur la même photo floutée, mot-marque géant blanc en dégradé placé derrière le bâtiment, barre en capitales (heure, ville, MENU + rond à points), titre Inter 500 en capitales, bouton large à flèche, cellules de conseiller en verre. Puis une page entièrement noire, blanche et grise : surtitres « // », compteurs odomètre, règle graduée, annonces 2×2 à étiquettes, services sur noir, cartes de quartier grises, étapes en carte collante qui bascule au défilement, témoignages en damier, agents, formulaire gris, FAQ, pied noir à mot-marque géant, menu plein écran. Tout apparaît par une montée de 80px au ressort. À utiliser pour une landing d'agence, un catalogue ou une fiche de bien, un site au style « luxe calme, minimal, noir et blanc, verre, Inter ».
 ---
 
 # Glass Frame Estate
 
-> Une photo de maison au coucher du soleil, posée dans un cadre de verre ; tout le reste est blanc, noir et silencieux.
+> Une maison devant le ciel, le nom de l'agence écrit derrière elle, et plus aucune couleur ensuite.
 
 ## L'idée
 
-Le héros est une **photo dans un cadre** : un filet blanc de 1px, coins à 6px, posé à quelques pixels du bord de l'écran sur **la même photo floutée** — l'image semble sous verre. Derrière le bâtiment, un **mot-marque géant** blanc qui s'efface vers le bas, comme gravé dans le ciel. L'interface tient en lignes fines et petites capitales : heure locale, ville, « MENU » et un rond blanc à points. Le texte est **net et moyen** (Inter 500 en capitales, mesuré) et la seule matière en relief est la **carte conseiller en verre dépoli**. Sous le héros, la page devient un catalogue éditorial blanc rythmé par une bande noire.
+Le héros est **une photo sous verre** : un cadre d'un pixel blanc posé sur la même photo floutée. Le **mot-marque géant** traverse le ciel et passe derrière le bâtiment, dont le sommet mord dans les lettres. En bas, un titre en capitales, un bouton large, et deux petites cellules de verre pour le conseiller. Sous le héros, tout est **noir, blanc et gris** : la couleur ne vient que des photos de biens. La page est calme : chaque bloc monte de 80px une seule fois, les survols inversent le noir et le blanc.
 
 Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, logo, photos ni textes du template d'origine.
 
 ## Règles prioritaires
 
-1. **Le cadre** : `border: 1px solid var(--frame-line)`, `border-radius: var(--radius-frame)`, marge `--frame-inset`, photo floutée (`--blur-bg`) visible tout autour.
-2. **Mot-marque derrière le sujet** : ciel → mot-marque → colline/maison. Le sommet du bâtiment mord dans le bas des lettres.
-3. **Titres Inter 500 en capitales** (`--weight-title`, interligne 1.1, `--tracking-title`), surtitres « // » 16px, texte 16px/1.6 `--muted`. Rien au-delà de 600 (le mot-marque).
-4. **Deux matières seulement** dans le héros : photo et verre (`--glass` + `backdrop-filter`). Ailleurs : blanc, `--surface`, noir `--ink`.
-5. **Ambre « golden hour »** (`--accent`) réservé aux prix et aux liens « Lire → » ; jamais de fond ambré.
-6. **Contraste** : le texte blanc du héros repose toujours sur le voile `--shade` (bas de photo) ; repli opaque `--glass-solid` si `backdrop-filter` manque.
-7. **Accessibilité** : cibles ≥ 44px (puces, rond menu, favoris), focus visible ambre (blanc sur photo et noir), photos avec `role="img"` + `aria-label`.
-8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
+1. **Aucune couleur d'interface.** Noir `--ink`, blanc, `--surface`, `--muted`. Pas d'accent, pas d'ombre portée.
+2. **Tout en capitales, Inter 500**, interligne 1.1, approche −0.02em. Seuls les paragraphes sont en bas de casse (16px / 1.6, `--muted`).
+3. **Le mot-marque passe derrière le bâtiment** : photo posée deux fois, copie du dessus détourée en `clip-path` (`assets.md`).
+4. **Le verre est discret** : fond noir à 5 %, flou 2px, liseré intérieur blanc. Uniquement dans le héros.
+5. **Trois rayons** : 10px (cartes, photos), 6px (photo dans une carte), 4px (boutons, étiquettes, champs).
+6. **Rythme mesuré** : contenu 1200px, sections à 140px, cartes écartées de 10px, un seul bloc noir (services) avant le pied.
+7. **Un seul mouvement d'entrée** : montée de 80px + fondu, courbe `--ease-spring`, une fois. Une seule séquence liée au défilement : les étapes.
+8. **Texte blanc** uniquement sur noir, sur `--shade` ou sur un dégradé noir ; jamais sur le ciel.
+9. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Cadre photo, mot-marque, barre du haut, boutons, carte verre, carte d'annonce… puis la partie **mesurée sur le site** : surtitre « // », bouton à flèche, compteurs odomètre, règle graduée, ligne de service, carte de quartier, pile d'étapes, mosaïque de témoignages, carte d'agent, formulaire gris, FAQ, encarts de fiche, menu plein écran, héros de page interne. |
-| `references/layouts.md` | Héros encadré, catalogue 2×2… puis l'**accueil réel en 13 sections**, les **10 pages internes** et le mobile observé. |
-| `references/motion.md` | Mise au point de la photo, montée du texte, survols ; transition de couleur **mesurée** (400ms), titres qui se remplissent, odomètres, étapes collantes. |
-| `references/assets.md` | Avant de placer une image : sujets, cadrages, lumière dorée, grade et voile, détourage pour le mot-marque, sources, prompts IA, maquette 3D optionnelle. |
-| `examples/demo.html` | Page d'exemple complète (agence fictive). |
-| `source.md` | Référence, site en ligne, pages explorées (mesuré / observé) et écarts. |
-
-## Pages couvertes
-
-| Page | Gabarit (`layouts.md`) | Composants clés |
-|---|---|---|
-| Accueil | Accueil réel (13 sections) | Héros + carte conseiller, compteurs, annonces, services noirs, quartiers, étapes, témoignages, FAQ |
-| À propos | Pages internes | Héros de page centré, logos clients en cases grises, cartes de chiffres à indicateur, agents |
-| Services / détail | Pages internes | Lignes de service, colonne 750px |
-| Biens / fiche | Pages internes | Cartes d'annonce ; encarts prix noir, visite, formulaire ; galerie 2×2 |
-| Quartier, Journal, Article | Pages internes | Carte de quartier, carte d'article, colonne 800px |
-| Contact, 404 | Pages internes | Formulaire gris, « 404 » géant translucide |
-| Menu | — | Menu plein écran flouté 5px |
+| `references/components.md` | Cadre, mot-marque, barre, boutons, verre, compteurs, règle, annonce, service, quartier, étape, témoignage, agent, formulaire, article, FAQ, menu. |
+| `references/layouts.md` | Héros, ordre des 13 sections de l'accueil, pages internes, mobile. |
+| `references/motion.md` | Montée au ressort, étapes qui basculent, survols, menu, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : sujets, détourage du héros, sources, traitements. |
+| `examples/demo.html` | Page complète animée (agence fictive « Halden »). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Réglages |
+| Rôle | Police | Réglages |
 |---|---|---|
-| Mot-marque géant | **Inter** 600 (ou Inter Tight 700) | 280px mesuré, capitales, −0.04em, dégradé blanc → transparent |
-| Titre du héros | **Inter** 500 | 80px desktop / 40px mobile (mesuré), capitales, interligne 1.1, −0.02em |
-| Titre de page interne | Inter 600 | 100px (mesuré), capitales, −0.02em |
-| Titres de section | Inter 500 | 48px (mesuré) / 32px mobile, capitales, −0.02em ; sous-titres 32, 24, 20px |
-| Chiffres | Inter Tight 400 | 40–64px, −0.04em |
-| Nav, surtitres « // », boutons, étiquettes | Inter 500 | 16px (mesuré), capitales, sans approche |
-| Texte | Inter 400 | 14–16px / 1.55 |
+| Mot-marque | **Inter** 600 | 280px, −0.04em, dégradé blanc → transparent |
+| Titre du héros | Inter 500 | 80px (40px mobile), capitales, 1.1, −0.02em |
+| Titre de page interne | Inter 600 | 100px |
+| Titres de section | Inter 500 | 48px (32px mobile) ; puis 32, 24, 20px |
+| Libellés (nav, surtitres « // », boutons, étiquettes) | Inter 500 | 16px / 16px, capitales (14px mobile) |
+| Texte | Inter 400 | 16px / 1.6 |
+| Heure | **Geist Mono** 500 | 16px |
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Fond | `--white`, `--surface` | sections claires alternées |
-| Encre | `--ink` | texte, bande de chiffres, pied de page, bouton plein |
-| Secondaire | `--muted`, `--on-dark-muted` | méta, légendes |
-| Accent | `--accent` / `--accent-2` | prix, « Lire → » |
-| Verre | `--glass`, `--glass-line`, `--frame-line` | carte conseiller, cadre, favoris |
-| Repli photo | `--sky-*`, `--shade`, `--stone` | fond des conteneurs avant chargement, grade doré |
+| `--white` | #ffffff | Fond dominant, texte sur noir et sur photo |
+| `--ink` | #000000 | Texte, bloc services, cartes d'étape, pied, bouton plein, étiquette de statut |
+| `--surface` | #f2f2f2 | Sections grises, cartes, bouton clair, panneau de formulaire |
+| `--muted` | #555555 | Texte secondaire sur clair |
+| `--soft` | #cccccc | Texte secondaire sur noir |
+| `--veil`, `--shade`, `--shade-1` | voile 20 %, #2b2d27 | Assombrir la photo sous le texte |
+| `--glass`, `--glass-edge` | noir 5 %, blanc 50 % | Cellules en verre |
+| `--word-from` → `--word-to` | blanc 62 % → 0 | Mot-marque |
 
 ## Images et 3D
 
-Le style vit de **vraies photos d'architecture en lumière dorée** (fin de journée, ciel dégagé en haut du cadre) et de **vrais portraits** homogènes pour l'équipe et la carte conseiller. Traitement discret : grade chaud en `soft-light`, voile `--shade` sous le texte du héros, même photo floutée hors du cadre, portraits légèrement désaturés. Pour que le mot-marque passe derrière le toit, on superpose un détourage réel de la photo. La 3D est optionnelle (maquette du bien sur une fiche). Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un bâtiment : détails dans `references/assets.md`.
+De **vraies photos**, nombreuses et homogènes : une maison à silhouette simple devant un ciel dégagé pour le héros (détourée pour laisser passer le mot-marque derrière elle), façades et intérieurs pour les annonces, vues de villes pour les quartiers, portraits de studio sur fond gris pour les agents. Aucun filtre de couleur. Logo, flèches et pictogrammes sont des signes et restent en SVG ; jamais une maison ou un portrait dessinés. 3D optionnelle (maquette d'un bien), jamais dans le héros. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le héros encadré avec mot-marque derrière la maison** : une fois par site, en haut de l'accueil. Le pied de page en fait l'écho (mot-marque estompé sur noir).
+1. Le **mot-marque derrière le bâtiment**, dans un cadre d'un pixel sur photo floutée.
+2. Les **cellules de verre** au liseré blanc.
+3. Les **surtitres « // »** et la **règle graduée** entre les sections.
+4. Les **étiquettes** blanche et noire sur les photos d'annonce.
+5. La **carte d'étape noire** sur laquelle la suivante se déplie.
 
 ## À éviter
 
-- Des ombres portées, des coins arrondis > 10px (mesuré : 4px boutons, 6px cadre, 10px cartes), des boutons pilule colorés.
-- Un titre de héros en gras 700+ ou centré sur l'accueil : il est en 500, en bas à gauche (les pages internes, elles, peuvent centrer leur titre).
-- Du verre dépoli partout : une carte en verre par écran, sur une photo.
-- Des photos froides ou en plein jour : la lumière est dorée, rasante.
-- Copier le nom, le logo ou les photos du template d'origine.
+- Ajouter une couleur d'accent, un dégradé coloré, une ombre portée.
+- Écrire le mot-marque par-dessus le bâtiment, ou sur un ciel blanc.
+- Des titres en gras (700 et plus) ou en bas de casse.
+- Du verre partout : il n'existe que dans le héros.
+- Animer un flou plein écran (menu, fond du héros) : voir « Performance » dans `motion.md`.
+- Des entrées différentes d'un bloc à l'autre (glissements latéraux, zooms, rebonds).
+- Des photos de plein midi surexposées ou des portraits hétérogènes.
 
 ## Adaptation React / React Native
 
-- Cadre : `View` absolue avec `borderWidth: 1`, `borderRadius: 6`, `pointerEvents="none"` ; fond = `Image` avec `blurRadius={22}`.
-- Mot-marque en dégradé : `MaskedView` + `LinearGradient` (expo-linear-gradient) sur un `Text`, placé entre l'image du ciel et un PNG détouré du bâtiment.
-- Verre : `BlurView` (expo-blur, `intensity` 40, `tint="light"`) ; Android ancien → fond `--glass-solid`.
-- Heure locale : `Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone })`.
-- Polices : `@expo-google-fonts/inter`, `@expo-google-fonts/inter-tight`.
+- **React** : un composant par bloc (`FrameHero`, `ListingCard`, `ServiceRow`, `StepDeck`, `FaqItem`), `tokens.css` importé une fois ; `Rise` enveloppe un bloc et pose la classe `in` par IntersectionObserver ; `StepDeck` garde un seul écouteur de défilement.
+- **React Native** : tokens en objet JS ; cadre = `ImageBackground` flouté (`blurRadius`) + vue à bordure ; mot-marque en `MaskedView` avec dégradé, bâtiment détouré en PNG posé au-dessus ; verre avec `expo-blur` (intensité faible) ; montée au ressort avec Reanimated (`withSpring`, raideur 250, amortissement 54) ; étapes en liste verticale simple, comme en mobile.
 
 ## Avant de livrer
 
-- [ ] Tokens importés, aucune valeur en dur.
-- [ ] Cadre 1px sur photo floutée, mot-marque derrière le sujet.
-- [ ] Une seule carte en verre dans le héros, avec repli opaque.
-- [ ] Annonces en 2×2, bande noire, équipe 4×2 (2 colonnes en mobile).
-- [ ] Testé à 375px et 1440px, aucun débordement horizontal, mouvement réduit respecté.
-- [ ] Contrastes vérifiés (`python3 tools/check.py glass-frame-estate`).
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Aucun élément du template d'origine.
+- [ ] `:root` copié de `tokens.css`, aucune couleur en dur ailleurs.
+- [ ] Le polygone de détourage suit le bâtiment à 1440 et à 390px.
+- [ ] Titre du héros lisible (voile + dégradé), verre visible grâce au liseré.
+- [ ] Pas de défilement horizontal à 390px ; étapes empilées en mobile.
+- [ ] Menu : Échap ferme, focus rendu au bouton ; FAQ au clavier.
+- [ ] `prefers-reduced-motion` : tout visible, pas de carte collante.
+- [ ] Nom, logo, photos et textes propres au projet.
