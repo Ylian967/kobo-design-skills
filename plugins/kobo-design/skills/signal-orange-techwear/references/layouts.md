@@ -1,65 +1,58 @@
 # Signal Orange Techwear — mises en page
 
-Conteneur `--container` (1360px), marges `--gutter`, quadrillage de fond `--grid-size` à 35 % d'opacité, masqué en ellipse.
+Chaque écran de la référence fait **1440 × 852px**, marges de 40px. Le skill les enchaîne sur une seule page : chaque section occupe au moins la hauteur de la fenêtre.
 
-## Héros en 3 colonnes
+## Écran 1 — héros (vu)
 
 ```
-┌ NOCTUNIT        COLLECTION  LOOKBOOK  LABO  ARCHIVES        SAC (3) ┐
-├─────────────────────────────────────────────────────────────────────┤
-│ — NOUVELLE COLLECTION        │ T          ┌ panneau produit ───────┐│
-│ UNIT-X  (orange)          ░░ ▓▓ ░░ E      │ ▣  NX-01 SNEAKER        ││
-│ // ▬▬▬                    ░ mannequin ░ C │    description          ││
-│ PHANTOM (contour)         ░░   ▓▓   ░░ H  │ [VOIR LE FILM PRODUIT ↗]││
-│ MIDNIGHT (blanc)            halo orange   └─────────────────────────┘│
-│ texte gris 3 lignes                       ┌ SPECS OPÉRATEUR   v2.6 ┐│
-│ EXPLORER →                                │ VISION        ▬▬▬▬▭     ││
-│ (◎) (▷) (➤)                               │ NERF     réactif 0,2 s  ││
-│                                           │ ● PROFONDEUR ON    (●─) ││
-│                       ⌄                   └─────────────────────────┘│
-└─────────────────────────────────────────────────────────────────────┘
- // TOUT-TEMPS   COUTURES THERMOSOUDÉES   // MODULAIRE   …  (défilant)
- 01 / LA COLLECTION — MIDNIGHT
- CHAQUE COUCHE.
- [TOUTES LES PIÈCES] [VESTES] [BAS] [ACCESSOIRES]            12 PIÈCES
- ┌──────◢ ┌──────◢ ┌──────◢ ┌──────◢
- │ tag   │ │      │ │      │ │      │
- │ pièce │ │      │ │      │ │      │
- │ NOM  €│ │      │ │      │ │      │
+┌──────────────────────────────────────────────────────────────┐
+│ ◎ NOCTUNIT        Accueil  Lookbook  Boutique      ◯ Sac (0) │
+│                                                    T          │
+│ Nouvelle collection           ┌───────────┐        e  ┌──────┐│
+│ KAGE-X                        │           │        c  │fiche ││
+│ // (01/04 ○)                  │ silhouette│        h  │produit││
+│ OMBRE (creux)                 │           │           └──────┘│
+│ NOCTURNE                      │           │           ┌──────┐│
+│ Texte (300px)                 │           │           │specs ││
+│ Explorer ↗                    └───────────┘           │      ││
+│ (X)(f)(ig)             DÉFILER ⌄                      └──────┘│
+└──────────────────────────────────────────────────────────────┘
 ```
 
-- Colonnes `1.05fr / 1fr / 0.95fr`, `min-height: min(100svh - 68px, 860px)`, contenu centré verticalement.
-- Le mannequin (image réelle ou modèle 3D, voir `assets.md`) occupe toute la hauteur de sa colonne, décor fondu par masque radial, halo orange derrière et texte vertical en haut à droite.
-- Chevron de défilement au centre bas.
+- Colonne de texte à gauche, silhouette au centre (44 % de la largeur, fondue sur ses bords), colonne de panneaux de 310px à droite.
+- Le titre peut mordre sur la silhouette ; les panneaux, jamais.
+- Voile sombre de gauche à droite : presque opaque sous le texte, transparent au centre.
 
-## Collection
+## Écran 2 — la collection (vu)
 
-Index + titre géant, barre d'onglets séparée par un filet, grille 4 colonnes de cartes à coin coupé (`gap: 16px`).
+Photo de dos en fond, sombre et en noir et blanc. Index, titre empilé (plein, creux, barres, blanc), ligne de rubriques en capitales, **trois fiches système** sur 760px, lien « Explorer la collection ». À droite, en bas, une devise de deux lignes (« Indépendant par nature. // NX-026 »).
 
-## Pages produit (même langage)
+## Écran 3 — équipement (vu)
 
-Grande image à gauche (60 %), panneau sticky à droite : étiquette « NX-02 / Veste », nom Michroma 32px, prix mono, onglets de taille, bouton orange plein pleine largeur, tableau de specs en dessous.
+Photo de fond sombre. Index, titre empilé sur trois lignes, **onglets**, puis **trois fiches produit** sur 1030px. « Tout » montre les trois premières ; chaque onglet montre sa catégorie.
 
-## Tablette (≤ 1100px)
+## Écran 4 — fiche produit claire (vu, adapté)
 
-Héros en 2 colonnes (texte + mannequin), panneaux en 2 colonnes dessous ; grille produits en 2 colonnes.
+Écran gris clair en deux parts : 41 % de texte à gauche (mention « Nº 1 des ventes », titre empilé, paragraphe), la photo du produit à droite sur toute la hauteur. Le fond du texte se fond dans la photo. En bas à droite, sur la photo : panneau « Produit suivant ↗ » puis panneau de specs clair avec le bouton plein « Acheter ↗ ».
 
-## Mobile (390px)
+## Mobile (proposé — le shot ne le montre pas)
 
-- Nav : logo, compteur, burger.
-- Ordre : texte (titre empilé ~34px) → mannequin (380px de haut) → panneaux en une colonne.
-- Grille produits 2 colonnes serrées (`gap: 8px`), méta sur deux lignes ; pied en 2 colonnes.
-- Vérifier : aucune ligne de l'empilement ne dépasse (`white-space: nowrap` + taille `clamp`), `scrollWidth === 390`.
+- Sous 1080px : le héros passe en colonne, les deux panneaux se rangent côte à côte sous le texte, la silhouette glisse à droite ; grille de produits sur 2 colonnes.
+- Sous 760px : menu replié ; la silhouette passe **derrière** le texte, sur toute la largeur, assombrie ; texte vertical masqué ; panneaux, fiches système et fiches produit sur une colonne ; l'écran clair empile texte, photo (320px) puis panneaux.
 
----
+## Autres pages (proposées — non vues dans la référence)
 
-## Écrans relevés sur les images du shot
+**Lookbook.** Suite d'écrans pleine hauteur : une silhouette par écran, titre empilé de deux lignes, numéro de look en texte vertical, pilule « 02/12 » pour avancer.
 
-| Écran | Composition |
-|---|---|
-| Héros « Nightfall » | 3 colonnes (déjà décrit). |
-| Collection « Chaque couche » | Index orange « 01 / LA COLLECTION — NIGHTFALL », titre 3 lignes à gauche (plein orange / contour orange / blanc), sujet de dos au centre, rubriques + 3 cartes système, étiquette de série à droite, « DÉFILER » + chevron au centre bas. |
-| Équipement « Construis ton uniforme » | Index « 02 / ÉQUIPEMENT CHOISI », titre 3 lignes, onglets, **3 cartes produit** sur la gauche (≈ 65 %), sujet à droite. |
-| Fiche produit claire | Panneau gris clair à gauche, photo à droite, carte « produit suivant », panneau de specs + bouton orange. |
+**Boutique.** Barre d'onglets collée sous la navigation, grille de fiches produit sur 4 colonnes, filtres de taille et de coloris en panneaux à gauche.
 
-Chaque écran est **un plein écran sur une photo sombre** du même univers ; les blocs flottent sur la photo (pas de sections pleines).
+**Sac.** Lignes en panneaux (vignette, nom orange, coloris, quantité, prix), total dans un panneau à filet orange, bouton plein « Commander ↗ ».
+
+**Fiche sombre.** Même structure que l'écran 4, sur fond sombre : utile quand la photo du produit est elle-même sombre.
+
+## Règles
+
+- Un seul titre empilé par écran, toujours à gauche.
+- Jamais plus de deux panneaux dans la colonne de droite.
+- L'orange reste rare : titre, étiquettes, filets actifs, un bouton plein par écran au plus.
+- Les angles sont presque vifs (2px) ; seuls la pilule, les ronds et le compteur sont arrondis.

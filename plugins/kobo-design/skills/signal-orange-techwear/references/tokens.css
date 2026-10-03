@@ -1,62 +1,62 @@
 /*
  * Signal Orange Techwear — tokens
- * Valeurs estimées sur les images d'un shot Dribbble (anthracite #1a1a1a / #222, orange signal #e8601c, blanc), voir source.md.
- * Le blanc sur orange ne passe qu'en grand (3,4:1) : texte sur bouton orange plein = --on-accent (noir).
- * @contrast text:bg text:panel text:panel-2 muted:bg muted:panel muted:panel-2 accent:bg accent:panel accent:panel-2 on-accent:accent dim:bg:large white:accent:large
+ * MESURÉS le 2026-10-03 par lecture des pixels sur les 5 images du shot Dribbble (les 4 écrans y sont à l'échelle 1 : 1440 × 852px).
+ * La référence est fixe : couleurs, tailles et positions sont mesurées ou lues ; tout le mouvement est proposé.
+ * @contrast text:bg text:screen text:panel-solid muted:bg muted:panel-solid orange:bg orange:panel-solid on-orange:orange ink:fog ink:fog-panel orange-deep:fog:large text:footer
  */
 :root {
-  /* Couleurs */
-  --bg: #121212;              /* fond de page */
-  --panel: #1a1a1a;           /* panneaux, cartes */
-  --panel-2: #222222;         /* panneau surélevé, survol */
-  --line: #2e2e2e;            /* filets 1px (décor) */
-  --line-strong: #444444;     /* contours de panneaux, boutons secondaires */
-  --text: #f2f2f2;
-  --white: #ffffff;
-  --muted: #9a9a9a;           /* texte courant 11–13px, valeurs de specs */
-  --dim: #6f6f6f;             /* grands numéros d'index, texte vertical (grand seulement) */
-  --accent: #e8601c;          /* orange signal */
-  --on-accent: #111111;
-  --accent-glow: rgb(232 96 28 / 0.18);
-  --scrim: rgb(18 18 18 / 0.72);
+  /* ---- Couleurs ---- */
+  --bg: #0e0e0f;            /* lu : zones les plus sombres des écrans (#08090a à #141515) */
+  --screen: #141515;        /* mesuré : fond d'écran sous la photo */
+  --footer: #0a0a0b;
+  --panel: rgb(16 14 13 / 0.74);           /* lu : panneau sombre translucide (#0f0d0c à #191412 sur la photo) */
+  --panel-solid: #171413;   /* même panneau, opaque (repli et contraste) */
+  --panel-hot: rgb(224 92 26 / 0.12);      /* lu : halo orange au bas des panneaux et des fiches */
+  --line: rgb(255 255 255 / 0.2);          /* mesuré : filet des panneaux (≈ #484445 sur #141515) */
+  --line-soft: rgb(255 255 255 / 0.1);     /* lu : filets entre les lignes du tableau */
+  --orange: #e05c1a;        /* mesuré : 10 587 points relevés sur le titre */
+  --on-orange: #0e0e0f;     /* choisi : texte sur orange plein (le shot le met en blanc, 3,3:1) */
+  --orange-deep: #b8430a;   /* choisi : orange pour un grand titre sur gris clair */
+  --text: #ffffff;
+  --muted: #a9a9a9;         /* lu : valeurs du tableau, textes secondaires */
+  --fog: #dcdcdc;           /* choisi : écran clair (shot : gris moyen #888 à #a2a1a3 avec texte blanc, illisible) */
+  --fog-panel: #ececec;     /* choisi : panneau clair sur l'écran gris */
+  --ink: #0e0e0f;
+  --veil-0: rgb(14 14 15 / 0);
+  --veil-1: rgb(14 14 15 / 0.62);
+  --veil-2: rgb(14 14 15 / 0.94);
+  --fog-0: rgb(220 220 220 / 0);
+  --fog-1: rgb(220 220 220 / 0.92);
 
-  /* Typographie */
-  --font-display: 'Michroma', 'Syncopate', 'Orbitron', sans-serif;   /* géométrique étendue, capitales */
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;             /* étiquettes techniques, specs */
-  --text-2xs: 0.625rem;  /* 10 — étiquettes mono */
-  --text-xs: 0.6875rem;  /* 11 — texte courant de panneau */
-  --text-sm: 0.8125rem;  /* 13 */
-  --text-base: 0.9375rem;/* 15 */
-  --text-lg: 1.125rem;   /* 18 */
-  --text-h3: 1.25rem;
-  --text-h2: clamp(2rem, 6vw, 5.5rem);      /* « CHAQUE COUCHE. » */
-  --text-hero: clamp(1.9rem, 4.4vw, 4rem);  /* empilement du héros */
-  --tracking-display: 0.02em;
-  --tracking-label: 0.22em;
-  --leading-display: 1.02;
+  /* ---- Typographie ---- */
+  --font-display: 'Unbounded', 'Arial Black', sans-serif;      /* shot : grotesque très étendue et grasse, non identifiée */
+  --font: 'Orbitron', 'Eurostile', 'Segoe UI', sans-serif;     /* shot : caractère technique à angles arrondis, non identifié */
+  --fs-title: clamp(2.05rem, 4.6vw, 4.15rem);    /* mesuré : capitales de 48px de haut, lignes au pas de ≈ 68px */
+  --lh-title: 1.04;
+  --fs-lead: 1rem;          /* lu : « New Collection » ≈ 16px */
+  --fs-body: 0.875rem;      /* lu : paragraphe ≈ 14px, interligne ≈ 25px */
+  --fs-small: 0.75rem;      /* lu : liens, valeurs, étiquettes ≈ 12px */
+  --fs-tiny: 0.6875rem;     /* lu : codes, étiquettes espacées ≈ 11px */
+  --ls-label: 0.18em;       /* lu : étiquettes orange très espacées */
+  --stroke: 1.5px;          /* lu : épaisseur du contour des lettres creuses */
 
-  /* Espace */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
-  --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
-  --container: 1360px;
-  --gutter: clamp(16px, 3.5vw, 48px);
+  /* ---- Grille (écran de 1440 × 852) ---- */
+  --page: 1440px;
+  --screen-h: 852px;        /* mesuré */
+  --pad: clamp(16px, 2.8vw, 40px);   /* mesuré : marges de 40px */
+  --nav-top: 39px;          /* mesuré : ligne du logo à 39px du haut */
+  --aside-w: 310px;         /* mesuré : colonne de panneaux de 310px */
+  --row-h: 43px;            /* mesuré : lignes du tableau au pas de 43px */
+  --circle: 36px;           /* mesuré : ronds sociaux de 36px ; compteur du sac 28px */
+  --tab-h: 30px;            /* lu : onglets rectangulaires */
+  --look-w: clamp(104px, 11.4vw, 164px);   /* lu : pilule du titre ≈ 164 × 52px */
+  --look-h: clamp(34px, 3.6vw, 52px);
+  --r: 2px;                 /* lu : angles presque vifs partout */
 
-  /* Formes */
-  --radius: 2px;              /* boutons, onglets */
-  --radius-panel: 6px;        /* panneaux translucides */
-  --radius-pill: 999px;       /* forme orange « // », compteur, icônes rondes */
-  --border: 1px solid var(--line-strong);
-  --cut: 14px;                /* coin coupé des cartes produit */
-
-  /* Ombres et matières */
-  --shadow-panel: 0 24px 60px rgb(0 0 0 / 0.45);
-  --panel-glass: rgb(26 26 26 / 0.78);
-  --blur: 14px;
-  --grid-size: 64px;          /* quadrillage de fond très discret */
-
-  /* Mouvement */
-  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-snap: steps(4, end);
-  --dur-fast: 160ms; --dur: 320ms; --dur-slow: 700ms; --dur-scan: 3.2s;
+  /* ---- Mouvement (proposé : la référence est fixe) ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-cut: steps(5, end);
+  --dur-fast: 160ms;
+  --dur: 450ms;
+  --dur-slow: 900ms;
 }

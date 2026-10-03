@@ -1,27 +1,27 @@
 ---
 name: signal-orange-techwear
-description: Direction artistique « Signal Orange Techwear » pour mode technique, streetwear et marques cyberpunk (techwear, sneakers, équipement outdoor urbain, accessoires, drops de collection, gaming lifestyle), inspirée des concepts Dribbble de boutiques techwear. Fond anthracite, orange signal unique, titres en capitales géométriques très étendues empilées (une ligne orange, une ligne « // » avec pilule orange, une ligne en contour orange, une ligne blanche), mannequin central avec texte vertical, panneaux translucides à filet fin (fiche produit + tableau « specs opérateur » à étiquettes orange espacées et valeurs grises en mono), lien souligné « Explorer », icônes rondes au contour, index de section « 01 / LA COLLECTION — », onglets rectangulaires orange plein / contour, cartes produit à coin coupé. À utiliser pour une landing de collection, une fiche produit, un e-shop mode, un lookbook ou une app au style « techwear, cyberpunk, ninja urbain, nuit, HUD, orange et noir ».
+description: Direction artistique « Signal Orange Techwear » pour mode technique, streetwear et marques cyberpunk (techwear, sneakers, équipement outdoor urbain, accessoires, drops de collection, gaming lifestyle), inspirée d'un concept Dribbble de boutique techwear. Fond anthracite, orange signal unique, titres en capitales très étendues empilées (une ligne orange, une ligne « // » avec pilule orange numérotée, une ligne en contour orange, une ligne blanche), silhouette masquée au centre avec texte vertical, panneaux translucides à filet fin (fiche produit + tableau « specs opérateur » à étiquettes orange espacées et valeurs grises), lien souligné « Explorer ↗ », ronds au contour, index de section « 01 / La collection — », fiches système, onglets rectangulaires orange plein / contour, fiches produit en noir et blanc à étiquette de code et bouton rond « + », écran de fiche produit gris clair. À utiliser pour une landing de collection, une fiche produit, un e-shop mode, un lookbook ou une app au style « techwear, cyberpunk, ninja urbain, nuit, HUD, orange et noir ». Fournit tokens, composants, mises en page, animations et une page d'exemple.
 ---
 
 # Signal Orange Techwear
 
-> Un catalogue de vêtements techniques lu sur un HUD de nuit : anthracite, filets fins et une seule couleur, l'orange signal.
+> La nuit, un masque, et un seul orange : une boutique qui se lit comme un affichage tête haute.
 
 ## L'idée
 
-La page est un **écran d'opérateur** : fond anthracite, quadrillage presque invisible, panneaux translucides à filet de 1px. Au centre, le **mannequin** (la pièce) ; à gauche, un **empilement typographique** en capitales géométriques très larges qui alterne plein orange, « // » + pilule, **contour orange** et blanc ; à droite, des **panneaux de données** (fiche produit, specs) écrits en mono comme une fiche technique. L'orange est le seul signal : il marque l'actif, l'index, l'étiquette, le CTA. Tout le reste est gris.
+Le visiteur regarde une **silhouette masquée** sortir du noir, et l'interface la décrit comme un instrument décrirait une machine : un **titre empilé** en capitales très larges dont chaque ligne change de registre (pleine orange, barres « // », creuse, pleine blanche), des **panneaux** à filet fin qui donnent des « specs opérateur », des étiquettes orange aux lettres très espacées. Tout est sombre, presque sans arrondi, et **l'orange est le seul signal**.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom de marque, de produit, de photo ni de texte d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, images ni textes de la maquette d'origine.
 
 ## Règles prioritaires
 
-1. **Une seule couleur** : `--accent` orange signal. Pas de deuxième teinte, pas de dégradé coloré (sauf halo `--accent-glow`).
-2. **L'empilement de titre** : 3–4 lignes courtes, une seule en contour, une seule en blanc ; la ligne « // » porte une pilule orange.
-3. **Trois voix** : display étendue (titres, noms de produit), mono espacée (étiquettes, specs, boutons), Inter (texte courant gris 11–13px).
-4. **Filets plutôt que fonds** : panneaux `--panel-glass` + `--border`, séparateurs `--line` ; rayon 2px (boutons) ou 6px (panneaux), cartes à coin coupé `--cut`.
-5. **Données lisibles** : étiquette orange à gauche, valeur grise à droite, une ligne par donnée.
-6. **Contraste** : texte sur orange plein toujours en `--on-accent` (noir) ; `--dim` seulement en grand (index, texte vertical).
-7. **Accessibilité** : onglets en `role="tab"`, interrupteur en `role="switch"`, jauges doublées d'un texte `sr-only`, cibles ≥ 44px.
+1. **Une seule couleur : l'orange `--orange`**, sur anthracite. Hors du héros, les photos sont en noir et blanc.
+2. **Titre empilé à registres** : une ligne orange, une ligne « // », une ligne creuse, une ligne blanche — jamais deux lignes creuses.
+3. **Tout en capitales étendues ou en caractère technique** : Unbounded pour les titres, Orbitron pour le reste.
+4. **Panneaux à filet de 1px**, translucides, angles de 2px, halo orange dans le bas.
+5. **Étiquettes orange très espacées** (0.18em) face à des valeurs grises : le motif du tableau de specs.
+6. **Silhouette au visage caché** au centre ; le texte à gauche, les panneaux à droite.
+7. **Texte sombre sur orange plein** ; jamais de texte orange sur fond clair en petite taille.
 8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
@@ -29,67 +29,78 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | Fichier | Quand le lire |
 |---|---|
 | `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
-| `references/components.md` | Navigation, empilement de titre, boutons (tous états), lien souligné, icônes rondes, panneau produit, tableau de specs, interrupteur, index de section, onglets, carte produit, bandeau défilant, texte vertical. Puis : cartes « système », étiquette de série, carte produit détaillée, fiche produit claire (relevées sur les 5 images du shot). |
-| `references/layouts.md` | Héros en 3 colonnes, collection, mobile. |
-| `references/motion.md` | Découpe des titres, ligne de scan, balayage des cartes, clignotant, mouvement réduit. |
-| `references/assets.md` | Avant de placer une image ou une scène 3D : sujets, cadrages, traitement N&B sombre + lueur orange, sources, prompts IA, recette du mannequin 3D `.glb`. |
-| `examples/demo.html` | Page d'exemple complète (marque fictive). |
-| `source.md` | Référence, observations et écarts. |
+| `references/components.md` | Navigation, titre empilé, pilule, index, panneau, tableau de specs, bouton, fiche système, onglets, fiche produit. |
+| `references/layouts.md` | Les quatre écrans, mobile, autres pages. |
+| `references/motion.md` | Lignes qui montent, changement de silhouette, décodage des valeurs, profondeur, filtre, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : traitement des photos, recadrages, choix. |
+| `examples/demo.html` | Page complète animée, quatre écrans (marque fictive « Noctunit »). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Réglages |
+| Rôle | Police | Taille |
 |---|---|---|
-| Empilement du héros, titres de section | **Michroma** (géométrique étendue) | capitales, 30–88px, interligne 1.02, +0.02em |
-| Noms de produit, logo, texte vertical | Michroma | 13–18px, capitales, +0.04 à +0.3em |
-| Étiquettes, boutons, specs | **JetBrains Mono** 500 | 10–11px, capitales, +0.18 à +0.22em |
-| Texte courant | **Inter** 400 | 11–13px / 1.6, `--muted` |
+| Titre empilé | Unbounded 800, capitales | `--fs-title` (jusqu'à 66px, interligne 1.04) |
+| « // » | Unbounded 700 italique | même taille |
+| Accroche (« Nouvelle collection ») | Orbitron 400 | `--fs-lead` (16px) |
+| Paragraphe | Orbitron 400, interligne 1.75 | `--fs-body` (14px) |
+| Navigation, valeurs, liens | Orbitron 400 | `--fs-small` (12px) |
+| Étiquettes, boutons, codes | Orbitron, capitales, espacées | `--fs-tiny` (11px) |
 
-Michroma n'a qu'une graisse : ne jamais simuler le gras. Alternative plus serrée : Syncopate 700.
+Les paragraphes restent courts (300 à 350px de large) : Orbitron fatigue vite en texte long.
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Fond | `--bg` | page |
-| Panneaux | `--panel`, `--panel-2`, `--panel-glass` | cartes, panneaux, survol |
-| Filets | `--line`, `--line-strong` | séparateurs, contours |
-| Texte | `--text`, `--muted`, `--dim` | titres blancs, texte courant, grands index |
-| Signal | `--accent`, `--on-accent`, `--accent-glow` | actif, étiquettes, CTA, halo |
+| `--bg` | #0e0e0f | Fond, intérieur des lettres creuses |
+| `--screen` | #141515 | Fond d'un écran sous sa photo |
+| `--panel` | noir chaud à 74 % | Panneaux translucides |
+| `--line` | blanc à 20 % | Filets des panneaux |
+| `--orange` | #e05c1a | Le signal : titres, étiquettes, filets actifs, boutons |
+| `--on-orange` | #0e0e0f | Texte sur orange plein |
+| `--muted` | #a9a9a9 | Valeurs, textes secondaires |
+| `--fog`, `--fog-panel` | #dcdcdc, #ececec | Écran clair de fiche produit |
+| `--orange-deep` | #b8430a | Grand titre orange sur l'écran clair |
 
-Règle : au plus **un** aplat orange par zone (onglet actif, pilule, ou bouton plein).
+## Mise en page
+
+- Écrans de 1440 × 852px, marges de 40px ; chaque section fait au moins la hauteur de la fenêtre.
+- Héros en trois zones : texte, silhouette (44 %), colonne de panneaux de 310px.
+- Puis : collection (trois fiches système), équipement (onglets et trois fiches produit), fiche claire (41 % de texte, photo, panneaux).
+- Détail et mobile : `references/layouts.md`.
+
+## Mouvement
+
+La référence est fixe : tout le mouvement est **proposé**. Les lignes du titre **montent** l'une après l'autre ; la pilule « 01/04 » **change de silhouette** en fondu pendant que les valeurs du tableau **se décodent** ; la silhouette **suit le pointeur** tant que l'interrupteur « Profondeur » est allumé ; boutons et onglets se remplissent **par pas**. Rien ne tourne en continu. Détail, code et mesures : `references/motion.md`.
 
 ## Images et 3D
 
-Le mannequin et les pièces sont de **vraies photos de mode** (ou un vrai mannequin 3D `.glb`), toujours **éteintes** : noir et blanc, sombres et contrastées, décor fondu dans la page par un masque radial. L'orange ne vient jamais de la photo : il est ajouté par l'interface (lueur `--accent-glow` en `screen`, étiquettes sur `--scrim`). Le mannequin 3D en rotation est l'option naturelle du héros, avec la photo en repli. Jamais de dessin CSS/SVG à la place d'une photo, d'un personnage ou d'un produit : détails dans `references/assets.md`.
+- **Vraies photos** : une silhouette masquée en couleur, à lumière orange, pour le héros ; tout le reste en noir et blanc sombre (`sat=-100` demandé au serveur d'images).
+- La référence utilise des images de synthèse noires et orange ; le skill en garde la palette par ce traitement, sans retouche.
+- **Pas de 3D** dans la démo. Une scène 3D (silhouette ou produit tournant) peut remplacer la photo du héros si le projet la fournit, avec un rendu à la demande.
+- Jamais de silhouette ou de produit dessiné en CSS ou en SVG.
+- Identifiants et recadrages : `references/assets.md`.
 
-## Signature
+## Accessibilité
 
-**L'empilement « UNIT-X / // ▬ / PHANTOM (contour) / MIDNIGHT »** à côté du mannequin, avec le **tableau de specs** en face. Une fois par page, dans le héros ; l'index « 01 / … — » et le titre orange géant en sont l'écho dans les sections.
+- Contrastes vérifiés dans `tokens.css` (`@contrast`) : texte sombre sur orange, écran clair éclairci par rapport au shot.
+- « Profondeur » est un `role="switch"` ; onglets en `aria-pressed` ; grille en `aria-live="polite"` ; compteur du sac annoncé.
+- Les barres « // », le texte vertical et les silhouettes de fond sont décoratifs.
+- `prefers-reduced-motion` : plus de décodage, plus de suivi du pointeur, apparitions immédiates.
 
-## À éviter
+## À ne pas faire
 
-- Du néon multicolore, des glitchs RVB, du violet/cyan : ici tout est mat et orange.
-- Des cartes arrondies à grosse ombre : filets fins, coins coupés.
-- Du texte blanc sur orange en petit, ou de l'orange en texte sur `--panel-2` en petit gris (préférer `--bg`/`--panel`).
-- Des titres longs dans la police étendue : 1 à 2 mots par ligne.
-- Copier le nom, le logo, les produits ou les photos du concept d'origine.
+- Ajouter une seconde couleur vive, un néon bleu ou rose, un dégradé coloré.
+- Arrondir les panneaux ou les boutons.
+- Écrire un titre en minuscules ou dans une police étroite.
+- Mettre du texte blanc sur l'orange plein, ou du texte orange en petit sur le gris clair.
+- Animer une ligne de balayage, un grain ou un flou en continu.
 
-## Adaptation React / React Native
+## Vérification
 
-- Texte en contour : pas de `text-stroke` natif → `react-native-svg` `Text` avec `stroke={accent}` `fill="none"`.
-- Panneaux translucides : `BlurView` (expo-blur, `tint="dark"`) + `borderWidth: 1`.
-- Coin coupé : `react-native-svg` `Path` en fond de carte, ou une petite vue triangulaire `--bg` posée sur le coin.
-- Texte vertical : `transform: [{ rotate: '90deg' }]` dans un conteneur à largeur fixe.
-- Polices : `@expo-google-fonts/michroma`, `@expo-google-fonts/jetbrains-mono`, `@expo-google-fonts/inter`.
-
-## Avant de livrer
-
-- [ ] Tokens importés, aucune valeur en dur, une seule couleur d'accent.
-- [ ] Empilement de titre avec une ligne en contour et une pilule.
-- [ ] Panneaux de données (produit + specs) en mono, étiquettes orange / valeurs grises.
-- [ ] Onglets, interrupteur et jauges accessibles.
-- [ ] Testé à 375px et 1440px, aucun débordement horizontal, mouvement réduit respecté.
-- [ ] Contrastes vérifiés (`python3 tools/check.py signal-orange-techwear`).
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Aucun élément du concept d'origine.
+1. `python3 tools/check.py signal-orange-techwear` passe.
+2. À 1440px et à 390px : pas de défilement horizontal, aucune erreur dans la console.
+3. Les quatre silhouettes s'enchaînent et les valeurs du tableau changent avec elles.
+4. Le titre reste lisible là où il mord sur la silhouette.
+5. Mouvement réduit : la page est entièrement utilisable.
