@@ -3,422 +3,350 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Orbitale Express — Cosmic Voyage (démo)</title>
+<title>Astralis — Cosmic Voyage (démo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&family=Noto+Serif:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:ital@1&display=swap">
 <style>
 :root {
-  --bg: #0a0e1c; --bg-deep: #000000; --nav: #0d0d0d; --surface: #111111; --surface-2: #212226; --glass: #2b3f66;
-  --glass-veil: rgb(93 127 181 / 0.42); --glass-edge: rgb(255 255 255 / 0.22);
-  --text: #e9e9e9; --text-soft: #ccd0d2; --muted: #919191; --gold: #dbbf91; --accent: #db9a45; --on-accent: #000000; --accent-sand: #d9c29a;
-  --link: #5b9dff; --line: rgb(229 229 229 / 0.5); --line-dark: #323339; --quote-strip: rgb(0 0 0 / 0.72);
-  --font-ui: 'Noto Sans', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif; --font-title: 'Noto Sans', system-ui, sans-serif; --font-quote: 'Noto Serif', Georgia, serif;
-  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 0.9375rem; --text-lg: 1.5rem; --text-xl: 1.875rem; --text-hero: 3.125rem; --leading: 1.6;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px;
-  --nav-h: 58px; --container: 880px;
-  --radius-1: 6px; --radius-2: 12px; --radius-3: 16px; --radius-4: 20px; --radius-5: 28px; --radius-card: 0 var(--radius-5) 0 0;
-  --ease: ease; --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1); --dur-fast: 150ms; --dur-base: 300ms; --dur-slow: 500ms;
-  color-scheme: dark;
+  --bg: #070a1b; --bg-top: #141936; --bg-glow: #234177; --bg-deep: #000000; --nav: #121212; --sub: #121212; --surface: #111111; --surface-2: #212226; --glass: #1a264e;
+  --glass-light: #7d8ea2; --ink-glass: #0b1324; --glass-veil: rgb(93 127 181 / 0.42); --glass-edge: rgb(255 255 255 / 0.22); --text: #e9e9e9; --text-soft: #ccd0d2;
+  --muted: #919191; --gold: #dbbf91; --accent: #db9a45; --accent-hot: #df9540; --on-accent: #000000; --accent-sand: #d9c29a; --link: #307af7;
+  --line: rgb(230 230 230 / 0.5); --line-dark: #323339; --quote-strip: rgb(0 0 0 / 0.72); --map-bg: #061230; --map-bg-2: #0d2358; --orbit: rgb(255 255 255 / 0.38);
+  --orbit-dim: rgb(255 255 255 / 0.16); --halo: rgb(91 157 255 / 0.55); --label-bg: #0b1324; --veil-world: rgb(6 18 48 / 0.62); --dim-side: rgb(0 0 0 / 0.55);
+  --pill: #ffffff; --cta-yellow: #ffd93b; --cta-yellow-edge: #c9962b; --cta-glow: rgb(255 217 59 / 0.45); --ring-a: #8b5cf6; --ring-b: #5b9dff; --ring-c: #ff9d3c;
+  --cookie-blue: #2a63d4; --on-cookie: #ffffff; --font-ui: 'Noto Sans', 'Noto Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-title: 'Noto Sans', 'Noto Sans SC', system-ui, sans-serif; --font-quote: 'Noto Serif', 'Noto Serif SC', Georgia, serif; --text-2xs: 0.6875rem; --text-xs: 0.75rem;
+  --text-sm: 0.875rem; --text-base: 0.9375rem; --text-lg: 1.5rem; --text-xl: 1.875rem; --text-hero: 3.125rem; --text-orbit: 0.6875rem; --text-world: 2.25rem;
+  --leading: 1.6; --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
+  --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-20: 80px; --nav-h: 57px; --card-w: clamp(260px, 29.4vw, 424px);
+  --char-w: clamp(150px, 15.7vw, 226px); --emblem: clamp(72px, 7.5vw, 108px); --more-w: 146px; --container: 880px; --nav-h-mobile: 52px; --world-icon: 64px;
+  --radius-1: 6px; --radius-2: 12px; --radius-3: 16px; --radius-4: 20px; --radius-5: 28px; --radius-card: 0 var(--radius-5) 0 0; --ease: ease;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1); --ease-panel: cubic-bezier(0.15, 0.59, 0.45, 0.89); --dur-fast: 200ms; --dur-base: 300ms; --dur-name: 400ms;
+  --dur-slow: 500ms; --dur-view: 600ms; --dur-hint: 2s; --dur-star: 1.4s;
 }
-* { box-sizing: border-box; }
-html { overflow-x: clip; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 500 var(--text-sm)/var(--leading) var(--font-ui); }
-/* Espace : scène Three.js fixe derrière l'interface (étoiles, nébuleuse en particules, planète), photo de nébuleuse en repli */
-.space { position: fixed; inset: 0; z-index: -1; background: var(--bg); overflow: hidden; }
-.space canvas { position: absolute; inset: 0; }
-.space .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .7; transition: opacity 1.2s var(--ease); }
-.space.is-3d-ready .fallback { opacity: .28; }
-.space::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, var(--bg) 100%); opacity: .6; pointer-events: none; }
-a { color: inherit; }
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: clip; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg-deep); color: var(--text); font: 500 var(--text-xs)/var(--leading) var(--font-ui); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body.is-intro { overflow: hidden; }
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+img { display: block; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, p { margin: 0; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Intro */
-.warp { position: fixed; inset: 0; z-index: 100; background: var(--bg-deep); transition: opacity var(--dur-slow) var(--ease), visibility var(--dur-slow); }
-.warp.is-done { opacity: 0; visibility: hidden; }
-.warp canvas { width: 100%; height: 100%; display: block; }
-.warp button { position: absolute; right: 24px; bottom: 24px; min-height: 44px; padding: 0 var(--space-5); background: transparent; color: var(--text-soft); border: 0.8px solid var(--line); font: 500 var(--text-xs) var(--font-ui); cursor: pointer; }
+/* ================= Intro : saut en hyperespace ================= */
+.intro { position: fixed; inset: 0; z-index: 100; background: var(--bg-deep); transition: opacity var(--dur-view) var(--ease); }
+.intro.is-off { opacity: 0; pointer-events: none; }
+.intro canvas { width: 100%; height: 100%; display: block; }
+.mark { display: inline-flex; flex-direction: column; font: 700 clamp(1.25rem, 2.2vw, 1.875rem)/.9 var(--font-title); letter-spacing: .16em; text-transform: uppercase; font-style: italic; color: var(--text); }
+.mark small { font-size: .32em; letter-spacing: .5em; font-style: normal; font-weight: 500; color: var(--gold); margin-bottom: .5em; }
+.intro .mark { position: absolute; left: 3vw; top: 3vw; }
 
-/* Navigation */
-.topnav { position: fixed; inset: 0 0 auto; height: var(--nav-h); z-index: 50; display: flex; align-items: center; background: var(--nav); }
-.topnav__sound { width: 64px; display: grid; place-items: center; color: var(--text); letter-spacing: 1px; font-size: var(--text-xs); }
-.topnav__links { flex: 1; display: flex; justify-content: center; height: 100%; }
-.topnav a { position: relative; display: grid; place-items: center; height: 100%; padding: 0 var(--space-8); color: var(--text); font: 500 var(--text-base) var(--font-ui); text-decoration: none; transition: color var(--dur-fast) var(--ease); }
-.topnav a:hover { color: var(--gold); }
-.topnav a[aria-current="page"] { color: var(--link); }
-.topnav a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--link); }
-.topnav__login { display: flex; align-items: center; gap: var(--space-2); padding: 0 var(--space-6); font-size: var(--text-base); }
-.topnav__login i { width: 22px; height: 22px; border: 1px solid var(--text); border-radius: 50%; }
-.dl { align-self: stretch; display: grid; place-items: center; padding: 0 var(--space-10); background: var(--accent-sand); color: var(--on-accent); font: 500 var(--text-base)/1.25 var(--font-ui); text-align: center; text-decoration: none; border-radius: 0 0 0 var(--radius-3); transition: filter var(--dur-base) var(--ease); }
-.dl:hover { filter: brightness(1.08); }
+/* ================= Navigation ================= */
+.nav { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--nav-h); display: flex; align-items: stretch; background: var(--nav); font-size: var(--text-base); font-weight: 400; transition: transform var(--dur-slow) ease-in-out; }
+.nav.is-hidden { transform: translateY(-101%); }
+.music { display: flex; align-items: center; gap: 2px; width: clamp(56px, 6vw, 96px); justify-content: center; }
+.music i { width: 2px; height: 9px; background: var(--muted); animation: bar var(--t, .5s) var(--ease) infinite alternate both; }
+.music i:nth-child(2) { --t: .4s; } .music i:nth-child(3) { --t: .7s; } .music i:nth-child(4) { --t: .3s; } .music i:nth-child(5) { --t: .5s; }
+@keyframes bar { from { transform: scaleY(.5); } to { transform: scaleY(1.7); } }
+.nav ul { display: flex; flex: 1; }
+.nav ul a { position: relative; display: flex; align-items: center; height: 100%; padding: 0 clamp(12px, 1.9vw, 28px); color: var(--text); transition: color var(--dur-fast) linear; white-space: nowrap; }
+.nav ul a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--link); transform: scaleX(0); transition: transform var(--dur-base) var(--ease); }
+.nav ul a:hover, .nav ul a[aria-current] { color: var(--link); } .nav ul a[aria-current]::after { transform: none; }
+.nav__login { display: flex; align-items: center; gap: 10px; padding: 0 var(--space-4); color: var(--text); }
+.nav__login i { width: 22px; height: 22px; border: 1px solid currentColor; border-radius: 50%; }
+.dl { display: grid; place-items: center; width: clamp(120px, 11.7vw, 168px); background: linear-gradient(180deg, var(--accent-sand), var(--gold)); color: var(--on-accent); font-weight: 700; line-height: 1.25; text-align: center; border-bottom-left-radius: var(--radius-2); position: relative; overflow: hidden; }
+.dl::after { content: ""; position: absolute; top: 0; bottom: 0; left: -100%; width: 60%; background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--pill) 60%, transparent), transparent); animation: sheen 4s var(--ease) infinite; }
+@keyframes sheen { 0% { left: -100%; } 50%, 100% { left: 120%; } }
+.burger { display: none; }
 
-/* Héros */
-.hero { position: relative; height: min(100vh, 760px); padding-top: var(--nav-h); overflow: hidden; }
-.hero__veil { position: absolute; inset: var(--nav-h) 0 0; background: linear-gradient(90deg, rgb(0 0 0 / .55), transparent 55%); pointer-events: none; }
-.hero__logo { position: absolute; left: 60px; top: calc(var(--nav-h) + 28px); font: 300 2rem/1 var(--font-title); letter-spacing: .12em; text-transform: uppercase; }
-.hero__logo small { display: block; font-size: var(--text-2xs); letter-spacing: .3em; color: var(--gold); margin-bottom: 4px; }
-.getit { position: absolute; left: 26%; bottom: 60px; display: flex; gap: var(--space-3); align-items: center; }
-.qr { width: 116px; height: 116px; background: var(--text); padding: 8px; }
-.qr i { display: block; width: 100%; height: 100%; background: repeating-conic-gradient(var(--bg-deep) 0 25%, var(--text) 0 50%) 0 0/16px 16px; }
-.stores { display: grid; grid-template-columns: repeat(3, 166px); gap: var(--space-2); }
-.store { min-height: 50px; display: flex; align-items: center; gap: 10px; padding: 0 var(--space-4); background: var(--bg-deep); border: 0.8px solid var(--line-dark); border-radius: var(--radius-1); color: var(--text); text-decoration: none; font: 500 var(--text-lg)/1 var(--font-ui); }
-.store small { display: block; font-size: 9px; }
-.store span { font-size: var(--text-base); }
-.play { width: 74px; height: 74px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--link), var(--gold), var(--accent-sand), var(--link)); animation: spin 6s linear infinite; }
-.play b { width: 60px; height: 60px; border-radius: 50%; background: var(--glass); display: grid; place-items: center; animation: spin 6s linear infinite reverse; font-size: 20px; }
-.rail { position: absolute; right: 16px; top: 30%; display: grid; gap: 10px; justify-items: center; }
-.rail span { writing-mode: vertical-rl; font-size: var(--text-2xs); color: var(--text-soft); }
-.rail a { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--text); font-size: var(--text-2xs); text-decoration: none; }
-.scroll { position: absolute; left: 24px; bottom: 40px; display: grid; justify-items: center; gap: 8px; font-size: var(--text-2xs); color: var(--text-soft); }
-.scroll span { writing-mode: vertical-rl; }
-.scroll i { width: 1px; height: 80px; background: linear-gradient(var(--text) 50%, var(--line-dark) 50%) 0 0/1px 200%; animation: scroll 2s linear infinite; }
+/* ================= Héros ================= */
+.hero { position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--bg-top); isolation: isolate; }
+.hero > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent), transparent 30%, transparent 60%, var(--bg)); }
+.hero .mark { position: absolute; left: clamp(16px, 5.4vw, 78px); top: calc(var(--nav-h) + 3vh); }
+.stores { position: absolute; left: 50%; bottom: 9vh; transform: translateX(-50%); display: flex; align-items: center; gap: var(--space-3); }
+.store { display: grid; place-items: center; min-width: 132px; height: 44px; padding: 0 var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-1); background: color-mix(in srgb, var(--bg-deep) 82%, transparent); font-weight: 700; transition: all var(--dur-fast) linear; }
+.store:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.play { position: relative; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: color-mix(in srgb, var(--bg-deep) 70%, transparent); }
+.play::before { content: ""; position: absolute; inset: 0; border-radius: 50%; padding: 3px; background: conic-gradient(var(--ring-a), var(--ring-b), var(--ring-c), var(--ring-a)); -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black); -webkit-mask-composite: xor; mask-composite: exclude; animation: spin 4s linear infinite; }
+.play svg { width: 18px; margin-left: 3px; fill: var(--text); }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: grid; justify-items: center; gap: 6px; color: var(--text-soft); font-size: var(--text-2xs); }
+.hint i { width: 1px; height: 28px; background: var(--text-soft); transform-origin: top; animation: hint var(--dur-hint) linear infinite alternate; }
+@keyframes hint { from { transform: scaleY(.25); } to { transform: scaleY(1); } }
+.rail { position: fixed; right: clamp(8px, 1.2vw, 18px); top: 50%; z-index: 40; transform: translateY(-50%); display: grid; gap: 10px; justify-items: center; }
+.rail > span { writing-mode: vertical-rl; font-size: var(--text-sm); color: var(--text); padding-bottom: 34px; position: relative; }
+.rail > span::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 1px; height: 26px; background: var(--line); }
+.rail a { display: grid; place-items: center; width: 44px; height: 44px; }
+.rail a i { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--text); color: var(--bg); font: 700 11px/1 var(--font-ui); font-style: normal; transition: all var(--dur-fast) linear; }
+.rail a:hover i { background: var(--accent); }
 
-/* Section */
-.section { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: var(--space-20) 0; }
-.sec-head { display: inline-block; margin: 0 0 var(--space-6); padding: 6px 90px 6px 12px; font: 500 var(--text-sm) var(--font-ui); border-left: 2px solid var(--gold); background: linear-gradient(90deg, rgb(0 0 0 / .85), transparent); }
+/* ================= Nuit étoilée ================= */
+.night { position: relative; isolation: isolate; background: linear-gradient(180deg, var(--bg-top), var(--bg) 60%); }
+.night__sky { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.night__sky img { width: 100%; height: 100%; object-fit: cover; opacity: .5; }
+.night__sky::after { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 40% at 80% 30%, color-mix(in srgb, var(--bg-glow) 60%, transparent), transparent), linear-gradient(180deg, color-mix(in srgb, var(--bg-top) 70%, transparent), color-mix(in srgb, var(--bg) 80%, transparent)); }
+.star { position: absolute; z-index: -1; left: var(--x); top: var(--y); width: var(--s, 3px); height: var(--s, 3px); border-radius: 50%; background: var(--text); box-shadow: 0 0 8px 2px color-mix(in srgb, var(--halo) 80%, transparent); animation: twinkle var(--t, 1.4s) var(--ease) var(--d, 0s) infinite alternate; }
+@keyframes twinkle { to { opacity: 0; } }
+.wrap { position: relative; width: min(1215px, 100% - 2 * var(--edge)); margin: 0 auto; --edge: clamp(16px, 15.6vw, 225px); }
+.sec { padding: var(--space-20) 0 var(--space-16); }
+/* frise du voyage : filet doré vertical et nœuds */
+.wrap::before { content: ""; position: absolute; left: -52px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--gold) 55%, transparent) 8%, color-mix(in srgb, var(--gold) 55%, transparent) 92%, transparent); }
+.sec__title { position: relative; display: inline-flex; align-items: center; min-width: 240px; height: 34px; padding: 0 var(--space-4); margin-bottom: var(--space-10); font: 400 var(--text-base)/1 var(--font-title); color: var(--text); background: linear-gradient(90deg, color-mix(in srgb, var(--bg-deep) 70%, transparent), transparent); border-left: 2px solid var(--muted); }
+.sec__title::before { content: ""; position: absolute; left: -62px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border: 1px solid var(--gold); border-radius: 50%; background: radial-gradient(circle, var(--gold) 3px, var(--bg) 4px); }
+.more { display: grid; place-items: center; width: var(--more-w); height: 27px; border: 0.8px solid var(--line); color: var(--text-soft); font-size: var(--text-2xs); transition: all var(--dur-fast) linear; }
+.more:hover, .more:focus-visible { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.js [data-in] { opacity: 0; transform: translateY(24px); }
+.js [data-in].is-in { opacity: 1; transform: none; transition: opacity var(--dur-view) var(--ease-out) var(--d, 0ms), transform var(--dur-view) var(--ease-out) var(--d, 0ms); }
 
-/* Personnages */
-.chars > * { min-width: 0; }
-.chars { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: var(--space-6); align-items: start; }
-.factions { display: grid; justify-items: center; gap: var(--space-2); padding-top: var(--space-6); position: relative; }
-.factions::before { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--gold), transparent); }
-.faction { position: relative; display: grid; justify-items: center; gap: 6px; padding: var(--space-2) 0; background: none; border: 0; color: var(--muted); font: 500 var(--text-2xs)/1.3 var(--font-ui); cursor: pointer; text-align: center; max-width: 130px; }
-.faction i { width: 70px; height: 70px; border-radius: 50%; border: 1px solid var(--gold); background: radial-gradient(circle, var(--surface-2), var(--bg-deep)); display: grid; place-items: center; font-style: normal; color: var(--gold); font-size: 22px; transition: transform var(--dur-base) var(--ease); }
-.faction[aria-pressed="true"] { color: var(--text); font-weight: 700; }
-.faction[aria-pressed="true"] i { transform: scale(1.12); box-shadow: 0 0 0 4px rgb(219 191 145 / .18); }
-.panel { position: relative; min-height: 470px; padding: 0; background: var(--glass-veil); backdrop-filter: blur(10px); border: 1px solid var(--glass-edge); border-radius: var(--radius-card); display: grid; grid-template-rows: auto 1fr auto; }
-.panel__head { display: flex; gap: var(--space-5); align-items: center; padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--glass-edge); }
-.emblem { width: 72px; height: 72px; display: grid; place-items: center; background: rgb(0 0 0 / .3); font-size: 34px; color: var(--text); }
-.panel h3 { margin: 0; font: 300 var(--text-xl)/1.1 var(--font-title); }
-.va { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-2); font-size: var(--text-2xs); color: var(--text-soft); }
-.va b { width: 22px; height: 22px; border-radius: 50%; background: var(--text); color: var(--bg-deep); display: grid; place-items: center; font-size: 11px; }
-.va s { width: 36px; height: 14px; border-radius: 7px; background: var(--bg-deep); position: relative; }
-.va s::after { content: ""; position: absolute; left: 3px; top: 3px; width: 8px; height: 8px; border-radius: 50%; background: var(--text); }
-.panel__body { position: relative; display: grid; grid-template-columns: minmax(0, 300px) 1fr; gap: var(--space-6); padding: var(--space-6) var(--space-5); }
-.desc { padding: var(--space-4); background: rgb(0 0 0 / .25); border-radius: var(--radius-1); font: 500 var(--text-xs)/1.7 var(--font-ui); color: var(--text); margin: 0; }
-.art { position: relative; min-height: 260px; margin: calc(var(--space-6) * -1) calc(var(--space-5) * -1) calc(var(--space-6) * -1) 0; overflow: hidden; border-radius: var(--radius-card); background: var(--glass); transition: transform var(--dur-slow) ease-in-out, opacity var(--dur-slow) ease-in-out; }
-/* Image fondue dans le verre : masque en dégradé vers la gauche + filet doré */
-.art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 35%); mask-image: linear-gradient(90deg, transparent, #000 35%); }
-.art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--quote-strip), transparent 45%); }
-.quotes { position: absolute; right: var(--space-5); bottom: var(--space-4); display: grid; justify-items: end; gap: 4px; }
-.quotes span { background: var(--quote-strip); padding: 2px 8px; font: 400 var(--text-2xs) var(--font-quote); color: var(--text); }
-.quotes span:nth-child(odd) { margin-right: 24px; }
-.panel > * { min-width: 0; }
-.thumbs { overflow-x: auto; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-5); border-top: 1px solid var(--glass-edge); }
-.thumbs button { width: 52px; height: 52px; flex: none; border: 1px solid var(--line-dark); padding: 0; cursor: pointer; position: relative; background: var(--surface-2); }
-.thumbs button img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.thumbs button[aria-pressed="true"] { border-color: var(--gold); }
-.thumbs button[aria-pressed="true"]::after { content: ""; position: absolute; left: 50%; bottom: -9px; transform: translateX(-50%); border: 5px solid transparent; border-bottom-color: var(--gold); }
-.arrow { background: none; border: 0; color: var(--gold); font-size: 22px; min-width: 44px; min-height: 44px; cursor: pointer; }
+/* ================= Actualités : cartes à un seul coin arrondi ================= */
+.news__view { overflow: hidden; margin: 0 -8px; padding: 0 8px; }
+.news__track { display: flex; gap: var(--space-3); transition: transform var(--dur-slow) var(--ease-out); will-change: transform; }
+.news__track li { flex: 0 0 var(--card-w); }
+.ncard { display: block; height: 100%; padding: 10px 10px var(--space-3); border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); border-radius: var(--radius-card); background: color-mix(in srgb, var(--surface) 86%, transparent); transition: border-color var(--dur-fast) linear, background-color var(--dur-fast) linear; }
+.ncard:hover, .ncard:focus-visible { border-color: var(--gold); background: var(--surface-2); }
+.ncard__img { aspect-ratio: 396 / 227; overflow: hidden; border-radius: 0 calc(var(--radius-5) - 8px) 0 0; background: var(--surface-2); }
+.ncard__img img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-view) var(--ease-out); }
+.ncard:hover img { transform: scale(1.05); }
+.ncard__meta { display: flex; justify-content: space-between; margin: var(--space-3) var(--space-2) 2px; color: var(--gold); font-size: var(--text-2xs); } .ncard__meta span + span { color: var(--text-soft); }
+.ncard h3 { margin: 0 var(--space-2); font: 500 var(--text-xs)/1.66 var(--font-ui); color: var(--text); min-height: 3.3em; }
+.news__foot { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-8); }
+.news__count { font: 400 var(--text-lg)/1 var(--font-title); color: var(--text-soft); } .news__count small { font-size: .45em; color: var(--muted); }
+.arrow { position: absolute; top: 46%; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: color-mix(in srgb, var(--bg-deep) 60%, transparent); transition: all var(--dur-fast) linear; }
+.arrow:hover { border-color: var(--gold); color: var(--gold); } .arrow[disabled] { opacity: .3; cursor: default; }
+.arrow--p { left: -64px; } .arrow--n { right: -64px; } .arrow svg { width: 10px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 
-/* Actualités */
-.news { width: min(var(--container), 100%); margin: 0 auto; }
-.tabs { display: flex; gap: var(--space-10); margin-bottom: var(--space-5); padding: 0; list-style: none; }
-.tabs button { position: relative; min-height: 44px; background: none; border: 0; color: var(--text); font: 500 var(--text-sm) var(--font-ui); cursor: pointer; padding: 0 6px; }
-.tabs button::after { content: "✦"; position: absolute; right: -8px; top: 6px; font-size: 8px; color: var(--text-soft); }
-.tabs button[aria-selected="true"] { color: var(--gold); }
-.news-list { display: grid; gap: var(--space-4); }
-.news-card { display: grid; grid-template-columns: 196px 1fr; gap: var(--space-5); padding: var(--space-4) var(--space-5); background: var(--surface); border-radius: var(--radius-card); color: var(--text); text-decoration: none; transition: background var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
-.news-card:hover { background: var(--surface-2); transform: translateX(4px); }
-.news-card .thumb { aspect-ratio: 196/64; align-self: center; overflow: hidden; background: var(--glass); }
-.news-card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform var(--dur-slow) var(--ease-out); }
-.news-card:hover .thumb img { transform: scale(1.05); }
-.news-card div { display: grid; grid-template-rows: auto 1fr auto; min-width: 0; }
-.news-card h3 { margin: 0 0 6px; font: 500 var(--text-sm) var(--font-ui); }
-.news-card p { margin: 0; font: 400 var(--text-2xs)/1.5 var(--font-ui); color: var(--muted); }
-.news-card time { justify-self: end; font: 400 var(--text-2xs) var(--font-ui); color: var(--muted); }
-.cta { display: inline-flex; align-items: center; min-height: 48px; margin-top: var(--space-8); padding: 14px 16px; background: var(--accent); color: var(--on-accent); border: 0.8px solid var(--accent); border-radius: var(--radius-2); font: 400 1rem var(--font-ui); text-decoration: none; transition: all 0.2s linear; }
-.cta:hover { filter: brightness(1.1); }
+/* ================= Personnages ================= */
+.chars { display: grid; grid-template-columns: repeat(4, var(--char-w)); gap: clamp(8px, 1.4vw, 20px); }
+.ccard { position: relative; aspect-ratio: 226 / 486; overflow: hidden; border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent); border-radius: var(--radius-card); background: var(--surface-2); isolation: isolate; transition: border-color var(--dur-fast) linear, transform var(--dur-base) var(--ease-out); }
+.ccard img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-view) var(--ease-out); }
+.ccard::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--bg-deep) 88%, transparent)); }
+.ccard span { position: absolute; left: 0; right: 0; bottom: 34px; text-align: center; font: 500 var(--text-base)/1 var(--font-title); color: var(--text); }
+.ccard i { position: absolute; left: 50%; bottom: 10px; width: 12px; height: 12px; margin-left: -6px; transform: rotate(45deg); border: 1px solid var(--c, var(--gold)); background: color-mix(in srgb, var(--c, var(--gold)) 40%, transparent); }
+.ccard:hover, .ccard[aria-pressed="true"] { border-color: var(--gold); } .ccard:hover img { transform: scale(1.05); } .ccard[aria-pressed="true"] { transform: translateY(-8px); }
+/* fiche : frise d'emblèmes + panneau de verre */
+.fiche { display: grid; grid-template-columns: var(--emblem) minmax(0, 1fr); gap: clamp(16px, 4vw, 56px); margin-top: var(--space-16); align-items: start; }
+.frieze { display: grid; gap: var(--space-6); justify-items: center; position: relative; padding: var(--space-6) 0; }
+.frieze::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: color-mix(in srgb, var(--gold) 45%, transparent); }
+.frieze button { position: relative; display: grid; justify-items: center; gap: 6px; width: var(--emblem); color: var(--muted); font: 700 var(--text-2xs)/1.15 var(--font-ui); text-align: center; transition: color var(--dur-base) var(--ease); }
+.frieze button b { display: grid; place-items: center; width: calc(var(--emblem) * .62); aspect-ratio: 1; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); background: radial-gradient(circle at 50% 35%, var(--surface-2), var(--bg-deep)); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--gold) 30%, transparent); opacity: .6; transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
+.frieze button svg { width: 46%; fill: none; stroke: var(--gold); stroke-width: 1.4; }
+.frieze button[aria-pressed="true"] { color: var(--text); } .frieze button[aria-pressed="true"] b { opacity: 1; transform: scale(1.12); }
+.panel { position: relative; min-height: clamp(380px, 34.5vw, 497px); border-radius: var(--radius-2); background: linear-gradient(180deg, var(--glass) 0 99px, color-mix(in srgb, var(--glass-light) 82%, transparent) 99px); border: 1px solid var(--glass-edge); overflow: hidden; isolation: isolate; }
+.panel__art { position: absolute; right: 0; top: 0; bottom: 0; z-index: -1; width: 62%; -webkit-mask: linear-gradient(90deg, transparent, black 34%); mask: linear-gradient(90deg, transparent, black 34%); }
+.panel__art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.panel__head { display: flex; align-items: center; gap: var(--space-4); height: 99px; padding: 0 var(--space-6); }
+.panel__head svg { width: 44px; fill: var(--text); }
+.panel__head h3 { font: 400 var(--text-xl)/1.1 var(--font-title); color: var(--text); } .panel__head p { margin-top: 6px; font-size: var(--text-2xs); font-weight: 400; color: var(--text-soft); }
+.panel__box { width: min(406px, 52%); margin: var(--space-8) var(--space-5); padding: var(--space-4); border: 1px solid var(--glass-edge); border-radius: var(--radius-1); background: color-mix(in srgb, var(--glass-light) 60%, var(--text)); color: var(--ink-glass); font-weight: 500; line-height: 1.6; }
+.panel__quote { position: absolute; right: var(--space-5); bottom: 86px; display: grid; justify-items: end; gap: 3px; max-width: 58%; }
+.panel__quote span { padding: 2px 10px; background: var(--quote-strip); color: var(--text); font: italic 400 var(--text-xs)/1.5 var(--font-quote); }
+.panel__thumbs { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: var(--space-3); padding: var(--space-3) var(--space-5); background: color-mix(in srgb, var(--glass) 55%, transparent); }
+.panel__thumbs button { width: 48px; height: 48px; border: 1px solid var(--glass-edge); border-radius: var(--radius-1); overflow: hidden; opacity: .65; transition: all var(--dur-fast) linear; }
+.panel__thumbs img { width: 100%; height: 100%; object-fit: cover; } .panel__thumbs button[aria-pressed="true"] { opacity: 1; border-color: var(--gold); }
+.panel__art { transition: opacity var(--dur-name) var(--ease), transform var(--dur-name) var(--ease); }
+.panel [data-swap] { transition: opacity var(--dur-name) var(--ease), transform var(--dur-name) var(--ease); } .panel.is-swap [data-swap] { opacity: 0; transform: translateX(-16px); } .panel.is-swap .panel__art { opacity: 0; transform: translateX(24px); }
 
-footer { padding: var(--space-12) var(--space-4); background: var(--nav); color: var(--muted); text-align: center; font-size: var(--text-2xs); }
+/* ================= Mondes : carte stellaire ================= */
+.map { position: relative; height: clamp(420px, 46vw, 620px); border: 1px solid var(--line-dark); border-radius: var(--radius-card); background: radial-gradient(60% 70% at 40% 55%, var(--map-bg-2), var(--map-bg)); overflow: hidden; }
+.orbit { position: absolute; left: var(--x); top: var(--y); width: var(--s); aspect-ratio: 1; margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border: 1px solid var(--orbit); border-radius: 50%; } .orbit--dash { border: 2px dotted var(--orbit-dim); }
+.world { position: absolute; left: var(--x); top: var(--y); display: grid; justify-items: center; gap: 8px; transform: translate(-50%, -50%); color: var(--text); font-size: var(--text-orbit); }
+.world b { display: block; width: var(--world-icon); aspect-ratio: 1; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 1px var(--orbit), 0 0 26px 6px var(--halo); transition: transform var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease); }
+.world img { width: 100%; height: 100%; object-fit: cover; }
+.world:hover b, .world:focus-visible b { transform: scale(1.15); box-shadow: 0 0 0 1px var(--text), 0 0 40px 12px var(--halo); }
 
-@keyframes float { 50% { transform: translateY(-6px); } }
-@keyframes spin { to { transform: rotate(1turn); } }
-@keyframes scroll { to { background-position: 0 -160px; } }
+/* ================= Abonnement, pied ================= */
+.sub { background: var(--sub); padding: var(--space-12) 0; }
+.sub__grid { display: grid; grid-template-columns: 1fr auto; gap: var(--space-10); align-items: start; width: min(980px, 100% - 2 * var(--space-6)); margin: 0 auto; }
+.sub h2 { font: 700 var(--text-lg)/1.2 var(--font-title); color: var(--text); } .sub p { max-width: 46ch; margin-top: var(--space-3); color: var(--text-soft); font-weight: 400; }
+.sub form { display: grid; gap: var(--space-3); width: min(500px, 100%); }
+.sub__row { display: flex; } .sub input[type=email] { flex: 1; min-width: 0; height: 44px; padding: 0 var(--space-3); border: 0; border-radius: var(--radius-1) 0 0 var(--radius-1); background: var(--surface-2); color: var(--text); outline: 0; font-size: var(--text-sm); }
+.sub input[type=email]:focus { box-shadow: inset 0 0 0 1px var(--gold); } .sub input[aria-invalid="true"] { box-shadow: inset 0 0 0 1px var(--accent-hot); }
+.btn { height: 44px; padding: 0 var(--space-4); border: 0.8px solid var(--accent); border-radius: 0 var(--radius-2) var(--radius-2) 0; background: var(--accent); color: var(--on-accent); font-size: var(--text-sm); white-space: nowrap; transition: all var(--dur-fast) linear; }
+.btn:hover { background: var(--gold); } .btn[aria-busy="true"] { opacity: .6; cursor: progress; }
+.sub label { display: flex; gap: 8px; align-items: flex-start; color: var(--text-soft); font-weight: 400; font-size: var(--text-2xs); } .sub .note { min-height: 1.5em; color: var(--gold); }
+footer { background: var(--bg-deep); color: var(--muted); text-align: center; padding: var(--space-12) var(--space-6); font-weight: 400; } footer .mark { margin-bottom: var(--space-6); }
 
-@media (max-width: 1023px) {
-  .topnav__links, .topnav__login { display: none; }
-  .topnav { justify-content: space-between; }
-  .getit { left: 16px; right: 16px; bottom: 32px; flex-wrap: wrap; } .qr, .play { display: none; }
-  .stores { grid-template-columns: repeat(2, 1fr); width: 100%; } .stores a:nth-child(n+3) { display: none; }
-  .rail, .scroll { display: none; }
-  .chars { grid-template-columns: 1fr; }
-  .factions { grid-auto-flow: column; justify-content: start; overflow-x: auto; } .factions::before { display: none; }
-  .panel__body { grid-template-columns: 1fr; } .art { order: -1; margin: calc(var(--space-6) * -1) calc(var(--space-5) * -1) 0; aspect-ratio: 16/10; min-height: 0; } .quotes span:not(:first-child) { display: none; }
-  .news-card { grid-template-columns: 1fr; } .news-card .thumb { aspect-ratio: 16/6; }
-  .tabs { gap: var(--space-4); overflow-x: auto; }
+/* ================= Mobile ================= */
+@media (max-width: 860px) {
+  :root { --nav-h: 52px; --card-w: 78vw; --char-w: 1fr; }
+  .nav ul, .nav__login, .music { display: none; }
+  .nav { justify-content: space-between; align-items: center; padding: 0 var(--space-3); }
+  .dl { width: auto; height: 36px; padding: 0 var(--space-4); border-radius: var(--radius-5); background: var(--pill); font-size: var(--text-xs); } .dl br { display: none; }
+  .burger { display: grid; gap: 5px; width: 44px; height: 44px; place-content: center; } .burger i { width: 22px; height: 2px; background: var(--text); }
+  .rail { display: none; }
+  .stores { flex-direction: column; bottom: 12vh; } .store { display: none; } .stores .cta { display: grid; }
+  .wrap { --edge: 16px; } .wrap::before, .sec__title::before { display: none; }
+  .arrow--p { left: 4px; } .arrow--n { right: 4px; }
+  .chars { grid-template-columns: 1fr 1fr; }
+  .fiche { grid-template-columns: 1fr; } .frieze { display: flex; justify-content: center; padding: 0; } .frieze::before { display: none; }
+  .panel__art { position: relative; width: 100%; height: 300px; -webkit-mask: none; mask: none; } .panel__box { width: auto; } .panel__quote { position: static; max-width: none; margin: 0 var(--space-5) 86px; justify-items: start; }
+  .world b { width: 48px; }
+  .sub__grid { grid-template-columns: 1fr; } .sub__row { flex-direction: column; gap: var(--space-2); } .sub input[type=email], .btn { border-radius: var(--radius-1); flex: none; }
 }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; } }
+.cta { display: none; place-items: center; min-height: 52px; padding: 0 var(--space-8); border: 2px solid var(--cta-yellow-edge); border-radius: var(--radius-2); background: var(--cta-yellow); color: var(--on-accent); font: 700 var(--text-base)/1 var(--font-ui); box-shadow: 0 0 24px var(--cta-glow); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
 </style>
 </head>
-<body>
-<div class="space" data-3d data-slot="space-3d" aria-hidden="true"><img class="fallback" src="https://images.unsplash.com/photo-1710678245561-f605d854f514?auto=format&fit=crop&w=2000&q=80" alt="" width="2000" height="1333" fetchpriority="high"></div>
-<div class="warp" id="warp" aria-hidden="true"><canvas id="warpCanvas"></canvas><button id="skip">Passer l'intro</button></div>
+<body class="is-intro">
 
-<header class="topnav">
-  <div class="topnav__sound" aria-label="Son coupé">ıılı</div>
-  <nav class="topnav__links" aria-label="Navigation principale">
-    <a href="#" aria-current="page">Accueil</a><a href="#news">Informations</a><a href="#chars">Personnages</a><a href="mondes.html">Mondes</a><a href="#">↗ Boutique</a>
-  </nav>
-  <div class="topnav__login">Connexion <i aria-hidden="true"></i></div>
-  <a class="dl" href="#">Télécharger<br>maintenant</a>
+<div class="intro" id="intro" aria-hidden="true"><canvas id="warp"></canvas><span class="mark"><small>Voyage</small>Astralis</span></div>
+
+<header class="nav" id="nav">
+  <span class="music" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+  <nav aria-label="Principale" style="display:contents"><ul>
+    <li><a href="#top" aria-current="page">Accueil</a></li><li><a href="#infos">Informations</a></li><li><a href="#persos">Personnages</a></li><li><a href="#mondes">Mondes</a></li>
+  </ul></nav>
+  <a class="nav__login" href="#abo">Connexion <i aria-hidden="true"></i></a>
+  <a class="dl" href="#abo">Télécharger<br> maintenant</a>
+  <a class="burger" href="#infos" aria-label="Aller au contenu"><i></i><i></i><i></i></a>
 </header>
 
-<main>
-  <section class="hero" aria-label="Accueil">
-    <div class="hero__veil" aria-hidden="true"></div>
-    <div class="hero__logo"><small>VOYAGE STELLAIRE</small>Orbitale<br>Express</div>
-    <div class="getit">
-      <div class="qr" aria-label="QR code de téléchargement"><i></i></div>
-      <div class="stores">
-        <a class="store" href="#">▶<span><small>Disponible sur</small>Play Store</span></a>
-        <a class="store" href="#"><span><small>Télécharger dans</small>App Store</span></a>
-        <a class="store" href="#"><span><small>Télécharger via</small>Launcher PC</span></a>
-        <a class="store" href="#"><span>Console</span></a>
-        <a class="store" href="#"><span>Magasin PC</span></a>
-        <a class="store" href="#"><span>Cloud</span></a>
-      </div>
-      <button class="play" aria-label="Lire la bande-annonce" style="border:0;cursor:pointer"><b>▶</b></button>
-    </div>
-    <div class="rail" aria-label="Réseaux"><span>Suivre</span><a href="#">X</a><a href="#">▶</a><a href="#">◎</a><a href="#">f</a></div>
-    <div class="scroll" aria-hidden="true"><span>Défiler</span><i></i></div>
+<aside class="rail" aria-label="Réseaux"><span>Suivre</span><a href="#top" aria-label="X"><i>X</i></a><a href="#top" aria-label="Vidéos"><i>▶</i></a><a href="#top" aria-label="Photos"><i>◎</i></a><a href="#top" aria-label="Communauté"><i>✦</i></a></aside>
+
+<main id="top">
+  <section class="hero" aria-label="Astralis">
+    <img fetchpriority="high" src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=2000&q=72" width="2000" height="1333" alt="Une silhouette debout sous la Voie lactée, ciel violet et or" data-slot="key-visual">
+    <h1 class="mark"><small>Voyage</small>Astralis</h1>
+    <div class="stores"><a class="store" href="#abo">Console</a><a class="store" href="#abo">Ordinateur</a><a class="store" href="#abo">Mobile</a><a class="cta" href="#abo">Télécharger maintenant</a><a class="play" href="#infos" aria-label="Voir la bande-annonce"><svg viewBox="0 0 18 20" aria-hidden="true"><path d="M1 1l16 9-16 9z"/></svg></a></div>
+    <span class="hint" aria-hidden="true">Défiler<i></i></span>
   </section>
 
-  <section class="section" id="chars">
-    <h2 class="sec-head">Personnages</h2>
-    <div class="chars">
-      <div class="factions" role="group" aria-label="Factions">
-        <button class="faction" aria-pressed="false"><i>✶</i>Cité des Rêves</button>
-        <button class="faction" aria-pressed="true"><i>◈</i>Compagnie des Comètes</button>
-        <button class="faction" aria-pressed="false"><i>⟡</i>Équipage du Train</button>
-      </div>
-      <article class="panel">
-        <div class="panel__head">
-          <div class="emblem" aria-hidden="true">❄</div>
-          <div><h3 id="charName">Lyra</h3><div class="va"><b aria-hidden="true">🎙</b><s aria-hidden="true"></s>Voix : Aline Mercier</div></div>
-        </div>
-        <div class="panel__body">
-          <p class="desc" id="charDesc">Elle cartographie les nébuleuses oubliées et vend ses cartes au plus offrant. On dit qu'aucune étoile ne lui a jamais échappé deux fois. Quelle route choisira-t-elle quand le dernier phare s'éteindra ?</p>
-          <div class="art" id="charArt" data-slot="character-art"><img src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=1200&q=80" alt="La Terre vue depuis l'orbite, une station spatiale au premier plan" width="1200" height="800" loading="lazy"></div>
-          <div class="quotes" aria-label="Citation">
-            <span>« Bienvenue à bord. Je suis Lyra, cartographe indépendante,</span>
-            <span>et ce train passe exactement là où mes cartes s'arrêtent.</span>
-            <span>Asseyez-vous près de la fenêtre :</span>
-            <span>la prochaine galaxie vaut le détour. »</span>
-          </div>
-        </div>
-        <div class="thumbs" role="group" aria-label="Choisir un personnage">
-          <button class="arrow" aria-label="Précédent">‹</button>
-          <button aria-pressed="true" aria-label="Lyra" data-name="Lyra" data-src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=1200&q=80" data-alt="La Terre vue depuis l'orbite, une station spatiale au premier plan"><img src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
-          <button aria-pressed="false" aria-label="Orion" data-name="Orion" data-src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=1200&q=80" data-alt="Station spatiale aux panneaux dorés sur fond noir"><img src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
-          <button aria-pressed="false" aria-label="Vesper" data-name="Vesper" data-src="https://images.unsplash.com/photo-1677926405168-fa86268b7295?auto=format&fit=crop&w=1200&q=80" data-alt="Nébuleuse rose et orange"><img src="https://images.unsplash.com/photo-1677926405168-fa86268b7295?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
-          <button aria-pressed="false" aria-label="Calix" data-name="Calix" data-src="https://images.unsplash.com/photo-1710678245561-f605d854f514?auto=format&fit=crop&w=1200&q=80" data-alt="Nébuleuse turquoise et rouge"><img src="https://images.unsplash.com/photo-1710678245561-f605d854f514?auto=format&fit=crop&w=120&h=120&q=70" alt="" width="52" height="52" loading="lazy"></button>
-          <button class="arrow" aria-label="Suivant">›</button>
-        </div>
-      </article>
-    </div>
-  </section>
+  <div class="night" id="night">
+    <div class="night__sky" aria-hidden="true"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=1800&q=60" width="1800" height="1200" alt=""></div>
 
-  <section class="section" id="news">
-    <div class="news">
-      <h2 class="sec-head">La voix de la galaxie</h2>
-      <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true">Quoi de neuf ?</button><button role="tab" aria-selected="false">Informations</button><button role="tab" aria-selected="false">Événements</button><button role="tab" aria-selected="false">Annonces</button>
+    <section class="sec" id="infos" aria-labelledby="t-infos"><div class="wrap">
+      <h2 class="sec__title" id="t-infos">La voix de la galaxie</h2>
+      <button class="arrow arrow--p" id="prev" type="button" aria-label="Actualité précédente" disabled><svg viewBox="0 0 10 18"><path d="M9 1 1 9l8 8"/></svg></button>
+      <button class="arrow arrow--n" id="next" type="button" aria-label="Actualité suivante"><svg viewBox="0 0 10 18"><path d="m1 1 8 8-8 8"/></svg></button>
+      <div class="news__view" data-in><ul class="news__track" id="track"></ul></div>
+      <div class="news__foot"><span class="news__count" aria-live="polite"><span id="cur">01</span> <small>/ 05</small></span><a class="more" href="#abo">En savoir plus</a></div>
+    </div></section>
+
+    <section class="sec" id="persos" aria-labelledby="t-persos"><div class="wrap">
+      <h2 class="sec__title" id="t-persos">Personnages</h2>
+      <div class="chars" id="chars" role="group" aria-label="Choisir un personnage"></div>
+      <div class="fiche" data-in>
+        <div class="frieze" role="group" aria-label="Factions">
+          <button type="button" aria-pressed="false" data-f="0"><b><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></b>Express astral</button>
+          <button type="button" aria-pressed="true" data-f="1"><b><svg viewBox="0 0 24 24"><path d="M12 3 22 20H2zM12 9l5 8H7z"/></svg></b>Guilde des Cartographes</button>
+          <button type="button" aria-pressed="false" data-f="2"><b><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v18M3 12h18"/></svg></b>Station Hélios</button>
+        </div>
+        <div class="panel" id="panel">
+          <div class="panel__art" id="pArt"><img id="pImg" decoding="async" width="900" height="1125" alt="" data-slot="chara-full"></div>
+          <div class="panel__head"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l2.4 7.2L22 9l-6 4.6L18.2 21 12 16.6 5.8 21 8 13.6 2 9l7.6-.8z"/></svg><div data-swap><h3 id="pName"></h3><p id="pVa"></p></div></div>
+          <p class="panel__box" id="pText" data-swap></p>
+          <p class="panel__quote" id="pQuote" data-swap></p>
+          <div class="panel__thumbs" id="pThumbs" role="group" aria-label="Autres personnages"></div>
+        </div>
       </div>
-      <div class="news-list">
-        <a class="news-card" href="#"><span class="thumb" data-slot="news-thumb"><img src="https://images.unsplash.com/photo-1677926405168-fa86268b7295?auto=format&fit=crop&w=400&h=130&q=75" alt="Nébuleuse rose et orange" width="400" height="130" loading="lazy"></span><div><h3>Taux d'obtention de l'invocation « Constellation »</h3><p></p><time datetime="2026-09-28">28/9/2026</time></div></a>
-        <a class="news-card" href="#"><span class="thumb" data-slot="news-thumb"><img src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=400&h=130&q=75" alt="Station spatiale aux panneaux dorés" width="400" height="130" loading="lazy"></span><div><h3>Mise à jour 4.6 « La valse des comètes »</h3><p>Une nouvelle région s'ouvre au-delà de la ceinture d'astéroïdes. Avant la prochaine éclipse, l'équipage devra trouver un pilote capable de traverser la tempête…</p><time datetime="2026-09-28">28/9/2026</time></div></a>
-        <a class="news-card" href="#"><span class="thumb" data-slot="news-thumb"><img src="https://images.unsplash.com/photo-1654280983312-110b5b422397?auto=format&fit=crop&w=400&h=130&q=75" alt="La Terre et une station spatiale en orbite" width="400" height="130" loading="lazy"></span><div><h3>Bande-annonce de Lyra — « Les cartes du silence »</h3><p>Thème : jusqu'où peut-on cartographier l'inconnu ?</p><time datetime="2026-09-27">27/9/2026</time></div></a>
+    </div></section>
+
+    <section class="sec" id="mondes" aria-labelledby="t-mondes"><div class="wrap">
+      <h2 class="sec__title" id="t-mondes">Mondes</h2>
+      <div class="map" data-in>
+        <span class="orbit" style="--x:30%;--y:62%;--s:64vw"></span><span class="orbit orbit--dash" style="--x:30%;--y:62%;--s:44vw"></span><span class="orbit" style="--x:72%;--y:20%;--s:30vw"></span><span class="orbit orbit--dash" style="--x:72%;--y:20%;--s:52vw"></span><span class="orbit" style="--x:84%;--y:78%;--s:12vw"></span>
+        <a class="world" href="#abo" style="--x:14%;--y:40%"><b><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1614314007212-0257d6e2f7d8?auto=format&fit=crop&w=160&h=160&q=70" width="160" height="160" alt="" data-slot="world-icon"></b>Station Hélios</a>
+        <a class="world" href="#abo" style="--x:36%;--y:60%"><b><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=160&h=160&q=70" width="160" height="160" alt="" data-slot="world-icon"></b>Amphore</a>
+        <a class="world" href="#abo" style="--x:64%;--y:24%"><b><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=160&h=160&q=70" width="160" height="160" alt="" data-slot="world-icon"></b>Astropole</a>
+        <a class="world" href="#abo" style="--x:60%;--y:80%"><b><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1630839437035-dac17da580d0?auto=format&fit=crop&w=160&h=160&q=70" width="160" height="160" alt="" data-slot="world-icon"></b>Jarilo</a>
+        <a class="world" href="#abo" style="--x:86%;--y:58%"><b><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=160&h=160&q=70" width="160" height="160" alt="" data-slot="world-icon"></b>Cité des Rêves</a>
       </div>
-      <a class="cta" href="#">S'abonner maintenant</a>
-    </div>
-  </section>
+    </div></section>
+  </div>
+
+  <section class="sub" id="abo" aria-labelledby="t-abo"><div class="sub__grid">
+    <div><h2 id="t-abo">Abonnez-vous<br>aux dernières actualités</h2><p>Recevez les nouvelles du voyage : mises à jour, nouveaux personnages et récompenses d'événements à durée limitée.</p></div>
+    <form id="form" novalidate><div class="sub__row"><label class="sr-only" for="mail">Adresse e-mail</label><input id="mail" type="email" placeholder="Adresse e-mail" autocomplete="email" aria-describedby="note"><button class="btn" type="submit">S'abonner maintenant</button></div>
+      <label><input type="checkbox" id="ok"> J'accepte de recevoir les invitations aux événements et les informations du jeu.</label><p class="note" id="note" aria-live="polite"></p></form>
+  </div></section>
 </main>
-<footer>© Studio fictif — démo Kōbō. Contenu et personnages inventés. Photos : Unsplash · 3D : Three.js · Exemples : <a href="demo.html" aria-current="page">Accueil</a> · <a href="mondes.html">Mondes</a></footer>
+<footer><span class="mark"><small>Voyage</small>Astralis</span><p>© Astralis (jeu fictif) — démo Kōbō · Photos : Unsplash · Confidentialité · Conditions · Assistance</p></footer>
 
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const warp = document.getElementById('warp'), cv = document.getElementById('warpCanvas');
-  const end = () => warp.classList.add('is-done');
-  document.getElementById('skip').addEventListener('click', end);
-  if (reduce) end(); else {
-    cv.width = innerWidth; cv.height = innerHeight; const ctx = cv.getContext('2d');
-    const stars = Array.from({ length: 380 }, () => ({ a: Math.random() * Math.PI * 2, r: Math.random() * 40, v: 2 + Math.random() * 8 }));
-    const t0 = performance.now();
-    (function frame(t) {
-      const w = cv.width, h = cv.height; ctx.fillStyle = 'rgb(0 0 0 / .35)'; ctx.fillRect(0, 0, w, h); ctx.strokeStyle = 'rgb(233 233 233 / .8)';
-      for (const s of stars) { const r0 = s.r; s.r += s.v; s.v *= 1.04; ctx.beginPath(); ctx.moveTo(w / 2 + Math.cos(s.a) * r0, h / 2 + Math.sin(s.a) * r0); ctx.lineTo(w / 2 + Math.cos(s.a) * s.r, h / 2 + Math.sin(s.a) * s.r); ctx.stroke(); if (s.r > Math.max(w, h)) { s.r = Math.random() * 40; s.v = 2 + Math.random() * 8; } }
-      if (t - t0 < 2500 && !warp.classList.contains('is-done')) requestAnimationFrame(frame); else end();
+  const root = document.documentElement, reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const css = getComputedStyle(root), v = n => css.getPropertyValue(n).trim();
+  const U = (id, w, h) => 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + w + (h ? '&h=' + h : '') + '&q=68';
+  root.classList.add('js');
+
+  /* ---------- Intro : saut en hyperespace (canvas, 2,2s), puis fondu ---------- */
+  const intro = $('#intro'), cv = $('#warp'), cx = cv.getContext('2d');
+  function warp() {
+    if (reduce) { intro.remove(); document.body.classList.remove('is-intro'); root.classList.remove('js'); return; }
+    const W = cv.width = innerWidth / 2, H = cv.height = innerHeight / 2, cols = [v('--text'), v('--gold'), v('--link')];
+    const stars = Array.from({ length: 260 }, () => ({ a: Math.random() * 6.283, r: Math.random() * .2 + .02, s: Math.random() * .9 + .4, c: cols[Math.random() * 3 | 0] }));
+    const t0 = performance.now(), dur = 2200; cx.lineCap = 'round';
+    let ended = false; const done = () => { if (ended) return; ended = true; intro.classList.add('is-off'); document.body.classList.remove('is-intro'); setTimeout(() => intro.remove(), 700); };
+    (function tick(now) {
+      const p = Math.min(1, (now - t0) / dur), speed = .004 + p * p * .05;
+      cx.globalAlpha = .28; cx.fillStyle = v('--bg-deep'); cx.fillRect(0, 0, W, H);          // traînée : on efface à moitié
+      for (const s of stars) { const r0 = s.r; s.r += speed * s.s * (1 + s.r * 6); if (s.r > 1.2) { s.r = Math.random() * .05 + .01; continue; }
+        cx.globalAlpha = Math.min(1, s.r * 2); cx.strokeStyle = s.c; cx.lineWidth = .6 + s.r * 1.6; cx.beginPath();
+        cx.moveTo(W / 2 + Math.cos(s.a) * r0 * W, H / 2 + Math.sin(s.a) * r0 * W); cx.lineTo(W / 2 + Math.cos(s.a) * s.r * W, H / 2 + Math.sin(s.a) * s.r * W); cx.stroke(); }
+      if (p < 1) return requestAnimationFrame(tick);
+      done();
     })(t0);
+    setTimeout(done, dur + 1200);   // filet de sécurité : si l'onglet est masqué, les images ne tournent pas
   }
-  const group = (sel, attr) => document.querySelectorAll(sel).forEach(b => b.addEventListener('click', () => { b.parentElement.querySelectorAll(sel).forEach(x => x.setAttribute(attr, x === b)); }));
-  group('.faction', 'aria-pressed'); group('.tabs button', 'aria-selected');
-  const art = document.getElementById('charArt'), nm = document.getElementById('charName');
-  document.querySelectorAll('.thumbs button[data-name]').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.thumbs button[data-name]').forEach(x => x.setAttribute('aria-pressed', x === b));
-    art.style.opacity = 0; art.style.transform = 'translateX(40px)';
-    setTimeout(() => { nm.textContent = b.dataset.name; const im = art.querySelector('img'); im.src = b.dataset.src; im.alt = b.dataset.alt; art.style.opacity = 1; art.style.transform = 'none'; }, reduce ? 0 : 250);
-  }));
+
+  /* ---------- Navigation : se cache en descendant, revient en remontant (0,5s) ---------- */
+  const nav = $('#nav'); let lastY = scrollY;
+  addEventListener('scroll', () => { const y = scrollY; nav.classList.toggle('is-hidden', y > lastY && y > innerHeight * .6); lastY = y; }, { passive: true });
+
+  /* ---------- Étoiles qui scintillent (1,08 à 1,88s, en aller-retour) ---------- */
+  const night = $('#night');
+  if (!reduce) for (let i = 0; i < 14; i++) { const s = document.createElement('i'); s.className = 'star'; s.style.cssText = '--x:' + (Math.random() * 96 + 2) + '%;--y:' + (Math.random() * 96 + 2) + '%;--s:' + (2 + Math.random() * 3) + 'px;--t:' + (1.08 + Math.random() * .8).toFixed(2) + 's;--d:' + (Math.random() * 1.2).toFixed(2) + 's'; night.appendChild(s); }
+
+  /* ---------- Carrousel d'actualités ---------- */
+  const NEWS = [['1654280983312-110b5b422397', '28/09/2026', 'Mise à jour 4.6 : « Danser avant l\'orée de la lune »'], ['1677926405168-fa86268b7295', '27/09/2026', 'Bande-annonce de Perle : « L\'espoir à dépeindre »'], ['1710678245561-f605d854f514', '23/09/2026', 'Tournée improvisée : rendez-vous sur la station'], ['1446776811953-b23d57bd21aa', '22/09/2026', 'Sur les traces de l\'Express : carnet de bord n° 12'], ['1502134249126-9f3755a50d78', '18/09/2026', 'Événement : la nuit des mille lanternes']];
+  const track = $('#track'), prev = $('#prev'), next = $('#next'), cur = $('#cur'); let idx = 0;
+  track.innerHTML = NEWS.map(([id, d, t]) => '<li><a class="ncard" href="#abo"><div class="ncard__img"><img loading="lazy" decoding="async" src="' + U(id, 800, 460) + '" width="800" height="460" alt="" data-slot="news-poster"></div><div class="ncard__meta"><span>' + d + '</span><span>+ plus</span></div><h3>' + t + '</h3></a></li>').join('');
+  function go(i) { idx = Math.max(0, Math.min(NEWS.length - 1, i)); const card = track.children[0].getBoundingClientRect().width + 12, max = track.scrollWidth - track.parentElement.clientWidth + 16;
+    track.style.transform = 'translate3d(' + -Math.min(idx * card, max) + 'px,0,0)'; cur.textContent = String(idx + 1).padStart(2, '0'); prev.disabled = idx === 0; next.disabled = idx === NEWS.length - 1; }
+  prev.addEventListener('click', () => go(idx - 1)); next.addEventListener('click', () => go(idx + 1)); addEventListener('resize', () => go(idx));
+
+  /* ---------- Personnages : cartes, frise d'emblèmes, panneau de verre ---------- */
+  const CH = [['Aëlle', '1559828801-04565cd31e27', 1, '', 'Voix : Capucine Morel', 'Elle peint les étoiles avec des couleurs que personne n\'a nommées, et rend aux civilisations perdues leur éclat.', ['« Bienvenue. Je suis Aëlle, experte en investissement d\'œuvres d\'art', 'au sein de la Guilde des Cartographes.', 'Il serait bon de commencer par mes œuvres. »']],
+    ['Orso', '1580428180163-76ab1efe2aed', 0, '', 'Voix : Malik Sarr', 'Mécanicien de l\'Express, il répare tout ce qui a un moteur et beaucoup de choses qui n\'en ont pas.', ['« Montez. On verra bien où ça nous mène,', 'et si ça casse, je répare. »']],
+    ['Lin', '1613698808499-f772ccb4f527', 2, '', 'Voix : Jade Perrin', 'Archiviste de la Station Hélios, elle lit trois langues mortes et en invente une quatrième.', ['« Tout est écrit quelque part.', 'Il suffit de savoir où chercher. »']],
+    ['Vesper', '1585732436636-f786c52696d6', 1, '', 'Voix : Inès Daoud', 'Cartographe des routes interdites. Ses cartes ne montrent pas les lieux, mais ce qu\'il en coûte d\'y aller.', ['« Je ne vends pas des chemins.', 'Je vends le droit de se perdre. »']]];
+  const chars = $('#chars'), panel = $('#panel'), thumbs = $('#pThumbs'), fr = $$('.frieze button');
+  chars.innerHTML = CH.map((c, i) => '<button type="button" class="ccard" aria-pressed="' + (i === 0) + '" data-in style="--d:' + i * 90 + 'ms"><img loading="lazy" decoding="async" src="' + U(c[1], 520, 1118) + '" width="520" height="1118" alt="" data-slot="chara-card"><span>' + c[0] + '</span><i aria-hidden="true"></i></button>').join('');
+  thumbs.innerHTML = CH.map((c, i) => '<button type="button" aria-pressed="' + (i === 0) + '" aria-label="' + c[0] + '"><img loading="lazy" decoding="async" src="' + U(c[1], 96, 96) + '" width="96" height="96" alt=""></button>').join('');
+  const cards = $$('.ccard'), tbs = $$('#pThumbs button');
+  function fill(i) { const c = CH[i]; $('#pName').textContent = c[0]; $('#pVa').textContent = c[4]; $('#pText').textContent = c[5]; $('#pQuote').innerHTML = c[6].map(l => '<span>' + l + '</span>').join(''); const im = $('#pImg'); im.src = U(c[1], 900, 1125); im.alt = 'Portrait de ' + c[0]; }
+  function pick(i) {
+    [cards, tbs].forEach(l => l.forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)))); fr.forEach((b, k) => b.setAttribute('aria-pressed', String(k === CH[i][2])));
+    if (reduce) return fill(i); panel.classList.add('is-swap'); setTimeout(() => { fill(i); panel.classList.remove('is-swap'); }, 400);
+  }
+  [cards, tbs].forEach(l => l.forEach((b, i) => b.addEventListener('click', () => pick(i))));
+  fr.forEach((b, f) => b.addEventListener('click', () => { const i = CH.findIndex(c => c[2] === f); if (i >= 0) pick(i); }));
+  fill(0);
+
+  /* ---------- Entrées au défilement ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .15 });
+  $$('[data-in]').forEach(el => io.observe(el));
+
+  /* ---------- Abonnement ---------- */
+  const form = $('#form'), mail = $('#mail'), note = $('#note');
+  form.addEventListener('submit', e => { e.preventDefault(); const btn = form.querySelector('.btn');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail.value.trim())) { note.textContent = 'Adresse incomplète : prenom@exemple.fr'; mail.setAttribute('aria-invalid', 'true'); mail.focus(); return; }
+    if (!$('#ok').checked) { note.textContent = 'Cochez la case pour confirmer votre accord.'; $('#ok').focus(); return; }
+    mail.removeAttribute('aria-invalid'); btn.setAttribute('aria-busy', 'true'); note.textContent = 'Envoi…';
+    setTimeout(() => { btn.removeAttribute('aria-busy'); note.textContent = 'C\'est noté : première lettre au prochain saut.'; form.reset(); }, reduce ? 0 : 800); });
+
+  warp();
 })();
 </script>
-<!-- Scène 3D : champ d'étoiles + nébuleuse en particules + planète annelée, fixe derrière l'interface -->
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-} }
-</script>
-<script type="module">
-import * as THREE from 'three';
-
-const host = document.querySelector('[data-3d]');
-const css = getComputedStyle(document.documentElement);
-const tok = (name) => new THREE.Color(css.getPropertyValue(name).trim());   // couleurs lues dans les tokens
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-let renderer;
-try {
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-} catch (e) { host.classList.add('no-webgl'); throw e; }
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.0;
-host.appendChild(renderer.domElement);
-renderer.domElement.setAttribute('aria-hidden', 'true');
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 200);
-camera.position.set(0, 0, 9);
-
-// Sprite rond et doux pour les particules (dessiné une fois sur un canvas 2D)
-function dotTexture() {
-  const c = document.createElement('canvas'); c.width = c.height = 64;
-  const g = c.getContext('2d'), grd = g.createRadialGradient(32, 32, 0, 32, 32, 32);
-  grd.addColorStop(0, 'rgba(255,255,255,1)'); grd.addColorStop(0.35, 'rgba(255,255,255,.55)'); grd.addColorStop(1, 'rgba(255,255,255,0)');
-  g.fillStyle = grd; g.fillRect(0, 0, 64, 64);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
-}
-const dot = dotTexture();
-const gauss = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
-
-// 1. Champ d'étoiles (coquille sphérique autour de la caméra), blanc + quelques étoiles dorées
-function starField(count, color, size) {
-  const pos = new Float32Array(count * 3);
-  for (let i = 0; i < count; i++) {
-    const r = 18 + Math.random() * 40, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
-    pos.set([r * Math.sin(ph) * Math.cos(th), r * Math.sin(ph) * Math.sin(th), r * Math.cos(ph)], i * 3);
-  }
-  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  return new THREE.Points(geo, new THREE.PointsMaterial({ color, size, map: dot, transparent: true, depthWrite: false, sizeAttenuation: true }));
-}
-const sky = new THREE.Group();
-sky.add(starField(3200, tok('--text'), 0.16), starField(500, tok('--gold'), 0.22));
-scene.add(sky);
-
-// 2. Nébuleuse en particules : nuage aplati, couleurs mélangées entre --link, --glass et --gold, mélange additif
-const NEB = 2600, nPos = new Float32Array(NEB * 3), nCol = new Float32Array(NEB * 3);
-const cA = tok('--link'), cB = tok('--glass'), cC = tok('--gold'), tmp = new THREE.Color();
-for (let i = 0; i < NEB; i++) {
-  const arm = Math.random() * Math.PI * 2, rad = Math.abs(gauss()) * 4;
-  nPos.set([Math.cos(arm) * rad * 1.8 + gauss() * 0.8, Math.sin(arm) * rad * 0.6 + gauss() * 0.5, -14 + gauss() * 2.5], i * 3);
-  tmp.copy(cB).lerp(cA, Math.random()); if (Math.random() < 0.18) tmp.lerp(cC, 0.7);
-  nCol.set([tmp.r, tmp.g, tmp.b], i * 3);
-}
-const nGeo = new THREE.BufferGeometry();
-nGeo.setAttribute('position', new THREE.BufferAttribute(nPos, 3));
-nGeo.setAttribute('color', new THREE.BufferAttribute(nCol, 3));
-const nebula = new THREE.Points(nGeo, new THREE.PointsMaterial({ size: 1.1, map: dot, vertexColors: true, transparent: true, opacity: 0.32, depthWrite: false, blending: THREE.AdditiveBlending }));
-nebula.position.set(-3, 1.5, 0);
-scene.add(nebula);
-
-// 3. Planète gazeuse : texture à bandes générée à partir des tokens, atmosphère en fresnel, anneau doré
-function bandTexture() {
-  const c = document.createElement('canvas'); c.width = 16; c.height = 512;
-  const g = c.getContext('2d'), base = tok('--glass'), hi = tok('--text-soft'), deep = tok('--bg'), col = new THREE.Color();
-  for (let y = 0; y < 512; y++) {
-    const t = y / 512, n = Math.sin(t * 38) * 0.5 + Math.sin(t * 91 + 1.3) * 0.3 + (Math.random() - 0.5) * 0.15;
-    col.copy(base).lerp(n > 0 ? hi : deep, Math.min(1, Math.abs(n) * 0.55));
-    g.fillStyle = col.getStyle(); g.fillRect(0, y, 16, 1);
-  }
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
-}
-const planet = new THREE.Group();
-const globe = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 64), new THREE.MeshStandardMaterial({ map: bandTexture(), roughness: 0.9, metalness: 0 }));
-planet.add(globe);
-
-const atmo = new THREE.Mesh(new THREE.SphereGeometry(1.06, 64, 48), new THREE.ShaderMaterial({
-  uniforms: { uColor: { value: tok('--link') } },
-  vertexShader: `varying vec3 vN; varying vec3 vV;
-    void main() { vN = normalize(normalMatrix * normal); vec4 mv = modelViewMatrix * vec4(position, 1.0); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }`,
-  fragmentShader: `uniform vec3 uColor; varying vec3 vN; varying vec3 vV;
-    void main() { float f = pow(1.0 - abs(dot(vN, vV)), 2.5); gl_FragColor = vec4(uColor, f * 0.85);
-    #include <tonemapping_fragment>
-    #include <colorspace_fragment>
-    }`,
-  transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
-}));
-planet.add(atmo);
-
-const R0 = 1.35, R1 = 2.2;
-const ringGeo = new THREE.RingGeometry(R0, R1, 180, 1);
-{ const p = ringGeo.attributes.position, uv = ringGeo.attributes.uv, v = new THREE.Vector3();
-  for (let i = 0; i < p.count; i++) { v.fromBufferAttribute(p, i); uv.setXY(i, (v.length() - R0) / (R1 - R0), 0.5); } }
-function ringTexture() {
-  const c = document.createElement('canvas'); c.width = 512; c.height = 4;
-  const g = c.getContext('2d'), gold = tok('--gold');
-  for (let x = 0; x < 512; x++) {
-    const t = x / 512, a = (0.25 + 0.5 * Math.abs(Math.sin(t * 40))) * (t < 0.04 || t > 0.97 ? 0 : 1) * (t > 0.55 && t < 0.6 ? 0.1 : 1);
-    g.fillStyle = `rgba(${Math.round(gold.r * 255)},${Math.round(gold.g * 255)},${Math.round(gold.b * 255)},${a.toFixed(3)})`;
-    g.fillRect(x, 0, 1, 4);
-  }
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.LinearSRGBColorSpace; return t;
-}
-const ring = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ map: ringTexture(), transparent: true, side: THREE.DoubleSide, depthWrite: false }));
-ring.rotation.x = -Math.PI / 2;
-planet.add(ring);
-planet.rotation.set(0.28, 0, 0.32);
-scene.add(planet);
-
-const sun = new THREE.DirectionalLight(tok('--accent-sand'), 2.6); sun.position.set(-5, 3, 4); scene.add(sun);
-scene.add(new THREE.AmbientLight(tok('--glass'), 0.35));
-
-// Mise en page : planète à droite du héros sur grand écran, en haut et plus petite sur mobile
-let baseX = 0, baseY = 0;
-function resize() {
-  const w = host.clientWidth, h = host.clientHeight;
-  renderer.setSize(w, h, false);
-  renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
-  camera.aspect = w / h; camera.updateProjectionMatrix();
-  const halfH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z, halfW = halfH * camera.aspect;
-  if (camera.aspect > 1) { baseX = halfW * 0.45; baseY = 0.1; planet.scale.setScalar(1); }
-  else { baseX = halfW * 0.25; baseY = halfH * 0.35; planet.scale.setScalar(0.7); }
-  render();
-}
-
-let px = 0, py = 0;
-if (!reduce) addEventListener('pointermove', (e) => { px = e.clientX / innerWidth - 0.5; py = e.clientY / innerHeight - 0.5; }, { passive: true });
-
-function render(t = 0) {
-  const s = scrollY / Math.max(1, innerHeight);
-  planet.position.set(baseX, baseY + s * 3.2, 0);          // la planète s'éloigne vers le haut au défilement
-  sky.rotation.y = s * 0.12 + t * 0.004;
-  nebula.rotation.z = t * 0.01;
-  globe.rotation.y = t * 0.08;
-  camera.position.x += (px * 0.6 - camera.position.x) * 0.05;
-  camera.position.y += (-py * 0.4 - camera.position.y) * 0.05;
-  camera.lookAt(0, 0, 0);
-  renderer.render(scene, camera);
-}
-new ResizeObserver(resize).observe(host); resize();
-
-const clock = new THREE.Clock();
-if (reduce) { addEventListener('scroll', () => render(0), { passive: true }); }
-else { (function tick() { render(clock.getElapsedTime()); requestAnimationFrame(tick); })(); }
-host.classList.add('is-3d-ready');
-</script>
-
 </body>
 </html>

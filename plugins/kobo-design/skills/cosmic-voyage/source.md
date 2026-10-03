@@ -1,53 +1,57 @@
 # Source — Cosmic Voyage
 
 - **Site de référence** : https://hsr.hoyoverse.com/fr-fr/home (site officiel d'un RPG gacha de science-fantasy)
-- **Pages observées** : accueil, /character, /news (1re passe) ; /world, /world/<id>, accueil mobile 375px (2e passe, voir « Pages explorées »)
 - **Famille** : Jeu vidéo & gacha
-- **Analysé le** : 2026-10-01, Chrome, 1536×674
-- **Méthode** : `extract-design.js` sur l'accueil + captures et zooms sur les pages personnages et actualités
+- **Analysé le** : 2026-10-01 et 2026-10-02 (accueil, personnages, actualités, mondes, mobile) ; **2026-10-03, réécriture complète** : Chrome 1440×900, arrivée capturée image par image, accueil parcouru écran par écran, pages Informations, Personnages et Mondes, styles calculés, lecture des 53 feuilles de style de la page (images clés, transitions), couleurs lues sur capture.
+- **Ce qui plaît** : la nuit étoilée, les cartes à un coin, le panneau de verre des personnages, la carte des mondes, le saut en hyperespace.
 
-## Mesures brutes
+## Mesures (1440 × 900)
 
-- **Polices** : Microsoft YaHei (dominant, police système), Inter, system-ui ; seule police web chargée : une police d'icônes
-- **Tailles** : 11px (dominant), 12px, 14px, 15px, 10.5px, 24px, 30px, 50px, 100px ; poids 500 dominant
-- **Textes** : #e9e9e9, #ccd0d2, #919191, #ffffff, #dbbf91 (or), #bbbbbb
-- **Fonds** : #000000, #111111, #121212, #212226, #db9a45
-- **Bordures** : 0.8px rgba(229,229,229,.5), 0.8px #323232 / #323339 / #4f5159, 0.8px #db9a45
-- **Rayons** : `0 28px 0 0` (×11, cartes), 12px, 4.8px, 28px
-- **Variables** : --global-radius-1…7 (6, 12, 16, 20, 28, 40, 48px), --global-spacing-1…13 (4 → 80px), --global-text-title/body/secondary…
-- **Bouton principal** : fond #db9a45, texte #000, bordure 0.8px #db9a45, rayon 12px, padding 14px 16px, `all 0.2s linear`
-- **Transitions** : opacity 0.2s ease, opacity 0.3s ease-out, width 0.4s ease, opacity/transform 0.5s ease-in-out
-- **Keyframes** : rotation, float-1…5, moreDown, scroll, user-model-loading
-- **Points de rupture** : min-width 1024px, 1024–1365px, max-width 1023px, 768–1023px
-- **Structure** : accueil = une scène de 674px (pas de défilement), 1 canvas (intro), 39 images, 5 iframes
+- **Technique** : Nuxt (Vue), Swiper pour les carrousels, 1 canvas (intro), styles en ligne. Racine `html` à **56,25px** (3,90625vw) : tout est en `rem`.
+- **Police** : Microsoft YaHei (police système), Arial en repli ; une police d'icônes.
+- **Barre** : 57px, fond `#121212` ; liens 15px blancs ; lien courant `#307af7` ; plaque « Télécharger » 168 × 54px.
+- **Cartes d'actualité** : 424 × 331px, image 396 × 227 ; date 11,8px `#dbbf91` ; « + more » 11,25px `#bfbfbf` ; titre 12,4px / 20,5px `#e9e9e9`, graisse 500.
+- **Bouton « En savoir plus »** : 146 × 27px, bord 0,8px `rgba(230,230,230,.5)`, texte 11,25px.
+- **Cartes de personnage** : 226 × 486px, nom 16,9px blanc ; rangée de 1 215px commençant à 225px du bord.
+- **Fiche personnage** : contenu 450 × 497px ; nom 29,8px 400 `#ededed` ; « VA » 10,7px `#d7d7d7` ; texte 12,4px / 19,7px ; emblèmes 108 × 98px ; libellé de faction 11,8px 700, `#6f6e6e` quand inactif.
+- **Page Informations** : onglets 16,9px, actif `#dbbf91` ; bandeau d'article 993 × 151px ; titre 16,9px / 21,4px 500.
+- **Couleurs lues sur capture** (éléments peints dans des images) : nuit `#141936` (haut) → `#070a1b` (bas), halo `#234177` ; en-tête du panneau `#1a264e`, corps `#7d8ea2` ; bande d'abonnement `#121212` ; bouton d'abonnement `#df9540` ; pied noir.
+- **Transitions** : barre `transform 0.5s ease-in-out` ; menu déroulant `opacity 0.2s` ; nom d'un personnage `opacity 0.4s, transform 0.4s` ; fiche `visibility 0.6s` ; carte des mondes `opacity 0.3s, transform 0.3s` ; changement de page `0.3s linear` ; fenêtres 0,2s, courbe `cubic-bezier(0.15, 0.59, 0.45, 0.89)`.
+- **Animations** : étoiles `fade-out` 1,08 à 1,88s `ease` en aller-retour (retards 0,53 à 1,2s) ; égaliseur 5 barres de 0,3 à 0,7s en aller-retour ; trait « Scroll Down » 2s `linear` en aller-retour ; chevron mobile 2s ; reflet `left: -100% → 100%` ; `rotation` 360°.
+- Passe du 2026-10-01 (non remesuré) : rayons `0 28px 0 0`, 12px ; échelle `--global-radius` 6 à 48px et `--global-spacing` 4 à 80px ; bouton principal `#db9a45`, rayon 12px, `all 0.2s linear`.
 
 ## Pages explorées
 
-**Mesuré** = valeur lue par script dans le navigateur ; **observé** = relevé à l'œil sur capture.
+« Mesuré » = lu dans le navigateur ; « observé » = relevé sur capture.
 
-| URL | Relevé | Nature |
-|---|---|---|
-| `/fr-fr/home` | Accueil, voir « Mesures brutes » | mesuré |
-| `/fr-fr/character` | Panneau de verre, frise d'emblèmes, citations en bandes, vignettes (1re passe) | observé |
-| `/fr-fr/news` | Onglets à étoile, cartes à un coin, en-tête de section (1re passe) | observé |
-| `/fr-fr/world` (2026-10-02) | Carte stellaire plein écran fond nuit bleu profond ; grands anneaux orbitaux concentriques (traits blancs fins pleins ou pointillés) qui traversent l'écran ; mondes = icônes rondes lumineuses (planètes, stations, bulles de verre) avec halo bleu et libellé blanc 11px ; étiquette « Mondes » en haut à gauche dans un petit cadre sombre ; lien de nav actif souligné de bleu clair | observé |
-| `/fr-fr/world/<id>` (2026-10-02) | Fond = illustration du monde floutée + voile ; bouton « Retour » rectangle à bord fin en haut à gauche ; nom du monde + icône ronde en haut à droite ; titre et paragraphe 12px centrés ; carrousel de lieux : image centrale 16:9 nette à coins arrondis, voisines assombries et coupées, flèches ‹ › fines sur l'image, légende sous l'image | observé |
-| accueil mobile, 375px (2026-10-02, navigateur intégré) | Barre noire : pilule blanche « Télécharger maintenant » sur 2 lignes à gauche, hamburger à droite ; héros portrait plein écran, logo en haut à gauche ; bouton lecture rond à anneau dégradé violet → bleu → orange ; gros bouton jaune #ffd93b à bord doré et lueur centré en bas ; chevron ⌄ ; bannière cookies à boutons bleus pleine largeur + « Paramètres » en contour | observé (le jaune #ffd93b est relevé sur capture) |
+| Page / écran | Relevé |
+|---|---|
+| Arrivée | Observé toutes les 0,6s : noir ≈ 2s, puis traits de lumière qui fusent du centre avec le logo en haut à gauche, puis le visuel clé. |
+| Accueil — héros | Observé : visuel clé plein écran, plaques de boutique et bouton lecture en bas, rail « Follow » à droite, « Scroll Down ». |
+| Accueil — actualités | Mesuré (tailles ci-dessus). Observé : titre en cartouche, nœud doré sur un filet vertical, 3 cartes visibles, flèches rondes, compteur « 01 / 05 ». |
+| Accueil — personnages, abonnement, pied | Mesuré. Observé : 4 cartes hautes à losange coloré, bande noire avec champ et bouton orange, logotypes centrés. |
+| `/news` | Mesuré : onglets, bandeaux. Observé : étoile entre les onglets, vignette à gauche, date à droite, bouton pleine largeur. |
+| `/character` | Mesuré : nom, textes, emblèmes. Observé : frise de 3 emblèmes avec chevrons, panneau à en-tête sombre et corps clair, boîte de texte claire, portrait débordant à droite, citation en 4 bandes noires, 4 vignettes. |
+| `/world` | Observé : grands cercles pleins et pointillés, mondes lumineux à halo avec libellé, étiquette « Mondes ». Le clic vers la fiche d'un monde n'a pas abouti pendant cette passe : la fiche est décrite d'après la passe du 2026-10-02. |
+| Mobile | Dans Chrome rétréci à 390px, le site garde sa mise en page de bureau (il choisit sa version selon l'appareil). La version mobile décrite vient de l'observation du 2026-10-02 dans un autre navigateur, accueil seulement. |
 
-Valeurs estimées (pas lues par script) : `--map-bg`, `--map-bg-2`, opacités des orbites et du halo, `--cta-yellow-edge`, couleurs de l'anneau du bouton lecture, `--cookie-blue` (assombri pour porter du texte blanc à 5,5:1), toutes les durées des animations de la carte et du mobile. Le menu mobile ouvert et les pages internes en mobile n'ont **pas** été observés.
+## Non mesuré / proposé
 
-## Non mesuré
-
-- Mobile : seul l'accueil a été observé (375px) ; aucune valeur mesurée par script. Les pages internes en mobile sont une adaptation proposée.
-- Le bleu de l'onglet actif (`--link`) et le bleu du verre ont été relevés à l'œil sur capture, pas par le script.
-- Les pages Personnages et Actualités ont été observées sur captures, pas passées au script.
+- Durée exacte du saut en hyperespace, du glissement du carrousel, de la rotation de l'anneau de lecture, du cycle du reflet : proposées.
+- Le visuel clé du site change à chaque version du jeu ; au moment du relevé il était clair et très coloré. Le skill garde la nuit étoilée comme ambiance de référence.
+- Entrées au défilement (blocs qui montent en fondu), survols des cartes : proposés.
+- Pages internes en mobile : proposées.
+- `examples/mondes.html` date de la passe du 2026-10-02 : tokens mis à jour, page non refaite.
+- Images par seconde de `motion.md` : mesurées sur la démo dans un Chrome sans carte graphique.
 
 ## Écarts assumés
 
 | Élément du site | Dans le skill | Raison |
 |---|---|---|
-| Microsoft YaHei (système Windows) | Noto Sans / Noto Sans SC | Disponible partout via Google Fonts |
-| Illustrations, logo, emblèmes de factions | Emplacements `data-slot` et formes | Droits d'auteur |
-| Visuels de la démo | Photos Unsplash libres (licence Unsplash) et scène Three.js, à remplacer par les images du projet | Démo sans droits ; voir `references/assets.md` |
-| Icônes et illustrations des mondes | Photos d'espace Unsplash (nébuleuses, Terre, station) dans les icônes rondes et le carrousel de `examples/mondes.html` | Droits d'auteur |
-| Intro vidéo/canvas d'origine | Hyperespace recodé en canvas simple | Identité de l'œuvre |
+| Logo, illustrations, personnages, emblèmes, noms, textes | Jeu fictif « Astralis », logotype en texte, emblèmes génériques, photos Unsplash | Identité et droits d'auteur |
+| Microsoft YaHei (système Windows) | Noto Sans, Noto Serif pour les citations | Disponible partout |
+| Panneau, bandeaux et cartouches peints dans des images | Dégradés et bordures CSS | Pas de dépendance aux images du site |
+| Molette qui passe d'un écran à l'autre sur l'accueil | Défilement normal | Accessibilité, mobile |
+| Blanc sur plaque dorée, libellés gris sombre sur la nuit | Noir sur doré, gris `--muted` réservé aux éléments inactifs | Contraste |
+| Tailles liées à la largeur (racine 3,9vw) | Tailles fixes avec `clamp` sur les cartes | Lisibilité sur petit écran |
+| Fiche personnage sur sa propre page | Intégrée à l'accueil de la démo, sous les cartes | Montrer la signature dans une seule page |

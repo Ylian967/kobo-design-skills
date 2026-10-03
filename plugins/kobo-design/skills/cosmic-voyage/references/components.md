@@ -1,198 +1,83 @@
 # Cosmic Voyage — composants
 
-## Barre de navigation (fixe, 58px)
+Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html` (accueil) et `examples/mondes.html` (carte et fiche d'un monde). « Mesuré » = lu dans le navigateur à 1440px ; « observé » = relevé sur capture (beaucoup d'éléments du site sont des images de fond) ; « proposé » = ajouté par le skill.
 
-Fond `--nav`. À gauche une petite icône (barres d'égaliseur) qui coupe le son. Au centre les liens (Noto Sans 500, 15px, `--text`) espacés de ~60px ; lien actif en `--link` avec un **trait bleu de 2px sous toute la largeur de l'onglet**. Lien externe précédé d'une petite flèche ↗. Menu « Autre ▾ ». À droite « Connexion » + icône de profil cerclée, puis le **bouton Télécharger** collé au bord.
+## 1. Barre de navigation (mesuré)
+
+Barre **`--nav` de 57px**, pleine largeur, fixe. De gauche à droite :
+- **égaliseur** : 5 petites barres grises qui bougent (musique de fond) ;
+- **liens** en 15px, blancs, 110 à 150px de large chacun ; lien courant **bleu `--link`** avec un filet bleu de 2px au bas de la barre ;
+- « Connexion » + icône ronde ;
+- **plaque dorée « Télécharger maintenant »** collée au bord droit, 168 × 54px, texte noir gras sur deux lignes, coin bas gauche arrondi.
+Mobile : pilule blanche « Télécharger maintenant » à gauche, trois traits à droite.
+
+## 2. Logotype
+
+Mot en capitales italiques grasses très espacées, surmonté d'un petit mot doré. En haut à gauche de l'intro et du héros, centré dans le pied. C'est un signe : il reste en texte.
+
+## 3. Héros (observé)
+
+Visuel clé plein écran (illustration de la version en cours sur le site). En bas, centrés : **plaques de boutique** rectangulaires sombres à bord fin (44px), puis le **bouton lecture rond** à anneau dégradé violet → bleu → orange. Tout en bas : « Défiler » et un trait vertical qui respire. Mobile : un seul **gros bouton jaune** `--cta-yellow` à bord doré et lueur.
+
+## 4. Rail « Suivre » (observé)
+
+Fixe au bord droit, centré en hauteur : le mot « Suivre » écrit verticalement, un petit trait, puis une colonne de **pastilles rondes blanches** de 26px (cible de 44px). Survol : pastille dorée.
+
+## 5. Frise du voyage et titre de section (signature, observé)
+
+À gauche du contenu, un **filet doré vertical** court sur toute la page ; devant chaque section, un **nœud** : anneau doré de 18px avec un point au centre. Le **titre de section** est un petit cartouche : barre verticale grise de 2px, texte 15px blanc, fond noir qui s'efface vers la droite (≈ 240 × 34px).
 
 ```css
-.topnav { position: fixed; inset: 0 0 auto; height: var(--nav-h); z-index: 50; display: flex; align-items: center; background: var(--nav); }
-.topnav a { position: relative; display: grid; place-items: center; height: 100%; padding: 0 var(--space-8); color: var(--text); font: 500 var(--text-base) var(--font-ui); text-decoration: none; transition: color var(--dur-fast) var(--ease); }
-.topnav a[aria-current="page"] { color: var(--link); }
-.topnav a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--link); }
+.sec__title { display: inline-flex; align-items: center; min-width: 240px; height: 34px; padding: 0 var(--space-4); border-left: 2px solid var(--muted);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--bg-deep) 70%, transparent), transparent); }
+.sec__title::before { /* nœud */ width: 18px; height: 18px; border: 1px solid var(--gold); border-radius: 50%; background: radial-gradient(circle, var(--gold) 3px, var(--bg) 4px); }
 ```
 
-## Bouton « Télécharger maintenant »
+## 6. Carte d'actualité à un seul coin arrondi (signature, mesuré)
 
-Bloc couleur sable `--accent-sand`, texte noir 500 15px sur deux lignes, **coins arrondis seulement en bas à gauche** (miroir de la carte), hauteur = barre de nav. Survol : éclaircissement + reflet qui traverse (300ms).
+**424 × 331px**. Cadre fin doré, fond sombre, **seul le coin haut droit est arrondi** (`--radius-card` : 28px). Image 396 × 227. Dessous : date en `--gold` 11,8px à gauche, « + more » gris à droite, titre 12,4px / 20,5px en `--text` sur deux lignes.
 
-## Bouton principal (or)
-
-`--accent` plein, texte `--on-accent`, rayon `--radius-2`, padding 14px 16px, `transition: all 0.2s linear` (mesuré). Variante secondaire : fond transparent, contour 0.8px `--line`, texte `--line`, très petit (10px) pour « En savoir plus ».
-
-## En-tête de section
-
-```html
-<h2 class="sec-head">La voix de la galaxie</h2>
-```
 ```css
-.sec-head { display: inline-block; margin: 0 0 var(--space-6); padding: 6px 80px 6px 12px; font: 500 var(--text-sm) var(--font-ui); color: var(--text);
-  border-left: 2px solid var(--gold); background: linear-gradient(90deg, rgb(0 0 0 / .85), transparent); }
+.ncard { border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); border-radius: var(--radius-card); background: color-mix(in srgb, var(--surface) 86%, transparent); }
 ```
+Autour : flèches rondes à contour (44px), compteur « 01 / 05 » (24px + petit), bouton « En savoir plus ».
 
-## Onglets
+## 7. Bouton contour « En savoir plus » (mesuré)
 
-Texte `--text` 14px, actif en `--gold` ; une petite **étoile à quatre branches** (✦ en 8px) accrochée en haut à droite de chaque onglet. Pas de soulignement.
+**146 × 27px**, bord 0,8px `--line`, texte 11px `--text-soft`, sans arrondi. Survol : fond et bord `--accent`, texte noir.
 
-## Carte d'actualité (signature)
+## 8. Bouton principal doré (mesuré)
 
-```html
-<a class="news-card" href="#">
-  <img src="…" alt="" width="196" height="64">
-  <div><h3>Titre de l'actualité</h3><p>Résumé sur deux lignes…</p><time>28/9/2026</time></div>
-</a>
-```
-```css
-.news-card { display: grid; grid-template-columns: 196px 1fr; gap: var(--space-5); padding: var(--space-4) var(--space-5); background: var(--surface);
-  border-radius: var(--radius-card); color: var(--text); text-decoration: none; transition: background var(--dur-base) var(--ease), transform var(--dur-base) var(--ease); }
-.news-card:hover { background: var(--surface-2); transform: translateX(4px); }
-.news-card h3 { margin: 0 0 6px; font: 500 var(--text-sm) var(--font-ui); }
-.news-card p { margin: 0; font: 400 var(--text-2xs)/1.5 var(--font-ui); color: var(--muted); }
-.news-card time { justify-self: end; font: 400 var(--text-2xs) var(--font-ui); color: var(--muted); }
-```
+Fond `--accent`, texte noir, bord 0,8px `--accent`, rayon 12px, `all 0.2s linear`. Accolé à un champ, il n'arrondit que son côté droit.
 
-## Panneau de personnage (verre bleuté)
+## 9. Carte de personnage (mesuré)
 
-- Grand panneau 900×520 environ, fond `--glass-veil` sur flou (`backdrop-filter: blur(10px)`), bordure 1px `--glass-edge`, **coin haut-droit arrondi**.
-- En-tête : emblème carré à gauche (fond plus sombre), nom en 30px léger, ligne « micro + interrupteur + VA : nom ».
-- Corps : bloc de description en verre plus sombre (`rgb(0 0 0 / .25)`), texte 12px blanc interligne 1.6.
-- L'illustration du personnage (image réelle : illustration PNG du projet ou rendu, voir `assets.md`) **déborde du panneau** à droite et en haut ; dans la démo, une photo fondue dans le verre par un masque en dégradé.
-- **Citations** : 3 ou 4 lignes en Noto Serif 11px blanc, chacune sur sa propre bande noire `--quote-strip`, alignées à droite, en escalier.
-- En bas : carrousel de vignettes carrées 52px (bordure dorée fine sur la vignette active + petit triangle doré dessous), flèches ‹ › dorées.
+**226 × 486px**, même cadre doré et même coin haut droit arrondi. Portrait plein cadre, fondu noir en bas, **nom centré** 16,9px blanc, petit **losange** de couleur sous le nom. La carte choisie garde un bord doré plein.
 
-## Frise d'emblèmes (verticale)
+## 10. Frise d'emblèmes (signature, mesuré + observé)
 
-Colonne de 3 cercles 70px (fond sombre, bordure 1px dorée, image dans le cercle) reliés par un filet vertical doré avec des petites pointes de flèche ; nom sous chaque cercle (11px, `--muted`, actif en blanc gras). Étoile à 4 branches en haut et en bas de la frise.
+Colonne à gauche de la fiche : emblèmes ronds de **108 × 98px** enfilés sur un filet doré, chevrons en haut et en bas. Emblème inactif : terne, libellé gris `#6f6e6e` 11,8px gras. Actif : éclairé, plus grand, libellé blanc. Les dessins des emblèmes sont des signes (SVG) propres à chaque projet.
 
-## Rail social (droite)
+## 11. Panneau de verre du personnage (signature, mesuré + observé)
 
-Icônes 28px blanches dans des cercles blancs à fond sombre, colonne verticale, libellé « Follow » vertical au-dessus. À gauche : « Scroll Down » vertical + trait.
+Bloc d'environ **450 × 497px de contenu**, coins de 12px. **En-tête bleu nuit** `--glass` (≈ 99px) : icône de voie, nom en **29,8px** Regular, ligne « Voix : … » en 10,7px. **Corps en verre bleu clair** `--glass-light`. Dedans : une **boîte de texte claire** (12,4px / 19,7px, texte sombre). Le **portrait** déborde à droite et se fond dans le panneau. Sur le portrait, la **citation en bandes** : chaque ligne sur son ruban noir à 72 %, en serif italique, alignée à droite. En bas : une rangée de **vignettes carrées** des autres personnages (48px, active à bord doré).
 
-## Bloc de téléchargement (héros)
+## 12. Carte stellaire des mondes (observé)
 
-QR code blanc 116px + grille 2×3 de boutons noirs (rayon 6px, bordure fine) avec logo et deux lignes de texte. Bouton lecture circulaire avec anneau dégradé à côté.
+Fond bleu nuit en dégradé radial. De **grands cercles** se croisent : traits pleins fins et **pointillés épais**. Chaque monde est une **icône ronde lumineuse** (photo ou rendu) avec halo bleu et libellé 11px dessous. Étiquette de page en haut à gauche. Fiche d'un monde : illustration floutée en fond, bouton « Retour », titre centré, carrousel de lieux (image centrale nette, voisines assombries) — voir `examples/mondes.html`.
+
+## 13. Liste d'actualités (page Informations, mesuré)
+
+**Onglets** en 16,9px séparés par une petite étoile ; actif en `--gold`. Chaque article : bandeau de **993 × 151px** au coin haut droit arrondi, vignette à gauche, titre 16,9px / 21,4px, extrait gris, date en bas à droite. Bouton pleine largeur « En savoir plus » sous la liste.
+
+## 14. Bande d'abonnement et pied (mesuré)
+
+Bande `--sub` : titre gras 24px sur deux lignes et texte à gauche ; à droite champ sombre + bouton doré, case de consentement dessous. Pied noir : logotypes centrés, liens gris.
 
 ## États
 
-- **Chargement** : intro « hyperespace » (voir motion.md) puis fondu.
-- **Vide** : en-tête de section + phrase en `--muted` centrée dans une carte à un coin.
-- **Erreur** : carte à un coin avec trait gauche `--accent`, message, bouton or « Réessayer ».
-
----
-
-# Composants des pages Mondes et du mobile
-
-> Relevés le 2026-10-02 sur la carte des mondes, la fiche d'un monde et l'accueil en 375px (voir `source.md`). Valeurs « observé » = à l'œil sur capture ; durées et tailles non mesurées par script.
-
-## Carte stellaire des mondes
-
-**Rôle** : page d'entrée « Mondes » ; choisir une destination.
-**Anatomie** (observé) :
-- plein écran sous la navigation, fond **nuit bleu profond** (`--map-bg`, dégradé radial vers `--map-bg-2` au centre) + champ d'étoiles réel (scène Three.js ou photo) ;
-- **grands anneaux orbitaux concentriques** (ellipses très larges, centre hors écran) qui traversent tout l'écran : traits blancs fins **pleins** (`--orbit`) ou **pointillés** (`--orbit-dim`) ;
-- **mondes** = icônes rondes lumineuses (planète, station, bulle de verre) posées sur les orbites, avec **halo bleu** (`--halo`) et un **libellé blanc 11px** à côté ;
-- étiquette **« Mondes »** en haut à gauche dans un petit cadre sombre (`--label-bg`, filet `--line`).
-
-Les anneaux sont un **élément graphique** (SVG ou lignes Three.js) ; l'intérieur des icônes de mondes est une **vraie image** (illustration du projet, sinon photo d'espace), jamais une planète dessinée en CSS.
-
-| État d'un monde | Rendu |
-|---|---|
-| Repos | icône 64px (`--world-icon`), halo 12px `--halo`, libellé `--text-soft` |
-| Survol | `scale(1.12)`, halo 24px, libellé `--text`, l'orbite porteuse passe de `--orbit-dim` à `--orbit` |
-| Focus | anneau 2px `--gold` décalé de 4px |
-| Actif (sélectionné) | anneau `--gold` permanent + petite étoile ✦ dorée au-dessus |
-| Verrouillé | image en niveaux de gris, opacité .5, libellé « ??? », `aria-disabled="true"` |
-
-```html
-<section class="starmap" aria-label="Carte des mondes">
-  <p class="map-tag">Mondes</p>
-  <svg class="orbits" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <ellipse cx="1500" cy="980" rx="900" ry="520" class="o"/>
-    <ellipse cx="1500" cy="980" rx="1250" ry="760" class="o o--dim"/>
-  </svg>
-  <a class="world" href="monde.html" style="--x:38%;--y:52%"><span class="world__icon"><img src="…" alt="" width="128" height="128"></span><span class="world__name">Station Héliade</span></a>
-</section>
-```
-```css
-.starmap { position: relative; height: calc(100svh - var(--nav-h)); overflow: hidden; background: radial-gradient(ellipse at 60% 70%, var(--map-bg-2), var(--map-bg) 70%); }
-.orbits { position: absolute; inset: 0; width: 100%; height: 100%; }
-.orbits .o { fill: none; stroke: var(--orbit); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.orbits .o--dim { stroke: var(--orbit-dim); stroke-dasharray: 4 8; }
-.map-tag { position: absolute; left: var(--space-6); top: var(--space-6); margin: 0; padding: 4px 12px; background: var(--label-bg); border: 0.8px solid var(--line); font: 500 var(--text-sm) var(--font-ui); }
-.world { position: absolute; left: var(--x); top: var(--y); translate: -50% -50%; display: flex; align-items: center; gap: var(--space-2); color: var(--text-soft); text-decoration: none; min-height: 44px; }
-.world__icon { width: var(--world-icon); height: var(--world-icon); border-radius: 50%; overflow: hidden; box-shadow: 0 0 12px 2px var(--halo); transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out); }
-.world__icon img { width: 100%; height: 100%; object-fit: cover; }
-.world__name { font: 500 var(--text-orbit) var(--font-ui); text-shadow: 0 1px 4px var(--bg-deep); }
-.world:hover .world__icon, .world:focus-visible .world__icon { transform: scale(1.12); box-shadow: 0 0 24px 6px var(--halo); }
-.world:hover .world__name { color: var(--text); }
-.world[aria-current="true"] .world__icon { outline: 2px solid var(--gold); outline-offset: 4px; }
-```
-
-## Fiche d'un monde
-
-**Anatomie** (observé) :
-- fond = **illustration du monde floutée** (`blur(18px)`, `scale(1.1)`) + voile `--veil-world` ;
-- **bouton « Retour »** en haut à gauche : rectangle à **bord fin** (0.8px `--line`), texte 14px, flèche ‹ ;
-- en haut à droite : **nom du monde avec son icône ronde** (même icône que sur la carte, 40px) ;
-- **titre centré** (Noto Sans 300, `--text-world`) + **paragraphe centré 12px** `--text-soft`, largeur ≈ 640px ;
-- **carrousel de lieux** : image centrale 16:9 nette, coins arrondis `--radius-2` ; images voisines à gauche et à droite **assombries** (`--dim-side`) et **coupées** par le bord ; **flèches ‹ › fines** posées sur l'image centrale ; **légende du lieu** sous l'image.
-
-| État | Rendu |
-|---|---|
-| Bouton Retour survol | bordure et texte `--gold` (150ms) |
-| Flèches repos / survol | `--text` 70 % → 100 %, fond `--quote-strip` au survol |
-| Flèches désactivées (bout de liste) | opacité .3, `disabled` |
-| Image voisine survol | voile allégé (.35) ; clic = elle passe au centre |
-| Focus | contour 2px `--gold` |
-
-```css
-.world-page { position: relative; min-height: 100svh; padding: calc(var(--nav-h) + var(--space-6)) 0 var(--space-12); overflow: hidden; }
-.world-page__bg { position: absolute; inset: -40px; z-index: -1; background: var(--map-bg); }
-.world-page__bg img { width: 100%; height: 100%; object-fit: cover; filter: blur(18px); transform: scale(1.1); }
-.world-page__bg::after { content: ""; position: absolute; inset: 0; background: var(--veil-world); }
-.btn-back { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-5); border: 0.8px solid var(--line); background: none; color: var(--text); font: 500 var(--text-sm) var(--font-ui); text-decoration: none; }
-.btn-back:hover { border-color: var(--gold); color: var(--gold); }
-.places { position: relative; display: grid; grid-template-columns: 1fr min(820px, 76vw) 1fr; gap: var(--space-5); align-items: center; }
-.place { aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius-2); position: relative; }
-.place--side::after { content: ""; position: absolute; inset: 0; background: var(--dim-side); transition: background var(--dur-base) var(--ease); }
-.place-arrow { position: absolute; top: 50%; translate: 0 -50%; min-width: 44px; min-height: 64px; background: none; border: 0; color: var(--text); font: 300 2.5rem/1 var(--font-ui); opacity: .7; }
-.place-arrow:hover { opacity: 1; background: var(--quote-strip); }
-```
-
-## Navigation mobile (observé à 375px)
-
-Barre noire `--nav`, hauteur ≈ `--nav-h-mobile` : à gauche une **pilule blanche** `--pill` « Télécharger maintenant » sur **2 lignes** (texte noir 12px), à droite un **hamburger 3 traits** blancs. Le menu ouvert (non observé, proposé) est un tiroir plein écran `--nav`, liens 18px, actif en `--link` avec trait bleu à gauche.
-
-```css
-.mnav { display: flex; justify-content: space-between; align-items: center; height: var(--nav-h-mobile); padding: 0 var(--space-3); background: var(--nav); }
-.mnav__dl { padding: 4px 14px; border-radius: 999px; background: var(--pill); color: var(--on-accent); font: 500 var(--text-xs)/1.2 var(--font-ui); text-align: center; text-decoration: none; }
-.burger { width: 44px; height: 44px; display: grid; place-content: center; gap: 5px; background: none; border: 0; }
-.burger i { width: 22px; height: 2px; background: var(--text); transition: transform var(--dur-base) var(--ease); }
-.burger[aria-expanded="true"] i:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.burger[aria-expanded="true"] i:nth-child(2) { opacity: 0; }
-.burger[aria-expanded="true"] i:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-```
-
-## Gros bouton jaune « Télécharger maintenant » (héros mobile)
-
-**Anatomie** (observé) : centré en bas du héros, fond **jaune** `--cta-yellow`, **bord doré** 2px `--cta-yellow-edge`, **lueur** (`box-shadow` 0 0 24px `--cta-glow`), texte noir 16px 500, rayon `--radius-2` (estimé). Remplace le bloc QR + 6 boutons du bureau. C'est le seul aplat jaune du site : réservé au téléchargement mobile.
-
-| État | Rendu |
-|---|---|
-| Repos | lueur 24px |
-| Survol / appui | lueur 36px, `scale(1.02)` ; appui `scale(.98)` |
-| Focus | contour 2px `--text` décalé 4px |
-| Désactivé | non utilisé |
-
-```css
-.cta-yellow { display: block; width: min(320px, 100%); margin: 0 auto; min-height: 52px; padding: 14px 20px; background: var(--cta-yellow); color: var(--on-accent); border: 2px solid var(--cta-yellow-edge); border-radius: var(--radius-2); box-shadow: 0 0 24px var(--cta-glow); font: 500 1rem var(--font-ui); text-align: center; text-decoration: none; transition: all 0.2s linear; }
-.cta-yellow:hover { box-shadow: 0 0 36px var(--cta-glow); transform: scale(1.02); }
-.cta-yellow:active { transform: scale(.98); }
-```
-
-## Bouton lecture à anneau dégradé (mobile)
-
-Rond 64px, anneau `conic-gradient(var(--ring-a), var(--ring-b), var(--ring-c), var(--ring-a))` qui tourne (6s), centre sombre avec ▶. Sous le héros : **chevron ⌄** de défilement qui descend de 6px en boucle.
-
-## Bannière cookies (mobile)
-
-Panneau `--nav` collé en bas, texte 12px `--text-soft` ; **boutons pleine largeur** empilés : « Tout refuser » et « Accepter » en `--cookie-blue` texte `--on-cookie`, « Paramètres » en contour 0.8px `--line`. Cibles ≥ 44px. Le refus a le même poids visuel que l'acceptation.
+- **Chargement** : saut en hyperespace (voir `motion.md`).
+- **Image absente** : cartes sur fond `--surface-2`, héros sur `--bg-top`, panneau lisible sans portrait.
+- **Formulaire** : erreur (liseré `--accent-hot`, message doré, `aria-invalid`, focus renvoyé), consentement manquant, envoi (`aria-busy`), confirmation en `aria-live`.
+- **Carrousel** : flèche désactivée en bout de course (30 % d'opacité).
+- **Focus clavier** : contour doré 2px décalé de 3px. **Cibles tactiles** : 44px.
