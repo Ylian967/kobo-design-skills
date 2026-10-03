@@ -1,75 +1,96 @@
 ---
 name: glacial-mono-3d
-description: Direction artistique « Glacial Mono 3D » pour sites-vitrines immersifs en 3D (entreprise tech, web3, studio, lancement produit), inspirée des sites primés où une scène 3D glacée et monochrome occupe tout l'écran. Gris-bleu acier, neige et brouillard, objets 3D lumineux (blocs de glace, particules), interface minuscule en monospace collée aux bords, crochets de coin autour des boutons, texte qui se brouille avant de s'afficher, chargement en caractères ASCII, défilement qui fait voyager la caméra. À utiliser pour une landing 3D, un site corporate « froid et premium », un portfolio WebGL ou une page de lancement au style « glace, minimal, monospace, techno ».
+description: Direction artistique « Glacial Mono 3D » pour sites-vitrines immersifs en 3D (entreprise tech, web3, studio, lancement produit), inspirée d'un site primé où une scène 3D glacée et monochrome occupe tout l'écran. Gris-bleu acier, neige et brouillard, objets de glace à facettes, interface minuscule en monospace collée aux quatre coins, boutons à crochets de coin, étiquettes blanches pleines reliées aux objets par un trait, constellation de points numérotés. Animée — chargement en chaîne ASCII, scène qui s'assemble en fil de fer puis se remplit, texte qui passe par des pavés avant de s'afficher, défilement qui fait voyager la caméra de scène en scène, transition en pixels et franges arc-en-ciel, sculpture de particules. À utiliser pour une landing 3D, un site corporate « froid et premium », un portfolio WebGL ou une page de lancement au style « glace, minimal, monospace, techno ».
 ---
 
 # Glacial Mono 3D
 
-> Une vitrine prise dans la glace : une scène 3D grise et silencieuse, et une interface qui chuchote en monospace dans les coins.
+> Un paysage de glace dans le brouillard, quelques lignes de texte minuscules aux quatre coins, et une caméra qui voyage quand on fait défiler.
 
 ## L'idée
 
-La **scène 3D est la page**. Elle occupe tout l'écran, et le défilement déplace la caméra d'un objet à l'autre (un bâtiment de glace, un logo en particules, un socle). L'interface est **minuscule** (10–13px), en **monospace**, collée aux bords : logo en haut à gauche, rubrique en haut à droite, son et aide en bas. Les boutons sont entourés de **crochets de coin** `⌜ ⌟`. Le texte se **brouille** (caractères aléatoires) avant de se fixer. Deux ambiances alternent : brouillard clair et nuit d'acier.
+L'écran entier est une **scène 3D monochrome** : gris-bleu, brume, glace à facettes. Il n'y a pas de page : le défilement **déplace la caméra** d'un lieu à l'autre, et l'ambiance bascule du brouillard clair à la nuit. L'interface se fait oublier : **monospace de 10–11px collée aux bords**, boutons sans fond marqués par quatre **crochets de coin**, étiquettes blanches reliées aux objets par un trait. Tout ce qui apparaît **se construit** : la scène en fil de fer, le texte en pavés.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de logo, de personnage, de marque ni de modèles 3D d'origine.
+Le mouvement fait la moitié du style (`references/motion.md`). Le site de référence dessine tout dans un canvas : rien n'y est mesurable, donc les durées sont proposées et les couleurs lues sur capture (voir `source.md`).
+
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : ni le logo, ni la mascotte, ni les modèles 3D, ni les textes du site.
 
 ## Règles prioritaires
 
-1. **Monochrome strict** : uniquement les gris-bleus de `tokens.css` ; la seule « couleur » est la lueur blanche (`--glow`).
-2. **Une seule famille de police** (IBM Plex Mono), petite, avec des préfixes en barres obliques (`////// Manifeste`, `/// Découvrir`).
-3. **Interface aux bords, contenu au centre** : jamais de grille de cartes, jamais de bloc de texte large (colonne 360px max).
-4. **Crochets de coin** sur tous les éléments cliquables.
-5. **Contraste selon l'ambiance** : sur scène claire, encre `--steel` ; sur scène sombre, `--text`. Si un texte blanc passe sur du clair, ajouter un voile (`--scrim-dark`) — le blanc sur brouillard ne fait que 2,5:1.
-6. **Repli sans WebGL** : image fixe de la scène + même interface ; le site reste lisible et navigable.
-7. **Mouvement réduit** : caméra par coupes au lieu de travellings, texte affiché sans brouillage.
-8. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
+1. **Une scène, pas une page** : canvas fixe plein écran, espace de défilement dessous, caméra à positions clés.
+2. **Monochrome gris-bleu** : `--fog`, `--frost`, `--steel`, `--night`. La seule couleur autorisée est la frange `--prism-*` de la transition.
+3. **Interface aux quatre coins**, en monospace 10–11px, à `--edge` des bords. Rien au centre sauf l'objet.
+4. **Crochets de coin** pour tout bouton ; étiquettes pleines blanches pour annoter un objet.
+5. **Tout se construit** : fil de fer → réseau → matière ; pavés → lettres.
+6. **Texte lisible** : sombre `--steel` sur scène claire, clair `--text` sur nuit ; jamais de blanc sur brouillard clair hors logotype.
+7. **L'interface est en HTML** par-dessus le canvas (le site la dessine dans le canvas : à ne pas imiter).
+8. **Fluide partout** : matières simples, 30 images/s, résolution adaptative (`motion.md`, « Performance »).
+9. **Accessibilité** : `aria-label` avec le vrai texte sur ce qui se brouille, canvas `aria-hidden`, repli photo sans WebGL, mouvement réduit en coupes franches, cibles 44px.
+10. **Aucune valeur en dur** : tout vient de `references/tokens.css` (les couleurs de la scène sont lues dans les variables CSS).
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier. |
-| `references/components.md` | Chargeur ASCII, crochets, texte brouillé, bouton son, panneau de contenu, carrousel 3D sur socle, défilant. Puis, observés sur le site : interface aux 4 coins, constellation de données, étiquette de portfolio, anneaux qui s'assemblent, socle à particules et carrousel à crochets. |
-| `references/layouts.md` | Scène plein écran, chapitres au défilement, panneau de contenu, mobile. |
-| `references/motion.md` | Caméra, brouillage, transitions de chapitre, Three.js. |
-| `references/assets.md` | Avant de construire la scène ou de placer une image : recette 3D complète (éclats de glace, matières, lumière, caméra), photos de repli, traitements, prompts IA. |
-| `examples/demo.html` | Démo Three.js (éclats de glace, rocher de nuit, socle à particules) avec photos de repli et l'interface complète. |
-| `source.md` | Observations et écarts. |
+| `references/tokens.css` | Toujours, en premier : couleurs lues sur capture, tailles, durées proposées. |
+| `references/motion.md` | **Toujours** : les 6 mouvements signature, le code, les règles de performance 3D. |
+| `references/components.md` | Interface aux coins, logotype, bouton à crochets, texte en pavés, étiquettes, constellation, scènes, panneau, chargement, états. |
+| `references/layouts.md` | Écran type, parcours des scènes, panneau, mobile. |
+| `references/assets.md` | Avant de construire la scène ou de choisir un repli : géométries, matières, photos. |
+| `examples/demo.html` | Expérience complète en Three.js (studio fictif « Polar Labs »). |
+| `source.md` | Ce qui a été observé, lu sur capture, proposé ; écarts. |
 
 ## Typographie
 
-| Rôle | Police | Réglages |
+| Rôle | Police (Google Fonts) | Réglages |
 |---|---|---|
-| Interface et texte | **IBM Plex Mono** 400/500 | 10–13px, interligne 1.45 |
-| Logotype | **Unbounded** 700 (équivalent arrondi et large) | 24px, blanc avec halo |
+| Toute l'interface | **IBM Plex Mono** 400 / 500 (c'est la police chargée par le site) | 10px et 11px, interligne 1.45, approche 0.02em ; paragraphes de panneau 13px |
+| Logotype | **Unbounded** 700 (le logo du site est un dessin arrondi) | 24px, blanc, léger halo |
+
+## Couleurs
+
+| Rôle | Token |
+|---|---|
+| Brouillard, scène claire | `--fog`, `--mist`, `--frost` |
+| Ciel, roche, ombres | `--sky`, `--rock`, `--shade`, `--steel` |
+| Glace | `--ice`, `--frost` |
+| Nuit | `--night` |
+| Texte | `--steel` (sur clair), `--text` (sur nuit), `--muted` |
+| Lueur | `--halo`, `--glow` |
+| Étiquettes pleines, pavés | `--white` ; cartouche `--tag` |
+| Chargement | `--loader` |
+| Franges de la transition | `--prism-a`, `--prism-b`, `--prism-c` |
 
 ## Images et 3D
 
-Le visuel principal est une **vraie scène Three.js** : un amas d'éclats de glace en verre transmissif (`MeshPhysicalMaterial`) posé dans le brouillard, sous une lumière froide, avec une parallaxe au pointeur et une caméra qui voyage au défilement vers un rocher de nuit puis un socle à particules. Toutes les couleurs des matières sont lues dans les tokens. Sous le canvas, des **photos de glace en N&B** (iceberg, glacier, banquise) servent de repli sans WebGL. Jamais de dessin CSS/SVG à la place d'un objet ou d'un paysage. Recette complète dans `references/assets.md`.
+Le visuel est une **vraie scène 3D** en Three.js : amas de glace à facettes, bloc sombre et éclats, socle et sculpture de particules, dans un brouillard de la couleur du fond. Les couleurs viennent des tokens. Sans WebGL, trois photos de glace en niveaux de gris prennent le relais. Logotype, crochets, constellation, traits et étiquettes sont des signes et restent en HTML / SVG ; jamais de glace dessinée en CSS. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le bouton à crochets** : un libellé monospace entouré seulement de quatre coins (pas de cadre complet), qui se referment légèrement au survol.
+**La scène qui s'assemble sous une interface de coins** : un objet de glace apparaît en fil de fer dans le brouillard, se remplit, et quatre petits blocs de texte monospace l'encadrent aux coins de l'écran.
 
 ## À éviter
 
-- Ajouter de la couleur, des dégradés vifs, des icônes colorées.
-- Des titres énormes : ici le gigantisme est porté par la 3D, pas par la typo.
-- Un menu classique en haut au centre.
-- Reprendre le logo, la mascotte, les marques ou les modèles 3D de la référence.
+- De la couleur, des dégradés d'ambiance, des photos colorées.
+- Un titre ou un bouton au centre de l'écran ; des boutons pleins ou arrondis.
+- Du texte dessiné dans le canvas.
+- Des sections qui défilent comme une page classique.
+- Des matières réalistes coûteuses sans mesure de fluidité.
+- Le logo, la mascotte, les modèles ou les textes du site d'origine.
 
 ## Adaptation React / React Native
 
-- Web : `@react-three/fiber` + `@react-three/drei` (`ScrollControls`, `Environment`, `Float`), post-traitement léger (bloom).
-- Natif : vidéo pré-rendue de la scène en fond (`expo-video`, boucle muette) + interface en `View` absolues.
-- Texte brouillé : un hook `useScramble(text)` qui remplace progressivement des caractères aléatoires.
+- `@react-three/fiber` : `<Canvas frameloop="demand" dpr={[0.4, 1.25]}>`, `invalidate()` au défilement, hook `useScrollProgress`.
+- Texte en pavés : hook `useScramble(text)`.
+- React Native : `expo-gl` + three, ou vidéos pré-rendues par scène ; interface en vues natives ; crochets avec quatre `View` en bordure.
+- Polices : `@expo-google-fonts/ibm-plex-mono`, `@expo-google-fonts/unbounded`.
 
 ## Avant de livrer
 
-- [ ] Monochrome strict, une seule police.
-- [ ] Interface collée aux bords, colonne de texte étroite.
-- [ ] Crochets sur tous les éléments cliquables.
-- [ ] Contraste vérifié dans les deux ambiances.
-- [ ] Repli sans WebGL et mouvement réduit fonctionnels.
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md`, avec `alt` et couleur de repli.
-- [ ] Testé à 375px et 1440px.
+- [ ] Tokens importés, aucune valeur en dur.
+- [ ] Scène monochrome, interface aux quatre coins en HTML.
+- [ ] Assemblage, texte en pavés, voyage de caméra et transition présents, coupés en mouvement réduit.
+- [ ] Fluidité mesurée ; résolution adaptative et repli photo en place.
+- [ ] Contrastes vérifiés (`python3 tools/check.py glacial-mono-3d`).
+- [ ] Testé à 390px et 1440px, sans débordement horizontal.
+- [ ] Aucun élément du site d'origine.

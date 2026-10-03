@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap">
 <style>
 :root {
-  --fog: #b6bac5; --frost: #d9dce3; --loader: #a0a5b1; --night: #1f2430; --steel: #383e4e; --ink: #1f2430; --text: #e9ecf2; --muted: #8a91a3;
-  --glow: rgb(220 235 255 / 0.85); --line: rgb(233 236 242 / 0.35); --scrim-light: rgb(182 186 197 / 0.72); --scrim-dark: rgb(31 36 48 / 0.72);
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace; --font-logo: 'Unbounded', 'IBM Plex Mono', sans-serif;
-  --text-2xs: 0.625rem; --text-xs: 0.6875rem; --text-sm: 0.8125rem; --text-base: 1rem; --text-logo: 1.5rem; --leading: 1.45; --tracking: 0.02em;
-  --edge: 28px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --text-col: 360px;
-  --bracket: 8px; --bracket-w: 1px;
-  --ease: cubic-bezier(0.16, 1, 0.3, 1); --dur-fast: 200ms; --dur: 600ms; --dur-scene: 1600ms; --scramble: 40ms;
+  --fog: #b6bac5; --mist: #b7bbc6; --sky: #9398a4; --rock: #474e5c; --shade: #383e54; --ice: #657081; --halo: #e5f1f6; --white: #ffffff; --tag: #393a3c;
+  --prism-a: #ff8a7a; --prism-b: #ffe9a8; --prism-c: #8fd0ff; --frost: #d9dce3; --loader: #a0a5b1; --night: #1f2430; --steel: #383e4e; --ink: #1f2430; --text: #e9ecf2;
+  --muted: #8a91a3; --glow: rgb(220 235 255 / 0.85); --line: rgb(233 236 242 / 0.35); --scrim-light: rgb(182 186 197 / 0.72); --scrim-dark: rgb(31 36 48 / 0.72);
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace; --font-logo: 'Unbounded', 'IBM Plex Mono', sans-serif; --text-2xs: 0.625rem; --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem; --text-base: 1rem; --text-logo: 1.5rem; --leading: 1.45; --tracking: 0.02em; --edge: 28px;
+  --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px; --text-col: 360px; --bracket: 8px; --bracket-w: 1px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1); --dur-fast: 200ms; --dur: 600ms; --dur-scene: 1600ms; --dur-born: 2800ms; --dur-glitch: 520ms; --scramble: 40ms;
 }
 * { box-sizing: border-box; }
 html { overflow-x: clip; }
@@ -70,6 +70,21 @@ body:not([data-ch="3"]) .ui .bc { display: none; }
 .panel .close { position: absolute; right: var(--edge); top: var(--edge); }
 
 .spacer { height: 400vh; }
+/* Texte brouillé : d'abord des pavés blancs pleins, puis les lettres */
+.scr.is-busy { background: var(--white); color: var(--steel); }
+.tagline { display: inline-block; padding: 1px 6px; background: var(--tag); color: var(--white); }
+/* Constellation numérotée (scène 1) et légendes à trait (scène 2) : signes posés sur la 3D */
+.marks { position: fixed; inset: 0; z-index: 9; pointer-events: none; color: var(--white); font-size: var(--text-2xs); opacity: 0; transition: opacity var(--dur) var(--ease); }
+body[data-ch="1"].is-born .marks--1, body[data-ch="2"] .marks--2 { opacity: 1; }
+.marks svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1; }
+.marks b { position: absolute; font-weight: 500; transform: translate(-130%, -110%); text-shadow: 0 0 6px var(--shade); }
+.marks .lbl { position: absolute; padding: 2px 8px; background: var(--white); color: var(--steel); font-weight: 500; white-space: nowrap; }
+/* Transition en pixels : quelques pavés et franges de couleur, 0,5s */
+.glitch { position: fixed; inset: 0; z-index: 8; pointer-events: none; overflow: hidden; }
+.glitch i { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h); opacity: 0; background: linear-gradient(100deg, var(--prism-a), var(--prism-b), var(--prism-c)); }
+.glitch i:nth-child(odd) { background: var(--mist); }
+.glitch.is-on i { animation: px var(--dur-glitch) steps(4) both; animation-delay: var(--d); }
+@keyframes px { 0% { opacity: 0; } 25% { opacity: .75; transform: translateX(-18px); } 60% { opacity: .5; transform: translateX(12px); } 100% { opacity: 0; } }
 
 @keyframes fall { to { transform: translate(-40px, 110vh); } }
 @media (max-width: 700px) {
@@ -91,8 +106,17 @@ body:not([data-ch="3"]) .ui .bc { display: none; }
   <div class="snow"><i style="left:10%;--d:9s;--dl:-2s"></i><i style="left:25%;--d:12s;--dl:-6s"></i><i style="left:40%;--d:10s;--dl:-1s"></i><i style="left:58%;--d:13s;--dl:-8s"></i><i style="left:72%;--d:8s;--dl:-4s"></i><i style="left:86%;--d:11s;--dl:-3s"></i><i style="left:94%;--d:14s;--dl:-9s"></i></div>
 </div>
 
+<div class="glitch" id="glitch" aria-hidden="true"></div>
+<div class="marks marks--1" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid meet"><path d="M596 412H742L800 508H662ZM742 412 868 386M596 412 640 520"/></svg>
+  <b style="left:41.4%;top:45.8%">01</b><b style="left:51.5%;top:45.8%">02</b><b style="left:60.3%;top:42.9%">03</b><b style="left:55.5%;top:56.4%">04</b><b style="left:46%;top:57.8%">05</b>
+</div>
+<div class="marks marks--2" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid meet"><path d="M434 184H578L666 270M856 657H1054M1054 657 1010 610"/></svg>
+  <span class="lbl" style="left:29.5%;top:13.6%">PROJET_CO_01</span><span class="lbl" style="left:67%;top:30.2%">03.2026</span><span class="lbl" style="left:63.7%;top:66.8%">CLIQUER POUR EXPLORER</span>
+</div>
 <div class="ui">
-  <div class="tl"><h1 class="logo">POLAR</h1><p>// Copyright © 2026</p><p>Polar Labs. Tous droits réservés.</p><p>Photos : Unsplash · 3D : Three.js</p></div>
+  <div class="tl"><h1 class="logo">POLAR</h1><p><span class="tagline">// Copyright © 2026</span></p><p>Polar Labs. Tous droits réservés.</p><p>Photos : Unsplash · 3D : Three.js</p></div>
   <div class="tr"><h2 class="scr" id="rubric">////// Manifeste</h2><p class="scr" id="manifest">Notre mission : construire la plus grande communauté créative en ligne, et ouvrir la prochaine ère du numérique grand public.</p></div>
   <div class="bl"><span>Défiler pour découvrir</span><button class="ghost" id="sound" aria-pressed="false">◖ Son : coupé</button><button class="bracket" id="openPanel"><span></span>Lire</button></div>
   <div class="bc"><button class="ghost" aria-label="Précédent">‹——  Studio</button><a class="bracket" href="#"><span></span>X / Réseau</a><button class="ghost" aria-label="Suivant">Archives  ——›</button></div>
@@ -117,15 +141,20 @@ body:not([data-ch="3"]) .ui .bc { display: none; }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ascii = document.getElementById('ascii'), loader = document.getElementById('loader');
   const g = '-=+'; const t = setInterval(() => { ascii.textContent = Array.from({ length: 10 }, () => g[Math.random() * 3 | 0]).join(''); }, 80);
-  setTimeout(() => { clearInterval(t); ascii.textContent = '=========='; setTimeout(() => loader.classList.add('is-done'), 250); }, reduce ? 100 : 1600);
+  setTimeout(() => { clearInterval(t); ascii.textContent = '=========='; setTimeout(() => { loader.classList.add('is-done'); document.body.classList.add('is-born'); dispatchEvent(new Event('born')); }, 250); }, reduce ? 100 : 1600);
 
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/\\_<>';
+  const chars = '█▓▒░#/\\_<>01';
+  // Texte brouillé : pavés pleins sur fond blanc, puis les lettres se fixent de gauche à droite
   const scramble = el => { const target = el.dataset.text || el.textContent; el.dataset.text = target; el.setAttribute('aria-label', target);
-    if (reduce) { el.textContent = target; return; } let i = 0; clearInterval(el._t);
-    el._t = setInterval(() => { el.textContent = [...target].map((c, k) => k < i || c === ' ' ? c : chars[Math.random() * chars.length | 0]).join(''); i += 2; if (i > target.length) { clearInterval(el._t); el.textContent = target; } }, 40); };
+    if (reduce) { el.textContent = target; return; } let i = -8; clearInterval(el._t); el.classList.add('is-busy');
+    el._t = setInterval(() => { el.textContent = [...target].map((c, k) => k < i || c === ' ' ? c : chars[Math.random() * chars.length | 0]).join(''); i += 2;
+      if (i > target.length) { clearInterval(el._t); el.textContent = target; el.classList.remove('is-busy'); } }, 40); };
+  const glitchEl = document.getElementById('glitch');
+  const glitch = () => { if (reduce) return; glitchEl.innerHTML = Array.from({ length: 14 }, () => '<i style="--x:' + (Math.random() * 90) + '%;--y:' + (Math.random() * 90) + '%;--w:' + (6 + Math.random() * 26) + '%;--h:' + (2 + Math.random() * 12) + '%;--d:' + (Math.random() * 160 | 0) + 'ms"></i>').join('');
+    glitchEl.classList.remove('is-on'); void glitchEl.offsetWidth; glitchEl.classList.add('is-on'); };
   const rubrics = { 1: '////// Manifeste', 2: '////// Résumé', 3: '////// Réseaux' };
   let ch = 1;
-  const setCh = n => { if (n === ch) return; ch = n; document.body.dataset.ch = n;     const r = document.getElementById('rubric'); r.dataset.text = rubrics[n]; scramble(r); };
+  const setCh = n => { if (n === ch) return; ch = n; document.body.dataset.ch = n; glitch();     const r = document.getElementById('rubric'); r.dataset.text = rubrics[n]; scramble(r); };
   addEventListener('scroll', () => { const p = scrollY / (document.documentElement.scrollHeight - innerHeight); setCh(p < .34 ? 1 : p < .67 ? 2 : 3); }, { passive: true });
   scramble(document.getElementById('manifest'));
   const panel = document.getElementById('panel');
@@ -143,7 +172,6 @@ body:not([data-ch="3"]) .ui .bc { display: none; }
 </script>
 <script type="module">
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const host = document.querySelector('[data-3d]');
 const css = getComputedStyle(document.documentElement);
@@ -152,19 +180,15 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 let renderer;
 try {
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: 'high-performance' });
 } catch (e) { host.classList.add('no-webgl'); throw e; }
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+let quality = Math.min(devicePixelRatio, 1.25); renderer.setPixelRatio(quality);   // plein écran : résolution ajustée en cours de route (voir tick)
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
 host.appendChild(renderer.domElement);
 renderer.domElement.setAttribute('aria-hidden', 'true');
 
 const C = { fog: tok('--fog'), frost: tok('--frost'), night: tok('--night'), steel: tok('--steel'), text: tok('--text'), muted: tok('--muted') };
 const scene = new THREE.Scene();
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 scene.background = C.fog.clone();                       // opaque : le verre transmissif a besoin d'un fond
 scene.fog = new THREE.Fog(C.fog.clone(), 6, 22);
 
@@ -178,11 +202,11 @@ const sun = new THREE.DirectionalLight(C.text, 2.5); sun.position.set(-5, 6, 3);
 let seed = 7; const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
 
 // Matières
-const ice = new THREE.MeshPhysicalMaterial({ color: C.frost, transmission: 1, thickness: 1.2, roughness: 0.08, ior: 1.31,
-  attenuationColor: C.fog, attenuationDistance: 2.5, clearcoat: 1, clearcoatRoughness: 0.1, flatShading: true });
-const snowMat = new THREE.MeshStandardMaterial({ color: C.frost, roughness: 1 });
-const rockMat = new THREE.MeshStandardMaterial({ color: C.steel, roughness: 0.85, metalness: 0.1, flatShading: true });
-const metal = new THREE.MeshPhysicalMaterial({ color: C.frost, metalness: 1, roughness: 0.25, clearcoat: 0.6 });
+// Glace : pas de transmission (elle double le coût du rendu), une matière claire, brillante et un peu translucide suffit
+const ice = new THREE.MeshPhongMaterial({ color: C.frost, specular: C.text, shininess: 70, transparent: true, opacity: 0.86, flatShading: true });   // matières simples : pas de carte d'environnement
+const snowMat = new THREE.MeshLambertMaterial({ color: C.frost });
+const rockMat = new THREE.MeshPhongMaterial({ color: C.steel, shininess: 12, flatShading: true });
+const metal = new THREE.MeshPhongMaterial({ color: C.frost, specular: C.text, shininess: 90 });
 
 // Sol de neige
 const ground = new THREE.Mesh(new THREE.CircleGeometry(40, 64), snowMat);
@@ -200,6 +224,14 @@ for (let i = 0; i < 12; i++) {
   m.rotation.set(Math.sin(a) * 0.45, rnd() * Math.PI, -Math.cos(a) * 0.45);   // penché vers l'extérieur
   cluster.add(m);
 }
+// Assemblage : arêtes en fil de fer de l'amas + réseau de traits autour (ils apparaissent avant la matière)
+const wireMat = new THREE.LineBasicMaterial({ color: C.text, transparent: true, opacity: 0 });
+const wires = new THREE.Group(); cluster.children.forEach(m => { const l = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry), wireMat); l.position.copy(m.position); l.rotation.copy(m.rotation); wires.add(l); }); scene.add(wires);
+const NET = 90, netPos = new Float32Array(NET * 6);
+for (let i = 0; i < NET; i++) { const a = rnd() * 6.28, d = 1.5 + rnd() * 6, x = Math.cos(a) * d, z = Math.sin(a) * d * .7, y = -0.9 + rnd() * 3; netPos.set([x, y, z, x + (rnd() - .5) * 2.2, y + (rnd() - .5) * 1.4, z + (rnd() - .5) * 2.2], i * 6); }
+const netGeo = new THREE.BufferGeometry(); netGeo.setAttribute('position', new THREE.BufferAttribute(netPos, 3)); netGeo.setDrawRange(0, 0);
+const net = new THREE.LineSegments(netGeo, wireMat); scene.add(net);
+let born = reduce ? 1 : 0, bornAt = 0; addEventListener('born', () => { bornAt = performance.now(); });
 // Fragments en suspension tout le long du parcours
 const shards = [];
 for (let i = 0; i < 22; i++) {
@@ -298,9 +330,21 @@ function renderStill() {
   renderer.render(scene, camera);
 }
 
-const clock = new THREE.Clock();
-function tick() {
+const clock = new THREE.Clock(); let lastFrame = 0, slow = 0;
+const BORN = parseFloat(css.getPropertyValue('--dur-born')) || 2800;
+function tick(now = 0) {
+  requestAnimationFrame(tick);
+  if (document.hidden || now - lastFrame < 30) return;                           // 30 images/s : la scène couvre tout l'écran
+  // Résolution adaptative : si une image met plus de 45ms, on baisse la finesse du rendu (jusqu'à 0,4) ; le canvas reste plein écran
+  slow = now - lastFrame > 45 ? slow + 1 : Math.max(0, slow - 1); lastFrame = now;
+  if (slow > 6 && quality > .4) { quality = Math.max(.4, quality - .2); renderer.setPixelRatio(quality); resize(); slow = 0; }
   const dt = Math.min(clock.getDelta(), 0.05), time = clock.elapsedTime;
+  if (bornAt && born < 1) {                                                      // fil de fer → réseau → matière
+    born = Math.min(1, (now - bornAt) / BORN);
+    wireMat.opacity = born < .5 ? born * 1.6 : (1 - born) * 1.6; netGeo.setDrawRange(0, Math.floor(Math.min(1, born * 1.8) * NET) * 2);
+    const solid = smooth(Math.max(0, (born - .35) / .65)); ice.opacity = 0.86 * solid; cluster.scale.setScalar(.9 + .1 * solid); ground.scale.setScalar(.05 + .95 * solid);
+    wires.rotation.copy(cluster.rotation);
+  }
   const t = sample();
   sx += (px - sx) * 0.05; sy += (py - sy) * 0.05;
   camPos.x += sx * 0.5; camPos.y -= sy * 0.35;
@@ -312,13 +356,13 @@ function tick() {
   const goal = t > 1.5 ? 1 : 0;
   if (Math.abs(goal - assemble) > 0.001) { assemble += (goal - assemble) * 0.04; setParticles(smooth(assemble)); }
   renderer.render(scene, camera);
-  requestAnimationFrame(tick);
 }
+if (!reduce) { ice.opacity = 0; ground.scale.setScalar(.05); }
 if (reduce) {
   renderStill();
   addEventListener('scroll', () => requestAnimationFrame(renderStill), { passive: true });
   new ResizeObserver(() => requestAnimationFrame(renderStill)).observe(host);
-} else tick();
+} else requestAnimationFrame(tick);
 host.classList.add('is-3d-ready');
 </script>
 </body>

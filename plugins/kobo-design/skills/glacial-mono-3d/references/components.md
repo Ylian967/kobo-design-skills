@@ -1,78 +1,68 @@
 # Glacial Mono 3D — composants
 
-## Chargeur ASCII
+Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html`. Le site de référence dessine son interface dans le canvas : tout est **observé sur capture** (1440 × 900) ; les tailles sont approchées.
 
-Fond `--loader`, au centre une chaîne de 10 caractères parmi `- = +` qui change toutes les 80ms (comme une barre de progression bruitée), blanche, 13px. Quand le chargement est fini, la chaîne se remplit de `=` puis disparaît en fondu.
+## 1. Interface aux quatre coins (signature)
 
-```js
-const glyphs = '-=+'; const el = document.querySelector('.loader__ascii');
-const tick = setInterval(() => { el.textContent = Array.from({ length: 10 }, () => glyphs[Math.random() * 3 | 0]).join(''); }, 80);
-```
+Le contenu de l'écran, c'est la scène. L'interface est **minuscule, en monospace, collée aux bords** (`--edge` : 28px) :
 
-## Crochets de coin (signature)
+| Coin | Contenu |
+|---|---|
+| Haut gauche | logotype large et arrondi, blanc lumineux ; dessous, un **petit cartouche sombre** `--tag` (« // Copyright © 2026 ») |
+| Haut droit | rubrique (« ////// Manifeste »), puis un paragraphe court **aligné à droite**, 190px de large |
+| Bas gauche | « Défiler pour découvrir », réglage du son, bouton à crochets |
+| Bas centre | (dernière scène) carrousel de liens : flèche fine, bouton à crochets, flèche fine |
+
+Texte en `--text-xs` (11px) et `--text-2xs` (10px), sombre `--steel` sur scène claire, clair `--text` sur scène de nuit.
+
+## 2. Logotype
+
+Mot en capitales très larges et arrondies (`--font-logo`), blanc avec un léger halo. C'est un signe : il reste en texte.
+
+## 3. Bouton à crochets de coin (signature)
+
+Pas de fond, pas de bord : **quatre petits crochets en L** (8px, 1px) aux coins du texte. Survol : les crochets se resserrent de 3px. Hauteur de cible 44px.
 
 ```css
-.bracket { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; background: none; border: 0; color: inherit; font: 500 var(--text-xs) var(--font-mono); cursor: pointer; }
-.bracket::before, .bracket::after { content: ""; position: absolute; width: var(--bracket); height: var(--bracket); border: var(--bracket-w) solid currentColor; transition: transform var(--dur-fast) var(--ease); }
-.bracket::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }
-.bracket::after { right: 0; bottom: 0; border-left: 0; border-top: 0; }
-.bracket:hover::before { transform: translate(3px, 3px); } .bracket:hover::after { transform: translate(-3px, -3px); }
+.bracket::before, .bracket::after, .bracket span::before, .bracket span::after { content: ""; position: absolute; width: var(--bracket); height: var(--bracket); border: var(--bracket-w) solid currentColor; }
+.bracket::before { left: 0; top: 0; border-right: 0; border-bottom: 0; }   /* … un par coin */
+.bracket:hover::before { transform: translate(3px, 3px); }
 ```
-(Pour 4 coins, ajouter un `<span>` interne qui porte les deux autres coins.)
 
-## Texte brouillé
+## 4. Texte en pavés
 
-Chaque texte qui apparaît passe par 6 à 10 étapes de caractères aléatoires (`A-Z0-9/\\_<>`) avant d'afficher la vraie lettre, de gauche à droite, pas de `--scramble`. L'attribut `aria-label` porte le vrai texte dès le départ.
+Tout texte d'interface qui apparaît passe par un état **bloc blanc plein** (`.is-busy` : fond `--white`, pavés `█▓▒░`), puis se décode. Le vrai texte est dans `aria-label`. Voir `motion.md`.
 
-## Barre d'interface
+## 5. Étiquette pleine
 
-- **Haut gauche** : logotype (Unbounded 24px blanc avec halo `text-shadow: 0 0 12px var(--glow)`), et dessous deux lignes mono 10px (`// Copyright © 2026`, `Studio. Tous droits réservés.`).
-- **Haut droite** : rubrique courante (`////// Manifeste`) + 4 lignes de texte 10px alignées à droite, colonne de 180px.
-- **Bas gauche** : `Défiler pour découvrir` + bouton son `◖ Son : activé`.
-- **Bas centre** (chapitres à carrousel) : `‹— Précédent   ⌜ X / Réseau ⌟   Suivant —›`.
+Petit rectangle **blanc** à texte sombre, sans arrondi (« PROJET_CO_01 », date, « CLIQUER POUR EXPLORER »), posé près de l'objet et relié à lui par un **trait fin blanc coudé**.
 
-## Panneau de contenu
+## 6. Constellation numérotée
 
-Overlay sur scène sombre floutée : colonne 360px centrée, sections préfixées `////// Résumé`, `/// Découvrir`, `/// Visiter`, texte 11–13px, liens entre crochets droits `[X] ↗ [IG] ↗`. Bouton `⌜ Fermer ⌟` en haut à droite.
+Sur l'objet de la première scène : 4 ou 5 points numérotés « 01 … 05 » en blanc 10px, reliés par des **traits blancs de 1px** formant un polygone. Signe en SVG, posé au-dessus du canvas.
 
-## Socle 3D
+## 7. Scènes 3D
 
-Un disque métallique en anneaux concentriques (vrai objet 3D : cylindres `MeshPhysicalMaterial` métal, voir `assets.md`) sur lequel flotte l'objet du chapitre (logo en particules `THREE.Points`, objet `.glb`). Flèches fines `<——` `——>` de part et d'autre.
+| Scène | Fond | Objet | Détails |
+|---|---|---|---|
+| 1 — Accueil | brouillard `--fog`, sol de neige | amas de blocs ou de cristaux de glace, lueur `--halo` aux joints | constellation numérotée, fragments qui flottent |
+| 2 — Projet | nuit `--night` | un grand bloc sombre contenant un signe, éclats en orbite | étiquettes pleines et traits de rappel, grille de points en fond |
+| 3 — Fin | clair `--frost` | socle à anneaux + sculpture en particules | carrousel de liens à crochets |
 
-## Neige / particules
+Matières : glace claire à facettes, un peu translucide ; roche `--steel` à facettes ; socle clair brillant. Lumière froide : une lumière d'ambiance ciel / sol et un soleil latéral.
 
-Points blancs flous qui tombent lentement (canvas 2D ou `radial-gradient` animé), densité faible, désactivés si mouvement réduit.
+## 8. Panneau de contenu
+
+Plein écran sur voile sombre (`--scrim-dark`) : **colonne étroite** de 360px centrée, rubriques en gris (« ////// Résumé », « /// Découvrir »), texte 13px, liens **entre crochets** (« [X] ↗ »). Bouton « Fermer » à crochets en haut à droite. Échap ferme.
+
+## 9. Chargement
+
+Fond `--loader`, une chaîne de signes ASCII au centre, 13px, blanche.
 
 ## États
 
-- **Pas de WebGL** : photo réelle N&B de la scène en fond (`data-slot`, voir `assets.md`), interface inchangée.
-- **Son coupé** par défaut ; le bouton change de libellé sans popup.
-
----
-
-# Relevés sur le site en ligne (2026-10-03)
-
-La scène s'est cette fois chargée (navigateur intégré, ~612px de large). **Tout, y compris le texte, est dessiné dans le WebGL** : le document ne contient qu'un `div` vide, aucune police ni aucun style n'est lisible par script. Ce qui suit est **observé** (≈).
-
-## Interface aux quatre coins (relevée)
-
-- Haut gauche : logotype arrondi blanc, puis « // Copyright © année » et le nom de la société sur 2 lignes, mono ~11px blanc.
-- Haut droite : « ////// Manifeste » puis la phrase de mission en mono, **justifiée à droite** sur 5 lignes.
-- Bas gauche : « Défiler pour découvrir. » sur 2 lignes ; tout en bas, icône haut-parleur barrée + « Son : Non ».
-- Ces blocs disparaissent (brouillage) dès qu'on quitte l'écran d'accueil ; seuls le logo et « Son » restent.
-
-## Étiquettes de données sur l'objet
-
-Sur l'igloo de l'accueil, des **nombres** (« 12 », « 21 », « 29 »…) reliés par des **segments fins blancs** forment une constellation posée sur les blocs, comme une mesure technique de l'objet. Les nombres changent quand la caméra bouge.
-
-## Étiquette de portfolio (fiche d'objet)
-
-Pour chaque projet, un **bloc de glace** flottant, le logo du projet pris dans la glace ; à côté, une étiquette mono en capitales reliée par un trait de rappel : « PORTFOLIO_CO_01 / NOM » ou « D 06.01.2023 / CLIQUER POUR EXPLORER » soulignée d'un filet. Des **faisceaux de traits fins** (comme des éclats de verre) partent de l'objet. Le logo du site lui-même se brouille brièvement (lettres remplacées) pendant les transitions.
-
-## Anneaux qui s'assemblent
-
-Grands segments d'anneau en pierre/glace sculptée qui **convergent** et s'emboîtent pour former le symbole de la marque, avec une lumière bleu-blanc qui naît au centre et un réseau de lignes et points (plexus) en surimpression ; puis l'ensemble se dissout en **flou radial** (tunnel) pour passer à la scène suivante.
-
-## Socle et sculpture de particules (fin de page)
-
-Un **socle rond** lumineux (anneau de lumière sur son bord, disque gravé) porte une **sculpture en nuage de points** sombres qui change de forme ; en bas, un **carrousel de liens** : libellé central entre **crochets de coin** (« [ Réseau ] »), libellés voisins estompés, et deux flèches en traits fins de part et d'autre de l'objet (← →).
+- **WebGL absent** : photo de repli par scène (glace, glacier, banquise), en niveaux de gris, sous un voile.
+- **Mouvement réduit** : scène complète d'emblée, coupes franches (voir `motion.md`).
+- **Focus clavier** : contour pointillé 1px de la couleur du texte, décalé de 4px.
+- **Son** : bouton à bascule (`aria-pressed`), coupé par défaut.
+- **Petit écran** : marges de 16px, paragraphe du coin haut droit masqué, carrousel resserré.

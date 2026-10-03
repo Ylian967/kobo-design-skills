@@ -1,13 +1,23 @@
 /*
  * Glacial Mono 3D — tokens
- * Palette issue de la fiche Awwwards (#b6bac5, #383e4e) et du fond de chargement mesuré (#a0a5b1), voir source.md.
- * @contrast ink:frost text:night muted:night ink:fog
+ * Le site de référence dessine tout dans un canvas WebGL (aucun style lisible) : les couleurs sont LUES SUR CAPTURE (1440×900, 2026-10-03),
+ * le fond de chargement est mesuré (style calculé), deux teintes viennent de la fiche Awwwards. Tailles : relevées sur capture. Voir source.md.
+ * @contrast ink:frost text:night muted:night ink:fog ink:white steel:white white:tag white:rock ink:mist ink:sky
  */
 :root {
   /* Couleurs : deux « météos » */
-  --fog: #b6bac5;            /* scène claire (neige, brouillard) */
+  --fog: #b6bac5;            /* brouillard clair — fiche Awwwards, confirmé sur capture (#b7bbc6) */
+  --mist: #b7bbc6;           /* lu sur capture : brume lointaine */
+  --sky: #9398a4;            /* lu sur capture : ciel de la scène d'accueil */
+  --rock: #474e5c;           /* lu sur capture : blocs et neige à l'ombre */
+  --shade: #383e54;          /* lu sur capture : faces les plus sombres */
+  --ice: #657081;            /* lu sur capture : glace du cube (scène « portfolio ») */
+  --halo: #e5f1f6;           /* lu sur capture : lueur bleu-blanc des joints */
+  --white: #ffffff;          /* lu sur capture : texte, étiquettes pleines pendant le brouillage */
+  --tag: #393a3c;            /* lu sur capture : petit cartouche sombre sous le logo */
+  --prism-a: #ff8a7a; --prism-b: #ffe9a8; --prism-c: #8fd0ff;   /* observé : franges arc-en-ciel de la transition (teintes approchées) */
   --frost: #d9dce3;          /* surfaces claires */
-  --loader: #a0a5b1;         /* fond de chargement mesuré */
+  --loader: #a0a5b1;         /* mesuré (style calculé du body) : fond de chargement */
   --night: #1f2430;          /* scène sombre (pages de contenu) */
   --steel: #383e4e;          /* encre principale sur clair */
   --ink: #1f2430;
@@ -40,6 +50,8 @@
 
   /* Mouvement */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);   /* expo out */
-  --dur-fast: 200ms; --dur: 600ms; --dur-scene: 1600ms;
+  --dur-fast: 200ms; --dur: 600ms; --dur-scene: 1600ms;   /* proposés : rien n'est lisible dans le canvas du site */
+  --dur-born: 2800ms;     /* proposé : la scène s'assemble (fil de fer, réseau, matière) */
+  --dur-glitch: 520ms;    /* proposé : transition en pixels entre deux scènes */
   --scramble: 40ms;       /* pas de l'effet de texte brouillé */
 }

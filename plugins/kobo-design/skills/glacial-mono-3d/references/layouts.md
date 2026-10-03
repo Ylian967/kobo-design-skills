@@ -1,32 +1,48 @@
 # Glacial Mono 3D — mises en page
 
-## Scène plein écran
+Relevé sur captures du site de référence à 1440 × 900 (2026-10-03). Le site n'a pas de page au sens habituel : un canvas plein écran, et le défilement déplace la caméra.
 
-- `canvas` fixe en fond (`position: fixed; inset: 0`), interface fixe par-dessus (`pointer-events` seulement sur les éléments cliquables).
-- Le document a une hauteur artificielle (ex. 600vh) : le défilement pilote la caméra, il n'y a pas de sections HTML visibles.
-- Marges de l'interface : `--edge` (28px) sur desktop, 16px sur mobile.
+## Écran type
 
-## Chapitres (au défilement)
+```
+ LOGO                                                ////// Manifeste
+ [// Copyright © 2026]                         Notre mission : construire
+ Polar Labs. Tous droits…                       la plus grande communauté…
 
-1. **Arrivée** : paysage de brouillard, objet principal en 3D (éclats de glace ou bâtiment de glace, voir `assets.md`) au centre. Manifeste en haut à droite.
-2. **Nuit** : la caméra plonge, le fond passe à `--night`, un objet sombre (rocher, sculpture) flotte ; le panneau de contenu peut s'ouvrir.
-3. **Socle** : carrousel d'objets 3D (logos en particules) sur un socle métallique, navigation précédente / suivante en bas.
-4. **Sortie** : retour au brouillard, liens et crédits en mono.
+                         ◇  objet 3D  ◇
+                      01 ─── 02
+                        ╲      ╲ 03
+                      05 ─── 04
+
+ Défiler pour découvrir
+ ◖ Son : coupé
+ ⌜ Lire ⌟                  ‹—— Studio   ⌜ X / Réseau ⌟   Archives ——›
+```
+
+- **Canvas fixe** plein écran ; l'interface est une couche HTML fixe par-dessus (`pointer-events` seulement sur ses éléments).
+- **Marge unique** de 28px (`--edge`) ; aucun autre alignement.
+- **Un espace de défilement** de 400vh sous la scène : c'est lui qui donne la progression (0 → 1).
+
+## Parcours
+
+| Progression | Scène | Ambiance | Interface |
+|---|---|---|---|
+| chargement | chaîne ASCII | `--loader` | — |
+| 0 – 0,34 | 1 : amas de glace sur la neige | brouillard clair | texte sombre, constellation numérotée |
+| 0,34 – 0,67 | 2 : bloc sombre et éclats | nuit | texte clair, étiquettes pleines |
+| 0,67 – 1 | 3 : socle et sculpture de particules | clair | texte sombre, carrousel de liens en bas |
+
+La caméra **reste posée** sur chaque scène pendant un quart de son segment, voyage pendant la moitié, puis se pose.
+
+Sur le site : accueil (dôme de glace), recul avec transition en pixels, « portfolio » (cubes de glace contenant des logos, un par projet, flèches latérales), symbole (anneaux qui s'assemblent), fin (socle, sculpture en particules, liens).
+
+## Panneau de contenu
+
+Ouvert depuis un bouton à crochets : voile sombre plein écran, colonne de 360px centrée. La scène reste visible, floue, derrière.
 
 ## Mobile
 
-- Interface réduite à : logo, rubrique (1 ligne), son, flèches du carrousel.
-- Paragraphes du manifeste dans un tiroir qui s'ouvre via `⌜ Lire ⌟`.
-- Scène 3D allégée (moins de particules, pas d'ombres) ou vidéo en boucle.
-
----
-
-## Parcours réel (observé, 2026-10-03)
-
-1. **Accueil** : igloo de glace aux joints lumineux dans un paysage enneigé gris, interface aux 4 coins.
-2. **Recul de caméra** au défilement : l'igloo s'éloigne, aberration chromatique (franges arc-en-ciel) pendant le mouvement, l'interface des coins s'efface.
-3. **Portfolio** : brouillard gris uni ; une suite de **blocs de glace** qui passent au premier plan un par un, chacun avec son étiquette ; on traverse le brouillard entre deux blocs.
-4. **Symbole** : anneaux qui s'assemblent puis flou radial.
-5. **Fin** : socle lumineux, sculpture de particules, carrousel de liens à crochets.
-
-Pas de sections HTML : un seul plan 3D piloté par le défilement, l'interface reste fixe aux coins. Sur écran étroit, mêmes positions de coin, textes ~11px.
+- Marges de 16px ; le paragraphe du coin haut droit disparaît, la rubrique reste.
+- Champ de vision de la caméra élargi (50° au lieu de 35°) quand l'écran est plus haut que large, pour garder l'objet entier.
+- Constellation et étiquettes conservées, à leur position en pourcentage.
+- Carrousel du bas resserré, texte de 10px.
