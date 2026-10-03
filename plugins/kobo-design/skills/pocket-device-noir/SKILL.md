@@ -1,103 +1,99 @@
 ---
 name: pocket-device-noir
-description: Direction artistique « Pocket Device Noir » pour sites produit d'objets tech et connectés (assistant vocal IA, gadget de poche, enceinte, montre, écouteurs, caméra, wearable, hardware startup), inspirée d'un concept Dribbble de site pour un compagnon IA de poche. Fond noir pur, photo de bureau chaleureuse (bois, café, lampe) qui fond au noir en bas, grand titre centré en grotesque serrée « Rencontrez … », deux petits boutons (blanc plein et sombre à contour), carte de verre fumé flottante « Offre du moment », petits libellés techniques dans les coins, section manifeste sur noir avec rayons fins en éventail et mots surlignés en rouge, nom de produit géant gris sombre derrière le rendu de l'objet, panneaux de verre avec étiquettes grises à coins de 3px, textures de roche et de tissu orange, rangée de témoignages miniatures. À utiliser pour une page de lancement hardware, une précommande, une fiche produit tech ou une app compagnon au style « noir, premium, minimal, objet, Apple-like, chaleureux ».
+description: Direction artistique « Pocket Device Noir » pour un produit tech ou un objet connecté (assistant vocal, enregistreur, baladeur, montre, accessoire audio, gadget de poche, lancement de matériel, précommande), mesurée sur une maquette Dribbble de site d'objet connecté. Site noir où la chaleur vient des photos - héros sur un bureau en bois au soleil rasant avec l'objet au centre, titre blanc centré, bouton blanc et bouton en verre fumé, carte d'offre à contour en tirets ; manifeste centré avec deux mots en rouge sur des rayons fins ; nom du produit géant en dégradé gris derrière l'objet ; bande de cinq vignettes dont celle du centre est agrandie ; panneau de verre flouté « en vedette » sur photo ; vue intérieure avec points d'intérêt et graduation rouge ; témoignages en rail ; appel final sur photo dorée. Objet présenté en 3D ou en photo, un seul rouge, pointillés et tirets fins. À utiliser pour une landing produit, une page de précommande ou une fiche d'objet au style « sombre, premium, chaleureux, minimal, matériel ».
 ---
 
 # Pocket Device Noir
 
-> Un objet noir posé sur un bureau en bois au soleil couchant, puis rien que du noir autour de lui, et un seul point rouge : son bouton.
+> Un petit objet noir posé sur un bureau au soleil : tout le site est dans ce contraste entre la pénombre et le bois chaud.
 
 ## L'idée
 
-Le visiteur doit sentir qu'on lui présente **un objet**, pas une application : le produit est le héros de chaque écran, le reste est noir. Le langage vient des sites de lancement hardware : une **photo d'ambiance chaude** qui disparaît dans le noir, un **titre centré court**, puis des sections très sombres où l'objet flotte devant son **nom géant gris sombre**. Le style vit dans le contraste entre **chaleur des photos** (bois, café, tissu orange) et **froid de l'interface** (noir, verre fumé, étiquettes en mono). Le **rouge** n'existe que là où il existe sur l'objet : son bouton, son voyant, et quelques mots du manifeste.
+Le site est **noir**, calme, presque muet — et il s'ouvre sur une **photo chaude** : un bureau en bois, une lumière de fin d'après-midi, et l'objet au milieu. Ce va-et-vient entre photos dorées et sections noires rythme toute la page. L'objet lui-même est montré sous tous les angles : tenu, de face devant son **nom géant**, de trois quarts avec ses points d'intérêt. L'interface s'efface : petits boutons blancs, étiquettes grises, verre fumé, pointillés. Une seule couleur, le **rouge du bouton de l'objet**, réapparaît sur deux mots et un pictogramme.
 
-Inspiré de : voir `source.md`. On reprend le langage visuel (proportions, rythme, traitements), jamais l'identité : pas de nom de produit, de logo, de rendu ni de texte du shot d'origine.
+Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité : pas de nom, logo, produit, photos ni textes de la maquette d'origine.
 
 ## Règles prioritaires
 
-1. **Noir d'abord** : `--bg` #000 et `--bg-2` #0d0d0d alternent ; la couleur vient des photos et de l'objet, jamais de l'interface.
-2. **L'objet est le héros** : un rendu par section, centré, grand, avec une ombre au sol ; le texte s'organise autour (légendes en coins, panneaux de verre en bas).
-3. **Hiérarchie** : un titre centré court en Geist 500 serré (-0.035em) ; sous-titres gris ; étiquettes en Geist Mono 11px capitales sur gris `--chip`. Le blanc plein est réservé à l'action principale.
-4. Contraste : texte courant ≥ 4,5:1 ; texte des étiquettes `--chip-text` sur `--chip` ; rouge en texte seulement sur noir (`--red` 4,9:1) ou en `--red-text` sur gris ; jamais de texte blanc sur rouge (paires vérifiées dans `references/tokens.css`).
-5. **Formes** : boutons à coins de 4px (pas de pilules), étiquettes à 3px, panneaux de verre à 12px, tuiles photo à 20px. Verre = `--glass` + contour 1px `--glass-line` + flou 18px.
-6. **Mouvement discret et mécanique** : la molette tourne au survol, le voyant pulse, les rayons tournent très lentement, l'objet flotte de 10px. Pas d'effet spectaculaire.
-7. Accessibilité : cibles ≥ 44px, focus visible (contour blanc), `prefers-reduced-motion` respecté, le rendu de l'objet a une description textuelle.
-8. Aucune valeur en dur : couleurs, polices, tailles, rayons et durées viennent de `references/tokens.css`.
+1. **Noir + photos chaudes, en alternance.** Pas d'autre fond.
+2. **Un seul rouge**, celui de l'objet : deux mots du manifeste, un pictogramme, un point d'intérêt, le haut de la graduation.
+3. **L'objet est le héros de chaque section** : en photo ou en 3D, jamais dessiné en CSS.
+4. **Le nom géant passe derrière l'objet**, en dégradé gris vers le noir.
+5. **Boutons blancs petits** (40px, rayon 6px) ; second bouton en verre fumé.
+6. **Pointillés et tirets** pour séparer, sélectionner, annoter ; pas de bordures pleines épaisses.
+7. **Texte centré** dans les sections noires ; à gauche dans les panneaux de verre.
+8. **Un seul flou** (le panneau « en vedette ») ; jamais de flou animé.
+9. **Aucune valeur en dur** : tout vient de `references/tokens.css`.
 
 ## Fichiers du skill
 
 | Fichier | Quand le lire |
 |---|---|
-| `references/tokens.css` | Toujours, en premier : copier le bloc `:root` dans le projet. |
-| `references/components.md` | Avant de coder un bouton, la navigation, une étiquette, la carte de verre, l'emplacement 3D de l'objet, un panneau de fonction, un témoignage ; bande de films à sélection centrale, panneau « en vedette », appel final photo (vus dans la vidéo du shot). |
-| `references/layouts.md` | Avant de construire une page : héros bureau, manifeste à rayons, révélation produit, grille de fonctions, avis, appel final, mobile. |
-| `references/motion.md` | Avant d'ajouter une animation ou une transition. |
-| `references/assets.md` | Avant de placer une photo ou l'objet : photos chaudes (bureau, roche, tissu), étalonnage, sources, prompts IA, **recette 3D complète de l'objet** (Three.js, R3F, React Native). |
-| `examples/demo.html` | Pour voir le résultat attendu et reprendre des morceaux. |
-| `source.md` | Pour connaître le shot de référence, sa vidéo et ce qui a été estimé. |
+| `references/tokens.css` | Toujours, en premier : copier le bloc `:root`. |
+| `references/components.md` | Barre, boutons, étiquette, titre, carte d'offre, manifeste, nom géant, vignettes, panneau de verre, points d'intérêt, témoignages, pied, objet. |
+| `references/layouts.md` | Héros, ordre des neuf sections, autres pages, mobile. |
+| `references/motion.md` | Objet qui suit la souris, écran vivant, manifeste, vignettes, performance, mouvement réduit. |
+| `references/assets.md` | Avant de placer une image : photos du produit, ambiances, construction de l'objet 3D, traitements. |
+| `examples/demo.html` | Site complet animé (objet fictif « Ora P1 », en 3D). |
+| `source.md` | Référence, mesures, ce qui est proposé, écarts. |
 
 ## Typographie
 
-| Rôle | Police (Google Fonts) | Poids | Taille | Interligne | Espacement |
-|---|---|---|---|---|---|
-| Titre du héros | **Geist** | 500 | `--text-hero` 44–72px | 1 | -0.035em, centré |
-| Titres de section | Geist | 500 | `--text-title` 32–48px | 1.08 | -0.035em, seconde phrase en `--muted` |
-| Manifeste | Geist | 400 | `--text-statement` 20–26px | 1.4 | centré, 30 caractères de large |
-| Nom géant | Geist | 600 | `--text-giant` jusqu'à 320px | 1 | -0.05em, `--giant` |
-| Texte, boutons | Geist | 400 / 500 | 12–16px | 1.55 | normal |
-| Étiquettes, coins, écran de l'objet | **Geist Mono** | 500 | 11px | 1.4 | +0.06em, capitales |
-
-La police du shot ressemble à une grotesque néo-suisse (type Inter / SF) ; **Geist** et **Geist Mono** sont choisies à l'œil.
+| Rôle | Police | Réglages |
+|---|---|---|
+| Titre du héros | **Inter Tight** 500 | 104px (capitales de 80px), approche −0.035em |
+| Nom géant | Inter Tight 500 | 328px, dégradé gris |
+| Manifeste | Inter Tight 500 | 46px / 1.1 |
+| Titres de section | Inter Tight 500 | 42px / 1.08 |
+| Texte | Inter Tight 400 | 17px / 1.6, gris clair |
+| Boutons, étiquettes, citations | Inter Tight 400–500 | 14px |
+| Écran de l'objet | **JetBrains Mono** | chiffres et état |
 
 ## Couleurs
 
-| Rôle | Token | Usage |
+| Token | Valeur | Usage |
 |---|---|---|
-| Fonds | `--bg` #000, `--bg-2` #0d0d0d | Sections alternées |
-| Cartes opaques | `--surface` #1a1a1a | Témoignages, tuiles sans photo |
-| Étiquettes | `--chip` #2a2a2a + `--chip-text` | Libellés techniques |
-| Texte | `--text`, `--muted` #8a8a8a | Titres, sous-titres |
-| Verre | `--glass`, `--glass-line`, `--glass-hi` | Carte d'offre, panneaux de fonction |
-| Rouge | `--red` #e5343a | Mots surlignés sur noir, bouton et voyant de l'objet |
-| Photos | `--wood`, `--lamp`, `--fabric`, `--rock`…, `--grade-warm` | Repli et étalonnage des photos, lumière de la scène 3D, jamais l'interface |
-| Objet 3D | `--device`, `--metal`, `--dial`, `--lcd`, `--red` | Matières de la scène Three.js |
-
-**Règle de l'accent** : le rouge est la couleur de l'objet ; dans l'interface, il ne sert qu'à surligner deux ou trois mots d'un manifeste.
+| `--bg` / `--bg-2` / `--foot` | #000000 / #0b0b0b / #121212 | Sections noires, intérieur, pied |
+| `--surface` / `--tag` / `--panel` | #181818 / #1c1c1c / #2c2c2c | Cartes, étiquettes, verre composé |
+| `--text` / `--soft` | #ffffff / #b4b4b4 | Titres / paragraphes |
+| `--paper` | #fcfcfc | Boutons blancs |
+| `--red` | #fc383c | Mots du manifeste, pictogramme, bouton de l'objet |
+| `--glass` | blanc 12 % | Panneaux et boutons en verre |
+| `--giant-top` → `--giant-bottom` | #3a3a3a → #0a0a0a | Nom géant |
 
 ## Images et 3D
 
-L'objet est une **vraie scène 3D** Three.js : boîtier noir mat arrondi, petit écran en texture canvas (heure, onde, voyant), molette circulaire en métal qui tourne au survol, bouton rouge ; il pivote doucement et suit le pointeur, dans le héros, la révélation et l'appel final, avec une image de repli. Autour, de **vraies photos chaudes** (bureau en bois, intérieur, roche noire, tissu orange) étalonnées `--grade-warm` et fondues au noir. Jamais de dessin CSS/SVG à la place d'une photo ou de l'objet : recette, sources et prompts dans `references/assets.md`.
+De **vraies photos chaudes** (bureau en bois au soleil rasant, mur doré traversé d'ombres, tissu orange) et des textures de pierre noire. L'objet est montré par des **photos du produit** — en main, posé, détouré — ou, comme dans la démo, par un **modèle 3D** (Three.js : boîtier, écran vivant, molette, bouton rouge) qui suit la souris. Logo, pictogramme, rayons, graduation et points d'intérêt sont des signes en CSS / SVG ; jamais l'objet dessiné à plat. Détails dans `references/assets.md`.
 
 ## Signature
 
-**Le nom géant derrière l'objet** : le nom du produit en Geist 600 à 22vw, gris très sombre `--giant` presque fondu dans le noir, avec l'objet en grand qui flotte devant, et quatre légendes techniques (étiquette mono + titre + ligne) dans les coins. Associé au **manifeste à rayons** (éventail de filets fins sur noir, mots en rouge). Une fois chacun par page.
+1. L'**objet noir sur une photo de bureau ensoleillé**.
+2. Le **nom géant gris** derrière l'objet.
+3. Le **manifeste** aux deux mots rouges, sur des rayons fins.
+4. La **vignette centrale agrandie** au contour en tirets.
+5. Le **panneau de verre** flouté posé sur une moitié de photo.
 
 ## À éviter
 
-- Des dégradés colorés, des néons, du violet « IA » : la technologie se dit par le noir et la matière.
-- Des boutons en pilule ou colorés : blanc plein ou contour sombre, coins de 4px.
-- Du texte blanc sur rouge, ou du rouge en aplat de bouton.
-- Des photos froides ou de studio blanc : les ambiances sont chaudes (bois, lampe, tissu, roche).
-- Plus d'un rendu d'objet en compétition dans le même écran.
-- Copier des assets, logos, textes ou interfaces du shot de référence.
+- Des photos froides, bleutées ou sur fond blanc.
+- Du rouge en aplat, en fond de bouton ou en titre entier.
+- De gros boutons arrondis, des dégradés colorés, des ombres portées marquées.
+- Des reflets 3D coûteux (environnement, transmission, ombres) et un rendu en continu : voir « Performance » dans `motion.md`.
+- Plusieurs panneaux floutés, ou un flou qui s'anime.
+- L'objet dessiné en CSS ou en SVG.
 
 ## Adaptation React / React Native
 
-- Héros : `ImageBackground` + `LinearGradient` (expo-linear-gradient) transparent → noir en bas.
-- Verre fumé : `BlurView` (expo-blur, `intensity` 30, `tint="dark"`) avec `borderWidth: 1` et `borderColor` translucide.
-- Rayons du manifeste : `react-native-svg` (lignes depuis le centre, opacité dégressive) ou une image ; rotation lente avec Reanimated.
-- Nom géant : `Text` avec `adjustsFontSizeToFit` et `numberOfLines={1}`, couleur `--giant`, derrière une image détourée de l'objet.
-- Objet : `expo-gl` + `@react-three/fiber/native` (même recette que `assets.md` § 5) ou PNG pré-rendu si l'appareil est faible ; flottement `withRepeat(withTiming(translateY: -10))`.
-- Polices : `@expo-google-fonts/geist`, `@expo-google-fonts/geist-mono`.
+- **React** : `DeviceCanvas` (une instance par emplacement, props `pose`, rendu à la demande ; `@react-three/fiber` avec `frameloop="demand"` convient), `Manifesto` (mots révélés au défilement), `ThumbStrip`, `FeaturePanel`, `Hotspot`, `VoiceRail`. Un seul observateur pour les apparitions.
+- **React Native** : objet en `expo-gl` + three, ou plus simplement une séquence de photos du produit que l'on fait défiler au doigt ; panneau de verre avec `expo-blur` ; bande de vignettes en `FlatList` horizontale centrée (`snapToAlignment="center"`) dont l'élément central grandit ; rail de témoignages aimanté ; retour haptique sur le bouton de précommande.
 
 ## Avant de livrer
 
-- [ ] Tokens importés, aucune valeur en dur.
-- [ ] Héros : photo chaude qui fond au noir, titre centré, bouton blanc + bouton à contour, carte de verre « offre », libellés de coins.
-- [ ] Manifeste sur noir avec rayons fins et deux ou trois mots en rouge.
-- [ ] Section produit : nom géant gris sombre derrière l'objet, légendes techniques avec étiquettes.
-- [ ] Panneaux de verre sur textures (roche, tissu) ; témoignages miniatures.
-- [ ] Composants conformes à `references/components.md` (repos, survol, appui, focus, désactivé).
-- [ ] Vraies images (ou 3D) traitées selon `references/assets.md` : objet en scène Three.js avec repli, photos chaudes étalonnées, `alt` et couleur de repli.
-- [ ] Testé à 390px et 1440px, sans défilement horizontal ; mouvement réduit respecté.
-- [ ] Aucun élément du shot d'origine (nom, logo, rendus, textes).
+- [ ] `:root` copié de `tokens.css`, aucune couleur en dur ailleurs.
+- [ ] Le rouge n'apparaît qu'aux endroits prévus.
+- [ ] Texte lisible sur chaque photo (dégradé sombre dessous).
+- [ ] 3D : rendu à la demande, arrêté hors écran, repli en image sans WebGL.
+- [ ] Vignettes, flèches et rail utilisables au clavier.
+- [ ] `prefers-reduced-motion` : objet fixe, manifeste entièrement lisible.
+- [ ] Pas de défilement horizontal à 390px.
+- [ ] Nom, produit, photos et textes propres au projet.

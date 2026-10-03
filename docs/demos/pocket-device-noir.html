@@ -1,536 +1,467 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ora P1 — compagnon vocal de poche (démo Pocket Device Noir)</title>
+<title>Ora P1 — le compagnon vocal de poche</title>
+<meta name="description" content="Démo du style Pocket Device Noir : site d'un objet connecté fictif.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #000000; --bg-2: #0d0d0d; --surface: #1a1a1a; --chip: #2a2a2a; --giant: #1f1f1f; --text: #ffffff; --muted: #8a8a8a; --chip-text: #a6a6a6; --line: #262626;
-  --glass: rgb(255 255 255 / 0.08); --glass-line: rgb(255 255 255 / 0.12); --glass-hi: rgb(255 255 255 / 0.16);
-  --red: #e5343a; --red-text: #ff5a5f; --paper: #ffffff; --on-paper: #000000;
-  --device: #121212; --device-hi: #3a3a3a; --dial: #1c1c1c; --metal: #6e6e6e; --lcd: #0f1a14; --lcd-text: #cfe8c2;
-  --wood: #7a4a2a; --wood-dark: #3a2213; --wall: #1e140d; --lamp: #f0b26a; --ceramic: #e9e2d6; --coffee: #2a170c; --fabric: #c9622a; --fabric-dark: #7d3412; --rock: #2b2b2b; --rock-hi: #4a4a4a;
-  --grade-warm: brightness(0.62) saturate(1.1) sepia(0.18) contrast(1.06); --grade-hero: brightness(0.92) saturate(1.08) sepia(0.12) contrast(1.04);
-  --font-display: 'Geist', 'Inter', system-ui, sans-serif; --font-body: 'Geist', 'Inter', system-ui, sans-serif; --font-mono: 'Geist Mono', ui-monospace, monospace;
-  --text-2xs: 0.6875rem; --text-xs: 0.75rem; --text-sm: 0.875rem; --text-base: 1rem; --text-lg: 1.125rem; --text-xl: 1.5rem;
-  --text-statement: clamp(1.25rem, 2vw, 1.625rem); --text-title: clamp(2rem, 3.6vw, 3rem); --text-hero: clamp(2.75rem, 5vw, 4.5rem); --text-giant: clamp(6rem, 22vw, 20rem);
-  --leading-tight: 1; --leading-title: 1.08; --leading-body: 1.55; --tracking-tight: -0.035em; --tracking-caps: 0.06em;
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
-  --gutter: clamp(16px, 3vw, 40px); --container: 1280px;
-  --radius-xs: 3px; --radius-sm: 4px; --radius-md: 12px; --radius-lg: 20px; --control: 44px; --blur: 18px;
-  --shadow-float: 0 24px 60px -20px rgb(0 0 0 / 0.9);
-  --fade-bottom: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.75) 72%, #000000 100%);
-  --fade-hero: linear-gradient(180deg, rgb(0 0 0 / 0) 60%, rgb(0 0 0 / 0.7) 84%, #000000 100%); /* noir seulement sur le bas ~40 % */
-  --veil-hero-top: linear-gradient(180deg, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.08) 22%, rgb(0 0 0 / 0) 40%);
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1); --ease-inout: cubic-bezier(0.7, 0, 0.3, 1); --dur-fast: 150ms; --dur-base: 300ms; --dur-slow: 800ms; --dur-pulse: 1600ms;
-  color-scheme: dark;
+  --bg: #000000; --bg-2: #0b0b0b; --foot: #121212; --surface: #181818; --tag: #1c1c1c; --tag-text: #c8c8c8; --panel: #2c2c2c; --glass: rgb(255 255 255 / 0.12);
+  --glass-line: rgb(255 255 255 / 0.22); --text: #ffffff; --soft: #b4b4b4; --giant-top: #3a3a3a; --giant-bottom: #0a0a0a; --red: #fc383c; --red-text: #ff6466;
+  --paper: #fcfcfc; --ink: #0a0a0a; --line: rgb(255 255 255 / 0.16); --shade: #1a1410; --veil-0: rgb(0 0 0 / 0); --veil-1: rgb(0 0 0 / 0.55); --veil-2: rgb(0 0 0 / 1);
+  --device: #1d1d1f; --device-edge: #3c3c40; --screen: #101012; --dial: #0e0e10; --dial-ring: #b9b9c2; --lcd: #e8e8e8;
+  --font: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif; --font-lcd: 'JetBrains Mono', ui-monospace, monospace; --fs-hero: clamp(3.5rem, 7.2vw, 6.5rem);
+  --fs-giant: clamp(7rem, 23vw, 20.5rem); --fs-manifesto: clamp(1.75rem, 3.2vw, 2.9rem); --fs-h2: clamp(1.75rem, 2.9vw, 2.6rem); --fs-h3: 1.5rem; --fs-body: 1.0625rem;
+  --fs-small: 0.875rem; --fs-tiny: 0.75rem; --ls-tight: -0.035em; --page: 1440px; --gutter: clamp(16px, 5.55vw, 80px); --btn-h: 40px; --r-btn: 6px; --r-card: 8px;
+  --tag-h: 32px; --thumb-w: 206px; --thumb-h: 202px; --thumb-h-on: 282px; --card-w: 327px; --card-h: 250px; --blur: 18px; --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms; --dur: 500ms; --dur-slow: 1000ms;
 }
-* { box-sizing: border-box; }
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--text-base)/var(--leading-body) var(--font-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 var(--fs-body)/1.6 var(--font); -webkit-font-smoothing: antialiased; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
 a { color: inherit; text-decoration: none; }
-button { font: inherit; color: inherit; }
-h1, h2, h3, p { margin: 0; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
 :focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
-.wrap { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
-.mono { font-family: var(--font-mono); }
-.hl { color: var(--red); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.page { width: min(var(--page), 100%); margin-inline: auto; overflow: hidden; }
+.wrap { padding-inline: var(--gutter); }
+h1, h2, h3 { font-weight: 500; letter-spacing: var(--ls-tight); line-height: 1.08; text-wrap: balance; }
+h2 { font-size: var(--fs-h2); }
+.soft { color: var(--soft); }
+.center { text-align: center; }
+.tag { display: inline-grid; place-items: center; height: var(--tag-h); padding: 0 14px; border-radius: var(--r-btn); background: var(--tag); color: var(--tag-text); font-size: var(--fs-small); }
+.rise { opacity: 0; transform: translateY(28px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); transition-delay: var(--d, 0ms); }
+.rise.in { opacity: 1; transform: none; }
+.device { position: relative; }
+.device canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* ---------- Boutons ---------- */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: var(--control); padding: 0 var(--space-5); border-radius: var(--radius-sm); border: 1px solid transparent; cursor: pointer;
-  font: 500 var(--text-sm)/1 var(--font-body); white-space: nowrap; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast); }
-.btn:active { transform: translateY(1px); }
-.btn--paper { background: var(--paper); color: var(--on-paper); }
-.btn--paper:hover { background: color-mix(in srgb, var(--paper) 86%, var(--bg)); }
-.btn--ghost { background: color-mix(in srgb, var(--bg) 35%, transparent); border-color: var(--glass-line); color: var(--text); backdrop-filter: blur(8px); }
-.btn--ghost:hover { background: var(--glass-hi); border-color: color-mix(in srgb, var(--text) 40%, transparent); }
-.btn--sm { min-height: 36px; padding: 0 var(--space-4); font-size: var(--text-xs); position: relative; }
-.btn--sm::after { content: ""; position: absolute; inset: -4px; }
-.btn:disabled, .btn[aria-disabled="true"] { opacity: .4; pointer-events: none; }
-.btn .play { width: 0; height: 0; border-left: 7px solid currentColor; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
-.chip { display: inline-flex; align-items: center; gap: var(--space-1); padding: 3px var(--space-2); border-radius: var(--radius-xs); background: var(--chip); color: var(--chip-text); font: 500 var(--text-2xs)/1.4 var(--font-mono); letter-spacing: var(--tracking-caps); text-transform: uppercase; }
-.chip--glass { background: var(--glass); box-shadow: inset 0 0 0 1px var(--glass-line); color: var(--text); }
-
-/* ---------- Objet : scène Three.js (voir references/assets.md) ---------- */
-[data-3d] { position: relative; }
-[data-3d] canvas { position: absolute; inset: 0; display: block; }
-[data-3d] .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; color: transparent; background: var(--rock); border-radius: var(--radius-lg); transition: opacity var(--dur-slow) var(--ease-out); }
-[data-3d].is-3d-ready .fallback { opacity: 0; }
-
-/* ---------- Photos ---------- */
-.shot { position: absolute; inset: 0; overflow: hidden; }
-.shot img { width: 100%; height: 100%; object-fit: cover; color: transparent; }
+.btn { display: inline-grid; place-items: center; height: var(--btn-h); padding: 0 22px; border-radius: var(--r-btn); background: var(--paper); color: var(--ink); font-size: var(--fs-body); font-weight: 500; box-shadow: 0 0 0 3px var(--glass); transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 0 0 6px var(--glass); }
+.btn:active { transform: scale(0.97); }
+.btn.ghost { background: var(--glass); color: var(--text); box-shadow: none; }
+.btn.ghost:hover { background: var(--glass-line); }
+.btn.small { height: 37px; padding: 0 16px; font-size: var(--fs-small); }
+.round { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--glass); transition: background-color var(--dur-fast) linear, transform var(--dur) var(--ease); }
+.round:hover { background: var(--glass-line); transform: scale(1.08); }
+.round svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- Héros ---------- */
-.hero { position: relative; min-height: max(700px, 100svh); overflow: hidden; isolation: isolate; display: flex; flex-direction: column; }
-.desk { position: absolute; inset: 0; z-index: -1; background: var(--wall); }
-.desk img { object-position: 50% 70%; filter: var(--grade-hero); }
-.desk::before { content: ""; position: absolute; inset: 0; background: var(--veil-hero-top); } /* voile léger : la photo reste lisible, juste assez pour le titre */
-.desk::after { content: ""; position: absolute; inset: 0; background: var(--fade-hero); }
-.hero__device { position: absolute; left: 50%; top: 44%; width: min(620px, 100%); height: 48%; translate: -50% 0; }
-.nav { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-4); min-height: 72px; }
-.logo { display: inline-flex; align-items: center; gap: var(--space-2); font: 600 var(--text-lg)/1 var(--font-display); letter-spacing: var(--tracking-tight); min-height: var(--control); }
-.logo i { width: 14px; height: 14px; border: 1.5px solid currentColor; border-radius: 3px; position: relative; }
-.logo i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 3px; height: 3px; border-radius: 50%; background: var(--red); }
-.nav__links { display: flex; gap: var(--space-1); }
-.nav__links a { display: inline-flex; align-items: center; min-height: var(--control); padding: 0 var(--space-3); font-size: var(--text-xs); color: color-mix(in srgb, var(--text) 75%, transparent); transition: color var(--dur-fast); }
-.nav__links a:hover, .nav__links a[aria-current] { color: var(--text); }
-.nav__end { display: flex; justify-content: flex-end; }
-.menu { display: none; }
-.hero__copy { position: relative; z-index: 2; text-align: center; margin-top: clamp(48px, 9vh, 110px); padding-inline: var(--gutter); }
-.hero h1 { font: 500 var(--text-hero)/var(--leading-tight) var(--font-display); letter-spacing: var(--tracking-tight); text-shadow: 0 2px 30px color-mix(in srgb, var(--bg) 60%, transparent); animation: fade-up var(--dur-slow) var(--ease-out) both; }
-.hero__sub { color: color-mix(in srgb, var(--text) 70%, transparent); max-width: 40ch; margin: var(--space-4) auto 0; font-size: var(--text-sm); animation: fade-up var(--dur-slow) var(--ease-out) 100ms both; }
-.hero__ctas { display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-6); flex-wrap: wrap; animation: fade-up var(--dur-slow) var(--ease-out) 200ms both; }
-.corner { position: absolute; bottom: var(--space-8); z-index: 2; font: 500 var(--text-2xs)/1.4 var(--font-mono); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--muted); }
-.corner b { display: block; color: var(--text); font-weight: 500; }
-.corner--l { left: var(--gutter); }
-.corner--r { right: calc(var(--gutter) + 300px); }
-.offer { position: absolute; right: var(--gutter); bottom: var(--space-8); z-index: 3; width: 268px; padding: var(--space-4); border-radius: var(--radius-md); background: var(--glass); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur));
-  box-shadow: var(--shadow-float); animation: fade-up var(--dur-slow) var(--ease-out) 400ms both; }
-.offer h2 { font: 500 var(--text-base)/1.2 var(--font-display); margin: var(--space-2) 0 var(--space-1); }
-.offer p { font-size: var(--text-xs); color: color-mix(in srgb, var(--text) 72%, transparent); }
-.offer__row { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-4); }
-.offer__price { font: 500 var(--text-lg)/1 var(--font-display); }
-.offer__price s { font-size: var(--text-xs); color: var(--muted); margin-left: var(--space-1); }
-.offer__close { position: absolute; top: 4px; right: 4px; width: var(--control); height: var(--control); border: 0; background: none; color: var(--muted); cursor: pointer; border-radius: 50%; }
-.offer__close:hover { color: var(--text); }
-.offer[hidden] { display: none; }
+.hero { position: relative; height: clamp(640px, 63.9vw, 920px); isolation: isolate; background: var(--shade); }
+.hero > img { position: absolute; inset: 0; z-index: -2; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--veil-1), var(--veil-0) 18%, var(--veil-0) 40%, var(--veil-1) 70%, var(--veil-2) 98%); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding-top: clamp(20px, 2.8vw, 40px); font-size: var(--fs-small); }
+.logo { display: inline-flex; align-items: center; gap: 2px; height: 30px; padding: 0 8px 0 4px; background: var(--paper); color: var(--ink); font-size: 1.375rem; font-weight: 500; letter-spacing: var(--ls-tight); }
+.logo i { width: 20px; height: 20px; background: radial-gradient(circle, var(--paper) 2px, transparent 2.4px) 0 0 / 7px 7px, var(--ink); clip-path: polygon(0 0, 55% 0, 100% 100%, 45% 100%, 45% 55%, 0 55%); }
+.nav ul { display: flex; gap: 4px; padding: 3px 6px; border-radius: var(--r-btn); background: var(--veil-1); }
+.nav li a { display: block; padding: 8px 10px; color: var(--soft); transition: color var(--dur-fast) linear; }
+.nav li a:hover, .nav li a[aria-current] { color: var(--text); }
+.hero .device { position: absolute; left: 50%; top: 6%; width: min(480px, 60%); height: 62%; transform: translateX(-50%); }
+.side { position: absolute; top: 40%; font-weight: 500; }
+.side.l { left: var(--gutter); } .side.r { right: var(--gutter); }
+.arc { position: absolute; z-index: -1; left: 50%; top: 20%; width: 122%; aspect-ratio: 1; margin-left: -61%; border-radius: 50%; box-shadow: inset 0 0 0 1px var(--line); clip-path: inset(46% 0 0 0); pointer-events: none; }
+.hero-copy { position: absolute; left: 0; right: 0; bottom: clamp(60px, 9.7vw, 140px); display: grid; justify-items: center; gap: 22px; padding-inline: var(--gutter); text-align: center; }
+.hero-copy h1 { font-size: var(--fs-hero); line-height: 0.95; }
+.hero-copy h1 span { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.hero-copy h1 b { display: inline-block; font-weight: 500; transform: translateY(105%); transition: transform var(--dur-slow) var(--ease); transition-delay: calc(var(--i) * 120ms + 300ms); }
+.loaded .hero-copy h1 b { transform: none; }
+.hero-copy p { max-width: 30em; }
+.pair { display: flex; gap: 10px; }
+.offer { position: absolute; right: var(--gutter); bottom: clamp(60px, 9.7vw, 140px); width: 236px; display: grid; gap: 6px; padding: 16px 18px 18px; border-radius: var(--r-card); border: 1px dashed var(--glass-line); background: var(--panel); font-size: var(--fs-tiny); }
+.offer b { font-size: var(--fs-body); font-weight: 500; }
+.offer .btn { margin-top: 12px; }
 
 /* ---------- Manifeste ---------- */
-.manifest { position: relative; background: var(--bg); padding: var(--space-32) 0; overflow: hidden; text-align: center; }
-.rays { position: absolute; left: 50%; top: 50%; width: 1600px; aspect-ratio: 1; translate: -50% -50%;
-  background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--text) 14%, transparent) 0deg .25deg, transparent .25deg 4deg);
-  -webkit-mask: radial-gradient(circle, transparent 9%, black 12%, color-mix(in srgb, var(--bg) 50%, transparent) 30%, transparent 55%); mask: radial-gradient(circle, transparent 9%, black 12%, color-mix(in srgb, var(--bg) 50%, transparent) 30%, transparent 55%); animation: turn 120s linear infinite; }
-.manifest .chip { position: relative; }
-.manifest p { position: relative; max-width: 30ch; margin: var(--space-6) auto 0; font: 400 var(--text-statement)/1.4 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.manifesto { position: relative; padding: clamp(60px, 9vw, 130px) var(--gutter) clamp(120px, 16vw, 230px); text-align: center; }
+.rays { position: absolute; left: 50%; top: 50%; width: min(1280px, 100%); height: 520px; transform: translate(-50%, -62%); background: repeating-conic-gradient(from 0deg, var(--line) 0 0.25deg, transparent 0.25deg 9deg); -webkit-mask: radial-gradient(ellipse 50% 50% at 50% 50%, transparent 46%, #000 60%, transparent 100%); mask: radial-gradient(ellipse 50% 50% at 50% 50%, transparent 46%, #000 60%, transparent 100%); pointer-events: none; }
+.manifesto p { position: relative; max-width: 23em; margin-inline: auto; font-size: var(--fs-manifesto); font-weight: 500; line-height: 1.1; letter-spacing: var(--ls-tight); }
+.manifesto em { font-style: normal; color: var(--red); }
+.manifesto span { opacity: 0.25; transition: opacity var(--dur) linear; }
+.manifesto span.lit { opacity: 1; }
 
 /* ---------- Produit ---------- */
-.product { position: relative; background: var(--bg-2); padding: var(--space-24) 0; overflow: hidden; }
-.product__head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-6); flex-wrap: wrap; }
-.title { font: 500 var(--text-title)/var(--leading-title) var(--font-display); letter-spacing: var(--tracking-tight); max-width: 16ch; }
-.title span { color: var(--muted); }
-.lead { color: var(--muted); max-width: 38ch; font-size: var(--text-sm); }
-.reveal { position: relative; display: grid; place-items: center; min-height: 560px; margin-top: var(--space-12); }
-.giant { position: absolute; inset: 50% 0 auto; translate: 0 -50%; text-align: center; white-space: nowrap; font: 600 var(--text-giant)/1 var(--font-display); letter-spacing: -0.05em; color: var(--giant); -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 8%, transparent); user-select: none; }
-.reveal__stage { width: min(460px, 100%); height: 560px; z-index: 1; cursor: pointer; }
-.reveal__stage .fallback { opacity: .5; }
-.callouts { position: absolute; inset: 0; }
-.callout { position: absolute; z-index: 2; display: grid; gap: var(--space-2); max-width: 220px; font-size: var(--text-xs); color: var(--muted); }
-.callout b { color: var(--text); font: 500 var(--text-sm)/1.3 var(--font-body); }
-.callout::before { content: ""; width: 40px; height: 1px; background: color-mix(in srgb, var(--text) 30%, transparent); }
-.callout--1 { left: 4%; top: 18%; } .callout--2 { left: 8%; bottom: 14%; } .callout--3 { right: 4%; top: 26%; text-align: right; justify-items: end; } .callout--4 { right: 8%; bottom: 12%; text-align: right; justify-items: end; }
-.listen { margin-top: var(--space-8); display: flex; justify-content: center; }
+.product { position: relative; display: grid; justify-items: center; padding-bottom: clamp(60px, 8vw, 110px); text-align: center; isolation: isolate; }
+.giant { position: absolute; z-index: -2; left: 0; right: 0; top: 0; font-size: var(--fs-giant); font-weight: 500; line-height: 0.9; letter-spacing: var(--ls-tight); white-space: nowrap; background: linear-gradient(180deg, var(--giant-top), var(--giant-bottom) 92%); -webkit-background-clip: text; background-clip: text; color: transparent; user-select: none; will-change: transform; }
+.rock { position: absolute; z-index: -1; left: 10%; right: 10%; top: 30%; height: 46%; opacity: 0.55; -webkit-mask: radial-gradient(ellipse 50% 50% at 50% 50%, #000 30%, transparent 72%); mask: radial-gradient(ellipse 50% 50% at 50% 50%, #000 30%, transparent 72%); }
+.product .device { width: min(520px, 86%); height: clamp(360px, 42vw, 600px); margin-top: clamp(20px, 3vw, 40px); -webkit-mask: linear-gradient(180deg, #000 60%, transparent 96%); mask: linear-gradient(180deg, #000 60%, transparent 96%); }
+.product .info { display: grid; justify-items: center; gap: 18px; margin-top: -150px; position: relative; }
+.price { font-size: 1.5rem; font-weight: 500; letter-spacing: var(--ls-tight); }
+.product .info p { max-width: 38em; padding-inline: var(--gutter); }
 
-/* ---------- Fonctions ---------- */
-.features { background: var(--bg); padding: var(--space-24) 0; }
-.fgrid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap: var(--space-4); margin-top: var(--space-12); }
-.tile { position: relative; min-height: 300px; border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: var(--space-4); }
-.tile--rock { grid-row: span 2; min-height: 620px; background: var(--rock); }
-.tile--fabric { background: var(--fabric-dark); }
-.tile--plain { background: var(--surface); }
-.tile--wide { grid-column: span 2; }
-.tile .shot img { transition: transform var(--dur-slow) var(--ease-out); }
-.tile:hover .shot img { transform: scale(1.04); }
-.tile .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, color-mix(in srgb, var(--bg) 70%, transparent)); }
-.glass { position: relative; padding: var(--space-4); border-radius: var(--radius-md); background: color-mix(in srgb, var(--bg) 35%, transparent); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); -webkit-backdrop-filter: blur(var(--blur)); transition: background var(--dur-base), border-color var(--dur-base); }
-.tile:hover .glass { border-color: color-mix(in srgb, var(--text) 24%, transparent); }
-.glass h3 { font: 500 var(--text-base)/1.25 var(--font-display); margin: var(--space-2) 0 var(--space-1); }
-.glass p { font-size: var(--text-xs); color: color-mix(in srgb, var(--text) 75%, transparent); }
-.stat-big { font: 500 clamp(3rem, 6vw, 5rem)/1 var(--font-display); letter-spacing: var(--tracking-tight); position: absolute; left: var(--space-5); top: var(--space-5); }
-.stat-big small { font-size: .35em; color: var(--muted); margin-left: var(--space-1); }
-.wave { position: absolute; left: var(--space-5); right: var(--space-5); top: 26%; height: 60px; display: flex; align-items: center; gap: 4px; }
-.wave i { flex: 1; height: var(--h); border-radius: 2px; background: color-mix(in srgb, var(--text) 30%, transparent); animation: eq 1.2s ease-in-out infinite alternate; animation-delay: var(--d); }
-.wave i:nth-child(5n+3) { background: var(--red); }
+/* ---------- Pourquoi : bande de vignettes ---------- */
+.why { display: grid; justify-items: center; gap: 22px; padding: clamp(60px, 8vw, 120px) var(--gutter); background: radial-gradient(ellipse 60% 34% at 50% 62%, var(--tag), var(--bg) 100%); text-align: center; }
+.strip { display: flex; align-items: center; justify-content: center; gap: 9px; width: min(1064px, 100%); height: var(--thumb-h-on); margin-top: 34px; }
+.strip button { position: relative; flex: 0 1 var(--thumb-w); height: var(--thumb-h); min-width: 0; border-radius: var(--r-card); overflow: hidden; opacity: 0.75; transition: height var(--dur) var(--ease), opacity var(--dur) linear; }
+.strip button[aria-pressed="true"] { height: var(--thumb-h-on); opacity: 1; outline: 1px dashed var(--text); outline-offset: 3px; }
+.strip button:hover { opacity: 1; }
+.why .say { max-width: 36em; min-height: 5.2em; margin-top: 30px; }
 
-/* ---------- Avis ---------- */
-.voices { background: var(--bg-2); padding: var(--space-24) 0; }
-.vrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-top: var(--space-10); }
-.voice { padding: var(--space-5); border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--space-5); justify-content: space-between; transition: border-color var(--dur-base); }
-.voice:hover { border-color: color-mix(in srgb, var(--text) 20%, transparent); }
-.voice q { font-size: var(--text-sm); quotes: "« " " »"; }
-.who { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-xs); }
-.who b { display: block; font-weight: 500; font-size: var(--text-sm); }
-.who span { color: var(--muted); }
-.avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; display: grid; place-items: center; font: 500 var(--text-xs)/1 var(--font-mono); color: var(--text); background: radial-gradient(circle at 35% 30%, var(--a), color-mix(in srgb, var(--a) 40%, var(--bg))); }
+/* ---------- En vedette ---------- */
+.feature { position: relative; display: grid; grid-template-columns: minmax(0, 0.403fr) minmax(0, 0.597fr); min-height: clamp(560px, 62.5vw, 900px); isolation: isolate; background: var(--shade); }
+.feature > img { position: absolute; inset: 0; z-index: -2; }
+.feature .slide { position: absolute; inset: 0; z-index: -2; opacity: 0; transition: opacity var(--dur-slow) linear; }
+.feature .slide.on { opacity: 1; }
+.glass { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(30px, 8.3vw, 120px) var(--gutter) clamp(30px, 8vw, 115px); background: var(--glass); -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur)); }
+.glass .ear { width: 50px; height: 50px; margin: clamp(30px, 5.5vw, 80px) 0 22px; fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linecap: round; }
+.glass h3 { font-size: clamp(1.75rem, 2.9vw, 2.6rem); max-width: 10em; }
+.glass hr { width: 100%; margin: 32px 0; border: 0; border-top: 1px dotted var(--text); opacity: 0.6; }
+.glass p { max-width: 25em; margin-bottom: 28px; }
+.segs { display: flex; gap: 8px; width: 100%; max-width: 430px; margin-top: auto; padding-top: 60px; }
+.segs i { flex: 1; height: 2px; background: var(--glass-line); overflow: hidden; }
+.segs i::after { content: ""; display: block; height: 100%; background: var(--text); transform: scaleX(0); transform-origin: left; transition: transform var(--dur) var(--ease); }
+.segs i.on::after { transform: none; }
+.shot { position: relative; }
+.shot .name { position: absolute; right: var(--gutter); top: clamp(30px, 8.3vw, 120px); font-weight: 500; }
+.shot .cap { position: absolute; right: var(--gutter); bottom: clamp(30px, 8vw, 115px); max-width: 16em; text-align: right; }
+.shot .round { position: absolute; top: 50%; margin-top: -24px; }
+.shot .round.prev { left: var(--gutter); } .shot .round.next { right: 80px; }
+.shot::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--veil-1), var(--veil-0) 30%, var(--veil-0) 60%, var(--veil-1)); pointer-events: none; }
+
+/* ---------- Intérieur ---------- */
+.inside { position: relative; min-height: clamp(620px, 65.3vw, 940px); background: var(--bg-2); isolation: isolate; overflow: hidden; }
+.inside > img { position: absolute; inset: 0; z-index: -2; opacity: 0.35; }
+.inside::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 60% 60% at 50% 40%, var(--veil-0), var(--veil-2) 100%); }
+.inside .tag { position: absolute; left: var(--gutter); top: clamp(60px, 8.3vw, 120px); }
+.inside .device { position: absolute; left: 50%; top: 6%; width: min(560px, 90%); height: 74%; transform: translateX(-46%); }
+.card { position: absolute; left: clamp(16px, 20.5vw, 295px); top: clamp(140px, 15vw, 222px); width: 236px; padding: 18px; border-radius: var(--r-card); background: var(--panel); font-size: var(--fs-small); }
+.card b { display: block; font-size: 1.125rem; font-weight: 500; line-height: 1.15; }
+.card hr { margin: 22px 0; border: 0; border-top: 1px dotted var(--text); opacity: 0.6; }
+.spot { position: absolute; width: 34px; height: 34px; border-radius: 50%; border: 1px dashed var(--soft); background: var(--glass); }
+.spot::after { content: ""; position: absolute; inset: 11px; border-radius: 50%; background: var(--soft); animation: ping 2.4s var(--ease) infinite; }
+.spot.red { border-color: var(--red); } .spot.red::after { background: var(--red); }
+@keyframes ping { 50% { transform: scale(0.5); opacity: 0.5; } }
+.ruler { position: absolute; right: var(--gutter); top: clamp(60px, 8.3vw, 120px); width: 22px; height: 300px; background: repeating-linear-gradient(180deg, var(--red) 0 2px, transparent 2px 9px) 0 0 / 100% 22% no-repeat, repeating-linear-gradient(180deg, var(--line) 0 1px, transparent 1px 9px) 0 0 / 70% 100% no-repeat; }
+.inside-foot { position: absolute; left: var(--gutter); right: var(--gutter); bottom: clamp(40px, 8.3vw, 120px); display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; }
+
+/* ---------- Témoignages ---------- */
+.voices { padding: clamp(70px, 8.3vw, 120px) 0; }
+.voices-head { display: grid; grid-template-columns: 1fr auto; gap: 16px 40px; align-items: end; margin-bottom: 30px; }
+.voices-head .tag { justify-self: start; grid-column: 1 / -1; }
+.voices-head p { max-width: 25em; text-align: right; }
+.rail { display: flex; gap: 9px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-inline: var(--gutter); }
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { flex: none; height: var(--card-h); border-radius: var(--r-card); overflow: hidden; scroll-snap-align: start; scroll-margin-left: var(--gutter); }
+.quote { width: var(--card-w); display: flex; flex-direction: column; justify-content: space-between; padding: 18px; background: var(--surface); font-size: var(--fs-small); line-height: 1.5; }
+.quote header { display: flex; justify-content: space-between; text-align: right; line-height: 1.5; }
+.quote header img { width: 64px; height: 64px; border-radius: 6px; }
+.quote header span { display: block; color: var(--soft); }
+.quote p { color: var(--soft); }
+.rail figure { width: 206px; }
+.voices .segs { margin: 30px auto 0; padding: 0; max-width: 200px; }
 
 /* ---------- Appel final + pied ---------- */
-.cta { position: relative; padding: var(--space-24) 0 var(--space-12); background: var(--bg); overflow: hidden; }
-.cta__box { position: relative; border-radius: var(--radius-lg); overflow: hidden; padding: clamp(32px, 6vw, 80px); min-height: 420px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: var(--space-5);
-  background: var(--wood-dark); isolation: isolate; }
-.cta__box .shot { z-index: -1; }
-.cta__box .shot img { object-position: 70% 50%; filter: var(--grade-warm); }
-.cta__box .shot::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, var(--bg) 25%, color-mix(in srgb, var(--bg) 40%, transparent) 60%, transparent); }
-.cta__device { position: absolute; right: 2%; top: 0; bottom: 0; width: 42%; }
-.cta__box h2 { position: relative; max-width: 14ch; }
-.cta__box p { position: relative; color: color-mix(in srgb, var(--text) 75%, transparent); max-width: 36ch; font-size: var(--text-sm); }
-.foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--line); color: var(--muted); font-size: var(--text-xs); }
-.foot nav { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); }
-.foot a { display: inline-flex; align-items: center; min-height: var(--control); transition: color var(--dur-fast); }
-.foot a:hover { color: var(--text); }
-.credit { color: var(--muted); }
-
-/* ---------- Mouvement ---------- */
-@keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
-@keyframes pulse { 50% { opacity: .25; } }
-@keyframes turn { to { rotate: 360deg; } }
-@keyframes hover-y { 50% { translate: 0 -10px; } }
-@keyframes eq { from { transform: scaleY(.35); } }
+.cta { position: relative; display: grid; align-content: start; justify-items: center; gap: 16px; height: clamp(600px, 62.5vw, 900px); padding: clamp(80px, 8.3vw, 120px) var(--gutter) 0; text-align: center; isolation: isolate; background: var(--shade); }
+.cta > img { position: absolute; inset: 0; z-index: -2; }
+.cta::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--veil-1), var(--veil-0) 45%, var(--veil-1)); }
+.cta h2 { max-width: 12em; font-size: clamp(2rem, 3.6vw, 3.25rem); }
+.cta .device { width: min(340px, 70%); height: clamp(260px, 29vw, 410px); margin-top: 10px; }
+.cta small { font-size: var(--fs-small); }
+.foot { position: relative; padding: clamp(60px, 8.3vw, 120px) var(--gutter) 40px; background: var(--foot); isolation: isolate; }
+.foot > img { position: absolute; inset: 0; z-index: -1; opacity: 0.4; }
+.foot-top { display: grid; grid-template-columns: 0.6fr 1fr 0.8fr; gap: 40px; }
+.foot .logo { height: 60px; padding: 0 12px 0 6px; font-size: 3rem; }
+.foot .logo i { width: 40px; height: 40px; background-size: 14px 14px; }
+.foot h3 { margin-bottom: 14px; color: var(--soft); font-size: var(--fs-body); font-weight: 400; letter-spacing: 0; }
+.menu { display: grid; grid-template-columns: auto auto; justify-content: start; gap: 6px 34px; font-size: 1.5rem; font-weight: 500; letter-spacing: var(--ls-tight); }
+.menu a, .foot-top a { display: inline-block; padding: 4px 0; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--dur) var(--ease); }
+.menu a:hover, .foot-top a:hover { background-size: 100% 1px; }
+.news { display: flex; gap: 10px; padding-bottom: 14px; margin-bottom: 30px; border-bottom: 1px dashed var(--soft); }
+.news input { flex: 1; min-width: 0; height: 44px; border: 0; background: none; }
+.news input::placeholder { color: var(--soft); opacity: 1; }
+.legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 30px; margin-top: 50px; padding-top: 34px; border-top: 1px dashed var(--line); }
 
 /* ---------- Mobile ---------- */
-@media (max-width: 1000px) {
-  .fgrid { grid-template-columns: 1fr 1fr; }
-  .tile--rock { grid-row: auto; grid-column: span 2; min-height: 420px; }
-  .vrow { grid-template-columns: 1fr 1fr; }
-  .corner--r { display: none; }
+@media (max-width: 900px) {
+  .nav ul, .side, .arc { display: none; }
+  .hero { height: auto; min-height: 760px; }
+  .hero .device { top: 9%; width: 78%; height: 300px; }
+  .hero-copy { position: relative; bottom: auto; padding-top: 350px; }
+  .offer { position: relative; right: auto; bottom: auto; width: auto; margin: 26px var(--gutter) 40px; }
+  .product .info { margin-top: -90px; }
+  .strip { gap: 5px; height: 190px; }
+  .strip button { height: 130px; }
+  .strip button[aria-pressed="true"] { height: 190px; flex-basis: 40%; }
+  .feature { grid-template-columns: 1fr; }
+  .glass { order: 2; }
+  .shot { min-height: 420px; }
+  .shot .round.next { right: var(--gutter); }
+  .inside { min-height: 880px; }
+  .inside .device { top: 26%; height: 44%; transform: translateX(-50%); }
+  .card { left: var(--gutter); top: 110px; }
+  .ruler { height: 160px; }
+  .inside-foot { flex-direction: column; align-items: flex-start; }
+  .voices-head { grid-template-columns: 1fr; }
+  .voices-head p { text-align: left; }
+  .foot-top { grid-template-columns: 1fr; }
 }
-@media (max-width: 720px) {
-  .nav { grid-template-columns: 1fr auto; }
-  .nav__links { display: none; position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; padding: var(--space-2); border-radius: var(--radius-md); background: color-mix(in srgb, var(--surface) 92%, transparent); border: 1px solid var(--glass-line); backdrop-filter: blur(var(--blur)); }
-  .nav__links.is-open { display: flex; }
-  .nav__end { gap: var(--space-2); }
-  .menu { display: inline-grid; place-items: center; width: var(--control); height: var(--control); border-radius: var(--radius-sm); border: 1px solid var(--glass-line); background: none; cursor: pointer; }
-  .hero { min-height: 780px; }
-  .hero__device { top: 46%; height: 34%; }
-  .offer { left: var(--gutter); right: var(--gutter); width: auto; bottom: var(--space-4); }
-  .corner--l { bottom: auto; top: 46%; }
-  .reveal { min-height: 440px; }
-  .reveal__stage { height: 440px; }
-  .callout { position: static; max-width: none; }
-  .callouts { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); margin-top: var(--space-8); }
-  .callout--3, .callout--4 { text-align: left; justify-items: start; }
-  .fgrid, .vrow { grid-template-columns: 1fr; }
-  .tile--rock, .tile--wide { grid-column: auto; }
-  .cta__box { min-height: 660px; justify-content: flex-start; }
-  .cta__device { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 300px; }
-  .cta__box .shot img { object-position: 60% 100%; }
-  .cta__box .shot::after { background: linear-gradient(180deg, var(--bg) 35%, color-mix(in srgb, var(--bg) 30%, transparent) 75%); }
-}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .rise { opacity: 1; transform: none; }
+  .hero-copy h1 b { transform: none; }
+  .manifesto span { opacity: 1; }
 }
 </style>
 </head>
 <body>
-
-<header class="hero" id="top">
-  <div class="desk shot" data-slot="hero-desk-photo">
-    <img src="https://images.unsplash.com/photo-1500989145603-8e7ef71d639e?auto=format&fit=crop&w=2000&q=80" alt="Bureau en bois clair avec une tasse de café et un clavier, lumière chaude" width="2000" height="1333" fetchpriority="high" decoding="async">
+<div class="page">
+<!-- ============ Héros ============ -->
+<header class="hero">
+  <img data-slot="hero" alt="Bureau en bois au soleil : carnets, crayon et tasse dans des ombres chaudes" fetchpriority="high" src="https://images.unsplash.com/photo-1606242403192-c40d308b704d?auto=format&fit=crop&w=2000&h=1300&q=75">
+  <div class="arc" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="nav" aria-label="Principale">
+      <a class="logo" href="#" aria-label="Ora, accueil"><i aria-hidden="true"></i>Ora.</a>
+      <ul><li><a href="#produit" aria-current="true">Produit</a></li><li><a href="#pourquoi">Fonctionnement</a></li><li><a href="#interieur">À propos</a></li><li><a href="#contact">Contact</a></li></ul>
+      <a class="btn small" href="#produit">Acheter</a>
+    </nav>
   </div>
-  <div class="hero__device" data-3d="hero" aria-hidden="true"></div>
-
-  <div class="wrap nav">
-    <a class="logo" href="#top" aria-label="Ora, accueil"><i aria-hidden="true"></i>ora</a>
-    <nav class="nav__links" id="links" aria-label="Principale"><a href="#product" aria-current="page">Produit</a><a href="#features">Fonctions</a><a href="#voices">Avis</a><a href="#cta">Assistance</a></nav>
-    <div class="nav__end">
-      <button class="menu" id="menu" aria-expanded="false" aria-controls="links" aria-label="Ouvrir le menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 5h12M2 11h12"/></svg></button>
-      <a class="btn btn--paper btn--sm" href="#cta">Acheter</a>
-    </div>
+  <div class="device" data-device="hero" role="img" aria-label="L'Ora P1 : boîtier noir, petit écran, molette ronde et bouton rouge"></div>
+  <span class="side l">Modèle Ora P1</span><span class="side r">Compagnon vocal</span>
+  <div class="hero-copy">
+    <h1 aria-label="Voici Ora."><span aria-hidden="true"><b style="--i:0">Voici</b></span> <span aria-hidden="true"><b style="--i:1">Ora.</b></span></h1>
+    <p class="soft">Votre compagnon vocal de tous les jours, pour les réunions, les notes et tout ce que vous ne voulez pas oublier.</p>
+    <div class="pair"><a class="btn" href="#produit">Obtenir Ora.</a><a class="btn ghost" href="#pourquoi">En savoir plus</a></div>
   </div>
-
-  <div class="hero__copy">
-    <h1>Rencontrez Ora.</h1>
-    <p class="hero__sub">Un compagnon vocal de poche qui écoute, retient et vous rappelle l'essentiel, sans écran ni notification.</p>
-    <div class="hero__ctas"><a class="btn btn--paper" href="#cta">Précommander</a><a class="btn btn--ghost" href="#product"><span class="play" aria-hidden="true"></span>Voir la démo</a></div>
-  </div>
-
-  <p class="corner corner--l"><b>Ora P1</b>Modèle 2026</p>
-  <p class="corner corner--r"><b>Compagnon IA</b>Vocal · Hors ligne</p>
-  <aside class="offer" id="offer" aria-labelledby="offerTitle">
-    <button class="offer__close" id="offerClose" aria-label="Fermer l'offre">×</button>
-    <span class="chip chip--glass">Offre du moment</span>
-    <h2 id="offerTitle">Étui en laine offert</h2>
-    <p>Pour toute précommande avant le 31 octobre.</p>
-    <div class="offer__row"><span class="offer__price">149 € <s>179 €</s></span><a class="btn btn--paper btn--sm" href="#cta">J'en profite</a></div>
-  </aside>
+  <aside class="offer"><b>Offre de lancement</b><span class="soft">Réservez votre Ora P1.<br>30 € offerts pour toute réservation.</span><a class="btn small" href="#produit">Découvrir Ora P1</a></aside>
 </header>
 
 <main>
-  <section class="manifest" aria-label="Manifeste">
-    <div class="rays" aria-hidden="true"></div>
-    <span class="chip">Pourquoi Ora</span>
-    <p>Ora écoute, résume et vous rappelle ce qui compte. <span class="hl">Sans écran</span>, sans fil d'actualité, <span class="hl">sans distraction</span> : juste votre voix, et une molette.</p>
-  </section>
+<!-- ============ Manifeste ============ -->
+<section class="manifesto">
+  <div class="rays" aria-hidden="true"></div>
+  <p id="manifesto">Si un objet <em>aussi petit</em> pouvait écouter, retenir et vous accompagner toute la journée, que voudriez-vous lui confier ?</p>
+</section>
 
-  <section class="product" id="product" aria-labelledby="productTitle">
-    <div class="wrap">
-      <div class="product__head">
-        <h2 class="title" id="productTitle">Tient dans la main. <span>Pèse 62 grammes.</span></h2>
-        <p class="lead">Un boîtier en aluminium noir, une molette pour tout faire, un petit écran qui ne montre que l'heure et ce qu'Ora est en train de faire.</p>
-      </div>
-      <div class="reveal">
-        <p class="giant" aria-hidden="true">Ora P1</p>
-        <div class="reveal__stage" id="bigDevice" data-3d="reveal" data-state="listening" role="img" aria-label="Ora P1 en 3D : boîtier noir mat aux coins arrondis, petit écran qui affiche l'heure et une onde, molette ronde en métal et bouton rouge sur le dessus">
-          <img class="fallback" src="https://images.unsplash.com/photo-1680026548022-e76f693d0a62?auto=format&fit=crop&w=1000&h=1200&q=80" alt="" width="1000" height="1200" loading="lazy" decoding="async">
-        </div>
-        <div class="callouts">
-          <p class="callout callout--1"><span class="chip">Écran</span><b>Écran mémoire 1,1 pouce</b>L'heure et l'état, rien d'autre.</p>
-          <p class="callout callout--2"><span class="chip">Micro</span><b>4 capsules, portée 3 m</b>Réduction du bruit embarquée.</p>
-          <p class="callout callout--3"><span class="chip">Bouton</span><b>Bouton rouge</b>Un appui pour parler, deux pour noter.</p>
-          <p class="callout callout--4"><span class="chip">Molette</span><b>Molette crantée</b>Volume, rappel, navigation.</p>
-        </div>
-      </div>
-      <div class="listen"><button class="btn btn--ghost" id="listenBtn" aria-pressed="true" aria-controls="bigDevice">Mettre en veille</button></div>
-    </div>
-  </section>
+<!-- ============ Produit ============ -->
+<section class="product" id="produit">
+  <p class="giant" aria-hidden="true" id="giant">Ora&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P1</p>
+  <div class="rock" aria-hidden="true"><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1701105040869-40cb9a5bbe6c?auto=format&fit=crop&w=1400&h=700&q=70&sat=-100"></div>
+  <h2 class="sr">Ora P1</h2>
+  <div class="device" data-device="front" aria-hidden="true"></div>
+  <div class="info rise">
+    <p class="price">199,00 €</p>
+    <p class="soft">Ora P1 écoute vos conversations, vous aide à retenir l'essentiel et garde vos tâches à portée de main, sans ajouter un écran de plus sur votre bureau.</p>
+    <a class="btn" href="#contact">Précommander</a>
+  </div>
+</section>
 
-  <section class="features" id="features" aria-labelledby="featTitle">
-    <div class="wrap">
-      <div class="product__head">
-        <h2 class="title" id="featTitle">Pensé pour disparaître. <span>Jusqu'à ce que vous en ayez besoin.</span></h2>
-        <span class="chip">Dans Ora P1</span>
-      </div>
-      <div class="fgrid">
-        <article class="tile tile--rock">
-          <div class="shot" data-slot="feature-rock"><img src="https://images.unsplash.com/photo-1680026548022-e76f693d0a62?auto=format&fit=crop&w=1200&h=1600&q=80" alt="Roches noires fracturées, texture mate" width="1200" height="1600" loading="lazy" decoding="async"></div>
-          <div class="glass"><span class="chip chip--glass">Mémoire</span><h3>Tout reste sur l'appareil</h3><p>Transcriptions et rappels chiffrés localement. Rien ne part sans votre accord.</p></div>
-        </article>
-        <article class="tile tile--plain">
-          <p class="stat-big">5<small>jours</small></p>
-          <div class="glass"><span class="chip chip--glass">Batterie</span><h3>Autonomie de 5 jours</h3><p>Recharge sans fil complète en 50 minutes.</p></div>
-        </article>
-        <article class="tile tile--fabric">
-          <div class="shot" data-slot="feature-fabric"><img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=800&h=800&q=80" alt="Canapé en tissu orange, flou et chaleureux" width="800" height="800" loading="lazy" decoding="async"></div>
-          <div class="glass"><span class="chip chip--glass">Rappels</span><h3>Il vous le redit au bon moment</h3><p>« Rappelle-moi d'appeler Lina en sortant. »</p></div>
-        </article>
-        <article class="tile tile--plain tile--wide">
-          <div class="wave" aria-hidden="true"></div>
-          <div class="glass"><span class="chip chip--glass">Voix</span><h3>Comprend le français parlé, même à voix basse</h3><p>Modèle vocal embarqué, fonctionne hors ligne, 12 langues.</p></div>
-        </article>
-      </div>
-    </div>
-  </section>
+<!-- ============ Pourquoi ============ -->
+<section class="why" id="pourquoi">
+  <span class="tag rise">Pourquoi Ora P1</span>
+  <h2 class="rise">Moins de téléphone.<br>Plus de choses faites.</h2>
+  <div class="strip rise" role="group" aria-label="Moments de la journée">
+    <button aria-pressed="false" data-say="Au réveil, Ora relit votre journée à voix haute pendant que le café coule."><img loading="lazy" alt="Table au soleil du matin" src="https://images.unsplash.com/photo-1688296524530-a916565cf7dc?auto=format&fit=crop&w=500&h=680&q=70"></button>
+    <button aria-pressed="false" data-say="En réunion, il note les décisions et qui s'en charge, sans que vous leviez les yeux."><img loading="lazy" alt="Carnet et tasse sur un bureau sombre" src="https://images.unsplash.com/photo-1556970181-98e37c414e87?auto=format&fit=crop&w=500&h=680&q=70"></button>
+    <button aria-pressed="true" data-say="Ora P1 est pensé pour les petits moments qui remplissent une journée : réunions, rappels, questions rapides. Il garde l'aide utile tout près, sans vous interrompre."><img loading="lazy" alt="Carnet posé sur une table, lumière rasante" src="https://images.unsplash.com/photo-1645821522738-551e9d46d1e6?auto=format&fit=crop&w=500&h=680&q=70"></button>
+    <button aria-pressed="false" data-say="Le soir, un appui sur le bouton rouge et la lampe du bureau peut s'éteindre : tout est noté."><img loading="lazy" alt="Bureau éclairé par une lampe, la nuit" src="https://images.unsplash.com/photo-1671104695361-8b16c458b552?auto=format&fit=crop&w=500&h=680&q=70"></button>
+    <button aria-pressed="false" data-say="Dans la poche, il pèse 52 grammes et tient trois jours sans recharge."><img loading="lazy" alt="Carnet à spirale sur du bois sombre" src="https://images.unsplash.com/photo-1623697899813-60dc464abeef?auto=format&fit=crop&w=500&h=680&q=70"></button>
+  </div>
+  <p class="soft say" id="say" aria-live="polite">Ora P1 est pensé pour les petits moments qui remplissent une journée : réunions, rappels, questions rapides. Il garde l'aide utile tout près, sans vous interrompre.</p>
+</section>
 
-  <section class="voices" id="voices" aria-labelledby="voicesTitle">
-    <div class="wrap">
-      <div class="product__head"><h2 class="title" id="voicesTitle">Ils l'ont gardé en poche. <span>Et l'écran dans le tiroir.</span></h2></div>
-      <div class="vrow">
-        <figure class="voice" style="margin:0"><q>Je note mes idées en marchant, sans sortir le téléphone. C'est devenu un réflexe.</q><figcaption class="who"><span class="avatar" style="--a:var(--fabric)" aria-hidden="true">CM</span><span><b>Camille M.</b><span>Architecte</span></span></figcaption></figure>
-        <figure class="voice" style="margin:0"><q>Le bouton rouge est le seul bouton dont j'ai besoin dans une journée de tournage.</q><figcaption class="who"><span class="avatar" style="--a:var(--wood)" aria-hidden="true">YB</span><span><b>Yanis B.</b><span>Réalisateur</span></span></figcaption></figure>
-        <figure class="voice" style="margin:0"><q>Les rappels arrivent au bon moment, à voix basse. Personne autour ne s'en rend compte.</q><figcaption class="who"><span class="avatar" style="--a:var(--rock-hi)" aria-hidden="true">SL</span><span><b>Sofia L.</b><span>Médecin</span></span></figcaption></figure>
-        <figure class="voice" style="margin:0"><q>Enfin un objet connecté qui ne réclame pas mon attention.</q><figcaption class="who"><span class="avatar" style="--a:var(--lamp)" aria-hidden="true">TR</span><span><b>Théo R.</b><span>Développeur</span></span></figcaption></figure>
-      </div>
-    </div>
-  </section>
+<!-- ============ En vedette ============ -->
+<section class="feature" id="vedette">
+  <div class="slide on"><img loading="lazy" alt="Tasse de café et carnet sur une table en bois" src="https://images.unsplash.com/photo-1557928082-c17dbf42a70f?auto=format&fit=crop&w=2000&h=1250&q=75"></div>
+  <div class="slide"><img loading="lazy" alt="Fauteuil orange dans une pièce sombre" src="https://images.unsplash.com/photo-1679387552459-9a1f2a9bcced?auto=format&fit=crop&w=2000&h=1250&q=75"></div>
+  <div class="slide"><img loading="lazy" alt="Mains écrivant une carte à la lumière d'une bougie" src="https://images.unsplash.com/photo-1671154453575-b0cea38bb19a?auto=format&fit=crop&w=2000&h=1250&q=75"></div>
+  <div class="glass">
+    <span class="tag">En vedette</span>
+    <svg class="ear" viewBox="0 0 50 50" aria-hidden="true"><path d="M9 20a11 11 0 0 1 22 0c0 7-7 8-7 14a6 6 0 0 1-11 3M15 20a5 5 0 0 1 10 0M36 12a13 13 0 0 1 0 17M42 8a20 20 0 0 1 0 25"/></svg>
+    <h3 id="fTitle">Restez dans la conversation, Ora s'occupe des détails.</h3>
+    <hr>
+    <p class="soft" id="fText">Ora écoute pendant que vous restez concentré. En réunion, en pleine idée ou au fil d'une réflexion, il garde l'important à portée de main sans vous sortir du moment.</p>
+    <a class="btn small" href="#interieur">En savoir plus</a>
+    <div class="segs" id="fSegs" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+  </div>
+  <div class="shot">
+    <span class="name">Ora-P1</span>
+    <button class="round prev" id="fPrev" aria-label="Fonction précédente"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M15 9H3M8 4 3 9l5 5"/></svg></button>
+    <button class="round next" id="fNext" aria-label="Fonction suivante"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h12M10 4l5 5-5 5"/></svg></button>
+    <p class="cap" id="fCap">À l'écoute en arrière-plan, pour que vous restiez dans l'instant.</p>
+  </div>
+</section>
 
-  <section class="cta" id="cta" aria-labelledby="ctaTitle">
-    <div class="wrap">
-      <div class="cta__box">
-        <div class="shot" data-slot="cta-lifestyle"><img src="https://images.unsplash.com/photo-1487015307662-6ce6210680f1?auto=format&fit=crop&w=1600&q=80" alt="Table ronde en bois, chaise et tasse dans une pièce lumineuse" width="1600" height="1067" loading="lazy" decoding="async"></div>
-        <div class="cta__device" data-3d="cta" aria-hidden="true"></div>
-        <span class="chip chip--glass" style="position:relative">Livraison en novembre</span>
-        <h2 class="title" id="ctaTitle">Réservez le vôtre. <span>149 €.</span></h2>
-        <p>Précommande sans frais, annulable à tout moment. Étui en laine offert jusqu'au 31 octobre.</p>
-        <div class="hero__ctas" style="justify-content:flex-start;position:relative"><button class="btn btn--paper" id="preorder">Précommander</button><a class="btn btn--ghost" href="#features">Fiche technique</a></div>
-      </div>
-      <footer class="foot">
-        <span>© 2026 Ora — produit fictif de démonstration · <span class="credit">Photos : Unsplash · 3D : Three.js</span></span>
-        <nav aria-label="Pied de page"><a href="#">Garantie</a><a href="#">Confidentialité</a><a href="#">Contact</a><a href="#top">Haut de page ↑</a></nav>
-      </footer>
-    </div>
-  </section>
+<!-- ============ Intérieur ============ -->
+<section class="inside" id="interieur">
+  <img loading="lazy" alt="" src="https://images.unsplash.com/photo-1595026677025-0eff2b5b3a16?auto=format&fit=crop&w=1800&h=1200&q=60&sat=-100">
+  <span class="tag">Dans l'Ora P1</span>
+  <div class="device" data-device="angle" aria-hidden="true"></div>
+  <div class="card rise"><b>Dessiné jusqu'au moindre détail.</b><hr><span class="soft">Ora P1 réunit ses commandes, son écran, son système d'écoute et ses composants dans un format compact, fait pour tous les jours.</span></div>
+  <span class="spot red" style="left:47%;top:30%" aria-hidden="true"></span><span class="spot" style="left:66%;top:14%" aria-hidden="true"></span><span class="spot" style="left:62%;top:62%" aria-hidden="true"></span>
+  <div class="ruler" aria-hidden="true"></div>
+  <div class="inside-foot rise"><h2>Tout ce qu'il faut.<br>Rien de plus.</h2><a class="btn small" href="#produit">En savoir plus</a></div>
+</section>
+
+<!-- ============ Témoignages ============ -->
+<section class="voices">
+  <div class="wrap voices-head rise"><span class="tag">Ce qu'ils en disent</span><h2>Un peu d'aide, ça change tout.</h2><p class="soft">Fait pour les moments ordinaires, Ora se glisse dans la façon dont on travaille, réfléchit et avance.</p></div>
+  <div class="rail" id="rail" tabindex="0" aria-label="Témoignages, liste à faire défiler">
+    <article class="quote"><header><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1715192133412-ce5f56ce4375?auto=format&fit=facearea&facepad=3&w=130&h=130&q=70"><div><span>Daniel Cartier</span>Chef de produit</div></header><p>« Je ne sors plus mon téléphone dès qu'un sujet tombe en réunion. Ora est là quand j'en ai besoin, sans me couper de la discussion. »</p></article>
+    <figure><img loading="lazy" alt="Bureau au soleil, carnets ouverts" src="https://images.unsplash.com/photo-1606242403192-c40d308b704d?auto=format&fit=crop&w=420&h=500&q=70"></figure>
+    <article class="quote"><header><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1667053508464-eb11b394df83?auto=format&fit=facearea&facepad=3&w=130&h=130&q=70"><div><span>Maya Chen</span>Directrice de création</div></header><p>« Ce que je préfère, c'est le peu d'effort qu'il demande. Je continue à travailler, je pose une question, et je reprends. »</p></article>
+    <figure><img loading="lazy" alt="Fauteuil orange dans la pénombre" src="https://images.unsplash.com/photo-1679387552459-9a1f2a9bcced?auto=format&fit=crop&w=420&h=500&q=70"></figure>
+    <article class="quote"><header><img loading="lazy" alt="" src="https://images.unsplash.com/photo-1762753674498-73ec49feafc4?auto=format&fit=facearea&facepad=3&w=130&h=130&q=70"><div><span>Marc Riva</span>Consultant</div></header><p>« Je pensais ne m'en servir qu'en réunion. Il ne me quitte plus : idées notées à la volée, rappels, et tous ces détails que j'oubliais. »</p></article>
+    <figure><img loading="lazy" alt="Carnet et tasse sur un bureau sombre" src="https://images.unsplash.com/photo-1556970181-98e37c414e87?auto=format&fit=crop&w=420&h=500&q=70"></figure>
+  </div>
+  <div class="segs" id="rSegs" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+</section>
+
+<!-- ============ Appel final ============ -->
+<section class="cta" id="contact">
+  <img loading="lazy" alt="Mur ocre traversé par l'ombre d'une fenêtre" src="https://images.unsplash.com/photo-1631832612525-98ba50f35189?auto=format&fit=crop&w=2000&h=1250&q=75">
+  <h2 class="rise">Le petit objet qui suit votre rythme.</h2>
+  <p class="soft rise" style="--d:100ms">De la première réunion à la dernière ligne de votre journée, Ora est toujours prêt.</p>
+  <div class="device" data-device="hand" aria-hidden="true"></div>
+  <a class="btn" href="#produit">Précommander Ora P1</a>
+  <small class="soft">Soyez parmi les premiers à l'essayer.</small>
+</section>
 </main>
 
-<script>
-(() => {
-  const wave = document.querySelector('.wave');
-  for (let i = 0; i < 48; i++) { const b = document.createElement('i'); b.style.setProperty('--h', (12 + Math.abs(Math.sin(i * 0.7)) * 44 + (i % 3) * 4) + 'px'); b.style.setProperty('--d', (i % 8) * -0.15 + 's'); wave.appendChild(b); }
+<footer class="foot">
+  <img loading="lazy" alt="" src="https://images.unsplash.com/photo-1595026677025-0eff2b5b3a16?auto=format&fit=crop&w=1800&h=700&q=60&sat=-100">
+  <div class="foot-top">
+    <div><span class="logo"><i aria-hidden="true"></i>Ora.</span></div>
+    <div><h3>Menu</h3><ul class="menu"><li><a href="#produit">Ora P1</a></li><li><a href="#vedette">Fonctions</a></li><li><a href="#pourquoi">Fonctionnement</a></li><li><a href="#interieur">À propos</a></li><li><a href="#">Questions</a></li></ul></div>
+    <div><h3>Recevez de temps en temps des nouvelles d'Ora.</h3>
+      <form class="news" onsubmit="return false"><label class="sr" for="mail">Adresse e-mail</label><input id="mail" type="email" required autocomplete="email" placeholder="Votre e-mail"><button class="btn small">S'abonner</button></form>
+      <h3>Contact</h3><a href="mailto:bonjour@ora.example">bonjour@ora.example</a></div>
+  </div>
+  <p class="legal soft"><span>© 2026 Ora — produit fictif, page de démonstration.</span><span>Conditions · Confidentialité</span></p>
+</footer>
+</div>
 
-  const menu = document.getElementById('menu'), links = document.getElementById('links');
-  menu.addEventListener('click', () => { const o = links.classList.toggle('is-open'); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu'); });
-  links.addEventListener('click', e => { if (e.target.closest('a')) { links.classList.remove('is-open'); menu.setAttribute('aria-expanded', false); } });
-
-  document.getElementById('offerClose').addEventListener('click', () => { document.getElementById('offer').hidden = true; });
-
-  const dev = document.getElementById('bigDevice'), btn = document.getElementById('listenBtn');
-  const toggle = () => { const on = dev.dataset.state !== 'listening'; dev.dataset.state = on ? 'listening' : 'idle'; btn.setAttribute('aria-pressed', on); btn.textContent = on ? 'Mettre en veille' : 'Réveiller Ora'; };
-  btn.addEventListener('click', toggle); dev.addEventListener('click', toggle);
-
-  const pre = document.getElementById('preorder');
-  pre.addEventListener('click', () => { pre.setAttribute('aria-busy', 'true'); pre.textContent = 'Réservation…'; setTimeout(() => { pre.removeAttribute('aria-busy'); pre.textContent = 'Réservé ✓'; pre.setAttribute('aria-disabled', 'true'); }, 700); });
-})();
-</script>
-<!-- Objet en 3D : Three.js r170 (voir references/assets.md). Repli : l'image .fallback (ou la photo de fond) si WebGL est absent. -->
-<script type="importmap">
-{ "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
-} }
-</script>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
 <script type="module">
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-const css = getComputedStyle(document.documentElement);
-const v = (name) => css.getPropertyValue(name).trim();          // couleurs et polices lues dans les tokens
-const tok = (name) => new THREE.Color(v(name));
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const MONO = v('--font-mono');
+const $ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const css = getComputedStyle(document.documentElement), tok = n => css.getPropertyValue(n).trim();
+requestAnimationFrame(() => document.body.classList.add('loaded'));
 
-// ---- Écran : texture canvas (heure + onde + état) ----
-function makeScreen() {
-  const c = document.createElement('canvas'); c.width = 512; c.height = 192;
-  const g = c.getContext('2d');
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
-  const draw = (t, listening, label) => {
-    g.fillStyle = v('--lcd'); g.fillRect(0, 0, c.width, c.height);
-    const d = new Date(), time = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
-    g.fillStyle = v('--lcd-text'); g.textBaseline = 'alphabetic';
-    g.font = `500 68px ${MONO}`; g.fillText(time, 30, 92);
-    const n = 20, x0 = 262, step = 11;                              // onde : 20 barres
-    for (let i = 0; i < n; i++) {
-      const amp = listening ? 6 + 46 * Math.abs(Math.sin(t * 3.1 + i * 0.7) * Math.sin(t * 1.3 + i * 0.31)) : 3;
-      g.fillRect(x0 + i * step, 66 - amp / 2, step - 4, amp);
-    }
-    g.globalAlpha = listening ? 0.25 + 0.75 * (0.5 + 0.5 * Math.cos(t * Math.PI * 2 / 1.6)) : 1;
-    g.fillStyle = listening ? v('--red') : v('--muted');
-    g.beginPath(); g.arc(44, 146, 10, 0, Math.PI * 2); g.fill();
-    g.globalAlpha = 1; g.fillStyle = v('--lcd-text');
-    g.font = `500 28px ${MONO}`; g.fillText(label, 68, 156);
-    tex.needsUpdate = true;
-  };
-  return { tex, draw };
+// ---------- L'objet : un boîtier haut, un écran, une molette, deux touches, une grille, un bouton rouge ----------
+const lcd = document.createElement('canvas'); lcd.width = 512; lcd.height = 256;
+const lx = lcd.getContext('2d'), lcdTex = new THREE.CanvasTexture(lcd); lcdTex.colorSpace = THREE.SRGBColorSpace;
+let phase = 0;
+function drawLcd() {
+  const ink = tok('--lcd');
+  lx.fillStyle = tok('--screen'); lx.fillRect(0, 0, 512, 256);
+  lx.fillStyle = ink; lx.font = '400 84px "JetBrains Mono", monospace'; lx.textBaseline = 'top';
+  lx.fillText(new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit' }).format(new Date()), 40, 34);
+  lx.font = '400 26px "JetBrains Mono", monospace'; lx.fillText('ORA', 42, 146); lx.fillText('À L\'ÉCOUTE…', 42, 182);
+  for (let i = 0; i < 4; i++) lx.fillRect(330 + i * 12, 70 - i * 6, 6, 8 + i * 6);                          // réseau
+  lx.strokeStyle = ink; lx.lineWidth = 3; lx.strokeRect(400, 48, 46, 26); lx.fillRect(406, 54, 26, 14);     // batterie
+  for (let i = 0; i < 16; i++) { const h = 8 + Math.abs(Math.sin(i * 0.9 + phase) * Math.cos(i * 0.31 + phase * 0.6)) * 70; lx.fillRect(300 + i * 11, 176 - h / 2, 5, h); }
+  lcdTex.needsUpdate = true;
 }
-
-// ---- L'objet : boîtier noir mat, écran, micro, molette métal, bouton rouge ----
+function grilleTexture() {
+  const c = document.createElement('canvas'); c.width = 256; c.height = 96; const x = c.getContext('2d');
+  x.fillStyle = tok('--device'); x.fillRect(0, 0, 256, 96); x.fillStyle = tok('--bg');
+  for (let r = 0; r < 4; r++) for (let k = 0; k < 11; k++) { x.beginPath(); x.arc(18 + k * 22, 14 + r * 22, 6, 0, 7); x.fill(); }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+}
 function makeDevice() {
-  const W = 1.8, H = 2.52, D = 0.5, F = D / 2;
-  const group = new THREE.Group();
-  const body = new THREE.Mesh(new RoundedBoxGeometry(W, H, D, 8, 0.24),
-    new THREE.MeshPhysicalMaterial({ color: tok('--device'), roughness: 0.62, metalness: 0.15, clearcoat: 0.25, clearcoatRoughness: 0.7 }));
-  group.add(body);
-
-  const bezel = new THREE.Mesh(new RoundedBoxGeometry(1.46, 0.62, 0.04, 3, 0.08),
-    new THREE.MeshPhysicalMaterial({ color: tok('--dial'), roughness: 0.25, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.05 }));
-  bezel.position.set(0, 0.76, F); group.add(bezel);
-  const screen = makeScreen();
-  const lcd = new THREE.Mesh(new THREE.PlaneGeometry(1.36, 0.51), new THREE.MeshBasicMaterial({ map: screen.tex, toneMapped: false }));
-  lcd.position.set(0, 0.76, F + 0.021); group.add(lcd);
-
-  const holeGeo = new THREE.CylinderGeometry(0.028, 0.028, 0.02, 16), holeMat = new THREE.MeshBasicMaterial({ color: tok('--bg') });
-  for (let i = 0; i < 4; i++) { const h = new THREE.Mesh(holeGeo, holeMat); h.rotation.x = Math.PI / 2; h.position.set(-0.18 + i * 0.12, 0.3, F + 0.002); group.add(h); }
-
-  const well = new THREE.Mesh(new THREE.CylinderGeometry(0.7, 0.7, 0.02, 96), new THREE.MeshStandardMaterial({ color: tok('--bg'), roughness: 0.9 }));
-  well.rotation.x = Math.PI / 2; well.position.set(0, -0.5, F + 0.001); group.add(well);
-  const metal = new THREE.MeshPhysicalMaterial({ color: tok('--metal'), metalness: 1, roughness: 0.32 });
-  const dial = new THREE.Group(); dial.position.set(0, -0.5, F);
-  const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.64, 0.64, 0.12, 96), metal);
-  ring.rotation.x = Math.PI / 2; ring.position.z = 0.06; dial.add(ring);
-  const knurl = new THREE.BoxGeometry(0.03, 0.02, 0.1);           // crans sur la tranche
-  for (let i = 0; i < 60; i++) { const a = i / 60 * Math.PI * 2, k = new THREE.Mesh(knurl, metal); k.position.set(Math.cos(a) * 0.64, Math.sin(a) * 0.64, 0.06); k.rotation.z = a; dial.add(k); }
-  const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.14, 96),
-    new THREE.MeshPhysicalMaterial({ color: tok('--device'), roughness: 0.35, metalness: 0.6, clearcoat: 0.6 }));
-  cap.rotation.x = Math.PI / 2; cap.position.z = 0.08; dial.add(cap);
-  const mark = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.14, 0.01), new THREE.MeshBasicMaterial({ color: tok('--text') }));
-  mark.position.set(0, 0.53, 0.125); dial.add(mark);
-  group.add(dial);
-
-  const button = new THREE.Mesh(new RoundedBoxGeometry(0.56, 0.16, 0.24, 4, 0.06),
-    new THREE.MeshPhysicalMaterial({ color: tok('--red'), roughness: 0.35, clearcoat: 0.8, clearcoatRoughness: 0.2 }));
-  button.position.set(0, H / 2 + 0.03, 0); group.add(button);
-  return { group, dial, button, screen, baseY: H / 2 + 0.03, bottom: -H / 2 };
+  const g = new THREE.Group(), W = 2, H = 3.6, D = 0.44, F = D / 2;
+  const shell = new THREE.MeshPhongMaterial({ color: tok('--device'), specular: tok('--device-edge'), shininess: 22 });
+  const body = new THREE.Mesh(new RoundedBoxGeometry(W, H, D, 6, 0.2), shell); g.add(body);
+  const bezel = new THREE.Mesh(new RoundedBoxGeometry(1.66, 0.92, 0.05, 4, 0.12), new THREE.MeshPhongMaterial({ color: tok('--screen'), specular: tok('--dial-ring'), shininess: 90 }));
+  bezel.position.set(0, 1.12, F); g.add(bezel);
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.75), new THREE.MeshBasicMaterial({ map: lcdTex })); screen.position.set(0, 1.12, F + 0.03); g.add(screen);
+  const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.66, 0.66, 0.1, 72), new THREE.MeshPhongMaterial({ color: tok('--dial-ring'), specular: tok('--lcd'), shininess: 120 }));
+  ring.rotation.x = Math.PI / 2; ring.position.set(0, -0.08, F + 0.02); g.add(ring);
+  const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.14, 72), new THREE.MeshPhongMaterial({ color: tok('--dial'), specular: tok('--device-edge'), shininess: 60 }));
+  cap.rotation.x = Math.PI / 2; cap.position.set(0, -0.08, F + 0.03); g.add(cap);
+  const dot = new THREE.Mesh(new THREE.CircleGeometry(0.035, 20), new THREE.MeshBasicMaterial({ color: tok('--lcd') })); dot.position.set(0, -0.08, F + 0.105); g.add(dot);
+  const key = new THREE.MeshPhongMaterial({ color: tok('--device'), specular: tok('--device-edge'), shininess: 40 });
+  [-0.4, 0.4].forEach(x => { const k = new THREE.Mesh(new RoundedBoxGeometry(0.74, 0.36, 0.08, 3, 0.07), key); k.position.set(x, -1.04, F); g.add(k); });
+  const grille = new THREE.Mesh(new THREE.PlaneGeometry(1.36, 0.5), new THREE.MeshBasicMaterial({ map: grilleTexture() })); grille.position.set(0, -1.5, F + 0.004); g.add(grille);
+  const red = new THREE.Mesh(new RoundedBoxGeometry(0.4, 0.2, 0.24, 3, 0.05), new THREE.MeshPhongMaterial({ color: tok('--red'), shininess: 50 })); red.position.set(0.5, H / 2 + 0.07, 0); g.add(red);
+  return g;
 }
 
-function makeShadow() {                                             // ombre douce au sol (texture canvas)
-  const c = document.createElement('canvas'); c.width = c.height = 128;
-  const g = c.getContext('2d'), grad = g.createRadialGradient(64, 64, 4, 64, 64, 64);
-  grad.addColorStop(0, v('--bg')); grad.addColorStop(1, 'transparent');
-  g.fillStyle = grad; g.fillRect(0, 0, 128, 128);
-  const m = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 1.4), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, opacity: 0.85, depthWrite: false }));
-  m.rotation.x = -Math.PI / 2; return m;
-}
+const poses = { hero: { rx: -0.42, ry: 0.3, rz: 0.12, z: 7.4 }, front: { rx: -0.05, ry: 0, rz: 0, z: 5.6, y: -0.9 }, angle: { rx: -0.25, ry: -0.6, rz: -0.14, z: 7 }, hand: { rx: -0.3, ry: 0.35, rz: 0.2, z: 7.2 } };
+const mounts = $('[data-device]').map(host => {
+  const pose = poses[host.dataset.device], renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
+  renderer.setPixelRatio(Math.min(1.5, devicePixelRatio || 1)); host.append(renderer.domElement);
+  const scene = new THREE.Scene(), cam = new THREE.PerspectiveCamera(30, 1, 0.1, 50); cam.position.set(0, 0, pose.z);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+  const sun = new THREE.DirectionalLight(0xffe2c0, 2.4); sun.position.set(-3, 4, 5); scene.add(sun);
+  const rim = new THREE.DirectionalLight(0xbfd0ff, 1.1); rim.position.set(4, -1, -3); scene.add(rim);
+  const dev = makeDevice(); dev.position.y = pose.y || 0; scene.add(dev);
+  const m = { host, renderer, scene, cam, dev, pose, visible: false, mx: 0, my: 0, dirty: true };
+  const size = () => { const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); m.dirty = true; };
+  new ResizeObserver(size).observe(host); size();
+  new IntersectionObserver(([e]) => { m.visible = e.isIntersecting; m.dirty = true; }).observe(host);
+  if (!reduced) host.closest('section, header').addEventListener('pointermove', e => { const r = host.getBoundingClientRect(); m.mx = (e.clientX - r.left) / r.width - 0.5; m.my = (e.clientY - r.top) / r.height - 0.5; m.dirty = true; }, { passive: true });
+  return m;
+});
 
-// Réglages par emplacement : caméra, pose, texte de l'écran
-const SETUPS = {
-  hero:   { cam: [0, 2.2, 8.4], look: [0, -0.4, 0], rot: [-0.12, -0.38, 0], float: false, label: "À L'ÉCOUTE…" },
-  reveal: { cam: [0, 0.2, 7.2], look: [0, 0, 0], rot: [0, -0.25, 0], float: true, label: null },
-  cta:    { cam: [0, 0.4, 7.4], look: [0, 0, 0], rot: [0.05, 0.45, -0.17], float: true, label: 'BONJOUR' },
+// Rendu à la demande : 30 images/s au plus, seulement pour les objets visibles qui ont changé
+let last = 0, lastLcd = 0;
+function frame(t) {
+  requestAnimationFrame(frame);
+  if (t - last < 33) return; last = t;
+  const anyVisible = mounts.some(m => m.visible);
+  if (anyVisible && !reduced && t - lastLcd > 110) { lastLcd = t; phase += 0.35; drawLcd(); mounts.forEach(m => m.dirty = true); }
+  mounts.forEach(m => {
+    if (!m.visible || !m.dirty) return;
+    const d = m.dev, p = m.pose, tx = p.rx + m.my * 0.25, ty = p.ry + m.mx * 0.5;
+    d.rotation.x += (tx - d.rotation.x) * 0.2; d.rotation.y += (ty - d.rotation.y) * 0.2; d.rotation.z = p.rz;
+    m.dirty = Math.abs(tx - d.rotation.x) + Math.abs(ty - d.rotation.y) > 0.002;
+    m.renderer.render(m.scene, m.cam);
+  });
+}
+mounts.forEach(m => { m.dev.rotation.set(m.pose.rx, m.pose.ry, m.pose.rz); });
+document.fonts.ready.then(() => { drawLcd(); mounts.forEach(m => m.dirty = true); });
+drawLcd(); requestAnimationFrame(frame);
+
+// ---------- Page ----------
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+$('.rise').forEach(el => io.observe(el));
+
+// Manifeste : les mots s'allument au défilement ; nom géant : léger décalage
+const man = document.getElementById('manifesto'); man.setAttribute('aria-label', man.textContent);
+man.innerHTML = [...man.childNodes].map(n => n.nodeType === 3 ? n.textContent.split(/(\s+)/).map(w => w.trim() ? `<span aria-hidden="true">${w}</span>` : w).join('') : `<em><span aria-hidden="true">${n.textContent}</span></em>`).join('');
+const words = $('span', man), giant = document.getElementById('giant'); let lit = -1, raf = 0;
+const onScroll = () => { raf = 0;
+  const r = man.getBoundingClientRect(), t = Math.min(1, Math.max(0, (innerHeight * 0.9 - r.top) / (innerHeight * 0.55))), n = Math.round(t * words.length);
+  if (n !== lit) { lit = n; words.forEach((w, i) => w.classList.toggle('lit', i < n)); }
+  const g = giant.parentElement.getBoundingClientRect(); if (g.bottom > 0 && g.top < innerHeight) giant.style.transform = `translateY(${Math.round(g.top * -0.08)}px)`;
 };
-const stateHost = document.getElementById('bigDevice');
+if (reduced) words.forEach(w => w.classList.add('lit')); else { addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(onScroll); }, { passive: true }); onScroll(); }
 
-function mount(host) {
-  const cfg = SETUPS[host.dataset['3d']];
-  let renderer;
-  try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); }
-  catch (e) { host.classList.add('no-webgl'); return null; }      // l'image de repli reste visible
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
-  renderer.domElement.setAttribute('aria-hidden', 'true');
-  host.appendChild(renderer.domElement);
+// Vignettes : une seule choisie
+const say = document.getElementById('say'), thumbs = $('.strip button');
+thumbs.forEach(b => b.addEventListener('click', () => { thumbs.forEach(o => o.setAttribute('aria-pressed', o === b)); say.textContent = b.dataset.say; }));
 
-  const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.55;
-  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-  camera.position.set(...cfg.cam); camera.lookAt(...cfg.look);
+// En vedette : trois fonctions
+const feats = [
+  ['Restez dans la conversation, Ora s\'occupe des détails.', 'Ora écoute pendant que vous restez concentré. En réunion, en pleine idée ou au fil d\'une réflexion, il garde l\'important à portée de main sans vous sortir du moment.', 'À l\'écoute en arrière-plan, pour que vous restiez dans l\'instant.'],
+  ['Un appui, et c\'est noté.', 'Le bouton rouge enregistre une pensée en deux secondes. Ora la classe, la date et vous la rappelle au bon moment.', 'Un seul geste, même les mains prises.'],
+  ['Le soir, tout est déjà rangé.', 'À la fin de la journée, Ora résume ce qui a été dit, ce qui a été décidé et ce qui reste à faire.', 'Un résumé de trois lignes, lu à voix haute.'],
+];
+const slides = $('.feature .slide'), fSegs = $('#fSegs i'); let f = 0;
+const setFeat = n => { f = (n + feats.length) % feats.length; slides.forEach((s, i) => s.classList.toggle('on', i === f)); fSegs.forEach((s, i) => s.classList.toggle('on', i <= f));
+  document.getElementById('fTitle').textContent = feats[f][0]; document.getElementById('fText').textContent = feats[f][1]; document.getElementById('fCap').textContent = feats[f][2]; };
+document.getElementById('fNext').addEventListener('click', () => setFeat(f + 1));
+document.getElementById('fPrev').addEventListener('click', () => setFeat(f - 1));
 
-  const dev = makeDevice();
-  const pivot = new THREE.Group(); pivot.add(dev.group); scene.add(pivot);
-  pivot.rotation.set(...cfg.rot);
-  const shadow = makeShadow(); shadow.position.y = dev.bottom - 0.12; scene.add(shadow);
-  const key = new THREE.DirectionalLight(tok('--lamp'), 2.2); key.position.set(4, 5, 4); scene.add(key);   // lumière de lampe chaude
-  const rim = new THREE.DirectionalLight(tok('--text'), 1.4); rim.position.set(-4, 2, -3); scene.add(rim);  // liseré froid
-  scene.add(new THREE.AmbientLight(tok('--text'), 0.15));
-
-  const resize = () => {
-    const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
-    renderer.setSize(w, h, false);
-    renderer.domElement.style.width = '100%'; renderer.domElement.style.height = '100%';
-    camera.aspect = w / h;
-    camera.fov = w / h < 0.8 ? 38 : 30;                             // recule un peu sur mobile
-    camera.updateProjectionMatrix();
-  };
-  new ResizeObserver(resize).observe(host); resize();
-
-  let px = 0, py = 0, over = false, visible = true, last = -1, lastState = null, press = -10;
-  host.addEventListener('pointermove', (e) => { const r = host.getBoundingClientRect(); px = (e.clientX - r.left) / r.width - 0.5; py = (e.clientY - r.top) / r.height - 0.5; over = true; });
-  host.addEventListener('pointerleave', () => { px = py = 0; over = false; });
-  new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(host);
-
-  const render = (t) => {
-    const listening = cfg.label ? true : stateHost.dataset.state === 'listening';
-    const label = cfg.label || (listening ? "À L'ÉCOUTE…" : 'EN VEILLE');
-    if (lastState !== null && lastState !== listening) press = t;  // appui sur le bouton rouge
-    lastState = listening;
-    if (t - last > 0.05 || reduce) { dev.screen.draw(t, listening, label); last = t; }
-    if (!reduce) {
-      const sway = Math.sin(t * 0.4) * 0.18;
-      pivot.rotation.y += (cfg.rot[1] + sway + px * 0.9 - pivot.rotation.y) * 0.06;
-      pivot.rotation.x += (cfg.rot[0] + py * 0.45 - pivot.rotation.x) * 0.06;
-      dev.dial.rotation.z += ((over ? -0.7 : 0) - dev.dial.rotation.z) * 0.05;   // la molette tourne au survol
-      const lift = cfg.float ? Math.sin(t * 1.05) * 0.1 : 0;
-      dev.group.position.y = lift;
-      shadow.scale.setScalar(1 - lift * 0.8); shadow.material.opacity = 0.85 - lift;
-    }
-    const k = Math.min(1, (t - press) / 0.25);
-    dev.button.position.y = dev.baseY - Math.sin(k * Math.PI) * 0.05;
-    renderer.render(scene, camera);
-  };
-  host.classList.add('is-3d-ready');
-  return { render, isVisible: () => visible };
-}
-
-const views = [...document.querySelectorAll('[data-3d]')].map(mount).filter(Boolean);
-const clock = new THREE.Clock();
-if (reduce) {
-  const still = () => views.forEach((vw) => vw.render(0));
-  still(); setInterval(still, 30000);                               // heure à jour, sans animation
-  stateHost.addEventListener('click', () => setTimeout(still, 0));
-  document.getElementById('listenBtn').addEventListener('click', () => setTimeout(still, 0));
-  document.fonts.ready.then(still);
-} else {
-  const loop = () => { const t = clock.getElapsedTime(); views.forEach((vw) => vw.isVisible() && vw.render(t)); requestAnimationFrame(loop); };
-  loop();
-}
+// Témoignages : l'indicateur suit le défilement du rail
+const rail = document.getElementById('rail'), rSegs = $('#rSegs i');
+rail.addEventListener('scroll', () => { const max = rail.scrollWidth - rail.clientWidth, k = max ? Math.round(rail.scrollLeft / max * (rSegs.length - 1)) : 0; rSegs.forEach((s, i) => s.classList.toggle('on', i <= k)); }, { passive: true });
 </script>
 </body>
 </html>

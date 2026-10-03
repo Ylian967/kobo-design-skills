@@ -1,92 +1,71 @@
 /*
  * Pocket Device Noir — tokens
- * Valeurs estimées à l'œil sur les captures d'un shot Dribbble (voir source.md), arrondies sur une échelle cohérente.
- * Noir pur, verre fumé, photos chaudes et un seul rouge : celui du bouton de l'objet.
- * @contrast text:bg text:bg-2 text:surface muted:bg muted:bg-2 muted:surface chip-text:chip red:bg red:bg-2 red-text:surface on-paper:paper lcd-text:lcd
+ * MESURÉS le 2026-10-03 par lecture des pixels sur les images du shot Dribbble (page entière de 1440px présentée à l'échelle 1).
+ * La référence est fixe (9 images et un diaporama vidéo) : couleurs, tailles et positions sont mesurées ; tout le mouvement est proposé.
+ * @contrast text:bg text:surface text:panel soft:bg soft:surface tag-text:tag ink:paper red-text:bg text:shade
  */
 :root {
-  /* Couleurs — noir */
-  --bg: #000000;            /* sections « manifeste », fond principal */
-  --bg-2: #0d0d0d;          /* sections produit */
-  --surface: #1a1a1a;       /* cartes opaques, témoignages */
-  --chip: #2a2a2a;          /* étiquettes grises */
-  --giant: #1f1f1f;         /* nom de produit géant en arrière-plan (décor, jamais du texte utile) */
+  /* ---- Couleurs ---- */
+  --bg: #000000;            /* mesuré : sections noires */
+  --bg-2: #0b0b0b;          /* mesuré : section « intérieur », légèrement plus claire */
+  --foot: #121212;          /* mesuré : pied de page (#101010 à #141414) */
+  --surface: #181818;       /* mesuré : cartes de témoignage */
+  --tag: #1c1c1c;           /* mesuré : étiquettes (#181818 à #202020) */
+  --tag-text: #c8c8c8;      /* choisi : texte des étiquettes (shot : ≈ #8c8c8c, trop sombre en petit) */
+  --panel: #2c2c2c;         /* mesuré : panneau de verre fumé une fois composé sur le noir (#282828 à #303030) */
+  --glass: rgb(255 255 255 / 0.12);        /* choisi : même panneau en transparence, sur photo */
+  --glass-line: rgb(255 255 255 / 0.22);   /* lu : contour en tirets de la carte d'offre et de la vignette choisie */
   --text: #ffffff;
-  --muted: #8a8a8a;         /* sous-titres, rôles, légendes */
-  --chip-text: #a6a6a6;     /* texte des étiquettes */
-  --line: #262626;          /* filets */
-  --glass: rgb(255 255 255 / 0.08);        /* panneaux de verre fumé */
-  --glass-line: rgb(255 255 255 / 0.12);   /* contour 1px des panneaux */
-  --glass-hi: rgb(255 255 255 / 0.16);     /* survol */
+  --soft: #b4b4b4;          /* lu : paragraphes gris clair */
+  --giant-top: #3a3a3a;     /* lu : nom géant derrière l'objet, dégradé vers le noir */
+  --giant-bottom: #0a0a0a;
+  --red: #fc383c;           /* mesuré : mots en rouge, pictogramme, bouton de l'objet */
+  --red-text: #ff6466;      /* choisi : rouge pour un petit texte sur noir */
+  --paper: #fcfcfc;         /* mesuré : boutons blancs */
+  --ink: #0a0a0a;
+  --line: rgb(255 255 255 / 0.16);         /* lu : filets, rayons, pointillés */
+  --shade: #1a1410;         /* choisi : ton sombre des photos chaudes sous le texte (repli et contraste) */
+  --veil-0: rgb(0 0 0 / 0);
+  --veil-1: rgb(0 0 0 / 0.55);
+  --veil-2: rgb(0 0 0 / 1);
+  /* matières de l'objet 3D (lues par le script, jamais du texte) */
+  --device: #1d1d1f;
+  --device-edge: #3c3c40;
+  --screen: #101012;
+  --dial: #0e0e10;
+  --dial-ring: #b9b9c2;
+  --lcd: #e8e8e8;
 
-  /* Accent : le rouge du bouton de l'objet */
-  --red: #e5343a;           /* mots surlignés, voyant, bouton de l'objet */
-  --red-text: #ff5a5f;      /* rouge en texte sur gris #1a1a1a */
-  --paper: #ffffff;         /* bouton plein blanc */
-  --on-paper: #000000;
+  /* ---- Typographie ---- */
+  --font: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;   /* shot : néo-grotesque non identifiée */
+  --font-lcd: 'JetBrains Mono', ui-monospace, monospace;        /* écran de l'objet */
+  --fs-hero: clamp(3.5rem, 7.2vw, 6.5rem);       /* mesuré : capitales de 80px de haut, « Meet CUE. » sur 518px */
+  --fs-giant: clamp(7rem, 23vw, 20.5rem);        /* mesuré : nom géant de 224px de haut */
+  --fs-manifesto: clamp(1.75rem, 3.2vw, 2.9rem); /* mesuré : lignes de 47px au pas de 52px */
+  --fs-h2: clamp(1.75rem, 2.9vw, 2.6rem);        /* mesuré : lignes de 38px au pas de 50px */
+  --fs-h3: 1.5rem;          /* lu : titre de carte ≈ 24px */
+  --fs-body: 1.0625rem;     /* lu : paragraphes ≈ 17px / 1.6 */
+  --fs-small: 0.875rem;     /* lu : boutons, étiquettes, témoignages ≈ 14px */
+  --fs-tiny: 0.75rem;
+  --ls-tight: -0.035em;     /* lu : approche serrée des titres */
 
-  /* Objet : matières de la scène 3D (lues par Three.js via getComputedStyle, jamais du texte) */
-  --device: #121212;
-  --device-hi: #3a3a3a;     /* reflet sur l'arête */
-  --dial: #1c1c1c;          /* cadre de l'écran */
-  --metal: #6e6e6e;         /* molette en métal (metalness 1) */
-  --lcd: #0f1a14;           /* petit écran */
-  --lcd-text: #cfe8c2;
+  /* ---- Grille (1440 de large) ---- */
+  --page: 1440px;
+  --gutter: clamp(16px, 5.55vw, 80px);   /* mesuré : marges de 80px */
+  --btn-h: 40px;            /* mesuré : bouton 146 × 40 ; « Acheter » 106 × 37 */
+  --r-btn: 6px;             /* lu : boutons et étiquettes */
+  --r-card: 8px;            /* lu : cartes, vignettes */
+  --tag-h: 32px;            /* mesuré : étiquette 118 × 32 */
+  --thumb-w: 206px;         /* mesuré : 5 vignettes sur 1064px ; 202px de haut, la vignette choisie 282px */
+  --thumb-h: 202px;
+  --thumb-h-on: 282px;
+  --card-w: 327px;          /* mesuré : carte de témoignage 327 × 250 */
+  --card-h: 250px;
+  --blur: 18px;             /* choisi : flou du panneau « en vedette » */
 
-  /* Photos chaudes : couleurs de repli des conteneurs et lumière de lampe (jamais du texte) */
-  --wood: #7a4a2a;
-  --wood-dark: #3a2213;
-  --wall: #1e140d;
-  --lamp: #f0b26a;
-  --ceramic: #e9e2d6;
-  --coffee: #2a170c;
-  --fabric: #c9622a;
-  --fabric-dark: #7d3412;
-  --rock: #2b2b2b;
-  --rock-hi: #4a4a4a;
-  --grade-warm: brightness(0.62) saturate(1.1) sepia(0.18) contrast(1.06);  /* étalonnage des photos */
-
-  /* Typographie */
-  --font-display: 'Geist', 'Inter', system-ui, sans-serif;     /* grotesque nette, titres serrés */
-  --font-body: 'Geist', 'Inter', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, monospace;          /* écran de l'objet, étiquettes techniques */
-  --text-2xs: 0.6875rem;    /* étiquettes, coins du héros */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.5rem;
-  --text-statement: clamp(1.25rem, 2vw, 1.625rem);   /* manifeste centré ~26px */
-  --text-title: clamp(2rem, 3.6vw, 3rem);
-  --text-hero: clamp(2.75rem, 5vw, 4.5rem);          /* « Rencontrez ORA. » ~64px */
-  --text-giant: clamp(6rem, 22vw, 20rem);            /* nom de produit en arrière-plan */
-  --leading-tight: 1;
-  --leading-title: 1.08;
-  --leading-body: 1.55;
-  --tracking-tight: -0.035em;
-  --tracking-caps: 0.06em;
-
-  /* Espace (base 4px) */
-  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 20px; --space-6: 24px;
-  --space-8: 32px; --space-10: 40px; --space-12: 48px; --space-16: 64px; --space-24: 96px; --space-32: 128px;
-  --gutter: clamp(16px, 3vw, 40px);
-  --container: 1280px;
-
-  /* Formes */
-  --radius-xs: 3px;         /* étiquettes grises */
-  --radius-sm: 4px;         /* boutons */
-  --radius-md: 12px;        /* panneaux de verre, cartes */
-  --radius-lg: 20px;        /* tuiles photo */
-  --control: 44px;
-  --blur: 18px;             /* flou derrière le verre */
-  --shadow-float: 0 24px 60px -20px rgb(0 0 0 / 0.9);
-  --fade-bottom: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(0 0 0 / 0.75) 72%, #000000 100%);
-
-  /* Mouvement */
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ease-inout: cubic-bezier(0.7, 0, 0.3, 1);
-  --dur-fast: 150ms;
-  --dur-base: 300ms;
-  --dur-slow: 800ms;
-  --dur-pulse: 1600ms;      /* voyant d'écoute */
+  /* ---- Mouvement (proposé : la référence est fixe) ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur: 500ms;
+  --dur-slow: 1000ms;
 }

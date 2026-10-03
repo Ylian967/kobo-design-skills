@@ -1,46 +1,70 @@
 # Source — Pocket Device Noir
 
-- **Site de référence** : https://dribbble.com/shots/27771993-Noda-AI-Companion-Website-Design (shot Dribbble « Noda — AI Companion Website Design »)
+- **Référence** : https://dribbble.com/shots/27771993-Noda-AI-Companion-Website-Design (« Noda — AI Companion Website Design », par Lil Dicky pour Odama)
 - **Famille** : Produit tech / objet connecté
-- **Analysé le** : 2026-10-01, Chrome (image) ; 2026-10-03, vidéo du shot image par image
+- **Analysé le** : 2026-10-01 (première version, à l'œil) ; **2026-10-03, réécriture complète** : les **neuf** images du shot téléchargées en pleine résolution, la vidéo lue image par image (8 images), couleurs **lues au pixel**, tailles et positions mesurées sur la page entière.
+- **Ce qui plaît** : l'objet noir dans une lumière chaude, le nom géant derrière lui, la sobriété de l'interface.
 
-## Ce qui a été vu
+## Ce que contient la référence
 
-- **Produit** : site sombre pour un assistant vocal IA de poche — boîtier noir, molette ronde, petit écran LCD (« 09:42 LISTENING… »), bouton rouge sur le dessus.
-- **Héros** : photo de bureau chaleureuse (bois, café) assombrie jusqu'au noir en bas ; grand titre blanc centré en grotesque serrée (« Meet CUE. », ~64px), petit sous-titre gris, deux petits boutons : blanc plein et sombre transparent à contour. Carte de verre flottante en bas à droite (« Hot Offers! ») avec bouton blanc. Petits libellés dans les coins gauche et droit (« Cue A01 Model », « AI Companion »).
-- **Navigation** : petit logo avec un petit carré, liens minuscules centrés, petit bouton blanc « Shop Now » (rayon ~4px).
-- **Manifeste** : section noir pur #000 avec de fins rayons en éventail (filets en soleil), texte blanc centré ~26px, quelques mots surlignés en rouge (~#e5343a).
-- **Nom géant** : nom de produit en très grand gris sombre (~#2a2a2a, contour ou atténué) derrière le rendu de l'objet.
-- **Fonctions** : petits panneaux de verre sombre (blanc à 8 %, contour 1px) avec petites étiquettes (« Inside CUE A01 »), texte à gauche ; textures de roche sombre ; petites étiquettes grises (rayon ~3px, fond ~#2a2a2a).
-- **Témoignages** : rangée de petites cartes avec avatar, nom et rôle.
-- **Photos d'ambiance** : tissu orange chaud, roche noire. Palette relevée : #000, #0d0d0d, #1a1a1a, blanc, gris #8a8a8a, rouge #e5343a, tons chauds des photos.
+- **Neuf images fixes** : huit mises en scène d'écrans (2400 × 1800) et la **page d'accueil entière** (1600 × 7276, soit une page de 1440px à l'échelle 1 dans un cadre de 80px).
+- **Une vidéo** de 2,4 s (800 × 600) : un **diaporama** des mêmes écrans, en coupes franches. Elle ne montre aucune animation d'interface.
+- Aucun site en ligne.
 
-## Pages explorées (2026-10-03)
+**Aucune animation n'est visible** : tout le mouvement décrit dans `motion.md` est proposé par le skill.
 
-| Source | Relevé |
+## Sections de la page
+
+Héros (bureau, main tenant l'objet, titre, deux boutons, carte d'offre) · manifeste sur rayons · produit (nom géant, objet de face, roches, prix, bouton) · « pourquoi » (5 vignettes) · « en vedette » (panneau de verre + photo) · intérieur (objet éclaté, carte, points, graduation rouge) · témoignages · appel final sur mur doré · pied texturé.
+
+## Mesures (page de 1440px)
+
+| Élément | Valeur |
 |---|---|
-| Image principale (2400×1800) | Déjà analysée (ci-dessus). |
-| Vidéo du shot (800×600, 2,4s) | Observé : section « pourquoi » (bande de 5 photos, sélection centrale à contour pointillé), panneau « en vedette » en verre flouté avec icône rouge et barre segmentée + photo avec flèche ronde, appel final photo avec bouton blanc centré. |
-| Autres shots du même projet | Aucun trouvé (recherche Dribbble). Pas de site en ligne lié. |
+| Page | 1440px, marges de 80px ; cadre #eeeeee |
+| Fonds | #000000 ; intérieur #040404 à #0b0b0b ; pied #101010 à #141414 |
+| Titre du héros | capitales de 80px de haut ; « Meet CUE. » de 462 à 980px (518px de large) |
+| Boutons | « Get CUE. » 146 × 40px ; « Shop Now » 106 × 37px ; blancs #fcfcfc |
+| Carte d'offre / panneau de verre | #282828 à #303030 une fois composés |
+| Manifeste | 3 lignes de 47px au pas de 52px ; rouge #fc383c |
+| Nom géant | 224px de haut ; gris #0c0c0c en bas, plus clair en haut |
+| Étiquette | 118 × 32px ; fond #181818 à #202020 ; texte ≈ #8c8c8c |
+| Titres de section | lignes de 38px au pas de 50px |
+| Vignettes | 5 sur 1064px (≈ 206px chacune) ; 202px de haut, celle du centre 282px |
+| Carte de témoignage | 327 × 250px ; fond #181818 |
+| Appel final | titre : lignes de 37 et 47px au pas de 52px |
+| Hauteurs | héros ≈ 920px ; page 7146px |
 
-## Non mesuré
+## Lu à l'œil (non mesuré au pixel)
 
-- Il s'agit d'un **mockup Dribbble** : analyse visuelle des images uniquement, aucun site en ligne, aucun code inspecté.
-- Toutes les valeurs (couleurs, tailles, rayons, flous) sont **estimées à l'œil** et arrondies sur une échelle de 4px.
-- La police n'est pas identifiée : **Geist** et **Geist Mono** sont choisies à l'œil.
-- Aucune animation n'est visible sur des images fixes : le mouvement (`motion.md`) est une proposition.
-- L'appel final est désormais **observé** dans la vidéo ; le pied de page reste extrapolé.
+- Rayons (≈ 6 et 8px), tailles du texte courant (≈ 17px) et du petit texte (≈ 14px).
+- Contours en tirets, pointillés, halo des boutons.
+- Gris des paragraphes (≈ #b4b4b4), dégradé du nom géant.
+- Détails de l'objet (proportions, molette, touches, grille).
+
+## Police
+
+Néo-grotesque serrée, **non identifiée** ; Inter Tight est choisie à l'œil. L'écran de l'objet utilise une police à segments ; JetBrains Mono la remplace.
+
+## Proposé par le skill
+
+- **Toutes les animations** et tous les états.
+- **L'objet en 3D** (construit en formes simples) à la place des photos du produit, et son écran vivant.
+- `--tag-text` (#c8c8c8 au lieu de ≈ #8c8c8c), `--red-text`, `--soft`, `--glass`, les voiles.
+- Les trois « fonctions » du panneau en vedette (la maquette en montre une), les textes des vignettes.
+- Les autres pages et **toute la version mobile**.
+- Les images par seconde de `motion.md`, mesurées dans un Chrome sans carte graphique.
 
 ## Écarts assumés
 
-| Élément du shot | Dans le skill | Raison |
+| Maquette | Dans le skill | Raison |
 |---|---|---|
-| Nom du produit, logo, textes en anglais | Produit fictif « Ora P1 », logo carré inventé, textes en français | Marque et droits d'auteur |
-| Rendus 3D de l'objet, photos de bureau, roche, tissu | Objet en scène Three.js procédurale (boîtier, écran, molette, bouton) et autres photos libres, dans des emplacements `data-3d` / `data-slot` | Droits d'auteur ; à remplacer par votre modèle `.glb` et vos photos |
-| Texte gris des étiquettes sur #2a2a2a (contraste faible) | `--chip-text` #a6a6a6 (5,9:1) | Contraste ≥ 4,5:1 |
-| Rouge #e5343a en texte sur gris #1a1a1a (4,1:1) | Rouge en texte uniquement sur noir (4,9:1) ; `--red-text` #ff5a5f sur gris (5,7:1) | Contraste |
-| Nom géant #2a2a2a | `--giant` #1f1f1f + contour blanc à 8 % (décor, `aria-hidden`) | Rester en arrière-plan sans gêner la lecture |
-| Petit bouton « Shop Now » (~32px) | Hauteur 36px visible + zone cliquable étendue à 44px | Cible tactile |
-| Prix en dollars, offre « Hot Offers! » | « Offre du moment », prix en euros | Contenu localisé |
-| Composition ordinateur uniquement | Version mobile (menu repliable, carte d'offre pleine largeur, légendes en grille sous l'objet) | Adaptation |
-| Visuels de la démo | Photos Unsplash libres (licence Unsplash) et scène Three.js, à remplacer par les images et le modèle du projet | Démo sans images propriétaires |
+| Marque « Noda », produit « CUE A01 », textes anglais | Produit fictif « Ora P1 », textes français | Identité |
+| Photos du produit tenu en main | Photos d'ambiance Unsplash **sans** le produit + objet 3D par-dessus | Aucune photo libre de ce produit ; c'est l'écart le plus visible |
+| Objet au rendu photoréaliste | Modèle 3D simple (formes de base, matériaux mats) | Légèreté ; un vrai modèle `.glb` le remplace |
+| Vue intérieure éclatée | Objet de trois quarts, non éclaté | Pas de modèle des composants |
+| Roches autour de l'objet | Photo de pierre fondue derrière l'objet | Pas de roches détourées libres |
+| Texte des étiquettes ≈ #8c8c8c sur #1c1c1c | #c8c8c8 | Contraste |
+| Portraits et noms des témoignages | Personnes fictives, portraits Unsplash | Identité |
+| Prix en dollars | Euros | Langue |
+| Une seule largeur | Tailles en `clamp()`, version mobile | Rendre le skill utilisable |

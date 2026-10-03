@@ -1,68 +1,51 @@
-# Pocket Device Noir — mises en page
+# Pocket Device Noir — gabarits
 
-Conteneur `--container` 1280px, marges `--gutter` (16px → 40px), sections de 96px (128px pour le manifeste), alternance `--bg` / `--bg-2` sans filet entre elles.
+Grille **mesurée** sur la maquette : page de 1440px, marges de 80px. Les sections se touchent ; elles alternent **photo chaude plein cadre** et **noir**.
 
-## Héros « bureau »
-
-```
-▢ ora               Produit  Fonctions  Avis  Assistance            [Acheter]
-                         Rencontrez Ora.
-              Sous-titre gris, 2 lignes, 40 caractères
-                  [Précommander]  [▶ Voir la démo]
-             [ photo du bureau + objet 3D posé dessus ]
-ORA P1                         COMPAGNON IA        ┌ verre : offre du moment ┐
-MODÈLE 2026                    VOCAL · HORS LIGNE  └ 149 € 179 €  [J'en profite] ┘
-```
-- Hauteur `max(700px, 100svh)`, `overflow: hidden`. Vraie photo de bureau chaud (image réelle, voir `assets.md`) étalonnée `--grade-warm`, voile haut pour la barre et `--fade-bottom` jusqu'au noir.
-- Texte centré à 9vh sous la barre ; l'objet 3D (`data-3d="hero"`, 48 % de la hauteur) est posé au centre du plateau, vu légèrement en plongée.
-
-## Manifeste
-
-Noir pur, rayons en éventail centrés, étiquette « Pourquoi Ora » puis 3–4 lignes centrées avec mots rouges.
-
-## Révélation produit
+## Héros (1440 × 920)
 
 ```
-Tient dans la main.                         Paragraphe gris, 38 caractères
-Pèse 62 grammes. (gris)
-  ─ ÉCRAN                                         BOUTON ─
-  Écran mémoire…        O r a [objet] P 1        Bouton rouge…
-  ─ MICRO                                         MOLETTE ─
-                         [Mettre en veille]
+┌──────────────────────────────────────────────────────────────┐
+│ [Ora.]        ( Produit  Fonctionnement  À propos )  [Acheter]│
+│                        ┌──────┐                               │
+│ Modèle Ora P1          │objet │              Compagnon vocal  │  libellés à 40 % de la hauteur
+│                        └──────┘                               │
+│                      Voici Ora.                               │  titre centré, devant l'objet
+│            Votre compagnon vocal de tous les jours…           │
+│               [Obtenir Ora.] [En savoir plus]    ┌ ─ ─ ─ ─ ┐  │
+│                                                  │ offre    │  │  carte en tirets, en bas à droite
+│   ─ ─ arc fin ─ ─                                └ ─ ─ ─ ─ ┘  │
+└──────────────────────────────────────────────────────────────┘
+        photo de bureau au soleil, fondue au noir vers le bas
 ```
-Zone de 560px minimum, nom géant centré verticalement derrière l'objet 3D (zone 460×560px), quatre légendes aux coins.
 
-## Grille de fonctions
+## Page d'accueil (ordre de la maquette)
 
-```
-[ photo roche, haute     ] [ 5 jours ]   [ photo tissu orange ]
-[  + panneau verre       ] [ onde sonore, large (2 colonnes) ]
-```
-`grid-template-columns: 1.3fr 1fr 1fr`, écart 16px ; la tuile roche fait 620px de haut.
+| # | Section | Fond | Disposition |
+|---|---|---|---|
+| 1 | Héros | photo chaude | voir ci-dessus |
+| 2 | Manifeste | noir + rayons | une phrase centrée, deux mots en rouge |
+| 3 | Produit | noir | nom géant en dégradé, l'objet de face devant lui, roches sombres, prix, texte, bouton |
+| 4 | Pourquoi | noir, halo gris | étiquette, titre sur 2 lignes, 5 vignettes (celle du centre plus haute), texte |
+| 5 | En vedette | photo chaude | panneau de verre à gauche (40 %), photo nette à droite (60 %) avec flèches et légende |
+| 6 | Intérieur | noir texturé | étiquette, objet de trois quarts, carte de verre, points d'intérêt, graduation rouge, titre en bas à gauche, bouton à droite |
+| 7 | Témoignages | noir | étiquette, titre à gauche et texte à droite, rail de cartes alternant citation et photo, indicateur |
+| 8 | Appel final | photo chaude | titre centré, phrase, objet, bouton blanc, mention |
+| 9 | Pied | gris très sombre texturé | logo, menu en grand, lettre d'information, ligne légale |
 
-## Avis
+Hauteurs relevées : héros ≈ 920px, manifeste + produit ≈ 1400px, pourquoi ≈ 880px, en vedette ≈ 900px, intérieur ≈ 940px, témoignages ≈ 680px, appel final ≈ 900px, pied ≈ 580px (page de 7146px).
 
-Titre bicolore puis rangée de 4 témoignages miniatures (écart 12px).
+## Autres pages (proposées)
 
-## Appel final + pied
+- **Fiche technique** : l'objet de trois quarts à gauche, tableau à filets pointillés à droite, étiquettes grises pour les rubriques.
+- **Fonctionnement** : trois sections « en vedette » empilées, panneau de verre alternativement à gauche et à droite.
+- **Commande** : photo chaude floutée, panneau de verre central avec le prix, les options en étiquettes et un bouton blanc.
 
-Grande tuile à coins de 20px : vraie photo d'intérieur chaleureux en fond, fondu noir depuis la gauche, objet 3D incliné à droite, texte à gauche (étiquette, titre bicolore, paragraphe, deux boutons). Pied : filet, mention légale à gauche, liens 12px à droite.
+## Mobile (390px, proposé)
 
-## Mobile (≤ 720px)
-
-- Barre : logo, bouton menu carré, petit bouton « Acheter ».
-- Héros 780px : texte centré, objet au milieu du plateau, libellé de coin gauche au-dessus de l'objet, carte d'offre pleine largeur en bas ; le libellé droit est masqué (≤ 1000px).
-- Révélation : zone 3D de 440px de haut, légendes en grille 2 colonnes sous l'objet (alignées à gauche).
-- Fonctions et avis : une colonne ; tuile roche 420px.
-- Appel final : 660px de haut, texte en haut, objet 3D en bas sur 300px (fondu noir du haut vers le bas).
-- Pas de défilement horizontal : les rayons et les photos débordent dans des sections en `overflow: hidden`.
-
----
-
-## Écrans relevés dans la vidéo du shot
-
-- **Pourquoi** (après le manifeste) : fond noir, en-tête centré (étiquette + titre 2 lignes), bande de 5 photos avec sélection centrale, paragraphe centré.
-- **En vedette** : 2 colonnes égales, panneau de verre à gauche, photo à droite, carrousel (barre segmentée + flèche ronde).
-- **Appel final** (remplace la version extrapolée) : photo plein cadre de l'objet en main, texte centré au-dessus de l'objet, bouton blanc centré sous l'objet, voile sombre en haut pour la lisibilité.
-
-Tous les écrans de la vidéo sont présentés dans un **cadre arrondi à fin contour gris** sur fond noir (mise en scène du shot, pas forcément du site).
+- Barre réduite au logo et au bouton ; libellés latéraux et arc masqués.
+- Héros : objet en haut, titre et boutons dessous, carte d'offre sous les boutons.
+- Vignettes : la bande reste sur une ligne, la vignette choisie prend 40 % de la largeur.
+- En vedette : photo en haut, panneau de verre dessous.
+- Intérieur : carte en haut, objet au milieu, titre et bouton en bas.
+- Témoignages : rail au doigt. Pied en une colonne.

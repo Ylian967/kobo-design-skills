@@ -1,54 +1,63 @@
 # Pocket Device Noir — mouvement
 
-## Principes
-
-**Discret, mécanique, précis.** On anime ce qu'un objet réel ferait : une molette qui tourne, un voyant qui respire, un objet qui flotte au-dessus de son ombre. L'interface, elle, apparaît simplement (fondu + 16px). Survols à `--dur-fast` 150ms, entrées à `--dur-slow` 800ms. Le shot de référence étant une image fixe, ces mouvements sont une proposition (voir `source.md`).
+**La référence est fixe** : neuf images et une vidéo de 2,4 s qui n'est qu'un diaporama des écrans (coupes franches, aucun mouvement dans l'image). Tout ce qui suit est **proposé** par le skill, dans le ton du visuel : calme, précis, comme un objet que l'on tourne dans sa main.
 
 ## Catalogue
 
-| Moment | Effet | Durée | Courbe | Notes |
-|---|---|---|---|---|
-| Chargement | Titre, sous-titre, boutons qui montent de 16px en fondu, décalés de 100ms | 800ms | `--ease-out` | carte d'offre à 400ms |
-| Continu | Voyant rouge de l’écran 3D qui pulse (opacité 1 → .25, texture canvas) | 1.6s | cosinus | éteint en veille |
-| Continu | Rayons du manifeste qui tournent | 120s | linéaire | presque imperceptible |
-| Continu | Objet 3D qui flotte (± 0,1 unité), tourne doucement et suit le pointeur | ≈ 6s | sinus + lissage 6 % | révélation et appel final |
-| Continu | Barres de l'onde sonore (échelle .35 → 1) | 1.2s | `ease-in-out` alterné | décalées |
-| Survol objet | Molette 3D qui tourne de 40° | ≈ 800ms | lissage 5 % par image | |
-| Clic objet / bouton | Écoute ↔ veille : texte de l'écran et voyant | immédiat | — | `aria-pressed` sur le bouton |
-| Survol bouton | Fond éclairci ou verre plus opaque ; appui 1px | 150ms | `--ease-out` | |
-| Survol panneau | Contour de verre plus visible | 300ms | — | |
-| Fermer l'offre | La carte disparaît | immédiat | — | ajouter un fondu de 300ms si souhaité |
+| Moment | Effet | Durée / courbe |
+|---|---|---|
+| Arrivée du héros | Les deux mots du titre montent derrière un cache, à 120 ms d'écart | 1000ms `--ease` |
+| Objet 3D | Suit la souris : jusqu'à ±0.25 rad d'avant en arrière, ±0.5 rad de gauche à droite, avec inertie | interpolation de 20 % par image |
+| Écran de l'objet | L'heure réelle ; la forme d'onde ondule | redessiné toutes les 110ms |
+| Manifeste | Les mots passent de 25 % à 100 % d'opacité un à un, au défilement | lié au défilement ; 500ms |
+| Nom géant | Glisse verticalement (8 % du défilement) derrière l'objet | lié au défilement |
+| Blocs | Montée de 28px en fondu, une fois | 1000ms `--ease` |
+| Bouton blanc | Monte de 2px, son halo passe de 3 à 6px | 500ms `--ease` |
+| Vignettes | La vignette choisie grandit (202 → 282px) et prend un contour en tirets ; le texte dessous change | 500ms `--ease` |
+| En vedette | Fondu entre les photos plein cadre ; les segments de la barre se remplissent | 1000ms linéaire ; 500ms |
+| Points d'intérêt | Le point central pulse | 2.4s, en boucle |
+| Liens du pied | Un filet se trace dessous | 500ms `--ease` |
 
-## Code de référence
+## Code
 
 ```css
-@keyframes fade-up { from { opacity: 0; transform: translateY(16px); } }
-.hero h1 { animation: fade-up var(--dur-slow) var(--ease-out) both; }
-.hero__sub { animation: fade-up var(--dur-slow) var(--ease-out) 100ms both; }
+.hero-copy h1 span { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.hero-copy h1 b { display: inline-block; transform: translateY(105%);
+  transition: transform var(--dur-slow) var(--ease); transition-delay: calc(var(--i) * 120ms + 300ms); }
+.loaded .hero-copy h1 b { transform: none; }
 
-/* Voyant, onde, flottement, molette : animés dans la scène Three.js (voir assets.md § 5) */
-
-@keyframes turn { to { rotate: 360deg; } }
-.rays { animation: turn 120s linear infinite; }
-
+.strip button { height: var(--thumb-h); transition: height var(--dur) var(--ease), opacity var(--dur) linear; }
+.strip button[aria-pressed="true"] { height: var(--thumb-h-on); outline: 1px dashed var(--text); outline-offset: 3px; }
 ```
+
+```js
+// Rendu à la demande : 30 images/s au plus, seulement pour les objets visibles qui ont changé
+function frame(t) {
+  requestAnimationFrame(frame);
+  if (t - last < 33) return; last = t;
+  if (anyVisible && t - lastLcd > 110) { lastLcd = t; drawLcd(); mounts.forEach(m => m.dirty = true); }
+  mounts.forEach(m => { if (!m.visible || !m.dirty) return; /* inertie vers la pose + souris */ m.renderer.render(m.scene, m.cam); });
+}
+```
+
+## Performance
+
+- **3D légère** : matériaux Phong (pas de reflets calculés, pas d'ombres, pas d'environnement), une trentaine de maillages, résolution plafonnée à 1.5.
+- **Rendu à la demande** : un objet n'est redessiné que s'il est à l'écran (IntersectionObserver) et s'il a changé (souris, écran). 30 images/s au plus.
+- **Une seule texture d'écran** partagée par les quatre objets, redessinée dans un petit canvas 2D.
+- **Un seul flou** : le panneau « en vedette » (`backdrop-filter`), fixe ; les photos changent dessous par fondu. Aucun flou animé.
+- Rayons du manifeste, graduations et pointillés : dégradés CSS fixes.
+- Mesuré dans un Chrome sans carte graphique (rendu logiciel, écran 144 Hz), 1440×900 : héros avec l'objet 137 images/s ; défilement de toute la page en bougeant la souris 75 (une image à 146 ms au premier affichage d'un objet).
 
 ## Mouvement réduit
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; transition-delay: 0s !important; }
+  .rise { opacity: 1; transform: none; }
+  .hero-copy h1 b { transform: none; }
+  .manifesto span { opacity: 1; }
 }
 ```
-Tout est affiché d'emblée ; la scène 3D est rendue une fois (objet immobile, voyant fixe, onde figée, heure redessinée toutes les 30 s), rayons immobiles ; les changements d'état (écoute / veille, « Réservé ✓ ») restent visibles.
 
----
-
-## Vu dans la vidéo du shot (2026-10-03)
-
-| Moment | Effet | Statut |
-|---|---|---|
-| Bande de films | La sélection (photo agrandie + contour pointillé) passe d'une photo à la voisine | Observé, durée estimée ≈ 450ms |
-| Panneau en vedette | Carrousel : le segment actif de la barre se remplit pendant l'affichage (≈ 5s), puis la diapositive suivante glisse | Observé, durées estimées |
-| Enchaînement des sections | Fondu enchaîné rapide entre écrans dans la vidéo (montage, pas forcément le site) | Observé |
+L'objet reste dans sa pose, ne suit plus la souris et son écran est fixe ; le manifeste est entièrement lisible ; les points ne pulsent plus.
