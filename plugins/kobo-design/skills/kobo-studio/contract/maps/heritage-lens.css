@@ -2,7 +2,7 @@
  * kobo-studio — fiche de correspondance : heritage-lens
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 39 reliés ou relevés, 4 dérivés, 13 en repli.
+ * Rôles : 39 reliés ou relevés, 4 dérivés, 19 en repli.
  * 24 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
@@ -69,6 +69,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 400; /* [main] relevé dans la démo */
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: 0em; /* repli du contrat */
+  --k-label-case: none; /* repli du contrat */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -78,6 +81,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* repli du contrat */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -93,6 +97,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur-hot); /* [main] */
   --k-dur-slow: var(--dur-text); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-half: var(--half);

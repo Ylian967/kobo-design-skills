@@ -2,18 +2,18 @@
  * kobo-studio — fiche de correspondance : alpine-glass-expedition
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 41 reliés ou relevés, 4 dérivés, 11 en repli.
+ * Rôles : 42 reliés ou relevés, 4 dérivés, 16 en repli.
  * 17 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..600&family=Roboto+Serif:opsz,wdth,wght@8..144,90,400..500&display=swap
  *
- * Signature : 29 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ * Signature : 28 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
  *   --k-sig-snow, --k-sig-haze, --k-sig-sky, --k-sig-glacier, --k-sig-steel, --k-sig-slate, --k-sig-abyss,
  *   --k-sig-muted, --k-sig-ember, --k-sig-line-ink, --k-sig-pill-glow, --k-sig-display-wdth, --k-sig-fs-quote,
- *   --k-sig-fs-caps, --k-sig-fs-rating, --k-sig-rating-wdth, --k-sig-fs-rating-label, --k-sig-ls-btn,
- *   --k-sig-ls-chip, --k-sig-edge-end, --k-sig-col-side, --k-sig-lead-w, --k-sig-chip-h, --k-sig-chip-gap,
- *   --k-sig-play, --k-sig-glass, --k-sig-dur-veil, --k-sig-dur-float, --k-sig-dur-pulse
+ *   --k-sig-fs-caps, --k-sig-fs-rating, --k-sig-rating-wdth, --k-sig-fs-rating-label, --k-sig-ls-chip,
+ *   --k-sig-edge-end, --k-sig-col-side, --k-sig-lead-w, --k-sig-chip-h, --k-sig-chip-gap, --k-sig-play,
+ *   --k-sig-glass, --k-sig-dur-veil, --k-sig-dur-float, --k-sig-dur-pulse
  *
  * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
@@ -70,6 +70,9 @@
   --k-ls-display: var(--ls-hero);
   --k-ls-caps: var(--ls-nav);
   --k-fw-display: var(--display-weight);
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: var(--ls-btn);
+  --k-label-case: none; /* repli du contrat */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -79,6 +82,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* repli du contrat */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -94,6 +98,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur);
   --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-snow: var(--snow);
@@ -113,7 +119,6 @@
   --k-sig-fs-rating: var(--fs-rating);
   --k-sig-rating-wdth: var(--rating-wdth);
   --k-sig-fs-rating-label: var(--fs-rating-label);
-  --k-sig-ls-btn: var(--ls-btn);
   --k-sig-ls-chip: var(--ls-chip);
   --k-sig-edge-end: var(--edge-end);
   --k-sig-col-side: var(--col-side);

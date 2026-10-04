@@ -7,7 +7,8 @@
   --_bg: var(--k-accent); --_fg: var(--k-on-accent); --_edge: var(--k-accent-edge);
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--k-space-2);
   min-block-size: var(--k-control-h); margin: 0; padding: 0 var(--k-space-6);
-  font-family: var(--k-font-body); font-size: var(--k-fs-small); font-weight: inherit; line-height: var(--k-lh-tight);
+  font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: inherit; line-height: var(--k-lh-tight);
+  text-transform: var(--k-btn-case); letter-spacing: var(--k-btn-tracking);
   text-decoration: none; white-space: nowrap; cursor: pointer; user-select: none;
   color: var(--_fg); background: var(--_bg); border: var(--k-border-w) solid var(--_edge);
   border-radius: var(--k-radius); box-shadow: var(--k-shadow);

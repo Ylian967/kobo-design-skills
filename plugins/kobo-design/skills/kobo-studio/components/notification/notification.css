@@ -12,13 +12,13 @@
 .k-toast {
   --_tone: var(--k-text);
   pointer-events: auto; display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: var(--k-space-3); padding: var(--k-space-4);
-  font-family: var(--k-font-body); font-size: var(--k-fs-small); line-height: var(--k-lh-body); color: var(--k-text);
+  font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); color: var(--k-text);
   background: var(--k-surface); border: var(--k-border-w) solid var(--k-line-strong); border-inline-start: var(--k-space-1) solid var(--_tone);
   border-radius: var(--k-radius); box-shadow: var(--k-shadow);
   animation: k-toast-in var(--k-dur-base) var(--k-ease-out);
 }
 @keyframes k-toast-in { from { opacity: 0; transform: translateY(var(--k-space-4)); } }
-.k-toast.is-leaving { opacity: 0; transition: opacity var(--k-dur-fast) var(--k-ease-out); }
+.k-toast.is-leaving { opacity: 0; transition: opacity var(--k-dur-exit) var(--k-ease-out); }
 .k-toast--success { --_tone: var(--k-success); }
 .k-toast--warning { --_tone: var(--k-warning); }
 .k-toast--error { --_tone: var(--k-danger); }

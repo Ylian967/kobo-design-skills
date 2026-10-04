@@ -1,26 +1,76 @@
 /*
- * kobo-studio — variantes de signature : lore-frame-editorial (le coin biseauté)
- * S'ajoute PAR-DESSUS le composant de base : <button class="k-btn k-btn--biseau">, <article class="k-card k-card--biseau">.
- * Fichier de signature : il a le droit de lire les --k-sig-* du skill. Les composants de base, jamais.
+ * kobo-studio — couche de signature : lore-frame-editorial
+ * Sources (lecture seule) : SKILL.md, references/components.md §2 (bouton à coin coupé), §3 (micro-label au carré plein),
+ * §6 (planche : image jamais rectangulaire, coin coupé), §14 (menu plein panneau noir, page active sur citron, survol en négatif).
+ * Non traduit : le cadre fixe et son rail (mise en page, pas composant), le décodage des textes (script), l'onglet des planches (clipPath SVG).
  *
- * Intensité (data-k-intensity sur un parent) :
- *   full, reduced : le biseau est dessiné.
- *   off           : --k-sig vaut 0, le biseau se referme ; il reste le composant de base, intact.
+ * Active en « full » et « reduced », absente en « off ». Ce skill n'a pas de mouvement de signature traduisible en CSS :
+ * les deux intensités rendent pareil.
  */
-.k-btn--biseau, .k-card--biseau { --_cut: calc(var(--k-cut) * var(--k-sig)); }
-.k-card--biseau { --_cut: calc(var(--k-sig-chamfer-lg, var(--k-cut)) * var(--k-sig)); }
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton : mono gras, angles vifs, coin bas gauche coupé ; survol en négatif ---- */
+  &.k-btn {
+    --_cut: var(--k-cut); z-index: 0; font-family: var(--k-font-mono); font-weight: bolder;
+    background: transparent; border-color: transparent; border-radius: 0; box-shadow: none;
+  }
+  &.k-btn::before {
+    content: ""; position: absolute; inset: calc(var(--k-border-w) * -1); z-index: -1;
+    background: var(--_bg); border: var(--k-border-w) solid var(--_edge);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, var(--_cut) 100%, 0 calc(100% - var(--_cut)));
+    transition: background-color var(--k-dur-fast) var(--k-ease-out);
+  }
+  /* variante contour : coin bas droit coupé, plus grand */
+  &.k-btn--secondary::before, &.k-btn--danger::before {
+    --_cut: var(--k-sig-chamfer-lg);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--_cut)), calc(100% - var(--_cut)) 100%, 0 100%);
+  }
+  &.k-btn--ghost::before { content: none; }
+  &.k-btn--icon::before { --_cut: calc(var(--k-cut) / 2); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-bg); --_fg: var(--k-text); --_edge: var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_fg: var(--k-bg); }
 
-/* Bouton : le fond et la bordure passent sur un calque rogné, pour que le contour de focus reste entier */
-.k-btn--biseau { z-index: 0; background: transparent; border-color: transparent; box-shadow: none; }
-.k-btn--biseau::before {
-  content: ""; position: absolute; inset: calc(var(--k-border-w) * -1); z-index: -1;
-  background: var(--_bg); border: var(--k-border-w) solid var(--_edge); border-radius: inherit;
-  clip-path: polygon(0 0, calc(100% - var(--_cut)) 0, 100% var(--_cut), 100% 100%, 0 100%);
-  transition: background-color var(--k-dur-fast) var(--k-ease-out);
+  /* ---- Micro-label : carré plein devant le texte ---- */
+  &.k-card__meta { color: var(--k-text); letter-spacing: var(--k-btn-tracking); }
+  &.k-card__meta::before, &.k-nav__link[aria-current="page"]::before, &.k-tabs__tab[aria-selected="true"]::before {
+    content: ""; display: inline-block; flex: none; inline-size: calc(var(--k-fs-label) / 2); block-size: calc(var(--k-fs-label) / 2);
+    margin-inline-end: var(--k-space-2); background: currentColor;
+  }
+
+  /* ---- Nav de section et onglets : mono, inactifs en gris, actif en noir précédé du carré (pas de filet) ---- */
+  &.k-nav__link, &.k-tabs__tab { font-family: var(--k-font-mono); color: var(--k-text-muted); border-radius: 0; }
+  &.k-nav__link[aria-current="page"], &.k-tabs__tab[aria-selected="true"] { color: var(--k-text); border-block-end-color: transparent; }
+  &.k-nav__link:hover, &.k-tabs__tab:hover { color: var(--k-text); }
+
+  /* ---- Grande voix : capitales serrées ---- */
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__title, &.k-nav__brand { text-transform: uppercase; letter-spacing: var(--k-ls-display); }
+
+  /* ---- Carte : ni bordure ni ombre ; l'image est une planche à coin coupé sur fond lavande ---- */
+  &.k-card { border-color: transparent; box-shadow: none; }
+  &.k-card__media {
+    --_cut: var(--k-sig-chamfer-lg); border: 0; background: var(--k-sig-lavender);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--_cut)), calc(100% - var(--_cut)) 100%, 0 100%);
+  }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { border-color: var(--k-text); }
+
+  /* ---- Menu : panneau noir ; mots géants en capitales ; survol en bloc blanc, page active en bloc citron à coin coupé ---- */
+  &.k-menu {
+    --k-bg: var(--k-bg-inverse); --k-text: var(--k-text-inverse); --k-text-muted: var(--k-text-inverse);
+    --k-line: color-mix(in srgb, var(--k-text-inverse) 20%, transparent); --k-line-strong: var(--k-text-inverse);
+    --k-surface: color-mix(in srgb, var(--k-text-inverse) 10%, var(--k-bg-inverse)); --k-focus: var(--k-text-inverse);
+    --k-accent: var(--k-text-inverse); --k-accent-edge: var(--k-text-inverse); --k-on-accent: var(--k-bg-inverse);
+  }
+  &.k-menu__link {
+    --_cut: calc(var(--k-fs-h2) * 0.28); text-transform: uppercase; letter-spacing: var(--k-ls-display); padding-inline: var(--k-space-2); border-block-end: 0;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--_cut)), calc(100% - var(--_cut)) 100%, 0 100%);
+  }
+  &.k-menu__link:hover, &.k-menu__link:focus-visible { background: var(--k-text-inverse); color: var(--k-bg-inverse); }
+  &.k-menu__link[aria-current="page"] { background: var(--k-accent-2); color: var(--k-bg-inverse); border-inline-start: 0; padding-inline-start: var(--k-space-2); }
+  &.k-menu__here { font-family: var(--k-font-mono); text-transform: uppercase; color: inherit; }
+
+  /* ---- Modale et notification : le cadre fin aux coins de 10px ---- */
+  &.k-modal { border-color: var(--k-line); border-radius: var(--k-radius); }
+  &.k-toast { border-color: var(--k-line); }
+  &.k-toast__title { font-family: var(--k-font-mono); text-transform: uppercase; }
 }
 
-/* Carte : toute la carte est rognée (image comprise). Le contour de focus passe à l'intérieur pour ne pas être coupé. */
-.k-card--biseau { clip-path: polygon(0 0, calc(100% - var(--_cut)) 0, 100% var(--_cut), 100% 100%, 0 100%); box-shadow: none; }
-.k-card--biseau.k-card--link:has(.k-card__title a:focus-visible) { outline-offset: calc(var(--k-focus-w) * -2); }
-
-@media (prefers-reduced-motion: reduce) { .k-btn--biseau::before { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .k-btn::before { transition: none; } }

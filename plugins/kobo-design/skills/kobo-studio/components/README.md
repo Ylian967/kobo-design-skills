@@ -14,7 +14,7 @@ Dix composants de base, neutres : ils ne lisent que les rôles `--k-*` du contra
 | `notification/` | Notification (toast) | `k-toast` | `notification.js` | `Notification.jsx` |
 | `etat-vide/` | État vide | `k-empty` | — | `EtatVide.jsx` |
 | `chargement/` | Squelette et barre de progression | `k-skeleton`, `k-progress` | `chargement.js` | `Chargement.jsx` |
-| `signatures/` | Variantes de signature (biseau, crochets) | `k-btn--biseau`… | — | prop `signature` |
+| `signatures/` | Couches de signature : une par skill (7 écrites sur 23) | mêmes classes | — | rien à ajouter |
 
 Chaque dossier a son `README.md` : rôle, anatomie, états, clavier, accessibilité, variantes, exemple.
 
@@ -24,7 +24,7 @@ Chaque dossier a son `README.md` : rôle, anatomie, états, clavier, accessibili
 <link rel="stylesheet" href="contract/maps/<id-du-skill>.css">   <!-- importe roles.css, les polices et les tokens du skill -->
 <link rel="stylesheet" href="components/socle.css">
 <link rel="stylesheet" href="components/bouton/bouton.css">       <!-- un fichier par composant utilisé -->
-<link rel="stylesheet" href="components/signatures/<id-du-skill>.css">   <!-- facultatif : variantes de signature -->
+<link rel="stylesheet" href="components/signatures/<id-du-skill>.css">   <!-- en dernier : la couche de signature du skill, si elle existe -->
 <script src="components/modale/modale.js"></script>                <!-- scripts classiques : fonctionnent en file:// -->
 ```
 
@@ -41,7 +41,9 @@ Les scripts s'accrochent à `window.Kobo` (`Kobo.field`, `Kobo.nav`, `Kobo.menu`
 - **Un état n'est jamais signalé par la couleur seule** : toujours une icône et un texte.
 - **Rien ne grossit au survol**, aucune ombre hors `--k-shadow`, aucun dégradé, aucun flou.
 - **`prefers-reduced-motion`** respecté partout.
-- **Intensité** : `data-k-intensity="full|reduced|off"` sur un parent ; elle n'agit que sur les variantes de signature.
+- **Intensité** : `data-k-intensity="full|reduced|off"` sur un parent ; elle n'agit que sur la couche de signature (formes et mouvements en full, formes seules en reduced, rien en off).
+- **Lisibilité** : tout texte qui porte une information fait au moins `--k-fs-min` (12px) ; seuls les surtitres décoratifs peuvent descendre dessous.
+- **Casse et photos** : les libellés d'action suivent `--k-btn-case` et `--k-btn-tracking`, les surtitres `--k-label-case`, les photos `--k-img-filter`.
 
 ## Vérifier
 
@@ -56,6 +58,6 @@ Puis ouvrir `gallery.html` (directement depuis le disque) : tous les composants,
 
 - Les versions React sont compilées et rendues côté serveur sans erreur, mais n'ont pas été essayées dans un navigateur.
 - Testé dans Chrome seulement. `<dialog>`, `:has()`, `color-mix()` et `clip-path: polygon(evenodd, …)` demandent un navigateur récent.
-- Les durées d'affichage d'une notification (6 s, 200 ms de sortie) sont dans le script : ce ne sont pas des rôles du contrat.
-- Le libellé des boutons garde la casse du texte : le contrat n'a pas de rôle pour dire qu'un skill écrit ses boutons en capitales.
-- Les photos ne reçoivent pas le traitement d'image du skill (duotone, noir et blanc, grain) : ce sera un composant de signature.
+- 16 skills n'ont pas encore de couche de signature : ils rendent le composant de base.
+- `--k-img-filter` n'est qu'un filtre CSS : la rampe en canvas d'acid-scan, le grain de pixel-lime ou de noir-inferno ne sont pas reproduits (la fiche le note).
+- Les couches utilisent l'imbrication CSS (`&`) : navigateur récent requis.

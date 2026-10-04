@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : serif-bistro-green
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 35 reliés ou relevés, 6 dérivés, 15 en repli.
- * 18 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 38 reliés ou relevés, 7 dérivés, 17 en repli.
+ * 22 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap
@@ -68,6 +68,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 400; /* [main] relevé dans la démo */
+  --k-btn-case: none; /* [main] relevé */
+  --k-btn-tracking: 0.02em; /* [main] dérivé : la référence dit « petit, espacé » sans valeur */
+  --k-label-case: uppercase; /* [main] relevé dans la démo */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-btn);
@@ -77,6 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* [main] photos en couleurs naturelles ; les assiettes sont recadrées en cercle, ce qui relève de la forme */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);
@@ -92,6 +96,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur);
   --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-cream-box: var(--cream-box);

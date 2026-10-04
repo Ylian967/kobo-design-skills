@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : pixel-lime-portfolio
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 37 reliés ou relevés, 5 dérivés, 14 en repli.
- * 21 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 41 reliés ou relevés, 5 dérivés, 16 en repli.
+ * 25 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,600&family=JetBrains+Mono:wght@400;500&display=swap
@@ -68,6 +68,9 @@
   --k-ls-display: var(--ls-tight);
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 400; /* [main] relevé dans la démo */
+  --k-btn-case: uppercase; /* [main] relevé : boutons et nav en mono capitales */
+  --k-btn-tracking: 0.02em; /* [main] relevé dans la démo (.mono) */
+  --k-label-case: none; /* [main] relevé : les étiquettes noires sont en bas de casse */
 
   /* ---- Formes ---- */
   --k-radius: var(--r);
@@ -77,6 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: grayscale(1) contrast(1.1); /* [main] le skill demande des photos en noir et blanc granuleuses : le grain n'est pas reproduit par ce filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);
@@ -92,6 +96,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur);
   --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-lime-bar: var(--lime-bar);

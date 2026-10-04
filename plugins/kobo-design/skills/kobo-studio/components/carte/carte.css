@@ -10,16 +10,17 @@
   transition: border-color var(--k-dur-fast) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out);
 }
 .k-card__media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--k-surface-2); border-block-end: var(--k-border-w) solid var(--k-line); }
-.k-card__media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.k-card__media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; filter: var(--k-img-filter); }
 .k-card__body { display: grid; gap: var(--k-space-3); padding: var(--k-space-6); align-content: start; flex: 1; }
-.k-card__meta { font-family: var(--k-font-mono); font-size: var(--k-fs-label); letter-spacing: var(--k-ls-caps); text-transform: uppercase; color: var(--k-text-muted); }
+/* Surtitre : libellé décoratif, il peut rester sous le plancher de 12px si le skill le veut ainsi */
+.k-card__meta { font-family: var(--k-font-mono); font-size: var(--k-fs-label); letter-spacing: var(--k-ls-caps); text-transform: var(--k-label-case); color: var(--k-text-muted); }
 .k-card__title { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); }
 .k-card__title a { color: inherit; text-decoration: none; }
 .k-card__text { margin: 0; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text-2); }
-.k-card__inset { padding: var(--k-space-3); font-size: var(--k-fs-small); background: var(--k-surface-2); border-radius: var(--k-radius); }
+.k-card__inset { padding: var(--k-space-3); font-size: max(var(--k-fs-small), var(--k-fs-min)); background: var(--k-surface-2); border-radius: var(--k-radius); }
 .k-card__foot {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-3);
-  padding: var(--k-space-4) var(--k-space-6); border-block-start: var(--k-border-w) solid var(--k-line); font-size: var(--k-fs-small);
+  padding: var(--k-space-4) var(--k-space-6); border-block-start: var(--k-border-w) solid var(--k-line); font-size: max(var(--k-fs-small), var(--k-fs-min));
 }
 
 /* Carte cliquable : le lien du titre couvre toute la carte ; le focus est dessiné sur la carte entière */
@@ -34,12 +35,12 @@
 
 /* Sélectionnée : bordure appuyée ET mention écrite avec icône (jamais la couleur seule) */
 .k-card[aria-current="true"], .k-card.is-selected { border-color: var(--k-line-strong); outline: var(--k-border-w) solid var(--k-line-strong); outline-offset: calc(var(--k-border-w) * -2); }
-.k-card__flag { display: inline-flex; align-items: center; gap: var(--k-space-1); font-size: var(--k-fs-small); color: var(--k-text); }
+.k-card__flag { display: inline-flex; align-items: center; gap: var(--k-space-1); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text); }
 
 /* Indisponible */
 .k-card[aria-disabled="true"] { background: var(--k-surface-2); box-shadow: none; }
 .k-card[aria-disabled="true"] :is(.k-card__title, .k-card__text) { color: var(--k-text-muted); }
-.k-card[aria-disabled="true"] .k-card__media img { filter: grayscale(1); }
+.k-card[aria-disabled="true"] .k-card__media img { filter: grayscale(1) var(--k-img-filter); }
 
 /* Variantes */
 .k-card--flat { background: transparent; box-shadow: none; }

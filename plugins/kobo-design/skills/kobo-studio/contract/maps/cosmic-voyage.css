@@ -2,7 +2,7 @@
  * kobo-studio — fiche de correspondance : cosmic-voyage
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 35 reliés ou relevés, 3 dérivés, 18 en repli.
+ * Rôles : 35 reliés ou relevés, 3 dérivés, 24 en repli.
  * 15 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
@@ -74,6 +74,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 700; /* repli */
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: 0em; /* repli du contrat */
+  --k-label-case: none; /* repli du contrat */
 
   /* ---- Formes ---- */
   --k-radius: var(--radius-2); /* [main] */
@@ -83,6 +86,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* repli du contrat */
 
   /* ---- Espace ---- */
   --k-edge: clamp(16px, 4vw, 48px); /* repli du contrat */
@@ -98,6 +102,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur-base);
   --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-bg-top: var(--bg-top);

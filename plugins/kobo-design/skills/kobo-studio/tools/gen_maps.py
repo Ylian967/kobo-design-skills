@@ -83,6 +83,8 @@ CANDIDATES = {
     "nav-h": (["nav-h", "bar-h"], "64px"),
     "ease-out": (["ease-out", "ease"], None), "ease-in-out": (["ease-in-out", "ease-io"], None),
     "ease-spring": (["ease-spring", "ease-back", "ease-pop", "ease-drop"], None),
+    "btn-case": ([], None), "btn-tracking": (["ls-btn"], None), "label-case": ([], None), "img-filter": ([], None),
+    "dur-toast": ([], None), "dur-exit": ([], None),
     "dur-fast": (["dur-fast"], None), "dur-base": (["dur-base", "dur", "dur-ui"], None), "dur-slow": (["dur-slow"], None),
 }
 

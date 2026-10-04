@@ -2,7 +2,7 @@
  * kobo-studio — fiche de correspondance : nocturne-architecture
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 37 reliés ou relevés, 4 dérivés, 15 en repli.
+ * Rôles : 37 reliés ou relevés, 4 dérivés, 21 en repli.
  * 15 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
@@ -68,6 +68,9 @@
   --k-ls-display: var(--ls-tight);
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 500; /* [main] relevé dans la démo */
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: 0em; /* repli du contrat */
+  --k-label-case: none; /* repli du contrat */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -77,6 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* repli du contrat */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);
@@ -92,6 +96,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur);
   --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-dim: var(--dim);

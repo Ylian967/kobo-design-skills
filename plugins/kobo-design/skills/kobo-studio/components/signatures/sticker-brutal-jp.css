@@ -1,0 +1,64 @@
+/*
+ * kobo-studio — couche de signature : sticker-brutal-jp
+ * Sources (lecture seule) : SKILL.md, references/components.md (effet autocollant : contour sombre + ombre dure ; navigation en
+ * pilules ; étiquette en pilule colorée ; fiche de service ; champs à ombre dure), references/motion.md (survol : translate(-4px,-4px)
+ * et ombre 6px ; pilule de nav : -2px ; champ : ombre 6px sans déplacement ; appui : translate(3px,3px), ombre à 0).
+ * Non traduit : le cadre de page et ses autocollants à cheval, le portrait en écusson, le katakana vertical, la bascule de langue.
+ *
+ * « full » : contours, ombres dures et décollement au survol. « reduced » : contours et ombres, sans déplacement. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton : très gras, cerné d'encre, ombre dure (elle vient de --k-shadow) ---- */
+  &.k-btn { font-weight: var(--k-fw-display); font-size: max(var(--k-fs-body), var(--k-fs-min)); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-surface); box-shadow: var(--k-shadow); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-surface); }
+
+  /* ---- Navigation : logo et liens en pilules ; le lien prend contour, ombre et fond blanc au survol ---- */
+  &.k-nav__brand { padding: var(--k-space-2) var(--k-space-4); border: var(--k-border-w) solid var(--k-text); border-radius: var(--k-radius-pill); background: var(--k-surface); }
+  &.k-nav__link { border: var(--k-border-w) solid transparent; border-radius: var(--k-radius-pill); padding-inline: var(--k-space-4); }
+  &.k-nav__link:is(:hover, [aria-current="page"]) { background: var(--k-surface); border-color: var(--k-text); box-shadow: var(--k-shadow); border-radius: var(--k-radius-pill); }
+  &.k-nav__link[aria-current="page"] { background: var(--k-accent); }
+
+  /* ---- Onglets : pilules ; l'actif en jaune cerné ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding: var(--k-space-2) var(--k-space-2) var(--k-space-3) 0; border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; border: var(--k-border-w) solid transparent; border-radius: var(--k-radius-pill); }
+  &.k-tabs__tab:is(:hover, [data-k-state="hover"]):not(:disabled) { background: var(--k-surface); border-color: var(--k-text); box-shadow: var(--k-shadow); }
+  &.k-tabs__tab[aria-selected="true"] { background: var(--k-accent); border-color: var(--k-text); box-shadow: var(--k-shadow); }
+
+  /* ---- Carte : fiche blanche cernée d'encre ; étiquette en pilule colorée ; titre en capitales ---- */
+  &.k-card { border-color: var(--k-text); }
+  &.k-card__media { border-block-end-color: var(--k-text); }
+  &.k-card__title { text-transform: uppercase; }
+  &.k-card__meta {
+    justify-self: start; padding: var(--k-space-1) var(--k-space-3); font-family: var(--k-font-body); letter-spacing: 0; color: var(--k-text);
+    background: var(--k-accent-2); border: var(--k-border-w) solid var(--k-text); border-radius: var(--k-radius-pill); box-shadow: var(--k-shadow);
+  }
+  &.k-card[aria-current="true"] .k-card__meta { background: var(--k-sig-blue); }
+  &.k-card:not(:has(.k-card__media)) .k-card__meta { background: var(--k-sig-purple); }
+
+  /* ---- Champ : blanc, cerné, ombre dure ; l'ombre s'allonge au survol et au focus ---- */
+  &.k-field__control:not(:disabled) { min-block-size: var(--k-sig-field-h); box-shadow: var(--k-shadow); }
+  &.k-field__control:not(:disabled):is(:hover, :focus-visible, [data-k-state="hover"], [data-k-state="focus"]) { background: var(--k-surface); box-shadow: var(--k-sig-shadow-up); }
+
+  /* ---- Modale, notification, état vide, progression : le même autocollant ---- */
+  &.k-modal { border-width: var(--k-sig-bw-frame); border-radius: var(--k-sig-r-frame); box-shadow: var(--k-sig-shadow-up); }
+  &.k-modal__head { padding-inline: var(--k-space-8); padding-block-start: var(--k-space-8); }
+  &.k-modal__body, &.k-modal__foot { padding-inline: var(--k-space-8); }
+  &.k-toast { border-radius: var(--k-radius-lg); }
+  &.k-empty { border-style: solid; background: var(--k-surface); box-shadow: var(--k-shadow); }
+  &.k-progress__track { block-size: var(--k-space-3); border-color: var(--k-text); }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); border-inline-end: var(--k-border-w) solid var(--k-text); }
+}
+
+/* Mouvement de signature : le survol décolle, l'appui enfonce (seulement en « full ») */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &:is(.k-btn, .k-card--link, .k-nav__link) { transition: translate var(--k-dur-base) var(--k-ease-in-out), box-shadow var(--k-dur-base) var(--k-ease-in-out), background-color var(--k-dur-fast) var(--k-ease-out); }
+  &:is(.k-btn, .k-card--link):not(:disabled, [aria-disabled="true"], [aria-busy="true"], .k-btn--ghost):is(:hover, [data-k-state="hover"]) { translate: var(--k-sig-lift) var(--k-sig-lift); box-shadow: var(--k-sig-shadow-up); }
+  &.k-nav__link:hover { translate: calc(var(--k-sig-lift) / 2) calc(var(--k-sig-lift) / 2); }
+  &:is(.k-btn, .k-card--link):not(:disabled, [aria-disabled="true"]):is(:active, [data-k-state="active"]) { translate: calc(var(--k-sig-lift) * -0.75) calc(var(--k-sig-lift) * -0.75); box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-btn, .k-card--link, .k-nav__link { transition: none; }
+  .k-btn:hover, .k-card--link:hover, .k-nav__link:hover { translate: none; }
+}

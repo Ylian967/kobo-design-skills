@@ -1,0 +1,72 @@
+/*
+ * kobo-studio — couche de signature : pixel-lime-portfolio
+ * Sources (lecture seule) : SKILL.md, references/components.md (bouton mono souligné à flèche, étiquette noire, fiche de carnet
+ * perforée, surlignage lime, liste survolée en négatif, champs gris sans contour), references/motion.md (inversion par pas, flèche
+ * qui avance, fiche qui pivote).
+ * Non traduit : la mosaïque de pixels et les ovales au feutre (canvas et SVG posés sur une photo ou un énoncé), les autocollants,
+ * le grain des photos.
+ *
+ * « full » : formes + mouvements. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton mono : souligné, suivi d'une flèche ; au survol, noir à texte lime ---- */
+  &.k-btn {
+    font-family: var(--k-font-mono); text-decoration: underline; text-underline-offset: var(--k-space-1); padding-inline: var(--k-space-2);
+    transition-timing-function: var(--k-sig-ease-step);
+  }
+  &.k-btn:not(.k-btn--icon)::before { content: "→"; order: 2; display: inline-block; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_fg: var(--k-accent); --_edge: var(--k-text); }
+  /* variante noire (envoi de formulaire) : au survol, lime à texte noir */
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-text); --_fg: var(--k-surface); --_edge: var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent); --_fg: var(--k-text); }
+
+  /* ---- Navigation mono soulignée ---- */
+  &.k-nav__link { font-family: var(--k-font-mono); text-decoration: underline; text-underline-offset: var(--k-space-1); }
+  &.k-nav__link[aria-current="page"] { border-block-end-color: transparent; text-decoration-thickness: calc(var(--k-border-w) * 3); }
+  &.k-nav__brand, &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { text-transform: lowercase; }
+
+  /* ---- Étiquette noire : petit rectangle noir, texte clair, en sans ---- */
+  &.k-card__meta {
+    justify-self: start; padding: calc(var(--k-space-1) / 2) var(--k-space-2); font-family: var(--k-font-body); letter-spacing: 0;
+    color: var(--k-surface); background: var(--k-text);
+  }
+
+  /* ---- Carte : case à filet gris, vignette en retrait ---- */
+  &.k-card { border-color: var(--k-sig-grey-bar); }
+  &.k-card__media { padding: var(--k-space-4) var(--k-space-4) 0; background: transparent; border-block-end: 0; }
+  /* carte sans image = fiche de carnet : lime, mono, perforations à gauche, marge en pointillé, lien sur une barre plus sombre */
+  &.k-card:not(:has(.k-card__media), [aria-busy="true"]) { font-family: var(--k-font-mono); background: var(--k-accent); border: 0; border-inline-start: var(--k-space-3) dotted var(--k-text); }
+  &.k-card:not(:has(.k-card__media), [aria-busy="true"]) .k-card__body { border-inline-start: var(--k-border-w) dashed var(--k-text); }
+  &.k-card:not(:has(.k-card__media)) :is(.k-card__text, .k-card__title) { color: var(--k-text); }
+  &.k-card:not(:has(.k-card__media)) .k-card__inset { background: var(--k-sig-lime-bar); text-decoration: underline; }
+
+  /* ---- Onglet actif = surlignage : italique gras sur rectangle lime ---- */
+  &.k-tabs__tab { font-family: var(--k-font-mono); }
+  &.k-tabs__tab[aria-selected="true"] { font-style: italic; background: var(--k-accent); border-block-end-color: var(--k-text); }
+
+  /* ---- Liste survolée en négatif : fond noir, texte clair ---- */
+  &.k-menu__link:hover, &.k-menu__link:focus-visible { background: var(--k-text); color: var(--k-surface); }
+
+  /* ---- Champs gris sans contour ---- */
+  &.k-field__control:not([aria-invalid="true"], :disabled) { background: var(--k-surface-2); border-color: transparent; }
+
+  /* ---- Modale = feuille de carnet : perforations lime à gauche ---- */
+  &.k-modal { border-inline-start: var(--k-space-3) dotted var(--k-accent); }
+
+  /* ---- Barre de progression : aplat lime cerné de noir ---- */
+  &.k-progress__track { border-color: var(--k-text); border-radius: 0; }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); border-inline-end: var(--k-border-w) solid var(--k-text); }
+}
+
+/* Mouvements de signature : seulement en « full » */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-btn::before { transition: translate var(--k-dur-base) var(--k-ease-out); }
+  &.k-btn:is(:hover, [data-k-state="hover"])::before { translate: var(--k-space-1) 0; }
+  &.k-card--link { transition: rotate var(--k-dur-base) var(--k-ease-out), translate var(--k-dur-base) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { rotate: 1.5deg; translate: 0 calc(var(--k-space-1) * -1.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-btn::before, .k-card--link { transition: none; }
+  .k-card--link:hover { rotate: none; translate: none; }
+}

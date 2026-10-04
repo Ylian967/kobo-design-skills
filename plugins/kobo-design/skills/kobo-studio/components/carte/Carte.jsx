@@ -8,7 +8,7 @@ import { Icone } from '../Icone.jsx';
  * image : { src, alt } — alt décrit la photo ; alt="" seulement pour un décor
  * meta : surtitre ; pied : contenu du pied (actions, prix)
  * selectionnee : bordure appuyée + mention écrite ; indisponible : aria-disabled
- * variante : 'flat' | 'row' ; signature : 'biseau' | 'crochets'
+ * variante : 'flat' | 'row' ; signature : 'crochets' (variante à la demande d'acid-scan-security)
  */
 export function Carte({
   titre, niveau: Titre = 'h3', href, image, meta, pied, selectionnee = false, indisponible = false,

@@ -2,7 +2,7 @@
  * kobo-studio — fiche de correspondance : glass-frame-estate
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 41 reliés ou relevés, 3 dérivés, 12 en repli.
+ * Rôles : 41 reliés ou relevés, 3 dérivés, 18 en repli.
  * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
@@ -72,6 +72,9 @@
   --k-ls-display: var(--ls-title);
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: var(--w-title);
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: 0em; /* repli du contrat */
+  --k-label-case: none; /* repli du contrat */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-btn);
@@ -81,6 +84,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* repli du contrat */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);
@@ -96,6 +100,8 @@
   --k-dur-fast: var(--dur-ui); /* [main] */
   --k-dur-base: var(--dur-color); /* [main] */
   --k-dur-slow: var(--dur-rise); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-soft: var(--soft);

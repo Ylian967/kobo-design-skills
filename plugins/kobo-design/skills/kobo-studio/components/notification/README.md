@@ -25,9 +25,9 @@ Un type n'est **jamais** signalé par la couleur seule : chacun a son icône et 
 
 | Type | Mot annoncé | Annonce | Fermeture |
 |---|---|---|---|
-| `success` | Succès | polie | seule après 6 s, ou au bouton |
-| `info` | Information | polie | seule après 6 s, ou au bouton |
-| `warning` | Attention | polie | seule après 6 s, ou au bouton |
+| `success` | Succès | polie | seule après `--k-dur-toast`, ou au bouton |
+| `info` | Information | polie | seule après `--k-dur-toast`, ou au bouton |
+| `warning` | Attention | polie | seule après `--k-dur-toast`, ou au bouton |
 | `error` | Erreur | immédiate | **reste** jusqu'à fermeture |
 
 ## États
@@ -48,7 +48,7 @@ n.close();
 Kobo.toast({ type: 'info', title: 'Réservation annulée', action: { label: 'Rétablir', onClick: retablir }, duration: 0 });
 ```
 
-`duration` : millisecondes (6000 par défaut ; 0 = reste). `returnFocus` : élément qui reprend le focus si la notification fermée l'avait.
+`duration` : millisecondes (par défaut le rôle `--k-dur-toast` de la fiche, 6 s en repli ; 0 = reste). `returnFocus` : élément qui reprend le focus si la notification fermée l'avait.
 
 ## Clavier
 
@@ -60,7 +60,7 @@ Kobo.toast({ type: 'info', title: 'Réservation annulée', action: { label: 'Ré
 - Une notification qui porte une action ne doit pas disparaître seule : passer `duration: 0`.
 - Le bouton « Fermer » a une zone cliquable de `--k-hit-min`.
 - `prefers-reduced-motion` : ni entrée ni sortie animée.
-- Les durées d'affichage (6 s, 200 ms de sortie) sont dans le script, pas dans le contrat : ce ne sont pas des durées de mouvement.
+- Les durées viennent du contrat : `--k-dur-toast` (affichage) et `--k-dur-exit` (sortie). Le script les lit sur la notification.
 
 ## Exemple
 

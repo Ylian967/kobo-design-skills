@@ -7,7 +7,7 @@
  * et jamais un --k-sig-* (réservé aux composants de signature du skill).
  *
  * Ordre de chargement : roles.css → maps/<id>.css → brand.css (facultatif).
- * 56 rôles déclarés par chaque fiche + 10 pas d'espacement et --k-hit-min fournis par le socle. Vérification : python3 tools/check_contract.py
+ * 62 rôles déclarés par chaque fiche + 10 pas d'espacement, --k-hit-min et --k-fs-min fournis par le socle. Vérification : python3 tools/check_contract.py
  */
 
 :root {
@@ -58,6 +58,10 @@
   --k-ls-display: 0em;                      /* approche des titres */
   --k-ls-caps: 0.06em;                      /* approche des libellés en capitales */
   --k-fw-display: 700;                      /* graisse des titres */
+  --k-btn-case: none;                       /* casse des libellés d'action : boutons, liens de nav, onglets (none, uppercase, lowercase) */
+  --k-btn-tracking: 0em;                    /* approche de ces mêmes libellés */
+  --k-label-case: none;                     /* casse des surtitres et des étiquettes */
+  --k-fs-min: 0.75rem;                      /* plancher de lisibilité (12px), fourni par le socle : tout texte qui porte une information (aide, erreur, bouton, champ, notification) ne descend pas dessous ; un libellé purement décoratif peut */
 
   /* ---- Formes ---- */
   --k-radius: 0px;                 /* rayon des petits éléments : bouton, champ, étiquette */
@@ -67,6 +71,7 @@
   --k-cut: 0px;                    /* longueur du biseau (coin coupé) ; 0 si le skill n'en a pas */
   --k-angle: 0deg;                 /* angle des biais et des inclinaisons ; 0 si le skill n'en a pas */
   --k-shadow: none;                /* ombre des éléments interactifs ; none par défaut, jamais une ombre douce ajoutée d'office */
+  --k-img-filter: none;            /* traitement des photos de contenu (cartes, médias) : filtre CSS du skill, none s'il les laisse en couleurs naturelles. Quand le skill exige plus qu'un filtre (canvas, couches), la fiche le note */
 
   /* ---- Espace : échelle fournie par le socle (base 4px), identique pour tous les skills ---- */
   --k-space-1: 4px;                /* écart minimal : icône et son texte */
@@ -93,6 +98,8 @@
   --k-dur-fast: 160ms;             /* survol, focus, appui */
   --k-dur-base: 320ms;             /* ouverture, changement d'état */
   --k-dur-slow: 700ms;             /* entrée de bloc, transition de scène */
+  --k-dur-toast: 6s;               /* temps d'affichage d'une notification avant qu'elle se ferme seule */
+  --k-dur-exit: var(--k-dur-fast); /* sortie d'un élément qui disparaît (notification) */
 
   /* ---- Intensité de la signature (interrupteurs lus par les composants de signature) ---- */
   --k-sig: 1;                      /* 1 : ornements signature affichés ; 0 : coupés */

@@ -4,7 +4,8 @@ import React from 'react';
 /**
  * variante : 'primary' (défaut) | 'secondary' | 'ghost' | 'danger'
  * pilule, bloc, iconeSeule : formes
- * signature : 'biseau' | 'crochets' — variantes de signature (charger le fichier signatures/ correspondant)
+ * signature : 'crochets' — variante à la demande d'acid-scan-security. Les couches de signature (signatures/<skill>.css)
+ *             s'appliquent seules, sans prop : il suffit de charger le fichier du skill.
  * enCours : aria-busy ; le libellé devient libelleEnCours et le bouton ne réagit plus
  * href : rend un lien <a> avec l'apparence du bouton
  */

@@ -6,7 +6,8 @@
  *   → renvoie { element, close }
  *
  * type     : 'info' (défaut), 'success', 'warning', 'error'. Chaque type a son icône et son mot ; la couleur ne fait que les appuyer.
- * duration : millisecondes avant fermeture. Par défaut 6000 ; 0 = reste jusqu'à fermeture. Une erreur reste toujours (0).
+ * duration : millisecondes avant fermeture. Par défaut le rôle --k-dur-toast de la fiche ; 0 = reste jusqu'à fermeture. Une erreur reste toujours (0).
+ *            La durée de sortie vient du rôle --k-dur-exit.
  *            Le compte à rebours s'arrête tant que la souris ou le focus est sur la notification.
  * action   : { label, onClick } — un bouton dans la notification.
  * Annonce  : les notifications sont insérées dans une zone aria-live (polie ; assertive pour les erreurs).
@@ -28,6 +29,11 @@
     svg.setAttribute('viewBox', '0 0 24 24'); svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('class', 'k-icon ' + (cls || ''));
     p.setAttribute('d', d); svg.appendChild(p);
     return svg;
+  }
+  // Lit une durée du contrat (« 6s », « 200ms ») sur l'élément, en millisecondes
+  function role(node, name, fallback) {
+    var v = getComputedStyle(node).getPropertyValue(name).trim(), n = parseFloat(v);
+    return isNaN(n) ? fallback : (/ms$/.test(v) ? n : n * 1000);
   }
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
 
@@ -60,12 +66,12 @@
     x.appendChild(icon('M6 6l12 12M18 6 6 18'));
     node.appendChild(icon(t.path, 'k-toast__icon')); node.appendChild(body); node.appendChild(x);
 
-    var duration = type === 'error' ? 0 : (opts.duration === undefined ? 6000 : opts.duration), timer = 0, closed = false;
+    var duration = 0, timer = 0, closed = false;
     function close() {
       if (closed) return; closed = true; clearTimeout(timer);
       var hadFocus = node.contains(document.activeElement);
       node.classList.add('is-leaving');
-      setTimeout(function () { node.remove(); if (hadFocus && opts.returnFocus && opts.returnFocus.isConnected) opts.returnFocus.focus(); }, 200);
+      setTimeout(function () { node.remove(); if (hadFocus && opts.returnFocus && opts.returnFocus.isConnected) opts.returnFocus.focus(); }, role(node, '--k-dur-exit', 0));
     }
     function arm() { clearTimeout(timer); if (duration > 0) timer = setTimeout(close, duration); }
     x.addEventListener('click', close);
@@ -76,6 +82,7 @@
     node.addEventListener('focusout', arm);
 
     region().querySelector('[data-k-live="' + (type === 'error' ? 'assertive' : 'polite') + '"]').appendChild(node);
+    duration = type === 'error' ? 0 : (opts.duration === undefined ? role(node, '--k-dur-toast', 0) : opts.duration);
     arm();
     return { element: node, close: close };
   }

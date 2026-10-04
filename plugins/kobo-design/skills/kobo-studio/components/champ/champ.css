@@ -4,7 +4,7 @@
  * lh-body, radius, border-w, control-h, hit-min, space-*, dur-fast, ease-out.
  */
 .k-field { display: grid; gap: var(--k-space-2); min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); }
-.k-field__label { font-size: var(--k-fs-small); line-height: var(--k-lh-body); color: var(--k-text); }
+.k-field__label { font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); color: var(--k-text); }
 .k-field__opt { color: var(--k-text-muted); }
 
 /*
@@ -35,12 +35,12 @@ textarea.k-field__control { min-block-size: calc(var(--k-control-h) * 3); paddin
 
 /* Erreur : bordure en couleur d'erreur, épaissie à gauche, ET un message écrit précédé d'une icône */
 .k-field__control[aria-invalid="true"] { border-color: var(--k-danger); border-inline-start-width: calc(var(--k-border-w) + var(--k-space-1)); }
-.k-field__help { font-size: var(--k-fs-small); color: var(--k-text-muted); }
-.k-field__error { display: flex; align-items: flex-start; gap: var(--k-space-2); font-size: var(--k-fs-small); color: var(--k-danger); }
+.k-field__help { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
+.k-field__error { display: flex; align-items: flex-start; gap: var(--k-space-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-danger); }
 .k-field__error[hidden] { display: none; }
 .k-field__error span { color: var(--k-text); }
 .k-field__foot { display: flex; justify-content: space-between; gap: var(--k-space-4); }
-.k-field__count { margin-inline-start: auto; font-size: var(--k-fs-small); color: var(--k-text-muted); white-space: nowrap; }
+.k-field__count { margin-inline-start: auto; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); white-space: nowrap; }
 
 /* Vérification en cours (aria-busy sur la boîte) : témoin dans le champ, message d'aide mis à jour */
 .k-field__spinner {

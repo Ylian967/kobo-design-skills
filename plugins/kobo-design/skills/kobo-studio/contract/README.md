@@ -21,7 +21,7 @@ Ordre de chargement dans une page : `roles.css` → `maps/<id>.css` → `brand.c
 
 ## Les rôles
 
-56 rôles déclarés par chaque fiche, plus 10 pas d'espacement et `--k-hit-min`, fournis par le socle.
+62 rôles déclarés par chaque fiche, plus 10 pas d'espacement, `--k-hit-min` et `--k-fs-min`, fournis par le socle.
 
 | Famille | Rôles |
 |---|---|
@@ -29,10 +29,10 @@ Ordre de chargement dans une page : `roles.css` → `maps/<id>.css` → `brand.c
 | Texte (5) | `text`, `text-2`, `text-muted`, `on-accent`, `text-inverse` |
 | Accent et états (10) | `accent`, `accent-edge`, `accent-on-bg`, `accent-2`, `success`, `warning`, `danger`, `focus`, `focus-w`, `focus-offset` |
 | Filets (2) | `line`, `line-strong` |
-| Typo (15) | `font-display`, `font-body`, `font-mono`, `fs-hero`, `fs-h1`, `fs-h2`, `fs-h3`, `fs-body`, `fs-small`, `fs-label`, `lh-tight`, `lh-body`, `ls-display`, `ls-caps`, `fw-display` |
-| Formes (7) | `radius`, `radius-lg`, `radius-pill`, `border-w`, `cut`, `angle`, `shadow` |
+| Typo (18) | `font-display`, `font-body`, `font-mono`, `fs-hero`, `fs-h1`, `fs-h2`, `fs-h3`, `fs-body`, `fs-small`, `fs-label`, `lh-tight`, `lh-body`, `ls-display`, `ls-caps`, `fw-display`, `btn-case`, `btn-tracking`, `label-case` ; socle : `fs-min` |
+| Formes et images (8) | `radius`, `radius-lg`, `radius-pill`, `border-w`, `cut`, `angle`, `shadow`, `img-filter` |
 | Espace (5 + socle) | `edge`, `container`, `section-y`, `control-h`, `nav-h` ; socle : échelle `space-1, 2, 3, 4, 6, 8, 12, 16, 24, 32` et `hit-min` |
-| Mouvement (6) | `ease-out`, `ease-in-out`, `ease-spring`, `dur-fast`, `dur-base`, `dur-slow` |
+| Mouvement (8) | `ease-out`, `ease-in-out`, `ease-spring`, `dur-fast`, `dur-base`, `dur-slow`, `dur-toast`, `dur-exit` |
 
 Ce que chaque rôle fait et sur quoi il se pose est écrit à côté de sa déclaration dans `roles.css`.
 
@@ -45,6 +45,10 @@ Points à connaître :
 - **`--k-bg-inverse` / `--k-text-inverse`** : la paire pour un bloc en ton inversé. Un composant posé dans un tel bloc lit cette paire, pas `--k-surface`.
 - **`--k-overlay`** est le fond d'une modale ; **`--k-scrim`** est le voile sous un texte posé sur une image. Ne pas les confondre.
 - **`--k-fs-hero ≥ --k-fs-h1 ≥ --k-fs-h2 ≥ --k-fs-h3 ≥ --k-fs-body ≥ --k-fs-small`** : l'ordre est garanti dans les 23 fiches (vérifié dans le navigateur à 1440px). Les mots géants des skills (mot-marque de 34vw, nom géant du pied) ne sont pas des tailles de titre : ils restent en signature.
+- **`--k-btn-case` et `--k-btn-tracking`** : casse et approche des libellés d'action (boutons, liens de nav, onglets). **`--k-label-case`** : casse des surtitres et des étiquettes.
+- **`--k-img-filter`** : le traitement des photos de contenu. Un filtre CSS ne suffit pas toujours : quand le skill exige un canvas, des couches ou un grain, la fiche garde la meilleure approximation et **le dit en commentaire**.
+- **`--k-fs-min`** (12px, socle) : plancher de lisibilité. Un composant écrit `font-size: max(var(--k-fs-small), var(--k-fs-min))` pour tout texte qui porte une information (aide, erreur, bouton, champ, notification, onglet, lien de nav). Un surtitre purement décoratif peut rester à la taille du skill, même plus petite.
+- **`--k-dur-toast` et `--k-dur-exit`** : temps d'affichage d'une notification et durée de sa sortie ; le script les lit.
 - **`--k-shadow` vaut `none`** sauf dans les 3 skills à ombre dure. Aucun composant partagé n'ajoute d'ombre de lui-même.
 
 ## La règle de l'accent pâle
@@ -96,7 +100,7 @@ Une fiche a quatre parties.
 
 **2. Les imports** : polices, `roles.css`, puis le `tokens.css` du skill par chemin relatif (`../../../<id>/references/tokens.css`).
 
-**3. Le bloc `:root`** : les 56 rôles, dans l'ordre de `roles.css`. Chaque ligne est d'un de ces quatre types, reconnaissable à son commentaire :
+**3. Le bloc `:root`** : les 62 rôles, dans l'ordre de `roles.css`. Chaque ligne est d'un de ces quatre types, reconnaissable à son commentaire :
 
 | Forme | Sens |
 |---|---|
@@ -177,7 +181,7 @@ Pour un skill ajouté à la main ou produit par `site-to-skill`.
    - les tailles : respecter l'ordre `hero ≥ h1 ≥ h2 ≥ h3 ≥ body ≥ small`. Un mot géant décoratif n'est pas un titre.
 3. **Dériver ce qui manque** en suivant la règle des couleurs d'état ci-dessus. Toute valeur calculée porte un commentaire qui commence par « dérivé », avec le rapport de contraste quand c'est une couleur.
 4. **Laisser un repli** pour ce que le skill ne dit pas (`/* repli */`). Ne rien inventer : pas d'ombre, pas d'angle, pas de biseau si le skill n'en a pas.
-5. **Déclarer les 56 rôles**, même en repli : le vérificateur refuse une fiche incomplète. Ne pas redéclarer `--k-space-*` ni `--k-hit-min`.
+5. **Déclarer les 62 rôles**, même en repli : le vérificateur refuse une fiche incomplète. Ne pas redéclarer `--k-space-*` ni `--k-hit-min`, ni `--k-fs-min`.
 6. **Lister la signature** : toute variable du skill restée sans rôle devient `--k-sig-<nom> : var(--<nom>)`, et son nom va dans l'en-tête.
 7. **Écrire les deux blocs d'intensité** : y remettre à `0s` chaque `--k-sig-*` qui est une durée.
 8. **Vérifier** :

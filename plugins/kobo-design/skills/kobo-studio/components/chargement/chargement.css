@@ -19,7 +19,7 @@
 .k-skeleton-stack { display: grid; gap: var(--k-space-3); }
 
 /* ---- Barre de progression : role="progressbar" ; la valeur est aussi écrite en toutes lettres. ---- */
-.k-progress { display: grid; gap: var(--k-space-2); font-family: var(--k-font-body); font-size: var(--k-fs-small); line-height: var(--k-lh-body); color: var(--k-text); }
+.k-progress { display: grid; gap: var(--k-space-2); font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); color: var(--k-text); }
 .k-progress__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--k-space-4); }
 .k-progress__value { color: var(--k-text-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .k-progress__track { block-size: var(--k-space-2); overflow: hidden; background: color-mix(in srgb, var(--k-text) 14%, transparent); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-pill); }

@@ -9,24 +9,31 @@ const TYPES = {
   warning: { mot: 'Attention', icone: 'attention' },
   error: { mot: 'Erreur', icone: 'erreur' },
 };
+// Lit une durée du contrat (« 6s », « 200ms ») sur un élément, en millisecondes
+const role = (noeud, nom) => {
+  const v = getComputedStyle(noeud).getPropertyValue(nom).trim(); const n = parseFloat(v);
+  return Number.isNaN(n) ? 0 : (v.endsWith('ms') ? n : n * 1000);
+};
 const Contexte = createContext(null);
 export const useNotifications = () => useContext(Contexte);
 
 // Une notification : icône + mot de l'état + titre. Le compte à rebours s'arrête au survol et au focus.
 function Notification({ n, surFermer }) {
   const t = TYPES[n.type] || TYPES.info;
-  const duree = n.type === 'error' ? 0 : (n.duree ?? 6000);   // une erreur reste jusqu'à fermeture
+  const ref = useRef(null);
   const minuteur = useRef(0);
   const armer = useCallback(() => {
     clearTimeout(minuteur.current);
+    // une erreur reste jusqu'à fermeture ; sinon la durée vient du rôle --k-dur-toast de la fiche
+    const duree = n.type === 'error' ? 0 : (n.duree ?? (ref.current ? role(ref.current, '--k-dur-toast') : 0));
     if (duree > 0) minuteur.current = setTimeout(() => surFermer(n.id), duree);
-  }, [duree, n.id, surFermer]);
+  }, [n.type, n.duree, n.id, surFermer]);
   const suspendre = () => clearTimeout(minuteur.current);
   useEffect(() => { armer(); return suspendre; }, [armer]);
 
   return (
     <div
-      className={`k-toast k-toast--${TYPES[n.type] ? n.type : 'info'}`}
+      ref={ref} className={`k-toast k-toast--${TYPES[n.type] ? n.type : 'info'}`}
       onMouseEnter={suspendre} onMouseLeave={armer} onFocus={suspendre} onBlur={armer}
       onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); surFermer(n.id); } }}
     >

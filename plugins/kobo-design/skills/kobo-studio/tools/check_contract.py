@@ -29,7 +29,7 @@ from pathlib import Path
 STUDIO = Path(__file__).resolve().parent.parent
 CONTRACT = STUDIO / "contract"
 MAPS = CONTRACT / "maps"
-NOT_ROLES = ("--k-space-", "--k-sig", "--k-hit-min")  # fournis par le socle : pas à déclarer dans une fiche
+NOT_ROLES = ("--k-space-", "--k-sig", "--k-hit-min", "--k-fs-min")  # fournis par le socle : pas à déclarer dans une fiche
 NAMED = {"white": "#ffffff", "black": "#000000", "transparent": "rgb(0 0 0 / 0)"}
 
 GROUNDS = ("bg", "surface", "surface-2")

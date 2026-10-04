@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : acid-scan-security
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 40 reliés ou relevés, 6 dérivés, 10 en repli.
- * 21 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 44 reliés ou relevés, 6 dérivés, 12 en repli.
+ * 25 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap
@@ -70,6 +70,9 @@
   --k-ls-display: var(--tracking-pixel); /* [main] */
   --k-ls-caps: var(--tracking-nav);
   --k-fw-display: 400; /* [main] relevé dans la démo */
+  --k-btn-case: uppercase; /* [main] relevé : boutons et nav en capitales */
+  --k-btn-tracking: var(--tracking-nav); /* [main] */
+  --k-label-case: uppercase; /* [main] relevé : surtitres et étiquettes mono en capitales */
 
   /* ---- Formes ---- */
   --k-radius: var(--radius);
@@ -79,6 +82,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: grayscale(1) sepia(1) hue-rotate(58deg) saturate(3.2) brightness(0.82) contrast(1.15); /* [main] approximation : le skill exige une rampe verte calculée une fois en canvas, en 4 couches (base, frange rouge, bande, cadre) ; un filtre CSS ne donne que la teinte générale */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -94,6 +98,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur-base);
   --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-mid: var(--mid);

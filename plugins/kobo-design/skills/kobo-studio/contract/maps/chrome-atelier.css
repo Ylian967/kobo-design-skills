@@ -2,19 +2,19 @@
  * kobo-studio — fiche de correspondance : chrome-atelier
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 43 reliés ou relevés, 4 dérivés, 9 en repli.
+ * Rôles : 44 reliés ou relevés, 4 dérivés, 14 en repli.
  * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&family=Bodoni+Moda:ital,wght@0,500;1,500&display=swap
  *
- * Signature : 35 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ * Signature : 34 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
  *   --k-sig-ghost, --k-sig-night-2, --k-sig-black, --k-sig-soft, --k-sig-bar-line, --k-sig-pill-ghost,
  *   --k-sig-gold-lo, --k-sig-gold, --k-sig-gold-hi, --k-sig-white-gold-lo, --k-sig-white-gold,
  *   --k-sig-white-gold-hi, --k-sig-rose-lo, --k-sig-rose, --k-sig-rose-hi, --k-sig-lh-h2, --k-sig-ls-h2,
- *   --k-sig-ls-body, --k-sig-fs-btn, --k-sig-ls-btn, --k-sig-fs-value, --k-sig-ls-mono, --k-sig-indent,
- *   --k-sig-edge-hero, --k-sig-bar-h, --k-sig-ring, --k-sig-card-w, --k-sig-cell-w, --k-sig-blur, --k-sig-ease,
- *   --k-sig-dur-move, --k-sig-dur-shift, --k-sig-dur-draw, --k-sig-dur-float, --k-sig-float-y
+ *   --k-sig-ls-body, --k-sig-fs-btn, --k-sig-fs-value, --k-sig-ls-mono, --k-sig-indent, --k-sig-edge-hero,
+ *   --k-sig-bar-h, --k-sig-ring, --k-sig-card-w, --k-sig-cell-w, --k-sig-blur, --k-sig-ease, --k-sig-dur-move,
+ *   --k-sig-dur-shift, --k-sig-dur-draw, --k-sig-dur-float, --k-sig-float-y
  *
  * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
@@ -71,6 +71,9 @@
   --k-ls-display: var(--ls-hero);
   --k-ls-caps: var(--ls-label);
   --k-fw-display: var(--weight);
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: var(--ls-btn);
+  --k-label-case: none; /* repli du contrat */
 
   /* ---- Formes ---- */
   --k-radius: 0px; /* repli */
@@ -80,6 +83,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* repli du contrat */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -95,6 +99,8 @@
   --k-dur-fast: var(--dur-nav); /* [main] */
   --k-dur-base: var(--dur-ui);
   --k-dur-slow: var(--dur-fade); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-ghost: var(--ghost);
@@ -116,7 +122,6 @@
   --k-sig-ls-h2: var(--ls-h2);
   --k-sig-ls-body: var(--ls-body);
   --k-sig-fs-btn: var(--fs-btn);
-  --k-sig-ls-btn: var(--ls-btn);
   --k-sig-fs-value: var(--fs-value);
   --k-sig-ls-mono: var(--ls-mono);
   --k-sig-indent: var(--indent);

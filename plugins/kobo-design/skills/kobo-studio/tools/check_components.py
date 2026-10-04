@@ -12,7 +12,7 @@ Dans toutes les feuilles de style, les styles en ligne et la galerie :
   - aucune valeur en dur : couleur (#…, rgb(), hsl(), couleur nommée), longueur (px, rem, em, pt, ch…),
     rayon, durée (ms, s). Sont admis : les rôles --k-*, les variables locales --_x, les pourcentages,
     les unités de fenêtre (vw, vh, dvh), fr, deg, turn, les nombres sans unité, zéro, transparent, currentColor ;
-  - aucun --k-sig-* hors de components/signatures/ ;
+  - aucun --k-sig-* hors de components/signatures/ (là, une ombre peut aussi venir d'un --k-sig-* du skill) ;
   - motifs de quality/anti-slop.md : dégradés (C1), ombres hors --k-shadow (F1, F5), flou d'arrière-plan (F3),
     scale() au survol (M1), transition: all (M4), outline retiré sans remplacement (U8), texte de remplissage (T1),
     emoji en guise d'icône (T5), liens href="#" (T7), boutons sans type (U10), images sans alt (T8).
@@ -66,7 +66,9 @@ def slop(css, where, signature=False):
         if re.search(r"gradient\(", line):
             out.append(f"{where}:{n} dégradé (anti-slop C1) : {line.strip()[:70]}")
         m = re.search(r"box-shadow\s*:\s*([^;}]+)", line)
-        if m and m.group(1).strip() not in ("none", "var(--k-shadow)"):
+        shadow_ok = m and (m.group(1).strip() in ("none", "var(--k-shadow)")
+                           or (signature and re.fullmatch(r"var\(--k-[\w-]+\)", m.group(1).strip())))  # une signature peut lire l'ombre du skill
+        if m and not shadow_ok:
             out.append(f"{where}:{n} ombre hors --k-shadow (anti-slop F1/F5) : {m.group(1).strip()[:50]}")
         if "backdrop-filter" in line:
             out.append(f"{where}:{n} flou d'arrière-plan (anti-slop F3)")

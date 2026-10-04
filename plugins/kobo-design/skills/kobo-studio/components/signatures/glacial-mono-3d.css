@@ -1,0 +1,64 @@
+/*
+ * kobo-studio — couche de signature : glacial-mono-3d
+ * Sources (lecture seule) : SKILL.md, references/components.md §3 (bouton à crochets de coin : ni fond ni bord), §4 (texte en pavés
+ * blancs), §5 (étiquette pleine blanche), §8 (panneau de contenu sombre, colonne étroite, rubriques « ////// »), états (focus en
+ * pointillé), references/motion.md (les crochets se resserrent au survol).
+ * Non traduit : la scène 3D, l'interface aux quatre coins (mise en page), le décodage des textes (script), le logotype blanc à halo
+ * (blanc sur brouillard : 1,9:1, illisible hors logotype).
+ *
+ * « full » : formes + mouvements. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton : ni fond ni bord, quatre crochets en L aux coins ---- */
+  &.k-btn:not(:disabled, [aria-disabled="true"]) { color: var(--k-text); background: transparent; border-color: transparent; box-shadow: none; font-family: var(--k-font-mono); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger) { font-weight: bolder; }
+  &.k-btn--secondary:not(:disabled) { color: var(--k-text-2); }
+  &.k-btn--danger:not(:disabled) { color: var(--k-danger); }
+  &.k-btn:not(.k-btn--ghost, :disabled, [aria-disabled="true"])::before, &.k-tabs__tab[aria-selected="true"]::before {
+    --_l: var(--k-sig-bracket);
+    content: ""; position: absolute; inset: 0; pointer-events: none; border: var(--k-border-w) solid currentColor;
+    clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0,
+      var(--_l) 0, var(--_l) var(--_l), 0 var(--_l), 0 calc(100% - var(--_l)), var(--_l) calc(100% - var(--_l)), var(--_l) 100%,
+      calc(100% - var(--_l)) 100%, calc(100% - var(--_l)) calc(100% - var(--_l)), 100% calc(100% - var(--_l)), 100% var(--_l),
+      calc(100% - var(--_l)) var(--_l), calc(100% - var(--_l)) 0, var(--_l) 0);
+  }
+  &.k-btn:disabled, &.k-btn[aria-disabled="true"] { background: transparent; border-color: transparent; text-decoration: line-through; }
+
+  /* ---- Onglets = carrousel de liens à crochets : l'actif est encadré de crochets, sans filet ---- */
+  &.k-tabs__tab { position: relative; font-family: var(--k-font-mono); }
+  &.k-tabs__tab[aria-selected="true"] { border-block-end-color: transparent; }
+  &.k-nav__link[aria-current="page"] { border-radius: 0; }
+
+  /* ---- Étiquette pleine : petit rectangle blanc à texte sombre ---- */
+  &.k-card__meta { justify-self: start; padding: calc(var(--k-space-1) / 2) var(--k-space-2); color: var(--k-text); background: var(--k-sig-white); }
+
+  /* ---- Rubriques « ////// » ---- */
+  &.k-modal__title::before, &.k-empty__title::before, &.k-menu__title::before { content: "////// "; font-family: var(--k-font-mono); font-weight: normal; color: var(--k-text-muted); }
+
+  /* ---- Texte en pavés : le squelette est un bloc blanc plein ---- */
+  &.k-skeleton { background: var(--k-sig-white); }
+
+  /* ---- Notification = étiquette pleine blanche ---- */
+  &.k-toast { background: var(--k-sig-white); }
+
+  /* ---- Panneau de contenu : nuit, colonne étroite, sans bord ---- */
+  &.k-modal, &.k-menu {
+    --k-bg: var(--k-bg-inverse); --k-text: var(--k-text-inverse); --k-text-2: var(--k-text-inverse); --k-text-muted: var(--k-sig-muted);
+    --k-surface: color-mix(in srgb, var(--k-text-inverse) 8%, var(--k-bg-inverse)); --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 14%, var(--k-bg-inverse));
+    --k-line: color-mix(in srgb, var(--k-text-inverse) 24%, transparent); --k-line-strong: var(--k-text-inverse);
+    --k-focus: var(--k-text-inverse); --k-accent: var(--k-text-inverse); --k-accent-edge: var(--k-text-inverse); --k-on-accent: var(--k-bg-inverse); --k-danger: var(--k-text-inverse);
+    color: var(--k-text-inverse); background: var(--k-bg-inverse); border: 0;
+  }
+  &.k-modal { inline-size: min(100% - var(--k-edge) * 2, var(--k-sig-text-col) + var(--k-space-6) * 2); }
+
+  /* ---- Focus en pointillé ---- */
+  &:is(.k-btn, .k-tabs__tab, .k-nav__link, .k-nav__brand, .k-field__control, .k-menu__link):focus-visible, &.k-btn[data-k-state="focus"] { outline-style: dashed; }
+}
+
+/* Mouvement de signature : les crochets se resserrent au survol (seulement en « full ») */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-btn::before { transition: inset var(--k-dur-fast) var(--k-ease-out); }
+  &.k-btn:is(:hover, [data-k-state="hover"])::before { inset: calc(var(--k-space-1) * 0.75); }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-btn::before { transition: none; } }

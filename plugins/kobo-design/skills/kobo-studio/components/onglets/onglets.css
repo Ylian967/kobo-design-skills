@@ -7,7 +7,7 @@
 .k-tabs__list { display: flex; gap: var(--k-space-1); overflow-x: auto; overflow-y: hidden; border-block-end: var(--k-border-w) solid var(--k-line); }
 .k-tabs__tab {
   flex: none; display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-hit-min); margin: 0 0 calc(var(--k-border-w) * -1); padding: 0 var(--k-space-4);
-  font: inherit; font-size: var(--k-fs-small); color: var(--k-text-2); white-space: nowrap; cursor: pointer;
+  font: inherit; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); text-transform: var(--k-btn-case); letter-spacing: var(--k-btn-tracking); white-space: nowrap; cursor: pointer;
   background: transparent; border: 0; border-block-end: calc(var(--k-border-w) * 3) solid transparent; border-start-start-radius: var(--k-radius); border-start-end-radius: var(--k-radius);
   transition: background-color var(--k-dur-fast) var(--k-ease-out), color var(--k-dur-fast) var(--k-ease-out);
 }

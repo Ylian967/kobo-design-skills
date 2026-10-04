@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : sticker-brutal-jp
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 41 reliés ou relevés, 4 dérivés, 11 en repli.
- * 22 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 45 reliés ou relevés, 4 dérivés, 13 en repli.
+ * 26 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@400;500;800&family=Outfit:wght@500;600;800&display=swap
@@ -69,6 +69,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 800; /* [main] relevé dans la démo */
+  --k-btn-case: none; /* [main] relevé */
+  --k-btn-tracking: 0em; /* [main] relevé */
+  --k-label-case: none; /* [main] relevé : étiquettes en pilules, bas de casse */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-btn);
@@ -78,6 +81,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: var(--shadow); /* [main] */
+  --k-img-filter: none; /* [main] seul le portrait est en noir et blanc, fondu dans un aplat rose (mix-blend-mode sur 4 calques) : hors filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);
@@ -93,6 +97,8 @@
   --k-dur-fast: 150ms; /* [main] dérivé : le skill n'a pas de durée courte */
   --k-dur-base: var(--dur);
   --k-dur-slow: var(--dur-pop); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-blue: var(--blue);

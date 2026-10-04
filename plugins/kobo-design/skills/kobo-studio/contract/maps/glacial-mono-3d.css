@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : glacial-mono-3d
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 33 reliés ou relevés, 8 dérivés, 15 en repli.
- * 31 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 37 reliés ou relevés, 8 dérivés, 17 en repli.
+ * 35 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap
@@ -69,6 +69,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: var(--tracking);
   --k-fw-display: 700; /* repli */
+  --k-btn-case: none; /* [main] relevé : boutons à crochets en bas de casse */
+  --k-btn-tracking: var(--tracking); /* [main] */
+  --k-label-case: uppercase; /* [main] relevé : étiquettes pleines en capitales */
 
   /* ---- Formes ---- */
   --k-radius: 0px; /* repli */
@@ -78,6 +81,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: grayscale(1); /* [main] relevé : photos de repli en niveaux de gris ; le voile de brume du skill se pose par-dessus, hors filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -93,6 +97,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur);
   --k-dur-slow: var(--dur-scene); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-mist: var(--mist);

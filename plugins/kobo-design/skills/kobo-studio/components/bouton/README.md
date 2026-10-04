@@ -17,7 +17,7 @@ Fichiers : `bouton.css`, `Bouton.jsx`. Pas de script : les états se pilotent pa
 
 | État | Déclencheur | Rendu |
 |---|---|---|
-| Repos | — | aplat `--k-accent`, texte `--k-on-accent`, contour `--k-accent-edge` |
+| Repos | — | aplat `--k-accent`, texte `--k-on-accent`, contour `--k-accent-edge` ; casse et approche du libellé : `--k-btn-case`, `--k-btn-tracking` ; jamais sous 12px (`--k-fs-min`) |
 | Survol | `:hover` | aplat éclairci vers `--k-on-accent` ; rien ne grossit |
 | Focus clavier | `:focus-visible` | contour `--k-focus` de `--k-focus-w`, décalé de `--k-focus-offset` |
 | Appui | `:active`, ou `aria-pressed="true"` pour une bascule | aplat plus marqué, ombre retirée |
@@ -37,7 +37,7 @@ Erreur et vide ne s'appliquent pas à un bouton. `data-k-state="hover|focus|acti
 | `k-btn--pill` | rayon `--k-radius-pill` |
 | `k-btn--icon` | icône seule, carrée : `aria-label` obligatoire |
 | `k-btn--block` | pleine largeur |
-| `k-btn--biseau`, `k-btn--crochets` | variantes de signature : voir `../signatures/` |
+| `k-btn--crochets` | variante à la demande d'acid-scan-security. Les couches de signature s'appliquent seules : voir `../signatures/` |
 
 ## Clavier
 
@@ -62,6 +62,6 @@ Erreur et vide ne s'appliquent pas à un bouton. `data-k-state="hover|focus|acti
 
 ```jsx
 <Bouton>Réserver</Bouton>
-<Bouton variante="secondary" signature="biseau">Voir le programme</Bouton>
+<Bouton variante="secondary">Voir le programme</Bouton>
 <Bouton type="submit" enCours={envoi} libelleEnCours="Envoi en cours…">Envoyer</Bouton>
 ```

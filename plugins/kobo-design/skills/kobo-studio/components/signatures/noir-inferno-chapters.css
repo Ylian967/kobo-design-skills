@@ -1,0 +1,79 @@
+/*
+ * kobo-studio — couche de signature : noir-inferno-chapters
+ * Sources (lecture seule) : SKILL.md (« tout est rond ou linéaire : cercles, pointillés, filets ; pas de carte, pas de fond de bouton,
+ * sauf un bouton à contour » ; texte centré ; lenteur), references/components.md (bouton à contour : survol fond blanc texte noir ;
+ * liens de coin : un filet se trace dessous ; numéros de scène en serif, le courant plus grand ; ligne pointillée ; cible en tirets ;
+ * panneau « à propos » clair à texte noir), references/motion.md (filet tracé en 600ms).
+ * Non traduit : le cercle à tirer, le titre qui se défait en poussière, le grain et le vignettage (calques d'image).
+ *
+ * « full » : formes + filets qui se tracent. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton : seul bouton à contour, sans fond ; au survol, fond blanc et texte noir ---- */
+  &.k-btn:not(:disabled, [aria-disabled="true"], .k-btn--ghost, .k-btn--danger) { --_bg: transparent; --_fg: var(--k-text); --_edge: var(--k-text); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"], :active, [data-k-state="active"]) { --_bg: var(--k-text); --_fg: var(--k-bg); }
+  &.k-btn { transition-duration: var(--k-dur-base); transition-timing-function: linear; }
+  /* bouton secondaire = lien de coin : pas de contour, un filet dessous */
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_edge: transparent; --_bg: transparent; padding-inline: var(--k-space-1); }
+  &.k-btn--icon { border-radius: 50%; }
+  /* le rouge du skill ne sert qu'une fois, à la fin du récit : ni lien discret ni barre de progression en rouge */
+  &.k-btn--ghost { --_fg: var(--k-text); }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-text); }
+  &.k-btn--secondary.k-btn--icon:not(:disabled) { --_edge: var(--k-text); }
+
+  /* ---- Filet des liens : sous les liens de nav et les boutons secondaires ---- */
+  &.k-nav__link { position: relative; border-block-end-color: transparent; }
+  &.k-nav__link::before, &.k-btn--secondary:not(.k-btn--icon)::before {
+    content: ""; position: absolute; inset-inline: var(--k-space-1); inset-block-end: var(--k-space-2); block-size: var(--k-border-w);
+    background: currentColor; transform: scaleX(0); transform-origin: left;
+  }
+  &.k-nav__link:is(:hover, [aria-current="page"])::before, &.k-btn--secondary:is(:hover, [data-k-state="hover"])::before { transform: none; }
+  &.k-nav__link:hover { background: transparent; }
+  &.k-nav__link[aria-current="page"] { border-block-end-color: transparent; }
+  &.k-nav { border-block-end-color: transparent; }
+
+  /* ---- Pas de carte : ni fond ni cadre, un filet en tête ; titres serif en capitales ---- */
+  &.k-card { background: transparent; border-color: transparent; border-block-start-color: var(--k-line); box-shadow: none; }
+  &.k-card__media { border-block-end: 0; }
+  &.k-card__body { padding-inline: 0; }
+  &.k-card__foot { padding-inline: 0; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: transparent; border-block-start-color: var(--k-text); }
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { text-transform: uppercase; letter-spacing: var(--k-sig-ls-quote); }
+
+  /* ---- Onglets = numéros de scène : serif, le courant plus grand, les autres en retrait ; pas de filet ---- */
+  &.k-tabs__list { align-items: baseline; border-block-end: 0; }
+  &.k-tabs__tab { font-family: var(--k-font-display); text-transform: none; letter-spacing: 0; font-size: var(--k-fs-h2); color: var(--k-text-muted); }
+  &.k-tabs__tab[aria-selected="true"] { font-size: var(--k-sig-fs-number); font-weight: inherit; color: var(--k-text); border-block-end-color: transparent; }
+  &.k-tabs__tab:hover { background: transparent; }
+
+  /* ---- Champ : une ligne ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: 0; }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: transparent; border-block-end-color: var(--k-line-strong); }
+
+  /* ---- État vide : centré, icône dans une cible ronde en tirets ---- */
+  &.k-empty { justify-items: center; text-align: center; border: 0; }
+  &.k-empty__icon { box-sizing: content-box; padding: var(--k-space-4); border: var(--k-border-w) dashed currentColor; border-radius: 50%; }
+  &.k-empty__actions { justify-content: center; }
+
+  /* ---- Progression : une ligne pointillée, la barre est un filet plein ---- */
+  &.k-progress__track { block-size: var(--k-space-1); background: transparent; border: 0; border-block-end: var(--k-border-w) dotted var(--k-text-muted); border-radius: 0; overflow: visible; }
+  &.k-progress--indeterminate .k-progress__track { overflow: hidden; }
+
+  /* ---- Panneau clair à texte noir (« à propos ») ---- */
+  &.k-modal {
+    --k-bg: var(--k-bg-inverse); --k-text: var(--k-text-inverse); --k-text-2: var(--k-text-inverse); --k-text-muted: var(--k-sig-ink-soft);
+    --k-surface: color-mix(in srgb, var(--k-text-inverse) 8%, var(--k-bg-inverse)); --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 14%, var(--k-bg-inverse));
+    --k-line: color-mix(in srgb, var(--k-text-inverse) 24%, transparent); --k-line-strong: var(--k-text-inverse);
+    --k-focus: var(--k-text-inverse); --k-accent: var(--k-text-inverse); --k-accent-edge: var(--k-text-inverse); --k-on-accent: var(--k-bg-inverse); --k-danger: var(--k-text-inverse);
+    color: var(--k-text-inverse); background: var(--k-bg-inverse); border: 0;
+  }
+  &.k-modal__title { font-size: var(--k-fs-h1); }
+  &.k-toast { border-color: var(--k-line); }
+}
+
+/* Mouvement de signature : les filets se tracent lentement (seulement en « full ») */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-nav__link::before, &.k-btn--secondary::before { transition: transform var(--k-dur-fast) var(--k-sig-ease-line); }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-nav__link::before, .k-btn--secondary::before { transition: none; } }

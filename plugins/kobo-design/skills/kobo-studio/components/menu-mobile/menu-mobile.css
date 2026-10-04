@@ -24,7 +24,7 @@
 .k-menu__link:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: calc(var(--k-focus-w) * -1); }
 /* Page courante : filet épais à gauche ET mention écrite (jamais la couleur seule) */
 .k-menu__link[aria-current="page"] { padding-inline-start: var(--k-space-4); border-inline-start: var(--k-space-1) solid currentColor; }
-.k-menu__here { font-family: var(--k-font-body); font-size: var(--k-fs-small); font-weight: normal; color: var(--k-text-muted); white-space: nowrap; }
+.k-menu__here { font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: normal; color: var(--k-text-muted); white-space: nowrap; }
 .k-menu__foot { display: flex; flex-wrap: wrap; gap: var(--k-space-3); margin-block-start: auto; }
 
 @media (prefers-reduced-motion: reduce) { .k-menu[open] { animation: none; } }

@@ -2,20 +2,20 @@
  * kobo-studio — fiche de correspondance : lore-frame-editorial
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 36 reliés ou relevés, 6 dérivés, 14 en repli.
- * 23 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 40 reliés ou relevés, 6 dérivés, 16 en repli.
+ * 27 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400..700&family=Tektur:wght@700&family=IBM+Plex+Mono:wght@400;500;600&display=swap
  *
- * Signature : 31 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ * Signature : 30 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
  *   --k-sig-muted, --k-sig-lavender, --k-sig-periwinkle, --k-sig-on-dark-muted, --k-sig-reveal-from,
  *   --k-sig-reveal-from-dark, --k-sig-line-light, --k-sig-font-hex, --k-sig-weight-hex, --k-sig-fs-nav,
  *   --k-sig-fs-menu-small, --k-sig-fs-story, --k-sig-fs-menu, --k-sig-fs-counter, --k-sig-fs-word,
  *   --k-sig-lh-statement, --k-sig-lh-menu, --k-sig-lh-hex, --k-sig-ls-manifest, --k-sig-ls-hex,
- *   --k-sig-ls-mono, --k-sig-indent-first, --k-sig-rail-w, --k-sig-overlap, --k-sig-parallax,
- *   --k-sig-chamfer-lg, --k-sig-ease-out-quart, --k-sig-ease-in-out-sine, --k-sig-dur-scramble-tick,
- *   --k-sig-dur-panel, --k-sig-dur-loader-min
+ *   --k-sig-indent-first, --k-sig-rail-w, --k-sig-overlap, --k-sig-parallax, --k-sig-chamfer-lg,
+ *   --k-sig-ease-out-quart, --k-sig-ease-in-out-sine, --k-sig-dur-scramble-tick, --k-sig-dur-panel,
+ *   --k-sig-dur-loader-min
  *
  * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
@@ -72,6 +72,9 @@
   --k-ls-display: var(--ls-display);
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: var(--weight-display);
+  --k-btn-case: uppercase; /* [main] relevé : bouton « Connexion » et nav en mono capitales */
+  --k-btn-tracking: var(--ls-mono); /* [main] */
+  --k-label-case: uppercase; /* [main] relevé : micro-labels mono en capitales */
 
   /* ---- Formes ---- */
   --k-radius: var(--frame-radius); /* [main] */
@@ -81,6 +84,7 @@
   --k-cut: var(--chamfer);
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: none; /* [main] le skill garde des illustrations très colorées ; leur forme de dossier (onglet, coin coupé) demande un clipPath SVG, pas un filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--frame-pad); /* [main] */
@@ -96,6 +100,8 @@
   --k-dur-fast: var(--dur-fast);
   --k-dur-base: var(--dur-ui);
   --k-dur-slow: var(--dur-menu); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-muted: var(--muted);
@@ -118,7 +124,6 @@
   --k-sig-lh-hex: var(--lh-hex);
   --k-sig-ls-manifest: var(--ls-manifest);
   --k-sig-ls-hex: var(--ls-hex);
-  --k-sig-ls-mono: var(--ls-mono);
   --k-sig-indent-first: var(--indent-first);
   --k-sig-rail-w: var(--rail-w);
   --k-sig-overlap: var(--overlap);

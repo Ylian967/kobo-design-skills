@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : noir-inferno-chapters
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 36 reliés ou relevés, 5 dérivés, 15 en repli.
- * 26 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 40 reliés ou relevés, 5 dérivés, 17 en repli.
+ * 31 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap
@@ -33,14 +33,14 @@
   --k-text: var(--text);
   --k-text-2: var(--soft);
   --k-text-muted: var(--half); /* [main] */
-  --k-on-accent: var(--text); /* [main] dérivé : blanc sur rouge */
+  --k-on-accent: var(--bg); /* [main] dérivé : noir sur blanc */
   --k-text-inverse: var(--ink); /* [main] */
 
   /* ---- Accent et états ---- */
-  --k-accent: var(--signal); /* [main] */
+  --k-accent: var(--text); /* [main] accent neutre : le skill réserve son rouge au dernier geste du récit ; l'action est blanche */
   --k-accent-edge: var(--k-accent); /* repli du contrat */
-  --k-accent-on-bg: 1; /* accent à 3.63:1 sur le fond : il peut porter seul une information */
-  --k-accent-2: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 19.44:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--signal); /* [main] le rouge unique du skill */
   --k-success: #2dd280; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 7.75:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
   --k-warning: #d29b2d; /* dérivé : teinte 40°, saturation calée sur celle de son accent, clarté ajustée → 6.16:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
   --k-danger: #e7626a; /* [main] dérivé de --signal (2.86:1 au pire) : même teinte, clarté ajustée → 4.63:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
@@ -68,6 +68,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: var(--ls-ui);
   --k-fw-display: 400; /* [main] relevé dans la démo */
+  --k-btn-case: uppercase; /* [main] relevé : toute l'interface en capitales */
+  --k-btn-tracking: var(--ls-ui); /* [main] */
+  --k-label-case: uppercase; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: 0px; /* repli */
@@ -77,6 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
+  --k-img-filter: grayscale(1) contrast(1.08); /* [main] repli seulement : le skill demande des images déjà grises (fichier ou serveur), « jamais en filtre CSS », plus grain et vignettage par-dessus */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -92,6 +96,8 @@
   --k-dur-fast: var(--dur-line); /* [main] */
   --k-dur-base: var(--dur-fade); /* [main] */
   --k-dur-slow: var(--dur-scene); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
 
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-veil-0: var(--veil-0);

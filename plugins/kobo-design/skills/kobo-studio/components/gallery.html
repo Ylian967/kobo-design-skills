@@ -20,8 +20,8 @@
 <link rel="stylesheet" href="notification/notification.css">
 <link rel="stylesheet" href="etat-vide/etat-vide.css">
 <link rel="stylesheet" href="chargement/chargement.css">
-<link rel="stylesheet" href="signatures/lore-frame-editorial.css">
-<link rel="stylesheet" href="signatures/acid-scan-security.css">
+<!-- Couche de signature du skill choisi : chargée par le script si elle existe (signatures/<id>.css) -->
+<link rel="stylesheet" id="sig">
 <style>
 /* Mise en page de la galerie : uniquement des rôles --k-*, comme les composants. */
 *, *::before, *::after { box-sizing: border-box; }
@@ -30,6 +30,7 @@ body { margin: 0; font-family: var(--k-font-body); font-size: var(--k-fs-body); 
 
 .g-bar { position: sticky; inset-block-start: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-4); padding: var(--k-space-2) var(--k-edge); border-block-end: var(--k-border-w) solid var(--k-line); }
 .g-bar strong { margin-inline-end: auto; font-family: var(--k-font-display); font-weight: var(--k-fw-display); }
+.g-bar span { font-size: var(--k-fs-small); }
 .g-bar label { display: flex; align-items: center; gap: var(--k-space-2); font-size: var(--k-fs-small); }
 .g-bar select { min-block-size: var(--k-hit-min); max-inline-size: 100%; padding: 0 var(--k-space-3); font: inherit; color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
 .g-bar select:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
@@ -79,6 +80,7 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 <div class="g-bar" data-k-tone="inverse">
   <strong>kobo-studio · composants</strong>
   <label>Skill <select id="skill"></select></label>
+  <span id="sig-state" role="status"></span>
   <label>Intensité <select id="intensity"><option>full</option><option>reduced</option><option>off</option></select></label>
 </div>
 
@@ -374,42 +376,39 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 
   <!-- ============ Signature et intensité ============ -->
   <section class="g-sec" id="signature">
-    <header><h2>Variantes de signature et intensité</h2><p>Le composant de base est neutre. Une variante de signature s'ajoute par-dessus et suit le réglage d'intensité de son parent. Les trois blocs ci-dessous portent chacun leur propre réglage, sous celui de la page.</p></header>
+    <header><h2>Couche de signature et intensité</h2><p id="sig-note">Le composant de base est neutre. La couche de signature du skill s'ajoute par-dessus et suit le réglage d'intensité de son parent. Les trois blocs ci-dessous portent chacun leur propre réglage, sous celui de la page.</p></header>
     <div class="g-cols g-cols--wide">
-      <div class="g-grp" data-k-intensity="full"><h3>Bloc en « full »</h3>
-        <div class="g-row g-pad g-frame">
-          <button type="button" class="k-btn k-btn--biseau">Biseau</button>
-          <button type="button" class="k-btn k-btn--secondary k-btn--biseau">Biseau</button>
-          <button type="button" class="k-btn k-btn--crochets">Crochets</button>
-          <button type="button" class="k-btn k-btn--secondary k-btn--crochets" data-k-state="hover">Crochets, survol</button>
-        </div>
+      <div class="g-grp" data-k-intensity="full"><h3>Bloc en « full » : formes et mouvements</h3>
         <div class="g-pad g-frame g-stack">
-          <article class="k-card k-card--biseau"><div class="k-card__body"><span class="k-card__meta">lore-frame-editorial</span><h3 class="k-card__title">Carte à coin biseauté</h3><p class="k-card__text">Le biseau lit --k-cut et la signature du skill.</p></div></article>
-          <article class="k-card k-card--crochets"><div class="k-card__body"><span class="k-card__meta">acid-scan-security</span><h3 class="k-card__title">Carte à crochets d'angle</h3><p class="k-card__text">Les crochets lisent --k-sig-bracket-len.</p></div></article>
+          <div class="g-row"><button type="button" class="k-btn">Réserver</button><button type="button" class="k-btn" data-k-state="hover">Survol</button><button type="button" class="k-btn k-btn--secondary">Programme</button></div>
+          <div class="k-tabs"><div class="k-tabs__list"><span class="k-tabs__tab" aria-selected="true">À venir</span><span class="k-tabs__tab">Passées</span><span class="k-tabs__tab">En attente</span></div></div>
+          <div class="k-field"><label class="k-field__label" for="s-full">Adresse e-mail</label><div class="k-field__box"><input class="k-field__control" id="s-full" type="email" value="camille@exemple.fr" autocomplete="off"></div></div>
+          <article class="k-card k-card--link">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1579624512056-3eb398311205?auto=format&fit=crop&w=720&h=480&q=70" alt="Deux tentes posées sur la neige face à la mer de nuages au crépuscule"></div>
+            <div class="k-card__body"><span class="k-card__meta">1 nuit · tous niveaux</span><h3 class="k-card__title"><a href="#modale">Bivouac au-dessus des nuages</a></h3><p class="k-card__text">Survolez : les mouvements de signature jouent.</p></div>
+          </article>
         </div>
       </div>
-      <div class="g-grp" data-k-intensity="reduced"><h3>Bloc en « reduced » : ornements fixes</h3>
-        <div class="g-row g-pad g-frame">
-          <button type="button" class="k-btn k-btn--biseau">Biseau</button>
-          <button type="button" class="k-btn k-btn--secondary k-btn--biseau">Biseau</button>
-          <button type="button" class="k-btn k-btn--crochets">Crochets</button>
-          <button type="button" class="k-btn k-btn--secondary k-btn--crochets" data-k-state="hover">Crochets, survol</button>
-        </div>
+      <div class="g-grp" data-k-intensity="reduced"><h3>Bloc en « reduced » : formes seules</h3>
         <div class="g-pad g-frame g-stack">
-          <article class="k-card k-card--biseau"><div class="k-card__body"><span class="k-card__meta">lore-frame-editorial</span><h3 class="k-card__title">Carte à coin biseauté</h3><p class="k-card__text">Le biseau reste : c'est un ornement fixe.</p></div></article>
-          <article class="k-card k-card--crochets"><div class="k-card__body"><span class="k-card__meta">acid-scan-security</span><h3 class="k-card__title">Carte à crochets d'angle</h3><p class="k-card__text">Les crochets restent, mais ne bougent plus.</p></div></article>
+          <div class="g-row"><button type="button" class="k-btn">Réserver</button><button type="button" class="k-btn" data-k-state="hover">Survol</button><button type="button" class="k-btn k-btn--secondary">Programme</button></div>
+          <div class="k-tabs"><div class="k-tabs__list"><span class="k-tabs__tab" aria-selected="true">À venir</span><span class="k-tabs__tab">Passées</span><span class="k-tabs__tab">En attente</span></div></div>
+          <div class="k-field"><label class="k-field__label" for="s-reduced">Adresse e-mail</label><div class="k-field__box"><input class="k-field__control" id="s-reduced" type="email" value="camille@exemple.fr" autocomplete="off"></div></div>
+          <article class="k-card k-card--link">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1579624512056-3eb398311205?auto=format&fit=crop&w=720&h=480&q=70" alt="Deux tentes posées sur la neige face à la mer de nuages au crépuscule"></div>
+            <div class="k-card__body"><span class="k-card__meta">1 nuit · tous niveaux</span><h3 class="k-card__title"><a href="#modale">Bivouac au-dessus des nuages</a></h3><p class="k-card__text">Les formes restent, les mouvements de signature sont coupés.</p></div>
+          </article>
         </div>
       </div>
       <div class="g-grp" data-k-intensity="off"><h3>Bloc en « off » : composant de base</h3>
-        <div class="g-row g-pad g-frame">
-          <button type="button" class="k-btn k-btn--biseau">Biseau</button>
-          <button type="button" class="k-btn k-btn--secondary k-btn--biseau">Biseau</button>
-          <button type="button" class="k-btn k-btn--crochets">Crochets</button>
-          <button type="button" class="k-btn k-btn--secondary k-btn--crochets" data-k-state="hover">Crochets, survol</button>
-        </div>
         <div class="g-pad g-frame g-stack">
-          <article class="k-card k-card--biseau"><div class="k-card__body"><span class="k-card__meta">lore-frame-editorial</span><h3 class="k-card__title">Carte à coin biseauté</h3><p class="k-card__text">Le biseau est refermé.</p></div></article>
-          <article class="k-card k-card--crochets"><div class="k-card__body"><span class="k-card__meta">acid-scan-security</span><h3 class="k-card__title">Carte à crochets d'angle</h3><p class="k-card__text">Les crochets ont disparu.</p></div></article>
+          <div class="g-row"><button type="button" class="k-btn">Réserver</button><button type="button" class="k-btn" data-k-state="hover">Survol</button><button type="button" class="k-btn k-btn--secondary">Programme</button></div>
+          <div class="k-tabs"><div class="k-tabs__list"><span class="k-tabs__tab" aria-selected="true">À venir</span><span class="k-tabs__tab">Passées</span><span class="k-tabs__tab">En attente</span></div></div>
+          <div class="k-field"><label class="k-field__label" for="s-off">Adresse e-mail</label><div class="k-field__box"><input class="k-field__control" id="s-off" type="email" value="camille@exemple.fr" autocomplete="off"></div></div>
+          <article class="k-card k-card--link">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1579624512056-3eb398311205?auto=format&fit=crop&w=720&h=480&q=70" alt="Deux tentes posées sur la neige face à la mer de nuages au crépuscule"></div>
+            <div class="k-card__body"><span class="k-card__meta">1 nuit · tous niveaux</span><h3 class="k-card__title"><a href="#modale">Bivouac au-dessus des nuages</a></h3><p class="k-card__text">Couleurs, typo et rayons du skill ; plus aucun ornement.</p></div>
+          </article>
         </div>
       </div>
     </div>
@@ -438,12 +437,18 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 // Pilotage de la galerie : choix du skill et de l'intensité, déclencheurs de démonstration.
 (function () {
   var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
+  // Skills qui ont une couche de signature (components/signatures/<id>.css)
+  var LAYERS = ['acid-scan-security', 'glacial-mono-3d', 'lore-frame-editorial', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'serif-bistro-green', 'sticker-brutal-jp'];
   var $ = function (id) { return document.getElementById(id); }, root = document.documentElement;
 
   function load(id) {
     var link = $('map');
     link.onload = function () { (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); }); };
     link.href = '../contract/maps/' + id + '.css';
+    var sig = $('sig'), has = LAYERS.indexOf(id) >= 0;
+    sig.onload = function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); }; // la couche change la largeur des liens
+    if (has) sig.href = 'signatures/' + id + '.css'; else sig.removeAttribute('href');
+    $('sig-state').textContent = has ? 'couche de signature chargée' : 'pas encore de couche de signature : composants de base';
     history.replaceState(null, '', '#' + id + (root.dataset.kIntensity !== 'full' ? ':' + root.dataset.kIntensity : ''));
   }
   SKILLS.forEach(function (id) { $('skill').add(new Option(id, id)); });

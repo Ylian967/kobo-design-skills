@@ -38,7 +38,7 @@ article.k-card
 | `k-card--link` | carte entièrement cliquable : le lien du titre est étiré sur la carte |
 | `k-card--flat` | sans fond ni ombre |
 | `k-card--row` | image à gauche, texte à droite |
-| `k-card--biseau`, `k-card--crochets` | variantes de signature : voir `../signatures/` |
+| `k-card--crochets` | variante à la demande d'acid-scan-security. Les couches de signature s'appliquent seules : voir `../signatures/` |
 
 ## Clavier
 
@@ -49,6 +49,7 @@ Une carte cliquable n'a qu'**un** arrêt de tabulation, le lien du titre ; `Entr
 - `<article>` avec un vrai titre (`h2` à `h4` selon le contexte).
 - Une seule cible par carte cliquable : pas de lien sur l'image **et** sur le titre.
 - `alt` décrit la photo. `alt=""` seulement pour un décor.
+- La photo reçoit le traitement du skill par `--k-img-filter` (noir et blanc de pixel-lime, teinte verte d'acid-scan…). Le surtitre suit `--k-label-case`.
 - Pas de série de trois cartes icône-titre-texte : une carte porte un contenu réel, pas un argument de vente.
 
 ## Exemple
