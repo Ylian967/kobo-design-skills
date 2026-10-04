@@ -30,7 +30,7 @@
         var content = box.querySelector('.g-hero__content');
         ['kicker', 'title', 'lead', 'facts', 'action'].forEach(function (k) { (parts[k] || []).forEach(function (n) { content.appendChild(n); }); });
         var cap = media.querySelector('figcaption');
-        if (cap) { var c = document.createElement('p'); c.className = 'g-hero__caption'; c.textContent = cap.textContent; box.appendChild(c); }
+        if (cap) { var c = document.createElement('p'); c.className = 'g-hero__caption'; c.textContent = cap.textContent; content.appendChild(c); }   // la légende de la photo reste dans le texte du héros, à la suite : elle ne recouvre jamais l'action
         if (options.extra) options.extra(box, parts, ctx);
         return box;
       },

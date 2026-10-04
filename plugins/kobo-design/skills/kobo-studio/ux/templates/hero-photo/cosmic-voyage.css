@@ -1,17 +1,23 @@
 /*
- * kobo-studio — héros photo, habillage cosmic-voyage : la photo plein écran entre deux voiles de nuit, le nom en haut à gauche.
- * Sources (lecture seule) : cosmic-voyage/examples/demo.html (.hero : hauteur d'écran, photo plein cadre, voile nuit en haut
- * et en bas ; .mark : le titre en haut à gauche, précédé d'un petit mot ; actions centrées en bas), references/tokens.css.
- * Non repris : le bouton lecture à anneau en dégradé (l'anneau violet est noté « estimé » dans l'audit), le fond étoilé et la
- * frise du voyage (famille « fond et fil de page », à écrire).
+ * kobo-studio — héros photo, habillage cosmic-voyage : le premier écran sous la nuit étoilée.
+ * Sources (lecture seule) : cosmic-voyage/examples/demo.html (.hero : hauteur d'écran, ciel étoilé plein cadre, voiles de nuit ;
+ * .mark : le titre en haut à gauche, précédé d'un petit mot ; actions centrées en bas), components/signatures (carte à cadre
+ * doré), references/tokens.css.
+ * Le ciel étoilé vient du fond de page (famille « scène », même skill) : le héros est donc transparent. La photo du projet est
+ * une image de contenu : elle reste visible, dans un cadre doré, à droite.
+ * Lisibilité : le ciel est piqué d'étoiles blanches, aucune zone n'y est calme (mesuré : 1.0 sur une étoile). Le texte est donc
+ * posé dans un panneau de nuit à filet doré — le « verre peint » que le skill donne à ses fenêtres —, pas sur une plaque nue.
+ * Non repris : le bouton lecture à anneau en dégradé.
  */
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic {
-  --_bg: var(--k-sig-bg-top); --_veil: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 55%, transparent), transparent 30%, transparent 60%, var(--k-bg));
-  --_plate: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 82%, transparent) 0 42%, transparent 62%), linear-gradient(0deg, color-mix(in srgb, var(--k-bg) 88%, transparent) 0 14%, transparent 30%);
-  min-block-size: 100dvh; align-items: stretch;
+  --_bg: transparent; --_veil: none;
+  --_plate: none;
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-8) var(--k-space-16); min-block-size: calc(100dvh - var(--k-nav-h)); overflow: visible;
+  inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; padding-block: var(--k-space-12) var(--k-space-16);
 }
-[data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__content { grid-template-rows: auto auto auto 1fr auto; padding-block: var(--k-space-12) var(--k-space-16); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__content { order: 1; flex: 3 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); inline-size: auto; margin: 0; padding: var(--k-space-8); background: color-mix(in srgb, var(--k-bg) 88%, transparent); border: var(--k-border-w) solid var(--k-sig-glass-edge); border-radius: var(--k-radius-lg); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__content > * { max-inline-size: 100%; }
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
-[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-facts { display: none; }
-[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-btn { grid-row: 5; justify-self: center; }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__rig { order: 2; flex: 2 1 calc(var(--k-space-32) * 2); position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 3; transform: none; overflow: hidden; border: var(--k-border-w) solid var(--k-sig-glass-edge); border-radius: var(--k-radius-lg); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__caption { position: static; flex: 1 1 100%; order: 3; max-inline-size: none; text-align: end; }

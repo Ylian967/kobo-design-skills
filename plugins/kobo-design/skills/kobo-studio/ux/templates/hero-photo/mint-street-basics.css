@@ -24,7 +24,9 @@
 [data-k-skill="mint-street-basics"] .g-hero--arch .g-hero__content > * { max-inline-size: 100%; }
 [data-k-skill="mint-street-basics"] .g-hero--arch h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); text-transform: uppercase; background: linear-gradient(180deg, var(--k-text-inverse) 30%, var(--k-sig-silver)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 [data-k-skill="mint-street-basics"] .g-hero--arch h1 .g-rise > b { background: inherit; -webkit-background-clip: text; background-clip: text; }
-[data-k-skill="mint-street-basics"] .g-hero--arch :is(.k-lead, .k-facts, .g-hero__caption) { display: none; }
+[data-k-skill="mint-street-basics"] .g-hero--arch :is(.k-lead, .k-facts) { max-inline-size: min(100%, max(34%, calc(var(--k-space-32) * 2 + var(--k-space-8)))); font-size: var(--k-fs-body); }
+/* Les faits et la légende peuvent passer devant le disque ou l'arche sur écran étroit : ils sont posés sur un cartouche bleu nuit arrondi, comme les pilules du skill */
+[data-k-skill="mint-street-basics"] .g-hero--arch :is(.k-facts, .g-hero__caption) { padding: var(--k-space-3) var(--k-space-4); background: color-mix(in srgb, var(--k-bg-inverse) 90%, transparent); border-radius: var(--k-radius-lg); }
 [data-k-skill="mint-street-basics"] .g-hero--arch .k-btn { align-self: end; justify-self: end; }
 /* Ouverture (full seulement) : les disques grandissent, l'arche monte, les mots du titre montent */
 .g-hero--arch[data-k-in="pending"]::before, .g-hero--arch[data-k-in="pending"]::after { transform: scale(0.6); opacity: 0; }

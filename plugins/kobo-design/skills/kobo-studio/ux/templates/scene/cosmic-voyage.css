@@ -1,0 +1,12 @@
+/*
+ * kobo-studio — scène plein écran, habillage cosmic-voyage : la nuit étoilée derrière toute la page.
+ * Sources (lecture seule) : cosmic-voyage/examples/demo.html (photo du héros : « Une silhouette debout sous la Voie lactée, ciel
+ * violet et or », Unsplash photo-1444703686981-a3abbc4d4fe3 ; voile nuit en haut et en bas), le relevé de l'étape 3 bis
+ * (« la nuit étoilée derrière tout »).
+ * Ici la famille ne charge aucune 3D : la photo est le fond. Elle est décorative (alt vide) ; la photo de contenu du héros
+ * reste celle du projet.
+ * Non repris : la frise du voyage à nœuds dorés, la frise d'emblèmes.
+ */
+[data-k-skill="cosmic-voyage"] .g-scene3d { --_filter: none; --_veil: 0%; background: var(--k-sig-bg-top); }
+[data-k-skill="cosmic-voyage"] .g-scene3d > img { object-position: 50% 60%; }
+[data-k-skill="cosmic-voyage"] .g-scene3d::after { background: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 55%, transparent), transparent 30%, transparent 60%, var(--k-bg)); }

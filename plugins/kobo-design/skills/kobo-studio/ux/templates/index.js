@@ -27,11 +27,12 @@
     'sticker-brutal-jp':     { cadre: ['css', 'js'], 'hero-photo': ['css', 'js'] },
     'retro-mission-poster':  { cadre: ['css', 'js'], 'hero-photo': ['css', 'js'] },
     'showroom-bento':        { 'hero-photo': ['css', 'js'] },
-    'cosmic-voyage':         { 'hero-photo': ['css', 'js'] },
+    'cosmic-voyage':         { scene: ['css', 'js'], 'hero-photo': ['css', 'js'] },
     'anime-x-slash':         { 'hero-photo': ['css', 'js'] },
     'heritage-lens':         { 'hero-photo': ['css', 'js'] },
     'hold-to-play-music':    { 'hero-photo': ['css', 'js'] },
-    'chrome-atelier':        { 'hero-photo': ['css', 'js'] }
+    'chrome-atelier':        { 'hero-photo': ['css', 'js'] },
+    'tiny-planet-toy':       { objet: ['css', 'js'] }
   };
   var loaded = {};
   function load(url) {

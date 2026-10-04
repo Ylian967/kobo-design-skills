@@ -75,7 +75,7 @@ body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family:
     shown = s.file;
     $('stage').toggleAttribute('data-narrow', $('narrow').checked);
     var gab = GABARITS[$('skill').value];
-    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '. ' + (gab ? 'Gabarits de ce skill : ' + gab + '.' : $('skill').value === 'tiny-planet-toy' ? 'Ce skill n’a pas encore de gabarit de signature.' : 'Gabarit de ce skill : hero (premier écran) — landing produit, accueil du site vitrine.');
+    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '. ' + (gab ? 'Gabarits de ce skill : ' + gab + '.' : 'Gabarit de ce skill : hero (premier écran) — landing produit, accueil du site vitrine.');
     $('direct').href = s.file + hash;
     history.replaceState(null, '', '#' + s.id + ':' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '') + (neutral ? ':neutre' : '') + ($('narrow').checked ? ':etroit' : ''));
   }

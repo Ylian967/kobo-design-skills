@@ -29,7 +29,7 @@
   background: var(--_plate, linear-gradient(90deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 74%), transparent) 0 clamp(var(--_plate-w, 62%), var(--_narrow), 100%), transparent clamp(var(--_plate-end, 92%), var(--_narrow), 100%))); }
 .g-hero__content .k-lead { color: inherit; }
 .g-hero__content .k-facts dt, .g-hero__content .k-kicker { color: inherit; }
-.g-hero__caption { position: absolute; inset-block-end: var(--k-space-4); inset-inline-end: var(--k-edge); max-inline-size: 40%; font-size: max(var(--k-fs-small), var(--k-fs-min)); text-align: end; }
+.g-hero__caption { margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
 /* Mots d'un titre qui montent à l'ouverture (habillages pocket-device, mint-street…) : chaque mot dans une fenêtre */
 .g-rise { display: inline-block; overflow: hidden; vertical-align: bottom; }
 .g-rise > b { display: inline-block; font-weight: inherit; }

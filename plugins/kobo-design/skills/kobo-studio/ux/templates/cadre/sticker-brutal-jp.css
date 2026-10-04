@@ -3,8 +3,17 @@
  * Sources (lecture seule) : sticker-brutal-jp/examples/demo.html (.frame : bord épais --bw-frame, couleur d'encre, coins --r-frame,
  * fond papier ; toute la page vit dedans), references/tokens.css.
  * Écart : dans la démo le cadre entoure la page et défile avec elle ; ici il est fixe autour de l'écran.
- * Non repris : les autocollants posés à cheval sur le cadre.
+ * .sticker : autocollants de couleur à cheval sur le cadre — carré bleu à étoile, demi-anneau vert, rond rose à spirale, rond
+ * rouge à anneau ; contour d'encre, ombre pleine décalée de 5 unités, chacun penché de son angle.
+ * Non repris : l'autocollant au caractère japonais, le léger décalage des autocollants pendant le défilement.
  */
 html[data-k-skill="sticker-brutal-jp"][data-k-gabarits~="cadre"] { --_rail-w: 0px; --_bw: var(--k-sig-bw-frame); --_line: var(--k-text); --_radius: var(--k-sig-r-frame); }
 html[data-k-skill="sticker-brutal-jp"] :is(.g-frame__bar, .g-frame__rail) { display: none; }
 html[data-k-skill="sticker-brutal-jp"][data-k-gabarits~="cadre"] .k-page__top .k-nav { background: var(--k-bg); }
+.g-stk { position: absolute; z-index: 1; inline-size: var(--_w); rotate: var(--_rot); pointer-events: none; }
+.g-stk svg { display: block; inline-size: 100%; block-size: auto; overflow: visible; fill: var(--_c); stroke: var(--k-text); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.g-stk .sh { fill: var(--k-text); }   /* l'ombre : la même forme, décalée dans le dessin (attribut transform du SVG) */
+.g-stk .no { fill: none; }
+/* Sur écran étroit, seuls deux autocollants restent : ils ne doivent pas couvrir le texte */
+.g-stk--wide { display: var(--_wide, block); }
+html[data-k-skill="sticker-brutal-jp"] .g-frame { --_s: clamp(calc(var(--k-space-16)), 9vw, calc(var(--k-space-32))); }

@@ -14,7 +14,7 @@
 [data-k-skill="nocturne-architecture"] .g-hero--word .g-hero__content > * { max-inline-size: min(100%, calc(var(--k-space-32) * 3 + var(--k-space-16))); }
 [data-k-skill="nocturne-architecture"] .g-hero--word h1 { font-size: var(--k-fs-h2); }
 [data-k-skill="nocturne-architecture"] .g-hero--word .k-lead { font-size: var(--k-fs-body); }
-[data-k-skill="nocturne-architecture"] .g-hero--word .k-facts { display: none; }
+[data-k-skill="nocturne-architecture"] .g-hero--word .k-facts { max-inline-size: var(--k-measure); }
 .g-hero__word { position: absolute; inset: auto 0 0 0; pointer-events: none; }
 .g-hero__word .g-word__giant { margin: 0; --_crop: 0.66; --_case: lowercase; --_tracking: var(--k-sig-ls-word); --_weight: 500; --_ink: var(--k-text); padding-inline-start: calc(var(--_size) * 0.035); }
 /* Ouverture (full seulement) : la photo dézoome, les lettres montent. État final par défaut. */

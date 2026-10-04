@@ -16,7 +16,7 @@
 [data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__content > * { max-inline-size: min(100%, max(46%, calc(var(--k-space-32) * 3))); }
 [data-k-skill="chrome-atelier"] .g-hero--guides h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); text-transform: uppercase; }
 [data-k-skill="chrome-atelier"] .g-hero--guides .k-lead { font-size: var(--k-fs-body); }
-[data-k-skill="chrome-atelier"] .g-hero--guides .k-facts { display: none; }
+[data-k-skill="chrome-atelier"] .g-hero--guides .k-facts { max-inline-size: var(--k-measure); }
 /* Cercles et axes de cadrage */
 [data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::before, [data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::after { content: ""; position: absolute; inset-inline-start: var(--_cx); inset-block-start: var(--_cy); aspect-ratio: 1; translate: -50% -50%; border: var(--_h) solid var(--k-sig-bar-line); border-radius: 50%; }
 [data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::before { inline-size: 26%; }

@@ -15,7 +15,7 @@
 .g-scene__image { position: absolute; inset: calc(var(--k-space-4) * -1); z-index: -2; transform: translate(calc(var(--_px, 0) * var(--k-space-4)), calc(var(--_py, 0) * var(--k-space-4))); }
 .g-scene__image [data-k-slot="media"], .g-scene__image figure { display: block; block-size: 100%; margin: 0; }
 .g-scene__image img { inline-size: 100%; block-size: 100%; aspect-ratio: auto; object-fit: cover; border-radius: 0; filter: var(--k-img-filter); }
-.g-scene__image figcaption { display: none; }
+.g-scene__image figcaption { position: absolute; inset: auto var(--k-edge) var(--k-space-4) auto; z-index: 1; }
 .g-scene__veil { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--_veil, var(--k-scrim)); }
 .g-scene__copy { align-self: center; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-4); justify-items: center; padding: var(--k-space-24) var(--k-edge) var(--k-space-8); }
 .g-scene__copy h2 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.05); letter-spacing: var(--k-ls-display); text-transform: var(--_title-case, none); overflow-wrap: anywhere; }

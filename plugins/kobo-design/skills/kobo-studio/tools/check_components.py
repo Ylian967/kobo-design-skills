@@ -20,7 +20,7 @@ Dans toutes les feuilles de style, les styles en ligne et la galerie :
 Dans ux/ (structures de page, fiches de patterns, page de démonstration) : les mêmes règles — aucune valeur en dur, aucun
 --k-sig-*, motifs anti-slop — et, pour chaque dossier de ux/structures/ : README.md, une page .html, une feuille .css, une version React.
 Dans ux/templates/ (gabarits de signature) : les règles d'une couche de signature (--k-sig-*, dégradés et ombres composées admis),
-un en-tête qui cite les sources, et pour chaque famille : <famille>.css, <famille>.js, au moins un habillage portant le nom d'un skill.
+un en-tête qui cite les sources, aucun contenu masqué (texte, légende, action), et pour chaque famille : <famille>.css, <famille>.js, au moins un habillage portant le nom d'un skill.
 
 Usage : python3 tools/check_components.py          Code de sortie 1 si une erreur est trouvée.
 """
@@ -133,6 +133,10 @@ def check_ux(errs):
         if f.suffix == ".css":
             css = strip_comments(text)
             errs += hard_values(css, where) + slop(css, where, signature=gabarit)
+            if gabarit:
+                for n, line in enumerate(css.splitlines(), 1):
+                    if re.search(r"(\.k-facts|\.k-lead|\.k-kicker|caption|\.k-btn|h1|h2)[^{]*\{[^}]*display\s*:\s*none", line):
+                        errs.append(f"{where}:{n} un gabarit ne masque jamais un contenu (display: none sur un texte, une légende ou une action)")
             if gabarit and not text.lstrip().startswith("/*"):
                 errs.append(f"{where} : en-tête manquant (sources lues dans le skill, ce qui n'est pas repris)")
             if re.search(r"\b(?:transition|animation)\s*:", css) and "prefers-reduced-motion" not in css:

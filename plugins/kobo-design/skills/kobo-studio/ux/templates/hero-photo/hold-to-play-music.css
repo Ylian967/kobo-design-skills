@@ -14,4 +14,4 @@
 [data-k-skill="hold-to-play-music"] .g-hero--single .g-hero__content > * { max-inline-size: min(100%, var(--k-measure-wide)); }
 [data-k-skill="hold-to-play-music"] .g-hero--single h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
 [data-k-skill="hold-to-play-music"] .g-hero--single .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); font-weight: 600; }
-[data-k-skill="hold-to-play-music"] .g-hero--single .k-facts { display: none; }
+[data-k-skill="hold-to-play-music"] .g-hero--single .k-facts { max-inline-size: var(--k-measure); }

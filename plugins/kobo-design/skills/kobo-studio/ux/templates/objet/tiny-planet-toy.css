@@ -1,0 +1,15 @@
+/*
+ * kobo-studio — objet 3D, habillage tiny-planet-toy : la petite planète.
+ * Sources (lecture seule) : tiny-planet-toy/examples/demo.html (.planet : planète de 280 à 620 px, halo de ciel clair derrière
+ * elle, qui arrive en tombant du haut ; le script de la scène : ombrage à trois paliers, contour d'encre, maisons, arbres,
+ * phare, bateau, rotation lente, on la tourne en la tirant), references/tokens.css.
+ * Non repris : le logo en lettres-blocs, la boîte de dialogue qui s'écrit et ses trois quartiers, le déplacement de la planète
+ * sur le côté pendant le défilement.
+ */
+[data-k-skill="tiny-planet-toy"] .g-obj { padding-block: var(--k-space-8) var(--k-space-16); }
+[data-k-skill="tiny-planet-toy"] .g-obj__stage { --_size: calc(var(--k-space-32) * 4 + var(--k-space-12)); }
+[data-k-skill="tiny-planet-toy"] .g-obj__stage::before { content: ""; position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(closest-side, var(--k-surface) 72%, transparent 100%); opacity: 0.55; }
+/* Ouverture (full seulement) : la planète tombe en place */
+.g-obj[data-k-in="pending"] .g-obj__stage canvas { transform: scale(0.18) translateY(-90%); }
+.g-obj[data-k-motion] .g-obj__stage canvas { transition: transform calc(var(--k-dur-slow) * 2) var(--k-ease-out); }
+@media (prefers-reduced-motion: reduce) { .g-obj[data-k-motion] .g-obj__stage canvas { transition: none; } }

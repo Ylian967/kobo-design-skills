@@ -4,7 +4,7 @@
  * l'écran, un panneau qui porte l'image (découpée au même angle, jamais déformée) et sort de l'autre côté, une bande derrière.
  * Un chapitre sur deux est inversé. Le texte du chapitre reste du texte, sous le panneau.
  * Uniquement des rôles --k-* ; l'habillage d'un skill règle les variables locales --_angle, --_h, --_block, --_radius…
- * Mouvement : seulement transform et opacity, joué une fois à l'entrée ; l'état final est l'état par défaut.
+ * Mouvement : transform seul, joué une fois à l'entrée ; l'état final est l'état par défaut.
  */
 .rc-chapter[data-k-gabarit="formes-inclinees"] { display: block; overflow: clip; border-block-end: 0; }
 .g-slant {
@@ -46,16 +46,16 @@
 .g-slant--flip .g-slant__block::before { inset: 0 -60vw 0 0; transform-origin: bottom; }
 .g-slant--flip .g-slant__copy { margin-inline: 0 var(--_inset); }
 
-/* Entrée (full seulement) */
-.g-slant[data-k-in="pending"] .g-slant__block { transform: translate(-70%, 0); opacity: 0; }
-.g-slant--flip[data-k-in="pending"] .g-slant__block { transform: translate(70%, 0); }
-.g-slant[data-k-in="pending"] .g-slant__panel { transform: translate(40%, 0); opacity: 0; }
-.g-slant--flip[data-k-in="pending"] .g-slant__panel { transform: translate(-40%, 0); }
-.g-slant[data-k-in="pending"] .g-slant__slab { transform: skewX(calc(var(--_a) * -1)) translateX(60%); }
-.g-slant--flip[data-k-in="pending"] .g-slant__slab { transform: skewX(calc(var(--_a) * -1)) translateX(-60%); }
-.g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { transition: transform var(--_dur-in, var(--k-dur-slow)) var(--k-ease-out), opacity var(--k-dur-base) ease-out; }
+/*
+ * Entrée (full seulement) : chaque forme arrive de l'extérieur de l'écran, en transform seul. Pas de fondu : mesuré, un fondu
+ * (opacity) sur le panneau, qui contient l'image découpée par clip-path, coûtait 12 à 17 images de plus de 34 ms par défilement.
+ */
+.g-slant[data-k-in="pending"] .g-slant__block { transform: translate(-140%, 0); }
+.g-slant--flip[data-k-in="pending"] .g-slant__block { transform: translate(140%, 0); }
+.g-slant[data-k-in="pending"] .g-slant__panel { transform: translate(120%, 0); }
+.g-slant--flip[data-k-in="pending"] .g-slant__panel { transform: translate(-120%, 0); }
+.g-slant[data-k-in="pending"] .g-slant__slab { transform: skewX(calc(var(--_a) * -1)) translateX(110%); }
+.g-slant--flip[data-k-in="pending"] .g-slant__slab { transform: skewX(calc(var(--_a) * -1)) translateX(-110%); }
+.g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { transition: transform var(--_dur-in, var(--k-dur-slow)) var(--k-ease-out); will-change: transform; }
 .g-slant[data-k-motion] .g-slant__panel { transition-delay: var(--k-dur-fast); }
-/* Pendant l'entrée seulement, chaque forme a sa propre couche : la trame, les arrondis et l'image découpée sont dessinés une fois,
-   puis seulement déplacés. Le script retire data-k-motion une fois l'entrée finie (les couches sont rendues). */
-.g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { will-change: transform, opacity; }
 @media (prefers-reduced-motion: reduce) { .g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { transition: none; } }

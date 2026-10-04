@@ -245,3 +245,124 @@ Sur les deux lots, le point faible reste **hyper-lime au premier défilement** (
 - Contraste mesuré en `reduced` seulement.
 - Clavier : aucun de ces héros n'a de geste ; l'ordre de tabulation n'a pas été reparcouru.
 - `reduced` et `off` n'ont pas été recontrôlés skill par skill pour ce lot.
+
+---
+
+# Dernier lot : pièces uniques et reprises
+
+## 1. Pièces uniques — quatre faites sur huit
+
+Reprises du code des démos (lecture seule), adaptées aux rôles `--k-*`.
+
+| Skill | Pièce | État | Comment |
+|---|---|---|---|
+| **tiny-planet-toy** | la planète 3D | **fait** | Nouvelle famille `objet` (objet 3D dans le héros). La scène de la démo est portée telle quelle : ombrage à trois paliers, contour d'encre, maisons, arbres, phare, bateau, graine 7. Seul écart : la fusion des géométries est écrite sur place (le module de three.js demandait une table d'import). On la tourne en la tirant, ou avec deux boutons, ou aux flèches. Repli : sans WebGL ou hors ligne, la scène n'occupe aucune place et la photo du héros tient seule |
+| **pixel-lime-portfolio** | la mosaïque de pixels | **fait** | Fonction de la démo reprise : 11 rangées, densité 0,5, graine 7, plus dense au centre ; allumage par vagues puis cinq blocs toutes les 900 ms, cadence tenue par la boucle commune |
+| **cosmic-voyage** | la photo de ciel étoilé | **fait** | La photo de la démo (Unsplash, Voie lactée) devient le fond de page (famille `scene`, sans 3D). Le héros est transparent ; la photo du projet reste, dans un cadre |
+| **sticker-brutal-jp** | les autocollants de couleur | **fait** | Quatre formes de la démo (tracés identiques) à cheval sur le cadre : carré bleu à étoile, demi-anneaux vert et bleu, rond rose à spirale, rond rouge |
+| **pocket-device-noir** | l'objet 3D | **non fait** | La famille `objet` est prête à le recevoir ; le code de l'appareil (65 lignes, textures d'écran et de grille) n'est pas porté |
+| **heritage-lens** | la lentille | **non fait** | — |
+| **hold-to-play-music** | le mot peint et le geste « maintenir » | **non fait** | — |
+| **showroom-bento** | le produit détouré et la rangée bento | **non fait** | — |
+
+## 2. serif-bistro-green : l'arche remonte dans le titre
+
+Le titre est coupé en deux lignes de deux moitiés, écartées de la largeur de l'arche — la construction de la démo (`justify-content: space-between`, `gap: --arch-w`). L'arche remonte entre les moitiés : le texte ne passe jamais devant la photo, aucune plaque n'est nécessaire.
+
+Garde-fou : le script mesure la distance à remonter et vérifie qu'aucun texte ne se trouve devant l'arche ; sinon elle reste sous le texte. Constaté : sur la landing (« Une nuit / sous la · tente, au-dessus / des nuages ») l'arche remonte ; sur l'accueil, dont le titre est plus long, le garde-fou la laisse dessous. Sur écran étroit, le titre se remet en lignes.
+
+## 3. Lisibilité : la solution retenue pour chaque héros
+
+Mesure au pire pixel, à 1440 et 390 px, sur la landing (surtitre, titre, phrase, faits, légende).
+
+| Skill | Solution | Plaque ? | Pire contraste mesuré |
+|---|---|---|---|
+| acid-scan | voile vert du skill renforcé à gauche, texte à gauche du sujet | plaque horizontale, couleur du fond vert | 7.8 |
+| alpine-glass | voile du skill : la démo fonce déjà le bas vers le bleu profond ; le texte y est posé | oui, verticale, bleu profond | 7.7 |
+| anime-x-slash | texte à gauche sur le fond uni, éclats à droite | seulement sur écran étroit | titre 3.3 (grand) |
+| chrome-atelier | voile nuit de gauche à droite du skill, renforcé ; texte à gauche | seulement sur écran étroit | 5.6 |
+| cosmic-voyage | le ciel étoilé n'a aucune zone calme (1.0 sur une étoile) : texte dans un panneau de nuit à filet doré, le « verre peint » du skill | panneau habillé | 12.0 (après correction) |
+| glacial-mono | texte du héros sur une plaque du fond du skill | oui, fond de brume | 4.9 |
+| glass-frame | voile sombre du skill sous le texte, dans le cadre | oui, verticale, ombre du skill | 8.9 |
+| heritage-lens | voile uni sur toute la photo (la démo assombrit sa scène) | non | titre 3.8 (grand) ; reste 5.9 |
+| hold-to-play | voile uni sur toute la photo, pas de boîte | non | 10.5 |
+| hyper-lime | titre sur le bas du visuel, que le skill fonce ; le reste sous le visuel, sur le fond de page | non | 11.2 |
+| lore-frame | voile par le bas sous le manifeste, voile du haut sous le court texte | deux voiles, pas de boîte | 4.8 |
+| mint-street | voile bleu nuit sur le haut du héros ; faits et légende sur un cartouche arrondi | cartouche | 9.5 (1.4 et 3.2 avant correction, à 390 px) |
+| nocturne | voiles du skill (haut et gauche) renforcés | oui, horizontale | 11.1 |
+| pixel-lime | voile noir du bas du skill | oui, verticale, noire | 12.8 |
+| pocket-device | la photo fond au noir, comme dans la démo | oui, verticale, noire | 8.7 |
+| retro-mission | voile haut et bas sur l'affiche | voile | phrase 8.7 ; **titre : mesure non concluante** |
+| serif-bistro | composition : le titre s'écarte autour de l'arche | **non** | texte sur fond uni |
+| showroom | texte sur fond uni, image dans sa tuile | **non** | paires du contrat |
+| signal-orange | texte à gauche de la silhouette | plaque étroite ; pleine largeur sur écran étroit | 8.1 |
+| sticker-brutal | texte à gauche, photo à droite | **non** | paires du contrat |
+| tiny-planet | texte à gauche, planète à droite | **non** | paires du contrat |
+| zigzag | titre blanc sur orange (3.2, grand texte) ; petit texte sur étiquette blanche | étiquette | 3.2 |
+
+Bilan honnête : la plaque n'est plus dans quatre héros (serif, showroom, sticker, tiny-planet) et elle est remplacée par un voile uni ou un panneau habillé dans cinq autres. **Dans sept héros elle est toujours là** (acid, alpine, glass-frame, nocturne, pixel-lime, pocket, glacial) : je n'ai pas repris leur composition un par un comme demandé. Elle y est de la couleur du voile du skill, pas la même boîte partout, mais c'est encore un réflexe.
+
+**Titre incliné de retro-mission** : cadre crème masqué, la mesure rend toujours 1.0. La boîte du titre, inclinée, englobe autre chose que son fond (bouton crème ou logo). La méthode ne convient pas à un texte incliné ; contraste **non établi**.
+
+## 4. Un gabarit ne masque jamais de contenu
+
+Treize habillages cachaient les faits du héros (durée, niveau, prix), trois la légende de la photo, un la phrase d'appui. Tous corrigés ; le vérificateur refuse désormais `display: none` sur un texte, une légende ou une action dans `ux/templates/`.
+
+Vérifié sur le héros de la landing, 23 skills, 1440 et 390 px : surtitre, titre, phrase, trois faits, action, photo et légende présents et visibles partout. Cas particulier : sous anime-x-slash la photo d'origine est réduite à un pixel, elle est montrée par ses cinq éclats.
+
+Trouvé au passage : à 390 px, la légende de la photo recouvrait le bouton dans cinq héros. Elle est maintenant dans le texte du héros, à la suite.
+
+## 5. hyper-lime-street : fluidité du premier défilement
+
+Fenêtre au premier plan, vérifié à chaque mesure.
+
+| État | Images de plus de 34 ms | Pire image |
+|---|---|---|
+| avant | 16, 12, 17 | 56 à 70 ms |
+| sans fondu | 2 | 49 ms |
+| sans aucune entrée | 0 | 28 ms |
+| **après correction**, trois essais | **1, 0, 1** | 42, 28, 35 ms |
+
+Cause : le fondu (`opacity`) du panneau, qui contient l'image découpée par `clip-path`. L'entrée est maintenant en `transform` seul : les formes arrivent de l'extérieur de l'écran. L'objectif « aucune » est atteint une fois sur trois ; il reste une image de 35 à 42 ms sur les deux autres.
+
+## 6. Mesures manquantes
+
+- **`reduced` et `off`, 17 habillages** (les 16 du second lot et tiny-planet) : en `reduced`, gabarits posés et aucune entrée en attente ; en `off`, aucun gabarit. Écart : sous tiny-planet, une tâche reste dans la boucle en `reduced` — elle ne dessine que lorsqu'on tourne la planète.
+- **Hors ligne, 17 habillages** (photos et CDN bloqués) : titre visible partout, aucune image cassée affichée dans un gabarit.
+- **Canvas refusé et WebGL absent** : non redéclenchés sur les nouvelles pièces (mosaïque, planète).
+
+## Verdicts des neuf skills
+
+| Skill | Avant | Maintenant | Raison |
+|---|---|---|---|
+| tiny-planet-toy | non fait | **oui** | La planète de la démo, qu'on fait tourner. Manque le logo en lettres-blocs posé dessus |
+| pixel-lime-portfolio | en partie | **oui** | La mosaïque lime sur la photo noir et blanc, le titre en minuscules en bas |
+| cosmic-voyage | en partie | **oui** | Le ciel étoilé de la démo derrière la page, barre à lien bleu et bouton doré |
+| sticker-brutal-jp | en partie | **oui** | Cadre d'encre, autocollants de couleur à cheval dessus, photo en autocollant |
+| serif-bistro-green | en partie | **oui** | L'arche remonte dans le titre qui s'écarte (landing) ; sur l'accueil elle reste dessous |
+| pocket-device-noir | en partie | en partie | L'objet 3D n'est pas porté |
+| heritage-lens | en partie | en partie | La lentille n'est pas faite |
+| hold-to-play-music | en partie | en partie | Ni le mot peint ni le geste |
+| showroom-bento | en partie | en partie | Ni le produit détouré ni la rangée bento |
+
+Sur 23 skills : **19 « oui », 4 « en partie »**.
+
+## Fluidité des nouvelles pièces
+
+Fenêtre au premier plan ; 2,5 s par mesure.
+
+| Pièce | Souris en mouvement | Défilement |
+|---|---|---|
+| tiny-planet · planète 3D | 144 images/s, 0 lente | 0 lente, pire 14 ms |
+| pixel-lime · mosaïque | 144 images/s, 0 lente | 0 lente, pire 14 ms |
+| cosmic · ciel étoilé | — | 0 lente, pire 14 ms |
+| sticker-brutal · autocollants | — | 0 lente, pire 7 ms |
+
+La plus faible de ce lot : hyper-lime, 1 image de 42 ms au premier défilement.
+
+## Non vérifié dans ce dernier lot
+
+- 390 px : captures regardées pour pixel-lime, sticker-brutal, cosmic et tiny-planet seulement ; les autres par la mesure (débordement, présence du contenu).
+- Clavier sur la planète : le bouton « Tourner à droite » reçoit le focus et son contour ; l'effet de la rotation n'a pas été vérifié à l'image.
+- L'arche de serif-bistro sur d'autres titres que ceux de la démonstration.
+- Les quatre « à cheval » de sticker-brutal par rapport au texte sur des écrans de taille intermédiaire.

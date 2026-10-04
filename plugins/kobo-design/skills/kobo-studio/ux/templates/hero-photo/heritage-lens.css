@@ -14,7 +14,7 @@
 [data-k-skill="heritage-lens"] .g-hero--scene .g-hero__content > * { max-inline-size: min(100%, var(--k-measure-wide)); }
 [data-k-skill="heritage-lens"] .g-hero--scene h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); color: var(--k-accent); }
 [data-k-skill="heritage-lens"] .g-hero--scene .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
-[data-k-skill="heritage-lens"] .g-hero--scene .k-facts { display: none; }
+[data-k-skill="heritage-lens"] .g-hero--scene .k-facts { max-inline-size: var(--k-measure); }
 .g-hero--scene .g-rise { overflow: visible; }
 .g-nowrap { display: inline-block; white-space: nowrap; }   /* les lettres d'un mot ne se séparent pas */
 .g-hero--scene[data-k-in="pending"] .g-rise > b { opacity: 0; transform: translateY(35%); }

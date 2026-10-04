@@ -1,0 +1,22 @@
+/*
+ * kobo-studio — famille de gabarits « objet 3D dans le héros » (emplacement hero).
+ * Un objet en 3D, sur fond transparent, prend la place d'honneur du héros ; on le fait tourner en le tirant, ou avec deux boutons.
+ * Tout le contenu du héros reste affiché : texte, faits, action, et la photo avec sa légende.
+ * Repli : sans WebGL, hors ligne ou tant que la scène n'est pas prête, la scène n'occupe aucune place et la photo tient seule le côté.
+ * Le canvas est un décor nommé (role="img") : aucun texte n'y est dessiné.
+ * Uniquement des rôles --k-*.
+ */
+[data-k-slot="hero"][data-k-gabarit="objet"] { overflow-x: clip; }
+.g-obj { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-8) var(--k-space-16); inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; }
+.g-obj__text { flex: 1 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-6); justify-items: start; }
+.g-obj__side { flex: 1 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-4); justify-items: center; }
+.g-obj__stage { position: relative; inline-size: min(100%, var(--_size, calc(var(--k-space-32) * 4))); aspect-ratio: 1; }
+.g-obj__stage:not([data-k-ready]) { display: none; }
+.g-obj__stage canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; cursor: grab; touch-action: pan-y; }
+.g-obj__stage canvas:active { cursor: grabbing; }
+.g-obj__turn { display: flex; gap: var(--k-space-2); justify-content: center; }
+.g-obj__stage:not([data-k-ready]) + .g-obj__turn { display: none; }
+/* La photo du héros : pleine quand elle tient seule le côté, plus petite quand l'objet est là */
+.g-obj__side [data-k-slot="media"] { inline-size: 100%; }
+.g-obj__stage[data-k-ready] ~ [data-k-slot="media"] { inline-size: min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))); }
+.g-obj__stage[data-k-ready] ~ [data-k-slot="media"] img { aspect-ratio: 3 / 2; }

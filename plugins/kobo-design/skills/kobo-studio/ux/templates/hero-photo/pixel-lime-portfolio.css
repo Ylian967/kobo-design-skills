@@ -3,8 +3,9 @@
  * Sources (lecture seule) : pixel-lime-portfolio/examples/demo.html (.hero : hauteur --hero-h, photo plein cadre, voiles du bas
  * et du haut ; .name : titre géant en minuscules, en bas à gauche, dont la seconde ligne est décalée et dont les lignes montent ;
  * .pitch : court texte et action en bas à droite ; .tag : petites étiquettes en police fixe), references/tokens.css.
- * Non repris : la bande de mosaïque en pixels sur la photo (traitement d'image en canvas : famille « image », à habiller),
- * l'ovale au feutre, les étiquettes posées sur la photo.
+ * .mosaic et sa fonction : bande de blocs lime tirés au hasard (graine fixe), plus denses au centre de la bande, qui s'allument
+ * par vagues puis clignotent par cinq toutes les 900 ms ; arrêt hors écran.
+ * Non repris : l'ovale au feutre, les étiquettes posées sur la photo.
  */
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name {
   --_ink: var(--k-text-inverse); --_bg: var(--k-bg-inverse); --_veil: linear-gradient(0deg, var(--k-scrim), var(--k-sig-veil-0) 40%), linear-gradient(180deg, var(--k-scrim), var(--k-sig-veil-0) 16%);
@@ -16,7 +17,9 @@
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .g-hero__content > .k-kicker { grid-column: 1 / -1; font-family: var(--k-font-mono); }
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .g-hero__content > h1 { grid-column: 1 / -2; grid-row: 2 / span 4; align-self: end; font-size: var(--k-fs-hero); line-height: 0.98; letter-spacing: var(--k-ls-display); text-transform: lowercase; }
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .k-lead { font-size: var(--k-fs-small); }
-[data-k-skill="pixel-lime-portfolio"] .g-hero--name .k-facts { display: none; }
+[data-k-skill="pixel-lime-portfolio"] .g-hero--name .k-facts { max-inline-size: var(--k-measure); }
 .g-hero--name[data-k-in="pending"] .g-rise > b { transform: translateY(110%); }
 .g-hero--name[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) + var(--k-dur-base)); }
 @media (prefers-reduced-motion: reduce) { .g-hero--name[data-k-motion] .g-rise > b { transition: none; } }
+/* Mosaïque : une bande de blocs sur la photo, à 30 % de la hauteur, haute de onze blocs */
+.g-mosaic { position: absolute; inset: 30% 0 auto 0; inline-size: 100%; block-size: calc(var(--k-sig-pixel) * 11); pointer-events: none; }

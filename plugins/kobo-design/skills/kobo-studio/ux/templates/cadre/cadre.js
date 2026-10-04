@@ -1,6 +1,7 @@
 /*
  * kobo-studio — famille « cadre de page » : construit le cadre et fait avancer la progression.
  * Kobo.templates.families.cadre(options) rend { render, mount }.
+ *   options.deco : HTML décoratif posé dans le cadre (autocollants à cheval, par exemple) ;
  *   options.sign : SVG décoratif du rail (chaîne), propre au skill ; options.count : afficher « 01 / 05 » (sections de la page)
  * Mouvement : la barre de progression suit le défilement — une lecture de scrollY par image affichée, une seule variable
  * écrite (--_p, appliquée en transform). En « reduced » la barre avance aussi : c'est une information, pas un décor.
@@ -14,7 +15,7 @@
       render: function () {
         return '<div class="g-frame"><div class="g-frame__mask"></div><div class="g-frame__bar"><div class="g-frame__progress"></div></div>' +
           '<div class="g-frame__rail"><span></span>' + (options.sign || '<span></span>') + (options.count ? '<span class="g-frame__count"></span>' : '<span></span>') + '</div>' +
-          '<div class="g-frame__line"></div></div>';
+          '<div class="g-frame__line"></div>' + (options.deco || '') + '</div>';
       },
       mount: function (el) {
         var bar = el.querySelector('.g-frame__progress'), count = el.querySelector('.g-frame__count'), pending = 0;

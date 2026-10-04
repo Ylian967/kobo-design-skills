@@ -17,5 +17,5 @@
 [data-k-skill="glass-frame-estate"] .g-hero--frame .g-hero__content > .k-btn { grid-column: 2; grid-row: 1 / span 9; align-self: end; min-inline-size: min(100%, calc(var(--k-space-32) * 2 - var(--k-space-4))); }
 [data-k-skill="glass-frame-estate"] .g-hero--frame h1 { max-inline-size: calc(var(--k-fs-h1) * 8.5); font-size: var(--k-fs-h1); }
 [data-k-skill="glass-frame-estate"] .g-hero--frame .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); }
-[data-k-skill="glass-frame-estate"] .g-hero--frame .k-facts { display: none; }
+[data-k-skill="glass-frame-estate"] .g-hero--frame .k-facts { max-inline-size: var(--k-measure); }
 .g-hero__bigword { position: absolute; inset: var(--k-space-24) 0 auto 0; z-index: -1; text-align: center; font-family: var(--k-font-display); font-size: var(--k-sig-fs-word); font-weight: var(--k-sig-w-word); line-height: 1.1; letter-spacing: var(--k-sig-ls-word); text-transform: uppercase; white-space: nowrap; color: transparent; background: linear-gradient(0deg, var(--k-sig-word-to) 19%, var(--k-sig-word-from) 100%); -webkit-background-clip: text; background-clip: text; user-select: none; pointer-events: none; }

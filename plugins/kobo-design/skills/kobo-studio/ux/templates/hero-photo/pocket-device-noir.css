@@ -13,7 +13,7 @@
 [data-k-skill="pocket-device-noir"] .g-hero--pocket .g-hero__content { justify-items: center; padding-block: var(--k-space-24) var(--k-space-24); }
 [data-k-skill="pocket-device-noir"] .g-hero--pocket h1 { font-size: var(--k-fs-hero); line-height: 0.95; }
 [data-k-skill="pocket-device-noir"] .g-hero--pocket .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); color: var(--k-text-2); }
-[data-k-skill="pocket-device-noir"] .g-hero--pocket .k-facts { display: none; }
+[data-k-skill="pocket-device-noir"] .g-hero--pocket .k-facts { max-inline-size: var(--k-measure); }
 /* Le grand cercle d'un filet, coupé par le haut */
 [data-k-skill="pocket-device-noir"] .g-hero--pocket .g-hero__veil::after { content: ""; position: absolute; inset-block-start: 20%; inset-inline-start: -11%; inline-size: 122%; aspect-ratio: 1; border-radius: 50%; box-shadow: inset 0 0 0 var(--k-border-w) var(--k-line); clip-path: inset(46% 0 0 0); }
 /* Ouverture (full seulement) : les mots du titre montent un à un */

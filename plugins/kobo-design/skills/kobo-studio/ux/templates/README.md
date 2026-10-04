@@ -11,7 +11,8 @@ Chaque **famille** est construite une fois (`<famille>/<famille>.css` et `.js`),
 | `cadre/` | `frame` | Cadre fixe autour de l'écran : filet, rail et barre facultatifs, progression | lore-frame-editorial, retro-mission-poster, sticker-brutal-jp |
 | `image/` | `media` | Forme et traitement d'une image de contenu ; parallaxe dans la forme | lore-frame-editorial (planches en forme de dossier) |
 | `hero-photo/` | `hero` | Photo du héros en plein cadre, texte et action posés dessus, sur une plaque de lisibilité ; couches colorées cuites en canvas | 20 habillages : acid-scan, lore-frame, hyper-lime, nocturne, alpine-glass, pocket-device, glass-frame, mint-street, zigzag, serif-bistro, pixel-lime, signal-orange, sticker-brutal, retro-mission, showroom, cosmic, anime-x-slash, heritage-lens, hold-to-play, chrome-atelier |
-| `scene/` | `backdrop` | Scène 3D fixe derrière la page, chargée en différé, photo de repli | glacial-mono-3d |
+| `scene/` | `backdrop` | Scène 3D fixe derrière la page, chargée en différé, photo de repli ; ou une photo seule | glacial-mono-3d (scène de glace), cosmic-voyage (ciel étoilé, sans 3D) |
+| `objet/` | `hero` | Objet 3D à la place d'honneur du héros, qu'on tourne en le tirant ou avec deux boutons ; repli sur la photo | tiny-planet-toy (la planète) |
 | `chapitre-ecran/` | `chapter` | Chapitre en scène de la hauteur de l'écran, cercle à tirer vers le suivant | noir-inferno-chapters |
 | `formes-inclinees/` | `chapter` | Bloc numéroté, panneau à image découpée et bande, penchés au même angle | hyper-lime-street |
 | `titre-geant/` | `title` | Le surtitre repris en très grand, d'un bord à l'autre, coupé par le bas | nocturne-architecture |
@@ -79,6 +80,10 @@ Dans une page livrée, en dur, après `ux/structures/page.js` :
 
 **Replis.** Chacun laisse une page lisible : pas de WebGL → la photo de repli ; image absente → elle est masquée, le fond et le texte du gabarit restent ; canvas refusé → la photo garde le filtre CSS du skill.
 
+**Contenu.** Un gabarit ne masque jamais un contenu : texte, faits, légende, action et photo restent affichés. Le vérificateur refuse `display: none` sur ces éléments.
+
+**Lisibilité.** D'abord la composition de la démo (texte sur une zone calme, voile du skill, cadrage). La plaque de lisibilité ne vient qu'ensuite, et habillée par skill (couleur du voile du skill, panneau, cartouche) — jamais la même boîte partout. Voir `../../quality/relecture-etape-4b.md`, « la solution retenue pour chaque héros ».
+
 **Images.** De vraies photos ou une vraie scène 3D. Le point d'intérêt d'une photo se donne par `data-k-focus="x% y%"` sur l'`<img>` ; `data-k-mark="x% y%"` place les repères d'un skill ailleurs que le cadrage.
 
 ## Vérifier
@@ -91,7 +96,7 @@ Puis `../structures.html` : sélecteur « Gabarits : signature / neutres ».
 
 ## Limites connues
 
-- Vingt-deux skills sur vingt-trois ont le gabarit de leur premier écran ; tiny-planet-toy n'en a pas. Seuls six skills ont d'autres gabarits que leur héros. Pas de version React.
+- Les vingt-trois skills ont le gabarit de leur premier écran. Quatre pièces uniques restent à écrire : l'objet 3D de pocket-device, la lentille de heritage-lens, le mot peint et le geste de hold-to-play, le produit détouré et la rangée bento de showroom. Pas de version React.
 - Testé dans Chrome seulement. `tan()`, `:has()`, l'imbrication de `color-mix()` et `import()` dynamique demandent un navigateur récent.
 - La scène 3D charge three.js depuis un CDN : hors ligne, la photo de repli reste.
 - Voir `../../quality/relecture-etape-4b.md` pour les verdicts et ce qui reste incertain.
