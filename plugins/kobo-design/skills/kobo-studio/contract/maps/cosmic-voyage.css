@@ -1,0 +1,165 @@
+/*
+ * kobo-studio — fiche de correspondance : cosmic-voyage
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 35 reliés ou relevés, 3 dérivés, 18 en repli.
+ * 15 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:ital@1&display=swap
+ *
+ * Signature : 46 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-bg-top, --k-sig-bg-glow, --k-sig-bg-deep, --k-sig-nav, --k-sig-sub, --k-sig-glass,
+ *   --k-sig-glass-light, --k-sig-ink-glass, --k-sig-glass-edge, --k-sig-accent-hot, --k-sig-accent-sand,
+ *   --k-sig-link, --k-sig-quote-strip, --k-sig-map-bg, --k-sig-map-bg-2, --k-sig-orbit, --k-sig-orbit-dim,
+ *   --k-sig-halo, --k-sig-label-bg, --k-sig-veil-world, --k-sig-cta-yellow-edge, --k-sig-cta-glow,
+ *   --k-sig-ring-a, --k-sig-ring-b, --k-sig-ring-c, --k-sig-cookie-blue, --k-sig-on-cookie, --k-sig-font-quote,
+ *   --k-sig-text-2xs, --k-sig-text-lg, --k-sig-text-orbit, --k-sig-card-w, --k-sig-char-w, --k-sig-emblem,
+ *   --k-sig-more-w, --k-sig-nav-h-mobile, --k-sig-world-icon, --k-sig-radius-1, --k-sig-radius-3,
+ *   --k-sig-radius-4, --k-sig-radius-card, --k-sig-ease, --k-sig-dur-name, --k-sig-dur-view, --k-sig-dur-hint,
+ *   --k-sig-dur-star
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:ital@1&display=swap");
+@import "../roles.css";
+@import "../../../cosmic-voyage/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--bg);
+  --k-surface: var(--surface);
+  --k-surface-2: var(--surface-2);
+  --k-overlay: var(--dim-side); /* [main] */
+  --k-scrim: var(--glass-veil); /* [main] */
+  --k-bg-inverse: var(--pill); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--text);
+  --k-text-2: var(--text-soft);
+  --k-text-muted: var(--muted);
+  --k-on-accent: var(--on-accent);
+  --k-text-inverse: var(--on-accent); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--accent);
+  --k-accent-edge: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 8.16:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--gold); /* [main] */
+  --k-success: #3fc080; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 6.86:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: var(--cta-yellow); /* [main] dérivé : repris de --cta-yellow, 11.53:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #d06e6e; /* dérivé : teinte 0°, saturation calée sur celle de son accent, clarté ajustée → 4.64:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--gold); /* [main] */
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 3px; /* repli du contrat */
+
+  /* ---- Filets ---- */
+  --k-line: var(--line-dark); /* [main] */
+  --k-line-strong: var(--line); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-title); /* [main] */
+  --k-font-body: var(--font-ui);
+  --k-font-mono: var(--k-font-body); /* repli du contrat */
+  --k-fs-hero: var(--text-hero);
+  --k-fs-h1: var(--text-world); /* [main] */
+  --k-fs-h2: var(--text-xl); /* [main] */
+  --k-fs-h3: calc((var(--k-fs-h2) + var(--k-fs-body)) / 2); /* repli du contrat */
+  --k-fs-body: var(--text-base);
+  --k-fs-small: var(--text-sm);
+  --k-fs-label: var(--text-xs);
+  --k-lh-tight: 1.05; /* repli */
+  --k-lh-body: var(--leading);
+  --k-ls-display: 0em; /* repli */
+  --k-ls-caps: 0.06em; /* repli */
+  --k-fw-display: 700; /* repli */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--radius-2); /* [main] */
+  --k-radius-lg: var(--radius-5); /* [main] */
+  --k-radius-pill: 999px; /* repli */
+  --k-border-w: 1px; /* repli */
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+
+  /* ---- Espace ---- */
+  --k-edge: clamp(16px, 4vw, 48px); /* repli du contrat */
+  --k-container: var(--container);
+  --k-section-y: var(--k-space-24); /* repli du contrat */
+  --k-control-h: 44px; /* repli */
+  --k-nav-h: var(--nav-h);
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease-out);
+  --k-ease-in-out: var(--ease-panel); /* [main] */
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur-base);
+  --k-dur-slow: var(--dur-slow);
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-bg-top: var(--bg-top);
+  --k-sig-bg-glow: var(--bg-glow);
+  --k-sig-bg-deep: var(--bg-deep);
+  --k-sig-nav: var(--nav);
+  --k-sig-sub: var(--sub);
+  --k-sig-glass: var(--glass);
+  --k-sig-glass-light: var(--glass-light);
+  --k-sig-ink-glass: var(--ink-glass);
+  --k-sig-glass-edge: var(--glass-edge);
+  --k-sig-accent-hot: var(--accent-hot);
+  --k-sig-accent-sand: var(--accent-sand);
+  --k-sig-link: var(--link);
+  --k-sig-quote-strip: var(--quote-strip);
+  --k-sig-map-bg: var(--map-bg);
+  --k-sig-map-bg-2: var(--map-bg-2);
+  --k-sig-orbit: var(--orbit);
+  --k-sig-orbit-dim: var(--orbit-dim);
+  --k-sig-halo: var(--halo);
+  --k-sig-label-bg: var(--label-bg);
+  --k-sig-veil-world: var(--veil-world);
+  --k-sig-cta-yellow-edge: var(--cta-yellow-edge);
+  --k-sig-cta-glow: var(--cta-glow);
+  --k-sig-ring-a: var(--ring-a);
+  --k-sig-ring-b: var(--ring-b);
+  --k-sig-ring-c: var(--ring-c);
+  --k-sig-cookie-blue: var(--cookie-blue);
+  --k-sig-on-cookie: var(--on-cookie);
+  --k-sig-font-quote: var(--font-quote);
+  --k-sig-text-2xs: var(--text-2xs);
+  --k-sig-text-lg: var(--text-lg);
+  --k-sig-text-orbit: var(--text-orbit);
+  --k-sig-card-w: var(--card-w);
+  --k-sig-char-w: var(--char-w);
+  --k-sig-emblem: var(--emblem);
+  --k-sig-more-w: var(--more-w);
+  --k-sig-nav-h-mobile: var(--nav-h-mobile);
+  --k-sig-world-icon: var(--world-icon);
+  --k-sig-radius-1: var(--radius-1);
+  --k-sig-radius-3: var(--radius-3);
+  --k-sig-radius-4: var(--radius-4);
+  --k-sig-radius-card: var(--radius-card);
+  --k-sig-ease: var(--ease);
+  --k-sig-dur-name: var(--dur-name);
+  --k-sig-dur-view: var(--dur-view);
+  --k-sig-dur-hint: var(--dur-hint);
+  --k-sig-dur-star: var(--dur-star);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-dur-name: 0s;
+  --k-sig-dur-view: 0s;
+  --k-sig-dur-hint: 0s;
+  --k-sig-dur-star: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-dur-name: 0s;
+  --k-sig-dur-view: 0s;
+  --k-sig-dur-hint: 0s;
+  --k-sig-dur-star: 0s;
+}

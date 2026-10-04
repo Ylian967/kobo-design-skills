@@ -1,0 +1,130 @@
+/*
+ * kobo-studio — fiche de correspondance : glacial-mono-3d
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 34 reliés ou relevés, 7 dérivés, 15 en repli.
+ * 31 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap
+ *
+ * Signature : 19 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-mist, --k-sig-sky, --k-sig-rock, --k-sig-shade, --k-sig-ice, --k-sig-white, --k-sig-prism-a,
+ *   --k-sig-prism-b, --k-sig-prism-c, --k-sig-loader, --k-sig-muted, --k-sig-glow, --k-sig-line,
+ *   --k-sig-text-sm, --k-sig-text-col, --k-sig-bracket, --k-sig-dur-born, --k-sig-dur-glitch, --k-sig-scramble
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap");
+@import "../roles.css";
+@import "../../../glacial-mono-3d/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--fog); /* [main] */
+  --k-surface: var(--frost); /* [main] */
+  --k-surface-2: var(--halo); /* [main] */
+  --k-overlay: var(--scrim-dark); /* [main] */
+  --k-scrim: var(--scrim-light); /* [main] */
+  --k-bg-inverse: var(--night); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--ink); /* [main] */
+  --k-text-2: var(--steel); /* [main] */
+  --k-text-muted: #434a55; /* [main] dérivé de --ice (2.58:1 au pire) : même teinte, clarté ajustée → 4.61:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-on-accent: var(--frost); /* [main] */
+  --k-text-inverse: var(--text); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--ink); /* [main] accent neutre : skill monochrome */
+  --k-accent-edge: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 7.99:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--tag); /* [main] */
+  --k-success: #27513c; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 4.65:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #5d4600; /* [main] dérivé de --prism-b (1.04:1 au pire) : même teinte, clarté ajustée → 4.62:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #931200; /* [main] dérivé de --prism-a (1.18:1 au pire) : même teinte, clarté ajustée → 4.65:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--ink); /* [main] */
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 4px; /* [main] relevé dans la démo */
+
+  /* ---- Filets ---- */
+  --k-line: color-mix(in srgb, var(--ink) 22%, transparent); /* [main] dérivé : --line du skill est prévu pour la nuit */
+  --k-line-strong: var(--ink); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-logo); /* [main] */
+  --k-font-body: var(--font-mono); /* [main] */
+  --k-font-mono: var(--font-mono);
+  --k-fs-hero: var(--text-logo); /* [main] */
+  --k-fs-h1: var(--text-logo); /* [main] */
+  --k-fs-h2: 1.25rem; /* [main] dérivé : entre le logotype et le texte, le skill n'a pas de grand titre */
+  --k-fs-h3: 1.125rem; /* [main] dérivé : même raison */
+  --k-fs-body: var(--text-base);
+  --k-fs-small: var(--text-xs); /* [main] */
+  --k-fs-label: var(--text-2xs); /* [main] */
+  --k-lh-tight: 1.05; /* repli */
+  --k-lh-body: var(--leading);
+  --k-ls-display: 0em; /* repli */
+  --k-ls-caps: var(--tracking);
+  --k-fw-display: 700; /* repli */
+
+  /* ---- Formes ---- */
+  --k-radius: 0px; /* repli */
+  --k-radius-lg: 0px; /* [main] skill sans arrondi */
+  --k-radius-pill: 0px; /* [main] skill sans arrondi */
+  --k-border-w: var(--bracket-w); /* [main] */
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--edge);
+  --k-container: 1200px; /* repli du contrat */
+  --k-section-y: var(--k-space-24); /* repli du contrat */
+  --k-control-h: 44px; /* repli */
+  --k-nav-h: 64px; /* repli */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease);
+  --k-ease-in-out: var(--k-ease-out); /* repli du contrat */
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur);
+  --k-dur-slow: var(--dur-scene); /* [main] */
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-mist: var(--mist);
+  --k-sig-sky: var(--sky);
+  --k-sig-rock: var(--rock);
+  --k-sig-shade: var(--shade);
+  --k-sig-ice: var(--ice);
+  --k-sig-white: var(--white);
+  --k-sig-prism-a: var(--prism-a);
+  --k-sig-prism-b: var(--prism-b);
+  --k-sig-prism-c: var(--prism-c);
+  --k-sig-loader: var(--loader);
+  --k-sig-muted: var(--muted);
+  --k-sig-glow: var(--glow);
+  --k-sig-line: var(--line);
+  --k-sig-text-sm: var(--text-sm);
+  --k-sig-text-col: var(--text-col);
+  --k-sig-bracket: var(--bracket);
+  --k-sig-dur-born: var(--dur-born);
+  --k-sig-dur-glitch: var(--dur-glitch);
+  --k-sig-scramble: var(--scramble);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-dur-born: 0s;
+  --k-sig-dur-glitch: 0s;
+  --k-sig-scramble: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-dur-born: 0s;
+  --k-sig-dur-glitch: 0s;
+  --k-sig-scramble: 0s;
+}

@@ -1,0 +1,123 @@
+/*
+ * kobo-studio — fiche de correspondance : nocturne-architecture
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 37 reliés ou relevés, 4 dérivés, 15 en repli.
+ * 15 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500&display=swap
+ *
+ * Signature : 16 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-dim, --k-sig-ghost, --k-sig-mark, --k-sig-night, --k-sig-veil-0, --k-sig-fs-word, --k-sig-fs-chip,
+ *   --k-sig-fs-row, --k-sig-fs-card, --k-sig-ls-word, --k-sig-hero-h, --k-sig-card-w, --k-sig-card-h,
+ *   --k-sig-gap, --k-sig-round, --k-sig-dur-marquee
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500&display=swap");
+@import "../roles.css";
+@import "../../../nocturne-architecture/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--bg);
+  --k-surface: var(--panel);
+  --k-surface-2: var(--foot); /* [main] */
+  --k-overlay: var(--veil);
+  --k-scrim: var(--veil);
+  --k-bg-inverse: var(--paper); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--text);
+  --k-text-2: var(--muted); /* [main] */
+  --k-text-muted: #808080; /* [main] dérivé de --dim (2.98:1 au pire) : même teinte, clarté ajustée → 4.60:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-on-accent: var(--on-accent);
+  --k-text-inverse: var(--ink); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--accent-deep); /* [main] */
+  --k-accent-edge: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 3.52:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--accent); /* [main] */
+  --k-success: #2dd280; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 9.21:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #d29b2d; /* dérivé : teinte 40°, saturation calée sur celle de son accent, clarté ajustée → 7.33:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: var(--accent-text); /* [main] dérivé : repris de --accent-text, 5.94:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--text); /* [main] */
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 3px; /* repli du contrat */
+
+  /* ---- Filets ---- */
+  --k-line: var(--line);
+  --k-line-strong: var(--k-text); /* repli du contrat */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-display);
+  --k-font-body: var(--font-body);
+  --k-font-mono: var(--k-font-body); /* repli du contrat */
+  --k-fs-hero: var(--fs-stat); /* [main] le mot-marque géant (--fs-word) reste en signature */
+  --k-fs-h1: var(--fs-marquee); /* [main] */
+  --k-fs-h2: var(--fs-h2);
+  --k-fs-h3: var(--fs-phrase); /* [main] */
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-small);
+  --k-fs-label: var(--fs-label);
+  --k-lh-tight: 1.05; /* repli */
+  --k-lh-body: 1.5; /* repli */
+  --k-ls-display: var(--ls-tight);
+  --k-ls-caps: 0.06em; /* repli */
+  --k-fw-display: 500; /* [main] relevé dans la démo */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--r-card); /* [main] */
+  --k-radius-lg: var(--r-panel); /* [main] */
+  --k-radius-pill: var(--r-pill);
+  --k-border-w: 1px; /* repli */
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--gutter);
+  --k-container: var(--page);
+  --k-section-y: var(--k-space-24); /* repli du contrat */
+  --k-control-h: var(--pill-h);
+  --k-nav-h: 64px; /* repli */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease);
+  --k-ease-in-out: var(--ease-io);
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur);
+  --k-dur-slow: var(--dur-slow);
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-dim: var(--dim);
+  --k-sig-ghost: var(--ghost);
+  --k-sig-mark: var(--mark);
+  --k-sig-night: var(--night);
+  --k-sig-veil-0: var(--veil-0);
+  --k-sig-fs-word: var(--fs-word);
+  --k-sig-fs-chip: var(--fs-chip);
+  --k-sig-fs-row: var(--fs-row);
+  --k-sig-fs-card: var(--fs-card);
+  --k-sig-ls-word: var(--ls-word);
+  --k-sig-hero-h: var(--hero-h);
+  --k-sig-card-w: var(--card-w);
+  --k-sig-card-h: var(--card-h);
+  --k-sig-gap: var(--gap);
+  --k-sig-round: var(--round);
+  --k-sig-dur-marquee: var(--dur-marquee);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-dur-marquee: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-dur-marquee: 0s;
+}

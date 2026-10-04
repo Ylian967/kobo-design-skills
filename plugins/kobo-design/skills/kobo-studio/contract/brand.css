@@ -1,0 +1,48 @@
+/*
+ * kobo-studio — surcouche de marque (MODÈLE, pas encore utilisé)
+ *
+ * Sert à poser les couleurs d'un client par-dessus un skill, sans toucher ni au skill ni à sa fiche.
+ * Copier ce fichier dans le projet, remplir, puis le charger EN DERNIER :
+ *
+ *   roles.css → maps/<id>.css → brand.css
+ *
+ * et poser l'attribut data-k-brand sur <html>. Sans l'attribut, rien ne s'applique.
+ *
+ * Règles :
+ *   1. On ne redéfinit que des rôles --k-*. Jamais une variable du skill, jamais un --k-sig-*.
+ *   2. Niveau 1 (le cas courant) : l'accent seul. Les quatre lignes vont ensemble.
+ *   3. Niveau 2 (seulement si la marque l'exige) : les surfaces et le texte. Toutes les paires
+ *      de contraste doivent alors être revérifiées.
+ *   4. Les couleurs d'état (--k-success, --k-warning, --k-danger) restent celles de la fiche,
+ *      sauf si le fond change : dans ce cas elles doivent être recalculées.
+ *
+ * Contrastes à tenir (les mêmes que tools/check_contract.py) :
+ *   --k-on-accent sur --k-accent ........ 4.5:1
+ *   --k-accent (ou --k-accent-edge) sur --k-bg ... 3:1
+ *   --k-focus sur --k-bg ................ 3:1
+ *   --k-text, --k-text-2, --k-text-muted sur --k-bg ... 4.5:1
+ */
+
+:root[data-k-brand] {
+  /* ---- Niveau 1 : accent de la marque ---- */
+  /* --k-accent: ;        couleur principale de la marque (bouton plein, lien fort) */
+  /* --k-on-accent: ;     texte lisible sur cette couleur (4.5:1) */
+  /* --k-accent-edge: ;   à remplir si l'accent est trop pâle pour le fond du skill (sinon : var(--k-accent)) */
+  /* --k-accent-2: ;      seconde couleur de la marque, ou une nuance de la première */
+  /* --k-focus: ;         à revoir seulement si le contour de focus du skill reprenait l'ancien accent */
+
+  /* ---- Niveau 2 : surfaces de la marque (facultatif) ---- */
+  /* --k-bg: ; */
+  /* --k-surface: ; */
+  /* --k-surface-2: ; */
+  /* --k-text: ; */
+  /* --k-text-2: ; */
+  /* --k-text-muted: ; */
+  /* --k-line: ; */
+  /* --k-line-strong: ; */
+  /* --k-bg-inverse: ; */
+  /* --k-text-inverse: ; */
+  /* --k-success: ;   à recalculer si --k-bg change (4.5:1 sur le nouveau fond) */
+  /* --k-warning: ; */
+  /* --k-danger: ; */
+}

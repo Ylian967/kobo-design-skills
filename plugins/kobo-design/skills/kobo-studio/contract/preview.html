@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kobo-studio — aperçu du contrat</title>
+<!-- Page de test du contrat : les mêmes éléments sous chaque skill, dessinés uniquement avec les rôles --k-*.
+     S'ouvre directement depuis le disque (file://) dans Chrome ; une connexion est nécessaire pour les polices Google. -->
+<link rel="stylesheet" href="roles.css">
+<link rel="stylesheet" id="map" href="maps/acid-scan-security.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--k-bg); color: var(--k-text); }
+body { margin: 0; font-family: var(--k-font-body); font-size: var(--k-fs-body); line-height: var(--k-lh-body); }
+:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+h1, h2, h3, p { margin: 0; }
+
+.bar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-4);
+  min-height: var(--k-nav-h); padding: var(--k-space-2) var(--k-edge);
+  background: var(--k-bg-inverse); color: var(--k-text-inverse); border-bottom: var(--k-border-w) solid var(--k-line); }
+.bar strong { font-family: var(--k-font-display); font-weight: var(--k-fw-display); margin-right: auto; }
+.bar label { display: flex; align-items: center; gap: var(--k-space-2); font-size: var(--k-fs-small); }
+.bar select { height: var(--k-control-h); padding: 0 var(--k-space-3); font: inherit; color: var(--k-text); background: var(--k-bg);
+  border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+
+main { padding: var(--k-space-12) var(--k-edge) var(--k-section-y); display: grid; gap: var(--k-space-16); }
+section > h2 { font-family: var(--k-font-mono); font-size: var(--k-fs-label); font-weight: 400; letter-spacing: var(--k-ls-caps);
+  text-transform: uppercase; color: var(--k-text-muted); padding-bottom: var(--k-space-2); margin-bottom: var(--k-space-6);
+  border-bottom: var(--k-border-w) solid var(--k-line); }
+.row { display: flex; flex-wrap: wrap; gap: var(--k-space-6); align-items: flex-start; }
+.cap { display: block; margin-top: var(--k-space-2); font-family: var(--k-font-mono); font-size: var(--k-fs-small); color: var(--k-text-muted); }
+
+/* Nuancier */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(calc(var(--k-space-32) + var(--k-space-8)), 1fr)); gap: var(--k-space-4); }
+.sw { border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius); overflow: hidden; background: var(--k-surface); }
+.sw i { display: block; height: var(--k-space-16); border-bottom: var(--k-border-w) solid var(--k-line); }
+.sw b, .sw span { display: block; padding: 0 var(--k-space-3); font-family: var(--k-font-mono); font-size: var(--k-fs-small); font-weight: 400; overflow-wrap: anywhere; }
+.sw b { padding-top: var(--k-space-2); color: var(--k-text); }
+.sw span { padding-bottom: var(--k-space-2); color: var(--k-text-muted); }
+
+/* Échelle typo */
+.type { display: grid; gap: var(--k-space-6); overflow: hidden; }
+.type > div { display: grid; grid-template-columns: calc(var(--k-space-32) + var(--k-space-8)) 1fr; gap: var(--k-space-6); align-items: baseline;
+  border-bottom: var(--k-border-w) solid var(--k-line); padding-bottom: var(--k-space-4); }
+.type small { font-family: var(--k-font-mono); font-size: var(--k-fs-small); color: var(--k-text-muted); }
+.type p { white-space: nowrap; overflow: hidden; text-overflow: clip; padding-block: var(--k-space-2); }
+.t-hero { font-family: var(--k-font-display); font-weight: var(--k-fw-display); font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); }
+.t-h1 { font-family: var(--k-font-display); font-weight: var(--k-fw-display); font-size: var(--k-fs-h1); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); }
+.t-h2 { font-family: var(--k-font-display); font-weight: var(--k-fw-display); font-size: var(--k-fs-h2); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); }
+.t-h3 { font-family: var(--k-font-display); font-weight: var(--k-fw-display); font-size: var(--k-fs-h3); line-height: var(--k-lh-tight); }
+.t-body { font-size: var(--k-fs-body); white-space: normal !important; color: var(--k-text-2); }
+.t-small { font-size: var(--k-fs-small); color: var(--k-text-muted); }
+.t-label { font-size: var(--k-fs-label); letter-spacing: var(--k-ls-caps); text-transform: uppercase; }
+.t-mono { font-family: var(--k-font-mono); font-size: var(--k-fs-small); }
+
+/* Bouton */
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--k-space-2); min-height: var(--k-control-h); padding: 0 var(--k-space-6);
+  font: inherit; font-size: var(--k-fs-small); letter-spacing: var(--k-ls-caps); text-transform: uppercase; cursor: pointer;
+  color: var(--k-on-accent); background: var(--k-accent); border: var(--k-border-w) solid var(--k-accent-edge);
+  border-radius: var(--k-radius); box-shadow: var(--k-shadow);
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), color var(--k-dur-fast) var(--k-ease-out); }
+/* zone cliquable agrandie à --k-hit-min sans changer la taille affichée */
+.btn::after { content: ""; position: absolute; top: 50%; left: 50%; width: max(100%, var(--k-hit-min)); height: max(100%, var(--k-hit-min)); transform: translate(-50%, -50%); }
+/* lien en accent : l'accent seulement si --k-accent-on-bg vaut 1, sinon la couleur du texte */
+.link { color: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text)); text-underline-offset: var(--k-space-1); }
+.btn:hover, .btn.is-hover { background: color-mix(in srgb, var(--k-accent) 84%, var(--k-on-accent)); }
+.btn.is-focus { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+.btn:disabled { cursor: not-allowed; color: var(--k-text-muted); background: var(--k-surface-2); border-color: var(--k-line); box-shadow: none; }
+.btn--pill { border-radius: var(--k-radius-pill); }
+.btn--line { color: var(--k-text); background: transparent; border-color: var(--k-line-strong); box-shadow: none; }
+.btn--line:hover { background: var(--k-surface); }
+
+/* Champ */
+.field { display: grid; gap: var(--k-space-2); min-width: calc(var(--k-space-32) * 2 + var(--k-space-8)); }
+.field label { font-size: var(--k-fs-label); letter-spacing: var(--k-ls-caps); text-transform: uppercase; }
+.field input { height: var(--k-control-h); padding: 0 var(--k-space-4); font: inherit; color: var(--k-text); background: var(--k-surface);
+  border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.field input[aria-invalid="true"] { border-color: var(--k-danger); box-shadow: 0 0 0 var(--k-border-w) var(--k-danger); }
+.field .help { font-size: var(--k-fs-small); color: var(--k-text-muted); }
+.field .err { font-size: var(--k-fs-small); color: var(--k-danger); }
+
+/* Carte */
+.card { max-width: calc(var(--k-space-32) * 3); padding: var(--k-space-6); display: grid; gap: var(--k-space-3);
+  background: var(--k-surface); color: var(--k-text); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow);
+ }
+.card--cut { box-shadow: none; clip-path: polygon(0 0, calc(100% - var(--k-cut)) 0, 100% var(--k-cut), 100% 100%, 0 100%); }
+.card .meta { font-family: var(--k-font-mono); font-size: var(--k-fs-label); letter-spacing: var(--k-ls-caps); text-transform: uppercase; }
+.card .inner { padding: var(--k-space-3); background: var(--k-surface-2); border-radius: var(--k-radius); font-size: var(--k-fs-small); }
+.card a { color: inherit; text-decoration-color: var(--k-accent-2); text-underline-offset: var(--k-space-1); }
+.inverse { background: var(--k-bg-inverse); color: var(--k-text-inverse); border-color: var(--k-bg-inverse); }
+
+/* Notification */
+.note { max-width: calc(var(--k-space-32) * 3); padding: var(--k-space-4) var(--k-space-6); display: grid; gap: var(--k-space-1);
+  background: var(--k-bg); border: var(--k-border-w) solid var(--k-line); border-left: calc(var(--k-border-w) + var(--k-space-1)) solid currentColor; border-radius: var(--k-radius); }
+.note b { font-weight: var(--k-fw-display); }
+.note span { color: var(--k-text); font-size: var(--k-fs-small); }
+.note--ok { color: var(--k-success); } .note--err { color: var(--k-danger); } .note--warn { color: var(--k-warning); }
+
+/* Signature et intensité */
+.sig { display: grid; gap: var(--k-space-4); }
+.orn { height: var(--k-space-8); width: calc(var(--k-space-32) * 2); background: var(--k-accent-2); border: var(--k-border-w) solid var(--k-line-strong);
+  transform: skewX(calc(var(--k-angle) * -1)); transform-origin: left; animation: orn calc(var(--k-dur-slow) * 4) var(--k-ease-in-out) infinite alternate; }
+@keyframes orn { to { width: calc(var(--k-space-32) * 3); } }
+.sig code { font-family: var(--k-font-mono); font-size: var(--k-fs-small); color: var(--k-text-muted); overflow-wrap: anywhere; }
+
+/* Tableau des contrastes */
+table { border-collapse: collapse; width: 100%; font-family: var(--k-font-mono); font-size: var(--k-fs-small); }
+th, td { text-align: left; padding: var(--k-space-2) var(--k-space-3); border-bottom: var(--k-border-w) solid var(--k-line); }
+th { color: var(--k-text-muted); font-weight: 400; }
+td i { display: inline-block; width: var(--k-space-6); height: var(--k-space-4); margin-right: var(--k-space-2); border: var(--k-border-w) solid var(--k-line); vertical-align: middle; }
+.ok { color: var(--k-success); } .ko { color: var(--k-danger); text-decoration: underline; }
+@media (prefers-reduced-motion: reduce) { .orn { animation: none; } }
+</style>
+</head>
+<body>
+<header class="bar">
+  <strong id="name">acid-scan-security</strong>
+  <label>Skill <select id="skill"></select></label>
+  <label>Intensité <select id="intensity"><option>full</option><option>reduced</option><option>off</option></select></label>
+</header>
+<main>
+  <section><h2>Nuancier des rôles</h2><div class="swatches" id="swatches"></div></section>
+
+  <section><h2>Échelle typo</h2><div class="type">
+    <div><small>--k-fs-hero</small><p class="t-hero">Atelier</p></div>
+    <div><small>--k-fs-h1</small><p class="t-h1">Titre de page</p></div>
+    <div><small>--k-fs-h2</small><p class="t-h2">Titre de section</p></div>
+    <div><small>--k-fs-h3</small><p class="t-h3">Titre de carte</p></div>
+    <div><small>--k-fs-body</small><p class="t-body">Texte courant : assez long pour juger l'interligne, la graisse et la couleur du texte secondaire sur le fond de la page.</p></div>
+    <div><small>--k-fs-small</small><p class="t-small">Texte d'appoint, aide et légende.</p></div>
+    <div><small>--k-fs-label</small><p class="t-label">Libellé en capitales</p></div>
+    <div><small>--k-font-mono</small><p class="t-mono">valeur_technique = 0123456789</p></div>
+  </div></section>
+
+  <section><h2>Bouton et ses états</h2><div class="row">
+    <div><button class="btn" type="button">Repos</button><span class="cap">repos (survolez-moi)</span></div>
+    <div><button class="btn is-hover" type="button">Survol</button><span class="cap">survol</span></div>
+    <div><button class="btn is-focus" type="button">Focus</button><span class="cap">focus</span></div>
+    <div><button class="btn" type="button" disabled>Désactivé</button><span class="cap">désactivé</span></div>
+    <div><button class="btn btn--pill" type="button">Pilule</button><span class="cap">--k-radius-pill</span></div>
+    <div><button class="btn btn--line" type="button">Secondaire</button><span class="cap">contour</span></div>
+    <div><a class="link" href="#lien">Lien en accent</a><span class="cap" id="flag"></span></div>
+  </div></section>
+
+  <section><h2>Champ</h2><div class="row">
+    <div class="field"><label for="f1">Adresse e-mail</label><input id="f1" type="email" value="prenom@exemple.fr" aria-describedby="h1"><span class="help" id="h1">Nous n'écrivons qu'une fois par mois.</span></div>
+    <div class="field"><label for="f2">Adresse e-mail</label><input id="f2" type="email" value="prenom@exemple" aria-invalid="true" aria-describedby="e2"><span class="err" id="e2" role="alert">Adresse incomplète : il manque le domaine, par exemple « .fr ».</span></div>
+  </div></section>
+
+  <section><h2>Carte</h2><div class="row">
+    <article class="card"><span class="meta">Étiquette</span><h3 class="t-h3">Titre de carte</h3><p>Texte principal posé sur la surface.</p><div class="inner">Zone de second niveau (--k-surface-2).</div><a href="#carte">Lien de la carte</a></article>
+    <article class="card inverse card--cut"><span class="meta">Ton inversé · biseau --k-cut</span><h3 class="t-h3">Bloc inversé</h3><p>Texte inversé posé sur le fond inversé.</p></article>
+  </div></section>
+
+  <section><h2>Notifications</h2><div class="row">
+    <div class="note note--ok" role="status"><b>Enregistré</b><span>Vos réglages sont à jour.</span></div>
+    <div class="note note--err" role="alert"><b>Envoi impossible</b><span>La connexion a été coupée. Réessayez.</span></div>
+    <div class="note note--warn" role="status"><b>Bientôt complet</b><span>Il reste deux places.</span></div>
+  </div></section>
+
+  <section><h2>Signature et intensité</h2><div class="sig">
+    <div class="orn" data-k-sig="motion"></div>
+    <span class="cap" id="sigstate"></span>
+    <code id="siglist"></code>
+  </div></section>
+
+  <section><h2>Contrastes</h2><table><thead><tr><th>Paire</th><th>Couleurs</th><th>Rapport</th><th>Seuil</th><th>Verdict</th></tr></thead><tbody id="contrast"></tbody></table></section>
+</main>
+<script>
+const DATA = {"acid-scan-security": {"sig": ["mid", "ghost", "dim", "glass", "glass-a", "line-solid", "bits-size", "bits-pitch", "bits-opacity", "scanline", "rgb-shift", "lh-label", "fs-stat", "fs-mono", "eye-y", "cta-size", "cta-gap", "bracket-len", "bracket-w", "ease-step", "dur-boot", "dur-scan", "dur-decode", "dur-blink"]}, "alpine-glass-expedition": {"sig": ["snow", "haze", "sky", "glacier", "steel", "slate", "abyss", "muted", "ember", "line-ink", "pill-glow", "display-wdth", "fs-quote", "fs-caps", "fs-rating", "rating-wdth", "fs-rating-label", "ls-btn", "ls-chip", "edge-end", "col-side", "lead-w", "chip-h", "chip-gap", "play", "glass", "dur-veil", "dur-float", "dur-pulse"]}, "anime-x-slash": {"sig": ["bg-hero", "accent-deep", "line-accent", "line-ghost", "panel", "fade", "halftone", "chara-1", "chara-2", "chara-3", "chara-4", "chara-5", "chara-6", "chara-7", "chara-8", "text-lg", "text-number", "text-menu", "text-tab", "text-chara", "text-quote", "tracking-body", "text-column", "menu-size", "news-row", "accordion-row", "story-cell-w", "skew", "band-skew", "card-h", "card-gap", "grid-w", "text-w", "news-w", "title-h", "cursor", "btn-w", "border-bold", "bar", "notch", "round", "ease", "ease-snap", "dur-xs", "dur-reveal", "dur-glitch", "glitch-every", "dur-stroke", "dur-spin", "hover-shift"]}, "chrome-atelier": {"sig": ["ghost", "night-2", "black", "soft", "bar-line", "pill-ghost", "gold-lo", "gold", "gold-hi", "white-gold-lo", "white-gold", "white-gold-hi", "rose-lo", "rose", "rose-hi", "lh-h2", "ls-h2", "ls-body", "fs-btn", "ls-btn", "fs-value", "ls-mono", "indent", "edge-hero", "bar-h", "ring", "card-w", "cell-w", "blur", "ease", "dur-move", "dur-shift", "dur-draw", "dur-float", "float-y"]}, "cosmic-voyage": {"sig": ["bg-top", "bg-glow", "bg-deep", "nav", "sub", "glass", "glass-light", "ink-glass", "glass-edge", "accent-hot", "accent-sand", "link", "quote-strip", "map-bg", "map-bg-2", "orbit", "orbit-dim", "halo", "label-bg", "veil-world", "cta-yellow-edge", "cta-glow", "ring-a", "ring-b", "ring-c", "cookie-blue", "on-cookie", "font-quote", "text-2xs", "text-lg", "text-orbit", "card-w", "char-w", "emblem", "more-w", "nav-h-mobile", "world-icon", "radius-1", "radius-3", "radius-4", "radius-card", "ease", "dur-name", "dur-view", "dur-hint", "dur-star"]}, "glacial-mono-3d": {"sig": ["mist", "sky", "rock", "shade", "ice", "white", "prism-a", "prism-b", "prism-c", "loader", "muted", "glow", "line", "text-sm", "text-col", "bracket", "dur-born", "dur-glitch", "scramble"]}, "glass-frame-estate": {"sig": ["soft", "rule-dark", "veil", "shade", "shade-0", "glass", "glass-edge", "frame-line", "word-from", "word-to", "word-dark", "w-text", "w-word", "fs-word", "fs-h4", "fs-h5", "ls-word", "gap", "gap-row", "gap-head", "pad-card", "pad-panel", "tag-h", "chip-h", "step-h", "step-top", "frame-inset", "r-frame", "r-inner", "blur-glass", "blur-menu", "blur-back", "dur-menu", "rise", "flip-y", "dur-odo"]}, "heritage-lens": {"sig": ["half", "veil-0", "night-veil", "font-ui", "lh-ui", "fs-enter", "fs-num", "fs-pct", "enter", "medal", "lens", "bullet", "bullet-step", "col-text", "ease-expo", "ease-in", "dur-fill", "dur-open", "spin-slow", "spin-mid", "spin-fast", "pulse"]}, "hold-to-play-music": {"sig": ["grey", "orange-ink", "w-thin", "paint-tall", "lh-say", "fs-key", "fs-mono-s", "key-w", "cover", "cover-big", "foot-y", "ease-snap", "ease-slide", "dur-blink", "dur-slide", "hold", "zap", "cut"]}, "hyper-lime-street": {"sig": ["black", "tab", "soft", "nav-idle", "field", "hatch", "watermark", "watermark-ink", "fs-num", "fs-en", "fs-ticker", "fs-mark", "angle", "panel-h", "block-w", "pill-h", "tab-w", "underline", "dur-ticker", "dur-beat"]}, "lore-frame-editorial": {"sig": ["muted", "lavender", "periwinkle", "on-dark-muted", "reveal-from", "reveal-from-dark", "line-light", "font-hex", "weight-hex", "fs-nav", "fs-menu-small", "fs-story", "fs-menu", "fs-counter", "fs-word", "lh-statement", "lh-menu", "lh-hex", "ls-manifest", "ls-hex", "ls-mono", "indent-first", "rail-w", "overlap", "parallax", "chamfer-lg", "ease-out-quart", "ease-in-out-sine", "dur-scramble-tick", "dur-panel", "dur-loader-min"]}, "mint-street-basics": {"sig": ["navy-2", "aqua-2", "green-2", "green-3", "silver", "soft", "star", "halo", "c-cream", "c-slate", "c-sage", "c-lilac", "c-sky", "c-white", "font-logo", "lh-h2", "fs-h2-center", "fs-stat", "fs-inset", "fs-ticker", "gap", "hero-h", "ticker-h", "card-h", "r-inset", "round", "dur-ticker"]}, "nocturne-architecture": {"sig": ["dim", "ghost", "mark", "night", "veil-0", "fs-word", "fs-chip", "fs-row", "fs-card", "ls-word", "hero-h", "card-w", "card-h", "gap", "round", "dur-marquee"]}, "noir-inferno-chapters": {"sig": ["veil-0", "ink-soft", "ls-quote", "fs-number", "fs-panel", "circle-small", "target", "pull", "close", "close-top", "col-scene", "ease-line", "dur-dust"]}, "pixel-lime-portfolio": {"sig": ["lime-bar", "lime-bar-deep", "grey-bar", "soft", "grid-dark", "veil-0", "giant", "fs-mono", "cell", "pixel", "hero-h", "col", "note-w", "note-h", "row-h", "ease-step", "dur-draw"]}, "pocket-device-noir": {"sig": ["bg-2", "foot", "tag", "tag-text", "glass", "giant-top", "giant-bottom", "shade", "veil-0", "veil-2", "device", "device-edge", "screen", "dial", "dial-ring", "lcd", "fs-giant", "tag-h", "thumb-w", "thumb-h", "thumb-h-on", "card-w", "card-h", "blur"]}, "retro-mission-poster": {"sig": ["red-hot", "red-text", "sky-pale", "rust", "sand", "veil-0", "fs-giant", "frame", "ring", "spin", "draw"]}, "serif-bistro-green": {"sig": ["cream-box", "frame", "paper", "green-soft", "line-cream", "field", "fs-stagger", "fs-giant", "fs-card", "fs-price", "fs-lead", "nav-w", "btn-h-s", "r-sheet", "frame-w", "fav-w", "fav-gap", "arch-w"]}, "showroom-bento": {"sig": ["outer", "symbol", "arrow", "lift", "sw-red", "sw-yellow", "sw-blue", "sw-grey", "sw-black", "fs-nav", "bento-pad", "bento-gap", "bento-row", "pill-w", "arrows-w", "swatch"]}, "signal-orange-techwear": {"sig": ["footer", "panel", "panel-hot", "fog-panel", "veil-0", "fog-0", "fog-1", "fs-lead", "screen-h", "nav-top", "aside-w", "row-h", "circle", "tab-h", "look-w", "look-h", "ease-cut"]}, "sticker-brutal-jp": {"sig": ["blue", "purple", "green", "mint", "red", "bw-frame", "bw-sticker", "shadow-up", "lift", "r-frame", "font-jp-display", "fs-h1-jp", "fs-h4", "fs-lead", "fs-vertical", "field-h", "card-pad", "icon", "frame-gap"]}, "tiny-planet-toy": {"sig": ["sky-light", "sky-deep", "cream-side", "soft", "yellow-side", "red", "orange", "green", "green-light", "wall", "wall-warm", "road", "shadow", "fs-dialog", "depth", "wipe", "planet", "dialog-w", "dialog-h", "type-speed"]}, "zigzag-snack-pop": {"sig": ["outer", "orange-light", "orange-hot", "orange-ink", "lime", "sky", "taupe", "c1", "c2", "c4", "c5", "lift", "font-label", "fs-giant", "fs-label", "frame", "hard-up", "zig", "circle", "marquee"]}};
+const COLORS = ['bg','surface','surface-2','overlay','scrim','bg-inverse','text','text-2','text-muted','on-accent','text-inverse','accent','accent-edge','accent-2','success','warning','danger','focus','line','line-strong'];
+const GROUNDS = ['bg','surface','surface-2'];
+const PAIRS = [].concat(
+  ['text','text-2','text-muted'].flatMap(f => GROUNDS.map(b => [f, b, 4.5])),
+  [['on-accent','accent',4.5], ['text-inverse','bg-inverse',4.5]],
+  ['success','warning','danger'].flatMap(f => GROUNDS.map(b => [f, b, 4.5])),
+  [['accent','bg',3], ['focus','bg',3]]);
+const $ = id => document.getElementById(id);
+const root = document.documentElement;
+const probe = document.createElement('i'); probe.hidden = true; document.body.append(probe);
+const ctx = document.createElement('canvas').getContext('2d', { willReadFrequently: true });
+
+function rgba(role) {            // couleur calculée d'un rôle, lue par le navigateur
+  probe.style.color = 'var(--k-' + role + ')';
+  ctx.clearRect(0, 0, 1, 1); ctx.fillStyle = getComputedStyle(probe).color; ctx.fillRect(0, 0, 1, 1);
+  const d = ctx.getImageData(0, 0, 1, 1).data; return [d[0], d[1], d[2], d[3] / 255];
+}
+const over = (f, b) => [0, 1, 2].map(i => f[i] * f[3] + b[i] * (1 - f[3])).concat(1);
+const lum = c => { const v = c.slice(0, 3).map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; }); return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2]; };
+const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+const hex = c => '#' + c.slice(0, 3).map(x => Math.round(x).toString(16).padStart(2, '0')).join('');
+
+function render() {
+  const id = $('skill').value, bg = rgba('bg');
+  $('name').textContent = id;
+  $('swatches').replaceChildren(...COLORS.map(r => {
+    const c = rgba(r), el = document.createElement('div'); el.className = 'sw';
+    const i = document.createElement('i'); i.style.background = 'var(--k-' + r + ')';
+    const b = document.createElement('b'); b.textContent = '--k-' + r;
+    const s = document.createElement('span'); s.textContent = hex(over(c, bg)) + (c[3] < 1 ? ' · ' + Math.round(c[3] * 100) + ' %' : '');
+    el.append(i, b, s); return el;
+  }));
+  $('contrast').replaceChildren(...PAIRS.map(([f, b, min]) => {
+    let back = over(rgba(b), bg), fg = over(rgba(f), back), r = ratio(fg, back), label = f + ' / ' + b;
+    if (f === 'accent' && r < min) { const e = over(rgba('accent-edge'), bg); if (hex(e) !== hex(fg)) { fg = e; r = ratio(e, back); label = 'accent-edge / bg'; } }
+    const tr = document.createElement('tr'), ok = r >= min;
+    const cells = [label, null, r.toFixed(2) + ':1', min + ':1', ok ? 'conforme' : 'ÉCHEC'].map(t => { const td = document.createElement('td'); if (t !== null) td.textContent = t; return td; });
+    [fg, back].forEach(c => { const i = document.createElement('i'); i.style.background = hex(c); cells[1].append(i); });
+    cells[1].append(hex(fg) + ' sur ' + hex(back)); cells[4].className = ok ? 'ok' : 'ko';
+    tr.append(...cells); return tr;
+  }));
+  const cs = getComputedStyle(root), sig = DATA[id].sig, onBg = cs.getPropertyValue('--k-accent-on-bg').trim();
+  $('flag').textContent = '--k-accent-on-bg = ' + onBg + (onBg === '0' ? ' : accent trop pâle, le lien prend la couleur du texte' : ' : le lien prend l\'accent');
+  $('sigstate').textContent = 'intensité « ' + (root.dataset.kIntensity || 'full') + ' » · --k-sig = ' + cs.getPropertyValue('--k-sig').trim() + ' · --k-sig-motion = ' + cs.getPropertyValue('--k-sig-motion').trim() + ' · ' + sig.length + ' variables de signature';
+  $('siglist').textContent = sig.map(n => { const v = cs.getPropertyValue('--k-sig-' + n).trim(); return '--k-sig-' + n + (/^-?[\d.]+m?s$/.test(v) ? ' = ' + v : ''); }).join(' · ');
+}
+function load(id) {
+  const link = $('map'); link.onload = () => (document.fonts ? document.fonts.ready : Promise.resolve()).then(render);
+  link.href = 'maps/' + id + '.css'; history.replaceState(null, '', '#' + id + (root.dataset.kIntensity !== 'full' ? ':' + root.dataset.kIntensity : ''));
+}
+Object.keys(DATA).forEach(id => $('skill').add(new Option(id, id)));
+$('skill').addEventListener('change', e => load(e.target.value));
+$('intensity').addEventListener('change', e => { root.dataset.kIntensity = e.target.value; load($('skill').value); render(); });
+const [h, inten] = location.hash.slice(1).split(':');
+if (inten) { root.dataset.kIntensity = inten; $('intensity').value = inten; }
+if (DATA[h]) $('skill').value = h;
+load($('skill').value); window.addEventListener('load', render);
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+/*
+ * kobo-studio — fiche de correspondance : chrome-atelier
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 43 reliés ou relevés, 4 dérivés, 9 en repli.
+ * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&family=Bodoni+Moda:ital,wght@0,500;1,500&display=swap
+ *
+ * Signature : 35 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-ghost, --k-sig-night-2, --k-sig-black, --k-sig-soft, --k-sig-bar-line, --k-sig-pill-ghost,
+ *   --k-sig-gold-lo, --k-sig-gold, --k-sig-gold-hi, --k-sig-white-gold-lo, --k-sig-white-gold,
+ *   --k-sig-white-gold-hi, --k-sig-rose-lo, --k-sig-rose, --k-sig-rose-hi, --k-sig-lh-h2, --k-sig-ls-h2,
+ *   --k-sig-ls-body, --k-sig-fs-btn, --k-sig-ls-btn, --k-sig-fs-value, --k-sig-ls-mono, --k-sig-indent,
+ *   --k-sig-edge-hero, --k-sig-bar-h, --k-sig-ring, --k-sig-card-w, --k-sig-cell-w, --k-sig-blur, --k-sig-ease,
+ *   --k-sig-dur-move, --k-sig-dur-shift, --k-sig-dur-draw, --k-sig-dur-float, --k-sig-float-y
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&family=Bodoni+Moda:ital,wght@0,500;1,500&display=swap");
+@import "../roles.css";
+@import "../../../chrome-atelier/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--paper);
+  --k-surface: var(--panel);
+  --k-surface-2: var(--mist); /* [main] */
+  --k-overlay: var(--bar); /* [main] */
+  --k-scrim: color-mix(in srgb, var(--k-bg) 60%, transparent); /* repli */
+  --k-bg-inverse: var(--night); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--ink);
+  --k-text-2: var(--body);
+  --k-text-muted: #686868; /* [main] dérivé de --soft (1.74:1 au pire) : même teinte, clarté ajustée → 4.63:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-on-accent: var(--paper); /* [main] */
+  --k-text-inverse: var(--paper); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--ink); /* [main] accent neutre : l'action est en encre */
+  --k-accent-edge: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 17.80:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--gold-ink); /* [main] */
+  --k-success: #197748; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 4.63:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: var(--gold-ink); /* [main] dérivé : repris de --gold-ink, 5.13:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #915a47; /* [main] dérivé de --rose (2.79:1 au pire) : même teinte, clarté ajustée → 4.65:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--ink); /* [main] */
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 4px; /* [main] relevé dans la démo */
+
+  /* ---- Filets ---- */
+  --k-line: var(--rule);
+  --k-line-strong: var(--ink); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-display);
+  --k-font-body: var(--font-display); /* [main] */
+  --k-font-mono: var(--font-mono);
+  --k-fs-hero: var(--fs-hero);
+  --k-fs-h1: var(--fs-hero); /* [main] */
+  --k-fs-h2: var(--fs-h2);
+  --k-fs-h3: calc((var(--k-fs-h2) + var(--k-fs-body)) / 2); /* repli du contrat */
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-label); /* [main] */
+  --k-fs-label: var(--fs-label);
+  --k-lh-tight: var(--lh-hero);
+  --k-lh-body: var(--lh-body);
+  --k-ls-display: var(--ls-hero);
+  --k-ls-caps: var(--ls-label);
+  --k-fw-display: var(--weight);
+
+  /* ---- Formes ---- */
+  --k-radius: 0px; /* repli */
+  --k-radius-lg: 0px; /* [main] aucun arrondi hors pilules */
+  --k-radius-pill: var(--r-pill);
+  --k-border-w: var(--hairline);
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--edge);
+  --k-container: var(--container);
+  --k-section-y: var(--space-24);
+  --k-control-h: var(--pill-h);
+  --k-nav-h: var(--nav-h);
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease-out);
+  --k-ease-in-out: var(--ease-io);
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-nav); /* [main] */
+  --k-dur-base: var(--dur-ui);
+  --k-dur-slow: var(--dur-fade); /* [main] */
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-ghost: var(--ghost);
+  --k-sig-night-2: var(--night-2);
+  --k-sig-black: var(--black);
+  --k-sig-soft: var(--soft);
+  --k-sig-bar-line: var(--bar-line);
+  --k-sig-pill-ghost: var(--pill-ghost);
+  --k-sig-gold-lo: var(--gold-lo);
+  --k-sig-gold: var(--gold);
+  --k-sig-gold-hi: var(--gold-hi);
+  --k-sig-white-gold-lo: var(--white-gold-lo);
+  --k-sig-white-gold: var(--white-gold);
+  --k-sig-white-gold-hi: var(--white-gold-hi);
+  --k-sig-rose-lo: var(--rose-lo);
+  --k-sig-rose: var(--rose);
+  --k-sig-rose-hi: var(--rose-hi);
+  --k-sig-lh-h2: var(--lh-h2);
+  --k-sig-ls-h2: var(--ls-h2);
+  --k-sig-ls-body: var(--ls-body);
+  --k-sig-fs-btn: var(--fs-btn);
+  --k-sig-ls-btn: var(--ls-btn);
+  --k-sig-fs-value: var(--fs-value);
+  --k-sig-ls-mono: var(--ls-mono);
+  --k-sig-indent: var(--indent);
+  --k-sig-edge-hero: var(--edge-hero);
+  --k-sig-bar-h: var(--bar-h);
+  --k-sig-ring: var(--ring);
+  --k-sig-card-w: var(--card-w);
+  --k-sig-cell-w: var(--cell-w);
+  --k-sig-blur: var(--blur);
+  --k-sig-ease: var(--ease);
+  --k-sig-dur-move: var(--dur-move);
+  --k-sig-dur-shift: var(--dur-shift);
+  --k-sig-dur-draw: var(--dur-draw);
+  --k-sig-dur-float: var(--dur-float);
+  --k-sig-float-y: var(--float-y);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-dur-move: 0s;
+  --k-sig-dur-shift: 0s;
+  --k-sig-dur-draw: 0s;
+  --k-sig-dur-float: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-dur-move: 0s;
+  --k-sig-dur-shift: 0s;
+  --k-sig-dur-draw: 0s;
+  --k-sig-dur-float: 0s;
+}

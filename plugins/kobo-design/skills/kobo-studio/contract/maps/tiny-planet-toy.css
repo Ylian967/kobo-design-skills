@@ -1,0 +1,128 @@
+/*
+ * kobo-studio — fiche de correspondance : tiny-planet-toy
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 38 reliés ou relevés, 5 dérivés, 13 en repli.
+ * 27 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik+Mono+One&family=Silkscreen:wght@400;700&display=swap
+ *
+ * Signature : 20 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-sky-light, --k-sig-sky-deep, --k-sig-cream-side, --k-sig-soft, --k-sig-yellow-side, --k-sig-red,
+ *   --k-sig-orange, --k-sig-green, --k-sig-green-light, --k-sig-wall, --k-sig-wall-warm, --k-sig-road,
+ *   --k-sig-shadow, --k-sig-fs-dialog, --k-sig-depth, --k-sig-wipe, --k-sig-planet, --k-sig-dialog-w,
+ *   --k-sig-dialog-h, --k-sig-type-speed
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik+Mono+One&family=Silkscreen:wght@400;700&display=swap");
+@import "../roles.css";
+@import "../../../tiny-planet-toy/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--sky); /* [main] */
+  --k-surface: var(--card);
+  --k-surface-2: var(--cream); /* [main] */
+  --k-overlay: var(--k-scrim); /* repli */
+  --k-scrim: color-mix(in srgb, var(--k-bg) 60%, transparent); /* repli */
+  --k-bg-inverse: var(--ink); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--ink);
+  --k-text-2: var(--ink); /* [main] dérivé : --soft est trop clair sur le turquoise */
+  --k-text-muted: var(--ink); /* [main] dérivé : --soft est trop clair sur le turquoise */
+  --k-on-accent: var(--ink); /* [main] */
+  --k-text-inverse: var(--paper); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--yellow); /* [main] */
+  --k-accent-edge: var(--ink); /* [main] contour d'encre : règle du skill */
+  --k-accent-on-bg: 0; /* accent à 1.40:1 sur le fond : jamais de texte, d'icône, de filet fin ni d'état actif en accent seul ; aplat cerné de --k-accent-edge uniquement */
+  --k-accent-2: var(--blue); /* [main] */
+  --k-success: #234c2f; /* [main] dérivé de --green (3.12:1 au pire) : même teinte, clarté ajustée → 4.62:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #693511; /* [main] dérivé de --orange (1.35:1 au pire) : même teinte, clarté ajustée → 4.68:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #6f2f30; /* [main] dérivé de --red (2.19:1 au pire) : même teinte, clarté ajustée → 4.66:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--ink); /* [main] */
+  --k-focus-w: 3px; /* [main] relevé dans la démo */
+  --k-focus-offset: 4px; /* [main] relevé dans la démo */
+
+  /* ---- Filets ---- */
+  --k-line: var(--ink); /* [main] */
+  --k-line-strong: var(--ink); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-block); /* [main] */
+  --k-font-body: var(--font-hand); /* [main] */
+  --k-font-mono: var(--font-pixel); /* [main] */
+  --k-fs-hero: var(--fs-block); /* [main] */
+  --k-fs-h1: var(--fs-block); /* [main] */
+  --k-fs-h2: var(--fs-h2);
+  --k-fs-h3: calc((var(--k-fs-h2) + var(--k-fs-body)) / 2); /* repli du contrat */
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-small);
+  --k-fs-label: var(--fs-tag); /* [main] */
+  --k-lh-tight: 1.05; /* repli */
+  --k-lh-body: 1.5; /* repli */
+  --k-ls-display: 0em; /* repli */
+  --k-ls-caps: 0.06em; /* repli */
+  --k-fw-display: 400; /* [main] relevé dans la démo */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--r);
+  --k-radius-lg: var(--r); /* [main] */
+  --k-radius-pill: 999px; /* repli */
+  --k-border-w: var(--bw);
+  --k-cut: 0px; /* repli */
+  --k-angle: var(--tilt);
+  --k-shadow: var(--drop);
+
+  /* ---- Espace ---- */
+  --k-edge: var(--gutter);
+  --k-container: var(--page);
+  --k-section-y: var(--k-space-24); /* repli du contrat */
+  --k-control-h: 44px; /* repli */
+  --k-nav-h: 64px; /* repli */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease);
+  --k-ease-in-out: var(--k-ease-out); /* repli du contrat */
+  --k-ease-spring: var(--ease-drop);
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur);
+  --k-dur-slow: var(--dur-wipe); /* [main] */
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-sky-light: var(--sky-light);
+  --k-sig-sky-deep: var(--sky-deep);
+  --k-sig-cream-side: var(--cream-side);
+  --k-sig-soft: var(--soft);
+  --k-sig-yellow-side: var(--yellow-side);
+  --k-sig-red: var(--red);
+  --k-sig-orange: var(--orange);
+  --k-sig-green: var(--green);
+  --k-sig-green-light: var(--green-light);
+  --k-sig-wall: var(--wall);
+  --k-sig-wall-warm: var(--wall-warm);
+  --k-sig-road: var(--road);
+  --k-sig-shadow: var(--shadow);
+  --k-sig-fs-dialog: var(--fs-dialog);
+  --k-sig-depth: var(--depth);
+  --k-sig-wipe: var(--wipe);
+  --k-sig-planet: var(--planet);
+  --k-sig-dialog-w: var(--dialog-w);
+  --k-sig-dialog-h: var(--dialog-h);
+  --k-sig-type-speed: var(--type-speed);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-type-speed: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-type-speed: 0s;
+}

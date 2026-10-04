@@ -1,0 +1,136 @@
+/*
+ * kobo-studio — fiche de correspondance : mint-street-basics
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 38 reliés ou relevés, 4 dérivés, 14 en repli.
+ * 18 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap
+ *
+ * Signature : 27 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-navy-2, --k-sig-aqua-2, --k-sig-green-2, --k-sig-green-3, --k-sig-silver, --k-sig-soft,
+ *   --k-sig-star, --k-sig-halo, --k-sig-c-cream, --k-sig-c-slate, --k-sig-c-sage, --k-sig-c-lilac,
+ *   --k-sig-c-sky, --k-sig-c-white, --k-sig-font-logo, --k-sig-lh-h2, --k-sig-fs-h2-center, --k-sig-fs-stat,
+ *   --k-sig-fs-inset, --k-sig-fs-ticker, --k-sig-gap, --k-sig-hero-h, --k-sig-ticker-h, --k-sig-card-h,
+ *   --k-sig-r-inset, --k-sig-round, --k-sig-dur-ticker
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap");
+@import "../roles.css";
+@import "../../../mint-street-basics/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--mint); /* [main] */
+  --k-surface: var(--card);
+  --k-surface-2: var(--card-soft);
+  --k-overlay: var(--k-scrim); /* repli */
+  --k-scrim: color-mix(in srgb, var(--k-bg) 60%, transparent); /* repli */
+  --k-bg-inverse: var(--navy); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--ink);
+  --k-text-2: var(--ink-2); /* [main] */
+  --k-text-muted: var(--muted);
+  --k-on-accent: var(--navy); /* [main] */
+  --k-text-inverse: var(--white); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--green); /* [main] */
+  --k-accent-edge: var(--green-ink); /* [main] dérivé : le vert vif n'atteint que 2,67:1 sur le menthe */
+  --k-accent-on-bg: 0; /* accent à 2.67:1 sur le fond : jamais de texte, d'icône, de filet fin ni d'état actif en accent seul ; aplat cerné de --k-accent-edge uniquement */
+  --k-accent-2: var(--aqua); /* [main] */
+  --k-success: var(--green-ink); /* [main] dérivé : repris de --green-ink, 5.69:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #8a6500; /* [main] dérivé de --star (1.63:1 au pire) : même teinte, clarté ajustée → 4.61:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #bc4040; /* dérivé : teinte 0°, saturation calée sur celle de son accent, clarté ajustée → 4.60:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--ink); /* [main] */
+  --k-focus-w: 3px; /* [main] relevé dans la démo */
+  --k-focus-offset: 3px; /* repli du contrat */
+
+  /* ---- Filets ---- */
+  --k-line: var(--line);
+  --k-line-strong: var(--ink); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-display);
+  --k-font-body: var(--font-body);
+  --k-font-mono: var(--k-font-body); /* repli du contrat */
+  --k-fs-hero: var(--fs-hero);
+  --k-fs-h1: var(--fs-h2); /* [main] titre de section du skill, plus grand que le titre de fiche */
+  --k-fs-h2: var(--fs-pdp); /* [main] */
+  --k-fs-h3: var(--fs-name); /* [main] */
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-small);
+  --k-fs-label: var(--fs-nav);
+  --k-lh-tight: var(--lh-hero);
+  --k-lh-body: 1.5; /* repli */
+  --k-ls-display: 0em; /* repli */
+  --k-ls-caps: 0.06em; /* repli */
+  --k-fw-display: 400; /* [main] relevé dans la démo */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--r-chip); /* [main] */
+  --k-radius-lg: var(--r-card);
+  --k-radius-pill: var(--r-pill);
+  --k-border-w: 1px; /* repli */
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--gutter);
+  --k-container: var(--page);
+  --k-section-y: var(--k-space-24); /* repli du contrat */
+  --k-control-h: var(--btn-h);
+  --k-nav-h: 64px; /* repli */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease);
+  --k-ease-in-out: var(--ease-io);
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur);
+  --k-dur-slow: var(--dur-slow);
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-navy-2: var(--navy-2);
+  --k-sig-aqua-2: var(--aqua-2);
+  --k-sig-green-2: var(--green-2);
+  --k-sig-green-3: var(--green-3);
+  --k-sig-silver: var(--silver);
+  --k-sig-soft: var(--soft);
+  --k-sig-star: var(--star);
+  --k-sig-halo: var(--halo);
+  --k-sig-c-cream: var(--c-cream);
+  --k-sig-c-slate: var(--c-slate);
+  --k-sig-c-sage: var(--c-sage);
+  --k-sig-c-lilac: var(--c-lilac);
+  --k-sig-c-sky: var(--c-sky);
+  --k-sig-c-white: var(--c-white);
+  --k-sig-font-logo: var(--font-logo);
+  --k-sig-lh-h2: var(--lh-h2);
+  --k-sig-fs-h2-center: var(--fs-h2-center);
+  --k-sig-fs-stat: var(--fs-stat);
+  --k-sig-fs-inset: var(--fs-inset);
+  --k-sig-fs-ticker: var(--fs-ticker);
+  --k-sig-gap: var(--gap);
+  --k-sig-hero-h: var(--hero-h);
+  --k-sig-ticker-h: var(--ticker-h);
+  --k-sig-card-h: var(--card-h);
+  --k-sig-r-inset: var(--r-inset);
+  --k-sig-round: var(--round);
+  --k-sig-dur-ticker: var(--dur-ticker);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-dur-ticker: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-dur-ticker: 0s;
+}

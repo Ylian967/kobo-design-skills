@@ -1,0 +1,124 @@
+/*
+ * kobo-studio — fiche de correspondance : pixel-lime-portfolio
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 37 reliés ou relevés, 5 dérivés, 14 en repli.
+ * 21 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,600&family=JetBrains+Mono:wght@400;500&display=swap
+ *
+ * Signature : 17 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-lime-bar, --k-sig-lime-bar-deep, --k-sig-grey-bar, --k-sig-soft, --k-sig-grid-dark, --k-sig-veil-0,
+ *   --k-sig-giant, --k-sig-fs-mono, --k-sig-cell, --k-sig-pixel, --k-sig-hero-h, --k-sig-col, --k-sig-note-w,
+ *   --k-sig-note-h, --k-sig-row-h, --k-sig-ease-step, --k-sig-dur-draw
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "../roles.css";
+@import "../../../pixel-lime-portfolio/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--paper);
+  --k-surface: var(--white); /* [main] */
+  --k-surface-2: var(--field); /* [main] */
+  --k-overlay: var(--veil);
+  --k-scrim: var(--veil);
+  --k-bg-inverse: var(--ink); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--ink);
+  --k-text-2: var(--k-text); /* [main] repli du contrat */
+  --k-text-muted: var(--muted);
+  --k-on-accent: var(--ink); /* [main] */
+  --k-text-inverse: var(--white); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--lime); /* [main] */
+  --k-accent-edge: var(--ink); /* [main] dérivé : lime trop pâle sur le fond clair */
+  --k-accent-on-bg: 0; /* accent à 1.10:1 sur le fond : jamais de texte, d'icône, de filet fin ni d'état actif en accent seul ; aplat cerné de --k-accent-edge uniquement */
+  --k-accent-2: var(--lime-deep); /* [main] */
+  --k-success: #55730f; /* [main] dérivé de --lime-deep (1.91:1 au pire) : même teinte, clarté ajustée → 4.62:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #87631d; /* dérivé : teinte 40°, saturation calée sur celle de son accent, clarté ajustée → 4.64:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #c92b2b; /* dérivé : teinte 0°, saturation calée sur celle de son accent, clarté ajustée → 4.60:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--ink); /* [main] */
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 3px; /* repli du contrat */
+
+  /* ---- Filets ---- */
+  --k-line: var(--grid); /* [main] */
+  --k-line-strong: var(--ink); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-sans); /* [main] */
+  --k-font-body: var(--font-sans);
+  --k-font-mono: var(--font-mono);
+  --k-fs-hero: var(--fs-name); /* [main] */
+  --k-fs-h1: var(--fs-statement); /* [main] */
+  --k-fs-h2: var(--fs-h2);
+  --k-fs-h3: calc(var(--fs-project) * 0.7); /* [main] dérivé de --fs-project */
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-small);
+  --k-fs-label: var(--fs-note); /* [main] */
+  --k-lh-tight: var(--lh-statement); /* [main] */
+  --k-lh-body: 1.5; /* repli */
+  --k-ls-display: var(--ls-tight);
+  --k-ls-caps: 0.06em; /* repli */
+  --k-fw-display: 400; /* [main] relevé dans la démo */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--r);
+  --k-radius-lg: var(--r); /* [main] */
+  --k-radius-pill: 999px; /* repli */
+  --k-border-w: 1px; /* repli */
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--gutter);
+  --k-container: var(--page);
+  --k-section-y: var(--k-space-24); /* repli du contrat */
+  --k-control-h: var(--btn-h);
+  --k-nav-h: 64px; /* repli */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease);
+  --k-ease-in-out: var(--k-ease-out); /* repli du contrat */
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur);
+  --k-dur-slow: var(--dur-slow);
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-lime-bar: var(--lime-bar);
+  --k-sig-lime-bar-deep: var(--lime-bar-deep);
+  --k-sig-grey-bar: var(--grey-bar);
+  --k-sig-soft: var(--soft);
+  --k-sig-grid-dark: var(--grid-dark);
+  --k-sig-veil-0: var(--veil-0);
+  --k-sig-giant: var(--giant);
+  --k-sig-fs-mono: var(--fs-mono);
+  --k-sig-cell: var(--cell);
+  --k-sig-pixel: var(--pixel);
+  --k-sig-hero-h: var(--hero-h);
+  --k-sig-col: var(--col);
+  --k-sig-note-w: var(--note-w);
+  --k-sig-note-h: var(--note-h);
+  --k-sig-row-h: var(--row-h);
+  --k-sig-ease-step: var(--ease-step);
+  --k-sig-dur-draw: var(--dur-draw);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+:root[data-k-intensity="reduced"] {
+  --k-sig-dur-draw: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+:root[data-k-intensity="off"] {
+  --k-sig-dur-draw: 0s;
+}
