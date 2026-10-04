@@ -13,7 +13,7 @@
  *   --k-sig-giant, --k-sig-fs-mono, --k-sig-cell, --k-sig-pixel, --k-sig-hero-h, --k-sig-col, --k-sig-note-w,
  *   --k-sig-note-h, --k-sig-row-h, --k-sig-ease-step, --k-sig-dur-draw
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,600&family=JetBrains+Mono:wght@400;500&display=swap");
@@ -114,11 +114,11 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-draw: 0s;
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-draw: 0s;
 }

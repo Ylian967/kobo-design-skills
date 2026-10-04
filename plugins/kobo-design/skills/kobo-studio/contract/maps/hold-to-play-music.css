@@ -13,7 +13,7 @@
  *   --k-sig-fs-mono-s, --k-sig-key-w, --k-sig-cover, --k-sig-cover-big, --k-sig-foot-y, --k-sig-ease-snap,
  *   --k-sig-ease-slide, --k-sig-dur-blink, --k-sig-dur-slide, --k-sig-hold, --k-sig-zap, --k-sig-cut
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&family=Inconsolata&family=Londrina+Solid:wght@900&display=swap");
@@ -115,7 +115,7 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-blink: 0s;
   --k-sig-dur-slide: 0s;
   --k-sig-hold: 0s;
@@ -124,7 +124,7 @@
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-blink: 0s;
   --k-sig-dur-slide: 0s;
   --k-sig-hold: 0s;

@@ -127,7 +127,7 @@ Il n'y a donc pas de vert ni de rouge standard : chaque fiche a les siens.
 
 ## L'intensité de la signature
 
-Un attribut sur `<html>` :
+Un attribut sur `<html>`, ou sur n'importe quel élément parent (il vaut alors pour sa descendance) :
 
 ```html
 <html data-k-intensity="full">     <!-- ou "reduced", ou "off" -->
@@ -144,6 +144,8 @@ Le réglage vit dans le contrat et dans la fiche, jamais dans le skill. Trois m�
 1. **Deux interrupteurs** dans `roles.css` : `--k-sig` (1 ou 0) et `--k-sig-motion` (1 ou 0). Un composant de signature peut s'en servir dans un calcul, par exemple `opacity: var(--k-sig)` ou `animation-duration: calc(var(--k-sig-dur-scan) * var(--k-sig-motion))`.
 2. **Un attribut de balisage** : tout ornement de signature porte `data-k-sig` ; s'il bouge, `data-k-sig="motion"`. En `off`, `roles.css` masque les premiers ; en `reduced` et `off`, il arrête l'animation des seconds.
 3. **Les blocs de la fiche** : `:root[data-k-intensity="reduced"]` et `:root[data-k-intensity="off"]` remettent à `0s` les durées de signature du skill (`--k-sig-dur-*`, `--k-sig-spin-*`…).
+
+Les variantes de signature des composants (`components/signatures/`) se branchent sur ces interrupteurs : voir `components/signatures/README.md`. On resserre l'intensité en descendant dans la page (`full` → `reduced` → `off`) ; un bloc `full` placé dans un parent `off` ne retrouve pas les durées de signature remises à zéro.
 
 Les rôles ordinaires ne changent pas avec l'intensité : `--k-angle`, `--k-cut`, `--k-shadow` et `--k-radius` sont des formes, et les formes sont gardées.
 

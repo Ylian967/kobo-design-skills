@@ -12,7 +12,7 @@
  *   --k-sig-red-hot, --k-sig-red-text, --k-sig-sky-pale, --k-sig-rust, --k-sig-sand, --k-sig-veil-0,
  *   --k-sig-fs-giant, --k-sig-frame, --k-sig-ring, --k-sig-spin, --k-sig-draw
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Jost:wght@500;700&display=swap");
@@ -107,13 +107,13 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-spin: 0s;
   --k-sig-draw: 0s;
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-spin: 0s;
   --k-sig-draw: 0s;
 }

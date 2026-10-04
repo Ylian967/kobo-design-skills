@@ -1,0 +1,36 @@
+/*
+ * kobo-studio — variantes de signature : acid-scan-security (les crochets d'angle)
+ * S'ajoute PAR-DESSUS le composant de base : <button class="k-btn k-btn--crochets">, <article class="k-card k-card--crochets">.
+ * Fichier de signature : il a le droit de lire les --k-sig-* du skill (--k-sig-bracket-len, --k-sig-bracket-w,
+ * --k-sig-cta-gap). Sous un autre skill, ces variables n'existent pas : des rôles du contrat servent de repli.
+ *
+ * Intensité (data-k-intensity sur un parent) :
+ *   full    : quatre crochets en L autour du composant ; au survol et au focus ils s'écartent.
+ *   reduced : crochets fixes (--k-sig-motion vaut 0 : la durée du mouvement tombe à zéro).
+ *   off     : --k-sig vaut 0, les crochets disparaissent ; il reste le composant de base, intact.
+ */
+.k-btn--crochets, .k-card--crochets {
+  --_len: var(--k-sig-bracket-len, var(--k-space-6)); --_w: var(--k-sig-bracket-w, var(--k-border-w)); --_gap: var(--k-space-2);
+  --_lx: min(var(--_len), 34%); --_ly: min(var(--_len), 34%);
+}
+.k-card--crochets { --_gap: var(--k-sig-cta-gap, var(--k-space-3)); overflow: visible; }
+.k-card--crochets .k-card__media { border-start-start-radius: inherit; border-start-end-radius: inherit; }
+
+.k-btn--crochets::before, .k-card--crochets::before {
+  content: ""; position: absolute; inset: calc(var(--_gap) * -1); pointer-events: none;
+  border: var(--_w) solid var(--k-line-strong); opacity: var(--k-sig);
+  /* Seuls les quatre coins de la bordure restent visibles : le rectangle entier moins une croix (règle pair-impair) */
+  clip-path: polygon(evenodd,
+    0 0, 100% 0, 100% 100%, 0 100%, 0 0,
+    var(--_lx) 0, var(--_lx) var(--_ly), 0 var(--_ly), 0 calc(100% - var(--_ly)), var(--_lx) calc(100% - var(--_ly)), var(--_lx) 100%,
+    calc(100% - var(--_lx)) 100%, calc(100% - var(--_lx)) calc(100% - var(--_ly)), 100% calc(100% - var(--_ly)), 100% var(--_ly),
+    calc(100% - var(--_lx)) var(--_ly), calc(100% - var(--_lx)) 0, var(--_lx) 0);
+  transition: inset calc(var(--k-dur-base) * var(--k-sig-motion)) var(--k-ease-out);
+}
+/* Mouvement de signature : les crochets s'écartent quand on approche */
+.k-btn--crochets:is(:hover, :focus-visible, [data-k-state="hover"])::before,
+.k-card--crochets.k-card--link:is(:hover, :has(a:focus-visible))::before { inset: calc((var(--_gap) + var(--k-space-1) * var(--k-sig-motion)) * -1); }
+/* Le contour de focus se place au-delà des crochets */
+.k-btn--crochets:focus-visible { outline-offset: calc(var(--_gap) + var(--k-space-2)); }
+
+@media (prefers-reduced-motion: reduce) { .k-btn--crochets::before, .k-card--crochets::before { transition: none; } }

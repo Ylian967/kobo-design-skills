@@ -1,0 +1,46 @@
+/*
+ * kobo-studio — chargement : squelette et barre de progression
+ * Composant non interactif : pas d'état de focus propre. k-check: non-interactif
+ * Rôles lus : text, text-2, text-muted, accent, accent-on-bg, success, danger, line, font-body, fs-h3, fs-body, fs-small,
+ * lh-body, radius, radius-pill, border-w, space-*, dur-slow, dur-base, ease-in-out, ease-out.
+ */
+
+/* ---- Squelette : tient la place du contenu. Le conteneur porte aria-busy="true" et un texte pour lecteur d'écran. ---- */
+.k-skeleton {
+  display: block; block-size: var(--k-fs-body); background: color-mix(in srgb, var(--k-text) 14%, transparent); border-radius: var(--k-radius);
+  animation: k-skeleton calc(var(--k-dur-slow) * 1.5) var(--k-ease-in-out) infinite alternate;
+}
+@keyframes k-skeleton { to { opacity: 0.45; } }
+.k-skeleton--title { block-size: var(--k-fs-h3); inline-size: 60%; }
+.k-skeleton--short { inline-size: 40%; }
+.k-skeleton--medium { inline-size: 75%; }
+.k-skeleton--media { block-size: auto; aspect-ratio: 3 / 2; border-radius: 0; }
+.k-skeleton--circle { inline-size: var(--k-space-12); block-size: var(--k-space-12); border-radius: var(--k-radius-pill); }
+.k-skeleton-stack { display: grid; gap: var(--k-space-3); }
+
+/* ---- Barre de progression : role="progressbar" ; la valeur est aussi écrite en toutes lettres. ---- */
+.k-progress { display: grid; gap: var(--k-space-2); font-family: var(--k-font-body); font-size: var(--k-fs-small); line-height: var(--k-lh-body); color: var(--k-text); }
+.k-progress__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--k-space-4); }
+.k-progress__value { color: var(--k-text-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.k-progress__track { block-size: var(--k-space-2); overflow: hidden; background: color-mix(in srgb, var(--k-text) 14%, transparent); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-pill); }
+/* La barre ne prend l'accent que si --k-accent-on-bg vaut 1 ; sinon la couleur du texte */
+.k-progress__bar {
+  block-size: 100%; inline-size: calc(var(--_value, 0) * 100%);
+  background: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text));
+  transition: inline-size var(--k-dur-base) var(--k-ease-out);
+}
+/* Durée inconnue : la barre va et vient */
+.k-progress--indeterminate .k-progress__bar { inline-size: 40%; animation: k-progress calc(var(--k-dur-slow) * 2) var(--k-ease-in-out) infinite; }
+@keyframes k-progress { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+/* Terminé / échec : une icône et un mot dans .k-progress__status, la couleur ne fait qu'appuyer */
+.k-progress__status { display: none; align-items: center; gap: var(--k-space-2); }
+.k-progress[data-k-state="done"] .k-progress__status--done, .k-progress[data-k-state="error"] .k-progress__status--error { display: flex; }
+.k-progress__status--done .k-icon { color: var(--k-success); }
+.k-progress__status--error .k-icon { color: var(--k-danger); }
+.k-progress[data-k-state="error"] .k-progress__bar { background: var(--k-danger); }
+
+@media (prefers-reduced-motion: reduce) {
+  .k-skeleton { animation: none; }
+  .k-progress__bar { transition: none; }
+  .k-progress--indeterminate .k-progress__bar { inline-size: 100%; animation: none; opacity: 0.45; }
+}

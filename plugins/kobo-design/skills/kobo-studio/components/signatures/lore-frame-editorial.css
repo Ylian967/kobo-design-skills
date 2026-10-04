@@ -1,0 +1,26 @@
+/*
+ * kobo-studio — variantes de signature : lore-frame-editorial (le coin biseauté)
+ * S'ajoute PAR-DESSUS le composant de base : <button class="k-btn k-btn--biseau">, <article class="k-card k-card--biseau">.
+ * Fichier de signature : il a le droit de lire les --k-sig-* du skill. Les composants de base, jamais.
+ *
+ * Intensité (data-k-intensity sur un parent) :
+ *   full, reduced : le biseau est dessiné.
+ *   off           : --k-sig vaut 0, le biseau se referme ; il reste le composant de base, intact.
+ */
+.k-btn--biseau, .k-card--biseau { --_cut: calc(var(--k-cut) * var(--k-sig)); }
+.k-card--biseau { --_cut: calc(var(--k-sig-chamfer-lg, var(--k-cut)) * var(--k-sig)); }
+
+/* Bouton : le fond et la bordure passent sur un calque rogné, pour que le contour de focus reste entier */
+.k-btn--biseau { z-index: 0; background: transparent; border-color: transparent; box-shadow: none; }
+.k-btn--biseau::before {
+  content: ""; position: absolute; inset: calc(var(--k-border-w) * -1); z-index: -1;
+  background: var(--_bg); border: var(--k-border-w) solid var(--_edge); border-radius: inherit;
+  clip-path: polygon(0 0, calc(100% - var(--_cut)) 0, 100% var(--_cut), 100% 100%, 0 100%);
+  transition: background-color var(--k-dur-fast) var(--k-ease-out);
+}
+
+/* Carte : toute la carte est rognée (image comprise). Le contour de focus passe à l'intérieur pour ne pas être coupé. */
+.k-card--biseau { clip-path: polygon(0 0, calc(100% - var(--_cut)) 0, 100% var(--_cut), 100% 100%, 0 100%); box-shadow: none; }
+.k-card--biseau.k-card--link:has(.k-card__title a:focus-visible) { outline-offset: calc(var(--k-focus-w) * -2); }
+
+@media (prefers-reduced-motion: reduce) { .k-btn--biseau::before { transition: none; } }

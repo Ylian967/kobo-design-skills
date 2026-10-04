@@ -13,7 +13,7 @@
  *   --k-sig-sw-blue, --k-sig-sw-grey, --k-sig-sw-black, --k-sig-fs-nav, --k-sig-bento-pad, --k-sig-bento-gap,
  *   --k-sig-bento-row, --k-sig-pill-w, --k-sig-arrows-w, --k-sig-swatch
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap");
@@ -113,11 +113,11 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
 }

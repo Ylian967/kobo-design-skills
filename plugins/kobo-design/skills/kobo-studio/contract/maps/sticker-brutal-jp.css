@@ -14,7 +14,7 @@
  *   --k-sig-fs-h1-jp, --k-sig-fs-h4, --k-sig-fs-lead, --k-sig-fs-vertical, --k-sig-field-h, --k-sig-card-pad,
  *   --k-sig-icon, --k-sig-frame-gap
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@400;500;800&family=Outfit:wght@500;600;800&display=swap");
@@ -117,11 +117,11 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
 }

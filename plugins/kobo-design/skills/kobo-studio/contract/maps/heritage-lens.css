@@ -14,7 +14,7 @@
  *   --k-sig-bullet-step, --k-sig-col-text, --k-sig-ease-expo, --k-sig-ease-in, --k-sig-dur-fill,
  *   --k-sig-dur-open, --k-sig-spin-slow, --k-sig-spin-mid, --k-sig-spin-fast, --k-sig-pulse
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Viaoda+Libre&display=swap");
@@ -120,7 +120,7 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-fill: 0s;
   --k-sig-dur-open: 0s;
   --k-sig-spin-slow: 0s;
@@ -130,7 +130,7 @@
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-fill: 0s;
   --k-sig-dur-open: 0s;
   --k-sig-spin-slow: 0s;

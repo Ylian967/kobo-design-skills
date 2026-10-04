@@ -19,7 +19,7 @@
  *   --k-sig-round, --k-sig-ease, --k-sig-ease-snap, --k-sig-dur-xs, --k-sig-dur-reveal, --k-sig-dur-glitch,
  *   --k-sig-glitch-every, --k-sig-dur-stroke, --k-sig-dur-spin, --k-sig-hover-shift
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap");
@@ -153,7 +153,7 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-xs: 0s;
   --k-sig-dur-reveal: 0s;
   --k-sig-dur-glitch: 0s;
@@ -163,7 +163,7 @@
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-xs: 0s;
   --k-sig-dur-reveal: 0s;
   --k-sig-dur-glitch: 0s;

@@ -100,16 +100,17 @@
 }
 
 /*
- * Intensité : attribut data-k-intensity sur <html>.
+ * Intensité : attribut data-k-intensity sur <html> ou sur n'importe quel élément parent (il vaut pour sa descendance).
  *   full    (ou absent) : tout le skill.
  *   reduced : ornements gardés, mouvements signature coupés.
  *   off     : couleurs, typo et formes gardées ; ornements ET mouvements signature coupés.
  * Chaque fiche complète ces blocs avec ses propres --k-sig-* (durées remises à 0).
  * Un ornement de signature porte l'attribut data-k-sig ; s'il bouge, data-k-sig="motion".
  */
-:root[data-k-intensity="reduced"] { --k-sig-motion: 0; }
-:root[data-k-intensity="off"] { --k-sig: 0; --k-sig-motion: 0; }
+[data-k-intensity="full"] { --k-sig: 1; --k-sig-motion: 1; }
+[data-k-intensity="reduced"] { --k-sig: 1; --k-sig-motion: 0; }
+[data-k-intensity="off"] { --k-sig: 0; --k-sig-motion: 0; }
 
-:root[data-k-intensity="off"] [data-k-sig] { display: none !important; }
-:root[data-k-intensity="reduced"] [data-k-sig~="motion"],
-:root[data-k-intensity="off"] [data-k-sig~="motion"] { animation: none !important; transition: none !important; }
+[data-k-intensity="off"] [data-k-sig]:not([data-k-intensity="full"] *, [data-k-intensity="reduced"] *) { display: none !important; }
+[data-k-intensity="reduced"] [data-k-sig~="motion"],
+[data-k-intensity="off"] [data-k-sig~="motion"] { animation: none !important; transition: none !important; }

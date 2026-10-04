@@ -2,18 +2,19 @@
  * kobo-studio — fiche de correspondance : glacial-mono-3d
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 34 reliés ou relevés, 7 dérivés, 15 en repli.
+ * Rôles : 33 reliés ou relevés, 8 dérivés, 15 en repli.
  * 31 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap
  *
- * Signature : 19 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
- *   --k-sig-mist, --k-sig-sky, --k-sig-rock, --k-sig-shade, --k-sig-ice, --k-sig-white, --k-sig-prism-a,
- *   --k-sig-prism-b, --k-sig-prism-c, --k-sig-loader, --k-sig-muted, --k-sig-glow, --k-sig-line,
- *   --k-sig-text-sm, --k-sig-text-col, --k-sig-bracket, --k-sig-dur-born, --k-sig-dur-glitch, --k-sig-scramble
+ * Signature : 20 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-mist, --k-sig-sky, --k-sig-rock, --k-sig-shade, --k-sig-ice, --k-sig-halo, --k-sig-white,
+ *   --k-sig-prism-a, --k-sig-prism-b, --k-sig-prism-c, --k-sig-loader, --k-sig-muted, --k-sig-glow,
+ *   --k-sig-line, --k-sig-text-sm, --k-sig-text-col, --k-sig-bracket, --k-sig-dur-born, --k-sig-dur-glitch,
+ *   --k-sig-scramble
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Unbounded:wght@700&display=swap");
@@ -24,7 +25,7 @@
   /* ---- Surfaces ---- */
   --k-bg: var(--fog); /* [main] */
   --k-surface: var(--frost); /* [main] */
-  --k-surface-2: var(--halo); /* [main] */
+  --k-surface-2: color-mix(in srgb, var(--frost) 50%, var(--fog)); /* [main] dérivé : à mi-chemin entre le fond et la surface (--halo, presque blanc, faisait ressortir les éléments désactivés) */
   --k-overlay: var(--scrim-dark); /* [main] */
   --k-scrim: var(--scrim-light); /* [main] */
   --k-bg-inverse: var(--night); /* [main] */
@@ -99,6 +100,7 @@
   --k-sig-rock: var(--rock);
   --k-sig-shade: var(--shade);
   --k-sig-ice: var(--ice);
+  --k-sig-halo: var(--halo);
   --k-sig-white: var(--white);
   --k-sig-prism-a: var(--prism-a);
   --k-sig-prism-b: var(--prism-b);
@@ -116,14 +118,14 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-born: 0s;
   --k-sig-dur-glitch: 0s;
   --k-sig-scramble: 0s;
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-born: 0s;
   --k-sig-dur-glitch: 0s;
   --k-sig-scramble: 0s;

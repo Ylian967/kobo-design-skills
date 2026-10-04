@@ -15,7 +15,7 @@
  *   --k-sig-fs-inset, --k-sig-fs-ticker, --k-sig-gap, --k-sig-hero-h, --k-sig-ticker-h, --k-sig-card-h,
  *   --k-sig-r-inset, --k-sig-round, --k-sig-dur-ticker
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap");
@@ -126,11 +126,11 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-ticker: 0s;
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-ticker: 0s;
 }

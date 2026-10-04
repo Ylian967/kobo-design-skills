@@ -230,7 +230,7 @@ def build(skill, adopt=False):
         line += f"--k-sig-{s}, "
     if sig:
         L.append(line.rstrip(", "))
-    L += [" *", ' * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).', " */", ""]
+    L += [" *", ' * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).', " */", ""]
     L += [f'@import url("{u}");' for u in fonts] + ['@import "../roles.css";',
                                                      f'@import "../../../{skill}/references/tokens.css";', "", ":root {"]
     g = None
@@ -246,9 +246,9 @@ def build(skill, adopt=False):
     zero = "\n".join(f"  --k-sig-{m}: 0s;" for m in motion) or \
         "  /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */"
     L += ["/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */",
-          ':root[data-k-intensity="reduced"] {', zero, "}", "",
+          '[data-k-intensity="reduced"] {', zero, "}", "",
           "/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */",
-          ':root[data-k-intensity="off"] {', zero, "}", ""]
+          '[data-k-intensity="off"] {', zero, "}", ""]
     return "\n".join(L), n_man
 
 

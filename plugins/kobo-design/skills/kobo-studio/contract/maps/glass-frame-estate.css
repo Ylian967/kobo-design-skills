@@ -17,7 +17,7 @@
  *   --k-sig-blur-glass, --k-sig-blur-menu, --k-sig-blur-back, --k-sig-dur-menu, --k-sig-rise, --k-sig-flip-y,
  *   --k-sig-dur-odo
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&family=Inter:wght@400;500;600&display=swap");
@@ -137,13 +137,13 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-menu: 0s;
   --k-sig-dur-odo: 0s;
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-menu: 0s;
   --k-sig-dur-odo: 0s;
 }

@@ -13,7 +13,7 @@
  *   --k-sig-fog-1, --k-sig-fs-lead, --k-sig-screen-h, --k-sig-nav-top, --k-sig-aside-w, --k-sig-row-h,
  *   --k-sig-circle, --k-sig-tab-h, --k-sig-look-w, --k-sig-look-h, --k-sig-ease-cut
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Unbounded:wght@700;800&display=swap");
@@ -114,11 +114,11 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
 }

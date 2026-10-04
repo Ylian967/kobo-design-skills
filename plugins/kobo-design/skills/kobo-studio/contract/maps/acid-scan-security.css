@@ -15,7 +15,7 @@
  *   --k-sig-bracket-len, --k-sig-bracket-w, --k-sig-ease-step, --k-sig-dur-boot, --k-sig-dur-scan,
  *   --k-sig-dur-decode, --k-sig-dur-blink
  *
- * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> (blocs en fin de fiche).
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
 
 @import url("https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
@@ -123,7 +123,7 @@
 }
 
 /* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
-:root[data-k-intensity="reduced"] {
+[data-k-intensity="reduced"] {
   --k-sig-dur-boot: 0s;
   --k-sig-dur-scan: 0s;
   --k-sig-dur-decode: 0s;
@@ -131,7 +131,7 @@
 }
 
 /* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
-:root[data-k-intensity="off"] {
+[data-k-intensity="off"] {
   --k-sig-dur-boot: 0s;
   --k-sig-dur-scan: 0s;
   --k-sig-dur-decode: 0s;

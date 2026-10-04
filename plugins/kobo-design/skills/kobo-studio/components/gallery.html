@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kobo-studio — galerie des composants</title>
+<!-- Galerie des composants : les dix composants dans tous leurs états, sous chacun des 23 skills.
+     S'ouvre directement depuis le disque (file://) dans Chrome ; une connexion est nécessaire pour les polices et les photos.
+     Les données affichées (Cordée Brume, sorties, prix, personnes) sont fictives. -->
+<link rel="stylesheet" href="../contract/roles.css">
+<link rel="stylesheet" id="map" href="../contract/maps/acid-scan-security.css">
+<link rel="stylesheet" href="socle.css">
+<link rel="stylesheet" href="bouton/bouton.css">
+<link rel="stylesheet" href="champ/champ.css">
+<link rel="stylesheet" href="carte/carte.css">
+<link rel="stylesheet" href="barre-nav/barre-nav.css">
+<link rel="stylesheet" href="menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="modale/modale.css">
+<link rel="stylesheet" href="onglets/onglets.css">
+<link rel="stylesheet" href="notification/notification.css">
+<link rel="stylesheet" href="etat-vide/etat-vide.css">
+<link rel="stylesheet" href="chargement/chargement.css">
+<link rel="stylesheet" href="signatures/lore-frame-editorial.css">
+<link rel="stylesheet" href="signatures/acid-scan-security.css">
+<style>
+/* Mise en page de la galerie : uniquement des rôles --k-*, comme les composants. */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--k-bg); color: var(--k-text); scroll-padding-block-start: var(--k-space-24); }
+body { margin: 0; font-family: var(--k-font-body); font-size: var(--k-fs-body); line-height: var(--k-lh-body); }
+
+.g-bar { position: sticky; inset-block-start: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-4); padding: var(--k-space-2) var(--k-edge); border-block-end: var(--k-border-w) solid var(--k-line); }
+.g-bar strong { margin-inline-end: auto; font-family: var(--k-font-display); font-weight: var(--k-fw-display); }
+.g-bar label { display: flex; align-items: center; gap: var(--k-space-2); font-size: var(--k-fs-small); }
+.g-bar select { min-block-size: var(--k-hit-min); max-inline-size: 100%; padding: 0 var(--k-space-3); font: inherit; color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.g-bar select:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+
+main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--k-edge) var(--k-section-y); max-inline-size: calc(var(--k-space-32) * 11); margin-inline: auto; }
+.g-intro { display: grid; gap: var(--k-space-4); }
+.g-intro h1 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); letter-spacing: var(--k-ls-display); overflow-wrap: anywhere; }
+.g-intro p { margin: 0; max-inline-size: calc(var(--k-space-32) * 5); color: var(--k-text-2); }
+.g-notice { display: flex; gap: var(--k-space-3); align-items: flex-start; padding: var(--k-space-4); font-size: var(--k-fs-small); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+
+.g-sec { display: grid; gap: var(--k-space-8); min-inline-size: 0; }
+.g-sec > header { display: grid; gap: var(--k-space-2); padding-block-end: var(--k-space-4); border-block-end: var(--k-border-w) solid var(--k-line-strong); }
+.g-sec h2 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h2); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); letter-spacing: var(--k-ls-display); overflow-wrap: anywhere; }
+.g-sec > header p { margin: 0; max-inline-size: calc(var(--k-space-32) * 5); font-size: var(--k-fs-small); color: var(--k-text-2); }
+.g-grp { display: grid; gap: var(--k-space-4); min-inline-size: 0; }
+.g-grp > h3 { margin: 0; font-family: var(--k-font-mono); font-size: var(--k-fs-label); font-weight: normal; letter-spacing: var(--k-ls-caps); text-transform: uppercase; color: var(--k-text-muted); }
+.g-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--k-space-6) var(--k-space-8); }
+.g-item { display: grid; gap: var(--k-space-2); justify-items: start; }
+.g-cap { font-family: var(--k-font-mono); font-size: var(--k-fs-small); color: var(--k-text-muted); }
+.g-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))), 1fr)); gap: var(--k-space-8) var(--k-space-6); align-items: start; }
+.g-cols--wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 3)), 1fr)); }
+.g-frame { border: var(--k-border-w) dashed var(--k-line); min-inline-size: 0; }
+.g-narrow { max-inline-size: calc(var(--k-space-32) * 3); }
+.g-stack { display: grid; gap: var(--k-space-3); justify-items: stretch; }
+.g-defs { display: none; }
+.g-pad { padding: var(--k-space-8) var(--k-space-6); }
+.g-pad.g-stack { gap: var(--k-space-12); }
+.g-list { margin: 0; padding: 0; list-style: none; display: grid; }
+.g-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--k-space-2) var(--k-space-4); padding-block: var(--k-space-3); border-block-end: var(--k-border-w) solid var(--k-line); }
+.g-list span { color: var(--k-text-2); }
+</style>
+</head>
+<body>
+<svg class="g-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 16v-5M12 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M8 12.5l2.5 2.5L16 9.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-empty" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8M3 13v6h18v-6M3 13h5l1.5 3h5L16 13h5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M20 20l-4.5-4.5M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v5M14 11v5"/></symbol>
+</svg>
+
+<div class="g-bar" data-k-tone="inverse">
+  <strong>kobo-studio · composants</strong>
+  <label>Skill <select id="skill"></select></label>
+  <label>Intensité <select id="intensity"><option>full</option><option>reduced</option><option>off</option></select></label>
+</div>
+
+<main id="haut">
+  <div class="g-intro">
+    <h1>Galerie des composants</h1>
+    <p>Les dix composants du premier lot, dans tous leurs états, dessinés avec les seuls rôles du contrat. Changez de skill et d'intensité dans la barre du haut : rien d'autre ne change que la fiche chargée.</p>
+    <p class="g-notice"><svg class="k-icon" aria-hidden="true"><use href="#i-info"/></svg><span><b>Données fictives.</b> « Cordée Brume », ses sorties, ses prix et ses guides sont inventés pour la démonstration. Les photos sont de vraies photos libres de droits.</span></p>
+  </div>
+
+  <!-- ============ Barre de navigation + menu mobile ============ -->
+  <section class="g-sec" id="nav">
+    <header><h2>Barre de navigation et menu mobile</h2><p>La barre mesure si ses liens tiennent. Quand ils ne tiennent plus, elle les replie derrière le bouton « Menu », qui ouvre le menu plein écran. Aucun point de rupture.</p></header>
+    <div class="g-grp"><h3>Dépliée (si la largeur le permet)</h3>
+      <div class="g-frame">
+        <header class="k-nav">
+          <a class="k-nav__brand" href="#haut">Cordée Brume</a>
+          <nav aria-label="Navigation principale">
+            <ul class="k-nav__list">
+              <li><a class="k-nav__link" href="#cartes" aria-current="page">Sorties</a></li>
+              <li><a class="k-nav__link" href="#onglets">Réservations</a></li>
+              <li><a class="k-nav__link" href="#vide">Guides</a></li>
+              <li><a class="k-nav__link" href="#champs">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="k-nav__actions">
+            <a class="k-btn k-nav__extra" href="#modale">Réserver</a>
+            <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+          </div>
+        </header>
+      </div>
+    </div>
+    <div class="g-grp"><h3>Repliée (conteneur étroit) — le bouton ouvre le menu mobile</h3>
+      <div class="g-frame g-narrow">
+        <header class="k-nav">
+          <a class="k-nav__brand" href="#haut">Cordée Brume</a>
+          <nav aria-label="Navigation principale, version étroite">
+            <ul class="k-nav__list">
+              <li><a class="k-nav__link" href="#cartes" aria-current="page">Sorties</a></li>
+              <li><a class="k-nav__link" href="#onglets">Réservations</a></li>
+              <li><a class="k-nav__link" href="#vide">Guides</a></li>
+              <li><a class="k-nav__link" href="#champs">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="k-nav__actions">
+            <button type="button" class="k-btn k-btn--secondary k-nav__burger" id="burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+          </div>
+        </header>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="#cartes" aria-current="page">Sorties <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="#onglets">Réservations</a></li>
+        <li><a class="k-menu__link" href="#vide">Guides</a></li>
+        <li><a class="k-menu__link" href="#champs">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="#modale" data-k-menu-close>Réserver une sortie</a></div>
+  </dialog>
+
+  <!-- ============ Bouton ============ -->
+  <section class="g-sec" id="boutons">
+    <header><h2>Bouton</h2><p>La zone cliquable fait au moins 44 px de côté, même quand le bouton affiché est plus petit.</p></header>
+    <div class="g-grp"><h3>Principal — états</h3><div class="g-row">
+      <div class="g-item"><button type="button" class="k-btn">Réserver</button><span class="g-cap">repos</span></div>
+      <div class="g-item"><button type="button" class="k-btn" data-k-state="hover">Réserver</button><span class="g-cap">survol</span></div>
+      <div class="g-item"><button type="button" class="k-btn" data-k-state="focus">Réserver</button><span class="g-cap">focus clavier</span></div>
+      <div class="g-item"><button type="button" class="k-btn" data-k-state="active">Réserver</button><span class="g-cap">appui</span></div>
+      <div class="g-item"><button type="button" class="k-btn" disabled>Complet</button><span class="g-cap">désactivé</span></div>
+      <div class="g-item"><button type="button" class="k-btn" aria-busy="true"><span class="k-btn__spinner" aria-hidden="true"></span>Envoi en cours…</button><span class="g-cap">chargement</span></div>
+    </div></div>
+    <div class="g-grp"><h3>Variantes</h3><div class="g-row">
+      <div class="g-item"><button type="button" class="k-btn k-btn--secondary">Voir le programme</button><span class="g-cap">secondaire</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--secondary" data-k-state="hover">Voir le programme</button><span class="g-cap">secondaire, survol</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--ghost">En savoir plus</button><span class="g-cap">discret</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--danger"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Supprimer la réservation</button><span class="g-cap">destructeur</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--pill">S'inscrire</button><span class="g-cap">pilule</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--secondary k-btn--icon" aria-label="Fermer"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button><span class="g-cap">icône seule</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--secondary" aria-pressed="true" id="toggle">Favori</button><span class="g-cap">bascule enfoncée</span></div>
+    </div></div>
+    <div class="g-grp"><h3>Déclencheur — simuler un envoi</h3><div class="g-row">
+      <div class="g-item"><button type="button" class="k-btn" id="send"><span class="k-btn__spinner" aria-hidden="true"></span><span>Envoyer la demande</span></button><span class="g-cap" id="send-cap" role="status">prêt</span></div>
+    </div></div>
+  </section>
+
+  <!-- ============ Champ ============ -->
+  <section class="g-sec" id="champs">
+    <header><h2>Champ</h2><p>Une erreur est toujours écrite, précédée d'une icône, et reliée au champ. Elle dit quoi corriger.</p></header>
+    <div class="g-cols">
+      <div class="g-item g-stack"><div class="k-field">
+        <label class="k-field__label" for="c1">Prénom</label>
+        <div class="k-field__box"><input class="k-field__control" id="c1" type="text" autocomplete="off" placeholder="Camille"></div>
+      </div><span class="g-cap">repos, avec exemple</span></div>
+      <div class="g-item g-stack"><div class="k-field">
+        <label class="k-field__label" for="c2">Prénom</label>
+        <div class="k-field__box"><input class="k-field__control" id="c2" type="text" value="Camille" autocomplete="off" data-k-state="focus"></div>
+      </div><span class="g-cap">focus clavier</span></div>
+      <div class="g-item g-stack"><div class="k-field">
+        <label class="k-field__label" for="c3">Adresse e-mail</label>
+        <div class="k-field__box"><input class="k-field__control" id="c3" type="email" value="camille@exemple" aria-invalid="true" aria-describedby="c3-e" autocomplete="off"></div>
+        <p class="k-field__error" id="c3-e"><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Adresse incomplète : il manque le domaine, par exemple « .fr ».</span></p>
+      </div><span class="g-cap">erreur</span></div>
+      <div class="g-item g-stack"><div class="k-field">
+        <label class="k-field__label" for="c4">Code de parrainage</label>
+        <div class="k-field__box"><input class="k-field__control" id="c4" type="text" value="BRUME-2026" disabled></div>
+        <span class="k-field__help">Disponible après la première sortie.</span>
+      </div><span class="g-cap">désactivé</span></div>
+      <div class="g-item g-stack"><div class="k-field">
+        <label class="k-field__label" for="c5">Numéro de réservation</label>
+        <div class="k-field__box"><input class="k-field__control" id="c5" type="text" value="CB-0412" readonly></div>
+      </div><span class="g-cap">lecture seule</span></div>
+      <div class="g-item g-stack"><div class="k-field">
+        <label class="k-field__label" for="c6">Identifiant</label>
+        <div class="k-field__box" aria-busy="true"><input class="k-field__control" id="c6" type="text" value="camille.r" aria-describedby="c6-h" autocomplete="off"><span class="k-field__spinner" aria-hidden="true"></span></div>
+        <span class="k-field__help" id="c6-h" role="status">Vérification de la disponibilité…</span>
+      </div><span class="g-cap">vérification en cours</span></div>
+    </div>
+    <div class="g-grp"><h3>Déclencheurs — essayez : sortez du champ vide, ou envoyez</h3>
+      <form class="g-cols g-cols--wide" id="form" novalidate>
+        <div class="k-field" data-k-validate>
+          <label class="k-field__label" for="f-mail">Adresse e-mail</label>
+          <div class="k-field__box"><input class="k-field__control" id="f-mail" type="email" required autocomplete="email" aria-describedby="f-mail-h"></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          <span class="k-field__help" id="f-mail-h">Pour la confirmation. Aucune lettre d'information.</span>
+        </div>
+        <div class="k-field" data-k-validate>
+          <label class="k-field__label" for="f-msg">Votre niveau et vos envies <span class="k-field__opt">(20 caractères au moins)</span></label>
+          <div class="k-field__box"><textarea class="k-field__control" id="f-msg" required minlength="20" maxlength="280" aria-describedby="f-msg-h"></textarea></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          <div class="k-field__foot"><span class="k-field__help" id="f-msg-h">Le guide adapte l'itinéraire.</span><span class="k-field__count" aria-hidden="true"></span></div>
+        </div>
+        <div class="g-row">
+          <button type="submit" class="k-btn"><span class="k-btn__spinner" aria-hidden="true"></span><span>Envoyer</span></button>
+          <button type="button" class="k-btn k-btn--secondary" id="server-error">Simuler une erreur du serveur</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ Carte ============ -->
+  <section class="g-sec" id="cartes">
+    <header><h2>Carte</h2><p>Une carte cliquable l'est tout entière. Une carte sélectionnée le dit en toutes lettres.</p></header>
+    <div class="g-cols">
+      <div class="g-item g-stack"><article class="k-card k-card--link">
+        <div class="k-card__media"><img src="https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?auto=format&fit=crop&w=720&h=480&q=70" alt="Cordée de trois alpinistes au pied d'un mur de glace bleue"></div>
+        <div class="k-card__body"><span class="k-card__meta">2 jours · niveau confirmé</span><h3 class="k-card__title"><a href="#modale">Traversée des séracs</a></h3><p class="k-card__text">Approche au lever du jour, nuit en refuge, retour par le col.</p></div>
+        <div class="k-card__foot"><span>420 € par personne</span><span>4 places</span></div>
+      </article><span class="g-cap">cliquable, repos</span></div>
+      <div class="g-item g-stack"><article class="k-card k-card--link" data-k-state="hover">
+        <div class="k-card__media"><img src="https://images.unsplash.com/photo-1579624512056-3eb398311205?auto=format&fit=crop&w=720&h=480&q=70" alt="Deux tentes posées sur la neige face à la mer de nuages au crépuscule"></div>
+        <div class="k-card__body"><span class="k-card__meta">1 nuit · tous niveaux</span><h3 class="k-card__title"><a href="#modale">Bivouac au-dessus des nuages</a></h3><p class="k-card__text">Montée en fin d'après-midi, repas chaud, lever de soleil sur les crêtes.</p></div>
+        <div class="k-card__foot"><span>180 € par personne</span><span>6 places</span></div>
+      </article><span class="g-cap">survol</span></div>
+      <div class="g-item g-stack"><article class="k-card" aria-current="true">
+        <div class="k-card__media"><img src="https://images.unsplash.com/photo-1576866946478-8d0d015bf3e5?auto=format&fit=crop&w=720&h=480&q=70" alt="Groupe de randonneurs en raquettes dans une forêt de sapins enneigés"></div>
+        <div class="k-card__body"><span class="k-card__meta">Demi-journée · débutant</span><h3 class="k-card__title">Raquettes en forêt</h3><p class="k-card__text">Boucle de trois heures à l'abri du vent.</p><span class="k-card__flag"><svg class="k-icon" aria-hidden="true"><use href="#i-check"/></svg>Sélectionnée</span></div>
+        <div class="k-card__foot"><span>55 € par personne</span><button type="button" class="k-btn k-btn--secondary">Retirer</button></div>
+      </article><span class="g-cap">sélectionnée</span></div>
+      <div class="g-item g-stack"><article class="k-card" aria-disabled="true">
+        <div class="k-card__media"><img src="https://images.unsplash.com/photo-1516914589923-f105f1535f88?auto=format&fit=crop&w=720&h=480&q=70" alt="Arête rocheuse enneigée balayée par le vent"></div>
+        <div class="k-card__body"><span class="k-card__meta">Complet</span><h3 class="k-card__title">Arête du grand vent</h3><p class="k-card__text">Prochaine date ouverte en février.</p></div>
+        <div class="k-card__foot"><span>Complet</span><button type="button" class="k-btn" disabled>Réserver</button></div>
+      </article><span class="g-cap">indisponible</span></div>
+      <div class="g-item g-stack"><article class="k-card k-card--link" data-k-state="focus">
+        <div class="k-card__body"><span class="k-card__meta">Conseil</span><h3 class="k-card__title"><a href="#champs">Préparer son sac</a></h3><p class="k-card__text">La liste du matériel, sortie par sortie.</p><div class="k-card__inset">Prêt de crampons et de piolets inclus.</div></div>
+      </article><span class="g-cap">sans image, focus clavier</span></div>
+      <div class="g-item g-stack"><article class="k-card" aria-busy="true" id="card-loading">
+        <span class="k-sr-only" role="status">Chargement de la sortie…</span>
+        <span class="k-skeleton k-skeleton--media" aria-hidden="true"></span>
+        <div class="k-card__body k-skeleton-stack"><span class="k-skeleton k-skeleton--short" aria-hidden="true"></span><span class="k-skeleton k-skeleton--title" aria-hidden="true"></span><span class="k-skeleton" aria-hidden="true"></span><span class="k-skeleton k-skeleton--medium" aria-hidden="true"></span></div>
+      </article><span class="g-cap">chargement (squelette)</span></div>
+    </div>
+  </section>
+
+  <!-- ============ Onglets ============ -->
+  <section class="g-sec" id="onglets">
+    <header><h2>Onglets</h2><p>Au clavier : une tabulation entre dans la liste, les flèches changent d'onglet, Début et Fin vont aux extrémités.</p></header>
+    <div class="k-tabs">
+      <div class="k-tabs__list" role="tablist" aria-label="Mes réservations">
+        <button type="button" role="tab" class="k-tabs__tab" id="t1" aria-controls="p1" aria-selected="true">À venir <span class="k-tabs__count">2</span></button>
+        <button type="button" role="tab" class="k-tabs__tab" id="t2" aria-controls="p2" aria-selected="false">Passées <span class="k-tabs__count">5</span></button>
+        <button type="button" role="tab" class="k-tabs__tab" id="t3" aria-controls="p3" aria-selected="false">En attente <span class="k-tabs__count">0</span></button>
+        <button type="button" role="tab" class="k-tabs__tab" id="t4" aria-controls="p4" aria-selected="false" disabled>Factures</button>
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">
+        <ul class="g-list"><li><b>Bivouac au-dessus des nuages</b><span>samedi 14 février · 2 personnes</span></li><li><b>Raquettes en forêt</b><span>dimanche 1er mars · 4 personnes</span></li></ul>
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
+        <ul class="g-list"><li><b>Traversée des séracs</b><span>août dernier · 2 personnes</span></li><li><b>Raquettes en forêt</b><span>janvier dernier · 3 personnes</span></li></ul>
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
+        <div class="k-empty k-empty--plain"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h3 class="k-empty__title">Aucune demande en attente</h3><p class="k-empty__text">Les demandes envoyées à un guide apparaissent ici jusqu'à sa réponse, en général sous deux jours.</p></div>
+      </div>
+      <div class="k-tabs__panel" role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden></div>
+    </div>
+    <div class="g-grp"><h3>États figés</h3><div class="g-row">
+      <div class="g-item"><div class="k-tabs"><div class="k-tabs__list"><span class="k-tabs__tab" data-k-state="hover">À venir</span></div></div><span class="g-cap">survol</span></div>
+      <div class="g-item"><div class="k-tabs"><div class="k-tabs__list"><span class="k-tabs__tab" data-k-state="focus">À venir</span></div></div><span class="g-cap">focus clavier</span></div>
+    </div></div>
+  </section>
+
+  <!-- ============ Modale ============ -->
+  <section class="g-sec" id="modale">
+    <header><h2>Modale</h2><p>Le focus reste dans la fenêtre, Échap la ferme, et le focus revient au bouton qui l'a ouverte.</p></header>
+    <div class="g-row">
+      <div class="g-item"><button type="button" class="k-btn" data-k-modal-open="m-book" id="open-book">Réserver une sortie</button><span class="g-cap">fenêtre avec formulaire</span></div>
+      <div class="g-item"><button type="button" class="k-btn k-btn--danger" data-k-modal-open="m-cancel" id="open-cancel"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Annuler ma réservation</button><span class="g-cap">confirmation (ne se ferme pas par le voile)</span></div>
+      <div class="g-item"><span class="g-cap" id="modal-result" role="status">aucune action pour l'instant</span></div>
+    </div>
+  </section>
+
+  <dialog class="k-modal" id="m-book" aria-labelledby="m-book-t" data-k-modal-dismiss="backdrop">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="m-book-t">Réserver « Bivouac au-dessus des nuages »</h2>
+      <button type="button" class="k-btn k-btn--secondary k-btn--icon" aria-label="Fermer la fenêtre" data-k-modal-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <div class="k-modal__body g-stack">
+      <p>Samedi 14 février, départ à 15 h du parking du col. Il reste 6 places.</p>
+      <div class="k-field"><label class="k-field__label" for="m-nb">Nombre de personnes</label><div class="k-field__box"><input class="k-field__control" id="m-nb" type="number" min="1" max="6" value="2" autofocus></div></div>
+    </div>
+    <div class="k-modal__foot"><button type="button" class="k-btn k-btn--secondary" data-k-modal-close>Plus tard</button><button type="button" class="k-btn" data-k-modal-close="reserve">Confirmer la réservation</button></div>
+  </dialog>
+
+  <dialog class="k-modal" id="m-cancel" role="alertdialog" aria-labelledby="m-cancel-t" aria-describedby="m-cancel-d">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="m-cancel-t">Annuler la réservation ?</h2></div>
+    <div class="k-modal__body" id="m-cancel-d"><p>Votre place pour « Raquettes en forêt » du dimanche 1er mars sera rendue. Le remboursement est intégral jusqu'à sept jours avant la sortie.</p></div>
+    <div class="k-modal__foot"><button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Garder ma place</button><button type="button" class="k-btn k-btn--danger" data-k-modal-close="annule"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Oui, annuler</button></div>
+  </dialog>
+
+  <!-- ============ Notification ============ -->
+  <section class="g-sec" id="notifications">
+    <header><h2>Notification</h2><p>Chaque notification a une icône et un titre écrit : la couleur ne fait que les appuyer. Elle est annoncée aux lecteurs d'écran et se ferme au bouton ou à la touche Échap.</p></header>
+    <div class="g-grp"><h3>Déclencheurs</h3><div class="g-row">
+      <button type="button" class="k-btn k-btn--secondary" data-toast="success">Succès</button>
+      <button type="button" class="k-btn k-btn--secondary" data-toast="info">Information</button>
+      <button type="button" class="k-btn k-btn--secondary" data-toast="warning">Avertissement</button>
+      <button type="button" class="k-btn k-btn--secondary" data-toast="error">Erreur (reste affichée)</button>
+    </div></div>
+    <div class="g-grp"><h3>Les quatre types, figés</h3><div class="g-cols g-cols--wide">
+      <div class="k-toast k-toast--success"><svg class="k-icon k-toast__icon" aria-hidden="true"><use href="#i-ok"/></svg><div><p class="k-toast__title">Réservation enregistrée</p><p class="k-toast__text">La confirmation part vers camille@exemple.fr.</p></div><button type="button" class="k-toast__close" aria-label="Fermer la notification : Réservation enregistrée"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+      <div class="k-toast k-toast--info"><svg class="k-icon k-toast__icon" aria-hidden="true"><use href="#i-info"/></svg><div><p class="k-toast__title">Le départ est avancé à 14 h 30</p><p class="k-toast__text">La météo annonce du vent en soirée.</p></div><button type="button" class="k-toast__close" aria-label="Fermer la notification : Le départ est avancé à 14 h 30"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+      <div class="k-toast k-toast--warning"><svg class="k-icon k-toast__icon" aria-hidden="true"><use href="#i-warn"/></svg><div><p class="k-toast__title">Il ne reste que deux places</p><p class="k-toast__text">Votre panier est gardé dix minutes.</p></div><button type="button" class="k-toast__close" aria-label="Fermer la notification : Il ne reste que deux places"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+      <div class="k-toast k-toast--error"><svg class="k-icon k-toast__icon" aria-hidden="true"><use href="#i-err"/></svg><div><p class="k-toast__title">Paiement refusé</p><p class="k-toast__text">La banque n'a pas validé la carte. Rien n'a été débité.</p><button type="button" class="k-btn k-btn--secondary k-toast__action">Réessayer</button></div><button type="button" class="k-toast__close" aria-label="Fermer la notification : Paiement refusé"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    </div></div>
+  </section>
+
+  <!-- ============ État vide ============ -->
+  <section class="g-sec" id="vide">
+    <header><h2>État vide</h2><p>Il dit ce qui se passe, pourquoi, et quoi faire ensuite.</p></header>
+    <div class="g-cols g-cols--wide">
+      <div class="g-item g-stack"><div class="k-empty"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h3 class="k-empty__title">Aucune réservation ce mois-ci</h3><p class="k-empty__text">Dès qu'une personne réserve une de vos sorties, elle apparaît ici avec ses coordonnées.</p><div class="k-empty__actions"><a class="k-btn" href="#cartes">Voir mes sorties</a></div></div><span class="g-cap">liste vide</span></div>
+      <div class="g-item g-stack"><div class="k-empty k-empty--center"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-search"/></svg><h3 class="k-empty__title">Aucune sortie pour « canyon »</h3><p class="k-empty__text">Cordée Brume ne propose que des sorties d'hiver. Essayez « raquettes » ou « bivouac ».</p><div class="k-empty__actions"><button type="button" class="k-btn k-btn--secondary">Effacer la recherche</button></div></div><span class="g-cap">recherche sans résultat, centré</span></div>
+      <div class="g-item g-stack"><div class="k-empty k-empty--error" role="alert"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-err"/></svg><h3 class="k-empty__title">Les réservations n'ont pas pu être chargées</h3><p class="k-empty__text">Le serveur n'a pas répondu. Vos données ne sont pas perdues.</p><div class="k-empty__actions"><button type="button" class="k-btn" id="retry">Réessayer</button></div></div><span class="g-cap">échec de chargement</span></div>
+    </div>
+  </section>
+
+  <!-- ============ Chargement ============ -->
+  <section class="g-sec" id="chargement">
+    <header><h2>Chargement</h2><p>Le squelette tient la place du contenu ; la barre dit où on en est, en toutes lettres.</p></header>
+    <div class="g-cols g-cols--wide">
+      <div class="g-item g-stack">
+        <div id="load-zone" class="g-stack" aria-busy="false">
+          <ul class="g-list"><li><b>Élise Varnier</b><span>guide de haute montagne</span></li><li><b>Tom Achard</b><span>accompagnateur</span></li><li><b>Inès Morel</b><span>guide de haute montagne</span></li></ul>
+        </div>
+        <button type="button" class="k-btn k-btn--secondary" id="load">Simuler un chargement</button>
+        <span class="g-cap">liste des guides ↔ squelette</span>
+      </div>
+      <div class="g-item g-stack">
+        <div class="k-progress" id="prog">
+          <div class="k-progress__head"><span id="prog-l">Import de reservations.csv</span><span class="k-progress__value">0 %</span></div>
+          <div class="k-progress__track" role="progressbar" aria-labelledby="prog-l" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="k-progress__bar"></div></div>
+          <p class="k-progress__status k-progress__status--done" role="status"><svg class="k-icon" aria-hidden="true"><use href="#i-check"/></svg><span>Terminé : 128 réservations importées.</span></p>
+          <p class="k-progress__status k-progress__status--error" role="alert"><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+        </div>
+        <div class="g-row"><button type="button" class="k-btn k-btn--secondary" id="prog-run">Lancer l'import</button><button type="button" class="k-btn k-btn--secondary" id="prog-fail">Simuler un échec</button></div>
+        <span class="g-cap">barre pilotée</span>
+      </div>
+      <div class="g-item g-stack">
+        <div class="k-progress"><div class="k-progress__head"><span id="pg2">Envoi des photos</span><span class="k-progress__value">40 %</span></div><div class="k-progress__track" role="progressbar" aria-labelledby="pg2" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40"><div class="k-progress__bar" style="--_value: 0.4"></div></div></div>
+        <div class="k-progress k-progress--indeterminate"><div class="k-progress__head"><span id="pg3">Recherche des disponibilités</span><span class="k-progress__value">en cours…</span></div><div class="k-progress__track" role="progressbar" aria-labelledby="pg3" aria-valuetext="en cours"><div class="k-progress__bar"></div></div></div>
+        <div class="k-progress" data-k-state="done"><div class="k-progress__head"><span id="pg4">Export du planning</span><span class="k-progress__value">100 %</span></div><div class="k-progress__track" role="progressbar" aria-labelledby="pg4" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="k-progress__bar" style="--_value: 1"></div></div><p class="k-progress__status k-progress__status--done"><svg class="k-icon" aria-hidden="true"><use href="#i-check"/></svg><span>Terminé.</span></p></div>
+        <div class="k-progress" data-k-state="error"><div class="k-progress__head"><span id="pg5">Synchronisation de l'agenda</span><span class="k-progress__value">62 %</span></div><div class="k-progress__track" role="progressbar" aria-labelledby="pg5" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62"><div class="k-progress__bar" style="--_value: 0.62"></div></div><p class="k-progress__status k-progress__status--error"><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Interrompue : connexion perdue.</span></p></div>
+        <span class="g-cap">40 %, durée inconnue, terminé, échec</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Signature et intensité ============ -->
+  <section class="g-sec" id="signature">
+    <header><h2>Variantes de signature et intensité</h2><p>Le composant de base est neutre. Une variante de signature s'ajoute par-dessus et suit le réglage d'intensité de son parent. Les trois blocs ci-dessous portent chacun leur propre réglage, sous celui de la page.</p></header>
+    <div class="g-cols g-cols--wide">
+      <div class="g-grp" data-k-intensity="full"><h3>Bloc en « full »</h3>
+        <div class="g-row g-pad g-frame">
+          <button type="button" class="k-btn k-btn--biseau">Biseau</button>
+          <button type="button" class="k-btn k-btn--secondary k-btn--biseau">Biseau</button>
+          <button type="button" class="k-btn k-btn--crochets">Crochets</button>
+          <button type="button" class="k-btn k-btn--secondary k-btn--crochets" data-k-state="hover">Crochets, survol</button>
+        </div>
+        <div class="g-pad g-frame g-stack">
+          <article class="k-card k-card--biseau"><div class="k-card__body"><span class="k-card__meta">lore-frame-editorial</span><h3 class="k-card__title">Carte à coin biseauté</h3><p class="k-card__text">Le biseau lit --k-cut et la signature du skill.</p></div></article>
+          <article class="k-card k-card--crochets"><div class="k-card__body"><span class="k-card__meta">acid-scan-security</span><h3 class="k-card__title">Carte à crochets d'angle</h3><p class="k-card__text">Les crochets lisent --k-sig-bracket-len.</p></div></article>
+        </div>
+      </div>
+      <div class="g-grp" data-k-intensity="reduced"><h3>Bloc en « reduced » : ornements fixes</h3>
+        <div class="g-row g-pad g-frame">
+          <button type="button" class="k-btn k-btn--biseau">Biseau</button>
+          <button type="button" class="k-btn k-btn--secondary k-btn--biseau">Biseau</button>
+          <button type="button" class="k-btn k-btn--crochets">Crochets</button>
+          <button type="button" class="k-btn k-btn--secondary k-btn--crochets" data-k-state="hover">Crochets, survol</button>
+        </div>
+        <div class="g-pad g-frame g-stack">
+          <article class="k-card k-card--biseau"><div class="k-card__body"><span class="k-card__meta">lore-frame-editorial</span><h3 class="k-card__title">Carte à coin biseauté</h3><p class="k-card__text">Le biseau reste : c'est un ornement fixe.</p></div></article>
+          <article class="k-card k-card--crochets"><div class="k-card__body"><span class="k-card__meta">acid-scan-security</span><h3 class="k-card__title">Carte à crochets d'angle</h3><p class="k-card__text">Les crochets restent, mais ne bougent plus.</p></div></article>
+        </div>
+      </div>
+      <div class="g-grp" data-k-intensity="off"><h3>Bloc en « off » : composant de base</h3>
+        <div class="g-row g-pad g-frame">
+          <button type="button" class="k-btn k-btn--biseau">Biseau</button>
+          <button type="button" class="k-btn k-btn--secondary k-btn--biseau">Biseau</button>
+          <button type="button" class="k-btn k-btn--crochets">Crochets</button>
+          <button type="button" class="k-btn k-btn--secondary k-btn--crochets" data-k-state="hover">Crochets, survol</button>
+        </div>
+        <div class="g-pad g-frame g-stack">
+          <article class="k-card k-card--biseau"><div class="k-card__body"><span class="k-card__meta">lore-frame-editorial</span><h3 class="k-card__title">Carte à coin biseauté</h3><p class="k-card__text">Le biseau est refermé.</p></div></article>
+          <article class="k-card k-card--crochets"><div class="k-card__body"><span class="k-card__meta">acid-scan-security</span><h3 class="k-card__title">Carte à crochets d'angle</h3><p class="k-card__text">Les crochets ont disparu.</p></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Ton inversé ============ -->
+  <section class="g-sec" id="inverse">
+    <header><h2>Ton inversé</h2><p>Les mêmes composants dans un bloc <code>data-k-tone="inverse"</code> : ils lisent la paire inversée du skill.</p></header>
+    <div class="g-pad g-cols" data-k-tone="inverse">
+      <div class="g-stack"><div class="g-row"><button type="button" class="k-btn">Réserver</button><button type="button" class="k-btn k-btn--secondary">Programme</button><button type="button" class="k-btn" disabled>Complet</button></div>
+        <div class="k-field"><label class="k-field__label" for="i1">Adresse e-mail</label><div class="k-field__box"><input class="k-field__control" id="i1" type="email" value="camille@exemple.fr" autocomplete="off"></div></div></div>
+      <article class="k-card"><div class="k-card__body"><span class="k-card__meta">Prochaine sortie</span><h3 class="k-card__title">Bivouac au-dessus des nuages</h3><p class="k-card__text">Samedi 14 février, 6 places.</p></div></article>
+      <div class="k-toast k-toast--success"><svg class="k-icon k-toast__icon" aria-hidden="true"><use href="#i-ok"/></svg><div><p class="k-toast__title">Réservation enregistrée</p><p class="k-toast__text">Sur fond inversé, l'état garde son icône et son titre ; il perd sa couleur.</p></div><button type="button" class="k-toast__close" aria-label="Fermer la notification : Réservation enregistrée"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    </div>
+  </section>
+</main>
+
+<script src="champ/champ.js"></script>
+<script src="barre-nav/barre-nav.js"></script>
+<script src="menu-mobile/menu-mobile.js"></script>
+<script src="modale/modale.js"></script>
+<script src="onglets/onglets.js"></script>
+<script src="notification/notification.js"></script>
+<script src="chargement/chargement.js"></script>
+<script>
+// Pilotage de la galerie : choix du skill et de l'intensité, déclencheurs de démonstration.
+(function () {
+  var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
+  var $ = function (id) { return document.getElementById(id); }, root = document.documentElement;
+
+  function load(id) {
+    var link = $('map');
+    link.onload = function () { (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); }); };
+    link.href = '../contract/maps/' + id + '.css';
+    history.replaceState(null, '', '#' + id + (root.dataset.kIntensity !== 'full' ? ':' + root.dataset.kIntensity : ''));
+  }
+  SKILLS.forEach(function (id) { $('skill').add(new Option(id, id)); });
+  $('skill').addEventListener('change', function (e) { load(e.target.value); });
+  $('intensity').addEventListener('change', function (e) { root.dataset.kIntensity = e.target.value; load($('skill').value); });
+  var hash = location.hash.slice(1).split(':');
+  if (hash[1]) { root.dataset.kIntensity = hash[1]; $('intensity').value = hash[1]; }
+  if (SKILLS.indexOf(hash[0]) >= 0) $('skill').value = hash[0];
+  load($('skill').value);
+
+  // Bouton : simuler un envoi
+  function busy(btn, label, done) {
+    var text = btn.querySelector('span:last-child'), old = text.textContent;
+    btn.setAttribute('aria-busy', 'true'); text.textContent = label;
+    setTimeout(function () { btn.removeAttribute('aria-busy'); text.textContent = old; done(); }, 1800);
+  }
+  $('send').addEventListener('click', function () {
+    $('send-cap').textContent = 'envoi en cours…';
+    busy($('send'), 'Envoi en cours…', function () { $('send-cap').textContent = 'demande envoyée'; });
+  });
+  $('toggle').addEventListener('click', function (e) { var b = e.currentTarget; b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); });
+
+  // Champ : validation à l'envoi, erreur renvoyée par le serveur
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var fields = Array.prototype.slice.call(e.target.querySelectorAll('.k-field'));
+    var bad = fields.filter(function (f) { return !Kobo.field.validate(f); });
+    if (bad.length) { bad[0].querySelector('.k-field__control').focus(); return; }
+    busy(e.target.querySelector('[type=submit]'), 'Envoi en cours…', function () {
+      Kobo.toast({ type: 'success', title: 'Demande envoyée', text: 'Un guide vous répond sous deux jours.' }); e.target.reset(); Kobo.field.init();
+      fields.forEach(function (f) { f.querySelector('.k-field__control').dispatchEvent(new Event('input')); });
+    });
+  });
+  $('server-error').addEventListener('click', function () {
+    var f = $('f-mail').closest('.k-field');
+    Kobo.field.setError(f, 'Cette adresse a déjà une demande en cours. Utilisez-en une autre ou attendez la réponse du guide.');
+    $('f-mail').focus();
+  });
+
+  // Modale : résultat de la fermeture
+  ['m-book', 'm-cancel'].forEach(function (id) {
+    $(id).addEventListener('close', function (e) {
+      var v = e.target.returnValue;
+      $('modal-result').textContent = v === 'reserve' ? 'réservation confirmée' : v === 'annule' ? 'réservation annulée' : 'fenêtre fermée sans action';
+      if (v === 'reserve') Kobo.toast({ type: 'success', title: 'Réservation enregistrée', text: 'La confirmation part vers votre adresse.' });
+      if (v === 'annule') Kobo.toast({ type: 'info', title: 'Réservation annulée', text: 'Le remboursement arrive sous cinq jours.', action: { label: 'Rétablir', onClick: function () { $('modal-result').textContent = 'réservation rétablie'; } } });
+    });
+  });
+
+  // Notifications
+  var TOASTS = {
+    success: { title: 'Réservation enregistrée', text: 'La confirmation part vers camille@exemple.fr.' },
+    info: { title: 'Le départ est avancé à 14 h 30', text: 'La météo annonce du vent en soirée.' },
+    warning: { title: 'Il ne reste que deux places', text: 'Votre panier est gardé dix minutes.' },
+    error: { title: 'Paiement refusé', text: 'La banque n’a pas validé la carte. Rien n’a été débité.', action: { label: 'Réessayer' } }
+  };
+  document.querySelectorAll('[data-toast]').forEach(function (b) {
+    b.addEventListener('click', function () { var t = TOASTS[b.dataset.toast]; Kobo.toast({ type: b.dataset.toast, title: t.title, text: t.text, action: t.action, returnFocus: b }); });
+  });
+  $('retry').addEventListener('click', function () { Kobo.toast({ type: 'error', title: 'Toujours pas de réponse', text: 'Le serveur reste injoignable. Réessayez dans une minute.' }); });
+
+  // Chargement : squelette puis contenu ; barre pilotée
+  var zone = $('load-zone'), content = zone.innerHTML;
+  $('load').addEventListener('click', function () {
+    zone.setAttribute('aria-busy', 'true');
+    zone.innerHTML = '<span class="k-sr-only" role="status">Chargement des guides…</span>' + [1, 2, 3].map(function () { return '<span class="k-skeleton k-skeleton--title" aria-hidden="true"></span><span class="k-skeleton k-skeleton--medium" aria-hidden="true"></span>'; }).join('');
+    setTimeout(function () { zone.innerHTML = content; zone.setAttribute('aria-busy', 'false'); }, 2200);
+  });
+  var timer = 0;
+  $('prog-run').addEventListener('click', function () {
+    var v = 0; clearInterval(timer); Kobo.progress.reset('prog');
+    timer = setInterval(function () { v = Math.min(1, v + 0.08); Kobo.progress.set('prog', v); if (v >= 1) clearInterval(timer); }, 220);
+  });
+  $('prog-fail').addEventListener('click', function () {
+    clearInterval(timer); Kobo.progress.set('prog', 0.37); Kobo.progress.fail('prog', 'Import interrompu à la ligne 47 : date illisible. Corrigez le fichier et relancez.');
+  });
+})();
+</script>
+</body>
+</html>
