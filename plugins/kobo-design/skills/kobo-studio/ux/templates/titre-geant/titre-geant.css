@@ -1,0 +1,21 @@
+/*
+ * kobo-studio — famille de gabarits « titre géant » (emplacement title).
+ * Le surtitre de la section est repris en très grand, d'un bord à l'autre de son bloc, et coupé par le bas.
+ * Le vrai titre (h2) et la phrase d'appui restent en place, lisibles, dans l'ordre du document : le mot géant est un décor
+ * (aria-hidden), le surtitre d'origine reste dans le DOM pour les lecteurs d'écran.
+ * La taille du mot est calculée une fois par titre-geant.js (--_fit : rapport entre la largeur du bloc et celle du mot).
+ * Uniquement des rôles --k-* ; l'habillage d'un skill ne change que des variables locales --_x.
+ */
+.g-word { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-3); padding-block-start: var(--k-space-4); }
+.g-word__giant {
+  --_size: calc(var(--k-fs-body) * var(--_fit, 4));
+  display: block; block-size: calc(var(--_size) * var(--_crop, 0.62)); overflow: hidden; margin-block-end: var(--k-space-6);
+  font-family: var(--k-font-display); font-size: var(--_size); font-weight: var(--_weight, var(--k-fw-display)); line-height: var(--_lh, 0.8);
+  letter-spacing: var(--_tracking, var(--k-ls-display)); text-transform: var(--_case, none); white-space: nowrap; color: var(--_ink, var(--k-text));
+  user-select: none; pointer-events: none;
+}
+.g-word__giant span { display: inline-block; }
+/* Entrée (full seulement) : chaque lettre monte, avec un léger décalage. L'état final est l'état par défaut. */
+.g-word[data-k-in="pending"] .g-word__giant span { transform: translateY(60%); opacity: 0; }
+.g-word[data-k-motion] .g-word__giant span { transition: transform var(--k-dur-slow) var(--k-ease-out), opacity var(--k-dur-base) linear; transition-delay: calc(var(--_i) * var(--k-dur-fast) / 2); }
+@media (prefers-reduced-motion: reduce) { .g-word[data-k-motion] .g-word__giant span { transition: none; transform: none; opacity: 1; } }

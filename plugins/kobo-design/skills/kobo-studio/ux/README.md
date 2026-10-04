@@ -6,7 +6,8 @@ La partie de kobo-studio qui ne dépend d'aucun skill : comment une page est con
 |---|---|
 | `structures/` | Quatre structures de page complètes (HTML, CSS, JS, React, README) et leur socle commun (`page.css`, `page.js`) |
 | `patterns/` | Fiches courtes sur les briques transverses : états de page, formulaire, navigation, mouvements |
-| `structures.html` | Démonstration : chaque structure sous chacun des 23 skills, aux trois intensités |
+| `templates/` | Gabarits de signature : une famille par type de mise en page, habillée par skill (premier lot : 6 skills) |
+| `structures.html` | Démonstration : chaque structure sous chacun des 23 skills, aux trois intensités, gabarits neutres ou de signature |
 
 ## Le principe des emplacements
 
@@ -119,10 +120,10 @@ Les pages de `structures/` chargent en plus `apercu.js`, qui choisit le skill d'
 python3 tools/check_components.py   # couvre aussi ux/ : valeurs en dur, motifs anti-slop, fichiers attendus par structure
 ```
 
-Puis ouvrir `structures.html` : sélecteur de structure, de skill et d'intensité ; « Montrer les emplacements » dessine leur contour et leur nom ; « Largeur de téléphone » réduit le cadre.
+Puis ouvrir `structures.html` : sélecteur de structure, de skill, d'intensité et de gabarits (signature ou neutres) ; « Montrer les emplacements » dessine leur contour et leur nom ; « Largeur de téléphone » réduit le cadre.
 
 ## Limites connues
 
-- Aucun gabarit de signature n'existe encore : tous les emplacements rendent leur contenu neutre. `frame` et `backdrop` sont donc vides.
+- Six skills ont un gabarit de signature (`templates/README.md`) ; sous les dix-sept autres, les emplacements rendent leur contenu neutre, et `frame` et `backdrop` sont vides.
 - Les versions React sont compilées et rendues côté serveur, pas essayées dans un navigateur.
 - Testé dans Chrome seulement.

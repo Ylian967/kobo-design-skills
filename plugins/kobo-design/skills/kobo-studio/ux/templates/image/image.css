@@ -1,0 +1,7 @@
+/*
+ * kobo-studio — famille de gabarits « image » (emplacement media) : la forme et le traitement d'une image de contenu.
+ * L'image reste une vraie <img> avec son texte alternatif ; la légende reste sous l'image.
+ * Uniquement des rôles --k-* ; l'habillage d'un skill règle --_shape (clip-path), --_bg (fond d'attente), --_shift (parallaxe).
+ */
+.g-plate { position: relative; display: block; overflow: hidden; background: var(--_bg, var(--k-surface-2)); clip-path: var(--_shape, none); }
+[data-k-slot="media"] .g-plate > img { border-radius: 0; transform: translateY(calc(var(--_y, 0) * var(--_shift, 0))) scale(var(--_zoom, 1)); }

@@ -1,0 +1,8 @@
+/*
+ * kobo-studio — image, habillage lore-frame-editorial : les « planches » en forme de dossier.
+ * Sources (lecture seule) : lore-frame-editorial/examples/demo.html (.planche : fond lavande en attente, image découpée par
+ * trois formes de dossier à onglet, définies en unités relatives pour garder leurs arrondis à toute taille ; les planches
+ * glissent pendant le défilement, --parallax), references/motion.md.
+ * Non repris : la légende posée en blanc sur l'image (elle reste dessous, lisible), l'éventail de planches, les planches flottantes.
+ */
+[data-k-skill="lore-frame-editorial"] .g-plate { --_bg: var(--k-sig-lavender); --_shift: calc(var(--k-sig-parallax) * -0.5); }

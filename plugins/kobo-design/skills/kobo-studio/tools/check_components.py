@@ -19,6 +19,8 @@ Dans toutes les feuilles de style, les styles en ligne et la galerie :
 
 Dans ux/ (structures de page, fiches de patterns, page de démonstration) : les mêmes règles — aucune valeur en dur, aucun
 --k-sig-*, motifs anti-slop — et, pour chaque dossier de ux/structures/ : README.md, une page .html, une feuille .css, une version React.
+Dans ux/templates/ (gabarits de signature) : les règles d'une couche de signature (--k-sig-*, dégradés et ombres composées admis),
+un en-tête qui cite les sources, et pour chaque famille : <famille>.css, <famille>.js, au moins un habillage portant le nom d'un skill.
 
 Usage : python3 tools/check_components.py          Code de sortie 1 si une erreur est trouvée.
 """
@@ -127,9 +129,12 @@ def check_ux(errs):
             continue
         text = f.read_text(encoding="utf-8")
         where = str(f.relative_to(STUDIO)).replace("\\", "/")
+        gabarit = (UX / "templates") in f.parents          # un gabarit de signature suit les règles d'une couche de signature
         if f.suffix == ".css":
             css = strip_comments(text)
-            errs += hard_values(css, where) + slop(css, where)
+            errs += hard_values(css, where) + slop(css, where, signature=gabarit)
+            if gabarit and not text.lstrip().startswith("/*"):
+                errs.append(f"{where} : en-tête manquant (sources lues dans le skill, ce qui n'est pas repris)")
             if re.search(r"\b(?:transition|animation)\s*:", css) and "prefers-reduced-motion" not in css:
                 errs.append(f"{where} : mouvement sans prise en compte de prefers-reduced-motion (anti-slop M5)")
         elif f.suffix == ".html":
@@ -139,6 +144,19 @@ def check_ux(errs):
             errs += markup(re.sub(r"<style.*?</style>|<script.*?</script>", "", text, flags=re.S), where)
         else:
             errs += markup(text, where)
+    # Gabarits de signature : chaque famille a sa feuille, son script et au moins un habillage de skill
+    fam = sorted(d for d in (UX / "templates").iterdir() if d.is_dir()) if (UX / "templates").exists() else []
+    skills = {d.name for d in STUDIO.parent.iterdir() if d.is_dir()}
+    for d in fam:
+        rel = f"ux/templates/{d.name}"
+        for name in (f"{d.name}.css", f"{d.name}.js"):
+            if not (d / name).exists():
+                errs.append(f"{rel} : {name} manquant")
+        skins = {f.stem for f in d.iterdir() if f.is_file() and f.stem != d.name}
+        if not skins:
+            errs.append(f"{rel} : aucun habillage de skill")
+        for s in sorted(skins - skills):
+            errs.append(f"{rel} : habillage « {s} » sans skill de ce nom")
     return len(dirs)
 
 

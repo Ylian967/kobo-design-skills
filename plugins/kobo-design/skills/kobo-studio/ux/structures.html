@@ -6,7 +6,8 @@
 <title>kobo-studio — structures de page</title>
 <!-- Démonstration des structures de page (étape 4a) : choisir une structure, un skill, une intensité.
      S'ouvre directement depuis le disque (file://) dans Chrome ; une connexion est nécessaire pour les polices et les photos.
-     Le projet montré (Cordée Brume) est fictif. Adresse directe : structures.html#<structure>:<skill>[:full|reduced|off][:slots][:etroit] -->
+     Le projet montré (Cordée Brume) est fictif. Adresse directe : structures.html#<structure>:<skill>[:full|reduced|off][:slots][:neutre][:etroit]
+     « Gabarits » : signature = les gabarits du skill remplissent les emplacements ; neutres = contenu neutre, pour comparer. -->
 <link rel="stylesheet" href="../contract/roles.css">
 <link rel="stylesheet" href="../components/socle.css">
 <style>
@@ -33,6 +34,7 @@ body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family:
   <label>Structure <select id="structure"></select></label>
   <label>Skill <select id="skill"></select></label>
   <label>Intensité <select id="intensity"><option>full</option><option>reduced</option><option>off</option></select></label>
+  <label>Gabarits <select id="templates"><option value="signature">signature</option><option value="neutre">neutres</option></select></label>
   <label><input type="checkbox" id="slots"> Montrer les emplacements</label>
   <label><input type="checkbox" id="narrow"> Largeur de téléphone</label>
 </div>
@@ -50,6 +52,15 @@ body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family:
     { id: 'article', name: 'Article / page éditoriale', file: 'structures/article/article.html', slots: 'frame, backdrop, hero, media, title, grid, finale' }
   ];
   var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
+  // Gabarits de signature écrits (ux/templates/) : emplacement rempli, et la structure où le voir
+  var GABARITS = {
+    'lore-frame-editorial': 'frame (cadre de page) et media (planches de dossier) — toutes les structures',
+    'acid-scan-security': 'hero (photo plein cadre et scan) — landing produit, accueil du site vitrine',
+    'glacial-mono-3d': 'backdrop (scène 3D) — toutes les structures',
+    'noir-inferno-chapters': 'chapter (scène plein écran et cercle à tirer) — récit',
+    'hyper-lime-street': 'chapter (formes inclinées) — récit',
+    'nocturne-architecture': 'title (mot géant coupé) — landing produit, site vitrine, article'
+  };
   var $ = function (id) { return document.getElementById(id); }, shown = '';
 
   STRUCTURES.forEach(function (s) { $('structure').add(new Option(s.name, s.id)); });
@@ -57,21 +68,23 @@ body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family:
 
   function show() {
     var s = STRUCTURES.filter(function (x) { return x.id === $('structure').value; })[0];
-    var hash = '#' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '');
+    var neutral = $('templates').value === 'neutre';
+    var hash = '#' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '') + (neutral ? ':neutre' : '');
     if (shown === s.file) $('frame').contentWindow.location.replace(s.file + hash);   // même page : seul le choix change, sans rechargement
     else $('frame').src = s.file + hash;
     shown = s.file;
     $('stage').toggleAttribute('data-narrow', $('narrow').checked);
-    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '.';
+    var gab = GABARITS[$('skill').value];
+    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '. ' + (gab ? 'Gabarits de ce skill : ' + gab + '.' : 'Ce skill n’a pas encore de gabarit de signature.');
     $('direct').href = s.file + hash;
-    history.replaceState(null, '', '#' + s.id + ':' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '') + ($('narrow').checked ? ':etroit' : ''));
+    history.replaceState(null, '', '#' + s.id + ':' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '') + (neutral ? ':neutre' : '') + ($('narrow').checked ? ':etroit' : ''));
   }
   var h = location.hash.slice(1).split(':');
   if (STRUCTURES.some(function (s) { return s.id === h[0]; })) $('structure').value = h[0];
   $('skill').value = SKILLS.indexOf(h[1]) >= 0 ? h[1] : 'serif-bistro-green';
   if (['full', 'reduced', 'off'].indexOf(h[2]) >= 0) $('intensity').value = h[2];
-  $('slots').checked = h.indexOf('slots') > 0; $('narrow').checked = h.indexOf('etroit') > 0;
-  ['structure', 'skill', 'intensity', 'slots', 'narrow'].forEach(function (id) { $(id).addEventListener('change', show); });
+  $('slots').checked = h.indexOf('slots') > 0; $('narrow').checked = h.indexOf('etroit') > 0; if (h.indexOf('neutre') > 0) $('templates').value = 'neutre';
+  ['structure', 'skill', 'intensity', 'templates', 'slots', 'narrow'].forEach(function (id) { $(id).addEventListener('change', show); });
   show();
 })();
 </script>

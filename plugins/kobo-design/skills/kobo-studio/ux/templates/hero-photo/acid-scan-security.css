@@ -1,0 +1,44 @@
+/*
+ * kobo-studio — héros photo, habillage acid-scan-security : le scan en quatre couches.
+ * Sources (lecture seule) : acid-scan-security/examples/demo.html (quatre versions de la photo : deux tons verts, frange rouge
+ * sombre décalée, bande claire découpée par clip-path, remplissage jaune du cadre ; réticule ; cadre de détection ; lignes de
+ * balayage ; voiles derrière le texte ; allumage par clip-path ; bande qui descend puis se cale), references/motion.md
+ * (mouvements 2, 3, 4 et 6 ; pointeur ±14 px lissé à 0,06), references/tokens.css.
+ * Non repris : les chiffres binaires, le décodage des lettres, le score « ID 07 · 98,6 % » (donnée inventée), la carte CTA à crochets.
+ */
+[data-k-skill="acid-scan-security"] .g-hero {
+  --_veil: radial-gradient(55% 45% at 22% 78%, color-mix(in srgb, var(--k-surface-2) 78%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--k-surface-2) 40%, transparent), transparent 18%, transparent 62%, var(--k-bg));
+  --_bandh: 6%;
+}
+/* Lignes de balayage */
+[data-k-skill="acid-scan-security"] .g-hero__veil::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 calc(var(--k-sig-scanline) - var(--k-border-w)), color-mix(in srgb, var(--k-bg) 40%, transparent) calc(var(--k-sig-scanline) - var(--k-border-w)) var(--k-sig-scanline)); }
+/* Frange : copie rouge sombre des zones sombres, décalée */
+.g-scan__ghost { opacity: 0.55; transform: translateX(calc(var(--k-sig-rgb-shift) + var(--_gx, 0) * var(--k-space-6))); }
+/* Bande claire, calée sur le point d'intérêt */
+.g-scan__band { clip-path: inset(calc(var(--_my) - var(--_bandh) * 0.55) 26% calc(100% - var(--_my) - var(--_bandh) * 0.45) 40%); transform: translateX(var(--k-space-3)); }
+/* Cadre de détection : remplissage jaune au-dessus du réticule, filet, trait */
+.g-scan__box { clip-path: inset(calc(var(--_my) - var(--_th) * 0.52) calc(100% - var(--_mx) - var(--_tw) / 2) calc(100% - var(--_my)) calc(var(--_mx) - var(--_tw) / 2)); }
+.g-scan__target { position: absolute; inset-inline-start: calc(var(--_mx) - var(--_tw) / 2); inset-block-start: calc(var(--_my) - var(--_th) * 0.52); inline-size: var(--_tw); block-size: var(--_th); border: var(--k-border-w) solid color-mix(in srgb, var(--k-accent) 70%, transparent); pointer-events: none; }
+.g-scan__target::after { content: ""; position: absolute; inset: 52% -6% auto -6%; block-size: calc(var(--k-border-w) * 2); background: var(--k-accent); }
+.g-hero__rig { --_tw: calc(var(--k-space-32) * 0.9); --_th: calc(var(--_tw) * 0.97); }
+/* Réticule */
+.g-scan__v, .g-scan__h { position: absolute; background: var(--k-line); pointer-events: none; }
+.g-scan__v { inset: 0 auto 0 var(--_mx); inline-size: var(--k-border-w); transform-origin: 50% var(--_my); }
+.g-scan__h { inset: var(--_my) 0 auto 0; block-size: var(--k-border-w); transform-origin: 0 50%; }
+
+/* Ouverture (full seulement) : allumage, bande qui descend et se cale, cadre qui clignote puis reste. État final = état par défaut. */
+.g-hero[data-k-in="pending"] .g-hero__rig { clip-path: inset(50% 0 50% 0); }
+.g-hero[data-k-in="pending"] .g-scan__band { clip-path: inset(0 26% calc(100% - var(--_bandh)) 40%); }
+.g-hero[data-k-in="pending"] :is(.g-scan__box, .g-scan__target) { opacity: 0; }
+.g-hero[data-k-in="pending"] .g-scan__v { transform: scaleY(0); }
+.g-hero[data-k-in="pending"] .g-scan__h { transform: scaleX(0); }
+.g-hero[data-k-motion] .g-hero__rig { clip-path: inset(0); transition: clip-path var(--k-dur-slow) var(--k-ease-out); }
+.g-hero[data-k-motion] .g-scan__band { transition: clip-path var(--k-sig-dur-scan) var(--k-ease-out) var(--k-dur-slow); }
+.g-hero[data-k-motion] :is(.g-scan__v, .g-scan__h) { transition: transform var(--k-dur-slow) var(--k-ease-out) var(--k-dur-slow); }
+.g-hero[data-k-motion][data-k-in="done"] :is(.g-scan__box, .g-scan__target) { animation: g-scan-lock var(--k-sig-dur-blink) steps(1) 3 calc(var(--k-dur-slow) + var(--k-sig-dur-scan)) backwards; }
+@keyframes g-scan-lock { 0% { opacity: 0; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .g-hero[data-k-motion] :is(.g-hero__rig, .g-scan__band, .g-scan__v, .g-scan__h) { transition: none; }
+  .g-hero[data-k-motion][data-k-in="done"] :is(.g-scan__box, .g-scan__target) { animation: none; }
+}

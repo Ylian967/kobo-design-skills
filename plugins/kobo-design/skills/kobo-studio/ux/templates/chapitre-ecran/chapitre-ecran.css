@@ -1,0 +1,50 @@
+/*
+ * kobo-studio — famille de gabarits « chapitre plein écran » (emplacement chapter).
+ * Chaque chapitre devient une scène de la hauteur de l'écran : image plein cadre, voile, titre et texte au centre, et en bas
+ * un cercle à tirer vers une cible pour passer au chapitre suivant. Le cercle est un bouton : cliquer, Entrée ou Espace font
+ * la même chose que le geste. Le défilement de la page reste libre ; rien n'est confisqué.
+ * Uniquement des rôles --k-* ; l'habillage d'un skill règle les variables locales --_circle, --_target, --_pull, --_veil…
+ * Mouvement : transform et opacity seulement.
+ */
+.rc-chapter[data-k-gabarit="chapitre-ecran"] { display: block; border-block-end: 0; }
+.g-scene {
+  --_c: var(--_circle, var(--k-control-h)); --_tg: var(--_target, calc(var(--_c) * 1.25)); --_pl: var(--_pull, calc(var(--k-space-32) + var(--k-space-8)));
+  position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-rows: 1fr auto; justify-items: center; min-block-size: 100dvh;
+  color: var(--_ink, var(--k-text-inverse)); background: var(--_bg, var(--k-bg-inverse)); text-align: center;
+}
+.g-scene__image { position: absolute; inset: calc(var(--k-space-4) * -1); z-index: -2; transform: translate(calc(var(--_px, 0) * var(--k-space-4)), calc(var(--_py, 0) * var(--k-space-4))); }
+.g-scene__image [data-k-slot="media"], .g-scene__image figure { display: block; block-size: 100%; margin: 0; }
+.g-scene__image img { inline-size: 100%; block-size: 100%; aspect-ratio: auto; object-fit: cover; border-radius: 0; filter: var(--k-img-filter); }
+.g-scene__image figcaption { display: none; }
+.g-scene__veil { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--_veil, var(--k-scrim)); }
+.g-scene__copy { align-self: center; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-4); justify-items: center; padding: var(--k-space-24) var(--k-edge) var(--k-space-8); }
+.g-scene__copy h2 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.05); letter-spacing: var(--k-ls-display); text-transform: var(--_title-case, none); overflow-wrap: anywhere; }
+.g-scene__copy h2:focus-visible { outline: var(--k-focus-w) solid currentColor; outline-offset: var(--k-focus-offset); }
+.g-scene__copy p { margin: 0; max-inline-size: min(100%, var(--_col, var(--k-measure))); }
+.g-scene__copy .k-kicker { color: inherit; }
+
+/* Le geste : ligne pointillée, cible en tirets, cercle à tirer */
+.g-pull { position: relative; inline-size: var(--_tg); block-size: calc(var(--_pl) + var(--_tg)); margin-block-end: var(--k-space-12); }
+.g-pull::before { content: ""; position: absolute; inset: var(--_c) auto var(--_tg) 50%; border-inline-start: var(--k-border-w) dotted color-mix(in srgb, currentColor 50%, transparent); }
+.g-pull::after { content: ""; position: absolute; inset: auto 0 0 0; block-size: var(--_tg); border-radius: 50%; border: var(--_hair, var(--k-border-w)) dashed color-mix(in srgb, currentColor 50%, transparent); transition: transform var(--k-dur-base) var(--k-ease-out), border-color var(--k-dur-base) linear; }
+.g-pull[data-k-near]::after { border-color: currentColor; transform: scale(1.12); }
+.g-pull__handle {
+  position: absolute; inset-block-start: 0; inset-inline-start: calc(50% - var(--_c) / 2); inline-size: var(--_c); block-size: var(--_c); padding: 0;
+  color: inherit; background: transparent; border: var(--_hair, var(--k-border-w)) solid currentColor; border-radius: 50%; cursor: grab; touch-action: none;
+  transform: translateY(var(--_y, 0)) scale(var(--_s, 1)); transition: transform var(--k-dur-slow) var(--k-ease-out);
+}
+.g-pull__handle::after { content: ""; position: absolute; inset: calc(50% - var(--k-border-w) * 1.5); border-radius: 50%; background: currentColor; }
+/* zone de saisie élargie : au moins --k-hit-min */
+.g-pull__handle::before { content: ""; position: absolute; inset: calc((min(var(--_c), var(--k-hit-min)) - var(--k-hit-min)) / 2); border-radius: 50%; }
+.g-pull__handle[data-k-drag] { cursor: grabbing; transition: none; --_s: 0.9; }
+.g-pull__handle:focus-visible { outline: var(--k-focus-w) solid currentColor; outline-offset: var(--k-focus-offset); }
+@media (hover: hover) { .g-pull__handle:hover:not([data-k-drag]) { --_s: 1.08; } }
+.g-pull__hint { position: absolute; inset-block-start: calc(100% + var(--k-space-2)); inset-inline-start: 50%; translate: -50% 0; inline-size: max-content; max-inline-size: 80vw; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+
+/* Entrée (full seulement) : le titre puis le texte montent en fondu */
+.g-scene[data-k-in="pending"] .g-scene__copy > * { opacity: 0; transform: translateY(var(--k-space-3)); }
+.g-scene[data-k-motion] .g-scene__copy > * { transition: opacity var(--k-dur-slow) linear, transform var(--k-dur-slow) var(--k-ease-out); }
+.g-scene[data-k-motion] .g-scene__copy > p { transition-delay: var(--k-dur-base); }
+@media (prefers-reduced-motion: reduce) {
+  .g-scene[data-k-motion] .g-scene__copy > *, .g-pull__handle, .g-pull::after { transition: none; }
+}

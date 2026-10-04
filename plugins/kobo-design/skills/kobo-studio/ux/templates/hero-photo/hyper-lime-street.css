@@ -1,0 +1,27 @@
+/*
+ * kobo-studio — héros photo, habillage hyper-lime-street : le visuel clé à coins ronds et ses autocollants.
+ * Sources (lecture seule) : hyper-lime-street/examples/demo.html (.key : visuel de 360 à 640 px de haut, coins arrondis, voile en
+ * bas ; .sticker.logo : étiquette noire penchée de −8°, à ombre dure lime, à cheval sur le coin ; .sticker.get : étiquette
+ * blanche penchée de 7°, à ombre dure noire, qui porte l'action ; h1 en capitales en bas à gauche ; .film : pellicule en
+ * diagonale ; .mark : nom géant vertical à droite), references/tokens.css.
+ * Non repris : les boutons de plateformes, l'onglet latéral numéroté, la seconde ligne du titre en lime.
+ */
+[data-k-skill="hyper-lime-street"] .g-hero--key {
+  --_ink: var(--k-text); --_bg: transparent; display: block; min-block-size: 0; overflow: visible;
+  inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; padding-block: var(--k-space-8) var(--k-space-16);
+}
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__rig { position: relative; inset: auto; z-index: 0; transform: none; block-size: clamp(calc(var(--k-space-32) * 3 - var(--k-space-6)), 44vw, calc(var(--k-space-32) * 5)); border-radius: var(--k-radius-lg); overflow: hidden; background: var(--k-bg-inverse); }
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__rig::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, color-mix(in srgb, var(--k-bg-inverse) 78%, transparent) 78%); }
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__veil { display: none; }
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__rig h1 { position: absolute; z-index: 2; inset: auto auto 7% 4%; max-inline-size: min(92%, calc(var(--k-fs-h1) * 9)); margin: 0; color: var(--k-text-inverse); font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: 1; text-transform: uppercase; }
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__content::before { content: none; }   /* le texte est sous le visuel, sur le fond de page */
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__content { inline-size: auto; margin: 0; padding-block: var(--k-space-8) 0; }
+[data-k-skill="hyper-lime-street"] .g-hero--key .g-hero__caption { position: static; max-inline-size: none; margin-block-start: var(--k-space-2); text-align: start; }
+/* Autocollants : à cheval sur le visuel */
+.g-sticker { position: absolute; z-index: 3; padding: var(--k-space-3) var(--k-space-4); border-radius: var(--k-radius); font-family: var(--k-font-display); font-size: var(--k-fs-h3); line-height: 1; text-transform: uppercase; }
+.g-sticker--logo { inset: calc(var(--k-space-8) - var(--k-space-4)) auto auto calc(var(--k-space-4) * -1); color: var(--k-text-inverse); background: var(--k-sig-black); rotate: -8deg; box-shadow: var(--k-space-1) var(--k-space-1) 0 var(--k-accent); font-size: var(--k-fs-h2); }
+[data-k-skill="hyper-lime-street"] .g-hero--key .k-btn.g-sticker--get { position: absolute; inset: calc(var(--k-space-8) + 8%) 3% auto auto; z-index: 3; rotate: 7deg; color: var(--k-text); background: var(--k-surface); border-color: var(--k-surface); border-radius: var(--k-radius); box-shadow: var(--k-space-1) var(--k-space-1) 0 var(--k-sig-black); font-family: var(--k-font-display); font-size: var(--k-fs-h3); }
+[data-k-skill="hyper-lime-street"] .g-hero--key .k-btn.g-sticker--get::before { content: none; }
+/* Pellicule en diagonale et nom géant vertical : décor */
+.g-hero__film { position: absolute; z-index: -1; inset-block-start: 58%; inset-inline-end: -40vh; inline-size: 150vh; block-size: var(--k-space-6); rotate: calc(var(--k-sig-angle) - 90deg); background: var(--k-bg-inverse) repeating-linear-gradient(90deg, transparent 0 var(--k-space-3), var(--k-bg) var(--k-space-3) var(--k-space-6)) 0 50% / 100% var(--k-space-3) no-repeat; pointer-events: none; }
+.g-hero__mark { position: absolute; z-index: -1; inset: auto calc(var(--k-edge) * -0.5) 2% auto; writing-mode: vertical-rl; font-family: var(--k-font-display); font-size: var(--k-sig-fs-mark); line-height: 1; text-transform: uppercase; color: var(--k-sig-watermark); white-space: nowrap; pointer-events: none; }

@@ -1,0 +1,10 @@
+/*
+ * kobo-studio — scène plein écran, habillage glacial-mono-3d.
+ * Sources (lecture seule) : glacial-mono-3d/examples/demo.html (scène Three.js : brouillard, sol de neige, amas d'éclats de
+ * glace qui s'assemble du fil de fer à la matière, fragments en suspension, socle à anneaux et sculpture de particules,
+ * caméra qui voyage avec le défilement, parallaxe au pointeur, 30 images/s et résolution adaptative, photo de repli en
+ * noir et blanc), references/motion.md (mouvements 2, 4 et 6).
+ * Non repris : le passage par la nuit et le rocher sombre (le texte de la page doit rester lisible sur un fond clair),
+ * la transition en pixels, le texte en pavés, la neige, l'interface aux quatre coins.
+ */
+[data-k-skill="glacial-mono-3d"] .g-scene3d { --_filter: grayscale(1) contrast(0.85) brightness(1.08); --_veil: 36%; }

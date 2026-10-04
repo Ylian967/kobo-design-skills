@@ -1,0 +1,28 @@
+/*
+ * kobo-studio — famille de gabarits « scène plein écran » (emplacement backdrop).
+ * Une scène 3D fixe derrière toute la page. Tant qu'elle n'est pas chargée, ou si WebGL manque, une vraie photo la remplace.
+ * Le canvas est un décor (aria-hidden) : aucun texte n'y est dessiné.
+ * Les sections de la structure restent lisibles : hors du héros, elles reçoivent un fond presque opaque.
+ * Uniquement des rôles --k-*.
+ */
+.g-scene3d { position: absolute; inset: 0; overflow: hidden; background: var(--k-bg); }
+.g-scene3d > img, .g-scene3d > canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; }
+.g-scene3d > img { filter: var(--_filter, var(--k-img-filter)); transition: opacity var(--k-dur-slow) var(--k-ease-out); }
+.g-scene3d > canvas { opacity: 0; transition: opacity var(--k-dur-slow) var(--k-ease-out); }
+.g-scene3d[data-k-ready] > canvas { opacity: 1; }
+.g-scene3d[data-k-ready] > img { opacity: 0; }
+/* Voile : garde le texte lisible au-dessus de la scène */
+.g-scene3d::after { content: ""; position: absolute; inset: 0; background: color-mix(in srgb, var(--k-bg) var(--_veil, 30%), transparent); }
+
+html[data-k-gabarits~="scene"] main > section:not([data-k-slot="hero"]),
+html[data-k-gabarits~="scene"] main > article,
+html[data-k-gabarits~="scene"] .rc-story { background: color-mix(in srgb, var(--k-bg) 88%, transparent); }
+html[data-k-gabarits~="scene"] main > section.k-section--alt { background: color-mix(in srgb, var(--k-surface) 90%, transparent); }
+html[data-k-gabarits~="scene"] main > [data-k-tone="inverse"] { background: var(--k-bg-inverse); }
+html[data-k-gabarits~="scene"] [data-k-slot="hero"] { min-block-size: calc(100dvh - var(--k-nav-h)); display: grid; align-content: end; }
+/* Zone calme : le texte du héros est posé sur une plaque du fond du skill, assez dense pour tenir 4.5:1 devant les objets les plus sombres de la scène (mesuré) */
+html[data-k-gabarits~="scene"] [data-k-slot="hero"] .k-hero__text { padding: var(--k-space-6); margin: calc(var(--k-space-6) * -1); background: color-mix(in srgb, var(--k-bg) var(--_plate-a, 80%), transparent); border-radius: var(--k-radius); }
+html[data-k-gabarits~="scene"] [data-k-slot="hero"] figcaption { justify-self: start; padding: var(--k-space-1) var(--k-space-2); color: var(--k-text); background: color-mix(in srgb, var(--k-bg) var(--_plate-a, 80%), transparent); }
+html[data-k-gabarits~="scene"] .k-page__top .k-nav { background: color-mix(in srgb, var(--k-bg) 88%, transparent); }
+
+@media (prefers-reduced-motion: reduce) { .g-scene3d > img, .g-scene3d > canvas { transition: none; } }

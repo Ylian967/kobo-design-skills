@@ -1,0 +1,14 @@
+/*
+ * kobo-studio — chapitre plein écran, habillage noir-inferno-chapters.
+ * Sources (lecture seule) : noir-inferno-chapters/examples/demo.html (.stage : image plein cadre et ses deux voiles ; .copy :
+ * titre en capitales et paragraphe au centre, qui montent de 10 px en fondu à 250 ms d'écart ; .pull : ligne pointillée de
+ * 160 px, cible en tirets de 65 px qui s'allume passé 80 % ; .handle : cercle à tirer, point au centre, retour en 600 ms,
+ * Entrée et Espace valident), references/motion.md (image qui se décale à l'opposé de la souris), references/tokens.css.
+ * Non repris : le fondu d'une scène à l'autre sur place (ici la page défile), le titre qui se défait en poussière, la
+ * poussière flottante, le grain, les numéros de scène, le cercle rouge de la dernière scène.
+ */
+[data-k-skill="noir-inferno-chapters"] .g-scene {
+  --_ink: var(--k-text); --_bg: var(--k-bg); --_target: var(--k-sig-target); --_pull: var(--k-sig-pull); --_col: var(--k-sig-col-scene); --_title-case: uppercase;
+  --_veil: radial-gradient(ellipse 75% 70% at 50% 50%, var(--k-sig-veil-0) 35%, var(--k-scrim)), linear-gradient(180deg, var(--k-scrim), var(--k-sig-veil-0) 22%, var(--k-sig-veil-0) 72%, var(--k-overlay));
+}
+[data-k-skill="noir-inferno-chapters"] .g-scene__veil::after { content: ""; position: absolute; inset: 0; background: var(--k-scrim); }

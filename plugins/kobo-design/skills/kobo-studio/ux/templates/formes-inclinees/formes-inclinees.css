@@ -1,0 +1,61 @@
+/*
+ * kobo-studio — famille de gabarits « formes inclinées » (emplacement chapter).
+ * Un chapitre devient une section à trois formes penchées au même angle : un bloc de titre numéroté qui sort d'un côté de
+ * l'écran, un panneau qui porte l'image (découpée au même angle, jamais déformée) et sort de l'autre côté, une bande derrière.
+ * Un chapitre sur deux est inversé. Le texte du chapitre reste du texte, sous le panneau.
+ * Uniquement des rôles --k-* ; l'habillage d'un skill règle les variables locales --_angle, --_h, --_block, --_radius…
+ * Mouvement : seulement transform et opacity, joué une fois à l'entrée ; l'état final est l'état par défaut.
+ */
+.rc-chapter[data-k-gabarit="formes-inclinees"] { display: block; overflow: clip; border-block-end: 0; }
+.g-slant {
+  --_a: var(--_angle, var(--k-angle)); --_t: tan(var(--_a));
+  --_h: var(--_panel-h, calc(var(--k-space-32) * 3)); --_bw: var(--_block-w, calc(var(--k-space-32) * 2 + var(--k-space-16)));
+  /* retrait du texte : celui du panneau sur grand écran, aucun quand l'écran est plus étroit que 6 × --k-space-32 (seuil sans point de rupture) */
+  --_inset: clamp(0px, (100vw - var(--k-space-32) * 6) * 999, calc(var(--_bw) * 0.6));
+  position: relative; inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; padding-block: var(--k-space-16) var(--k-section-y);
+}
+.g-slant__stage { position: relative; block-size: var(--_h); }
+.g-slant__shape { position: absolute; border-radius: var(--_radius, var(--k-radius-lg)); transform: skewX(calc(var(--_a) * -1)); }
+/* Bande : derrière, décalée vers le bas, sort de l'écran */
+.g-slant__slab { inset: calc(var(--_h) * 0.35) -40vw calc(var(--_h) * -0.35) 18%; background: var(--_slab, var(--k-bg-inverse)); }
+/* Panneau : liseré, feuille, image découpée */
+.g-slant__panel { position: absolute; inset: 0 0 0 calc(var(--_bw) * 0.6); }
+.g-slant__under { inset: 0 -30vw 0 0; background: var(--k-accent); translate: 0 var(--_under, var(--k-space-2)); }
+.g-slant__sheet { inset: 0 -30vw 0 0; background: var(--_sheet, var(--k-surface)); }
+.g-slant__cut { position: absolute; inset: 0 -30vw 0 0; clip-path: polygon(calc(var(--_h) * var(--_t)) 0, 100% 0, 100% 100%, 0 100%); }
+.g-slant__cut [data-k-slot="media"], .g-slant__cut figure { display: block; block-size: 100%; margin: 0; }
+.g-slant__cut img { inline-size: 100%; block-size: 100%; aspect-ratio: auto; object-fit: cover; border-radius: 0; filter: var(--k-img-filter); }
+/* Bloc du titre : sort de l'écran du côté opposé au panneau */
+.g-slant__block {
+  position: absolute; z-index: 2; inset-block-start: 0; inset-inline-start: calc(var(--_bw) * -0.42); inline-size: var(--_bw); block-size: var(--_h);
+  display: grid; align-content: start; gap: var(--k-space-1); padding: var(--k-space-6) 0 0 calc(var(--_bw) * 0.46); color: var(--k-on-accent);
+}
+.g-slant__block::before { content: ""; position: absolute; z-index: -1; inset: 0 0 0 -60vw; border-radius: var(--_radius, var(--k-radius-lg)); background: var(--k-accent); transform: skewX(calc(var(--_a) * -1)); transform-origin: top; }
+.g-slant__block h2 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: var(--k-lh-tight); overflow-wrap: anywhere; }
+.g-slant__block .k-kicker { color: inherit; font-size: max(var(--k-fs-label), var(--k-fs-min)); }
+.g-slant__num { font-family: var(--k-font-display); font-size: var(--_fs-num, var(--k-fs-hero)); font-weight: var(--k-fw-display); line-height: 1; }
+.g-slant__copy { position: relative; z-index: 2; display: grid; gap: var(--k-space-4); margin-block-start: calc(var(--_h) * 0.35 + var(--k-space-12)); margin-inline-start: var(--_inset); max-inline-size: var(--k-measure); }
+.g-slant__copy p { margin: 0; }
+
+/* Chapitre inversé : bloc à droite, panneau et bande sortant à gauche */
+.g-slant--flip .g-slant__slab { inset-inline: -40vw 18%; }
+.g-slant--flip .g-slant__panel { inset: 0 calc(var(--_bw) * 0.55) 0 0; }
+.g-slant--flip .g-slant__under, .g-slant--flip .g-slant__sheet { inset: 0 0 0 -30vw; }
+.g-slant--flip .g-slant__cut { inset: 0 0 0 -30vw; clip-path: polygon(0 0, 100% 0, calc(100% - var(--_h) * var(--_t)) 100%, 0 100%); }
+.g-slant--flip .g-slant__block { inset-inline: auto calc(var(--_bw) * -0.3); align-content: end; justify-items: end; padding: 0 calc(var(--_bw) * 0.34) var(--k-space-4) 0; text-align: end; }
+.g-slant--flip .g-slant__block::before { inset: 0 -60vw 0 0; transform-origin: bottom; }
+.g-slant--flip .g-slant__copy { margin-inline: 0 var(--_inset); }
+
+/* Entrée (full seulement) */
+.g-slant[data-k-in="pending"] .g-slant__block { transform: translate(-70%, 0); opacity: 0; }
+.g-slant--flip[data-k-in="pending"] .g-slant__block { transform: translate(70%, 0); }
+.g-slant[data-k-in="pending"] .g-slant__panel { transform: translate(40%, 0); opacity: 0; }
+.g-slant--flip[data-k-in="pending"] .g-slant__panel { transform: translate(-40%, 0); }
+.g-slant[data-k-in="pending"] .g-slant__slab { transform: skewX(calc(var(--_a) * -1)) translateX(60%); }
+.g-slant--flip[data-k-in="pending"] .g-slant__slab { transform: skewX(calc(var(--_a) * -1)) translateX(-60%); }
+.g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { transition: transform var(--_dur-in, var(--k-dur-slow)) var(--k-ease-out), opacity var(--k-dur-base) ease-out; }
+.g-slant[data-k-motion] .g-slant__panel { transition-delay: var(--k-dur-fast); }
+/* Pendant l'entrée seulement, chaque forme a sa propre couche : la trame, les arrondis et l'image découpée sont dessinés une fois,
+   puis seulement déplacés. Le script retire data-k-motion une fois l'entrée finie (les couches sont rendues). */
+.g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { will-change: transform, opacity; }
+@media (prefers-reduced-motion: reduce) { .g-slant[data-k-motion] :is(.g-slant__block, .g-slant__panel, .g-slant__slab) { transition: none; } }

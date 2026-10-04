@@ -100,13 +100,16 @@ h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 [data-k-slot="title"] > .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); }
 /* media : image de contenu. Neutre : la photo au filtre du skill, sa légende dessous. */
 [data-k-slot="media"] { display: grid; gap: var(--k-space-2); }
-[data-k-slot="media"] img { inline-size: 100%; aspect-ratio: var(--_ratio, 4 / 3); object-fit: cover; filter: var(--k-img-filter); border-radius: var(--k-radius-lg); }
+[data-k-slot="media"] img { background: var(--k-surface-2); color: var(--k-text-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); /* image absente : un bloc calme et son texte alternatif, pas un trou */ inline-size: 100%; aspect-ratio: var(--_ratio, 4 / 3); object-fit: cover; filter: var(--k-img-filter); border-radius: var(--k-radius-lg); }
 [data-k-slot="media"] figcaption { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
 /* grid : liste d'éléments. Neutre : colonnes égales qui se replient. */
 [data-k-slot="grid"] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))), 1fr)); gap: var(--k-space-8) var(--k-space-6); align-items: start; }
 [data-k-slot="grid"] > .k-grid__wide { grid-column: 1 / -1; }
 /* chapter : voir recit-collant.css. finale : dernière section. Neutre : une phrase, une action, sur le ton inversé. */
 [data-k-slot="finale"] { padding-block: var(--k-section-y); }
+
+/* Dans un gabarit de signature, une image absente est masquée : le fond du gabarit et le texte restent (voir ../templates/gabarits.js) */
+[data-k-gabarit] img[data-k-broken] { visibility: hidden; }
 
 /* Aide à la lecture : montre où sont les emplacements (structures.html, case « emplacements ») */
 [data-k-show-slots] [data-k-slot] { outline: var(--k-border-w) dashed var(--k-line-strong); outline-offset: calc(var(--k-space-1) * -1); }

@@ -1,0 +1,10 @@
+/*
+ * kobo-studio — cadre de page, habillage lore-frame-editorial.
+ * Sources (lecture seule) : lore-frame-editorial/examples/demo.html (.frame : cadre fixe à 20 px du bord, rayon 10 px, filet
+ * d'un pixel ; .frame__rail de 67 px à gauche ; .frame__bar de 51 px ; .frame__progress : aplat gris qui grandit avec le
+ * défilement ; le signe en étoile du rail), references/tokens.css (--frame-pad, --rail-w, --bar-h, --frame-radius, --panel).
+ * Non repris : le bouton de menu et le bouton de son du rail (la navigation appartient à la structure), le bouton
+ * « Connexion » à pan coupé, le passage du cadre en clair sur les images sombres.
+ */
+html[data-k-skill="lore-frame-editorial"][data-k-gabarits~="cadre"] { --_rail-w: var(--k-sig-rail-w); --_radius: var(--k-radius); --_fill: var(--k-surface); }
+html[data-k-skill="lore-frame-editorial"] .g-frame__bar { border-start-end-radius: var(--k-radius); }

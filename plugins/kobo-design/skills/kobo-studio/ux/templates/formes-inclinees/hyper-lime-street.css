@@ -1,0 +1,13 @@
+/*
+ * kobo-studio — formes inclinées, habillage hyper-lime-street.
+ * Sources (lecture seule) : hyper-lime-street/examples/demo.html (.shape penchée de 41°, .block lime numéroté qui sort à gauche,
+ * .panel blanc à liseré lime, .cut : image découpée au même angle, .slab : bande noire tramée ; entrées : bloc depuis −70 %,
+ * panneau depuis +40 %, bande qui glisse), references/layouts.md (« une section sur deux est inversée »), references/tokens.css.
+ * Non repris : la pellicule en diagonale, les autocollants, la pilule de vignettes, le mot géant vertical.
+ */
+[data-k-skill="hyper-lime-street"] .g-slant {
+  --_angle: var(--k-sig-angle); --_panel-h: var(--k-sig-panel-h); --_block-w: var(--k-sig-block-w); --_under: var(--k-sig-underline);
+  --_fs-num: var(--k-sig-fs-num); --_sheet: var(--k-surface);
+}
+[data-k-skill="hyper-lime-street"] .g-slant__slab { background: var(--k-bg-inverse) repeating-linear-gradient(135deg, var(--k-sig-hatch) 0 calc(var(--k-border-w) * 2), transparent calc(var(--k-border-w) * 2) calc(var(--k-border-w) * 6)); }
+[data-k-skill="hyper-lime-street"] .g-slant__block .k-kicker { text-transform: uppercase; font-family: var(--k-font-display); font-size: max(var(--k-sig-fs-en), var(--k-fs-min)); }

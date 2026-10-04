@@ -1,0 +1,23 @@
+/*
+ * kobo-studio — héros photo, habillage lore-frame-editorial : le manifeste géant de l'ouverture.
+ * Sources (lecture seule) : lore-frame-editorial/examples/demo.html (.hero__art : photo plein cadre et son voile en biais ;
+ * .hero__intro : court texte en haut à gauche, 300 px ; .manifest : le titre en capitales géantes, en bas, chaque ligne
+ * décalée — 26 %, 34 %, 0 — et précédée d'un petit repère en police fixe), references/tokens.css (--fs-manifest, --ls-manifest).
+ * Non repris : le chargement à compteur, l'image qui se découpe en planche au défilement, le signe central.
+ */
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest {
+  --_ink: var(--k-text-inverse); --_bg: var(--k-sig-lavender); --_veil: linear-gradient(160deg, var(--k-overlay), transparent 45%), linear-gradient(0deg, var(--k-scrim), transparent 55%);
+  --_plate: linear-gradient(0deg, color-mix(in srgb, var(--k-bg-inverse) 68%, transparent) 0 55%, transparent 80%), linear-gradient(180deg, color-mix(in srgb, var(--k-bg-inverse) 74%, transparent) 0 20%, transparent 42%);
+  min-block-size: calc(100dvh - var(--k-nav-h) - var(--k-edge) * 2); align-items: stretch; border-radius: var(--k-radius);
+}
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest .g-hero__content { inline-size: auto; margin-inline: var(--k-space-8); padding-block: var(--k-space-8) var(--k-space-8); grid-template-rows: auto 1fr auto; align-content: stretch; }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest .g-hero__content > * { max-inline-size: 100%; }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-lead { order: -1; max-inline-size: calc(var(--k-space-32) * 2 + var(--k-space-8)); font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); letter-spacing: var(--k-ls-display); }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-kicker { order: -2; color: inherit; }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest h1 { align-self: end; inline-size: 100%; margin: 0; font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); letter-spacing: var(--k-sig-ls-manifest); text-transform: uppercase; text-wrap: nowrap; }
+.g-manifest__line { display: block; position: relative; inline-size: max-content; max-inline-size: 100%; white-space: normal; }
+.g-manifest__line:nth-child(1) { margin-inline-start: min(26%, 100% - var(--_w, 100%)); }
+.g-manifest__line:nth-child(2) { margin-inline-start: min(34%, 100% - var(--_w, 100%)); }
+.g-manifest__mark { position: absolute; inset-inline-start: calc(var(--k-space-2) * -1); inset-block-start: 0; translate: -100% 0; font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: normal; letter-spacing: 0; line-height: 1; }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest :is(.k-facts, .g-hero__caption) { display: none; }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-btn { justify-self: end; }
