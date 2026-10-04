@@ -38,7 +38,6 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/layouts.md` | Ordre et mesures de l'accueil, pages internes, mobile. |
 | `references/assets.md` | Avant de placer une image : sujets, cadrages, traitements, sources. |
 | `examples/demo.html` | Accueil complet et animé (jeu fictif « Astralis »). |
-| `examples/mondes.html` | Carte stellaire et fiche d'un monde (page statique, passe précédente). |
 | `source.md` | Ce qui a été mesuré, observé, proposé ; écarts. |
 
 ## Typographie

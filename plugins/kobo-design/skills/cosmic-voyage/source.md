@@ -41,7 +41,7 @@
 - Le visuel clé du site change à chaque version du jeu ; au moment du relevé il était clair et très coloré. Le skill garde la nuit étoilée comme ambiance de référence.
 - Entrées au défilement (blocs qui montent en fondu), survols des cartes : proposés.
 - Pages internes en mobile : proposées.
-- `examples/mondes.html` date de la passe du 2026-10-02 : tokens mis à jour, page non refaite.
+- L'ancienne page d'exemple `mondes.html` a été supprimée : seule `demo.html` illustre le skill.
 - Images par seconde de `motion.md` : mesurées sur la démo dans un Chrome sans carte graphique.
 
 ## Écarts assumés

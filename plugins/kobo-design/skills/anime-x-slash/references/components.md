@@ -1,6 +1,6 @@
 # Anime X Slash — composants
 
-Toutes les valeurs viennent de `tokens.css`. « Mesuré » = lu dans le navigateur ou dans le code du site ; « observé » = relevé sur capture ; « proposé » = ajouté par le skill. Code complet de l'accueil dans `examples/demo.html`, des pages internes dans `examples/personnage.html` et `examples/medias.html`.
+Toutes les valeurs viennent de `tokens.css`. « Mesuré » = lu dans le navigateur ou dans le code du site ; « observé » = relevé sur capture ; « proposé » = ajouté par le skill. Code complet de l'accueil dans `examples/demo.html` ; les pages internes n'ont pas de page d'exemple.
 
 # Accueil (mesuré le 2026-10-03)
 

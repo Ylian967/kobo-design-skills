@@ -53,4 +53,4 @@
 
 ## 5. 3D
 
-Optionnelle. Deux usages qui servent le style : la **carte des mondes** en Three.js (sphères texturées, orbites en lignes, légère rotation au pointeur — voir `examples/mondes.html`) et l'**intro** en particules. Repli : les icônes rondes en images et l'intro en canvas 2D de la démo.
+Optionnelle. Deux usages qui servent le style : la **carte des mondes** en Three.js (sphères texturées, orbites en lignes, légère rotation au pointeur) et l'**intro** en particules. Repli : les icônes rondes en images et l'intro en canvas 2D de la démo.

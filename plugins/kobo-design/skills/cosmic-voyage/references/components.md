@@ -1,6 +1,6 @@
 # Cosmic Voyage — composants
 
-Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html` (accueil) et `examples/mondes.html` (carte et fiche d'un monde). « Mesuré » = lu dans le navigateur à 1440px ; « observé » = relevé sur capture (beaucoup d'éléments du site sont des images de fond) ; « proposé » = ajouté par le skill.
+Toutes les valeurs viennent de `tokens.css`. Code complet dans `examples/demo.html` (accueil) ; la carte et la fiche d'un monde n'ont pas de page d'exemple. « Mesuré » = lu dans le navigateur à 1440px ; « observé » = relevé sur capture (beaucoup d'éléments du site sont des images de fond) ; « proposé » = ajouté par le skill.
 
 ## 1. Barre de navigation (mesuré)
 
@@ -64,7 +64,7 @@ Bloc d'environ **450 × 497px de contenu**, coins de 12px. **En-tête bleu nuit*
 
 ## 12. Carte stellaire des mondes (observé)
 
-Fond bleu nuit en dégradé radial. De **grands cercles** se croisent : traits pleins fins et **pointillés épais**. Chaque monde est une **icône ronde lumineuse** (photo ou rendu) avec halo bleu et libellé 11px dessous. Étiquette de page en haut à gauche. Fiche d'un monde : illustration floutée en fond, bouton « Retour », titre centré, carrousel de lieux (image centrale nette, voisines assombries) — voir `examples/mondes.html`.
+Fond bleu nuit en dégradé radial. De **grands cercles** se croisent : traits pleins fins et **pointillés épais**. Chaque monde est une **icône ronde lumineuse** (photo ou rendu) avec halo bleu et libellé 11px dessous. Étiquette de page en haut à gauche. Fiche d'un monde : illustration floutée en fond, bouton « Retour », titre centré, carrousel de lieux (image centrale nette, voisines assombries).
 
 ## 13. Liste d'actualités (page Informations, mesuré)
 

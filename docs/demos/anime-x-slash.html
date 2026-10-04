@@ -384,7 +384,7 @@ footer small { display: block; margin-top: var(--space-20); font-size: 11px; col
   </section>
 
   <section class="sec chara" id="chara" aria-labelledby="t-chara">
-    <div class="sec__head"><h2 class="title" id="t-chara">Personnages</h2><a class="btn" href="personnage.html">Tous</a></div>
+    <div class="sec__head"><h2 class="title" id="t-chara">Personnages</h2><a class="btn" href="#chara">Tous</a></div>
     <ul class="cards" id="cards"></ul>
   </section>
 </main>
@@ -408,7 +408,7 @@ footer small { display: block; margin-top: var(--space-20); font-size: 11px; col
   /* ---------- Personnages : 10 cartes (rang, nom, photo, couleur) ---------- */
   const CHARA = [['Zéro', 'photo-1580428180163-76ab1efe2aed', 1], ['Reine', 'photo-1585732436636-f786c52696d6', 6], ['Dragon', 'photo-1615790469537-7c9d8e95c047', 3], ['Lame fantôme', 'photo-1758413266415-d736d4dc1de1', 4], ['Les Jumeaux', 'photo-1546427660-eb346c344ba5', 5],
     ['Loli', 'photo-1581661685609-4fb610338a34', 6], ['Cyan', 'photo-1535467728855-93fe6218a7b1', 7], ['Âme', 'photo-1659225260593-f082454ca503', 8], ['Écho', 'photo-1613698808499-f772ccb4f527', 2], ['Nova', 'photo-1559828801-04565cd31e27', 8]];
-  $('#cards').innerHTML = CHARA.map(([n, id, c], i) => '<li><a class="card" href="personnage.html" style="--c:var(--chara-' + c + ')" aria-label="Rang ' + (i + 1) + ' : ' + n + '">' +
+  $('#cards').innerHTML = CHARA.map(([n, id, c], i) => '<li><a class="card" href="#chara" style="--c:var(--chara-' + c + ')" aria-label="Rang ' + (i + 1) + ' : ' + n + '">' +
     '<span class="card__img"><div><img loading="lazy" decoding="async" src="' + U(id, 640, 520) + '" width="640" height="520" alt="" data-slot="chara-card"></div></span>' +
     '<span class="card__name"><span class="tag">Nom de héros</span><strong>' + n + '</strong></span>' +
     '<span class="card__num"><span class="tag">Rang n°</span><b>' + String(i + 1).padStart(2, '0') + '</b></span></a></li>').join('');

@@ -39,7 +39,6 @@ Inspiré de : voir `source.md`. On reprend le langage visuel, jamais l'identité
 | `references/layouts.md` | Ordre et mesures de l'accueil, gabarits des pages internes, mobile. |
 | `references/assets.md` | Avant de placer une image : sujets, cadrages, couleur ou gris, sources, prompts IA. |
 | `examples/demo.html` | Accueil complet et animé (série fictive « Rank Zero »). |
-| `examples/personnage.html`, `examples/medias.html` | Pages internes statiques : fiche personnage, actualités, histoire, vidéos, musique. |
 | `source.md` | Ce qui a été mesuré, observé, proposé ; écarts. |
 
 ## Typographie

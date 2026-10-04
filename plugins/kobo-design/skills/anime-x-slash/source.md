@@ -48,7 +48,7 @@
 - Le mobile des pages internes (fiche, histoire, musique) : déduit.
 - Pagination d'article et page d'article : non vues.
 - Les images par seconde de `motion.md` : mesurées sur la démo dans un Chrome sans carte graphique.
-- `examples/personnage.html` et `examples/medias.html` datent de la passe du 2026-10-02 : pages statiques, tokens mis à jour, **non refaites** dans cette passe (cartes en gris tramé, à aligner sur l'accueil si besoin).
+- Les anciennes pages d'exemple `personnage.html` et `medias.html` ont été supprimées : seule `demo.html` illustre le skill.
 
 ## Écarts assumés
 
