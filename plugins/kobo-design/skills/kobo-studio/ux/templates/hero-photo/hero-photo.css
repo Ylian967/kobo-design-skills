@@ -21,9 +21,15 @@
  * règle sa couleur (--_plate-color : le fond sur lequel son texte est prévu), sa densité (--_plate-a) ou sa forme (--_plate).
  */
 /* Sur écran étroit (moins de 6 × --k-space-32), le texte prend toute la largeur : la plaque aussi */
+/* Plaque verticale prête à l'emploi (texte en bas du héros) : dense sous le texte, fondue sur le dernier --k-space-24 du haut.
+   L'habillage écrit --_plate: var(--_plate-v) et garde ce même espace libre au-dessus de son texte. */
+.g-hero { --_plate-v: linear-gradient(0deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 80%), transparent) 0 calc(100% - var(--k-space-24)), transparent 100%); }
 .g-hero__content { --_narrow: calc((var(--k-space-32) * 6 - 100vw) * 999); }
 .g-hero__content::before { content: ""; position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); pointer-events: none;
   background: var(--_plate, linear-gradient(90deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 74%), transparent) 0 clamp(var(--_plate-w, 62%), var(--_narrow), 100%), transparent clamp(var(--_plate-end, 92%), var(--_narrow), 100%))); }
 .g-hero__content .k-lead { color: inherit; }
 .g-hero__content .k-facts dt, .g-hero__content .k-kicker { color: inherit; }
 .g-hero__caption { position: absolute; inset-block-end: var(--k-space-4); inset-inline-end: var(--k-edge); max-inline-size: 40%; font-size: max(var(--k-fs-small), var(--k-fs-min)); text-align: end; }
+/* Mots d'un titre qui montent à l'ouverture (habillages pocket-device, mint-street…) : chaque mot dans une fenêtre */
+.g-rise { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.g-rise > b { display: inline-block; font-weight: inherit; }

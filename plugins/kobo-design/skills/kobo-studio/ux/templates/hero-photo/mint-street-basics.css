@@ -1,0 +1,36 @@
+/*
+ * kobo-studio — héros photo, habillage mint-street-basics : le titre géant, le disque vert et la photo dans son arche.
+ * Sources (lecture seule) : mint-street-basics/examples/demo.html (.hero : fond bleu nuit en dégradé ; h1 : capitales géantes en
+ * dégradé blanc → argent, dont les lignes montent une à une ; .disc : grand disque vert en dégradé et disque intérieur menthe,
+ * qui grandissent à l'ouverture ; .arch : la photo dans une arche à sommet rond, posée sur le bas ; .pill : l'action à droite),
+ * references/tokens.css.
+ * Non repris : le bandeau défilant, les étoiles et la note (données du site d'origine).
+ */
+[data-k-skill="mint-street-basics"] .g-hero--arch {
+  --_ink: var(--k-text-inverse); --_bg: linear-gradient(180deg, var(--k-bg-inverse), var(--k-sig-navy-2)); --_plate: none;
+  /* Le titre passe devant le disque : un voile bleu nuit sur le haut du héros le garde lisible, le disque reste vif en bas */
+  --_veil: linear-gradient(180deg, color-mix(in srgb, var(--k-bg-inverse) 80%, transparent) 0 64%, transparent 90%);
+  /* La scène (disques et arche) occupe la partie droite du héros ; tout le héros sur écran étroit (seuil sans point de rupture) */
+  --_sx: clamp(0%, calc((100vw - var(--k-space-32) * 6) * 999), 37%); --_sw: calc(100% - var(--_sx));
+  min-block-size: min(var(--k-sig-hero-h), 100dvh - var(--k-nav-h)); align-items: start;
+}
+[data-k-skill="mint-street-basics"] .g-hero--arch::before, [data-k-skill="mint-street-basics"] .g-hero--arch::after { content: ""; position: absolute; z-index: -2; aspect-ratio: 1; border-radius: 50%; }
+[data-k-skill="mint-street-basics"] .g-hero--arch::before { inset: auto auto -46% calc(var(--_sx) + var(--_sw) * 0.04); inline-size: calc(var(--_sw) * 1.08); background: radial-gradient(circle at 50% 38%, var(--k-sig-green-2), var(--k-accent) 70%); }
+[data-k-skill="mint-street-basics"] .g-hero--arch::after { inset: auto auto -72% calc(var(--_sx) + var(--_sw) * 0.2); inline-size: calc(var(--_sw) * 0.78); background: linear-gradient(180deg, var(--k-bg), var(--k-accent-2)); }
+[data-k-skill="mint-street-basics"] .g-hero--arch .g-hero__rig { inset: auto auto 0 calc(var(--_sx) + var(--_sw) * 0.21); inline-size: calc(var(--_sw) * 0.46); block-size: 88%; transform: none; overflow: hidden; border-radius: var(--k-radius-pill) var(--k-radius-pill) 0 0; }
+/* Le titre passe devant la photo : un voile bleu nuit en haut de l'arche le garde lisible (3:1 au pire pixel, mesuré) */
+[data-k-skill="mint-street-basics"] .g-hero--arch .g-hero__rig::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--k-bg-inverse) 78%, transparent) 0 45%, transparent 75%); }
+[data-k-skill="mint-street-basics"] .g-hero--arch .g-hero__content { z-index: 2; padding-block: var(--k-space-8) var(--k-space-16); min-block-size: inherit; grid-template-rows: auto auto 1fr auto; }
+[data-k-skill="mint-street-basics"] .g-hero--arch .g-hero__content > * { max-inline-size: 100%; }
+[data-k-skill="mint-street-basics"] .g-hero--arch h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); text-transform: uppercase; background: linear-gradient(180deg, var(--k-text-inverse) 30%, var(--k-sig-silver)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+[data-k-skill="mint-street-basics"] .g-hero--arch h1 .g-rise > b { background: inherit; -webkit-background-clip: text; background-clip: text; }
+[data-k-skill="mint-street-basics"] .g-hero--arch :is(.k-lead, .k-facts, .g-hero__caption) { display: none; }
+[data-k-skill="mint-street-basics"] .g-hero--arch .k-btn { align-self: end; justify-self: end; }
+/* Ouverture (full seulement) : les disques grandissent, l'arche monte, les mots du titre montent */
+.g-hero--arch[data-k-in="pending"]::before, .g-hero--arch[data-k-in="pending"]::after { transform: scale(0.6); opacity: 0; }
+.g-hero--arch[data-k-in="pending"] .g-hero__rig { translate: 0 12%; opacity: 0; }
+.g-hero--arch[data-k-in="pending"] .g-rise > b { transform: translateY(105%); }
+.g-hero--arch[data-k-motion]::before, .g-hero--arch[data-k-motion]::after { transition: transform var(--k-dur-slow) var(--k-ease-out), opacity var(--k-dur-base) linear; }
+.g-hero--arch[data-k-motion] .g-hero__rig { transition: translate var(--k-dur-slow) var(--k-ease-out) var(--k-dur-fast), opacity var(--k-dur-base) linear var(--k-dur-fast); }
+.g-hero--arch[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast)); }
+@media (prefers-reduced-motion: reduce) { .g-hero--arch[data-k-motion]::before, .g-hero--arch[data-k-motion]::after, .g-hero--arch[data-k-motion] .g-hero__rig, .g-hero--arch[data-k-motion] .g-rise > b { transition: none; } }

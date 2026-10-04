@@ -1,0 +1,18 @@
+/*
+ * kobo-studio — héros photo, habillage sticker-brutal-jp : texte à gauche, photo-autocollant à droite.
+ * Sources (lecture seule) : sticker-brutal-jp/examples/demo.html (.hero : deux colonnes égales, centrées ; h1 en capitales très
+ * grasses, approche serrée ; phrase de 560 px ; bouton jaune sous le texte), components/signatures (autocollant : contour
+ * d'encre épais, ombre dure décalée, coins ronds), references/tokens.css.
+ * Non repris : le titre japonais en second, les autocollants de couleur dispersés autour de la photo, le texte vertical.
+ */
+[data-k-skill="sticker-brutal-jp"] .g-hero--split {
+  --_veil: none; --_plate: none; display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-8) var(--k-space-12); min-block-size: 0; overflow: visible;
+  inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; padding-block: var(--k-space-12) var(--k-space-16);
+}
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__content { order: 1; flex: 1 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); inline-size: auto; margin: 0; padding: 0; }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__content::before { content: none; }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__content > * { max-inline-size: 100%; }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split h1 { font-size: var(--k-fs-h1); font-weight: 800; line-height: 1; text-transform: uppercase; overflow-wrap: normal; hyphens: manual; }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-sig-fs-lead); }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__rig { order: 2; flex: 1 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 3; transform: none; rotate: 3deg; overflow: hidden; border: var(--k-sig-bw-sticker) solid var(--k-text); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow); }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__caption { display: none; }

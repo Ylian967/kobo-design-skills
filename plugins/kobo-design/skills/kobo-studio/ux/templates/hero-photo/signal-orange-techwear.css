@@ -1,0 +1,22 @@
+/*
+ * kobo-studio — héros photo, habillage signal-orange-techwear : le titre empilé à registres et la silhouette au centre.
+ * Sources (lecture seule) : signal-orange-techwear/examples/demo.html (.stack : titre en capitales grasses, une ligne par mot,
+ * registres différents — la première en orange, une ligne « creuse » au contour, les autres pleines ; lignes qui montent à
+ * 80 ms d'écart ; .figure : photo en colonne au centre, fondue sur ses deux bords ; .hero-copy : texte de 300 px sous le titre),
+ * references/tokens.css.
+ * Non repris : la pilule « changer de silhouette », le texte vertical, les panneaux de caractéristiques à droite, les ronds de réseaux.
+ */
+/* Plaque : étroite sur grand écran (le texte est à gauche de la silhouette), sur toute la largeur quand l'écran est étroit */
+[data-k-skill="signal-orange-techwear"] .g-hero--stack { --_veil: none; --_plate-w: 28%; --_plate-end: 56%; --_plate-a: 88%; min-block-size: min(var(--k-sig-screen-h), 100dvh - var(--k-nav-h)); align-items: center; }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack .g-hero__rig { inset: 0 auto 0 30%; inline-size: 44%; transform: translate(calc(var(--_px, 0) * var(--k-space-4)), 0); -webkit-mask-image: linear-gradient(90deg, transparent, var(--k-bg) 22%, var(--k-bg) 78%, transparent); mask-image: linear-gradient(90deg, transparent, var(--k-bg) 22%, var(--k-bg) 78%, transparent); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack .g-hero__rig::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--k-bg) 80%, transparent), transparent 70%); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack .g-hero__content > * { max-inline-size: min(100%, calc(var(--k-space-32) * 4 + var(--k-space-12))); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack h1 { font-size: var(--k-fs-hero); font-weight: 800; line-height: var(--k-lh-tight); text-transform: uppercase; }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack h1 .g-rise { display: block; padding-block: calc(var(--k-space-1) / 2); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack h1 .g-rise:first-child > b { color: var(--k-accent); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack h1 .g-rise:nth-child(3) > b { color: transparent; -webkit-text-stroke: var(--k-border-w) var(--k-text); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack .k-lead { max-inline-size: calc(var(--k-space-32) * 2 + var(--k-space-12)); font-size: var(--k-fs-body); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack .k-facts { display: none; }
+.g-hero--stack[data-k-in="pending"] .g-rise > b { transform: translateY(105%); }
+.g-hero--stack[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) / 2); }
+@media (prefers-reduced-motion: reduce) { .g-hero--stack[data-k-motion] .g-rise > b { transition: none; } }

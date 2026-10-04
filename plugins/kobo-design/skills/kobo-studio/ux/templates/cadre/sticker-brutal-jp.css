@@ -1,0 +1,10 @@
+/*
+ * kobo-studio — cadre de page, habillage sticker-brutal-jp : le cadre d'encre épais à coins ronds.
+ * Sources (lecture seule) : sticker-brutal-jp/examples/demo.html (.frame : bord épais --bw-frame, couleur d'encre, coins --r-frame,
+ * fond papier ; toute la page vit dedans), references/tokens.css.
+ * Écart : dans la démo le cadre entoure la page et défile avec elle ; ici il est fixe autour de l'écran.
+ * Non repris : les autocollants posés à cheval sur le cadre.
+ */
+html[data-k-skill="sticker-brutal-jp"][data-k-gabarits~="cadre"] { --_rail-w: 0px; --_bw: var(--k-sig-bw-frame); --_line: var(--k-text); --_radius: var(--k-sig-r-frame); }
+html[data-k-skill="sticker-brutal-jp"] :is(.g-frame__bar, .g-frame__rail) { display: none; }
+html[data-k-skill="sticker-brutal-jp"][data-k-gabarits~="cadre"] .k-page__top .k-nav { background: var(--k-bg); }

@@ -1,0 +1,20 @@
+/*
+ * kobo-studio — héros photo, habillage showroom-bento : le produit au centre de sa scène éclairée.
+ * Sources (lecture seule) : showroom-bento/examples/demo.html (.frame : grand cadre arrondi au fond gris clair ; .head : nom du
+ * produit en titre, dont une partie en couleur de marque, court texte ; .stage : halo de lumière ovale au centre, où pose le
+ * produit), references/tokens.css.
+ * Écart : la démo pose un produit détouré sur son sol de studio ; le projet fournit une photo rectangulaire, montrée dans une
+ * tuile arrondie sur le halo.
+ * Non repris : la rotation du produit, les pastilles de teinte, le prix, la rangée bento sous la scène (famille « grilles »).
+ */
+[data-k-skill="showroom-bento"] .g-hero--stage {
+  --_veil: none; --_plate: none; display: grid; justify-items: center; align-content: start; gap: var(--k-space-8); min-block-size: 0; overflow: visible; padding: var(--k-space-12) var(--k-edge) var(--k-space-16); text-align: center;
+  background: radial-gradient(ellipse 46% 60% at 50% 62%, var(--k-surface-2), transparent 70%);
+}
+[data-k-skill="showroom-bento"] .g-hero--stage .g-hero__content { order: 1; justify-items: center; inline-size: auto; margin: 0; padding: 0; }
+[data-k-skill="showroom-bento"] .g-hero--stage .g-hero__content::before { content: none; }
+[data-k-skill="showroom-bento"] .g-hero--stage .g-hero__content > * { max-inline-size: min(100%, var(--k-measure-wide)); }
+[data-k-skill="showroom-bento"] .g-hero--stage h1 { font-size: var(--k-fs-h1); }
+[data-k-skill="showroom-bento"] .g-hero--stage .k-facts { display: none; }
+[data-k-skill="showroom-bento"] .g-hero--stage .g-hero__rig { order: 2; position: relative; inset: auto; z-index: 0; inline-size: min(100%, calc(var(--k-space-32) * 5)); aspect-ratio: 16 / 9; transform: none; overflow: hidden; border-radius: var(--k-radius-lg); }
+[data-k-skill="showroom-bento"] .g-hero--stage .g-hero__caption { position: static; max-inline-size: none; text-align: center; color: var(--k-text-2); }

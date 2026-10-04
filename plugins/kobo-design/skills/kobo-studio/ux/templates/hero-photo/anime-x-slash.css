@@ -1,0 +1,26 @@
+/*
+ * kobo-studio — héros photo, habillage anime-x-slash : le héros en éclats biaisés.
+ * Sources (lecture seule) : anime-x-slash/examples/demo.html (.hero : fond sombre ; .shards : la photo découpée en éclats — des
+ * parallélogrammes penchés du même angle, à filet intérieur, dans lesquels l'image reste droite ; titre rouge géant), le
+ * relevé de l'étape 3 bis (« titres rouges géants collés au bord gauche »), references/tokens.css (--slant).
+ * Non repris : le changement de personnage, le signe « / » et l'effet de brouillage du logo, la bande-annonce en X.
+ */
+[data-k-skill="anime-x-slash"] .g-hero--shards {
+  --_bg: var(--k-sig-bg-hero); --_veil: none; --_plate-w: 0%; --_plate-end: 0%; --_plate-a: 96%;   /* plaque seulement sur écran étroit, où le texte passe devant les éclats */
+  min-block-size: min(100dvh - var(--k-nav-h), 54vw); align-items: end;
+}
+[data-k-skill="anime-x-slash"] .g-hero--shards .g-hero__rig { inset: 8% 4% 12% 46%; display: flex; gap: var(--k-space-2); transform: skewX(calc(var(--k-angle) * -1)) translate(calc(var(--_px, 0) * var(--k-space-4)), 0); }
+[data-k-skill="anime-x-slash"] .g-hero--shards .g-hero__layer--base { position: absolute; inline-size: var(--k-border-w); block-size: var(--k-border-w); overflow: hidden; opacity: 0; }   /* l'<img> d'origine reste pour son texte alternatif */
+.g-shard { position: relative; flex: 1; overflow: hidden; background: var(--k-surface); }
+.g-shard:nth-child(odd) { margin-block: 6% 0; } .g-shard:nth-child(even) { margin-block: 0 9%; }
+.g-shard > img { position: absolute; inset-block: 0; inset-inline-start: calc(var(--_n) * -100% - 30%); inline-size: calc(var(--_count) * 100% + 60%); block-size: 100%; max-inline-size: none; object-fit: cover; transform: skewX(var(--k-angle)); filter: var(--k-img-filter); }
+.g-shard::after { content: ""; position: absolute; inset: var(--k-space-1); border: calc(var(--k-border-w) * 2) solid color-mix(in srgb, var(--k-surface) 40%, transparent); }
+[data-k-skill="anime-x-slash"] .g-hero--shards .g-hero__content > * { max-inline-size: min(100%, max(32%, calc(var(--k-space-32) * 3))); }
+[data-k-skill="anime-x-slash"] .g-hero--shards h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); text-transform: uppercase; color: var(--k-accent); }
+[data-k-skill="anime-x-slash"] .g-hero--shards .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
+[data-k-skill="anime-x-slash"] .g-hero--shards .k-facts { display: none; }
+/* Ouverture (full seulement) : les éclats glissent en place, en alternance du haut et du bas */
+.g-hero--shards[data-k-in="pending"] .g-shard:nth-child(odd) { translate: 0 -40%; opacity: 0; }
+.g-hero--shards[data-k-in="pending"] .g-shard:nth-child(even) { translate: 0 40%; opacity: 0; }
+.g-hero--shards[data-k-motion] .g-shard { transition: translate var(--k-dur-slow) var(--k-ease-out), opacity var(--k-dur-base) linear; transition-delay: calc(var(--_n) * var(--k-dur-fast) / 2); }
+@media (prefers-reduced-motion: reduce) { .g-hero--shards[data-k-motion] .g-shard { transition: none; } }

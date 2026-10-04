@@ -1,0 +1,22 @@
+/*
+ * kobo-studio — héros photo, habillage pocket-device-noir : la photo chaude qui fond au noir, le texte centré en bas.
+ * Sources (lecture seule) : pocket-device-noir/examples/demo.html (.hero : photo plein cadre et voile vertical — sombre en haut,
+ * clair au milieu, noir en bas ; .arc : grand cercle d'un filet, coupé ; .hero-copy : titre géant, phrase et bouton centrés en bas ;
+ * les mots du titre montent un à un à l'ouverture, 120 ms d'écart ; .side : deux libellés de part et d'autre), references/tokens.css.
+ * Non repris : l'objet en 3D au centre de la photo (aucun modèle n'est fourni par le projet), le second bouton.
+ */
+[data-k-skill="pocket-device-noir"] .g-hero--pocket {
+  --_bg: var(--k-sig-shade); --_veil: linear-gradient(180deg, var(--k-scrim), var(--k-sig-veil-0) 18%, var(--k-sig-veil-0) 40%, var(--k-scrim) 70%, var(--k-sig-veil-2) 98%);
+  --_plate: var(--_plate-v); --_plate-a: 88%;
+  min-block-size: min(100dvh - var(--k-nav-h), calc(var(--k-space-32) * 7)); text-align: center;
+}
+[data-k-skill="pocket-device-noir"] .g-hero--pocket .g-hero__content { justify-items: center; padding-block: var(--k-space-24) var(--k-space-24); }
+[data-k-skill="pocket-device-noir"] .g-hero--pocket h1 { font-size: var(--k-fs-hero); line-height: 0.95; }
+[data-k-skill="pocket-device-noir"] .g-hero--pocket .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); color: var(--k-text-2); }
+[data-k-skill="pocket-device-noir"] .g-hero--pocket .k-facts { display: none; }
+/* Le grand cercle d'un filet, coupé par le haut */
+[data-k-skill="pocket-device-noir"] .g-hero--pocket .g-hero__veil::after { content: ""; position: absolute; inset-block-start: 20%; inset-inline-start: -11%; inline-size: 122%; aspect-ratio: 1; border-radius: 50%; box-shadow: inset 0 0 0 var(--k-border-w) var(--k-line); clip-path: inset(46% 0 0 0); }
+/* Ouverture (full seulement) : les mots du titre montent un à un */
+.g-hero--pocket[data-k-in="pending"] .g-rise > b { transform: translateY(105%); }
+.g-hero--pocket[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) + var(--k-dur-base)); }
+@media (prefers-reduced-motion: reduce) { .g-hero--pocket[data-k-motion] .g-rise > b { transition: none; } }

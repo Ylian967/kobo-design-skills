@@ -1,0 +1,26 @@
+/*
+ * kobo-studio — héros photo, habillage chrome-atelier : le héros nuit et ses cercles de cadrage.
+ * Sources (lecture seule) : chrome-atelier/examples/demo.html (.hero : hauteur d'écran, fond nuit ; .hero__photo et son voile
+ * de gauche à droite — nuit pleine à gauche, photo à droite ; .guides : cercles et deux axes d'un filet, centrés sur le sujet
+ * à 60 % / 44 % ; .hero__title : capitales, une ligne par segment, chacune décalée), references/tokens.css.
+ * Non repris : la pièce en 3D sur sa planche, la barre de caractéristiques, le décalage ligne à ligne du titre (il dépend du texte).
+ */
+[data-k-skill="chrome-atelier"] .g-hero--guides {
+  --_ink: var(--k-text-inverse); --_bg: var(--k-bg-inverse); --_plate-color: var(--k-bg-inverse); --_plate-w: 0%; --_plate-end: 0%; --_plate-a: 88%;
+  --_veil: linear-gradient(90deg, var(--k-bg-inverse) 4%, color-mix(in srgb, var(--k-bg-inverse) 84%, transparent) 40%, color-mix(in srgb, var(--k-sig-black) 18%, transparent) 62%, color-mix(in srgb, var(--k-bg-inverse) 55%, transparent));
+  --_h: var(--k-border-w); --_cx: var(--_mx, 60%); --_cy: var(--_my, 44%);
+  min-block-size: calc(100dvh - var(--k-nav-h)); align-items: end;
+}
+/* Plaque : absente sur grand écran (le voile de gauche suffit), sur toute la largeur quand l'écran est étroit et que le texte passe devant la photo */
+[data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__content { padding-block: var(--k-space-24) var(--k-space-16); }
+[data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__content > * { max-inline-size: min(100%, max(46%, calc(var(--k-space-32) * 3))); }
+[data-k-skill="chrome-atelier"] .g-hero--guides h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); text-transform: uppercase; }
+[data-k-skill="chrome-atelier"] .g-hero--guides .k-lead { font-size: var(--k-fs-body); }
+[data-k-skill="chrome-atelier"] .g-hero--guides .k-facts { display: none; }
+/* Cercles et axes de cadrage */
+[data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::before, [data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::after { content: ""; position: absolute; inset-inline-start: var(--_cx); inset-block-start: var(--_cy); aspect-ratio: 1; translate: -50% -50%; border: var(--_h) solid var(--k-sig-bar-line); border-radius: 50%; }
+[data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::before { inline-size: 26%; }
+[data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__veil::after { inline-size: 46%; }
+[data-k-skill="chrome-atelier"] .g-hero--guides .g-hero__rig::after { content: ""; position: absolute; inset: 0; background:
+  linear-gradient(90deg, transparent calc(var(--_cx) - var(--_h)), var(--k-sig-bar-line) 0 var(--_cx), transparent 0),
+  linear-gradient(180deg, transparent calc(var(--_cy) - var(--_h)), var(--k-sig-bar-line) 0 var(--_cy), transparent 0); }

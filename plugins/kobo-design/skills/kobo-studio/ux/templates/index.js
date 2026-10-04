@@ -15,7 +15,23 @@
     'glacial-mono-3d':       { scene: ['css', 'js'] },
     'noir-inferno-chapters': { 'chapitre-ecran': ['css', 'js'] },
     'hyper-lime-street':     { 'hero-photo': ['css', 'js'], 'formes-inclinees': ['css', 'js'] },
-    'nocturne-architecture': { 'titre-geant': ['css', 'js'], 'hero-photo': ['css', 'js'] }
+    'nocturne-architecture': { 'titre-geant': ['css', 'js'], 'hero-photo': ['css', 'js'] },
+    'alpine-glass-expedition': { 'hero-photo': ['css', 'js'] },
+    'pocket-device-noir':    { 'hero-photo': ['css', 'js'] },
+    'glass-frame-estate':    { 'hero-photo': ['css', 'js'] },
+    'mint-street-basics':    { 'hero-photo': ['css', 'js'] },
+    'zigzag-snack-pop':      { 'hero-photo': ['css', 'js'] },
+    'serif-bistro-green':    { 'hero-photo': ['css', 'js'] },
+    'pixel-lime-portfolio':  { 'hero-photo': ['css', 'js'] },
+    'signal-orange-techwear': { 'hero-photo': ['css', 'js'] },
+    'sticker-brutal-jp':     { cadre: ['css', 'js'], 'hero-photo': ['css', 'js'] },
+    'retro-mission-poster':  { cadre: ['css', 'js'], 'hero-photo': ['css', 'js'] },
+    'showroom-bento':        { 'hero-photo': ['css', 'js'] },
+    'cosmic-voyage':         { 'hero-photo': ['css', 'js'] },
+    'anime-x-slash':         { 'hero-photo': ['css', 'js'] },
+    'heritage-lens':         { 'hero-photo': ['css', 'js'] },
+    'hold-to-play-music':    { 'hero-photo': ['css', 'js'] },
+    'chrome-atelier':        { 'hero-photo': ['css', 'js'] }
   };
   var loaded = {};
   function load(url) {

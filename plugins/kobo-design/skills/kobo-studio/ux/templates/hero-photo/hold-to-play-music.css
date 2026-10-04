@@ -1,0 +1,17 @@
+/*
+ * kobo-studio — héros photo, habillage hold-to-play-music : l'écran unique, le mot géant et la touche au centre.
+ * Sources (lecture seule) : hold-to-play-music/examples/demo.html (écran plein, texte centré, une seule consigne ; h1 « peint »
+ * géant ; touche en pilule à contour), le relevé de l'étape 3 bis (image grise qui prend sa couleur, orange à l'action),
+ * references/tokens.css.
+ * Non repris : le mot peint à la main (une image, pas une police), les plans vidéo, le geste « maintenir pour jouer » et son
+ * contour qui se trace — ici la touche est un lien ordinaire, activable d'un clic, d'Entrée ou d'un toucher.
+ */
+[data-k-skill="hold-to-play-music"] .g-hero--single {
+  --_plate: none; --_veil: linear-gradient(color-mix(in srgb, var(--k-bg) 74%, transparent), color-mix(in srgb, var(--k-bg) 74%, transparent));   /* un voile uni sur toute la photo : pas de bande visible derrière le texte */
+  min-block-size: calc(100dvh - var(--k-nav-h)); align-items: center; text-align: center;
+}
+[data-k-skill="hold-to-play-music"] .g-hero--single .g-hero__content { justify-items: center; gap: var(--k-space-8); }
+[data-k-skill="hold-to-play-music"] .g-hero--single .g-hero__content > * { max-inline-size: min(100%, var(--k-measure-wide)); }
+[data-k-skill="hold-to-play-music"] .g-hero--single h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
+[data-k-skill="hold-to-play-music"] .g-hero--single .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); font-weight: 600; }
+[data-k-skill="hold-to-play-music"] .g-hero--single .k-facts { display: none; }

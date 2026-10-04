@@ -140,3 +140,108 @@ Familles déjà là, à habiller : `hero-photo` (alpine, nocturne, pocket, glass
 
 Familles à créer : fond et fil de page (cosmic, zigzag, serif-bistro), grilles particulières (showroom, anime, glass-frame).
 
+
+---
+
+# Second lot : les 17 autres skills
+
+Règle : chaque skill reçoit d'abord le gabarit de son **premier écran**, puis ses autres signatures. Travail par paquets de quatre, chacun vérifié avant le suivant : capture à côté du premier écran de la démo (accueil du site vitrine, full, 1440 px), fluidité, 390 px, contraste au pire pixel du texte posé sur image.
+
+Toutes les mesures de contraste sont faites en `reduced` (image fixe), à 1440 et 390 px. Fluidité : 2,5 s de souris en mouvement puis 2,5 s de défilement ; « lentes » = images de plus de 34 ms.
+
+## Paquet 1 — alpine-glass, pocket-device, glass-frame, mint-street
+
+Famille réutilisée : `hero-photo`, quatre habillages.
+
+| Skill | Verdict | Ce qui fait reconnaître | Ce qui manque | Fluidité | 390 px | Contraste (pire pixel) |
+|---|---|---|---|---|---|---|
+| **alpine-glass-expedition** | **oui** | Photo plein cadre, voile diagonal brume → bleu profond, titre géant à empattements en capitales en bas | La sphère de verre qui suit le pointeur, les puces, la note du site d'origine, la brume en canvas | 0 lente | aucun débordement | 7.5 à 13.9 |
+| **pocket-device-noir** | **en partie** | Photo qui fond au noir, titre géant centré en bas, phrase et bouton centrés, grand cercle d'un filet | L'objet en 3D au centre de la photo : c'est le sujet de la démo, et le projet ne fournit aucun modèle | 0 lente | aucun débordement | 9.4 à 16.7 |
+| **glass-frame-estate** | **oui** | Photo dans un cadre à filet, mot-marque en capitales derrière le voile, titre en bas à gauche, bouton large à flèche en bas à droite | Le sujet détouré qui passe devant le mot, les cellules de verre (données du site d'origine), le fond flouté | 0 lente | aucun débordement | 9.4 à 11.7 |
+| **mint-street-basics** | **oui** | Fond bleu nuit, titre géant en capitales blanc → argent, disque vert, photo dans son arche | Le titre ne passe devant le disque que sous un voile (lisibilité) ; bandeau défilant, étoiles et chiffres du site d'origine | 0 lente | aucun débordement | titre 4.2 (1440), 9.5 (390) ; surtitre 16.4 |
+
+Corrigé pendant le paquet : la géométrie des disques de mint-street (ils vivent dans la partie droite du héros) ; le surtitre, placé là où la plaque s'estompait, passait sous 4.5:1 dans trois héros — la plaque reste dense sous tout le texte et ne s'estompe qu'au-dessus.
+
+## Paquet 2 — zigzag-snack, serif-bistro, pixel-lime, signal-orange
+
+Famille réutilisée : `hero-photo`, quatre habillages.
+
+| Skill | Verdict | Ce qui fait reconnaître | Ce qui manque | Fluidité | 390 px | Contraste (pire pixel) |
+|---|---|---|---|---|---|---|
+| **zigzag-snack-pop** | **oui** | Héros orange, titre géant blanc centré, photo à bord blanc épais et ombre dure, penchée | Le bord en dents de scie, le tampon rond, le slogan jaune ; la photo est sous le titre, pas à cheval dessus | 0 lente | aucun débordement | titre 3.2 (grand texte) ; surtitre et phrase posés sur une étiquette blanche (paire du contrat) |
+| **serif-bistro-green** | **en partie** | Très grand titre à empattements, photo dans une arche à filet épais, phrase et bouton à droite | L'arche ne remonte pas dans le titre : dans la démo les mots s'écartent pour lui laisser la place, ce qu'un titre libre ne permet pas ; l'assiette ronde | 0 lente | aucun débordement | 9.1 partout |
+| **pixel-lime-portfolio** | **en partie** | Photo noir et blanc plein cadre, titre en minuscules en bas à gauche, phrase et bouton lime en bas à droite | La bande de mosaïque en pixels lime sur la photo : c'est le signe de la démo | 1 lente (35 ms) | aucun débordement | 12.8 à 16.2 |
+| **signal-orange-techwear** | **oui** | Titre empilé en capitales (ligne orange, ligne creuse au contour, lignes pleines), silhouette noir et blanc en colonne au centre | Les panneaux de caractéristiques à droite, le texte vertical, la pilule de changement de silhouette | 0 lente | aucun débordement | 8.1 à 19.3 |
+
+Corrigé pendant le paquet : blanc sur orange (3,2:1) et brun sur orange (3,0:1) ne tiennent pas pour un petit texte sous zigzag ; à 390 px le texte de signal-orange passait sur la silhouette (1.2 à 1.8) — la plaque prend toute la largeur ; le titre de serif-bistro passait devant la photo claire (1.1) — l'arche reste sous le titre.
+
+## Paquet 3 — sticker-brutal, retro-mission, showroom-bento, cosmic-voyage
+
+Familles réutilisées : `hero-photo` (quatre habillages) et `cadre` (deux habillages : sticker-brutal, retro-mission). La famille `cadre` a été étendue : épaisseur du filet et retrait réglables, rail et barre facultatifs.
+
+| Skill | Verdict | Ce qui fait reconnaître | Ce qui manque | Fluidité | 390 px | Contraste (pire pixel) |
+|---|---|---|---|---|---|---|
+| **retro-mission-poster** | **oui** | Cadre crème épais autour de l'écran, affiche plein écran, titre géant incliné en haut à droite, logo rouge espacé, bouton crème | La photo en aplats granuleux (un fichier préparé, pas un filtre), l'anneau dentelé, le passage par crans | 0 lente | aucun débordement | phrase 8.7 à 12.1 ; **titre non mesuré** : sa boîte, inclinée, est traversée par le cadre crème, de la couleur du texte — la mesure rend 1.0 et ne dit rien du fond réel |
+| **sticker-brutal-jp** | **en partie** | Cadre d'encre épais à coins ronds, titre en capitales très grasses, photo en autocollant penché à ombre dure | Les autocollants de couleur à cheval sur le cadre et autour de la photo, le titre japonais, le texte vertical : ce sont eux qui font l'écran de la démo | 0 lente | aucun débordement | texte sur fond uni (paires du contrat) |
+| **showroom-bento** | **en partie** | Barre de pilules, titre centré, image dans une tuile arrondie sur un halo de lumière | Le produit détouré sur son sol de studio (le projet fournit une photo rectangulaire), la rangée bento, les pastilles de teinte | 0 lente | aucun débordement | texte sur fond uni (paires du contrat) |
+| **cosmic-voyage** | **en partie** | Photo plein écran entre deux voiles de nuit, titre en haut à gauche, action centrée en bas, barre à lien bleu et bouton doré | Le ciel étoilé : c'est la photo qui fait la démo, et celle du projet est une montagne de jour ; la frise du voyage | 0 lente | aucun débordement | 5.2 à 13.4 |
+
+Corrigé pendant le paquet : le bouton de retro-mission étiré par la grille ; le titre de sticker-brutal, trop grand, coupait un mot.
+
+## Paquet 4 — anime-x-slash, heritage-lens, hold-to-play, chrome-atelier
+
+Famille réutilisée : `hero-photo`, quatre habillages.
+
+| Skill | Verdict | Ce qui fait reconnaître | Ce qui manque | Fluidité | 390 px | Contraste (pire pixel) |
+|---|---|---|---|---|---|---|
+| **anime-x-slash** | **oui** | La photo découpée en éclats biaisés à filet intérieur, le titre rouge géant en capitales condensées | Le logo penché à barre oblique, les formes de couleur derrière les éclats, le changement de personnage ; cinq éclats de la même photo, là où la démo en montre cinq différentes | 0 lente | aucun débordement | titre 3.3 et 3.2 (grand texte) ; reste 17.6 à 18.9 |
+| **chrome-atelier** | **oui** | Héros nuit, photo à droite sous son voile, cercles et axes de cadrage d'un filet, petit titre en capitales | La pièce en 3D sur sa planche (second écran de la démo), la barre de caractéristiques, le décalage ligne à ligne du titre | 0 lente | aucun débordement | 5.6 à 12.2 |
+| **heritage-lens** | **en partie** | Scène plein écran, texte centré, titre en or dans la police d'affiche | La lentille avant / après, l'anneau de dentelle, les points de navigation : la démo ouvre sur une phrase, pas sur un titre | 0 lente | aucun débordement | titre 3.9 (grand texte) ; reste 6.2 à 8.3 |
+| **hold-to-play-music** | **en partie** | Écran unique en noir et blanc, texte centré, touche en pilule à contour | Le mot peint à la main (une image), les plans vidéo, le geste « maintenir pour jouer » : la touche est ici un lien ordinaire | 0 lente | aucun débordement | 10.0 à 11.7 |
+
+Corrigé pendant le paquet : la plaque délavait les éclats d'anime (elle ne sert plus que sur écran étroit) ; les lettres du titre de heritage, animées une à une, coupaient les mots ; la plaque de hold-to-play dessinait une bande visible (remplacée par un voile uni) ; la phrase de chrome passait à 4.4.
+
+## tiny-planet-toy — non fait
+
+Le premier écran de sa démo est une planète en 3D construite pièce par pièce (maisons, arbres, phare, route), sur 90 lignes de code serré et une douzaine de couleurs. La reprendre fidèlement dans la famille `scene` demandait une lecture et un portage que je n'ai pas menés à bout dans ce lot ; une planète simplifiée aurait été une invention. **Ce skill n'a donc aucun gabarit** : ses emplacements rendent leur contenu neutre.
+
+## Bilan du second lot
+
+16 skills sur 17 ont le gabarit de leur premier écran. **8 « oui »** (alpine-glass, glass-frame, mint-street, zigzag, signal-orange, retro-mission, anime-x-slash, chrome-atelier), **8 « en partie »** (pocket-device, serif-bistro, pixel-lime, sticker-brutal, showroom, cosmic, heritage, hold-to-play), **1 non fait** (tiny-planet). Avec le premier lot : 14 « oui » sur 23.
+
+Les « en partie » se rangent en trois causes :
+- **le sujet dépend de la photo ou d'un objet que le projet ne fournit pas** : pocket-device (objet 3D), showroom (produit détouré), cosmic (ciel étoilé), hold-to-play (mot peint, vidéo) ;
+- **une pièce de signature reste à écrire** : pixel-lime (mosaïque), heritage (lentille), sticker-brutal (autocollants) ;
+- **le gabarit a dû céder à la lisibilité** : serif-bistro (l'arche ne remonte plus dans le titre).
+
+### Familles créées ou étendues
+
+Aucune famille créée. Étendues :
+- `hero-photo` : 16 habillages de plus (20 en tout). Ajouts à la famille : variante et retouche par habillage, repère distinct du cadrage (`data-k-mark`), plaque de lisibilité horizontale ou verticale, qui prend toute la largeur sur écran étroit, mots et lettres d'un titre qui montent à l'ouverture.
+- `cadre` : 2 habillages de plus (sticker-brutal, retro-mission) ; épaisseur et retrait du filet réglables, rail et barre facultatifs.
+- Moteur : préchargement des photos un écran avant, image absente masquée.
+
+### Ce qui n'a pas été fait dans ce second lot
+
+La consigne demandait, après le premier écran, « les autres signatures selon la répartition par famille ». **Seul le premier écran est fait.** Restent, par famille :
+- `image` : mosaïque de pixel-lime, lentille de heritage, couches d'acid sur les autres photos ;
+- `chapitre-ecran` : heritage-lens, hold-to-play ;
+- `formes-inclinees` : anime-x-slash (grille en parallélogrammes), retro-mission ;
+- `titre-geant` : signal-orange, mint-street, zigzag, pocket-device ;
+- `scene` : tiny-planet, pièce 3D de chrome-atelier ;
+- à créer : fond et fil de page (cosmic, zigzag, serif-bistro), grilles particulières (showroom, anime, glass-frame).
+
+### Fluidité la plus faible du second lot
+
+pixel-lime : 1 image de 35 ms au défilement. Les 15 autres : aucune image lente. Aucun de ces héros n'a de tâche dans la boucle d'animation ; leurs mouvements sont des entrées jouées une fois.
+Sur les deux lots, le point faible reste **hyper-lime au premier défilement** (15 à 21 images lentes), non résolu.
+
+### Non vérifié dans ce second lot
+
+- Chaque héros n'a été regardé que sur l'accueil du site vitrine ; pas sur la landing, où le héros porte une liste de faits que plusieurs habillages masquent.
+- Les entrées (mots qui montent, éclats, disques, arche) : seul leur état final a été vu.
+- Les replis (image absente, hors ligne) n'ont pas été redéclenchés sur les 16 nouveaux habillages ; ils passent par le même code que le premier lot.
+- Le titre incliné de retro-mission : contraste non mesuré (sa boîte est traversée par le cadre crème).
+- Contraste mesuré en `reduced` seulement.
+- Clavier : aucun de ces héros n'a de geste ; l'ordre de tabulation n'a pas été reparcouru.
+- `reduced` et `off` n'ont pas été recontrôlés skill par skill pour ce lot.

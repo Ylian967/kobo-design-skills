@@ -54,12 +54,12 @@ body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family:
   var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
   // Gabarits de signature écrits (ux/templates/) : emplacement rempli, et la structure où le voir
   var GABARITS = {
-    'lore-frame-editorial': 'frame (cadre de page) et media (planches de dossier) — toutes les structures',
+    'lore-frame-editorial': 'frame (cadre de page), media (planches de dossier), hero (manifeste géant)',
     'acid-scan-security': 'hero (photo plein cadre et scan) — landing produit, accueil du site vitrine',
     'glacial-mono-3d': 'backdrop (scène 3D) — toutes les structures',
     'noir-inferno-chapters': 'chapter (scène plein écran et cercle à tirer) — récit',
-    'hyper-lime-street': 'chapter (formes inclinées) — récit',
-    'nocturne-architecture': 'title (mot géant coupé) — landing produit, site vitrine, article'
+    'hyper-lime-street': 'hero (visuel clé et autocollants) — accueil, landing ; chapter (formes inclinées) — récit',
+    'nocturne-architecture': 'hero (photo et mot-marque coupé), title (mot géant coupé)'
   };
   var $ = function (id) { return document.getElementById(id); }, shown = '';
 
@@ -75,7 +75,7 @@ body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family:
     shown = s.file;
     $('stage').toggleAttribute('data-narrow', $('narrow').checked);
     var gab = GABARITS[$('skill').value];
-    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '. ' + (gab ? 'Gabarits de ce skill : ' + gab + '.' : 'Ce skill n’a pas encore de gabarit de signature.');
+    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '. ' + (gab ? 'Gabarits de ce skill : ' + gab + '.' : $('skill').value === 'tiny-planet-toy' ? 'Ce skill n’a pas encore de gabarit de signature.' : 'Gabarit de ce skill : hero (premier écran) — landing produit, accueil du site vitrine.');
     $('direct').href = s.file + hash;
     history.replaceState(null, '', '#' + s.id + ':' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '') + (neutral ? ':neutre' : '') + ($('narrow').checked ? ':etroit' : ''));
   }

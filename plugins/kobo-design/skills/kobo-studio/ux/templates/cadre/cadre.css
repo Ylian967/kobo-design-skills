@@ -28,4 +28,4 @@ html[data-k-gabarits~="cadre"] .k-sticky[data-k-side] { inset-block-start: calc(
 .g-frame__count { font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); writing-mode: vertical-rl; rotate: 180deg; letter-spacing: var(--k-ls-caps); color: var(--k-text-muted); }
 .g-frame__sign { inline-size: var(--k-space-8); fill: currentColor; }
 /* Le filet du cadre, par-dessus tout */
-.g-frame__line { position: absolute; inset: var(--_pad); border: var(--k-border-w) solid var(--_line, var(--k-line)); border-radius: var(--_radius, var(--k-radius)); }
+.g-frame__line { position: absolute; inset: var(--_inset, var(--_pad)); border: var(--_bw, var(--k-border-w)) solid var(--_line, var(--k-line)); border-radius: var(--_radius, var(--k-radius)); }

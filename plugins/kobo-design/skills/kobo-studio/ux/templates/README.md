@@ -4,13 +4,13 @@ Un gabarit remplit un emplacement d'une structure de page (`../README.md`) avec 
 
 Chaque **famille** est construite une fois (`<famille>/<famille>.css` et `.js`), puis **habillée** par skill (`<famille>/<skill>.css` et `.js`). La famille porte la mécanique et ne lit que des rôles `--k-*` ; l'habillage règle des variables locales et cite, en tête de fichier, ce qu'il a lu dans le skill et ce qu'il n'a pas repris.
 
-## Familles écrites (premier lot)
+## Familles écrites
 
 | Famille | Emplacement | Ce qu'elle fait | Habillage |
 |---|---|---|---|
-| `cadre/` | `frame` | Cadre fixe autour de l'écran : filet, rail, barre haute où se lit la progression | lore-frame-editorial |
+| `cadre/` | `frame` | Cadre fixe autour de l'écran : filet, rail et barre facultatifs, progression | lore-frame-editorial, retro-mission-poster, sticker-brutal-jp |
 | `image/` | `media` | Forme et traitement d'une image de contenu ; parallaxe dans la forme | lore-frame-editorial (planches en forme de dossier) |
-| `hero-photo/` | `hero` | Photo du héros en plein cadre, texte et action posés dessus, sur une plaque de lisibilité ; couches colorées cuites en canvas | acid-scan-security (scan en quatre couches), lore-frame-editorial (manifeste géant), hyper-lime-street (visuel clé et autocollants), nocturne-architecture (mot-marque coupé) |
+| `hero-photo/` | `hero` | Photo du héros en plein cadre, texte et action posés dessus, sur une plaque de lisibilité ; couches colorées cuites en canvas | 20 habillages : acid-scan, lore-frame, hyper-lime, nocturne, alpine-glass, pocket-device, glass-frame, mint-street, zigzag, serif-bistro, pixel-lime, signal-orange, sticker-brutal, retro-mission, showroom, cosmic, anime-x-slash, heritage-lens, hold-to-play, chrome-atelier |
 | `scene/` | `backdrop` | Scène 3D fixe derrière la page, chargée en différé, photo de repli | glacial-mono-3d |
 | `chapitre-ecran/` | `chapter` | Chapitre en scène de la hauteur de l'écran, cercle à tirer vers le suivant | noir-inferno-chapters |
 | `formes-inclinees/` | `chapter` | Bloc numéroté, panneau à image découpée et bande, penchés au même angle | hyper-lime-street |
@@ -91,7 +91,7 @@ Puis `../structures.html` : sélecteur « Gabarits : signature / neutres ».
 
 ## Limites connues
 
-- Six skills sur vingt-trois ont un gabarit. Pas de version React.
+- Vingt-deux skills sur vingt-trois ont le gabarit de leur premier écran ; tiny-planet-toy n'en a pas. Seuls six skills ont d'autres gabarits que leur héros. Pas de version React.
 - Testé dans Chrome seulement. `tan()`, `:has()`, l'imbrication de `color-mix()` et `import()` dynamique demandent un navigateur récent.
 - La scène 3D charge three.js depuis un CDN : hors ligne, la photo de repli reste.
 - Voir `../../quality/relecture-etape-4b.md` pour les verdicts et ce qui reste incertain.

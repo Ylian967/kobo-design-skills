@@ -6,7 +6,7 @@ La partie de kobo-studio qui ne dépend d'aucun skill : comment une page est con
 |---|---|
 | `structures/` | Quatre structures de page complètes (HTML, CSS, JS, React, README) et leur socle commun (`page.css`, `page.js`) |
 | `patterns/` | Fiches courtes sur les briques transverses : états de page, formulaire, navigation, mouvements |
-| `templates/` | Gabarits de signature : une famille par type de mise en page, habillée par skill (premier lot : 6 skills) |
+| `templates/` | Gabarits de signature : une famille par type de mise en page, habillée par skill |
 | `structures.html` | Démonstration : chaque structure sous chacun des 23 skills, aux trois intensités, gabarits neutres ou de signature |
 
 ## Le principe des emplacements
@@ -124,6 +124,6 @@ Puis ouvrir `structures.html` : sélecteur de structure, de skill, d'intensité 
 
 ## Limites connues
 
-- Six skills ont un gabarit de signature (`templates/README.md`) ; sous les dix-sept autres, les emplacements rendent leur contenu neutre, et `frame` et `backdrop` sont vides.
+- Vingt-deux skills ont le gabarit de leur premier écran (`templates/README.md`) ; tiny-planet-toy n'en a pas. Hors du héros, les emplacements de seize skills rendent encore leur contenu neutre.
 - Les versions React sont compilées et rendues côté serveur, pas essayées dans un navigateur.
 - Testé dans Chrome seulement.

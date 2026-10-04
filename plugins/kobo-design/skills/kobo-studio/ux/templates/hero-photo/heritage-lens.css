@@ -1,0 +1,22 @@
+/*
+ * kobo-studio — héros photo, habillage heritage-lens : la scène plein écran et son titre centré.
+ * Sources (lecture seule) : heritage-lens/examples/demo.html (.stage : scène de la hauteur de l'écran ; .hero-title : nom du
+ * lieu au centre, dans la police d'affiche, dont les lettres apparaissent une à une en montant, 28 ms d'écart), le relevé de
+ * l'étape 3 bis (texte centré, titres de lieu en or), references/tokens.css.
+ * Non repris : la lentille avant / après qui suit le pointeur, l'anneau de dentelle, les points de navigation verticaux.
+ */
+[data-k-skill="heritage-lens"] .g-hero--scene {
+  --_veil: linear-gradient(color-mix(in srgb, var(--k-bg) 70%, transparent), color-mix(in srgb, var(--k-bg) 70%, transparent)), linear-gradient(0deg, var(--k-overlay), transparent 40%);
+  --_plate: none;
+  min-block-size: calc(100dvh - var(--k-nav-h)); align-items: center; text-align: center;
+}
+[data-k-skill="heritage-lens"] .g-hero--scene .g-hero__content { justify-items: center; padding-block: var(--k-space-24); }
+[data-k-skill="heritage-lens"] .g-hero--scene .g-hero__content > * { max-inline-size: min(100%, var(--k-measure-wide)); }
+[data-k-skill="heritage-lens"] .g-hero--scene h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); color: var(--k-accent); }
+[data-k-skill="heritage-lens"] .g-hero--scene .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
+[data-k-skill="heritage-lens"] .g-hero--scene .k-facts { display: none; }
+.g-hero--scene .g-rise { overflow: visible; }
+.g-nowrap { display: inline-block; white-space: nowrap; }   /* les lettres d'un mot ne se séparent pas */
+.g-hero--scene[data-k-in="pending"] .g-rise > b { opacity: 0; transform: translateY(35%); }
+.g-hero--scene[data-k-motion] .g-rise > b { transition: opacity var(--k-dur-slow) var(--k-ease-out), transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) / 2); }
+@media (prefers-reduced-motion: reduce) { .g-hero--scene[data-k-motion] .g-rise > b { transition: none; } }

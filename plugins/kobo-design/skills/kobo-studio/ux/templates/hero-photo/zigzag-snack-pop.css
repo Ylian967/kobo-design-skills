@@ -1,0 +1,28 @@
+/*
+ * kobo-studio — héros photo, habillage zigzag-snack-pop : le héros orange, son titre géant et la photo-autocollant penchée.
+ * Sources (lecture seule) : zigzag-snack-pop/examples/demo.html (.hero : fond orange, texte blanc centré ; h1 géant dont les mots
+ * arrivent en sautant — translateY(40px) rotate(−6°) ; .pack figure : photo à bord blanc épais, coins ronds, ombre dure, penchée
+ * de −6°, qui arrive en tournant ; bouton sous le titre), references/tokens.css.
+ * Non repris : le tampon rond et le slogan jaune (textes du site d'origine), le bord en dents de scie (il relie deux sections :
+ * famille « fond et fil de page », à écrire).
+ */
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack {
+  --_ink: var(--k-text-inverse); --_bg: var(--k-accent-2); --_veil: none; --_plate: none;
+  display: flex; flex-direction: column; min-block-size: 0; padding: var(--k-space-12) var(--k-edge) var(--k-space-24); text-align: center;
+}
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__content { justify-items: center; inline-size: auto; padding-block: 0 var(--k-space-8); }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__content > * { max-inline-size: 100%; }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); }
+/* Sur l'orange, ni le blanc (3,2:1) ni le brun (3,0:1) ne tiennent pour un petit texte : mesuré. Le blanc est réservé au grand
+   titre ; le surtitre et la phrase sont posés sur une étiquette du fond du skill (paire du contrat, opaque). */
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack :is(.k-kicker, .k-lead) { padding: var(--k-space-2) var(--k-space-4); color: var(--k-text); background: var(--k-bg); border-radius: var(--k-radius); }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack :is(.k-facts, .g-hero__caption) { display: none; }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__rig { order: 2; position: relative; inset: auto; z-index: 0; inline-size: min(74%, calc(var(--k-space-32) * 4)); aspect-ratio: 1.55; margin-inline: auto; transform: none; rotate: -6deg; overflow: hidden; border: var(--k-sig-frame) solid var(--k-text-inverse); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow); }
+/* Ouverture (full seulement) : les mots sautent en place, la photo arrive en tournant */
+.g-hero--pack[data-k-in="pending"] .g-rise > b { transform: translateY(var(--k-space-12)) rotate(-6deg); opacity: 0; }
+.g-hero--pack[data-k-in="pending"] .g-hero__rig { translate: 0 var(--k-space-16); rotate: 8deg; opacity: 0; }
+.g-hero--pack .g-rise { overflow: visible; }
+.g-hero--pack[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-spring), opacity var(--k-dur-base) ease; transition-delay: calc(var(--_i) * var(--k-dur-fast) / 2); }
+.g-hero--pack[data-k-motion] .g-hero__rig { transition: translate var(--k-dur-slow) var(--k-ease-spring) var(--k-dur-base), rotate var(--k-dur-slow) var(--k-ease-spring) var(--k-dur-base), opacity var(--k-dur-base) ease var(--k-dur-base); }
+@media (prefers-reduced-motion: reduce) { .g-hero--pack[data-k-motion] :is(.g-rise > b, .g-hero__rig) { transition: none; } }

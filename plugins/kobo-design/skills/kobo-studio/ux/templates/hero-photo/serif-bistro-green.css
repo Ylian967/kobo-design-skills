@@ -1,0 +1,25 @@
+/*
+ * kobo-studio — héros photo, habillage serif-bistro-green : le grand titre à empattements et la photo dans son arche.
+ * Sources (lecture seule) : serif-bistro-green/examples/demo.html (.hero-title : titre géant sur deux lignes ; .hero-row : trois
+ * colonnes — petit texte centré à gauche, arche au centre, phrase et bouton à droite ; .arch : photo dans une arche à sommet
+ * rond, cernée d'un filet épais, qui remonte dans le titre et monte à l'ouverture), references/tokens.css.
+ * Écart : dans la démo l'arche remonte dans le titre, dont les mots s'écartent pour lui laisser la place ; ici le titre est
+ * un texte libre, l'arche reste donc sous lui (un titre blanc ne doit pas passer devant une photo claire).
+ * Non repris : l'assiette ronde qui tourne, les feuilles de section empilées (famille « fond et fil de page », à écrire).
+ */
+[data-k-skill="serif-bistro-green"] .g-hero--bistro {
+  --_veil: none; --_plate: none; --_aw: clamp(calc(var(--k-space-32) * 2), 30vw, var(--k-sig-arch-w));
+  display: grid; grid-template-columns: minmax(0, 1fr); min-block-size: 0; padding-block: var(--k-space-12) 0; overflow: visible;
+}
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__content { order: 1; padding-block: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2)), 1fr)); align-items: start; column-gap: calc(var(--_aw) + var(--k-space-12)); }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__content > * { max-inline-size: 100%; }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro :is(.k-kicker, h1) { grid-column: 1 / -1; }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro h1 { position: relative; z-index: 1; font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); margin-block-end: var(--k-space-8); }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .k-lead { grid-column: -2 / -1; font-size: var(--k-sig-fs-lead); }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .k-btn { grid-column: -2 / -1; }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .k-facts { grid-column: 1; grid-row: 3 / span 2; font-size: var(--k-fs-small); }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__rig { order: 2; position: relative; inset: auto; z-index: 0; justify-self: center; inline-size: var(--_aw); block-size: clamp(calc(var(--k-space-32) * 3), 44vw, calc(var(--k-space-32) * 5)); margin-block-start: var(--k-space-8); transform: none; overflow: hidden; border: var(--k-sig-frame-w) solid var(--k-sig-frame); border-block-end: 0; border-radius: var(--k-radius-pill) var(--k-radius-pill) 0 0; }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__caption { display: none; }
+.g-hero--bistro[data-k-in="pending"] .g-hero__rig { translate: 0 18%; opacity: 0; }
+.g-hero--bistro[data-k-motion] .g-hero__rig { transition: translate calc(var(--k-dur-slow) * 2) var(--k-ease-out) var(--k-dur-fast), opacity var(--k-dur-slow) var(--k-ease-out) var(--k-dur-fast); }
+@media (prefers-reduced-motion: reduce) { .g-hero--bistro[data-k-motion] .g-hero__rig { transition: none; } }

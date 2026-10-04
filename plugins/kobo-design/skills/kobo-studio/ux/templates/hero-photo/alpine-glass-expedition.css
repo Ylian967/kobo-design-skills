@@ -1,0 +1,21 @@
+/*
+ * kobo-studio — héros photo, habillage alpine-glass-expedition : la photo plein cadre sous son voile diagonal.
+ * Sources (lecture seule) : alpine-glass-expedition/examples/demo.html (.hero : hauteur d'écran ; .hero__shade : diagonale à 155°,
+ * brume en haut à gauche → bleu profond en bas à droite, puis bas uni ; .title : capitales géantes en dégradé blanc → neige, en bas ;
+ * .lead sous le titre ; .chip : puces en contour), references/tokens.css.
+ * Non repris : la grande sphère de verre qui suit le pointeur, la note « 4,8/5 » (donnée du site d'origine), le bouton lecture,
+ * le canvas de brume et de neige, le voile de chargement à altimètre.
+ */
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine {
+  --_veil: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--k-bg) 86%, transparent) 74%, var(--k-bg) 90%),
+    linear-gradient(155deg, transparent 37%, color-mix(in srgb, var(--k-surface-2) 82%, transparent) 57%, color-mix(in srgb, var(--k-bg) 94%, transparent) 74%),
+    radial-gradient(40% 46% at 20% 15%, color-mix(in srgb, var(--k-bg-inverse) 88%, transparent), color-mix(in srgb, var(--k-bg-inverse) 55%, transparent) 45%, transparent 78%);
+  --_plate: var(--_plate-v); --_plate-a: 84%;
+  min-block-size: 100dvh;
+}
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .g-hero__content { padding-block: var(--k-space-24) var(--k-edge); }
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .g-hero__content > * { max-inline-size: 100%; }
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); text-transform: uppercase;
+  background: linear-gradient(180deg, var(--k-text) 25%, var(--k-sig-snow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .k-lead { max-inline-size: var(--k-sig-lead-w); font-size: var(--k-fs-body); }
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .k-facts { max-inline-size: var(--k-measure); }

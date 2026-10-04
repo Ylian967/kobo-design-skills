@@ -1,0 +1,17 @@
+/*
+ * kobo-studio — héros photo, habillage cosmic-voyage : la photo plein écran entre deux voiles de nuit, le nom en haut à gauche.
+ * Sources (lecture seule) : cosmic-voyage/examples/demo.html (.hero : hauteur d'écran, photo plein cadre, voile nuit en haut
+ * et en bas ; .mark : le titre en haut à gauche, précédé d'un petit mot ; actions centrées en bas), references/tokens.css.
+ * Non repris : le bouton lecture à anneau en dégradé (l'anneau violet est noté « estimé » dans l'audit), le fond étoilé et la
+ * frise du voyage (famille « fond et fil de page », à écrire).
+ */
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic {
+  --_bg: var(--k-sig-bg-top); --_veil: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 55%, transparent), transparent 30%, transparent 60%, var(--k-bg));
+  --_plate: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 82%, transparent) 0 42%, transparent 62%), linear-gradient(0deg, color-mix(in srgb, var(--k-bg) 88%, transparent) 0 14%, transparent 30%);
+  min-block-size: 100dvh; align-items: stretch;
+}
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__content { grid-template-rows: auto auto auto 1fr auto; padding-block: var(--k-space-12) var(--k-space-16); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-facts { display: none; }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-btn { grid-row: 5; justify-self: center; }
