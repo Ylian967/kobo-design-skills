@@ -48,7 +48,7 @@ Les scripts s'accrochent à `window.Kobo` (`Kobo.field`, `Kobo.nav`, `Kobo.menu`
 ## Vérifier
 
 ```bash
-python3 tools/check_components.py     # valeurs en dur, README, focus, React, motifs anti-slop
+python3 tools/check_components.py     # valeurs en dur, README, focus, React, motifs anti-slop ; couvre aussi ../ux/
 python3 tools/check_contract.py       # fiches du contrat
 ```
 

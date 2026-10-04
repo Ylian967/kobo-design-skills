@@ -44,7 +44,10 @@
 
 /* Variantes */
 .k-card--flat { background: transparent; box-shadow: none; }
-.k-card--row { flex-direction: row; }
-.k-card--row .k-card__media { flex: none; inline-size: 38%; aspect-ratio: auto; border-block-end: 0; border-inline-end: var(--k-border-w) solid var(--k-line); }
+/* En ligne : image à côté du texte tant que la carte est assez large ; sinon l'image repasse au-dessus (sans point de rupture). Le pied prend toute la largeur. */
+.k-card--row { flex-flow: row wrap; }
+.k-card--row .k-card__media { display: grid; flex: 1 1 calc(var(--k-space-32) * 2); min-block-size: calc(var(--k-space-32) + var(--k-space-16)); aspect-ratio: auto; border-block-end: 0; }
+.k-card--row .k-card__body { flex: 2 1 calc(var(--k-space-32) * 2); }
+.k-card--row .k-card__foot { flex: 1 1 100%; }
 
 @media (prefers-reduced-motion: reduce) { .k-card { transition: none; } }

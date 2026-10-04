@@ -1,0 +1,44 @@
+/*
+ * kobo-studio — structure « récit en sections collantes » : ce qui lui est propre (le reste vient de ../page.css).
+ * Uniquement des rôles --k-*. Le collant est fait en CSS (position: sticky) : sans script, le récit se lit entièrement.
+ * Le script ne fait que dire où l'on en est (chapitre courant, barre de progression).
+ */
+.rc-toc ol { display: grid; padding: 0; list-style: none; }
+.rc-toc a { display: flex; align-items: baseline; gap: var(--k-space-4); min-block-size: var(--k-hit-min); padding-block: var(--k-space-3); color: inherit; text-decoration: none; border-block-start: var(--k-border-w) solid var(--k-line); }
+.rc-toc li:last-child a { border-block-end: var(--k-border-w) solid var(--k-line); }
+.rc-toc a:hover { text-decoration: underline; text-underline-offset: var(--k-space-1); }
+.rc-toc a:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+.rc-toc__when { flex: none; inline-size: var(--k-space-16); font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); letter-spacing: var(--k-ls-caps); color: var(--k-text-2); }
+
+.rc-story { position: relative; border-block-start: var(--k-border-w) solid var(--k-line); }
+
+/* Rail de progression : collé en haut, cliquable, il dit le chapitre en cours en toutes lettres.
+   Quand la barre de navigation revient (on remonte, ou le focus y entre), il descend de sa hauteur (--_top-h, publiée par page.js)
+   pour ne pas être recouvert ; quand elle se cache, il remonte. */
+.rc-rail { position: sticky; inset-block-start: var(--_top-h, 0); z-index: 20; transition: inset-block-start var(--k-dur-base) var(--k-ease-out); background: var(--k-bg); border-block-end: var(--k-border-w) solid var(--k-line); }
+.k-page:has(.k-page__top[data-k-hidden]:not(:focus-within)) .rc-rail { inset-block-start: 0; }
+.rc-rail ol { display: flex; gap: var(--k-space-1); margin: 0; padding: 0 var(--k-edge); list-style: none; overflow-x: auto; scrollbar-width: none; }
+.rc-rail a { display: inline-flex; align-items: center; min-block-size: var(--k-hit-min); padding-inline: var(--k-space-3); font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); letter-spacing: var(--k-ls-caps); white-space: nowrap; color: var(--k-text-2); text-decoration: none; }
+.rc-rail a[aria-current="step"] { color: var(--k-text); font-weight: bolder; text-decoration: underline; text-underline-offset: var(--k-space-2); text-decoration-thickness: calc(var(--k-border-w) * 2); }
+.rc-rail a:focus-visible { outline-offset: calc(var(--k-focus-w) * -1); }
+.rc-rail__bar { display: block; block-size: calc(var(--k-border-w) * 2); background: var(--k-line-strong); transform-origin: 0 50%; transform: scaleX(var(--_progress, 0)); }
+[dir="rtl"] .rc-rail__bar { transform-origin: 100% 50%; }
+
+/*
+ * Chapitre (emplacement « chapter »). Neutre : l'image colle, le texte passe à côté.
+ * Colonnes larges : image à gauche sur toute la hauteur d'écran, texte à droite.
+ * Colonne unique (écran étroit) : la même règle fait coller l'image en haut, sur une demi-hauteur ; le texte passe dessous.
+ */
+.rc-chapter { --_top: var(--k-hit-min); display: flex; flex-wrap: wrap; align-items: start; border-block-end: var(--k-border-w) solid var(--k-line); }
+.rc-chapter__media { position: sticky; inset-block-start: var(--_top); z-index: 1; flex: 1 1 calc(var(--k-space-32) * 3); min-inline-size: 0; background: var(--k-bg); }
+.rc-chapter__media[data-k-slot="media"] img { block-size: min(100dvh - var(--_top), 100vw); aspect-ratio: auto; border-radius: 0; }
+.rc-chapter__text { flex: 1 1 calc(var(--k-space-32) * 3); min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-6); align-content: start; padding: var(--k-section-y) var(--k-edge) calc(var(--k-section-y) * 2); }
+.rc-chapter__text > p:not(.k-kicker) { max-inline-size: var(--k-measure); font-size: var(--k-fs-h3); line-height: var(--k-lh-body); }
+/* Posé par le script, qui mesure : « side » (côte à côte) ou « stacked » (une colonne). Sans script, ni l'un ni l'autre : le récit se lit à plat. */
+/* Côte à côte : le texte dure plus longtemps que l'écran, pour que l'image reste pendant qu'on lit */
+.rc-chapter[data-k-layout="side"] .rc-chapter__text { min-block-size: 160dvh; padding-block-start: 30dvh; }
+/* Une colonne : l'image ne prend que le haut de l'écran, pour laisser lire */
+.rc-chapter[data-k-layout="stacked"] .rc-chapter__media[data-k-slot="media"] img { block-size: 42dvh; }
+.rc-chapter[data-k-layout="stacked"] .rc-chapter__text { padding-block: var(--k-space-12) var(--k-section-y); }
+
+@media (prefers-reduced-motion: reduce) { .rc-rail { transition: none; } }

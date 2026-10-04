@@ -37,7 +37,7 @@ article.k-card
 |---|---|
 | `k-card--link` | carte entièrement cliquable : le lien du titre est étiré sur la carte |
 | `k-card--flat` | sans fond ni ombre |
-| `k-card--row` | image à gauche, texte à droite |
+| `k-card--row` | image à gauche, texte à droite, pied sur toute la largeur ; l'image repasse au-dessus quand la carte devient étroite |
 | `k-card--crochets` | variante à la demande d'acid-scan-security. Les couches de signature s'appliquent seules : voir `../signatures/` |
 
 ## Clavier

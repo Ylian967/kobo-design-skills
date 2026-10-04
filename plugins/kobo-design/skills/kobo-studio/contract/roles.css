@@ -7,7 +7,7 @@
  * et jamais un --k-sig-* (réservé aux composants de signature du skill).
  *
  * Ordre de chargement : roles.css → maps/<id>.css → brand.css (facultatif).
- * 62 rôles déclarés par chaque fiche + 10 pas d'espacement, --k-hit-min et --k-fs-min fournis par le socle. Vérification : python3 tools/check_contract.py
+ * 62 rôles déclarés par chaque fiche + 10 pas d'espacement, --k-hit-min, --k-fs-min, --k-measure et --k-measure-wide fournis par le socle. Vérification : python3 tools/check_contract.py
  */
 
 :root {
@@ -89,6 +89,8 @@
   --k-section-y: var(--k-space-24);        /* marge verticale d'une section */
   --k-control-h: 44px;                     /* hauteur AFFICHÉE d'un bouton et d'un champ ; peut être inférieure à --k-hit-min */
   --k-hit-min: 44px;                       /* côté minimal de la zone cliquable ; fourni par le socle, agrandit la cible sans changer la taille affichée */
+  --k-measure: 50ch;                       /* longueur de ligne du texte courant ; fourni par le socle. `ch` est la largeur du zéro, plus large qu'une lettre moyenne : 50ch donnent 50 caractères en chasse fixe et de 65 à 80 dans les polices des skills (mesuré) */
+  --k-measure-wide: 62ch;                  /* longueur de ligne large (≈ 80 caractères et plus) : listes de faits, lignes de données, jamais un paragraphe ; fourni par le socle */
   --k-nav-h: 64px;                         /* hauteur de la barre de navigation */
 
   /* ---- Mouvement ---- */

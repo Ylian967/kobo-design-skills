@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kobo-studio — structures de page</title>
+<!-- Démonstration des structures de page (étape 4a) : choisir une structure, un skill, une intensité.
+     S'ouvre directement depuis le disque (file://) dans Chrome ; une connexion est nécessaire pour les polices et les photos.
+     Le projet montré (Cordée Brume) est fictif. Adresse directe : structures.html#<structure>:<skill>[:full|reduced|off][:slots][:etroit] -->
+<link rel="stylesheet" href="../contract/roles.css">
+<link rel="stylesheet" href="../components/socle.css">
+<style>
+/* Barre de pilotage : uniquement des rôles --k-* (valeurs neutres du contrat). La structure est affichée dans un cadre, en dessous. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { block-size: 100%; }
+body { margin: 0; display: grid; grid-template-rows: auto auto 1fr; font-family: var(--k-font-body); font-size: var(--k-fs-small); line-height: var(--k-lh-body); color: var(--k-text); background: var(--k-surface-2); }
+.s-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-4); padding: var(--k-space-2) var(--k-edge); }
+.s-bar h1 { margin: 0; margin-inline-end: auto; font-size: var(--k-fs-body); }
+.s-bar label { display: flex; align-items: center; gap: var(--k-space-2); }
+.s-bar select { min-block-size: var(--k-hit-min); max-inline-size: 100%; padding: 0 var(--k-space-3); font: inherit; color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.s-bar input { inline-size: var(--k-space-6); block-size: var(--k-space-6); margin: 0; accent-color: var(--k-text); }
+.s-bar select:focus-visible, .s-bar input:focus-visible, .s-info a:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+.s-info { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-6); margin: 0; padding: var(--k-space-2) var(--k-edge); background: var(--k-bg); border-block: var(--k-border-w) solid var(--k-line); }
+.s-info a { color: inherit; }
+.s-stage { display: grid; justify-items: center; min-block-size: 0; }
+.s-stage iframe { inline-size: 100%; block-size: 100%; border: 0; background: var(--k-bg); }
+.s-stage[data-narrow] iframe { inline-size: min(100%, calc(var(--k-space-32) * 3 + var(--k-space-1) + var(--k-space-1) / 2)); border-inline: var(--k-border-w) solid var(--k-line-strong); }
+</style>
+</head>
+<body>
+<div class="s-bar" data-k-tone="inverse">
+  <h1>kobo-studio · structures de page</h1>
+  <label>Structure <select id="structure"></select></label>
+  <label>Skill <select id="skill"></select></label>
+  <label>Intensité <select id="intensity"><option>full</option><option>reduced</option><option>off</option></select></label>
+  <label><input type="checkbox" id="slots"> Montrer les emplacements</label>
+  <label><input type="checkbox" id="narrow"> Largeur de téléphone</label>
+</div>
+<p class="s-info"><span><b>Projet fictif.</b> Cordée Brume, ses sorties, ses prix et ses guides sont inventés ; les photos sont de vraies photos.</span><span id="about" role="status"></span><a id="direct" href="structures/landing-produit/landing-produit.html">Ouvrir la structure seule</a></p>
+<div class="s-stage" id="stage"><iframe id="frame" title="Structure affichée"></iframe></div>
+
+<script>
+// Pilotage : la structure choisie s'affiche dans un cadre ; le skill, l'intensité et l'affichage des emplacements passent par son adresse.
+(function () {
+  var STRUCTURES = [
+    { id: 'landing-produit', name: 'Landing produit', file: 'structures/landing-produit/landing-produit.html', slots: 'frame, backdrop, hero, media, title, grid, finale' },
+    { id: 'recit-collant', name: 'Récit en sections collantes', file: 'structures/recit-collant/recit-collant.html', slots: 'frame, backdrop, hero, chapter, media, finale' },
+    { id: 'site-vitrine', name: 'Site vitrine — accueil', file: 'structures/site-vitrine/accueil.html', slots: 'frame, backdrop, hero, media, title, grid, finale' },
+    { id: 'site-vitrine-page', name: 'Site vitrine — page intérieure', file: 'structures/site-vitrine/page-interieure.html', slots: 'frame, backdrop, hero, media, title, grid, finale' },
+    { id: 'article', name: 'Article / page éditoriale', file: 'structures/article/article.html', slots: 'frame, backdrop, hero, media, title, grid, finale' }
+  ];
+  var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
+  var $ = function (id) { return document.getElementById(id); }, shown = '';
+
+  STRUCTURES.forEach(function (s) { $('structure').add(new Option(s.name, s.id)); });
+  SKILLS.forEach(function (id) { $('skill').add(new Option(id, id)); });
+
+  function show() {
+    var s = STRUCTURES.filter(function (x) { return x.id === $('structure').value; })[0];
+    var hash = '#' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '');
+    if (shown === s.file) $('frame').contentWindow.location.replace(s.file + hash);   // même page : seul le choix change, sans rechargement
+    else $('frame').src = s.file + hash;
+    shown = s.file;
+    $('stage').toggleAttribute('data-narrow', $('narrow').checked);
+    $('about').textContent = 'Emplacements de cette structure : ' + s.slots + '.';
+    $('direct').href = s.file + hash;
+    history.replaceState(null, '', '#' + s.id + ':' + $('skill').value + ':' + $('intensity').value + ($('slots').checked ? ':slots' : '') + ($('narrow').checked ? ':etroit' : ''));
+  }
+  var h = location.hash.slice(1).split(':');
+  if (STRUCTURES.some(function (s) { return s.id === h[0]; })) $('structure').value = h[0];
+  $('skill').value = SKILLS.indexOf(h[1]) >= 0 ? h[1] : 'serif-bistro-green';
+  if (['full', 'reduced', 'off'].indexOf(h[2]) >= 0) $('intensity').value = h[2];
+  $('slots').checked = h.indexOf('slots') > 0; $('narrow').checked = h.indexOf('etroit') > 0;
+  ['structure', 'skill', 'intensity', 'slots', 'narrow'].forEach(function (id) { $(id).addEventListener('change', show); });
+  show();
+})();
+</script>
+</body>
+</html>

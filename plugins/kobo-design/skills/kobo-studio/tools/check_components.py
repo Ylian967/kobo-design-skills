@@ -17,6 +17,9 @@ Dans toutes les feuilles de style, les styles en ligne et la galerie :
     scale() au survol (M1), transition: all (M4), outline retiré sans remplacement (U8), texte de remplissage (T1),
     emoji en guise d'icône (T5), liens href="#" (T7), boutons sans type (U10), images sans alt (T8).
 
+Dans ux/ (structures de page, fiches de patterns, page de démonstration) : les mêmes règles — aucune valeur en dur, aucun
+--k-sig-*, motifs anti-slop — et, pour chaque dossier de ux/structures/ : README.md, une page .html, une feuille .css, une version React.
+
 Usage : python3 tools/check_components.py          Code de sortie 1 si une erreur est trouvée.
 """
 import re
@@ -26,6 +29,7 @@ from pathlib import Path
 STUDIO = Path(__file__).resolve().parent.parent
 COMP = STUDIO / "components"
 SIG = COMP / "signatures"
+UX = STUDIO / "ux"
 NAMED = ("white|black|red|green|blue|yellow|orange|purple|violet|pink|gray|grey|silver|gold|navy|teal|"
          "maroon|olive|lime|aqua|fuchsia|brown|beige|ivory|indigo|cyan|magenta|crimson|coral|salmon|tomato")
 FILLER = re.compile(r"lorem|ipsum|dolor sit|votre texte ici|titre de la section|description courte|texte de remplissage ici", re.I)
@@ -108,6 +112,36 @@ def markup(text, where):
     return out
 
 
+def check_ux(errs):
+    """Structures de page et patterns (ux/). Renvoie le nombre de dossiers de structure vérifiés."""
+    if not UX.exists():
+        return 0
+    dirs = sorted(d for d in (UX / "structures").iterdir() if d.is_dir()) if (UX / "structures").exists() else []
+    for d in dirs:
+        rel = f"ux/structures/{d.name}"
+        for pattern, what in [("README.md", "README.md"), ("*.html", "page .html"), ("*.css", "feuille .css"), ("*.jsx", "version React (*.jsx)")]:
+            if not list(d.glob(pattern)):
+                errs.append(f"{rel} : {what} manquant")
+    for f in sorted(UX.rglob("*")):
+        if not f.is_file() or f.suffix not in (".css", ".html", ".js", ".jsx", ".md"):
+            continue
+        text = f.read_text(encoding="utf-8")
+        where = str(f.relative_to(STUDIO)).replace("\\", "/")
+        if f.suffix == ".css":
+            css = strip_comments(text)
+            errs += hard_values(css, where) + slop(css, where)
+            if re.search(r"\b(?:transition|animation)\s*:", css) and "prefers-reduced-motion" not in css:
+                errs.append(f"{where} : mouvement sans prise en compte de prefers-reduced-motion (anti-slop M5)")
+        elif f.suffix == ".html":
+            for block in re.findall(r"<style[^>]*>(.*?)</style>", text, flags=re.S):
+                css = strip_comments(block)
+                errs += hard_values(css, where + " <style>") + slop(css, where + " <style>")
+            errs += markup(re.sub(r"<style.*?</style>|<script.*?</script>", "", text, flags=re.S), where)
+        else:
+            errs += markup(text, where)
+    return len(dirs)
+
+
 def main():
     errs, notes = [], []
     if not COMP.exists():
@@ -150,11 +184,12 @@ def main():
                 css = strip_comments(block)
                 errs += hard_values(css, where + " <style>") + slop(css, where + " <style>")
             errs += markup(re.sub(r"<style.*?</style>|<script.*?</script>", "", text, flags=re.S), where)
+    ux_dirs = check_ux(errs)
     for e in errs:
         print("  ✗", e)
     for n in notes:
         print("  ·", n)
-    print(f"\n{len(dirs)} dossier(s) vérifié(s), {len(errs)} erreur(s).")
+    print(f"\n{len(dirs)} dossier(s) de composants et {ux_dirs} structure(s) de page vérifié(s), {len(errs)} erreur(s).")
     return 1 if errs else 0
 
 

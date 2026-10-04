@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Préparer sa sortie — Cordée Brume (projet fictif)</title>
+<!-- Structure « site vitrine », page intérieure type : fil d'Ariane, titre, texte long avec repères, encart qui reste, suite.
+     Projet fictif : Cordée Brume, ses sorties, ses dates, ses prix et ses guides sont inventés. Les photos sont de vraies photos (Unsplash).
+     S'ouvre depuis le disque. Aperçu sous un autre skill : page-interieure.html#<id>[:full|reduced|off][:slots] -->
+<link rel="stylesheet" href="../../../contract/roles.css">
+<link rel="stylesheet" id="map" href="../../../contract/maps/serif-bistro-green.css">
+<link rel="stylesheet" href="../../../components/socle.css">
+<link rel="stylesheet" href="../../../components/bouton/bouton.css">
+<link rel="stylesheet" href="../../../components/champ/champ.css">
+<link rel="stylesheet" href="../../../components/carte/carte.css">
+<link rel="stylesheet" href="../../../components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="../../../components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="../../../components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="../page.css">
+<link rel="stylesheet" href="site-vitrine.css">
+<link rel="stylesheet" id="sig">
+<script src="../apercu.js" data-k-base="../../../"></script>
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M20 20l-4.5-4.5M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="accueil.html" data-k-keep>Cordée Brume</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="accueil.html" data-k-keep>Accueil</a></li>
+          <li><a class="k-nav__link" href="accueil.html#sorties" data-k-keep>Sorties</a></li>
+          <li><a class="k-nav__link" href="page-interieure.html" data-k-keep aria-current="page">Préparer sa sortie</a></li>
+          <li><a class="k-nav__link" href="../recit-collant/recit-collant.html" data-k-keep>Récit</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="accueil.html#sorties" data-k-keep>Voir les sorties</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="accueil.html" data-k-keep>Accueil</a></li>
+        <li><a class="k-menu__link" href="accueil.html#sorties" data-k-keep>Sorties</a></li>
+        <li><a class="k-menu__link" href="page-interieure.html" data-k-keep aria-current="page">Préparer sa sortie <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="../recit-collant/recit-collant.html" data-k-keep>Récit</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="accueil.html#sorties" data-k-keep data-k-menu-close>Voir les sorties</a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Où l'on est, et de quoi parle la page -->
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="accueil.html" data-k-keep>Accueil</a></li><li><span aria-current="page">Préparer sa sortie</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Préparer sa sortie</h1>
+        <p class="k-lead" data-k-part="lead">Ce qu'on met dans le sac, comment on a chaud la nuit, ce qui se passe quand la météo tourne.</p>
+      </div>
+    </section>
+
+    <!-- 2. Le contenu : texte à gauche, encart pratique qui reste à droite -->
+    <section class="k-section k-section--tight k-section--rule">
+      <div class="k-wrap k-split">
+        <div class="k-split__main k-prose">
+          <h2 class="k-h2" id="sac">Le sac</h2>
+          <p>Un sac de quarante litres suffit pour une nuit. Ce qui pèse va au fond, près du dos. La doudoune reste en haut : on la met dès qu'on s'arrête, avant d'avoir froid.</p>
+          <ul><li>Trois couches chaudes, dont une de rechange gardée au sec</li><li>Deux paires de gants : une fine pour monter la tente, une épaisse pour le reste</li><li>Une lampe frontale avec des piles neuves</li><li>Une gourde d'un litre, glissée dans le duvet la nuit pour qu'elle ne gèle pas</li></ul>
+          <figure data-k-slot="media">
+            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&h=800&q=70" alt="Vue depuis l'intérieur d'une tente orange ouverte sur une forêt" loading="lazy" style="--_ratio: 3 / 2">
+            <figcaption>On dort à deux par tente. Les chaussures restent dans l'abside.</figcaption>
+          </figure>
+          <h2 class="k-h2" id="froid">Le froid</h2>
+          <p>Il fait entre moins cinq et moins quinze la nuit. Les duvets fournis sont prévus pour cela. Ce qui compte, c'est de se coucher chaud : on marche cinq minutes avant d'entrer dans la tente, et on mange gras au dîner.</p>
+          <p>Si vous avez froid, vous le dites. Le guide a toujours un duvet de plus et une bouillotte.</p>
+          <h2 class="k-h2" id="meteo">La météo</h2>
+          <p>Le guide confirme la sortie l'avant-veille, à 18 h. Si le vent ou la neige annoncés rendent la nuit dangereuse, la sortie est reportée et vous choisissez une autre date, ou vous êtes remboursé.</p>
+          <h2 class="k-h2" id="annuler">Annuler</h2>
+          <p>Vous pouvez annuler sans frais jusqu'à sept jours avant le départ. Ensuite, la place est due, sauf si quelqu'un de la liste d'attente la reprend.</p>
+        </div>
+        <aside class="k-sticky k-stack sv-aside" aria-labelledby="t-bref">
+          <h2 class="k-h3" id="t-bref">En bref</h2>
+          <nav aria-label="Dans cette page" class="k-toc">
+            <ol><li><a class="k-link" href="#sac">Le sac</a></li><li><a class="k-link" href="#froid">Le froid</a></li><li><a class="k-link" href="#meteo">La météo</a></li><li><a class="k-link" href="#annuler">Annuler</a></li></ol>
+          </nav>
+          <dl class="k-facts">
+            <div><dt>Confirmation</dt><dd>l'avant-veille, 18 h</dd></div>
+            <div><dt>Nuit</dt><dd>de −5 à −15 °C</dd></div>
+            <div><dt>Annulation</dt><dd>sans frais à J−7</dd></div>
+          </dl>
+          <a class="k-btn k-btn--block" href="accueil.html#sorties" data-k-keep>Voir les sorties</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. Pour aller plus loin : deux lectures, pas une rangée de cartes -->
+    <section class="k-section k-section--alt" aria-labelledby="t-lire">
+      <div class="k-wrap">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">À lire avant de partir</p>
+          <h2 class="k-h2" id="t-lire" data-k-part="title">Deux façons de se faire une idée</h2>
+        </header>
+        <div data-k-slot="grid" class="sv-grid">
+          <article class="k-card k-card--link k-card--row" data-k-part="item">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1517824806704-9040b037703b?auto=format&fit=crop&w=900&h=600&q=70" alt="Tente éclairée de l'intérieur sous la Voie lactée" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Récit · 6 minutes</span><h3 class="k-card__title"><a href="../recit-collant/recit-collant.html" data-k-keep>Une nuit là-haut</a></h3><p class="k-card__text">Seize heures entre le parking et le lever du soleil, chapitre par chapitre.</p></div>
+          </article>
+          <article class="k-card k-card--link k-card--row" data-k-part="item">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1457269449834-928af64c684d?auto=format&fit=crop&w=900&h=600&q=70" alt="Flocon de neige en gros plan" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Journal · 5 minutes</span><h3 class="k-card__title"><a href="../article/article.html" data-k-keep>Dormir sur la neige sans avoir froid</a></h3><p class="k-card__text">Pourquoi la neige isole, et ce que cela change à la façon de monter un camp.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
+      <div class="k-wrap k-split k-split--center">
+        <div class="k-stack k-split__main">
+          <h2 class="k-h2" id="t-suite" data-k-part="title">Prêt à choisir une date ?</h2>
+          <p class="k-lead" data-k-part="lead">La sortie la plus simple pour commencer est le bivouac d'une nuit.</p>
+        </div>
+        <div><a class="k-btn" href="../landing-produit/landing-produit.html" data-k-keep data-k-part="action">Voir le bivouac et ses dates</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Cordée Brume</span><span>Projet fictif, écrit pour la démonstration de kobo-studio.</span></div>
+      <ul><li><a href="accueil.html" data-k-keep>Accueil</a></li><li><a href="page-interieure.html" data-k-keep>Préparer sa sortie</a></li><li><a href="../recit-collant/recit-collant.html" data-k-keep>Récit</a></li><li><a href="../article/article.html" data-k-keep>Journal</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="../../../components/barre-nav/barre-nav.js"></script>
+<script src="../../../components/menu-mobile/menu-mobile.js"></script>
+<script src="../../../components/champ/champ.js"></script>
+<script src="../page.js"></script>
+</body>
+</html>

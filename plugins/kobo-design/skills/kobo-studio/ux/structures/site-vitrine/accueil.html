@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cordée Brume — sorties d'hiver en montagne (projet fictif)</title>
+<!-- Structure « site vitrine », page d'accueil : dire qui on est, montrer l'offre, donner une suite.
+     Projet fictif : Cordée Brume, ses sorties, ses dates, ses prix et ses guides sont inventés. Les photos sont de vraies photos (Unsplash).
+     S'ouvre depuis le disque. Aperçu sous un autre skill : accueil.html#<id>[:full|reduced|off][:slots] -->
+<link rel="stylesheet" href="../../../contract/roles.css">
+<link rel="stylesheet" id="map" href="../../../contract/maps/serif-bistro-green.css">
+<link rel="stylesheet" href="../../../components/socle.css">
+<link rel="stylesheet" href="../../../components/bouton/bouton.css">
+<link rel="stylesheet" href="../../../components/champ/champ.css">
+<link rel="stylesheet" href="../../../components/carte/carte.css">
+<link rel="stylesheet" href="../../../components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="../../../components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="../../../components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="../page.css">
+<link rel="stylesheet" href="site-vitrine.css">
+<link rel="stylesheet" id="sig">
+<script src="../apercu.js" data-k-base="../../../"></script>
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M20 20l-4.5-4.5M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="accueil.html" data-k-keep>Cordée Brume</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="accueil.html" data-k-keep aria-current="page">Accueil</a></li>
+          <li><a class="k-nav__link" href="accueil.html#sorties" data-k-keep>Sorties</a></li>
+          <li><a class="k-nav__link" href="page-interieure.html" data-k-keep>Préparer sa sortie</a></li>
+          <li><a class="k-nav__link" href="../recit-collant/recit-collant.html" data-k-keep>Récit</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="accueil.html#sorties" data-k-keep>Voir les sorties</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="accueil.html" data-k-keep aria-current="page">Accueil <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="accueil.html#sorties" data-k-keep>Sorties</a></li>
+        <li><a class="k-menu__link" href="page-interieure.html" data-k-keep>Préparer sa sortie</a></li>
+        <li><a class="k-menu__link" href="../recit-collant/recit-collant.html" data-k-keep>Récit</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="accueil.html#sorties" data-k-keep data-k-menu-close>Voir les sorties</a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Qui on est, en une phrase, et où aller ensuite -->
+    <section data-k-slot="hero" aria-labelledby="titre">
+      <div class="k-wrap k-hero">
+        <div class="k-hero__text">
+          <p class="k-kicker" data-k-part="kicker">Guides de haute montagne · Aravis</p>
+          <h1 class="k-h1" id="titre" data-k-part="title">L'hiver en montagne, à six, avec un guide</h1>
+          <p class="k-lead" data-k-part="lead">Cordée Brume emmène de petits groupes dormir, marcher et grimper sur la neige, de décembre à mars. Le matériel est fourni ; le rythme est celui du plus lent.</p>
+          <a class="k-btn" href="#sorties" data-k-part="action">Voir les sorties de l'hiver</a>
+        </div>
+        <figure class="k-hero__side" data-k-slot="media" data-k-part="media">
+          <img src="https://images.unsplash.com/photo-1491555103944-7c647fd857e6?auto=format&fit=crop&w=1100&h=1100&q=70" alt="Personne en veste rouge, de dos, face à un sommet enneigé" style="--_ratio: 1">
+          <figcaption>Au belvédère du col, un matin de janvier.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. L'offre : une sortie mise en avant, les autres ensuite ; une recherche qui cherche vraiment -->
+    <section class="k-section k-section--rule" id="sorties" aria-labelledby="t-sorties">
+      <div class="k-wrap">
+        <div class="k-split sv-head">
+          <header data-k-slot="title" class="k-split__main">
+            <p class="k-kicker" data-k-part="kicker">Hiver en cours</p>
+            <h2 class="k-h2" id="t-sorties" data-k-part="title">Cinq sorties, du premier pas sur la neige à l'arête</h2>
+          </header>
+          <form class="k-field sv-search" role="search" id="recherche">
+            <label class="k-field__label" for="q">Chercher une sortie</label>
+            <div class="k-field__box"><input class="k-field__control" id="q" type="search" autocomplete="off" aria-describedby="q-etat" placeholder="raquettes, débutant, nuit…"></div>
+            <span class="k-field__help" id="q-etat" role="status">5 sorties affichées.</span>
+          </form>
+        </div>
+        <div data-k-slot="grid" class="sv-grid" id="liste">
+          <article class="k-card k-card--link k-card--row k-grid__wide" data-k-part="item" data-sv-item="bivouac nuit tente tous niveaux">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1579624512056-3eb398311205?auto=format&fit=crop&w=900&h=600&q=70" alt="Deux tentes posées sur la neige face à la mer de nuages au crépuscule" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">1 nuit · tous niveaux</span><h3 class="k-card__title"><a href="../landing-produit/landing-produit.html" data-k-keep>Bivouac au-dessus des nuages</a></h3><p class="k-card__text">Montée en fin d'après-midi, dîner chaud, nuit sous la tente à 2 100 mètres, lever de soleil sur les crêtes. La sortie la plus demandée de l'hiver.</p></div>
+            <div class="k-card__foot"><span>180 € par personne</span><span>5 dates cet hiver</span></div>
+          </article>
+          <article class="k-card" data-k-part="item" data-sv-item="raquettes forêt débutant demi-journée">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1576866946478-8d0d015bf3e5?auto=format&fit=crop&w=900&h=600&q=70" alt="Groupe de randonneurs en raquettes dans une forêt de sapins enneigés" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Demi-journée · débutant</span><h3 class="k-card__title">Raquettes en forêt</h3><p class="k-card__text">Boucle de trois heures à l'abri du vent, pour apprendre à marcher sur la neige.</p></div>
+            <div class="k-card__foot"><span>55 € par personne</span><span>tous les mercredis</span></div>
+          </article>
+          <article class="k-card" data-k-part="item" data-sv-item="séracs glacier alpinisme confirmé refuge">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1520208422220-d12a3c588e6c?auto=format&fit=crop&w=900&h=600&q=70" alt="Cordée de trois alpinistes au pied d'un mur de glace bleue" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">2 jours · confirmé</span><h3 class="k-card__title">Traversée des séracs</h3><p class="k-card__text">Approche au lever du jour, nuit en refuge, retour par le col. Crampons et piolet fournis.</p></div>
+            <div class="k-card__foot"><span>420 € par personne</span><span>4 places</span></div>
+          </article>
+          <article class="k-card" data-k-part="item" data-sv-item="arête alpinisme confirmé journée" aria-disabled="true">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1516914589923-f105f1535f88?auto=format&fit=crop&w=900&h=600&q=70" alt="Arête rocheuse enneigée balayée par le vent" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Journée · confirmé</span><h3 class="k-card__title">Arête du grand vent</h3><p class="k-card__text">Une arête aérienne, encordés deux par deux. Prochaine date ouverte en février.</p></div>
+            <div class="k-card__foot"><span>Complet</span><span>liste d'attente par e-mail</span></div>
+          </article>
+          <article class="k-card" data-k-part="item" data-sv-item="belvédère randonnée intermédiaire journée">
+            <div class="k-card__media"><img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=900&h=600&q=70" alt="Massif enneigé sous un ciel de nuages, vu depuis un col" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Journée · intermédiaire</span><h3 class="k-card__title">Belvédère du col</h3><p class="k-card__text">Six heures de marche pour un point de vue que la route n'atteint pas. Pique-nique chaud au sommet.</p></div>
+            <div class="k-card__foot"><span>95 € par personne</span><span>samedis de janvier</span></div>
+          </article>
+        </div>
+        <div class="k-empty k-empty--center" id="vide" hidden>
+          <svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-search"/></svg>
+          <h3 class="k-empty__title">Aucune sortie ne correspond</h3>
+          <p class="k-empty__text">Cordée Brume ne propose que des sorties d'hiver. Essayez « raquettes », « débutant » ou « nuit ».</p>
+          <div class="k-empty__actions"><button type="button" class="k-btn k-btn--secondary" id="effacer">Effacer la recherche</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. La maison : qui emmène, et dans quel cadre -->
+    <section class="k-section k-section--alt" id="maison" aria-labelledby="t-maison">
+      <div class="k-wrap k-split">
+        <figure data-k-slot="media">
+          <img src="https://images.unsplash.com/photo-1445543949571-ffc3e0e2f55e?auto=format&fit=crop&w=900&h=1100&q=70" alt="Sapins couverts de givre sous un ciel bleu" loading="lazy" style="--_ratio: 4 / 5">
+        </figure>
+        <div class="k-split__main k-stack k-stack--lg">
+          <header data-k-slot="title">
+            <p class="k-kicker" data-k-part="kicker">La maison</p>
+            <h2 class="k-h2" id="t-maison" data-k-part="title">Trois guides, une camionnette, une vallée</h2>
+          </header>
+          <div class="k-prose">
+            <p>Élise Varnier et Inès Morel sont guides de haute montagne ; Tom Achard est accompagnateur. Ils travaillent ensemble depuis six hivers et connaissent chaque combe du massif.</p>
+            <p>Ils ne prennent jamais plus de six personnes par guide. C'est la règle de la maison : assez peu pour s'attendre, assez pour porter le réchaud à tour de rôle.</p>
+          </div>
+          <dl class="k-facts">
+            <div><dt>Saison</dt><dd>de la mi-décembre à la fin mars</dd></div>
+            <div><dt>Départs</dt><dd>parking du col, à 40 minutes d'Annecy</dd></div>
+            <div><dt>Matériel</dt><dd>fourni, sauf chaussures et vêtements</dd></div>
+            <div><dt>Annulation</dt><dd>remboursée jusqu'à sept jours avant</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. La suite : une seule, vers la page qui lève les doutes -->
+    <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
+      <div class="k-wrap k-split k-split--center">
+        <div class="k-stack k-split__main">
+          <h2 class="k-h2" id="t-suite" data-k-part="title">Jamais dormi sur la neige ?</h2>
+          <p class="k-lead" data-k-part="lead">Le sac, le froid, la météo, l'annulation : tout ce qu'il faut savoir avant de réserver tient sur une page.</p>
+        </div>
+        <div><a class="k-btn" href="page-interieure.html" data-k-keep data-k-part="action">Préparer sa sortie</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Cordée Brume</span><span>Projet fictif, écrit pour la démonstration de kobo-studio.</span></div>
+      <ul><li><a href="accueil.html" data-k-keep>Accueil</a></li><li><a href="page-interieure.html" data-k-keep>Préparer sa sortie</a></li><li><a href="../recit-collant/recit-collant.html" data-k-keep>Récit</a></li><li><a href="../article/article.html" data-k-keep>Journal</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="../../../components/barre-nav/barre-nav.js"></script>
+<script src="../../../components/menu-mobile/menu-mobile.js"></script>
+<script src="../../../components/champ/champ.js"></script>
+<script src="../page.js"></script>
+<script src="site-vitrine.js"></script>
+</body>
+</html>

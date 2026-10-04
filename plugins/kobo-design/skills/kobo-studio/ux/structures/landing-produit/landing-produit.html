@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bivouac au-dessus des nuages — Cordée Brume (projet fictif)</title>
+<!-- Structure « landing produit » : une seule offre, un seul parcours, de la promesse à la demande.
+     Projet fictif : Cordée Brume, ses sorties, ses dates, ses prix et ses guides sont inventés. Les photos sont de vraies photos (Unsplash).
+     S'ouvre depuis le disque. Aperçu sous un autre skill : landing-produit.html#<id>[:full|reduced|off][:slots] -->
+<link rel="stylesheet" href="../../../contract/roles.css">
+<link rel="stylesheet" id="map" href="../../../contract/maps/serif-bistro-green.css">
+<link rel="stylesheet" href="../../../components/socle.css">
+<link rel="stylesheet" href="../../../components/bouton/bouton.css">
+<link rel="stylesheet" href="../../../components/champ/champ.css">
+<link rel="stylesheet" href="../../../components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="../../../components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="../../../components/onglets/onglets.css">
+<link rel="stylesheet" href="../../../components/notification/notification.css">
+<link rel="stylesheet" href="../page.css">
+<link rel="stylesheet" href="landing-produit.css">
+<link rel="stylesheet" id="sig">
+<script src="../apercu.js" data-k-base="../../../"></script>
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="#contenu">Cordée Brume</a>
+      <nav aria-label="Dans cette page">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="#deroule">Le déroulé</a></li>
+          <li><a class="k-nav__link" href="#pratique">Pratique</a></li>
+          <li><a class="k-nav__link" href="#dates">Dates</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="#demande">Demander une place</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="#deroule" data-k-menu-close>Le déroulé</a></li>
+        <li><a class="k-menu__link" href="#pratique" data-k-menu-close>Pratique</a></li>
+        <li><a class="k-menu__link" href="#dates" data-k-menu-close>Dates</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="#demande" data-k-menu-close>Demander une place</a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Promesse : ce que c'est, pour qui, combien, et une seule action -->
+    <section data-k-slot="hero" aria-labelledby="titre">
+      <div class="k-wrap k-hero">
+        <div class="k-hero__text">
+          <p class="k-kicker" data-k-part="kicker">Sortie d'hiver · massif des Aravis</p>
+          <h1 class="k-h1" id="titre" data-k-part="title">Une nuit sous la tente, au-dessus des nuages</h1>
+          <p class="k-lead" data-k-part="lead">On monte en fin d'après-midi, on dîne chaud, on dort à 2 100 mètres. Au matin, la vallée est sous la brume et vous êtes au-dessus.</p>
+          <dl class="k-facts lp-facts" data-k-part="facts">
+            <div><dt>Durée</dt><dd>du samedi 15 h au dimanche 11 h</dd></div>
+            <div><dt>Niveau</dt><dd>tous niveaux, dès 12 ans</dd></div>
+            <div><dt>Prix</dt><dd>180 € par personne, matériel compris</dd></div>
+          </dl>
+          <a class="k-btn" href="#dates" data-k-part="action">Voir les dates de l'hiver</a>
+        </div>
+        <figure class="k-hero__side" data-k-slot="media" data-k-part="media">
+          <img src="https://images.unsplash.com/photo-1579624512056-3eb398311205?auto=format&fit=crop&w=1100&h=1300&q=70" alt="Deux tentes posées sur la neige face à la mer de nuages au crépuscule" style="--_ratio: 5 / 6">
+          <figcaption>Le camp, vers 18 h, un soir de février.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. Preuve par le déroulé : heure par heure, pas trois arguments interchangeables -->
+    <section class="k-section k-section--rule" id="deroule" aria-labelledby="t-deroule">
+      <div class="k-wrap k-split">
+        <div>
+          <header data-k-slot="title">
+            <p class="k-kicker" data-k-part="kicker">Le déroulé</p>
+            <h2 class="k-h2" id="t-deroule" data-k-part="title">Vingt heures, heure par heure</h2>
+            <p class="k-lead" data-k-part="lead">Rien n'est laissé au hasard, sauf la météo : si le ciel se couvre, on reporte et vous choisissez une autre date.</p>
+          </header>
+          <figure data-k-slot="media" class="lp-aside-media">
+            <img src="https://images.unsplash.com/photo-1576866946478-8d0d015bf3e5?auto=format&fit=crop&w=900&h=675&q=70" alt="Groupe de randonneurs en raquettes dans une forêt de sapins enneigés" loading="lazy">
+            <figcaption>La montée se fait en raquettes, par la forêt.</figcaption>
+          </figure>
+        </div>
+        <ol class="lp-steps k-split__main">
+          <li><span class="lp-steps__when">Samedi, 15 h</span><h3 class="k-h3">Rendez-vous au parking du col</h3><p>On vérifie les sacs ensemble. Raquettes, bâtons et duvets grand froid vous attendent sur place.</p></li>
+          <li><span class="lp-steps__when">15 h 30</span><h3 class="k-h3">Montée par la forêt</h3><p>Deux heures et demie, 450 mètres de dénivelé, au rythme du plus lent. On s'arrête quand quelqu'un le demande.</p></li>
+          <li><span class="lp-steps__when">18 h</span><h3 class="k-h3">Le camp</h3><p>Chacun tasse la neige sous sa tente et la monte avec le guide. C'est plus simple qu'on ne le pense, et ça réchauffe.</p></li>
+          <li><span class="lp-steps__when">19 h 30</span><h3 class="k-h3">Dîner chaud</h3><p>Soupe, fondue au réchaud, tisane. Le guide raconte la nuit qui vient : le froid, le vent, le silence.</p></li>
+          <li><span class="lp-steps__when">Dimanche, 6 h 40</span><h3 class="k-h3">Lever du soleil</h3><p>On sort des duvets pour voir la lumière passer sur les crêtes. Petit-déjeuner dehors si le vent le permet.</p></li>
+          <li><span class="lp-steps__when">11 h</span><h3 class="k-h3">Retour au parking</h3><p>Descente par l'autre versant, au soleil. Vous repartez avec la trace GPS de la boucle.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3. Lever les objections : ce qui est compris, ce qu'il faut apporter, le niveau -->
+    <section class="k-section k-section--alt" id="pratique" aria-labelledby="t-pratique">
+      <div class="k-wrap k-split">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">Pratique</p>
+          <h2 class="k-h2" id="t-pratique" data-k-part="title">Ce qu'on fournit, ce que vous apportez</h2>
+        </header>
+        <div class="k-tabs k-split__main">
+          <div class="k-tabs__list" role="tablist" aria-label="Informations pratiques">
+            <button type="button" role="tab" class="k-tabs__tab" id="tab-compris" aria-controls="pan-compris" aria-selected="true">Compris</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="tab-sac" aria-controls="pan-sac" aria-selected="false">Dans votre sac</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="tab-niveau" aria-controls="pan-niveau" aria-selected="false">Niveau</button>
+          </div>
+          <div class="k-tabs__panel" role="tabpanel" id="pan-compris" aria-labelledby="tab-compris" tabindex="0">
+            <ul class="lp-list"><li>Tente d'hiver pour deux, matelas isolant, duvet prévu pour −15 °C</li><li>Raquettes, bâtons, détecteur de victimes d'avalanche</li><li>Dîner et petit-déjeuner chauds</li><li>Un guide de haute montagne pour six personnes au plus</li></ul>
+          </div>
+          <div class="k-tabs__panel" role="tabpanel" id="pan-sac" aria-labelledby="tab-sac" tabindex="0" hidden>
+            <ul class="lp-list"><li>Chaussures de randonnée montantes, imperméables</li><li>Trois couches chaudes, bonnet, deux paires de gants</li><li>Une lampe frontale et une gourde d'un litre</li><li>Un sac de 40 litres ; on en prête si vous n'en avez pas</li></ul>
+          </div>
+          <div class="k-tabs__panel" role="tabpanel" id="pan-niveau" aria-labelledby="tab-niveau" tabindex="0" hidden>
+            <div class="k-prose"><p>Si vous marchez trois heures sans peine, vous pouvez venir. Aucune expérience de la neige n'est demandée : on apprend à chausser les raquettes au départ.</p><p>La sortie n'est pas adaptée aux enfants de moins de 12 ans, à cause du froid de la nuit.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Choix : les dates, avec leurs places. Une date complète est dite complète. -->
+    <section class="k-section" id="dates" aria-labelledby="t-dates">
+      <div class="k-wrap">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">Hiver en cours</p>
+          <h2 class="k-h2" id="t-dates" data-k-part="title">Choisissez une date</h2>
+          <p class="k-lead" data-k-part="lead">Six places par sortie. Le choix se reporte dans la demande, plus bas.</p>
+        </header>
+        <div data-k-slot="grid" class="lp-dates" role="radiogroup" aria-labelledby="t-dates">
+          <label class="lp-date" data-k-part="item"><input type="radio" name="date" value="samedi 17 janvier"><span class="lp-date__day">Samedi 17 janvier</span><span class="lp-date__info">4 places</span></label>
+          <label class="lp-date" data-k-part="item"><input type="radio" name="date" value="samedi 31 janvier" disabled><span class="lp-date__day">Samedi 31 janvier</span><span class="lp-date__info">Complet</span></label>
+          <label class="lp-date" data-k-part="item"><input type="radio" name="date" value="samedi 14 février"><span class="lp-date__day">Samedi 14 février</span><span class="lp-date__info">6 places</span></label>
+          <label class="lp-date" data-k-part="item"><input type="radio" name="date" value="samedi 28 février"><span class="lp-date__day">Samedi 28 février</span><span class="lp-date__info">2 places</span></label>
+          <label class="lp-date" data-k-part="item"><input type="radio" name="date" value="samedi 14 mars"><span class="lp-date__day">Samedi 14 mars</span><span class="lp-date__info">6 places</span></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Demande : le formulaire, avec ses erreurs écrites et un envoi qui aboutit -->
+    <section data-k-slot="finale" id="demande" aria-labelledby="t-demande" data-k-tone="inverse">
+      <div class="k-wrap k-split">
+        <div class="k-stack">
+          <h2 class="k-h2" id="t-demande" data-k-part="title">Demander une place</h2>
+          <p data-k-part="lead">Le guide vous répond sous deux jours et confirme la date selon la météo annoncée. Rien n'est payé avant sa réponse.</p>
+          <p class="k-note" id="date-choisie" role="status">Aucune date choisie pour l'instant.</p>
+        </div>
+        <form class="k-stack k-split__main" id="form" novalidate data-k-part="form">
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="f-nom">Prénom et nom</label>
+            <div class="k-field__box"><input class="k-field__control" id="f-nom" type="text" required autocomplete="name"></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          </div>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="f-mail">Adresse e-mail</label>
+            <div class="k-field__box"><input class="k-field__control" id="f-mail" type="email" required autocomplete="email" aria-describedby="f-mail-h"></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+            <span class="k-field__help" id="f-mail-h">Pour la réponse du guide. Aucune lettre d'information.</span>
+          </div>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="f-nb">Nombre de personnes</label>
+            <div class="k-field__box"><input class="k-field__control" id="f-nb" type="number" min="1" max="6" value="2" required inputmode="numeric"></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          </div>
+          <div class="lp-send">
+            <button type="submit" class="k-btn" id="envoyer" aria-disabled="true" aria-describedby="envoi-aide"><span class="k-btn__spinner" aria-hidden="true"></span><span>Envoyer la demande</span></button>
+            <a class="k-link" id="envoi-aide" href="#dates">Choisissez d'abord une date.</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Cordée Brume</span><span>Projet fictif, écrit pour la démonstration de kobo-studio.</span></div>
+      <ul><li><a href="#deroule">Le déroulé</a></li><li><a href="#pratique">Pratique</a></li><li><a href="#dates">Dates</a></li><li><a href="#demande">Demander une place</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="../../../components/barre-nav/barre-nav.js"></script>
+<script src="../../../components/menu-mobile/menu-mobile.js"></script>
+<script src="../../../components/champ/champ.js"></script>
+<script src="../../../components/onglets/onglets.js"></script>
+<script src="../../../components/notification/notification.js"></script>
+<script src="../page.js"></script>
+<script src="landing-produit.js"></script>
+</body>
+</html>

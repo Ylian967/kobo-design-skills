@@ -1,0 +1,22 @@
+/*
+ * kobo-studio — structure « article / page éditoriale » : ce qui lui est propre (le reste vient de ../page.css).
+ * Uniquement des rôles --k-*. La colonne de lecture est bornée par .k-prose (pas plus de 80 caractères par ligne).
+ */
+.ar-head[data-k-slot="hero"] { padding-block: var(--k-space-12) var(--k-space-12); }
+.ar-title { max-inline-size: calc(var(--k-space-32) * 7); }
+.ar-meta { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-6); }
+.ar-meta span + span::before { content: "·"; margin-inline-end: var(--k-space-6); }
+.ar-cover { margin-block-end: var(--k-space-16); }
+.ar-body { padding-block-end: var(--k-section-y); }
+/* Le sommaire est une colonne étroite : il passe au-dessus du texte quand la largeur manque (flex-wrap du socle) */
+.ar-body > .ar-side { flex: 0 1 calc(var(--k-space-32) + var(--k-space-24)); /* le sommaire ne s'étire pas : la place libre reste à droite du texte */ display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-4); justify-items: start; }
+.ar-body > .ar-prose { --_fs: calc((var(--k-fs-body) + var(--k-fs-h3)) / 2); flex: 4 1 calc(var(--k-space-32) * 3 + var(--k-space-16)); }
+.ar-prose > p:first-child { font-size: var(--k-fs-h3); }
+.ar-prose .k-note { font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+
+/* Suite de lecture : deux lignes cliquables, pas des cartes */
+.ar-next[data-k-slot="grid"] { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; list-style: none; }
+.ar-next a { display: grid; gap: var(--k-space-1); padding-block: var(--k-space-4); color: inherit; text-decoration: none; border-block-start: var(--k-border-w) solid var(--k-line); }
+.ar-next li:last-child a { border-block-end: var(--k-border-w) solid var(--k-line); }
+.ar-next a:hover .k-h3 { text-decoration: underline; text-underline-offset: var(--k-space-1); text-decoration-thickness: var(--k-border-w); }
+.ar-next a:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
