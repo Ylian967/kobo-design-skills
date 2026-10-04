@@ -1,0 +1,38 @@
+/*
+ * kobo-studio — couche de signature : chrome-atelier
+ * Sources (lecture seule) : SKILL.md (Regular partout, traits de 0,8px, aucun arrondi sauf les pilules), references/components.md
+ * §1 (étiquette mono entre crochets), §2 (titre en capitales Regular), §3 (pilule : contour fin ; contour → pleine au survol,
+ * pleine → contour au survol ; lien souligné comme action secondaire), §8 (roue des légendes : l'actif en encre avec un point,
+ * les autres en gris), §13 (champs à simple filet bas, carte blanche sans arrondi).
+ * Non traduit : la planche au cercle et ses filets, la pièce en 3D, le héros nuit et ses cercles de cadrage, la rangée de presse.
+ *
+ * Ce skill n'a pas de mouvement de signature traduisible ici : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Pilules : la principale est pleine et se vide au survol ; la secondaire est en contour et se remplit ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: transparent; --_fg: var(--k-text); --_edge: var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_fg: var(--k-bg); }
+
+  /* ---- Étiquette entre crochets, en mono très serré ---- */
+  &.k-card__meta { letter-spacing: var(--k-sig-ls-mono); color: var(--k-text-2); }
+  &.k-card__meta::before { content: "["; }
+  &.k-card__meta::after { content: "]"; }
+
+  /* ---- Titres : capitales en Regular ---- */
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title, &.k-nav__brand { text-transform: uppercase; letter-spacing: var(--k-sig-ls-h2); }
+
+  /* ---- Carte : cellule à filets, sans fond ---- */
+  &.k-card { background: transparent; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: transparent; }
+
+  /* ---- Champ : un simple filet bas ---- */
+  &.k-field__control:not(:disabled) { background: transparent; padding-inline: 0; }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: transparent; border-block-end-color: var(--k-line-strong); }
+
+  /* ---- Onglets = roue des légendes : l'actif en encre précédé d'un point, les autres en gris, pas de filet ---- */
+  &.k-tabs__tab { color: var(--k-text-muted); }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-text); border-block-end-color: transparent; font-weight: inherit; }
+  &.k-tabs__tab[aria-selected="true"]::before { content: ""; flex: none; inline-size: var(--k-space-1); block-size: var(--k-space-1); background: currentColor; border-radius: 50%; }
+  &.k-nav__link[aria-current="page"] { font-weight: inherit; }
+}

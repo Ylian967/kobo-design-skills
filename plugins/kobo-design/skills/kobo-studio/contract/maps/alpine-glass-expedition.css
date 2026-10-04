@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : alpine-glass-expedition
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 42 reliés ou relevés, 4 dérivés, 16 en repli.
- * 17 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 44 reliés ou relevés, 4 dérivés, 14 en repli.
+ * 21 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..600&family=Roboto+Serif:opsz,wdth,wght@8..144,90,400..500&display=swap
@@ -70,9 +70,9 @@
   --k-ls-display: var(--ls-hero);
   --k-ls-caps: var(--ls-nav);
   --k-fw-display: var(--display-weight);
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: var(--ls-btn);
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: uppercase; /* [main] relevé : pilule, liens et puces en capitales */
+  --k-btn-tracking: var(--ls-btn); /* [main] */
+  --k-label-case: uppercase; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -82,7 +82,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: saturate(0.45); /* [main] repli donné par le skill lui-même ; il exige des photos refroidies une fois en canvas sur sa rampe bleue, plus un voile diagonal */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);

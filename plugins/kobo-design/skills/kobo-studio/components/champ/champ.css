@@ -3,7 +3,7 @@
  * Rôles lus : text, text-muted, surface, surface-2, line, line-strong, danger, focus*, font-body, fs-body, fs-small,
  * lh-body, radius, border-w, control-h, hit-min, space-*, dur-fast, ease-out.
  */
-.k-field { display: grid; gap: var(--k-space-2); min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); }
+.k-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-2); min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); }
 .k-field__label { font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); color: var(--k-text); }
 .k-field__opt { color: var(--k-text-muted); }
 

@@ -1,0 +1,53 @@
+/*
+ * kobo-studio — couche de signature : anime-x-slash
+ * Sources (lecture seule) : SKILL.md (trois couleurs d'interface ; « le noir et blanc est un état » ; ni arrondi ni ombre), 
+ * references/components.md §2 (menu plein écran : liens Oswald en capitales, courant et survol sur aplat rouge à texte noir),
+ * §7 (bouton contour : bord épais noir, survol fond noir), §9 (ligne d'actualité : barre noire, bord haut rouge de 4px, date en
+ * étiquette rouge à texte noir), §15 (étiquette rouge biaisée), onglets rectangulaires (actif : fond noir).
+ * Non traduit : le héros en éclats, la grille de cartes en parallélogrammes, la bande-annonce en X, les filets de fond, le glitch.
+ *
+ * « full » : formes + noir et blanc au repos. « reduced » : formes, images en couleurs. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Boutons en Oswald ; principal = aplat rouge à texte noir ; secondaire = bouton contour à bord épais, noir au survol ---- */
+  &.k-btn, &.k-nav__link, &.k-tabs__tab { font-family: var(--k-font-display); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { border-width: var(--k-sig-border-bold); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-bg-inverse); --_fg: var(--k-text-inverse); }
+  /* bouton de menu : carré noir */
+  &.k-nav__burger:not(:disabled) { --_bg: var(--k-bg-inverse); --_fg: var(--k-text-inverse); --_edge: var(--k-bg-inverse); }
+
+  /* ---- Onglets rectangulaires : bord fin noir ; l'actif en noir à texte blanc ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; color: var(--k-text); border: var(--k-border-w) solid var(--k-text); border-radius: 0; }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-text-inverse); background: var(--k-bg-inverse); font-weight: inherit; }
+  &.k-tabs__tab[aria-selected="true"] .k-tabs__count { color: inherit; }
+
+  /* ---- Carte = ligne d'actualité : barre noire, bord haut rouge, étiquette rouge biaisée à texte noir ---- */
+  &.k-card, &.k-toast {
+    --k-text: var(--k-text-inverse); --k-text-2: var(--k-text-inverse); --k-text-muted: var(--k-text-inverse);
+    --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 14%, var(--k-bg-inverse)); --k-line: color-mix(in srgb, var(--k-text-inverse) 24%, transparent);
+    --k-line-strong: var(--k-text-inverse); --k-success: var(--k-text-inverse); --k-warning: var(--k-text-inverse); --k-danger: var(--k-text-inverse);
+    color: var(--k-text-inverse); background: var(--k-bg-inverse); border: 0; border-block-start: var(--k-sig-bar) solid var(--k-accent);
+  }
+  &.k-card__meta { justify-self: start; padding: 0 var(--k-space-2); font-family: var(--k-font-display); color: var(--k-on-accent); background: var(--k-accent); transform: skewX(var(--k-sig-band-skew)); }
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title, &.k-toast__title { font-family: var(--k-font-display); text-transform: uppercase; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-bg-inverse); border-block-start-color: var(--k-text-inverse); }
+  &.k-card__media { border-block-end: 0; }
+  &.k-toast { border-inline-start: 0; }
+
+  /* ---- Menu plein écran : panneau noir, lien courant et survol sur aplat rouge à texte noir ---- */
+  &.k-menu {
+    --k-bg: var(--k-bg-inverse); --k-text: var(--k-text-inverse); --k-text-muted: var(--k-text-inverse); --k-line: color-mix(in srgb, var(--k-text-inverse) 20%, transparent);
+    --k-line-strong: var(--k-text-inverse); --k-surface: color-mix(in srgb, var(--k-text-inverse) 10%, var(--k-bg-inverse)); --k-focus: var(--k-text-inverse);
+  }
+  &.k-menu__link:is(:hover, :focus-visible, [aria-current="page"]) { color: var(--k-on-accent); background: var(--k-accent); border-inline-start: 0; padding-inline-start: var(--k-space-3); }
+  &.k-menu__here { color: inherit; }
+}
+
+/* En « full » seulement : le noir et blanc est un état. L'image d'une carte cliquable est grise au repos, en couleurs au survol. */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-card--link .k-card__media img { filter: grayscale(1); transition: filter var(--k-dur-fast) var(--k-ease-out); }
+  &.k-card--link:is(:hover, [data-k-state="hover"], :has(a:focus-visible)) .k-card__media img { filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-card--link .k-card__media img { transition: none; } }

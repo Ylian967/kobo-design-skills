@@ -1,0 +1,61 @@
+/*
+ * kobo-studio — couche de signature : hyper-lime-street
+ * Sources (lecture seule) : SKILL.md (texte noir sur lime, blanc sur noir, jamais de lime sur béton ; commandes en pilules noires,
+ * pilule lime pour l'action principale ; autocollants à ombre pleine), references/components.md (barre noire à liens gris gras,
+ * onglet actif en pilule blanche ; bouton « En savoir plus » : pilule noire à pastille lime, lime au survol ; panneau blanc doublé
+ * d'un liseré lime ; pilule de vignettes noire, la choisie cerclée de lime ; étiquette de catégorie en parallélogramme noir à texte
+ * lime ; champ en pilule sombre ; ombre pleine décalée sans flou).
+ * Non traduit : les grandes formes inclinées qui sortent de l'écran, le bloc lime numéroté, la pellicule, les mots géants, la découpe
+ * des images à 41°.
+ *
+ * Ce skill n'a pas de mouvement de signature repris ici : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Pilule lime très grasse = action principale ; pilule noire à pastille lime = action secondaire ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger) { font-weight: bolder; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-text); --_fg: var(--k-sig-soft); --_edge: var(--k-text); font-family: var(--k-font-display); }
+  &.k-btn--secondary:not(.k-btn--icon, :disabled, [aria-disabled="true"])::before { content: ""; order: 2; flex: none; inline-size: var(--k-space-3); block-size: var(--k-space-3); border-radius: 50%; background: var(--k-accent); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent); --_fg: var(--k-on-accent); }
+  &.k-btn--secondary:is(:hover, [data-k-state="hover"])::before { background: var(--k-text); }
+
+  /* ---- Barre noire : liens gris gras, la section en cours en pilule blanche à texte noir ---- */
+  &.k-nav { --k-text: var(--k-text-inverse); --k-surface: color-mix(in srgb, var(--k-text-inverse) 12%, var(--k-bg-inverse)); --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 18%, var(--k-bg-inverse)); --k-line-strong: var(--k-text-inverse); --k-focus: var(--k-accent); color: var(--k-text-inverse); background: var(--k-bg-inverse); border-block-end-color: transparent; }
+  /* dans la barre noire, le bouton de menu est une pilule à contour clair */
+  &.k-nav .k-btn--secondary:not(:disabled), &.k-toast .k-btn--secondary:not(:disabled) { --_bg: transparent; --_fg: var(--k-text-inverse); --_edge: var(--k-text-inverse); }
+  &.k-nav__link { font-weight: bolder; color: var(--k-sig-nav-idle); border-radius: var(--k-radius-pill); }
+  &.k-nav__link:hover { color: var(--k-text-inverse); }
+  &.k-nav__link[aria-current="page"] { color: var(--k-bg-inverse); background: var(--k-text-inverse); border-block-end-color: transparent; border-radius: var(--k-radius-pill); }
+
+  /* ---- Panneau blanc doublé d'un liseré lime ; étiquette en parallélogramme noir à texte lime ---- */
+  &.k-card, &.k-modal, &.k-empty { border-color: transparent; border-block-end: var(--k-sig-underline) solid var(--k-accent); }
+  &.k-empty { background: var(--k-surface); border-style: solid; }
+  &.k-card__meta {
+    --_o: calc(var(--k-space-4) * var(--k-sig-slant)); justify-self: start; padding: var(--k-space-1) calc(var(--k-space-3) + var(--_o)); font-family: var(--k-font-body); font-weight: bolder;
+    color: var(--k-accent); background: var(--k-bg-inverse); clip-path: polygon(var(--_o) 0, 100% 0, calc(100% - var(--_o)) 100%, 0 100%);
+  }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-surface); border-color: var(--k-text); border-block-end-color: var(--k-accent); }
+
+  /* ---- Onglets = pilule de vignettes : barre noire, l'onglet choisi cerclé de lime ---- */
+  &.k-tabs__list { inline-size: fit-content; max-inline-size: 100%; gap: var(--k-space-1); padding: var(--k-space-1) var(--k-space-3); background: var(--k-text); border-block-end: 0; border-radius: var(--k-radius-pill); }
+  &.k-tabs__tab { margin: 0; font-family: var(--k-font-display); color: var(--k-sig-soft); border: calc(var(--k-border-w) * 2) solid transparent; border-radius: var(--k-radius-pill); }
+  &.k-tabs__tab:is(:hover, [data-k-state="hover"]) { color: var(--k-surface); background: transparent; }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-surface); border-color: var(--k-accent); font-weight: inherit; }
+  &.k-tabs__tab .k-tabs__count { color: inherit; }
+  &.k-tabs__tab:focus-visible { outline-color: var(--k-accent); }
+
+  /* ---- Champ en pilule sombre ---- */
+  &.k-field__control:not(:disabled) { color: var(--k-text-inverse); background: var(--k-sig-field); border-radius: var(--k-radius-pill); padding-inline: var(--k-space-6); }
+  textarea&.k-field__control:not(:disabled) { border-radius: var(--k-radius-lg); }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: var(--k-sig-field); }
+  &.k-field__control::placeholder { color: var(--k-sig-soft); }
+
+  /* ---- Notification = autocollant : fond noir, ombre lime pleine décalée, sans flou ---- */
+  &.k-toast {
+    --k-text: var(--k-text-inverse); --k-text-2: var(--k-sig-soft); --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 16%, var(--k-bg-inverse)); --k-line-strong: var(--k-text-inverse);
+    --k-success: var(--k-text-inverse); --k-warning: var(--k-text-inverse); --k-danger: var(--k-text-inverse); --k-focus: var(--k-accent);
+    color: var(--k-text-inverse); background: var(--k-bg-inverse); border-color: var(--k-bg-inverse); border-radius: var(--k-radius); box-shadow: var(--k-space-1) var(--k-space-1) 0 var(--k-accent);
+  }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); border-inline-end: var(--k-border-w) solid var(--k-text); }
+  &.k-progress__track { border-color: var(--k-text); }
+}

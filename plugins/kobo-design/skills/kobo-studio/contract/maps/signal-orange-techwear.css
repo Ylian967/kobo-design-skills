@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : signal-orange-techwear
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 34 reliés ou relevés, 4 dérivés, 24 en repli.
- * 15 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 38 reliés ou relevés, 4 dérivés, 20 en repli.
+ * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&family=Unbounded:wght@700;800&display=swap
@@ -68,9 +68,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: var(--ls-label);
   --k-fw-display: 700; /* repli */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: uppercase; /* [main] relevé : capitales espacées */
+  --k-btn-tracking: 0.12em; /* [main] relevé dans la démo */
+  --k-label-case: uppercase; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: var(--r);
@@ -80,7 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: grayscale(1); /* [main] relevé : hors du héros, les photos sont en noir et blanc */
 
   /* ---- Espace ---- */
   --k-edge: var(--pad);

@@ -1,0 +1,60 @@
+/*
+ * kobo-studio — couche de signature : pocket-device-noir
+ * Sources (lecture seule) : SKILL.md (boutons blancs petits, second bouton en verre fumé ; pointillés et tirets pour séparer,
+ * sélectionner, annoter ; texte centré dans les sections noires), references/components.md (bouton blanc à halo translucide de 3px,
+ * rond en verre fumé ; étiquette grise à coins de 6px ; carte d'offre à contour en tirets ; titre suivi d'un filet pointillé ;
+ * vignette choisie entourée de tirets ; champ sans fond souligné de tirets ; logo en cartouche blanc, liens dans une pilule sombre),
+ * démo (le bouton monte de 2px et son halo passe à 6px).
+ * Non traduit : l'objet en 3D et son nom géant, la photo chaude du héros, les rayons du manifeste, le panneau de verre flouté.
+ *
+ * « full » : formes + bouton qui se soulève. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton blanc à halo translucide (action) ; verre fumé (secondaire) ---- */
+  &.k-btn { font-weight: var(--k-fw-display); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]) { --_ring: calc(var(--k-space-1) * 0.75); box-shadow: 0 0 0 var(--_ring) var(--k-overlay); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-overlay); --_edge: transparent; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-line-strong); }
+  &.k-btn--icon { border-radius: 50%; }
+
+  /* ---- Nav : logo en cartouche blanc à texte noir, liens dans une pilule sombre ---- */
+  &.k-nav { border-block-end-color: transparent; }
+  &.k-nav__brand { padding: var(--k-space-1) var(--k-space-3); color: var(--k-text-inverse); background: var(--k-bg-inverse); border-radius: var(--k-radius); }
+  &.k-nav__list { padding-inline: var(--k-space-2); background: var(--k-overlay); border-radius: var(--k-radius-pill); }
+  &.k-nav__link { border-radius: var(--k-radius-pill); }
+  &.k-nav__link[aria-current="page"] { border-end-start-radius: var(--k-radius-pill); border-end-end-radius: var(--k-radius-pill); border-block-end-color: transparent; text-decoration: underline dashed; text-underline-offset: var(--k-space-1); }
+
+  /* ---- Étiquette : petit rectangle gris ---- */
+  &.k-card__meta { justify-self: start; padding: var(--k-space-1) var(--k-space-3); font-family: var(--k-font-body); letter-spacing: 0; color: var(--k-sig-tag-text); background: var(--k-sig-tag); border-radius: var(--k-radius); }
+
+  /* ---- Carte : contour en tirets ; le titre est suivi d'un filet pointillé ---- */
+  &.k-card, &.k-toast, &.k-modal { border-style: dashed; border-color: var(--k-line-strong); }
+  &.k-toast { border-inline-start-style: solid; }
+  &.k-card__title, &.k-modal__title { padding-block-end: var(--k-space-3); border-block-end: var(--k-border-w) dotted var(--k-line-strong); }
+  &.k-card__media { border-block-end-style: dashed; }
+  &.k-card[aria-current="true"] { outline-style: dashed; }
+  &.k-modal { background: var(--k-surface-2); }
+
+  /* ---- Onglet choisi : entouré de tirets ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; border: var(--k-border-w) dashed transparent; border-radius: var(--k-radius-lg); }
+  &.k-tabs__tab[aria-selected="true"] { border-color: var(--k-text); }
+
+  /* ---- Champ sans fond, souligné de tirets ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: 0; padding-inline: 0; }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: transparent; border-block-end: var(--k-border-w) dashed var(--k-line-strong); }
+
+  /* ---- Texte centré ; barre de progression en tirets ---- */
+  &.k-empty { justify-items: center; text-align: center; border-color: var(--k-line-strong); }
+  &.k-empty__actions { justify-content: center; }
+  &.k-progress__track { background: transparent; border: 0; border-block-end: calc(var(--k-border-w) * 2) dashed var(--k-line-strong); border-radius: 0; block-size: var(--k-space-1); overflow: visible; }
+  &.k-progress--indeterminate .k-progress__track { overflow: hidden; }
+}
+
+/* Mouvement de signature (seulement en « full ») : le bouton blanc se soulève, son halo s'élargit */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-btn { transition: translate var(--k-dur-base) var(--k-ease-out), box-shadow var(--k-dur-base) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"], [aria-busy="true"]):is(:hover, [data-k-state="hover"]) { --_ring: calc(var(--k-space-1) * 1.5); translate: 0 calc(var(--k-space-1) * -0.5); }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-btn { transition: none; } .k-btn:hover { translate: none; } }

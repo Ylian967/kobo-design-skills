@@ -1,0 +1,55 @@
+/*
+ * kobo-studio — couche de signature : heritage-lens
+ * Sources (lecture seule) : SKILL.md (filets de 1px, formes rondes ; or pour les ornements et les titres de lieu ; pas de rectangle,
+ * pas d'ombre portée ; texte centré), references/components.md (« tout ce qui est rond est cerclé d'un filet d'or, sans fond ; seul
+ * le bouton de plan est plein » ; pilule et bouton rond : au survol un disque d'or monte et le texte devient sombre ; carte arrondie
+ * sur voile sombre ; liste à filets), references/motion.md (remplissage en 650ms).
+ * Non traduit : les scènes plein écran, la lentille, l'anneau de dentelle (SVG tracé par script), le mot géant, les puces verticales.
+ *
+ * « full » : formes + disque d'or qui monte. « reduced » : formes, survol sans mouvement. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Boutons ronds ou en pilule. Le principal est plein (or) ; les autres sont cerclés d'or, sans fond ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); }
+  &.k-btn--icon { border-radius: 50%; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_edge: var(--k-accent); z-index: 0; overflow: hidden; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent); --_fg: var(--k-on-accent); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_edge: var(--k-text); }
+
+  /* ---- Titres de lieu en or ; voix d'affiche ---- */
+  &.k-card__title, &.k-modal__title, &.k-empty__title { color: var(--k-accent); }
+  &.k-tabs__tab, &.k-toast__title { font-family: var(--k-font-display); }
+  &.k-tabs__tab { font-size: var(--k-fs-h3); }
+
+  /* ---- Carte arrondie sur voile sombre, sans cadre ; liste à filets ---- */
+  &.k-card { background: var(--k-sig-veil-2); border-color: transparent; }
+  &.k-card__media { border-block-end: 0; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-sig-veil-2); border-color: var(--k-line-strong); }
+  &.k-card[aria-current="true"] { border-color: var(--k-accent); outline-color: var(--k-accent); }
+
+  /* ---- Champ cerclé d'un filet d'or, sans fond ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: var(--k-radius-pill); padding-inline: var(--k-space-6); }
+  textarea&.k-field__control:not(:disabled) { border-radius: var(--k-radius-lg); }
+  &.k-field__control:not([aria-invalid="true"]):is(:focus-visible, [data-k-state="focus"]) { border-color: var(--k-accent); }
+
+  /* ---- Texte centré ; panneaux arrondis à filet d'or ---- */
+  &.k-empty { justify-items: center; text-align: center; border-style: solid; }
+  &.k-empty__actions { justify-content: center; }
+  &.k-toast, &.k-modal { border-radius: var(--k-radius-lg); }
+  &.k-skeleton:not(.k-skeleton--media) { border-radius: var(--k-radius-pill); }
+
+  /* ---- Trois voix : la sans pour l'aide, les boutons et les légendes (le serif de lecture reste au récit) ---- */
+  &.k-btn, &.k-nav__link, &.k-field__label, &.k-field__help, &.k-field__error, &.k-field__count, &.k-card__meta, &.k-card__foot, &.k-toast__text, &.k-progress { font-family: var(--k-sig-font-ui); }
+}
+
+/* Mouvement de signature (seulement en « full ») : un disque d'or monte dans le bouton cerclé */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: transparent; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"])::before {
+    content: ""; position: absolute; inset-inline-start: 50%; inset-block-start: 100%; z-index: -1; inline-size: 140%; aspect-ratio: 1; border-radius: 50%;
+    background: var(--k-accent); transform: translate(-50%, 0); transition: transform var(--k-sig-dur-fill) var(--k-sig-ease-expo);
+  }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"])::before { transform: translate(-50%, -85%); }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-btn--secondary::before { transition: none; } }

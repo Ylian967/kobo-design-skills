@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : hold-to-play-music
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 32 reliés ou relevés, 7 dérivés, 23 en repli.
- * 30 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 36 reliés ou relevés, 7 dérivés, 19 en repli.
+ * 34 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600&family=Inconsolata&family=Londrina+Solid:wght@900&display=swap
@@ -68,9 +68,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 900; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: none; /* [main] relevé */
+  --k-btn-tracking: 0em; /* [main] relevé */
+  --k-label-case: none; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: 8px; /* [main] relevé dans la démo */
@@ -80,7 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: grayscale(1); /* [main] relevé : images grises au repos ; la couleur revient pendant l'action (la couche de signature la rend au survol), ce qu'un filtre seul ne fait pas */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);

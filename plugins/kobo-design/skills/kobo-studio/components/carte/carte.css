@@ -13,7 +13,7 @@
 .k-card__media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; filter: var(--k-img-filter); }
 .k-card__body { display: grid; gap: var(--k-space-3); padding: var(--k-space-6); align-content: start; flex: 1; }
 /* Surtitre : libellé décoratif, il peut rester sous le plancher de 12px si le skill le veut ainsi */
-.k-card__meta { font-family: var(--k-font-mono); font-size: var(--k-fs-label); letter-spacing: var(--k-ls-caps); text-transform: var(--k-label-case); color: var(--k-text-muted); }
+.k-card__meta { font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); letter-spacing: var(--k-ls-caps); text-transform: var(--k-label-case); color: var(--k-text-muted); }
 .k-card__title { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); }
 .k-card__title a { color: inherit; text-decoration: none; }
 .k-card__text { margin: 0; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text-2); }

@@ -2,15 +2,15 @@
  * kobo-studio — fiche de correspondance : retro-mission-poster
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 38 reliés ou relevés, 6 dérivés, 18 en repli.
- * 29 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 40 reliés ou relevés, 7 dérivés, 15 en repli.
+ * 33 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Jost:wght@500;700&display=swap
  *
- * Signature : 11 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
- *   --k-sig-red-hot, --k-sig-red-text, --k-sig-sky-pale, --k-sig-rust, --k-sig-sand, --k-sig-veil-0,
- *   --k-sig-fs-giant, --k-sig-frame, --k-sig-ring, --k-sig-spin, --k-sig-draw
+ * Signature : 13 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-red-hot, --k-sig-red-text, --k-sig-sky, --k-sig-sky-pale, --k-sig-rust, --k-sig-sand,
+ *   --k-sig-veil-0, --k-sig-fs-giant, --k-sig-fs-head, --k-sig-frame, --k-sig-ring, --k-sig-spin, --k-sig-draw
  *
  * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
@@ -32,16 +32,16 @@
   --k-text: var(--cream); /* [main] */
   --k-text-2: var(--soft);
   --k-text-muted: var(--k-text-2); /* repli du contrat */
-  --k-on-accent: var(--ink); /* [main] */
+  --k-on-accent: var(--ink); /* [main] dérivé : noir chaud sur crème */
   --k-text-inverse: var(--ink); /* [main] */
 
   /* ---- Accent et états ---- */
-  --k-accent: var(--red); /* [main] */
+  --k-accent: var(--cream); /* [main] accent neutre : le bouton du skill est crème ; le rouge sert en grand (logo, titres, filets) */
   --k-accent-edge: var(--k-accent); /* repli du contrat */
-  --k-accent-on-bg: 1; /* accent à 4.63:1 sur le fond : il peut porter seul une information */
-  --k-accent-2: var(--sky); /* [main] */
+  --k-accent-on-bg: 1; /* accent à 16.14:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--red); /* [main] le rouge du skill : survol du bouton, titres, filets */
   --k-success: #47b892; /* [main] dérivé : teinte 160°, saturation calée sur celle de son accent, clarté ajustée → 5.19:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
-  --k-warning: #bb964d; /* dérivé : teinte 40°, saturation calée sur celle de son accent, clarté ajustée → 4.61:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #d29b2d; /* dérivé : teinte 40°, saturation calée sur celle de son accent, clarté ajustée → 5.15:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
   --k-danger: #f27766; /* [main] dérivé de --red-text (3.94:1 au pire) : même teinte, clarté ajustée → 4.62:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
   --k-focus: var(--cream); /* [main] */
   --k-focus-w: var(--line); /* [main] */
@@ -58,7 +58,7 @@
   --k-fs-hero: var(--fs-title); /* [main] le mot géant (--fs-giant) reste en signature */
   --k-fs-h1: calc(var(--fs-title) * 0.66); /* [main] dérivé : le skill n'a pas de titre intermédiaire */
   --k-fs-h2: var(--fs-card); /* [main] */
-  --k-fs-h3: var(--fs-head); /* [main] */
+  --k-fs-h3: var(--fs-card); /* [main] le titre d'une carte du journal : capitales étroites de 40px */
   --k-fs-body: var(--fs-body);
   --k-fs-small: var(--fs-small);
   --k-fs-label: var(--fs-tiny);
@@ -67,9 +67,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: var(--ls-chapter); /* [main] */
   --k-fw-display: 800; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: uppercase; /* [main] relevé : capitales partout dans l'interface */
+  --k-btn-tracking: 0.06em; /* [main] relevé dans la démo */
+  --k-label-case: uppercase; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -79,7 +79,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: var(--tilt);
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: contrast(1.2) saturate(0.75) sepia(0.2); /* [main] repli seulement : le skill demande des images traitées en aplats granuleux (terre rouge et sarcelle), calculées une fois, « jamais de filtre en direct » */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);
@@ -101,11 +101,13 @@
   /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
   --k-sig-red-hot: var(--red-hot);
   --k-sig-red-text: var(--red-text);
+  --k-sig-sky: var(--sky);
   --k-sig-sky-pale: var(--sky-pale);
   --k-sig-rust: var(--rust);
   --k-sig-sand: var(--sand);
   --k-sig-veil-0: var(--veil-0);
   --k-sig-fs-giant: var(--fs-giant);
+  --k-sig-fs-head: var(--fs-head);
   --k-sig-frame: var(--frame);
   --k-sig-ring: var(--ring);
   --k-sig-spin: var(--spin);

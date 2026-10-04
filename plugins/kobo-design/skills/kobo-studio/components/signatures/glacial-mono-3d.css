@@ -11,7 +11,10 @@
 :not([data-k-intensity="off"] *) {
   /* ---- Bouton : ni fond ni bord, quatre crochets en L aux coins ---- */
   &.k-btn:not(:disabled, [aria-disabled="true"]) { color: var(--k-text); background: transparent; border-color: transparent; box-shadow: none; font-family: var(--k-font-mono); }
-  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger) { font-weight: bolder; }
+  /* L'action principale se distingue par plus que la graisse : c'est une « étiquette pleine » du skill (rectangle blanc à texte
+     sombre, le signe qui porte « Cliquer pour explorer » dans sa démo), encadrée des mêmes crochets, posés à l'extérieur. */
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]) { font-weight: bolder; color: var(--_ink, var(--k-text)); background: var(--k-sig-white); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"])::before { inset: calc(var(--k-space-1) * -1.5); border-color: var(--k-text); }
   &.k-btn--secondary:not(:disabled) { color: var(--k-text-2); }
   &.k-btn--danger:not(:disabled) { color: var(--k-danger); }
   &.k-btn:not(.k-btn--ghost, :disabled, [aria-disabled="true"])::before, &.k-tabs__tab[aria-selected="true"]::before {
@@ -30,7 +33,7 @@
   &.k-nav__link[aria-current="page"] { border-radius: 0; }
 
   /* ---- Étiquette pleine : petit rectangle blanc à texte sombre ---- */
-  &.k-card__meta { justify-self: start; padding: calc(var(--k-space-1) / 2) var(--k-space-2); color: var(--k-text); background: var(--k-sig-white); }
+  &.k-card__meta { justify-self: start; padding: calc(var(--k-space-1) / 2) var(--k-space-2); color: var(--_ink, var(--k-text)); background: var(--k-sig-white); }
 
   /* ---- Rubriques « ////// » ---- */
   &.k-modal__title::before, &.k-empty__title::before, &.k-menu__title::before { content: "////// "; font-family: var(--k-font-mono); font-weight: normal; color: var(--k-text-muted); }
@@ -47,6 +50,7 @@
     --k-surface: color-mix(in srgb, var(--k-text-inverse) 8%, var(--k-bg-inverse)); --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 14%, var(--k-bg-inverse));
     --k-line: color-mix(in srgb, var(--k-text-inverse) 24%, transparent); --k-line-strong: var(--k-text-inverse);
     --k-focus: var(--k-text-inverse); --k-accent: var(--k-text-inverse); --k-accent-edge: var(--k-text-inverse); --k-on-accent: var(--k-bg-inverse); --k-danger: var(--k-text-inverse);
+    --_ink: var(--k-bg-inverse); /* dans le panneau de nuit, une étiquette blanche garde un texte sombre */
     color: var(--k-text-inverse); background: var(--k-bg-inverse); border: 0;
   }
   &.k-modal { inline-size: min(100% - var(--k-edge) * 2, var(--k-sig-text-col) + var(--k-space-6) * 2); }
@@ -59,6 +63,7 @@
 :not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
   &.k-btn::before { transition: inset var(--k-dur-fast) var(--k-ease-out); }
   &.k-btn:is(:hover, [data-k-state="hover"])::before { inset: calc(var(--k-space-1) * 0.75); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger):is(:hover, [data-k-state="hover"])::before { inset: calc(var(--k-space-1) * -0.75); }
 }
 
 @media (prefers-reduced-motion: reduce) { .k-btn::before { transition: none; } }

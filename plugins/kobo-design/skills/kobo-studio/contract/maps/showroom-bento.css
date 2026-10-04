@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : showroom-bento
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 37 reliés ou relevés, 3 dérivés, 22 en repli.
- * 21 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 40 reliés ou relevés, 4 dérivés, 18 en repli.
+ * 26 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap
@@ -33,14 +33,14 @@
   --k-text: var(--ink);
   --k-text-2: var(--k-text); /* repli du contrat */
   --k-text-muted: var(--muted);
-  --k-on-accent: var(--tile); /* [main] */
+  --k-on-accent: var(--tile); /* [main] dérivé : blanc sur noir */
   --k-text-inverse: var(--tile); /* [main] */
 
   /* ---- Accent et états ---- */
-  --k-accent: var(--accent);
+  --k-accent: var(--ink); /* [main] accent neutre : l'action du skill est une pilule noire ; le rouge ne sert qu'au monogramme, au nom de marque et à une pastille */
   --k-accent-edge: var(--k-accent); /* repli du contrat */
-  --k-accent-on-bg: 1; /* accent à 4.47:1 sur le fond : il peut porter seul une information */
-  --k-accent-2: var(--accent-ink); /* [main] */
+  --k-accent-on-bg: 1; /* accent à 13.96:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--accent); /* [main] le rouge du skill */
   --k-success: #197647; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 4.65:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
   --k-warning: #746809; /* [main] dérivé de --sw-yellow (1.19:1 au pire) : même teinte, clarté ajustée → 4.64:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
   --k-danger: var(--accent-ink); /* [main] dérivé : repris de --accent-ink, 5.38:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
@@ -68,9 +68,9 @@
   --k-ls-display: var(--ls-tight);
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: var(--fw-bold);
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: none; /* [main] relevé */
+  --k-btn-tracking: 0em; /* [main] relevé */
+  --k-label-case: none; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-tile); /* [main] */
@@ -80,7 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] le produit est une image détourée sur fond de studio ; le détourage (ou le repli mix-blend-mode: multiply) ne se fait pas par un filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--pad);

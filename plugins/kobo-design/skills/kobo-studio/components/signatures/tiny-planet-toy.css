@@ -1,0 +1,49 @@
+/*
+ * kobo-studio — couche de signature : tiny-planet-toy
+ * Sources (lecture seule) : SKILL.md (« tout ce qui se clique est un bloc : une face, un contour de 3px, une tranche ou une ombre
+ * décalée ; il s'enfonce à l'appui » ; trois écritures : blocs, pixels, main levée), references/components.md (bouton-bloc jaune penché
+ * à tranche plus sombre, qui se redresse au survol et s'enfonce de son épaisseur ; étiquette du nom : rectangle bleu cerné, à ombre
+ * décalée, légèrement tournée ; fiche de quartier cernée à ombre décalée, l'active en jaune ; boîte de dialogue cernée).
+ * Non traduit : la planète en 3D, le logo en lettres-blocs, les poussières du ciel, le texte qui s'écrit lettre à lettre (script).
+ *
+ * « full » : blocs + redressement au survol et enfoncement à l'appui. « reduced » : blocs immobiles. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton-bloc : face jaune penchée, tranche plus sombre dessous, cernée d'encre ; secondaire : bloc crème, droit ---- */
+  &.k-btn:not(.k-btn--ghost) { font-family: var(--k-font-mono); font-weight: bolder; }
+  &.k-btn:not(.k-btn--ghost, :disabled, [aria-disabled="true"]) { --_side: var(--k-sig-yellow-side); box-shadow: 0 var(--k-sig-depth) 0 0 var(--_side), 0 var(--k-sig-depth) 0 var(--k-border-w) var(--k-text); margin-block-end: var(--k-sig-depth); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, .k-btn--icon, :disabled, [aria-disabled="true"]) { rotate: var(--k-angle); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]), &.k-btn--danger:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-surface-2); --_side: var(--k-sig-cream-side); --_edge: var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-surface); }
+
+  /* ---- Étiquette du nom : rectangle bleu cerné, à ombre décalée, légèrement tournée ---- */
+  &.k-card__meta { justify-self: start; padding: var(--k-space-1) var(--k-space-3); color: var(--k-text); background: var(--k-accent-2); border: var(--k-border-w) solid var(--k-text); border-radius: var(--k-radius); box-shadow: var(--k-shadow); rotate: calc(var(--k-angle) / 2); }
+
+  /* ---- Fiches, onglets, champs, boîte de dialogue : cernés d'encre, à ombre décalée ; l'actif en jaune ---- */
+  &.k-card { border-color: var(--k-text); }
+  &.k-card__media { border-block-end-color: var(--k-text); }
+  &.k-card__title, &.k-modal__title, &.k-empty__title { font-family: var(--k-font-mono); text-transform: uppercase; }
+  &.k-card[aria-current="true"] { background: var(--k-accent); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-surface); }
+  &.k-tabs__list { gap: var(--k-space-3); padding: var(--k-space-1) var(--k-space-2) var(--k-space-3) 0; border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; color: var(--k-text); background: var(--k-surface); border: var(--k-border-w) solid var(--k-text); border-radius: var(--k-radius); box-shadow: var(--k-shadow); font-family: var(--k-font-mono); }
+  &.k-tabs__tab[aria-selected="true"] { background: var(--k-accent); }
+  &.k-tabs__tab:disabled { box-shadow: none; }
+  &.k-field__control:not(:disabled) { box-shadow: var(--k-shadow); }
+  &.k-empty { background: var(--k-surface); border-style: solid; border-width: var(--k-border-w); box-shadow: var(--k-shadow); }
+  &.k-progress__track { block-size: var(--k-space-3); border-color: var(--k-text); border-width: var(--k-border-w); border-radius: var(--k-radius); }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); border-inline-end: var(--k-border-w) solid var(--k-text); }
+}
+
+/* Mouvement de signature (seulement en « full ») : le bloc se redresse et monte au survol, s'enfonce de son épaisseur à l'appui */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &:is(.k-btn, .k-card--link, .k-tabs__tab) { transition: translate var(--k-dur-fast) var(--k-ease-spring), rotate var(--k-dur-base) var(--k-ease-spring), box-shadow var(--k-dur-fast) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out); }
+  &.k-btn:not(.k-btn--ghost, :disabled, [aria-disabled="true"], [aria-busy="true"]):is(:hover, [data-k-state="hover"]) { rotate: 0deg; translate: 0 calc(var(--k-space-1) * -0.5); }
+  &.k-btn:not(.k-btn--ghost, :disabled, [aria-disabled="true"]):is(:active, [data-k-state="active"]) { translate: 0 var(--k-sig-depth); box-shadow: none; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]), &.k-tabs__tab:is(:hover, [data-k-state="hover"]):not(:disabled) { translate: calc(var(--k-space-1) * -0.75) calc(var(--k-space-1) * -0.75); box-shadow: var(--k-sig-depth) var(--k-sig-depth) 0 0 var(--k-text); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-btn, .k-card--link, .k-tabs__tab { transition: none; }
+  .k-btn:hover, .k-card--link:hover, .k-tabs__tab:hover { translate: none; }
+}

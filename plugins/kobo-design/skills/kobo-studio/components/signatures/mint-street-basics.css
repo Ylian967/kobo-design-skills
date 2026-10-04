@@ -1,0 +1,53 @@
+/*
+ * kobo-studio — couche de signature : mint-street-basics
+ * Sources (lecture seule) : SKILL.md (« des ronds, pas des rectangles » ; aucune ombre portée ; le vert vend, le texte posé dessus
+ * est bleu nuit), references/components.md (pilule blanche en police d'affiche à anneau clair ; bouton vert en dégradé pour l'achat ;
+ * bouton rond blanc inversé au survol ; carte produit : photo à coins de 28px sur fond pâle, nom en police d'affiche, textes centrés ;
+ * puces de taille à contour, la choisie blanche et plus large ; champ en pilule à contour ; logotype en serif gras).
+ * Dégradé : celui du bouton d'achat est décrit par le skill. L'anneau de la pilule est une ombre pleine, sans flou.
+ * Non traduit : le titre géant en dégradé, la scène du héros (disque vert, arche), le bandeau défilant, la pile de collections.
+ *
+ * « full » : formes + l'anneau qui s'élargit. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Action principale : pilule verte en dégradé, texte bleu nuit gras. Secondaire : pilule blanche en police d'affiche, cerclée d'un anneau clair ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, .k-btn--icon, :disabled, [aria-disabled="true"]) { font-weight: bolder; background: linear-gradient(180deg, var(--k-sig-green-2), var(--_bg)); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_ring: var(--k-space-2); --_bg: var(--k-surface); --_edge: transparent; font-family: var(--k-font-display); box-shadow: 0 0 0 var(--_ring) var(--k-sig-halo); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-surface); }
+  /* bouton rond blanc, inversé au survol */
+  &.k-btn--icon:not(:disabled) { --_bg: var(--k-surface); --_fg: var(--k-text); --_edge: transparent; border-radius: 50%; box-shadow: none; }
+  &.k-btn--icon:not(:disabled):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_fg: var(--k-surface); }
+
+  /* ---- Nav : logotype en serif gras, liens en capitales à filet ---- */
+  &.k-nav__brand { font-family: var(--k-sig-font-logo); }
+  &.k-nav__link:hover { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
+
+  /* ---- Carte produit : pas de cadre, photo aux coins ronds sur fond pâle, textes centrés, nom en capitales d'affiche ---- */
+  &.k-card { background: transparent; border-color: transparent; }
+  &.k-card__media { background: var(--k-surface-2); border: 0; border-radius: var(--k-radius-lg); }
+  &.k-card__body { justify-items: center; text-align: center; }
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { text-transform: uppercase; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: transparent; border-color: var(--k-line); }
+
+  /* ---- Onglets = puces de taille : contour, la choisie blanche et plus large ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius); }
+  &.k-tabs__tab[aria-selected="true"] { padding-inline: var(--k-space-6); background: var(--k-surface); border-color: var(--k-text); }
+
+  /* ---- Champ en pilule à contour ; encarts blancs sans cadre ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: var(--k-radius-pill); padding-inline: var(--k-space-6); }
+  textarea&.k-field__control:not(:disabled) { border-radius: var(--k-radius-lg); }
+  &.k-modal { background: var(--k-surface); border-color: transparent; }
+  &.k-toast { border-color: var(--k-line); border-radius: var(--k-radius-lg); }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); }
+  &.k-progress__track { border-color: var(--k-accent-edge); }
+}
+
+/* Mouvement de signature (seulement en « full ») : l'anneau de la pilule blanche s'élargit */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-btn--secondary { transition: box-shadow var(--k-dur-base) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_ring: var(--k-space-3); }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-btn--secondary { transition: none; } }

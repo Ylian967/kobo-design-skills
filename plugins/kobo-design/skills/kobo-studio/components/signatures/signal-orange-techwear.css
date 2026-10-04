@@ -1,0 +1,54 @@
+/*
+ * kobo-studio — couche de signature : signal-orange-techwear
+ * Sources (lecture seule) : SKILL.md (une seule couleur : l'orange ; panneaux à filet de 1px, translucides, angles de 2px, halo orange
+ * dans le bas ; étiquettes orange très espacées), references/components.md (bouton à contour orange suivi d'une flèche ↗, variante
+ * pleine à texte sombre ; onglets rectangulaires à contour orange, l'actif plein ; lien actif marqué d'un trait orange plus court que
+ * le mot ; ronds à contour dont un seul orange), démo (transitions par pas ; la variante pleine devient blanche au survol).
+ * Dégradé : le halo orange des panneaux est décrit par le skill.
+ * Non traduit : le titre empilé à registres (plein, barres, creux), la silhouette centrale, le texte vertical, l'index de section.
+ *
+ * « full » : formes + transitions par pas. « reduced » : formes, transitions ordinaires. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton plein orange à texte sombre (action) ; bouton à contour orange (secondaire) ; tous deux suivis d'une flèche ---- */
+  &.k-btn:not(.k-btn--icon, .k-btn--ghost)::before { content: "↗"; order: 2; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger) { font-weight: bolder; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_edge: var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_edge: var(--k-accent); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent); --_fg: var(--k-on-accent); }
+  &.k-btn--icon { border-radius: 50%; }
+  &.k-btn--secondary.k-btn--icon:not(:disabled) { --_edge: var(--k-line-strong); }
+
+  /* ---- Étiquette orange très espacée ---- */
+  &.k-card__meta { font-family: var(--k-font-body); letter-spacing: var(--k-sig-ls-label); color: var(--k-accent); }
+
+  /* ---- Lien actif : un trait orange plus court que le mot ---- */
+  &.k-nav { border-block-end-color: transparent; }
+  &.k-nav__link { position: relative; }
+  &.k-nav__link[aria-current="page"] { border-block-end-color: transparent; }
+  &.k-nav__link[aria-current="page"]::before { content: ""; position: absolute; inset-inline-start: var(--k-space-3); inset-block-end: var(--k-space-1); inline-size: min(var(--k-space-12), 60%); block-size: calc(var(--k-border-w) * 2); background: var(--k-accent); }
+
+  /* ---- Panneau : filet fin, angles de 2px, halo orange dans le bas ---- */
+  &.k-card, &.k-modal, &.k-toast, &.k-empty { background: linear-gradient(0deg, var(--k-sig-panel-hot), transparent 55%), var(--k-surface); border-color: var(--k-line-strong); border-style: solid; }
+  &.k-toast { border-inline-start-color: var(--_tone); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: linear-gradient(0deg, var(--k-sig-panel-hot), transparent 80%), var(--k-surface); border-color: var(--k-accent); }
+  &.k-card[aria-current="true"] { border-color: var(--k-accent); outline-color: var(--k-accent); }
+
+  /* ---- Onglets rectangulaires à contour orange ; l'actif plein, à texte sombre ---- */
+  &.k-tabs__list { gap: var(--k-space-3); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; color: var(--k-text); border: var(--k-border-w) solid var(--k-accent); border-radius: var(--k-radius); }
+  &.k-tabs__tab:is(:hover, [data-k-state="hover"]):not(:disabled) { background: var(--k-sig-panel-hot); }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-on-accent); background: var(--k-accent); }
+  &.k-tabs__tab[aria-selected="true"] .k-tabs__count { color: inherit; }
+
+  /* ---- Champ : filet fin, orange au focus ---- */
+  &.k-field__control:not(:disabled) { background: transparent; }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: var(--k-line-strong); }
+  &.k-field__control:not([aria-invalid="true"]):is(:focus-visible, [data-k-state="focus"]) { border-color: var(--k-accent); }
+  &.k-field__label { letter-spacing: var(--k-btn-tracking); text-transform: uppercase; }
+}
+
+/* Mouvement de signature (seulement en « full ») : les couleurs changent par pas, pas en fondu */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &:is(.k-btn, .k-tabs__tab) { transition-timing-function: var(--k-sig-ease-cut); }
+}

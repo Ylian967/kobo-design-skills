@@ -32,7 +32,7 @@ Erreur et vide ne s'appliquent pas à un bouton. `data-k-state="hover|focus|acti
 |---|---|
 | (aucune) | action principale : une seule par écran |
 | `k-btn--secondary` | action secondaire : contour `--k-line-strong`, fond transparent |
-| `k-btn--ghost` | action discrète : texte souligné. Prend l'accent seulement si `--k-accent-on-bg` vaut 1 |
+| `k-btn--ghost` | action discrète : texte de la couleur du texte, souligné. Le soulignement prend l'accent seulement si `--k-accent-on-bg` vaut 1 |
 | `k-btn--danger` | action destructrice : toujours avec une icône et un verbe explicite, jamais la couleur seule |
 | `k-btn--pill` | rayon `--k-radius-pill` |
 | `k-btn--icon` | icône seule, carrée : `aria-label` obligatoire |

@@ -1,0 +1,54 @@
+/*
+ * kobo-studio — couche de signature : showroom-bento
+ * Sources (lecture seule) : SKILL.md (« tout est pilule ou tuile » ; gris, blanc, noir et un seul rouge, réservé au monogramme, au nom
+ * de marque et à une pastille), references/components.md (pilules blanches, l'active en noir à texte blanc ; boutons ronds blancs ;
+ * pilule noire pour commander ; tuiles blanches à rayon de 12px, contenu centré : pictogramme, valeur en gras, étiquette légère),
+ * démo (pilules et ronds montent de 2px, tuiles de 4px).
+ * Non traduit : l'écran unique dans son cadre, la scène du produit et son sol, la rangée bento serrée, les pastilles de teinte.
+ * L'ombre douce que la démo ajoute sous une tuile survolée n'est pas reprise (ombre floue).
+ *
+ * « full » : formes + éléments qui se soulèvent. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Pilule noire = action ; pilule blanche = secondaire ; rond blanc ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-surface); --_edge: transparent; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-surface-2); }
+  &.k-btn--icon { border-radius: 50%; }
+
+  /* ---- Navigation et onglets : pilules blanches, l'active en noir à texte blanc ---- */
+  &.k-nav { border-block-end-color: transparent; }
+  &.k-nav__list, &.k-tabs__list { gap: var(--k-space-2); }
+  &.k-tabs__list { padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-nav__link, &.k-tabs__tab { margin: 0; padding-inline: var(--k-space-6); color: var(--k-text); background: var(--k-surface); border: 0; border-radius: var(--k-radius-pill); }
+  &.k-nav__link:hover, &.k-tabs__tab:is(:hover, [data-k-state="hover"]) { background: var(--k-surface-2); }
+  &.k-nav__link[aria-current="page"], &.k-tabs__tab[aria-selected="true"] { color: var(--k-on-accent); background: var(--k-accent); border-radius: var(--k-radius-pill); font-weight: inherit; }
+  &.k-tabs__tab[aria-selected="true"] .k-tabs__count { color: inherit; }
+  /* le nom de marque en rouge (grand texte seulement) */
+  &.k-nav__brand { color: var(--k-accent-2); }
+
+  /* ---- Carte = tuile blanche sans cadre, contenu centré ; photo en retrait à coins de 8px ---- */
+  &.k-card, &.k-modal, &.k-toast, &.k-empty { border-color: transparent; }
+  &.k-toast { border-inline-start-color: var(--_tone); }
+  &.k-empty { background: var(--k-surface); border-style: solid; }
+  &.k-modal { background: var(--k-surface); }
+  &.k-card__media { margin: var(--k-space-1) var(--k-space-1) 0; border: 0; border-radius: var(--k-radius); background: var(--k-surface-2); }
+  &.k-card__body { justify-items: center; text-align: center; }
+  &.k-card__meta { font-family: var(--k-font-body); letter-spacing: 0; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-surface); border-color: var(--k-text); }
+
+  /* ---- Champ : blanc, sans cadre ---- */
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: transparent; }
+}
+
+/* Mouvement de signature (seulement en « full ») : pilules et ronds montent de 2px, tuiles de 4px */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &:is(.k-btn, .k-card--link, .k-nav__link) { transition: translate var(--k-dur-base) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out); }
+  &:is(.k-btn, .k-nav__link):not(:disabled, [aria-disabled="true"], [aria-busy="true"], .k-btn--ghost):is(:hover, [data-k-state="hover"]) { translate: 0 calc(var(--k-space-1) * -0.5); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { translate: 0 calc(var(--k-space-1) * -1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-btn, .k-card--link, .k-nav__link { transition: none; }
+  .k-btn:hover, .k-card--link:hover, .k-nav__link:hover { translate: none; }
+}

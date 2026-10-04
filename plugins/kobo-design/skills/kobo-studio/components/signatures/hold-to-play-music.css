@@ -1,0 +1,52 @@
+/*
+ * kobo-studio — couche de signature : hold-to-play-music
+ * Sources (lecture seule) : SKILL.md (gris au repos, couleur dans l'action ; texte posé sans carte ni panneau ; contours de 1,6px,
+ * pilules et cercles), references/components.md (la touche : pilule à contour blanc, libellé en graisse fine, orange pendant l'appui ;
+ * consignes en sans gras ; liens soulignés ; pied en mono qui passe à l'orange au survol ; aide et pochette sur un simple voile).
+ * Non traduit : le geste « maintenir » et le contour qui se trace (script), le mot peint, les plans vidéo, le grain.
+ *
+ * « full » : formes + la couleur revient au survol. « reduced » : formes, images toujours grises. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton = la touche : pilule à contour, sans fond, libellé fin ; orange quand on agit. Secondaire = lien souligné en gras ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]) { --_bg: transparent; --_fg: var(--k-text); --_edge: var(--k-text); font-weight: var(--k-sig-w-thin); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, :active, [data-k-state="hover"], [data-k-state="active"]) { --_bg: transparent; --_fg: var(--k-accent); --_edge: var(--k-accent); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_edge: transparent; font-weight: bolder; text-decoration: underline; text-underline-offset: var(--k-space-1); padding-inline: var(--k-space-2); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: transparent; --_fg: var(--k-accent); }
+  &.k-btn--icon { border-radius: 50%; }
+  &.k-btn--secondary.k-btn--icon:not(:disabled) { --_edge: var(--k-text); text-decoration: none; }
+
+  /* ---- Consignes en sans gras : le lettrage peint est réservé au mot-titre et au logo ---- */
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { font-family: var(--k-font-body); font-weight: bolder; }
+  &.k-nav__link, &.k-field__label, &.k-tabs__tab { font-weight: bolder; }
+
+  /* ---- Ni carte ni panneau : le texte est posé, séparé par un filet ---- */
+  &.k-card { background: transparent; border-color: transparent; border-block-start-color: var(--k-line); border-radius: 0; }
+  &.k-card__media { border-block-end: 0; }
+  &.k-card__body, &.k-card__foot { padding-inline: 0; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: transparent; border-block-start-color: var(--k-accent); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) .k-card__title a { color: var(--k-accent); }
+  &.k-modal { background: transparent; border-color: transparent; }
+  &.k-empty { border-color: var(--k-line); }
+
+  /* ---- Onglet actif = une touche ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; border: var(--k-border-w) solid transparent; border-radius: var(--k-radius-pill); }
+  &.k-tabs__tab[aria-selected="true"] { border-color: var(--k-text); }
+  &.k-tabs__tab:hover { color: var(--k-accent); background: transparent; }
+
+  /* ---- Champ : pilule à contour, sans fond ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: var(--k-radius-pill); padding-inline: var(--k-space-6); }
+  textarea&.k-field__control:not(:disabled) { border-radius: var(--k-radius-lg); }
+  &.k-field__control:not([aria-invalid="true"]):is(:focus-visible, [data-k-state="focus"]) { border-color: var(--k-accent); }
+  &.k-nav__link:hover { color: var(--k-accent); background: transparent; }
+}
+
+/* En « full » seulement : gris au repos, couleur dans l'action */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-card--link .k-card__media img { transition: filter var(--k-dur-fast) var(--k-ease-out); }
+  &.k-card--link:is(:hover, [data-k-state="hover"], :has(a:focus-visible)) .k-card__media img { filter: none; }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-card--link .k-card__media img { transition: none; } }

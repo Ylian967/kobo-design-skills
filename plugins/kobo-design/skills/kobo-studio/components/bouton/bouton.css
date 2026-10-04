@@ -6,10 +6,10 @@
 .k-btn {
   --_bg: var(--k-accent); --_fg: var(--k-on-accent); --_edge: var(--k-accent-edge);
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--k-space-2);
-  min-block-size: var(--k-control-h); margin: 0; padding: 0 var(--k-space-6);
+  min-block-size: var(--k-control-h); max-inline-size: 100%; margin: 0; padding: 0 var(--k-space-6);
   font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: inherit; line-height: var(--k-lh-tight);
   text-transform: var(--k-btn-case); letter-spacing: var(--k-btn-tracking);
-  text-decoration: none; white-space: nowrap; cursor: pointer; user-select: none;
+  text-decoration: none; text-align: center; overflow-wrap: anywhere; cursor: pointer; user-select: none;
   color: var(--_fg); background: var(--_bg); border: var(--k-border-w) solid var(--_edge);
   border-radius: var(--k-radius); box-shadow: var(--k-shadow);
   transition: background-color var(--k-dur-fast) var(--k-ease-out), color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out);
@@ -32,11 +32,12 @@
 .k-btn--secondary:hover, .k-btn--secondary[data-k-state="hover"] { --_bg: var(--k-surface); }
 .k-btn--secondary:active, .k-btn--secondary[aria-pressed="true"] { --_bg: var(--k-surface-2); }
 
-/* Discret : pas d'aplat. L'accent ne colore le texte que si --k-accent-on-bg vaut 1 ; le soulignement reste dans tous les cas. */
+/* Discret : pas d'aplat. Le texte reste de la couleur du texte (un accent à 3:1 ne suffit pas pour un petit texte) ;
+   c'est le soulignement qui prend l'accent, et seulement si --k-accent-on-bg vaut 1. */
 .k-btn--ghost {
-  --_bg: transparent; --_edge: transparent; box-shadow: none; padding-inline: var(--k-space-3);
-  --_fg: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text));
+  --_bg: transparent; --_fg: var(--k-text); --_edge: transparent; box-shadow: none; padding-inline: var(--k-space-3);
   text-decoration: underline; text-underline-offset: var(--k-space-1);
+  text-decoration-color: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text));
 }
 .k-btn--ghost:hover, .k-btn--ghost[data-k-state="hover"] { --_bg: var(--k-surface); }
 .k-btn--ghost:active { --_bg: var(--k-surface-2); }
@@ -49,7 +50,7 @@
 .k-btn--pill { border-radius: var(--k-radius-pill); }
 .k-btn--block { display: flex; inline-size: 100%; }
 /* Icône seule : carré ; le nom accessible vient de aria-label */
-.k-btn--icon { inline-size: var(--k-control-h); padding: 0; }
+.k-btn--icon { flex: none; inline-size: var(--k-control-h); min-inline-size: var(--k-hit-min); padding: 0; }
 
 /* Désactivé : gris lisible (pas de transparence), aucune réaction */
 .k-btn:disabled, .k-btn[aria-disabled="true"] {

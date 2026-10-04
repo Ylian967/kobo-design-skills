@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : tiny-planet-toy
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 38 reliés ou relevés, 5 dérivés, 19 en repli.
- * 27 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 42 reliés ou relevés, 5 dérivés, 15 en repli.
+ * 31 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Rubik+Mono+One&family=Silkscreen:wght@400;700&display=swap
@@ -69,9 +69,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 400; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: uppercase; /* [main] relevé : police pixel en capitales */
+  --k-btn-tracking: 0.04em; /* [main] relevé dans la démo */
+  --k-label-case: uppercase; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: var(--r);
@@ -81,7 +81,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: var(--tilt);
   --k-shadow: var(--drop);
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] le skill n'a pas de photo : sa seule image est une scène 3D au rendu dessin animé, cernée d'encre */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);

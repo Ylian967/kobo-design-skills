@@ -1,0 +1,43 @@
+/*
+ * kobo-studio — couche de signature : cosmic-voyage
+ * Sources (lecture seule) : SKILL.md (l'or est un ornement ; un seul coin arrondi sur les cartes ; le verre est peint, sans flou),
+ * references/components.md §1 (barre noire, lien courant bleu avec filet bleu), §6 (carte à cadre doré fin, coin haut droit seul
+ * arrondi, date en or), §7 (bouton contour sans arrondi : au survol fond et bord dorés, texte noir), §8 (bouton doré), §11 (panneau
+ * de verre : en-tête bleu nuit, corps bleu clair à texte sombre), §13 (onglets séparés par une étoile, l'actif en or).
+ * Non traduit : la nuit étoilée, la frise du voyage et ses nœuds, la frise d'emblèmes, la carte stellaire, le rail « Suivre ».
+ *
+ * Ce skill n'a pas de mouvement de signature sur ces composants : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton doré ; le contour « En savoir plus » est sans arrondi et se dore au survol ---- */
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]) { font-weight: bolder; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent-2); --_edge: var(--k-accent-2); }
+  &.k-btn--secondary { border-radius: 0; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_fg: var(--k-text-2); --_edge: var(--k-line-strong); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent); --_fg: var(--k-on-accent); --_edge: var(--k-accent); }
+
+  /* ---- Barre noire ; lien courant en bleu avec son filet ---- */
+  &.k-nav { background: var(--k-sig-nav); border-block-end-color: transparent; }
+  &.k-nav__link[aria-current="page"] { color: var(--k-sig-link); }
+
+  /* ---- Carte : cadre doré fin, seul le coin haut droit est arrondi, date en or ---- */
+  &.k-card, &.k-toast { border-color: color-mix(in srgb, var(--k-accent-2) 45%, transparent); border-radius: var(--k-sig-radius-card); }
+  &.k-card__meta { color: var(--k-accent-2); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]), &.k-card[aria-current="true"] { border-color: var(--k-accent-2); }
+  &.k-card[aria-current="true"] { outline-color: var(--k-accent-2); }
+
+  /* ---- Onglets : séparés par une petite étoile, l'actif en or ---- */
+  &.k-tabs__tab + .k-tabs__tab::before { content: "✦"; margin-inline-end: var(--k-space-3); color: var(--k-text-muted); font-weight: normal; }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-accent-2); border-block-end-color: var(--k-accent-2); }
+
+  /* ---- Champ sombre : liseré doré au focus ---- */
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: var(--k-line); }
+  &.k-field__control:not([aria-invalid="true"]):is(:focus-visible, [data-k-state="focus"]) { border-color: var(--k-accent-2); }
+
+  /* ---- Modale = panneau de verre peint : en-tête bleu nuit, corps bleu clair à texte sombre ---- */
+  &.k-modal { border-color: var(--k-sig-glass-edge); }
+  &.k-modal__head { background: var(--k-sig-glass); padding-block-end: var(--k-space-6); }
+  &.k-modal__body { padding-block-start: var(--k-space-6); color: var(--k-sig-ink-glass); background: var(--k-sig-glass-light); }
+  /* Seuls les textes posés sur le verre clair prennent son encre : la valeur saisie reste claire sur le champ sombre */
+  &.k-modal__body :is(.k-field__label, .k-field__help, .k-field__count) { color: var(--k-sig-ink-glass); }
+}

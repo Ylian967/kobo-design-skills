@@ -1,0 +1,45 @@
+/*
+ * kobo-studio — couche de signature : nocturne-architecture
+ * Sources (lecture seule) : SKILL.md (un seul rouge, pour agir ou désigner : pilule, carte mise en avant, points, ligne de progression ;
+ * « des filets, pas des boîtes »), references/components.md (pilule rouge, pilule à contour ; au survol un calque blanc recouvre la
+ * pilule et le texte devient noir ; petits libellés en capitales précédés d'un point plein ; carte rouge ; ligne de 1px avec un
+ * segment rouge de 3px ; photos à coins de 12px ; panneau à coins de 20px).
+ * Non traduit : le mot-marque géant coupé par le héros, la phrase en deux tons, les chiffres 2 × 2, la date \ heure \ température.
+ *
+ * Les survols de ce skill ne changent que des couleurs : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Pilule rouge = action ; pilule à contour = lien secondaire ; au survol, blanc à texte noir ---- */
+  &.k-btn:not(.k-btn--ghost) { border-radius: var(--k-radius-pill); font-weight: var(--k-fw-display); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-bg-inverse); --_fg: var(--k-text-inverse); --_edge: var(--k-bg-inverse); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_edge: var(--k-line); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-bg-inverse); --_fg: var(--k-text-inverse); --_edge: var(--k-bg-inverse); }
+  &.k-btn--icon { border-radius: 50%; }
+
+  /* ---- Petit libellé en capitales, précédé d'un point plein ---- */
+  &.k-card__meta { display: inline-flex; align-items: center; gap: var(--k-space-2); font-family: var(--k-font-body); color: var(--k-text); }
+  &.k-card__meta::before { content: ""; flex: none; inline-size: var(--k-space-2); block-size: var(--k-space-2); border-radius: 50%; background: currentColor; }
+
+  /* ---- Des filets, pas des boîtes : la carte n'a ni fond ni cadre, un filet la ferme ; photo à coins de 12px ---- */
+  &.k-card { background: transparent; border-color: transparent; border-block-end-color: var(--k-line); border-radius: 0; }
+  &.k-card__media { border: 0; border-radius: var(--k-radius); }
+  &.k-card__body, &.k-card__foot { padding-inline: 0; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: transparent; border-block-end-color: var(--k-text); }
+  /* la carte mise en avant est rouge */
+  &.k-card[aria-current="true"] { --k-text-2: var(--k-text); --k-text-muted: var(--k-text); --k-line: color-mix(in srgb, var(--k-text) 40%, transparent); padding-inline: var(--k-space-4); background: var(--k-accent); border-radius: var(--k-radius); outline-color: transparent; }
+
+  /* ---- Champ : un filet ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: 0; padding-inline: 0; }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: transparent; border-block-end-color: var(--k-line-strong); }
+
+  /* ---- Ligne de 1px avec un segment rouge de 3px ---- */
+  &.k-progress__track { block-size: var(--k-border-w); overflow: visible; background: var(--k-line); border: 0; border-radius: 0; }
+  &.k-progress__bar { block-size: calc(var(--k-border-w) * 3); margin-block-start: calc(var(--k-border-w) * -1); }
+  &.k-progress--indeterminate .k-progress__track { overflow: hidden; block-size: calc(var(--k-border-w) * 3); }
+
+  /* ---- Panneaux à coins de 20px, sans cadre ---- */
+  &.k-modal { background: var(--k-surface); border-color: transparent; }
+  &.k-toast { border-color: var(--k-line); }
+  &.k-empty { border-style: solid; border-color: var(--k-line); }
+  &.k-tabs__tab { font-weight: var(--k-fw-display); }
+}

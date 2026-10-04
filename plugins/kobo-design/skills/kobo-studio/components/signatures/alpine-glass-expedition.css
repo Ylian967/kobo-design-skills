@@ -1,0 +1,63 @@
+/*
+ * kobo-studio — couche de signature : alpine-glass-expedition
+ * Sources (lecture seule) : SKILL.md (« tout est rond » ; une sphère de verre en dégradé, jamais de flou), references/components.md
+ * §1 (nav sans fond, filet qui s'étire, pilule blanche à lueur bleue), §5 (sphère de verre, variante 56px), §8 (puces en contour),
+ * §9 (carte de séjour à étiquette en contour et nom en serif capitales, filtres en puces, champ pilule), references/motion.md
+ * (carte au survol : image à 1,07).
+ * Dégradés : la lueur de la pilule et la sphère de verre sont des dégradés décrits par le skill, repris tels quels.
+ * Non traduit : la photo plein cadre et son voile diagonal, le titre géant, la brume et la neige en canvas, la note « 4,8/5 ».
+ *
+ * « full » : formes + mouvements. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Pilule blanche à lueur bleue ; secondaire = puce en contour ---- */
+  &.k-btn { border-radius: var(--k-radius-pill); font-weight: bolder; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, .k-btn--icon, :disabled, [aria-disabled="true"]) { background: linear-gradient(180deg, var(--k-sig-pill-glow), var(--_bg) 38%); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: color-mix(in srgb, var(--k-bg) 26%, transparent); --_edge: var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_fg: var(--k-on-accent); }
+  /* bouton rond = petite sphère de verre */
+  &.k-btn--icon:not(:disabled) {
+    color: var(--k-text); border-color: transparent; border-radius: 50%;
+    background: radial-gradient(125% 100% at 50% -4%, var(--k-sig-sky), var(--k-sig-glacier) 20%, var(--k-sig-steel) 46%, var(--k-sig-slate) 78%, var(--k-sig-steel) 104%);
+  }
+
+  /* ---- Nav sans fond : liens gras en capitales, un filet s'étire dessous ---- */
+  &.k-nav__link { position: relative; font-weight: bolder; }
+  &.k-nav__link::before { content: ""; position: absolute; inset-inline: var(--k-space-3); inset-block-end: var(--k-space-2); block-size: var(--k-border-w); background: currentColor; transform: scaleX(0); transform-origin: left; }
+  &.k-nav__link:is(:hover, [aria-current="page"])::before { transform: none; }
+  &.k-nav__link:hover { background: transparent; }
+  &.k-nav__link[aria-current="page"] { border-block-end-color: transparent; }
+
+  /* ---- Onglets = filtres en puces : contour fin, la choisie pleine ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; font-weight: bolder; border: var(--k-border-w) solid var(--k-text); border-radius: var(--k-radius-pill); }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-on-accent); background: var(--k-text); }
+  &.k-tabs__tab[aria-selected="true"] .k-tabs__count { color: inherit; }
+
+  /* ---- Carte de séjour : fond de crête, sans cadre ; étiquette en contour ; nom en serif capitales ---- */
+  &.k-card { background: var(--k-surface-2); border-color: transparent; }
+  &.k-card__media { border-block-end: 0; }
+  &.k-card__meta { justify-self: start; padding: var(--k-space-1) var(--k-space-3); color: var(--k-text); border: var(--k-border-w) solid var(--k-text); border-radius: var(--k-radius-pill); }
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { text-transform: uppercase; }
+
+  /* ---- Champ pilule : contour blanc, fond transparent ; focus en bleu ciel ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: var(--k-radius-pill); padding-inline: var(--k-space-6); }
+  textarea&.k-field__control:not(:disabled) { border-radius: var(--k-radius-lg); }
+  &.k-field__control:not([aria-invalid="true"]):is(:focus-visible, [data-k-state="focus"]) { border-color: var(--k-sig-sky); }
+
+  &.k-toast, &.k-empty { border-radius: var(--k-radius-lg); border-color: var(--k-line); }
+  &.k-modal { border-color: var(--k-line); }
+}
+
+/* Mouvements de signature : seulement en « full » */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-nav__link::before { transition: transform var(--k-dur-base) var(--k-ease-out); }
+  /* image de la carte à 1,07 au survol : mouvement décrit par le skill (exception citée à « rien ne grossit ») */
+  &.k-card--link .k-card__media img { transition: scale var(--k-dur-slow) var(--k-ease-out); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) .k-card__media img { scale: 1.07; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-nav__link::before, .k-card--link .k-card__media img { transition: none; }
+  .k-card--link:hover .k-card__media img { scale: none; }
+}

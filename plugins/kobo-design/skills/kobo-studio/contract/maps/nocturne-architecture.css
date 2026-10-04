@@ -2,16 +2,16 @@
  * kobo-studio — fiche de correspondance : nocturne-architecture
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 37 reliés ou relevés, 4 dérivés, 21 en repli.
- * 15 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 41 reliés ou relevés, 4 dérivés, 17 en repli.
+ * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Inter+Tight:wght@400;500&display=swap
  *
  * Signature : 16 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
- *   --k-sig-dim, --k-sig-ghost, --k-sig-mark, --k-sig-night, --k-sig-veil-0, --k-sig-fs-word, --k-sig-fs-chip,
- *   --k-sig-fs-row, --k-sig-fs-card, --k-sig-ls-word, --k-sig-hero-h, --k-sig-card-w, --k-sig-card-h,
- *   --k-sig-gap, --k-sig-round, --k-sig-dur-marquee
+ *   --k-sig-dim, --k-sig-ghost, --k-sig-mark, --k-sig-night, --k-sig-veil-0, --k-sig-fs-word,
+ *   --k-sig-fs-phrase, --k-sig-fs-chip, --k-sig-fs-row, --k-sig-ls-word, --k-sig-hero-h, --k-sig-card-w,
+ *   --k-sig-card-h, --k-sig-gap, --k-sig-round, --k-sig-dur-marquee
  *
  * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
  */
@@ -59,7 +59,7 @@
   --k-fs-hero: var(--fs-stat); /* [main] le mot-marque géant (--fs-word) reste en signature */
   --k-fs-h1: var(--fs-marquee); /* [main] */
   --k-fs-h2: var(--fs-h2);
-  --k-fs-h3: var(--fs-phrase); /* [main] */
+  --k-fs-h3: var(--fs-card); /* [main] le nom d'une carte de bien (26px) ; --fs-phrase, la grande phrase en deux tons, reste en signature */
   --k-fs-body: var(--fs-body);
   --k-fs-small: var(--fs-small);
   --k-fs-label: var(--fs-label);
@@ -68,9 +68,9 @@
   --k-ls-display: var(--ls-tight);
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 500; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: none; /* [main] relevé : pilules en bas de casse */
+  --k-btn-tracking: 0em; /* [main] relevé */
+  --k-label-case: uppercase; /* [main] relevé : petits libellés en capitales */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -80,7 +80,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] photos de nuit ou d'heure bleue telles quelles ; un voile sombre se pose sous tout texte, hors filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--gutter);
@@ -106,9 +106,9 @@
   --k-sig-night: var(--night);
   --k-sig-veil-0: var(--veil-0);
   --k-sig-fs-word: var(--fs-word);
+  --k-sig-fs-phrase: var(--fs-phrase);
   --k-sig-fs-chip: var(--fs-chip);
   --k-sig-fs-row: var(--fs-row);
-  --k-sig-fs-card: var(--fs-card);
   --k-sig-ls-word: var(--ls-word);
   --k-sig-hero-h: var(--hero-h);
   --k-sig-card-w: var(--card-w);

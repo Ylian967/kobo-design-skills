@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : hyper-lime-street
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 36 reliés ou relevés, 5 dérivés, 21 en repli.
- * 17 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 40 reliés ou relevés, 5 dérivés, 17 en repli.
+ * 21 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap
@@ -69,9 +69,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 400; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: none; /* [main] relevé */
+  --k-btn-tracking: 0.02em; /* [main] relevé dans la démo */
+  --k-label-case: uppercase; /* [main] relevé : sous-titres et étiquettes de catégorie en capitales */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -81,7 +81,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: var(--slant);
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] images très colorées ; elles sont découpées à 41° (clip-path), ce qui relève de la forme */
 
   /* ---- Espace ---- */
   --k-edge: clamp(16px, 4vw, 48px); /* repli du contrat */

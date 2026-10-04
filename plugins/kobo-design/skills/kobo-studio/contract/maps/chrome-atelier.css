@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : chrome-atelier
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 44 reliés ou relevés, 4 dérivés, 14 en repli.
- * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 47 reliés ou relevés, 4 dérivés, 11 en repli.
+ * 23 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&family=Bodoni+Moda:ital,wght@0,500;1,500&display=swap
@@ -71,9 +71,9 @@
   --k-ls-display: var(--ls-hero);
   --k-ls-caps: var(--ls-label);
   --k-fw-display: var(--weight);
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: var(--ls-btn);
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: uppercase; /* [main] relevé : pilules en capitales */
+  --k-btn-tracking: var(--ls-btn); /* [main] */
+  --k-label-case: none; /* [main] relevé : étiquettes mono entre crochets, en bas de casse */
 
   /* ---- Formes ---- */
   --k-radius: 0px; /* repli */
@@ -83,7 +83,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] photos en couleurs naturelles ; la pièce elle-même est une scène 3D ou une séquence de rendus, hors filtre */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);

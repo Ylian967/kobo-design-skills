@@ -13,7 +13,7 @@ Dans toutes les feuilles de style, les styles en ligne et la galerie :
     rayon, durée (ms, s). Sont admis : les rôles --k-*, les variables locales --_x, les pourcentages,
     les unités de fenêtre (vw, vh, dvh), fr, deg, turn, les nombres sans unité, zéro, transparent, currentColor ;
   - aucun --k-sig-* hors de components/signatures/ (là, une ombre peut aussi venir d'un --k-sig-* du skill) ;
-  - motifs de quality/anti-slop.md : dégradés (C1), ombres hors --k-shadow (F1, F5), flou d'arrière-plan (F3),
+  - motifs de quality/anti-slop.md : dégradés (C1 ; admis dans signatures/ quand le skill les décrit), ombres hors --k-shadow (F1, F5), flou d'arrière-plan (F3),
     scale() au survol (M1), transition: all (M4), outline retiré sans remplacement (U8), texte de remplissage (T1),
     emoji en guise d'icône (T5), liens href="#" (T7), boutons sans type (U10), images sans alt (T8).
 
@@ -63,11 +63,12 @@ def hard_values(css, where):
 def slop(css, where, signature=False):
     out = []
     for n, line in enumerate(css.splitlines(), 1):
-        if re.search(r"gradient\(", line):
+        if re.search(r"gradient\(", line) and not signature:   # une couche de signature peut reprendre un dégradé décrit par le skill (cité en tête de fichier)
             out.append(f"{where}:{n} dégradé (anti-slop C1) : {line.strip()[:70]}")
         m = re.search(r"box-shadow\s*:\s*([^;}]+)", line)
+        # une signature peut lire l'ombre du skill, ou composer une ombre dure (sans flou chiffré) à partir de rôles
         shadow_ok = m and (m.group(1).strip() in ("none", "var(--k-shadow)")
-                           or (signature and re.fullmatch(r"var\(--k-[\w-]+\)", m.group(1).strip())))  # une signature peut lire l'ombre du skill
+                           or (signature and not re.sub(r"var\(--[\w-]+\)|inset|\b0\b|[\s,]", "", m.group(1))))
         if m and not shadow_ok:
             out.append(f"{where}:{n} ombre hors --k-shadow (anti-slop F1/F5) : {m.group(1).strip()[:50]}")
         if "backdrop-filter" in line:

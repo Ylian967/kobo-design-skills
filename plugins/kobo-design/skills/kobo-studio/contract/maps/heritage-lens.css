@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : heritage-lens
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 39 reliés ou relevés, 4 dérivés, 19 en repli.
- * 24 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 43 reliés ou relevés, 4 dérivés, 15 en repli.
+ * 28 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Viaoda+Libre&display=swap
@@ -69,9 +69,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: 0.06em; /* repli */
   --k-fw-display: 400; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: none; /* [main] relevé : boutons en sans, bas de casse */
+  --k-btn-tracking: 0em; /* [main] relevé */
+  --k-label-case: none; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: var(--r-card); /* [main] */
@@ -81,7 +81,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: 0deg; /* repli */
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] scènes à la lumière dorée, sans filtre ; le skill demande un voile sombre sous tout texte posé sur l'image */
 
   /* ---- Espace ---- */
   --k-edge: var(--edge);

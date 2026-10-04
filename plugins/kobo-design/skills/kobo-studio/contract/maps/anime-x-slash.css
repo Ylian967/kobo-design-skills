@@ -2,8 +2,8 @@
  * kobo-studio — fiche de correspondance : anime-x-slash
  *
  * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
- * Rôles : 39 reliés ou relevés, 3 dérivés, 20 en repli.
- * 19 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ * Rôles : 43 reliés ou relevés, 3 dérivés, 16 en repli.
+ * 23 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
  *
  * Polices (Google Fonts) :
  *   https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap
@@ -74,9 +74,9 @@
   --k-ls-display: 0em; /* repli */
   --k-ls-caps: var(--tracking-caps);
   --k-fw-display: 500; /* [main] relevé dans la démo */
-  --k-btn-case: none; /* repli du contrat */
-  --k-btn-tracking: 0em; /* repli du contrat */
-  --k-label-case: none; /* repli du contrat */
+  --k-btn-case: uppercase; /* [main] relevé : Oswald en capitales */
+  --k-btn-tracking: var(--tracking-caps); /* [main] */
+  --k-label-case: uppercase; /* [main] relevé */
 
   /* ---- Formes ---- */
   --k-radius: 0px; /* repli */
@@ -86,7 +86,7 @@
   --k-cut: 0px; /* repli */
   --k-angle: var(--slant);
   --k-shadow: none; /* repli */
-  --k-img-filter: none; /* repli du contrat */
+  --k-img-filter: none; /* [main] les images restent vives ; le noir et blanc est un état (carte non survolée), posé par la couche de signature */
 
   /* ---- Espace ---- */
   --k-edge: clamp(16px, 4vw, 48px); /* repli du contrat */
