@@ -18,7 +18,7 @@ Ne pas la choisir pour un contenu surtout visuel, chapitre par chapitre (→ ré
 | `article.js` | Titre en cours dans le sommaire ; copie du lien |
 | `Article.jsx` | Version React |
 
-Composants utilisés : bouton, barre-nav, menu-mobile, notification.
+Composants utilisés : bouton, barre-nav, menu-mobile, notification, fil-ariane.
 
 ## Enchaînement des sections
 

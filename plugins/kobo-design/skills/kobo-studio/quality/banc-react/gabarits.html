@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kobo-studio — essai React : gabarits</title>
+<script>
+  // La fiche du skill et sa couche de signature sont choisies par ?skill=… : rôles et fiche avant les composants, signature en dernier.
+  var q = new URLSearchParams(location.search), S = q.get('skill') || 'glass-frame-estate', B = 'http://localhost:8766/kobo-studio/';
+  document.documentElement.dataset.kSkill = S; if (q.get('i')) document.documentElement.dataset.kIntensity = q.get('i');
+  document.write('<link rel="stylesheet" href="' + B + 'contract/roles.css"><link rel="stylesheet" href="' + B + 'contract/maps/' + S + '.css">');
+  addEventListener('DOMContentLoaded', function () { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = B + 'components/signatures/' + S + '.css'; document.head.appendChild(l); });
+</script>
+</head>
+<body><div id="racine"></div><script type="module" src="./src/gabarits.jsx"></script></body>
+</html>

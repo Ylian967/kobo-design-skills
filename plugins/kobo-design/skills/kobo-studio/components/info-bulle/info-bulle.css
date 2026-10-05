@@ -1,0 +1,28 @@
+/*
+ * kobo-studio — info-bulle
+ * Rôles lus : bg-inverse, text-inverse, focus*, font-body, fs-small, fs-min, lh-body, radius, space-*, dur-fast, ease-out.
+ * La bulle est en ton inversé : elle se détache de la page sans ombre ni flou.
+ */
+.k-tooltip { position: relative; display: inline-flex; }
+.k-tooltip__bubble {
+  position: absolute; z-index: 30; inset-block-end: calc(100% + var(--k-space-2)); inset-inline-start: 50%; inline-size: max-content; max-inline-size: min(calc(var(--k-space-32) * 2), calc(100vw - var(--k-space-8)));
+  padding: var(--k-space-2) var(--k-space-3); font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: normal; line-height: var(--k-lh-body); text-align: start; text-transform: none; letter-spacing: normal; white-space: normal;
+  color: var(--k-text-inverse); background: var(--k-bg-inverse); border-radius: var(--k-radius);
+  transform: translateX(calc(-50% + var(--_shift, 0%))); visibility: hidden; opacity: 0; transition: opacity var(--k-dur-fast) var(--k-ease-out), visibility 0s linear var(--k-dur-fast);
+}
+/* Un pont invisible entre le déclencheur et la bulle : on peut aller lire la bulle sans qu'elle se referme */
+.k-tooltip__bubble::before { content: ""; position: absolute; inset-inline: 0; inset-block-start: 100%; block-size: var(--k-space-2); }
+.k-tooltip[data-k-place="bottom"] .k-tooltip__bubble { inset-block-end: auto; inset-block-start: calc(100% + var(--k-space-2)); }
+.k-tooltip[data-k-place="bottom"] .k-tooltip__bubble::before { inset-block-start: auto; inset-block-end: 100%; }
+/* Affichée : au focus clavier, au survol (souris seulement), ou sur demande (data-k-open) ; jamais après Échap (data-k-dismissed) */
+.k-tooltip:focus-within:not([data-k-dismissed]) .k-tooltip__bubble, .k-tooltip[data-k-open]:not([data-k-dismissed]) .k-tooltip__bubble { visibility: visible; opacity: 1; transition-delay: 0s; }
+@media (hover: hover) {
+  .k-tooltip:hover:not([data-k-dismissed]) .k-tooltip__bubble { visibility: visible; opacity: 1; transition-delay: 0s; }
+}
+.k-tooltip > :focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Terme souligné en pointillé : un mot du texte qui porte une précision */
+.k-tooltip__term { position: relative; font: inherit; color: inherit; cursor: help; background: transparent; border: 0; padding: 0; text-decoration: underline dotted; text-underline-offset: var(--k-space-1); }
+/* Zone cliquable du terme : --k-hit-min de haut, sans écarter les lignes du texte */
+.k-tooltip__term::after { content: ""; position: absolute; inset-inline: 0; inset-block-start: 50%; block-size: var(--k-hit-min); transform: translateY(-50%); }
+
+@media (prefers-reduced-motion: reduce) { .k-tooltip__bubble { transition: none; } }

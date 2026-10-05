@@ -36,3 +36,25 @@
   &.k-tabs__tab[aria-selected="true"]::before { content: ""; flex: none; inline-size: var(--k-space-1); block-size: var(--k-space-1); background: currentColor; border-radius: 50%; }
   &.k-nav__link[aria-current="page"] { font-weight: inherit; }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : page courante précédée d'un point ; rubriques entre crochets ; tableau en filets ; capitales espacées.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { color: var(--k-text-muted); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { color: var(--k-text); background: transparent; }
+  &.k-pagination__page[aria-current="page"] { gap: var(--k-space-1); color: var(--k-text); background: transparent; border-color: transparent; }
+  &.k-pagination__page[aria-current="page"]::before { content: ""; flex: none; inline-size: var(--k-space-1); block-size: var(--k-space-1); background: currentColor; border-radius: 50%; }
+  &.k-dropdown__label::before { content: "["; }
+  &.k-dropdown__label::after { content: "]"; }
+  &.k-dropdown__label, &.k-table thead th { letter-spacing: var(--k-sig-ls-mono); color: var(--k-text-2); }
+  &.k-table { border-color: transparent; border-block-color: var(--k-line); border-radius: 0; }
+  &.k-table thead th { background: transparent; }
+  &.k-accordion--titles .k-accordion__trigger { text-transform: uppercase; letter-spacing: var(--k-sig-ls-h2); }
+  /* sélection : le champ est un filet sans marge, le chevron vient au bord */
+  &.k-select__control:not(:disabled) { padding-inline-end: var(--k-space-8); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-1); }
+}

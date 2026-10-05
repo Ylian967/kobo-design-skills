@@ -1,5 +1,6 @@
 /*
- * kobo-studio — héros photo, habillage nocturne-architecture : le premier mot de la marque, géant, en bas du héros.
+ * kobo-studio — héros photo, habillage nocturne-architecture : le nom du projet (ou le mot choisi par data-k-word sur le <h1>),
+ * géant, en bas du héros.
  * Le mot géant est un décor (aria-hidden) : le <h1> de la page reste le titre, à sa place dans le texte du héros.
  */
 (function () {
@@ -8,7 +9,9 @@
   var g = F.heroPhoto({
     variant: 'word',
     extra: function (box) {
-      var brand = document.querySelector('.k-nav__brand'), word = (brand ? brand.textContent : '').trim().split(/\s+/)[0];
+      // Le mot géant du héros : data-k-word sur le <h1> du héros (choisi exprès), sinon le nom du projet lu dans la barre
+      var brand = document.querySelector('.k-nav__brand'), h1 = box.querySelector('h1');
+      var word = (h1 && h1.getAttribute('data-k-word')) || F.motChoisi(brand ? brand.textContent : '', 1);
       if (!word) return;
       var holder = document.createElement('div'); holder.className = 'g-hero__word';
       holder.appendChild(F.motGeant(word.toLowerCase())); box.appendChild(holder);

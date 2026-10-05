@@ -50,3 +50,20 @@
   &.k-menu__link { justify-content: center; text-align: center; border-block-end: 0; }
   &.k-menu__link[aria-current="page"] { border-inline-start: 0; padding-inline-start: 0; text-decoration: underline; text-underline-offset: var(--k-space-2); }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : tout en capitales ; « // » entre les niveaux ; pages en puces à contour, la courante en noir ; tableau gris sans cadre.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-table thead th, &.k-crumbs, &.k-accordion__trigger { text-transform: uppercase; }
+  &.k-pagination__page, &.k-table thead th, &.k-crumbs { font-weight: var(--k-fw-display); }
+  &.k-pagination__page { color: var(--k-text); border-color: var(--k-line); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-bg); background: var(--k-text); border-color: var(--k-text); }
+  &.k-crumbs li + li::before { content: "//"; }
+  &.k-table { background: var(--k-surface); border-color: transparent; }
+  &.k-table thead th { background: transparent; }
+  &.k-dropdown__menu { border-color: var(--k-line); }
+}

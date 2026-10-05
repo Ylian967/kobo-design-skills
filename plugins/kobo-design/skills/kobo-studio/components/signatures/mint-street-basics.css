@@ -51,3 +51,20 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-btn--secondary { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pages en puces de taille, la courante cernée ; intitulés en capitales ; panneaux à grands coins.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { border-color: var(--k-line); }
+  &.k-pagination__page[aria-current="page"] { background: var(--k-surface); border-color: var(--k-text); }
+  &.k-accordion--titles .k-accordion__trigger, &.k-table thead th { text-transform: uppercase; }
+  &.k-table, &.k-dropdown__menu, &.k-tooltip__bubble { border-color: var(--k-line); border-radius: var(--k-radius-lg); }
+  /* sélection : le chevron suit le champ en pilule ; la liste ouverte garde des coins larges */
+  &.k-select__control:not(:disabled) { padding-inline-end: calc(var(--k-space-8) + var(--k-space-4)); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-6); }
+  &.k-select__control[multiple]:not(:disabled) { padding-inline: var(--k-space-2); border-radius: var(--k-radius-lg); }
+}

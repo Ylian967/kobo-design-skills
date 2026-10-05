@@ -47,3 +47,28 @@
   .k-btn, .k-card--link, .k-tabs__tab { transition: none; }
   .k-btn:hover, .k-card--link:hover, .k-tabs__tab:hover { translate: none; }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pages en blocs cernés à ombre décalée, la courante en jaune ; mono en capitales ; tableau et menu cernés ; cases et glissières sur fond crème ; info-bulle en étiquette bleue cernée (étiquette du nom) ; accordéon en fiches cernées à ombre décalée (fiche de quartier).
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-table thead th, &.k-accordion--titles .k-accordion__trigger, &.k-crumbs { font-family: var(--k-font-mono); }
+  &.k-table thead th, &.k-accordion--titles .k-accordion__trigger { text-transform: uppercase; }
+  &.k-pagination__list { gap: var(--k-space-3); padding-block-end: var(--k-space-2); }
+  &.k-pagination__page { color: var(--k-text); background: var(--k-surface); border-color: var(--k-text); box-shadow: var(--k-shadow); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { background: var(--k-surface); }
+  &.k-pagination__page[aria-current="page"] { background: var(--k-accent); border-color: var(--k-text); }
+  &.k-table, &.k-dropdown__menu { border-color: var(--k-text); }
+  &.k-table { background: var(--k-surface); box-shadow: var(--k-shadow); }
+  &.k-check__box, &.k-radio__box, &.k-switch__track { border-color: var(--k-text); }
+  /* relecture sur components.md */
+  &.k-check__box, &.k-radio__box, &.k-switch__track { background: var(--k-surface); }
+  &.k-dropdown__menu { background: var(--k-surface); }
+  &.k-tooltip__bubble { font-family: var(--k-font-mono); color: var(--k-text); background: var(--k-accent-2); border: var(--k-border-w) solid var(--k-text); box-shadow: var(--k-shadow); }
+  &.k-accordion { display: grid; gap: var(--k-space-3); border-block-start: 0; }
+  &.k-accordion__item { padding-inline: var(--k-space-4); background: var(--k-surface); border: var(--k-border-w) solid var(--k-text); box-shadow: var(--k-shadow); }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
+}

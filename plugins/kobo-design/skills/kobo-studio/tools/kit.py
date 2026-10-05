@@ -69,7 +69,7 @@ import { createRoot } from 'react-dom/client';
 %(imports)s
 // La structure du kit : ses props sont décrites en tête du fichier et dans le README de la structure.
 // import { … } from './kobo/kobo-studio/%(jsx)s';
-
+%(gabarits)s
 function App() {
   return null; // À REMPLACER : la page, composée avec la structure ou avec ses pièces (Page, Emplacement, TitreSection, Image, Finale…)
 }
@@ -79,9 +79,9 @@ createRoot(document.getElementById('root')).render(<App />);
 }
 COMPONENTS = {  # composants utilisés par chaque structure (voir son README)
     "landing-produit": ["bouton", "champ", "barre-nav", "menu-mobile", "onglets", "notification"],
-    "site-vitrine": ["bouton", "champ", "carte", "barre-nav", "menu-mobile", "etat-vide"],
+    "site-vitrine": ["bouton", "champ", "carte", "barre-nav", "menu-mobile", "etat-vide", "fil-ariane"],
     "recit-collant": ["bouton", "barre-nav", "menu-mobile"],
-    "article": ["bouton", "barre-nav", "menu-mobile", "notification"],
+    "article": ["bouton", "barre-nav", "menu-mobile", "notification", "fil-ariane"],
 }
 PAGES = {  # page de la structure → nom dans le projet
     "landing-produit": {"landing-produit.html": "index.html"},
@@ -110,7 +110,7 @@ def kit_files(skill, structure, extra, react):
     for f in fams:
         files += [f"ux/templates/{f}/{f}.css", f"ux/templates/{f}/{f}.js", f"ux/templates/{f}/{skill}.css", f"ux/templates/{f}/{skill}.js"]
     if react:
-        files += ["components/Icone.jsx", "ux/structures/Page.jsx"]
+        files += ["components/Icone.jsx", "ux/structures/Page.jsx", "ux/templates/Gabarits.jsx"]
         for c in comps:
             files += [str(p.relative_to(STUDIO)) for p in (STUDIO / "components" / c).glob("*.jsx")]
         files += [str(p.relative_to(STUDIO)) for p in (STUDIO / "ux/structures" / structure).glob("*.jsx")]
@@ -188,18 +188,31 @@ def main():
         css = [f for f in files if f.endswith(".css") and "/templates/" not in f and f != "contract/roles.css"]
         css.sort(key=lambda f: (f.startswith("components/signatures/"), "structures" in f, not f.startswith("contract/")))
         jsx = next(f for f in files if f.endswith(".jsx") and f"structures/{a.structure}/" in f)
-        values = {"name": project.name, "skill": a.skill, "jsx": jsx, "imports": "".join(f"import './kobo/kobo-studio/{f}';\n" for f in css)}
+        # Gabarits de signature : les mêmes fichiers que les pages HTML, posés par ux/templates/Gabarits.jsx.
+        # Feuilles avant la couche de signature ; scripts ensuite, le moteur d'abord, puis chaque famille avant son habillage.
+        gab_css = [f for f in files if f.endswith(".css") and "/templates/" in f]
+        gab_js = [f for f in files if f.endswith(".js") and "/templates/" in f] if fams else []
+        css = css[:-1] + gab_css + css[-1:] if fams else css
+        lines = [f"import './kobo/kobo-studio/{f}';" for f in css + gab_js]
+        if fams:
+            lines.append("import { gabarits } from './kobo/kobo-studio/ux/templates/Gabarits.jsx';")
+        values = {"name": project.name, "skill": a.skill, "jsx": jsx, "imports": "\n".join(lines) + "\n",
+                  "gabarits": f"// Gabarits de signature : passer emplacements={{gabarits('{a.skill}')}} à la structure (ou à <Page> et <Emplacement>).\n" if fams else ""}
         for name, body in REACT.items():
             if not (project / name).exists():
                 (project / name).parent.mkdir(parents=True, exist_ok=True)
                 (project / name).write_text(body % values, encoding="utf-8")
                 print(f"  {name} : écrit")
         print("  images : dans public/images/, appelées par « images/<fichier> »")
-        print("\nImports des feuilles de style (déjà dans src/main.jsx s'il vient d'être écrit ; la couche de signature en dernier) :")
-        for f in css:
-            print(f"  import './kobo/kobo-studio/{f}';")
+        print("\nImports (déjà dans src/main.jsx s'il vient d'être écrit ; la couche de signature est la dernière feuille) :")
+        for line in lines:
+            print("  " + line)
         print(f"Structure : import {{ … }} from './kobo/kobo-studio/{jsx}';   (props : voir le README de la structure)")
-        print("Les gabarits de signature (ux/templates/) n'ont pas de version React : la page rend les emplacements neutres.")
+        if fams:
+            print(f"Gabarits de signature : emplacements={{gabarits('{a.skill}')}} sur la structure. Essayés en React : héros photo et objet 3D ;"
+                  " les autres familles restent neutres (option familles de gabarits(), non essayée).")
+        else:
+            print("Ce skill n'a pas de gabarit de signature : la page rend les emplacements neutres.")
         return 0
     names = PAGES[a.structure]
     for src_name, name in names.items():

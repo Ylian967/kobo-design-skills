@@ -1,6 +1,6 @@
 # Navigation
 
-Composants : `barre-nav`, `menu-mobile`. Socle : `structures/page.css` (`.k-page__top`, `.k-crumbs`, `.k-toc`) et `structures/page.js`.
+Composants : `barre-nav`, `menu-mobile`, `fil-ariane`. Socle : `structures/page.css` (`.k-page__top`, `.k-toc`) et `structures/page.js`.
 
 ## Choisir
 

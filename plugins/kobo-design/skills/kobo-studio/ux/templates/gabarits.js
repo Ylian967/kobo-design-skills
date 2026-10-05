@@ -120,6 +120,7 @@
   Kobo.templates = {
     register: function (def) { defs.push(def); },
     apply: apply, clear: clear, color: color,
+    defs: function (skill) { return defs.filter(function (d) { return !skill || d.skill === skill; }); },   // pour Gabarits.jsx (React)
     list: function () { return defs.map(function (d) { return d.skill + ' · ' + d.family + ' → ' + d.slot; }); }
   };
 })();

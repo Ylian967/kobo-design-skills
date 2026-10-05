@@ -50,3 +50,24 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-card--link .k-card__media img { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : ni carte ni panneau : tableau en filets ; pages en pilules à contour, orange au survol ; libellés gras.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-table thead th, &.k-crumbs { font-weight: bolder; }
+  &.k-pagination__page { border-radius: var(--k-radius-pill); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { color: var(--k-accent); background: transparent; }
+  &.k-pagination__page[aria-current="page"] { background: transparent; border-color: var(--k-text); }
+  &.k-table { border-color: transparent; border-block-color: var(--k-line); border-radius: 0; }
+  &.k-table thead th { background: transparent; }
+  &.k-dropdown__menu { border-color: var(--k-line); }
+  &.k-dropdown__item { border-radius: var(--k-radius-pill); }
+  /* sélection : le chevron suit le champ en pilule ; la liste ouverte garde des coins larges */
+  &.k-select__control:not(:disabled) { padding-inline-end: calc(var(--k-space-8) + var(--k-space-4)); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-6); }
+  &.k-select__control[multiple]:not(:disabled) { padding-inline: var(--k-space-2); border-radius: var(--k-radius-lg); }
+}

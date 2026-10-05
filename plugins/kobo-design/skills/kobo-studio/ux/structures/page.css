@@ -66,12 +66,7 @@ h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 .k-facts dt { color: var(--k-text-2); }
 .k-facts dd { font-weight: bolder; text-align: end; }
 
-/* Fil d'Ariane */
-.k-crumbs ol { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-2); padding: 0; list-style: none; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
-.k-crumbs li { display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-space-6); }
-.k-crumbs li + li::before { content: "/"; color: var(--k-text-muted); }
-.k-crumbs a { color: inherit; text-underline-offset: var(--k-space-1); }
-.k-crumbs [aria-current="page"] { color: var(--k-text-2); }
+/* Fil d'Ariane : composant components/fil-ariane/ (à charger par les pages qui en ont un) */
 
 /* Sommaire d'une page : liste de liens vers ses titres ; le script d'une structure peut marquer le titre en cours */
 .k-toc ol { display: grid; padding: 0; list-style: none; }

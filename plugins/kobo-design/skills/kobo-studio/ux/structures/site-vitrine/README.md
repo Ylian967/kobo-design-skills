@@ -19,7 +19,7 @@ Ne pas la choisir pour une offre unique (→ landing produit).
 | `site-vitrine.js` | La recherche de l'accueil |
 | `SiteVitrine.jsx` | Version React : `Accueil` et `PageInterieure` |
 
-Composants utilisés : bouton, champ, carte, barre-nav, menu-mobile, etat-vide.
+Composants utilisés : bouton, champ, carte, barre-nav, menu-mobile, etat-vide, fil-ariane (page intérieure).
 
 ## Enchaînement des sections
 

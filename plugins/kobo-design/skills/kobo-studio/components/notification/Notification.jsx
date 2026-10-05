@@ -35,7 +35,7 @@ function Notification({ n, surFermer }) {
     <div
       ref={ref} className={`k-toast k-toast--${TYPES[n.type] ? n.type : 'info'}`}
       onMouseEnter={suspendre} onMouseLeave={armer} onFocus={suspendre} onBlur={armer}
-      onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); surFermer(n.id); } }}
+      onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); surFermer(n.id); if (n.retour?.isConnected) n.retour.focus(); } }}
     >
       <Icone nom={t.icone} className="k-toast__icon" />
       <div>
@@ -47,7 +47,7 @@ function Notification({ n, surFermer }) {
           </button>
         )}
       </div>
-      <button type="button" className="k-toast__close" aria-label={`Fermer la notification : ${n.titre || t.mot}`} onClick={() => surFermer(n.id)}>
+      <button type="button" className="k-toast__close" aria-label={`Fermer la notification : ${n.titre || t.mot}`} onClick={() => { surFermer(n.id); if (n.retour?.isConnected) n.retour.focus(); }}>
         <Icone nom="fermer" />
       </button>
     </div>
@@ -58,7 +58,8 @@ export function ZoneNotifications({ children }) {
   const [liste, setListe] = useState([]);
   const compteur = useRef(0);
   const fermer = useCallback((id) => setListe((l) => l.filter((n) => n.id !== id)), []);
-  const notifier = useCallback((n) => { const id = ++compteur.current; setListe((l) => [...l, { ...n, id }]); return id; }, []);
+  // retour : l'élément qui avait le focus à l'appel ; il le reprend quand la notification est fermée par son bouton
+  const notifier = useCallback((n) => { const id = ++compteur.current; setListe((l) => [...l, { retour: document.activeElement, ...n, id }]); return id; }, []);
   const zone = (mode, filtre) => (
     <div className="k-toasts__live" aria-live={mode} aria-atomic="false">
       {liste.filter(filtre).map((n) => <Notification key={n.id} n={n} surFermer={fermer} />)}

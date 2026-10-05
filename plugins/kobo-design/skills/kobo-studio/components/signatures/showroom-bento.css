@@ -52,3 +52,18 @@
   .k-btn, .k-card--link, .k-nav__link { transition: none; }
   .k-btn:hover, .k-card--link:hover, .k-nav__link:hover { translate: none; }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pages en pilules blanches, la courante en noir ; tableau et menu en tuile blanche sans cadre.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { color: var(--k-text); background: var(--k-surface); border-color: transparent; border-radius: var(--k-radius-pill); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { background: var(--k-surface-2); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-on-accent); background: var(--k-accent); font-weight: inherit; }
+  &.k-table, &.k-dropdown__menu { background: var(--k-surface); border-color: transparent; }
+  &.k-table thead th { background: transparent; }
+  &.k-dropdown__item { border-radius: var(--k-radius-pill); }
+}

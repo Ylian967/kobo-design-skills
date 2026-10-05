@@ -59,3 +59,26 @@
   &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); border-inline-end: var(--k-border-w) solid var(--k-text); }
   &.k-progress__track { border-color: var(--k-text); }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pagination dans une pilule noire, la page courante cerclée de lime ; tableau et menu à liseré lime ; champ sombre.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-table thead th { font-family: var(--k-font-display); }
+  &.k-pagination__list { padding: var(--k-space-1) var(--k-space-3); background: var(--k-text); border-radius: var(--k-radius-pill); }
+  &.k-pagination__page { color: var(--k-sig-soft); border-width: calc(var(--k-border-w) * 2); border-radius: var(--k-radius-pill); }
+  &.k-pagination__gap { color: var(--k-sig-soft); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { color: var(--k-surface); background: transparent; }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-surface); background: transparent; border-color: var(--k-accent); font-weight: inherit; }
+  &.k-pagination__page:is(:focus-visible, [data-k-state="focus"]) { outline-color: var(--k-accent); }
+  &.k-table, &.k-dropdown__menu { border-color: transparent; border-block-end: var(--k-sig-underline) solid var(--k-accent); }
+  &.k-table { background: var(--k-surface); }
+  &.k-select__box::after { color: var(--k-text-inverse); }
+  /* sélection : le chevron suit le champ en pilule ; la liste ouverte garde des coins larges */
+  &.k-select__control:not(:disabled) { padding-inline-end: calc(var(--k-space-8) + var(--k-space-4)); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-6); }
+  &.k-select__control[multiple]:not(:disabled) { padding-inline: var(--k-space-2); border-radius: var(--k-radius-lg); }
+}

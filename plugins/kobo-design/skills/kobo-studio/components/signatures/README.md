@@ -30,6 +30,8 @@ Une couche par skill : `signatures/<id-du-skill>.css`, chargée en dernier. Rien
 | `tiny-planet-toy.css` | bouton-bloc jaune penché à tranche ; bloc crème ; étiquette bleue cernée et tournée ; fiches, onglets et champs cernés à ombre décalée, l'actif en jaune | la planète en 3D, le logo en lettres-blocs, le texte qui s'écrit |
 | `zigzag-snack-pop.css` | bouton jaune à ombre dure et chevron ; bouton blanc cerné ; barre brune ; pilule blanche à pastille orange ; photo dans un cadre blanc ; champ à ombre dure | les dents de scie, le titre géant, la photo-autocollant penchée |
 
+**Second lot** (sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination, fil d'Ariane, info-bulle, menu déroulant) : chaque couche se termine par un bloc qui reporte sur ces composants ce qu'elle fait déjà sur les premiers (les onglets donnent la pagination, le champ la sélection, la carte et les panneaux le tableau et le menu, les étiquettes les en-têtes de tableau, les titres l'accordéon). Aucun ornement nouveau, aucun mouvement.
+
 Chaque fichier cite en tête les passages du skill dont il part (`SKILL.md`, `references/components.md`, `references/motion.md`). **Rien n'y est inventé** : un ornement absent du skill n'entre pas dans sa couche.
 
 ## Intensité
@@ -78,7 +80,7 @@ Limite : on resserre l'intensité en descendant dans la page. Un bloc `full` pla
 ## Écrire la couche d'un autre skill
 
 1. Relire son `SKILL.md`, `references/components.md` et `references/motion.md`.
-2. Lister ce qui se traduit sur les dix composants, et ce qui n'en relève pas (mise en page, image, script) : le noter en tête du fichier.
+2. Lister ce qui se traduit sur les composants, et ce qui n'en relève pas (mise en page, image, script) : le noter en tête du fichier.
 3. Renseigner dans sa fiche `--k-btn-case`, `--k-btn-tracking`, `--k-label-case` et `--k-img-filter` (lignes `[main]`).
 4. Écrire les deux blocs, ajouter l'identifiant à `LAYERS` dans `gallery.html`.
 5. `python3 tools/check_components.py`, puis comparer la galerie à `examples/demo.html` du skill : « si je cache le nom, est-ce que je reconnais la démo ? »

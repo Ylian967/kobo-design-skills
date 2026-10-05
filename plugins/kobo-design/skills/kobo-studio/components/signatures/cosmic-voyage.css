@@ -41,3 +41,19 @@
   /* Seuls les textes posés sur le verre clair prennent son encre : la valeur saisie reste claire sur le champ sombre */
   &.k-modal__body :is(.k-field__label, .k-field__help, .k-field__count) { color: var(--k-sig-ink-glass); }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : filets dorés et coin unique sur le tableau et le menu ; page courante dorée soulignée ; étoile entre les niveaux.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-table, &.k-dropdown__menu { border-color: color-mix(in srgb, var(--k-accent-2) 45%, transparent); border-radius: var(--k-sig-radius-card); }
+  &.k-table thead th, &.k-dropdown__label { color: var(--k-accent-2); }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent-2); }
+  &.k-pagination__page { border-radius: 0; }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-accent-2); background: transparent; border-color: transparent; border-block-end-color: var(--k-accent-2); }
+  &.k-crumbs li + li::before { content: "✦"; }
+  &.k-tooltip__bubble { border: var(--k-border-w) solid color-mix(in srgb, var(--k-accent-2) 45%, transparent); }
+}

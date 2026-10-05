@@ -71,7 +71,7 @@ Déclencheur : `<button type="button" data-k-modal-open="id">`. Fermeture : `dat
 ```jsx
 <Modale ouverte={ouverte} surFermer={(valeur) => { setOuverte(false); if (valeur === 'annule') annuler(); }}
         titre="Annuler la réservation ?" alerte
-        pied={<><Bouton variante="secondary" autoFocus onClick={() => setOuverte(false)}>Garder ma place</Bouton>
+        pied={<><Bouton variante="secondary" data-k-autofocus onClick={() => setOuverte(false)}>Garder ma place</Bouton>
                 <Bouton variante="danger" onClick={annuler}>Oui, annuler</Bouton></>}>
   Votre place sera rendue. Le remboursement est intégral jusqu'à sept jours avant la sortie.
 </Modale>

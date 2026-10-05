@@ -6,7 +6,8 @@ import { Icone } from '../Icone.jsx';
 /**
  * ouverte, surFermer(valeur) : état piloté par le parent ; valeur = returnValue du dialog
  * titre : nom accessible (obligatoire)
- * pied : boutons d'action ; mettre autoFocus sur l'action la moins risquée
+ * pied : boutons d'action ; poser data-k-autofocus sur l'action la moins risquée : elle reçoit le focus à l'ouverture
+ *        (autoFocus ne suffit pas : React ne le rejoue pas quand la fenêtre se rouvre)
  * alerte : role="alertdialog" (confirmation) — le clic sur le voile ne ferme alors jamais
  * fermableParLeVoile : un clic hors de la modale la ferme
  * large : variante k-modal--wide
@@ -23,6 +24,8 @@ export function Modale({ ouverte, surFermer, titre, pied, alerte = false, fermab
       declencheur.current = document.activeElement;
       modale.returnValue = '';
       modale.showModal();
+      // React ne rend pas l'attribut autofocus : l'action à viser au départ porte data-k-autofocus
+      modale.querySelector('[data-k-autofocus]')?.focus();
     } else if (!ouverte && modale.open) {
       modale.close();
     }

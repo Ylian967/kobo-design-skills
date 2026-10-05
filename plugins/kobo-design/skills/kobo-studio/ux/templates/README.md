@@ -15,7 +15,18 @@ Chaque **famille** est construite une fois (`<famille>/<famille>.css` et `.js`),
 | `objet/` | `hero` | Objet 3D à la place d'honneur du héros, qu'on tourne en le tirant ou avec deux boutons ; repli sur la photo | tiny-planet-toy (la planète) ; pocket-device-noir (l'appareil, accueilli par son héros photo : `F.objet.models`, `F.objet.mount`) |
 | `chapitre-ecran/` | `chapter` | Chapitre en scène de la hauteur de l'écran, cercle à tirer vers le suivant | noir-inferno-chapters |
 | `formes-inclinees/` | `chapter` | Bloc numéroté, panneau à image découpée et bande, penchés au même angle | hyper-lime-street |
-| `titre-geant/` | `title` | Le surtitre repris en très grand, d'un bord à l'autre, coupé par le bas | nocturne-architecture |
+| `titre-geant/` | `title` | Un mot choisi, repris en très grand, d'un bord à l'autre, coupé par le bas (voir « Mots géants ») | nocturne-architecture |
+
+## Mots géants
+
+Vaut pour `titre-geant` (titres de section) et pour le mot du héros de nocturne-architecture.
+
+- **Le mot géant est choisi exprès** : le nom du projet, ou un mot-clé de la section. Jamais un mot pris automatiquement dans un titre.
+- **Pas d'article, pas de mot vide** : « lieu », pas « le » ; « tarifs », pas « nos ». Trois lettres au moins.
+- **D'où il vient** : `data-k-word="…"` posé sur le titre (`<h2 data-k-word="lieu">`) ou sur son surtitre ; à défaut le surtitre (`k-kicker`), dont les articles de tête sont retirés. Pour le héros : `data-k-word` sur le `<h1>`, à défaut le premier mot du nom du projet dans la barre.
+- **Rien à agrandir, rien d'agrandi** : sans surtitre ni `data-k-word`, ou avec un mot de moins de trois lettres, le titre reste neutre.
+- **Tailles cohérentes entre sections** : chaque mot va d'un bord à l'autre de son bloc, mais aucun ne dépasse une fois et demie le plus petit de la page. Choisir des mots de longueur voisine (4 à 9 lettres) : un mot très long rapetisse tous les autres.
+- `check_studio.py` signale en alerte un mot géant de moins de trois lettres ou réduit à un mot vide.
 
 ## Intensité
 
@@ -103,3 +114,21 @@ Puis `../structures.html` : sélecteur « Gabarits : signature / neutres ».
 - Testé dans Chrome seulement. `tan()`, `:has()`, l'imbrication de `color-mix()` et `import()` dynamique demandent un navigateur récent.
 - La scène 3D charge three.js depuis un CDN : hors ligne, la photo de repli reste.
 - Voir `../../quality/relecture-etape-4b.md` pour les verdicts et ce qui reste incertain.
+
+## En React
+
+`Gabarits.jsx` pose dans un emplacement rendu par React les gabarits écrits pour les pages HTML : mêmes fichiers, donc aucun écart possible entre les deux. `kit.py … --react` écrit les imports dans l'ordre (feuilles avant la couche de signature ; puis `gabarits.js`, chaque famille, l'habillage du skill).
+
+```jsx
+import { gabarits } from './kobo/kobo-studio/ux/templates/Gabarits.jsx';
+<LandingProduit … emplacements={gabarits('nocturne-architecture')} />
+```
+
+| | |
+|---|---|
+| Essayé dans un navigateur | `hero-photo` (20 skills) et `objet` (pocket-device-noir, tiny-planet-toy), dans la landing et l'accueil du site vitrine, à 1440 et 390 px, en `full`, `reduced`, `off`, sous `prefers-reduced-motion` et sous `StrictMode` |
+| Non essayé | `cadre`, `titre-geant`, `image`, `chapitre-ecran`, `formes-inclinees`, `scene` : ils passent par le même chemin avec `gabarits(skill, { familles: [...] })`, sans garantie |
+| Repli | l'emplacement rend d'abord son contenu neutre ; le gabarit ne le remplace que s'il se pose. Pas de photo dans le héros, intensité `off`, skill sans gabarit, échec du gabarit : le contenu neutre reste, entier. Objet 3D sans WebGL ou sans réseau : la photo reste seule |
+| Photo dont l'adresse est morte | comme en HTML : le gabarit se pose, l'image est marquée `data-k-broken`, le fond et le texte restent |
+| Props qui changent | le gabarit tient les éléments du héros (mêmes nœuds, écouteurs React compris) et peut en découper le texte. Quand le contenu des parts change (texte, image, lien), ou `data-k-intensity` / `data-k-skill` sur `<html>`, l'emplacement est remonté et le gabarit reposé : la page affiche toujours les props en cours. L'entrée du gabarit rejoue alors |
+

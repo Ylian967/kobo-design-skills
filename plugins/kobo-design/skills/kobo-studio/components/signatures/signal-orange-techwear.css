@@ -52,3 +52,18 @@
 :not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
   &:is(.k-btn, .k-tabs__tab) { transition-timing-function: var(--k-sig-ease-cut); }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pages à contour orange, la courante pleine ; tableau et menu en panneau à halo ; en-têtes orange espacés.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { color: var(--k-text); border-color: var(--k-accent); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { background: var(--k-sig-panel-hot); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-on-accent); background: var(--k-accent); }
+  &.k-table, &.k-dropdown__menu { background: linear-gradient(0deg, var(--k-sig-panel-hot), transparent 55%), var(--k-surface); border-color: var(--k-line-strong); }
+  &.k-table thead th, &.k-dropdown__label { letter-spacing: var(--k-sig-ls-label); color: var(--k-accent); background: transparent; }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent); }
+}

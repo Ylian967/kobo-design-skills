@@ -76,3 +76,25 @@
   .k-btn::before, .k-nav__link::before, .k-card--link::before, .k-btn--crochets::before { transition: none; }
   .k-card--link:hover .k-card__media::after { animation: none; }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : mono partout ; tableau et menu sur le vert profond des cartes ; page courante cernée de jaune ; « > » du terminal entre les niveaux ; lignes du tableau en mono, comme le journal ; crochets d'angle autour du menu (§8, §9).
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-crumbs, &.k-table thead th, &.k-tooltip__bubble { font-family: var(--k-font-mono); }
+  &.k-table thead th { text-transform: uppercase; background: transparent; }
+  &.k-table { background: var(--k-surface-2); border-color: var(--k-sig-line-solid); }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent); }
+  &.k-dropdown__menu { background: var(--k-surface-2); border-color: var(--k-line-strong); }
+  &.k-pagination__page { border-radius: 0; }
+  &.k-pagination__page[aria-current="page"] { background: transparent; border-color: var(--k-accent); }
+  &.k-crumbs li + li::before { content: ">"; color: var(--k-accent); }
+  &.k-select__control { padding-inline-end: calc(var(--k-space-8) + var(--k-space-2)); }
+  /* relecture sur components.md */
+  &.k-table td, &.k-table tbody th { font-family: var(--k-font-mono); }
+  &.k-dropdown__menu::before { --_l: var(--k-space-3); content: ""; position: absolute; inset: calc(var(--k-space-1) * -1); pointer-events: none; border: var(--k-sig-bracket-w) solid var(--k-line-strong); clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, var(--_l) 0, var(--_l) var(--_l), 0 var(--_l), 0 calc(100% - var(--_l)), var(--_l) calc(100% - var(--_l)), var(--_l) 100%, calc(100% - var(--_l)) 100%, calc(100% - var(--_l)) calc(100% - var(--_l)), 100% calc(100% - var(--_l)), 100% var(--_l), calc(100% - var(--_l)) var(--_l), calc(100% - var(--_l)) 0, var(--_l) 0); }
+  &.k-dropdown__menu { border-color: var(--k-sig-line-solid); border-radius: 0; }
+}

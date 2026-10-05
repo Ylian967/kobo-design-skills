@@ -77,3 +77,26 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-nav__link::before, .k-btn--secondary::before { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pages en numéros de scène serif, la courante agrandie ; tableau en filets ; intitulés en capitales espacées ; pas de fond de bouton : survols par un filet tracé dessous ; menu sans boîte pleine, en petites capitales espacées ; fil d'Ariane en capitales.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { font-family: var(--k-font-display); font-size: var(--k-fs-h3); color: var(--k-text-muted); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { color: var(--k-text); background: transparent; }
+  &.k-pagination__page[aria-current="page"] { font-size: var(--k-fs-h2); color: var(--k-text); background: transparent; border-color: transparent; }
+  &.k-table { border-color: transparent; border-block-color: var(--k-line); border-radius: 0; }
+  &.k-table thead th { background: transparent; }
+  &.k-accordion--titles .k-accordion__trigger { text-transform: uppercase; letter-spacing: var(--k-sig-ls-quote); }
+  &.k-dropdown__menu { border-color: var(--k-line); }
+  /* relecture sur components.md */
+  &.k-dropdown__menu { background: var(--k-bg); border-color: var(--k-line); border-radius: 0; }
+  &.k-dropdown__item { font-size: max(var(--k-fs-small), var(--k-fs-min)); text-transform: uppercase; letter-spacing: var(--k-ls-caps); border-radius: 0; }
+  &.k-dropdown__item:not([aria-disabled="true"]):is(:hover, :focus-visible, [data-k-state="hover"], [data-k-state="focus"]) { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { text-decoration: underline; text-underline-offset: var(--k-space-1); }
+  &.k-crumbs { text-transform: uppercase; letter-spacing: var(--k-ls-caps); }
+}

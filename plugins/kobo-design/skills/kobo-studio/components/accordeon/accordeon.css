@@ -1,0 +1,35 @@
+/*
+ * kobo-studio — accordéon
+ * Rôles lus : text, text-2, text-muted, surface, line, line-strong, focus*, font-body, font-display, fw-display, fs-body, fs-h3,
+ * lh-body, lh-tight, border-w, hit-min, space-*, dur-fast, ease-out.
+ */
+.k-accordion { min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); border-block-start: var(--k-border-w) solid var(--k-line-strong); }
+.k-accordion__item { border-block-end: var(--k-border-w) solid var(--k-line); }
+.k-accordion__head { margin: 0; font: inherit; }
+.k-accordion__trigger {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--k-space-4); inline-size: 100%; min-block-size: max(var(--k-hit-min), var(--k-space-12)); margin: 0; padding: var(--k-space-3) 0;
+  font: inherit; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text); text-align: start; cursor: pointer; background: transparent; border: 0;
+  transition: background-color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-accordion__trigger:hover, .k-accordion__trigger[data-k-state="hover"] { background: var(--k-surface); }
+/* Le contour de focus est tracé vers l'intérieur : il ne déborde pas sur la ligne voisine */
+.k-accordion__trigger:focus-visible, .k-accordion__trigger[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: calc(var(--k-focus-w) * -1); }
+/* Le signe : un plus qui devient un moins. Deux barres de la couleur du texte. */
+.k-accordion__mark { flex: none; position: relative; inline-size: var(--k-space-4); block-size: var(--k-space-4); margin-inline-end: var(--k-space-1); }
+.k-accordion__mark::before, .k-accordion__mark::after {
+  content: ""; position: absolute; inset-block-start: 50%; inset-inline-start: 0; inline-size: 100%; block-size: max(var(--k-border-w), calc(var(--k-space-1) / 2));
+  background: currentColor; transform: translateY(-50%); transition: transform var(--k-dur-fast) var(--k-ease-out);
+}
+.k-accordion__mark::after { transform: translateY(-50%) rotate(90deg); }
+/* Ouvert : le plus devient un moins ET le titre passe en gras */
+.k-accordion__trigger[aria-expanded="true"] { font-weight: bolder; }
+.k-accordion__trigger[aria-expanded="true"] .k-accordion__mark::after { transform: translateY(-50%) rotate(0deg); }
+.k-accordion__trigger:disabled, .k-accordion__trigger[aria-disabled="true"] { color: var(--k-text-muted); cursor: not-allowed; background: transparent; }
+.k-accordion__panel { padding: 0 0 var(--k-space-6); max-inline-size: var(--k-measure-wide); font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text-2); }
+.k-accordion__panel[hidden] { display: none; }
+.k-accordion__panel > :first-child { margin-block-start: 0; }
+.k-accordion__panel > :last-child { margin-block-end: 0; }
+/* Variante à titres : les intitulés prennent la police de titre du skill */
+.k-accordion--titles .k-accordion__trigger { font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: var(--k-lh-tight); padding-block: var(--k-space-4); }
+
+@media (prefers-reduced-motion: reduce) { .k-accordion__trigger, .k-accordion__mark::before, .k-accordion__mark::after { transition: none; } }

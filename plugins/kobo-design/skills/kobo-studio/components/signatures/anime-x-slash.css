@@ -51,3 +51,25 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-card--link .k-card__media img { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : police de titre ; angles droits ; page courante en noir ; en-tête de tableau noir à bord haut rouge ; survol rouge dans le menu.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-table thead th, &.k-accordion--titles .k-accordion__trigger { font-family: var(--k-font-display); text-transform: uppercase; }
+  &.k-pagination__page { color: var(--k-text); border-color: var(--k-text); border-radius: 0; }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-text-inverse); background: var(--k-bg-inverse); font-weight: inherit; }
+  &.k-table { border-color: var(--k-text); border-block-start: var(--k-space-1) solid var(--k-accent); border-radius: 0; }
+  &.k-table thead th { color: var(--k-text-inverse); background: var(--k-bg-inverse); }
+  &.k-table thead th .k-table__sort:is(:hover, [data-k-state="hover"]) { color: var(--k-on-accent); background: var(--k-accent); }
+  th[aria-sort]&:is([aria-sort="ascending"], [aria-sort="descending"]) { color: var(--k-text-inverse); }
+  &.k-table thead th .k-table__arrow, &.k-table thead th .k-table__arrow::before, &.k-table thead th .k-table__arrow::after { color: inherit; }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent); }
+  &.k-dropdown__menu, &.k-tooltip__bubble, &.k-check__box { border-radius: 0; }
+  &.k-dropdown__menu { border-color: var(--k-text); }
+  &.k-dropdown__item { border-radius: 0; }
+  &.k-dropdown__item:not([aria-disabled="true"]):is(:hover, :focus-visible, [data-k-state="hover"], [data-k-state="focus"]) { color: var(--k-on-accent); background: var(--k-accent); }
+}

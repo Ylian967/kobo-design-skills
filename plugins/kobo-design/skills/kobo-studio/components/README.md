@@ -1,6 +1,6 @@
-# Composants kobo-studio — premier lot
+# Composants kobo-studio
 
-Dix composants de base, neutres : ils ne lisent que les rôles `--k-*` du contrat (`../contract/`) et prennent donc l'apparence du skill dont la fiche est chargée. Aucune couleur, taille, rayon ni durée écrite en dur.
+Vingt composants de base (deux lots de dix), neutres : ils ne lisent que les rôles `--k-*` du contrat (`../contract/`) et prennent donc l'apparence du skill dont la fiche est chargée. Aucune couleur, taille, rayon ni durée écrite en dur.
 
 | Dossier | Composant | Classe | Script | React |
 |---|---|---|---|---|
@@ -14,6 +14,16 @@ Dix composants de base, neutres : ils ne lisent que les rôles `--k-*` du contra
 | `notification/` | Notification (toast) | `k-toast` | `notification.js` | `Notification.jsx` |
 | `etat-vide/` | État vide | `k-empty` | — | `EtatVide.jsx` |
 | `chargement/` | Squelette et barre de progression | `k-skeleton`, `k-progress` | `chargement.js` | `Chargement.jsx` |
+| `selection/` | Liste déroulante native (dépend de `champ`) | `k-select` | — | `Selection.jsx` |
+| `case-a-cocher/` | Case à cocher et groupe de cases | `k-check`, `k-check-group` | `case-a-cocher.js` (partielle, tout cocher) | `CaseACocher.jsx` |
+| `bouton-radio/` | Groupe de boutons radio | `k-radio`, `k-radio-group` | — | `BoutonRadio.jsx` |
+| `interrupteur/` | Réglage appliqué tout de suite | `k-switch` | `interrupteur.js` | `Interrupteur.jsx` |
+| `tableau/` | Tableau de données : tri, lignes sélectionnées, état vide | `k-table` | `tableau.js` | `Tableau.jsx` |
+| `accordeon/` | Panneaux repliables | `k-accordion` | `accordeon.js` | `Accordeon.jsx` |
+| `pagination/` | Pages d'une liste | `k-pagination` | `pagination.js` (version pilotée) | `Pagination.jsx` |
+| `fil-ariane/` | Fil d'Ariane | `k-crumbs` | `fil-ariane.js` (repli) | `FilAriane.jsx` |
+| `info-bulle/` | Précision au survol et au focus | `k-tooltip` | `info-bulle.js` | `InfoBulle.jsx` |
+| `menu-deroulant/` | Menu d'actions ou de choix | `k-dropdown` | `menu-deroulant.js` | `MenuDeroulant.jsx` |
 | `signatures/` | Couches de signature : une par skill (23 sur 23) | mêmes classes | — | rien à ajouter |
 
 Chaque dossier a son `README.md` : rôle, anatomie, états, clavier, accessibilité, variantes, exemple.
@@ -28,7 +38,7 @@ Chaque dossier a son `README.md` : rôle, anatomie, états, clavier, accessibili
 <script src="components/modale/modale.js"></script>                <!-- scripts classiques : fonctionnent en file:// -->
 ```
 
-Les scripts s'accrochent à `window.Kobo` (`Kobo.field`, `Kobo.nav`, `Kobo.menu`, `Kobo.modal`, `Kobo.tabs`, `Kobo.toast`, `Kobo.progress`) et s'activent seuls sur le balisage présent au chargement. Les versions React n'utilisent pas ces scripts : elles portent le même comportement.
+Les scripts s'accrochent à `window.Kobo` (`Kobo.field`, `Kobo.nav`, `Kobo.menu`, `Kobo.modal`, `Kobo.tabs`, `Kobo.toast`, `Kobo.progress`, `Kobo.check`, `Kobo.switch`, `Kobo.table`, `Kobo.accordion`, `Kobo.pagination`, `Kobo.crumbs`, `Kobo.tooltip`, `Kobo.dropdown`) et s'activent seuls sur le balisage présent au chargement. Les versions React n'utilisent pas ces scripts : elles portent le même comportement.
 
 `socle.css` fournit : `k-sr-only`, `k-icon`, le ton inversé (`data-k-tone="inverse"` sur un bloc : les composants qu'il contient lisent la paire inversée du skill) et le blocage du défilement sous une modale.
 

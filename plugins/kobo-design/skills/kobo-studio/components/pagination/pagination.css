@@ -1,0 +1,26 @@
+/*
+ * kobo-studio — pagination
+ * Rôles lus : text, text-2, text-muted, surface, surface-2, line, line-strong, focus*, font-body, fs-small, fs-min, lh-body,
+ * radius, border-w, hit-min, space-*, btn-case, btn-tracking, dur-fast, ease-out.
+ * « Précédent » et « Suivant » sont des boutons du composant bouton (k-btn k-btn--secondary) : charger bouton/bouton.css.
+ */
+.k-pagination { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-3) var(--k-space-4); min-inline-size: 0; font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text); }
+.k-pagination__list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-1); margin: 0; padding: 0; list-style: none; }
+.k-pagination__page {
+  display: inline-flex; align-items: center; justify-content: center; min-inline-size: var(--k-hit-min); min-block-size: var(--k-hit-min); margin: 0; padding: 0 var(--k-space-2);
+  font: inherit; font-variant-numeric: tabular-nums; line-height: var(--k-lh-body); color: var(--k-text-2); text-decoration: none; cursor: pointer;
+  background: transparent; border: var(--k-border-w) solid transparent; border-radius: var(--k-radius);
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-pagination__page:hover, .k-pagination__page[data-k-state="hover"] { color: var(--k-text); background: var(--k-surface); }
+.k-pagination__page:focus-visible, .k-pagination__page[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Page courante : cadre, fond ET graisse ; jamais la couleur seule */
+.k-pagination__page[aria-current="page"] { color: var(--k-text); font-weight: bolder; background: var(--k-surface-2); border-color: var(--k-line-strong); cursor: default; }
+.k-pagination__gap { display: inline-flex; align-items: center; justify-content: center; min-inline-size: var(--k-space-6); color: var(--k-text-muted); }
+.k-pagination__status { margin: 0; margin-inline-start: auto; color: var(--k-text-2); font-variant-numeric: tabular-nums; }
+/* Version courte, pour les écrans étroits ou les longues listes : seulement Précédent, « Page 3 sur 12 », Suivant */
+.k-pagination--compact .k-pagination__list { display: none; }
+.k-pagination--compact .k-pagination__status { margin-inline: 0; }
+.k-pagination[aria-busy="true"] .k-pagination__page { cursor: progress; }
+
+@media (prefers-reduced-motion: reduce) { .k-pagination__page { transition: none; } }

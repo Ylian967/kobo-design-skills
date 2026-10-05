@@ -53,3 +53,23 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-btn--secondary::before { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : sans d'interface pour les réglages ; intitulés d'accordéon en or ; page courante cerclée d'or ; panneaux arrondis sur voile.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-crumbs, &.k-table thead th, &.k-tooltip__bubble, &.k-check, &.k-radio, &.k-switch { font-family: var(--k-sig-font-ui); }
+  &.k-accordion--titles .k-accordion__trigger { color: var(--k-accent); }
+  &.k-pagination__page { border-radius: var(--k-radius-pill); }
+  &.k-pagination__page[aria-current="page"] { background: transparent; border-color: var(--k-accent); }
+  &.k-table { background: var(--k-sig-veil-2); border-color: transparent; border-radius: var(--k-radius-lg); }
+  &.k-table thead th { background: transparent; }
+  &.k-dropdown__menu, &.k-tooltip__bubble { border-radius: var(--k-radius-lg); }
+  /* sélection : le chevron suit le champ en pilule ; la liste ouverte garde des coins larges */
+  &.k-select__control:not(:disabled) { padding-inline-end: calc(var(--k-space-8) + var(--k-space-4)); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-6); }
+  &.k-select__control[multiple]:not(:disabled) { padding-inline: var(--k-space-2); border-radius: var(--k-radius-lg); }
+}

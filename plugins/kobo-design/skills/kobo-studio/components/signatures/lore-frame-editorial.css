@@ -74,3 +74,27 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-btn::before { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : mono ; page et niveau courants marqués du carré plein ; intitulés en capitales serrées ; accordéon en micro-labels mono (§17, « OREILLE + ») ; carré plein devant les en-têtes (§3) ; menu : survol en bloc inversé, choix coché sur citron (§14).
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-crumbs, &.k-table thead th, &.k-tooltip__bubble { font-family: var(--k-font-mono); }
+  &.k-pagination__page { color: var(--k-text-muted); border-radius: 0; }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { color: var(--k-text); background: transparent; }
+  &.k-pagination__page[aria-current="page"] { gap: var(--k-space-2); color: var(--k-text); background: transparent; border-color: transparent; }
+  &.k-pagination__page[aria-current="page"]::before, &.k-crumbs [aria-current="page"]::before { content: ""; display: inline-block; flex: none; inline-size: var(--k-space-2); block-size: var(--k-space-2); margin-inline-end: var(--k-space-1); background: currentColor; }
+  &.k-table, &.k-dropdown__menu { border-color: var(--k-line); }
+  &.k-table thead th { color: var(--k-text); letter-spacing: var(--k-btn-tracking); background: transparent; }
+  &.k-accordion--titles .k-accordion__trigger { text-transform: uppercase; letter-spacing: var(--k-ls-display); }
+  /* relecture sur components.md */
+  &.k-accordion__trigger { font-family: var(--k-font-mono); font-size: max(var(--k-fs-small), var(--k-fs-min)); text-transform: uppercase; letter-spacing: var(--k-btn-tracking); }
+  &.k-accordion--titles .k-accordion__trigger { font-family: var(--k-font-display); font-size: var(--k-fs-h3); }
+  &.k-table thead th:not(.k-table__check)::before { content: ""; display: inline-block; inline-size: var(--k-space-1); block-size: var(--k-space-1); margin-inline-end: var(--k-space-2); background: currentColor; vertical-align: middle; }
+  &.k-check__box, &.k-dropdown__item { border-radius: 0; }
+  &.k-dropdown__item:not([aria-disabled="true"]):is(:hover, :focus-visible, [data-k-state="hover"], [data-k-state="focus"]) { color: var(--k-bg); background: var(--k-text); outline-color: var(--k-bg); }
+  &.k-dropdown__item[aria-checked="true"]:not(:hover, :focus-visible, [data-k-state]) { color: var(--k-text); background: var(--k-accent-2); }
+}

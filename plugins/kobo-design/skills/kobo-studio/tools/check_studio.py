@@ -86,6 +86,9 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
 
 
+EMPTY_WORDS = {"le", "la", "les", "un", "une", "des", "du", "de", "au", "aux", "et", "ou", "en", "sur", "pour", "nos", "notre", "vos", "votre", "mes", "mon", "ma", "ses", "son", "sa", "ce", "cet", "cette", "ces", "the", "of", "and"}
+
+
 def find_browser():
     env = os.environ.get("KOBO_CHROME")
     names = ["google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "chrome", "chrome-headless-shell", "msedge"]
@@ -247,6 +250,11 @@ def browse(page, w, h, browser, out_dir, quick, prefix=""):
         for s in doc.get("series", []):
             notes.append(f"ALERTE anti-slop (K2, F1) — {page} : {s['count']} éléments de même forme côte à côte dans {s['where']} (« {s['first']} »…) : "
                          "une liste est une liste ; des cartes seulement si chacune a une image et une destination, l'une mise en avant")
+        for word in doc.get("giants", []):
+            letters = re.sub(r"[^A-Za-zÀ-ÿ0-9]", "", word)
+            if len(letters) < 3 or word.lower() in EMPTY_WORDS:
+                notes.append(f"ALERTE anti-slop (Y2) — {page} : mot géant « {word} » ({len(letters)} lettre(s)) : un mot géant est le nom du projet ou un mot-clé "
+                             "choisi exprès (data-k-word), jamais un article ni un mot vide")
         if doc["eager"]:
             notes.append(f"{page} : {doc['eager']} image(s) sous le premier écran sans loading=\"lazy\" (performance)")
         notes.append(f"{page} : {weight[1]} fichier(s) locaux, {weight[0] / 1024:.0f} Ko servis au premier écran (hors polices et images distantes)"

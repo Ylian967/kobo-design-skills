@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>kobo-studio — galerie des composants</title>
-<!-- Galerie des composants : les dix composants dans tous leurs états, sous chacun des 23 skills.
+<!-- Galerie des composants : les vingt composants dans tous leurs états, sous chacun des 23 skills.
      S'ouvre directement depuis le disque (file://) dans Chrome ; une connexion est nécessaire pour les polices et les photos.
      Les données affichées (Cordée Brume, sorties, prix, personnes) sont fictives. -->
 <link rel="stylesheet" href="../contract/roles.css">
@@ -20,6 +20,16 @@
 <link rel="stylesheet" href="notification/notification.css">
 <link rel="stylesheet" href="etat-vide/etat-vide.css">
 <link rel="stylesheet" href="chargement/chargement.css">
+<link rel="stylesheet" href="selection/selection.css">
+<link rel="stylesheet" href="case-a-cocher/case-a-cocher.css">
+<link rel="stylesheet" href="bouton-radio/bouton-radio.css">
+<link rel="stylesheet" href="interrupteur/interrupteur.css">
+<link rel="stylesheet" href="tableau/tableau.css">
+<link rel="stylesheet" href="accordeon/accordeon.css">
+<link rel="stylesheet" href="pagination/pagination.css">
+<link rel="stylesheet" href="fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="info-bulle/info-bulle.css">
+<link rel="stylesheet" href="menu-deroulant/menu-deroulant.css">
 <!-- Couche de signature du skill choisi : chargée par le script si elle existe (signatures/<id>.css) -->
 <link rel="stylesheet" id="sig">
 <style>
@@ -30,26 +40,26 @@ body { margin: 0; font-family: var(--k-font-body); font-size: var(--k-fs-body); 
 
 .g-bar { position: sticky; inset-block-start: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-4); padding: var(--k-space-2) var(--k-edge); border-block-end: var(--k-border-w) solid var(--k-line); }
 .g-bar strong { margin-inline-end: auto; font-family: var(--k-font-display); font-weight: var(--k-fw-display); }
-.g-bar span { font-size: var(--k-fs-small); }
-.g-bar label { display: flex; align-items: center; gap: var(--k-space-2); font-size: var(--k-fs-small); }
+.g-bar span { font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+.g-bar label { display: flex; align-items: center; gap: var(--k-space-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); }
 .g-bar select { min-block-size: var(--k-hit-min); max-inline-size: 100%; padding: 0 var(--k-space-3); font: inherit; color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
 .g-bar select:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
 
 main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--k-edge) var(--k-section-y); max-inline-size: calc(var(--k-space-32) * 11); margin-inline: auto; }
 .g-intro { display: grid; gap: var(--k-space-4); }
 .g-intro h1 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); letter-spacing: var(--k-ls-display); overflow-wrap: anywhere; }
-.g-intro p { margin: 0; max-inline-size: calc(var(--k-space-32) * 5); color: var(--k-text-2); }
-.g-notice { display: flex; gap: var(--k-space-3); align-items: flex-start; padding: var(--k-space-4); font-size: var(--k-fs-small); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.g-intro p { margin: 0; max-inline-size: var(--k-measure); color: var(--k-text-2); }
+.g-notice { display: flex; gap: var(--k-space-3); align-items: flex-start; padding: var(--k-space-4); font-size: max(var(--k-fs-small), var(--k-fs-min)); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
 
 .g-sec { display: grid; gap: var(--k-space-8); min-inline-size: 0; }
 .g-sec > header { display: grid; gap: var(--k-space-2); padding-block-end: var(--k-space-4); border-block-end: var(--k-border-w) solid var(--k-line-strong); }
 .g-sec h2 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h2); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); letter-spacing: var(--k-ls-display); overflow-wrap: anywhere; }
-.g-sec > header p { margin: 0; max-inline-size: calc(var(--k-space-32) * 5); font-size: var(--k-fs-small); color: var(--k-text-2); }
+.g-sec > header p { margin: 0; max-inline-size: var(--k-measure); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
 .g-grp { display: grid; gap: var(--k-space-4); min-inline-size: 0; }
-.g-grp > h3 { margin: 0; font-family: var(--k-font-mono); font-size: var(--k-fs-label); font-weight: normal; letter-spacing: var(--k-ls-caps); text-transform: uppercase; color: var(--k-text-muted); }
+.g-grp > h3 { margin: 0; font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: normal; letter-spacing: var(--k-ls-caps); text-transform: uppercase; color: var(--k-text-muted); }
 .g-row { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--k-space-6) var(--k-space-8); }
 .g-item { display: grid; gap: var(--k-space-2); justify-items: start; }
-.g-cap { font-family: var(--k-font-mono); font-size: var(--k-fs-small); color: var(--k-text-muted); }
+.g-cap { font-family: var(--k-font-mono); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
 .g-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))), 1fr)); gap: var(--k-space-8) var(--k-space-6); align-items: start; }
 .g-cols--wide { grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 3)), 1fr)); }
 .g-frame { border: var(--k-border-w) dashed var(--k-line); min-inline-size: 0; }
@@ -61,6 +71,8 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 .g-list { margin: 0; padding: 0; list-style: none; display: grid; }
 .g-list li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--k-space-2) var(--k-space-4); padding-block: var(--k-space-3); border-block-end: var(--k-border-w) solid var(--k-line); }
 .g-list span { color: var(--k-text-2); }
+/* menu déroulant figé ouvert : il reprend sa place dans le flux pour être regardé */
+#dd-fige .k-dropdown__menu { position: relative; inset: auto; inline-size: fit-content; }
 </style>
 </head>
 <body>
@@ -87,7 +99,7 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 <main id="haut">
   <div class="g-intro">
     <h1>Galerie des composants</h1>
-    <p>Les dix composants du premier lot, dans tous leurs états, dessinés avec les seuls rôles du contrat. Changez de skill et d'intensité dans la barre du haut : rien d'autre ne change que la fiche chargée.</p>
+    <p>Les vingt composants (premier et second lot), dans tous leurs états, dessinés avec les seuls rôles du contrat. Changez de skill et d'intensité dans la barre du haut : rien d'autre ne change que la fiche chargée.</p>
     <p class="g-notice"><svg class="k-icon" aria-hidden="true"><use href="#i-info"/></svg><span><b>Données fictives.</b> « Cordée Brume », ses sorties, ses prix et ses guides sont inventés pour la démonstration. Les photos sont de vraies photos libres de droits.</span></p>
   </div>
 
@@ -375,6 +387,324 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
   </section>
 
   <!-- ============ Signature et intensité ============ -->
+  <!-- ============ Second lot : sélection ============ -->
+  <section class="g-sec" id="selection">
+    <header><h2>Sélection</h2><p>La liste est celle du système : juste au doigt, au clavier et au lecteur d'écran. Elle prend l'apparence et les états du champ.</p></header>
+    <form class="g-cols" id="form-select" novalidate>
+      <div class="k-field k-select" data-k-validate>
+        <label class="k-field__label" for="s-niveau">Votre niveau</label>
+        <div class="k-field__box k-select__box">
+          <select class="k-field__control k-select__control" id="s-niveau" required aria-describedby="s-niveau-aide" data-k-msg="Choisissez un niveau : le guide en a besoin pour composer le groupe.">
+            <option value="">Choisir…</option><option>Jamais marché sur la neige</option><option>Quelques sorties en raquettes</option><option>Randonneur régulier</option><option>Ski de randonnée</option><option disabled>Alpinisme (complet)</option>
+          </select>
+        </div>
+        <p class="k-field__help" id="s-niveau-aide">Le guide adapte l'allure du groupe.</p>
+        <p class="k-field__error" id="s-niveau-erreur" hidden></p>
+      </div>
+      <div class="k-field k-select">
+        <label class="k-field__label" for="s-survol">Survol (figé)</label>
+        <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="s-survol" data-k-state="hover"><option>Chamonix</option><option>Les Contamines</option></select></div>
+      </div>
+      <div class="k-field k-select">
+        <label class="k-field__label" for="s-focus">Focus clavier (figé)</label>
+        <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="s-focus" data-k-state="focus"><option>Chamonix</option><option>Les Contamines</option></select></div>
+      </div>
+      <div class="k-field k-select">
+        <label class="k-field__label" for="s-erreur">Erreur</label>
+        <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="s-erreur" aria-invalid="true" aria-describedby="s-erreur-msg"><option value="">Choisir…</option><option>Samedi 17 janvier</option></select></div>
+        <p class="k-field__error" id="s-erreur-msg"><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez une date : sans elle, la demande ne peut pas partir.</span></p>
+      </div>
+      <div class="k-field k-select">
+        <label class="k-field__label" for="s-off">Désactivée</label>
+        <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="s-off" disabled aria-describedby="s-off-aide"><option>Refuge du Lac Blanc</option></select></div>
+        <p class="k-field__help" id="s-off-aide">Le refuge est imposé par la sortie choisie.</p>
+      </div>
+      <div class="k-field k-select">
+        <label class="k-field__label" for="s-charge">Chargement</label>
+        <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="s-charge" disabled aria-busy="true"><option>Chargement des dates…</option></select></div>
+      </div>
+      <div class="k-field k-select">
+        <label class="k-field__label" for="s-multi">Choix multiple</label>
+        <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="s-multi" multiple aria-describedby="s-multi-aide"><option selected>Raquettes</option><option>Bâtons</option><option selected>Duvet grand froid</option><option>Frontale</option></select></div>
+        <p class="k-field__help" id="s-multi-aide">Ctrl ou Maj pour étendre le choix.</p>
+      </div>
+      <div class="g-item"><button type="submit" class="k-btn">Vérifier la première liste</button><span class="g-cap">envoi sans choix → erreur écrite sous « Votre niveau »</span></div>
+    </form>
+  </section>
+
+  <!-- ============ Case à cocher ============ -->
+  <section class="g-sec" id="cases">
+    <header><h2>Case à cocher</h2><p>La coche prend la couleur du texte, pas l'accent : elle se lit sous tous les skills. La vraie case reste là, invisible, sur toute la zone cliquable.</p></header>
+    <div class="g-cols">
+      <fieldset class="k-check-group" aria-describedby="c-pret-aide">
+        <legend class="k-check-group__legend">Matériel à prêter</legend>
+        <div class="k-check-group__list">
+          <label class="k-check"><input type="checkbox" class="k-check__input" data-k-check-all="pret"><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Tout le matériel</span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" name="pret" value="raquettes" checked><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Raquettes</span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" name="pret" value="batons"><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Bâtons</span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" name="pret" value="duvet"><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Duvet grand froid<span class="k-check__help">Confort −15 °C</span></span></label>
+        </div>
+        <p class="k-check-group__help" id="c-pret-aide">Compris dans le prix. La première case coche tout, et devient partielle.</p>
+      </fieldset>
+      <div class="g-grp"><h3>États figés</h3>
+        <div class="g-stack">
+          <label class="k-check" data-k-state="hover"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Survol</span></label>
+          <label class="k-check" data-k-state="focus"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Focus clavier</span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" checked><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Cochée</span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" data-k-indeterminate><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Partielle</span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" disabled><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Désactivée<span class="k-check__help">Indisponible en février</span></span></label>
+          <label class="k-check"><input type="checkbox" class="k-check__input" disabled checked><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">Désactivée et cochée</span></label>
+        </div>
+      </div>
+      <fieldset class="k-check-group" aria-describedby="c-cgv-err">
+        <legend class="k-check-group__legend">Erreur</legend>
+        <div class="k-check-group__list">
+          <label class="k-check"><input type="checkbox" class="k-check__input" required aria-invalid="true" aria-describedby="c-cgv-err"><span class="k-check__box" aria-hidden="true"></span><span class="k-check__text">J'ai lu les conditions d'annulation</span></label>
+        </div>
+        <p class="k-check-group__error" id="c-cgv-err"><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Cochez la case pour continuer : l'annulation n'est remboursée que dans ces conditions.</span></p>
+      </fieldset>
+    </div>
+  </section>
+
+  <!-- ============ Bouton radio ============ -->
+  <section class="g-sec" id="radios">
+    <header><h2>Bouton radio</h2><p>Un seul choix parmi deux à cinq, tous visibles. Le choix se lit au point plein et à la graisse du libellé. Les flèches passent d'un choix à l'autre.</p></header>
+    <div class="g-cols">
+      <fieldset class="k-radio-group" aria-describedby="r-date-aide">
+        <legend class="k-radio-group__legend">Date de la sortie</legend>
+        <div class="k-radio-group__list">
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="date" value="17-01" checked><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Samedi 17 janvier</span><span class="k-radio__help">4 places</span></span></label>
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="date" value="24-01"><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Samedi 24 janvier</span><span class="k-radio__help">2 places</span></span></label>
+          <label class="k-radio k-radio--off"><input type="radio" class="k-radio__input" name="date" value="31-01" disabled><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Samedi 31 janvier</span><span class="k-radio__help">Complet</span></span></label>
+        </div>
+        <p class="k-radio-group__help" id="r-date-aide">Six places par sortie.</p>
+      </fieldset>
+      <div class="g-grp"><h3>États figés</h3>
+        <div class="g-stack">
+          <label class="k-radio" data-k-state="hover"><input type="radio" class="k-radio__input" name="fige-1"><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Survol</span></span></label>
+          <label class="k-radio" data-k-state="focus"><input type="radio" class="k-radio__input" name="fige-2"><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Focus clavier</span></span></label>
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="fige-3" checked><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Choisi</span></span></label>
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="fige-4" checked disabled><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Choisi, désactivé</span></span></label>
+        </div>
+      </div>
+      <fieldset class="k-radio-group k-radio-group--inline" aria-describedby="r-couchage-err">
+        <legend class="k-radio-group__legend">Couchage (en ligne, en erreur)</legend>
+        <div class="k-radio-group__list">
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="couchage" required aria-invalid="true"><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Tente</span></span></label>
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="couchage" required aria-invalid="true"><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Igloo</span></span></label>
+          <label class="k-radio"><input type="radio" class="k-radio__input" name="couchage" required aria-invalid="true"><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Refuge</span></span></label>
+        </div>
+        <p class="k-radio-group__error" id="r-couchage-err"><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez un couchage : le guide prépare le matériel en fonction.</span></p>
+      </fieldset>
+    </div>
+  </section>
+
+  <!-- ============ Interrupteur ============ -->
+  <section class="g-sec" id="interrupteurs">
+    <header><h2>Interrupteur</h2><p>Un réglage qui s'applique tout de suite. L'état se lit à trois signes : la position du curseur, le fond de la glissière et le mot écrit.</p></header>
+    <div class="g-cols">
+      <div class="g-stack">
+        <button type="button" class="k-switch k-switch--row" role="switch" aria-checked="true"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Rappel par e-mail la veille</span><span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span></button>
+        <button type="button" class="k-switch k-switch--row" role="switch" aria-checked="false"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Alerte météo par SMS</span><span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span></button>
+        <button type="button" class="k-switch k-switch--row" role="switch" aria-checked="false" data-k-async id="sw-async"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Partager mes photos avec le groupe</span><span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span></button>
+        <button type="button" class="k-switch k-switch--row" role="switch" aria-checked="false" data-k-async id="sw-fail"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Lettre mensuelle (l'enregistrement échoue)</span><span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span></button>
+        <span class="g-cap">les deux derniers attendent la réponse du serveur avant de basculer</span>
+      </div>
+      <div class="g-grp"><h3>États figés</h3>
+        <div class="g-stack">
+          <button type="button" class="k-switch" role="switch" aria-checked="false" data-k-state="hover"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Survol</span></button>
+          <button type="button" class="k-switch" role="switch" aria-checked="true" data-k-state="focus"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Focus clavier</span></button>
+          <button type="button" class="k-switch" role="switch" aria-checked="true" aria-busy="true"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Chargement</span><span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span></button>
+          <button type="button" class="k-switch" role="switch" aria-checked="false" disabled aria-describedby="sw-off-why"><span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span><span class="k-switch__label">Désactivé</span><span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé"></span></button>
+          <span class="g-cap" id="sw-off-why">réservé aux comptes de guide</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Tableau ============ -->
+  <section class="g-sec" id="tableau">
+    <header><h2>Tableau</h2><p>Un clic sur un en-tête trie, le suivant inverse. Une ligne choisie le dit par son fond, son filet épais et sa case cochée. Sans ligne, le tableau explique pourquoi.</p></header>
+    <div class="k-field k-select g-narrow">
+      <label class="k-field__label" for="t-filtre">Filtrer par sortie</label>
+      <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="t-filtre"><option value="">Toutes les sorties</option><option>Bivouac</option><option>Raquettes</option><option>Igloo</option><option value="aucune">Cascade de glace (aucune réservation)</option></select></div>
+    </div>
+    <div class="k-table" role="region" aria-labelledby="t-res" tabindex="0" id="table-res">
+      <div class="k-table__bar"><span class="k-table__count"></span>
+        <div class="k-dropdown" data-k-align="end" id="t-actions">
+          <button type="button" class="k-btn k-btn--secondary" aria-haspopup="menu" aria-expanded="false" aria-controls="t-actions-menu">Actions<span class="k-dropdown__caret" aria-hidden="true"></span></button>
+          <ul class="k-dropdown__menu" role="menu" id="t-actions-menu" hidden>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-value="relancer">Relancer par e-mail</button></li>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-value="exporter">Exporter la sélection</button></li>
+          </ul>
+        </div>
+      </div>
+      <table>
+        <caption id="t-res">Réservations de février (données fictives)</caption>
+        <thead><tr>
+          <th scope="col" class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input" data-k-select-all><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Tout sélectionner</span></label></th>
+          <th scope="col" aria-sort="ascending"><button type="button" class="k-table__sort">Nom<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+          <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Sortie<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+          <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Date<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+          <th scope="col" data-k-type="number" aria-sort="none"><button type="button" class="k-table__sort">Prix<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+          <th scope="col">État</th>
+        </tr></thead>
+        <tbody>
+          <tr data-sortie="Bivouac"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Agathe Morel</span></label></td><th scope="row">Agathe Morel</th><td>Bivouac</td><td data-k-sort="2027-02-06">6 février</td><td data-k-type="number" data-k-sort="180">180 €</td><td>Payée</td></tr>
+          <tr data-sortie="Raquettes" aria-selected="true"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input" checked><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Camille Roux</span></label></td><th scope="row">Camille Roux</th><td>Raquettes</td><td data-k-sort="2027-02-13">13 février</td><td data-k-type="number" data-k-sort="65">65 €</td><td>En attente de paiement</td></tr>
+          <tr data-sortie="Igloo"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Idriss Benali</span></label></td><th scope="row">Idriss Benali</th><td>Igloo</td><td data-k-sort="2027-02-20">20 février</td><td data-k-type="number" data-k-sort="240">240 €</td><td>Payée</td></tr>
+          <tr data-sortie="Bivouac" aria-disabled="true"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input" disabled><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Jeanne Lortat (réservation annulée)</span></label></td><th scope="row">Jeanne Lortat</th><td>Bivouac</td><td data-k-sort="2027-02-06">6 février</td><td data-k-type="number" data-k-sort="180">180 €</td><td>Annulée, remboursée</td></tr>
+          <tr data-sortie="Raquettes"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Noé Vasseur</span></label></td><th scope="row">Noé Vasseur</th><td>Raquettes</td><td data-k-sort="2027-02-27">27 février</td><td data-k-type="number" data-k-sort="65">65 €</td><td>Payée</td></tr>
+        </tbody>
+      </table>
+      <div class="k-table__empty" hidden><div class="k-empty k-empty--plain"><h3 class="k-empty__title">Aucune réservation pour cette sortie</h3><p class="k-empty__text">Personne ne s'est encore inscrit. Les demandes reçues apparaîtront ici.</p></div></div>
+      <p class="k-table__status k-sr-only" role="status"></p>
+    </div>
+    <div class="g-grp"><h3>Serré, en chargement</h3>
+      <div class="k-table k-table--dense g-narrow" role="region" aria-labelledby="t-guides" tabindex="0" aria-busy="true">
+        <table>
+          <caption id="t-guides">Guides de la saison (mise à jour en cours…)</caption>
+          <thead><tr><th scope="col">Guide</th><th scope="col" data-k-type="number">Sorties</th></tr></thead>
+          <tbody><tr><th scope="row">Maël Ferrand</th><td data-k-type="number">12</td></tr><tr><th scope="row">Suzanne Albrecht</th><td data-k-type="number">9</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Accordéon ============ -->
+  <section class="g-sec" id="accordeon">
+    <header><h2>Accordéon</h2><p>Chaque intitulé est un vrai bouton dans un vrai titre. Ouvert : le plus devient un moins et l'intitulé passe en gras. Flèches, Début et Fin vont d'un intitulé à l'autre.</p></header>
+    <div class="g-cols g-cols--wide">
+      <div class="g-grp"><h3>Un seul panneau ouvert à la fois</h3>
+        <div class="k-accordion" data-k-single>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-q1" aria-controls="a-r1" aria-expanded="true">Et si la météo est mauvaise ?<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-r1" role="region" aria-labelledby="a-q1"><p>Le guide décide la veille à 18 h. La sortie est reportée, ou remboursée si aucune date ne vous convient.</p></div></div>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-q2" aria-controls="a-r2" aria-expanded="false">Faut-il déjà avoir dormi dehors ?<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-r2" role="region" aria-labelledby="a-q2"><p>Non. Le bivouac est monté ensemble, et le guide dort à côté.</p></div></div>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-q3" aria-controls="a-r3" aria-expanded="false" data-k-state="hover">Survol (figé)<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-r3" role="region" aria-labelledby="a-q3"><p>Le fond de la ligne change au survol.</p></div></div>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-q4" aria-controls="a-r4" aria-expanded="false" data-k-state="focus">Focus clavier (figé)<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-r4" role="region" aria-labelledby="a-q4"><p>Le contour est tracé vers l'intérieur.</p></div></div>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-q5" aria-controls="a-r5" aria-expanded="false" disabled>Tarifs de groupe (bientôt)<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-r5" role="region" aria-labelledby="a-q5"><p>À venir.</p></div></div>
+        </div>
+      </div>
+      <div class="g-grp"><h3>Variante à titres, plusieurs panneaux ouverts</h3>
+        <div class="k-accordion k-accordion--titles">
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-t1" aria-controls="a-p1" aria-expanded="true">Le sac<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-p1" role="region" aria-labelledby="a-t1"><p>Trente litres suffisent : une doudoune, deux paires de gants, un thermos.</p></div></div>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-t2" aria-controls="a-p2" aria-expanded="true">Le froid<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-p2" role="region" aria-labelledby="a-t2"><p>La nuit descend à −12 °C. Le duvet prêté est donné pour −15 °C.</p></div></div>
+          <div class="k-accordion__item"><h3 class="k-accordion__head"><button type="button" class="k-accordion__trigger" id="a-t3" aria-controls="a-p3" aria-expanded="false">L'annulation<span class="k-accordion__mark" aria-hidden="true"></span></button></h3>
+            <div class="k-accordion__panel" id="a-p3" role="region" aria-labelledby="a-t3"><p>Remboursée en entier jusqu'à sept jours avant le départ.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Pagination ============ -->
+  <section class="g-sec" id="pagination">
+    <header><h2>Pagination</h2><p>La page courante se lit à son cadre, à son fond et à sa graisse. Quand les numéros ne tiennent plus, la pagination se replie en « Page 3 sur 12 ».</p></header>
+    <div class="g-grp"><h3>Pilotée par script</h3>
+      <nav class="k-pagination" aria-label="Pages des sorties" data-k-pages="12" data-k-page="3" id="pg-live"></nav>
+      <span class="g-cap" id="pg-cap" role="status">page 3 affichée</span>
+    </div>
+    <div class="g-grp"><h3>Liens, sans script ; survol et focus figés</h3>
+      <nav class="k-pagination" aria-label="Pages du journal">
+        <a class="k-btn k-btn--secondary k-pagination__step" href="#pagination" rel="prev">Précédent</a>
+        <ol class="k-pagination__list">
+          <li><a class="k-pagination__page" href="#pagination"><span class="k-sr-only">Page </span>1</a></li>
+          <li><a class="k-pagination__page" href="#pagination" aria-current="page"><span class="k-sr-only">Page </span>2</a></li>
+          <li><a class="k-pagination__page" href="#pagination" data-k-state="hover"><span class="k-sr-only">Page </span>3</a></li>
+          <li><a class="k-pagination__page" href="#pagination" data-k-state="focus"><span class="k-sr-only">Page </span>4</a></li>
+          <li><span class="k-pagination__gap" aria-hidden="true">…</span></li>
+          <li><a class="k-pagination__page" href="#pagination"><span class="k-sr-only">Page </span>9</a></li>
+        </ol>
+        <a class="k-btn k-btn--secondary k-pagination__step" href="#pagination" rel="next">Suivant</a>
+        <p class="k-pagination__status">Page 2 sur 9</p>
+      </nav>
+    </div>
+    <div class="g-grp"><h3>Première page (« Précédent » indisponible), dans 320 px, et une seule page</h3>
+      <div class="g-frame g-narrow g-pad"><nav class="k-pagination" aria-label="Pages des guides" data-k-pages="24" data-k-page="1"></nav></div>
+      <nav class="k-pagination" aria-label="Pages des refuges" data-k-pages="1" data-k-page="1"></nav>
+    </div>
+  </section>
+
+  <!-- ============ Fil d'Ariane ============ -->
+  <section class="g-sec" id="fil">
+    <header><h2>Fil d'Ariane</h2><p>La page courante n'est pas un lien : elle se lit à sa graisse. Un chemin de plus de quatre niveaux range ceux du milieu derrière « … ».</p></header>
+    <div class="g-stack">
+      <nav class="k-crumbs" aria-label="Fil d'Ariane"><ol><li><a href="#fil">Accueil</a></li><li><a href="#fil">Sorties</a></li><li><span aria-current="page">Préparer sa sortie</span></li></ol></nav>
+      <nav class="k-crumbs" aria-label="Fil d'Ariane, survol et focus figés"><ol><li><a href="#fil" data-k-state="hover">Survol</a></li><li><a href="#fil" data-k-state="focus">Focus clavier</a></li><li><span aria-current="page">Page courante</span></li></ol></nav>
+      <nav class="k-crumbs" aria-label="Fil d'Ariane replié" data-k-collapse><ol><li><a href="#fil">Accueil</a></li><li><a href="#fil">Sorties</a></li><li><a href="#fil">Hiver</a></li><li><a href="#fil">Massif du Mont-Blanc</a></li><li><a href="#fil">Bivouac au-dessus des nuages</a></li><li><span aria-current="page">Préparer sa sortie</span></li></ol></nav>
+      <div class="g-frame g-narrow g-pad"><nav class="k-crumbs" aria-label="Fil d'Ariane dans 320 px"><ol><li><a href="#fil">Accueil</a></li><li><a href="#fil">Sorties d'hiver</a></li><li><a href="#fil">Massif du Mont-Blanc</a></li><li><span aria-current="page">Bivouac au-dessus des nuages</span></li></ol></nav></div>
+    </div>
+  </section>
+
+  <!-- ============ Info-bulle ============ -->
+  <section class="g-sec" id="bulles">
+    <header><h2>Info-bulle</h2><p>Elle s'ouvre au focus clavier comme au survol, reste ouverte quand on va la lire, et se ferme avec Échap. Elle ne porte jamais une information indispensable.</p></header>
+    <div class="g-row g-pad">
+      <div class="g-item"><span class="k-tooltip"><button type="button" class="k-btn k-btn--secondary k-btn--icon" aria-label="Supprimer la réservation" aria-describedby="tip-suppr"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg></button><span class="k-tooltip__bubble" role="tooltip" id="tip-suppr">Remboursée en entier jusqu'à 7 jours avant le départ.</span></span><span class="g-cap">survol ou focus</span></div>
+      <div class="g-item"><span class="k-tooltip" data-k-open><button type="button" class="k-btn k-btn--secondary" aria-describedby="tip-open">Niveau 2</button><span class="k-tooltip__bubble" role="tooltip" id="tip-open">Quatre heures de marche, 600 m de dénivelé.</span></span><span class="g-cap">ouverte (figée)</span></div>
+      <div class="g-item"><span class="k-tooltip" data-k-open data-k-place="bottom" data-k-place-fixed><button type="button" class="k-btn k-btn--secondary" aria-describedby="tip-bas">Départ 14 h</button><span class="k-tooltip__bubble" role="tooltip" id="tip-bas">Parking du Tour, au pied du télécabine.</span></span><span class="g-cap">dessous</span></div>
+      <p class="g-item">La nuit se passe en <span class="k-tooltip"><button type="button" class="k-tooltip__term" aria-describedby="tip-terme">bivouac</button><span class="k-tooltip__bubble" role="tooltip" id="tip-terme">Une nuit dehors, sous tente légère, montée le soir et démontée au matin.</span></span>, à 2 300 m.</p>
+    </div>
+  </section>
+
+  <!-- ============ Menu déroulant ============ -->
+  <section class="g-sec" id="menus">
+    <header><h2>Menu déroulant</h2><p>Entrée, Espace ou ↓ l'ouvrent ; les flèches parcourent en boucle ; une lettre saute au choix qui commence par elle ; Échap referme et rend le focus au bouton.</p></header>
+    <div class="g-row">
+      <div class="g-item">
+        <div class="k-dropdown" id="dd-actions">
+          <button type="button" class="k-btn k-btn--secondary" aria-haspopup="menu" aria-expanded="false" aria-controls="dd-actions-m">Actions<span class="k-dropdown__caret" aria-hidden="true"></span></button>
+          <ul class="k-dropdown__menu" role="menu" id="dd-actions-m" hidden>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-value="modifier">Modifier<span class="k-dropdown__hint">E</span></button></li>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-value="dupliquer">Dupliquer</button></li>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-value="archiver" aria-disabled="true">Archiver (sortie à venir)</button></li>
+            <li role="separator" class="k-dropdown__sep"></li>
+            <li role="none"><button type="button" class="k-dropdown__item k-dropdown__item--danger" role="menuitem" data-k-value="supprimer"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Supprimer…</button></li>
+          </ul>
+        </div>
+        <span class="g-cap" id="dd-cap" role="status">aucune action choisie</span>
+      </div>
+      <div class="g-item">
+        <div class="k-dropdown" id="dd-tri">
+          <button type="button" class="k-btn k-btn--secondary" aria-haspopup="menu" aria-expanded="false" aria-controls="dd-tri-m">Trier par<span class="k-dropdown__caret" aria-hidden="true"></span></button>
+          <ul class="k-dropdown__menu" role="menu" id="dd-tri-m" hidden>
+            <li role="presentation" class="k-dropdown__label">Ordre des sorties</li>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitemradio" aria-checked="true" data-k-value="date"><span class="k-dropdown__tick" aria-hidden="true"></span>Date</button></li>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitemradio" aria-checked="false" data-k-value="prix"><span class="k-dropdown__tick" aria-hidden="true"></span>Prix</button></li>
+            <li role="none"><button type="button" class="k-dropdown__item" role="menuitemradio" aria-checked="false" data-k-value="niveau"><span class="k-dropdown__tick" aria-hidden="true"></span>Niveau</button></li>
+          </ul>
+        </div>
+        <span class="g-cap">un choix exclusif : coche et graisse</span>
+      </div>
+      <div class="g-item">
+        <div class="k-dropdown">
+          <button type="button" class="k-btn k-btn--secondary" disabled aria-haspopup="menu" aria-expanded="false" aria-controls="dd-off-m">Exporter<span class="k-dropdown__caret" aria-hidden="true"></span></button>
+          <ul class="k-dropdown__menu" role="menu" id="dd-off-m" hidden><li role="none"><button type="button" class="k-dropdown__item" role="menuitem">CSV</button></li></ul>
+        </div>
+        <span class="g-cap">désactivé : rien à exporter</span>
+      </div>
+    </div>
+    <div class="g-grp"><h3>Ouvert (figé) : survol, focus, coché, désactivé, destructeur</h3>
+      <div class="g-frame g-pad" id="dd-fige">
+        <ul class="k-dropdown__menu" role="menu" aria-label="Menu figé">
+          <li role="presentation" class="k-dropdown__label">Réservation</li>
+          <li role="none"><button type="button" class="k-dropdown__item" role="menuitem">Repos</button></li>
+          <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-state="hover">Survol</button></li>
+          <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-k-state="focus">Focus clavier</button></li>
+          <li role="none"><button type="button" class="k-dropdown__item" role="menuitemcheckbox" aria-checked="true"><span class="k-dropdown__tick" aria-hidden="true"></span>Coché</button></li>
+          <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" aria-disabled="true">Désactivé</button></li>
+          <li role="separator" class="k-dropdown__sep"></li>
+          <li role="none"><button type="button" class="k-dropdown__item k-dropdown__item--danger" role="menuitem"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Supprimer…</button></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="g-sec" id="signature">
     <header><h2>Couche de signature et intensité</h2><p id="sig-note">Le composant de base est neutre. La couche de signature du skill s'ajoute par-dessus et suit le réglage d'intensité de son parent. Les trois blocs ci-dessous portent chacun leur propre réglage, sous celui de la page.</p></header>
     <div class="g-cols g-cols--wide">
@@ -433,6 +763,14 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 <script src="onglets/onglets.js"></script>
 <script src="notification/notification.js"></script>
 <script src="chargement/chargement.js"></script>
+<script src="case-a-cocher/case-a-cocher.js"></script>
+<script src="interrupteur/interrupteur.js"></script>
+<script src="tableau/tableau.js"></script>
+<script src="accordeon/accordeon.js"></script>
+<script src="pagination/pagination.js"></script>
+<script src="fil-ariane/fil-ariane.js"></script>
+<script src="info-bulle/info-bulle.js"></script>
+<script src="menu-deroulant/menu-deroulant.js"></script>
 <script>
 // Pilotage de la galerie : choix du skill et de l'intensité, déclencheurs de démonstration.
 (function () {
@@ -443,10 +781,11 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 
   function load(id) {
     var link = $('map');
-    link.onload = function () { (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); }); };
+    var refit = function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); document.querySelectorAll('.k-tooltip[data-k-open]').forEach(Kobo.tooltip.place); };   // la fiche et la couche changent les largeurs
+    link.onload = function () { (document.fonts ? document.fonts.ready : Promise.resolve()).then(refit); };
     link.href = '../contract/maps/' + id + '.css';
     var sig = $('sig'), has = LAYERS.indexOf(id) >= 0;
-    sig.onload = function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); }; // la couche change la largeur des liens
+    sig.onload = refit;
     if (has) sig.href = 'signatures/' + id + '.css'; else sig.removeAttribute('href');
     $('sig-state').textContent = has ? 'couche de signature chargée' : 'pas encore de couche de signature : composants de base';
     history.replaceState(null, '', '#' + id + (root.dataset.kIntensity !== 'full' ? ':' + root.dataset.kIntensity : ''));
@@ -522,6 +861,30 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
     var v = 0; clearInterval(timer); Kobo.progress.reset('prog');
     timer = setInterval(function () { v = Math.min(1, v + 0.08); Kobo.progress.set('prog', v); if (v >= 1) clearInterval(timer); }, 220);
   });
+  // Second lot
+  $('form-select').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = $('s-niveau').closest('.k-field');
+    if (!Kobo.field.validate(f)) $('s-niveau').focus(); else Kobo.toast({ type: 'success', title: 'Niveau enregistré', text: $('s-niveau').value });
+  });
+  ['sw-async', 'sw-fail'].forEach(function (id) {
+    $(id).addEventListener('k-switch:change', function (e) {
+      if (!e.detail.done) return;
+      setTimeout(function () {
+        var ok = id === 'sw-async'; e.detail.done(ok);
+        if (!ok) Kobo.toast({ type: 'error', title: 'Réglage non enregistré', text: 'Le serveur n’a pas répondu. La lettre mensuelle reste désactivée.' });
+      }, 1400);
+    });
+  });
+  $('t-filtre').addEventListener('change', function (e) {
+    var v = e.target.value, root = $('table-res');
+    root.querySelectorAll('tbody > tr').forEach(function (tr) { tr.hidden = !!v && tr.dataset.sortie !== v; });
+    Kobo.table.refresh(root);
+  });
+  $('pg-live').addEventListener('k-pagination:change', function (e) { $('pg-cap').textContent = 'page ' + e.detail.page + ' affichée'; });
+  $('dd-actions').addEventListener('k-dropdown:select', function (e) { $('dd-cap').textContent = 'action choisie : ' + e.detail.value; });
+  $('t-actions').addEventListener('k-dropdown:select', function (e) { Kobo.toast({ type: 'info', title: 'Action sur la sélection', text: e.detail.value }); });
+
   $('prog-fail').addEventListener('click', function () {
     clearInterval(timer); Kobo.progress.set('prog', 0.37); Kobo.progress.fail('prog', 'Import interrompu à la ligne 47 : date illisible. Corrigez le fichier et relancez.');
   });

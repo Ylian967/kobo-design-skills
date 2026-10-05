@@ -67,3 +67,17 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .k-btn::before { transition: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : mono ; rubriques « ////// » ; page courante dans un cadre droit ; angles droits.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-crumbs, &.k-table thead th, &.k-tooltip__bubble { font-family: var(--k-font-mono); }
+  &.k-pagination__page, &.k-dropdown__item, &.k-dropdown__menu, &.k-tooltip__bubble, &.k-table, &.k-check__box { border-radius: 0; }
+  &.k-pagination__page[aria-current="page"] { background: transparent; border-color: var(--k-text); }
+  &.k-dropdown__label::before, &.k-table caption::before { content: "////// "; font-family: var(--k-font-mono); }
+  &.k-table thead th { background: transparent; }
+}

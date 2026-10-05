@@ -43,3 +43,25 @@
   &.k-empty { border-style: solid; border-color: var(--k-line); }
   &.k-tabs__tab { font-weight: var(--k-fw-display); }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : des filets, pas des boîtes ; page courante en pilule rouge ; ligne choisie marquée de rouge ; « \ » entre les niveaux ; menu en panneau sans cadre.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { border-radius: var(--k-radius-pill); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-on-accent); background: var(--k-accent); border-color: var(--k-accent); }
+  &.k-table { border-color: transparent; border-block-color: var(--k-line); border-radius: 0; }
+  &.k-table thead th { background: transparent; }
+  &.k-table thead th { text-transform: uppercase; }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent); }
+  &.k-crumbs li + li::before { content: "\\"; }
+  &.k-dropdown__menu { background: var(--k-surface); border-color: transparent; border-radius: var(--k-radius-lg); }
+  &.k-dropdown__item { border-radius: var(--k-radius); }
+  &.k-accordion--titles .k-accordion__trigger, &.k-crumbs { font-weight: var(--k-fw-display); }
+  /* sélection : le champ est un filet sans marge, le chevron vient au bord */
+  &.k-select__control:not(:disabled) { padding-inline-end: var(--k-space-8); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-1); }
+}

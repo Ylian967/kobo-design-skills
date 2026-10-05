@@ -1,0 +1,22 @@
+/*
+ * kobo-studio — fil d'Ariane
+ * Rôles lus : text, text-2, text-muted, focus*, fs-small, fs-min, hit-min, space-*, btn-case, btn-tracking.
+ */
+.k-crumbs { min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); }
+.k-crumbs ol { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-2); margin: 0; padding: 0; list-style: none; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+.k-crumbs li { display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-space-6); }
+/* Le séparateur est un décor : il n'est pas lu, la liste ordonnée dit déjà l'ordre */
+.k-crumbs li + li::before { content: "/"; color: var(--k-text-muted); }
+.k-crumbs a { position: relative; color: inherit; text-underline-offset: var(--k-space-1); }
+/* Zone cliquable d'au moins --k-hit-min de haut, sans écarter les lignes */
+.k-crumbs a::after { content: ""; position: absolute; inset-inline: 0; inset-block-start: 50%; block-size: var(--k-hit-min); transform: translateY(-50%); }
+.k-crumbs a:hover, .k-crumbs a[data-k-state="hover"] { text-decoration-thickness: calc(var(--k-space-1) / 2); }
+.k-crumbs a:focus-visible, .k-crumbs a[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* La page courante n'est pas un lien : elle se lit à sa graisse et à l'absence de soulignement, pas à sa couleur */
+.k-crumbs [aria-current="page"] { color: var(--k-text-2); font-weight: bolder; }
+/* Chemin replié : les niveaux du milieu derrière un bouton « … » (data-k-collapsed posé par fil-ariane.js) */
+.k-crumbs__more { position: relative; min-inline-size: var(--k-hit-min); min-block-size: var(--k-space-6); padding: 0 var(--k-space-2); font: inherit; color: inherit; cursor: pointer; background: transparent; border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+/* Même zone cliquable que les liens : --k-hit-min de haut, sans écarter les lignes */
+.k-crumbs__more::after { content: ""; position: absolute; inset-inline: 0; inset-block-start: 50%; block-size: var(--k-hit-min); transform: translateY(-50%); }
+.k-crumbs__more:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+.k-crumbs li[hidden] { display: none; }

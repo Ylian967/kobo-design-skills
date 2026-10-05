@@ -1,5 +1,5 @@
 // kobo-studio — Bouton (React). Mêmes classes et mêmes états que bouton.css.
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 /**
  * variante : 'primary' (défaut) | 'secondary' | 'ghost' | 'danger'
@@ -8,12 +8,13 @@ import React from 'react';
  *             s'appliquent seules, sans prop : il suffit de charger le fichier du skill.
  * enCours : aria-busy ; le libellé devient libelleEnCours et le bouton ne réagit plus
  * href : rend un lien <a> avec l'apparence du bouton
+ * ref : transmis au <button> ou au <a> (un menu, une info-bulle ou une modale lui rendent le focus)
  */
-export function Bouton({
+export const Bouton = forwardRef(function Bouton({
   variante = 'primary', pilule = false, bloc = false, iconeSeule = false, signature,
   enCours = false, libelleEnCours = 'En cours…', desactive = false, enfonce,
   href, type = 'button', className = '', children, ...reste
-}) {
+}, ref) {
   const classes = [
     'k-btn',
     variante !== 'primary' && `k-btn--${variante}`,
@@ -27,15 +28,15 @@ export function Bouton({
     </>
   );
   if (href && !desactive) {
-    return <a className={classes} href={href} aria-busy={enCours || undefined} {...reste}>{contenu}</a>;
+    return <a ref={ref} className={classes} href={href} aria-busy={enCours || undefined} {...reste}>{contenu}</a>;
   }
   return (
     <button
-      className={classes} type={type} disabled={desactive}
+      ref={ref} className={classes} type={type} disabled={desactive}
       aria-busy={enCours || undefined} aria-pressed={enfonce === undefined ? undefined : enfonce}
       {...reste}
     >
       {contenu}
     </button>
   );
-}
+});
