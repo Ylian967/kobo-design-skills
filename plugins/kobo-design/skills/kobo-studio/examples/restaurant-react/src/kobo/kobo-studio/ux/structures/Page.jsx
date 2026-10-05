@@ -4,16 +4,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BarreNav } from '../../components/barre-nav/BarreNav.jsx';
 import { MenuMobile } from '../../components/menu-mobile/MenuMobile.jsx';
 import { Bouton } from '../../components/bouton/Bouton.jsx';
+import { EmplacementDom } from '../templates/Gabarits.jsx';
 
 /**
  * Emplacement : un endroit nommé de la structure. Sans gabarit, il rend son contenu neutre (children).
  * nom : frame | backdrop | hero | title | media | grid | chapter | finale
- * gabarits : l'objet « emplacements » reçu par la structure — { nom: (parts, rang) => élément }
+ * gabarits : l'objet « emplacements » reçu par la structure — { nom: (parts, rang) => élément }, écrit à la main,
+ *            ou rendu par gabarits('<skill>') de ../templates/Gabarits.jsx (les gabarits de signature des pages HTML)
  * parts : les éléments du contenu neutre, déjà construits, que le gabarit redispose (titre, action, image…)
  * comme : balise rendue ('div' par défaut)
  */
 export function Emplacement({ nom, gabarits, parts = {}, rang = 0, comme: Balise = 'div', children, ...reste }) {
-  const rendu = gabarits && gabarits[nom] ? gabarits[nom](parts, rang) : null;
+  const pose = gabarits && gabarits[nom];
+  if (pose && pose.dom) return <EmplacementDom nom={nom} defs={pose.dom} parts={parts} rang={rang} comme={Balise} {...reste}>{children}</EmplacementDom>;
+  const rendu = pose ? pose(parts, rang) : null;
   return <Balise data-k-slot={nom} data-k-filled={rendu ? '' : undefined} {...reste}>{rendu || children}</Balise>;
 }
 
@@ -29,16 +33,17 @@ export function TitreSection({ id, surtitre, titre, appui, niveau: Titre = 'h2',
 
 /** Image de contenu (emplacement « media ») : { src, alt, legende, ratio, largeur, hauteur, sujet } — alt décrit la photo ;
  *  largeur et hauteur réservent la place (attributs width / height) ; sujet : point d'intérêt, « x% y% » (data-k-focus). */
-export function Image({ image, differee = true, gabarits, className }) {
+export function Image({ image, differee = true, gabarits, className, ...reste }) {
   const parts = {
     image: <img src={image.src} alt={image.alt} width={image.largeur} height={image.hauteur} data-k-focus={image.sujet} loading={differee ? 'lazy' : undefined} style={image.ratio ? { '--_ratio': image.ratio } : undefined} />,
     caption: image.legende && <figcaption>{image.legende}</figcaption>,
   };
-  return <Emplacement nom="media" comme="figure" gabarits={gabarits} parts={parts} className={className}>{parts.image}{parts.caption}</Emplacement>;
+  return <Emplacement nom="media" comme="figure" gabarits={gabarits} parts={parts} className={className} {...reste}>{parts.image}{parts.caption}</Emplacement>;
 }
 
-/** Dernière section (emplacement « finale ») : une phrase, une action, sur le ton inversé. */
-export function Finale({ id = 'suite', titre, appui, action, gabarits, children }) {
+/** Dernière section (emplacement « finale ») : une phrase et l'action principale du site, sur le ton inversé.
+ *  action : { libelle, href } ; lien : { libelle, href }, suite secondaire en lien simple (facultatif). */
+export function Finale({ id = 'suite', titre, appui, action, lien, gabarits, children }) {
   const parts = {
     title: <h2 className="k-h2" id={`${id}-t`}>{titre}</h2>,
     lead: appui && <p className="k-lead">{appui}</p>,
@@ -48,23 +53,19 @@ export function Finale({ id = 'suite', titre, appui, action, gabarits, children 
     <Emplacement nom="finale" comme="section" gabarits={gabarits} parts={parts} id={id} aria-labelledby={`${id}-t`} data-k-tone="inverse">
       <div className="k-wrap k-split k-split--center">
         <div className="k-stack k-split__main">{parts.title}{parts.lead}</div>
-        <div>{children || parts.action}</div>
+        <div className="k-stack k-stack--sm">{children || parts.action}{lien && <a className="k-link" href={lien.href}>{lien.libelle}</a>}</div>
       </div>
     </Emplacement>
   );
 }
 
 /** Liste de faits : [{ terme, valeur }] */
-export const Faits = ({ faits, className = '' }) => (
-  <dl className={`k-facts ${className}`.trim()}>{faits.map((f) => <div key={f.terme}><dt>{f.terme}</dt><dd>{f.valeur}</dd></div>)}</dl>
+export const Faits = ({ faits, className = '', ...reste }) => (
+  <dl className={`k-facts ${className}`.trim()} {...reste}>{faits.map((f) => <div key={f.terme}><dt>{f.terme}</dt><dd>{f.valeur}</dd></div>)}</dl>
 );
 
-/** Fil d'Ariane : [{ libelle, href }] — le dernier élément est la page courante, sans lien. */
-export const FilAriane = ({ chemin }) => (
-  <nav className="k-crumbs" aria-label="Fil d'Ariane">
-    <ol>{chemin.map((c, i) => <li key={c.libelle}>{i < chemin.length - 1 ? <a href={c.href}>{c.libelle}</a> : <span aria-current="page">{c.libelle}</span>}</li>)}</ol>
-  </nav>
-);
+/** Fil d'Ariane : le composant components/fil-ariane/, réexporté ici pour les structures. */
+export { FilAriane } from '../../components/fil-ariane/FilAriane.jsx';
 
 /** Bloc qui colle seulement quand il tient à côté d'un autre bloc de son .k-split (mesure, pas de point de rupture). */
 export function Collant({ comme: Balise = 'div', className = '', children, ...reste }) {

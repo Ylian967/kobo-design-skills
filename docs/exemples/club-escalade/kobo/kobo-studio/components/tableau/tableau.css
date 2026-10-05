@@ -14,6 +14,8 @@
 .k-table thead th { font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: bolder; color: var(--k-text-2); white-space: nowrap; background: var(--k-surface); border-block-end-color: var(--k-line-strong); text-transform: var(--k-label-case); }
 .k-table tbody th { font-weight: bolder; }
 /* Nombres : alignés à droite, chiffres de même largeur */
+/* Seconde ligne d'une cellule : replier deux colonnes en une (jour + heure, activité + niveau) quand la place manque */
+.k-table__sub { display: block; font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: normal; color: var(--k-text-2); }
 .k-table [data-k-type="number"] { text-align: end; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .k-table__check { inline-size: var(--k-hit-min); padding-inline-end: 0; }
 .k-table__check .k-check { min-block-size: var(--k-hit-min); }

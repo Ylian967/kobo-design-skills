@@ -1,12 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import './styles.js';
+import { emplacements } from './styles.js';
 import { PageInterieure } from './kobo/kobo-studio/ux/structures/site-vitrine/SiteVitrine.jsx';
 import { Image, Faits } from './kobo/kobo-studio/ux/structures/Page.jsx';
 import { page, suite, PLATS, PAGES, TELEPHONE, ADRESSE, PLAN } from './site.js';
 
-const facade = { src: 'images/facade.jpg', alt: "Façade d'un petit restaurant d'angle, vitrine à petits carreaux, dans une rue en pente", largeur: 1600, hauteur: 1067,
-  legende: 'Photo provisoire : la vraie façade arrive bientôt.' };
+const salle = { src: 'images/salle.jpg', alt: 'Petite salle de restaurant : tables en bois, mur vert bouteille, lumière tamisée', largeur: 1600, hauteur: 1067,
+  legende: 'Photo provisoire : la vraie salle arrive bientôt.' };
 
 const formules = [
   { terme: 'Midi, entrée-plat ou plat-dessert', valeur: '19 €' },
@@ -37,7 +37,7 @@ const parService = (meta) => PLATS.filter((p) => p.meta === meta).map((p) => <li
 
 function LaCarte() {
   return (
-    <PageInterieure page={page('carte')} chemin={[{ libelle: 'Accueil', href: PAGES.accueil }, { libelle: 'La carte et les infos pratiques' }]}
+    <PageInterieure emplacements={emplacements()} page={page('carte')} chemin={[{ libelle: 'Accueil', href: PAGES.accueil }, { libelle: 'La carte et les infos pratiques' }]}
       titre="La carte et les infos pratiques" appui="Tout est écrit ici : rien à télécharger. La carte change chaque semaine, au gré du marché."
       encart={encart} suite={suite}>
       <h2 className="k-h2" id="formules">Les formules</h2>
@@ -59,7 +59,7 @@ function LaCarte() {
 
       <h2 className="k-h2" id="adresse">L'adresse</h2>
       <p>{ADRESSE}, sur les pentes de la Croix-Rousse. <a href={PLAN}>Ouvrir dans Google Maps</a></p>
-      <Image image={facade} />
+      <Image image={salle} />
     </PageInterieure>
   );
 }

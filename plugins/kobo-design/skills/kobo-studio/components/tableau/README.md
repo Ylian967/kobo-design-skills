@@ -23,6 +23,8 @@ div.k-table[role=region][aria-labelledby][tabindex=0]    la zone qui défile hor
 └── p.k-table__status.k-sr-only[role=status]             annonce du tri et de la sélection
 ```
 
+**Replier des colonnes.** Sur un écran étroit, un tableau défile de côté dans sa zone. Pour l'éviter sans rien perdre, deux colonnes se replient en une : la seconde valeur s'écrit dans la même cellule, en `<span class="k-table__sub">` (seconde ligne, plus petite). Le tri de la colonne suit `data-k-sort` de la cellule. On ne raccourcit pas une donnée pour gagner de la place.
+
 ## États
 
 | État | Déclencheur | Rendu |

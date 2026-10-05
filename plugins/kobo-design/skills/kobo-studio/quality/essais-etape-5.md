@@ -184,6 +184,16 @@ Ce que la relance a encore trouvé :
 - L'encart collant apparaissait trois fois dans `carte-1440.png` (capture assemblée par écrans) : corrigé après les essais dans `tools/sonde.html`, il reprend sa place dans le flux le temps de la capture (vérifié sur la même page : une seule fois).
 - Deux photos provisoires ne montrent pas le plat annoncé (asperges pour poireaux, poisson pour quenelle) : dit par l'agent à la livraison, mais c'est la limite d'une photo de banque posée sous un vrai nom de plat.
 
+## Reprises des exemples après publication (5 octobre 2026)
+
+Trois exemples ont été repris à la main après relecture de la galerie en ligne ; ce ne sont plus les livraisons brutes des agents.
+
+| Exemple | Ce qui a changé | Pourquoi |
+|---|---|---|
+| `festival-lyon` | Le mot géant du héros passe sous le texte et les boutons (gabarit corrigé : il vit dans le plan de l'image) | Il se posait par-dessus le contenu |
+| `restaurant-react` | Refait sous `retro-mission-poster`, même contenu et même React : héros-affiche à titre incliné sur la photo de la façade, cadre de page ; le portrait d'Odile descend dans « La maison », la photo de la salle passe sur la page de la carte | Deux exemples utilisaient `serif-bistro-green`. Ce skill demande des paysages peu détaillés en aplats préparés : une photo de rue n'est pas son sujet, et cela se voit |
+| `club-escalade` | Données complètes rétablies (« Cours encadré », « Débutant », « Réservé par vous ») ; le tableau tient à 390 px en repliant quatre colonnes en trois (`k-table__sub`) ; la recherche de « débutant » trouve ses cinq créneaux | L'agent avait raccourci les données pour gagner de la place |
+
 ## 4. Un CRM B2B pour une PME de services (registre fonctionnel, 5 octobre 2026)
 
 Essai fait après l'ajout du skill `clear-ledger-desk` et de la structure `application`. Agent neuf, avec seulement `SKILL.md` et la demande ; les deux arrêts tenus ; je jouais le client (Atelier Rivage, conseil numérique à Nantes, six utilisateurs, outil « Rivage Suivi », premier écran : la liste des affaires). Résultat : `examples/crm-pme/`, capture `essais-etape-5/crm-pme.png`.

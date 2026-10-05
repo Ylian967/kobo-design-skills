@@ -75,7 +75,7 @@ Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL
 | Exemple | Demande | Skill | Structure |
 |---|---|---|---|
 | [`festival-lyon`](plugins/kobo-design/skills/kobo-studio/examples/festival-lyon/) | Une landing pour un festival de musique électronique | `nocturne-architecture` | landing produit |
-| [`restaurant-react`](plugins/kobo-design/skills/kobo-studio/examples/restaurant-react/) | Le site d'un restaurant de quartier, en React | `serif-bistro-green` | site vitrine |
+| [`restaurant-react`](plugins/kobo-design/skills/kobo-studio/examples/restaurant-react/) | Le site d'un restaurant de quartier, en React | `retro-mission-poster` | site vitrine |
 | [`reprise-poterie`](plugins/kobo-design/skills/kobo-studio/examples/reprise-poterie/) | Reprendre un site existant de cours de poterie | `serif-bistro-green` | reprise |
 | [`crm-pme`](plugins/kobo-design/skills/kobo-studio/examples/crm-pme/) | Un CRM B2B pour une PME de services | `clear-ledger-desk` | application |
 | [`cabinet-architectes`](plugins/kobo-design/skills/kobo-studio/examples/cabinet-architectes/) | Le site d'un cabinet d'architectes, avec deux couleurs de marque imposées | `glass-frame-estate` | site vitrine |

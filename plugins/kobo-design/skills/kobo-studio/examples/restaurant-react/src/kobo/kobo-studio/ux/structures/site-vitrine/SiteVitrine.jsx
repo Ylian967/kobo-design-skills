@@ -78,7 +78,7 @@ export function Accueil({ page, hero, offre, maison, suite, emplacements }) {
         </div>
       </section>
 
-      <Finale titre={suite.titre} appui={suite.appui} action={suite.action} gabarits={emplacements} />
+      <Finale titre={suite.titre} appui={suite.appui} action={suite.action} lien={suite.lien} gabarits={emplacements} />
     </Page>
   );
 }
@@ -129,7 +129,7 @@ export function PageInterieure({ page, chemin, titre, appui, children, encart, l
         </section>
       )}
 
-      <Finale titre={suite.titre} appui={suite.appui} action={suite.action} gabarits={emplacements} />
+      <Finale titre={suite.titre} appui={suite.appui} action={suite.action} lien={suite.lien} gabarits={emplacements} />
     </Page>
   );
 }

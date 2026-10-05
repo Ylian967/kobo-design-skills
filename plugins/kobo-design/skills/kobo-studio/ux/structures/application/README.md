@@ -211,7 +211,7 @@ Ce que `application.js` et `tableau.js` font, pour ne pas avoir à les ouvrir :
 | Densité (clear-ledger-desk) | poser ou retirer `data-density="compact"` sur `<html>` ; un interrupteur dans les filtres suffit. La mémoriser est à la charge de la page |
 | Des lignes sans case à cocher | retirer la colonne `k-table__check` (en-tête et lignes), la barre `k-table__bar` et `case-a-cocher` des fichiers chargés ; `Espace` ne fait alors rien |
 | L'action ne vaut que pour la ligne ouverte (réserver **ce** créneau) | le bouton plein va dans le panneau de détail, et la tête d'écran n'en a pas : toujours un seul bouton plein à l'écran |
-| Un tableau trop large pour un téléphone | il défile de côté dans sa zone, c'est prévu. Réduire le nombre de colonnes plutôt que raccourcir les données ; si une cellule est abrégée, le mot entier va dans le panneau de détail et dans `data-ap-keywords` |
+| Un tableau trop large pour un téléphone | il défile de côté dans sa zone, c'est prévu. Réduire le nombre de colonnes plutôt que raccourcir les données : deux colonnes se replient en une avec `k-table__sub` (seconde ligne d'une cellule, voir le README du tableau). Si une cellule est quand même abrégée, le mot entier va dans le panneau de détail et dans `data-ap-keywords` |
 | Faire avancer une étape par script (fiche) | `Kobo.app.step(ap, true)` ; écouter `k-app:step` pour enregistrer |
 | Une répartition (tableau de bord) | écrire le nombre dans `ap-bars__value` et la part dans `style="--_v: …"` (valeur ÷ la plus grande valeur) |
 | Un écran en moins | supprimer sa page et son lien dans la barre latérale des autres |

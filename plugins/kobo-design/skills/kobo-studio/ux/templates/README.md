@@ -86,6 +86,7 @@ Dans une page livrée, en dur, après `ux/structures/page.js` :
 - Tout geste a un bouton : le cercle à tirer est un `<button>` ; un clic, Entrée ou Espace font ce que fait le geste, et le focus va au titre atteint.
 - Un canvas est un décor (`aria-hidden`) : aucun texte de la page n'y est porté. La photo reste une `<img>` avec son texte alternatif. Deux exceptions décoratives : l'écran de l'appareil de pocket-device (un faux affichage, l'objet est nommé par `aria-label`) et le mot peint de hold-to-play (copie filtrée du titre, qui reste dans la page).
 - Un mot géant est un décor ; le texte qu'il reprend reste dans le document pour les lecteurs d'écran.
+- Un mot géant décoratif vit **dans le plan de l'image** : `z-index` négatif dans son bloc (comme la photo et son voile), `pointer-events: none`. Il passe sous le texte, les faits et les boutons, jamais par-dessus : il ne gêne ni la lecture ni les clics.
 - Le défilement n'est jamais confisqué.
 - **Texte posé sur une image ou une scène : 4.5:1 au pire pixel** (3:1 pour un texte d'au moins 24 px), mesuré dans le navigateur, lettres contre leur entourage : deux captures de chaque texte (avec, puis sans les lettres), les pixels qui diffèrent sont les lettres, et la couleur du texte est comparée aux pixels du fond situés sous et autour d'elles (2 px). La méthode vaut pour un texte incliné, en dégradé, ou posé sur une image, une scène 3D ou une forme.
 

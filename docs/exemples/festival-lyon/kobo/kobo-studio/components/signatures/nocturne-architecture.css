@@ -47,7 +47,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : des filets, pas des boîtes ; page courante en pilule rouge ; ligne choisie marquée de rouge ; « \ » entre les niveaux ; menu en panneau sans cadre.
+ * Ici : des filets, pas des boîtes ; page courante en pilule rouge ; ligne choisie marquée de rouge ; « \ » entre les niveaux ; menu en panneau sans cadre ; point plein devant les petits libellés d'en-tête (règles communes).
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -64,4 +64,6 @@
   /* sélection : le champ est un filet sans marge, le chevron vient au bord */
   &.k-select__control:not(:disabled) { padding-inline-end: var(--k-space-8); }
   &.k-select__box::after { inset-inline-end: var(--k-space-1); }
+  /* relecture sur components.md */
+  &.k-table thead th:not(.k-table__check)::before { content: ""; display: inline-block; inline-size: var(--k-space-1); block-size: var(--k-space-1); margin-inline-end: var(--k-space-2); background: currentColor; border-radius: 50%; vertical-align: middle; }
 }

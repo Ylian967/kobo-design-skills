@@ -16,9 +16,11 @@
   if (d.fonts) await Promise.race([d.fonts.ready, wait(3000)]);
   await wait(300);
   f.scrollTo(0, +q.get('y') || 0);
-  if (+q.get('y')) [].forEach.call(d.body.querySelectorAll('*'), function (el) {   // une barre collée en haut ne se répète pas d'écran en écran
+  if (+q.get('y')) [].forEach.call(d.body.querySelectorAll('*'), function (el) {   // une barre collée en haut (ou juste sous le bord d'un cadre de page) ne se répète pas d'écran en écran
     var pos = f.getComputedStyle(el).position, r = el.getBoundingClientRect();
-    if ((pos === 'sticky' || pos === 'fixed') && r.top <= 2 && r.height < H * 0.3 && r.width > W * 0.5) el.style.setProperty('visibility', 'hidden', 'important');
+    if ((pos === 'sticky' || pos === 'fixed') && r.top <= H * 0.04 && r.height < H * 0.3 && r.width > W * 0.5) el.style.setProperty('visibility', 'hidden', 'important');
+    // le cadre de page (fixe, tout l'écran) non plus : répété à chaque écran, son bord couvrirait le texte coupé par le bas de la capture
+    if (el.getAttribute('data-k-slot') === 'frame') el.style.setProperty('visibility', 'hidden', 'important');
   });
   // un encart collant sur le côté reprend sa place dans le flux : sinon il se répète dans chaque écran de la capture assemblée
   [].forEach.call(d.body.querySelectorAll('*'), function (el) {

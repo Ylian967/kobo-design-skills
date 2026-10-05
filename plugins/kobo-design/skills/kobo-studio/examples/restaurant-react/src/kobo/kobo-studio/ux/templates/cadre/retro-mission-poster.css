@@ -1,0 +1,9 @@
+/*
+ * kobo-studio — cadre de page, habillage retro-mission-poster : le cadre crème épais autour de l'écran.
+ * Sources (lecture seule) : retro-mission-poster/examples/demo.html (.frame : position fixe, bord plein de la largeur --frame,
+ * couleur crème, par-dessus toute la page), references/tokens.css.
+ * Non repris : rien d'autre n'est dans ce cadre (ni rail, ni barre, ni progression).
+ */
+html[data-k-skill="retro-mission-poster"][data-k-gabarits~="cadre"] { --_pad: var(--k-sig-frame); --_rail-w: 0px; --_inset: 0; --_bw: var(--k-sig-frame); --_line: var(--k-text); --_radius: 0; }
+html[data-k-skill="retro-mission-poster"] :is(.g-frame__bar, .g-frame__rail, .g-frame__mask) { display: none; }
+html[data-k-skill="retro-mission-poster"][data-k-gabarits~="cadre"] .k-page__top .k-nav { background: var(--k-bg); border-block-end-color: var(--k-line); }

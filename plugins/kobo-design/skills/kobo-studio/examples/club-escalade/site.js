@@ -50,7 +50,11 @@
   function ecrireLigne(ligne) {
     var c = lire(ligne), cellule = ligne.querySelector('[data-res-places]');
     cellule.textContent = '';
-    if (c.mien) { var fort = document.createElement('strong'); fort.textContent = places(c); cellule.appendChild(fort); }
+    if (c.mien) {
+      var fort = document.createElement('strong'), qui = document.createElement('span');
+      fort.textContent = places(c); qui.className = 'k-table__sub'; qui.textContent = 'par vous';
+      cellule.appendChild(fort); cellule.appendChild(qui);
+    }
     else cellule.textContent = places(c);
     cellule.setAttribute('data-k-sort', String(c.reste));
     if (c.reste === 0 && !c.mien) ligne.setAttribute('aria-disabled', 'true'); else ligne.removeAttribute('aria-disabled');

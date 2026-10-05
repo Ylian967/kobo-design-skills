@@ -1,0 +1,82 @@
+/*
+ * kobo-studio — couche de signature : retro-mission-poster
+ * Sources (lecture seule) : SKILL.md (trois encres : crème, rouge, noir chaud ; capitales partout ; le rouge en grand : logo, titres
+ * du journal, filets ; le cadre crème), references/components.md (bouton crème rectangulaire sans arrondi, rouge au survol ; boutons
+ * ronds à contour de 2px ; logo en capitales grasses rouges espacées ; petites capitales très espacées ; carte du journal : image à
+ * coins de 12px, titre en capitales étroites, filet rouge, contour rouge au survol ; champ sans fond souligné de 2px ; liste à filets
+ * rouges), démo (le bouton monte de 2px).
+ * Non traduit : l'affiche plein écran, le titre géant incliné, le mot rouge derrière lui, l'anneau dentelé, le cadre autour de l'écran.
+ *
+ * « full » : formes + bouton qui monte. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton crème rectangulaire en capitales grasses, rouge au survol ; secondaire à contour de 2px ---- */
+  &.k-btn:not(.k-btn--icon) { border-radius: 0; }
+  &.k-btn { font-weight: bolder; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-accent-2); --_edge: var(--k-accent-2); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: transparent; --_edge: var(--k-accent-2); }
+  &.k-btn--icon { border-radius: 50%; }
+
+  /* ---- Logo en capitales grasses rouges, espacées ; liens en capitales grasses ---- */
+  &.k-nav__brand { font-family: var(--k-font-body); font-weight: bolder; text-transform: uppercase; letter-spacing: var(--k-ls-caps); color: var(--k-accent-2); }
+  &.k-nav__link, &.k-tabs__tab, &.k-field__label { font-weight: bolder; }
+  &.k-field__label { text-transform: uppercase; letter-spacing: var(--k-btn-tracking); }
+
+  /* ---- Carte du journal : ni fond ni cadre ; petites capitales très espacées ; titre rouge en capitales étroites ; filet rouge ---- */
+  &.k-card { background: transparent; border-color: transparent; border-block-end: var(--k-border-w) solid var(--k-accent-2); border-radius: 0; }
+  &.k-card__media { border: var(--k-border-w) solid transparent; border-radius: var(--k-radius); }
+  &.k-card__body, &.k-card__foot { padding-inline: 0; }
+  &.k-card__meta { font-family: var(--k-font-body); letter-spacing: var(--k-sig-ls-chapter); color: var(--k-text); }
+  &.k-card__title { color: var(--k-accent-2); }
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { text-transform: uppercase; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: transparent; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) .k-card__media { border-color: var(--k-accent-2); }
+
+  /* ---- Onglets : capitales étroites, filets rouges ---- */
+  &.k-tabs__list { border-block-end-color: var(--k-accent-2); }
+  &.k-tabs__tab { font-family: var(--k-font-display); font-size: var(--k-fs-h3); }
+  &.k-tabs__tab[aria-selected="true"] { border-block-end-color: var(--k-accent-2); }
+
+  /* ---- Champ sans fond, souligné de 2px ---- */
+  &.k-field__control:not(:disabled) { background: transparent; border-radius: 0; padding-inline: 0; font-weight: bolder; }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: transparent; border-block-end-color: var(--k-text-2); }
+
+  /* ---- Le cadre crème : autour de la modale et de la notification ---- */
+  &.k-modal { border: var(--k-sig-frame) solid var(--k-text); border-radius: 0; }
+  &.k-toast { border-radius: 0; border-color: var(--k-text); }
+  &.k-empty { border: 0; border-block-start: var(--k-border-w) solid var(--k-accent-2); border-radius: 0; padding-inline: 0; }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent-2); }
+  &.k-progress__track { border-radius: 0; }
+}
+
+/* Mouvement de signature (seulement en « full ») : le bouton monte de 2px */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &.k-btn { transition: translate var(--k-dur-fast) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out); }
+  &.k-btn:not(:disabled, [aria-disabled="true"], [aria-busy="true"], .k-btn--ghost):is(:hover, [data-k-state="hover"]) { translate: 0 calc(var(--k-space-1) * -0.5); }
+}
+
+@media (prefers-reduced-motion: reduce) { .k-btn { transition: none; } .k-btn:hover { translate: none; } }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : filets rouges ; angles droits ; page courante soulignée de rouge ; intitulés en capitales étroites ; lignes de l'accordéon séparées par un filet rouge (liste de faits).
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-table { border-color: transparent; border-block-color: var(--k-accent-2); border-radius: 0; }
+  &.k-table thead th { text-transform: uppercase; background: transparent; border-block-end-color: var(--k-accent-2); }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent-2); }
+  &.k-accordion { border-block-start-color: var(--k-accent-2); }
+  &.k-accordion--titles .k-accordion__trigger { text-transform: uppercase; }
+  &.k-pagination__page { font-weight: bolder; border-radius: 0; }
+  &.k-pagination__page[aria-current="page"] { background: transparent; border-color: transparent; border-block-end-color: var(--k-accent-2); }
+  &.k-dropdown__menu, &.k-dropdown__item, &.k-tooltip__bubble, &.k-check__box { border-radius: 0; }
+  &.k-dropdown__menu { border-color: var(--k-text); }
+  &.k-crumbs { font-weight: bolder; }
+  /* sélection : le champ est un filet sans marge, le chevron vient au bord */
+  &.k-select__control:not(:disabled) { padding-inline-end: var(--k-space-8); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-1); }
+  /* relecture sur components.md */
+  &.k-accordion__item { border-block-end-color: var(--k-accent-2); }
+}

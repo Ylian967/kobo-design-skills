@@ -1,0 +1,31 @@
+/*
+ * kobo-studio — famille de gabarits « cadre de page » (emplacement frame).
+ * Un cadre fixe autour de l'écran : filet, rail latéral, barre haute où se lit la progression dans la page.
+ * La barre de navigation de la structure n'est pas déplacée dans le DOM : elle est seulement logée dans la barre du cadre.
+ * Uniquement des rôles --k-* ; l'habillage d'un skill règle des variables locales (--_rail, --_radius, --_line).
+ * Seuil sans point de rupture : le rail disparaît de lui-même quand l'écran est plus étroit que 6 × --k-space-32.
+ */
+html[data-k-gabarits~="cadre"] {
+  --_pad: var(--k-edge);
+  --_rail: clamp(0px, (100vw - var(--k-space-32) * 6) * 999, var(--_rail-w, var(--k-space-16)));
+  --_bar: var(--k-nav-h);
+  scroll-padding-block-start: calc(var(--_pad) + var(--_bar) + var(--k-space-6));
+}
+/* La page se range dans le cadre */
+html[data-k-gabarits~="cadre"] .k-page { padding: var(--_pad) var(--_pad) var(--_pad) calc(var(--_pad) + var(--_rail)); }
+html[data-k-gabarits~="cadre"] .k-page__top { inset-block-start: var(--_pad); z-index: 45; }
+html[data-k-gabarits~="cadre"] .k-page__top .k-nav { background: transparent; border-block-end-color: transparent; }
+html[data-k-gabarits~="cadre"] .k-sticky[data-k-side] { inset-block-start: calc(var(--_pad) + var(--_bar) + var(--k-space-6)); }
+
+.g-frame { position: absolute; inset: 0; color: var(--k-text); }
+/* Bandeau qui masque ce qui défile entre le haut de l'écran et le cadre, puis la barre du cadre */
+.g-frame__mask { position: absolute; inset: 0 0 auto 0; block-size: var(--_pad); background: var(--k-bg); }
+.g-frame__bar { position: absolute; inset: var(--_pad) var(--_pad) auto calc(var(--_pad) + var(--_rail)); block-size: var(--_bar); overflow: hidden; background: var(--k-bg); border-block-end: var(--k-border-w) solid var(--_line, var(--k-line)); }
+.g-frame__progress { position: absolute; inset: 0; background: var(--_fill, var(--k-surface)); transform-origin: 0 50%; transform: scaleX(var(--_p, 0)); }
+[dir="rtl"] .g-frame__progress { transform-origin: 100% 50%; }
+.g-frame__rail { position: absolute; inset: var(--_pad) auto var(--_pad) var(--_pad); inline-size: var(--_rail); overflow: hidden; display: grid; grid-template-rows: var(--_bar) 1fr var(--_bar); justify-items: center; align-items: center; background: var(--k-bg); border-inline-end: var(--k-border-w) solid var(--_line, var(--k-line)); }
+.g-frame__rail > :first-child { inline-size: 100%; block-size: 100%; display: grid; place-items: center; border-block-end: var(--k-border-w) solid var(--_line, var(--k-line)); }
+.g-frame__count { font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); writing-mode: vertical-rl; rotate: 180deg; letter-spacing: var(--k-ls-caps); color: var(--k-text-muted); }
+.g-frame__sign { inline-size: var(--k-space-8); fill: currentColor; }
+/* Le filet du cadre, par-dessus tout */
+.g-frame__line { position: absolute; inset: var(--_inset, var(--_pad)); border: var(--_bw, var(--k-border-w)) solid var(--_line, var(--k-line)); border-radius: var(--_radius, var(--k-radius)); }

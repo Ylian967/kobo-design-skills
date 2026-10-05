@@ -10,7 +10,8 @@
  *   d'après la ligne (son en-tête de ligne devient le titre, ses autres cellules une liste de faits) ; [data-ap-close] ou Échap
  *   le ferme et rend le focus à la ligne. Événements sur .ap : « k-app:open » (detail.row) et « k-app:close ».
  * Filtres : <select data-ap-filter="etat"> masque les lignes dont data-etat diffère ; le champ [data-ap-search] filtre sur le
- *   texte ; le résumé [data-ap-sum] est réécrit (role="status") ; [data-ap-reset] efface tout.
+ *   texte des lignes et sur leur attribut data-ap-keywords (mots absents des cellules) ; le résumé [data-ap-sum] est réécrit
+ *   (role="status"), avec le modèle data-ap-sum-one quand une seule ligne reste ; [data-ap-reset] efface tout.
  * Recherche hors de la liste (fiche, tableau de bord) : Entrée mène à l'écran de liste (attribut action du formulaire) avec ?q=… ;
  *   la liste lit ?q= à l'ouverture et filtre.
  * Chemin d'étapes (fiche) : <ol data-ap-steps> ; l'étape en cours porte aria-current="step", les étapes faites data-k-step="done".
@@ -85,13 +86,13 @@
     var filters = Array.prototype.map.call(ap.querySelectorAll('[data-ap-filter]'), function (s) { return [s.dataset.apFilter, s.value]; });
     var rows = table.querySelectorAll('tbody > tr'), shown = 0;
     Array.prototype.forEach.call(rows, function (r) {
-      var ok = filters.every(function (f) { return !f[1] || r.dataset[f[0]] === f[1]; }) && (!needle || r.textContent.toLowerCase().indexOf(needle) >= 0);
+      var ok = filters.every(function (f) { return !f[1] || r.dataset[f[0]] === f[1]; }) && (!needle || (r.textContent + ' ' + (r.dataset.apKeywords || '')).toLowerCase().indexOf(needle) >= 0);
       r.hidden = !ok; if (ok) shown++;
     });
     if (ap._row && ap._row.hidden) close(ap, false);
     if (Kobo.table) Kobo.table.refresh(table);
     var sum = $(ap, '[data-ap-sum]');
-    if (sum) sum.textContent = (sum.dataset.apSum || '{n} sur {total}').replace('{n}', shown).replace('{total}', rows.length);
+    if (sum) sum.textContent = ((shown === 1 && sum.dataset.apSumOne) || sum.dataset.apSum || '{n} sur {total}').replace('{n}', shown).replace('{total}', rows.length);
   }
 
   /* ---------- Chemin d'étapes (écran fiche) ---------- */

@@ -1,13 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import './styles.js';
+import { emplacements } from './styles.js';
 import { Bouton } from './kobo/kobo-studio/components/bouton/Bouton.jsx';
 import { Carte } from './kobo/kobo-studio/components/carte/Carte.jsx';
 import { Page, Emplacement, TitreSection, Image, Finale, Faits } from './kobo/kobo-studio/ux/structures/Page.jsx';
 import { page, suite, PLATS, PAGES, TELEPHONE } from './site.js';
 
+const facade = { src: 'images/facade.jpg', alt: "Façade d'un petit restaurant d'angle, vitrine à petits carreaux, dans une rue en pente", largeur: 1600, hauteur: 1067, sujet: '70% 55%' };
 const portrait = { src: 'images/odile-cuisine.jpg', alt: 'Une cuisinière en chemise claire et tablier dresse des assiettes, dans une cuisine sombre', largeur: 1200, hauteur: 1500, ratio: '4 / 5', sujet: '55% 30%' };
-const salle = { src: 'images/salle.jpg', alt: 'Petite salle de restaurant : tables en bois, mur vert bouteille, lumière tamisée', largeur: 1600, hauteur: 1067 };
 
 const maison = [
   { terme: 'Ouverture', valeur: '2019' },
@@ -18,17 +18,21 @@ const maison = [
 
 // Accueil composé avec les pièces de la structure : la recherche de <Accueil> n'a pas d'objet pour quatre plats.
 function Accueil() {
+  const gab = emplacements();
+  // Les parts du héros : le gabarit du skill (affiche, titre incliné) les redispose ; sans gabarit, le contenu neutre reste.
+  const hero = {
+    kicker: <p className="k-kicker">Chez Odile · pentes de la Croix-Rousse, Lyon</p>,
+    title: <h1 className="k-h1" id="titre">La cuisine du marché, chez Odile</h1>,
+    lead: <p className="k-lead">Une carte courte qui change chaque semaine, 28 couverts, et Odile seule aux fourneaux. Du mardi au samedi, midi et soir.</p>,
+    action: <Bouton href={TELEPHONE.href}>{TELEPHONE.libelle}</Bouton>,
+    media: <Image image={facade} differee={false} className="k-hero__side" />,
+  };
   return (
-    <Page {...page('accueil')}>
-      <Emplacement nom="hero" comme="section" aria-labelledby="titre">
+    <Page {...page('accueil')} emplacements={gab}>
+      <Emplacement nom="hero" comme="section" gabarits={gab} parts={hero} aria-labelledby="titre">
         <div className="k-wrap k-hero">
-          <div className="k-hero__text">
-            <p className="k-kicker">Chez Odile · pentes de la Croix-Rousse, Lyon</p>
-            <h1 className="k-h1" id="titre">La cuisine du marché, chez Odile</h1>
-            <p className="k-lead">Une carte courte qui change chaque semaine, 28 couverts, et Odile seule aux fourneaux. Du mardi au samedi, midi et soir.</p>
-            <Bouton href={TELEPHONE.href}>{TELEPHONE.libelle}</Bouton>
-          </div>
-          <Image image={portrait} differee={false} className="k-hero__side" />
+          <div className="k-hero__text">{hero.kicker}{hero.title}{hero.lead}{hero.action}</div>
+          {hero.media}
         </div>
       </Emplacement>
 
@@ -45,7 +49,7 @@ function Accueil() {
 
       <section className="k-section k-section--alt" id="maison" aria-labelledby="t-maison">
         <div className="k-wrap k-split">
-          <Image image={salle} />
+          <Image image={portrait} />
           <div className="k-split__main k-stack k-stack--lg">
             <TitreSection id="t-maison" surtitre="La maison" titre="Deux personnes, une petite salle" />
             <div className="k-prose">
