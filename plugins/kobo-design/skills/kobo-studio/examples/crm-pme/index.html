@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full" data-k-skill="clear-ledger-desk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affaires — Rivage Suivi, Atelier Rivage (données d'exemple fictives)</title>
+<!-- Fichiers de kobo/ : ne pas les modifier. Comportements du projet : site.js. -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/clear-ledger-desk.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/selection/selection.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/tableau/tableau.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/modale/modale.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/interrupteur/interrupteur.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/application/application.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/clear-ledger-desk.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-empty" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8M3 13v6h18v-6M3 13h5l1.5 3h5L16 13h5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.5M12 3l9.5 17h-19L12 3Z"/></symbol>
+</svg>
+
+<div class="k-page ap">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="ap-top">
+      <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-side aria-expanded="true" aria-controls="ap-side" aria-label="Barre latérale"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <a class="ap-brand" href="index.html">Rivage Suivi</a>
+      <form class="k-field ap-search" role="search">
+        <label class="k-field__label k-sr-only" for="ap-q">Chercher une affaire ou une société</label>
+        <div class="k-field__box"><input class="k-field__control" id="ap-q" type="search" data-ap-search placeholder="Chercher une affaire, une société…" autocomplete="off" aria-describedby="ap-q-aide"></div>
+        <p class="k-field__help k-sr-only" id="ap-q-aide">Raccourci : la touche barre oblique.</p>
+      </form>
+      <div class="ap-top__end">
+        <button type="button" class="k-btn k-btn--ghost" data-ap-help data-k-modal-open="ap-aide" aria-haspopup="dialog">Raccourcis <span class="ap-key" aria-hidden="true">?</span></button>
+      </div>
+    </header>
+  </div>
+
+  <div class="ap-body">
+    <nav class="ap-side" id="ap-side" aria-label="Sections de Rivage Suivi">
+      <h2 class="ap-side__title">Suivi</h2>
+      <ul>
+        <li><a class="ap-side__link" href="index.html" aria-current="page" title="Affaires ouvertes"><svg class="k-icon" aria-hidden="true"><use href="#i-list"/></svg><span class="ap-side__label">Affaires</span><span class="ap-side__count" data-rs-ouvertes>16</span></a></li>
+      </ul>
+    </nav>
+
+    <main id="contenu" class="ap-main" tabindex="-1">
+      <!-- 1. Tête d'écran : où je suis, combien, et la seule action principale -->
+      <header data-k-slot="title" class="ap-head">
+        <div class="ap-head__text">
+          <p class="k-kicker" data-k-part="kicker">Atelier Rivage</p>
+          <h1 id="titre" data-k-part="title">Affaires</h1>
+          <p class="ap-head__sum" data-k-part="lead" role="status" data-ap-sum="{n} affaires affichées sur {total}"></p>
+        </div>
+        <div><button type="button" class="k-btn" data-k-part="action" data-k-modal-open="rs-creer" aria-haspopup="dialog">Créer une affaire</button></div>
+      </header>
+
+      <p class="k-note"><strong>Données d'exemple fictives.</strong> Les sociétés, les affaires, les montants et les prénoms sont inventés. Rien n'est enregistré : une affaire créée ou une étape changée disparaît au rechargement de la page.</p>
+
+      <!-- 2. Filtres -->
+      <div class="ap-tools">
+        <div class="k-field k-select">
+          <label class="k-field__label" for="f-responsable">Responsable</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-responsable" data-ap-filter="responsable"><option value="">Tous les responsables</option><option value="armelle">Armelle</option><option value="erwan">Erwan</option><option value="maëlle">Maëlle</option><option value="soizic">Soizic</option><option value="titouan">Titouan</option></select></div>
+        </div>
+        <div class="k-field k-select">
+          <label class="k-field__label" for="f-avancement">Avancement</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-avancement" data-ap-filter="avancement"><option value="ouverte" selected>Affaires ouvertes</option><option value="close">Affaires closes (gagnées, perdues)</option><option value="">Toutes les affaires</option></select></div>
+        </div>
+        <div class="k-field k-select">
+          <label class="k-field__label" for="f-etape">Étape</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-etape" data-ap-filter="etape"><option value="">Toutes les étapes</option><option value="qualification">Qualification</option><option value="proposition">Proposition</option><option value="negociation">Négociation</option><option value="gagnee">Gagnée</option><option value="perdue">Perdue</option></select></div>
+        </div>
+        <button type="button" class="k-btn k-btn--ghost" data-ap-reset>Effacer les filtres</button>
+        <button type="button" class="k-switch" role="switch" aria-checked="false" data-rs-densite>
+          <span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span>
+          <span class="k-switch__label">Affichage compact</span>
+          <span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span>
+        </button>
+      </div>
+
+      <!-- 3. Zone de travail : la liste, et le détail de l'affaire ouverte -->
+      <div class="ap-work">
+        <section data-k-slot="grid" class="ap-list" aria-labelledby="titre">
+          <div class="k-table" role="region" aria-labelledby="t-aff" tabindex="0" data-k-rownav>
+            <table>
+              <caption id="t-aff">Affaires d'Atelier Rivage (données fictives). Flèches : changer de ligne. Entrée : ouvrir le détail.</caption>
+              <thead><tr>
+                <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Affaire<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Société<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Étape<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" data-k-type="number" aria-sort="none"><button type="button" class="k-table__sort">Montant HT<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" aria-sort="ascending"><button type="button" class="k-table__sort">Clôture prévue<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Responsable<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+              </tr></thead>
+              <tbody>
+                <tr data-etape="gagnee" data-avancement="close" data-responsable="erwan" data-service="refonte"><th scope="row">Refonte du site vitrine</th><td>Maison Trélaz</td><td data-rs-cell="etape" data-k-sort="4">Gagnée</td><td data-k-type="number" data-k-sort="7600">7 600 €</td><td data-k-sort="2026-08-28">28 août 2026</td><td>Erwan</td></tr>
+                <tr data-etape="gagnee" data-avancement="close" data-responsable="maëlle" data-service="audit"><th scope="row">Audit du réseau des deux boutiques</th><td>Boulangeries Le Fournil d'Anne</td><td data-rs-cell="etape" data-k-sort="4">Gagnée</td><td data-k-type="number" data-k-sort="2900">2 900 €</td><td data-k-sort="2026-09-04">4 sept. 2026</td><td>Maëlle</td></tr>
+                <tr data-etape="perdue" data-avancement="close" data-responsable="soizic" data-service="formation"><th scope="row">Formation tableur avancé</th><td>Transports Roussin</td><td data-rs-cell="etape" data-k-sort="5">Perdue</td><td data-k-type="number" data-k-sort="1800">1 800 €</td><td data-k-sort="2026-09-11">11 sept. 2026</td><td>Soizic</td></tr>
+                <tr data-etape="gagnee" data-avancement="close" data-responsable="titouan" data-service="maintenance"><th scope="row">Contrat de maintenance 2026</th><td>Garage des Deux Rives</td><td data-rs-cell="etape" data-k-sort="4">Gagnée</td><td data-k-type="number" data-k-sort="2600">2 600 €</td><td data-k-sort="2026-09-15">15 sept. 2026</td><td>Titouan</td></tr>
+                <tr data-etape="perdue" data-avancement="close" data-responsable="armelle" data-service="refonte"><th scope="row">Refonte du site et du catalogue</th><td>Imprimerie du Sillon</td><td data-rs-cell="etape" data-k-sort="5">Perdue</td><td data-k-type="number" data-k-sort="12000">12 000 €</td><td data-k-sort="2026-09-18">18 sept. 2026</td><td>Armelle</td></tr>
+                <tr data-etape="gagnee" data-avancement="close" data-responsable="maëlle" data-service="audit"><th scope="row">Audit de sécurité des postes</th><td>Cabinet Brévin Expertise</td><td data-rs-cell="etape" data-k-sort="4">Gagnée</td><td data-k-type="number" data-k-sort="3400">3 400 €</td><td data-k-sort="2026-09-22">22 sept. 2026</td><td>Maëlle</td></tr>
+                <tr data-etape="gagnee" data-avancement="close" data-responsable="soizic" data-service="formation"><th scope="row">Formation à la gestion du site</th><td>Maison Trélaz</td><td data-rs-cell="etape" data-k-sort="4">Gagnée</td><td data-k-type="number" data-k-sort="900">900 €</td><td data-k-sort="2026-09-25">25 sept. 2026</td><td>Soizic</td></tr>
+                <tr data-etape="perdue" data-avancement="close" data-responsable="titouan" data-service="maintenance"><th scope="row">Maintenance du site</th><td>Librairie Passerelle</td><td data-rs-cell="etape" data-k-sort="5">Perdue</td><td data-k-type="number" data-k-sort="1500">1 500 €</td><td data-k-sort="2026-09-29">29 sept. 2026</td><td>Titouan</td></tr>
+                <tr data-etape="negociation" data-avancement="ouverte" data-responsable="maëlle" data-service="audit"><th scope="row">Audit du parc informatique</th><td>Menuiserie Lormeau</td><td data-rs-cell="etape" data-k-sort="3">Négociation</td><td data-k-type="number" data-k-sort="3600">3 600 €</td><td data-k-sort="2026-10-09">9 oct. 2026</td><td>Maëlle</td></tr>
+                <tr data-etape="negociation" data-avancement="ouverte" data-responsable="erwan" data-service="refonte"><th scope="row">Refonte du site vitrine</th><td>Garage des Deux Rives</td><td data-rs-cell="etape" data-k-sort="3">Négociation</td><td data-k-type="number" data-k-sort="9800">9 800 €</td><td data-k-sort="2026-10-16">16 oct. 2026</td><td>Erwan</td></tr>
+                <tr data-etape="proposition" data-avancement="ouverte" data-responsable="soizic" data-service="formation"><th scope="row">Formation tableur pour l'équipe administrative</th><td>Cabinet Brévin Expertise</td><td data-rs-cell="etape" data-k-sort="2">Proposition</td><td data-k-type="number" data-k-sort="1900">1 900 €</td><td data-k-sort="2026-10-20">20 oct. 2026</td><td>Soizic</td></tr>
+                <tr data-etape="proposition" data-avancement="ouverte" data-responsable="titouan" data-service="maintenance"><th scope="row">Contrat de maintenance 2027</th><td>Imprimerie du Sillon</td><td data-rs-cell="etape" data-k-sort="2">Proposition</td><td data-k-type="number" data-k-sort="4200">4 200 €</td><td data-k-sort="2026-10-23">23 oct. 2026</td><td>Titouan</td></tr>
+                <tr data-etape="proposition" data-avancement="ouverte" data-responsable="erwan" data-service="refonte"><th scope="row">Refonte de la boutique en ligne</th><td>Atelier Coquelin</td><td data-rs-cell="etape" data-k-sort="2">Proposition</td><td data-k-type="number" data-k-sort="14500">14 500 €</td><td data-k-sort="2026-10-30">30 oct. 2026</td><td>Erwan</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="maëlle" data-service="audit"><th scope="row">Audit de sécurité des postes</th><td>Clinique vétérinaire de l'Erdre</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="2800">2 800 €</td><td data-k-sort="2026-11-06">6 nov. 2026</td><td>Maëlle</td></tr>
+                <tr data-etape="negociation" data-avancement="ouverte" data-responsable="soizic" data-service="formation"><th scope="row">Formation à la gestion du site</th><td>Librairie Passerelle</td><td data-rs-cell="etape" data-k-sort="3">Négociation</td><td data-k-type="number" data-k-sort="1200">1 200 €</td><td data-k-sort="2026-11-10">10 nov. 2026</td><td>Soizic</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="titouan" data-service="maintenance"><th scope="row">Maintenance du site et des sauvegardes</th><td>Paysages Bodiguel</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="2400">2 400 €</td><td data-k-sort="2026-11-13">13 nov. 2026</td><td>Titouan</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="armelle" data-service="refonte"><th scope="row">Refonte du site et prise de rendez-vous</th><td>Opticiens Havard</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="11200">11 200 €</td><td data-k-sort="2026-11-20">20 nov. 2026</td><td>Armelle</td></tr>
+                <tr data-etape="proposition" data-avancement="ouverte" data-responsable="maëlle" data-service="audit"><th scope="row">Audit des outils de facturation</th><td>Transports Roussin</td><td data-rs-cell="etape" data-k-sort="2">Proposition</td><td data-k-type="number" data-k-sort="4500">4 500 €</td><td data-k-sort="2026-11-27">27 nov. 2026</td><td>Maëlle</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="soizic" data-service="formation"><th scope="row">Formation messagerie et agenda partagés</th><td>Crèche Les Goélands</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="950">950 €</td><td data-k-sort="2026-12-04">4 déc. 2026</td><td>Soizic</td></tr>
+                <tr data-etape="proposition" data-avancement="ouverte" data-responsable="erwan" data-service="refonte"><th scope="row">Refonte du site vitrine</th><td>Serrurerie Mahé</td><td data-rs-cell="etape" data-k-sort="2">Proposition</td><td data-k-type="number" data-k-sort="6900">6 900 €</td><td data-k-sort="2026-12-11">11 déc. 2026</td><td>Erwan</td></tr>
+                <tr data-etape="negociation" data-avancement="ouverte" data-responsable="titouan" data-service="maintenance"><th scope="row">Contrat de maintenance 2027</th><td>Courtage Valmère</td><td data-rs-cell="etape" data-k-sort="3">Négociation</td><td data-k-type="number" data-k-sort="3300">3 300 €</td><td data-k-sort="2026-12-15">15 déc. 2026</td><td>Titouan</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="armelle" data-service="audit"><th scope="row">Audit d'accessibilité du site</th><td>Voiles Kerbrat</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="3100">3 100 €</td><td data-k-sort="2027-01-15">15 janv. 2027</td><td>Armelle</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="soizic" data-service="formation"><th scope="row">Formation à la sécurité numérique</th><td>Plomberie Jahan</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="1600">1 600 €</td><td data-k-sort="2027-01-22">22 janv. 2027</td><td>Soizic</td></tr>
+                <tr data-etape="qualification" data-avancement="ouverte" data-responsable="erwan" data-service="refonte"><th scope="row">Refonte de l'espace élèves</th><td>Auto-école du Port</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="8400">8 400 €</td><td data-k-sort="2027-02-12">12 févr. 2027</td><td>Erwan</td></tr>
+              </tbody>
+            </table>
+            <div class="k-table__empty" hidden><div class="k-empty k-empty--plain"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h2 class="k-empty__title">Aucune affaire ne correspond</h2><p class="k-empty__text">Aucune affaire pour cette recherche et ces filtres. Changez le responsable, l'avancement ou l'étape, ou effacez tout pour revenir aux affaires ouvertes.</p><div class="k-empty__actions"><button type="button" class="k-btn k-btn--secondary" data-ap-reset>Effacer les filtres</button></div></div></div>
+            <p class="k-table__status k-sr-only" role="status"></p>
+          </div>
+          <div class="ap-list__foot">
+            <span>Montants fictifs, en euros hors taxes.</span>
+            <ul class="ap-list__keys" aria-label="Touches de la liste"><li><span class="ap-key">↑</span><span class="ap-key">↓</span> ligne</li><li><span class="ap-key">Entrée</span> détail</li><li><span class="ap-key">/</span> chercher</li></ul>
+          </div>
+        </section>
+
+        <aside class="ap-detail" id="ap-detail" aria-labelledby="d-titre" hidden>
+          <div class="ap-detail__head">
+            <div><h2 class="ap-detail__title" id="d-titre" tabindex="-1"></h2><p class="ap-detail__sub">Affaire</p></div>
+            <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-close aria-label="Fermer le détail"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          </div>
+          <dl class="k-facts" data-ap-facts></dl>
+          <div class="k-field k-select">
+            <label class="k-field__label" for="d-etape">Changer l'étape</label>
+            <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="d-etape" data-rs-etape aria-describedby="d-etape-aide"><option value="qualification">Qualification</option><option value="proposition">Proposition</option><option value="negociation">Négociation</option><option value="gagnee">Gagnée</option><option value="perdue">Perdue</option></select></div>
+            <span class="k-field__help" id="d-etape-aide">Le changement s'applique tout de suite.</span>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="k-modal" id="rs-creer" aria-labelledby="rs-creer-t">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="rs-creer-t">Créer une affaire</h2><button type="button" class="k-btn k-btn--secondary k-btn--icon" data-k-modal-close aria-label="Fermer la fenêtre"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <div class="k-modal__body">
+      <form class="k-stack" id="rs-form" novalidate>
+        <div class="k-field" data-k-validate>
+          <label class="k-field__label" for="n-affaire">Affaire</label>
+          <div class="k-field__box"><input class="k-field__control" id="n-affaire" name="affaire" type="text" required autocomplete="off" aria-describedby="n-affaire-aide" data-k-msg="Donnez un nom à l'affaire, par exemple « Refonte du site vitrine »."></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+          <span class="k-field__help" id="n-affaire-aide">Ce que la société achète, en quelques mots.</span>
+        </div>
+        <div class="k-field" data-k-validate>
+          <label class="k-field__label" for="n-societe">Société</label>
+          <div class="k-field__box"><input class="k-field__control" id="n-societe" name="societe" type="text" required autocomplete="off" list="rs-societes" data-k-msg="Indiquez la société cliente : choisissez-la dans la liste ou écrivez son nom."></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+          <datalist id="rs-societes"><option value="Atelier Coquelin"><option value="Auto-école du Port"><option value="Boulangeries Le Fournil d&#x27;Anne"><option value="Cabinet Brévin Expertise"><option value="Clinique vétérinaire de l&#x27;Erdre"><option value="Courtage Valmère"><option value="Crèche Les Goélands"><option value="Garage des Deux Rives"><option value="Imprimerie du Sillon"><option value="Librairie Passerelle"><option value="Maison Trélaz"><option value="Menuiserie Lormeau"><option value="Opticiens Havard"><option value="Paysages Bodiguel"><option value="Plomberie Jahan"><option value="Serrurerie Mahé"><option value="Transports Roussin"><option value="Voiles Kerbrat"></datalist>
+        </div>
+        <div class="k-field k-select" data-k-validate>
+          <label class="k-field__label" for="n-service">Service</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="n-service" name="service" required data-k-msg="Choisissez le service vendu : audit, refonte de site, formation ou maintenance."><option value="">Choisir un service</option><option value="audit">Audit</option><option value="refonte">Refonte de site</option><option value="formation">Formation</option><option value="maintenance">Maintenance</option></select></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+        <div class="k-field k-select">
+          <label class="k-field__label" for="n-etape">Étape</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="n-etape" name="etape"><option value="qualification">Qualification</option><option value="proposition">Proposition</option><option value="negociation">Négociation</option><option value="gagnee">Gagnée</option><option value="perdue">Perdue</option></select></div>
+        </div>
+        <div class="k-field" data-k-validate>
+          <label class="k-field__label" for="n-montant">Montant <span class="k-field__opt">(facultatif)</span></label>
+          <div class="k-field__box"><input class="k-field__control" id="n-montant" name="montant" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" aria-describedby="n-montant-aide" data-k-msg="Écrivez le montant en chiffres, sans espace ni symbole : 4800."></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+          <span class="k-field__help" id="n-montant-aide">En euros hors taxes.</span>
+        </div>
+        <div class="k-field" data-k-validate>
+          <label class="k-field__label" for="n-cloture">Clôture prévue <span class="k-field__opt">(facultatif)</span></label>
+          <div class="k-field__box"><input class="k-field__control" id="n-cloture" name="cloture" type="date" autocomplete="off"></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+        <div class="k-field k-select" data-k-validate>
+          <label class="k-field__label" for="n-responsable">Responsable</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="n-responsable" name="responsable" required data-k-msg="Choisissez la personne qui suit cette affaire."><option value="">Choisir un responsable</option><option value="armelle">Armelle</option><option value="erwan">Erwan</option><option value="maëlle">Maëlle</option><option value="soizic">Soizic</option><option value="titouan">Titouan</option></select></div>
+          <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+        </div>
+      </form>
+    </div>
+    <div class="k-modal__foot">
+      <button type="button" class="k-btn k-btn--secondary" data-k-modal-close>Annuler</button>
+      <button type="submit" class="k-btn" form="rs-form" data-rs-envoi>Créer l'affaire</button>
+    </div>
+  </dialog>
+
+  <dialog class="k-modal" id="ap-aide" aria-labelledby="ap-aide-t" data-k-modal-dismiss="backdrop">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="ap-aide-t">Raccourcis clavier</h2><button type="button" class="k-btn k-btn--secondary k-btn--icon" data-k-modal-close aria-label="Fermer la fenêtre"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <div class="k-modal__body">
+      <ul class="ap-keys">
+        <li><span>Chercher une affaire ou une société</span><span><span class="ap-key">/</span></span></li>
+        <li><span>Changer de ligne</span><span><span class="ap-key">↑</span><span class="ap-key">↓</span></span></li>
+        <li><span>Première, dernière ligne</span><span><span class="ap-key">Début</span><span class="ap-key">Fin</span></span></li>
+        <li><span>Ouvrir le détail de l'affaire</span><span><span class="ap-key">Entrée</span></span></li>
+        <li><span>Fermer le détail, le tiroir, cette fenêtre</span><span><span class="ap-key">Échap</span></span></li>
+        <li><span>Replier ou ouvrir la barre latérale</span><span><span class="ap-key">[</span></span></li>
+        <li><span>Cette aide</span><span><span class="ap-key">?</span></span></li>
+      </ul>
+    </div>
+  </dialog>
+</div>
+
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/tableau/tableau.js"></script>
+<script src="kobo/kobo-studio/components/modale/modale.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/components/interrupteur/interrupteur.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/structures/application/application.js"></script>
+<script src="site.js"></script>
+<script>
+  Kobo.templates.apply();
+</script>
+</body>
+</html>

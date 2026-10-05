@@ -12,13 +12,15 @@ const nombre = (v) => { const n = parseFloat(String(v).replace(/\s/g, '').replac
  * selection, surSelection(ids) : mode piloté ; sinon interne. selectionnable : affiche les cases
  * tri : { colonne, sens: 'ascending' | 'descending' } de départ ; surTri(tri) : tri fait par le serveur (les lignes ne sont alors pas retriées ici)
  * vide : { titre, texte, actions } ; nomLigne(ligne) → nom lu pour sa case (« Sélectionner Camille Roux »)
+ * surOuvrir(ligne) : rend les lignes parcourables (↑ ↓ Début Fin, Espace coche, Entrée ou clic ouvre) ; ouverte : id de la ligne ouverte
  * dense ; enCours : aria-busy
  */
-export function Tableau({ legende, colonnes, lignes, selectionnable = false, selection, surSelection, tri: triInitial, surTri, vide, nomLigne, dense, enCours, barre }) {
+export function Tableau({ legende, colonnes, lignes, selectionnable = false, selection, surSelection, tri: triInitial, surTri, vide, nomLigne, dense, enCours, barre, surOuvrir, ouverte }) {
   const id = useId();
   const [interne, setInterne] = useState([]);
   const [tri, setTri] = useState(triInitial || null);
   const [annonce, setAnnonce] = useState('');
+  const [courante, setCourante] = useState(null);   // ligne dans l'ordre de tabulation, quand les lignes sont parcourables
   const choisies = selection ?? interne;
   const triees = useMemo(() => {
     if (!tri || surTri) return lignes;
@@ -39,9 +41,20 @@ export function Tableau({ legende, colonnes, lignes, selectionnable = false, sel
     setTri(suivant); surTri?.(suivant);
     setAnnonce(`Trié par ${col.libelle}, ordre ${suivant.sens === 'ascending' ? 'croissant' : 'décroissant'}.`);
   };
+  const basculer = (l) => { if (!l.indisponible) choisir(choisies.includes(l.id) ? choisies.filter((x) => x !== l.id) : [...choisies, l.id]); };
+  const auClavier = (e, l, i) => {
+    if (e.target !== e.currentTarget) return;
+    const vers = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: triees.length - 1 }[e.key];
+    if (vers !== undefined) {
+      e.preventDefault();
+      const suivante = triees[Math.max(0, Math.min(triees.length - 1, vers))];
+      setCourante(suivante.id); e.currentTarget.parentElement.children[triees.indexOf(suivante)].focus();
+    } else if (e.key === ' ' && selectionnable) { e.preventDefault(); basculer(l); } else if (e.key === 'Enter') { e.preventDefault(); surOuvrir(l); }
+  };
+  const tabulee = triees.some((l) => l.id === courante) ? courante : triees[0]?.id;
   const compte = cochees.length ? `${cochees.length} ${cochees.length > 1 ? 'lignes sélectionnées' : 'ligne sélectionnée'}` : `${triees.length} ${triees.length > 1 ? 'lignes' : 'ligne'}`;
   return (
-    <div className={`k-table${dense ? ' k-table--dense' : ''}`} role="region" aria-labelledby={`${id}-legende`} tabIndex={0} aria-busy={enCours || undefined}>
+    <div className={`k-table${dense ? ' k-table--dense' : ''}`} role="region" aria-labelledby={`${id}-legende`} tabIndex={0} aria-busy={enCours || undefined} data-k-rownav={surOuvrir ? '' : undefined}>
       {(selectionnable || barre) && <div className="k-table__bar"><span className="k-table__count">{compte}</span>{barre?.(cochees)}</div>}
       <table aria-rowcount={triees.length + 1}>
         <caption id={`${id}-legende`}>{legende}</caption>
@@ -61,8 +74,10 @@ export function Tableau({ legende, colonnes, lignes, selectionnable = false, sel
           </tr>
         </thead>
         <tbody hidden={!triees.length}>
-          {triees.map((l) => (
-            <tr key={l.id} aria-selected={selectionnable ? choisies.includes(l.id) : undefined} aria-disabled={l.indisponible || undefined}>
+          {triees.map((l, i) => (
+            <tr key={l.id} aria-selected={selectionnable ? choisies.includes(l.id) : undefined} aria-disabled={l.indisponible || undefined} aria-current={ouverte === l.id ? 'true' : undefined}
+              tabIndex={surOuvrir ? (l.id === tabulee ? 0 : -1) : undefined} onKeyDown={surOuvrir ? (e) => auClavier(e, l, i) : undefined} onFocus={surOuvrir ? () => setCourante(l.id) : undefined}
+              onClick={surOuvrir ? (e) => { if (!e.target.closest('a, button, input, label, select')) { setCourante(l.id); surOuvrir(l); } } : undefined}>
               {selectionnable && (
                 <td className="k-table__check">
                   <CaseACocher libelle={<span className="k-sr-only">{nomLigne ? nomLigne(l) : `Sélectionner ${l[colonnes[0].id]}`}</span>} cochee={choisies.includes(l.id)} desactivee={l.indisponible}

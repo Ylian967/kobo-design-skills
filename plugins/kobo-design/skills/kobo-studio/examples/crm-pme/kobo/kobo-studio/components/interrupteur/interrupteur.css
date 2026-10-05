@@ -1,0 +1,41 @@
+/*
+ * kobo-studio — interrupteur
+ * Rôles lus : text, text-2, text-muted, bg, surface-2, line-strong, focus*, font-body, fs-body, fs-small, fs-min, lh-body,
+ * radius-pill, border-w, hit-min, space-*, dur-fast, ease-out.
+ * L'état se lit à trois signes : la position du curseur, le fond de la glissière et le mot écrit (« Activé » / « Désactivé »).
+ */
+.k-switch {
+  --_h: var(--k-space-6); --_w: max(var(--k-border-w), calc(var(--k-space-1) / 2)); --_knob: calc(var(--_h) - var(--_w) * 4);
+  display: inline-flex; align-items: center; gap: var(--k-space-3); min-block-size: var(--k-hit-min); margin: 0; padding: 0;
+  font: inherit; font-family: var(--k-font-body); font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text); text-align: start; cursor: pointer; background: transparent; border: 0;
+}
+.k-switch__track {
+  flex: none; display: flex; align-items: center; inline-size: calc(var(--_h) * 2); block-size: var(--_h); padding-inline: var(--_w);
+  background: var(--k-bg); border: var(--_w) solid var(--k-line-strong); border-radius: var(--k-radius-pill);
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-switch__thumb { inline-size: var(--_knob); block-size: var(--_knob); background: var(--k-text); border-radius: var(--k-radius-pill); transition: transform var(--k-dur-fast) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out); }
+.k-switch__label { min-inline-size: 0; }
+.k-switch__state { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+.k-switch__state::after { content: attr(data-off); }
+.k-switch[aria-checked="true"] .k-switch__state::after { content: attr(data-on); }
+
+.k-switch:hover .k-switch__track, .k-switch[data-k-state="hover"] .k-switch__track { background: var(--k-surface-2); }
+.k-switch:focus-visible, .k-switch[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Activé : glissière pleine, curseur passé de l'autre côté */
+.k-switch[aria-checked="true"] .k-switch__track { background: var(--k-text); border-color: var(--k-text); }
+.k-switch[aria-checked="true"] .k-switch__thumb { background: var(--k-bg); transform: translateX(calc(var(--_h) * 2 - var(--_knob) - var(--_w) * 4)); }
+[dir="rtl"] .k-switch[aria-checked="true"] .k-switch__thumb { transform: translateX(calc((var(--_h) * 2 - var(--_knob) - var(--_w) * 4) * -1)); }
+.k-switch:disabled, .k-switch[aria-disabled="true"] { color: var(--k-text-muted); cursor: not-allowed; }
+.k-switch:disabled .k-switch__track, .k-switch[aria-disabled="true"] .k-switch__track { background: var(--k-surface-2); border-style: dashed; border-color: var(--k-line-strong); }
+.k-switch:disabled .k-switch__thumb, .k-switch[aria-disabled="true"] .k-switch__thumb { background: var(--k-text-muted); }
+/* En cours d'enregistrement : le mot d'état le dit, la glissière passe en tirets ; le curseur ne bouge qu'à la réponse */
+.k-switch[aria-busy="true"] { cursor: progress; }
+.k-switch[aria-busy="true"] .k-switch__track { border-style: dashed; }
+.k-switch[aria-busy="true"] .k-switch__state::after { content: attr(data-busy); }
+/* Libellé avant la glissière, sur toute la largeur (ligne de réglage) */
+.k-switch--row { display: flex; inline-size: 100%; justify-content: space-between; }
+.k-switch--row .k-switch__track { order: 3; }
+.k-switch--row .k-switch__label { flex: 1; }
+
+@media (prefers-reduced-motion: reduce) { .k-switch__track, .k-switch__thumb { transition: none; } }

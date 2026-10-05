@@ -79,6 +79,10 @@ Une ou deux références, pas plus. Plafonds par référence :
 
 Au-delà, demande avant de continuer. Puis passe à A.
 
+**Deux références aux rôles différents** (l'une pour le style, l'autre pour des schémas propres au métier) : la première prend les pages du tableau ci-dessus ; la seconde dépense ses pages sur les schémas qu'on lui demande (sa page d'index compte pour une). Écris dans `source.md` qui a fourni quoi.
+
+**Avant de compter sur une mesure**, regarde où sont les exemples : rendus dans la page, ils se mesurent ; dans un cadre d'un autre domaine (`iframe`) ou en image, ils ne se mesurent pas, et la référence ne donne alors que des règles **lues**. Dis-le dans `source.md`, sans maquiller une lecture en mesure.
+
 ### B5. Tout rejoint l'index
 
 Ajoute à `references/index.md` une ligne par référence **vue**, même écartée, même inaccessible : date, registre, type d'application, nom, lien, une ligne, état. Mets à jour la ligne d'une référence qui change d'état (analysée, devenue skill `<id>`).
@@ -91,7 +95,7 @@ Dans `source.md` : l'adresse, le registre, le type d'application, et **ce que la
 
 ### A2. Mesurer
 
-Ouvre la page à 1440 × 900, attends la fin des entrées, exécute `${CLAUDE_SKILL_DIR}/scripts/extract-design.js` (console du navigateur, ou injection par un outil d'automatisation). Recommence à 390 × 844 si la référence a une version mobile, et sur les autres pages du plafond B4.
+Ouvre la page à 1440 × 900, attends la fin des entrées, exécute `${CLAUDE_SKILL_DIR}/scripts/extract-design.js` (console du navigateur, ou injection par un outil d'automatisation). Avec un navigateur piloté qui ne lit pas les fichiers locaux : sers le script par un petit serveur de fichiers, lis son texte dans un onglet, puis évalue ce texte dans la page de référence. Un design system expose souvent ses jetons en variables CSS sur `:root` : lis-les par leur nom (`getComputedStyle(document.documentElement).getPropertyValue('--…')`), c'est plus sûr que de les déduire des éléments. Recommence à 390 × 844 si la référence a une version mobile, et sur les autres pages du plafond B4.
 
 L'extracteur donne : polices chargées, échelle de tailles, couleurs pondérées par surface, rayons, ombres, découpes, filtres, espacements, transitions, animations, points de rupture, variables CSS, styles calculés des boutons, liens, champs et cartes.
 

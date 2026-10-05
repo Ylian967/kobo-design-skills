@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>kobo-studio — galerie des composants</title>
-<!-- Galerie des composants : les vingt composants dans tous leurs états, sous chacun des 23 skills.
+<!-- Galerie des composants : les vingt composants dans tous leurs états, sous chacun des 24 skills.
      S'ouvre directement depuis le disque (file://) dans Chrome ; une connexion est nécessaire pour les polices et les photos.
      Les données affichées (Cordée Brume, sorties, prix, personnes) sont fictives. -->
 <link rel="stylesheet" href="../contract/roles.css">
@@ -774,9 +774,9 @@ main { display: grid; gap: var(--k-section-y); padding: var(--k-space-12) var(--
 <script>
 // Pilotage de la galerie : choix du skill et de l'intensité, déclencheurs de démonstration.
 (function () {
-  var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
+  var SKILLS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'clear-ledger-desk', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
   // Skills qui ont une couche de signature (components/signatures/<id>.css)
-  var LAYERS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
+  var LAYERS = ['acid-scan-security', 'alpine-glass-expedition', 'anime-x-slash', 'chrome-atelier', 'clear-ledger-desk', 'cosmic-voyage', 'glacial-mono-3d', 'glass-frame-estate', 'heritage-lens', 'hold-to-play-music', 'hyper-lime-street', 'lore-frame-editorial', 'mint-street-basics', 'nocturne-architecture', 'noir-inferno-chapters', 'pixel-lime-portfolio', 'pocket-device-noir', 'retro-mission-poster', 'serif-bistro-green', 'showroom-bento', 'signal-orange-techwear', 'sticker-brutal-jp', 'tiny-planet-toy', 'zigzag-snack-pop'];
   var $ = function (id) { return document.getElementById(id); }, root = document.documentElement;
 
   function load(id) {

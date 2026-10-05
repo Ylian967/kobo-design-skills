@@ -11,33 +11,61 @@ Règles :
 
 ## Premier tour — le projet
 
-1. **Mode.** Part-on de zéro, ou un site existe déjà (adresse ou fichiers) ? → s'il existe : `reprise.md`.
-2. **Le but.** Qu'est-ce que le visiteur doit faire à la fin : réserver, acheter, écrire, s'inscrire, simplement s'informer ? Une seule réponse : ce sera l'action principale.
-3. **Le public.** Qui vient, d'où (recherche, réseau social, affiche, bouche-à-oreille), sur téléphone ou sur ordinateur ?
-4. **Le contenu réel.** Qu'avez-vous déjà : textes, tarifs, horaires, programme, adresse, mentions ? Ce qui manque, faut-il l'écrire ou laisser la section de côté ?
-5. **Les photos.** Combien, de quoi (lieu, personnes, produits, plats, scène), prises par qui, et dans quel état : portrait de face, objet sur fond uni, paysage large, de nuit ? Y a-t-il une vidéo, un modèle 3D, un logo ?
-6. **Les couleurs de marque.** Y a-t-il un logo, une ou deux couleurs imposées (code exact), une police ? Ou tout est libre ?
-7. **L'ambiance.** Trois mots pour le ton voulu, et un site que vous aimez ou détestez.
-8. **La technique.** Pages HTML simples ou React ? Une page ou plusieurs ? Où part le formulaire s'il y en a un (adresse e-mail, service, rien pour l'instant) ?
+Le premier tour a un tronc commun de trois questions, puis une suite qui dépend du registre. Tout part dans **un seul message**.
+
+**Lis d'abord le registre dans la demande.** « Un CRM », « un back-office », « un outil de suivi », « un tableau de bord » : c'est un outil, registre fonctionnel. « Un site pour mon restaurant », « une landing », « un portfolio » : c'est un site. Écris ta lecture en tête du message (« J'ai compris : un outil de travail, pas un site de présentation ») et pose la suite qui correspond.
+
+Si la demande ne permet pas de trancher (« une plateforme pour mes clients », « un espace membres »), pose le tronc commun **seul**, arrête-toi, puis pose la suite adaptée à la réponse. C'est le seul cas où le premier tour prend deux messages.
+
+### Tronc commun
+
+1. **Le registre.** Est-ce un site qu'on **visite** (présenter, vendre, raconter) ou un outil dans lequel on **travaille** (saisir, chercher, suivre des enregistrements) ?
+2. **Le mode.** Part-on de zéro, ou quelque chose existe déjà (adresse ou fichiers) ? → s'il existe : `reprise.md`.
+3. **La technique.** Pages HTML simples ou React ? Une page ou plusieurs ?
+
+### Suite pour un site (registres expressif et produit)
+
+4. **Le but.** Qu'est-ce que le visiteur doit faire à la fin : réserver, acheter, écrire, s'inscrire, simplement s'informer ? Une seule réponse : ce sera l'action principale.
+5. **Le public.** Qui vient, d'où (recherche, réseau social, affiche, bouche-à-oreille), sur téléphone ou sur ordinateur ?
+6. **Le contenu réel.** Qu'avez-vous déjà : textes, tarifs, horaires, programme, adresse, mentions ? Ce qui manque, faut-il l'écrire ou laisser la section de côté ?
+7. **Les photos.** Combien, de quoi (lieu, personnes, produits, plats, scène), prises par qui, et dans quel état : portrait de face, objet sur fond uni, paysage large, de nuit ? Y a-t-il une vidéo, un modèle 3D, un logo ?
+8. **Les couleurs de marque.** Y a-t-il un logo, une ou deux couleurs imposées (code exact), une police ? Ou tout est libre ?
+9. **L'ambiance.** Trois mots pour le ton voulu, et un site que vous aimez ou détestez.
+10. **Le formulaire**, s'il y en a un : où part-il (adresse e-mail, service, rien pour l'instant) ?
+
+### Suite pour un outil (registre fonctionnel)
+
+Pas de « visiteur », pas de photos, pas d'ambiance : on parle de personnes qui travaillent et de données.
+
+4. **Les utilisateurs.** Qui s'en sert, combien sont-ils, à quelle fréquence, sur quel écran (ordinateur de bureau, portable, téléphone en déplacement) ?
+5. **Les tâches fréquentes.** Les deux ou trois gestes faits cent fois par jour (chercher un client, changer une étape, ajouter une ligne). Lequel doit être possible dès le premier écran ? Ce sera l'action principale.
+6. **Les données.** Quels enregistrements (clients, affaires, commandes), combien de chacun aujourd'hui et dans un an, quelles colonnes comptent pour décider, d'où viennent-ils (saisie, import, autre logiciel) ? Faut-il des données d'exemple, et lesquelles sont permises ?
+7. **Les écrans.** Lesquels faut-il d'abord : la liste, la fiche d'un enregistrement, le tableau de bord ? Dans quel ordre de priorité ?
+8. **Les rôles et les droits.** Tout le monde voit-il tout ? Qui peut créer, modifier, supprimer, exporter ? Y a-t-il des données qu'un rôle ne doit pas voir ?
+9. **Les couleurs de marque.** Une couleur imposée (code exact), ou tout est libre ? Dans un outil, elle ne sert qu'à l'action principale ; les couleurs d'état restent celles du skill.
+10. **Les habitudes.** Quel outil remplace-t-on (tableur, autre logiciel), et qu'est-ce qui y marche bien ou mal ? Travaille-t-on au clavier, ligne après ligne, ou à la souris ?
+
+Le second tour d'un projet fonctionnel ne parle pas de photos ni de 3D : il se limite aux données qui manquent pour remplir le plan et à la densité (confort ou compact).
 
 ## Registre
 
-D'après les réponses, classe le projet. Dis ta lecture au client dans la proposition.
+D'après la demande et la réponse à la première question, classe le projet. Dis ta lecture au client dès le premier message, et redis-la dans la proposition.
 
 | Registre | Ce que c'est | Ce que kobo-studio a |
 |---|---|---|
 | **Expressif** | L'image et le récit priment : festival, univers, jeu, campagne, exposition | Les skills à scène, cadre, chapitres ; intensité `full` |
 | **Produit** | Vendre ou présenter une offre : restaurant, boutique, agence, objet, service | La majorité des skills ; intensité `full` ou `reduced` |
-| **Fonctionnel** | Faire un travail : CRM, ERP, back-office, tableau de bord, outil interne, application SaaS | Les composants (tableau, filtres, formulaires) ; **aucun skill dédié** : passer par `site-to-skill` |
+| **Fonctionnel** | Faire un travail : CRM, ERP, back-office, tableau de bord, outil interne, application SaaS | Le skill `clear-ledger-desk`, la structure `application`, les composants de données ; intensité sans objet (aucun mouvement de signature) |
 
-**Projet fonctionnel : dis-le franchement, et passe par `site-to-skill`.** Aucun des 23 skills ne couvre ce registre : aucun ne montre un tableau de données dense, des filtres, une barre latérale d'application ou un formulaire long. Un outil de travail appelle de la clarté, pas un design spectaculaire. kobo-studio a les **composants** qu'il faut (tableau à tri et sélection, pagination, sélection, cases, boutons radio, interrupteur, menu déroulant, accordéon, fil d'Ariane, info-bulle, en plus des dix premiers), mais **ni skill fonctionnel, ni structure de page d'application** (barre latérale, écran de liste, écran de fiche).
+**Projet fonctionnel : dis-le franchement.** Un outil de travail appelle de la clarté, pas un design spectaculaire : tableaux denses, filtres, recherche, raccourcis clavier, états vides et d'erreur. kobo-studio a ce qu'il faut :
 
-La voie à proposer, dans cet ordre :
+- **un skill** : `clear-ledger-desk` (fond blanc, texte de 14 px, une seule couleur d'action, densité confort ou compact). C'est le seul skill du registre ; propose-le en premier, seul ou avec un second choix issu de `site-to-skill`.
+- **une structure** : `application`, avec trois écrans de départ : la **liste** (barre latérale repliable, en-tête à recherche, filtres, tableau et panneau de détail), la **fiche** d'un enregistrement en pleine page (en-tête, faits, étapes, onglets, historique) et le **tableau de bord** (chiffres, répartition, activité récente). Lis `ux/structures/application/README.md`.
+- **les composants** : tableau à tri, sélection et lignes parcourables, pagination, sélection, cases, boutons radio, interrupteur, menu déroulant, accordéon, onglets, modale, notification, état vide, chargement.
 
-1. **`/kobo-design:site-to-skill` avec le type d'application** (« un CRM B2B pour une PME de services ») : il juge le registre, cherche d'abord en local, propose dix références au plus (design systems publics, produits de référence), s'arrête pour laisser le client choisir, puis crée le skill à partir de la référence choisie, avec sa fiche de correspondance et sa couche de signature. On revient ensuite ici avec ce skill. Si le client a déjà une application qu'il trouve juste : `/kobo-design:site-to-skill <adresse>`.
-2. **À défaut, un skill existant en intensité `off`** : on garde ses couleurs, sa typo et ses formes, sans ornement ni mouvement. Choisir un skill aux textes lisibles et aux surfaces calmes (catalogue, « Choisir vite », ligne « Interface sobre »). C'est un pis-aller : le dire.
+Si le client veut une autre allure qu'un outil clair et neutre (les couleurs d'un produit qu'il connaît, un ton plus chaleureux) : **`/kobo-design:site-to-skill` avec le type d'application** (« un CRM B2B pour une PME de services »). Il cherche d'abord en local, propose dix références au plus, s'arrête pour laisser choisir, puis crée le skill avec sa fiche et sa couche de signature. On revient ici avec ce skill et la structure `application`.
 
-Dans les deux cas, l'écran d'application se compose avec les composants et les briques de page ; ce qui manque (barre latérale, mise en page liste et fiche) est écrit pour le projet avec les seuls rôles `--k-*`, et signalé comme tel.
+Ce que kobo-studio n'a pas, à dire au client : les graphiques (courbes, camemberts) et la connexion aux données. Le tableau de bord montre des chiffres et des barres de répartition en HTML ; les données d'exemple sont écrites dans la page.
 
 Ne présente jamais un skill expressif comme adapté à un outil de travail.
 
@@ -69,9 +97,7 @@ Ne présente jamais un skill expressif comme adapté à un outil de travail.
 
 Garde ces réponses sous la main : elles servent à la proposition, puis à la livraison (« inventé » = tout ce qui n'est pas dans cette liste).
 
-- action principale ; public et appareil ;
-- contenu fourni / à écrire / absent ;
-- photos fournies, et leur type ;
+- registre ; technique (HTML ou React, nombre de pages) ;
 - couleurs de marque ;
-- registre, ambiance, intensité ;
-- technique (HTML ou React, nombre de pages, destination du formulaire).
+- site : action principale ; public et appareil ; contenu fourni / à écrire / absent ; photos fournies, et leur type ; ambiance, intensité ; destination du formulaire ;
+- outil : utilisateurs et écran ; tâches fréquentes et action principale ; enregistrements, volumes, colonnes, origine des données ; écrans voulus ; rôles et droits ; densité.

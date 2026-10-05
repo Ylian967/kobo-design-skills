@@ -1,0 +1,120 @@
+/*
+ * Clear Ledger Desk — tokens
+ * MESURÉS le 2026-10-05 dans Chrome à 1440 × 900 sur un design system public d'outils de suivi (voir source.md) :
+ * neutres, états, échelle de texte, espacements, rayons, ombres, durées et courbe, hauteurs de ligne et de champ.
+ * PROPOSÉS : la couleur d'action (un sarcelle, la référence est bleue), la densité « compact », la barre latérale, le chemin d'étapes.
+ * La densité se règle par data-density="compact" sur <html> ou sur un bloc ; « confort » est le réglage par défaut.
+ * @contrast text:bg text:surface text:surface-2 text-2:bg text-2:surface text-2:surface-2 muted:bg muted:surface on-accent:accent on-accent:accent-hover accent:bg accent:surface accent:selected text:selected danger:bg danger:danger-bg on-accent:danger-bold success:bg success:success-bg warning:bg warning:warning-bg text:warning-bold info:bg info:info-bg on-inverse:inverse focus:bg:large line-strong:bg:large
+ */
+:root {
+  /* ---- Neutres (mesurés) ---- */
+  --bg: #ffffff;            /* mesuré : surface de travail */
+  --surface: #f8f8f8;       /* mesuré : fond en retrait (barre latérale, en-tête de tableau, zone de code) */
+  --surface-2: #f0f1f2;     /* mesuré : survol d'une surface */
+  --text: #292a2e;          /* mesuré : texte courant, 14,3:1 sur blanc */
+  --text-2: #505258;        /* mesuré : texte secondaire, libellés, en-têtes de colonne */
+  --muted: #6b6e76;         /* mesuré : aide, texte le plus discret */
+  --disabled: #a9abb0;      /* dérivé : le gris désactivé mesuré (#080f21 à 29 %), aplati sur blanc ; jamais porteur d'information seul */
+  --line: #dddee1;          /* mesuré : filet (la référence emploie #0b120e à 14 %, soit cette valeur sur blanc) */
+  --line-strong: #8c8f97;   /* mesuré : contour d'un champ, 3,3:1 sur blanc */
+  --neutral: #eef0f1;       /* dérivé : fond neutre d'une étiquette ou d'un bouton discret (#051524 à 6 % sur blanc) */
+  --inverse: #292a2e;       /* mesuré : fond inversé (info-bulle, notification sombre) */
+  --on-inverse: #ffffff;
+
+  /* ---- Action : une seule couleur, réservée à l'action principale, au lien et à la sélection (proposée) ---- */
+  --accent: #0f6e6a;        /* proposé : sarcelle profond, 6,1:1 sur blanc. La référence emploie un bleu : non repris */
+  --accent-hover: #0c5a57;  /* proposé */
+  --accent-pressed: #094744;/* proposé */
+  --on-accent: #ffffff;
+  --selected: #e3f3f1;      /* proposé : fond d'une ligne ou d'un choix sélectionné (même clarté que le fond sélectionné mesuré, #e9f2fe) */
+  --selected-hover: #cbe7e4;/* proposé */
+  --focus: #1f8f89;         /* proposé : contour de focus, 3,9:1 sur blanc */
+
+  /* ---- États (mesurés) : la couleur ne dit jamais seule l'état, elle appuie un mot et une icône ---- */
+  --danger: #ae2e24;        /* mesuré : texte d'erreur */
+  --danger-bg: #ffeceb;     /* mesuré */
+  --danger-bold: #c9372c;   /* mesuré : bouton destructeur */
+  --success: #4c6b1f;       /* mesuré */
+  --success-bg: #efffd6;    /* mesuré */
+  --warning: #9e4c00;       /* mesuré */
+  --warning-bg: #fff5db;    /* mesuré */
+  --warning-bold: #fbc828;  /* mesuré : étiquette d'attention, texte --text dessus */
+  --info: #1558bc;          /* mesuré */
+  --info-bg: #e9f2fe;       /* mesuré */
+  --scrim: rgba(5, 12, 31, 0.46);  /* mesuré : voile derrière une fenêtre (#050c1f à 46 %) */
+
+  /* ---- Typographie ---- */
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;   /* équivalent libre de la sans propriétaire mesurée */
+  --font-display: var(--font-body);   /* mesuré : une seule famille, la hiérarchie vient de la taille et de la graisse */
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;              /* équivalent libre */
+  --fs-label: 0.75rem;      /* mesuré : 12px / 16px, libellé de champ, en-tête de colonne, aide */
+  --fs-small: 0.75rem;      /* mesuré */
+  --fs-body: 0.875rem;      /* mesuré : 14px / 20px, tout le texte de travail */
+  --fs-lead: 1rem;          /* mesuré : 16px / 24px */
+  --fs-h3: 1rem;            /* mesuré : 16px / 20px, graisse 650 */
+  --fs-h2: 1.25rem;         /* mesuré : 20px / 24px */
+  --fs-h1: 1.5rem;          /* mesuré : 24px / 28px */
+  --fs-hero: 1.75rem;       /* mesuré : 28px / 32px, le plus grand titre d'un écran */
+  --fs-stat: 2rem;          /* proposé : chiffre d'un tableau de bord */
+  --lh-body: 1.43;          /* mesuré : 20 / 14 */
+  --lh-title: 1.2;          /* mesuré : 24 / 20 */
+  --ls-title: 0em;          /* mesuré : aucun interlettrage */
+  --ls-label: 0em;          /* mesuré : les libellés ne sont ni espacés ni en capitales */
+  --weight: 650;            /* mesuré : 653 sur la référence (police variable) ; titres, libellés, en-têtes */
+  --weight-medium: 500;     /* mesuré : boutons */
+
+  /* ---- Espacement (mesuré : base 8, avec 2, 4 et 6 pour le détail) ---- */
+  --space-025: 0.125rem; --space-050: 0.25rem; --space-075: 0.375rem; --space-100: 0.5rem; --space-150: 0.75rem;
+  --space-200: 1rem; --space-250: 1.25rem; --space-300: 1.5rem; --space-400: 2rem; --space-500: 2.5rem; --space-600: 3rem; --space-800: 4rem;
+  --edge: 1.5rem;           /* proposé : marge d'un écran d'application */
+  --container: 90rem;       /* mesuré : dernier point de rupture de la référence */
+  --section-y: 2rem;        /* proposé : écart entre deux blocs d'un écran ; un outil ne respire pas comme une page d'accueil */
+
+  /* ---- Densité (confort mesuré ; compact proposé d'après le réglage « confort / compact » de la seconde référence) ---- */
+  --row-h: 3rem;            /* mesuré : 48px, ligne de tableau */
+  --head-h: 2.125rem;       /* mesuré : 34px, en-tête de tableau */
+  --cell-y: 0.25rem;        /* mesuré : 4px */
+  --cell-x: 0.5rem;         /* mesuré : 8px */
+  --field-h: 2.5rem;        /* mesuré : 40px, champ */
+  --btn-h: 2rem;            /* mesuré : 32px, bouton */
+  --field-gap: 1rem;        /* proposé : écart entre deux champs */
+  --nav-h: 3rem;            /* proposé : en-tête d'application */
+  --side-w: 15rem;          /* proposé : barre latérale ouverte */
+  --side-w-min: 3.5rem;     /* proposé : barre latérale repliée */
+  --detail-w: 26rem;        /* proposé : panneau de détail */
+  --hit-min: 2.75rem;       /* 44px : zone cliquable au doigt, tenue par un pseudo-élément quand le contrôle affiché est plus petit */
+
+  /* ---- Formes (mesuré) ---- */
+  --radius: 0.375rem;       /* mesuré : 6px, boutons, champs, cellules de pagination */
+  --r-small: 0.25rem;       /* mesuré : 4px, cases, étiquettes */
+  --radius-lg: 0.5rem;      /* mesuré : 8px, panneaux, fenêtres */
+  --r-xl: 0.75rem;          /* mesuré : 12px */
+  --r-pill: 999px;          /* mesuré : compteurs, avatars */
+  --bw: 1px;                /* mesuré : 0,8px rendu, soit un filet d'un pixel */
+  --shadow-raised: 0 1px 1px rgba(30, 31, 33, 0.25), 0 0 1px rgba(30, 31, 33, 0.31);    /* mesuré : carte posée */
+  --shadow-overlay: 0 8px 12px rgba(30, 31, 33, 0.15), 0 0 1px rgba(30, 31, 33, 0.31);  /* mesuré : menu, fenêtre, panneau de détail */
+
+  /* ---- Mouvement (mesuré) : seulement des retours d'état ---- */
+  --dur-fast: 50ms;         /* mesuré : couleur d'un bouton, d'une ligne */
+  --dur-base: 150ms;        /* mesuré */
+  --dur-slow: 200ms;        /* mesuré : ouverture d'un panneau, d'un menu */
+  --ease-out: cubic-bezier(0.4, 1, 0.6, 1);   /* mesuré */
+  --ease-in-out: ease-in-out;                 /* mesuré */
+}
+
+/* Densité « compact » : mêmes rôles, valeurs resserrées (proposé). Le texte ne descend pas sous 13px. */
+[data-density="compact"] {
+  --row-h: 2.25rem;         /* 36px */
+  --head-h: 1.875rem;       /* 30px */
+  --cell-y: 0.125rem;
+  --field-h: 2rem;          /* 32px */
+  --btn-h: 1.75rem;         /* 28px */
+  --field-gap: 0.5rem;
+  --fs-body: 0.8125rem;     /* 13px */
+  --section-y: 1.25rem;
+  --nav-h: 2.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; --dur-base: 0ms; --dur-slow: 0ms; }
+}

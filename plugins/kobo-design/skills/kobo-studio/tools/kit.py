@@ -4,9 +4,8 @@ kobo-studio — pose dans un projet les seuls fichiers dont il a besoin, et une 
 
   python3 tools/kit.py <projet> --skill <id> --structure <structure> [--composants modale,onglets] [--react] [--marque]
 
-  <structure> : landing-produit | site-vitrine | recit-collant | article
-  --composants : composants en plus de ceux de la structure (bouton, champ, carte, barre-nav, menu-mobile, modale,
-                 onglets, notification, etat-vide, chargement)
+  <structure> : landing-produit | site-vitrine | recit-collant | article | application
+  --composants : composants en plus de ceux de la structure (noms de dossier : voir components/INDEX.md)
   --react      : copie aussi les versions .jsx, dans <projet>/src/kobo/ ; n'écrit pas de page HTML
   --marque     : copie le modèle brand.css à la racine du projet (voir brand.md)
 
@@ -82,12 +81,14 @@ COMPONENTS = {  # composants utilisés par chaque structure (voir son README)
     "site-vitrine": ["bouton", "champ", "carte", "barre-nav", "menu-mobile", "etat-vide", "fil-ariane"],
     "recit-collant": ["bouton", "barre-nav", "menu-mobile"],
     "article": ["bouton", "barre-nav", "menu-mobile", "notification", "fil-ariane"],
+    "application": ["bouton", "champ", "selection", "case-a-cocher", "tableau", "etat-vide", "modale", "onglets"],
 }
 PAGES = {  # page de la structure → nom dans le projet
     "landing-produit": {"landing-produit.html": "index.html"},
     "site-vitrine": {"accueil.html": "index.html", "page-interieure.html": "page-interieure.html"},
     "recit-collant": {"recit-collant.html": "index.html"},
     "article": {"article.html": "index.html"},
+    "application": {"application.html": "index.html", "fiche.html": "fiche.html", "tableau-de-bord.html": "tableau-de-bord.html"},
 }
 
 
@@ -145,7 +146,7 @@ def page(src, skill, structure, fams, names):
             return f'{name}="{base}{target.relative_to(STUDIO).as_posix()}"'
         return m.group(0)
 
-    html = re.sub(r'\b(href|src)="([^"]*)"', attr, html).replace(" data-k-keep", "")
+    html = re.sub(r'\b(href|src|action)="([^"]*)"', attr, html).replace(" data-k-keep", "")
     apply = ("<script>\n  Kobo.templates.apply();\n"
              "  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });\n</script>\n")
     return html.replace("</body>", apply + "</body>")

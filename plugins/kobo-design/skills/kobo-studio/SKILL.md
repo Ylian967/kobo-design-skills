@@ -5,7 +5,7 @@ description: Chef d'atelier Kōbō pour lancer un projet de site ou d'interface,
 
 # kobo-studio
 
-Tu conduis un projet de site du premier message à la livraison. Les 23 skills de style donnent l'**apparence** ; ce skill donne la **méthode**, la structure des pages, les composants et la vérification.
+Tu conduis un projet de site du premier message à la livraison. Les 24 skills de style donnent l'**apparence** ; ce skill donne la **méthode**, la structure des pages, les composants et la vérification.
 
 ## Règles fixes
 
@@ -21,15 +21,16 @@ Tu conduis un projet de site du premier message à la livraison. Les 23 skills d
 
 ## Ne lis que ce que l'étape demande
 
-Ce dossier est gros. **N'ouvre pas** `audit/`, `quality/relecture-*.md`, `contract/README.md`, `components/README.md`, `ux/README.md`, `ux/templates/` ni les fichiers CSS / JS de la bibliothèque : tu n'en as pas besoin pour construire, et `tools/kit.py` branche tout pour toi.
+Ce dossier est gros. **N'ouvre pas** `audit/`, `quality/relecture-*.md`, `contract/README.md`, `components/README.md`, `ux/README.md`, `ux/templates/` ni les fichiers CSS / JS de la bibliothèque : tu n'en as pas besoin pour construire, et `tools/kit.py` branche tout pour toi. La liste des composants est dans `components/INDEX.md`.
 
 | Étape | À lire | Seulement si |
 |---|---|---|
 | b. Interview | `interview.md` | toujours |
 | c. Proposition | `catalogue.md`, puis `ux/structures/<structure>/README.md` de la structure retenue (une seule) | toujours |
+| | `components/INDEX.md` : une ligne par composant (rôle, états, script, fichier React) | le plan a besoin d'une pièce que la structure ne fournit pas ; à relire en d avant d'ajouter un composant |
 | d. Construction | `ux/patterns/formulaire.md` | la page a un formulaire que tu modifies |
 | | `ux/patterns/etats-de-page.md` | la page charge des données |
-| | `components/<nom>/README.md` | tu ajoutes un composant absent de la page de départ |
+| | `components/<nom>/README.md` | tu **utilises** ce composant : tu modifies son balisage, tu en ajoutes un exemplaire, tu t'appuies sur son script, ou tu l'ajoutes à la page. Seulement ceux-là : un composant de la page de départ que tu laisses tel quel (tu n'y changes que les textes) ne demande pas son README |
 | | `brand.md` | le client a des couleurs de marque |
 | | `reprise.md` | mode reprise |
 | e. Vérification | `quality/anti-slop.md`, à partir de « Grille de relecture visuelle » | toujours |
@@ -49,7 +50,7 @@ Si la demande ne le dit pas, c'est la première question de l'interview.
 
 ### b. Interview
 
-Lis `interview.md`. Pose le **premier tour** de questions en un seul message, puis **arrête-toi** et attends les réponses. Ne suppose pas à la place du client ; ne commence aucun fichier.
+Lis `interview.md`. Le premier tour commence par le **registre** (un site qu'on visite, ou un outil dans lequel on travaille) : la suite des questions en dépend. Pose le **premier tour** en un seul message, puis **arrête-toi** et attends les réponses. Ne suppose pas à la place du client ; ne commence aucun fichier.
 
 Le second tour se pose avec la proposition (étape c), une fois les skills candidats connus : il porte sur ce que ces skills exigent.
 
@@ -57,14 +58,14 @@ Le second tour se pose avec la proposition (étape c), une fois les skills candi
 
 Lis `catalogue.md`. Écris au client un seul message :
 
-1. **Le registre** du projet (fonctionnel, produit ou expressif) en une phrase. Si le projet est fonctionnel (CRM, ERP, back-office, outil interne, application SaaS), dis-le franchement et passe par `/kobo-design:site-to-skill` avant de proposer un style : voir `interview.md`, « Registre ».
+1. **Le registre** du projet (fonctionnel, produit ou expressif) en une phrase. Si le projet est fonctionnel (CRM, ERP, back-office, outil interne, application SaaS), dis-le franchement : propose le skill `clear-ledger-desk` et la structure **application**, pas un skill expressif. C'est le seul skill du registre : présente-le seul plutôt que d'en inventer deux autres, et donne comme seconde voie `/kobo-design:site-to-skill`, qui trouve des références sobres si le client veut une autre allure. Voir `interview.md`, « Registre ».
 2. **Deux ou trois skills**, chacun avec :
    - une raison tirée des réponses du client (pas une description du style) ;
    - sa **limite honnête** : ce que le skill exige et que le client n'a peut-être pas (type de photo, 3D), ce que le gabarit ne reproduit pas, un contraste qui dépend de la photo ;
    - les gabarits de signature disponibles (colonne « Gabarits » du catalogue).
    Recommande-en un, et dis pourquoi.
 3. **Le plan UX** :
-   - la **structure** (une des quatre, tableau ci-dessous) et pourquoi. Lis son README **avant** d'écrire le plan : il donne les sections qu'elle fournit, celles que tu composeras toi-même se disent ;
+   - la **structure** (une des cinq, tableau ci-dessous) et pourquoi. Lis son README **avant** d'écrire le plan : il donne les sections qu'elle fournit, celles que tu composeras toi-même se disent ;
    - les **sections dans l'ordre**, chacune avec la question du visiteur à laquelle elle répond et le contenu réel qui la remplit ;
    - l'**action principale**, la même du héros à la fin ;
    - les **emplacements** qui recevront un gabarit du skill (tableau « Gabarits par emplacement » du catalogue) : le héros, **et tous les autres** que le skill prévoit. Choisis la structure qui a ces emplacements (un gabarit de `chapter` ne se pose que dans un récit collant). Si le skill n'a de gabarit que pour le héros, écris-le : « sous le premier écran, le style tient par les couleurs, la typo et les composants, pas par une mise en page » ;
@@ -79,6 +80,7 @@ Puis **arrête-toi** et attends la validation. Le client peut choisir un autre s
 | Site vitrine | plusieurs offres ou plusieurs pages : un accueil qui oriente, des pages qui renseignent | `ux/structures/site-vitrine/` |
 | Récit collant | une histoire en chapitres, lue dans l'ordre | `ux/structures/recit-collant/` |
 | Article | un texte long à lire d'une traite | `ux/structures/article/` |
+| Application | registre **fonctionnel** : un outil de travail (CRM, back-office, ERP, espace d'administration) où l'on cherche, trie, filtre et ouvre des enregistrements. Trois écrans de départ : liste et détail, fiche d'un enregistrement, tableau de bord | `ux/structures/application/` |
 
 ### d. Construction
 
@@ -88,7 +90,7 @@ Puis **arrête-toi** et attends la validation. Le client peut choisir un autre s
 python3 <kobo-studio>/tools/kit.py <projet> --skill <id> --structure <structure> [--composants modale,chargement] [--marque]
 ```
 
-Résultat : `<projet>/kobo/` (**ne jamais le modifier**) et `<projet>/index.html` (plus `page-interieure.html` pour un site vitrine). La page charge un seul skill, la couche de signature en dernier, et pose les gabarits (`Kobo.templates.apply()`).
+Résultat : `<projet>/kobo/` (**ne jamais le modifier**) et `<projet>/index.html` (plus `page-interieure.html` pour un site vitrine ; plus `fiche.html` et `tableau-de-bord.html` pour une application : supprime les écrans que le plan n'a pas, et leurs liens). La page charge un seul skill, la couche de signature en dernier, et pose les gabarits (`Kobo.templates.apply()`).
 
 **2. Reprendre le README de la structure** (lu à l'étape c), et lui seul : ordre des sections, emplacements, états, clavier.
 
@@ -118,7 +120,7 @@ Briques de page (fournies par `page.css`, déjà chargé) :
 | Liste d'éléments en colonnes | `<ul data-k-slot="grid">` avec des `<li data-k-part="item">` ; `k-grid__wide` pour un élément sur toute la largeur. Cartes : composant `carte`, seulement si chaque élément a une image et une destination, et l'une d'elles est mise en avant. Des prix, des formules, des horaires sont une liste de faits, pas une rangée de cartes identiques |
 | Photo et légende | `<figure data-k-slot="media"><img …><figcaption>…</figcaption></figure>` |
 
-Un composant en plus en cours de route : relance `kit.py` avec `--composants <nom>` ; il affiche les balises à ajouter à la page.
+Un composant en plus en cours de route : choisis-le dans `components/INDEX.md`, relance `kit.py` avec `--composants <nom>` (il affiche les balises à ajouter à la page), puis lis son README.
 
 **Gabarits hors du héros.** `kit.py` charge toutes les familles du skill ; elles ne se posent que si la page a leur emplacement. Vérifie-le : `frame` et `backdrop` sont deux `<div>` vides en tête de la page de départ (ne les retire pas) ; `title` est chaque `<header data-k-slot="title">` de section ; `media` chaque `<figure data-k-slot="media">` ; `chapter` chaque chapitre d'un récit. Sur la capture, tu dois voir le gabarit à chacun de ces endroits ; sinon cherche l'emplacement manquant avant de livrer.
 
@@ -142,10 +144,15 @@ Le script vérifie la bibliothèque, les fichiers du projet (valeurs en dur, res
 
 1. Corrige chaque ligne `✗`, relance, jusqu'à 0 erreur — sans jamais appauvrir la page pour y arriver (règle 7). Une ligne `ALERTE` n'est pas une erreur : elle demande un regard (une série d'éléments identiques côte à côte devient une liste, ou reçoit un élément mis en avant ; ou tu justifies). Un contraste en échec sur une photo se corrige par la photo (cadrage `data-k-focus`, autre photo plus calme sous le texte) ou par un texte plus court ; jamais en modifiant `kobo/`.
 2. **Regarde les deux captures** (ouvre les images). Le script ne voit pas une mise en page laide.
-3. Remplis la grille de `quality/anti-slop.md` (« Grille de relecture visuelle ») sur ces captures. Une case non cochée se corrige ou se justifie (skill + règle).
+3. Remplis la grille de `quality/anti-slop.md` (« Grille de relecture visuelle ») sur ces captures. Une case non cochée se corrige ou se justifie (skill + règle). Projet fonctionnel : les cases du héros, des photos et des cartes sont sans objet, dis-le ; celles des états, du clavier, du contenu et de la largeur de 390 px s'appliquent toutes.
 4. Essaie ce que le script ne fait pas : formulaire envoyé vide, menu au clavier, Échap. Pour ouvrir la page toi-même, sers le dossier (`python3 -m http.server <port libre>` depuis le projet) plutôt que `file://`.
 
-Si le navigateur manque, le script le dit : les contrôles sur capture ne sont alors **pas faits**, et tu l'écris à la livraison.
+**Sans navigateur.** Si le script ne trouve pas de navigateur, ou si celui-ci ne rend rien, il fait quand même les contrôles par script (bibliothèque, fichiers du projet, contrastes de `brand.css`) et termine par « VÉRIFICATION VISUELLE NON FAITE » (code de sortie 2). Dans ce cas :
+
+- corrige les erreurs que le script a trouvées : elles comptent toujours ;
+- ne remplace pas les captures par une lecture du code : tu ne peux ni remplir la grille anti-slop, ni dire qu'un contraste tient sur la page, ni dire que le clavier marche ;
+- si tu trouves un autre moyen de voir la page (un autre navigateur, `KOBO_CHROME`), dis lequel et à quelle largeur réelle : une capture à 500 px n'est pas une vérification à 390 px ;
+- à la livraison, recopie sous **Mesuré** la phrase que le script donne, et n'écris « vérifié » pour rien de ce qui se voit.
 
 ### f. Livraison
 
@@ -153,7 +160,7 @@ Un message court au client :
 
 - ce qui est livré (pages, dossier, comment l'ouvrir) ;
 - le skill, la structure, l'intensité ;
-- **Mesuré** : résultat de `check_studio.py` (erreurs, pire contraste à 1440 et 390 px), ce que tu as essayé à la main ;
+- **Mesuré** : résultat de `check_studio.py` (erreurs, pire contraste à 1440 et 390 px), ce que tu as essayé à la main. Si la vérification visuelle n'a pas été faite, c'est la **première ligne** du message, avant ce qui est livré ;
 - **Estimé** : ce que tu as jugé à l'œil sur les captures (grille anti-slop), sans mesure ;
 - **Inventé** : tout texte, chiffre, photo ou comportement qui ne vient pas du client (photos de banque à remplacer, envoi de formulaire simulé, horaires supposés…). « Signalé à remplacer » veut dire : dit au client, ici. Sur la page, une mention visible ne se justifie que si la photo provisoire peut tromper le visiteur (elle prétend montrer le lieu, l'équipe ou les produits) ;
 - les **faux positifs** laissés en l'état (règle 7), et les **alertes** du script non suivies, avec la raison ;
@@ -168,6 +175,7 @@ Ne dis pas « vérifié » pour ce qui est seulement estimé.
 <projet>/
   index.html            la ou les pages
   site.css              styles du projet (facultatif, rôles --k-* seulement)
+  site.js               script du projet (facultatif : données d'exemple, formulaire simulé), chargé après ceux du kit
   brand.css             couleurs de marque (facultatif)
   images/               photos du client
   kobo/                 le kit, posé par tools/kit.py — ne pas modifier
@@ -177,5 +185,5 @@ Ne dis pas « vérifié » pour ce qui est seulement estimé.
 ## Quand rien ne convient
 
 - Aucun skill ne colle à l'ambiance voulue : propose `/kobo-design:site-to-skill <adresse>` pour créer un style à partir d'un site que le client aime, ou `/kobo-design:site-to-skill` avec le type de projet pour qu'il propose dix références au plus et laisse choisir. Le skill créé arrive avec sa fiche de correspondance et sa couche de signature : reviens ici ensuite.
-- Projet fonctionnel : `site-to-skill` d'abord (références sobres : tableaux denses, filtres, raccourcis), voir `interview.md`, « Registre ».
+- Projet fonctionnel : skill `clear-ledger-desk` et structure `application` ; pour une autre allure, `site-to-skill` (références sobres : tableaux denses, filtres, raccourcis). Voir `interview.md`, « Registre ».
 - Une pièce manque (composant, structure) : dis-le au lieu de l'improviser ; propose la forme la plus proche qui existe.

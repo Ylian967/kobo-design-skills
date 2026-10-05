@@ -78,7 +78,7 @@ En React, chaque structure accepte une propriété `emplacements` : un objet `{ 
 - Ajouter une seconde action dans un `hero`.
 - Dépendre du mouvement : en `reduced` et en `off`, et sous `prefers-reduced-motion`, la page doit rester complète. En `off`, les gabarits ne s'installent pas : la structure rend son contenu neutre.
 
-## Les quatre structures
+## Les cinq structures
 
 | Structure | Dossier | À choisir quand | Emplacements |
 |---|---|---|---|
@@ -86,6 +86,7 @@ En React, chaque structure accepte une propriété `emplacements` : un objet `{ 
 | Récit en sections collantes | `structures/recit-collant/` | Une histoire en chapitres, lue dans l'ordre | frame, backdrop, hero, chapter, media, finale |
 | Site vitrine | `structures/site-vitrine/` | Plusieurs pages : un accueil qui oriente, des pages intérieures qui renseignent | frame, backdrop, hero, media, title, grid, finale |
 | Article / page éditoriale | `structures/article/` | Un texte long, fait pour être lu d'une traite | frame, backdrop, hero, media, title, grid, finale |
+| Application | `structures/application/` | Un outil de travail : barre latérale, recherche, et trois écrans (liste et panneau de détail, fiche d'un enregistrement, tableau de bord) | frame, backdrop, title, grid |
 
 Toutes partagent `structures/page.css` (coquille, largeurs, rythme, texte, emplacements neutres) et `structures/page.js` (emplacements, barre qui se cache).
 

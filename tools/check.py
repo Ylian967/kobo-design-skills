@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "plugins" / "kobo-design" / "skills"
 REQUIRED = ["SKILL.md", "source.md", "references/tokens.css", "references/components.md",
             "references/layouts.md", "references/motion.md", "references/assets.md", "examples/demo.html"]
-META_SKILLS = {"site-to-skill", "catalogue"}  # skills outils, sans tokens ni démo
+META_SKILLS = {"site-to-skill", "catalogue", "kobo-studio"}  # skills outils, sans tokens ni démo
 
 
 def lum(h):

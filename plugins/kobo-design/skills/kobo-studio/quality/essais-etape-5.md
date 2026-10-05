@@ -181,6 +181,43 @@ Ce que la relance a encore trouvé :
 - L'encart collant apparaissait trois fois dans `carte-1440.png` (capture assemblée par écrans) : corrigé après les essais dans `tools/sonde.html`, il reprend sa place dans le flux le temps de la capture (vérifié sur la même page : une seule fois).
 - Deux photos provisoires ne montrent pas le plat annoncé (asperges pour poireaux, poisson pour quenelle) : dit par l'agent à la livraison, mais c'est la limite d'une photo de banque posée sous un vrai nom de plat.
 
+## 4. Un CRM B2B pour une PME de services (registre fonctionnel, 5 octobre 2026)
+
+Essai fait après l'ajout du skill `clear-ledger-desk` et de la structure `application`. Agent neuf, avec seulement `SKILL.md` et la demande ; les deux arrêts tenus ; je jouais le client (Atelier Rivage, conseil numérique à Nantes, six utilisateurs, outil « Rivage Suivi », premier écran : la liste des affaires). Résultat : `examples/crm-pme/`, capture `essais-etape-5/crm-pme.png`.
+
+**Ce qu'il devait trouver, et qu'il a trouvé seul :**
+
+| Attendu | Fait |
+|---|---|
+| Lire le projet comme *fonctionnel* et le dire | Oui, dès le premier message : « un outil de travail, pas un site de présentation » |
+| Proposer `clear-ledger-desk` | Oui, **seul**, en refusant de présenter un skill expressif comme adapté ; `site-to-skill` donné en seconde voie |
+| Proposer la structure `application` | Oui, avec son plan en sept zones tiré du README de la structure |
+| Poser les questions du registre | Oui : enregistrements et volumes, colonnes, gestes répétés, utilisateurs et écrans, origine des données |
+
+**Livraison :** liste de 24 affaires fictives (16 ouvertes affichées par défaut), trois filtres, recherche, détail avec changement d'étape, fenêtre « Créer une affaire » à formulaire validé, bascule de densité, raccourcis. `check_studio.py` : 0 erreur après correction du script (voir plus bas), pire contraste 4,51:1. Lecture : `SKILL.md`, `interview.md`, le README de la structure, le catalogue en partie, un pattern, cinq README de composants, la grille.
+
+**Où il s'est perdu :**
+
+| Point | Ce qui s'est passé | Suite donnée |
+|---|---|---|
+| « Deux ou trois skills » alors qu'un seul est fonctionnel | Il a hésité, puis présenté un skill et la voie `site-to-skill` | `SKILL.md` dit maintenant de présenter `clear-ledger-desk` seul |
+| « Une des quatre structures » | Le texte disait quatre, le tableau en listait cinq | Corrigé |
+| Faux positif du script : « reste du contenu de démonstration (« Raccourcis clavier ») » | Le titre de la fenêtre d'aide, fourni par la structure, était pris pour un oubli. Il l'a laissé et signalé (règle 7), sans rebaptiser le titre | Corrigé dans le script : un titre marqué `data-k-fixed` appartient à la structure |
+| Ce que font les scripts de la structure | Pour un filtre à valeur de départ, « Effacer », l'ajout d'une ligne, le tri par script et la densité, le README ne suffisait pas : il a ouvert `application.js` et `tableau.js`, ce que le skill interdit | Section « Brancher ses données et ses gestes » ajoutée au README de la structure |
+| Liste des composants | `components/README.md` est interdit de lecture et rien d'autre ne les liste : il a fait un `ls` | Corrigé ensuite : `components/INDEX.md`, une ligne par composant, cité dans le tableau des lectures de `SKILL.md` |
+| README d'un composant déjà présent dans la page de départ | Le skill ne dit de le lire que s'il est absent ; `champ` et `modale` étaient là, mais sans le balisage d'un formulaire ni d'un pied de fenêtre : lus quand même | Corrigé ensuite : `SKILL.md` dit de lire le README des composants qu'on **utilise**, et seulement ceux-là |
+| Où ranger le script du projet | Rien ne le disait : il a créé `site.js` | Ajouté à « Organisation d'un projet » |
+| Grand blanc sous la tête d'écran | Marge d'un titre de section, héritée de `page.css` ; il ne savait pas s'il pouvait la corriger | Corrigé dans `application.css` |
+| Grille anti-slop | Écrite pour des landings : héros, photos, cartes sans objet | `SKILL.md` dit quelles cases s'appliquent à un projet fonctionnel ; la grille elle-même n'est pas réécrite |
+| Premier tour de l'interview | Parle de visiteur et de photos : il l'a reformulé pour un outil | Corrigé ensuite : le registre est la première question, et le premier tour a une suite pour un site et une suite pour un outil (utilisateurs, tâches fréquentes, données, écrans, rôles et droits) |
+| Cases à cocher des lignes | « Garder le balisage » contre « ne charger que l'utile » : il a retiré les cases, faute d'action groupée | Le README dit maintenant comment retirer la colonne |
+| Bascule de densité dans l'en-tête | Elle cassait l'en-tête sur téléphone : il l'a rangée avec les filtres | Le README conseille cet endroit |
+| Essais manuels sans navigateur | Contrainte de la machine ce jour-là. Il a monté son propre banc (Chrome sans écran), à 500 px de large au plus étroit, pas 390 | Corrigé ensuite : sans navigateur, `check_studio.py` fait quand même les contrôles par script, écrit « VÉRIFICATION VISUELLE NON FAITE » (code de sortie 2) et donne la phrase à reporter ; `SKILL.md` dit qu'une capture à 500 px n'est pas une vérification à 390 px |
+
+Deux remarques de l'agent sans objet : « 24 skills ici, 26 dans la liste des skills » (la liste du plugin compte aussi deux skills outils et n'a pas été touchée) et des fichiers du skill modifiés hors de son dossier (c'était ce travail-ci, en cours et non commité).
+
+**Ce que l'essai ne dit pas :** l'écran de fiche et le tableau de bord n'ont pas été demandés, donc pas exercés par un agent (ils ont été ajoutés à la structure après cet essai, et essayés à la main) ; rien n'a été essayé au doigt ni avec un lecteur d'écran ; un seul agent, une seule demande.
+
 ## Ce que les essais ont changé dans le skill
 
 | Fichier | Changement | Vu dans |

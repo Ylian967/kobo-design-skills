@@ -24,7 +24,7 @@ Vingt composants de base (deux lots de dix), neutres : ils ne lisent que les rô
 | `fil-ariane/` | Fil d'Ariane | `k-crumbs` | `fil-ariane.js` (repli) | `FilAriane.jsx` |
 | `info-bulle/` | Précision au survol et au focus | `k-tooltip` | `info-bulle.js` | `InfoBulle.jsx` |
 | `menu-deroulant/` | Menu d'actions ou de choix | `k-dropdown` | `menu-deroulant.js` | `MenuDeroulant.jsx` |
-| `signatures/` | Couches de signature : une par skill (23 sur 23) | mêmes classes | — | rien à ajouter |
+| `signatures/` | Couches de signature : une par skill (24 sur 24) | mêmes classes | — | rien à ajouter |
 
 Chaque dossier a son `README.md` : rôle, anatomie, états, clavier, accessibilité, variantes, exemple.
 
@@ -62,7 +62,7 @@ python3 tools/check_components.py     # valeurs en dur, README, focus, React, mo
 python3 tools/check_contract.py       # fiches du contrat
 ```
 
-Puis ouvrir `gallery.html` (directement depuis le disque) : tous les composants, tous leurs états, sous les 23 skills et les trois intensités, avec des déclencheurs qui fonctionnent. Adresse : `gallery.html#<id>` ou `#<id>:off`.
+Puis ouvrir `gallery.html` (directement depuis le disque) : tous les composants, tous leurs états, sous les 24 skills et les trois intensités, avec des déclencheurs qui fonctionnent. Adresse : `gallery.html#<id>` ou `#<id>:off`.
 
 ## Limites connues
 

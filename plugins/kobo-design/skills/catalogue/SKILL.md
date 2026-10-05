@@ -1,6 +1,6 @@
 ---
 name: catalogue
-description: Catalogue des 23 directions artistiques Kōbō (jeu vidéo, anime, gacha, expériences web primées, luxe, tech, mode, food, immobilier, voyage, portfolio). À utiliser quand on demande quel style choisir, « montre-moi les styles », « je veux un site sombre / coloré / japonais / luxe… », ou avant de lancer un projet sans style imposé. Propose 1 à 3 skills adaptés et explique pourquoi.
+description: Catalogue des 24 directions artistiques Kōbō (jeu vidéo, anime, gacha, expériences web primées, luxe, tech, mode, food, immobilier, voyage, portfolio, et un style sobre pour les outils de travail — CRM, back-office, tableau de bord). À utiliser quand on demande quel style choisir, « montre-moi les styles », « je veux un site sombre / coloré / japonais / luxe… », ou avant de lancer un projet sans style imposé. Propose 1 à 3 skills adaptés et explique pourquoi.
 ---
 
 # Catalogue Kōbō
@@ -9,10 +9,11 @@ Ce skill ne dessine rien : il aide à **choisir** le bon style, puis passe la ma
 
 ## Comment répondre
 
-1. Lire la demande : type de produit (jeu, boutique, portfolio…), ambiance (sombre, lumineuse, joyeuse, luxe), plateforme (web, React Native).
+1. Lire la demande : type de produit (jeu, boutique, portfolio…), ambiance (sombre, lumineuse, joyeuse, luxe), plateforme (web, React Native). Si c'est un **outil de travail** (CRM, ERP, back-office, tableau de bord, application SaaS), proposer `clear-ledger-desk` seul : les autres styles sont faits pour présenter, pas pour travailler.
 2. Proposer **1 à 3 styles** du tableau, chacun avec une phrase : pourquoi il colle, et ce qu'il faudra fournir (photos, illustrations, 3D).
 3. Indiquer la commande à lancer : `/kobo-design:<id> <la demande>`.
-4. Si rien ne colle, proposer `/kobo-design:site-to-skill <url>` pour créer un style à partir d'un site.
+4. Si rien ne colle, proposer `/kobo-design:site-to-skill <url>` pour créer un style à partir d'un site, ou `/kobo-design:site-to-skill <type de projet>` pour qu'il propose dix références au plus et laisse choisir.
+5. Pour un projet entier (interview, structure des pages, composants, vérification), passer la main à `/kobo-design:kobo-studio`.
 
 Ne jamais mélanger deux styles dans un même projet : choisir, puis s'y tenir.
 
@@ -54,8 +55,15 @@ Ne jamais mélanger deux styles dans un même projet : choisir, puis s'y tenir.
 | `pixel-lime-portfolio` | Portfolio créatif | N&B, blocs pixel citron vert, mono | Shot « CH — Bold Editorial Portfolio » |
 | `alpine-glass-expedition` | Voyage d'aventure | Montagne bleutée, serif capitales, verre | Shot « WayWild » |
 
+## Outils de travail (registre fonctionnel)
+
+| id | En un mot | Ambiance | Inspiré de |
+|---|---|---|---|
+| `clear-ledger-desk` | CRM, back-office, tableau de bord | Fond blanc, texte de 14 px, tableaux denses, une seule couleur d'action, densité confort ou compact | atlassian.design (style mesuré) et Salesforce Lightning 2 (schémas lus) |
+
 ## Raccourcis par envie
 
+- **Sobre, pour travailler** : `clear-ledger-desk`.
 - **Sombre et premium** : `pocket-device-noir`, `nocturne-architecture`, `glacial-mono-3d`.
 - **Clair et élégant** : `chrome-atelier`, `glass-frame-estate`, `showroom-bento`.
 - **Coloré et joyeux** : `sticker-brutal-jp`, `zigzag-snack-pop`, `tiny-planet-toy`.
@@ -68,5 +76,5 @@ Ne jamais mélanger deux styles dans un même projet : choisir, puis s'y tenir.
 ## À savoir
 
 - Chaque style a une page d'exemple : `skills/<id>/examples/demo.html` (galerie : `docs/index.html`).
-- Les styles inspirés de Dribbble viennent de **maquettes** : valeurs estimées à l'œil (voir `source.md` de chaque skill). Les sites de jeu ont été mesurés dans le navigateur ; les sites Awwwards en WebGL ont été analysés surtout à partir de leurs fiches.
+- Les styles inspirés de Dribbble viennent de **maquettes** : valeurs estimées à l'œil (voir `source.md` de chaque skill). Les sites de jeu ont été mesurés dans le navigateur ; les sites Awwwards en WebGL ont été analysés surtout à partir de leurs fiches. `clear-ledger-desk` vient d'un système de design public mesuré dans le navigateur ; sa couleur d'action et sa densité compacte sont proposées (voir son `source.md`).
 - Aucun style ne contient de logo, personnage, illustration ou texte des sites d'origine.

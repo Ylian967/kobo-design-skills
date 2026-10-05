@@ -25,7 +25,10 @@ Navigateur : variable KOBO_CHROME, sinon chrome / chromium du PATH, sinon le Chr
 --rapide ne mesure que le premier écran. --prefixe nomme les captures (avant-, lot-1-…) pour garder l'avant et l'après.
 --constat : pour un site qui n'est PAS un projet kobo-studio (mode reprise) ; ni bibliothèque ni règles du projet, seulement
 les captures et ce que le navigateur mesure, rendu comme un état des lieux (code de sortie 0).
-Code de sortie 1 si une erreur est trouvée.
+Sans navigateur (aucun trouvé, --sans-navigateur, ou il ne rend rien) : les contrôles 1 et 2 tournent quand même ; le script
+écrit « VÉRIFICATION VISUELLE NON FAITE » et la phrase à reporter à la livraison. Rien de ce que le navigateur aurait mesuré
+n'est alors tenu pour vérifié.
+Code de sortie : 1 si une erreur est trouvée ; 2 si aucune erreur mais la vérification visuelle n'a pas été faite ; 0 sinon.
 """
 import argparse
 import json
@@ -245,7 +248,7 @@ def browse(page, w, h, browser, out_dir, quick, prefix=""):
             errs.append(f"{page} : {doc['h1']} <h1> dans la page rendue (il en faut un)")
         if not doc["main"] or not doc["skip"]:
             errs.append(f"{page} : <main> ou lien d'évitement (.k-skip) absent de la page rendue")
-        if not doc["images"]:
+        if not doc["images"] and not doc.get("app"):   # une application n'a pas de photo imposée
             (errs if Path(page).stem == "index" else notes).append(f"{page} : aucune image dans la page rendue (anti-slop I3 : de vraies images)")
         for s in doc.get("series", []):
             notes.append(f"ALERTE anti-slop (K2, F1) — {page} : {s['count']} éléments de même forme côte à côte dans {s['where']} (« {s['first']} »…) : "
@@ -306,7 +309,8 @@ def demo_titles():
     """Titres des pages de démonstration des structures : en retrouver un dans un projet, c'est du contenu non remplacé."""
     out = set()
     for f in (STUDIO / "ux/structures").glob("*/*.html"):
-        for t in re.findall(r"<h[1-3][^>]*>(.*?)</h[1-3]>", f.read_text(encoding="utf-8"), flags=re.S):
+        # un titre marqué data-k-fixed appartient à la structure (fenêtre d'aide…) : le garder n'est pas un oubli
+        for t in re.findall(r"<h[1-3](?![^>]*\bdata-k-fixed)[^>]*>(.*?)</h[1-3]>", f.read_text(encoding="utf-8"), flags=re.S):
             t = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", t)).strip()
             if len(t) > 14:
                 out.add(t)
@@ -354,14 +358,15 @@ def static(project):
                 continue                                         # coquille d'une application : la page rendue est vérifiée dans le navigateur
             if len(re.findall(r"<h1\b", plain)) != 1:
                 errs.append(f"{where} : {len(re.findall(r'<h1', plain))} <h1> (il en faut un seul)")
-            for tag in ("header", "main", "footer"):
+            app = 'class="k-page ap"' in plain or "ap-body" in plain   # structure « application » : un outil n'a ni pied de page ni photo imposée
+            for tag in ("header", "main") + (() if app else ("footer",)):
                 if f"<{tag}" not in plain:
                     errs.append(f"{where} : <{tag}> manquant (anti-slop U12)")
             if "k-skip" not in plain:
                 errs.append(f"{where} : lien d'évitement manquant (anti-slop U9)")
             if not re.search(r"<html[^>]*\blang=", plain):
                 errs.append(f"{where} : attribut lang manquant sur <html>")
-            if not re.search(r"<(img|video|canvas)\b", plain):
+            if not app and not re.search(r"<(img|video|canvas)\b", plain):
                 (errs if Path(where).stem == "index" else notes).append(f"{where} : aucune image (anti-slop I3 : de vraies images)")
             empty = len(re.findall(r"<img\b[^>]*\balt=\"\"", plain))
             if empty:
@@ -414,6 +419,7 @@ def main():
         if "data-k-brand" not in shell:
             notes.append("brand.css présent mais data-k-brand absent de <html> : la marque ne s'applique pas")
 
+    blind = ""                                               # raison pour laquelle le navigateur n'a rien vérifié
     react = (project / "package.json").exists()
     serve = project / (a.servir or ("dist" if react else "."))
     if not a.sans_navigateur:
@@ -422,9 +428,9 @@ def main():
         try:
             import PIL  # noqa: F401
         except ImportError:
-            browser, _ = None, notes.append("Pillow absent (pip install pillow) : pas de mesure sur capture")
+            browser, blind = None, "Pillow absent (pip install pillow)"
         if not browser:
-            errs.append("aucun navigateur trouvé (Chrome ou Chromium ; variable KOBO_CHROME) : captures et contraste NON vérifiés")
+            blind = blind or "aucun navigateur trouvé (Chrome ou Chromium ; variable KOBO_CHROME)"
         elif not pages:
             errs.append(f"aucune page .html dans {serve}" + (" : lancer « npm run build » (base: './')" if react else ""))
         else:
@@ -436,24 +442,39 @@ def main():
             out.mkdir(parents=True, exist_ok=True)
             try:
                 b = Browser(browser, server.server_address[1], tmp)
+                seen, dead = 0, []
                 for page in pages:
                     for w, h in SIZES:
                         e, n = browse(page, w, h, b, out, a.rapide, a.prefixe)
-                        errs, notes = errs + e, notes + n
+                        if len(e) == 1 and "capture impossible" in e[0]:
+                            dead.append(e[0])
+                            continue
+                        seen, errs, notes = seen + 1, errs + e, notes + n
+                if seen:
+                    errs += dead
+                else:                                        # le navigateur est là mais ne rend aucune page (pas d'affichage, bac à sable)
+                    blind = f"le navigateur ({browser}) n'a rendu aucune page"
             finally:
                 server.shutdown()
                 shutil.rmtree(tmp, ignore_errors=True)
-            notes.append(f"captures : {out}/{a.prefixe}<page>-1440.png et -390.png (à relire avec quality/anti-slop.md)")
+            if not blind:
+                notes.append(f"captures : {out}/{a.prefixe}<page>-1440.png et -390.png (à relire avec quality/anti-slop.md)")
     else:
-        notes.append("navigateur non lancé : contenu masqué, texte sous 12 px et contraste sur capture NON vérifiés")
+        blind = "navigateur non lancé (--sans-navigateur)"
 
     print("\n== Constats" if a.constat else "\n== 2. Projet")
     for e in errs:
         print("  ✗", e)
     for n in notes:
         print("  ·", n)
-    print(f"\n{len(errs)} {'constat(s)' if a.constat else 'erreur(s)'}.")
-    return 1 if errs and not a.constat else 0
+    if blind:
+        print(f"\n== VÉRIFICATION VISUELLE NON FAITE : {blind}")
+        print("  Non contrôlé : captures à 1440 et 390 px, contenu masqué, texte sous 12 px, débordement, images qui ne chargent pas,")
+        print("  contraste sur capture, grille anti-slop, clavier.")
+        print("  À écrire tel quel à la livraison, sous « Mesuré » : « Vérification visuelle non faite (pas de navigateur) : ni capture,")
+        print("  ni contraste mesuré sur la page, ni essai au clavier. Seuls les contrôles par script des fichiers ont tourné. »")
+    print(f"\n{len(errs)} {'constat(s)' if a.constat else 'erreur(s)'}" + (" sur les seuls contrôles par script ; vérification visuelle NON FAITE." if blind else "."))
+    return 0 if a.constat else 1 if errs else 2 if blind else 0
 
 
 if __name__ == "__main__":

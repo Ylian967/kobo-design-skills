@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tableau de bord — Cordée Brume, espace des guides (projet fictif)</title>
+<!-- Structure « application », écran « tableau de bord » : des chiffres écrits, une répartition, ce qui attend, l'activité récente.
+     Projet fictif : Cordée Brume, ses sorties, ses clients, ses montants sont inventés.
+     S'ouvre depuis le disque. Aperçu sous un autre skill : tableau-de-bord.html#<id>[:full|reduced|off][:slots] -->
+<link rel="stylesheet" href="../../../contract/roles.css">
+<link rel="stylesheet" id="map" href="../../../contract/maps/clear-ledger-desk.css">
+<link rel="stylesheet" href="../../../components/socle.css">
+<link rel="stylesheet" href="../../../components/bouton/bouton.css">
+<link rel="stylesheet" href="../../../components/champ/champ.css">
+<link rel="stylesheet" href="../../../components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="../../../components/modale/modale.css">
+<link rel="stylesheet" href="../page.css">
+<link rel="stylesheet" href="application.css">
+<link rel="stylesheet" id="sig">
+<script src="../apercu.js" data-k-base="../../../"></script>
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M20 20l-4.5-4.5M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><path d="M16 19v-1a4 4 0 0 0-8 0v1M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12 3v3M12 18v3M3 12h3M18 12h3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-empty" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8M3 13v6h18v-6M3 13h5l1.5 3h5L16 13h5"/></symbol>
+</svg>
+
+<div class="k-page ap">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="ap-top">
+      <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-side aria-expanded="true" aria-controls="ap-side" aria-label="Barre latérale"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <a class="ap-brand" href="application.html" data-k-keep>Cordée Brume · guides</a>
+      <form class="k-field ap-search" role="search" action="application.html">
+        <label class="k-field__label k-sr-only" for="ap-q">Chercher une réservation</label>
+        <div class="k-field__box"><input class="k-field__control" id="ap-q" type="search" name="q" data-ap-search placeholder="Chercher un nom, une sortie…" autocomplete="off" aria-describedby="ap-q-aide"></div>
+        <p class="k-field__help k-sr-only" id="ap-q-aide">Raccourci : la touche barre oblique.</p>
+      </form>
+      <div class="ap-top__end">
+        <button type="button" class="k-btn k-btn--ghost" data-ap-help data-k-modal-open="ap-aide" aria-haspopup="dialog">Raccourcis <span class="ap-key" aria-hidden="true">?</span></button>
+      </div>
+    </header>
+  </div>
+
+  <div class="ap-body">
+    <nav class="ap-side" id="ap-side" aria-label="Sections de l'espace des guides">
+      <h2 class="ap-side__title">Suivi</h2>
+      <ul>
+        <li><a class="ap-side__link" href="tableau-de-bord.html" data-k-keep aria-current="page" title="Tableau de bord"><svg class="k-icon" aria-hidden="true"><use href="#i-chart"/></svg><span class="ap-side__label">Tableau de bord</span></a></li>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Réservations"><svg class="k-icon" aria-hidden="true"><use href="#i-list"/></svg><span class="ap-side__label">Réservations</span><span class="ap-side__count">8</span></a></li>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Sorties"><svg class="k-icon" aria-hidden="true"><use href="#i-flag"/></svg><span class="ap-side__label">Sorties</span><span class="ap-side__count">3</span></a></li>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Clients"><svg class="k-icon" aria-hidden="true"><use href="#i-people"/></svg><span class="ap-side__label">Clients</span></a></li>
+      </ul>
+      <h2 class="ap-side__title">Compte</h2>
+      <ul>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Réglages"><svg class="k-icon" aria-hidden="true"><use href="#i-gear"/></svg><span class="ap-side__label">Réglages</span></a></li>
+      </ul>
+    </nav>
+
+    <main id="contenu" class="ap-main" tabindex="-1">
+      <!-- 1. Tête d'écran : la période, la date des chiffres, la même action principale que la liste -->
+      <header data-k-slot="title" class="ap-head">
+        <div class="ap-head__text">
+          <p class="k-kicker" data-k-part="kicker">Hiver 2027</p>
+          <h1 id="titre" data-k-part="title" data-k-fixed>Tableau de bord</h1>
+          <p class="ap-head__sum" data-k-part="lead">Chiffres arrêtés au 4 février 2027, 8 h.</p>
+        </div>
+        <div><button type="button" class="k-btn" data-k-part="action">Nouvelle réservation</button></div>
+      </header>
+
+      <!-- 2. Les chiffres qui se lisent d'abord : un nombre, ce qu'il compte, et sa précision en toutes lettres -->
+      <ul class="ap-stats" aria-label="Chiffres de la saison">
+        <li><p class="ap-stat__label">Réservations</p><p class="ap-stat__value">8</p><p class="ap-stat__note">dont 1 annulée et remboursée</p></li>
+        <li><p class="ap-stat__label">Encaissé</p><p class="ap-stat__value">1 720 €</p><p class="ap-stat__note">5 réservations payées</p></li>
+        <li><p class="ap-stat__label">En attente de paiement</p><p class="ap-stat__value">740 €</p><p class="ap-stat__note">2 réservations, à relancer avant le 10 février</p></li>
+        <li><p class="ap-stat__label">Personnes inscrites</p><p class="ap-stat__value">20</p><p class="ap-stat__note">sur 3 sorties, hors annulation</p></li>
+      </ul>
+
+      <!-- 3. Les panneaux : chacun répond à une question, et mène à la liste ou à une fiche -->
+      <div class="ap-panels">
+        <section class="ap-panel" aria-labelledby="p-sorties">
+          <h2 class="ap-h2" id="p-sorties">Réservations par sortie</h2>
+          <ul class="ap-bars">
+            <li><span>Bivouac au-dessus des nuages</span><span class="ap-bars__value">3</span><span class="ap-bars__bar" style="--_v: 1" aria-hidden="true"></span></li>
+            <li><span>Raquettes en forêt</span><span class="ap-bars__value">3</span><span class="ap-bars__bar" style="--_v: 1" aria-hidden="true"></span></li>
+            <li><span>Nuit en igloo</span><span class="ap-bars__value">2</span><span class="ap-bars__bar" style="--_v: 0.667" aria-hidden="true"></span></li>
+            <li><span>Cascade de glace</span><span class="ap-bars__value">0</span><span class="ap-bars__bar" style="--_v: 0" aria-hidden="true"></span></li>
+          </ul>
+          <p class="ap-panel__note"><a class="k-link" href="application.html" data-k-keep>Voir toutes les réservations</a></p>
+        </section>
+
+        <section class="ap-panel" aria-labelledby="p-attente">
+          <h2 class="ap-h2" id="p-attente">Paiements en attente</h2>
+          <ul class="ap-rows">
+            <li><a class="k-link" href="fiche.html" data-k-keep>Camille Roux</a><span class="ap-rows__facts">Raquettes, 13 février · 260 €</span></li>
+            <li><a class="k-link" href="fiche.html" data-k-keep>Salomé Guérin</a><span class="ap-rows__facts">Igloo, 6 mars · 480 €</span></li>
+          </ul>
+          <p class="ap-panel__note">Total : 740 €.</p>
+        </section>
+
+        <section class="ap-panel" aria-labelledby="p-activite">
+          <h2 class="ap-h2" id="p-activite" data-k-fixed>Activité récente</h2>
+          <ol class="ap-timeline">
+            <li><time datetime="2027-02-03">3 février 2027</time><p>Inès Carpentier a réservé les raquettes du 13 mars, pour 5 personnes.</p></li>
+            <li><time datetime="2027-02-01">1er février 2027</time><p>Jeanne Lortat a annulé le bivouac du 6 février : 180 € remboursés.</p></li>
+            <li><time datetime="2027-01-29">29 janvier 2027</time><p>Noé Vasseur a payé le solde des raquettes du 27 février.</p></li>
+          </ol>
+        </section>
+
+        <section class="ap-panel" aria-labelledby="p-alertes">
+          <h2 class="ap-h2" id="p-alertes">Sorties à compléter</h2>
+          <div class="k-empty k-empty--plain"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h3 class="k-empty__title">Aucune sortie sous son minimum</h3><p class="k-empty__text">Une sortie apparaît ici quand elle a moins de deux inscrits à dix jours du départ.</p></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="k-modal" id="ap-aide" aria-labelledby="ap-aide-t" data-k-modal-dismiss="backdrop">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="ap-aide-t" data-k-fixed>Raccourcis clavier</h2><button type="button" class="k-btn k-btn--secondary k-btn--icon" data-k-modal-close aria-label="Fermer la fenêtre"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <div class="k-modal__body">
+      <ul class="ap-keys">
+        <li><span>Chercher une réservation</span><span><span class="ap-key">/</span></span></li>
+        <li><span>Fermer le tiroir, cette fenêtre</span><span><span class="ap-key">Échap</span></span></li>
+        <li><span>Replier ou ouvrir la barre latérale</span><span><span class="ap-key">[</span></span></li>
+        <li><span>Cette aide</span><span><span class="ap-key">?</span></span></li>
+      </ul>
+    </div>
+  </dialog>
+</div>
+
+<script src="../../../components/champ/champ.js"></script>
+<script src="../../../components/modale/modale.js"></script>
+<script src="../page.js"></script>
+<script src="../../templates/gabarits.js"></script>
+<script src="../../templates/index.js"></script>
+<script src="application.js"></script>
+</body>
+</html>

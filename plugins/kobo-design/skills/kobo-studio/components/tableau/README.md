@@ -43,6 +43,8 @@ div.k-table[role=region][aria-labelledby][tabindex=0]    la zone qui défile hor
 
 `Tab` : la zone (si elle défile, les flèches la font défiler), puis la case d'en-tête, les en-têtes triables, puis les cases et les liens de chaque ligne. `Entrée` ou `Espace` sur un en-tête trie, puis inverse le tri. `Espace` coche une ligne. Le tri ne déplace pas le focus.
 
+**Lignes parcourables** (`data-k-rownav` sur `.k-table` ; en React, la prop `surOuvrir`) : une seule ligne est dans l'ordre de tabulation. `↑` `↓` changent de ligne, `Début` et `Fin` vont aux extrémités, `Espace` coche la ligne, `Entrée` (ou un clic sur la ligne) l'ouvre : événement `k-table:open` (`detail.row`). La page pose `aria-current="true"` sur la ligne ouverte (en React : prop `ouverte`). À utiliser quand une ligne mène à une fiche ou à un panneau de détail.
+
 ## Accessibilité
 
 - Un vrai `<table>` : `<caption>`, `<th scope="col">`, `<th scope="row">` pour la cellule qui nomme la ligne.

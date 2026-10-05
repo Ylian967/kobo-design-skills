@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réservations — Cordée Brume, espace des guides (projet fictif)</title>
+<!-- Structure « application » : une coquille d'outil de travail (barre latérale repliable, en-tête à recherche). Écran « liste » : filtres, tableau et panneau de détail.
+     Les deux autres écrans : fiche.html (un enregistrement en pleine page) et tableau-de-bord.html.
+     Projet fictif : Cordée Brume, ses sorties, ses clients, ses montants sont inventés.
+     S'ouvre depuis le disque. Aperçu sous un autre skill : application.html#<id>[:full|reduced|off][:slots] -->
+<link rel="stylesheet" href="../../../contract/roles.css">
+<link rel="stylesheet" id="map" href="../../../contract/maps/clear-ledger-desk.css">
+<link rel="stylesheet" href="../../../components/socle.css">
+<link rel="stylesheet" href="../../../components/bouton/bouton.css">
+<link rel="stylesheet" href="../../../components/champ/champ.css">
+<link rel="stylesheet" href="../../../components/selection/selection.css">
+<link rel="stylesheet" href="../../../components/case-a-cocher/case-a-cocher.css">
+<link rel="stylesheet" href="../../../components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="../../../components/tableau/tableau.css">
+<link rel="stylesheet" href="../../../components/modale/modale.css">
+<link rel="stylesheet" href="../page.css">
+<link rel="stylesheet" href="application.css">
+<link rel="stylesheet" id="sig">
+<script src="../apercu.js" data-k-base="../../../"></script>
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M20 20l-4.5-4.5M17 10.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><path d="M16 19v-1a4 4 0 0 0-8 0v1M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12 3v3M12 18v3M3 12h3M18 12h3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-empty" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8M3 13v6h18v-6M3 13h5l1.5 3h5L16 13h5"/></symbol>
+</svg>
+
+<div class="k-page ap">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="ap-top">
+      <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-side aria-expanded="true" aria-controls="ap-side" aria-label="Barre latérale"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
+      <a class="ap-brand" href="application.html" data-k-keep>Cordée Brume · guides</a>
+      <form class="k-field ap-search" role="search" action="application.html">
+        <label class="k-field__label k-sr-only" for="ap-q">Chercher une réservation</label>
+        <div class="k-field__box"><input class="k-field__control" id="ap-q" type="search" name="q" data-ap-search placeholder="Chercher un nom, une sortie…" autocomplete="off" aria-describedby="ap-q-aide"></div>
+        <p class="k-field__help k-sr-only" id="ap-q-aide">Raccourci : la touche barre oblique.</p>
+      </form>
+      <div class="ap-top__end">
+        <button type="button" class="k-btn k-btn--ghost" data-ap-help data-k-modal-open="ap-aide" aria-haspopup="dialog">Raccourcis <span class="ap-key" aria-hidden="true">?</span></button>
+      </div>
+    </header>
+  </div>
+
+  <div class="ap-body">
+    <nav class="ap-side" id="ap-side" aria-label="Sections de l'espace des guides">
+      <h2 class="ap-side__title">Suivi</h2>
+      <ul>
+        <li><a class="ap-side__link" href="tableau-de-bord.html" data-k-keep title="Tableau de bord"><svg class="k-icon" aria-hidden="true"><use href="#i-chart"/></svg><span class="ap-side__label">Tableau de bord</span></a></li>
+        <li><a class="ap-side__link" href="application.html" data-k-keep aria-current="page" title="Réservations"><svg class="k-icon" aria-hidden="true"><use href="#i-list"/></svg><span class="ap-side__label">Réservations</span><span class="ap-side__count">8</span></a></li>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Sorties"><svg class="k-icon" aria-hidden="true"><use href="#i-flag"/></svg><span class="ap-side__label">Sorties</span><span class="ap-side__count">3</span></a></li>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Clients"><svg class="k-icon" aria-hidden="true"><use href="#i-people"/></svg><span class="ap-side__label">Clients</span></a></li>
+      </ul>
+      <h2 class="ap-side__title">Compte</h2>
+      <ul>
+        <li><a class="ap-side__link" href="application.html" data-k-keep title="Réglages"><svg class="k-icon" aria-hidden="true"><use href="#i-gear"/></svg><span class="ap-side__label">Réglages</span></a></li>
+      </ul>
+    </nav>
+
+    <main id="contenu" class="ap-main" tabindex="-1">
+      <!-- 1. Tête d'écran : où je suis, combien, et la seule action principale -->
+      <header data-k-slot="title" class="ap-head">
+        <div class="ap-head__text">
+          <p class="k-kicker" data-k-part="kicker">Hiver 2027</p>
+          <h1 id="titre" data-k-part="title">Réservations</h1>
+          <p class="ap-head__sum" data-k-part="lead" role="status" data-ap-sum="{n} réservations affichées sur {total}"></p>
+        </div>
+        <div><button type="button" class="k-btn" data-k-part="action">Nouvelle réservation</button></div>
+      </header>
+
+      <!-- 2. Filtres -->
+      <div class="ap-tools">
+        <div class="k-field k-select">
+          <label class="k-field__label" for="f-sortie">Sortie</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-sortie" data-ap-filter="sortie"><option value="">Toutes les sorties</option><option value="bivouac">Bivouac</option><option value="raquettes">Raquettes</option><option value="igloo">Igloo</option><option value="cascade">Cascade de glace</option></select></div>
+        </div>
+        <div class="k-field k-select">
+          <label class="k-field__label" for="f-etat">État</label>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-etat" data-ap-filter="etat"><option value="">Tous les états</option><option value="payee">Payée</option><option value="attente">En attente de paiement</option><option value="annulee">Annulée</option></select></div>
+        </div>
+        <button type="button" class="k-btn k-btn--ghost" data-ap-reset>Effacer les filtres</button>
+      </div>
+
+      <!-- 3. Zone de travail : la liste, et le détail de la ligne ouverte -->
+      <div class="ap-work">
+        <section data-k-slot="grid" class="ap-list" aria-labelledby="titre">
+          <div class="k-table" role="region" aria-labelledby="t-res" tabindex="0" data-k-rownav>
+            <div class="k-table__bar"><span class="k-table__count"></span></div>
+            <table>
+              <caption id="t-res">Réservations de l'hiver (données fictives). Entrée ouvre le détail d'une ligne.</caption>
+              <thead><tr>
+                <th scope="col" class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input" data-k-select-all><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Tout sélectionner</span></label></th>
+                <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Client<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" aria-sort="none"><button type="button" class="k-table__sort">Sortie<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" aria-sort="ascending"><button type="button" class="k-table__sort">Date<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" data-k-type="number" aria-sort="none"><button type="button" class="k-table__sort">Personnes<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col" data-k-type="number" aria-sort="none"><button type="button" class="k-table__sort">Montant<span class="k-table__arrow" aria-hidden="true"></span></button></th>
+                <th scope="col">État</th>
+              </tr></thead>
+              <tbody>
+            <tr data-sortie="bivouac" data-etat="payee"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Agathe Morel</span></label></td><th scope="row">Agathe Morel</th><td>Bivouac au-dessus des nuages</td><td data-k-sort="2027-02-06">6 février</td><td data-k-type="number" data-k-sort="2">2</td><td data-k-type="number" data-k-sort="360">360 €</td><td>Payée</td></tr>
+            <tr data-sortie="raquettes" data-etat="attente"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Camille Roux</span></label></td><th scope="row">Camille Roux</th><td>Raquettes en forêt</td><td data-k-sort="2027-02-13">13 février</td><td data-k-type="number" data-k-sort="4">4</td><td data-k-type="number" data-k-sort="260">260 €</td><td>En attente de paiement</td></tr>
+            <tr data-sortie="igloo" data-etat="payee"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Idriss Benali</span></label></td><th scope="row">Idriss Benali</th><td>Nuit en igloo</td><td data-k-sort="2027-02-20">20 février</td><td data-k-type="number" data-k-sort="2">2</td><td data-k-type="number" data-k-sort="480">480 €</td><td>Payée</td></tr>
+            <tr data-sortie="bivouac" data-etat="annulee"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Jeanne Lortat</span></label></td><th scope="row">Jeanne Lortat</th><td>Bivouac au-dessus des nuages</td><td data-k-sort="2027-02-06">6 février</td><td data-k-type="number" data-k-sort="1">1</td><td data-k-type="number" data-k-sort="180">180 €</td><td>Annulée, remboursée</td></tr>
+            <tr data-sortie="raquettes" data-etat="payee"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Noé Vasseur</span></label></td><th scope="row">Noé Vasseur</th><td>Raquettes en forêt</td><td data-k-sort="2027-02-27">27 février</td><td data-k-type="number" data-k-sort="3">3</td><td data-k-type="number" data-k-sort="195">195 €</td><td>Payée</td></tr>
+            <tr data-sortie="igloo" data-etat="attente"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Salomé Guérin</span></label></td><th scope="row">Salomé Guérin</th><td>Nuit en igloo</td><td data-k-sort="2027-03-06">6 mars</td><td data-k-type="number" data-k-sort="2">2</td><td data-k-type="number" data-k-sort="480">480 €</td><td>En attente de paiement</td></tr>
+            <tr data-sortie="bivouac" data-etat="payee"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Théo Marchand</span></label></td><th scope="row">Théo Marchand</th><td>Bivouac au-dessus des nuages</td><td data-k-sort="2027-03-13">13 mars</td><td data-k-type="number" data-k-sort="2">2</td><td data-k-type="number" data-k-sort="360">360 €</td><td>Payée</td></tr>
+            <tr data-sortie="raquettes" data-etat="payee"><td class="k-table__check"><label class="k-check"><input type="checkbox" class="k-check__input"><span class="k-check__box" aria-hidden="true"></span><span class="k-sr-only">Sélectionner Inès Carpentier</span></label></td><th scope="row">Inès Carpentier</th><td>Raquettes en forêt</td><td data-k-sort="2027-03-13">13 mars</td><td data-k-type="number" data-k-sort="5">5</td><td data-k-type="number" data-k-sort="325">325 €</td><td>Payée</td></tr>
+              </tbody>
+            </table>
+            <div class="k-table__empty" hidden><div class="k-empty k-empty--plain"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h2 class="k-empty__title">Aucune réservation ne correspond</h2><p class="k-empty__text">Aucune réservation pour ces filtres. Élargissez la sortie ou l'état, ou effacez la recherche.</p><div class="k-empty__actions"><button type="button" class="k-btn k-btn--secondary" data-ap-reset>Effacer les filtres</button></div></div></div>
+            <p class="k-table__status k-sr-only" role="status"></p>
+          </div>
+          <div class="ap-list__foot">
+            <span>Montants fictifs, en euros.</span>
+            <ul class="ap-list__keys" aria-label="Touches de la liste"><li><span class="ap-key">↑</span><span class="ap-key">↓</span> ligne</li><li><span class="ap-key">Espace</span> cocher</li><li><span class="ap-key">Entrée</span> détail</li></ul>
+          </div>
+        </section>
+
+        <aside class="ap-detail" id="ap-detail" aria-labelledby="d-titre" hidden>
+          <div class="ap-detail__head">
+            <div><h2 class="ap-detail__title" id="d-titre" tabindex="-1"></h2><p class="ap-detail__sub">Réservation</p></div>
+            <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-close aria-label="Fermer le détail"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+          </div>
+          <dl class="k-facts" data-ap-facts></dl>
+          <div class="ap-detail__actions"><a class="k-btn k-btn--secondary" href="fiche.html" data-k-keep>Ouvrir la fiche</a><button type="button" class="k-btn k-btn--ghost">Envoyer un rappel</button></div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="k-modal" id="ap-aide" aria-labelledby="ap-aide-t" data-k-modal-dismiss="backdrop">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="ap-aide-t" data-k-fixed>Raccourcis clavier</h2><button type="button" class="k-btn k-btn--secondary k-btn--icon" data-k-modal-close aria-label="Fermer la fenêtre"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
+    <div class="k-modal__body">
+      <ul class="ap-keys">
+        <li><span>Chercher</span><span><span class="ap-key">/</span></span></li>
+        <li><span>Changer de ligne</span><span><span class="ap-key">↑</span><span class="ap-key">↓</span></span></li>
+        <li><span>Première, dernière ligne</span><span><span class="ap-key">Début</span><span class="ap-key">Fin</span></span></li>
+        <li><span>Cocher la ligne</span><span><span class="ap-key">Espace</span></span></li>
+        <li><span>Ouvrir le détail de la ligne</span><span><span class="ap-key">Entrée</span></span></li>
+        <li><span>Fermer le détail, le tiroir, cette fenêtre</span><span><span class="ap-key">Échap</span></span></li>
+        <li><span>Replier ou ouvrir la barre latérale</span><span><span class="ap-key">[</span></span></li>
+        <li><span>Cette aide</span><span><span class="ap-key">?</span></span></li>
+      </ul>
+    </div>
+  </dialog>
+</div>
+
+<script src="../../../components/champ/champ.js"></script>
+<script src="../../../components/case-a-cocher/case-a-cocher.js"></script>
+<script src="../../../components/tableau/tableau.js"></script>
+<script src="../../../components/modale/modale.js"></script>
+<script src="../page.js"></script>
+<script src="../../templates/gabarits.js"></script>
+<script src="../../templates/index.js"></script>
+<script src="application.js"></script>
+</body>
+</html>

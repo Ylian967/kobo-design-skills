@@ -1,10 +1,10 @@
-# Catalogue des 23 skills de style, vu depuis kobo-studio
+# Catalogue des 24 skills de style, vu depuis kobo-studio
 
 Une fiche courte par skill, pour choisir à l'étape c sans ouvrir les skills. Tout vient des fichiers existants : la description et `references/assets.md` de chaque skill, `audit/<id>.md`, `components/signatures/README.md`, les en-têtes de `ux/templates/` et `quality/relecture-etape-4b.md`. Rien n'est inventé ; une ligne vide de source dit « non relevé ».
 
 Comment lire une fiche :
 
-- **Registre** : *expressif* (l'image et le récit priment) ou *produit* (présenter, vendre). Aucun skill n'est *fonctionnel* : pour ce registre, passer par `site-to-skill` (voir `interview.md`). Le classement est une lecture de l'audit, pas une donnée des skills.
+- **Registre** : *expressif* (l'image et le récit priment), *produit* (présenter, vendre) ou *fonctionnel* (faire un travail). Un seul skill est *fonctionnel* : `clear-ledger-desk`, avec la structure `application` (voir `interview.md`). Le classement est une lecture de l'audit, pas une donnée des skills.
 - **Photos exigées** : ce que le gabarit attend pour ressembler à sa démo. Sans elles, il fonctionne mais rend moins bien.
 - **Gabarits** : les mises en page de signature que kobo-studio sait poser (famille → emplacement). Tout autre emplacement rend son contenu neutre, habillé par la couche de signature des composants. En React, seuls les gabarits du héros (`hero-photo`, `objet`) sont essayés ; les autres emplacements restent neutres.
 - **Pièces lourdes** : ce qui coûte au chargement ou à l'affichage. Chacune a un repli (photo).
@@ -17,6 +17,7 @@ Ce que kobo-studio sait poser pour chaque skill, emplacement par emplacement. �
 | Skill | `frame` | `backdrop` | `hero` | `title` | `media` | `chapter` | Hors héros |
 |---|---|---|---|---|---|---|---|
 | acid-scan-security | — | — | ● (hero-photo) | — | — | — | 0 |
+| clear-ledger-desk | — | — | — | — | — | — | 0 (aucun gabarit : sa signature est la sobriété) |
 | alpine-glass-expedition | — | — | ● (hero-photo) | — | — | — | 0 |
 | anime-x-slash | — | — | ● (hero-photo) | — | — | — | 0 |
 | chrome-atelier | — | — | ● (hero-photo) | — | — | — | 0 |
@@ -40,7 +41,7 @@ Ce que kobo-studio sait poser pour chaque skill, emplacement par emplacement. �
 | tiny-planet-toy | — | — | ● (objet) | — | — | — | 0 |
 | zigzag-snack-pop | — | — | ● (hero-photo) | — | — | — | 0 |
 
-Lecture : un seul skill a deux gabarits hors du héros (`lore-frame-editorial`), six en ont un, seize n'en ont aucun. Tout gabarit listé hors du héros **doit** être posé (règle 8 de `SKILL.md`) ; pour les seize autres, la proposition et la livraison disent que la signature, sous le premier écran, ne tient que par les couleurs, la typo et les composants.
+Lecture : un seul skill a deux gabarits hors du héros (`lore-frame-editorial`), six en ont un, dix-sept n'en ont aucun (dont `clear-ledger-desk`, qui n'en a aucun du tout). Tout gabarit listé hors du héros **doit** être posé (règle 8 de `SKILL.md`) ; pour les seize autres, la proposition et la livraison disent que la signature, sous le premier écran, ne tient que par les couleurs, la typo et les composants.
 
 ## Choisir vite
 
@@ -58,9 +59,23 @@ Lecture : un seul skill a deux gabarits hors du héros (`lore-frame-editorial`),
 | Récit de marque, mission, campagne | `retro-mission-poster`, `noir-inferno-chapters`, `lore-frame-editorial` |
 | Tech, sécurité, entreprise | `acid-scan-security`, `glacial-mono-3d` |
 | Accent de marque du client à poser | accent neutre : `alpine-glass-expedition`, `chrome-atelier`, `glacial-mono-3d`, `glass-frame-estate`, `lore-frame-editorial`, `pocket-device-noir` |
+| **Outil de travail** : CRM, back-office, ERP, tableau de bord, application SaaS | `clear-ledger-desk`, avec la structure `application` |
 | Interface sobre (intensité `off`) | `glass-frame-estate`, `chrome-atelier`, `showroom-bento`, `nocturne-architecture` |
 
 Accent pâle (l'accent ne porte jamais seul une information sur le fond) : `hyper-lime-street`, `mint-street-basics`, `pixel-lime-portfolio`, `serif-bistro-green`, `sticker-brutal-jp`, `tiny-planet-toy`, `zigzag-snack-pop`.
+
+---
+
+## Fonctionnel
+
+### `clear-ledger-desk` — outil de travail
+- **Convient à** : CRM, back-office, ERP, outil interne, espace d'administration, tableau de bord, application SaaS. À poser avec la structure **`application`**.
+- **Ambiance** : fond blanc, un seul gris de retrait, texte de 14 px en Inter, filets d'un pixel ; calme, dense, neutre.
+- **Forces** : le tableau (en-tête discret, lignes de 48 ou 36 px, ligne choisie sur fond teinté) ; la **densité réglable** (`data-density="compact"` sur `<html>` ou sur un bloc) ; une seule couleur d'action, les autres couleurs réservées aux états ; couche de signature sur les vingt composants ; contrastes larges (texte 14,3:1).
+- **Limites** : **aucun gabarit de signature**, et c'est voulu : rien ne signe le premier écran, la signature est la sobriété. Inadapté à une landing, à un site vitrine, à tout ce qui doit séduire. Pas de mode sombre. La densité compacte et tout ce qui est propre au CRM (chemin d'étapes, fiche, historique) sont **proposés**, pas mesurés sur une référence ; la structure `application` les fournit (écrans fiche et tableau de bord). Essayé dans Chrome seulement.
+- **Photos exigées** : aucune. Portraits des personnes en avatars de 24 px (initiales en repli).
+- **Gabarits** : aucun. Contraste : 6,07 (bouton d'action, blanc sur sarcelle).
+- **Pièces lourdes** : aucune.
 
 ---
 
