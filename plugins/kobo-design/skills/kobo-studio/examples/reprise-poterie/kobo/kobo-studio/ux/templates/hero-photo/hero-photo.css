@@ -1,0 +1,35 @@
+/*
+ * kobo-studio — famille de gabarits « héros photo plein cadre » (emplacement hero).
+ * La photo du héros occupe tout le premier écran ; le texte et l'action se posent dessus, sur un voile.
+ * La photo reste une vraie <img> avec son texte alternatif ; les couches colorées sont des canvas décoratifs (aria-hidden).
+ * Uniquement des rôles --k-* ; l'habillage d'un skill ajoute ses couches et règle des variables locales.
+ */
+[data-k-slot="hero"][data-k-gabarit="hero-photo"] { padding-block: 0; overflow-x: clip; }   /* un décor peut sortir du héros, jamais élargir la page */
+.g-hero { position: relative; isolation: isolate; display: grid; align-items: end; min-block-size: calc(100dvh - var(--k-nav-h)); overflow: hidden; color: var(--_ink, var(--k-text)); background: var(--_bg, var(--k-bg)); }
+.g-hero__rig { position: absolute; inset: calc(var(--k-space-4) * -1); z-index: -1; transform: translate(calc(var(--_px, 0) * var(--k-space-4)), calc(var(--_py, 0) * var(--k-space-4))); }
+.g-hero__layer { position: absolute; inset: 0; }
+.g-hero__layer > img, .g-hero__layer > canvas { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: var(--_fx, 50%) var(--_fy, 36%); }
+.g-hero__layer > img { filter: var(--k-img-filter); }
+.g-hero[data-k-baked] .g-hero__layer--base > img { opacity: 0; }                 /* la version cuite la remplace ; l'<img> reste pour les lecteurs d'écran */
+.g-hero__veil { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--_veil, linear-gradient(0deg, var(--k-overlay), transparent 60%)); }
+.g-hero__content { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-6); justify-items: start; inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; padding-block: var(--k-space-24) var(--k-space-16); }
+/* Le texte n'occupe qu'une partie de la largeur, pour laisser voir la photo ; sur un écran étroit il prend tout */
+.g-hero__content > * { max-inline-size: min(100%, max(58%, calc(var(--k-space-32) * 3))); }
+/*
+ * Plaque de lisibilité : un voile derrière la colonne de texte, assez dense pour que le texte tienne 4.5:1 (3:1 pour un grand
+ * titre) même sur le pixel le plus défavorable de la photo. Mesuré dans le navigateur, pas estimé. L'habillage d'un skill
+ * règle sa couleur (--_plate-color : le fond sur lequel son texte est prévu), sa densité (--_plate-a) ou sa forme (--_plate).
+ */
+/* Sur écran étroit (moins de 6 × --k-space-32), le texte prend toute la largeur : la plaque aussi */
+/* Plaque verticale prête à l'emploi (texte en bas du héros) : dense sous le texte, fondue sur le dernier --k-space-24 du haut.
+   L'habillage écrit --_plate: var(--_plate-v) et garde ce même espace libre au-dessus de son texte. */
+.g-hero { --_plate-v: linear-gradient(0deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 80%), transparent) 0 calc(100% - var(--k-space-24)), transparent 100%); }
+.g-hero { --_narrow: calc((var(--k-space-32) * 6 - 100vw) * 999); }   /* très grand sur écran étroit, très négatif sinon : sert de bascule dans un clamp() */
+.g-hero__content::before { content: ""; position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); pointer-events: none;
+  background: var(--_plate, linear-gradient(90deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 74%), transparent) 0 clamp(var(--_plate-w, 62%), var(--_narrow), 100%), transparent clamp(var(--_plate-end, 92%), var(--_narrow), 100%))); }
+.g-hero__content .k-lead { color: inherit; }
+.g-hero__content .k-facts dt, .g-hero__content .k-kicker { color: inherit; }
+.g-hero__caption { margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+/* Mots d'un titre qui montent à l'ouverture (habillages pocket-device, mint-street…) : chaque mot dans une fenêtre */
+.g-rise { display: inline-block; overflow: hidden; vertical-align: bottom; }
+.g-rise > b { display: inline-block; font-weight: inherit; }

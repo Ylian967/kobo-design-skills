@@ -1,0 +1,72 @@
+/*
+ * kobo-studio — bouton
+ * Rôles lus : accent, accent-edge, accent-on-bg, on-accent, text, text-muted, surface, surface-2, line, line-strong,
+ * danger, focus*, font-body, fs-small, lh-tight, radius, radius-pill, border-w, shadow, control-h, hit-min, space-*, dur-fast, ease-out.
+ */
+.k-btn {
+  --_bg: var(--k-accent); --_fg: var(--k-on-accent); --_edge: var(--k-accent-edge);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--k-space-2);
+  min-block-size: var(--k-control-h); max-inline-size: 100%; margin: 0; padding: 0 var(--k-space-6);
+  font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: inherit; line-height: var(--k-lh-tight);
+  text-transform: var(--k-btn-case); letter-spacing: var(--k-btn-tracking);
+  text-decoration: none; text-align: center; overflow-wrap: anywhere; cursor: pointer; user-select: none;
+  color: var(--_fg); background: var(--_bg); border: var(--k-border-w) solid var(--_edge);
+  border-radius: var(--k-radius); box-shadow: var(--k-shadow);
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out);
+}
+/* Zone cliquable : au moins --k-hit-min de côté, sans changer la taille affichée */
+.k-btn::after {
+  content: ""; position: absolute; inset-block-start: 50%; inset-inline-start: 50%;
+  inline-size: max(100%, var(--k-hit-min)); block-size: max(100%, var(--k-hit-min)); transform: translate(-50%, -50%);
+}
+
+/* Survol, appui, bascule enfoncée. data-k-state="hover|active|focus" fige un état pour la documentation et les captures. */
+.k-btn:hover, .k-btn[data-k-state="hover"] { --_bg: color-mix(in srgb, var(--k-accent) 84%, var(--k-on-accent)); }
+.k-btn:active, .k-btn[data-k-state="active"], .k-btn[aria-pressed="true"] { --_bg: color-mix(in srgb, var(--k-accent) 70%, var(--k-on-accent)); box-shadow: none; }
+
+/* Focus clavier */
+.k-btn:focus-visible, .k-btn[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+
+/* Variantes */
+.k-btn--secondary { --_bg: transparent; --_fg: var(--k-text); --_edge: var(--k-line-strong); box-shadow: none; }
+.k-btn--secondary:hover, .k-btn--secondary[data-k-state="hover"] { --_bg: var(--k-surface); }
+.k-btn--secondary:active, .k-btn--secondary[aria-pressed="true"] { --_bg: var(--k-surface-2); }
+
+/* Discret : pas d'aplat. Le texte reste de la couleur du texte (un accent à 3:1 ne suffit pas pour un petit texte) ;
+   c'est le soulignement qui prend l'accent, et seulement si --k-accent-on-bg vaut 1. */
+.k-btn--ghost {
+  --_bg: transparent; --_fg: var(--k-text); --_edge: transparent; box-shadow: none; padding-inline: var(--k-space-3);
+  text-decoration: underline; text-underline-offset: var(--k-space-1);
+  text-decoration-color: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text));
+}
+.k-btn--ghost:hover, .k-btn--ghost[data-k-state="hover"] { --_bg: var(--k-surface); }
+.k-btn--ghost:active { --_bg: var(--k-surface-2); }
+
+/* Action destructrice : contour et texte en couleur d'erreur, toujours avec une icône et un verbe explicite */
+.k-btn--danger { --_bg: transparent; --_fg: var(--k-danger); --_edge: var(--k-danger); box-shadow: none; }
+.k-btn--danger:hover { --_bg: var(--k-surface); }
+.k-btn--danger:active { --_bg: var(--k-surface-2); }
+
+.k-btn--pill { border-radius: var(--k-radius-pill); }
+.k-btn--block { display: flex; inline-size: 100%; }
+/* Icône seule : carré ; le nom accessible vient de aria-label */
+.k-btn--icon { flex: none; inline-size: var(--k-control-h); min-inline-size: var(--k-hit-min); padding: 0; }
+
+/* Désactivé : gris lisible (pas de transparence), aucune réaction */
+.k-btn:disabled, .k-btn[aria-disabled="true"] {
+  --_bg: var(--k-surface-2); --_fg: var(--k-text-muted); --_edge: var(--k-line);
+  box-shadow: none; cursor: not-allowed; text-decoration: none;
+}
+
+/* Chargement : aria-busy="true" ; le libellé change (« Envoi en cours… ») et un témoin tourne */
+.k-btn[aria-busy="true"] { cursor: progress; pointer-events: none; }
+.k-btn__spinner {
+  display: none; inline-size: var(--k-space-4); block-size: var(--k-space-4); flex: none;
+  border: calc(var(--k-border-w) * 2) solid currentColor; border-inline-end-color: transparent; border-radius: 50%;
+}
+.k-btn[aria-busy="true"] .k-btn__spinner { display: block; animation: k-spin var(--k-dur-slow) linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .k-btn { transition: none; }
+  .k-btn[aria-busy="true"] .k-btn__spinner { animation: none; border-inline-end-color: currentColor; border-style: dotted; }
+}

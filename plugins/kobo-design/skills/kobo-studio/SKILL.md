@@ -1,0 +1,180 @@
+---
+name: kobo-studio
+description: Chef d'atelier Kōbō pour lancer un projet de site ou d'interface, ou reprendre un site existant, de la demande à la livraison vérifiée. À utiliser quand on demande « fais-moi un site », « une landing pour… », « un site vitrine », « lance un projet d'interface », « refais / reprends / modernise ce site existant », « migre ce site vers un style Kōbō », ou toute demande de site sans style imposé. Mène une courte interview, propose 2 ou 3 skills de style avec leur limite honnête et un plan UX, attend la validation, construit avec une seule direction artistique et une UX commune (structures de page, composants, gabarits), puis vérifie par script, captures 390 / 1440 px et grille anti-slop. HTML ou React.
+---
+
+# kobo-studio
+
+Tu conduis un projet de site du premier message à la livraison. Les 23 skills de style donnent l'**apparence** ; ce skill donne la **méthode**, la structure des pages, les composants et la vérification.
+
+## Règles fixes
+
+1. **L'UI vient d'un seul skill.** Une page charge une seule fiche (`contract/maps/<id>.css`). Jamais deux styles mélangés.
+2. **L'UX est composée.** La structure de la page, les composants et les états viennent de ce skill (`ux/`, `components/`), pas du skill de style. On ne réinvente ni une barre de navigation ni un formulaire.
+3. **Contenu réel.** Les textes, prix, horaires, noms viennent du client. Rien de la démonstration ne reste. Pas de faux avis, de faux logos, de chiffres sans source. Ce que tu as dû inventer est **dit** à la livraison.
+4. **De vraies images.** Les photos du client d'abord ; à défaut de vraies photos d'une banque libre, signalées « à remplacer ». Jamais de dessin CSS ou SVG à la place d'une photo.
+5. **Aucun contenu masqué.** Texte, légende, action et photo restent affichés à toutes les largeurs. On déplace, on ne cache pas.
+6. **Un état n'est jamais signalé par la couleur seule** : toujours un mot, une icône, une graisse ou un filet en plus.
+7. **On ne contourne jamais un contrôle.** Ne retire, ne masque ni ne dégrade aucun contenu (lien, texte, image, fonction) pour faire passer `check_studio.py` ou la grille. Si un contrôle échoue et que la capture montre un faux positif, laisse la page telle quelle et signale-le à la livraison (ligne du script, ce que montre la capture). Le script peut avoir tort ; la page ne paie pas pour lui.
+8. **La signature ne s'arrête pas au héros.** Tous les gabarits que le catalogue donne au skill hors du héros sont posés : au moins deux autres emplacements quand le skill en a deux ou plus. Quand il en a moins, on le **dit** au client, à la proposition et à la livraison.
+9. **Performance.** On ne charge que les fichiers dont la page a besoin ; images dimensionnées et différées ; rien ne bloque ni ne confisque le défilement ; la 3D ne se charge qu'après la page.
+
+## Ne lis que ce que l'étape demande
+
+Ce dossier est gros. **N'ouvre pas** `audit/`, `quality/relecture-*.md`, `contract/README.md`, `components/README.md`, `ux/README.md`, `ux/templates/` ni les fichiers CSS / JS de la bibliothèque : tu n'en as pas besoin pour construire, et `tools/kit.py` branche tout pour toi.
+
+| Étape | À lire | Seulement si |
+|---|---|---|
+| b. Interview | `interview.md` | toujours |
+| c. Proposition | `catalogue.md`, puis `ux/structures/<structure>/README.md` de la structure retenue (une seule) | toujours |
+| d. Construction | `ux/patterns/formulaire.md` | la page a un formulaire que tu modifies |
+| | `ux/patterns/etats-de-page.md` | la page charge des données |
+| | `components/<nom>/README.md` | tu ajoutes un composant absent de la page de départ |
+| | `brand.md` | le client a des couleurs de marque |
+| | `reprise.md` | mode reprise |
+| e. Vérification | `quality/anti-slop.md`, à partir de « Grille de relecture visuelle » | toujours |
+
+Le skill de style choisi se lit par sa fiche de `catalogue.md`. N'ouvre son `SKILL.md` (`../<id>/SKILL.md`) que si tu dois écrire une section que la page de départ ne contient pas.
+
+## Le déroulé
+
+Six étapes, dans l'ordre. Deux arrêts obligatoires : après les questions (b), après la proposition (c).
+
+### a. Choisir le mode
+
+- **Nouveau projet** : rien n'existe, ou seulement des textes et des photos.
+- **Reprise** : un site existe (fichiers ou adresse) et doit être refait sans perdre son contenu. Lis `reprise.md` et suis-le : il remplace les étapes b à d ; e et f restent les mêmes.
+
+Si la demande ne le dit pas, c'est la première question de l'interview.
+
+### b. Interview
+
+Lis `interview.md`. Pose le **premier tour** de questions en un seul message, puis **arrête-toi** et attends les réponses. Ne suppose pas à la place du client ; ne commence aucun fichier.
+
+Le second tour se pose avec la proposition (étape c), une fois les skills candidats connus : il porte sur ce que ces skills exigent.
+
+### c. Proposition : 2 ou 3 skills, et le plan UX
+
+Lis `catalogue.md`. Écris au client un seul message :
+
+1. **Le registre** du projet (fonctionnel, produit ou expressif) en une phrase. Si le projet est fonctionnel (CRM, back-office, tableau de bord), dis-le franchement : voir `interview.md`, « Registre ».
+2. **Deux ou trois skills**, chacun avec :
+   - une raison tirée des réponses du client (pas une description du style) ;
+   - sa **limite honnête** : ce que le skill exige et que le client n'a peut-être pas (type de photo, 3D), ce que le gabarit ne reproduit pas, un contraste qui dépend de la photo ;
+   - les gabarits de signature disponibles (colonne « Gabarits » du catalogue).
+   Recommande-en un, et dis pourquoi.
+3. **Le plan UX** :
+   - la **structure** (une des quatre, tableau ci-dessous) et pourquoi. Lis son README **avant** d'écrire le plan : il donne les sections qu'elle fournit, celles que tu composeras toi-même se disent ;
+   - les **sections dans l'ordre**, chacune avec la question du visiteur à laquelle elle répond et le contenu réel qui la remplit ;
+   - l'**action principale**, la même du héros à la fin ;
+   - les **emplacements** qui recevront un gabarit du skill (tableau « Gabarits par emplacement » du catalogue) : le héros, **et tous les autres** que le skill prévoit. Choisis la structure qui a ces emplacements (un gabarit de `chapter` ne se pose que dans un récit collant). Si le skill n'a de gabarit que pour le héros, écris-le : « sous le premier écran, le style tient par les couleurs, la typo et les composants, pas par une mise en page » ;
+   - les **photos** nécessaires, et lesquelles manquent.
+4. **Le second tour** de questions (`interview.md`), limité à ce qui bloque.
+
+Puis **arrête-toi** et attends la validation. Le client peut choisir un autre skill ou changer le plan.
+
+| Structure | À choisir quand | Dossier |
+|---|---|---|
+| Landing produit | une seule offre, un seul parcours, une demande au bout | `ux/structures/landing-produit/` |
+| Site vitrine | plusieurs offres ou plusieurs pages : un accueil qui oriente, des pages qui renseignent | `ux/structures/site-vitrine/` |
+| Récit collant | une histoire en chapitres, lue dans l'ordre | `ux/structures/recit-collant/` |
+| Article | un texte long à lire d'une traite | `ux/structures/article/` |
+
+### d. Construction
+
+**1. Poser le kit.** Une commande copie dans le projet les seuls fichiers nécessaires (contrat, fiche du skill, composants de la structure, gabarits du skill) et écrit une page de départ déjà branchée :
+
+```bash
+python3 <kobo-studio>/tools/kit.py <projet> --skill <id> --structure <structure> [--composants modale,chargement] [--marque]
+```
+
+Résultat : `<projet>/kobo/` (**ne jamais le modifier**) et `<projet>/index.html` (plus `page-interieure.html` pour un site vitrine). La page charge un seul skill, la couche de signature en dernier, et pose les gabarits (`Kobo.templates.apply()`).
+
+**2. Reprendre le README de la structure** (lu à l'étape c), et lui seul : ordre des sections, emplacements, états, clavier.
+
+**3. Remplacer tout le contenu de démonstration** (« Cordée Brume ») par le contenu réel, section par section :
+
+- Garde le balisage : classes `k-*`, `data-k-slot`, `data-k-part`, ancres, niveaux de titre. Un gabarit redispose les parts ; il ne réécrit pas le texte.
+- Retire une section sans contenu réel plutôt que de la remplir. Si tu retires la dernière section qui se servait d'un composant ou du script de la structure (formulaire, onglets, notification), retire aussi ses balises `<link>` et `<script>` : la page ne charge que ce qu'elle utilise.
+- Une section que la structure n'a pas (tarifs, horaires, galerie, accès) se compose avec les briques ci-dessous, sans lire le CSS.
+- Le titre du héros reste court : huit mots au plus. Plusieurs gabarits le redécoupent (lignes, moitiés, mot géant) et un titre long les casse. Regarde le héros sur capture avant de tenir le titre pour acquis ; si tu dois le raccourcir après validation, dis-le.
+- Une seule action dans le héros ; **la même** dans la barre et dans la dernière section de chaque page. Une autre suite (la page qui lève les doutes, un itinéraire) est un lien simple `k-link` à côté, jamais un second bouton.
+- Titre de page, `lang`, textes alternatifs, pied de page : ce sont aussi du contenu.
+- Les liens mènent quelque part : ancre de la page, page du site, `mailto:`, `tel:`. Jamais `href="#"`.
+- Pas de formulaire dans le projet (l'action est un lien, un téléphone, un e-mail) : la dernière section garde son emplacement `finale` avec une phrase et le bouton d'action ; les dates à cocher et le formulaire de la landing se retirent avec leurs balises.
+- Formulaire : l'envoi de la page de départ est simulé. Branche l'appel réel si le client a une destination ; sinon garde la simulation et **dis-le** à la livraison.
+
+Briques de page (fournies par `page.css`, déjà chargé) :
+
+| Besoin | Balisage |
+|---|---|
+| Une section, sa largeur | `<section class="k-section" aria-labelledby="…"><div class="k-wrap">…` ; variantes `k-section--alt` (fond de surface), `k-section--rule` (filet), `k-section--tight` ; `k-wrap--text` pour une colonne de lecture |
+| Titre de section | `<header data-k-slot="title">` avec `<p class="k-kicker" data-k-part="kicker">`, `<h2 class="k-h2" data-k-part="title">`, `<p class="k-lead" data-k-part="lead">` |
+| Empiler | `k-stack` (`k-stack--sm`, `k-stack--lg`) |
+| Deux colonnes qui se replient | `k-split`, la colonne large en `k-split__main` |
+| Texte courant, liens soulignés | `k-prose` ; un lien isolé : `k-link` ; une remarque : `k-note` |
+| Liste de faits (horaires, prix, adresse) | `<dl class="k-facts"><div><dt>…</dt><dd>…</dd></div>…</dl>` |
+| Liste d'éléments en colonnes | `<ul data-k-slot="grid">` avec des `<li data-k-part="item">` ; `k-grid__wide` pour un élément sur toute la largeur. Cartes : composant `carte`, seulement si chaque élément a une image et une destination, et l'une d'elles est mise en avant. Des prix, des formules, des horaires sont une liste de faits, pas une rangée de cartes identiques |
+| Photo et légende | `<figure data-k-slot="media"><img …><figcaption>…</figcaption></figure>` |
+
+Un composant en plus en cours de route : relance `kit.py` avec `--composants <nom>` ; il affiche les balises à ajouter à la page.
+
+**Gabarits hors du héros.** `kit.py` charge toutes les familles du skill ; elles ne se posent que si la page a leur emplacement. Vérifie-le : `frame` et `backdrop` sont deux `<div>` vides en tête de la page de départ (ne les retire pas) ; `title` est chaque `<header data-k-slot="title">` de section ; `media` chaque `<figure data-k-slot="media">` ; `chapter` chaque chapitre d'un récit. Sur la capture, tu dois voir le gabarit à chacun de ces endroits ; sinon cherche l'emplacement manquant avant de livrer.
+
+**4. Images.** Photos provisoires : de vraies photos d'une banque libre (Unsplash, ou Wikimedia Commons avec le crédit que sa licence demande), du type que le skill exige, téléchargées dans `images/` à une taille raisonnable (1600 px de large suffit pour un héros) ou appelées par leur adresse directe ; vérifie que chacune charge. Ces banques refusent souvent la recherche automatique : si tu n'obtiens rien, garde les photos que le client a déjà (reprise) ou demande-lui des adresses, et dis-le — ne dessine rien à la place. `<img>` avec `alt` qui décrit la photo, `width` et `height`, `loading="lazy"` sous le premier écran. Le sujet se donne par `data-k-focus="x% y%"` sur l'`<img>` du héros. Respecte le type de photo qu'exige le skill (catalogue) : sinon le gabarit rend moins bien, ou le texte posé dessus perd son contraste.
+
+**5. Styles du projet.** S'il en faut, dans `<projet>/site.css`, dont le `<link>` se place juste avant celui de `components/signatures/<id>.css` (donc après la structure et les gabarits) : uniquement des rôles `--k-*` (couleurs, tailles, espaces `--k-space-*`, durées). Aucune valeur en dur (zéro est admis), aucun `--k-sig-*`, aucune ombre, aucun dégradé, aucun point de rupture : les colonnes se replient seules (`flex-wrap`, `auto-fit`). Une largeur se donne par `--k-measure`, `--k-container` ou un multiple d'un pas d'espace (`calc(var(--k-space-32) * 2)`) ; l'échelle a les pas 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, pas d'autre. La liste des rôles : `kobo/kobo-studio/contract/roles.css` (à consulter par recherche, pas à lire en entier).
+
+**6. Intensité.** `data-k-intensity` sur `<html>` : `full` (tout le skill), `reduced` (formes sans mouvement), `off` (interface sobre aux couleurs du skill, gabarits non posés). Suis le choix du client.
+
+**7. Couleurs de marque** : `brand.md`.
+
+**React.** `kit.py … --react` copie le kit dans `src/kobo/` (versions `.jsx` comprises) et écrit le socle Vite s'il manque : `package.json`, `vite.config.js` (`base: './'`, une entrée par page `.html` de la racine), `index.html` (`lang`, `data-k-skill`, `data-k-intensity`) et `src/main.jsx` avec les imports dans l'ordre. Une page de plus = un fichier `.html` à la racine et son point d'entrée dans `src/`. Images dans `public/images/`. Les props de la structure sont dans son README (« Exemple React ») et en tête de son `.jsx` ; une image accepte `ratio` (cadrage, par exemple `'3 / 4'` pour un portrait), `largeur`, `hauteur` et `sujet`. Une page de plus se crée à la main (copie d'`index.html`, autre point d'entrée) ; les imports de styles se partagent dans un module commun. Si le composant de la structure impose une section sans objet (la recherche de l'accueil pour quatre éléments), compose ta page avec ses pièces (`Page`, `Emplacement`, `TitreSection`, `Image`, `Finale`, `Carte`…) : c'est permis, tant que le balisage et les classes restent ceux du kit. **Limite à dire au client dès l'étape c** : les gabarits de signature n'ont pas de version React ; la page garde les couleurs, la typo, les formes et les composants du skill, mais ses emplacements restent neutres (pas de héros photo de signature).
+
+### e. Vérification
+
+```bash
+python3 <kobo-studio>/tools/check_studio.py <projet>          # React : npm run build d'abord
+```
+
+Le script vérifie la bibliothèque, les fichiers du projet (valeurs en dur, reste de démonstration, un seul skill, structure), puis ouvre chaque page à 1440 et 390 px : contenu masqué, texte sous 12 px, débordement, images cassées, et **contraste mesuré sur capture** avec les vraies images. Il écrit `captures/<page>-1440.png` et `-390.png`.
+
+1. Corrige chaque ligne `✗`, relance, jusqu'à 0 erreur — sans jamais appauvrir la page pour y arriver (règle 7). Une ligne `ALERTE` n'est pas une erreur : elle demande un regard (une série d'éléments identiques côte à côte devient une liste, ou reçoit un élément mis en avant ; ou tu justifies). Un contraste en échec sur une photo se corrige par la photo (cadrage `data-k-focus`, autre photo plus calme sous le texte) ou par un texte plus court ; jamais en modifiant `kobo/`.
+2. **Regarde les deux captures** (ouvre les images). Le script ne voit pas une mise en page laide.
+3. Remplis la grille de `quality/anti-slop.md` (« Grille de relecture visuelle ») sur ces captures. Une case non cochée se corrige ou se justifie (skill + règle).
+4. Essaie ce que le script ne fait pas : formulaire envoyé vide, menu au clavier, Échap. Pour ouvrir la page toi-même, sers le dossier (`python3 -m http.server <port libre>` depuis le projet) plutôt que `file://`.
+
+Si le navigateur manque, le script le dit : les contrôles sur capture ne sont alors **pas faits**, et tu l'écris à la livraison.
+
+### f. Livraison
+
+Un message court au client :
+
+- ce qui est livré (pages, dossier, comment l'ouvrir) ;
+- le skill, la structure, l'intensité ;
+- **Mesuré** : résultat de `check_studio.py` (erreurs, pire contraste à 1440 et 390 px), ce que tu as essayé à la main ;
+- **Estimé** : ce que tu as jugé à l'œil sur les captures (grille anti-slop), sans mesure ;
+- **Inventé** : tout texte, chiffre, photo ou comportement qui ne vient pas du client (photos de banque à remplacer, envoi de formulaire simulé, horaires supposés…). « Signalé à remplacer » veut dire : dit au client, ici. Sur la page, une mention visible ne se justifie que si la photo provisoire peut tromper le visiteur (elle prétend montrer le lieu, l'équipe ou les produits) ;
+- les **faux positifs** laissés en l'état (règle 7), et les **alertes** du script non suivies, avec la raison ;
+- la **signature hors du héros** : les emplacements qui portent un gabarit, ou la phrase qui dit qu'il n'y en a pas (règle 8) ;
+- ce qui reste à faire, et les limites du skill qui se voient dans le résultat.
+
+Ne dis pas « vérifié » pour ce qui est seulement estimé.
+
+## Organisation d'un projet
+
+```
+<projet>/
+  index.html            la ou les pages
+  site.css              styles du projet (facultatif, rôles --k-* seulement)
+  brand.css             couleurs de marque (facultatif)
+  images/               photos du client
+  kobo/                 le kit, posé par tools/kit.py — ne pas modifier
+  captures/             écrites par tools/check_studio.py
+```
+
+## Quand rien ne convient
+
+- Aucun skill ne colle à l'ambiance voulue : propose `/kobo-design:site-to-skill <adresse>` pour créer un style à partir d'un site que le client aime, puis reviens ici.
+- Projet fonctionnel : voir `interview.md`, « Registre ».
+- Une pièce manque (composant, structure) : dis-le au lieu de l'improviser ; propose la forme la plus proche qui existe.

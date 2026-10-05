@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>Bienvenue - Accueil</title>
+<meta charset="utf-8">
+<!-- Page volontairement médiocre, écrite pour l'essai du mode reprise de kobo-studio (étape 5).
+     L'atelier « Terre & Feu » est fictif. Les défauts sont voulus : ne pas corriger ce fichier. -->
+<style>
+body { margin:0; font-family: "Comic Sans MS", Arial; background:#f4f4f8; color:#9aa0ad; font-size:14px }
+.wrap { width:1200px; margin:0 auto }
+.top { background:#fff; height:60px; box-shadow:0 4px 20px rgba(0,0,0,.08) }
+.top div.logo { float:left; font-size:22px; color:#7c3aed; line-height:60px; font-weight:bold }
+.top div.menu { float:right; line-height:60px }
+.top div.menu span { margin-left:30px; color:#b9bdc7; cursor:pointer }
+.hero { background:linear-gradient(135deg,#7c3aed,#3b82f6); text-align:center; padding:110px 0; color:#d9d2ff }
+.hero div.t { font-size:54px; color:#fff; font-weight:bold }
+.hero p { font-size:18px; width:700px; margin:20px auto }
+.btn { display:inline-block; padding:14px 30px; border-radius:14px; background:#fff; color:#7c3aed; text-decoration:none; margin:6px; transition:all .3s }
+.btn.ghost { background:none; border:1px solid #fff; color:#fff }
+.btn:hover, .card:hover { transform:scale(1.06) }
+.cards { padding:60px 0; overflow:hidden }
+.card { float:left; width:340px; margin:0 20px 0 20px; background:#fff; border-radius:16px; padding:30px 20px; box-shadow:0 10px 30px rgba(0,0,0,.08); text-align:center; transition:all .3s; box-sizing:border-box }
+.card .ico { width:56px; height:56px; border-radius:50%; background:#ede9fe; margin:0 auto 14px; line-height:56px; font-size:26px }
+.card div.h { font-size:20px; color:#444 }
+.sec { padding:50px 0; text-align:center }
+.sec div.h { font-size:32px; color:#444; margin-bottom:20px }
+table.tarifs { margin:0 auto; border-collapse:collapse }
+table.tarifs td { border:1px solid #e2e4ea; padding:10px 26px; color:#aab }
+.avis { background:#fff; overflow:hidden; padding:50px 0; text-align:center }
+.avis .a { float:left; width:360px; margin:0 20px; font-style:italic }
+.avis .a b { display:block; margin-top:10px; color:#7c3aed; font-style:normal }
+.galerie img { width:380px; height:260px; object-fit:cover; border-radius:16px; margin:6px }
+.contact input, .contact textarea { display:block; width:400px; margin:8px auto; padding:12px; border:1px solid #e2e4ea; border-radius:12px; outline:none }
+.contact .send { background:#7c3aed; color:#fff; border:0; border-radius:12px; padding:12px 40px; cursor:pointer }
+.foot { background:#1e293b; color:#64748b; font-size:10px; padding:30px 0; text-align:center }
+.logos span { display:inline-block; width:120px; height:40px; background:#e5e7eb; margin:10px; border-radius:8px; line-height:40px; color:#c5c8d0 }
+@media (max-width:700px) { .tarifs, .horaires, .galerie { display:none } }
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <div class="logo">🏺 Terre &amp; Feu</div>
+  <div class="menu"><span onclick="">Accueil</span><span onclick="">Nos cours</span><span onclick="">Tarifs</span><span onclick="">Contact</span></div>
+</div></div>
+
+<div class="hero"><div class="wrap">
+  <div class="t">Révolutionnez votre créativité</div>
+  <p>Terre &amp; Feu est une solution innovante au cœur de Nantes pour booster votre potentiel artistique grâce à une expérience de poterie nouvelle génération.</p>
+  <a class="btn" href="#">Commencer maintenant</a> <a class="btn ghost" href="#">En savoir plus</a>
+</div></div>
+
+<div class="cards"><div class="wrap">
+  <div class="card"><div class="ico">✨</div><div class="h">Créativité</div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p></div>
+  <div class="card"><div class="ico">🚀</div><div class="h">Progression</div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p></div>
+  <div class="card"><div class="ico">❤️</div><div class="h">Passion</div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p></div>
+</div></div>
+
+<div class="sec"><div class="wrap">
+  <div class="h">Nos cours</div>
+  <p style="width:760px;margin:0 auto;color:#b3b7c2">L'atelier a ouvert en 2016 dans une ancienne menuiserie du quartier Chantenay. Maëlle Guivarch, céramiste, y donne tous les cours elle-même, par groupes de six personnes au plus. On y apprend le tournage, le modelage et l'émaillage. La terre, les émaux et les deux cuissons sont compris dans le prix. Chaque élève repart avec ses pièces, trois semaines après le dernier cours, le temps du séchage et des cuissons.</p>
+  <br>
+  <table class="tarifs">
+    <tr><td><b>Découverte du tour</b></td><td>une séance de 2 h 30</td><td>55 €</td></tr>
+    <tr><td><b>Cycle tournage débutant</b></td><td>6 séances de 2 h 30, le mardi ou le jeudi soir</td><td>290 €</td></tr>
+    <tr><td><b>Modelage parent-enfant</b></td><td>une séance de 1 h 30, le mercredi après-midi, dès 6 ans</td><td>40 € le duo</td></tr>
+    <tr><td><b>Atelier libre</b></td><td>pour les anciens élèves, tour et four à disposition</td><td>12 € de l'heure</td></tr>
+  </table>
+  <p style="font-size:10px;color:#c9ccd4">Tarifs au 1er septembre. Paiement sur place, par chèque ou carte. Une séance annulée moins de 48 h avant n'est pas remboursée mais peut être reportée une fois.</p>
+</div></div>
+
+<div class="sec horaires"><div class="wrap">
+  <div class="h">Horaires</div>
+  <p>Mardi et jeudi : 18 h 30 – 21 h<br>Mercredi : 14 h – 17 h 30<br>Samedi : 10 h – 13 h (découverte du tour)<br>Fermé le dimanche, le lundi et le vendredi</p>
+</div></div>
+
+<div class="avis"><div class="wrap">
+  <div class="a">« Une expérience incroyable qui a changé ma vie ! Je recommande à 200 % ! »<b>Sophie M., CEO</b></div>
+  <div class="a">« Le meilleur atelier de France, tout simplement. 5 étoiles ⭐⭐⭐⭐⭐ »<b>Thomas L., Directeur Marketing</b></div>
+  <div class="a">« Grâce à Terre &amp; Feu j'ai boosté ma productivité de 300 %. »<b>Julie R., Entrepreneure</b></div>
+</div></div>
+
+<div class="sec"><div class="wrap">
+  <div class="h">Ils nous font confiance</div>
+  <div class="logos"><span>LOGO</span><span>LOGO</span><span>LOGO</span><span>LOGO</span><span>LOGO</span></div>
+  <p>+10 000 élèves satisfaits · 99,9 % de réussite · N°1 en Europe</p>
+</div></div>
+
+<div class="sec galerie"><div class="wrap">
+  <div class="h">Galerie</div>
+  <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=70">
+  <img src="https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=800&q=70">
+  <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=70">
+  <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=800&q=70">
+  <img src="images/four.jpg">
+</div></div>
+
+<div class="sec contact"><div class="wrap">
+  <div class="h">Contact</div>
+  <p>Terre &amp; Feu — 14 rue de la Verrerie, 44100 Nantes<br>Tél. 02 40 55 01 27 — bonjour@terre-et-feu.example<br>Tram ligne 1, arrêt Gare maritime, puis 6 minutes à pied.</p>
+  <form onsubmit="this.querySelector('.send').value='Merci !';return false">
+    <input placeholder="Votre nom">
+    <input placeholder="Votre email">
+    <textarea placeholder="Votre message"></textarea>
+    <input class="send" type="submit" value="Envoyer">
+  </form>
+</div></div>
+
+<div class="foot">© Terre &amp; Feu — Tous droits réservés — <a href="#" style="color:#475569">Mentions légales</a> — <a href="#" style="color:#475569">Politique de confidentialité</a> — Site propulsé par l'innovation</div>
+
+</body>
+</html>

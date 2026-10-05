@@ -1,0 +1,125 @@
+/*
+ * kobo-studio — socle des structures de page
+ * À charger après la fiche du skill, components/socle.css et les composants utilisés ; avant la feuille de la structure.
+ * Uniquement des rôles --k-* et des variables locales --_x : aucune valeur en dur, aucun point de rupture.
+ * Longueur de ligne : bornée par les rôles --k-measure et --k-measure-wide du socle (en caractères), jamais en pixels :
+ * un skill à petit texte ou à police étroite ne doit pas donner des lignes de 120 caractères.
+ * Les colonnes se replient seules (grilles auto-fit, flex-wrap) : ce qui tient côte à côte reste côte à côte.
+ *
+ * Emplacements (voir ../README.md) : [data-k-slot="frame | backdrop | hero | title | media | grid | chapter | finale"].
+ * Chaque emplacement a ici son rendu neutre. Un gabarit de signature remplace son contenu, jamais sa place.
+ */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--k-bg); color: var(--k-text); scroll-padding-block-start: calc(var(--k-nav-h) + var(--k-space-6)); }
+body { margin: 0; font-family: var(--k-font-body); font-size: var(--k-fs-body); line-height: var(--k-lh-body); overflow-wrap: break-word; }
+img { display: block; max-inline-size: 100%; }
+[hidden] { display: none !important; } /* un composant qui pose son propre display ne doit pas réafficher un élément caché */
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+
+/* ---------- Coquille ---------- */
+.k-page { position: relative; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; grid-template-columns: minmax(0, 1fr); min-block-size: 100dvh; }
+.k-skip { position: absolute; inset-block-start: var(--k-space-2); inset-inline-start: var(--k-edge); z-index: 60; transform: translateY(-300%); }
+.k-skip:focus { transform: none; }
+.k-page__top { position: sticky; inset-block-start: 0; z-index: 30; transition: transform var(--k-dur-base) var(--k-ease-out); }
+/* Barre qui se cache : page.js pose data-k-hidden quand on descend, le retire quand on remonte ou qu'on y entre au clavier */
+.k-page__top[data-k-hidden]:not(:focus-within) { transform: translateY(-100%); }
+.k-wrap { inline-size: min(100% - 2 * var(--k-edge), var(--k-container)); margin-inline: auto; }
+.k-wrap--text { --k-container: calc(var(--k-space-32) * 5 + var(--k-space-16)); }
+.k-section { padding-block: var(--k-section-y); }
+.k-section--tight { padding-block: var(--k-space-16); }
+.k-section--rule { border-block-start: var(--k-border-w) solid var(--k-line); }
+.k-section--alt { background: var(--k-surface); }
+.k-stack { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--_gap, var(--k-space-6)); align-content: start; }
+.k-stack--lg { --_gap: var(--k-space-12); }
+.k-stack--sm { --_gap: var(--k-space-3); }
+.k-stack > p { max-inline-size: var(--k-measure); }
+/* Deux colonnes inégales qui s'empilent d'elles-mêmes quand la plus petite n'a plus sa largeur minimale */
+.k-split { display: flex; flex-wrap: wrap; gap: var(--k-space-12) var(--k-space-16); align-items: start; }
+.k-split > * { flex: 1 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); min-inline-size: 0; }
+.k-split > .k-split__main { flex-grow: 2; flex-basis: calc(var(--k-space-32) * 3 + var(--k-space-16)); }
+.k-split--center { align-items: center; }
+/* Un bloc ne colle que s'il est réellement à côté d'un autre : page.js mesure et pose data-k-side. Empilé, il reste à sa place. */
+.k-sticky[data-k-side] { position: sticky; inset-block-start: calc(var(--k-nav-h) + var(--k-space-6)); }
+
+/* ---------- Texte ---------- */
+.k-h1, .k-h2, .k-h3 { font-family: var(--k-font-display); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); letter-spacing: var(--k-ls-display); overflow-wrap: anywhere; text-wrap: balance; }
+.k-h1 { font-size: var(--k-fs-h1); }
+.k-h2 { font-size: var(--k-fs-h2); }
+.k-h3 { font-size: var(--k-fs-h3); }
+.k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-h3); line-height: var(--k-lh-body); color: var(--k-text-2); }
+.k-kicker { font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); letter-spacing: var(--k-ls-caps); text-transform: var(--k-label-case); color: var(--k-text-muted); }
+.k-note { max-inline-size: var(--k-measure); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
+.k-prose { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-6); max-inline-size: var(--k-measure); font-size: var(--_fs, var(--k-fs-body)); }
+.k-prose > figure { max-inline-size: none; }
+.k-prose > h2, .k-prose > h3 { margin-block-start: var(--k-space-8); }
+.k-prose ul, .k-prose ol { display: grid; gap: var(--k-space-2); padding-inline-start: var(--k-space-6); }
+.k-prose a, .k-link { color: inherit; text-decoration: underline; text-decoration-thickness: var(--k-border-w); text-underline-offset: var(--k-space-1); text-decoration-color: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text)); }
+.k-prose a:hover, .k-link:hover { text-decoration-thickness: calc(var(--k-border-w) * 2); }
+.k-prose a:focus-visible, .k-link:focus-visible, .k-crumbs a:focus-visible, .k-toc a:focus-visible, .k-rail a:focus-visible, .k-foot a:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Citation tirée du texte lui-même (jamais un témoignage) */
+.k-pull { padding-inline-start: var(--k-space-6); border-inline-start: calc(var(--k-border-w) * 2) solid var(--k-line-strong); font-family: var(--k-font-display); font-size: var(--k-fs-h3); line-height: var(--k-lh-body); }
+
+/* Liste de faits : terme à gauche, valeur à droite, un filet entre chaque ligne */
+.k-facts { display: grid; }
+.k-facts > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--k-space-1) var(--k-space-6); padding-block: var(--k-space-3); border-block-start: var(--k-border-w) solid var(--k-line); }
+.k-facts > div:last-child { border-block-end: var(--k-border-w) solid var(--k-line); }
+.k-facts dt { color: var(--k-text-2); }
+.k-facts dd { font-weight: bolder; text-align: end; }
+
+/* Fil d'Ariane */
+.k-crumbs ol { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-2); padding: 0; list-style: none; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+.k-crumbs li { display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-space-6); }
+.k-crumbs li + li::before { content: "/"; color: var(--k-text-muted); }
+.k-crumbs a { color: inherit; text-underline-offset: var(--k-space-1); }
+.k-crumbs [aria-current="page"] { color: var(--k-text-2); }
+
+/* Sommaire d'une page : liste de liens vers ses titres ; le script d'une structure peut marquer le titre en cours */
+.k-toc ol { display: grid; padding: 0; list-style: none; }
+.k-toc a { display: flex; align-items: center; min-block-size: var(--k-hit-min); }
+.k-toc a[aria-current="true"] { font-weight: bolder; text-decoration-thickness: calc(var(--k-border-w) * 2); }
+
+/* Pied de page */
+.k-foot { padding-block: var(--k-space-12); border-block-start: var(--k-border-w) solid var(--k-line-strong); font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+.k-foot__in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--k-space-6) var(--k-space-12); }
+.k-foot ul { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-6); padding: 0; list-style: none; }
+.k-foot a { display: inline-flex; align-items: center; min-block-size: var(--k-hit-min); color: inherit; text-underline-offset: var(--k-space-1); }
+.k-foot__brand { font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); }
+
+/* ---------- Emplacements : rendu neutre ---------- */
+/* frame : cadre posé par-dessus la page. Neutre : rien. */
+[data-k-slot="frame"] { position: fixed; inset: 0; z-index: 40; pointer-events: none; }
+/* backdrop : fond de page, derrière tout. Neutre : le fond du skill, sans rien d'autre. */
+[data-k-slot="backdrop"] { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+/* hero : premier écran. Neutre : texte et action d'un côté, image de l'autre ; jamais centré. */
+[data-k-slot="hero"] { padding-block: var(--k-space-16) var(--k-section-y); }
+.k-hero { display: flex; flex-wrap: wrap; gap: var(--k-space-12) var(--k-space-16); align-items: end; }
+.k-hero__text { flex: 3 1 calc(var(--k-space-32) * 3); min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-6); justify-items: start; }
+.k-hero__side { flex: 2 1 calc(var(--k-space-32) * 2 + var(--k-space-8)); min-inline-size: 0; }
+/* title : titre de section. Neutre : surtitre, titre, phrase d'appui, alignés au bord. */
+[data-k-slot="title"] { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-3); margin-block-end: var(--k-space-12); }
+[data-k-slot="title"] > .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); }
+/* media : image de contenu. Neutre : la photo au filtre du skill, sa légende dessous. */
+[data-k-slot="media"] { display: grid; gap: var(--k-space-2); }
+[data-k-slot="media"] img { background: var(--k-surface-2); color: var(--k-text-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); /* image absente : un bloc calme et son texte alternatif, pas un trou */ inline-size: 100%; block-size: auto; /* les attributs width et height réservent la place, ils ne fixent pas la hauteur */ aspect-ratio: var(--_ratio, 4 / 3); object-fit: cover; filter: var(--k-img-filter); border-radius: var(--k-radius-lg); }
+[data-k-slot="media"] figcaption { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
+/* grid : liste d'éléments. Neutre : colonnes égales qui se replient. */
+[data-k-slot="grid"] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))), 1fr)); gap: var(--k-space-8) var(--k-space-6); align-items: start; }
+[data-k-slot="grid"] > .k-grid__wide { grid-column: 1 / -1; }
+/* chapter : voir recit-collant.css. finale : dernière section. Neutre : une phrase, une action, sur le ton inversé. */
+[data-k-slot="finale"] { padding-block: var(--k-section-y); }
+
+/* Dans un gabarit de signature, une image absente est masquée : le fond du gabarit et le texte restent (voir ../templates/gabarits.js) */
+[data-k-gabarit] img[data-k-broken] { visibility: hidden; }
+
+/* Aide à la lecture : montre où sont les emplacements (structures.html, case « emplacements ») */
+[data-k-show-slots] [data-k-slot] { outline: var(--k-border-w) dashed var(--k-line-strong); outline-offset: calc(var(--k-space-1) * -1); }
+[data-k-show-slots] [data-k-slot]::before {
+  content: "emplacement : " attr(data-k-slot); position: absolute; z-index: 50; padding: var(--k-space-1) var(--k-space-2);
+  font-family: var(--k-font-mono); font-size: var(--k-fs-min); line-height: var(--k-lh-body); color: var(--k-text-inverse); background: var(--k-bg-inverse);
+}
+[data-k-show-slots] [data-k-slot="frame"]::before { inset-block-end: 0; inset-inline-end: 0; }
+[data-k-show-slots] [data-k-slot="backdrop"]::before { inset-block-end: 0; inset-inline-start: 0; z-index: 50; }
+[data-k-show-slots] [data-k-slot="backdrop"] { z-index: 40; }
+
+@media (prefers-reduced-motion: reduce) { .k-page__top { transition: none; } }
+.k-defs { display: none; }

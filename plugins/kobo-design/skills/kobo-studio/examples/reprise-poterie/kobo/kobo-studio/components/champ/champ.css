@@ -1,0 +1,56 @@
+/*
+ * kobo-studio — champ (texte et zone de texte)
+ * Rôles lus : text, text-muted, surface, surface-2, line, line-strong, danger, focus*, font-body, fs-body, fs-small,
+ * lh-body, radius, border-w, control-h, hit-min, space-*, dur-fast, ease-out.
+ */
+.k-field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-2); min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); }
+.k-field__label { font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); color: var(--k-text); }
+.k-field__opt { color: var(--k-text-muted); }
+
+/*
+ * La boîte porte la zone cliquable : si --k-control-h est plus petit que --k-hit-min, elle déborde
+ * au-dessus et au-dessous du champ (marge négative : la mise en page ne bouge pas) et champ.js lui
+ * fait donner le focus au champ.
+ */
+.k-field__box {
+  --_pad: max(0px, calc((var(--k-hit-min) - var(--k-control-h)) / 2));
+  position: relative; display: flex; align-items: center; padding-block: var(--_pad); margin-block: calc(var(--_pad) * -1); cursor: text;
+}
+.k-field__control {
+  flex: 1; min-inline-size: 0; min-block-size: var(--k-control-h); margin: 0; padding: 0 var(--k-space-4);
+  font: inherit; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text);
+  background: var(--k-surface); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); appearance: none;
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out);
+}
+textarea.k-field__control { min-block-size: calc(var(--k-control-h) * 3); padding-block: var(--k-space-3); resize: vertical; }
+.k-field__control::placeholder { color: var(--k-text-muted); opacity: 1; }
+
+.k-field__control:hover, .k-field__control[data-k-state="hover"] { background: var(--k-surface-2); }
+.k-field__control:focus-visible, .k-field__control[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); background: var(--k-surface); }
+
+.k-field__control:disabled { color: var(--k-text-muted); background: var(--k-surface-2); border-color: var(--k-line); cursor: not-allowed; }
+.k-field__control[readonly] { border-style: dashed; }
+.k-field:has(.k-field__control:disabled) .k-field__box { cursor: not-allowed; }
+.k-field:has(.k-field__control:disabled) .k-field__label { color: var(--k-text-muted); }
+
+/* Erreur : bordure en couleur d'erreur, épaissie à gauche, ET un message écrit précédé d'une icône */
+.k-field__control[aria-invalid="true"] { border-color: var(--k-danger); border-inline-start-width: calc(var(--k-border-w) + var(--k-space-1)); }
+.k-field__help { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
+.k-field__error { display: flex; align-items: flex-start; gap: var(--k-space-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-danger); }
+.k-field__error[hidden] { display: none; }
+.k-field__error span { color: var(--k-text); }
+.k-field__foot { display: flex; justify-content: space-between; gap: var(--k-space-4); }
+.k-field__count { margin-inline-start: auto; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); white-space: nowrap; }
+
+/* Vérification en cours (aria-busy sur la boîte) : témoin dans le champ, message d'aide mis à jour */
+.k-field__spinner {
+  display: none; position: absolute; inset-inline-end: var(--k-space-3); inline-size: var(--k-space-4); block-size: var(--k-space-4);
+  border: calc(var(--k-border-w) * 2) solid var(--k-text-muted); border-inline-end-color: transparent; border-radius: 50%;
+}
+.k-field__box[aria-busy="true"] .k-field__spinner { display: block; animation: k-spin var(--k-dur-slow) linear infinite; }
+.k-field__box[aria-busy="true"] .k-field__control { padding-inline-end: var(--k-space-8); }
+
+@media (prefers-reduced-motion: reduce) {
+  .k-field__control { transition: none; }
+  .k-field__box[aria-busy="true"] .k-field__spinner { animation: none; border-inline-end-color: var(--k-text-muted); border-style: dotted; }
+}

@@ -1,0 +1,28 @@
+/*
+ * kobo-studio — onglets
+ * Rôles lus : text, text-2, text-muted, surface, line, accent, accent-on-bg, focus*, font-body, fs-small, fs-body,
+ * lh-body, radius, border-w, hit-min, space-*, dur-fast, ease-out.
+ */
+.k-tabs { min-inline-size: 0; font-family: var(--k-font-body); color: var(--k-text); }
+.k-tabs__list { display: flex; gap: var(--k-space-1); overflow-x: auto; overflow-y: hidden; border-block-end: var(--k-border-w) solid var(--k-line); }
+.k-tabs__tab {
+  flex: none; display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-hit-min); margin: 0 0 calc(var(--k-border-w) * -1); padding: 0 var(--k-space-4);
+  font: inherit; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); text-transform: var(--k-btn-case); letter-spacing: var(--k-btn-tracking); white-space: nowrap; cursor: pointer;
+  background: transparent; border: 0; border-block-end: calc(var(--k-border-w) * 3) solid transparent; border-start-start-radius: var(--k-radius); border-start-end-radius: var(--k-radius);
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-tabs__tab:hover, .k-tabs__tab[data-k-state="hover"] { color: var(--k-text); background: var(--k-surface); }
+/* Onglet actif : graisse renforcée ET filet épais. Le filet ne prend l'accent que si --k-accent-on-bg vaut 1, sinon la couleur du texte. */
+.k-tabs__tab[aria-selected="true"] {
+  color: var(--k-text); font-weight: bolder;
+  border-block-end-color: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text));
+}
+/* Le contour de focus est tracé vers l'intérieur : la liste défile et couperait un contour extérieur */
+.k-tabs__tab:focus-visible, .k-tabs__tab[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: calc(var(--k-focus-w) * -1); }
+.k-tabs__tab:disabled { color: var(--k-text-muted); cursor: not-allowed; background: transparent; text-decoration: line-through; }
+.k-tabs__count { color: var(--k-text-muted); font-weight: normal; }
+.k-tabs__panel { padding-block: var(--k-space-6); font-size: var(--k-fs-body); line-height: var(--k-lh-body); }
+.k-tabs__panel[hidden] { display: none; }
+.k-tabs__panel:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+
+@media (prefers-reduced-motion: reduce) { .k-tabs__tab { transition: none; } }

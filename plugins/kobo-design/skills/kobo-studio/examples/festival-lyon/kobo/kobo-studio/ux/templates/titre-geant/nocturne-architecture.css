@@ -1,0 +1,12 @@
+/*
+ * kobo-studio — titre géant, habillage nocturne-architecture.
+ * Sources (lecture seule) : nocturne-architecture/references/components.md « Mot-marque géant » (minuscules, d'un bord à l'autre,
+ * approche −0.055em, graisse 500, interligne 0.8, coupé par le bas : un cinquième des lettres disparaît),
+ * examples/demo.html (.word : translateY(18%) dans un bloc à débordement caché ; lettres qui montent de 60 % à 70 ms d'écart),
+ * references/motion.md.
+ * Non repris : la photo de ville derrière le mot (c'est un gabarit hero), la phrase en deux tons.
+ */
+[data-k-skill="nocturne-architecture"] .g-word {
+  --_case: lowercase; --_tracking: var(--k-sig-ls-word); --_weight: 500; --_lh: 0.8; --_crop: 0.64;
+}
+[data-k-skill="nocturne-architecture"] .g-word__giant { padding-inline-start: calc(var(--_size) * 0.035); }

@@ -1,0 +1,29 @@
+/*
+ * kobo-studio — héros photo, habillage nocturne-architecture : la photo plein cadre et le mot-marque géant coupé.
+ * Sources (lecture seule) : nocturne-architecture/examples/demo.html (.hero : photo plein cadre, deux voiles — du haut et de la
+ * gauche ; bouton et paragraphe de 440 px en haut à gauche ; .word : le nom en minuscules d'un bord à l'autre, posé en bas et
+ * coupé — translateY(18 %) ; lettres qui montent à l'ouverture ; photo qui dézoome de 1,08 à 1), references/components.md.
+ * Non repris : la date et la météo de la barre, la pastille « voir le film ».
+ * Dépend de la famille titre-geant (mot géant et son ajustement).
+ */
+[data-k-skill="nocturne-architecture"] .g-hero--word {
+  --_ink: var(--k-text); --_bg: var(--k-sig-night); --_veil: linear-gradient(180deg, var(--k-scrim), var(--k-sig-veil-0) 30%), linear-gradient(90deg, var(--k-scrim), var(--k-sig-veil-0) 55%), linear-gradient(0deg, var(--k-scrim), var(--k-sig-veil-0) 45%);
+  /* Lisibilité, comme la démo : son voile de gauche (--veil → transparent), tenu sous la colonne de texte puis fondu ; sans plaque */
+  --_plate: linear-gradient(90deg, var(--k-scrim) clamp(62%, var(--_narrow), 100%), var(--k-sig-veil-0) clamp(92%, var(--_narrow), 100%)), linear-gradient(var(--k-scrim), var(--k-scrim));
+  min-block-size: min(var(--k-sig-hero-h), 100dvh - var(--k-nav-h)); align-items: start;
+}
+[data-k-skill="nocturne-architecture"] .g-hero--word .g-hero__content { padding-block: var(--k-space-12) calc(var(--k-space-32) * 2); }
+[data-k-skill="nocturne-architecture"] .g-hero--word .g-hero__content > * { max-inline-size: min(100%, calc(var(--k-space-32) * 3 + var(--k-space-16))); }
+[data-k-skill="nocturne-architecture"] .g-hero--word h1 { font-size: var(--k-fs-h2); }
+[data-k-skill="nocturne-architecture"] .g-hero--word .k-lead { font-size: var(--k-fs-body); }
+[data-k-skill="nocturne-architecture"] .g-hero--word .k-facts { max-inline-size: min(100%, var(--k-measure)); }
+.g-hero__word { position: absolute; inset: auto 0 0 0; pointer-events: none; }
+.g-hero__word .g-word__giant { margin: 0; --_crop: 0.66; --_case: lowercase; --_tracking: var(--k-sig-ls-word); --_weight: 500; --_ink: var(--k-text); padding-inline-start: calc(var(--_size) * 0.035); }
+/* Ouverture (full seulement) : la photo dézoome, les lettres montent. État final par défaut. */
+.g-hero--word[data-k-in="pending"] .g-hero__rig { scale: 1.08; }
+.g-hero--word[data-k-in="pending"] .g-word__giant span { transform: translateY(60%); opacity: 0; }
+.g-hero--word[data-k-motion] .g-hero__rig { transition: scale calc(var(--k-dur-slow) * 3) var(--k-ease-out); }
+.g-hero--word[data-k-motion] .g-word__giant span { transition: transform var(--k-dur-slow) var(--k-ease-out), opacity var(--k-dur-base) linear; transition-delay: calc(var(--_i) * var(--k-dur-fast) / 2 + var(--k-dur-fast)); }
+@media (prefers-reduced-motion: reduce) { .g-hero--word[data-k-motion] :is(.g-hero__rig, .g-word__giant span) { transition: none; } }
+/* Sur écran étroit le texte prend toute la largeur : le voile du skill est posé une seconde fois, sur tout le bloc (sinon 4,4:1 sur une photo claire) */
+[data-k-skill="nocturne-architecture"] .g-hero--word .g-hero__content::before { background-repeat: no-repeat; background-size: 100% 100%, clamp(0px, var(--_narrow), 100%) 100%; }

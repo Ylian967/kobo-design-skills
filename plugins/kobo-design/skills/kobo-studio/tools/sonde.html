@@ -1,0 +1,93 @@
+<!-- kobo-studio — sonde de check_studio.py : la page du projet dans un cadre de la largeur voulue. Elle fige les mouvements,
+     défile, relève les textes et l'état du document, puis la capture est prise. Paramètres : p (page), w, h, y, m (probe | bare), k (clé). -->
+<!doctype html>
+<meta charset="utf-8"><style>html,body{margin:0;background:#fff;overflow:hidden}iframe{display:block;border:0}</style>
+<iframe id="f" width="0" height="0"></iframe>
+<script>
+(async function () {
+  var q = new URLSearchParams(location.search), frame = document.getElementById('f');
+  frame.width = q.get('w'); frame.height = q.get('h');
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  await new Promise(function (r) { frame.addEventListener('load', r); frame.src = q.get('p'); });
+  var f = frame.contentWindow, d = f.document, W = f.innerWidth, H = f.innerHeight;
+  var style = d.createElement('style');
+  style.textContent = '*,*::before,*::after{animation-duration:0s!important;animation-delay:0s!important;transition:none!important;scroll-behavior:auto!important;caret-color:transparent!important}';
+  d.head.appendChild(style);
+  if (d.fonts) await Promise.race([d.fonts.ready, wait(3000)]);
+  await wait(300);
+  f.scrollTo(0, +q.get('y') || 0);
+  if (+q.get('y')) [].forEach.call(d.body.querySelectorAll('*'), function (el) {   // une barre collée en haut ne se répète pas d'écran en écran
+    var pos = f.getComputedStyle(el).position, r = el.getBoundingClientRect();
+    if ((pos === 'sticky' || pos === 'fixed') && r.top <= 2 && r.height < H * 0.3 && r.width > W * 0.5) el.style.setProperty('visibility', 'hidden', 'important');
+  });
+  // un encart collant sur le côté reprend sa place dans le flux : sinon il se répète dans chaque écran de la capture assemblée
+  [].forEach.call(d.body.querySelectorAll('*'), function (el) {
+    if (f.getComputedStyle(el).position !== 'sticky') return;
+    var r = el.getBoundingClientRect();
+    if (r.width < W * 0.5 && r.height < H) el.style.setProperty('position', 'static', 'important');
+  });
+  f.scrollTo(0, +q.get('y') || 0);
+  for (var i = 0; i < 20; i++) {                       // les images de l'écran (différées comprises) doivent être arrivées
+    await wait(200);
+    var late = [].filter.call(d.images, function (im) { var r = im.getBoundingClientRect(); return !im.complete && r.bottom > 0 && r.top < H; });
+    if (!late.length && i > 1) break;
+  }
+  var path = function (el) { return el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + (el.classList.length ? '.' + el.classList[0] : ''); };
+  var shown = function (el) {
+    if (el.closest('[aria-hidden="true"], .k-sr-only, [inert]')) return false;
+    return !el.checkVisibility || el.checkVisibility({ opacityProperty: true, visibilityProperty: true });
+  };
+  if (q.get('m') === 'bare') {
+    style.textContent += '*,*::before,*::after{-webkit-text-fill-color:transparent!important;-webkit-text-stroke-color:transparent!important;text-decoration-color:transparent!important;text-shadow:none!important}';
+    return;
+  }
+  var texts = [], small = [], n, walker = d.createTreeWalker(d.body, NodeFilter.SHOW_TEXT);
+  while ((n = walker.nextNode())) {
+    var t = n.nodeValue.replace(/\s+/g, ' ').trim(), el = n.parentElement;
+    if (!t || !el || /^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE|OPTION|TITLE)$/.test(el.tagName) || !shown(el)) continue;
+    var cs = f.getComputedStyle(el), size = parseFloat(cs.fontSize);
+    if (size < 11.99) small.push({ t: t.slice(0, 48), size: size, where: path(el) });
+    var range = d.createRange(); range.selectNodeContents(n);
+    var rects = [].map.call(range.getClientRects(), function (r) { return [r.left, r.top, r.width, r.height]; })
+      .filter(function (r) { return r[2] > 1 && r[3] > 1 && r[0] < W && r[1] < H && r[0] + r[2] > 0 && r[1] + r[3] > 0; });
+    if (rects.length) texts.push({ t: t.slice(0, 48), rects: rects, color: cs.color, fill: cs.webkitTextFillColor, size: size, weight: +cs.fontWeight || 400,
+      off: !!el.closest('[disabled], [aria-disabled="true"]'), where: path(el) });
+  }
+  var report = { key: q.get('k'), y: f.scrollY, texts: texts };
+  if (!(+q.get('y'))) {
+    var scope = d.querySelector('main') || d.body, hidden = [];
+    scope.querySelectorAll('h1,h2,h3,h4,p,li,figcaption,img,dt,dd,blockquote,[data-k-part]').forEach(function (el) {
+      if (el.closest('[hidden], dialog:not([open]), template, [aria-hidden="true"], .k-sr-only, .k-nav, .k-toast, [data-k-broken]')) return;
+      if (el.tagName !== 'IMG' && !el.textContent.trim()) return;
+      var r = el.getBoundingClientRect();
+      var gone = (el.checkVisibility && !el.checkVisibility({ opacityProperty: true, visibilityProperty: true })) || r.width < 1 || r.height < 1;
+      if (gone) hidden.push(path(el) + ' « ' + (el.tagName === 'IMG' ? el.alt : el.textContent.trim()).slice(0, 40) + ' »');
+    });
+    // Séries : trois éléments ou plus de même forme, côte à côte (même parent, même balisage, même ligne)
+    var series = [], shape = function (k) {
+      var tags = {}; [].forEach.call(k.querySelectorAll('*'), function (c) { tags[c.tagName] = 1; });
+      return k.tagName + '.' + k.className + '|' + Object.keys(tags).sort().join(',');
+    };
+    [].forEach.call(scope.querySelectorAll('*'), function (parent) {
+      var run = [];
+      var flush = function () { if (run.length >= 3) series.push({ where: path(parent), count: run.length, first: run[0].el.textContent.replace(/\s+/g, ' ').trim().slice(0, 40) }); run = []; };
+      [].forEach.call(parent.children, function (k) {
+        var r = k.getBoundingClientRect();
+        if (!shown(k) || r.width < 150 || r.height < 90 || !k.children.length) { flush(); return; }
+        var item = { el: k, top: r.top, shape: shape(k) };
+        if (run.length && (run[0].shape !== item.shape || Math.abs(run[0].top - item.top) > 4)) flush();
+        run.push(item);
+      });
+      flush();
+    });
+    report.doc = {
+      series: series,
+      height: d.documentElement.scrollHeight, overflow: d.documentElement.scrollWidth - W, small: small, hidden: hidden,
+      broken: [].filter.call(d.images, function (im) { return im.complete && !im.naturalWidth; }).map(function (im) { return im.getAttribute('src').slice(0, 70); }),
+      h1: d.querySelectorAll('h1').length, main: !!d.querySelector('main'), skip: !!d.querySelector('a[href^="#"].k-skip, a.k-skip'),
+      eager: [].filter.call(d.images, function (im) { return im.loading !== 'lazy' && im.getBoundingClientRect().top > H * 1.5; }).length, images: d.images.length
+    };
+  }
+  await fetch('/__k/report', { method: 'POST', body: JSON.stringify(report) });
+})();
+</script>

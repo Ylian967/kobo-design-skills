@@ -30,7 +30,7 @@ Composants utilisés : bouton, champ, carte, barre-nav, menu-mobile, etat-vide.
 | 1 | Qui on est (`hero`) | Titre, phrase, **une** action vers l'offre, une photo |
 | 2 | L'offre | Titre et champ de recherche ; une carte mise en avant sur toute la largeur, puis les autres sur deux colonnes ; état vide si rien ne correspond |
 | 3 | La maison | Photo, deux paragraphes, liste de faits |
-| 4 | Suite (`finale`) | Une phrase, une action vers la page qui lève les doutes |
+| 4 | Suite (`finale`) | Une phrase et **l'action principale du site**, la même que dans la barre et le héros ; la page qui lève les doutes l'accompagne en lien simple (`k-link`), jamais en second bouton |
 
 **Page intérieure**
 
@@ -39,7 +39,7 @@ Composants utilisés : bouton, champ, carte, barre-nav, menu-mobile, etat-vide.
 | 1 | En-tête (`hero`) | Fil d'Ariane, titre, phrase |
 | 2 | Contenu | Texte long à gauche ; à droite un encart qui reste : sommaire, faits, une action |
 | 3 | Lectures | Deux cartes en ligne, pas plus |
-| 4 | Suite (`finale`) | Une phrase, une action |
+| 4 | Suite (`finale`) | Une phrase, l'action principale du site |
 
 La grille ne fait jamais plus de deux colonnes : pas de rangée de trois cartes identiques.
 

@@ -27,17 +27,19 @@ export function TitreSection({ id, surtitre, titre, appui, niveau: Titre = 'h2',
   return <Emplacement nom="title" comme="header" gabarits={gabarits} parts={parts} className={className}>{parts.kicker}{parts.title}{parts.lead}</Emplacement>;
 }
 
-/** Image de contenu (emplacement « media ») : { src, alt, legende, ratio } — alt décrit la photo. */
+/** Image de contenu (emplacement « media ») : { src, alt, legende, ratio, largeur, hauteur, sujet } — alt décrit la photo ;
+ *  largeur et hauteur réservent la place (attributs width / height) ; sujet : point d'intérêt, « x% y% » (data-k-focus). */
 export function Image({ image, differee = true, gabarits, className }) {
   const parts = {
-    image: <img src={image.src} alt={image.alt} loading={differee ? 'lazy' : undefined} style={image.ratio ? { '--_ratio': image.ratio } : undefined} />,
+    image: <img src={image.src} alt={image.alt} width={image.largeur} height={image.hauteur} data-k-focus={image.sujet} loading={differee ? 'lazy' : undefined} style={image.ratio ? { '--_ratio': image.ratio } : undefined} />,
     caption: image.legende && <figcaption>{image.legende}</figcaption>,
   };
   return <Emplacement nom="media" comme="figure" gabarits={gabarits} parts={parts} className={className}>{parts.image}{parts.caption}</Emplacement>;
 }
 
-/** Dernière section (emplacement « finale ») : une phrase, une action, sur le ton inversé. */
-export function Finale({ id = 'suite', titre, appui, action, gabarits, children }) {
+/** Dernière section (emplacement « finale ») : une phrase et l'action principale du site, sur le ton inversé.
+ *  action : { libelle, href } ; lien : { libelle, href }, suite secondaire en lien simple (facultatif). */
+export function Finale({ id = 'suite', titre, appui, action, lien, gabarits, children }) {
   const parts = {
     title: <h2 className="k-h2" id={`${id}-t`}>{titre}</h2>,
     lead: appui && <p className="k-lead">{appui}</p>,
@@ -47,7 +49,7 @@ export function Finale({ id = 'suite', titre, appui, action, gabarits, children 
     <Emplacement nom="finale" comme="section" gabarits={gabarits} parts={parts} id={id} aria-labelledby={`${id}-t`} data-k-tone="inverse">
       <div className="k-wrap k-split k-split--center">
         <div className="k-stack k-split__main">{parts.title}{parts.lead}</div>
-        <div>{children || parts.action}</div>
+        <div className="k-stack k-stack--sm">{children || parts.action}{lien && <a className="k-link" href={lien.href}>{lien.libelle}</a>}</div>
       </div>
     </Emplacement>
   );
