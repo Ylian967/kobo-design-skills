@@ -194,6 +194,35 @@ Trois exemples ont été repris à la main après relecture de la galerie en lig
 | `restaurant-react` | Refait sous `retro-mission-poster`, même contenu et même React : héros-affiche à titre incliné sur la photo de la façade, cadre de page ; le portrait d'Odile descend dans « La maison », la photo de la salle passe sur la page de la carte | Deux exemples utilisaient `serif-bistro-green`. Ce skill demande des paysages peu détaillés en aplats préparés : une photo de rue n'est pas son sujet, et cela se voit |
 | `club-escalade` | Données complètes rétablies (« Cours encadré », « Débutant », « Réservé par vous ») ; le tableau tient à 390 px en repliant quatre colonnes en trois (`k-table__sub`) ; la recherche de « débutant » trouve ses cinq créneaux | L'agent avait raccourci les données pour gagner de la place |
 
+## Couche mouvement : trois exemples rejoués, chacun à côté de la démo de son skill (5 octobre 2026)
+
+Constat de départ : les pages produites par kobo-studio n'étaient pas au niveau des démos des skills. Il manquait surtout le mouvement, et la mise en page restait sage. Une couche mouvement par skill a été écrite pour six skills (`components/motion/`, voir son README), et trois exemples ont été rejoués avec elle. Il n'existe pas d'autre exemple sous `nocturne-architecture` que `festival-lyon`.
+
+Chaque exemple a été posé à côté de la démo de son skill par `tools/compare.py` : six instants de la page au-dessus des six mêmes instants de la démo. Les planches sont dans `quality/mouvement/`. Le verdict est donné à l'œil sur ces planches et dans le navigateur ; ce n'est pas une mesure.
+
+| Exemple | Skill | Ce que la couche a ajouté | Mouvement face à la démo | Mise en page face à la démo | Verdict |
+|---|---|---|---|---|---|
+| `festival-lyon` (Nuits Basses) | nocturne-architecture | Titres de section qui s'allument mot à mot au défilement, blocs qui montent, prix qui comptent, bouton dont le fond monte, liens de la barre en fondu ; le mot géant passe sous le contenu | Proche : les mouvements de la démo qui ont une pièce dans la page y sont. Manquent les deux bandeaux qui défilent et le carrousel | En dessous : après le héros, des sections sombres presque identiques ; la démo alterne grande phrase, chiffres géants, cartes de biens en couleur | **En dessous**, de peu : par la mise en page, plus par le mouvement |
+| `reprise-poterie` (Terre & Feu) | serif-bistro-green | Mots des titres qui montent derrière un cache, blocs qui montent de 28 px, photos en arche, liens de la barre ; intensité passée de `reduced` à `full` pour l'essai | Présent, plus discret que la démo : pas d'assiette qui tourne, pas de carrousel, pas de dessins qui se tracent | **Nettement en dessous** : toute la page est verte ; la démo empile des feuilles crème, un bloc orange, des fiches reliées | **En dessous** |
+| `restaurant-react` (Chez Odile) | retro-mission-poster | Titres mot à mot derrière un cache, surtitres en fondu, faits qui arrivent de la gauche, contour rouge des cartes, cascade de la barre ; en React (`useMouvement`) | Présent sur les titres et les blocs. Manquent l'anneau qui tourne, le mot géant qui glisse, l'écran de chargement | **En dessous** : la démo est une suite d'affiches plein écran en aplats rouille et bleu, avec un mot géant par chapitre ; la page a une affiche (le héros) puis des blocs sombres. Les photos ne sont pas traitées en aplats, ce que le skill exige | **En dessous** |
+
+Aucun des trois n'atteint la barre posée dans `SKILL.md` (règle 10). Le mouvement n'est plus ce qui manque le plus : c'est la **mise en page sous le héros**, que la couche mouvement ne change pas. Elle dépend des gabarits hors du héros (sections en feuilles, chapitres-affiches, bandeaux), qui restent à écrire pour ces skills.
+
+**Fluidité**, mesurée dans Chrome, fenêtre ramenée au premier plan, écran 144 Hz, sur un défilement de toute la page en 2,5 s :
+
+| Page | 1440 px | 390 px |
+|---|---|---|
+| Nuits Basses | 145 images/s, pire image 7 ms | 145 images/s, pire image 7 ms |
+| Terre & Feu | 145 images/s, pire image 7 ms | 145 images/s, pire image 7 ms |
+| Chez Odile, accueil (React) | 142 images/s, pire image 14 ms | 144 images/s, pire image 21 ms |
+| Chez Odile, carte (React) | 145 images/s, pire image 7 ms | 145 images/s, pire image 7 ms |
+
+Sur le festival, la même mesure sans la couche (intensité `off`) donne aussi 145 images/s : la couche ne coûte rien de mesurable ici. Les trois autres couches, essayées sur la page de départ d'une landing : acid-scan-security 128 à 140 images/s (pire image 28 ms), lore-frame-editorial 132 à 145 (21 ms). Sous hold-to-play-music, une image de 1,3 à 1,5 s apparaît au début du défilement, **avec et sans** la couche : elle vient du gabarit du héros, pas du mouvement ajouté ; elle n'est pas corrigée.
+
+**Autres essais** : au clavier seul (Tab d'un bout à l'autre des trois pages : 15 à 18 arrêts, chaque élément atteint est révélé et visible) ; intensité `reduced`, `off` et mouvement réduit du système : tout est affiché, immobile, aucun titre découpé ; `check_studio.py` : 0 erreur sur les trois.
+
+**Défauts trouvés et corrigés en route** : un bloc dépassé d'un coup au défilement n'était jamais révélé (il restait masqué derrière soi) ; un texte en cours de décodage restait à moitié écrit quand il sortait de l'écran ; un titre de bas de page restait gris faute de pouvoir monter assez haut.
+
 ## 4. Un CRM B2B pour une PME de services (registre fonctionnel, 5 octobre 2026)
 
 Essai fait après l'ajout du skill `clear-ledger-desk` et de la structure `application`. Agent neuf, avec seulement `SKILL.md` et la demande ; les deux arrêts tenus ; je jouais le client (Atelier Rivage, conseil numérique à Nantes, six utilisateurs, outil « Rivage Suivi », premier écran : la liste des affaires). Résultat : `examples/crm-pme/`, capture `essais-etape-5/crm-pme.png`.
@@ -321,6 +350,7 @@ Essai fait pour rejouer les corrections tirées de l'essai 4 (interview par regi
 | `SKILL.md`, `interview.md`, `tools/kit.py` | Projet à deux natures ; `--prefixe` ; balises des composants ajoutés au premier passage | 6 |
 | `ux/structures/application/` | `data-ap-keywords`, `data-ap-sum-one` ; bouton plein dans le panneau ; ordre de `k-app:open` | 6 |
 | `components/barre-nav/` | Nom long sur deux lignes au lieu d'être tronqué (`data-k-brand`) | 5 |
+| `components/motion/`, `tools/compare.py`, `SKILL.md` | Couche mouvement de six skills ; planche page / démo ; règle 10 (le niveau de la démo) ; alerte mouvement de `check_studio.py` | exemples rejoués |
 | `ux/templates/hero-photo/glass-frame-estate.js`, `SKILL.md` | Mot géant choisi par `data-k-word` ; nom court dans la barre ; `brand.md` lu dès l'étape c | 5 |
 
 ## Ce qui reste incertain
@@ -334,5 +364,7 @@ Essai fait pour rejouer les corrections tirées de l'essai 4 (interview par regi
 - **Séries de cartes de même forme** (formules, plats) : le skill les déconseille, deux agents en ont fait. Depuis, `check_studio.py` les signale en alerte (trois éléments ou plus de même forme côte à côte). C'est une alerte, pas une erreur : une vraie liste de même forme la déclenche aussi.
 - **Cible tactile du nom dans la barre** (25 px) : corrigé après les essais, la zone cliquable fait `--k-hit-min` de haut sans changer la hauteur affichée.
 - **Récit collant et article** : aucun essai ne les a exercés. Le registre fonctionnel et les couleurs de marque l'ont été une fois chacun (essais 4 et 5). Pour la marque, seul le cas facile est passé dans un projet complet : un accent foncé sur un skill à accent neutre. L'accent pâle n'a été essayé qu'à la main sur `brand.css` (jaune refusé, puis accepté avec contour et drapeau à 0), jamais sur capture.
+- **Le niveau de la démo n'est atteint par aucun exemple rejoué** : voir la section « Couche mouvement ». Dix-huit skills n'ont pas de couche mouvement.
+- **`tools/compare.py` est une simulation** : dans un navigateur sans interface, les images d'animation, l'observation à l'écran et le défilement sont relayés par des minuteries. La planche montre l'allure d'un mouvement, pas sa durée exacte ni sa fluidité ; un titre lié au défilement peut y paraître éteint alors qu'il s'allume dans un vrai navigateur.
 - **Corrections rejouées ou non.** L'essai 6 a rejoué celles de l'essai 4 (interview par registre, index des composants, README utilisés) : elles tiennent. Celles de l'essai 5 (`brand.md`) et de l'essai 6 (projet à deux natures) n'ont pas été rejouées.
 - **Mode reprise** : essayé sur une page locale unique ; ni site en ligne, ni site à plusieurs pages.

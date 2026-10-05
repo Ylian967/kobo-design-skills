@@ -11,11 +11,23 @@
 .k-nav--sticky { position: sticky; inset-block-start: 0; z-index: 10; }
 .k-nav__brand {
   margin-inline-end: auto; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display);
-  line-height: var(--k-lh-tight); color: inherit; text-decoration: none; white-space: nowrap;
+  line-height: var(--k-lh-tight); color: inherit; text-decoration: none; white-space: nowrap; position: relative;
   flex: none; /* la marque ne rétrécit pas : c'est ce qui permet au script de mesurer le débordement */
 }
-/* Une fois la barre repliée, une marque encore trop large se tronque plutôt que de faire déborder la page */
-.k-nav[data-k-collapsed] .k-nav__brand { flex: 0 1 auto; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
+/* Zone cliquable d'au moins --k-hit-min, sans changer la hauteur affichée (comme le bouton) */
+.k-nav__brand::after {
+  content: ""; position: absolute; inset-block-start: 50%; inset-inline-start: 50%;
+  inline-size: 100%; block-size: max(100%, var(--k-hit-min)); transform: translate(-50%, -50%);
+}
+/* Une fois la barre repliée, une marque qui ne tient pas à côté du bouton de menu (data-k-brand="long", posé par le script)
+   passe à la ligne, dans la taille du texte courant (data-k-brand="long tight" : et dans sa police, si un mot dépasse encore) : jamais tronquée, jamais coupée au milieu d'un mot s'il tient sur une ligne.
+   La barre grandit avec elle ; la zone cliquable (::after) suit sa hauteur et garde au moins --k-hit-min. */
+.k-nav[data-k-collapsed] { padding-block: var(--k-space-2); }
+.k-nav[data-k-collapsed] .k-nav__brand { flex: 0 1 auto; min-inline-size: 0; white-space: normal; overflow-wrap: break-word; text-wrap: balance; }
+/* Un mot plus long que la ligne (police très large) se coupe avec un trait d'union, selon la langue de la page */
+.k-nav[data-k-brand~="long"] .k-nav__brand { font-size: max(var(--k-fs-body), var(--k-fs-min)); line-height: var(--k-lh-tight); letter-spacing: normal; hyphens: auto; }
+/* Un mot ne tient toujours pas sur une ligne (police de titre très large) : la marque prend la police et la petite taille du texte */
+.k-nav[data-k-brand~="tight"] .k-nav__brand { font-family: var(--k-font-body); font-size: max(var(--k-fs-small), var(--k-fs-min)); }
 .k-nav__list { display: flex; align-items: center; gap: var(--k-space-1); margin: 0; padding: 0; list-style: none; }
 .k-nav__link {
   display: inline-flex; align-items: center; min-block-size: min(var(--k-hit-min), var(--k-nav-h)); padding-inline: var(--k-space-3);

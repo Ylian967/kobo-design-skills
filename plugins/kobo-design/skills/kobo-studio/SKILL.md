@@ -18,6 +18,7 @@ Tu conduis un projet de site du premier message à la livraison. Les 24 skills d
 7. **On ne contourne jamais un contrôle.** Ne retire, ne masque ni ne dégrade aucun contenu (lien, texte, image, fonction) pour faire passer `check_studio.py` ou la grille. Si un contrôle échoue et que la capture montre un faux positif, laisse la page telle quelle et signale-le à la livraison (ligne du script, ce que montre la capture). Le script peut avoir tort ; la page ne paie pas pour lui.
 8. **La signature ne s'arrête pas au héros.** Tous les gabarits que le catalogue donne au skill hors du héros sont posés : au moins deux autres emplacements quand le skill en a deux ou plus. Quand il en a moins, on le **dit** au client, à la proposition et à la livraison.
 9. **Performance.** On ne charge que les fichiers dont la page a besoin ; images dimensionnées et différées ; rien ne bloque ni ne confisque le défilement ; la 3D ne se charge qu'après la page.
+10. **Le niveau de la démo.** Une page livrée doit tenir à côté de la démo du skill (`../<id>/examples/demo.html`) : son **mouvement signature** est là (couche mouvement chargée, intensité `full` sauf choix du client), sa **mise en page ose** comme la démo (pas une suite de blocs sages sur un fond uni), et les **gabarits de signature** vont au-delà du héros. On le vérifie en posant la page à côté de la démo (étape e). En dessous : on continue, on ne livre pas ; ce qui ne peut pas être rattrapé se dit au client comme une limite, pas comme un détail.
 
 ## Ne lis que ce que l'étape demande
 
@@ -34,6 +35,7 @@ Ce dossier est gros. **N'ouvre pas** `audit/`, `quality/relecture-*.md`, `contra
 | | `brand.md` | le client a des couleurs de marque (à lire dès l'étape c, avant de proposer un skill) |
 | | `reprise.md` | mode reprise |
 | e. Vérification | `quality/anti-slop.md`, à partir de « Grille de relecture visuelle » | toujours |
+| | `components/motion/README.md` | la page a une couche mouvement et tu ajoutes une section que tu veux voir bouger |
 
 Le skill de style choisi se lit par sa fiche de `catalogue.md`. N'ouvre son `SKILL.md` (`../<id>/SKILL.md`) que si tu dois écrire une section que la page de départ ne contient pas.
 
@@ -92,6 +94,8 @@ Puis **arrête-toi** et attends la validation. Le client peut choisir un autre s
 python3 <kobo-studio>/tools/kit.py <projet> --skill <id> --structure <structure> [--composants modale,chargement] [--marque]
 ```
 
+La commande dit si le skill a une **couche mouvement** (`components/motion/`) : elle est alors déjà branchée dans la page de départ (deux feuilles après la couche de signature, deux scripts avant `Kobo.templates.apply()`) ; ne la retire pas. Sans couche mouvement, seuls les gabarits et la couche de signature bougent : dis-le au client à l'étape c.
+
 Résultat : `<projet>/kobo/` (**ne jamais le modifier**) et `<projet>/index.html` (plus `page-interieure.html` pour un site vitrine ; plus `fiche.html` et `tableau-de-bord.html` pour une application : supprime les écrans que le plan n'a pas, et leurs liens). La page charge un seul skill, la couche de signature en dernier, et pose les gabarits (`Kobo.templates.apply()`).
 
 **2. Reprendre le README de la structure** (lu à l'étape c), et lui seul : ordre des sections, emplacements, états, clavier.
@@ -148,7 +152,14 @@ Le script vérifie la bibliothèque, les fichiers du projet (valeurs en dur, res
 1. Corrige chaque ligne `✗`, relance, jusqu'à 0 erreur — sans jamais appauvrir la page pour y arriver (règle 7). Une ligne `ALERTE` n'est pas une erreur : elle demande un regard (une série d'éléments identiques côte à côte devient une liste, ou reçoit un élément mis en avant ; ou tu justifies). Un contraste en échec sur une photo se corrige par la photo (cadrage `data-k-focus`, autre photo plus calme sous le texte) ou par un texte plus court ; jamais en modifiant `kobo/`.
 2. **Regarde les deux captures** (ouvre les images). Le script ne voit pas une mise en page laide.
 3. Remplis la grille de `quality/anti-slop.md` (« Grille de relecture visuelle ») sur ces captures. Une case non cochée se corrige ou se justifie (skill + règle). Projet fonctionnel : les cases du héros, des photos et des cartes sont sans objet, dis-le ; celles des états, du clavier, du contenu et de la largeur de 390 px s'appliquent toutes.
-4. Essaie ce que le script ne fait pas : formulaire envoyé vide, menu au clavier, Échap. Pour ouvrir la page toi-même, sers le dossier (`python3 -m http.server <port libre>` depuis le projet) plutôt que `file://`.
+4. **Pose la page à côté de la démo du skill** (règle 10) :
+
+   ```bash
+   python3 <kobo-studio>/tools/compare.py <projet> [--page index.html] [--largeur 390]
+   ```
+
+   Le script écrit `captures/comparaison-<page>-1440.png` : six instants de la page (entrée, puis défilement) au-dessus des six mêmes instants de la démo. Ouvre la planche et réponds à trois questions. Quelque chose **bouge**-t-il à l'entrée et au défilement, comme dans la démo ? La **mise en page** a-t-elle la tenue de la démo : fonds qui alternent, images qui prennent de la place, titres qui pèsent ? La **signature** se voit-elle sous le premier écran ? Donne un verdict : **au niveau** ou **en dessous**. En dessous, corrige (gabarits manquants, sections `k-section--alt`, images plus grandes, emplacements `title` et `media` posés) et relance. La planche est une simulation image par image : elle ne dit rien de la fluidité.
+5. Essaie ce que le script ne fait pas : formulaire envoyé vide, menu au clavier, Échap. Avec une couche mouvement : parcours la page **à la touche Tab seulement** (chaque élément atteint doit être visible), puis passe `data-k-intensity` à `reduced` et à `off` (tout doit être affiché, immobile). Pour ouvrir la page toi-même, sers le dossier (`python3 -m http.server <port libre>` depuis le projet) plutôt que `file://`.
 
 **Sans navigateur.** Si le script ne trouve pas de navigateur, ou si celui-ci ne rend rien, il fait quand même les contrôles par script (bibliothèque, fichiers du projet, contrastes de `brand.css`) et termine par « VÉRIFICATION VISUELLE NON FAITE » (code de sortie 2). Dans ce cas :
 
@@ -164,7 +175,7 @@ Un message court au client :
 - ce qui est livré (pages, dossier, comment l'ouvrir) ;
 - le skill, la structure, l'intensité ;
 - **Mesuré** : résultat de `check_studio.py` (erreurs, pire contraste à 1440 et 390 px), ce que tu as essayé à la main. Si la vérification visuelle n'a pas été faite, c'est la **première ligne** du message, avant ce qui est livré ;
-- **Estimé** : ce que tu as jugé à l'œil sur les captures (grille anti-slop), sans mesure ;
+- **Estimé** : ce que tu as jugé à l'œil sur les captures (grille anti-slop), sans mesure, et le **verdict face à la démo** (« au niveau » ou « en dessous », avec ce qui manque) ;
 - **Inventé** : tout texte, chiffre, photo ou comportement qui ne vient pas du client (photos de banque à remplacer, envoi de formulaire simulé, horaires supposés…). « Signalé à remplacer » veut dire : dit au client, ici. Sur la page, une mention visible ne se justifie que si la photo provisoire peut tromper le visiteur (elle prétend montrer le lieu, l'équipe ou les produits) ;
 - les **faux positifs** laissés en l'état (règle 7), et les **alertes** du script non suivies, avec la raison ;
 - la **signature hors du héros** : les emplacements qui portent un gabarit, ou la phrase qui dit qu'il n'y en a pas (règle 8) ;

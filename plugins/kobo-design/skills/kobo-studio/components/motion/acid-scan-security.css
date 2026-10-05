@@ -1,0 +1,32 @@
+/*
+ * kobo-studio — couche mouvement de acid-scan-security.
+ * Sources (lecture seule) : acid-scan-security/references/motion.md (mouvements 2, 5, 8 et secondaires) et examples/demo.html :
+ * allumage CRT (.hero : clip-path inset(50% 0 50% 0) → inset(0), 520 ms --ease-in-out), décodage ([data-decode] : signes
+ * 01<>/\#*+=[]_ qui se fixent de gauche à droite, --dur-decode, ligne invisible avant), décryptage d'image (mosaïque en huit
+ * paliers de 85 ms), nav dont les éléments apparaissent un à un (90 ms), paragraphes qui s'allument par paliers (--ease-step),
+ * compteurs, carré clignotant du surtitre (--dur-blink, steps(1)).
+ * Non repris : l'amorçage terminal, la bande de scan et le verrouillage (c'est le gabarit du héros), la frange RVB et les
+ * chiffres binaires en continu, la console. Les survols (aplat qui glisse, filet, ligne de scan) sont dans la couche de signature.
+ */
+html[data-k-motion="on"][data-k-skill="acid-scan-security"] {
+  /* Allumage CRT : le premier écran s'ouvre verticalement depuis une ligne */
+  &[data-k-enter] [data-k-slot="hero"] { transition: clip-path calc(var(--k-dur-base) * 2) var(--k-ease-in-out) var(--k-dur-base); }
+  &[data-k-enter="pending"] [data-k-slot="hero"] { clip-path: inset(50% 0 50% 0); }
+  &[data-k-enter="done"] [data-k-slot="hero"] { clip-path: inset(0 0 0 0); }
+  /* Barre : ses éléments apparaissent un à un, tout ou rien */
+  &[data-k-enter] .k-nav__list > li { transition: opacity 0s linear calc(var(--_i, 0) * var(--k-dur-fast) * 0.75 + var(--k-dur-base)); }
+  &[data-k-enter="pending"] .k-nav__list > li { opacity: 0; }
+  /* Décodage : la ligne est invisible tant que son décodage n'a pas commencé */
+  & [data-k-reveal="decode"]:not([data-k-seen]) { visibility: hidden; }
+  /* Paragraphes et blocs : ils s'allument par paliers, l'un après l'autre */
+  & [data-k-reveal="step"] { transition: opacity var(--k-dur-base) var(--k-sig-ease-step); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.9); }
+  & [data-k-reveal="step"]:not([data-k-seen]) { opacity: 0; }
+  /* Décryptage : le canvas de mosaïque couvre l'image le temps de l'effet */
+  & [data-k-reveal="decrypt"] { position: relative; }
+  /* Surtitre : son carré clignote, tout ou rien, seulement à l'écran */
+  & .k-section .k-kicker::before { content: ""; display: inline-block; inline-size: var(--k-space-2); block-size: var(--k-space-2); margin-inline-end: var(--k-space-2); background: var(--k-accent); }
+  & .k-section .k-kicker[data-k-inview]::before { animation: k-acid-blink var(--k-sig-dur-blink) steps(1) infinite; }
+}
+@keyframes k-acid-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .k-section .k-kicker::before { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html[data-k-skill="acid-scan-security"] :is([data-k-reveal], .k-m-word, .k-m-word > span, .k-nav__list > li, .k-btn, .k-btn::before, .k-card__media, .k-card__media img) { transition: none; } }

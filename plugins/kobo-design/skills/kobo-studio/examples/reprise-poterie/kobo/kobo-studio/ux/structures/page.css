@@ -66,12 +66,7 @@ h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 .k-facts dt { color: var(--k-text-2); }
 .k-facts dd { font-weight: bolder; text-align: end; }
 
-/* Fil d'Ariane */
-.k-crumbs ol { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-2); padding: 0; list-style: none; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
-.k-crumbs li { display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-space-6); }
-.k-crumbs li + li::before { content: "/"; color: var(--k-text-muted); }
-.k-crumbs a { color: inherit; text-underline-offset: var(--k-space-1); }
-.k-crumbs [aria-current="page"] { color: var(--k-text-2); }
+/* Fil d'Ariane : composant components/fil-ariane/ (à charger par les pages qui en ont un) */
 
 /* Sommaire d'une page : liste de liens vers ses titres ; le script d'une structure peut marquer le titre en cours */
 .k-toc ol { display: grid; padding: 0; list-style: none; }
@@ -105,6 +100,7 @@ h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 /* grid : liste d'éléments. Neutre : colonnes égales qui se replient. */
 [data-k-slot="grid"] { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))), 1fr)); gap: var(--k-space-8) var(--k-space-6); align-items: start; }
 [data-k-slot="grid"] > .k-grid__wide { grid-column: 1 / -1; }
+ul[data-k-slot="grid"], ol[data-k-slot="grid"] { list-style: none; margin: 0; padding: 0; }   /* une liste reste une liste, sans puces ni retrait */
 /* chapter : voir recit-collant.css. finale : dernière section. Neutre : une phrase, une action, sur le ton inversé. */
 [data-k-slot="finale"] { padding-block: var(--k-section-y); }
 

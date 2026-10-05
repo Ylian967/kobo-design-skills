@@ -25,6 +25,7 @@ Vingt composants de base (deux lots de dix), neutres : ils ne lisent que les rô
 | `info-bulle/` | Précision au survol et au focus | `k-tooltip` | `info-bulle.js` | `InfoBulle.jsx` |
 | `menu-deroulant/` | Menu d'actions ou de choix | `k-dropdown` | `menu-deroulant.js` | `MenuDeroulant.jsx` |
 | `signatures/` | Couches de signature : une par skill (24 sur 24) | mêmes classes | — | rien à ajouter |
+| `motion/` | Couche mouvement : les mouvements signature d'un skill (6 sur 24), et leur moteur | mêmes classes, `data-k-reveal` | `motion.js`, `<skill>.js` | `Mouvement.jsx` (`useMouvement`) |
 
 Chaque dossier a son `README.md` : rôle, anatomie, états, clavier, accessibilité, variantes, exemple.
 

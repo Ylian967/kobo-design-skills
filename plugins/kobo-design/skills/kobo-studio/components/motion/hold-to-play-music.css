@@ -1,0 +1,31 @@
+/*
+ * kobo-studio — couche mouvement de hold-to-play-music.
+ * Sources (lecture seule) : hold-to-play-music/references/motion.md et examples/demo.html
+ *   le mot peint (traits dispersés qui se rangent en lettres, 900 ms --ease-slide, 45 ms d'écart : ici mot par mot),
+ *   les plans en coupe franche (aucun fondu : un plan toutes les --zap), la pochette qui monte de 40 px (push-cover, --dur-push
+ *   --ease-push), la touche qui clignote en deux pas, les liens qui changent de couleur en 500 ms --ease-snap.
+ * Non repris : la touche à maintenir et les plans qui défilent en couleur (c'est le gabarit du héros), l'arrivée d'un artiste.
+ */
+html[data-k-motion="on"][data-k-skill="hold-to-play-music"] {
+  /* Titres : les mots arrivent dispersés et penchés, puis se rangent (le mot peint) */
+  & [data-k-reveal="paint"] .k-m-word > span { transition: translate calc(var(--k-dur-slow) * 0.9) var(--k-sig-ease-slide), rotate calc(var(--k-dur-slow) * 0.9) var(--k-sig-ease-slide), opacity var(--k-dur-fast) linear; transition-delay: calc(var(--_i) * var(--k-sig-dur-blink) * 0.45); }
+  & [data-k-reveal="paint"]:not([data-k-seen]) .k-m-word > span { opacity: 0; translate: calc(var(--_x, 0) * var(--k-space-8)) calc(var(--_y, 0) * var(--k-space-8)); rotate: calc(var(--_r, 0) * 1deg); }
+  /* Blocs : coupe franche, l'un après l'autre, sans fondu */
+  & [data-k-reveal="cut"] { transition: opacity 0s linear calc(var(--_i) * var(--k-sig-zap) + var(--k-sig-zap)); }
+  & [data-k-reveal="cut"]:not([data-k-seen]) { opacity: 0; }
+  /* Images : la pochette monte de 40 px */
+  & [data-k-reveal="push"] { transition: translate var(--k-dur-slow) var(--k-ease-out), opacity var(--k-dur-fast) linear; transition-delay: calc(var(--_i) * var(--k-sig-zap)); }
+  & [data-k-reveal="push"]:not([data-k-seen]) { opacity: 0; translate: 0 calc(var(--k-space-8) * 1.25); }
+  /* La touche : un contour qui clignote en deux pas autour de l'action de fin de page, seulement quand elle est à l'écran */
+  & [data-k-slot="finale"] .k-btn:not(.k-btn--secondary, .k-btn--ghost) { position: relative; }
+  & [data-k-slot="finale"] .k-btn:not(.k-btn--secondary, .k-btn--ghost)::before { content: ""; position: absolute; inset: calc(var(--k-space-1) * -1.5); border: var(--k-border-w) solid currentColor; border-radius: inherit; pointer-events: none; }
+  & [data-k-slot="finale"] .k-btn[data-k-inview]:not(.k-btn--secondary, .k-btn--ghost, :hover, :focus-visible)::before { animation: k-hold-blink calc(var(--k-sig-dur-blink) * 9) steps(2, jump-none) infinite; }
+  /* Liens : la couleur bascule en 500 ms, d'un coup */
+  & :is(.k-link, .k-nav__link, .k-prose a) { transition: color var(--k-dur-base) var(--k-sig-ease-snap), background-color var(--k-dur-base) var(--k-sig-ease-snap); }
+  /* Entrée de page : la barre apparaît en coupe franche, lien après lien */
+  &[data-k-enter] .k-nav__list > li { transition: opacity 0s linear calc(var(--_i, 0) * var(--k-sig-zap) + var(--k-dur-fast)); }
+  &[data-k-enter="pending"] .k-nav__list > li { opacity: 0; }
+}
+@keyframes k-hold-blink { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { [data-k-slot="finale"] .k-btn::before { animation: none; } }
+@media (prefers-reduced-motion: reduce) { html[data-k-skill="hold-to-play-music"] :is([data-k-reveal], .k-m-word, .k-m-word > span, .k-nav__list > li, .k-btn, .k-btn::before, .k-card__media, .k-card__media img) { transition: none; } }

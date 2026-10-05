@@ -101,6 +101,11 @@ def families(skill):
     return re.findall(r"'?([\w-]+)'?\s*:\s*\[", m.group(1)) if m else []
 
 
+def motion(skill):
+    """Le skill a-t-il une couche mouvement (components/motion/<skill>.css) ?"""
+    return (STUDIO / f"components/motion/{skill}.css").exists()
+
+
 def kit_files(skill, structure, extra, react):
     """Fichiers de kobo-studio nécessaires, en chemins relatifs à kobo-studio/."""
     comps = list(dict.fromkeys(COMPONENTS[structure] + extra))
@@ -109,11 +114,13 @@ def kit_files(skill, structure, extra, react):
     for c in comps:
         files += [f"components/{c}/{c}.css", f"components/{c}/{c}.js"]
     files += [f"ux/structures/{structure}/{structure}.css", f"ux/structures/{structure}/{structure}.js", "ux/templates/gabarits.js"]
+    if motion(skill):                                        # couche mouvement du skill, si elle est écrite
+        files += ["components/motion/motion.css", "components/motion/motion.js", f"components/motion/{skill}.css", f"components/motion/{skill}.js"]
     fams = families(skill)
     for f in fams:
         files += [f"ux/templates/{f}/{f}.css", f"ux/templates/{f}/{f}.js", f"ux/templates/{f}/{skill}.css", f"ux/templates/{f}/{skill}.js"]
     if react:
-        files += ["components/Icone.jsx", "ux/structures/Page.jsx", "ux/templates/Gabarits.jsx"]
+        files += ["components/Icone.jsx", "ux/structures/Page.jsx", "ux/templates/Gabarits.jsx"] + (["components/motion/Mouvement.jsx"] if motion(skill) else [])
         for c in comps:
             files += [str(p.relative_to(STUDIO)) for p in (STUDIO / "components" / c).glob("*.jsx")]
         files += [str(p.relative_to(STUDIO)) for p in (STUDIO / "ux/structures" / structure).glob("*.jsx")]
@@ -129,9 +136,12 @@ def page(src, skill, structure, fams, names):
     html = re.sub(r'<link rel="stylesheet" id="map" href="[^"]*">', f'<link rel="stylesheet" href="{base}contract/maps/{skill}.css">', html)
     head = "".join(f'<link rel="stylesheet" href="{base}ux/templates/{f}/{n}.css">\n' for f in fams for n in (f, skill)
                    if (STUDIO / f"ux/templates/{f}/{n}.css").exists())
-    html = re.sub(r'<link rel="stylesheet" id="sig">', lambda m: head + f'<link rel="stylesheet" href="{base}components/signatures/{skill}.css">', html)
+    move = (f'\n<link rel="stylesheet" href="{base}components/motion/motion.css">\n<link rel="stylesheet" href="{base}components/motion/{skill}.css">' if motion(skill) else "")
+    html = re.sub(r'<link rel="stylesheet" id="sig">', lambda m: head + f'<link rel="stylesheet" href="{base}components/signatures/{skill}.css">' + move, html)
     tags = "".join(f'<script src="{base}ux/templates/{f}/{n}.js"></script>\n' for f in fams for n in (f, skill)
                    if (STUDIO / f"ux/templates/{f}/{n}.js").exists())
+    if motion(skill):
+        tags += f'<script src="{base}components/motion/motion.js"></script>\n<script src="{base}components/motion/{skill}.js"></script>\n'
     html = re.sub(r'<script src="[^"]*templates/index\.js"></script>\n?', lambda m: tags, html)
     html = re.sub(r"<!-- Structure «.*?-->", "<!-- CONTENU DE DÉMONSTRATION (Cordée Brume) : tout le texte, les liens et les photos sont à remplacer par ceux du projet.\n"
                   "     Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css (rôles --k-* seulement). -->", html, count=1, flags=re.S)
@@ -185,11 +195,12 @@ def main():
     print(f"{len(files) + 1} fichier(s) dans {os.path.relpath(kobo)}/ — skill {a.skill}, structure {a.structure}")
     print("  composants : " + ", ".join(comps))
     print("  gabarits de signature : " + (", ".join(fams) if fams else "aucun"))
+    print("  couche mouvement : " + ("oui (components/motion/)" if motion(a.skill) else "aucune pour ce skill : seuls les gabarits et la couche de signature bougent"))
     if a.marque and not (project / "brand.css").exists():
         shutil.copyfile(STUDIO / "contract/brand.css", project / "brand.css")
         print("  brand.css : modèle copié, à remplir (brand.md)")
     if a.react:
-        css = [f for f in files if f.endswith(".css") and "/templates/" not in f and f != "contract/roles.css"]
+        css = [f for f in files if f.endswith(".css") and "/templates/" not in f and "/motion/" not in f and f != "contract/roles.css"]
         css.sort(key=lambda f: (f.startswith("components/signatures/"), "structures" in f, not f.startswith("contract/")))
         jsx = next(f for f in files if f.endswith(".jsx") and f"structures/{a.structure}/" in f)
         # Gabarits de signature : les mêmes fichiers que les pages HTML, posés par ux/templates/Gabarits.jsx.
@@ -197,7 +208,11 @@ def main():
         gab_css = [f for f in files if f.endswith(".css") and "/templates/" in f]
         gab_js = [f for f in files if f.endswith(".js") and "/templates/" in f] if fams else []
         css = css[:-1] + gab_css + css[-1:] if fams else css
-        lines = [f"import './kobo/kobo-studio/{f}';" for f in css + gab_js]
+        move = [f for f in files if "/motion/" in f and f.endswith((".css", ".js"))]
+        move.sort(key=lambda f: f.endswith(".js"))                # les deux feuilles (après la signature), puis les deux scripts
+        lines = [f"import './kobo/kobo-studio/{f}';" for f in css + gab_js + move]
+        if move:
+            lines.append("import { useMouvement } from './kobo/kobo-studio/components/motion/Mouvement.jsx';")
         if fams:
             lines.append("import { gabarits } from './kobo/kobo-studio/ux/templates/Gabarits.jsx';")
         values = {"name": project.name, "skill": a.skill, "jsx": jsx, "imports": "\n".join(lines) + "\n",
@@ -212,6 +227,8 @@ def main():
         for line in lines:
             print("  " + line)
         print(f"Structure : import {{ … }} from './kobo/kobo-studio/{jsx}';   (props : voir le README de la structure)")
+        if motion(a.skill):
+            print("Couche mouvement : appeler useMouvement() dans le composant de chaque page.")
         if fams:
             print(f"Gabarits de signature : emplacements={{gabarits('{a.skill}')}} sur la structure. Essayés en React : héros photo et objet 3D ;"
                   " les autres familles restent neutres (option familles de gabarits(), non essayée).")

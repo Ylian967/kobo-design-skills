@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { emplacements } from './styles.js';
+import { emplacements, useMouvement } from './styles.js';
 import { PageInterieure } from './kobo/kobo-studio/ux/structures/site-vitrine/SiteVitrine.jsx';
 import { Image, Faits } from './kobo/kobo-studio/ux/structures/Page.jsx';
 import { page, suite, PLATS, PAGES, TELEPHONE, ADRESSE, PLAN } from './site.js';
@@ -36,6 +36,7 @@ const encart = {
 const parService = (meta) => PLATS.filter((p) => p.meta === meta).map((p) => <li key={p.id}>{p.titre}</li>);
 
 function LaCarte() {
+  useMouvement();
   return (
     <PageInterieure emplacements={emplacements()} page={page('carte')} chemin={[{ libelle: 'Accueil', href: PAGES.accueil }, { libelle: 'La carte et les infos pratiques' }]}
       titre="La carte et les infos pratiques" appui="Tout est écrit ici : rien à télécharger. La carte change chaque semaine, au gré du marché."

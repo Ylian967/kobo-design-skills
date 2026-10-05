@@ -1,0 +1,25 @@
+/*
+ * kobo-studio — couche mouvement de lore-frame-editorial.
+ * Sources (lecture seule) : lore-frame-editorial/references/motion.md (mouvements 3, 4, 5, 6 et le fondu des vignettes) et
+ * examples/demo.html : décodage des libellés (signes aléatoires qui se fixent de gauche à droite, --dur-scramble-tick),
+ * [data-reveal] span (mots du titre qui passent de --reveal-from à l'encre au fil du défilement), texte tapé (18 ms par
+ * caractère), .planche (image qui se plie selon la vitesse du défilement, amortie).
+ * Non repris : le chargement terminal, la fusion du logo, le héros qui devient planche et le chapitre plein cadre (sections
+ * collantes : le défilement n'est jamais confisqué), le menu qui glisse depuis le rail, l'éventail de cartes, le compteur roulant.
+ */
+html[data-k-motion="on"][data-k-skill="lore-frame-editorial"] {
+  /* Titres : chaque mot passe du gris clair à l'encre à mesure que la phrase traverse l'écran */
+  & [data-k-reveal="phrase"] .k-m-word { color: var(--k-sig-reveal-from); transition: color var(--k-dur-base) linear; }
+  & [data-k-reveal="phrase"] .k-m-word[data-k-lit] { color: inherit; }
+  /* Libellés : invisibles tant que leur décodage n'a pas commencé */
+  & [data-k-reveal="decode"]:not([data-k-seen]) { visibility: hidden; }
+  & [data-k-reveal="type"]:not([data-k-seen]) { visibility: hidden; }
+  /* Blocs et vignettes : ouverture en rideau depuis la gauche, comme un dossier qu'on tire */
+  & [data-k-reveal="wipe"] { transition: clip-path var(--k-dur-slow) var(--k-sig-ease-out-quart), opacity var(--k-dur-base) linear; transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.6); }
+  & [data-k-reveal="wipe"]:not([data-k-seen]) { clip-path: inset(0 100% 0 0); opacity: 0; }
+  & [data-k-reveal="wipe"][data-k-seen] { clip-path: inset(0 0 0 0); }
+  /* Planche : l'image penche et se déforme un peu selon la vitesse du défilement (--_bend, écrit par le script), puis se redresse */
+  & [data-k-bend] { transform: perspective(calc(var(--k-space-32) * 7)) rotateX(calc(var(--_bend, 0) * -0.08deg)) rotate(calc(var(--_bend, 0) * var(--_side, 1) * 0.025deg)) skewY(calc(var(--_bend, 0) * 0.03deg)); }
+  /* Entrée de page : les liens de la barre se décodent (script) ; la barre elle-même ne bouge pas */
+}
+@media (prefers-reduced-motion: reduce) { html[data-k-skill="lore-frame-editorial"] :is([data-k-reveal], .k-m-word, .k-m-word > span, .k-nav__list > li, .k-btn, .k-btn::before, .k-card__media, .k-card__media img) { transition: none; } }

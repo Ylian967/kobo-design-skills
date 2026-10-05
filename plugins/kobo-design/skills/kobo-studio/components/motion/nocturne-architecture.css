@@ -1,0 +1,30 @@
+/*
+ * kobo-studio — couche mouvement de nocturne-architecture.
+ * Sources (lecture seule) : nocturne-architecture/references/motion.md et examples/demo.html
+ *   .rise (blocs : 32 px, fondu, --dur-slow --ease), .phrase span (mots qui passent du gris --dim au blanc au fil du défilement,
+ *   couleur en --dur linéaire), .pill::before (un fond clair monte du bas, le texte s'inverse, --dur --ease),
+ *   .card img (zoom à 1,05 dans son cadre, --dur-slow), chiffres qui comptent (1500 ms).
+ * Non repris : les deux bandeaux qui défilent, le carrousel aimanté, les étapes qui s'ouvrent (pièces absentes des structures) ;
+ * l'arrivée du héros et les lettres du mot géant sont déjà dans les gabarits.
+ */
+html[data-k-motion="on"][data-k-skill="nocturne-architecture"] {
+  /* Blocs : montée de 32 px en fondu, une fois */
+  & [data-k-reveal="rise"] { transition: opacity var(--k-dur-slow) var(--k-ease-out), translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.35); }
+  & [data-k-reveal="rise"]:not([data-k-seen]) { opacity: 0; translate: 0 var(--k-space-8); }
+  /* Grande phrase : les mots s'allument un à un au fil du défilement */
+  & [data-k-reveal="phrase"] .k-m-word { color: var(--k-sig-dim); transition: color var(--k-dur-base) linear; }
+  & [data-k-reveal="phrase"] .k-m-word[data-k-lit] { color: inherit; }
+  /* Pilule : un fond clair monte du bas, le texte passe au sombre. Le fond est découpé par clip-path : la zone cliquable n'est pas rognée */
+  & .k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--icon, .k-skip, :disabled, [aria-disabled="true"]) { position: relative; isolation: isolate; transition: color var(--k-dur-base) var(--k-ease-out); }
+  & .k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--icon, .k-skip, :disabled, [aria-disabled="true"])::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--k-text); clip-path: inset(100% 0 0 0 round var(--k-radius-pill)); transition: clip-path var(--k-dur-base) var(--k-ease-out); }
+  & .k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--icon, .k-skip, :disabled, [aria-disabled="true"]):is(:hover, :focus-visible) { color: var(--k-bg); }
+  & .k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--icon, .k-skip, :disabled, [aria-disabled="true"]):is(:hover, :focus-visible)::before { clip-path: inset(0 0 0 0 round var(--k-radius-pill)); }
+  /* Carte : la photo zoome dans son cadre, qui ne grandit pas */
+  & .k-card--link .k-card__media { overflow: hidden; }
+  & .k-card--link .k-card__media img { transition: scale var(--k-dur-slow) var(--k-ease-out); }
+  & .k-card--link:is(:hover, :has(a:focus-visible)) .k-card__media img { scale: 1.05; }
+  /* Entrée de page : les liens de la barre apparaissent un à un */
+  &[data-k-enter] .k-nav__list > li { transition: opacity var(--k-dur-slow) linear; transition-delay: calc(var(--_i, 0) * var(--k-dur-fast) * 0.35 + var(--k-dur-fast)); }
+  &[data-k-enter="pending"] .k-nav__list > li { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html[data-k-skill="nocturne-architecture"] :is([data-k-reveal], .k-m-word, .k-m-word > span, .k-nav__list > li, .k-btn, .k-btn::before, .k-card__media, .k-card__media img) { transition: none; } }

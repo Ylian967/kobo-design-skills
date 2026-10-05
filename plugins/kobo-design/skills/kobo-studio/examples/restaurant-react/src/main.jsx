@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { emplacements } from './styles.js';
+import { emplacements, useMouvement } from './styles.js';
 import { Bouton } from './kobo/kobo-studio/components/bouton/Bouton.jsx';
 import { Carte } from './kobo/kobo-studio/components/carte/Carte.jsx';
 import { Page, Emplacement, TitreSection, Image, Finale, Faits } from './kobo/kobo-studio/ux/structures/Page.jsx';
@@ -18,6 +18,7 @@ const maison = [
 
 // Accueil composé avec les pièces de la structure : la recherche de <Accueil> n'a pas d'objet pour quatre plats.
 function Accueil() {
+  useMouvement();
   const gab = emplacements();
   // Les parts du héros : le gabarit du skill (affiche, titre incliné) les redispose ; sans gabarit, le contenu neutre reste.
   const hero = {

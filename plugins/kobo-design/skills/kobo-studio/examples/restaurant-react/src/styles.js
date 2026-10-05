@@ -13,12 +13,19 @@ import './kobo/kobo-studio/ux/templates/cadre/retro-mission-poster.css';
 import './kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css';
 import './kobo/kobo-studio/ux/templates/hero-photo/retro-mission-poster.css';
 import './kobo/kobo-studio/components/signatures/retro-mission-poster.css';
+import './kobo/kobo-studio/components/motion/motion.css';
+import './kobo/kobo-studio/components/motion/retro-mission-poster.css';
 import './kobo/kobo-studio/ux/templates/gabarits.js';
 import './kobo/kobo-studio/ux/templates/cadre/cadre.js';
 import './kobo/kobo-studio/ux/templates/cadre/retro-mission-poster.js';
 import './kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js';
 import './kobo/kobo-studio/ux/templates/hero-photo/retro-mission-poster.js';
+import './kobo/kobo-studio/components/motion/motion.js';
+import './kobo/kobo-studio/components/motion/retro-mission-poster.js';
 import { gabarits } from './kobo/kobo-studio/ux/templates/Gabarits.jsx';
+
+// Couche mouvement du skill : useMouvement() est appelé dans chaque page.
+export { useMouvement } from './kobo/kobo-studio/components/motion/Mouvement.jsx';
 
 // Gabarits de signature du skill : le héros-affiche et le cadre de page.
 export const emplacements = () => gabarits('retro-mission-poster', { familles: ['hero-photo', 'cadre'] });

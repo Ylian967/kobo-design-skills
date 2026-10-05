@@ -1,0 +1,25 @@
+/*
+ * kobo-studio — couche mouvement de serif-bistro-green.
+ * Sources (lecture seule) : serif-bistro-green/references/motion.md et examples/demo.html
+ *   .mask > b (mots du titre qui montent derrière un cache, translateY(112%), --dur-slow --ease, écart de 90 ms),
+ *   .rise (blocs : 28 px, fondu, --dur-slow --ease), .arch (photo : monte de 18 %, 1400 ms), .dish img (zoom au survol, déjà dans
+ *   la couche de signature), .btn (monte de 3 px, flèche qui avance : déjà dans la couche de signature).
+ * Non repris : l'assiette qui tourne avec le défilement, le carrousel relié, les dessins qui se tracent, le filtre de la carte
+ * (ces pièces n'existent pas dans les structures du kit).
+ */
+html[data-k-motion="on"][data-k-skill="serif-bistro-green"] {
+  /* Titres : chaque mot monte derrière son cache, l'un après l'autre */
+  & [data-k-reveal="mask"] .k-m-word { overflow: hidden; padding-block-end: var(--k-space-1); margin-block-end: calc(var(--k-space-1) * -1); }
+  & [data-k-reveal="mask"] .k-m-word > span { transition: translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.45); }
+  & [data-k-reveal="mask"]:not([data-k-seen]) .k-m-word > span { translate: 0 112%; }
+  /* Blocs : montée de 28 px en fondu, une fois */
+  & [data-k-reveal="rise"] { transition: opacity var(--k-dur-slow) var(--k-ease-out), translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.45); }
+  & [data-k-reveal="rise"]:not([data-k-seen]) { opacity: 0; translate: 0 calc(var(--k-space-6) + var(--k-space-1)); }
+  /* Photos : montent de 18 % en fondu, plus lentement (l'arche de la démo) */
+  & [data-k-reveal="arch"] { transition: opacity var(--k-dur-slow) var(--k-ease-out), translate calc(var(--k-dur-slow) * 1.4) var(--k-ease-out); transition-delay: var(--k-dur-fast); }
+  & [data-k-reveal="arch"]:not([data-k-seen]) { opacity: 0; translate: 0 18%; }
+  /* Entrée de page : la barre descend, ses liens suivent */
+  &[data-k-enter] .k-nav__list > li { transition: opacity var(--k-dur-base) var(--k-ease-out), translate var(--k-dur-base) var(--k-ease-out); transition-delay: calc(var(--_i, 0) * var(--k-dur-fast) * 0.45 + var(--k-dur-fast)); }
+  &[data-k-enter="pending"] .k-nav__list > li { opacity: 0; translate: 0 calc(var(--k-space-3) * -1); }
+}
+@media (prefers-reduced-motion: reduce) { html[data-k-skill="serif-bistro-green"] :is([data-k-reveal], .k-m-word, .k-m-word > span, .k-nav__list > li, .k-btn, .k-btn::before, .k-card__media, .k-card__media img) { transition: none; } }

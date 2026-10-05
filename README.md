@@ -57,10 +57,10 @@ Il se déclenche aussi seul sur une demande de site sans style imposé.
 | Dossier | Contenu |
 |---|---|
 | `contract/` | Les rôles `--k-*` communs, et une fiche par skill qui relie ses variables à ces rôles |
-| `components/` | 20 composants (bouton, champ, tableau, modale, onglets…) en HTML/CSS/JS et en React ; la liste est dans [`INDEX.md`](plugins/kobo-design/skills/kobo-studio/components/INDEX.md) |
+| `components/` | 20 composants (bouton, champ, tableau, modale, onglets…) en HTML/CSS/JS et en React ; la liste est dans [`INDEX.md`](plugins/kobo-design/skills/kobo-studio/components/INDEX.md). `components/motion/` porte les mouvements signature de six skills |
 | `ux/structures/` | 5 structures de page : landing produit, site vitrine, récit collant, article, application |
 | `ux/templates/` | Les gabarits qui portent la signature d'un skill (héros, cadre de page, titres) |
-| `tools/` | `kit.py` (poser le kit), `check_studio.py` (vérifier un projet), et les vérificateurs de la bibliothèque |
+| `tools/` | `kit.py` (poser le kit), `check_studio.py` (vérifier un projet), `compare.py` (poser la page à côté de la démo du skill), et les vérificateurs de la bibliothèque |
 | `quality/` | La grille de relecture et les comptes rendus des essais |
 | `examples/` | Les projets construits pendant les essais |
 

@@ -52,3 +52,16 @@
   .k-btn:hover, .k-btn:hover::before { translate: none; }
   .k-card--link:hover .k-card__media img { scale: none; }
 }
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : pages en pastilles de filtre, la courante pleine ; serif d'affiche ; panneaux en feuille.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page { font-family: var(--k-font-display); border-color: var(--k-line); border-radius: var(--k-radius-pill); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-on-accent); background: var(--k-accent); border-color: var(--k-accent-edge); font-weight: inherit; }
+  &.k-table, &.k-dropdown__menu { border-color: var(--k-line); border-radius: var(--k-radius-lg); }
+  &.k-tooltip__bubble { border-radius: var(--k-radius-lg); }
+}

@@ -10,7 +10,9 @@ kobo-studio — vérification d'un PROJET construit avec le skill.
    - valeurs en dur (couleur, longueur, durée) et motifs anti-slop, avec les règles de check_components.py ;
    - un seul skill chargé ; ni apercu.js ni templates/index.js (outils de démonstration) ; aucun reste du contenu de démonstration ;
    - un <h1>, <header>, <main>, <footer>, lien d'évitement, langue ; de vraies images ;
-   - brand.css, s'il existe : les paires de contraste du contrat recalculées avec les couleurs de la marque.
+   - brand.css, s'il existe : les paires de contraste du contrat recalculées avec les couleurs de la marque ;
+   - alerte (pas une erreur) : la couche mouvement du skill (components/motion/) existe et la page ne la charge pas, ou la page
+     n'a aucune animation signature (ni couche mouvement, ni gabarit).
 3. Les pages dans un navigateur (Chrome ou Chromium sans interface), à 1440 et 390 px de large :
    - captures pleine page dans <projet>/captures/<page>-1440.png et -390.png (pour la grille anti-slop) ;
    - contenu masqué, texte sous 12 px, débordement horizontal, images qui ne chargent pas ;
@@ -373,6 +375,27 @@ def static(project):
                 notes.append(f"{where} : {empty} image(s) avec alt=\"\" : à réserver au décor (anti-slop T8)")
         else:
             errs += cc.markup(text, where)
+    # Couche mouvement : une page sans le mouvement signature de son skill n'est pas au niveau de la démo (alerte, pas erreur)
+    skill_id = sorted(maps)[0] if len(maps) == 1 else None
+    if skill_id:
+        has_layer = (STUDIO / f"components/motion/{skill_id}.css").exists()
+        pages = [w for w in texts if w.endswith(".html")]
+        code = "\n".join(texts.values())
+        for w in pages:
+            text = texts[w]
+            module = 'type="module"' in text                 # page React : les imports sont dans src/
+            src = code if module else text
+            loaded = f"components/motion/{skill_id}.css" in src and f"components/motion/{skill_id}.js" in src and "components/motion/motion.js" in src
+            if has_layer and not loaded:
+                notes.append(f"ALERTE mouvement — {w} : la couche mouvement de {skill_id} existe et n'est pas chargée (motion.css, {skill_id}.css, motion.js, {skill_id}.js) : "
+                             "la page n'a pas le mouvement signature du skill")
+            elif has_layer and module and "useMouvement" not in code:
+                notes.append(f"ALERTE mouvement — {w} : la couche mouvement est importée mais useMouvement() n'est appelé nulle part : rien ne se révèle")
+            elif not has_layer and not re.search(r"ux/templates/[\w-]+/[\w-]+\.js", src):
+                notes.append(f"ALERTE mouvement — {w} : aucune animation signature chargée ({skill_id} n'a pas encore de couche mouvement, et aucun gabarit n'est posé) : "
+                             "le dire à la livraison")
+        if re.search(r'data-k-intensity="(?:reduced|off)"', code) and has_layer:
+            notes.append("mouvement : l'intensité de la page n'est pas « full » : la couche mouvement donne l'état final, sans bouger (choix du client à rappeler à la livraison)")
     if len(maps) > 1:
         errs.append("deux skills chargés (" + ", ".join(sorted(maps)) + ") : l'UI vient d'un seul skill")
     if not maps:

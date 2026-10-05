@@ -1,0 +1,31 @@
+/*
+ * kobo-studio — couche mouvement de retro-mission-poster.
+ * Sources (lecture seule) : retro-mission-poster/references/motion.md et examples/demo.html
+ *   .title b (lignes du titre qui montent derrière un cache, translateY(105%), --dur-move --ease, 120 ms d'écart, retard 150 ms),
+ *   .title small (le petit « Chapitre N » qui apparaît), .pitch (l'accroche monte de 24 px), .facts li (lignes qui arrivent de la
+ *   gauche, 20 px, 120 ms d'écart), .card .pic (contour rouge de 2 px au survol), .menu ol a (titres en cascade, 70 ms).
+ * Non repris : l'écran de chargement et son cercle qui se trace, l'anneau dentelé qui tourne, le mot géant qui glisse avec le
+ * défilement (pièces absentes des structures) ; le bouton qui se déplace est déjà dans la couche de signature.
+ */
+html[data-k-motion="on"][data-k-skill="retro-mission-poster"] {
+  /* Titres : les mots montent derrière un cache, en cascade */
+  & [data-k-reveal="mask"] .k-m-word { overflow: hidden; padding-block-end: var(--k-space-1); margin-block-end: calc(var(--k-space-1) * -1); }
+  & [data-k-reveal="mask"] .k-m-word > span { transition: translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.4 + var(--k-dur-fast) * 0.5); }
+  & [data-k-reveal="mask"]:not([data-k-seen]) .k-m-word > span { translate: 0 105%; }
+  /* Surtitre : il apparaît, sans bouger */
+  & [data-k-reveal="fade"] { transition: opacity var(--k-dur-slow) var(--k-ease-out) calc(var(--k-dur-fast) * 0.5); }
+  & [data-k-reveal="fade"]:not([data-k-seen]) { opacity: 0; }
+  /* Accroche, blocs, images : montée de 24 px */
+  & [data-k-reveal="rise"] { transition: opacity var(--k-dur-slow) var(--k-ease-out), translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.4 + var(--k-dur-fast)); }
+  & [data-k-reveal="rise"]:not([data-k-seen]) { opacity: 0; translate: 0 var(--k-space-6); }
+  /* Faits : les lignes arrivent de la gauche, l'une après l'autre */
+  & [data-k-reveal="left"] { transition: opacity var(--k-dur-slow) var(--k-ease-out), translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) * 0.4 + var(--k-dur-fast) * 2); }
+  & [data-k-reveal="left"]:not([data-k-seen]) { opacity: 0; translate: calc(var(--k-space-4) * -1.25) 0; }
+  /* Carte : un contour rouge apparaît autour de l'image */
+  & .k-card--link .k-card__media { outline: calc(var(--k-border-w) * 2) solid transparent; transition: outline-color var(--k-dur-fast) var(--k-ease-out); }
+  & .k-card--link:is(:hover, :has(a:focus-visible)) .k-card__media { outline-color: var(--k-accent); }
+  /* Entrée de page : les liens de la barre montent en cascade (la cascade du menu de la démo) */
+  &[data-k-enter] .k-nav__list > li { transition: opacity var(--k-dur-base) var(--k-ease-in-out), translate var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i, 0) * var(--k-dur-fast) * 0.23 + var(--k-dur-fast)); }
+  &[data-k-enter="pending"] .k-nav__list > li { opacity: 0; translate: 0 var(--k-space-8); }
+}
+@media (prefers-reduced-motion: reduce) { html[data-k-skill="retro-mission-poster"] :is([data-k-reveal], .k-m-word, .k-m-word > span, .k-nav__list > li, .k-btn, .k-btn::before, .k-card__media, .k-card__media img) { transition: none; } }

@@ -12,7 +12,7 @@ Dans toutes les feuilles de style, les styles en ligne et la galerie :
   - aucune valeur en dur : couleur (#…, rgb(), hsl(), couleur nommée), longueur (px, rem, em, pt, ch…),
     rayon, durée (ms, s). Sont admis : les rôles --k-*, les variables locales --_x, les pourcentages,
     les unités de fenêtre (vw, vh, dvh), fr, deg, turn, les nombres sans unité, zéro, transparent, currentColor ;
-  - aucun --k-sig-* hors de components/signatures/ (là, une ombre peut aussi venir d'un --k-sig-* du skill) ;
+  - aucun --k-sig-* hors de components/signatures/ et de components/motion/ (là, une ombre peut aussi venir d'un --k-sig-* du skill) ;
   - motifs de quality/anti-slop.md : dégradés (C1 ; admis dans signatures/ quand le skill les décrit), ombres hors --k-shadow (F1, F5), flou d'arrière-plan (F3),
     scale() au survol (M1), transition: all (M4), outline retiré sans remplacement (U8), texte de remplissage (T1),
     emoji en guise d'icône (T5), liens href="#" (T7), boutons sans type (U10), images sans alt (T8).
@@ -31,6 +31,7 @@ from pathlib import Path
 STUDIO = Path(__file__).resolve().parent.parent
 COMP = STUDIO / "components"
 SIG = COMP / "signatures"
+MOTION = COMP / "motion"   # couche mouvement : mêmes droits qu'une couche de signature (--k-sig-*), et ses propres règles
 UX = STUDIO / "ux"
 NAMED = ("white|black|red|green|blue|yellow|orange|purple|violet|pink|gray|grey|silver|gold|navy|teal|"
          "maroon|olive|lime|aqua|fuchsia|brown|beige|ivory|indigo|cyan|magenta|crimson|coral|salmon|tomato")
@@ -164,6 +165,40 @@ def check_ux(errs):
     return len(dirs)
 
 
+def check_motion(d, rel):
+    """Couche mouvement : un moteur (motion.js, motion.css) et, par skill, une feuille et un script du même nom."""
+    out = []
+    skills = {x.name for x in STUDIO.parent.iterdir() if x.is_dir()}
+    for name in ("motion.js", "motion.css"):
+        if not (d / name).exists():
+            out.append(f"{rel} : {name} manquant (le moteur)")
+    for f in sorted(d.glob("*.css")):
+        if f.stem == "motion":
+            continue
+        where, raw = f"{rel}/{f.name}", f.read_text(encoding="utf-8")
+        css = strip_comments(raw)
+        if f.stem not in skills:
+            out.append(f"{where} : aucun skill de ce nom")
+        if not (d / f"{f.stem}.js").exists():
+            out.append(f"{where} : {f.stem}.js manquant")
+        if not raw.lstrip().startswith("/*") or "Sources" not in raw.split("*/")[0] or "Non repris" not in raw.split("*/")[0]:
+            out.append(f"{where} : en-tête manquant (sources lues dans le skill, ce qui n'est pas repris)")
+        # Sans le script, la page doit être dans son état final : tout état de départ vit sous html[data-k-motion="on"]
+        body = re.sub(r"@keyframes[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}|@media[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}", "", css)
+        scope = f'html[data-k-motion="on"][data-k-skill="{f.stem}"]'
+        if scope not in body or re.sub(r"\s+", "", body.split(scope, 1)[0]):
+            out.append(f"{where} : toutes les règles doivent être écrites sous {scope}")
+        # Seules les propriétés que le compositeur anime, plus la couleur d'un petit élément (documentée par le skill)
+        for prop in sorted(set(re.findall(r"transition\s*:\s*([^;}]+)", css))):
+            for _ in range(3):                               # les virgules d'un calc() ou d'un var() ne séparent pas deux transitions
+                prop = re.sub(r"\([^()]*\)", "", prop)
+            for part in prop.split(","):
+                name = part.strip().split(" ")[0]
+                if name and name not in ("opacity", "translate", "rotate", "scale", "transform", "clip-path", "color", "background-color", "outline-color", "none"):
+                    out.append(f"{where} : transition sur « {name} » (seuls transform, opacity, clip-path et une couleur sont animés)")
+    return out
+
+
 def main():
     errs, notes = [], []
     if not COMP.exists():
@@ -172,7 +207,7 @@ def main():
     dirs = sorted(d for d in COMP.iterdir() if d.is_dir())
     for d in dirs:
         rel = f"components/{d.name}"
-        sig = d == SIG
+        sig = d in (SIG, MOTION)
         css_files = sorted(d.glob("*.css"))
         if not (d / "README.md").exists():
             errs.append(f"{rel} : README.md manquant")
@@ -181,6 +216,8 @@ def main():
                 errs.append(f"{rel} : {d.name}.css manquant")
             if not list(d.glob("*.jsx")):
                 errs.append(f"{rel} : version React (*.jsx) manquante")
+        if d == MOTION:
+            errs += check_motion(d, rel)
         for f in css_files:
             raw = f.read_text(encoding="utf-8")
             css = strip_comments(raw)

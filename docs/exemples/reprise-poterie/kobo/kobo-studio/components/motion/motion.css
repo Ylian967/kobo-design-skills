@@ -1,0 +1,11 @@
+/*
+ * kobo-studio — couche mouvement : ce que tous les skills partagent.
+ * Rien ici ne masque ni ne déplace un contenu : les états de départ sont écrits par chaque skill, sous html[data-k-motion="on"],
+ * attribut que seul motion.js pose (intensité « full », mouvement non réduit). Sans script : état final.
+ */
+/* Mots d'un titre découpé par motion.js (m.words) : le texte entier reste lu, ces mots sont décoratifs */
+.k-m-word { display: inline-block; vertical-align: top; }
+.k-m-word > span { display: inline-block; }
+/* Un canvas d'effet posé sur une image (décryptage) : décor, jamais interactif */
+.k-m-over { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { [data-k-reveal], .k-m-word > span { transition: none; animation: none; } }
