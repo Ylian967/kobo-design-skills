@@ -1,0 +1,25 @@
+/*
+ * kobo-studio — héros photo, habillage glass-frame-estate : la photo dans son cadre, le mot-marque derrière le sujet.
+ * Sources (lecture seule) : glass-frame-estate/examples/demo.html (.hero : marge autour du cadre, fond sombre ; .frame : hauteur
+ * d'écran moins la marge, filet d'un pixel, coins arrondis, photo et ses deux voiles ; .word : le nom en capitales très larges,
+ * centré en haut, en dégradé vertical ; .hero-body : titre en bas à gauche, bouton large en bas à droite), references/tokens.css.
+ * Non repris : la photo floutée derrière le cadre, le sujet détouré qui passe devant le mot, les cellules de verre (portrait,
+ * téléphone) — elles portent des données du site d'origine.
+ */
+[data-k-skill="glass-frame-estate"] [data-k-slot="hero"][data-k-gabarit="hero-photo"] { padding: var(--k-sig-frame-inset); background: var(--k-sig-shade); }
+[data-k-skill="glass-frame-estate"] .g-hero--frame {
+  --_ink: var(--k-text-inverse); --_bg: var(--k-sig-shade); --_veil: linear-gradient(var(--k-sig-veil), var(--k-sig-veil)), linear-gradient(180deg, var(--k-sig-shade-0) 46%, var(--k-scrim) 96%);
+  /* Lisibilité, comme la démo : son voile uni sur toute la photo, et son ombre du bas (--shade-0 → --shade-1), calée sur le haut du texte ; sans plaque */
+  --_plate: linear-gradient(180deg, var(--k-sig-shade-0), var(--k-scrim) var(--k-space-16));
+  min-block-size: max(calc(var(--k-space-32) * 5), 100dvh - var(--k-nav-h) - 2 * var(--k-sig-frame-inset)); border: var(--k-border-w) solid var(--k-sig-frame-line); border-radius: var(--k-sig-r-frame);
+}
+[data-k-skill="glass-frame-estate"] .g-hero--frame .g-hero__content { padding-block: var(--k-space-24) var(--k-space-12); }
+[data-k-skill="glass-frame-estate"] .g-hero--frame .g-hero__content > * { grid-column: 1; max-inline-size: 100%; }
+/* L'action : en bas à droite du texte sur grand écran (remontée d'une rangée, poussée à droite), à la suite du texte sur écran étroit.
+   Une seule colonne dans les deux cas : une seconde colonne écrasait le texte sous 6 × --k-space-32. */
+[data-k-skill="glass-frame-estate"] .g-hero--frame .g-hero__content > .k-btn { --_btn: calc(var(--k-space-32) * 2 - var(--k-space-4)); min-inline-size: min(100%, var(--_btn));
+  margin-inline-start: clamp(0px, var(--_narrow) * -1, 100% - var(--_btn)); margin-block-start: clamp((var(--k-control-h) + var(--k-space-6)) * -1, var(--_narrow), 0px); }
+[data-k-skill="glass-frame-estate"] .g-hero--frame h1 { max-inline-size: calc(var(--k-fs-h1) * 8.5); font-size: var(--k-fs-h1); }
+[data-k-skill="glass-frame-estate"] .g-hero--frame .k-lead { max-inline-size: min(100%, var(--k-measure)); font-size: var(--k-fs-body); }
+[data-k-skill="glass-frame-estate"] .g-hero--frame .k-facts { max-inline-size: min(100%, var(--k-measure)); }
+.g-hero__bigword { position: absolute; inset: var(--k-space-24) 0 auto 0; z-index: -1; text-align: center; font-family: var(--k-font-display); font-size: var(--k-sig-fs-word); font-weight: var(--k-sig-w-word); line-height: 1.1; letter-spacing: var(--k-sig-ls-word); text-transform: uppercase; white-space: nowrap; color: transparent; background: linear-gradient(0deg, var(--k-sig-word-to) 19%, var(--k-sig-word-from) 100%); -webkit-background-clip: text; background-clip: text; user-select: none; pointer-events: none; }

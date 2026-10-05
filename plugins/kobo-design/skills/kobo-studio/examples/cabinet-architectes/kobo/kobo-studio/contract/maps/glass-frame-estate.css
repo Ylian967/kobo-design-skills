@@ -1,0 +1,155 @@
+/*
+ * kobo-studio — fiche de correspondance : glass-frame-estate
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 45 reliés ou relevés, 3 dérivés, 14 en repli.
+ * 23 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&family=Inter:wght@400;500;600&display=swap
+ *
+ * Signature : 36 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-soft, --k-sig-rule-dark, --k-sig-veil, --k-sig-shade, --k-sig-shade-0, --k-sig-glass,
+ *   --k-sig-glass-edge, --k-sig-frame-line, --k-sig-word-from, --k-sig-word-to, --k-sig-word-dark,
+ *   --k-sig-w-text, --k-sig-w-word, --k-sig-fs-word, --k-sig-fs-h4, --k-sig-fs-h5, --k-sig-ls-word,
+ *   --k-sig-gap, --k-sig-gap-row, --k-sig-gap-head, --k-sig-pad-card, --k-sig-pad-panel, --k-sig-tag-h,
+ *   --k-sig-chip-h, --k-sig-step-h, --k-sig-step-top, --k-sig-frame-inset, --k-sig-r-frame, --k-sig-r-inner,
+ *   --k-sig-blur-glass, --k-sig-blur-menu, --k-sig-blur-back, --k-sig-dur-menu, --k-sig-rise, --k-sig-flip-y,
+ *   --k-sig-dur-odo
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500&family=Inter:wght@400;500;600&display=swap");
+@import "../roles.css";
+@import "../../../glass-frame-estate/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--white); /* [main] */
+  --k-surface: var(--surface);
+  --k-surface-2: var(--surface-2);
+  --k-overlay: var(--glass-solid); /* [main] */
+  --k-scrim: var(--shade-1); /* [main] */
+  --k-bg-inverse: var(--ink); /* [main] */
+
+  /* ---- Texte ---- */
+  --k-text: var(--ink);
+  --k-text-2: var(--k-text); /* [main] repli du contrat */
+  --k-text-muted: var(--muted);
+  --k-on-accent: var(--white); /* [main] */
+  --k-text-inverse: var(--white); /* [main] */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--ink); /* [main] accent neutre : règle du skill */
+  --k-accent-edge: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 21.00:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--k-accent); /* repli du contrat */
+  --k-success: #3a795a; /* dérivé : teinte 150°, saturation calée sur celle de son accent, clarté ajustée → 4.62:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-warning: #806a3e; /* dérivé : teinte 40°, saturation calée sur celle de son accent, clarté ajustée → 4.63:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-danger: #ab5252; /* dérivé : teinte 0°, saturation calée sur celle de son accent, clarté ajustée → 4.62:1 au moins sur --k-bg, --k-surface et --k-surface-2 */
+  --k-focus: var(--ink); /* [main] */
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 3px; /* repli du contrat */
+
+  /* ---- Filets ---- */
+  --k-line: var(--rule);
+  --k-line-strong: var(--tick); /* [main] */
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font); /* [main] */
+  --k-font-body: var(--font);
+  --k-font-mono: var(--font-mono);
+  --k-fs-hero: var(--fs-page); /* [main] la plus grande taille de titre du skill */
+  --k-fs-h1: var(--fs-hero); /* [main] titre du héros photo, plus petit que le titre de page */
+  --k-fs-h2: var(--fs-h2);
+  --k-fs-h3: var(--fs-h3);
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-label-s); /* [main] */
+  --k-fs-label: var(--fs-label);
+  --k-lh-tight: var(--lh-title);
+  --k-lh-body: var(--lh-body);
+  --k-ls-display: var(--ls-title);
+  --k-ls-caps: 0.06em; /* repli */
+  --k-fw-display: var(--w-title);
+  --k-btn-case: uppercase; /* [main] relevé : « tout est en capitales », sauf paragraphes et champs */
+  --k-btn-tracking: 0em; /* [main] relevé : libellé sans approche */
+  --k-label-case: uppercase; /* [main] relevé */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--r-btn);
+  --k-radius-lg: var(--r-card);
+  --k-radius-pill: 999px; /* repli */
+  --k-border-w: 1px; /* repli */
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: none; /* repli */
+  --k-img-filter: none; /* [main] photos de biens en couleurs ; seule la photo du pied est en niveaux de gris */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--gutter);
+  --k-container: var(--container);
+  --k-section-y: var(--section-y);
+  --k-control-h: var(--btn-h);
+  --k-nav-h: 64px; /* repli */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease-spring); /* [main] */
+  --k-ease-in-out: var(--ease-color); /* [main] */
+  --k-ease-spring: var(--ease-spring);
+  --k-dur-fast: var(--dur-ui); /* [main] */
+  --k-dur-base: var(--dur-color); /* [main] */
+  --k-dur-slow: var(--dur-rise); /* [main] */
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-soft: var(--soft);
+  --k-sig-rule-dark: var(--rule-dark);
+  --k-sig-veil: var(--veil);
+  --k-sig-shade: var(--shade);
+  --k-sig-shade-0: var(--shade-0);
+  --k-sig-glass: var(--glass);
+  --k-sig-glass-edge: var(--glass-edge);
+  --k-sig-frame-line: var(--frame-line);
+  --k-sig-word-from: var(--word-from);
+  --k-sig-word-to: var(--word-to);
+  --k-sig-word-dark: var(--word-dark);
+  --k-sig-w-text: var(--w-text);
+  --k-sig-w-word: var(--w-word);
+  --k-sig-fs-word: var(--fs-word);
+  --k-sig-fs-h4: var(--fs-h4);
+  --k-sig-fs-h5: var(--fs-h5);
+  --k-sig-ls-word: var(--ls-word);
+  --k-sig-gap: var(--gap);
+  --k-sig-gap-row: var(--gap-row);
+  --k-sig-gap-head: var(--gap-head);
+  --k-sig-pad-card: var(--pad-card);
+  --k-sig-pad-panel: var(--pad-panel);
+  --k-sig-tag-h: var(--tag-h);
+  --k-sig-chip-h: var(--chip-h);
+  --k-sig-step-h: var(--step-h);
+  --k-sig-step-top: var(--step-top);
+  --k-sig-frame-inset: var(--frame-inset);
+  --k-sig-r-frame: var(--r-frame);
+  --k-sig-r-inner: var(--r-inner);
+  --k-sig-blur-glass: var(--blur-glass);
+  --k-sig-blur-menu: var(--blur-menu);
+  --k-sig-blur-back: var(--blur-back);
+  --k-sig-dur-menu: var(--dur-menu);
+  --k-sig-rise: var(--rise);
+  --k-sig-flip-y: var(--flip-y);
+  --k-sig-dur-odo: var(--dur-odo);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+[data-k-intensity="reduced"] {
+  --k-sig-dur-menu: 0s;
+  --k-sig-dur-odo: 0s;
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+[data-k-intensity="off"] {
+  --k-sig-dur-menu: 0s;
+  --k-sig-dur-odo: 0s;
+}

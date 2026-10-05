@@ -11,7 +11,24 @@ On pose les couleurs du client **par-dessus** le skill, dans un fichier du proje
 
 La marque ne redéfinit que des rôles `--k-*`. **Jamais** une variable du skill, **jamais** un `--k-sig-*` : les ornements de signature gardent les couleurs du skill. Si la couleur du client jure avec eux, baisse l'intensité (`reduced` ou `off`) ou change de skill ; dis-le au client.
 
-À dire au client avant de commencer : dans un skill dont l'identité **est** une couleur (le lime de pixel-lime-portfolio, l'orange de signal-orange-techwear, le vert d'acid-scan-security), remplacer l'accent défait le style. Propose plutôt un skill à accent neutre (alpine-glass-expedition, chrome-atelier, glacial-mono-3d, glass-frame-estate, lore-frame-editorial, pocket-device-noir) : la marque y prend la place d'`--k-accent-2` sans rien casser.
+À dire au client avant de commencer : dans un skill dont l'identité **est** une couleur (le lime de pixel-lime-portfolio, l'orange de signal-orange-techwear, le vert d'acid-scan-security), remplacer l'accent défait le style. Propose plutôt un skill à accent neutre (alpine-glass-expedition, chrome-atelier, glacial-mono-3d, glass-frame-estate, lore-frame-editorial, pocket-device-noir) : la marque s'y pose sans rien casser.
+
+## Où chaque couleur apparaît
+
+À savoir avant de promettre quoi que ce soit au client : redéfinir un rôle ne colore que ce qui le lit.
+
+| Rôle | Ce qui le lit dans le kit | Ce qui ne le lit pas |
+|---|---|---|
+| `--k-accent` | l'aplat du bouton principal, la barre de progression, le filet de l'onglet actif, le trait de soulignement des liens (`k-link`, `k-prose`) | le **texte** des liens : il garde la couleur du texte |
+| `--k-accent-2` | **rien** dans les composants ni dans les structures ; quelques couches de signature et deux gabarits seulement | tout le reste : une seconde couleur de marque reste invisible tant que tu ne la poses pas |
+| `--k-bg-inverse`, `--k-text-inverse` | le bloc de fin de page et tout bloc `data-k-tone="inverse"` | — |
+
+Donc :
+
+- **Liens à la couleur de la marque** : dans `site.css`, `.k-section .k-link { color: var(--k-accent); }`, seulement si l'accent atteint 4.5:1 sur `--k-bg`, `--k-surface` et `--k-surface-2` (le script donne ces rapports) et si `--k-accent-on-bg` vaut 1. Le soulignement reste : la couleur seule ne dit pas qu'un texte est un lien.
+- **Seconde couleur** : pose-la toi-même dans `site.css`, par `var(--k-accent-2)`, sur un filet ou un aplat (le trait devant un surtitre, le bord d'un bloc). En **texte**, seulement si elle atteint 4.5:1 sur le fond où elle est écrite : calcule-le, le script ne mesure que ce qui est affiché. Dis au client où elle apparaît.
+- **Bloc de fin à la couleur de la marque** : permis au niveau 1 en redéfinissant ensemble `--k-bg-inverse` et `--k-text-inverse` (4.5:1 entre eux ; le script le vérifie). C'est une décision de mise en page, pas une conséquence automatique : propose-la au client à l'étape c, ou dis-la à la livraison avec la façon de revenir en arrière.
+- **Rien d'autre ne change tout seul.** Regarde les captures : si une couleur de marque promise n'apparaît nulle part, ce n'est pas un détail, c'est un écart à corriger ou à dire.
 
 ## Marche à suivre
 

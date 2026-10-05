@@ -1,0 +1,74 @@
+/*
+ * kobo-studio — couche de signature : glass-frame-estate
+ * Sources (lecture seule) : SKILL.md (aucune couleur d'interface ; tout en capitales Inter 500 ; trois rayons ; les survols inversent
+ * le noir et le blanc), references/components.md (libellé en capitales ; surtitre précédé de « // » ; bouton large, libellé à gauche
+ * et flèche à droite ; variantes encre, claire et contour ; carte sur fond gris avec photo en retrait ; champs blancs dans un
+ * panneau gris ; menu plein écran aux liens centrés).
+ * Non traduit : le cadre du héros sur photo floutée, le mot-marque derrière le bâtiment, les cellules de verre, la règle graduée,
+ * la pile de cartes d'étape.
+ *
+ * Les survols de ce skill ne changent que des couleurs : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton large : libellé à gauche, flèche à droite ; le survol inverse noir et blanc ---- */
+  &.k-btn { font-weight: var(--k-fw-display); }
+  &.k-btn:not(.k-btn--icon, .k-btn--ghost) { justify-content: space-between; gap: var(--k-space-6); padding-inline: var(--k-space-4) var(--k-space-3); }
+  &.k-btn:not(.k-btn--icon, .k-btn--ghost)::before { content: "→"; order: 2; }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-surface); --_fg: var(--k-text); --_edge: var(--k-surface); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-bg); --_edge: var(--k-line); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-text); --_fg: var(--k-bg); --_edge: var(--k-text); }
+
+  /* ---- Tout est en capitales, sauf les paragraphes et les champs ---- */
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title, &.k-nav__brand, &.k-field__label, &.k-toast__title { text-transform: uppercase; }
+  &.k-nav__link, &.k-tabs__tab, &.k-field__label { font-weight: var(--k-fw-display); }
+  /* ---- Surtitre « // » ---- */
+  &.k-card__meta { color: var(--k-text); font-weight: var(--k-fw-display); }
+  &.k-card__meta::before { content: "// "; }
+
+  /* ---- Carte : fond gris sans cadre, photo en retrait aux coins fins ---- */
+  &.k-card { border-color: transparent; }
+  &.k-card__media { margin: var(--k-sig-pad-card) var(--k-sig-pad-card) 0; border: 0; border-radius: var(--k-sig-r-inner); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { border-color: var(--k-text); }
+
+  /* ---- Onglets = puces à contour ; la choisie en noir ---- */
+  &.k-tabs__list { gap: var(--k-space-2); padding-block: var(--k-space-1); border-block-end: 0; }
+  &.k-tabs__tab { margin: 0; color: var(--k-text); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius); }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-bg); background: var(--k-text); border-color: var(--k-text); }
+  &.k-tabs__tab[aria-selected="true"] .k-tabs__count { color: inherit; }
+
+  /* ---- Champs blancs ; modale = panneau gris sans bord ---- */
+  &.k-field__control:not(:disabled) { background: var(--k-bg); }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: var(--k-line); }
+  &.k-modal { background: var(--k-surface); border-color: transparent; }
+  &.k-toast, &.k-empty { border-color: var(--k-line); }
+
+  /* ---- Menu plein écran : sombre, liens centrés ---- */
+  &.k-menu {
+    --k-bg: var(--k-bg-inverse); --k-text: var(--k-text-inverse); --k-text-muted: var(--k-text-inverse); --k-line: color-mix(in srgb, var(--k-text-inverse) 16%, transparent);
+    --k-line-strong: var(--k-text-inverse); --k-surface: color-mix(in srgb, var(--k-text-inverse) 10%, var(--k-bg-inverse)); --k-focus: var(--k-text-inverse);
+  }
+  &.k-menu__link { justify-content: center; text-align: center; border-block-end: 0; }
+  &.k-menu__link[aria-current="page"] { border-inline-start: 0; padding-inline-start: 0; text-decoration: underline; text-underline-offset: var(--k-space-2); }
+}
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : tout en capitales ; « // » entre les niveaux ; pages en puces à contour, la courante en noir ; tableau gris sans cadre ; accordéon en lignes blanches sur gris, à 4 px de rayon, question en libellé (FAQ).
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-dropdown__item, &.k-table thead th, &.k-crumbs, &.k-accordion__trigger { text-transform: uppercase; }
+  &.k-pagination__page, &.k-table thead th, &.k-crumbs { font-weight: var(--k-fw-display); }
+  &.k-pagination__page { color: var(--k-text); border-color: var(--k-line); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-bg); background: var(--k-text); border-color: var(--k-text); }
+  &.k-crumbs li + li::before { content: "//"; }
+  &.k-table { background: var(--k-surface); border-color: transparent; }
+  &.k-table thead th { background: transparent; }
+  &.k-dropdown__menu { border-color: var(--k-line); }
+  /* relecture sur components.md */
+  &.k-accordion { display: grid; gap: var(--k-space-2); padding: var(--k-space-3); background: var(--k-surface); border-block-start: 0; border-radius: var(--k-radius-lg); }
+  &.k-accordion__item { padding-inline: var(--k-space-4); background: var(--k-bg); border-block-end: 0; border-radius: var(--k-radius); }
+  &.k-accordion__trigger { font-weight: var(--k-fw-display); }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
+}

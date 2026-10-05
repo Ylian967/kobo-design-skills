@@ -1,0 +1,21 @@
+/*
+ * kobo-studio — état vide
+ * Composant non interactif : il n'a pas d'état de focus propre ; ses actions sont des boutons (k-btn). k-check: non-interactif
+ * Rôles lus : text, text-2, text-muted, danger, line, font-display, font-body, fs-h3, fs-body, fw-display, lh-tight, lh-body,
+ * radius-lg, border-w, space-*.
+ */
+.k-empty {
+  display: grid; justify-items: start; gap: var(--k-space-3); padding: var(--k-space-8) var(--k-space-6);
+  font-family: var(--k-font-body); color: var(--k-text); border: var(--k-border-w) dashed var(--k-line-strong); border-radius: var(--k-radius-lg);
+}
+.k-empty__icon { --k-icon: var(--k-space-8); color: var(--k-text-muted); }
+.k-empty__title { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); }
+.k-empty__text { margin: 0; max-inline-size: calc(var(--k-space-32) * 4); font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text-2); }
+.k-empty__actions { display: flex; flex-wrap: wrap; gap: var(--k-space-3); margin-block-start: var(--k-space-2); }
+
+/* Variantes */
+.k-empty--plain { padding-inline: 0; border: 0; }
+.k-empty--center { justify-items: center; text-align: center; }
+/* Échec de chargement : icône en couleur d'erreur ET titre écrit ; la bordure devient pleine */
+.k-empty--error { border-style: solid; }
+.k-empty--error .k-empty__icon { color: var(--k-danger); }

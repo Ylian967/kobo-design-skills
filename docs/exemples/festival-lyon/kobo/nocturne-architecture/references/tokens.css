@@ -1,0 +1,65 @@
+/*
+ * Nocturne Architecture — tokens
+ * MESURÉS le 2026-10-03 par lecture des pixels sur les images du shot Dribbble (page entière de 1440px présentée à l'échelle 1).
+ * La référence est fixe : couleurs, tailles et positions sont mesurées ; tout le mouvement est proposé. « choisi » = décidé par le skill.
+ * @contrast text:bg text:panel text:foot muted:bg muted:panel dim:bg:large on-accent:accent-deep on-accent:accent:large ink:paper accent-text:bg text:night
+ */
+:root {
+  /* ---- Couleurs ---- */
+  --bg: #0e0e0e;            /* mesuré : fond de la page */
+  --panel: #171516;         /* mesuré : grand panneau « comment nous travaillons » */
+  --foot: #121210;          /* mesuré : pied de page */
+  --text: #ffffff;          /* mesuré : texte, mot-marque */
+  --muted: #9a9a9a;         /* choisi : petits textes secondaires (le shot utilise un gris plus sombre, trop peu lisible) */
+  --dim: #626262;           /* mesuré : suite grise d'une grande phrase — grand texte seulement (3,3:1) */
+  --ghost: #565656;         /* mesuré : « + » et « K » des chiffres — décor */
+  --mark: #2a2a2a;          /* mesuré : mots éteints du bandeau défilant — décor */
+  --line: #2b2b2b;          /* mesuré : filets */
+  --accent: #ef2525;        /* mesuré : carte rouge, point lecture, points du bandeau */
+  --accent-deep: #d50000;   /* mesuré : pilule « Let's Connect » ; fond de tout petit texte blanc (5,6:1) */
+  --accent-text: #ff5a5a;   /* choisi : rouge lisible en petit texte sur noir */
+  --on-accent: #ffffff;
+  --paper: #ffffff;         /* mesuré : pilule blanche, bouton rond, étiquette d'article */
+  --ink: #0e0e0e;
+  --night: #153a54;         /* mesuré : bleu de la photo du héros (haut #1a3f59, milieu #315670) — repli et contraste */
+  --veil: rgb(14 14 14 / 0.55);   /* choisi : voile sous le texte posé sur photo */
+  --veil-0: rgb(14 14 14 / 0);
+
+  /* ---- Typographie ---- */
+  --font-display: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;  /* shot : grotesque serrée non identifiée */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --fs-word: 34.2vw;        /* mesuré : mot-marque de 6 lettres sur 1407px, haut de 480px, coupé par le bas du héros */
+  --fs-phrase: clamp(1.75rem, 3.34vw, 3rem);     /* mesuré : grande phrase, lignes au pas de 58px (48px / 1.2) */
+  --fs-stat: clamp(3.25rem, 6.1vw, 5.5rem);      /* mesuré : chiffres de 66px de haut (≈ 88px) */
+  --fs-h2: clamp(2rem, 3.9vw, 3.5rem);           /* mesuré : titres de section, lignes de 58px (≈ 56px / 1.05) */
+  --fs-marquee: clamp(2.25rem, 4.6vw, 4.1rem);   /* mesuré : bandeau, 53px de haut (≈ 66px) */
+  --fs-chip: 1.5rem;        /* lu : puces de catégories ≈ 24px */
+  --fs-row: 1.375rem;       /* lu : titre d'une étape ≈ 22px */
+  --fs-card: 1.625rem;      /* lu : nom d'un bien ≈ 26px */
+  --fs-body: 1rem;          /* lu : paragraphe du héros ≈ 16px / 1.45 */
+  --fs-small: 0.8125rem;    /* lu : liens, pilules ≈ 13px */
+  --fs-label: 0.6875rem;    /* lu : libellés en capitales ≈ 11px */
+  --ls-tight: -0.035em;     /* lu : approche serrée des grands textes */
+  --ls-word: -0.055em;
+
+  /* ---- Grille (1440 de large) ---- */
+  --page: 1440px;
+  --gutter: clamp(16px, 2.8vw, 40px);    /* mesuré : marges de 40px */
+  --hero-h: clamp(600px, 69.4vw, 1000px);/* mesuré : héros de 1000px */
+  --card-w: clamp(260px, 30.4vw, 438px); /* mesuré : carte de bien 438 × 461, écart 23px */
+  --card-h: clamp(300px, 32vw, 461px);
+  --gap: 23px;
+  --pill-h: 48px;           /* mesuré : pilule rouge 151 × 48 */
+  --round: 60px;            /* lu : boutons ronds du carrousel */
+  --r-card: 12px;           /* lu : coins des cartes et photos */
+  --r-panel: 20px;          /* lu : grand panneau */
+  --r-pill: 999px;
+
+  /* ---- Mouvement (proposé : la référence est fixe) ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur: 500ms;
+  --dur-slow: 1000ms;
+  --dur-marquee: 30s;
+}

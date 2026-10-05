@@ -1,0 +1,83 @@
+/*
+ * kobo-studio — couche de signature : clear-ledger-desk
+ * Sources (lecture seule) : SKILL.md (la clarté pour signature ; un seul bouton plein par écran ; la couleur réservée à l'action,
+ * à la sélection et aux états ; densité confort / compact ; mouvement fonctionnel), references/components.md (bouton neutre sur
+ * fond gris, champ de 40 px à libellé gras gris, en-tête de tableau discret, ligne sélectionnée sur fond teinté, page et lien
+ * courants sur fond teinté, étiquettes d'état, panneaux à filet), references/motion.md (couleurs en 50 ms, rien d'autre).
+ * Non traduit : la coquille d'application et le panneau de détail (structure « application »), le chemin d'étapes, l'historique,
+ * les raccourcis clavier.
+ *
+ * Les hauteurs lisent les variables de densité du skill : data-density="compact" sur <html> ou sur un bloc resserre tout.
+ * Aucun mouvement de signature : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton : 32 px, graisse moyenne ; le secondaire est un aplat gris sans contour ---- */
+  &.k-btn { min-block-size: var(--k-control-h); padding-inline: var(--k-space-3); font-weight: var(--k-sig-weight-medium); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-sig-accent-hover); --_edge: var(--k-sig-accent-hover); }
+  &.k-btn:not(.k-btn--secondary, .k-btn--ghost, .k-btn--danger, :disabled, [aria-disabled="true"]):is(:active, [data-k-state="active"]) { --_bg: var(--k-sig-accent-pressed); --_edge: var(--k-sig-accent-pressed); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-sig-neutral); --_edge: transparent; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-line); }
+  &.k-btn--secondary[aria-pressed="true"] { --_bg: var(--k-sig-selected); --_fg: var(--k-accent); }
+  &.k-btn--ghost:not(:disabled, [aria-disabled="true"]) { --_fg: var(--k-text-2); }
+  &.k-btn--danger:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-sig-danger-bold); --_edge: var(--k-sig-danger-bold); }
+
+  /* ---- Champ : 40 px (32 en compact), libellé petit, gras et gris ; focus doublé d'un filet intérieur ---- */
+  &.k-field__label, &.k-check-group__legend, &.k-radio-group__legend { font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: var(--k-fw-display); color: var(--k-text-2); }
+  &.k-field__control { min-block-size: var(--k-sig-field-h); padding-inline: var(--k-space-2); }
+  &.k-field__control:not([aria-invalid="true"], :disabled):is(:focus-visible, [data-k-state="focus"]) { border-color: var(--k-focus); box-shadow: inset 0 0 0 var(--k-border-w) var(--k-focus); }
+  &.k-select__control:not(:disabled) { padding-inline-end: var(--k-space-8); }
+  &.k-select__box::after { inset-inline-end: var(--k-space-3); }
+
+  /* ---- La sélection est la seule couleur des contrôles : case, bouton radio, interrupteur ---- */
+  &.k-check__input:checked:not(:disabled) + .k-check__box, &.k-check__input:indeterminate:not(:disabled) + .k-check__box { background: var(--k-accent); border-color: var(--k-accent); }
+  &.k-check__box { border-radius: var(--k-sig-r-small); }
+  &.k-radio__input:checked:not(:disabled) + .k-radio__box { border-color: var(--k-accent); }
+  &.k-radio__input:checked:not(:disabled) + .k-radio__box::after { background: var(--k-accent); }
+  &.k-switch[aria-checked="true"]:not(:disabled, [aria-disabled="true"]) .k-switch__track { background: var(--k-accent); border-color: var(--k-accent); }
+
+  /* ---- Barre et onglets : le courant est en couleur d'action, sur fond teinté pour la barre ---- */
+  &.k-nav { border-block-end: var(--k-border-w) solid var(--k-line); }
+  &.k-nav__link { color: var(--k-text-2); font-weight: var(--k-sig-weight-medium); }
+  &.k-nav__link[aria-current="page"] { color: var(--k-accent); background: var(--k-sig-selected); border-block-end-color: transparent; border-radius: var(--k-radius); font-weight: var(--k-sig-weight-medium); }
+  &.k-tabs__tab { color: var(--k-text-2); font-weight: var(--k-sig-weight-medium); }
+  &.k-tabs__tab[aria-selected="true"] { color: var(--k-accent); border-block-end-color: var(--k-accent); font-weight: var(--k-sig-weight-medium); }
+
+  /* ---- Surfaces : un filet, 8 px de rayon, jamais d'ombre sauf ce qui flotte ---- */
+  &.k-card { background: var(--k-bg); border-color: var(--k-line); border-radius: var(--k-radius-lg); }
+  &.k-card__meta { font-family: var(--k-font-body); font-size: max(var(--k-fs-label), var(--k-fs-min)); letter-spacing: 0; color: var(--k-text-2); }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-surface); border-color: var(--k-line); }
+  &.k-card[aria-current="true"] { border-color: var(--k-accent); background: var(--k-sig-selected); }
+  &.k-modal { border-color: transparent; border-radius: var(--k-radius-lg); box-shadow: var(--k-sig-shadow-overlay); }
+  &.k-toast { border-color: var(--k-line); box-shadow: var(--k-sig-shadow-overlay); }
+  &.k-empty { border-color: transparent; justify-items: center; text-align: center; }
+  &.k-empty__actions { justify-content: center; }
+  &.k-skeleton { background: var(--k-sig-neutral); }
+  &.k-menu__link[aria-current="page"] { color: var(--k-accent); border-inline-start-color: var(--k-accent); }
+}
+
+/*
+ * Second lot de composants : tableau, pagination, menu déroulant, accordéon, fil d'Ariane, info-bulle.
+ * Le tableau est le cœur du skill : en-tête discret, lignes à la hauteur de la densité, ligne choisie sur fond teinté.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-table { border-color: var(--k-line); border-radius: var(--k-radius-lg); }
+  &.k-table th, &.k-table td { block-size: var(--k-sig-row-h); padding: var(--k-sig-cell-y) var(--k-space-3); white-space: nowrap; }
+  &.k-table thead th { block-size: var(--k-sig-head-h); font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: var(--k-fw-display); color: var(--k-text-2); background: var(--k-surface); border-block-end-width: calc(var(--k-border-w) * 2); border-block-end-color: var(--k-line); }
+  &.k-table tbody th { font-weight: var(--k-sig-weight-medium); }
+  &.k-table tbody tr[aria-selected="true"] { background: var(--k-sig-selected); }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent); }
+  &.k-table__bar { background: var(--k-surface); }
+  &.k-table__sort { min-block-size: var(--k-sig-head-h); margin-block: 0; }
+  &.k-pagination__page { min-inline-size: var(--k-control-h); min-block-size: var(--k-control-h); }
+  &.k-pagination__page:not([aria-current="page"]):is(:hover, [data-k-state="hover"]) { background: var(--k-sig-neutral); }
+  &.k-pagination__page[aria-current="page"] { color: var(--k-accent); background: var(--k-sig-selected); border-color: transparent; font-weight: var(--k-sig-weight-medium); }
+  &.k-dropdown__menu { border-color: transparent; border-radius: var(--k-radius-lg); box-shadow: var(--k-sig-shadow-overlay); }
+  &.k-dropdown__item { min-block-size: var(--k-control-h); }
+  &.k-dropdown__item[aria-checked="true"] { color: var(--k-accent); }
+  &.k-dropdown__label { font-weight: var(--k-fw-display); color: var(--k-text-2); }
+  &.k-accordion { border-block-start-color: var(--k-line); }
+  &.k-accordion__trigger { font-weight: var(--k-sig-weight-medium); }
+  &.k-crumbs { color: var(--k-text-2); }
+  &.k-crumbs [aria-current="page"] { color: var(--k-text); }
+  &.k-tooltip__bubble { border-radius: var(--k-sig-r-small); }
+}

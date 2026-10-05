@@ -3,6 +3,8 @@
 Kōbō — génère la galerie docs/index.html (publiable avec GitHub Pages, dossier /docs).
 Chaque skill apparaît avec un aperçu vivant de sa page d'exemple (examples/demo.html),
 copiée dans docs/demos/<style>.html, et un lien vers son SKILL.md.
+La page présente aussi kobo-studio et site-to-skill, et donne accès aux exemples construits avec kobo-studio :
+chaque dossier de kobo-studio/examples/ listé dans EXEMPLES est copié dans docs/exemples/<nom>/.
 
 Usage : python3 tools/build_gallery.py
 """
@@ -13,6 +15,33 @@ ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "plugins" / "kobo-design" / "skills"
 DOCS = ROOT / "docs"
 REPO_URL = "https://github.com/{owner}/kobo-design-skills"  # remplacé si docs/config.json existe
+STUDIO = SKILLS / "kobo-studio"
+# Exemples de kobo-studio montrés dans la galerie : (dossier, nom, essai fait, structure). Le skill est lu dans la page.
+EXEMPLES = [
+    ("festival-lyon", "Nuits Basses", "une landing pour un festival de musique électronique à Lyon", "landing produit"),
+    ("restaurant-react", "Chez Odile", "le site vitrine d'un restaurant de quartier, en React", "site vitrine, React"),
+    ("reprise-poterie", "Terre & Feu", "la reprise d'un site existant de cours de poterie, sans perdre son contenu", "reprise"),
+    ("crm-pme", "Rivage Suivi", "un CRM B2B pour une PME de services", "application"),
+    ("cabinet-architectes", "Atelier Sorbier", "le site vitrine d'un cabinet d'architectes, avec deux couleurs de marque imposées", "site vitrine, marque"),
+]
+IGNORES = shutil.ignore_patterns("captures", "node_modules", "avant", "dist", "src", "public", "*.json", "vite.config.js", "__pycache__")
+
+
+def exemples():
+    """Copie les exemples de kobo-studio dans docs/exemples/ et renvoie leurs fiches. Un projet React est copié depuis dist/."""
+    out = DOCS / "exemples"
+    shutil.rmtree(out, ignore_errors=True)
+    items = []
+    for name, title, ask, structure in EXEMPLES:
+        src = STUDIO / "examples" / name
+        react = (src / "package.json").exists()
+        built = src / "dist" if react else src
+        if not (built / "index.html").exists():          # exemple absent, ou projet React non compilé : pas de carte
+            continue
+        shutil.copytree(built, out / name, ignore=None if react else IGNORES)
+        skill = re.search(r'data-k-skill="([\w-]+)"', (src / "index.html").read_text(encoding="utf-8"))
+        items.append({"id": name, "title": title, "ask": ask, "structure": structure, "skill": skill.group(1) if skill else ""})
+    return items
 
 
 def fm(text):
@@ -50,6 +79,16 @@ def main():
                       "tagline": tag.group(1) if tag else meta.get("description", "")[:140],
                       "cat": cat.group(1).strip() if cat else "Autre"})
 
+    studio = "\n".join(f"""
+    <article class="card">
+      <a class="frame" href="exemples/{e['id']}/index.html" target="_blank" rel="noopener" aria-label="Ouvrir l'exemple {html.escape(e['title'])}">
+        <iframe src="exemples/{e['id']}/index.html" loading="lazy" tabindex="-1" title="Aperçu {html.escape(e['title'])}"></iframe>
+      </a>
+      <div class="meta"><h3>{html.escape(e['title'])}</h3><span>{html.escape(e['structure'])}</span></div>
+      <p>Essai : {html.escape(e['ask'])}. Projet fictif.</p>
+      <div class="links"><a href="exemples/{e['id']}/index.html" target="_blank" rel="noopener">Ouvrir l'exemple</a><a href="{repo}/tree/main/plugins/kobo-design/skills/kobo-studio/examples/{e['id']}">Fichiers</a><code>{e['skill']}</code></div>
+    </article>""" for e in exemples())
+
     cards = "\n".join(f"""
     <article class="card" data-cat="{html.escape(i['cat'])}">
       <a class="frame" href="demos/{i['id']}.html" target="_blank" rel="noopener" aria-label="Ouvrir la démo {html.escape(i['title'])}">
@@ -81,7 +120,15 @@ pre{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padd
 .frame iframe{{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;transform:scale(calc(100cqw / 1440px));pointer-events:none}}
 @supports not (transform:scale(calc(100cqw / 1440px))){{.frame iframe{{transform:scale(.25)}}}}
 .meta{{display:flex;justify-content:space-between;gap:10px;align-items:baseline}}.meta h2{{margin:0;font:700 20px var(--d)}}.meta span{{font:12px var(--m);color:var(--dim)}}
+.meta h3{{margin:0;font:700 18px var(--d)}}
 .card p{{margin:0;color:var(--dim);font-size:14px}}
+section{{padding-bottom:40px;border-bottom:1px solid var(--line);margin-bottom:28px}}
+section>h2{{font:800 clamp(28px,4vw,44px)/1 var(--d);letter-spacing:-.03em;margin:0 0 6px}}
+section>h2 code{{font:inherit}}
+.sub{{color:var(--dim);max-width:70ch;margin:0 0 20px}}
+.cols{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:22px;margin-bottom:28px}}
+.cols h3{{font:700 16px var(--d);margin:0 0 6px}}.cols p,.cols ol{{margin:0;color:var(--dim);font-size:14px}}.cols ol{{padding-left:18px}}
+.cols pre{{margin-top:8px;white-space:pre-wrap;overflow-wrap:anywhere}}.cols a,.sub a{{color:var(--fg)}}
 .links{{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:14px}}.links a{{color:var(--fg)}}.links code{{font:12px var(--m);color:var(--dim);overflow-wrap:anywhere}}
 .empty{{color:var(--dim)}}
 @media (max-width:860px){{header{{grid-template-columns:minmax(0,1fr)}}}}
@@ -90,7 +137,26 @@ pre{{background:var(--panel);border:1px solid var(--line);border-radius:8px;padd
 <div><p class="lede">Chaque skill est construit à partir d'un site ou d'une maquette de référence analysés dans le navigateur, puis testé sur une page d'exemple. Installe-les dans Claude Code :</p>
 <pre>/plugin marketplace add {repo.replace('https://github.com/', '')}
 /plugin install kobo-design@kobo</pre></div></header>
-<main class="grid">{cards}</main></div>
+<main>
+<section aria-labelledby="t-studio"><h2 id="t-studio"><code>kobo-studio</code>, le chef d'atelier</h2>
+<p class="sub">Les skills de style donnent l'apparence. <code>kobo-studio</code> donne la méthode : il conduit un projet de site ou d'outil, de la demande à la livraison vérifiée, avec un seul style à la fois.</p>
+<div class="cols">
+<div><h3>À quoi il sert</h3><p>À construire un site entier ou un outil de travail sans réinventer la navigation, les formulaires ni les tableaux, et à reprendre un site existant sans perdre son contenu.</p></div>
+<div><h3>Comment le lancer</h3><p>Dans Claude Code, avec la demande en une phrase :</p><pre>/kobo-design:kobo-studio un site vitrine pour mon cabinet d'architectes</pre></div>
+<div><h3>Ce qu'il fait</h3><ol><li>Il pose quelques questions, puis s'arrête.</li><li>Il propose des skills avec leur limite, et un plan des pages, puis s'arrête.</li><li>Il construit avec 5 structures de page, 20 composants et les gabarits du skill.</li><li>Il vérifie par script, à 1440 et 390 px, et dit ce qui est mesuré, estimé ou inventé.</li></ol></div>
+</div>
+<h3 class="eb" style="margin:0 0 14px">Exemples construits avec kobo-studio</h3>
+<div class="grid">{studio}</div>
+</section>
+<section aria-labelledby="t-s2s"><h2 id="t-s2s"><code>site-to-skill</code>, pour ajouter un style</h2>
+<p class="sub">Il crée un skill à partir d'un site que tu aimes. Sans adresse, tu lui donnes le type de projet : il cherche d'abord dans les skills existants, puis propose dix références au plus et s'arrête pour te laisser choisir. Il analyse ensuite une ou deux références et écrit le skill. Le dernier créé ainsi : <a href="demos/clear-ledger-desk.html">Clear Ledger Desk</a>, un style sobre pour les outils de travail.</p>
+<div class="cols"><div><pre>/kobo-design:site-to-skill https://un-site-que-j-aime.com</pre></div><div><pre>/kobo-design:site-to-skill un CRM B2B pour une PME de services</pre></div></div>
+</section>
+<section aria-labelledby="t-styles" style="border:0"><h2 id="t-styles">Les {len(items)} skills de style</h2>
+<p class="sub">Chaque aperçu est la page d'exemple du skill, construite avec le skill seul.</p>
+<div class="grid">{cards}</div>
+</section>
+</main></div>
 <script>
 /* Ajuste l'échelle des aperçus si les unités de conteneur dans calc() ne sont pas gérées */
 for (const f of document.querySelectorAll('.frame')) {{
@@ -101,7 +167,7 @@ for (const f of document.querySelectorAll('.frame')) {{
 </script></body></html>"""
     (DOCS / "index.html").write_text(page, encoding="utf-8")
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"Galerie générée : {len(items)} skill(s) → docs/index.html")
+    print(f"Galerie générée : {len(items)} skill(s), {studio.count('<article')} exemple(s) kobo-studio → docs/index.html")
 
 
 if __name__ == "__main__":

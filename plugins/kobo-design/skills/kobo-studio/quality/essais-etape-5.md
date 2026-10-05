@@ -13,8 +13,10 @@ Ce que ces essais ne prouvent pas : un seul passage par demande, un seul client 
 | Festival à Lyon (expressif) | hold-to-play-music | landing produit | 5 + la page de départ | 3 recherches dans le CSS du kit, 1 dans `check_studio.py` | 0 erreur | 5,48:1 |
 | Restaurant en React (produit) | serif-bistro-green | site vitrine, 2 pages | 4 + les `.jsx` du kit | `check_studio.py` (3 fonctions), 1 recherche dans `page.css` | 0 erreur | 4,62:1 |
 | Reprise d'un site (reprise) | serif-bistro-green | landing produit | 7 | 2 recherches dans le CSS, l'en-tête d'un gabarit, `measure()` et la sonde | 0 erreur | 4,62:1 |
+| CRM d'une PME (fonctionnel, essai 4) | clear-ledger-desk | application | 11, dont 5 README de composants | `application.js`, `tableau.js`, un `ls` des composants | 0 erreur | 4,51:1 |
+| Cabinet d'architectes (produit, marque imposée, essai 5) | glass-frame-estate | site vitrine, 2 pages | 6, dont `brand.md` | 2 extraits de `check_studio.py`, 4 recherches dans le kit | 0 erreur | 6,66:1 |
 
-Les trois agents ont respecté les deux arrêts, n'ont ouvert ni `audit/`, ni `quality/relecture-*`, ni les README généraux, et ont chargé un seul skill. Chacun a pourtant dû fouiller du CSS ou le vérificateur au moins une fois : c'est là que le skill manquait.
+Les trois premiers agents ont respecté les deux arrêts, n'ont ouvert ni `audit/`, ni `quality/relecture-*`, ni les README généraux, et ont chargé un seul skill. Chacun a pourtant dû fouiller du CSS ou le vérificateur au moins une fois : c'est là que le skill manquait.
 
 ## 1. Landing pour un festival de musique électronique à Lyon
 
@@ -218,6 +220,40 @@ Deux remarques de l'agent sans objet : « 24 skills ici, 26 dans la liste des sk
 
 **Ce que l'essai ne dit pas :** l'écran de fiche et le tableau de bord n'ont pas été demandés, donc pas exercés par un agent (ils ont été ajoutés à la structure après cet essai, et essayés à la main) ; rien n'a été essayé au doigt ni avec un lecteur d'écran ; un seul agent, une seule demande.
 
+## 5. Site vitrine d'un cabinet d'architectes, couleurs de marque imposées (5 octobre 2026)
+
+Premier essai de `brand.md` dans un projet complet. Agent neuf, avec seulement `SKILL.md` et la demande : « Site vitrine d'un cabinet d'architectes ; charte imposée : vert sapin #1F4D3A et ocre #C8892B ». Les deux arrêts tenus ; je jouais le client (Atelier Sorbier architectes, cabinet fictif à Chambéry : deux associées, quatre projets, pas de photos présentables, pas de formulaire, « pas un site tout noir », les deux codes ne se modifient pas). Résultat : `examples/cabinet-architectes/`, capture `essais-etape-5/cabinet-architectes.png`.
+
+**Ce qu'on voulait savoir, vérifié sur pièces après la livraison (fichiers relus, script relancé, pages ouvertes à 1440 et 390 px) :**
+
+| Question | Constat |
+|---|---|
+| `brand.md` est-il suivi ? | Oui. `kit.py … --marque`, `brand.css` chargé en dernier, `data-k-brand` sur `<html>`, les lignes du niveau 1 remplies ensemble (`--k-accent`, `--k-on-accent`, `--k-accent-edge`, `--k-accent-2`, drapeau à 1). Aucune variable du skill ni `--k-sig-*` redéfinie, `kobo/` intact. Il l'a lu dès l'étape c, avant de proposer un skill, alors que le tableau des lectures le plaçait en d |
+| Le skill choisi accepte-t-il une marque ? | Oui : `glass-frame-estate`, un des six skills à accent neutre que `brand.md` conseille. Il a écarté `nocturne-architecture` (noir, photos de nuit : ce que le client refuse) et `serif-bistro-green` malgré son vert (portrait exigé) |
+| Les contrastes sont-ils revérifiés ? | Oui, deux fois. Par calcul avant de construire : il a annoncé au client que l'ocre fait environ 2,97:1 sur blanc et ne servirait donc jamais de texte. Par le script : 22 paires conformes avec les couleurs de la marque, pire contraste sur capture 6,66:1 (accueil) et 9,63:1 (agence), aux deux largeurs. Relancé par moi : mêmes chiffres |
+| Les codes de la marque sont-ils intacts ? | Oui. Lus dans la page rendue : bouton `rgb(31, 77, 58)` à texte blanc, filet `rgb(200, 137, 43)` |
+| Le skill reste-t-il reconnaissable ? | Dans le héros, oui : photo encadrée d'un filet, mot géant derrière le voile, titre en bas à gauche. Sous le héros, non : ce skill n'a de gabarit que là, et la page tient par la typo et les composants. L'agent l'a dit à la proposition et à la livraison (règle 8) |
+| Quelque chose est-il masqué ou dégradé pour passer un contrôle ? | Non. Aucune erreur à aucun passage, donc rien à faire passer. Deux changements faits à cause d'une ligne du script, dits dans son journal : les photos réduites (premier écran de 1934 à 560 Ko) et la liste des projets passée de trois à deux colonnes (un projet restait seul sur sa rangée ; l'alerte « éléments de même forme » a disparu du même coup). Aucun texte, lien ni image retiré. Compté dans la page à 390 px : aucun élément de texte masqué |
+
+**Où il s'est perdu, et la suite donnée :**
+
+| Point | Ce qui s'est passé | Suite donnée |
+|---|---|---|
+| La seconde couleur n'apparaît nulle part | `brand.md` disait que la marque « prend la place d'`--k-accent-2` sans rien casser », mais aucun composant ni aucune structure ne lit ce rôle : l'ocre était invisible. Il l'a posé lui-même dans `site.css`, en deux filets | **`brand.md` corrigé** : section « Où chaque couleur apparaît », qui dit ce que lit chaque rôle et comment poser la seconde couleur |
+| Les liens ne prennent pas l'accent | Il comprenait de `brand.md` que `--k-accent-on-bg: 1` colorait les liens ; seul leur soulignement le lit. Ajouté dans `site.css` | **`brand.md` corrigé** : la règle à écrire, et sa condition de contraste |
+| Bloc de fin noir | Il a redéfini la paire inversée en vert, de sa propre initiative, parce que le client refuse le noir. `brand.md` ne prévoyait ce changement qu'au niveau 2. Il l'a dit à la livraison, avec la façon de revenir en arrière | **`brand.md` corrigé** : permis au niveau 1, à proposer ou à dire |
+| Mot géant du héros | Promis « Sorbier », obtenu « ATELIER » : le gabarit de glass-frame-estate prenait le premier mot du nom, et `data-k-word` n'y existait pas. Il n'a pas contourné : écart dit à la livraison | Gabarit corrigé : `data-k-word` sur le `<h1>` ; `SKILL.md` le dit. Exemple mis à jour après l'essai (« Sorbier ») |
+| Nom tronqué dans la barre à 390 px | « ATELIER SORB… » : comportement de la barre, laissé tel quel et signalé | `SKILL.md` : le nom de la barre reste court. **La barre elle-même n'est pas corrigée** |
+| `brand.md` lu trop tard d'après le tableau | Il l'a lu en c de lui-même | `SKILL.md` : à lire dès l'étape c |
+| Liste composée à la main sur deux colonnes | Le skill ne dit pas comment : il a repris la classe `sv-grid` de la structure, trouvée par recherche dans son CSS | **Non corrigé** |
+| Crédit d'une photo sous licence | Le skill ne dit pas où l'écrire : dans chaque légende | **Non corrigé** |
+| Recherche et cartes de l'accueil retirées | Le skill ne prévoit ce retrait qu'en React ; appliqué en HTML, avec les balises devenues inutiles | **Non corrigé** (le résultat est juste) |
+| `anti-slop.md` lu en entier | La consigne disait « à partir de la grille » | Rien : erreur de l'agent |
+
+**Essayé par moi après la livraison**, parce que l'agent ne l'avait pas fait : parcours à la touche Tab sur les deux pages (ordre logique, contour de focus partout ; les liens des légendes ont le contour par défaut du navigateur, pas celui du kit), menu sur téléphone ouvert au clavier, fermé par Échap, focus rendu au bouton Menu.
+
+**Ce que l'essai ne dit pas :** un accent pâle (ici le vert passe partout : le chemin `--k-accent-edge` et drapeau à 0 n'a pas servi) ; le niveau 2 (fonds de la marque) ; une police de marque ; une marque posée sur un skill dont l'identité est une couleur. Les photos viennent d'une banque et ne se ressemblent pas : ce que donnerait le skill avec les photos qu'il exige n'est pas montré. Un seul agent, une seule demande.
+
 ## Ce que les essais ont changé dans le skill
 
 | Fichier | Changement | Vu dans |
@@ -234,6 +270,12 @@ Deux remarques de l'agent sans objet : « 24 skills ici, 26 dans la liste des sk
 | `tools/check_studio.py`, `sonde.html` | Faux positif des soulignements ; chemin de `--captures` ; coquille React ; image par page ; rôle inexistant ; poids | 1, 2, 3 |
 | `ux/structures/page.css` | `block-size: auto` sur les images d'emplacement | 1, 3 |
 | `ux/structures/Page.jsx`, `components/carte/Carte.jsx` | `largeur`, `hauteur`, `sujet` | 2 |
+| `SKILL.md`, `interview.md` | Registre dès le premier tour, suite pour un outil ; un seul skill fonctionnel présenté seul ; README des composants utilisés ; repli sans navigateur | 4 |
+| `components/INDEX.md` | Une ligne par composant | 4 |
+| `ux/structures/application/` | « Brancher ses données et ses gestes » ; marge de la tête d'écran ; écrans fiche et tableau de bord | 4 |
+| `tools/check_studio.py` | Titres `data-k-fixed` ; vérification visuelle non faite dite en toutes lettres (code de sortie 2) | 4 |
+| `brand.md` | Où chaque couleur apparaît ; liens, seconde couleur, bloc de fin | 5 |
+| `ux/templates/hero-photo/glass-frame-estate.js`, `SKILL.md` | Mot géant choisi par `data-k-word` ; nom court dans la barre ; `brand.md` lu dès l'étape c | 5 |
 
 ## Ce qui reste incertain
 
@@ -245,5 +287,6 @@ Deux remarques de l'agent sans objet : « 24 skills ici, 26 dans la liste des sk
 - **Hors du héros, la signature est mince** dans les trois résultats : la page tient par les couleurs, la typo et les composants. C'est la limite connue de l'étape 4b (gabarits du premier écran seulement), et elle se voit.
 - **Séries de cartes de même forme** (formules, plats) : le skill les déconseille, deux agents en ont fait. Depuis, `check_studio.py` les signale en alerte (trois éléments ou plus de même forme côte à côte). C'est une alerte, pas une erreur : une vraie liste de même forme la déclenche aussi.
 - **Cible tactile du nom dans la barre** (25 px) : corrigé après les essais, la zone cliquable fait `--k-hit-min` de haut sans changer la hauteur affichée.
-- **Registre fonctionnel, couleurs de marque (`brand.md`), récit collant et article** : aucun essai ne les a exercés. La vérification de `brand.css` a été essayée à la main sur trois marques (bleu conforme, jaune pâle refusé, jaune accepté avec contour et drapeau à 0), jamais dans un projet complet ni sur capture.
+- **Récit collant et article** : aucun essai ne les a exercés. Le registre fonctionnel et les couleurs de marque l'ont été une fois chacun (essais 4 et 5). Pour la marque, seul le cas facile est passé dans un projet complet : un accent foncé sur un skill à accent neutre. L'accent pâle n'a été essayé qu'à la main sur `brand.css` (jaune refusé, puis accepté avec contour et drapeau à 0), jamais sur capture.
+- **Les corrections tirées des essais 4 et 5 n'ont pas été rejouées** par un nouvel agent : rien ne dit encore qu'elles suffisent.
 - **Mode reprise** : essayé sur une page locale unique ; ni site en ligne, ni site à plusieurs pages.

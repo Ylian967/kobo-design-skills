@@ -1,0 +1,9 @@
+/* Atelier Sorbier architectes : styles du projet (rôles --k-* seulement). */
+
+/* Le vert de marque sur les liens des sections claires. */
+.k-section .k-link,
+.k-section figcaption a { color: var(--k-accent); }
+
+/* L'ocre, seconde couleur : un filet, jamais un texte. */
+.k-section .k-kicker { border-inline-start: var(--k-space-1) solid var(--k-accent-2); padding-inline-start: var(--k-space-3); }
+[data-k-slot="finale"] { border-block-start: var(--k-space-1) solid var(--k-accent-2); }

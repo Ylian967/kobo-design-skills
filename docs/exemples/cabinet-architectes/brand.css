@@ -1,0 +1,12 @@
+/* Atelier Sorbier architectes : couleurs de marque, niveau 1 (accent seul). Codes imposés par le client, à ne pas modifier. */
+:root[data-k-brand] {
+  --k-accent: #1F4D3A;        /* vert sapin, couleur principale */
+  --k-on-accent: #ffffff;
+  --k-accent-edge: var(--k-accent);
+  --k-accent-2: #C8892B;      /* ocre, seconde couleur */
+  --k-accent-on-bg: 1;
+
+  /* Paire inversée (bloc de fin de page) : le vert de marque à la place du noir du skill. */
+  --k-bg-inverse: #1F4D3A;
+  --k-text-inverse: #ffffff;
+}

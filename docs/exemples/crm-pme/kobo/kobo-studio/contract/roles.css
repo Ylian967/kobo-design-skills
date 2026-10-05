@@ -1,0 +1,125 @@
+/*
+ * kobo-studio — contrat de rôles (--k-*)
+ *
+ * Ce fichier donne la liste définitive des rôles et une valeur neutre par défaut pour chacun.
+ * Une fiche de correspondance (maps/<id>.css) relie ensuite chaque rôle à une variable du skill.
+ * Les composants partagés ne lisent QUE ces rôles, jamais les variables d'un skill,
+ * et jamais un --k-sig-* (réservé aux composants de signature du skill).
+ *
+ * Ordre de chargement : roles.css → maps/<id>.css → brand.css (facultatif).
+ * 62 rôles déclarés par chaque fiche + 10 pas d'espacement, --k-hit-min, --k-fs-min, --k-measure et --k-measure-wide fournis par le socle. Vérification : python3 tools/check_contract.py
+ */
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: #ffffff;                 /* fond dominant de la page ; tout le reste se pose dessus */
+  --k-surface: #f4f4f4;            /* carte, panneau, champ : un contenant posé sur --k-bg, lisible avec --k-text */
+  --k-surface-2: #e9e9e9;          /* second niveau : contenant dans un contenant, ligne survolée, zone enfoncée */
+  --k-overlay: rgb(0 0 0 / 0.6);   /* fond d'une modale ou d'un menu plein écran, posé sur toute la page */
+  --k-scrim: rgb(0 0 0 / 0.5);     /* voile sous un texte posé sur une image ; jamais sous une modale */
+  --k-bg-inverse: #111111;         /* fond d'une section ou d'un bloc en ton inversé (sombre sur skill clair, clair sur skill sombre) */
+
+  /* ---- Texte ---- */
+  --k-text: #111111;               /* texte principal, sur --k-bg et --k-surface */
+  --k-text-2: var(--k-text);       /* texte secondaire (chapeau, description), sur --k-bg */
+  --k-text-muted: var(--k-text-2); /* texte discret (aide, légende, date), sur --k-bg ; reste lisible (4.5:1) */
+  --k-on-accent: #ffffff;          /* texte et icône posés sur un aplat --k-accent */
+  --k-text-inverse: #ffffff;       /* texte posé sur --k-bg-inverse */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--k-text);       /* couleur de l'action principale (bouton plein, lien fort) ; peut être neutre */
+  --k-accent-edge: var(--k-accent);/* contour d'un aplat d'accent sur --k-bg : le détache quand l'accent est trop pâle pour le fond */
+  --k-accent-on-bg: 1;             /* drapeau : 1 si l'accent peut porter seul une information sur --k-bg (texte, icône, filet fin, état actif) ; 0 s'il est trop pâle pour le fond et ne sert qu'en aplat cerné de --k-accent-edge */
+  --k-accent-2: var(--k-accent);   /* second accent : survol de l'accent, mise en avant ponctuelle, jamais du texte courant */
+  --k-success: #1a7f4b;            /* texte, icône ou filet de réussite, sur --k-bg */
+  --k-warning: #8a5a00;            /* texte, icône ou filet d'avertissement, sur --k-bg */
+  --k-danger: #b3261e;             /* texte, icône ou filet d'erreur, sur --k-bg ; bordure d'un champ invalide */
+  --k-focus: var(--k-text);        /* contour de focus clavier, sur --k-bg (3:1 au moins) */
+  --k-focus-w: 2px;                /* épaisseur du contour de focus (2px au moins) */
+  --k-focus-offset: 3px;           /* écart entre l'élément et son contour de focus */
+
+  /* ---- Filets ---- */
+  --k-line: color-mix(in srgb, var(--k-text) 16%, transparent); /* séparateur et bordure discrète, sur --k-bg et --k-surface */
+  --k-line-strong: var(--k-text);  /* bordure appuyée : champ, contenant mis en avant, trait de tableau */
+
+  /* ---- Typo ---- */
+  --k-font-display: system-ui, sans-serif;  /* titres */
+  --k-font-body: system-ui, sans-serif;     /* texte courant, boutons, champs */
+  --k-font-mono: var(--k-font-body);        /* code, valeurs techniques, étiquettes ; repli sur le texte courant */
+  --k-fs-hero: clamp(2.75rem, 7vw, 6rem);   /* titre du premier écran */
+  --k-fs-h1: var(--k-fs-hero);              /* titre de page hors héros ; repli sur --k-fs-hero */
+  --k-fs-h2: clamp(1.75rem, 3.4vw, 3rem);   /* titre de section */
+  --k-fs-h3: calc((var(--k-fs-h2) + var(--k-fs-body)) / 2); /* titre de carte ou de bloc */
+  --k-fs-body: 1rem;                        /* texte courant */
+  --k-fs-small: 0.875rem;                   /* texte d'appoint : aide, légende */
+  --k-fs-label: var(--k-fs-small);          /* libellé court : nav, étiquette, surtitre, bouton */
+  --k-lh-tight: 1.05;                       /* interligne des titres */
+  --k-lh-body: 1.5;                         /* interligne du texte courant */
+  --k-ls-display: 0em;                      /* approche des titres */
+  --k-ls-caps: 0.06em;                      /* approche des libellés en capitales */
+  --k-fw-display: 700;                      /* graisse des titres */
+  --k-btn-case: none;                       /* casse des libellés d'action : boutons, liens de nav, onglets (none, uppercase, lowercase) */
+  --k-btn-tracking: 0em;                    /* approche de ces mêmes libellés */
+  --k-label-case: none;                     /* casse des surtitres et des étiquettes */
+  --k-fs-min: 0.75rem;                      /* plancher de lisibilité (12px), fourni par le socle : tout texte qui porte une information (aide, erreur, bouton, champ, notification) ne descend pas dessous ; un libellé purement décoratif peut */
+
+  /* ---- Formes ---- */
+  --k-radius: 0px;                 /* rayon des petits éléments : bouton, champ, étiquette */
+  --k-radius-lg: var(--k-radius);  /* rayon des contenants : carte, panneau, image */
+  --k-radius-pill: 999px;          /* rayon des pilules et des ronds ; 0 dans un skill entièrement carré */
+  --k-border-w: 1px;               /* épaisseur des bordures et des filets */
+  --k-cut: 0px;                    /* longueur du biseau (coin coupé) ; 0 si le skill n'en a pas */
+  --k-angle: 0deg;                 /* angle des biais et des inclinaisons ; 0 si le skill n'en a pas */
+  --k-shadow: none;                /* ombre des éléments interactifs ; none par défaut, jamais une ombre douce ajoutée d'office */
+  --k-img-filter: none;            /* traitement des photos de contenu (cartes, médias) : filtre CSS du skill, none s'il les laisse en couleurs naturelles. Quand le skill exige plus qu'un filtre (canvas, couches), la fiche le note */
+
+  /* ---- Espace : échelle fournie par le socle (base 4px), identique pour tous les skills ---- */
+  --k-space-1: 4px;                /* écart minimal : icône et son texte */
+  --k-space-2: 8px;                /* écart serré : éléments d'un même groupe */
+  --k-space-3: 12px;               /* marge intérieure d'un petit élément */
+  --k-space-4: 16px;               /* écart courant ; marge de page minimale sur mobile */
+  --k-space-6: 24px;               /* marge intérieure d'une carte ; gouttière de grille */
+  --k-space-8: 32px;               /* écart entre deux blocs d'un même groupe */
+  --k-space-12: 48px;              /* écart entre deux groupes */
+  --k-space-16: 64px;              /* respiration à l'intérieur d'une section */
+  --k-space-24: 96px;              /* écart entre deux sections */
+  --k-space-32: 128px;             /* grande respiration : avant et après un moment fort */
+  --k-edge: clamp(16px, 4vw, 48px);        /* marge latérale de la page */
+  --k-container: 1200px;                   /* largeur maximale du contenu */
+  --k-section-y: var(--k-space-24);        /* marge verticale d'une section */
+  --k-control-h: 44px;                     /* hauteur AFFICHÉE d'un bouton et d'un champ ; peut être inférieure à --k-hit-min */
+  --k-hit-min: 44px;                       /* côté minimal de la zone cliquable ; fourni par le socle, agrandit la cible sans changer la taille affichée */
+  --k-measure: 50ch;                       /* longueur de ligne du texte courant ; fourni par le socle. `ch` est la largeur du zéro, plus large qu'une lettre moyenne : 50ch donnent 50 caractères en chasse fixe et de 65 à 80 dans les polices des skills (mesuré) */
+  --k-measure-wide: 62ch;                  /* longueur de ligne large (≈ 80 caractères et plus) : listes de faits, lignes de données, jamais un paragraphe ; fourni par le socle */
+  --k-nav-h: 64px;                         /* hauteur de la barre de navigation */
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: cubic-bezier(0.22, 1, 0.36, 1);   /* courbe d'entrée et de retour d'état */
+  --k-ease-in-out: var(--k-ease-out);              /* courbe de déplacement ; repli sur --k-ease-out */
+  --k-ease-spring: var(--k-ease-out);              /* courbe à rebond des styles joueurs ; repli sans rebond */
+  --k-dur-fast: 160ms;             /* survol, focus, appui */
+  --k-dur-base: 320ms;             /* ouverture, changement d'état */
+  --k-dur-slow: 700ms;             /* entrée de bloc, transition de scène */
+  --k-dur-toast: 6s;               /* temps d'affichage d'une notification avant qu'elle se ferme seule */
+  --k-dur-exit: var(--k-dur-fast); /* sortie d'un élément qui disparaît (notification) */
+
+  /* ---- Intensité de la signature (interrupteurs lus par les composants de signature) ---- */
+  --k-sig: 1;                      /* 1 : ornements signature affichés ; 0 : coupés */
+  --k-sig-motion: 1;               /* 1 : mouvements signature joués ; 0 : coupés */
+}
+
+/*
+ * Intensité : attribut data-k-intensity sur <html> ou sur n'importe quel élément parent (il vaut pour sa descendance).
+ *   full    (ou absent) : tout le skill.
+ *   reduced : ornements gardés, mouvements signature coupés.
+ *   off     : couleurs, typo et formes gardées ; ornements ET mouvements signature coupés.
+ * Chaque fiche complète ces blocs avec ses propres --k-sig-* (durées remises à 0).
+ * Un ornement de signature porte l'attribut data-k-sig ; s'il bouge, data-k-sig="motion".
+ */
+[data-k-intensity="full"] { --k-sig: 1; --k-sig-motion: 1; }
+[data-k-intensity="reduced"] { --k-sig: 1; --k-sig-motion: 0; }
+[data-k-intensity="off"] { --k-sig: 0; --k-sig-motion: 0; }
+
+[data-k-intensity="off"] [data-k-sig]:not([data-k-intensity="full"] *, [data-k-intensity="reduced"] *) { display: none !important; }
+[data-k-intensity="reduced"] [data-k-sig~="motion"],
+[data-k-intensity="off"] [data-k-sig~="motion"] { animation: none !important; transition: none !important; }

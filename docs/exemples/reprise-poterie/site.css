@@ -1,0 +1,3 @@
+/* Terre & Feu — styles du projet (rôles --k-* seulement). */
+/* La liste des formules est une liste sans puce : on retire le retrait par défaut du navigateur. */
+ul[data-k-slot="grid"] { list-style: none; margin: 0; padding: 0; }
