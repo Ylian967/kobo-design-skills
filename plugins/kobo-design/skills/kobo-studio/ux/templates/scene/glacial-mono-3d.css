@@ -8,3 +8,7 @@
  * la transition en pixels, le texte en pavés, la neige, l'interface aux quatre coins.
  */
 [data-k-skill="glacial-mono-3d"] .g-scene3d { --_filter: grayscale(1) contrast(0.85) brightness(1.08); --_veil: 36%; }
+/* Lisibilité : la démo pose son contenu sur un panneau voilé (.panel, --scrim-*). Même moyen ici : le texte du héros est sur le voile
+   clair du skill (--scrim-light, 72 %), par-dessus le brouillard de la scène. C'est le seul héros qui garde une plaque. */
+[data-k-skill="glacial-mono-3d"] [data-k-slot="hero"] { --_plate-bg: var(--k-scrim); }
+[data-k-skill="glacial-mono-3d"] [data-k-slot="hero"] :is(.k-kicker, .k-lead, .k-facts dt) { color: var(--k-text); }   /* le gris secondaire ne tient pas 4.5:1 sur le voile à 72 % */

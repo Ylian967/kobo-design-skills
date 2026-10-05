@@ -366,3 +366,131 @@ La plus faible de ce lot : hyper-lime, 1 image de 42 ms au premier défilement.
 - Clavier sur la planète : le bouton « Tourner à droite » reçoit le focus et son contour ; l'effet de la rotation n'a pas été vérifié à l'image.
 - L'arche de serif-bistro sur d'autres titres que ceux de la démonstration.
 - Les quatre « à cheval » de sticker-brutal par rapport au texte sur des écrans de taille intermédiaire.
+
+---
+
+# Lot ciblé : quatre dernières pièces, lisibilité sans plaque, contraste lettre par lettre
+
+Fait le 2026-10-04. Rien n'a été modifié hors de `kobo-studio/`. Les démos ont été lues, jamais touchées.
+
+## 1. Les quatre pièces uniques
+
+| Skill | Pièce | Reprise de la démo | Écarts |
+|---|---|---|---|
+| pocket-device-noir | L'appareil en 3D, au centre de la photo, dans la famille « objet » | `makeDevice`, `drawLcd` (écran redessiné toutes les 110 ms), `grilleTexture`, pose « hero », matériaux et lumières | Boîte arrondie réécrite ici (les modules complémentaires de three.js demandent une table d'import) ; lumières blanches (aucun rôle ne porte leurs teintes) ; l'appareil ne suit pas le pointeur, on le tourne en le tirant, avec deux boutons ou les flèches |
+| heritage-lens | La lentille : bouton rond cerclé de dentelle qui tourne, photo nette dedans, ouvre la photo en plein écran | `svg.lace` (22 cercles), `.lens`, `.present` | Au-dessus du texte centré (la démo la met à gauche du récit) ; pas de grossissement au survol (règle anti-slop du studio) ; vue plein écran en `<dialog>`, sans fondu |
+| hold-to-play-music | Le mot peint et la touche à maintenir | `#paint` (lettres penchées, étirées, dispersées puis rangées), filtre `#rough`, `startHold` / `endHold`, contour qui se trace pendant `--hold` | Pas de lettres bleu Klein (1,6:1 sur le noir) ; le mot filtré est cuit une fois dans un canvas (voir § 5) ; voile fort du skill (86 %) |
+| showroom-bento | Le produit détouré sur son sol, et la rangée bento | `cut` (fond estimé d'après les quatre coins), `.floor`, `.bento`, `.tile`, `.spec` | Le détourage ne s'applique que si la photo s'y prête ; pas d'ombre au survol des tuiles (`--k-shadow` est vide dans ce skill) ; pas de rotation entre modèles ni de teintes |
+
+**Le geste « maintenir ».** La touche est l'action du héros (même lien, même libellé). Souris ou doigt : maintenir 1,5 s trace le contour, « Relâchez » s'affiche, le relâchement suit le lien ; relâcher avant ne fait rien. Clavier : barre d'espace maintenue (même effet), ou Entrée sur la touche (suit le lien tout de suite, comme dans la démo). Bouton : un lien « Y aller sans maintenir » sous la consigne. Vérifié au navigateur : appui court (rien), appui long (lien suivi), espace maintenue (lien suivi), Entrée (lien suivi).
+
+**La lentille au clavier.** Entrée ouvre la vue, le focus passe sur « Fermer » ; Échap ou « Fermer » referme et le focus revient sur la lentille. Vérifié.
+
+**Le détourage.** Avec la photo du projet fictif (un paysage), il ne s'applique pas : la photo reste entière dans sa tuile. Vérifié avec la photo de produit de la démo (casque sur fond clair, `data-k-cutout="0 0.14 1 0.72"`) : produit détouré, posé sur son sol.
+
+## 2. Lisibilité des sept héros : le moyen de la démo, sans plaque
+
+Pour chacun, le premier écran de la démo a été relu. Le voile de la démo est calé sur la hauteur de son héros, avec trois lignes de texte ; ici le texte est plus long, donc **les mêmes arrêts sont calés sur le bloc de texte**.
+
+| Héros | Comment la démo rend son texte lisible | Repris ici | Plaque gardée ? |
+|---|---|---|---|
+| acid-scan-security | Voile local en ovale derrière le titre (`--veil` à 78 %) ; sur mobile, voile vertical vers le fond | L'ovale à 78 % derrière le bloc de texte ; sous 768 px, le voile vertical (85 % puis le fond) | Non |
+| alpine-glass-expedition | Dégradé `.hero__shade` vers le bas uni (86 % puis le bleu profond) | Le même dégradé, étiré sur la hauteur du texte ; le premier tiers de l'écran reste en photo nue | Non |
+| glass-frame-estate | Voile uni à 20 % sur toute la photo et ombre du bas (`--shade-0` → `--shade-1`) | Les deux ; l'ombre atteint `--shade-1` au haut du texte | Non |
+| nocturne-architecture | Voile de gauche (`--veil` → transparent à 55 %) | Le voile de gauche, tenu sous la colonne de texte puis fondu ; sous 768 px, posé une seconde fois sur tout le bloc | Non |
+| pixel-lime-portfolio | Voile du bas (`--veil` à 45 % → transparent) | Le voile du bas, calé sur le haut du texte, **densité portée à 68 %** : à 45 % le texte courant tombait à 3,3:1 sur la neige | Non |
+| pocket-device-noir | Voile vertical : clair au milieu, `--veil-1` puis noir en bas | Les mêmes arrêts : `--veil-1` où le texte commence, noir sous le titre | Non |
+| glacial-mono-3d | Le contenu est posé sur un panneau voilé (`.panel`, `--scrim-*` à 72 %) | Le texte du héros sur `--scrim-light` (72 %) ; le gris secondaire remplacé par la couleur de texte | **Oui** — équivalent du `.panel` de la démo |
+
+## 3. Contraste : les lettres contre leur entourage
+
+**Méthode.** Deux captures de chaque texte : telle quelle, puis avec tout le texte de l'emplacement rendu transparent (transitions coupées). Les pixels qui diffèrent sont les lettres. La couleur du texte est comparée à chaque pixel du fond situé sous une lettre et à 2 px autour ; le pire rapport est retenu. Texte translucide : sa couleur est composée sur le fond qu'il recouvre. Texte en plusieurs couleurs ou en dégradé : la couleur est lue au cœur de la lettre (le pixel le plus couvert à 3 px). Seuil : 4,5 ; 3 pour un texte d'au moins 24 px. Mesuré en `reduced` (image fixe), à 1440 et 390 px.
+
+Pire cas par skill, premier écran de la landing (le plus faible des deux largeurs) :
+
+| Skill | Pire texte | Rapport | Seuil |
+|---|---|---|---|
+| acid-scan-security | fait | 7,88 | 4,5 |
+| alpine-glass-expedition | surtitre | 5,66 | 4,5 |
+| anime-x-slash | titre | 3,27 | 3 |
+| chrome-atelier | phrase d'appui | 9,59 | 4,5 |
+| cosmic-voyage | bouton | 8,72 | 4,5 |
+| glacial-mono-3d | phrase d'appui (sur la scène 3D) | 6,93 | 4,5 |
+| glass-frame-estate | surtitre | 7,47 | 4,5 |
+| heritage-lens | titre | 3,84 | 3 |
+| hold-to-play-music | titre peint | 3,46 | 3 |
+| hyper-lime-street | titre sur la photo | 6,85 | 3 |
+| lore-frame-editorial | titre | 4,81 | 3 |
+| mint-street-basics | bouton | 5,95 | 4,5 |
+| nocturne-architecture | bouton | 5,48 | 4,5 |
+| noir-inferno-chapters | surtitre (héros neutre) | 5,34 | 4,5 |
+| pixel-lime-portfolio | phrase d'appui | 7,47 | 4,5 |
+| pocket-device-noir | bouton « Tourner » | 5,64 | 4,5 |
+| retro-mission-poster | **titre incliné** | 3,05 | 3 |
+| serif-bistro-green | bouton | 4,62 | 4,5 |
+| showroom-bento | phrase d'appui | 13,83 | 4,5 |
+| signal-orange-techwear | bouton | 5,25 | 4,5 |
+| sticker-brutal-jp | bouton | 9,56 | 4,5 |
+| tiny-planet-toy | surtitre | 5,27 | 4,5 |
+| zigzag-snack-pop | titre | 3,25 | 3 |
+
+Autres textes posés sur image ou forme inclinée : chapitres du récit sous noir-inferno 5,10 ; sous hyper-lime 13,96. Accueil du site vitrine, pour les héros retouchés : acid 4,36 (titre, seuil 3), alpine 5,48, glass-frame 8,58, nocturne 5,48, pixel-lime 7,36, pocket 7,15, glacial 6,93, heritage 3,95 (titre), hold 4,01 (titre), retro 5,98.
+
+**Ce que la nouvelle mesure a fait trouver** (défauts réels, corrigés) :
+
+- hyper-lime, héros : la pellicule noire passait derrière le texte posé sous le visuel et traversait une ligne (noir sur noir). Elle est maintenant coupée au bas du visuel.
+- hyper-lime, chapitres retournés du récit : le titre sortait de la forme lime et finissait sur la forme noire. Le numéro passe en haut, le titre en bas (là où la forme est large), et chaque ligne porte la couleur de la forme.
+- serif-bistro : les lettres touchaient le cadre de l'arche (même crème). L'écart du titre dépasse maintenant l'arche.
+- retro-mission, 390 px : la phrase d'appui tombait dans l'éclaircie du panneau (2,93). L'éclaircie se referme sur écran étroit.
+- zigzag-snack : la légende, brune sur l'orange, était à 3,25 ; elle est sur l'étiquette blanche, comme le reste.
+- glass-frame, 390 px : la colonne du bouton écrasait le texte à une lettre par ligne (présent depuis le lot précédent, passé inaperçu parce que la page ne débordait pas). Une seule colonne désormais.
+- heritage-lens, hold-to-play, 390 px : phrase d'appui et faits plus larges que l'écran (rognés à droite). Largeurs bornées à 100 % dans tous les habillages.
+
+## 4. Petits restes
+
+- **serif-bistro, accueil** : le titre est maintenant en deux moitiés de même largeur, l'écart au milieu, là où est l'arche ; le script réduit le corps par paliers (`--_k`, de 1 à 0,55) jusqu'à ce que les moitiés tiennent. L'arche remonte sur la landing (corps × 0,91) et sur l'accueil (corps entier), aucun texte devant elle. Corrigé au passage : en `full`, l'arche montait 114 px trop haut (la mesure lisait sa position pendant le mouvement d'entrée) ; elle est lue dans la mise en page.
+- **Replis redéclenchés** (390 px, aucune erreur de script, tout le contenu présent) : sans WebGL — planète (photo seule), appareil (héros photo seul), scène de glace (photo) ; lecture de canvas refusée — mosaïque de pixel-lime, détourage de showroom (photo entière), couches d'acid-scan (photo filtrée), mot peint de hold-to-play (toujours cuit : il ne lit pas le canvas).
+- **Rotation au clavier, à l'image** : planète et appareil — Tab jusqu'à « Tourner à droite », Entrée × 2 puis flèche droite × 3 ; trois captures différentes, l'objet a bien tourné. Contour de focus visible.
+- **390 px** : captures regardées pour les quatre nouvelles pièces ; aucun débordement, aucun texte hors cadre ni écrasé, sur les 23 skills × landing et accueil.
+
+## 5. Fluidité (fenêtre au premier plan, 3 s de défilement, écran à 144 Hz)
+
+| Skill | Images | Lentes (> 34 ms) | Pire |
+|---|---|---|---|
+| pocket-device-noir | 425 | 0 | 14 ms |
+| heritage-lens | 433 | 0 | 7 ms |
+| hold-to-play-music | 429 | 0 | 14 ms |
+| showroom-bento | 434 | 0 | 7 ms |
+| acid-scan-security | 163 | 0 | 28 ms |
+| alpine, glass-frame, serif, hyper-lime (héros) | 433–434 | 0 | 7 ms |
+| nocturne-architecture | 431 | 0 | 14 ms |
+| pixel-lime-portfolio | 346 | 0 | 21 ms |
+| glacial-mono-3d (scène 3D) | 178 | 6 | 35 ms |
+| hyper-lime, récit | 339 (3,5 s) | 1 | 49 ms |
+
+hold-to-play : avec le filtre SVG vivant de la démo sur le mot peint, 59 à 72 images en 3 s et presque toutes lentes (le filtre était recalculé à chaque image du défilement ; la démo, elle, ne défile pas). Le mot filtré est maintenant dessiné une fois dans deux canvas décoratifs posés sur les lettres : 429 images, 0 lente.
+
+## 6. Verdicts (nom caché, à côté de la démo)
+
+| Skill | Avant | Maintenant |
+|---|---|---|
+| pocket-device-noir | en partie | **oui** — l'appareil, la photo qui fond au noir, le texte centré |
+| heritage-lens | en partie | **oui** — la lentille de dentelle, le titre doré lettre à lettre |
+| hold-to-play-music | en partie | **oui** — le mot peint, la consigne et la touche |
+| showroom-bento | en partie | **oui avec une photo de produit ; en partie avec la photo du projet** (paysage : pas de détourage, la tuile arrondie reste) |
+| acid, glass-frame, nocturne, pixel-lime, serif, hyper-lime | oui | oui |
+| alpine-glass-expedition | oui | oui, avec une réserve : sous un titre de trois lignes, la photo ne se voit bien que sur le premier tiers de l'écran |
+| glacial-mono-3d | oui | oui |
+
+Bilan : 22 « oui », 1 « oui ou en partie selon la photo » (showroom-bento).
+
+## 7. Ce qui reste incertain
+
+- **Le contraste dépend de la photo.** Les rapports valent pour les deux photos du projet fictif. Une photo plus claire sous le titre de retro-mission (3,05), de zigzag (3,25), d'anime-x (3,27), de hold-to-play (3,46) ou sous le bouton de serif-bistro (4,62) peut passer sous le seuil.
+- **La mesure ignore les filaments du filtre « pinceau »** de hold-to-play (pixels couverts à moins de 60 %) : ce sont des bavures voulues, pas des corps de lettre. Sans cette règle, le titre peint lit 2,6 à 2,9.
+- **pixel-lime** : la densité du voile (68 %) s'écarte de la démo (45 %). C'est un choix de lisibilité, pas une reprise.
+- **Le détourage** n'a été vérifié qu'avec une photo de la démo. Un produit sombre sur fond sombre, ou un fond en dégradé marqué, donnera un détourage partiel ou aucun.
+- **La touche à maintenir** : essayée à la souris et au clavier, pas au doigt sur un vrai téléphone.
+- **Le mot peint cuit** : dépend de `filter` dans un canvas 2D (Chrome, Firefox). Sans lui, les lettres restent nettes, sans bord de pinceau. Non essayé hors de Chrome.
+- **alpine** : la part de photo visible reste faible quand le titre est long ; la démo a un titre de deux mots.
+- Non revu dans ce lot : les autres emplacements (grilles, finales), les versions React, d'autres navigateurs que Chrome.

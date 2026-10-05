@@ -13,6 +13,6 @@
 [data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__content::before { content: none; }
 [data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__content > * { max-inline-size: 100%; }
 [data-k-skill="sticker-brutal-jp"] .g-hero--split h1 { font-size: var(--k-fs-h2); font-weight: 800; line-height: 1; text-transform: uppercase; overflow-wrap: normal; hyphens: manual; }
-[data-k-skill="sticker-brutal-jp"] .g-hero--split .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-sig-fs-lead); }
+[data-k-skill="sticker-brutal-jp"] .g-hero--split .k-lead { max-inline-size: min(100%, var(--k-measure)); font-size: var(--k-sig-fs-lead); }
 [data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__rig { order: 2; flex: 1 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 3; transform: none; rotate: 3deg; overflow: hidden; border: var(--k-sig-bw-sticker) solid var(--k-text); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow); }
 [data-k-skill="sticker-brutal-jp"] .g-hero--split .g-hero__caption { order: 3; flex: 1 1 100%; position: static; max-inline-size: none; text-align: end; }

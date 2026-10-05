@@ -24,7 +24,7 @@
 /* Plaque verticale prête à l'emploi (texte en bas du héros) : dense sous le texte, fondue sur le dernier --k-space-24 du haut.
    L'habillage écrit --_plate: var(--_plate-v) et garde ce même espace libre au-dessus de son texte. */
 .g-hero { --_plate-v: linear-gradient(0deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 80%), transparent) 0 calc(100% - var(--k-space-24)), transparent 100%); }
-.g-hero__content { --_narrow: calc((var(--k-space-32) * 6 - 100vw) * 999); }
+.g-hero { --_narrow: calc((var(--k-space-32) * 6 - 100vw) * 999); }   /* très grand sur écran étroit, très négatif sinon : sert de bascule dans un clamp() */
 .g-hero__content::before { content: ""; position: absolute; z-index: -1; inset: 0 calc(50% - 50vw); pointer-events: none;
   background: var(--_plate, linear-gradient(90deg, color-mix(in srgb, var(--_plate-color, var(--k-bg)) var(--_plate-a, 74%), transparent) 0 clamp(var(--_plate-w, 62%), var(--_narrow), 100%), transparent clamp(var(--_plate-end, 92%), var(--_narrow), 100%))); }
 .g-hero__content .k-lead { color: inherit; }

@@ -10,7 +10,12 @@
   --_veil: radial-gradient(55% 45% at 22% 78%, color-mix(in srgb, var(--k-surface-2) 78%, transparent), transparent 70%),
     linear-gradient(180deg, color-mix(in srgb, var(--k-surface-2) 40%, transparent), transparent 18%, transparent 62%, var(--k-bg));
   --_bandh: 6%;
+  /* Lisibilité, comme la démo : un voile local en ovale derrière le texte (--veil à 78 %), sans plaque ; sur écran étroit, son voile
+     vertical (--veil à 85 % puis le fond). Les deux sont calés sur le bloc de texte. */
+  --_plate: radial-gradient(58% 76% at 19% 56%, color-mix(in srgb, var(--k-surface-2) 78%, transparent) 55%, transparent 100%),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--k-surface-2) 85%, transparent) var(--k-space-16), var(--k-bg));
 }
+[data-k-skill="acid-scan-security"] .g-hero__content::before { background-repeat: no-repeat; background-size: 100% 100%, clamp(0px, var(--_narrow), 100%) 100%; }
 /* Lignes de balayage */
 [data-k-skill="acid-scan-security"] .g-hero__veil::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 calc(var(--k-sig-scanline) - var(--k-border-w)), color-mix(in srgb, var(--k-bg) 40%, transparent) calc(var(--k-sig-scanline) - var(--k-border-w)) var(--k-sig-scanline)); }
 /* Frange : copie rouge sombre des zones sombres, décalée */

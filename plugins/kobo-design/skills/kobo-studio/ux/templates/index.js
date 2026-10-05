@@ -17,7 +17,7 @@
     'hyper-lime-street':     { 'hero-photo': ['css', 'js'], 'formes-inclinees': ['css', 'js'] },
     'nocturne-architecture': { 'titre-geant': ['css', 'js'], 'hero-photo': ['css', 'js'] },
     'alpine-glass-expedition': { 'hero-photo': ['css', 'js'] },
-    'pocket-device-noir':    { 'hero-photo': ['css', 'js'] },
+    'pocket-device-noir':    { objet: ['css', 'js'], 'hero-photo': ['css', 'js'] },
     'glass-frame-estate':    { 'hero-photo': ['css', 'js'] },
     'mint-street-basics':    { 'hero-photo': ['css', 'js'] },
     'zigzag-snack-pop':      { 'hero-photo': ['css', 'js'] },

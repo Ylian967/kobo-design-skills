@@ -3,7 +3,7 @@
  * Un objet en 3D, sur fond transparent, prend la place d'honneur du héros ; on le fait tourner en le tirant, ou avec deux boutons.
  * Tout le contenu du héros reste affiché : texte, faits, action, et la photo avec sa légende.
  * Repli : sans WebGL, hors ligne ou tant que la scène n'est pas prête, la scène n'occupe aucune place et la photo tient seule le côté.
- * Le canvas est un décor nommé (role="img") : aucun texte n'y est dessiné.
+ * Le canvas est un décor nommé (role="img") : aucun texte de la page n'y est porté (l'écran de l'appareil de pocket-device est un faux affichage).
  * Uniquement des rôles --k-*.
  */
 [data-k-slot="hero"][data-k-gabarit="objet"] { overflow-x: clip; }

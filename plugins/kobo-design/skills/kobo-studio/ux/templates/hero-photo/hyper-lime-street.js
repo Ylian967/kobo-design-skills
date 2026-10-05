@@ -13,7 +13,7 @@
       if (h1) rig.appendChild(h1);
       if (action) { action.classList.add('g-sticker--get'); box.insertBefore(action, rig.nextSibling); }   // après le titre, dans l'ordre de lecture
       if (name) {
-        box.insertAdjacentHTML('afterbegin', '<span class="g-hero__film" aria-hidden="true"></span><span class="g-hero__mark" aria-hidden="true"></span><span class="g-sticker g-sticker--logo" aria-hidden="true"></span>');
+        box.insertAdjacentHTML('afterbegin', '<span class="g-hero__filmclip" aria-hidden="true"><span class="g-hero__film"></span></span><span class="g-hero__mark" aria-hidden="true"></span><span class="g-sticker g-sticker--logo" aria-hidden="true"></span>');
         box.querySelector('.g-hero__mark').textContent = name;
         box.querySelector('.g-sticker--logo').textContent = name.split(/\s+/).map(function (w) { return w.charAt(0); }).join('·');
       }

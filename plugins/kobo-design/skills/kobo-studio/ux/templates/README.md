@@ -10,9 +10,9 @@ Chaque **famille** est construite une fois (`<famille>/<famille>.css` et `.js`),
 |---|---|---|---|
 | `cadre/` | `frame` | Cadre fixe autour de l'écran : filet, rail et barre facultatifs, progression | lore-frame-editorial, retro-mission-poster, sticker-brutal-jp |
 | `image/` | `media` | Forme et traitement d'une image de contenu ; parallaxe dans la forme | lore-frame-editorial (planches en forme de dossier) |
-| `hero-photo/` | `hero` | Photo du héros en plein cadre, texte et action posés dessus, sur une plaque de lisibilité ; couches colorées cuites en canvas | 20 habillages : acid-scan, lore-frame, hyper-lime, nocturne, alpine-glass, pocket-device, glass-frame, mint-street, zigzag, serif-bistro, pixel-lime, signal-orange, sticker-brutal, retro-mission, showroom, cosmic, anime-x-slash, heritage-lens, hold-to-play, chrome-atelier |
+| `hero-photo/` | `hero` | Photo du héros en plein cadre, texte et action posés dessus, rendus lisibles par le moyen de la démo du skill (voile, dégradé, zone calme) ; couches colorées cuites en canvas ; pièces propres à un skill (lentille, mot peint et touche à maintenir, produit détouré et rangée bento) | 20 habillages : acid-scan, lore-frame, hyper-lime, nocturne, alpine-glass, pocket-device, glass-frame, mint-street, zigzag, serif-bistro, pixel-lime, signal-orange, sticker-brutal, retro-mission, showroom, cosmic, anime-x-slash, heritage-lens, hold-to-play, chrome-atelier |
 | `scene/` | `backdrop` | Scène 3D fixe derrière la page, chargée en différé, photo de repli ; ou une photo seule | glacial-mono-3d (scène de glace), cosmic-voyage (ciel étoilé, sans 3D) |
-| `objet/` | `hero` | Objet 3D à la place d'honneur du héros, qu'on tourne en le tirant ou avec deux boutons ; repli sur la photo | tiny-planet-toy (la planète) |
+| `objet/` | `hero` | Objet 3D à la place d'honneur du héros, qu'on tourne en le tirant ou avec deux boutons ; repli sur la photo | tiny-planet-toy (la planète) ; pocket-device-noir (l'appareil, accueilli par son héros photo : `F.objet.models`, `F.objet.mount`) |
 | `chapitre-ecran/` | `chapter` | Chapitre en scène de la hauteur de l'écran, cercle à tirer vers le suivant | noir-inferno-chapters |
 | `formes-inclinees/` | `chapter` | Bloc numéroté, panneau à image découpée et bande, penchés au même angle | hyper-lime-street |
 | `titre-geant/` | `title` | Le surtitre repris en très grand, d'un bord à l'autre, coupé par le bas | nocturne-architecture |
@@ -73,16 +73,18 @@ Dans une page livrée, en dur, après `ux/structures/page.js` :
 **Accessibilité.**
 - L'état final est l'état par défaut de la feuille de style : sans script d'entrée, sous `prefers-reduced-motion` et en `reduced`, tout est en place.
 - Tout geste a un bouton : le cercle à tirer est un `<button>` ; un clic, Entrée ou Espace font ce que fait le geste, et le focus va au titre atteint.
-- Un canvas est un décor (`aria-hidden`) : aucun texte n'y est dessiné. La photo reste une `<img>` avec son texte alternatif.
+- Un canvas est un décor (`aria-hidden`) : aucun texte de la page n'y est porté. La photo reste une `<img>` avec son texte alternatif. Deux exceptions décoratives : l'écran de l'appareil de pocket-device (un faux affichage, l'objet est nommé par `aria-label`) et le mot peint de hold-to-play (copie filtrée du titre, qui reste dans la page).
 - Un mot géant est un décor ; le texte qu'il reprend reste dans le document pour les lecteurs d'écran.
 - Le défilement n'est jamais confisqué.
-- **Texte posé sur une image ou une scène : 4.5:1 au pire pixel** (3:1 pour un texte d'au moins 24 px), mesuré dans le navigateur. La famille « héros photo » fournit une plaque de lisibilité ; la scène 3D pose le texte du héros sur une plaque du fond.
+- **Texte posé sur une image ou une scène : 4.5:1 au pire pixel** (3:1 pour un texte d'au moins 24 px), mesuré dans le navigateur, lettres contre leur entourage : deux captures de chaque texte (avec, puis sans les lettres), les pixels qui diffèrent sont les lettres, et la couleur du texte est comparée aux pixels du fond situés sous et autour d'elles (2 px). La méthode vaut pour un texte incliné, en dégradé, ou posé sur une image, une scène 3D ou une forme.
 
-**Replis.** Chacun laisse une page lisible : pas de WebGL → la photo de repli ; image absente → elle est masquée, le fond et le texte du gabarit restent ; canvas refusé → la photo garde le filtre CSS du skill.
+**Replis.** Chacun laisse une page lisible : pas de WebGL → la photo de repli (scène, planète) ou le héros photo seul (appareil) ; image absente → elle est masquée, le fond et le texte du gabarit restent ; canvas refusé → la photo garde le filtre CSS du skill, le produit n'est pas détouré ; photo qui ne se prête pas au détourage (pas un objet sur fond uni) → elle reste entière dans sa tuile.
+
+**Gestes.** Un geste a toujours une autre voie : tourner un objet → deux boutons et les flèches ; maintenir la touche (hold-to-play) → la barre d'espace maintenue, Entrée sur la touche, ou le lien « sans maintenir ».
 
 **Contenu.** Un gabarit ne masque jamais un contenu : texte, faits, légende, action et photo restent affichés. Le vérificateur refuse `display: none` sur ces éléments.
 
-**Lisibilité.** D'abord la composition de la démo (texte sur une zone calme, voile du skill, cadrage). La plaque de lisibilité ne vient qu'ensuite, et habillée par skill (couleur du voile du skill, panneau, cartouche) — jamais la même boîte partout. Voir `../../quality/relecture-etape-4b.md`, « la solution retenue pour chaque héros ».
+**Lisibilité.** Le moyen de la démo du skill, repris tel quel : son voile local, son dégradé, sa zone calme, son cadrage. Comme le texte d'un projet est souvent plus long que celui de la démo, les arrêts du voile sont calés sur le bloc de texte (`--_plate`, derrière `.g-hero__content`) plutôt que sur la hauteur du héros. Une plaque unie n'est gardée que si la démo en a une (glacial-mono-3d : son panneau voilé). Voir `../../quality/relecture-etape-4b.md`, « la solution retenue pour chaque héros ».
 
 **Images.** De vraies photos ou une vraie scène 3D. Le point d'intérêt d'une photo se donne par `data-k-focus="x% y%"` sur l'`<img>` ; `data-k-mark="x% y%"` place les repères d'un skill ailleurs que le cadrage.
 
@@ -96,7 +98,8 @@ Puis `../structures.html` : sélecteur « Gabarits : signature / neutres ».
 
 ## Limites connues
 
-- Les vingt-trois skills ont le gabarit de leur premier écran. Quatre pièces uniques restent à écrire : l'objet 3D de pocket-device, la lentille de heritage-lens, le mot peint et le geste de hold-to-play, le produit détouré et la rangée bento de showroom. Pas de version React.
+- Les vingt-trois skills ont le gabarit de leur premier écran, pièces uniques comprises. Hors du héros, la plupart des emplacements rendent encore leur contenu neutre. Pas de version React.
+- Le détourage de showroom-bento ne vaut que pour un objet photographié sur un fond uni ; avec une autre photo, elle reste entière.
 - Testé dans Chrome seulement. `tan()`, `:has()`, l'imbrication de `color-mix()` et `import()` dynamique demandent un navigateur récent.
 - La scène 3D charge three.js depuis un CDN : hors ligne, la photo de repli reste.
 - Voir `../../quality/relecture-etape-4b.md` pour les verdicts et ce qui reste incertain.

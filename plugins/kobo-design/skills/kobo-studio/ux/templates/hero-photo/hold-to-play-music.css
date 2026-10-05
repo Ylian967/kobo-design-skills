@@ -3,15 +3,46 @@
  * Sources (lecture seule) : hold-to-play-music/examples/demo.html (écran plein, texte centré, une seule consigne ; h1 « peint »
  * géant ; touche en pilule à contour), le relevé de l'étape 3 bis (image grise qui prend sa couleur, orange à l'action),
  * references/tokens.css.
- * Non repris : le mot peint à la main (une image, pas une police), les plans vidéo, le geste « maintenir pour jouer » et son
- * contour qui se trace — ici la touche est un lien ordinaire, activable d'un clic, d'Entrée ou d'un toucher.
+ * Mot peint (.paint) : lettres penchées (--tilt) et étirées (--tall, 1,75 à 2,05), qui partent dispersées et se rangent une à une
+ * (45 ms d'écart), puis filtre « rough » (cuit une fois dans un canvas : la page défile, pas la démo). Touche (.key, .fill-line) : pilule dont le contour se trace pendant --hold ; orange
+ * quand c'est prêt ; pendant l'appui, la photo reprend sa couleur et le mot passe au blanc (.zap).
+ * Écarts : le titre fait plusieurs mots, donc le corps est réduit et l'interligne suit l'étirement ; les lettres bleu Klein de la
+ * démo ne sont pas reprises (1,6:1 sur le fond noir) : orange et blanc seulement.
+ * Non repris : les plans qui se succèdent en coupes franches, le grain, les pages d'artiste.
  */
 [data-k-skill="hold-to-play-music"] .g-hero--single {
-  --_plate: none; --_veil: linear-gradient(color-mix(in srgb, var(--k-bg) 74%, transparent), color-mix(in srgb, var(--k-bg) 74%, transparent));   /* un voile uni sur toute la photo : pas de bande visible derrière le texte */
+  --_plate: none; --_veil: linear-gradient(color-mix(in srgb, var(--k-bg) 86%, transparent), color-mix(in srgb, var(--k-bg) 86%, transparent));   /* le voile fort du skill (--veil-strong, 86 %), uni sur toute la photo : pas de bande visible derrière le texte */
   min-block-size: calc(100dvh - var(--k-nav-h)); align-items: center; text-align: center;
 }
 [data-k-skill="hold-to-play-music"] .g-hero--single .g-hero__content { justify-items: center; gap: var(--k-space-8); }
 [data-k-skill="hold-to-play-music"] .g-hero--single .g-hero__content > * { max-inline-size: min(100%, var(--k-measure-wide)); }
 [data-k-skill="hold-to-play-music"] .g-hero--single h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
-[data-k-skill="hold-to-play-music"] .g-hero--single .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); font-weight: 600; }
-[data-k-skill="hold-to-play-music"] .g-hero--single .k-facts { max-inline-size: var(--k-measure); }
+[data-k-skill="hold-to-play-music"] .g-hero--single .k-lead { font-size: var(--k-fs-body); max-inline-size: min(100%, var(--k-measure)); font-weight: 600; }
+[data-k-skill="hold-to-play-music"] .g-hero--single .k-facts { max-inline-size: min(100%, var(--k-measure)); }
+/* ---- Mot peint ---- */
+[data-k-skill="hold-to-play-music"] .g-hero--single h1.g-paint { max-inline-size: 100%; font-size: calc(var(--k-fs-hero) * 0.52); line-height: calc(var(--k-sig-paint-tall) * 0.96); text-transform: uppercase; user-select: none; }
+.g-paint__word { display: inline-block; white-space: nowrap; }
+.g-paint__word > span { display: inline-block; transform: rotate(var(--_tilt)) scaleY(var(--_tall)); }
+.g-paint--o { color: var(--k-accent); }
+.g-paint { position: relative; }
+/* Le mot filtré, dessiné une fois (voir le script) : posé sur les lettres, qui gardent leur place mais ne sont plus peintes */
+.g-paint__ink { position: absolute; pointer-events: none; }   /* place et taille posées par le script : la marge qui laisse déborder le filtre */
+.g-paint__ink--hold, .g-hero[data-k-hold] .g-paint__ink--idle { opacity: 0; }
+.g-hero[data-k-hold] .g-paint__ink--hold { opacity: 1; }
+.g-paint[data-k-baked] .g-paint__word { visibility: hidden; }
+.g-paint__defs { position: absolute; inline-size: 0; block-size: 0; }
+.g-hero[data-k-hold] .g-paint__word > span { color: var(--k-text); }
+.g-hero--single[data-k-in="pending"] .g-paint__word > span { transform: translate(var(--_x), var(--_y)) rotate(var(--_r)) scale(var(--_sx), var(--_sy)); }
+.g-hero--single[data-k-motion] .g-paint__word > span { transition: transform calc(var(--k-dur-slow) * 2) var(--k-sig-ease-slide), color var(--k-dur-base) var(--k-sig-ease-snap); transition-delay: calc(var(--_i) * var(--k-dur-fast) / 4), 0s; }
+/* ---- Consigne et touche ---- */
+.g-say { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--k-space-2) var(--k-space-3); margin: 0; font-weight: 600; }
+.g-say__ready, .g-hero[data-k-hold="ready"] .g-say__idle { display: none; }
+.g-hero[data-k-hold="ready"] .g-say__ready { display: inline; }
+.g-key.k-btn { position: relative; touch-action: none; user-select: none; -webkit-user-select: none; }
+.g-key svg { position: absolute; inset: calc(var(--k-border-w) * -1); inline-size: calc(100% + 2 * var(--k-border-w)); block-size: calc(100% + 2 * var(--k-border-w)); overflow: visible; fill: none; stroke-width: var(--k-border-w); pointer-events: none; }
+.g-key__fill { stroke: var(--k-focus); stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset var(--k-dur-base) var(--k-ease-out); }
+.g-hero[data-k-hold] .g-key__fill { stroke-dashoffset: 0; transition: stroke-dashoffset var(--k-sig-hold) linear; }
+.g-hero[data-k-hold="ready"] .g-key.k-btn { --_fg: var(--k-focus); }
+/* Pendant l'appui, la photo reprend sa couleur */
+.g-hero--single[data-k-hold] .g-hero__layer > img { filter: none; }
+@media (prefers-reduced-motion: reduce) { .g-hero--single[data-k-motion] .g-paint__word > span, .g-key__fill, .g-hero[data-k-hold] .g-key__fill { transition: none; } }

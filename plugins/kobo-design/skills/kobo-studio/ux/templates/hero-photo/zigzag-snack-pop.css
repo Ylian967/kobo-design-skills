@@ -13,12 +13,12 @@
 [data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__content { justify-items: center; inline-size: auto; padding-block: 0 var(--k-space-8); }
 [data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__content > * { max-inline-size: 100%; }
 [data-k-skill="zigzag-snack-pop"] .g-hero--pack h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
-[data-k-skill="zigzag-snack-pop"] .g-hero--pack .k-lead { max-inline-size: var(--k-measure); font-size: var(--k-fs-body); }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .k-lead { max-inline-size: min(100%, var(--k-measure)); font-size: var(--k-fs-body); }
 /* Sur l'orange, ni le blanc (3,2:1) ni le brun (3,0:1) ne tiennent pour un petit texte : mesuré. Le blanc est réservé au grand
    titre ; le surtitre et la phrase sont posés sur une étiquette du fond du skill (paire du contrat, opaque). */
 [data-k-skill="zigzag-snack-pop"] .g-hero--pack :is(.k-kicker, .k-lead) { padding: var(--k-space-2) var(--k-space-4); color: var(--k-text); background: var(--k-bg); border-radius: var(--k-radius); }
-[data-k-skill="zigzag-snack-pop"] .g-hero--pack .k-facts { max-inline-size: var(--k-measure); padding: var(--k-space-2) var(--k-space-4); color: var(--k-text); background: var(--k-bg); border-radius: var(--k-radius); text-align: start; }
-[data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__caption { position: static; order: 3; max-inline-size: none; margin-block-start: var(--k-space-6); text-align: center; }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .k-facts { max-inline-size: min(100%, var(--k-measure)); padding: var(--k-space-2) var(--k-space-4); color: var(--k-text); background: var(--k-bg); border-radius: var(--k-radius); text-align: start; }
+[data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__caption { position: static; order: 3; max-inline-size: none; margin-block-start: var(--k-space-6); justify-self: center; padding: var(--k-space-1) var(--k-space-3); text-align: center; color: var(--k-text); background: var(--k-surface); border-radius: var(--k-radius);   /* sur l'étiquette blanche, comme le reste du texte : 4,3:1 seulement sur l'orange */ }
 [data-k-skill="zigzag-snack-pop"] .g-hero--pack .g-hero__rig { order: 2; position: relative; inset: auto; z-index: 0; inline-size: min(74%, calc(var(--k-space-32) * 4)); aspect-ratio: 1.55; margin-inline: auto; transform: none; rotate: -6deg; overflow: hidden; border: var(--k-sig-frame) solid var(--k-text-inverse); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow); }
 /* Ouverture (full seulement) : les mots sautent en place, la photo arrive en tournant */
 .g-hero--pack[data-k-in="pending"] .g-rise > b { transform: translateY(var(--k-space-12)) rotate(-6deg); opacity: 0; }

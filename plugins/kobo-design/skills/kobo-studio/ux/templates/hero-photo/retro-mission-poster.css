@@ -8,15 +8,15 @@
  */
 [data-k-skill="retro-mission-poster"] .g-hero--poster {
   --_bg: var(--k-surface); --_veil: linear-gradient(180deg, var(--k-sig-veil-0) 55%, var(--k-scrim));
-  --_plate: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 82%, transparent) 0 46%, color-mix(in srgb, var(--k-bg) 45%, transparent) 60%, color-mix(in srgb, var(--k-bg) 86%, transparent) 76% 100%);
+  --_plate: linear-gradient(180deg, color-mix(in srgb, var(--k-bg) 82%, transparent) 0 46%, color-mix(in srgb, var(--k-bg) 45%, transparent) clamp(46%, 60% - var(--_narrow), 60%), color-mix(in srgb, var(--k-bg) 86%, transparent) clamp(46%, 76% - var(--_narrow), 76%) 100%);   /* sur écran étroit le texte occupe toute la hauteur : l'éclaircie du milieu se referme */
   min-block-size: 100dvh; align-items: stretch;
 }
 [data-k-skill="retro-mission-poster"] .g-hero--poster .g-hero__content { grid-template-rows: auto auto 1fr auto auto auto; padding-block: var(--k-space-24) var(--k-space-12); }
 [data-k-skill="retro-mission-poster"] .g-hero--poster .g-hero__content > :is(.k-kicker, h1) { justify-self: end; inline-size: min(100%, max(44%, calc(var(--k-space-32) * 3))); max-inline-size: none; transform: rotate(var(--k-angle)) skewX(var(--k-angle)); transform-origin: left bottom; }
 [data-k-skill="retro-mission-poster"] .g-hero--poster h1 { font-size: var(--k-fs-hero); font-weight: 800; line-height: var(--k-lh-tight); text-transform: uppercase; }
 [data-k-skill="retro-mission-poster"] .g-hero--poster h1 .g-rise { display: block; }
-[data-k-skill="retro-mission-poster"] .g-hero--poster .k-lead { grid-row: 4; font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
-[data-k-skill="retro-mission-poster"] .g-hero--poster .k-facts { grid-row: 5; max-inline-size: var(--k-measure); }
+[data-k-skill="retro-mission-poster"] .g-hero--poster .k-lead { grid-row: 4; font-size: var(--k-fs-body); max-inline-size: min(100%, var(--k-measure)); }
+[data-k-skill="retro-mission-poster"] .g-hero--poster .k-facts { grid-row: 5; max-inline-size: min(100%, var(--k-measure)); }
 [data-k-skill="retro-mission-poster"] .g-hero--poster .k-btn { grid-row: 6; align-self: start; }
 .g-hero--poster[data-k-in="pending"] .g-rise > b { transform: translateY(105%); }
 .g-hero--poster[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) + var(--k-dur-fast)); }

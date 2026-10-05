@@ -1,4 +1,4 @@
-// kobo-studio — héros photo, habillage pocket-device-noir : texte centré en bas, mots du titre qui montent à l'ouverture.
+// kobo-studio — héros photo, habillage pocket-device-noir : l'appareil 3D au centre de la photo, texte centré dessous, mots du titre qui montent à l'ouverture.
 (function () {
   'use strict';
   var F = Kobo.templates.families;
@@ -16,6 +16,19 @@
     box.setAttribute('data-k-in', 'pending');
     requestAnimationFrame(function () { box.setAttribute('data-k-motion', ''); requestAnimationFrame(function () { box.setAttribute('data-k-in', 'done'); }); });
   };
-  var g = F.heroPhoto({ variant: 'pocket', extra: function (box) { var h = box.querySelector('h1'); if (h) F.motsMontants(h); }, mount: function (box, ctx) { F.entree(box, ctx); return null; } });
+  // L'appareil en 3D (famille « objet », objet/pocket-device-noir.js) se pose au-dessus du texte ; s'il ne peut pas se monter, le héros reste entier
+  var model = function () { return F.objet && F.objet.models['pocket-device-noir']; };
+  var g = F.heroPhoto({ variant: 'pocket',
+    extra: function (box) {
+      var h = box.querySelector('h1'); if (h) F.motsMontants(h);
+      if (!model()) return;
+      var top = document.createElement('div'); top.className = 'g-hero__object'; top.innerHTML = F.objet.html(model().label);
+      box.insertBefore(top, box.querySelector('.g-hero__content'));
+    },
+    mount: function (box, ctx) {
+      F.entree(box, ctx);
+      var stage = box.querySelector('.g-obj__stage');
+      return stage ? F.objet.mount(stage, box.querySelector('.g-obj__turn'), model(), ctx) : null;
+    } });
   Kobo.templates.register({ skill: 'pocket-device-noir', family: 'hero-photo', slot: 'hero', render: g.render, mount: g.mount });
 })();

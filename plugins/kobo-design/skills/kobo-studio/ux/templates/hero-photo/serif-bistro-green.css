@@ -16,9 +16,10 @@
 [data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__content > * { max-inline-size: 100%; pointer-events: auto; }
 [data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__content::before { content: none; }
 [data-k-skill="serif-bistro-green"] .g-hero--bistro :is(.k-kicker, h1) { grid-column: 1 / -1; }
-[data-k-skill="serif-bistro-green"] .g-hero--bistro h1 { font-size: max(var(--_fs), var(--k-fs-h2)); line-height: var(--k-lh-tight); margin-block-end: var(--k-space-8); }
+[data-k-skill="serif-bistro-green"] .g-hero--bistro h1 { inline-size: 100%; max-inline-size: none; font-size: max(calc(var(--_fs) * var(--_k, 1)), var(--k-fs-h2)); line-height: var(--k-lh-tight); margin-block-end: var(--k-space-8); }
 /* Une ligne du titre : deux moitiés, écartées de la largeur de l'arche ; elles passent l'une sous l'autre quand la place manque */
-.g-bistro__line { display: flex; flex-wrap: wrap; justify-content: space-between; column-gap: var(--_aw); }
+.g-bistro__line { display: flex; flex-wrap: wrap; column-gap: calc(var(--_aw) + var(--k-space-8)); }
+.g-bistro__line > span { flex: 1 1 calc(var(--k-space-32) + var(--k-space-16)); min-inline-size: 0; }   /* deux moitiés de même largeur : l'écart tombe au milieu, là où est l'arche */   /* l'écart dépasse l'arche : les lettres ne touchent pas son cadre */
 [data-k-skill="serif-bistro-green"] .g-hero--bistro .k-lead { grid-column: -2 / -1; font-size: var(--k-sig-fs-lead); }
 [data-k-skill="serif-bistro-green"] .g-hero--bistro .k-btn { grid-column: -2 / -1; }
 [data-k-skill="serif-bistro-green"] .g-hero--bistro .k-facts { grid-column: 1; grid-row: 3 / span 2; max-inline-size: calc(var(--k-space-32) * 2 + var(--k-space-8)); font-size: var(--k-fs-small); }
@@ -28,7 +29,8 @@
   margin-block-start: clamp(calc(var(--_up, 0px) * -1), calc((var(--k-space-32) * 6 - 100vw) * 999), var(--k-space-8));   /* --_up : distance jusqu'au haut du titre, mesurée par le script */
   transform: none; overflow: hidden; border: var(--k-sig-frame-w) solid var(--k-sig-frame); border-block-end: 0; border-radius: var(--k-radius-pill) var(--k-radius-pill) 0 0;
 }
-/* Garde-fou : si une moitié de titre se trouve quand même devant l'arche (titre très long), le script le voit et l'arche redescend sous le texte */
+/* Le script réduit le corps du titre (--_k) jusqu'à ce que ses moitiés tiennent de part et d'autre de l'arche. Garde-fou : si même le plus
+   petit corps ne suffit pas, l'arche redescend sous le texte */
 [data-k-skill="serif-bistro-green"] .g-hero--bistro[data-k-flat] .g-hero__rig { margin-block-start: var(--k-space-8); }
 [data-k-skill="serif-bistro-green"] .g-hero--bistro .g-hero__caption { order: 3; position: static; max-inline-size: none; padding-block: var(--k-space-2); text-align: center; color: var(--k-text-2); }
 .g-hero--bistro[data-k-in="pending"] .g-hero__rig { translate: 0 18%; opacity: 0; }

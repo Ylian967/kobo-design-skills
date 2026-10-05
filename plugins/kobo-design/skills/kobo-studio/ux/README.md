@@ -124,6 +124,6 @@ Puis ouvrir `structures.html` : sélecteur de structure, de skill, d'intensité 
 
 ## Limites connues
 
-- Les vingt-trois skills ont le gabarit de leur premier écran (`templates/README.md`). Hors du héros, les emplacements de la plupart des skills rendent encore leur contenu neutre.
+- Les vingt-trois skills ont le gabarit de leur premier écran, pièces uniques comprises (`templates/README.md`). Hors du héros, les emplacements de la plupart des skills rendent encore leur contenu neutre.
 - Les versions React sont compilées et rendues côté serveur, pas essayées dans un navigateur.
 - Testé dans Chrome seulement.

@@ -1,0 +1,9 @@
+/*
+ * kobo-studio — objet 3D, habillage pocket-device-noir : l'appareil posé au centre de la photo du héros.
+ * Sources (lecture seule) : pocket-device-noir/examples/demo.html (.hero .device : centré, 60 % de la largeur au plus, 62 % de la
+ * hauteur du héros, au-dessus du texte ; sous 900 px : 78 % de large, 300 px de haut, le texte passe dessous), references/tokens.css.
+ * Repli : sans WebGL, hors ligne, en « off » ou tant que la scène n'est pas prête, la scène n'occupe aucune place : le héros
+ * photo tient seul, avec tout son texte.
+ */
+[data-k-skill="pocket-device-noir"] .g-hero .g-obj__stage { justify-self: center; inline-size: min(calc(var(--k-space-32) * 3 + var(--k-space-24)), 78%); aspect-ratio: auto; block-size: clamp(calc(var(--k-space-32) * 2 + var(--k-space-12)), 46dvh, calc(var(--k-space-32) * 4)); margin-block-start: var(--k-space-8); }
+[data-k-skill="pocket-device-noir"] .g-hero .g-obj__turn { margin-block-start: var(--k-space-2); }

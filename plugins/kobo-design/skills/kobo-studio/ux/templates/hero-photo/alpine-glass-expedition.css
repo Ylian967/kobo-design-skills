@@ -10,12 +10,14 @@
   --_veil: linear-gradient(180deg, transparent 50%, color-mix(in srgb, var(--k-bg) 86%, transparent) 74%, var(--k-bg) 90%),
     linear-gradient(155deg, transparent 37%, color-mix(in srgb, var(--k-surface-2) 82%, transparent) 57%, color-mix(in srgb, var(--k-bg) 94%, transparent) 74%),
     radial-gradient(40% 46% at 20% 15%, color-mix(in srgb, var(--k-bg-inverse) 88%, transparent), color-mix(in srgb, var(--k-bg-inverse) 55%, transparent) 45%, transparent 78%);
-  --_plate: var(--_plate-v); --_plate-a: 84%;
+  /* Lisibilité, comme la démo : son dégradé vers le bas uni (86 % puis le bleu profond plein), étiré sur la hauteur du texte pour laisser voir la photo derrière le titre ; sans plaque */
+  --_top: clamp(var(--k-space-24), 30dvh, calc(var(--k-space-32) * 2));   /* la photo reste nue sur le premier tiers de l'écran, comme dans la démo */
+  --_plate: linear-gradient(180deg, transparent calc(var(--_top) - var(--k-space-24)), color-mix(in srgb, var(--k-bg) 64%, transparent) calc(var(--_top) - var(--k-space-4)), color-mix(in srgb, var(--k-bg) 86%, transparent) 60%, var(--k-bg) 82%);
   min-block-size: 100dvh;
 }
-[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .g-hero__content { padding-block: var(--k-space-24) var(--k-edge); }
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .g-hero__content { padding-block: var(--_top) var(--k-edge); }
 [data-k-skill="alpine-glass-expedition"] .g-hero--alpine .g-hero__content > * { max-inline-size: 100%; }
 [data-k-skill="alpine-glass-expedition"] .g-hero--alpine h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); letter-spacing: var(--k-ls-display); text-transform: uppercase;
   background: linear-gradient(180deg, var(--k-text) 25%, var(--k-sig-snow)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 [data-k-skill="alpine-glass-expedition"] .g-hero--alpine .k-lead { max-inline-size: var(--k-sig-lead-w); font-size: var(--k-fs-body); }
-[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .k-facts { max-inline-size: var(--k-measure); }
+[data-k-skill="alpine-glass-expedition"] .g-hero--alpine .k-facts { max-inline-size: min(100%, var(--k-measure)); }

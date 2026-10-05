@@ -4,7 +4,8 @@
  *   - charge contract/maps/<id>.css et components/signatures/<id>.css dans les <link id="map"> et <link id="sig"> ;
  *   - pose data-k-intensity sur <html> ; « slots » dessine le contour des emplacements ;
  *   - charge et pose les gabarits de signature du skill (ux/templates/), sauf si l'adresse dit « neutre » ;
- *   - reporte le choix sur les liens internes marqués data-k-keep, pour naviguer sans le perdre.
+ *   - reporte le choix sur les liens internes marqués data-k-keep, pour naviguer sans le perdre ;
+ *   - une ancre de la page (#dates) n'est pas un choix de skill : le skill en cours est gardé.
  * BASE : chemin vers kobo-studio/ depuis la page (attribut data-k-base de la balise <script>).
  */
 (function () {
@@ -12,6 +13,7 @@
   var root = document.documentElement, base = document.currentScript.dataset.kBase || '../../../';
   function apply() {
     var h = location.hash.slice(1).split(':'), id = h[0] || 'serif-bistro-green';
+    if (h[0] && root.dataset.kSkill && document.getElementById(h[0])) return;   // une ancre de la page (#dates), pas un choix de skill : on garde le skill en cours
     var refit = function () { if (window.Kobo && Kobo.nav) (document.fonts ? document.fonts.ready : Promise.resolve()).then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); }); };
     var map = document.getElementById('map'), sig = document.getElementById('sig');
     // Les gabarits lisent des couleurs et des tailles dans la fiche : on attend qu'elle et la couche de signature soient chargées

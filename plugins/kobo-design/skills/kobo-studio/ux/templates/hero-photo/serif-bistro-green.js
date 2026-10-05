@@ -28,14 +28,23 @@
       F.entree(box, ctx);
       // Garde-fou de lisibilité : le titre ne doit jamais se trouver devant la photo. Mesuré au chargement et à chaque changement de largeur.
       var rig = box.querySelector('.g-hero__rig'), pending = 0;
+      // Positions lues dans la mise en page (offsetTop), pas à l'écran : l'entrée déplace l'arche par un transform, qui fausserait la mesure
+      var topIn = function (el) { var y = 0; while (el && el !== box) { y += el.offsetTop; el = el.offsetParent; } return y; };
       var check = function () {
         pending = 0;
-        box.setAttribute('data-k-flat', '');                                  // position sans remontée : on mesure la distance jusqu'au haut du titre
-        var h = box.querySelector('h1');
-        box.style.setProperty('--_up', Math.max(0, Math.round(rig.getBoundingClientRect().top - h.getBoundingClientRect().top)) + 'px');
-        box.removeAttribute('data-k-flat');
-        var r = rig.getBoundingClientRect();
-        var hit = Array.prototype.some.call(box.querySelectorAll('.g-bistro__line > span, .k-lead, .k-facts, .k-btn'), function (s) { var b = s.getBoundingClientRect(); return Math.min(b.right, r.right) - Math.max(b.left, r.left) > 2 && Math.min(b.bottom, r.bottom) - Math.max(b.top, r.top) > 2; });
+        var h = box.querySelector('h1'), hit = true, wrapped = false, halves = box.querySelectorAll('.g-bistro__line > span');
+        // Le titre doit tenir de part et d'autre de l'arche : on réduit son corps par paliers jusqu'à ce qu'il tienne (--_k, de 1 à 0,55)
+        for (var k = 1; (hit || wrapped) && k > 0.5; k -= 0.09) {
+          box.style.setProperty('--_k', k.toFixed(2));
+          box.setAttribute('data-k-flat', '');                                // position sans remontée : on mesure la distance jusqu'au haut du titre
+          box.style.setProperty('--_up', Math.max(0, Math.round(topIn(rig) - topIn(h))) + 'px');
+          box.removeAttribute('data-k-flat');
+          var raw = rig.getBoundingClientRect(), dy = raw.top - (box.getBoundingClientRect().top + topIn(rig)), r = { left: raw.left, right: raw.right, top: raw.top - dy, bottom: raw.bottom - dy };
+          hit = Array.prototype.some.call(box.querySelectorAll('.g-bistro__line > span, .k-lead, .k-facts, .k-btn'), function (s) { var b = s.getBoundingClientRect(); return Math.min(b.right, r.right) - Math.max(b.left, r.left) > -4 && Math.min(b.bottom, r.bottom) - Math.max(b.top, r.top) > 2; });
+          var line = parseFloat(getComputedStyle(h).lineHeight) || parseFloat(getComputedStyle(h).fontSize) * 1.1;
+          wrapped = r.top < h.getBoundingClientRect().bottom && Array.prototype.some.call(halves, function (s) { return s.offsetHeight > line * 1.5; });   // une moitié passe sur deux lignes à côté de l'arche : on réduit aussi
+        }
+        if (hit) box.style.setProperty('--_k', '1');                           // rien n'y fait (titre très long) : corps d'origine, arche sous le texte
         box.toggleAttribute('data-k-flat', hit);
       };
       var ro = new ResizeObserver(function () { if (!pending) pending = requestAnimationFrame(check); }); ro.observe(box);

@@ -18,6 +18,6 @@
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__content { order: 1; flex: 3 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); inline-size: auto; margin: 0; padding: var(--k-space-8); background: color-mix(in srgb, var(--k-bg) 88%, transparent); border: var(--k-border-w) solid var(--k-sig-glass-edge); border-radius: var(--k-radius-lg); }
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__content > * { max-inline-size: 100%; }
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); }
-[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
+[data-k-skill="cosmic-voyage"] .g-hero--cosmic .k-lead { font-size: var(--k-fs-body); max-inline-size: min(100%, var(--k-measure)); }
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__rig { order: 2; flex: 2 1 calc(var(--k-space-32) * 2); position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 3; transform: none; overflow: hidden; border: var(--k-border-w) solid var(--k-sig-glass-edge); border-radius: var(--k-radius-lg); }
 [data-k-skill="cosmic-voyage"] .g-hero--cosmic .g-hero__caption { position: static; flex: 1 1 100%; order: 3; max-inline-size: none; text-align: end; }

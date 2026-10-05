@@ -16,7 +16,7 @@
 [data-k-skill="signal-orange-techwear"] .g-hero--stack h1 .g-rise:first-child > b { color: var(--k-accent); }
 [data-k-skill="signal-orange-techwear"] .g-hero--stack h1 .g-rise:nth-child(3) > b { color: transparent; -webkit-text-stroke: var(--k-border-w) var(--k-text); }
 [data-k-skill="signal-orange-techwear"] .g-hero--stack .k-lead { max-inline-size: calc(var(--k-space-32) * 2 + var(--k-space-12)); font-size: var(--k-fs-body); }
-[data-k-skill="signal-orange-techwear"] .g-hero--stack .k-facts { max-inline-size: var(--k-measure); }
+[data-k-skill="signal-orange-techwear"] .g-hero--stack .k-facts { max-inline-size: min(100%, var(--k-measure)); }
 .g-hero--stack[data-k-in="pending"] .g-rise > b { transform: translateY(105%); }
 .g-hero--stack[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) / 2); }
 @media (prefers-reduced-motion: reduce) { .g-hero--stack[data-k-motion] .g-rise > b { transition: none; } }

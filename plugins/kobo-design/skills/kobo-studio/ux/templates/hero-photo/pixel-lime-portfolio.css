@@ -9,7 +9,9 @@
  */
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name {
   --_ink: var(--k-text-inverse); --_bg: var(--k-bg-inverse); --_veil: linear-gradient(0deg, var(--k-scrim), var(--k-sig-veil-0) 40%), linear-gradient(180deg, var(--k-scrim), var(--k-sig-veil-0) 16%);
-  --_plate: var(--_plate-v); --_plate-color: var(--k-bg-inverse); --_plate-a: 82%;
+  /* Lisibilité, comme la démo : son voile du bas (--veil → transparent), calé sur le haut du texte ; sans plaque.
+     Écart : densité portée de 45 % à 68 % — la photo du projet est claire en bas (neige), 45 % donnait 3,3:1 au texte courant. */
+  --_plate: linear-gradient(0deg, color-mix(in srgb, var(--k-bg-inverse) 68%, transparent) calc(100% - var(--k-space-16)), var(--k-sig-veil-0));
   min-block-size: min(var(--k-sig-hero-h), 100dvh - var(--k-nav-h));
 }
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .g-hero__content { grid-template-columns: repeat(auto-fit, minmax(min(100%, calc(var(--k-space-32) * 2 + var(--k-space-8))), 1fr)); align-items: end; column-gap: var(--k-space-8); padding-block: var(--k-space-24) var(--k-space-8); }
@@ -17,7 +19,7 @@
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .g-hero__content > .k-kicker { grid-column: 1 / -1; font-family: var(--k-font-mono); }
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .g-hero__content > h1 { grid-column: 1 / -2; grid-row: 2 / span 4; align-self: end; font-size: var(--k-fs-hero); line-height: 0.98; letter-spacing: var(--k-ls-display); text-transform: lowercase; }
 [data-k-skill="pixel-lime-portfolio"] .g-hero--name .k-lead { font-size: var(--k-fs-small); }
-[data-k-skill="pixel-lime-portfolio"] .g-hero--name .k-facts { max-inline-size: var(--k-measure); }
+[data-k-skill="pixel-lime-portfolio"] .g-hero--name .k-facts { max-inline-size: min(100%, var(--k-measure)); }
 .g-hero--name[data-k-in="pending"] .g-rise > b { transform: translateY(110%); }
 .g-hero--name[data-k-motion] .g-rise > b { transition: transform var(--k-dur-slow) var(--k-ease-out); transition-delay: calc(var(--_i) * var(--k-dur-fast) + var(--k-dur-base)); }
 @media (prefers-reduced-motion: reduce) { .g-hero--name[data-k-motion] .g-rise > b { transition: none; } }

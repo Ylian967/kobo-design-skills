@@ -44,6 +44,11 @@
 .g-slant--flip .g-slant__cut { inset: 0 0 0 -30vw; clip-path: polygon(0 0, 100% 0, calc(100% - var(--_h) * var(--_t)) 100%, 0 100%); }
 .g-slant--flip .g-slant__block { inset-inline: auto calc(var(--_bw) * -0.3); align-content: end; justify-items: end; padding: 0 calc(var(--_bw) * 0.34) var(--k-space-4) 0; text-align: end; }
 .g-slant--flip .g-slant__block::before { inset: 0 -60vw 0 0; transform-origin: bottom; }
+/* Retourné, le bloc est le plus large en bas : le numéro (étroit) passe en haut, le titre (large) en bas. L'ordre de lecture ne change pas. */
+/* Chaque ligne de texte porte la couleur de la forme : là où la forme inclinée est plus étroite que le texte (écran étroit), la lettre reste sur sa couleur */
+.g-slant__block > :is(h2, .k-kicker, .g-slant__num) { padding: var(--k-space-1) var(--k-space-2); margin-inline: calc(var(--k-space-2) * -1); background: var(--k-accent); }
+.g-slant--flip .g-slant__num { order: -2; }
+.g-slant--flip .g-slant__block .k-kicker { order: -1; }
 .g-slant--flip .g-slant__copy { margin-inline: 0 var(--_inset); }
 
 /*

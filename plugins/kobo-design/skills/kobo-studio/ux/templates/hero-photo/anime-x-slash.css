@@ -17,8 +17,8 @@
 .g-shard::after { content: ""; position: absolute; inset: var(--k-space-1); border: calc(var(--k-border-w) * 2) solid color-mix(in srgb, var(--k-surface) 40%, transparent); }
 [data-k-skill="anime-x-slash"] .g-hero--shards .g-hero__content > * { max-inline-size: min(100%, max(32%, calc(var(--k-space-32) * 3))); }
 [data-k-skill="anime-x-slash"] .g-hero--shards h1 { font-size: var(--k-fs-hero); line-height: var(--k-lh-tight); text-transform: uppercase; color: var(--k-accent); }
-[data-k-skill="anime-x-slash"] .g-hero--shards .k-lead { font-size: var(--k-fs-body); max-inline-size: var(--k-measure); }
-[data-k-skill="anime-x-slash"] .g-hero--shards .k-facts { max-inline-size: var(--k-measure); }
+[data-k-skill="anime-x-slash"] .g-hero--shards .k-lead { font-size: var(--k-fs-body); max-inline-size: min(100%, var(--k-measure)); }
+[data-k-skill="anime-x-slash"] .g-hero--shards .k-facts { max-inline-size: min(100%, var(--k-measure)); }
 /* Ouverture (full seulement) : les éclats glissent en place, en alternance du haut et du bas */
 .g-hero--shards[data-k-in="pending"] .g-shard:nth-child(odd) { translate: 0 -40%; opacity: 0; }
 .g-hero--shards[data-k-in="pending"] .g-shard:nth-child(even) { translate: 0 40%; opacity: 0; }

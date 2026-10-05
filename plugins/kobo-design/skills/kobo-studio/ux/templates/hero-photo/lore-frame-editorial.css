@@ -19,6 +19,6 @@
 .g-manifest__line:nth-child(1) { margin-inline-start: min(26%, 100% - var(--_w, 100%)); }
 .g-manifest__line:nth-child(2) { margin-inline-start: min(34%, 100% - var(--_w, 100%)); }
 .g-manifest__mark { position: absolute; inset-inline-start: calc(var(--k-space-2) * -1); inset-block-start: 0; translate: -100% 0; font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: normal; letter-spacing: 0; line-height: 1; }
-[data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-facts { max-inline-size: var(--k-measure); }
+[data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-facts { max-inline-size: min(100%, var(--k-measure)); }
 [data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-facts dt { color: inherit; }
 [data-k-skill="lore-frame-editorial"] .g-hero--manifest .k-btn { justify-self: end; }
