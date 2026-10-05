@@ -56,7 +56,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : pages à contour orange, la courante pleine ; tableau et menu en panneau à halo ; en-têtes orange espacés.
+ * Ici : pages à contour orange, la courante pleine ; tableau et menu en panneau à halo ; en-têtes orange espacés ; lignes à étiquette orange espacée à gauche et valeur grise, comme le tableau de specs ; mot d'état de l'interrupteur en orange.
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -66,4 +66,8 @@
   &.k-table, &.k-dropdown__menu { background: linear-gradient(0deg, var(--k-sig-panel-hot), transparent 55%), var(--k-surface); border-color: var(--k-line-strong); }
   &.k-table thead th, &.k-dropdown__label { letter-spacing: var(--k-sig-ls-label); color: var(--k-accent); background: transparent; }
   &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-accent); }
+  /* relecture sur components.md */
+  &.k-table tbody th { font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: inherit; text-transform: uppercase; letter-spacing: var(--k-sig-ls-label); color: var(--k-accent); }
+  &.k-table tbody td { color: var(--k-text-2); }
+  &.k-switch__state { text-transform: uppercase; letter-spacing: var(--k-sig-ls-label); color: var(--k-accent); }
 }

@@ -55,7 +55,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : police de titre ; angles droits ; page courante en noir ; en-tête de tableau noir à bord haut rouge ; survol rouge dans le menu.
+ * Ici : police de titre ; angles droits ; page courante en noir ; en-tête de tableau noir à bord haut rouge ; survol rouge dans le menu ; accordéon en barres noires à bord haut rouge, comme la liste d'actualités (§9).
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -72,4 +72,11 @@
   &.k-dropdown__menu { border-color: var(--k-text); }
   &.k-dropdown__item { border-radius: 0; }
   &.k-dropdown__item:not([aria-disabled="true"]):is(:hover, :focus-visible, [data-k-state="hover"], [data-k-state="focus"]) { color: var(--k-on-accent); background: var(--k-accent); }
+  /* relecture sur components.md */
+  &.k-accordion { display: grid; gap: var(--k-space-2); border-block-start: 0; }
+  &.k-accordion__item { border-block-end: 0; }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]) { padding-inline: var(--k-space-4); color: var(--k-text-inverse); background: var(--k-bg-inverse); border-block-start: var(--k-space-1) solid var(--k-accent); }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { color: var(--k-on-accent); background: var(--k-accent); }
+  &.k-accordion__trigger:is(:focus-visible, [data-k-state="focus"]) { outline-color: var(--k-accent); }
+  &.k-accordion__panel { padding-block-start: var(--k-space-3); padding-inline: var(--k-space-4); }
 }

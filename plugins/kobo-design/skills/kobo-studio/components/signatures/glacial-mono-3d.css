@@ -71,7 +71,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : mono ; rubriques « ////// » ; page courante dans un cadre droit ; angles droits.
+ * Ici : mono ; rubriques « ////// » ; page courante dans un cadre droit ; angles droits ; info-bulle en étiquette pleine blanche à texte sombre (§5).
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -80,4 +80,6 @@
   &.k-pagination__page[aria-current="page"] { background: transparent; border-color: var(--k-text); }
   &.k-dropdown__label::before, &.k-table caption::before { content: "////// "; font-family: var(--k-font-mono); }
   &.k-table thead th { background: transparent; }
+  /* relecture sur components.md */
+  &.k-tooltip__bubble { color: var(--_ink, var(--k-text)); background: var(--k-sig-white); }
 }

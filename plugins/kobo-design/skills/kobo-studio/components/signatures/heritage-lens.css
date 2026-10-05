@@ -57,7 +57,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : sans d'interface pour les réglages ; intitulés d'accordéon en or ; page courante cerclée d'or ; panneaux arrondis sur voile.
+ * Ici : sans d'interface pour les réglages ; intitulés d'accordéon en or ; page courante cerclée d'or ; panneaux arrondis sur voile ; ce qui est rond est cerclé d'or, sans fond (règles communes).
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -72,4 +72,6 @@
   &.k-select__control:not(:disabled) { padding-inline-end: calc(var(--k-space-8) + var(--k-space-4)); }
   &.k-select__box::after { inset-inline-end: var(--k-space-6); }
   &.k-select__control[multiple]:not(:disabled) { padding-inline: var(--k-space-2); border-radius: var(--k-radius-lg); }
+  /* relecture sur components.md */
+  &.k-radio__box, &.k-switch__track { background: transparent; border-color: var(--k-accent); }
 }

@@ -4,7 +4,7 @@ Une fiche courte par skill, pour choisir à l'étape c sans ouvrir les skills. T
 
 Comment lire une fiche :
 
-- **Registre** : *expressif* (l'image et le récit priment) ou *produit* (présenter, vendre). Aucun skill n'est *fonctionnel* (voir `interview.md`). Le classement est une lecture de l'audit, pas une donnée des skills.
+- **Registre** : *expressif* (l'image et le récit priment) ou *produit* (présenter, vendre). Aucun skill n'est *fonctionnel* : pour ce registre, passer par `site-to-skill` (voir `interview.md`). Le classement est une lecture de l'audit, pas une donnée des skills.
 - **Photos exigées** : ce que le gabarit attend pour ressembler à sa démo. Sans elles, il fonctionne mais rend moins bien.
 - **Gabarits** : les mises en page de signature que kobo-studio sait poser (famille → emplacement). Tout autre emplacement rend son contenu neutre, habillé par la couche de signature des composants. En React, seuls les gabarits du héros (`hero-photo`, `objet`) sont essayés ; les autres emplacements restent neutres.
 - **Pièces lourdes** : ce qui coûte au chargement ou à l'affichage. Chacune a un repli (photo).

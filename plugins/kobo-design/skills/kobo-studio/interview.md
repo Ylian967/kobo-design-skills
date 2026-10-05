@@ -28,12 +28,16 @@ D'après les réponses, classe le projet. Dis ta lecture au client dans la propo
 |---|---|---|
 | **Expressif** | L'image et le récit priment : festival, univers, jeu, campagne, exposition | Les skills à scène, cadre, chapitres ; intensité `full` |
 | **Produit** | Vendre ou présenter une offre : restaurant, boutique, agence, objet, service | La majorité des skills ; intensité `full` ou `reduced` |
-| **Fonctionnel** | Faire un travail : CRM, back-office, tableau de bord, outil interne | **Rien de dédié** |
+| **Fonctionnel** | Faire un travail : CRM, ERP, back-office, tableau de bord, outil interne, application SaaS | Les composants (tableau, filtres, formulaires) ; **aucun skill dédié** : passer par `site-to-skill` |
 
-**Projet fonctionnel : dis-le franchement.** Aucun des 23 skills ne couvre ce registre : aucun ne montre un tableau de données, des filtres, une barre latérale d'application ou un formulaire long, et kobo-studio n'a pas ces composants (ni tableau, ni pagination, ni menu déroulant, ni interrupteur). Deux voies honnêtes, à proposer telles quelles :
+**Projet fonctionnel : dis-le franchement, et passe par `site-to-skill`.** Aucun des 23 skills ne couvre ce registre : aucun ne montre un tableau de données dense, des filtres, une barre latérale d'application ou un formulaire long. Un outil de travail appelle de la clarté, pas un design spectaculaire. kobo-studio a les **composants** qu'il faut (tableau à tri et sélection, pagination, sélection, cases, boutons radio, interrupteur, menu déroulant, accordéon, fil d'Ariane, info-bulle, en plus des dix premiers), mais **ni skill fonctionnel, ni structure de page d'application** (barre latérale, écran de liste, écran de fiche).
 
-1. **Un skill en intensité `off`** : on garde ses couleurs, sa typo et ses formes, sans ornement ni mouvement. Choisir un skill aux textes lisibles et aux surfaces calmes (catalogue, « Choisir vite », ligne « Interface sobre »). Les dix composants existants servent (bouton, champ, carte, onglets, modale, notification, état vide, chargement, barre, menu) ; le reste sera écrit pour le projet, avec les seuls rôles `--k-*`, et signalé comme tel.
-2. **`/kobo-design:site-to-skill <adresse>`** : créer un skill à partir d'une application que le client trouve juste, puis revenir ici.
+La voie à proposer, dans cet ordre :
+
+1. **`/kobo-design:site-to-skill` avec le type d'application** (« un CRM B2B pour une PME de services ») : il juge le registre, cherche d'abord en local, propose dix références au plus (design systems publics, produits de référence), s'arrête pour laisser le client choisir, puis crée le skill à partir de la référence choisie, avec sa fiche de correspondance et sa couche de signature. On revient ensuite ici avec ce skill. Si le client a déjà une application qu'il trouve juste : `/kobo-design:site-to-skill <adresse>`.
+2. **À défaut, un skill existant en intensité `off`** : on garde ses couleurs, sa typo et ses formes, sans ornement ni mouvement. Choisir un skill aux textes lisibles et aux surfaces calmes (catalogue, « Choisir vite », ligne « Interface sobre »). C'est un pis-aller : le dire.
+
+Dans les deux cas, l'écran d'application se compose avec les composants et les briques de page ; ce qui manque (barre latérale, mise en page liste et fiche) est écrit pour le projet avec les seuls rôles `--k-*`, et signalé comme tel.
 
 Ne présente jamais un skill expressif comme adapté à un outil de travail.
 

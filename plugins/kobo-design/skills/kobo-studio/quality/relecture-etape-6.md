@@ -22,7 +22,31 @@ Ce que la relecture n'a **pas** changé, et pourquoi :
 - **Les cases à cocher restent carrées sous noir-inferno** (« tout est rond ou linéaire ») : une case ronde ne se distinguerait plus d'un bouton radio.
 - **La coche et le point restent de la couleur du texte**, jamais de l'accent : règle du composant, pour les skills à accent pâle.
 - **Le champ de sélection de lore-frame** n'a pas le coin coupé du champ de recherche du skill : la couche du premier lot ne le donne pas non plus au champ texte ; à traiter avec lui.
-- **Les quinze autres skills n'ont pas été relus** sur leur `components.md` : leur couche reporte ce qu'elle fait déjà sur le premier lot (voir `components/signatures/README.md`).
+- Les quinze autres skills ont été relus ensuite : voir « Suite : les quinze autres skills ».
+
+### Suite : les quinze autres skills (même méthode, 5 octobre 2026)
+
+Relus sur leur `references/components.md` ; les neuf retouchés ont été regardés dans la galerie à 1440 px après correction. Les six jugés conformes l'ont été sur lecture de la fiche et de leur couche, sans nouvelle capture.
+
+| Skill | Verdict | Ce qui était générique ou contraire | Corrigé |
+|---|---|---|---|
+| alpine-glass-expedition | **conforme** | Pages en puces à contour, la courante pleine : c'est la puce du skill (§8). Une retouche essayée (survol en aplat) rendait le survol identique à la page courante : retirée | — |
+| anime-x-slash | **corrigé** | Accordéon en filets, alors que le skill fait de ses listes des barres noires à bord haut rouge (§9) | Chaque question est une barre noire à bord haut rouge ; survol rouge |
+| chrome-atelier | **corrigé** | Signe de l'accordéon à droite et texte courant : les questions du skill ont le signe à gauche et un petit corps (§12) | Signe à gauche, petit corps, survol par soulignement |
+| cosmic-voyage | **conforme** | Filets dorés, coin unique, page courante dorée soulignée, étoile entre les niveaux : tout vient de la fiche | — |
+| glacial-mono-3d | **corrigé** | Info-bulle sombre, alors que l'étiquette du skill est un rectangle blanc à texte sombre (§5) | Info-bulle en étiquette pleine blanche |
+| glass-frame-estate | **corrigé** | Accordéon en filets : la FAQ du skill est faite de lignes blanches sur gris, à 4 px de rayon | Lignes blanches sur un fond gris, question en libellé |
+| heritage-lens | **corrigé** | Boutons radio et glissières à contour neutre : « tout ce qui est rond est cerclé d'or, sans fond » | Rond du bouton radio et glissière cerclés d'or, sans fond |
+| hold-to-play-music | **conforme** | Aucune carte, pilules à contour, orange seulement à l'action : respecté | — |
+| mint-street-basics | **conforme** | Tout est rond, aucune ombre : respecté | — |
+| nocturne-architecture | **corrigé** | En-têtes de tableau sans le point plein des petits libellés | Point plein devant chaque en-tête |
+| pixel-lime-portfolio | **corrigé** | Survols gris : la ligne survolée du skill passe en noir à texte blanc | Survol inversé dans le menu et l'accordéon ; en-têtes et choix en capitales mono |
+| pocket-device-noir | **conforme** | Tirets, étiquette grise, petits rayons : respecté | — |
+| serif-bistro-green | **conforme** | Pastilles de filtre, serif d'affiche, feuilles : respecté | — |
+| showroom-bento | **conforme** | Pilules blanches dont l'active est noire, tuiles blanches sans cadre : respecté | — |
+| signal-orange-techwear | **corrigé** | Lignes de tableau neutres, alors que le « tableau de specs » du skill a une étiquette orange espacée à gauche et une valeur grise à droite ; mot d'état de l'interrupteur neutre | Première cellule de chaque ligne en étiquette orange, valeurs en gris ; mot d'état en orange espacé |
+
+Réserve : sous signal-orange-techwear, la première cellule en petites capitales orange convient à une fiche de caractéristiques ; dans un tableau de personnes, elle rend les noms moins lisibles. À revoir si ce skill sert à un tableau long.
 
 ## 2. Captures « off » et grille anti-slop sur la galerie
 
@@ -96,4 +120,4 @@ Les deux bulles figées ouvertes de la galerie (« ouverte », « dessous »), m
 
 La cause des deux cas : la bulle était placée une fois, puis une police arrivait et déplaçait son bouton sans que rien ne la replace. `info-bulle.js` replace maintenant une bulle ouverte quand sa largeur ou celle de son déclencheur change, quand un lot de polices finit de charger, et à la fin du chargement de la page.
 
-Non refait : la passe complète sur les 23 skills après cette dernière correction (seuls huit skills ont été remesurés).
+Passe complète refaite ensuite (5 octobre 2026, après la relecture des quinze autres skills) : 23 skills, `full` et `off`, 46 pages chargées à neuf, les deux bulles présentes à chaque fois : **0 bulle hors de l'écran, 0 px de défilement horizontal.**

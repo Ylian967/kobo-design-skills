@@ -74,7 +74,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : mono ; page courante surlignée de lime, en italique ; intitulés en bas de casse ; tableau au filet gris.
+ * Ici : mono ; page courante surlignée de lime, en italique ; intitulés en bas de casse ; tableau au filet gris ; ligne survolée en noir à texte blanc, comme la liste de récompenses.
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -83,4 +83,8 @@
   &.k-accordion--titles .k-accordion__trigger { text-transform: lowercase; }
   &.k-table { border-color: var(--k-sig-grey-bar); }
   &.k-dropdown__menu { border-inline-start: var(--k-space-2) dotted var(--k-accent); }
+  /* relecture sur components.md */
+  &.k-dropdown__item:not([aria-disabled="true"]):is(:hover, :focus-visible, [data-k-state="hover"], [data-k-state="focus"]) { color: var(--k-bg); background: var(--k-text); outline-color: var(--k-bg); }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { color: var(--k-bg); background: var(--k-text); outline-color: var(--k-bg); }
+  &.k-table thead th, &.k-dropdown__item { text-transform: uppercase; }
 }

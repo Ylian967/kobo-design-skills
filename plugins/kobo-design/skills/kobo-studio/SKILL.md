@@ -57,7 +57,7 @@ Le second tour se pose avec la proposition (étape c), une fois les skills candi
 
 Lis `catalogue.md`. Écris au client un seul message :
 
-1. **Le registre** du projet (fonctionnel, produit ou expressif) en une phrase. Si le projet est fonctionnel (CRM, back-office, tableau de bord), dis-le franchement : voir `interview.md`, « Registre ».
+1. **Le registre** du projet (fonctionnel, produit ou expressif) en une phrase. Si le projet est fonctionnel (CRM, ERP, back-office, outil interne, application SaaS), dis-le franchement et passe par `/kobo-design:site-to-skill` avant de proposer un style : voir `interview.md`, « Registre ».
 2. **Deux ou trois skills**, chacun avec :
    - une raison tirée des réponses du client (pas une description du style) ;
    - sa **limite honnête** : ce que le skill exige et que le client n'a peut-être pas (type de photo, 3D), ce que le gabarit ne reproduit pas, un contraste qui dépend de la photo ;
@@ -176,6 +176,6 @@ Ne dis pas « vérifié » pour ce qui est seulement estimé.
 
 ## Quand rien ne convient
 
-- Aucun skill ne colle à l'ambiance voulue : propose `/kobo-design:site-to-skill <adresse>` pour créer un style à partir d'un site que le client aime, puis reviens ici.
-- Projet fonctionnel : voir `interview.md`, « Registre ».
+- Aucun skill ne colle à l'ambiance voulue : propose `/kobo-design:site-to-skill <adresse>` pour créer un style à partir d'un site que le client aime, ou `/kobo-design:site-to-skill` avec le type de projet pour qu'il propose dix références au plus et laisse choisir. Le skill créé arrive avec sa fiche de correspondance et sa couche de signature : reviens ici ensuite.
+- Projet fonctionnel : `site-to-skill` d'abord (références sobres : tableaux denses, filtres, raccourcis), voir `interview.md`, « Registre ».
 - Une pièce manque (composant, structure) : dis-le au lieu de l'improviser ; propose la forme la plus proche qui existe.

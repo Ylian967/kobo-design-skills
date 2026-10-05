@@ -54,7 +54,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : tout en capitales ; « // » entre les niveaux ; pages en puces à contour, la courante en noir ; tableau gris sans cadre.
+ * Ici : tout en capitales ; « // » entre les niveaux ; pages en puces à contour, la courante en noir ; tableau gris sans cadre ; accordéon en lignes blanches sur gris, à 4 px de rayon, question en libellé (FAQ).
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -66,4 +66,9 @@
   &.k-table { background: var(--k-surface); border-color: transparent; }
   &.k-table thead th { background: transparent; }
   &.k-dropdown__menu { border-color: var(--k-line); }
+  /* relecture sur components.md */
+  &.k-accordion { display: grid; gap: var(--k-space-2); padding: var(--k-space-3); background: var(--k-surface); border-block-start: 0; border-radius: var(--k-radius-lg); }
+  &.k-accordion__item { padding-inline: var(--k-space-4); background: var(--k-bg); border-block-end: 0; border-radius: var(--k-radius); }
+  &.k-accordion__trigger { font-weight: var(--k-fw-display); }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
 }

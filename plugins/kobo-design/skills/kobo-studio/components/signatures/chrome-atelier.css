@@ -40,7 +40,7 @@
 /*
  * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
  * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
- * Ici : page courante précédée d'un point ; rubriques entre crochets ; tableau en filets ; capitales espacées.
+ * Ici : page courante précédée d'un point ; rubriques entre crochets ; tableau en filets ; capitales espacées ; questions : signe à gauche du texte, petit corps (§12).
  * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
  */
 :not([data-k-intensity="off"] *) {
@@ -57,4 +57,8 @@
   /* sélection : le champ est un filet sans marge, le chevron vient au bord */
   &.k-select__control:not(:disabled) { padding-inline-end: var(--k-space-8); }
   &.k-select__box::after { inset-inline-end: var(--k-space-1); }
+  /* relecture sur components.md */
+  &.k-accordion__trigger { justify-content: flex-start; font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+  &.k-accordion__mark { order: -1; margin-inline: 0; }
+  &.k-accordion__trigger:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { background: transparent; text-decoration: underline; text-underline-offset: var(--k-space-1); }
 }
