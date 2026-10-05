@@ -1,0 +1,45 @@
+/*
+ * kobo-studio — case à cocher
+ * Rôles lus : text, text-2, text-muted, bg, surface, surface-2, line, line-strong, danger, focus*, font-body, fs-body, fs-small,
+ * fs-min, lh-body, radius, border-w, hit-min, space-*, dur-fast, ease-out.
+ * La coche est de la couleur du texte, pas de l'accent : elle se lit sous tous les skills, accent pâle compris.
+ */
+.k-check {
+  --_box: calc(var(--k-space-4) + var(--k-space-2)); --_w: max(var(--k-border-w), calc(var(--k-space-1) / 2));
+  position: relative; display: inline-flex; align-items: flex-start; gap: var(--k-space-3); min-block-size: var(--k-hit-min);
+  padding-block: calc((var(--k-hit-min) - var(--_box)) / 2); font-family: var(--k-font-body); font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text); cursor: pointer;
+}
+/* La vraie case reste là, invisible, sur toute la zone cliquable : clavier, formulaire et lecteur d'écran sont natifs */
+.k-check__input { position: absolute; inset-block-start: 0; inset-inline-start: calc((var(--_box) - var(--k-hit-min)) / 2); inline-size: var(--k-hit-min); block-size: var(--k-hit-min); margin: 0; opacity: 0; cursor: inherit; }
+.k-check__box {
+  flex: none; display: grid; place-items: center; inline-size: var(--_box); block-size: var(--_box); margin-block-start: calc((var(--k-lh-body) * var(--k-fs-body) - var(--_box)) / 2);
+  background: var(--k-bg); border: var(--_w) solid var(--k-line-strong); border-radius: min(var(--k-radius), var(--k-space-1));
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-check__box::after { content: ""; inline-size: 30%; block-size: 60%; border: solid var(--k-bg); border-width: 0 var(--_w) var(--_w) 0; transform: translateY(-12%) rotate(45deg) scale(0); }
+.k-check__text { display: grid; gap: var(--k-space-1); min-inline-size: 0; }
+.k-check__help { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+
+.k-check:hover .k-check__box, .k-check[data-k-state="hover"] .k-check__box { background: var(--k-surface-2); }
+.k-check__input:focus-visible + .k-check__box, .k-check[data-k-state="focus"] .k-check__box { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Cochée : case pleine ET coche. Partielle (indeterminate) : case pleine ET tiret. */
+.k-check__input:checked + .k-check__box, .k-check__input:indeterminate + .k-check__box { background: var(--k-text); border-color: var(--k-text); }
+.k-check__input:checked + .k-check__box::after { transform: translateY(-12%) rotate(45deg) scale(1); }
+.k-check__input:indeterminate + .k-check__box::after { inline-size: 55%; block-size: 0; border-width: 0 0 var(--_w) 0; transform: none; }
+/* Désactivée : contour en tirets, texte discret ; la coche éventuelle reste lisible */
+.k-check:has(.k-check__input:disabled) { color: var(--k-text-muted); cursor: not-allowed; }
+.k-check__input:disabled + .k-check__box { background: var(--k-surface-2); border-style: dashed; border-color: var(--k-line-strong); }
+.k-check__input:disabled:checked + .k-check__box::after, .k-check__input:disabled:indeterminate + .k-check__box::after { border-color: var(--k-text-muted); }
+/* Erreur : contour en couleur d'erreur, épaissi, ET un message écrit dans le groupe */
+.k-check__input[aria-invalid="true"] + .k-check__box { border-color: var(--k-danger); border-width: calc(var(--_w) * 2); }
+
+/* Groupe : une question, plusieurs cases */
+.k-check-group { display: grid; gap: var(--k-space-1); min-inline-size: 0; margin: 0; padding: 0; border: 0; font-family: var(--k-font-body); color: var(--k-text); }
+.k-check-group__legend { padding: 0; margin-block-end: var(--k-space-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); }
+.k-check-group__help { margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
+.k-check-group__error { display: flex; align-items: flex-start; gap: var(--k-space-2); margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-danger); }
+.k-check-group__error[hidden] { display: none; }
+.k-check-group--inline > .k-check-group__list { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-6); }
+.k-check-group__list { display: grid; gap: var(--k-space-1); }
+
+@media (prefers-reduced-motion: reduce) { .k-check__box { transition: none; } }

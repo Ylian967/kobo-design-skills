@@ -79,6 +79,7 @@ Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL
 | [`reprise-poterie`](plugins/kobo-design/skills/kobo-studio/examples/reprise-poterie/) | Reprendre un site existant de cours de poterie | `serif-bistro-green` | reprise |
 | [`crm-pme`](plugins/kobo-design/skills/kobo-studio/examples/crm-pme/) | Un CRM B2B pour une PME de services | `clear-ledger-desk` | application |
 | [`cabinet-architectes`](plugins/kobo-design/skills/kobo-studio/examples/cabinet-architectes/) | Le site d'un cabinet d'architectes, avec deux couleurs de marque imposées | `glass-frame-estate` | site vitrine |
+| [`club-escalade`](plugins/kobo-design/skills/kobo-studio/examples/club-escalade/) | Une application de réservation pour un club d'escalade, avec une page publique et un espace membre | `clear-ledger-desk` | application |
 
 La galerie publique permet de les ouvrir.
 

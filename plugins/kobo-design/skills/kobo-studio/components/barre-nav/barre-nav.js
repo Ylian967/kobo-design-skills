@@ -2,16 +2,32 @@
  * kobo-studio — barre de navigation : repli des liens quand ils ne tiennent plus.
  * Sans dépendance, sans point de rupture : on mesure. Quand la liste déborde, la barre reçoit
  * data-k-collapsed ; la CSS cache alors les liens et montre le bouton de menu (voir menu-mobile).
+ * Si la marque ne tient pas non plus à côté de ce bouton, la barre reçoit data-k-brand="long" : la marque passe à la ligne.
  * S'active seul sur les .k-nav ; pour du contenu ajouté ensuite : Kobo.nav.init(conteneur).
  */
 (function () {
   'use strict';
   var Kobo = (window.Kobo = window.Kobo || {});
 
+  // Un mot de la marque est-il plus large que la place ? (mesuré sans coupure de mot)
+  function wordTooWide(brand) {
+    brand.style.overflowWrap = 'normal'; brand.style.hyphens = 'manual';
+    var wide = brand.scrollWidth > brand.clientWidth + 1;
+    brand.style.overflowWrap = ''; brand.style.hyphens = '';
+    return wide;
+  }
+
   function fit(nav) {
     nav.removeAttribute('data-k-collapsed');          // on mesure la barre dépliée…
+    nav.removeAttribute('data-k-brand');
+    var brand = nav.querySelector('.k-nav__brand'), natural = brand ? brand.offsetWidth : 0;   // la marque sur une ligne
     var overflow = nav.scrollWidth > nav.clientWidth + 1;
-    if (overflow) nav.setAttribute('data-k-collapsed', ''); // …et on replie si elle déborde
+    if (!overflow) return;
+    nav.setAttribute('data-k-collapsed', '');         // …et on replie si elle déborde
+    // Repliée, la marque ne tient toujours pas à côté du bouton de menu : elle passe à la ligne, en plus petit (jamais tronquée)
+    if (!brand || natural <= brand.offsetWidth + 1) return;
+    nav.setAttribute('data-k-brand', 'long');
+    if (wordTooWide(brand)) nav.setAttribute('data-k-brand', 'long tight');   // un mot dépasse encore la ligne : police du texte, plus petite
   }
 
   function init(root) {

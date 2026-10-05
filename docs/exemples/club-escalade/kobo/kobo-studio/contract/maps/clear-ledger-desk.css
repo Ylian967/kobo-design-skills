@@ -1,0 +1,146 @@
+/*
+ * kobo-studio — fiche de correspondance : clear-ledger-desk
+ *
+ * Relie les rôles du contrat (--k-*) aux variables du skill. Le skill n'est pas modifié.
+ * Rôles : 48 reliés ou relevés, 0 dérivés, 14 en repli.
+ * 7 ligne(s) marquée(s) [main] : décidées à la main, conservées telles quelles par tools/gen_maps.py.
+ *
+ * Polices (Google Fonts) :
+ *   https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650&family=JetBrains+Mono:wght@400;500&display=swap
+ *
+ * Signature : 30 variable(s) --k-sig-* (lisibles seulement par les composants de signature) :
+ *   --k-sig-disabled, --k-sig-neutral, --k-sig-inverse, --k-sig-on-inverse, --k-sig-accent-hover,
+ *   --k-sig-accent-pressed, --k-sig-selected, --k-sig-selected-hover, --k-sig-danger-bg, --k-sig-danger-bold,
+ *   --k-sig-success-bg, --k-sig-warning-bg, --k-sig-warning-bold, --k-sig-info-bg, --k-sig-fs-lead,
+ *   --k-sig-fs-stat, --k-sig-weight-medium, --k-sig-row-h, --k-sig-head-h, --k-sig-cell-y, --k-sig-cell-x,
+ *   --k-sig-field-h, --k-sig-field-gap, --k-sig-side-w, --k-sig-side-w-min, --k-sig-detail-w, --k-sig-hit-min,
+ *   --k-sig-r-small, --k-sig-r-xl, --k-sig-shadow-raised
+ *
+ * Intensité : data-k-intensity="full" | "reduced" | "off" sur <html> ou sur un parent (blocs en fin de fiche).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "../roles.css";
+@import "../../../clear-ledger-desk/references/tokens.css";
+
+:root {
+  /* ---- Surfaces ---- */
+  --k-bg: var(--bg);
+  --k-surface: var(--surface);
+  --k-surface-2: var(--surface-2);
+  --k-overlay: var(--k-scrim); /* repli */
+  --k-scrim: var(--scrim); /* [main] mesuré : voile derrière une fenêtre */
+  --k-bg-inverse: var(--k-text); /* repli */
+
+  /* ---- Texte ---- */
+  --k-text: var(--text);
+  --k-text-2: var(--text-2);
+  --k-text-muted: var(--muted);
+  --k-on-accent: var(--on-accent);
+  --k-text-inverse: var(--k-bg); /* repli */
+
+  /* ---- Accent et états ---- */
+  --k-accent: var(--accent);
+  --k-accent-edge: var(--k-accent); /* repli du contrat */
+  --k-accent-on-bg: 1; /* accent à 6.07:1 sur le fond : il peut porter seul une information */
+  --k-accent-2: var(--info); /* [main] le bleu d’information mesuré : second repère, jamais une seconde action */
+  --k-success: var(--success); /* [main] mesuré sur la référence, 6,1:1 sur blanc : préféré à la teinte dérivée */
+  --k-warning: var(--warning); /* [main] mesuré sur la référence, 6,0:1 sur blanc */
+  --k-danger: var(--danger); /* [main] mesuré sur la référence, 6,5:1 sur blanc */
+  --k-focus: var(--focus);
+  --k-focus-w: 2px; /* repli du contrat */
+  --k-focus-offset: 2px; /* [main] contour de focus à 2 px, comme la démo */
+
+  /* ---- Filets ---- */
+  --k-line: var(--line);
+  --k-line-strong: var(--line-strong);
+
+  /* ---- Typo ---- */
+  --k-font-display: var(--font-display);
+  --k-font-body: var(--font-body);
+  --k-font-mono: var(--font-mono);
+  --k-fs-hero: var(--fs-hero);
+  --k-fs-h1: var(--fs-h1);
+  --k-fs-h2: var(--fs-h2);
+  --k-fs-h3: var(--fs-h3);
+  --k-fs-body: var(--fs-body);
+  --k-fs-small: var(--fs-small);
+  --k-fs-label: var(--fs-label);
+  --k-lh-tight: var(--lh-title);
+  --k-lh-body: var(--lh-body);
+  --k-ls-display: var(--ls-title);
+  --k-ls-caps: var(--ls-label);
+  --k-fw-display: var(--weight);
+  --k-btn-case: none; /* repli du contrat */
+  --k-btn-tracking: 0em; /* repli du contrat */
+  --k-label-case: none; /* repli du contrat */
+
+  /* ---- Formes ---- */
+  --k-radius: var(--radius);
+  --k-radius-lg: var(--radius-lg);
+  --k-radius-pill: var(--r-pill);
+  --k-border-w: var(--bw);
+  --k-cut: 0px; /* repli */
+  --k-angle: 0deg; /* repli */
+  --k-shadow: var(--shadow-overlay); /* [main] mesuré : ombre de ce qui flotte (menu, fenêtre). Rien d’autre ne porte d’ombre */
+  --k-img-filter: none; /* repli du contrat */
+
+  /* ---- Espace ---- */
+  --k-edge: var(--edge);
+  --k-container: var(--container);
+  --k-section-y: var(--section-y);
+  --k-control-h: var(--btn-h);
+  --k-nav-h: var(--nav-h);
+
+  /* ---- Mouvement ---- */
+  --k-ease-out: var(--ease-out);
+  --k-ease-in-out: var(--ease-in-out);
+  --k-ease-spring: var(--k-ease-out); /* repli du contrat */
+  --k-dur-fast: var(--dur-fast);
+  --k-dur-base: var(--dur-base);
+  --k-dur-slow: var(--dur-slow);
+  --k-dur-toast: 6s; /* repli du contrat */
+  --k-dur-exit: var(--k-dur-fast); /* repli du contrat */
+
+  /* ---- Signature : variables propres au skill, sous leur nom d'origine ---- */
+  --k-sig-disabled: var(--disabled);
+  --k-sig-neutral: var(--neutral);
+  --k-sig-inverse: var(--inverse);
+  --k-sig-on-inverse: var(--on-inverse);
+  --k-sig-accent-hover: var(--accent-hover);
+  --k-sig-accent-pressed: var(--accent-pressed);
+  --k-sig-selected: var(--selected);
+  --k-sig-selected-hover: var(--selected-hover);
+  --k-sig-danger-bg: var(--danger-bg);
+  --k-sig-danger-bold: var(--danger-bold);
+  --k-sig-success-bg: var(--success-bg);
+  --k-sig-warning-bg: var(--warning-bg);
+  --k-sig-warning-bold: var(--warning-bold);
+  --k-sig-info-bg: var(--info-bg);
+  --k-sig-fs-lead: var(--fs-lead);
+  --k-sig-fs-stat: var(--fs-stat);
+  --k-sig-weight-medium: var(--weight-medium);
+  --k-sig-row-h: var(--row-h);
+  --k-sig-head-h: var(--head-h);
+  --k-sig-cell-y: var(--cell-y);
+  --k-sig-cell-x: var(--cell-x);
+  --k-sig-field-h: var(--field-h);
+  --k-sig-field-gap: var(--field-gap);
+  --k-sig-side-w: var(--side-w);
+  --k-sig-side-w-min: var(--side-w-min);
+  --k-sig-detail-w: var(--detail-w);
+  --k-sig-hit-min: var(--hit-min);
+  --k-sig-r-small: var(--r-small);
+  --k-sig-r-xl: var(--r-xl);
+  --k-sig-shadow-raised: var(--shadow-raised);
+}
+
+/* Intensité « reduced » : ornements gardés, mouvements de signature coupés. */
+[data-k-intensity="reduced"] {
+  /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
+}
+
+/* Intensité « off » : couleurs, typo et formes gardées ; ornements et mouvements de signature coupés. */
+[data-k-intensity="off"] {
+  /* aucune durée de signature dans ce skill : les interrupteurs --k-sig et --k-sig-motion suffisent */
+}

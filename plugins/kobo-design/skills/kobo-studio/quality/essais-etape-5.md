@@ -15,6 +15,7 @@ Ce que ces essais ne prouvent pas : un seul passage par demande, un seul client 
 | Reprise d'un site (reprise) | serif-bistro-green | landing produit | 7 | 2 recherches dans le CSS, l'en-tête d'un gabarit, `measure()` et la sonde | 0 erreur | 4,62:1 |
 | CRM d'une PME (fonctionnel, essai 4) | clear-ledger-desk | application | 11, dont 5 README de composants | `application.js`, `tableau.js`, un `ls` des composants | 0 erreur | 4,51:1 |
 | Cabinet d'architectes (produit, marque imposée, essai 5) | glass-frame-estate | site vitrine, 2 pages | 6, dont `brand.md` | 2 extraits de `check_studio.py`, 4 recherches dans le kit | 0 erreur | 6,66:1 |
+| Club d'escalade (deux registres, essai 6) | clear-ledger-desk | application, 2 pages | 12, dont `INDEX.md` et 6 README de composants | `kit.py --help`, recherches dans le CSS et les scripts du kit, 3 fonctions de `check_studio.py` | 0 erreur | 4,51:1 |
 
 Les trois premiers agents ont respecté les deux arrêts, n'ont ouvert ni `audit/`, ni `quality/relecture-*`, ni les README généraux, et ont chargé un seul skill. Chacun a pourtant dû fouiller du CSS ou le vérificateur au moins une fois : c'est là que le skill manquait.
 
@@ -243,7 +244,7 @@ Premier essai de `brand.md` dans un projet complet. Agent neuf, avec seulement `
 | Les liens ne prennent pas l'accent | Il comprenait de `brand.md` que `--k-accent-on-bg: 1` colorait les liens ; seul leur soulignement le lit. Ajouté dans `site.css` | **`brand.md` corrigé** : la règle à écrire, et sa condition de contraste |
 | Bloc de fin noir | Il a redéfini la paire inversée en vert, de sa propre initiative, parce que le client refuse le noir. `brand.md` ne prévoyait ce changement qu'au niveau 2. Il l'a dit à la livraison, avec la façon de revenir en arrière | **`brand.md` corrigé** : permis au niveau 1, à proposer ou à dire |
 | Mot géant du héros | Promis « Sorbier », obtenu « ATELIER » : le gabarit de glass-frame-estate prenait le premier mot du nom, et `data-k-word` n'y existait pas. Il n'a pas contourné : écart dit à la livraison | Gabarit corrigé : `data-k-word` sur le `<h1>` ; `SKILL.md` le dit. Exemple mis à jour après l'essai (« Sorbier ») |
-| Nom tronqué dans la barre à 390 px | « ATELIER SORB… » : comportement de la barre, laissé tel quel et signalé | `SKILL.md` : le nom de la barre reste court. **La barre elle-même n'est pas corrigée** |
+| Nom tronqué dans la barre à 390 px | « ATELIER SORB… » : comportement de la barre, laissé tel quel et signalé | Corrigé ensuite dans le composant : un nom long passe à la ligne, sans être tronqué (essayé sous les 24 skills à 390 px) ; le kit de l'exemple a été mis à jour |
 | `brand.md` lu trop tard d'après le tableau | Il l'a lu en c de lui-même | `SKILL.md` : à lire dès l'étape c |
 | Liste composée à la main sur deux colonnes | Le skill ne dit pas comment : il a repris la classe `sv-grid` de la structure, trouvée par recherche dans son CSS | **Non corrigé** |
 | Crédit d'une photo sous licence | Le skill ne dit pas où l'écrire : dans chaque légende | **Non corrigé** |
@@ -253,6 +254,38 @@ Premier essai de `brand.md` dans un projet complet. Agent neuf, avec seulement `
 **Essayé par moi après la livraison**, parce que l'agent ne l'avait pas fait : parcours à la touche Tab sur les deux pages (ordre logique, contour de focus partout ; les liens des légendes ont le contour par défaut du navigateur, pas celui du kit), menu sur téléphone ouvert au clavier, fermé par Échap, focus rendu au bouton Menu.
 
 **Ce que l'essai ne dit pas :** un accent pâle (ici le vert passe partout : le chemin `--k-accent-edge` et drapeau à 0 n'a pas servi) ; le niveau 2 (fonds de la marque) ; une police de marque ; une marque posée sur un skill dont l'identité est une couleur. Les photos viennent d'une banque et ne se ressemblent pas : ce que donnerait le skill avec les photos qu'il exige n'est pas montré. Un seul agent, une seule demande.
+
+## 6. Essai de contrôle : réservation d'un club d'escalade, page publique et espace membre (5 octobre 2026)
+
+Essai fait pour rejouer les corrections tirées de l'essai 4 (interview par registre, `components/INDEX.md`, README des composants utilisés), sur une demande qui mêle deux registres : « Application de réservation pour un club d'escalade, avec une page publique et un espace membre ». Agent neuf, avec seulement `SKILL.md` et la demande ; je jouais le client (Club Les Dalles, club fictif à Grenoble : 180 membres, surtout sur téléphone, l'espace membre d'abord, un seul écran, trois réservations par semaine au plus). Résultat : `examples/club-escalade/`, capture `essais-etape-5/club-escalade.png` (espace membre à 1440 et 390 px, page publique à 390 px).
+
+**Ce qu'on voulait savoir :**
+
+| Question | Constat |
+|---|---|
+| Utilise-t-il l'interview par registre ? | Oui. Il a reconnu que la demande ne tranchait pas, posé le **tronc commun seul** (registre, mode, technique) et s'est arrêté. Après la réponse, il a annoncé « registre fonctionnel » et posé la suite pour un outil (utilisateurs, tâches fréquentes, données, écrans, règles et droits, marque, habitudes), sans « visiteur » ni ambiance. Trois arrêts au lieu de deux, comme prévu dans ce cas |
+| Utilise-t-il `components/INDEX.md` ? | Oui, à l'étape c, pour trouver `notification`, `barre-nav` et `menu-mobile` ; aucun `ls`, aucun README général ouvert |
+| Lit-il les README des composants qu'il utilise, et seulement ceux-là ? | Oui : six README (les trois ajoutés, plus `modale`, `tableau` et `bouton` qu'il modifiait) ; pas `champ`, `selection` ni `etat-vide`, laissés tels quels |
+| Propose-t-il le skill fonctionnel seul ? | Oui, `clear-ledger-desk` seul, avec `site-to-skill` en seconde voie et ses limites dites (page publique sobre, pas une vitrine) |
+| Tient-il la livraison honnête ? | Oui : 0 erreur aux deux passages du script (relancé par moi : mêmes chiffres, pire contraste 4,51:1), essais faits et non faits listés, textes et données inventés listés |
+
+**Où il s'est perdu, et la suite donnée :**
+
+| Point | Ce qui s'est passé | Suite donnée |
+|---|---|---|
+| Un projet à deux natures | Rien ne disait quoi faire d'une page de présentation et d'un outil dans le même projet. Il a tout mis sous un skill et une structure, ajouté de lui-même deux questions de la suite « site » (contenu, photos), et composé la page publique en déduisant le balisage du héros, de la dernière section et du pied de page du CSS, faute d'avoir le droit de lire le README d'une seconde structure | **Corrigé** : `SKILL.md` et `interview.md` ont un paragraphe « projet à deux natures » (la partie à réussir d'abord donne le registre, un seul skill, une seconde structure dont on lit le README) ; `kit.py --prefixe` pose la seconde structure à côté de la première |
+| Balises d'un composant ajouté | `kit.py --composants …` au premier passage ne disait pas quelles balises ajouter (il ne le faisait que pour une page déjà là). Écrites à la main | **Corrigé** dans `kit.py` |
+| Tableau trop large à 390 px | La colonne « Places » sortait de l'écran. Il a d'abord tenté de laisser les cellules passer à la ligne, sans effet contre la couche de signature, puis a **raccourci les données** (« Cours » pour « Cours encadré, débutant »). Conséquence dite à la livraison : chercher « débutant » ne trouve plus rien. Ce n'est pas un contrôle contourné (le script ne signalait rien), mais c'est un contenu appauvri pour une largeur | **Corrigé en partie** : la recherche lit aussi `data-ap-keywords` sur la ligne, et le README dit de réduire les colonnes plutôt que les données. L'exemple n'a pas été repris |
+| « 1 créneaux affichés » | Le modèle du résumé n'accordait pas | **Corrigé** : `data-ap-sum-one` |
+| Bouton plein hors de la tête d'écran | La structure disait « une seule action pleine : celle de la tête d'écran » ; ici on ne réserve qu'un créneau ouvert. Il l'a mis dans le panneau et l'a dit | **Corrigé** : le README le prévoit |
+| Ordre entre remplissage du panneau et `k-app:open` | Non documenté : il a cherché dans `application.js` | **Corrigé** : dit dans le README |
+| Barre de sélection du tableau | Retirée avec les cases, sans que le README le dise | **Corrigé** : dit dans le README |
+| Filtres à deux ou trois valeurs | `INDEX.md` conseille autre chose qu'une sélection, mais le filtrage ne lit que des `select` | **Non corrigé** |
+| Une page de plus hors site vitrine | Le skill ne dit pas comment nommer ni créer une seconde page en HTML : il a copié la page de départ | **Non corrigé** (`--prefixe` couvre le cas d'une seconde structure, pas celui d'une page de plus de la même) |
+| Essais sans serveur | Chrome sans interface ne descend pas sous 500 px de fenêtre : sa première mesure « à 390 » était à 454 px. Il s'en est aperçu et a refait l'essai dans un cadre de 390 px | Rien : `SKILL.md` prévient déjà qu'une largeur annoncée doit être la largeur réelle |
+| Zone tactile du bouton « Menu » | 32 px de haut mesurés ; il a coché la case d'après la promesse du README, sans vérifier | Vérifié par moi : la zone cliquable fait 44 px (un appui 5 px au-dessus du bouton l'atteint) |
+
+**Ce que l'essai ne dit pas :** la correction « projet à deux natures » vient de cet essai et n'a pas été rejouée ; `--prefixe` a été essayé à la main (les deux structures se posent côte à côte), pas par un agent. Rien au doigt, pas de lecteur d'écran, Chrome seulement. Un seul agent, une seule demande.
 
 ## Ce que les essais ont changé dans le skill
 
@@ -275,6 +308,9 @@ Premier essai de `brand.md` dans un projet complet. Agent neuf, avec seulement `
 | `ux/structures/application/` | « Brancher ses données et ses gestes » ; marge de la tête d'écran ; écrans fiche et tableau de bord | 4 |
 | `tools/check_studio.py` | Titres `data-k-fixed` ; vérification visuelle non faite dite en toutes lettres (code de sortie 2) | 4 |
 | `brand.md` | Où chaque couleur apparaît ; liens, seconde couleur, bloc de fin | 5 |
+| `SKILL.md`, `interview.md`, `tools/kit.py` | Projet à deux natures ; `--prefixe` ; balises des composants ajoutés au premier passage | 6 |
+| `ux/structures/application/` | `data-ap-keywords`, `data-ap-sum-one` ; bouton plein dans le panneau ; ordre de `k-app:open` | 6 |
+| `components/barre-nav/` | Nom long sur deux lignes au lieu d'être tronqué (`data-k-brand`) | 5 |
 | `ux/templates/hero-photo/glass-frame-estate.js`, `SKILL.md` | Mot géant choisi par `data-k-word` ; nom court dans la barre ; `brand.md` lu dès l'étape c | 5 |
 
 ## Ce qui reste incertain
@@ -288,5 +324,5 @@ Premier essai de `brand.md` dans un projet complet. Agent neuf, avec seulement `
 - **Séries de cartes de même forme** (formules, plats) : le skill les déconseille, deux agents en ont fait. Depuis, `check_studio.py` les signale en alerte (trois éléments ou plus de même forme côte à côte). C'est une alerte, pas une erreur : une vraie liste de même forme la déclenche aussi.
 - **Cible tactile du nom dans la barre** (25 px) : corrigé après les essais, la zone cliquable fait `--k-hit-min` de haut sans changer la hauteur affichée.
 - **Récit collant et article** : aucun essai ne les a exercés. Le registre fonctionnel et les couleurs de marque l'ont été une fois chacun (essais 4 et 5). Pour la marque, seul le cas facile est passé dans un projet complet : un accent foncé sur un skill à accent neutre. L'accent pâle n'a été essayé qu'à la main sur `brand.css` (jaune refusé, puis accepté avec contour et drapeau à 0), jamais sur capture.
-- **Les corrections tirées des essais 4 et 5 n'ont pas été rejouées** par un nouvel agent : rien ne dit encore qu'elles suffisent.
+- **Corrections rejouées ou non.** L'essai 6 a rejoué celles de l'essai 4 (interview par registre, index des composants, README utilisés) : elles tiennent. Celles de l'essai 5 (`brand.md`) et de l'essai 6 (projet à deux natures) n'ont pas été rejouées.
 - **Mode reprise** : essayé sur une page locale unique ; ni site en ligne, ni site à plusieurs pages.

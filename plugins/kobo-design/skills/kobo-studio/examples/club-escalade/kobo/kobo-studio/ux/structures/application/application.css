@@ -1,0 +1,147 @@
+/*
+ * kobo-studio — structure « application » : une coquille d'outil de travail.
+ * En-tête à recherche, barre latérale repliable, puis trois écrans : liste + panneau de détail, fiche pleine page, tableau de bord.
+ * Uniquement des rôles --k-*. Aucun point de rupture : application.js mesure la place et pose trois attributs sur .ap :
+ *   data-k-narrow          la barre latérale ne tient plus à côté du contenu : elle devient un tiroir (data-k-drawer quand il est ouvert)
+ *   data-k-side="min"      barre repliée par l'utilisateur (icônes seules)
+ *   data-k-detail="over"   le panneau de détail ne tient pas à côté de la liste : il passe par-dessus
+ * Sans script : barre ouverte, panneau de détail affiché sous la liste. Tout reste lisible.
+ */
+.ap { --_side: calc(var(--k-space-32) * 2 - var(--k-space-4)); --_side-min: calc(var(--k-space-12) + var(--k-space-4)); --_detail: calc(var(--k-space-32) * 3); --_top: var(--_top-h, var(--k-nav-h)); }
+
+/* ---- En-tête ---- */
+.ap-top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-3); min-block-size: var(--k-nav-h); padding: var(--k-space-2) var(--k-edge) var(--k-space-2) var(--k-space-3); color: var(--k-text); background: var(--k-bg); border-block-end: var(--k-border-w) solid var(--k-line); }
+.ap-brand { flex: 0 1 auto; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: var(--k-lh-tight); color: inherit; text-decoration: none; white-space: nowrap; }
+.ap-brand:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+.ap-search { flex: 1 1 calc(var(--k-space-32) + var(--k-space-16)); max-inline-size: calc(var(--k-space-32) * 4); margin-inline: auto; }
+.ap-top__end { display: flex; align-items: center; gap: var(--k-space-2); }
+.ap-key { display: inline-grid; place-items: center; min-inline-size: var(--k-space-6); block-size: var(--k-space-6); padding-inline: var(--k-space-1); font-family: var(--k-font-mono); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); background: var(--k-surface); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+
+/* ---- Corps : barre latérale + contenu ---- */
+.ap-body { display: flex; align-items: flex-start; min-inline-size: 0; }
+.ap-side { flex: none; position: sticky; inset-block-start: var(--_top); inline-size: var(--_side); max-block-size: calc(100dvh - var(--_top)); overflow: auto; align-self: stretch; padding: var(--k-space-3) var(--k-space-2); color: var(--k-text); background: var(--k-surface); border-inline-end: var(--k-border-w) solid var(--k-line); transition: inline-size var(--k-dur-base) var(--k-ease-out); }
+.ap-side ul { display: grid; gap: var(--k-space-1); margin: 0; padding: 0; list-style: none; }
+.ap-side__title { margin: 0; padding: var(--k-space-3) var(--k-space-3) var(--k-space-1); font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: bolder; color: var(--k-text-2); text-transform: var(--k-label-case); letter-spacing: var(--k-ls-caps); }
+.ap-side__link { display: flex; align-items: center; gap: var(--k-space-3); min-block-size: var(--k-hit-min); padding: var(--k-space-2) var(--k-space-3); color: var(--k-text-2); text-decoration: none; white-space: nowrap; border-inline-start: calc(var(--k-border-w) * 3) solid transparent; border-radius: var(--k-radius); transition: background-color var(--k-dur-fast) var(--k-ease-out); }
+.ap-side__link:hover { color: var(--k-text); background: var(--k-surface-2); }
+.ap-side__link:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: calc(var(--k-focus-w) * -1); }
+/* Section en cours : filet à gauche, graisse ET fond ; jamais la couleur seule */
+.ap-side__link[aria-current="page"] { color: var(--k-text); font-weight: bolder; background: var(--k-surface-2); border-inline-start-color: currentColor; }
+.ap-side__label { flex: 1; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; }
+.ap-side__count { font-size: max(var(--k-fs-small), var(--k-fs-min)); font-weight: normal; color: var(--k-text-muted); font-variant-numeric: tabular-nums; }
+/* Barre repliée (choix de l'utilisateur) : icônes seules ; le nom de chaque lien reste lu et sert d'info-bulle (title) */
+.ap[data-k-side="min"]:not([data-k-narrow]) .ap-side { inline-size: var(--_side-min); }
+.ap[data-k-side="min"]:not([data-k-narrow]) :is(.ap-side__label, .ap-side__count, .ap-side__title) { position: absolute; inline-size: var(--k-border-w); block-size: var(--k-border-w); overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.ap[data-k-side="min"]:not([data-k-narrow]) .ap-side__link { justify-content: center; padding-inline: 0; }
+/* Écran étroit : la barre est un tiroir par-dessus le contenu */
+.ap[data-k-narrow] .ap-side { position: fixed; z-index: 40; inset-block: var(--_top) 0; inset-inline-start: 0; inline-size: min(var(--_side), 86%); max-block-size: none; box-shadow: var(--k-shadow); transform: translateX(-100%); visibility: hidden; transition: transform var(--k-dur-base) var(--k-ease-out), visibility 0s linear var(--k-dur-base); }
+[dir="rtl"] .ap[data-k-narrow] .ap-side { transform: translateX(100%); }
+.ap[data-k-narrow][data-k-drawer] .ap-side { transform: none; visibility: visible; transition-delay: 0s; }
+
+/* ---- Contenu ---- */
+.ap-main { flex: 1; min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-6); align-content: start; padding: var(--k-space-6) var(--k-edge) var(--k-space-16); }
+.ap-main:focus { outline: 0; }
+.ap-head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--k-space-3) var(--k-space-8); margin-block-end: 0; }   /* pas la marge d'un titre de section : un écran d'outil est serré */
+.ap-head__text { flex: 1 1 calc(var(--k-space-32) * 2); min-inline-size: 0; display: grid; gap: var(--k-space-1); }
+.ap-head h1 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); letter-spacing: var(--k-ls-display); overflow-wrap: anywhere; }
+.ap-head__sum { margin: 0; color: var(--k-text-2); }
+.ap-tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--k-space-3) var(--k-space-4); }
+.ap-tools > .k-field { flex: 0 1 calc(var(--k-space-32) + var(--k-space-24)); }
+
+/* ---- Zone de travail : la liste, et le panneau de détail à côté quand il y a la place ---- */
+.ap-work { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--k-space-6); }
+.ap-list { flex: 1 1 calc(var(--k-space-32) * 3); min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-3); }
+.ap-list__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2) var(--k-space-6); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+.ap-list__keys { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-4); margin: 0; padding: 0; list-style: none; }
+.ap-list__keys li { display: inline-flex; align-items: center; gap: var(--k-space-1); }
+.ap-detail { flex: 1 1 var(--_detail); max-inline-size: 100%; display: grid; gap: var(--k-space-6); align-content: start; padding: var(--k-space-6); color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-lg); }
+.ap-detail[hidden] { display: none; }
+.ap-detail__head { display: flex; align-items: flex-start; gap: var(--k-space-3); }
+.ap-detail__head > :first-child { flex: 1; min-inline-size: 0; display: grid; gap: var(--k-space-1); }
+.ap-detail__title { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h2); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); overflow-wrap: anywhere; }
+.ap-detail__title:focus { outline: 0; }
+.ap-detail__title:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+.ap-detail__sub { margin: 0; color: var(--k-text-2); }
+.ap-detail__actions { display: flex; flex-wrap: wrap; gap: var(--k-space-2); }
+/* À côté de la liste : il ne grandit pas et reste sous l'en-tête pendant le défilement */
+.ap[data-k-detail="side"] .ap-detail { flex: 0 0 var(--_detail); position: sticky; inset-block-start: calc(var(--_top) + var(--k-space-4)); max-block-size: calc(100dvh - var(--_top) - var(--k-space-8)); overflow: auto; }
+/* Pas la place : il passe par-dessus, sur le bord, et la liste reste dessous */
+.ap[data-k-detail="over"] .ap-detail { position: fixed; z-index: 35; inset-block: var(--_top) 0; inset-inline-end: 0; inline-size: min(100%, var(--_detail)); overflow: auto; border-radius: 0; border-block: 0; border-inline-end: 0; box-shadow: var(--k-shadow); }
+
+/* ---- Pièces communes aux écrans « fiche » et « tableau de bord » ---- */
+.ap-h2 { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); overflow-wrap: anywhere; }
+.ap-h2:focus { outline: 0; }
+.ap-head__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2); }
+/* Fil des événements : qui a fait quoi, quand. La date est écrite, jamais « il y a 3 min » seul */
+.ap-timeline { display: grid; margin: 0; padding: 0; list-style: none; }
+.ap-timeline > li { display: grid; gap: var(--k-space-1); padding: var(--k-space-3) 0 var(--k-space-3) var(--k-space-4); border-inline-start: calc(var(--k-border-w) * 2) solid var(--k-line-strong); }
+.ap-timeline time, .ap-timeline__who { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+.ap-timeline p { margin: 0; }
+
+/* ---- Écran « fiche » : un enregistrement en pleine page ---- */
+.ap-back { margin: 0; }
+.ap-back a { display: inline-flex; align-items: center; gap: var(--k-space-2); min-block-size: var(--k-hit-min); }
+/* Faits clés : ce qu'on vient vérifier, lisible sans ouvrir un onglet */
+.ap-keyfacts { display: flex; flex-wrap: wrap; gap: var(--k-space-4) var(--k-space-8); margin: 0; padding: var(--k-space-4) var(--k-space-6); color: var(--k-text); background: var(--k-surface); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-lg); }
+.ap-keyfacts > div { flex: 1 1 calc(var(--k-space-32) - var(--k-space-4)); min-inline-size: 0; display: grid; gap: var(--k-space-1); align-content: start; }
+.ap-keyfacts dt { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+.ap-keyfacts dd { margin: 0; font-weight: bolder; overflow-wrap: anywhere; }
+/* Chemin d'étapes : faite = coche et mot ; en cours = point plein, filet épais, graisse et mot ; à venir = rond vide et mot */
+.ap-steps { display: grid; gap: var(--k-space-3); }
+.ap-steps__list { display: flex; flex-wrap: wrap; gap: var(--k-space-2); margin: 0; padding: 0; list-style: none; }
+.ap-steps__list > li { flex: 1 1 calc(var(--k-space-32) + var(--k-space-4)); min-inline-size: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 var(--k-space-2); align-content: start; padding: var(--k-space-3); color: var(--k-text-2); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line); border-block-start: calc(var(--k-border-w) * 3) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.ap-steps__mark { grid-row: span 2; display: grid; place-items: center; inline-size: var(--k-space-6); block-size: var(--k-space-6); color: var(--k-text); border: calc(var(--k-border-w) * 2) solid var(--k-line-strong); border-radius: var(--k-radius-pill); }
+.ap-steps__mark .k-icon { --k-icon: var(--k-space-4); visibility: hidden; }
+.ap-steps__name { color: var(--k-text); overflow-wrap: anywhere; }
+.ap-steps__state { font-size: max(var(--k-fs-small), var(--k-fs-min)); }
+.ap-steps__list > li[data-k-step="done"] { border-block-start-color: var(--k-text-2); }
+.ap-steps__list > li[data-k-step="done"] .ap-steps__mark { border-color: var(--k-text-2); }
+.ap-steps__list > li[data-k-step="done"] .ap-steps__mark .k-icon { visibility: visible; }
+.ap-steps__list > li[aria-current="step"] { color: var(--k-text); background: var(--k-surface-2); border-color: var(--k-line-strong); border-block-start-color: var(--k-text); }
+.ap-steps__list > li[aria-current="step"] .ap-steps__name { font-weight: bolder; }
+.ap-steps__list > li[aria-current="step"] .ap-steps__mark { padding: var(--k-space-1); background: var(--k-text) content-box; border-color: var(--k-text); }
+.ap-steps__go { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-space-2) var(--k-space-4); }
+.ap-steps__status { margin: 0; color: var(--k-text-2); }
+.ap-tabs-body { display: grid; gap: var(--k-space-6); padding-block-start: var(--k-space-4); }
+/* Deux groupes de faits côte à côte quand il y a la place */
+.ap-cols { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--k-space-6) var(--k-space-12); }
+.ap-cols > * { flex: 1 1 calc(var(--k-space-32) * 2); min-inline-size: 0; }
+
+/* ---- Écran « tableau de bord » : des chiffres, une répartition, ce qui attend ---- */
+.ap-stats { display: flex; flex-wrap: wrap; gap: var(--k-space-3); margin: 0; padding: 0; list-style: none; }
+.ap-stats > li { flex: 1 1 calc(var(--k-space-32) + var(--k-space-12)); min-inline-size: 0; display: grid; gap: var(--k-space-1); align-content: start; padding: var(--k-space-4); color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-lg); }
+.ap-stats p { margin: 0; }
+.ap-stat__label { color: var(--k-text-2); }
+.ap-stat__value { font-family: var(--k-font-display); font-size: var(--k-fs-h1); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.ap-stat__note { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+.ap-panels { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--k-space-6); }
+.ap-panel { flex: 1 1 calc(var(--k-space-32) * 3 - var(--k-space-8)); min-inline-size: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--k-space-4); align-content: start; padding: var(--k-space-6); color: var(--k-text); background: var(--k-bg); border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-lg); }
+.ap-panel__note { margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+/* Répartition : chaque ligne écrit son nom et son nombre ; la barre ne fait que les montrer (--_v : part de 0 à 1) */
+.ap-bars { display: grid; gap: var(--k-space-3); margin: 0; padding: 0; list-style: none; }
+.ap-bars > li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--k-space-1) var(--k-space-4); }
+.ap-bars__value { font-variant-numeric: tabular-nums; color: var(--k-text-2); }
+.ap-bars__bar { grid-column: 1 / -1; block-size: var(--k-space-2); background: var(--k-surface-2); border-radius: var(--k-radius-pill); overflow: hidden; }
+.ap-bars__bar::before { content: ""; display: block; block-size: 100%; inline-size: calc(var(--_v, 0) * 100%); background: var(--k-text-2); }
+/* Liste d'enregistrements à ouvrir : le nom est le lien, les faits suivent */
+.ap-rows { display: grid; margin: 0; padding: 0; list-style: none; }
+.ap-rows > li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-1) var(--k-space-4); min-block-size: var(--k-hit-min); padding-block: var(--k-space-2); border-block-start: var(--k-border-w) solid var(--k-line); }
+.ap-rows > li:last-child { border-block-end: var(--k-border-w) solid var(--k-line); }
+.ap-rows a { display: inline-flex; align-items: center; min-block-size: var(--k-hit-min); font-weight: bolder; }
+.ap-rows__facts { color: var(--k-text-2); font-variant-numeric: tabular-nums; }
+
+/* Repères de mesure, lus par application.js : jamais affichés */
+.ap-probe { position: absolute; visibility: hidden; block-size: 0; pointer-events: none; }
+.ap-probe--narrow { inline-size: calc(var(--k-space-32) * 6); }                       /* en dessous : la barre devient un tiroir */
+.ap-probe--detail { inline-size: calc(var(--k-space-32) * 3 + var(--_detail) + var(--k-space-6)); }   /* en dessous : le détail passe par-dessus */
+
+/* Liste des raccourcis (dans la modale d'aide) */
+.ap-keys { display: grid; margin: 0; padding: 0; list-style: none; }
+.ap-keys li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-2) var(--k-space-4); min-block-size: var(--k-hit-min); padding-block: var(--k-space-2); border-block-end: var(--k-border-w) solid var(--k-line); }
+.ap-keys li:last-child { border-block-end: 0; }
+.ap-keys span:last-child { display: inline-flex; align-items: center; gap: var(--k-space-1); }
+
+@media (prefers-reduced-motion: reduce) { .ap-side, .ap-side__link { transition: none; } }
+
+/* Le libellé de la recherche reste lu, pas affiché : la loupe et l'exemple du champ le disent à l'œil */
+.ap-search .k-field__label { position: absolute; inline-size: var(--k-border-w); block-size: var(--k-border-w); overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

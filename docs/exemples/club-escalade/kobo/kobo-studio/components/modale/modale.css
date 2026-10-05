@@ -1,0 +1,25 @@
+/*
+ * kobo-studio — modale
+ * Repose sur <dialog> ouvert par showModal() : piège du focus, Échap et mise hors service du reste de la page sont natifs.
+ * Rôles lus : bg, text, text-2, line, line-strong, overlay, focus*, font-display, font-body, fs-h3, fs-body, fw-display,
+ * lh-tight, lh-body, radius-lg, border-w, shadow, edge, space-*, dur-base, ease-out.
+ */
+.k-modal {
+  inline-size: min(100% - var(--k-edge) * 2, var(--k-space-32) * 4); max-block-size: calc(100dvh - var(--k-space-8) * 2); padding: 0; overflow: hidden;
+  font-family: var(--k-font-body); color: var(--k-text); background: var(--k-bg);
+  border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow);
+}
+.k-modal--wide { inline-size: min(100% - var(--k-edge) * 2, var(--k-space-32) * 6); }
+.k-modal::backdrop { background: var(--k-overlay); }
+.k-modal[open] { display: flex; flex-direction: column; animation: k-modal-in var(--k-dur-base) var(--k-ease-out); }
+@keyframes k-modal-in { from { opacity: 0; transform: translateY(var(--k-space-4)); } }
+
+.k-modal__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--k-space-4); padding: var(--k-space-6) var(--k-space-6) var(--k-space-4); }
+.k-modal__title { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); }
+.k-modal__body { padding: 0 var(--k-space-6) var(--k-space-6); overflow-y: auto; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text-2); }
+.k-modal__body > :first-child { margin-block-start: 0; }
+.k-modal__body > :last-child { margin-block-end: 0; }
+.k-modal__body:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: calc(var(--k-focus-w) * -1); }
+.k-modal__foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--k-space-3); padding: var(--k-space-4) var(--k-space-6); border-block-start: var(--k-border-w) solid var(--k-line); }
+
+@media (prefers-reduced-motion: reduce) { .k-modal[open] { animation: none; } }

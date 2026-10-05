@@ -1,0 +1,50 @@
+/*
+ * kobo-studio — socle commun des composants
+ * À charger avant tout composant, après contract/roles.css et la fiche du skill.
+ * Uniquement des rôles --k-* : aucune valeur en dur.
+ */
+
+/* Texte réservé aux lecteurs d'écran */
+.k-sr-only {
+  position: absolute; inline-size: var(--k-border-w); block-size: var(--k-border-w); margin: calc(var(--k-border-w) * -1);
+  padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+
+/* Icône au trait : hérite de la couleur du texte ; taille réglable par --k-icon */
+.k-icon {
+  inline-size: var(--k-icon, calc(var(--k-space-4) + var(--k-space-1))); block-size: var(--k-icon, calc(var(--k-space-4) + var(--k-space-1)));
+  flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Contour de focus clavier, identique partout */
+.k-focusable:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+
+/*
+ * Ton inversé : tout composant placé dans [data-k-tone="inverse"] lit la paire inversée du skill.
+ * Les couleurs d'accent et d'état ne sont pas vérifiées sur le fond inversé : elles sont ramenées
+ * au texte inversé (un état garde son icône et son mot, il ne perd que sa couleur).
+ */
+[data-k-tone="inverse"] {
+  --k-bg: var(--k-bg-inverse);
+  --k-text: var(--k-text-inverse);
+  --k-text-2: var(--k-text-inverse);
+  --k-text-muted: var(--k-text-inverse);
+  --k-surface: color-mix(in srgb, var(--k-text-inverse) 8%, var(--k-bg-inverse));
+  --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 14%, var(--k-bg-inverse));
+  --k-line: color-mix(in srgb, var(--k-text-inverse) 24%, transparent);
+  --k-line-strong: var(--k-text-inverse);
+  --k-accent: var(--k-text-inverse);
+  --k-accent-edge: var(--k-text-inverse);
+  --k-accent-on-bg: 1;
+  --k-on-accent: var(--k-bg-inverse);
+  --k-focus: var(--k-text-inverse);
+  --k-success: var(--k-text-inverse);
+  --k-warning: var(--k-text-inverse);
+  --k-danger: var(--k-text-inverse);
+  color: var(--k-text-inverse); background: var(--k-bg-inverse);
+}
+
+/* Une modale ou un menu ouvert bloque le défilement de la page */
+html:has(dialog[open]) { overflow: hidden; }
+
+@keyframes k-spin { to { transform: rotate(1turn); } }

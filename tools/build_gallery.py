@@ -23,6 +23,7 @@ EXEMPLES = [
     ("reprise-poterie", "Terre & Feu", "la reprise d'un site existant de cours de poterie, sans perdre son contenu", "reprise"),
     ("crm-pme", "Rivage Suivi", "un CRM B2B pour une PME de services", "application"),
     ("cabinet-architectes", "Atelier Sorbier", "le site vitrine d'un cabinet d'architectes, avec deux couleurs de marque imposées", "site vitrine, marque"),
+    ("club-escalade", "Club Les Dalles", "une application de réservation pour un club d'escalade, avec une page publique et un espace membre", "application"),
 ]
 IGNORES = shutil.ignore_patterns("captures", "node_modules", "avant", "dist", "src", "public", "*.json", "vite.config.js", "__pycache__")
 

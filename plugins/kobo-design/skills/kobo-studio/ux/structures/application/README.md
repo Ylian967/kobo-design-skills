@@ -202,12 +202,16 @@ Ce que `application.js` et `tableau.js` font, pour ne pas avoir à les ouvrir :
 | Un filtre qui a une valeur au départ (« affaires ouvertes ») | donner `selected` à l'option : le filtre s'applique au chargement. Une ligne passe si son `data-<nom>` vaut la valeur de la sélection |
 | Un filtre à plusieurs valeurs (ouvertes = trois étapes) | poser sur chaque ligne un second attribut (`data-avancement="ouverte"`) et filtrer dessus |
 | « Effacer les filtres » | `[data-ap-reset]` remet **toutes** les sélections et la recherche à vide. Pour revenir à une valeur de départ, écouter le clic, reposer la valeur, puis appeler `Kobo.app.filter(ap)` |
+| Le résumé au singulier | `data-ap-sum-one="{n} réservation affichée sur {total}"` à côté de `data-ap-sum` : il sert quand une seule ligne reste |
+| Chercher un mot qui n'est pas dans les cellules | `data-ap-keywords="débutant cours encadré"` sur la ligne : la recherche lit le texte de la ligne **et** cet attribut |
 | Refiltrer après un changement fait par script | `Kobo.app.filter(document.querySelector('.ap'))` : lignes masquées, état vide, résumé |
 | Ajouter une ligne | l'insérer dans `<tbody>`, puis `Kobo.app.filter(ap)` ; pour la ranger à sa place, `Kobo.table.sort(tableau, th, 'ascending')` sur l'en-tête trié |
 | Trier par script | `Kobo.table.sort(racineDuTableau, th, 'ascending' ou 'descending')` |
-| Écrire soi-même le panneau de détail | écouter `k-app:open` sur `.ap` (`detail.row`) et remplir `.ap-detail` ; `Kobo.app.close(ap)` le ferme |
+| Écrire soi-même le panneau de détail | écouter `k-app:open` sur `.ap` (`detail.row`) et remplir `.ap-detail` : l'événement part **après** le remplissage automatique, ce que tu écris reste ; `Kobo.app.close(ap)` le ferme |
 | Densité (clear-ledger-desk) | poser ou retirer `data-density="compact"` sur `<html>` ; un interrupteur dans les filtres suffit. La mémoriser est à la charge de la page |
-| Des lignes sans case à cocher | retirer la colonne `k-table__check` (en-tête et lignes) et `case-a-cocher` des fichiers chargés ; `Espace` ne fait alors rien |
+| Des lignes sans case à cocher | retirer la colonne `k-table__check` (en-tête et lignes), la barre `k-table__bar` et `case-a-cocher` des fichiers chargés ; `Espace` ne fait alors rien |
+| L'action ne vaut que pour la ligne ouverte (réserver **ce** créneau) | le bouton plein va dans le panneau de détail, et la tête d'écran n'en a pas : toujours un seul bouton plein à l'écran |
+| Un tableau trop large pour un téléphone | il défile de côté dans sa zone, c'est prévu. Réduire le nombre de colonnes plutôt que raccourcir les données ; si une cellule est abrégée, le mot entier va dans le panneau de détail et dans `data-ap-keywords` |
 | Faire avancer une étape par script (fiche) | `Kobo.app.step(ap, true)` ; écouter `k-app:step` pour enregistrer |
 | Une répartition (tableau de bord) | écrire le nombre dans `ap-bars__value` et la part dans `style="--_v: …"` (valeur ÷ la plus grande valeur) |
 | Un écran en moins | supprimer sa page et son lien dans la barre latérale des autres |

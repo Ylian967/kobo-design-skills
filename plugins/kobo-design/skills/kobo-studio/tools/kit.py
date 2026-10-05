@@ -2,12 +2,14 @@
 """
 kobo-studio — pose dans un projet les seuls fichiers dont il a besoin, et une page de départ déjà branchée.
 
-  python3 tools/kit.py <projet> --skill <id> --structure <structure> [--composants modale,onglets] [--react] [--marque]
+  python3 tools/kit.py <projet> --skill <id> --structure <structure> [--composants modale,onglets] [--react] [--marque] [--prefixe public-]
 
   <structure> : landing-produit | site-vitrine | recit-collant | article | application
   --composants : composants en plus de ceux de la structure (noms de dossier : voir components/INDEX.md)
   --react      : copie aussi les versions .jsx, dans <projet>/src/kobo/ ; n'écrit pas de page HTML
   --marque     : copie le modèle brand.css à la racine du projet (voir brand.md)
+  --prefixe    : préfixe du nom des pages écrites (public-index.html) : pour poser une seconde structure dans un projet
+                 qui a deux natures (une page publique et un outil), sans toucher aux pages déjà là
 
 Ce qui est écrit :
   <projet>/kobo/kobo-studio/…          contrat, fiche du skill, composants, structure, gabarits du skill (NE PAS MODIFIER)
@@ -160,6 +162,7 @@ def main():
     ap.add_argument("--composants", default="")
     ap.add_argument("--react", action="store_true")
     ap.add_argument("--marque", action="store_true")
+    ap.add_argument("--prefixe", default="")
     a = ap.parse_args()
     if not (STUDIO / f"contract/maps/{a.skill}.css").exists():
         print(f"Skill inconnu : {a.skill}. Voir catalogue.md.")
@@ -215,7 +218,7 @@ def main():
         else:
             print("Ce skill n'a pas de gabarit de signature : la page rend les emplacements neutres.")
         return 0
-    names = PAGES[a.structure]
+    names = {src: a.prefixe + name for src, name in PAGES[a.structure].items()}
     for src_name, name in names.items():
         out = project / name
         if out.exists():
@@ -228,6 +231,11 @@ def main():
             continue
         out.write_text(page(STUDIO / "ux/structures" / a.structure / src_name, a.skill, a.structure, fams, names), encoding="utf-8")
         print(f"  {name} : page de départ écrite (contenu de démonstration à remplacer)")
+        for c in extra:                                          # composant demandé en plus : la page de départ ne le charge pas
+            if f"components/{c}/{c}.css" not in out.read_text(encoding="utf-8"):
+                print(f'    à ajouter dans <head>, avant page.css : <link rel="stylesheet" href="kobo/kobo-studio/components/{c}/{c}.css">')
+                if (STUDIO / f"components/{c}/{c}.js").exists():
+                    print(f'    à ajouter avant page.js : <script src="kobo/kobo-studio/components/{c}/{c}.js"></script>')
     return 0
 
 

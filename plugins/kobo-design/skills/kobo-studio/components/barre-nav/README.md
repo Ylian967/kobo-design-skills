@@ -20,6 +20,8 @@ header.k-nav                       [k-nav--sticky] ; data-k-collapsed posé par 
 
 La barre ne connaît aucune largeur d'écran. Le script la mesure : si les liens ne tiennent plus sur une ligne, il pose `data-k-collapsed`, la CSS cache les liens et montre le bouton « Menu ». La mesure est refaite quand la largeur change et quand la police a fini de charger. Sans script, les liens passent à la ligne.
 
+**Nom long.** Une fois la barre repliée, si la marque ne tient pas à côté du bouton « Menu », le script pose `data-k-brand="long"` : la marque passe à la ligne, dans la taille du texte courant et sans l'approche des capitales. Si un mot dépasse encore la ligne (police de titre très large), l'attribut devient `"long tight"` et la marque prend la police et la petite taille du texte. Elle n'est jamais tronquée ni masquée, la barre grandit avec elle, et sa zone cliquable garde au moins `--k-hit-min` de haut. Un nom court garde sa taille. Sans script, la barre entière passe à la ligne.
+
 ## États
 
 | État | Déclencheur | Rendu |
@@ -29,7 +31,7 @@ La barre ne connaît aucune largeur d'écran. Le script la mesure : si les liens
 | Focus clavier | `:focus-visible` | contour `--k-focus` |
 | Appui | `:active` | fond `--k-surface-2` |
 | Page courante | `aria-current="page"` | filet sous le lien **et** graisse renforcée, dans la couleur du texte (jamais l'accent seul) |
-| Repliée | `data-k-collapsed` | liens cachés, bouton « Menu » affiché |
+| Repliée | `data-k-collapsed` | liens cachés, bouton « Menu » affiché ; la marque passe à la ligne si elle est trop longue |
 
 Désactivé, chargement, erreur et vide ne s'appliquent pas.
 

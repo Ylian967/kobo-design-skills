@@ -17,6 +17,8 @@ Le premier tour a un tronc commun de trois questions, puis une suite qui dépend
 
 Si la demande ne permet pas de trancher (« une plateforme pour mes clients », « un espace membres »), pose le tronc commun **seul**, arrête-toi, puis pose la suite adaptée à la réponse. C'est le seul cas où le premier tour prend deux messages.
 
+**Les deux à la fois** (« une application de réservation, avec une page publique et un espace membre »). Demande dans le tronc commun laquelle des deux parties doit être réussie d'abord : elle donne le registre du projet. Pose ensuite la suite de ce registre en entier, et de l'autre suite **seulement** ce dont la seconde partie a besoin. Pour une page publique à côté d'un outil : le but de la page, le contenu réel, les photos. Pour un espace d'outil à côté d'un site : les utilisateurs, les tâches fréquentes, les données. Dis au client que le projet aura un seul skill pour les deux parties.
+
 ### Tronc commun
 
 1. **Le registre.** Est-ce un site qu'on **visite** (présenter, vendre, raconter) ou un outil dans lequel on **travaille** (saisir, chercher, suivre des enregistrements) ?

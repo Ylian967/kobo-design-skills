@@ -74,6 +74,8 @@ Lis `catalogue.md`. Écris au client un seul message :
 
 Puis **arrête-toi** et attends la validation. Le client peut choisir un autre skill ou changer le plan.
 
+**Projet à deux natures** (une page publique **et** un outil : « une application de réservation avec sa page de présentation »). Le client dit laquelle doit être réussie d'abord : c'est elle qui donne le registre, le skill et la structure principale. Le projet garde **un seul skill** sur toutes ses pages. L'autre partie prend une **seconde structure** : lis aussi son README (c'est la seule exception à « une seule »), et dis au client ce que le skill retenu ne fera pas pour elle (`clear-ledger-desk` donne une page publique claire et sobre, pas une vitrine). À la construction, pose la seconde structure avec `kit.py … --structure <seconde> --prefixe public-` : ses pages arrivent sous un autre nom, à côté des premières, et `kobo/` est complété.
+
 | Structure | À choisir quand | Dossier |
 |---|---|---|
 | Landing produit | une seule offre, un seul parcours, une demande au bout | `ux/structures/landing-produit/` |
@@ -101,7 +103,7 @@ Résultat : `<projet>/kobo/` (**ne jamais le modifier**) et `<projet>/index.html
 - Une section que la structure n'a pas (tarifs, horaires, galerie, accès) se compose avec les briques ci-dessous, sans lire le CSS.
 - Le titre du héros reste court : huit mots au plus. Plusieurs gabarits le redécoupent (lignes, moitiés, mot géant) et un titre long les casse. Regarde le héros sur capture avant de tenir le titre pour acquis ; si tu dois le raccourcir après validation, dis-le.
 - **Mot géant** (nocturne-architecture : héros et titres de section) : c'est le nom du projet ou un mot-clé **choisi exprès**, jamais un mot pris automatiquement dans un titre. Pas d'article ni de mot vide (« lieu », pas « le »), trois lettres au moins, des mots de longueur voisine d'une section à l'autre (4 à 9 lettres) pour que les tailles se tiennent. Il vient du surtitre (`k-kicker`) de la section, ou de `data-k-word="…"` posé sur le titre ; pour le héros, du premier mot du nom dans la barre, ou de `data-k-word` sur le `<h1>`. Regarde-les sur capture : `check_studio.py` signale un mot de moins de trois lettres. Le héros de glass-frame-estate a aussi un mot géant, pris de la même façon : si le nom commence par un mot commun (« Atelier », « Cabinet », « Studio »), choisis le mot qui distingue avec `data-k-word` sur le `<h1>`.
-- Le nom dans la barre reste court, deux ou trois mots : sur téléphone la barre le tronque s'il ne tient pas à côté du bouton Menu. Le nom complet s'écrit dans le héros et dans le pied de page.
+- Le nom dans la barre : sur téléphone, un nom long passe sur deux lignes à côté du bouton Menu (il n'est pas tronqué). Deux ou trois mots tiennent sur une ligne ; regarde-le sur la capture à 390 px.
 - Une seule action dans le héros ; **la même** dans la barre et dans la dernière section de chaque page. Une autre suite (la page qui lève les doutes, un itinéraire) est un lien simple `k-link` à côté, jamais un second bouton.
 - Titre de page, `lang`, textes alternatifs, pied de page : ce sont aussi du contenu.
 - Les liens mènent quelque part : ancre de la page, page du site, `mailto:`, `tel:`. Jamais `href="#"`.
