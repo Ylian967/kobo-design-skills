@@ -1,0 +1,75 @@
+/*
+ * kobo-studio — couche de signature : zigzag-snack-pop
+ * Sources (lecture seule) : SKILL.md (ombre dure, jamais floue, sur boutons, champs et photos ; boutons rectangulaires presque sans
+ * arrondi, le jaune est l'action principale ; titres en capitales condensées), references/components.md (bouton jaune en police
+ * d'affiche suivi d'un chevron « › » ; variante blanche à contour et ombre d'encre ; barre de navigation brune ; champ blanc à ombre
+ * dure ; pilule blanche à ombre dure avec une pastille orange ; fiche sur fond pâle ; photo dans un cadre blanc de 8px),
+ * references/motion.md et démo (bouton : translate(-3px,-3px) et ombre plus longue ; appui : il s'enfonce ; fiche : monte et penche de -1°).
+ * Non traduit : les bords en dents de scie des sections, le titre géant à mot jaune, la photo-autocollant penchée, la bande défilante.
+ *
+ * « full » : formes + décollement au survol. « reduced » : formes seules. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  /* ---- Bouton jaune en police d'affiche, suivi d'un chevron ; secondaire : blanc, contour et ombre d'encre ---- */
+  &.k-btn:not(.k-btn--ghost) { font-family: var(--k-font-display); font-size: max(var(--k-fs-body), var(--k-fs-min)); }
+  &.k-btn:not(.k-btn--icon, .k-btn--ghost)::before { content: "›"; order: 2; font-family: var(--k-font-body); font-weight: bolder; }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]), &.k-btn--danger:not(:disabled, [aria-disabled="true"]) { --_bg: var(--k-bg); border-width: calc(var(--k-border-w) * 2); box-shadow: var(--k-space-1) var(--k-space-1) 0 0 var(--k-text); }
+  &.k-btn--secondary:not(:disabled, [aria-disabled="true"]):is(:hover, [data-k-state="hover"]) { --_bg: var(--k-surface); }
+
+  /* ---- Barre brune : marque en police d'affiche, liens clairs ---- */
+  &.k-nav { --k-text: var(--k-text-inverse); --k-surface: color-mix(in srgb, var(--k-text-inverse) 12%, var(--k-bg-inverse)); --k-surface-2: color-mix(in srgb, var(--k-text-inverse) 18%, var(--k-bg-inverse)); --k-focus: var(--k-accent); color: var(--k-text-inverse); background: var(--k-bg-inverse); border-block-end-color: transparent; }
+  /* dans la barre brune, le bouton blanc garde un texte brun */
+  &.k-nav .k-btn--secondary:not(:disabled) { --_fg: var(--k-bg-inverse); --_edge: var(--k-bg-inverse); box-shadow: none; }
+
+  /* ---- Étiquette : pilule blanche à ombre dure, précédée d'une pastille orange ---- */
+  &.k-card__meta { display: inline-flex; align-items: center; gap: var(--k-space-2); justify-self: start; padding: var(--k-space-1) var(--k-space-3); font-family: var(--k-font-display); letter-spacing: 0; color: var(--k-text); background: var(--k-bg); border-radius: var(--k-radius-pill); box-shadow: var(--k-shadow); }
+  &.k-card__meta::before { content: ""; flex: none; inline-size: var(--k-space-2); block-size: var(--k-space-2); border-radius: 50%; background: var(--k-accent-2); }
+
+  /* ---- Fiche sur fond pâle, sans cadre ; photo dans un cadre blanc ---- */
+  &.k-card { border-color: transparent; box-shadow: none; }
+  &.k-card__media { margin: var(--k-space-3) var(--k-space-3) 0; border: var(--k-space-2) solid var(--k-bg); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow); }
+  &.k-card__title, &.k-modal__title, &.k-empty__title, &.k-menu__link, &.k-menu__title { text-transform: uppercase; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { background: var(--k-surface); border-color: var(--k-text); }
+
+  /* ---- Champ blanc à ombre dure ; panneaux à ombre dure ---- */
+  &.k-field__control:not(:disabled) { background: var(--k-bg); box-shadow: var(--k-shadow); }
+  &.k-field__control:not([aria-invalid="true"], :disabled) { border-color: var(--k-sig-brown-deep); }
+  &.k-modal, &.k-toast { border-color: var(--k-sig-brown-deep); }
+  &.k-toast { border-inline-start-color: var(--_tone); }
+  &.k-tabs__tab { font-family: var(--k-font-display); font-size: max(var(--k-fs-body), var(--k-fs-min)); }
+  &.k-progress:not([data-k-state="error"]) .k-progress__bar { background: var(--k-accent); border-inline-end: var(--k-border-w) solid var(--k-text); }
+  &.k-progress__track { border-color: var(--k-text); border-radius: var(--k-radius); }
+}
+
+/* Mouvement de signature (seulement en « full ») : le bouton se décolle, le chevron avance, la fiche monte et penche */
+:not([data-k-intensity="off"] *, [data-k-intensity="reduced"] *) {
+  &:is(.k-btn, .k-card--link) { transition: translate var(--k-dur-base) var(--k-ease-spring), rotate var(--k-dur-base) var(--k-ease-spring), box-shadow var(--k-dur-fast) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out); }
+  &.k-btn::before { transition: translate var(--k-dur-base) var(--k-ease-out); }
+  &.k-btn:not(.k-btn--ghost, .k-btn--secondary, .k-btn--danger, :disabled, [aria-disabled="true"], [aria-busy="true"]):is(:hover, [data-k-state="hover"]) { translate: calc(var(--k-space-1) * -0.75) calc(var(--k-space-1) * -0.75); box-shadow: var(--k-sig-hard-up); }
+  &.k-btn:is(:hover, [data-k-state="hover"])::before { translate: var(--k-space-1) 0; }
+  &.k-btn:not(.k-btn--ghost, :disabled, [aria-disabled="true"]):is(:active, [data-k-state="active"]) { translate: calc(var(--k-space-1) * 1.25) calc(var(--k-space-1) * 1.25); box-shadow: none; }
+  &.k-card--link:is(:hover, [data-k-state="hover"]) { translate: 0 calc(var(--k-space-2) * -1); rotate: -1deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-btn, .k-btn::before, .k-card--link { transition: none; }
+  .k-btn:hover, .k-btn:hover::before, .k-card--link:hover { translate: none; rotate: none; }
+}
+
+/*
+ * Second lot de composants (étape 6) : sélection, case à cocher, bouton radio, interrupteur, tableau, accordéon, pagination,
+ * fil d'Ariane, info-bulle, menu déroulant. Rien de neuf : la couche reporte sur eux ce qu'elle fait déjà plus haut.
+ * Ici : page courante en pilule blanche à ombre dure ; police de titre ; contours bruns ; ombre dure sous le tableau ; ligne choisie marquée d'orange.
+ * Aucun mouvement de signature sur ce lot : « full » et « reduced » rendent pareil. « off » : rien.
+ */
+:not([data-k-intensity="off"] *) {
+  &.k-pagination__page, &.k-table thead th { font-family: var(--k-font-display); }
+  &.k-pagination__page { border-radius: var(--k-radius-pill); }
+  &.k-pagination__page[aria-current="page"] { background: var(--k-bg); border-color: var(--k-sig-brown-deep); box-shadow: var(--k-shadow); }
+  &.k-table, &.k-dropdown__menu { border-color: var(--k-sig-brown-deep); }
+  &.k-table { background: var(--k-bg); }
+  &.k-accordion--titles .k-accordion__trigger { text-transform: uppercase; }
+  /* relecture sur components.md */
+  &.k-table { box-shadow: var(--k-shadow); }
+  &.k-table tbody tr[aria-selected="true"] > :first-child { border-inline-start-color: var(--k-sig-orange-hot); }
+}

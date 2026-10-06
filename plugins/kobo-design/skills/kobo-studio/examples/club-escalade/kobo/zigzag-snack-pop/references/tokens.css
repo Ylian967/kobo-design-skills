@@ -1,0 +1,65 @@
+/*
+ * Zigzag Snack Pop — tokens
+ * MESURÉS le 2026-10-03 par lecture des pixels sur l'image du shot Dribbble (4800 × 3600 ; la page y fait 2742px de large, ramenée ici à 1440).
+ * Mouvement : quelques effets sont visibles sur la vidéo du shot (bande qui défile, produits qui arrivent) ; durées et courbes sont proposées.
+ * @contrast white:brown white:outer ink:white ink:blush ink:yellow yellow:brown white:orange:large ink:orange-hot ink:lime white:sky white:taupe orange-ink:white soft:white ink:c1 ink:c2 ink:c3 ink:c4 ink:c5
+ */
+:root {
+  /* ---- Couleurs ---- */
+  --outer: #351c12;         /* mesuré : fond autour de la page */
+  --brown: #62382e;         /* mesuré : barre de navigation, sections sombres */
+  --brown-deep: #531f10;    /* mesuré : ombre dure des boutons */
+  --ink: #3e2617;           /* mesuré : titres sur blanc */
+  --soft: #6b5449;          /* choisi : texte secondaire sur blanc (shot : gris #aaa09a, trop pâle) */
+  --white: #ffffff;
+  --blush: #f6ece9;         /* mesuré : fiche d'avis, tuiles claires (#f6ece9 à #f9eae5) */
+  --orange: #ee6410;        /* choisi : fond du héros, foncé pour porter un grand titre blanc (shot : #fd7c24) */
+  --orange-light: #fd7c24;  /* mesuré : orange du héros dans le shot, gardé pour les reliefs */
+  --orange-hot: #ff6011;    /* mesuré : montagnes, bouton orange */
+  --orange-ink: #c2410c;    /* choisi : prix en orange sur blanc */
+  --yellow: #ffeb33;        /* mesuré : boutons, mot en couleur, mot géant du pied (#ffeb33 à #ffff39) */
+  --lime: #b3ce20;          /* mesuré : fiche de saveur verte */
+  --sky: #2f78b7;           /* choisi : fiche bleue, foncée pour son texte blanc (shot : #428fce) */
+  --taupe: #84685f;         /* choisi : fiche brune, foncée pour son texte blanc (shot : #a48b87) */
+  --c1: #e8f69b;            /* mesuré : pastilles d'ingrédients */
+  --c2: #fff068;
+  --c3: #f3e4df;
+  --c4: #dcc1a1;
+  --c5: #ffe6b5;
+  --track: rgb(53 28 18 / 0.35);           /* lu : traces de pneu sur le brun */
+  --lift: rgb(53 28 18 / 0.35);            /* lu : ombre douce de la fiche du milieu */
+
+  /* ---- Typographie ---- */
+  --font-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;      /* shot : grotesque condensée très grasse, non identifiée */
+  --font: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+  --font-label: 'Barlow Semi Condensed', 'Barlow', sans-serif;        /* shot : libellés semi-étroits arrondis, non identifiés */
+  --fs-hero: clamp(3rem, 8.5vw, 7.75rem);        /* mesuré : capitales de 92px de haut, soit ≈ 124px de corps */
+  --fs-h2: clamp(2.1rem, 4.4vw, 3.9rem);         /* lu : titres de section ≈ 62px */
+  --fs-h3: clamp(1.5rem, 2.3vw, 2rem);
+  --fs-giant: clamp(4rem, 15.5vw, 14rem);        /* lu : mot géant du pied, italique */
+  --fs-label: 1.375rem;     /* lu : libellé d'ingrédient ≈ 22px */
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-nav: 0.8125rem;      /* lu : liens de la barre, capitales ≈ 13px */
+
+  /* ---- Formes ---- */
+  --page: 1440px;
+  --gutter: clamp(16px, 4.2vw, 60px);
+  --frame: clamp(0px, 1.1vw, 16px);        /* mesuré : marge sombre autour de la page */
+  --nav-h: 47px;            /* mesuré */
+  --btn-h: 56px;            /* mesuré : bouton ≈ 236 × 56px, ombre comprise 244 × 61 */
+  --hard: 5px 5px 0 0 var(--brown-deep);   /* mesuré : ombre dure décalée */
+  --hard-up: 8px 8px 0 0 var(--brown-deep);
+  --r: 4px;                 /* lu : boutons presque droits */
+  --r-card: 10px;           /* lu : fiches */
+  --zig: 22px;              /* lu : largeur d'une dent ; hauteur ≈ 11px */
+  --circle: 148px;          /* lu : pastille d'ingrédient */
+
+  /* ---- Mouvement ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 150ms;
+  --dur: 450ms;
+  --dur-slow: 800ms;
+  --marquee: 36s;           /* observé sur la vidéo : la bande d'ingrédients avance lentement, en continu */
+}

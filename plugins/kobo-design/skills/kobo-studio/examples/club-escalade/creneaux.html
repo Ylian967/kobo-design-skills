@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="reduced" data-k-skill="zigzag-snack-pop">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réserver un créneau — Les Dalles</title>
+<!-- Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css (rôles --k-* seulement). -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/zigzag-snack-pop.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/modale/modale.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/onglets/onglets.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/zigzag-snack-pop.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 9h16M8 3v4M16 3v4M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Les Dalles</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html">Le club</a></li>
+          <li><a class="k-nav__link" href="essayer.html">Essayer</a></li>
+          <li><a class="k-nav__link" href="adherer.html">Adhérer</a></li>
+          <li><a class="k-nav__link" href="creneaux.html" aria-current="page">Créneaux</a></li>
+          <li><a class="k-nav__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="creneaux.html" data-dalles="action">Réserver un créneau</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html">Le club</a></li>
+        <li><a class="k-menu__link" href="essayer.html">Essayer</a></li>
+        <li><a class="k-menu__link" href="adherer.html">Adhérer</a></li>
+        <li><a class="k-menu__link" href="creneaux.html" aria-current="page">Créneaux <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot k-stack k-stack--sm">
+      <a class="k-btn k-btn--block" href="creneaux.html" data-dalles="action" data-k-menu-close>Réserver un créneau</a>
+      <button type="button" class="k-btn k-btn--secondary k-btn--block" data-dalles="deconnexion" hidden>Se déconnecter</button>
+    </div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Le club</a></li><li><span aria-current="page">Créneaux</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Réserver un créneau</h1>
+        <p class="k-lead" data-k-part="lead" id="cr-compte" role="status">Les créneaux sont visibles par tous. Pour réserver, il faut être membre et connecté.</p>
+        <p id="cr-liens"><a class="k-btn k-btn--secondary" href="connexion.html?retour=creneaux.html">Se connecter</a></p>
+      </div>
+    </section>
+
+    <!-- Le jour, puis les créneaux du jour : pas de filtre, pas de recherche -->
+    <section class="k-section k-section--tight k-section--rule" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <p id="cr-quota" class="dalles-avis" role="status" hidden></p>
+        <div class="k-tabs" id="cr-jours">
+          <div class="k-tabs__list" role="tablist" aria-label="Jour du créneau">
+            <button type="button" role="tab" class="k-tabs__tab" id="j0" aria-controls="p0" aria-selected="true">Aujourd'hui</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="j1" aria-controls="p1" aria-selected="false">Demain</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="j2" aria-controls="p2" aria-selected="false">Jour 3</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="j3" aria-controls="p3" aria-selected="false">Jour 4</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="j4" aria-controls="p4" aria-selected="false">Jour 5</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="j5" aria-controls="p5" aria-selected="false">Jour 6</button>
+            <button type="button" role="tab" class="k-tabs__tab" id="j6" aria-controls="p6" aria-selected="false">Jour 7</button>
+          </div>
+          <div class="k-tabs__panel" role="tabpanel" id="p0" aria-labelledby="j0" tabindex="0"></div>
+          <div class="k-tabs__panel" role="tabpanel" id="p1" aria-labelledby="j1" tabindex="0" hidden></div>
+          <div class="k-tabs__panel" role="tabpanel" id="p2" aria-labelledby="j2" tabindex="0" hidden></div>
+          <div class="k-tabs__panel" role="tabpanel" id="p3" aria-labelledby="j3" tabindex="0" hidden></div>
+          <div class="k-tabs__panel" role="tabpanel" id="p4" aria-labelledby="j4" tabindex="0" hidden></div>
+          <div class="k-tabs__panel" role="tabpanel" id="p5" aria-labelledby="j5" tabindex="0" hidden></div>
+          <div class="k-tabs__panel" role="tabpanel" id="p6" aria-labelledby="j6" tabindex="0" hidden></div>
+        </div>
+        <p class="k-note">Trois réservations par semaine (du lundi au samedi), 20 places par créneau. Une réservation s'annule jusqu'à 2 heures avant.</p>
+        <noscript><p>Cette page a besoin de JavaScript pour afficher les créneaux. Horaires : du lundi au vendredi 12 h – 14 h, 18 h – 20 h, 20 h – 22 h ; samedi 10 h – 12 h et 14 h – 17 h.</p></noscript>
+      </div>
+    </section>
+
+    <dialog class="k-modal" id="annuler" role="alertdialog" aria-labelledby="annuler-t" aria-describedby="annuler-d">
+      <div class="k-modal__head"><h2 class="k-modal__title" id="annuler-t">Annuler cette réservation ?</h2></div>
+      <div class="k-modal__body" id="annuler-d"><p id="annuler-texte"></p></div>
+      <div class="k-modal__foot">
+        <button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Garder ma place</button>
+        <button type="button" class="k-btn k-btn--danger" data-k-modal-close="annule"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Oui, annuler</button>
+      </div>
+    </dialog>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm">
+        <span class="k-foot__brand">Les Dalles</span>
+        <span>Club d'escalade associatif · 12 rue des Alliés, Grenoble</span>
+        <span><a href="tel:+33400000038">04 00 00 00 38</a> · <a href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></span>
+      </div>
+      <ul><li><a href="index.html">Le club</a></li><li><a href="essayer.html">Essayer</a></li><li><a href="adherer.html">Adhérer</a></li><li><a href="creneaux.html">Créneaux</a></li><li><a href="connexion.html">Se connecter</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/modale/modale.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/components/onglets/onglets.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="site.js"></script>
+<script src="js/dates.js"></script>
+<script src="js/reservations.js"></script>
+<script src="js/annulation.js"></script>
+<script src="js/creneaux.js"></script>
+</body>
+</html>

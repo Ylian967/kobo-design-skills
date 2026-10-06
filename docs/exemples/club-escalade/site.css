@@ -1,0 +1,22 @@
+/* Les Dalles — styles du projet. Rôles --k-* seulement ; aucune valeur en dur, aucun point de rupture. */
+
+/* Liste de créneaux ou de réservations : des lignes empilées, jamais un tableau. */
+.dalles-liste { display: grid; gap: var(--k-space-3); margin: 0; padding: 0; list-style: none; }
+.dalles-creneau { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-3) var(--k-space-6); padding: var(--k-space-4); background: var(--k-surface); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.dalles-creneau[data-etat="reserve"] { border-width: calc(var(--k-border-w) * 2); }
+.dalles-creneau[data-etat="complet"] { background: var(--k-surface-2); border-style: dashed; }
+.dalles-creneau__texte { display: grid; gap: var(--k-space-1); }
+.dalles-creneau__heure { font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: var(--k-lh-tight); }
+.dalles-creneau__etat { color: var(--k-text-2); }
+.dalles-creneau[data-etat="reserve"] .dalles-creneau__etat { color: var(--k-text); font-weight: bolder; }
+
+/* Un état écrit, avec son icône : jamais la couleur seule. */
+.dalles-etat { display: flex; align-items: center; gap: var(--k-space-2); }
+.dalles-etat .k-icon { flex: none; }
+
+/* Bloc de confirmation qui reste à l'écran. */
+.dalles-bloc { padding: var(--k-space-6); background: var(--k-surface); border: calc(var(--k-border-w) * 2) solid var(--k-line-strong); border-radius: var(--k-radius); }
+.dalles-actions { display: flex; flex-wrap: wrap; gap: var(--k-space-3); }
+
+/* Avis qui explique un bouton éteint (quota atteint). */
+.dalles-avis { padding: var(--k-space-3) var(--k-space-4); background: var(--k-surface-2); border-inline-start: calc(var(--k-border-w) * 3) solid var(--k-warning); }

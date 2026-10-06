@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full" data-k-skill="zigzag-snack-pop">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venir essayer un samedi — Les Dalles</title>
+<!-- Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css (rôles --k-* seulement). -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/zigzag-snack-pop.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton-radio/bouton-radio.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/modale/modale.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/zigzag-snack-pop.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 9h16M8 3v4M16 3v4M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Les Dalles</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html">Le club</a></li>
+          <li><a class="k-nav__link" href="essayer.html" aria-current="page">Essayer</a></li>
+          <li><a class="k-nav__link" href="adherer.html">Adhérer</a></li>
+          <li><a class="k-nav__link" href="creneaux.html">Créneaux</a></li>
+          <li><a class="k-nav__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="essayer.html" data-dalles="action">Venir essayer</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html">Le club</a></li>
+        <li><a class="k-menu__link" href="essayer.html" aria-current="page">Essayer <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="adherer.html">Adhérer</a></li>
+        <li><a class="k-menu__link" href="creneaux.html">Créneaux</a></li>
+        <li><a class="k-menu__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot k-stack k-stack--sm">
+      <a class="k-btn k-btn--block" href="essayer.html" data-dalles="action" data-k-menu-close>Venir essayer</a>
+      <button type="button" class="k-btn k-btn--secondary k-btn--block" data-dalles="deconnexion" hidden>Se déconnecter</button>
+    </div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Où l'on est, et de quoi parle la page -->
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Le club</a></li><li><span aria-current="page">Essayer</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Venir essayer un samedi</h1>
+        <p class="k-lead" data-k-part="lead">Une séance découverte de deux heures, avec un encadrant, pour voir si l'escalade vous plaît. Aucun compte à créer, rien à payer en ligne.</p>
+      </div>
+    </section>
+
+    <!-- 2. Ce qu'il faut savoir, puis l'inscription : un samedi, trois champs -->
+    <section class="k-section k-section--tight k-section--rule" aria-labelledby="t-inscription">
+      <div class="k-wrap k-wrap--text k-stack k-stack--lg">
+        <dl class="k-facts">
+          <div><dt>Quand</dt><dd>le samedi, de 10 h à 12 h</dd></div>
+          <div><dt>Prix</dt><dd>10 €, à régler sur place</dd></div>
+          <div><dt>Matériel</dt><dd>prêté</dd></div>
+          <div><dt>Groupe</dt><dd>8 personnes au plus, un encadrant</dd></div>
+          <div><dt>Où</dt><dd>12 rue des Alliés, Grenoble</dd></div>
+        </dl>
+
+        <div id="inscription" class="k-stack k-stack--lg">
+          <h2 class="k-h2" id="t-inscription" tabindex="-1">Réserver ma séance</h2>
+
+          <!-- Séance déjà réservée depuis cet appareil : la confirmation reste -->
+          <div id="essai-confirme" class="dalles-bloc k-stack" role="status" hidden>
+            <p class="dalles-etat"><svg class="k-icon" aria-hidden="true"><use href="#i-check"/></svg><strong>C'est réservé.</strong></p>
+            <p id="essai-resume"></p>
+            <dl class="k-facts">
+              <div><dt>Rendez-vous</dt><dd>12 rue des Alliés, Grenoble, à 10 h</dd></div>
+              <div><dt>À régler sur place</dt><dd>10 €</dd></div>
+              <div><dt>Matériel</dt><dd>prêté</dd></div>
+              <div><dt>Un empêchement, une question</dt><dd><a class="k-link" href="tel:+33400000038">04 00 00 00 38</a></dd></div>
+            </dl>
+            <p class="k-note">Simulation : aucun e-mail n'est envoyé pour l'instant. La réservation est gardée sur cet appareil.</p>
+            <div class="dalles-actions">
+              <a class="k-btn" href="adherer.html">Adhérer pour l'année</a>
+              <button type="button" class="k-btn k-btn--secondary" id="essai-annuler">Annuler ma séance</button>
+            </div>
+          </div>
+
+          <!-- Aucun samedi ouvert -->
+          <div class="k-empty" id="essai-vide" hidden>
+            <svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-cal"/></svg>
+            <h3 class="k-empty__title">Les quatre prochains samedis sont complets</h3>
+            <p class="k-empty__text">Une nouvelle date s'ouvre chaque samedi. Vous pouvez aussi nous écrire : on vous prévient dès qu'une place se libère.</p>
+            <div class="k-empty__actions"><a class="k-btn k-btn--secondary" href="mailto:contact@lesdalles.example">Écrire au club</a></div>
+          </div>
+
+          <form id="essai-form" class="k-stack k-stack--lg" novalidate>
+            <fieldset class="k-radio-group" id="essai-dates" aria-describedby="essai-dates-aide">
+              <legend class="k-radio-group__legend">Quel samedi ?</legend>
+              <div class="k-radio-group__list" id="essai-liste"></div>
+              <p class="k-radio-group__help" id="essai-dates-aide">Huit places par séance.</p>
+              <p class="k-radio-group__error" id="essai-dates-erreur" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez un samedi pour réserver.</span></p>
+            </fieldset>
+
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="essai-nom">Prénom et nom</label>
+              <div class="k-field__box"><input class="k-field__control" id="essai-nom" name="nom" type="text" autocomplete="name" required data-k-msg="Écrivez votre prénom et votre nom."></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="essai-mail">Adresse e-mail</label>
+              <div class="k-field__box"><input class="k-field__control" id="essai-mail" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="essai-mail-aide" data-k-msg="Adresse incomplète : il faut un @ et un domaine, par exemple prenom@exemple.fr."></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="essai-mail-aide">Pour vous confirmer la séance.</span>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="essai-tel">Téléphone</label>
+              <div class="k-field__box"><input class="k-field__control" id="essai-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required pattern="[0-9 +.]{10,}" aria-describedby="essai-tel-aide" data-k-msg="Numéro incomplet : dix chiffres, par exemple 06 12 34 56 78."></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="essai-tel-aide">Pour vous prévenir si la séance change.</span>
+            </div>
+
+            <button type="submit" class="k-btn k-btn--block" id="essai-envoyer">Réserver ma séance</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="k-modal" id="annuler" role="alertdialog" aria-labelledby="annuler-t" aria-describedby="annuler-d">
+      <div class="k-modal__head"><h2 class="k-modal__title" id="annuler-t">Annuler la séance découverte ?</h2></div>
+      <div class="k-modal__body" id="annuler-d"><p id="annuler-texte"></p></div>
+      <div class="k-modal__foot">
+        <button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Garder ma place</button>
+        <button type="button" class="k-btn k-btn--danger" data-k-modal-close="annule"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Oui, annuler</button>
+      </div>
+    </dialog>
+
+    <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
+      <div class="k-wrap k-split k-split--center">
+        <div class="k-stack k-split__main">
+          <h2 class="k-h2" id="t-suite" data-k-part="title">Un samedi, trois champs</h2>
+          <p class="k-lead" data-k-part="lead">La séance se règle sur place. Vous pouvez l'annuler d'ici jusqu'au dernier moment.</p>
+        </div>
+        <div><a class="k-btn" href="#inscription" data-k-part="action">Venir essayer</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm">
+        <span class="k-foot__brand">Les Dalles</span>
+        <span>Club d'escalade associatif · 12 rue des Alliés, Grenoble</span>
+        <span><a href="tel:+33400000038">04 00 00 00 38</a> · <a href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></span>
+      </div>
+      <ul><li><a href="index.html">Le club</a></li><li><a href="essayer.html">Essayer</a></li><li><a href="adherer.html">Adhérer</a></li><li><a href="creneaux.html">Créneaux</a></li><li><a href="connexion.html">Se connecter</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/modale/modale.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="site.js"></script>
+<script src="js/dates.js"></script>
+<script src="js/formulaire.js"></script>
+<script src="js/annulation.js"></script>
+<script src="js/essayer.js"></script>
+</body>
+</html>

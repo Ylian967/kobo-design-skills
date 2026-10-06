@@ -1,183 +1,233 @@
 <!doctype html>
-<html lang="fr" data-k-intensity="full" data-k-skill="clear-ledger-desk">
+<html lang="fr" data-k-intensity="full" data-k-skill="zigzag-snack-pop">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Club Les Dalles — salle d'escalade associative à Grenoble (club fictif)</title>
-<meta name="description" content="Club Les Dalles, salle d'escalade associative à Grenoble : bloc, voie et cours encadrés. Horaires, adhésion et réservation des créneaux.">
-<!-- Fichiers de kobo/ : ne pas les modifier. -->
+<title>Les Dalles — club d'escalade associatif à Grenoble</title>
+<!-- Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css (rôles --k-* seulement). -->
 <link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
-<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/clear-ledger-desk.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/zigzag-snack-pop.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/carte/carte.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
 <link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
-<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/clear-ledger-desk.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/zigzag-snack-pop.css">
 </head>
 <body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 9h16M8 3v4M16 3v4M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
 <div class="k-page">
   <div data-k-slot="backdrop" aria-hidden="true"></div>
   <div data-k-slot="frame" aria-hidden="true"></div>
   <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
 
   <div class="k-page__top">
-    <header class="k-nav k-nav--sticky">
-      <a class="k-nav__brand" href="index.html">Club Les Dalles</a>
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Les Dalles</a>
       <nav aria-label="Navigation principale">
         <ul class="k-nav__list">
-          <li><a class="k-nav__link" href="#activites">Activités</a></li>
-          <li><a class="k-nav__link" href="#horaires">Horaires</a></li>
-          <li><a class="k-nav__link" href="#adhesion">Adhésion</a></li>
-          <li><a class="k-nav__link" href="#venir">Venir et écrire</a></li>
+          <li><a class="k-nav__link" href="index.html" aria-current="page">Le club</a></li>
+          <li><a class="k-nav__link" href="essayer.html">Essayer</a></li>
+          <li><a class="k-nav__link" href="adherer.html">Adhérer</a></li>
+          <li><a class="k-nav__link" href="creneaux.html">Créneaux</a></li>
+          <li><a class="k-nav__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
         </ul>
       </nav>
       <div class="k-nav__actions">
-        <a class="k-btn k-nav__extra" href="espace-membre.html">Réserver un créneau</a>
-        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu">Menu</button>
+        <a class="k-btn k-nav__extra" href="essayer.html" data-dalles="action">Venir essayer</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
       </div>
     </header>
   </div>
 
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html" aria-current="page">Le club <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="essayer.html">Essayer</a></li>
+        <li><a class="k-menu__link" href="adherer.html">Adhérer</a></li>
+        <li><a class="k-menu__link" href="creneaux.html">Créneaux</a></li>
+        <li><a class="k-menu__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot k-stack k-stack--sm">
+      <a class="k-btn k-btn--block" href="essayer.html" data-dalles="action" data-k-menu-close>Venir essayer</a>
+      <button type="button" class="k-btn k-btn--secondary k-btn--block" data-dalles="deconnexion" hidden>Se déconnecter</button>
+    </div>
+  </dialog>
+
   <main id="contenu" tabindex="-1">
-    <!-- 1. Ouverture : qu'est-ce que c'est ? -->
-    <section class="k-section" data-k-slot="hero" aria-labelledby="titre">
+    <!-- 1. Qui on est, et la première chose à faire -->
+    <section data-k-slot="hero" aria-labelledby="titre">
       <div class="k-wrap k-hero">
         <div class="k-hero__text">
-          <p class="k-kicker" data-k-part="kicker">Salle d'escalade associative</p>
-          <h1 class="k-h1" id="titre" data-k-part="title">Grimper à Grenoble, toute l'année</h1>
-          <p class="k-lead" data-k-part="lead">Le Club Les Dalles est une salle associative. On y grimpe en bloc ou en voie, seul, à deux ou en cours encadré, sur des créneaux réservés à l'avance.</p>
-          <a class="k-btn" data-k-part="action" href="espace-membre.html">Réserver un créneau</a>
+          <p class="k-kicker" data-k-part="kicker">Club associatif · Grenoble</p>
+          <h1 class="k-h1" id="titre" data-k-part="title">L'escalade à Grenoble, sans prise de tête</h1>
+          <p class="k-lead" data-k-part="lead">Les Dalles, c'est une salle de bloc et de voie, 180 membres, et une séance découverte chaque samedi matin : 10 €, matériel prêté, un encadrant avec vous. <a class="k-link" href="creneaux.html">Déjà membre ? Réserver un créneau</a></p>
+          <a class="k-btn" href="essayer.html" data-k-part="action">Venir essayer</a>
         </div>
-        <div class="k-hero__side">
-          <figure data-k-slot="media" data-k-part="media">
-            <img src="images/mur-bloc.jpg" width="1920" height="1080" data-k-focus="60% 45%" alt="Un mur de bloc en salle, couvert de prises de couleur, au-dessus d'un grand tapis bleu ; un grimpeur au fond.">
-            <figcaption>Photo provisoire, à remplacer : ce n'est pas la salle du club. Ka23 13, Wikimedia Commons, CC BY-SA 4.0.</figcaption>
-          </figure>
+        <figure class="k-hero__side" data-k-slot="media" data-k-part="media">
+          <img src="images/bloc-grimpeur.jpg" alt="Grimpeur torse nu accroché à des volumes gris sur un mur de bloc vert, entouré de prises de couleur" width="1100" height="1100" style="--_ratio: 1" data-k-focus="55% 50%">
+          <figcaption>Photo provisoire : ce n'est pas encore notre salle.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. Par où commencer : trois portes, la séance découverte en avant -->
+    <section class="k-section k-section--rule" id="commencer" aria-labelledby="t-commencer">
+      <div class="k-wrap">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">Par où commencer</p>
+          <h2 class="k-h2" id="t-commencer" data-k-part="title">Essayer, adhérer, ou réserver sa séance</h2>
+        </header>
+        <div data-k-slot="grid" class="sv-grid">
+          <article class="k-card k-card--link k-card--row k-grid__wide" data-k-part="item">
+            <div class="k-card__media"><img src="images/decouverte-groupe.jpg" alt="Trois personnes au pied d'un mur de bloc couvert de prises de toutes les couleurs, tapis bleus au sol" width="900" height="600" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Jamais grimpé ? C'est ici</span><h3 class="k-card__title"><a href="essayer.html">La séance découverte du samedi</a></h3><p class="k-card__text">Deux heures avec un encadrant, huit personnes au plus. Le matériel est prêté, il n'y a rien à acheter avant de venir.</p></div>
+            <div class="k-card__foot"><span>10 €, payés sur place</span><span>samedi, 10 h – 12 h</span></div>
+          </article>
+          <article class="k-card k-card--link" data-k-part="item">
+            <div class="k-card__media"><img src="images/voie-grimpeur.jpg" alt="Grimpeur encordé, de profil, sur un mur de voie bleu" width="900" height="600" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Décidé</span><h3 class="k-card__title"><a href="adherer.html">Adhérer pour l'année</a></h3><p class="k-card__text">Bloc et voie, du lundi au samedi. La licence est comprise.</p></div>
+            <div class="k-card__foot"><span>180 € l'année</span><span>120 € en tarif réduit</span></div>
+          </article>
+          <article class="k-card k-card--link" data-k-part="item">
+            <div class="k-card__media"><img src="images/salle-mur.jpg" alt="Grande salle d'escalade vide, murs clairs couverts de prises, verrière au plafond" width="900" height="600" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Membres</span><h3 class="k-card__title"><a href="creneaux.html">Réserver un créneau</a></h3><p class="k-card__text">Les créneaux des sept prochains jours et les places qui restent. Deux touches, c'est réservé.</p></div>
+            <div class="k-card__foot"><span>Gratuit pour les membres</span><span>20 places par créneau</span></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- 2. Activités : qu'y fait-on ? -->
-    <section class="k-section k-section--alt" id="activites" aria-labelledby="t-activites">
+    <!-- 3. Le club : est-ce pour moi ? -->
+    <section class="k-section k-section--alt" id="club" aria-labelledby="t-club">
+      <div class="k-wrap k-split">
+        <figure data-k-slot="media">
+          <img src="images/falaise-grimpeur.jpg" alt="Grimpeur en bonnet noir, encordé, les deux mains sur le rebord d'un rocher en extérieur" width="900" height="600" loading="lazy" style="--_ratio: 3 / 2">
+          <figcaption>Photo provisoire, en attendant celles des membres.</figcaption>
+        </figure>
+        <div class="k-split__main k-stack k-stack--lg">
+          <header data-k-slot="title">
+            <p class="k-kicker" data-k-part="kicker">Le club</p>
+            <h2 class="k-h2" id="t-club" data-k-part="title">Un club, pas une salle de sport</h2>
+          </header>
+          <div class="k-prose">
+            <p>Les Dalles est un club associatif grenoblois. On y grimpe en bloc et en voie, dans la même salle, du lundi au samedi.</p>
+            <p>Vous n'avez jamais grimpé ? La séance découverte du samedi matin est faite pour ça. Si ça vous plaît, vous adhérez pour l'année, puis vous réservez vos créneaux depuis votre téléphone.</p>
+          </div>
+          <dl class="k-facts">
+            <div><dt>La salle</dt><dd>bloc et voie</dd></div>
+            <div><dt>Membres</dt><dd>180</dd></div>
+            <div><dt>Statut</dt><dd>club associatif</dd></div>
+            <div><dt>Pour débuter</dt><dd>séance encadrée, matériel prêté</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Tarifs : combien ça coûte, sans surprise -->
+    <section class="k-section" id="tarifs" aria-labelledby="t-tarifs" data-k-tone="inverse">
       <div class="k-wrap k-stack k-stack--lg">
         <header data-k-slot="title">
-          <p class="k-kicker" data-k-part="kicker">Activités</p>
-          <h2 class="k-h2" id="t-activites" data-k-part="title">Trois façons de grimper</h2>
+          <p class="k-kicker" data-k-part="kicker">Tarifs</p>
+          <h2 class="k-h2" id="t-tarifs" data-k-part="title">Trois prix, tout compris</h2>
+        </header>
+        <dl class="k-facts">
+          <div><dt>Séance découverte (samedi 10 h – 12 h, encadrée, matériel prêté)</dt><dd>10 €, sur place</dd></div>
+          <div><dt>Adhésion adulte, licence comprise</dt><dd>180 € l'année</dd></div>
+          <div><dt>Tarif réduit (étudiants, moins de 18 ans, demandeurs d'emploi), licence comprise</dt><dd>120 € l'année</dd></div>
+          <div><dt>Réserver un créneau, pour un membre</dt><dd>gratuit</dd></div>
+          <div><dt>À apporter à la première séance</dt><dd>un certificat médical</dd></div>
+        </dl>
+        <p><a class="k-link" href="adherer.html">Adhérer pour l'année</a></p>
+      </div>
+    </section>
+
+    <!-- 5. Horaires et accès : quand, et où -->
+    <section class="k-section k-section--alt" id="horaires" aria-labelledby="t-horaires">
+      <div class="k-wrap k-stack k-stack--lg">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">Horaires et accès</p>
+          <h2 class="k-h2" id="t-horaires" data-k-part="title">Ouvert midi et soir, et le samedi</h2>
         </header>
         <div class="k-split">
-          <div class="k-split__main k-stack k-stack--lg">
-            <div class="k-stack k-stack--sm"><h3 class="k-h3">Bloc</h3><p>Des passages courts, sans corde, au-dessus de tapis épais.</p></div>
-            <div class="k-stack k-stack--sm"><h3 class="k-h3">Voie</h3><p>Le grand mur, encordé, à deux : l'un grimpe, l'autre assure.</p></div>
-            <div class="k-stack k-stack--sm"><h3 class="k-h3">Cours encadrés</h3><p>Un encadrant du club et un niveau annoncé : débutant ou confirmé.</p></div>
+          <div class="k-split__main k-stack">
+            <h3 class="k-h3">Les créneaux</h3>
+            <dl class="k-facts">
+              <div><dt>Du lundi au vendredi</dt><dd>12 h – 14 h · 18 h – 20 h · 20 h – 22 h</dd></div>
+              <div><dt>Samedi</dt><dd>10 h – 12 h · 14 h – 17 h</dd></div>
+              <div><dt>Dimanche</dt><dd>fermé</dd></div>
+            </dl>
           </div>
-          <figure data-k-slot="media">
-            <img src="images/grimpeur-bloc.jpg" width="960" height="1275" loading="lazy" alt="Un grimpeur en tee-shirt blanc, assis en équilibre sur un volume d'un mur de bloc turquoise, tend les deux bras vers la prise suivante.">
-            <figcaption>Photo provisoire, à remplacer : ce n'est pas un membre du club. John Kane, Wikimedia Commons, CC0.</figcaption>
-          </figure>
+          <div class="k-stack">
+            <h3 class="k-h3">Nous trouver</h3>
+            <dl class="k-facts">
+              <div><dt>Adresse</dt><dd>12 rue des Alliés, Grenoble</dd></div>
+              <div><dt>Téléphone</dt><dd><a class="k-link" href="tel:+33400000038">04 00 00 00 38</a></dd></div>
+              <div><dt>E-mail</dt><dd><a class="k-link" href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></dd></div>
+            </dl>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 3. Horaires : quand ? -->
-    <section class="k-section" id="horaires" aria-labelledby="t-horaires">
-      <div class="k-wrap k-split">
-        <header data-k-slot="title">
-          <p class="k-kicker" data-k-part="kicker">Horaires</p>
-          <h2 class="k-h2" id="t-horaires" data-k-part="title">Ouvert tous les jours</h2>
-        </header>
-        <div class="k-split__main k-stack">
-          <dl class="k-facts">
-            <div><dt>Du lundi au vendredi</dt><dd>de 12 h à 22 h</dd></div>
-            <div><dt>Samedi et dimanche</dt><dd>de 10 h à 19 h</dd></div>
-          </dl>
-          <p class="k-note">Les séances se réservent dans l'espace membre : trois réservations au plus par semaine, annulation possible jusqu'à deux heures avant le début.</p>
+    <!-- 6. La suite : la même action qu'en haut -->
+    <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
+      <div class="k-wrap k-split k-split--center">
+        <div class="k-stack k-split__main">
+          <h2 class="k-h2" id="t-suite" data-k-part="title">Envie d'essayer samedi ?</h2>
+          <p class="k-lead" data-k-part="lead">De 10 h à 12 h, 10 € sur place, matériel prêté. Huit places par séance : réservez la vôtre.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- 4. Adhésion : combien ? -->
-    <section class="k-section k-section--rule" id="adhesion" aria-labelledby="t-adhesion">
-      <div class="k-wrap k-split">
-        <header data-k-slot="title">
-          <p class="k-kicker" data-k-part="kicker">Adhésion</p>
-          <h2 class="k-h2" id="t-adhesion" data-k-part="title">Une adhésion pour l'année</h2>
-        </header>
-        <div class="k-split__main">
-          <dl class="k-facts">
-            <div><dt>Adulte</dt><dd>240 € par an</dd></div>
-            <div><dt>Moins de 18 ans</dt><dd>160 € par an</dd></div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. Venir, écrire : où, comment joindre ? -->
-    <section class="k-section k-section--rule" id="venir" aria-labelledby="t-venir">
-      <div class="k-wrap k-split">
-        <header data-k-slot="title">
-          <p class="k-kicker" data-k-part="kicker">Venir et écrire</p>
-          <h2 class="k-h2" id="t-venir" data-k-part="title">8 rue des Arts, à Grenoble</h2>
-        </header>
-        <div class="k-split__main">
-          <dl class="k-facts">
-            <div><dt>Adresse</dt><dd>8 rue des Arts, Grenoble</dd></div>
-            <div><dt>Téléphone</dt><dd><a class="k-link" href="tel:+33400000033">04 00 00 00 33</a></dd></div>
-            <div><dt>Courriel</dt><dd><a class="k-link" href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></dd></div>
-          </dl>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. Dernière section : et maintenant ? -->
-    <section data-k-slot="finale" aria-labelledby="t-fin">
-      <div class="k-wrap k-stack">
-        <h2 class="k-h2" id="t-fin">Votre prochaine séance</h2>
-        <p class="k-lead">Les créneaux de la semaine sont dans l'espace membre.</p>
-        <div><a class="k-btn" href="espace-membre.html">Réserver un créneau</a></div>
+        <div class="k-stack k-stack--sm"><a class="k-btn" href="essayer.html" data-k-part="action">Venir essayer</a><a class="k-link" href="creneaux.html">Déjà membre ? Réserver un créneau</a></div>
       </div>
     </section>
   </main>
 
   <footer class="k-foot">
     <div class="k-wrap k-foot__in">
-      <div>
-        <p class="k-foot__brand">Club Les Dalles</p>
-        <p>Salle d'escalade associative · 8 rue des Arts, Grenoble</p>
-        <p>Club fictif : cette page est un exemple.</p>
+      <div class="k-stack k-stack--sm">
+        <span class="k-foot__brand">Les Dalles</span>
+        <span>Club d'escalade associatif · 12 rue des Alliés, Grenoble</span>
+        <span><a href="tel:+33400000038">04 00 00 00 38</a> · <a href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></span>
       </div>
-      <ul>
-        <li><a href="espace-membre.html">Espace membre</a></li>
-        <li><a href="tel:+33400000033">04 00 00 00 33</a></li>
-        <li><a href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></li>
-      </ul>
+      <ul><li><a href="index.html">Le club</a></li><li><a href="essayer.html">Essayer</a></li><li><a href="adherer.html">Adhérer</a></li><li><a href="creneaux.html">Créneaux</a></li><li><a href="connexion.html">Se connecter</a></li></ul>
     </div>
+    <div class="k-wrap"><p class="k-note">Photos provisoires, à remplacer par celles du club. Wikimedia Commons, recadrées :
+      <a href="https://commons.wikimedia.org/wiki/File:Man_climbing_in_bouldering_gym.jpg">John Kane</a> (CC0),
+      <a href="https://commons.wikimedia.org/wiki/File:%E3%83%9C%E3%83%AB%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0_(7955003588).jpg">ColdSleeper</a> (CC BY 2.0),
+      <a href="https://commons.wikimedia.org/wiki/File:Climber_practices_skills_on_indoor_wall_during_event_at_climbing_center.jpg">Shixart1985</a> (CC BY 2.0),
+      <a href="https://commons.wikimedia.org/wiki/File:Indoor_climbing_at_the_UBC_Student_Union_Building.jpg">Dllu</a> (CC BY-SA 4.0),
+      <a href="https://commons.wikimedia.org/wiki/File:Grimpeur_ext%C3%A9rieur_falaise_prise_escalade_plat.jpg">JEKruger</a> (CC BY-SA 2.0).</p></div>
   </footer>
 </div>
-
-<dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
-  <div class="k-menu__head">
-    <h2 class="k-menu__title" id="menu-titre">Menu</h2>
-    <button type="button" class="k-btn k-btn--secondary" data-k-menu-close>Fermer</button>
-  </div>
-  <nav aria-label="Menu">
-    <ul class="k-menu__list">
-      <li><a class="k-menu__link" href="#activites">Activités</a></li>
-      <li><a class="k-menu__link" href="#horaires">Horaires</a></li>
-      <li><a class="k-menu__link" href="#adhesion">Adhésion</a></li>
-      <li><a class="k-menu__link" href="#venir">Venir et écrire</a></li>
-    </ul>
-  </nav>
-  <div class="k-menu__foot"><a class="k-btn k-btn--block" href="espace-membre.html">Réserver un créneau</a></div>
-</dialog>
 
 <script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
 <script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
 <script src="kobo/kobo-studio/ux/structures/page.js"></script>
 <script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.js"></script>
 <script>
   Kobo.templates.apply();
   if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
 </script>
+<script src="site.js"></script>
 </body>
 </html>

@@ -5,7 +5,9 @@ La partie de kobo-studio qui ne dépend d'aucun skill : comment une page est con
 | Dossier | Contenu |
 |---|---|
 | `structures/` | Quatre structures de page complètes (HTML, CSS, JS, React, README) et leur socle commun (`page.css`, `page.js`) |
+| `methode.md` | La méthode UX, à suivre avant de choisir un style : profils, tâches, parcours écran par écran, plan de parcours |
 | `patterns/` | Fiches courtes sur les briques transverses : états de page, formulaire, navigation, mouvements |
+| `patterns/domaines/` | Parcours types par domaine, avec leurs sources : réservation de créneaux, adhésion, compte et espace membre, boutique, contact et devis, rendez-vous, outil interne |
 | `templates/` | Gabarits de signature : une famille par type de mise en page, habillée par skill |
 | `structures.html` | Démonstration : chaque structure sous chacun des 23 skills, aux trois intensités, gabarits neutres ou de signature |
 

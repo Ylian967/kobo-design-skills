@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="reduced" data-k-skill="zigzag-snack-pop">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Se connecter — Les Dalles</title>
+<!-- Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css (rôles --k-* seulement). -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/zigzag-snack-pop.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/zigzag-snack-pop.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 9h16M8 3v4M16 3v4M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Les Dalles</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html">Le club</a></li>
+          <li><a class="k-nav__link" href="essayer.html">Essayer</a></li>
+          <li><a class="k-nav__link" href="adherer.html">Adhérer</a></li>
+          <li><a class="k-nav__link" href="creneaux.html">Créneaux</a></li>
+          <li><a class="k-nav__link" href="connexion.html" aria-current="page" data-dalles="lien-compte">Se connecter</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="creneaux.html" data-dalles="action">Réserver un créneau</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html">Le club</a></li>
+        <li><a class="k-menu__link" href="essayer.html">Essayer</a></li>
+        <li><a class="k-menu__link" href="adherer.html">Adhérer</a></li>
+        <li><a class="k-menu__link" href="creneaux.html">Créneaux</a></li>
+        <li><a class="k-menu__link" href="connexion.html" aria-current="page" data-dalles="lien-compte">Se connecter <span class="k-menu__here">page actuelle</span></a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot k-stack k-stack--sm">
+      <a class="k-btn k-btn--block" href="creneaux.html" data-dalles="action" data-k-menu-close>Réserver un créneau</a>
+      <button type="button" class="k-btn k-btn--secondary k-btn--block" data-dalles="deconnexion" hidden>Se déconnecter</button>
+    </div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Le club</a></li><li><span aria-current="page">Se connecter</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Se connecter</h1>
+        <p class="k-lead" data-k-part="lead" id="cx-accroche">Derrière : les créneaux des sept prochains jours, vos réservations, et de quoi les annuler.</p>
+      </div>
+    </section>
+
+    <section class="k-section k-section--tight k-section--rule" aria-labelledby="titre">
+      <div class="k-wrap k-wrap--text k-stack k-stack--lg">
+
+        <!-- Déjà connecté : on le dit, on ne redemande rien -->
+        <div id="cx-deja" class="dalles-bloc k-stack" hidden>
+          <p class="dalles-etat"><svg class="k-icon" aria-hidden="true"><use href="#i-check"/></svg><strong id="cx-deja-nom"></strong></p>
+          <div class="dalles-actions">
+            <a class="k-btn" href="creneaux.html">Réserver un créneau</a>
+            <button type="button" class="k-btn k-btn--secondary" data-dalles="deconnexion">Se déconnecter</button>
+          </div>
+        </div>
+
+        <form id="cx-form" class="k-stack k-stack--lg" novalidate>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="cx-mail">Adresse e-mail</label>
+            <div class="k-field__box"><input class="k-field__control" id="cx-mail" name="email" type="email" inputmode="email" autocomplete="username" required data-k-msg="Adresse incomplète : il faut un @ et un domaine, par exemple prenom@exemple.fr."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          </div>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="cx-mdp">Mot de passe</label>
+            <div class="k-field__box"><input class="k-field__control" id="cx-mdp" name="mdp" type="password" autocomplete="current-password" required data-k-msg="Écrivez votre mot de passe."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          </div>
+          <p><button type="button" class="k-btn k-btn--ghost" data-dalles-voir="cx-mdp">Afficher le mot de passe</button></p>
+          <button type="submit" class="k-btn k-btn--block">Se connecter</button>
+          <p><a class="k-link" href="#acces">Mot de passe oublié, ou première connexion ?</a></p>
+          <p class="k-note">Démonstration : la connexion est simulée. Essayez avec camille@lesdalles.example et le mot de passe grimpe2026.</p>
+        </form>
+
+        <!-- Mot de passe oublié et premier accès des membres actuels : un seul champ -->
+        <form id="acces" class="k-stack" novalidate aria-labelledby="t-acces">
+          <h2 class="k-h3" id="t-acces">Mot de passe oublié, ou première connexion ?</h2>
+          <p>Déjà membre avant l'ouverture du site ? Donnez l'adresse e-mail que le club connaît : vous recevez un lien pour choisir votre mot de passe.</p>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="acces-mail">Adresse e-mail</label>
+            <div class="k-field__box"><input class="k-field__control" id="acces-mail" name="email" type="email" inputmode="email" autocomplete="email" required data-k-msg="Adresse incomplète : il faut un @ et un domaine, par exemple prenom@exemple.fr."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          </div>
+          <p><button type="submit" class="k-btn k-btn--secondary">Recevoir un lien</button></p>
+          <p id="acces-etat" role="status"></p>
+        </form>
+
+        <div class="k-stack k-stack--sm">
+          <h2 class="k-h3">Pas encore membre ?</h2>
+          <p><a class="k-link" href="essayer.html">Venir essayer un samedi</a>, ou <a class="k-link" href="adherer.html">adhérer pour l'année</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm">
+        <span class="k-foot__brand">Les Dalles</span>
+        <span>Club d'escalade associatif · 12 rue des Alliés, Grenoble</span>
+        <span><a href="tel:+33400000038">04 00 00 00 38</a> · <a href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></span>
+      </div>
+      <ul><li><a href="index.html">Le club</a></li><li><a href="essayer.html">Essayer</a></li><li><a href="adherer.html">Adhérer</a></li><li><a href="creneaux.html">Créneaux</a></li><li><a href="connexion.html">Se connecter</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="site.js"></script>
+<script src="js/formulaire.js"></script>
+<script src="js/connexion.js"></script>
+</body>
+</html>

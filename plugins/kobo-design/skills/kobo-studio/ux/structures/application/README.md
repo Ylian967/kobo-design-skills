@@ -4,10 +4,12 @@ La coquille d'un outil de travail : on y revient chaque jour pour faire une tâc
 
 ## Quand la choisir
 
-- Registre **fonctionnel** : CRM, back-office, ERP, outil interne, tableau de bord, espace d'administration, application SaaS.
+- **Outil interne utilisé par des employés** : CRM, back-office, ERP, espace d'administration. Vérifie les quatre « oui » de `../../patterns/domaines/outil-interne.md`.
 - L'utilisateur gère des enregistrements (clients, affaires, commandes, réservations) : il cherche, trie, filtre, coche, ouvre.
 
 Ne pas la choisir pour présenter ou vendre (→ landing produit, site vitrine) : elle n'a ni héros, ni dernière section d'appel, ni pied de page.
+
+Ne pas la choisir non plus pour l'**espace connecté d'un public** (membres, clients, adhérents), même si la demande dit « application » : barre latérale, tableau dense, recherche et raccourcis sont faits pour un employé à son bureau, pas pour quelqu'un qui réserve sur son téléphone (→ pages du site vitrine en intensité `reduced`, voir `SKILL.md`, « Projet mixte », et `../../patterns/domaines/compte-espace-membre.md`).
 
 ## Fichiers
 

@@ -1,10 +1,10 @@
 # Catalogue des 24 skills de style, vu depuis kobo-studio
 
-Une fiche courte par skill, pour choisir à l'étape c sans ouvrir les skills. Tout vient des fichiers existants : la description et `references/assets.md` de chaque skill, `audit/<id>.md`, `components/signatures/README.md`, les en-têtes de `ux/templates/` et `quality/relecture-etape-4b.md`. Rien n'est inventé ; une ligne vide de source dit « non relevé ».
+Une fiche courte par skill, pour choisir à l'étape c sans ouvrir les skills. **À ouvrir après le plan de parcours** (`ux/methode.md`), jamais avant : on choisit un style pour des personnes et des tâches déjà écrites. Tout vient des fichiers existants : la description et `references/assets.md` de chaque skill, `audit/<id>.md`, `components/signatures/README.md`, les en-têtes de `ux/templates/` et `quality/relecture-etape-4b.md`. Rien n'est inventé ; une ligne vide de source dit « non relevé ».
 
 Comment lire une fiche :
 
-- **Registre** : *expressif* (l'image et le récit priment), *produit* (présenter, vendre) ou *fonctionnel* (faire un travail). Un seul skill est *fonctionnel* : `clear-ledger-desk`, avec la structure `application` (voir `interview.md`). Le classement est une lecture de l'audit, pas une donnée des skills.
+- **Registre** : *expressif* (l'image et le récit priment), *produit* (présenter, vendre) ou *outil interne* (des employés y travaillent). Le classement est une lecture de l'audit, pas une donnée des skills, et **il ne choisit pas le skill à lui seul** : il sert à écarter. `clear-ledger-desk` est le seul skill pour un outil interne, et il n'est proposé pour rien d'autre.
 - **Photos exigées** : ce que le gabarit attend pour ressembler à sa démo. Sans elles, il fonctionne mais rend moins bien.
 - **Gabarits** : les mises en page de signature que kobo-studio sait poser (famille → emplacement). Tout autre emplacement rend son contenu neutre, habillé par la couche de signature des composants. En React, seuls les gabarits du héros (`hero-photo`, `objet`) sont essayés ; les autres emplacements restent neutres.
 - **Pièces lourdes** : ce qui coûte au chargement ou à l'affichage. Chacune a un repli (photo).
@@ -43,6 +43,18 @@ Ce que kobo-studio sait poser pour chaque skill, emplacement par emplacement. �
 
 Lecture : un seul skill a deux gabarits hors du héros (`lore-frame-editorial`), six en ont un, dix-sept n'en ont aucun (dont `clear-ledger-desk`, qui n'en a aucun du tout). Tout gabarit listé hors du héros **doit** être posé (règle 8 de `SKILL.md`) ; pour les seize autres, la proposition et la livraison disent que la signature, sous le premier écran, ne tient que par les couleurs, la typo et les composants.
 
+## Choisir : le public, l'ambiance, les images
+
+Dans cet ordre, et les trois à la fois :
+
+1. **Le public.** Qui regarde, à quel âge, dans quel état d'esprit, sur quel appareil (profils du plan de parcours). Des grimpeurs, des gourmands, des acheteurs pressés, des collectionneurs ne lisent pas la même page. Un skill dont la ligne « Convient à » ne nomme pas un public voisin du vôtre demande une raison écrite.
+2. **L'ambiance.** Les trois mots du client (`interview.md`), comparés à la ligne « Ambiance » de la fiche.
+3. **Les images.** Ce que le client a vraiment, comparé à « Photos exigées ». Un skill dont les photos manquent se propose avec sa limite, ou ne se propose pas.
+
+Le registre et le tableau ci-dessous ne font que réduire la liste. **Jamais « l'espace membre est fonctionnel, donc `clear-ledger-desk` »** : ce skill est réservé aux outils internes utilisés par des employés.
+
+**Projet mixte (site public et espace connecté) : un seul skill.** Celui de la partie publique, en intensité `full` ; l'espace connecté le garde en `reduced` ou en `off`. Choisis donc un skill dont les **composants** (boutons, cartes, onglets, champs) portent la marque sans le héros : regarde la ligne « Forces » (couche de signature) et, sur capture, une page en `reduced`. Les skills pensés pour un écran unique (`hold-to-play-music`), pour un récit (`noir-inferno-chapters`) ou dont la signature est une scène 3D (`glacial-mono-3d`, `tiny-planet-toy`) conviennent mal à un espace connecté : dis-le.
+
 ## Choisir vite
 
 | Besoin | Regarder d'abord |
@@ -53,26 +65,30 @@ Lecture : un seul skill a deux gabarits hors du héros (`lore-frame-editorial`),
 | Objet, produit tech, configurateur | `pocket-device-noir`, `showroom-bento`, `chrome-atelier` |
 | Immobilier, architecture | `glass-frame-estate`, `nocturne-architecture` |
 | Voyage, plein air | `alpine-glass-expedition` |
+| Sport, club, association, loisir (public jeune ou familial, sur téléphone) | plein air, montagne : `alpine-glass-expedition` ; salle, énergie urbaine : `hyper-lime-street` ; frais et sportif : `mint-street-basics` ; joyeux, familial : `zigzag-snack-pop`, `sticker-brutal-jp` |
 | Portfolio, indépendant, studio | `pixel-lime-portfolio`, `sticker-brutal-jp` |
 | Culture, musée, patrimoine | `heritage-lens`, `lore-frame-editorial` |
 | Jeu, anime, univers | `anime-x-slash`, `cosmic-voyage`, `hyper-lime-street`, `tiny-planet-toy` |
 | Récit de marque, mission, campagne | `retro-mission-poster`, `noir-inferno-chapters`, `lore-frame-editorial` |
 | Tech, sécurité, entreprise | `acid-scan-security`, `glacial-mono-3d` |
 | Accent de marque du client à poser | accent neutre : `alpine-glass-expedition`, `chrome-atelier`, `glacial-mono-3d`, `glass-frame-estate`, `lore-frame-editorial`, `pocket-device-noir` |
-| **Outil de travail** : CRM, back-office, ERP, tableau de bord, application SaaS | `clear-ledger-desk`, avec la structure `application` |
+| **Outil interne d'employés** : CRM, back-office, ERP, administration | `clear-ledger-desk`, avec la structure `application`. Pour rien d'autre : ni espace membre, ni compte client, ni page publique d'un club ou d'une boutique |
 | Interface sobre (intensité `off`) | `glass-frame-estate`, `chrome-atelier`, `showroom-bento`, `nocturne-architecture` |
+
+**Couche mouvement** (révélations au défilement propres au skill, `components/motion/`) : `acid-scan-security`, `hold-to-play-music`, `lore-frame-editorial`, `nocturne-architecture`, `retro-mission-poster`, `serif-bistro-green`. Les dix-huit autres n'en ont pas : seuls leur premier écran et leurs composants bougent, et le verdict « en dessous de la démo » sous le premier écran est alors attendu — à dire au client à la proposition, pas à découvrir à la livraison.
 
 Accent pâle (l'accent ne porte jamais seul une information sur le fond) : `hyper-lime-street`, `mint-street-basics`, `pixel-lime-portfolio`, `serif-bistro-green`, `sticker-brutal-jp`, `tiny-planet-toy`, `zigzag-snack-pop`.
 
 ---
 
-## Fonctionnel
+## Outil interne
 
-### `clear-ledger-desk` — outil de travail
-- **Convient à** : CRM, back-office, ERP, outil interne, espace d'administration, tableau de bord, application SaaS. À poser avec la structure **`application`**.
+### `clear-ledger-desk` — outil interne d'employés
+- **Convient à** : CRM, back-office, ERP, espace d'administration : des outils dans lesquels des **employés** travaillent plusieurs fois par jour, sur ordinateur. À poser avec la structure **`application`**.
+- **Ne convient pas à** : tout ce qu'un public utilise (visiteurs, clients, membres, adhérents), y compris leur espace connecté et une application de réservation ; une page publique. Constat : le premier `club-escalade`, posé avec ce skill pour des grimpeurs, donnait une page publique sans énergie et un espace membre d'employé (`quality/ux-audit-exemples.md`).
 - **Ambiance** : fond blanc, un seul gris de retrait, texte de 14 px en Inter, filets d'un pixel ; calme, dense, neutre.
 - **Forces** : le tableau (en-tête discret, lignes de 48 ou 36 px, ligne choisie sur fond teinté) ; la **densité réglable** (`data-density="compact"` sur `<html>` ou sur un bloc) ; une seule couleur d'action, les autres couleurs réservées aux états ; couche de signature sur les vingt composants ; contrastes larges (texte 14,3:1).
-- **Limites** : **aucun gabarit de signature**, et c'est voulu : rien ne signe le premier écran, la signature est la sobriété. Inadapté à une landing, à un site vitrine, à tout ce qui doit séduire. Pas de mode sombre. La densité compacte et tout ce qui est propre au CRM (chemin d'étapes, fiche, historique) sont **proposés**, pas mesurés sur une référence ; la structure `application` les fournit (écrans fiche et tableau de bord). Essayé dans Chrome seulement.
+- **Limites** : **aucun gabarit de signature**, et c'est voulu : rien ne signe le premier écran, la signature est la sobriété. Inadapté à une landing, à un site vitrine, à un espace membre, à tout ce qui s'adresse à un public. Pas de mode sombre. La densité compacte et tout ce qui est propre au CRM (chemin d'étapes, fiche, historique) sont **proposés**, pas mesurés sur une référence ; la structure `application` les fournit (écrans fiche et tableau de bord). Essayé dans Chrome seulement.
 - **Photos exigées** : aucune. Portraits des personnes en avatars de 24 px (initiales en repli).
 - **Gabarits** : aucun. Contraste : 6,07 (bouton d'action, blanc sur sarcelle).
 - **Pièces lourdes** : aucune.

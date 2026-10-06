@@ -46,11 +46,12 @@ Il se déclenche aussi seul sur une demande de site sans style imposé.
 
 **Ce qu'il fait**, dans l'ordre :
 
-1. Il pose un premier tour de questions, puis s'arrête. La première porte sur le registre : un site qu'on visite, ou un outil dans lequel on travaille.
-2. Il propose deux ou trois skills, chacun avec sa limite, et un plan des pages. Puis il s'arrête et attend la validation. Pour un outil de travail, il propose `clear-ledger-desk` seul.
+1. Il pose un premier tour de questions, puis s'arrête. Les premières portent sur les personnes : qui utilise le site, sur quel appareil, à quelle fréquence, pour faire quoi.
+2. Il écrit le **plan de parcours** ([`ux/methode.md`](plugins/kobo-design/skills/kobo-studio/ux/methode.md)) : un à trois profils, leurs tâches, chaque parcours écran par écran avec ses états et un nombre d'étapes visé. Ensuite seulement il propose deux ou trois skills, choisis selon le public, l'ambiance et les images, chacun avec sa limite. Puis il s'arrête et attend la validation du plan et du style. `clear-ledger-desk` est réservé aux outils internes utilisés par des employés.
 3. Il construit. Une commande (`tools/kit.py`) pose dans le projet les fichiers nécessaires et une page de départ. La page charge un seul skill.
 4. Il vérifie par script (`tools/check_studio.py`) : fichiers du projet, puis les pages à 1440 et 390 px, avec le contraste mesuré sur capture. Sans navigateur, le script le dit et la livraison l'écrit.
-5. Il livre en séparant ce qui est mesuré, ce qui est estimé et ce qui est inventé.
+5. Il **joue chaque tâche du plan dans le navigateur** ([`quality/ux-grille.md`](plugins/kobo-design/skills/kobo-studio/quality/ux-grille.md)) : au doigt simulé à 390 px, au clavier à 1440 px, en comptant les étapes ; puis il coche les dix heuristiques de Nielsen et les règles mobile avec une preuve par ligne. Verdict « à corriger » : il corrige au lieu de livrer.
+6. Il livre en séparant ce qui est mesuré, ce qui est estimé et ce qui est inventé, avec le tableau des tâches jouées.
 
 **Ce qu'il contient** (dossier [`kobo-studio/`](plugins/kobo-design/skills/kobo-studio/)) :
 
@@ -58,19 +59,20 @@ Il se déclenche aussi seul sur une demande de site sans style imposé.
 |---|---|
 | `contract/` | Les rôles `--k-*` communs, et une fiche par skill qui relie ses variables à ces rôles |
 | `components/` | 20 composants (bouton, champ, tableau, modale, onglets…) en HTML/CSS/JS et en React ; la liste est dans [`INDEX.md`](plugins/kobo-design/skills/kobo-studio/components/INDEX.md). `components/motion/` porte les mouvements signature de six skills |
+| `ux/methode.md`, `ux/patterns/domaines/` | La méthode UX, et sept parcours types avec leurs sources (réservation de créneaux, adhésion, compte et espace membre, boutique, contact et devis, rendez-vous, outil interne) |
 | `ux/structures/` | 5 structures de page : landing produit, site vitrine, récit collant, article, application |
 | `ux/templates/` | Les gabarits qui portent la signature d'un skill (héros, cadre de page, titres) |
 | `tools/` | `kit.py` (poser le kit), `check_studio.py` (vérifier un projet), `compare.py` (poser la page à côté de la démo du skill), et les vérificateurs de la bibliothèque |
 | `quality/` | La grille de relecture et les comptes rendus des essais |
 | `examples/` | Les projets construits pendant les essais |
 
-La structure **application** sert aux outils de travail. Elle a trois écrans de départ : une liste avec filtres et panneau de détail, la fiche d'un enregistrement, un tableau de bord.
+La structure **application** sert aux outils internes d'employés, pas à l'espace connecté d'un public. Elle a trois écrans de départ : une liste avec filtres et panneau de détail, la fiche d'un enregistrement, un tableau de bord.
 
 **Couleurs de marque.** Les couleurs d'un client se posent par-dessus le skill, dans un fichier `brand.css` du projet. Le script recalcule les contrastes avec ces couleurs. La marche à suivre est dans [`brand.md`](plugins/kobo-design/skills/kobo-studio/brand.md).
 
 ### Exemples
 
-Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL.md` et une demande. Tous sont fictifs. Les comptes rendus, avec ce qui a mal marché, sont dans [`quality/essais-etape-5.md`](plugins/kobo-design/skills/kobo-studio/quality/essais-etape-5.md).
+Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL.md` et une demande. Tous sont fictifs. Les comptes rendus, avec ce qui a mal marché, sont dans [`quality/essais-etape-5.md`](plugins/kobo-design/skills/kobo-studio/quality/essais-etape-5.md). Les cinq premiers datent d'avant la méthode UX : leurs problèmes de parcours sont listés dans [`quality/ux-audit-exemples.md`](plugins/kobo-design/skills/kobo-studio/quality/ux-audit-exemples.md), pas encore corrigés.
 
 | Exemple | Demande | Skill | Structure |
 |---|---|---|---|
@@ -79,7 +81,7 @@ Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL
 | [`reprise-poterie`](plugins/kobo-design/skills/kobo-studio/examples/reprise-poterie/) | Reprendre un site existant de cours de poterie | `serif-bistro-green` | reprise |
 | [`crm-pme`](plugins/kobo-design/skills/kobo-studio/examples/crm-pme/) | Un CRM B2B pour une PME de services | `clear-ledger-desk` | application |
 | [`cabinet-architectes`](plugins/kobo-design/skills/kobo-studio/examples/cabinet-architectes/) | Le site d'un cabinet d'architectes, avec deux couleurs de marque imposées | `glass-frame-estate` | site vitrine |
-| [`club-escalade`](plugins/kobo-design/skills/kobo-studio/examples/club-escalade/) | Une application de réservation pour un club d'escalade, avec une page publique et un espace membre | `clear-ledger-desk` | application |
+| [`club-escalade`](plugins/kobo-design/skills/kobo-studio/examples/club-escalade/) | Le site d'un club d'escalade associatif : séance découverte, adhésion, et espace où les membres réservent leurs créneaux sur téléphone | `zigzag-snack-pop` | site vitrine, espace membre |
 
 La galerie publique permet de les ouvrir.
 

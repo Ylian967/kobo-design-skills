@@ -30,6 +30,9 @@ les captures et ce que le navigateur mesure, rendu comme un état des lieux (cod
 Sans navigateur (aucun trouvé, --sans-navigateur, ou il ne rend rien) : les contrôles 1 et 2 tournent quand même ; le script
 écrit « VÉRIFICATION VISUELLE NON FAITE » et la phrase à reporter à la livraison. Rien de ce que le navigateur aurait mesuré
 n'est alors tenu pour vérifié.
+4. Les parcours : RIEN. Le script ne joue aucune tâche ; il le rappelle en fin de sortie et signale (alerte) un projet sans
+   parcours.md. La vérification UX est quality/ux-grille.md.
+
 Code de sortie : 1 si une erreur est trouvée ; 2 si aucune erreur mais la vérification visuelle n'a pas été faite ; 0 sinon.
 """
 import argparse
@@ -496,6 +499,13 @@ def main():
         print("  contraste sur capture, grille anti-slop, clavier.")
         print("  À écrire tel quel à la livraison, sous « Mesuré » : « Vérification visuelle non faite (pas de navigateur) : ni capture,")
         print("  ni contraste mesuré sur la page, ni essai au clavier. Seuls les contrôles par script des fichiers ont tourné. »")
+    if not a.constat:
+        plan = (project / "parcours.md").exists()
+        print("\n== 3. Parcours : NON VÉRIFIÉS PAR CE SCRIPT")
+        if not plan:
+            print("  ALERTE parcours.md absent : le plan de parcours (ux/methode.md) n'est pas dans le projet.")
+        print("  Ce script ne joue aucune tâche. Avant de livrer : quality/ux-grille.md (chaque tâche jouée à 390 px au doigt")
+        print("  et à 1440 px au clavier, tableau des tâches jouées, verdict « parcours OK » ou « à corriger »).")
     print(f"\n{len(errs)} {'constat(s)' if a.constat else 'erreur(s)'}" + (" sur les seuls contrôles par script ; vérification visuelle NON FAITE." if blind else "."))
     return 0 if a.constat else 1 if errs else 2 if blind else 0
 

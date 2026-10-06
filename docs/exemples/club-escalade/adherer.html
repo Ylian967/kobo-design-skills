@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full" data-k-skill="zigzag-snack-pop">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adhérer pour l'année — Les Dalles</title>
+<!-- Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css (rôles --k-* seulement). -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/zigzag-snack-pop.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton-radio/bouton-radio.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/zigzag-snack-pop.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><path d="M4 9h16M8 3v4M16 3v4M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Les Dalles</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html">Le club</a></li>
+          <li><a class="k-nav__link" href="essayer.html">Essayer</a></li>
+          <li><a class="k-nav__link" href="adherer.html" aria-current="page">Adhérer</a></li>
+          <li><a class="k-nav__link" href="creneaux.html">Créneaux</a></li>
+          <li><a class="k-nav__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="essayer.html" data-dalles="action">Venir essayer</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html">Le club</a></li>
+        <li><a class="k-menu__link" href="essayer.html">Essayer</a></li>
+        <li><a class="k-menu__link" href="adherer.html" aria-current="page">Adhérer <span class="k-menu__here">page actuelle</span></a></li>
+        <li><a class="k-menu__link" href="creneaux.html">Créneaux</a></li>
+        <li><a class="k-menu__link" href="connexion.html" data-dalles="lien-compte">Se connecter</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot k-stack k-stack--sm">
+      <a class="k-btn k-btn--block" href="essayer.html" data-dalles="action" data-k-menu-close>Venir essayer</a>
+      <button type="button" class="k-btn k-btn--secondary k-btn--block" data-dalles="deconnexion" hidden>Se déconnecter</button>
+    </div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Page de départ : pour qui, combien, combien de temps, quoi avoir sous la main -->
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Le club</a></li><li><span aria-current="page">Adhérer</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Adhérer pour l'année</h1>
+        <p class="k-lead" data-k-part="lead">Deux formules, licence comprise. Comptez trois minutes : il vous faut une adresse e-mail. Le certificat médical s'apporte à la première séance.</p>
+        <p><a class="k-link" href="connexion.html">Déjà membre ? Se connecter</a></p>
+      </div>
+    </section>
+
+    <section class="k-section k-section--tight k-section--rule" aria-labelledby="t-etape">
+      <div class="k-wrap k-wrap--text k-stack k-stack--lg">
+        <h2 class="k-h2" id="t-etape" tabindex="-1">Votre adhésion</h2>
+
+        <!-- Étape 1 : la formule et quatre champs -->
+        <form id="adh-form" class="k-stack k-stack--lg" novalidate>
+          <fieldset class="k-radio-group" id="adh-formules">
+            <legend class="k-radio-group__legend">Quelle formule ?</legend>
+            <div class="k-radio-group__list">
+              <label class="k-radio"><input type="radio" class="k-radio__input" name="formule" value="adulte" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Adulte : 180 € l'année</span><span class="k-radio__help">Licence comprise.</span></span></label>
+              <label class="k-radio"><input type="radio" class="k-radio__input" name="formule" value="reduit" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Tarif réduit : 120 € l'année</span><span class="k-radio__help">Étudiants, moins de 18 ans, demandeurs d'emploi. Licence comprise.</span></span></label>
+            </div>
+            <p class="k-radio-group__error" id="adh-formules-erreur" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez une des deux formules.</span></p>
+          </fieldset>
+
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="adh-nom">Prénom et nom</label>
+            <div class="k-field__box"><input class="k-field__control" id="adh-nom" name="nom" type="text" autocomplete="name" required data-k-msg="Écrivez votre prénom et votre nom."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+          </div>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="adh-mail">Adresse e-mail</label>
+            <div class="k-field__box"><input class="k-field__control" id="adh-mail" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="adh-mail-aide" data-k-msg="Adresse incomplète : il faut un @ et un domaine, par exemple prenom@exemple.fr."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+            <span class="k-field__help" id="adh-mail-aide">Ce sera votre identifiant pour réserver.</span>
+          </div>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="adh-tel">Téléphone</label>
+            <div class="k-field__box"><input class="k-field__control" id="adh-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required pattern="[0-9 +.]{10,}" aria-describedby="adh-tel-aide" data-k-msg="Numéro incomplet : dix chiffres, par exemple 06 12 34 56 78."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+            <span class="k-field__help" id="adh-tel-aide">Pour vous joindre si un créneau est annulé.</span>
+          </div>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="adh-mdp">Mot de passe</label>
+            <div class="k-field__box"><input class="k-field__control" id="adh-mdp" name="mdp" type="password" autocomplete="new-password" required minlength="8" aria-describedby="adh-mdp-aide" data-k-msg="Mot de passe trop court : huit caractères au moins."></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+            <span class="k-field__help" id="adh-mdp-aide">Huit caractères au moins. Il servira à réserver vos créneaux.</span>
+          </div>
+          <p><button type="button" class="k-btn k-btn--ghost" data-dalles-voir="adh-mdp">Afficher le mot de passe</button></p>
+
+          <button type="submit" class="k-btn k-btn--block">Continuer</button>
+          <p class="k-note">Rien n'est envoyé ni payé à cette étape : vous relisez d'abord.</p>
+        </form>
+
+        <!-- Étape 2 : relire, puis payer -->
+        <div id="adh-relecture" class="k-stack k-stack--lg" hidden>
+          <div class="k-stack">
+            <h3 class="k-h3">La formule</h3>
+            <dl class="k-facts">
+              <div><dt>Formule</dt><dd id="rel-formule"></dd></div>
+              <div><dt>À payer</dt><dd id="rel-prix"></dd></div>
+            </dl>
+            <p><button type="button" class="k-btn k-btn--secondary" data-dalles-modifier="adh-formules">Modifier la formule</button></p>
+          </div>
+          <div class="k-stack">
+            <h3 class="k-h3">Vos coordonnées</h3>
+            <dl class="k-facts">
+              <div><dt>Prénom et nom</dt><dd id="rel-nom"></dd></div>
+              <div><dt>Adresse e-mail</dt><dd id="rel-mail"></dd></div>
+              <div><dt>Téléphone</dt><dd id="rel-tel"></dd></div>
+              <div><dt>Mot de passe</dt><dd>enregistré, non affiché</dd></div>
+            </dl>
+            <p><button type="button" class="k-btn k-btn--secondary" data-dalles-modifier="adh-nom">Modifier mes coordonnées</button></p>
+          </div>
+          <p class="k-note">Rien n'est envoyé avant que vous n'appuyiez sur le bouton. Simulation : le paiement en ligne n'est pas encore branché, aucune carte n'est demandée et rien n'est débité.</p>
+          <button type="button" class="k-btn k-btn--block" id="adh-payer">Payer et adhérer</button>
+        </div>
+
+        <!-- Étape 3 : confirmation, et la suite -->
+        <div id="adh-confirme" class="dalles-bloc k-stack" role="status" hidden>
+          <p class="dalles-etat"><svg class="k-icon" aria-hidden="true"><use href="#i-check"/></svg><strong id="conf-titre"></strong></p>
+          <dl class="k-facts">
+            <div><dt>Formule</dt><dd id="conf-formule"></dd></div>
+            <div><dt>Votre identifiant</dt><dd id="conf-mail"></dd></div>
+            <div><dt>À apporter à la première séance</dt><dd>un certificat médical</dd></div>
+            <div><dt>Pour annuler votre adhésion</dt><dd><a class="k-link" href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></dd></div>
+          </dl>
+          <p>Votre compte est créé et vous êtes connecté : vous pouvez réserver tout de suite, trois créneaux par semaine au plus.</p>
+          <div class="dalles-actions"><a class="k-btn" href="creneaux.html">Réserver mon premier créneau</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
+      <div class="k-wrap k-split k-split--center">
+        <div class="k-stack k-split__main">
+          <h2 class="k-h2" id="t-suite" data-k-part="title">Pas encore sûr ?</h2>
+          <p class="k-lead" data-k-part="lead">Venez d'abord un samedi matin : deux heures encadrées, 10 € sur place, matériel prêté.</p>
+        </div>
+        <div><a class="k-btn" href="essayer.html" data-k-part="action">Venir essayer</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm">
+        <span class="k-foot__brand">Les Dalles</span>
+        <span>Club d'escalade associatif · 12 rue des Alliés, Grenoble</span>
+        <span><a href="tel:+33400000038">04 00 00 00 38</a> · <a href="mailto:contact@lesdalles.example">contact@lesdalles.example</a></span>
+      </div>
+      <ul><li><a href="index.html">Le club</a></li><li><a href="essayer.html">Essayer</a></li><li><a href="adherer.html">Adhérer</a></li><li><a href="creneaux.html">Créneaux</a></li><li><a href="connexion.html">Se connecter</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/zigzag-snack-pop.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="site.js"></script>
+<script src="js/formulaire.js"></script>
+<script src="js/adherer.js"></script>
+</body>
+</html>
