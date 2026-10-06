@@ -13,6 +13,8 @@ header.k-nav                       [k-nav--sticky] ; data-k-collapsed posé par 
 │   └── li > a.k-nav__link         aria-current="page" sur la page courante
 └── .k-nav__actions
     ├── .k-nav__extra              action cachée quand la barre est repliée (elle passe dans le menu)
+    ├── (tout autre élément)       reste visible barre repliée : un lien court « Panier (2) », « Ma réservation ». Sans la classe k-nav__extra,
+    │                              il n'est pas masqué ; garde-le court (un mot et un nombre) et regarde la barre à 390 px
     └── button.k-nav__burger       ouvre le menu mobile ; visible seulement repliée
 ```
 

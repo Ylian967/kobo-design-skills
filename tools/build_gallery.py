@@ -18,14 +18,14 @@ REPO_URL = "https://github.com/{owner}/kobo-design-skills"  # remplacé si docs/
 STUDIO = SKILLS / "kobo-studio"
 # Exemples de kobo-studio montrés dans la galerie : (dossier, nom, essai fait, structure). Le skill est lu dans la page.
 EXEMPLES = [
-    ("festival-lyon", "Nuits Basses", "une landing pour un festival de musique électronique à Lyon", "landing produit"),
-    ("restaurant-react", "Chez Odile", "le site vitrine d'un restaurant de quartier, en React", "site vitrine, React"),
-    ("reprise-poterie", "Terre & Feu", "la reprise d'un site existant de cours de poterie, sans perdre son contenu", "reprise"),
-    ("crm-pme", "Rivage Suivi", "un CRM B2B pour une PME de services", "application"),
-    ("cabinet-architectes", "Atelier Sorbier", "le site vitrine d'un cabinet d'architectes, avec deux couleurs de marque imposées", "site vitrine, marque"),
+    ("festival-lyon", "Nuits Basses", "le site d'un festival de musique électronique à Lyon, avec sa billetterie : choix des billets, commande, paiement simulé, confirmation", "landing produit, billetterie"),
+    ("restaurant-react", "Chez Odile", "le site d'un restaurant de quartier, en React, avec réservation de table en ligne et annulation", "site vitrine, React"),
+    ("reprise-poterie", "Terre & Feu", "la reprise du site d'un atelier de poterie : réserver une séance, la retrouver, changer de date, l'annuler", "reprise, site vitrine"),
+    ("crm-pme", "Rivage Suivi", "un CRM B2B pour une PME de services, pensé pour le clavier : étape annulable, modification, archivage", "application"),
+    ("cabinet-architectes", "Atelier Sorbier", "le site d'un cabinet d'architectes, avec deux couleurs de marque imposées, une page de projets et une demande de rendez-vous guidée", "site vitrine, marque"),
     ("club-escalade", "Les Dalles", "le site d'un club d'escalade associatif : séance découverte, adhésion, et espace où les membres réservent leurs créneaux sur téléphone", "site vitrine, espace membre"),
 ]
-IGNORES = shutil.ignore_patterns("captures", "node_modules", "avant", "dist", "src", "public", "*.json", "vite.config.js", "__pycache__")
+IGNORES = shutil.ignore_patterns("captures", "node_modules", "avant*", "parcours.md", "dist", "src", "public", "*.json", "vite.config.js", "__pycache__")
 
 
 def exemples():

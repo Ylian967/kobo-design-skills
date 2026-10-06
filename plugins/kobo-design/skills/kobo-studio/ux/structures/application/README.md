@@ -47,7 +47,7 @@ La coquille (en-tête, barre latérale, aide des raccourcis) est la même partou
 | 3 | Tête d'écran (`title`) | Surtitre, titre, résumé chiffré annoncé (`role="status"`), **une seule** action principale |
 | 4 | Filtres | Sélections libellées, « Effacer les filtres » |
 | 5 | Liste (`grid`) | Un tableau triable, à lignes sélectionnables et parcourables ; son état vide dit pourquoi et quoi faire |
-| 6 | Panneau de détail | Le titre de la ligne ouverte, ses faits, deux actions au plus. À côté de la liste s'il y a la place, par-dessus sinon |
+| 6 | Panneau de détail | Le titre de la ligne ouverte, ses faits, deux actions visibles au plus ; s'il en faut davantage (modifier, archiver, restaurer, supprimer), les rares vont derrière un `menu-deroulant` « Autres actions ». Modifier un enregistrement se fait **dans le panneau** (ses faits deviennent des champs, la liste reste visible), pas dans une modale. À côté de la liste s'il y a la place, par-dessus sinon |
 
 Une seule action pleine par écran : celle de la tête d'écran. Dans le panneau de détail, les actions sont secondaires.
 
@@ -196,6 +196,10 @@ En React, le filtrage et le contenu du panneau sont à la charge de la page : `A
 `Fiche` et `TableauDeBord` reprennent `Coquille` : mêmes props `marque`, `sections`, `recherche`, `emplacements`. Les étapes sont pilotées : la page tient `courante`, écrit l'état de chaque étape et la phrase annoncée.
 
 ## Brancher ses données et ses gestes
+
+**Une seule vue : sans barre latérale.** Retire de la page `#ap-side` et le bouton `data-ap-side` ; la touche `[` ne fait alors plus rien, et la ligne correspondante sort de l'aide des raccourcis.
+
+**Confirmer un geste sans cacher le détail.** Une `notification` s'affiche en bas à droite, **sur le panneau de détail** : pour un message qui doit rester avec son bouton « Annuler » (étape changée, affaire archivée), écris-le dans la page (`role="status"`, au-dessus de la liste et dans le panneau) plutôt que dans une notification.
 
 Ce que `application.js` et `tableau.js` font, pour ne pas avoir à les ouvrir :
 

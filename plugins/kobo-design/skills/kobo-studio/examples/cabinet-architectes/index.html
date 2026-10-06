@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="kobo/kobo-studio/contract/maps/glass-frame-estate.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/carte/carte.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
 <link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
@@ -35,12 +36,12 @@
       <nav aria-label="Navigation principale">
         <ul class="k-nav__list">
           <li><a class="k-nav__link" href="index.html" aria-current="page">Accueil</a></li>
-          <li><a class="k-nav__link" href="index.html#projets">Projets</a></li>
+          <li><a class="k-nav__link" href="projets.html">Projets</a></li>
           <li><a class="k-nav__link" href="agence.html">L'agence</a></li>
         </ul>
       </nav>
       <div class="k-nav__actions">
-        <a class="k-btn k-nav__extra" href="mailto:contact@atelier-sorbier.example?subject=Premier%20rendez-vous">Nous écrire</a>
+        <a class="k-btn k-nav__extra" href="rendez-vous.html">Demander un rendez-vous</a>
         <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
       </div>
     </header>
@@ -54,11 +55,11 @@
     <nav aria-label="Menu">
       <ul class="k-menu__list">
         <li><a class="k-menu__link" href="index.html" aria-current="page">Accueil <span class="k-menu__here">page actuelle</span></a></li>
-        <li><a class="k-menu__link" href="index.html#projets">Projets</a></li>
+        <li><a class="k-menu__link" href="projets.html">Projets</a></li>
         <li><a class="k-menu__link" href="agence.html">L'agence</a></li>
       </ul>
     </nav>
-    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="mailto:contact@atelier-sorbier.example?subject=Premier%20rendez-vous" data-k-menu-close>Nous écrire</a></div>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="rendez-vous.html" data-k-menu-close>Demander un rendez-vous</a></div>
   </dialog>
 
   <main id="contenu" tabindex="-1">
@@ -69,7 +70,8 @@
           <p class="k-kicker" data-k-part="kicker">Atelier Sorbier architectes · Chambéry</p>
           <h1 class="k-h1" id="titre" data-k-part="title" data-k-word="Sorbier">Architectes à Chambéry, pour maisons et communes</h1>
           <p class="k-lead" data-k-part="lead">L'Atelier Sorbier conçoit des maisons, des rénovations et des extensions pour des particuliers, et des bâtiments pour de petites communes.</p>
-          <a class="k-btn" href="mailto:contact@atelier-sorbier.example?subject=Premier%20rendez-vous" data-k-part="action">Nous écrire</a>
+          <a class="k-btn" href="rendez-vous.html" data-k-part="action">Demander un rendez-vous</a>
+          <a class="k-link" href="#projets" data-k-part="more">Voir les projets</a>
         </div>
         <figure class="k-hero__side" data-k-slot="media" data-k-part="media">
           <img src="images/hero-maison-bardage.jpg" alt="Long bâtiment à pignon simple, entièrement bardé de lames de bois clair, devant un ciel pâle" width="1600" height="1043" data-k-focus="40% 45%" style="--_ratio: 1">
@@ -78,67 +80,36 @@
       </div>
     </section>
 
-    <!-- 2. Les projets : quatre, de même rang, du plus récent au plus ancien -->
+    <!-- 2. Les projets : quatre cartes, la plus récente et la plus petite en grand (pas de carte seule sur sa ligne) ; chacune ouvre son détail dans projets.html -->
     <section class="k-section k-section--rule" id="projets" aria-labelledby="t-projets">
       <div class="k-wrap k-stack k-stack--lg">
         <header data-k-slot="title">
           <p class="k-kicker" data-k-part="kicker">Projets</p>
           <h2 class="k-h2" id="t-projets" data-k-part="title">Quatre projets, de l'extension de maison à l'école</h2>
         </header>
-        <ul data-k-slot="grid" class="sv-grid">
-          <li class="k-stack" data-k-part="item">
-            <figure data-k-slot="media">
-              <img src="images/projet-ecole.jpg" alt="École de village à étage en bois et rez-de-chaussée blanc, devant des sommets et un clocher à bulbe" width="960" height="720" loading="lazy" style="--_ratio: 3 / 2">
-              <figcaption>Photo provisoire, qui ne montre pas ce projet. <a href="https://commons.wikimedia.org/wiki/File:Buerserberg-Primary_School-01ASD.jpg">Asurnipal, CC BY-SA 4.0, Wikimedia Commons</a>.</figcaption>
-            </figure>
-            <h3 class="k-h3" id="p-ecole">École des Tilleuls</h3>
-            <dl class="k-facts">
-              <div><dt>Programme</dt><dd>Extension d'école</dd></div>
-              <div><dt>Lieu</dt><dd>La Motte-Servolex</dd></div>
-              <div><dt>Année</dt><dd>2025</dd></div>
-              <div><dt>Surface</dt><dd>380 m²</dd></div>
-            </dl>
-          </li>
-          <li class="k-stack" data-k-part="item">
-            <figure data-k-slot="media">
-              <img src="images/projet-maison-bois.jpg" alt="Deux petits volumes en bois à grandes baies vitrées, reliés par une pergola sombre" width="960" height="640" loading="lazy" style="--_ratio: 3 / 2">
-              <figcaption>Photo provisoire, qui ne montre pas ce projet. <a href="https://commons.wikimedia.org/wiki/File:Two_modern_wooden_cabins_stand_prominently_in_a_serene_countryside_setting.jpg">Shixart1985, CC BY 2.0, Wikimedia Commons</a>.</figcaption>
-            </figure>
-            <h3 class="k-h3" id="p-fauvettes">Maison des Fauvettes</h3>
-            <dl class="k-facts">
-              <div><dt>Programme</dt><dd>Maison bois</dd></div>
-              <div><dt>Lieu</dt><dd>Le Bourget-du-Lac</dd></div>
-              <div><dt>Année</dt><dd>2024</dd></div>
-              <div><dt>Surface</dt><dd>140 m²</dd></div>
-            </dl>
-          </li>
-          <li class="k-stack" data-k-part="item">
-            <figure data-k-slot="media">
-              <img src="images/projet-grange.jpg" alt="Longue grange en pierre rénovée, toit d'ardoise, derrière une pelouse bordée de lavande" width="960" height="652" loading="lazy" style="--_ratio: 3 / 2">
-              <figcaption>Photo provisoire, qui ne montre pas ce projet. <a href="https://commons.wikimedia.org/wiki/File:The_Great_Barn_at_Slade_House_-_geograph.org.uk_-_6922173.jpg">Neil Theasby, CC BY-SA 2.0, Wikimedia Commons</a>.</figcaption>
-            </figure>
-            <h3 class="k-h3" id="p-grange">Grange de la Combe</h3>
-            <dl class="k-facts">
-              <div><dt>Programme</dt><dd>Rénovation</dd></div>
-              <div><dt>Lieu</dt><dd>Saint-Pierre-d'Entremont</dd></div>
-              <div><dt>Année</dt><dd>2023</dd></div>
-              <div><dt>Surface</dt><dd>210 m²</dd></div>
-            </dl>
-          </li>
-          <li class="k-stack" data-k-part="item">
-            <figure data-k-slot="media">
-              <img src="images/projet-extension.jpg" alt="Maison à pignon blanc prolongée par un volume bas en bois sombre, sous un ciel bleu" width="960" height="720" loading="lazy" style="--_ratio: 3 / 2">
-              <figcaption>Photo provisoire, qui ne montre pas ce projet. <a href="https://commons.wikimedia.org/wiki/File:Timber_house_in_Balingup,_May_2022_01.jpg">Calistemon, CC BY-SA 4.0, Wikimedia Commons</a>.</figcaption>
-            </figure>
-            <h3 class="k-h3" id="p-verrier">Extension Verrier</h3>
-            <dl class="k-facts">
-              <div><dt>Programme</dt><dd>Extension de maison</dd></div>
-              <div><dt>Lieu</dt><dd>Chambéry</dd></div>
-              <div><dt>Année</dt><dd>2022</dd></div>
-              <div><dt>Surface</dt><dd>45 m²</dd></div>
-            </dl>
-          </li>
-        </ul>
+        <div data-k-slot="grid" class="sv-grid">
+          <article class="k-card k-card--link k-card--row k-grid__wide" data-k-part="item">
+            <div class="k-card__media"><img src="images/projet-ecole.jpg" alt="École de village à étage en bois et rez-de-chaussée blanc, devant des sommets et un clocher à bulbe" width="960" height="720" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Extension d'école · 2025</span><h3 class="k-card__title"><a href="projets.html#p-ecole">École des Tilleuls</a></h3><p class="k-card__text">Le projet le plus récent de l'atelier, pour une commune : l'extension d'une école à La Motte-Servolex.</p></div>
+            <div class="k-card__foot"><span>380 m²</span><span>1,2 M€ HT de travaux</span></div>
+          </article>
+          <article class="k-card k-card--link" data-k-part="item">
+            <div class="k-card__media"><img src="images/projet-maison-bois.jpg" alt="Deux petits volumes en bois à grandes baies vitrées, reliés par une pergola sombre" width="960" height="640" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Maison bois · 2024</span><h3 class="k-card__title"><a href="projets.html#p-fauvettes">Maison des Fauvettes</a></h3><p class="k-card__text">Une maison en bois au Bourget-du-Lac.</p></div>
+            <div class="k-card__foot"><span>140 m²</span><span>420 000 € HT de travaux</span></div>
+          </article>
+          <article class="k-card k-card--link" data-k-part="item">
+            <div class="k-card__media"><img src="images/projet-grange.jpg" alt="Longue grange en pierre rénovée, toit d'ardoise, derrière une pelouse bordée de lavande" width="960" height="652" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Rénovation · 2023</span><h3 class="k-card__title"><a href="projets.html#p-grange">Grange de la Combe</a></h3><p class="k-card__text">La rénovation d'une grange à Saint-Pierre-d'Entremont.</p></div>
+            <div class="k-card__foot"><span>210 m²</span><span>380 000 € HT de travaux</span></div>
+          </article>
+          <article class="k-card k-card--link k-card--row k-grid__wide" data-k-part="item">
+            <div class="k-card__media"><img src="images/projet-extension.jpg" alt="Maison à pignon blanc prolongée par un volume bas en bois sombre, sous un ciel bleu" width="960" height="720" loading="lazy"></div>
+            <div class="k-card__body"><span class="k-card__meta">Extension de maison · 2022</span><h3 class="k-card__title"><a href="projets.html#p-verrier">Extension Verrier</a></h3><p class="k-card__text">L'extension d'une maison à Chambéry.</p></div>
+            <div class="k-card__foot"><span>45 m²</span><span>95 000 € HT de travaux</span></div>
+          </article>
+        </div>
+        <p class="k-note">Photos provisoires, qui ne montrent pas ces projets. Crédits, dans l'ordre : <a href="https://commons.wikimedia.org/wiki/File:Buerserberg-Primary_School-01ASD.jpg">Asurnipal, CC BY-SA 4.0</a> ; <a href="https://commons.wikimedia.org/wiki/File:Two_modern_wooden_cabins_stand_prominently_in_a_serene_countryside_setting.jpg">Shixart1985, CC BY 2.0</a> ; <a href="https://commons.wikimedia.org/wiki/File:The_Great_Barn_at_Slade_House_-_geograph.org.uk_-_6922173.jpg">Neil Theasby, CC BY-SA 2.0</a> ; <a href="https://commons.wikimedia.org/wiki/File:Timber_house_in_Balingup,_May_2022_01.jpg">Calistemon, CC BY-SA 4.0</a> (Wikimedia Commons).</p>
       </div>
     </section>
 
@@ -163,20 +134,21 @@
             <div><dt>Adresse</dt><dd>14 rue de Boigne, Chambéry</dd></div>
             <div><dt>Téléphone</dt><dd><a class="k-link" href="tel:+33400000021">04 00 00 00 21</a></dd></div>
             <div><dt>E-mail</dt><dd><a class="k-link" href="mailto:contact@atelier-sorbier.example">contact@atelier-sorbier.example</a></dd></div>
+            <div><dt>Horaires</dt><dd>Du lundi au vendredi, 9 h – 12 h 30 et 14 h – 18 h</dd></div>
           </dl>
           <p><a class="k-link" href="agence.html">L'agence : l'équipe et la méthode</a></p>
         </div>
       </div>
     </section>
 
-    <!-- 4. La suite : écrire, ou téléphoner -->
+    <!-- 4. La suite : demander un rendez-vous, ou téléphoner -->
     <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
       <div class="k-wrap k-split k-split--center">
         <div class="k-stack k-split__main">
           <h2 class="k-h2" id="t-suite" data-k-part="title">Une maison, une rénovation, une extension ?</h2>
-          <p class="k-lead" data-k-part="lead">Écrivez-nous quelques lignes sur votre projet : nous vous répondons pour convenir d'un premier rendez-vous.</p>
+          <p class="k-lead" data-k-part="lead">Le premier rendez-vous est gratuit et sans engagement. Décrivez votre projet en sept questions : nous vous répondons sous trois jours ouvrés.</p>
         </div>
-        <div class="k-stack k-stack--sm"><a class="k-btn" href="mailto:contact@atelier-sorbier.example?subject=Premier%20rendez-vous" data-k-part="action">Nous écrire</a><a class="k-link" href="tel:+33400000021">Ou par téléphone : 04 00 00 00 21</a></div>
+        <div class="k-stack k-stack--sm"><a class="k-btn" href="rendez-vous.html" data-k-part="action">Demander un rendez-vous</a><a class="k-link" href="tel:+33400000021">Ou par téléphone : 04 00 00 00 21</a></div>
       </div>
     </section>
   </main>
@@ -184,7 +156,7 @@
   <footer class="k-foot">
     <div class="k-wrap k-foot__in">
       <div class="k-stack k-stack--sm"><span class="k-foot__brand">Atelier Sorbier architectes</span><span>14 rue de Boigne, Chambéry · <a href="tel:+33400000021">04 00 00 00 21</a> · <a href="mailto:contact@atelier-sorbier.example">contact@atelier-sorbier.example</a></span><span>Cabinet fictif, créé pour un essai de kobo-studio.</span></div>
-      <ul><li><a href="index.html">Accueil</a></li><li><a href="index.html#projets">Projets</a></li><li><a href="agence.html">L'agence</a></li></ul>
+      <ul><li><a href="index.html">Accueil</a></li><li><a href="projets.html">Projets</a></li><li><a href="agence.html">L'agence</a></li><li><a href="rendez-vous.html">Rendez-vous</a></li></ul>
     </div>
   </footer>
 </div>

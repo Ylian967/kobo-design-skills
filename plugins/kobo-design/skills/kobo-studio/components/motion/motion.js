@@ -22,7 +22,7 @@
  *   m.wordsOr(sel, repli), m.each(sel, fn)     découpe les titres révélés ; un titre qui a des enfants prend le mouvement « repli »
  *   m.scramble(el, signes, { tirages })        décodage : signes aléatoires qui se fixent de gauche à droite
  *   m.type(el)                                 texte tapé, à hauteur réservée
- *   m.count(el)                                un nombre seul monte de 0 à sa valeur
+ *   m.count(el)                                un nombre seul monte de 0 à sa valeur ; jamais dans [data-k-still], [aria-live], [role=status], <output>
  *   m.progress(el), m.velocity, m.ms(rôle)     progression de el dans l'écran (0 à 1), vitesse lissée du défilement, durée d'un rôle
  */
 (function () {
@@ -168,13 +168,17 @@
     count: function (el, duration) {
       var text = el.textContent, hit = /^(\D{0,3}?)(\d{1,6})(\D{0,4})$/.exec(text.trim());
       if (el.childElementCount || !hit || el._kBusy) return;
-      var end = Number(hit[2]), last = -1;
+      // Jamais sur une valeur vivante (total, compteur) : elle appartient au script de la page.
+      if (el.closest('[data-k-still], [aria-live], [role="status"], output')) return;
+      var end = Number(hit[2]), last = -1, written = null, taken = false;
       el._kBusy = true; el.setAttribute('aria-label', text.trim());
       m.run(el, duration || 1200, function (p) {
+        if (taken) return;
+        if (written !== null && el.textContent !== written) { taken = true; return; }   // un script a changé la valeur pendant le comptage : on la lui laisse
         var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
         if (v === last) return;
-        last = v; el.textContent = p >= 1 ? text : hit[1] + v + hit[3];
-      }, function () { el.textContent = text; el.removeAttribute('aria-label'); el._kBusy = false; });
+        last = v; written = p >= 1 ? text : hit[1] + v + hit[3]; el.textContent = written;
+      }, function () { if (!taken) el.textContent = text; el.removeAttribute('aria-label'); el._kBusy = false; });
     }
   };
 

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full" data-k-skill="nocturne-architecture">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billets — Nuits Basses, 12 et 13 juin 2027, Lyon</title>
+<meta name="description" content="Choisissez vos billets pour Nuits Basses : pass 1 soir 32 €, pass 2 soirs 54 €, réduit étudiant 26 €.">
+<!-- Fichiers de kobo/ : ne pas les modifier. Paiement simulé : voir site.js et commande.js. -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/nocturne-architecture.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/selection/selection.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/landing-produit/landing-produit.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/titre-geant/titre-geant.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/titre-geant/nocturne-architecture.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/nocturne-architecture.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/motion.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/nocturne-architecture.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-billet" viewBox="0 0 24 24"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4V7ZM14 7v10"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Nuits Basses</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html#programmation">Programmation</a></li>
+          <li><a class="k-nav__link" href="index.html#tarifs">Tarifs</a></li>
+          <li><a class="k-nav__link" href="index.html#lieu">Le lieu</a></li>
+          <li><a class="k-nav__link" href="index.html#pratique">Pratique</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn" href="billets.html" aria-current="page">Billets<span data-nb-compteur="court"></span></a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+          <li><a class="k-menu__link" href="index.html#programmation">Programmation</a></li>
+          <li><a class="k-menu__link" href="index.html#tarifs">Tarifs</a></li>
+          <li><a class="k-menu__link" href="index.html#lieu">Le lieu</a></li>
+          <li><a class="k-menu__link" href="index.html#pratique">Pratique</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="billets.html" aria-current="page">Acheter un billet<span data-nb-compteur></span></a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <section class="k-section" aria-labelledby="titre">
+      <div class="k-wrap k-split">
+        <div class="k-stack">
+          <header data-k-slot="title">
+            <p class="k-kicker" data-k-part="kicker">Billets</p>
+            <h1 class="k-h2" id="titre" data-k-part="title">Choisissez vos billets</h1>
+            <p class="k-lead" data-k-part="lead">Étape 1 sur 2. Six billets au plus par commande, aucun frais en plus.</p>
+          </header>
+        </div>
+        <form class="k-stack k-split__main" id="f-billets" action="commande.html" novalidate>
+          <div>
+            <div class="nb-line" data-nb-billet="ven">
+              <div class="k-field k-select">
+                <label class="k-field__label" for="q-ven">Pass 1 soir, vendredi 12 juin · <span class="nb-price">32 €</span></label>
+                <div class="k-field__box k-select__box">
+                  <select class="k-field__control k-select__control" id="q-ven" name="ven" aria-describedby="a-ven"><option value="0">0</option><option value="1">1 billet</option><option value="2">2 billets</option><option value="3">3 billets</option><option value="4">4 billets</option><option value="5">5 billets</option><option value="6">6 billets</option></select>
+                </div>
+                <p class="k-field__help" id="a-ven">20 h – 5 h, les deux scènes.</p>
+              </div>
+              <button type="button" class="k-btn k-btn--ghost" data-nb-retirer="ven" hidden>Retirer<span class="k-sr-only"> : Pass 1 soir, vendredi 12 juin</span></button>
+            </div>
+            <div class="nb-line" data-nb-billet="sam">
+              <div class="k-field k-select">
+                <label class="k-field__label" for="q-sam">Pass 1 soir, samedi 13 juin · <span class="nb-price">32 €</span></label>
+                <div class="k-field__box k-select__box">
+                  <select class="k-field__control k-select__control" id="q-sam" name="sam" aria-describedby="a-sam"><option value="0">0</option><option value="1">1 billet</option><option value="2">2 billets</option><option value="3">3 billets</option><option value="4">4 billets</option><option value="5">5 billets</option><option value="6">6 billets</option></select>
+                </div>
+                <p class="k-field__help" id="a-sam">20 h – 5 h, les deux scènes.</p>
+              </div>
+              <button type="button" class="k-btn k-btn--ghost" data-nb-retirer="sam" hidden>Retirer<span class="k-sr-only"> : Pass 1 soir, samedi 13 juin</span></button>
+            </div>
+            <div class="nb-line" data-nb-billet="deux">
+              <div class="k-field k-select">
+                <label class="k-field__label" for="q-deux">Pass 2 soirs, vendredi et samedi · <span class="nb-price">54 €</span></label>
+                <div class="k-field__box k-select__box">
+                  <select class="k-field__control k-select__control" id="q-deux" name="deux" aria-describedby="a-deux"><option value="0">0</option><option value="1">1 billet</option><option value="2">2 billets</option><option value="3">3 billets</option><option value="4">4 billets</option><option value="5">5 billets</option><option value="6">6 billets</option></select>
+                </div>
+                <p class="k-field__help" id="a-deux">Les deux nuits, pour une personne.</p>
+              </div>
+              <button type="button" class="k-btn k-btn--ghost" data-nb-retirer="deux" hidden>Retirer<span class="k-sr-only"> : Pass 2 soirs, vendredi et samedi</span></button>
+            </div>
+            <div class="nb-line" data-nb-billet="etu-ven">
+              <div class="k-field k-select">
+                <label class="k-field__label" for="q-etu-ven">Réduit étudiant, vendredi 12 juin · <span class="nb-price">26 €</span></label>
+                <div class="k-field__box k-select__box">
+                  <select class="k-field__control k-select__control" id="q-etu-ven" name="etu-ven" aria-describedby="a-etu-ven"><option value="0">0</option><option value="1">1 billet</option><option value="2">2 billets</option><option value="3">3 billets</option><option value="4">4 billets</option><option value="5">5 billets</option><option value="6">6 billets</option></select>
+                </div>
+                <p class="k-field__help" id="a-etu-ven">Carte étudiante demandée à l'entrée.</p>
+              </div>
+              <button type="button" class="k-btn k-btn--ghost" data-nb-retirer="etu-ven" hidden>Retirer<span class="k-sr-only"> : Réduit étudiant, vendredi 12 juin</span></button>
+            </div>
+            <div class="nb-line" data-nb-billet="etu-sam">
+              <div class="k-field k-select">
+                <label class="k-field__label" for="q-etu-sam">Réduit étudiant, samedi 13 juin · <span class="nb-price">26 €</span></label>
+                <div class="k-field__box k-select__box">
+                  <select class="k-field__control k-select__control" id="q-etu-sam" name="etu-sam" aria-describedby="a-etu-sam"><option value="0">0</option><option value="1">1 billet</option><option value="2">2 billets</option><option value="3">3 billets</option><option value="4">4 billets</option><option value="5">5 billets</option><option value="6">6 billets</option></select>
+                </div>
+                <p class="k-field__help" id="a-etu-sam">Carte étudiante demandée à l'entrée.</p>
+              </div>
+              <button type="button" class="k-btn k-btn--ghost" data-nb-retirer="etu-sam" hidden>Retirer<span class="k-sr-only"> : Réduit étudiant, samedi 13 juin</span></button>
+            </div>
+          </div>
+          <p class="k-lead">Billets choisis : <strong id="nb-nombre">0</strong>. Total à payer : <strong id="nb-total">0 €</strong></p>
+          <p class="k-note" id="nb-etat" role="status">Aucun billet choisi pour l'instant.</p>
+          <div class="nb-actions">
+            <button type="submit" class="k-btn" id="commander" aria-disabled="true">Commander</button>
+            <a class="k-btn k-btn--ghost" id="nb-manque" href="#q-ven">Choisissez au moins un billet</a>
+          </div>
+          <ul class="lp-list">
+            <li>Pas de remboursement. La revente entre particuliers est autorisée.</li>
+            <li>Billets non nominatifs, envoyés par e-mail.</li>
+            <li>Interdit aux moins de 18 ans.</li>
+            <li>Vente en ligne jusqu'à l'ouverture des portes, 20 h, s'il reste des places.</li>
+          </ul>
+          <p><a class="k-link" href="conditions.html">Toutes les conditions de vente</a></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Nuits Basses</span><span>Festival de musique électronique, 4e édition. Les Grandes Halles, Lyon 7e.</span><span>Un souci avec un billet ? Écrivez-nous : nous sommes trois bénévoles et nous répondons dès que possible.</span></div>
+      <ul><li><a href="https://instagram.com/nuitsbasses">Instagram @nuitsbasses</a></li><li><a href="mailto:salut@nuits-basses.example">salut@nuits-basses.example</a></li><li><a href="billets.html">Acheter un billet</a></li><li><a href="conditions.html">Conditions de vente</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/titre-geant/titre-geant.js"></script>
+<script src="kobo/kobo-studio/ux/templates/titre-geant/nocturne-architecture.js"></script>
+<script src="kobo/kobo-studio/components/motion/motion.js"></script>
+<script src="kobo/kobo-studio/components/motion/nocturne-architecture.js"></script>
+<script src="site.js"></script>
+<script src="billets.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+</body>
+</html>

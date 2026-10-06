@@ -2,8 +2,17 @@
 
 /* Le vert de marque sur les liens des sections claires. */
 .k-section .k-link,
-.k-section figcaption a { color: var(--k-accent); }
+.k-section figcaption a,
+.k-section .k-note a { color: var(--k-accent); }
 
 /* L'ocre, seconde couleur : un filet, jamais un texte. */
 .k-section .k-kicker { border-inline-start: var(--k-space-1) solid var(--k-accent-2); padding-inline-start: var(--k-space-3); }
 [data-k-slot="finale"] { border-block-start: var(--k-space-1) solid var(--k-accent-2); }
+
+/* Téléphone, e-mail, sommaire, pied de page : des liens qui sont une étape d'un parcours. Leur zone à toucher est agrandie. */
+.k-facts .k-link,
+.k-toc .k-link,
+[data-k-slot="finale"] .k-link,
+[data-k-slot="hero"] .k-link,
+.k-crumbs a,
+.k-foot a { display: inline-block; padding-block: var(--k-space-3); }

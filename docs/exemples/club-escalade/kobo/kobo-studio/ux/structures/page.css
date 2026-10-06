@@ -54,6 +54,9 @@ h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
 .k-prose > h2, .k-prose > h3 { margin-block-start: var(--k-space-8); }
 .k-prose ul, .k-prose ol { display: grid; gap: var(--k-space-2); padding-inline-start: var(--k-space-6); }
 .k-prose a, .k-link { color: inherit; text-decoration: underline; text-decoration-thickness: var(--k-border-w); text-underline-offset: var(--k-space-1); text-decoration-color: color-mix(in srgb, var(--k-accent) calc(var(--k-accent-on-bg) * 100%), var(--k-text)); }
+/* Lien isolé : zone cliquable d'au moins --k-hit-min de haut, sans écarter les lignes (comme le fil d'Ariane) */
+.k-link { position: relative; }
+.k-link::after { content: ""; position: absolute; inset-inline: 0; inset-block-start: 50%; block-size: var(--k-hit-min); transform: translateY(-50%); }
 .k-prose a:hover, .k-link:hover { text-decoration-thickness: calc(var(--k-border-w) * 2); }
 .k-prose a:focus-visible, .k-link:focus-visible, .k-crumbs a:focus-visible, .k-toc a:focus-visible, .k-rail a:focus-visible, .k-foot a:focus-visible { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
 /* Citation tirée du texte lui-même (jamais un témoignage) */

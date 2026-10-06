@@ -9,6 +9,7 @@
   display: grid; gap: var(--k-space-3); inline-size: min(100% - var(--k-space-4) * 2, var(--k-space-32) * 3); pointer-events: none;
 }
 .k-toasts__live { display: contents; }
+.k-toast[hidden] { display: none; }
 .k-toast {
   --_tone: var(--k-text);
   pointer-events: auto; display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: var(--k-space-3); padding: var(--k-space-4);

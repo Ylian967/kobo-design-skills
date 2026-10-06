@@ -68,3 +68,7 @@ Le moteur démarre seul quand la page est lue, après la pose des gabarits. Apr�
 - En React, un texte découpé ou décodé est réécrit hors de React : à réserver aux textes qui ne changent pas après le premier rendu.
 - Les effets de texte changent le contenu d'un élément pendant leur durée : une sélection de texte faite à ce moment est perdue.
 - Essayé dans Chrome seulement.
+
+## Valeurs que ton script met à jour
+
+Une couche mouvement peut réécrire un texte pendant son effet (les chiffres qui comptent de `nocturne-architecture`, sur les `dd` d'une liste `k-facts`). Un total, un compteur de panier, un nombre de places sont à toi : pose `data-k-still` sur l'élément ou sur un parent (ou donne-lui `role="status"`), la couche n'y touche plus. Sans cela, elle abandonne quand même dès que ton script change la valeur pendant le comptage.

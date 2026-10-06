@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full" data-k-skill="glass-frame-estate" data-k-brand>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demander un rendez-vous — Atelier Sorbier architectes (cabinet fictif)</title>
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/glass-frame-estate.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton-radio/bouton-radio.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/glass-frame-estate.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/glass-frame-estate.css">
+<link rel="stylesheet" href="brand.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Atelier Sorbier architectes</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="k-nav__link" href="projets.html">Projets</a></li>
+          <li><a class="k-nav__link" href="agence.html">L'agence</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="#demande">Demander un rendez-vous</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html">Accueil</a></li>
+        <li><a class="k-menu__link" href="projets.html">Projets</a></li>
+        <li><a class="k-menu__link" href="agence.html">L'agence</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="#demande" data-k-menu-close>Demander un rendez-vous</a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Où l'on est, et ce que la page demande -->
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Accueil</a></li><li><span aria-current="page">Rendez-vous</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Demander un rendez-vous</h1>
+        <p class="k-lead" data-k-part="lead">Le premier rendez-vous est gratuit et sans engagement. Sept questions, quelques minutes, rien à préparer : nous répondons sous trois jours ouvrés.</p>
+      </div>
+    </section>
+
+    <!-- 2. Le formulaire, puis sa confirmation ; à droite, les moyens de joindre l'atelier sans formulaire -->
+    <section class="k-section k-section--tight k-section--rule" aria-label="Votre demande">
+      <div class="k-wrap k-split">
+        <div class="k-split__main k-stack k-stack--lg">
+          <form class="k-stack k-stack--lg" id="demande" novalidate aria-labelledby="t-demande">
+            <h2 class="k-h2" id="t-demande">Votre projet</h2>
+            <fieldset class="k-radio-group" id="g-type" data-rdv-groupe aria-describedby="type-aide">
+              <legend class="k-radio-group__legend">Type de projet</legend>
+              <div class="k-radio-group__list">
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="type" value="maison" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Maison neuve</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="type" value="renovation" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Rénovation</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="type" value="extension" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Extension</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="type" value="communal" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Bâtiment communal</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="type" value="autre" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Autre</span></span></label>
+              </div>
+              <p class="k-radio-group__help" id="type-aide">Pour savoir tout de suite de quel projet nous allons parler.</p>
+              <p class="k-radio-group__error" id="type-err" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez un type de projet.</span></p>
+            </fieldset>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="commune">Commune du projet</label>
+              <div class="k-field__box"><input class="k-field__control" id="commune" name="commune" data-k-msg="Indiquez la commune du projet." type="text" required autocomplete="off" aria-describedby="commune-aide"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="commune-aide">La commune où se trouve le terrain ou le bâtiment.</span>
+            </div>
+            <fieldset class="k-radio-group" id="g-budget" data-rdv-groupe aria-describedby="budget-aide">
+              <legend class="k-radio-group__legend">Budget envisagé pour les travaux</legend>
+              <div class="k-radio-group__list">
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="budget" value="moins-100" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Moins de 100 000 €</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="budget" value="100-300" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">100 000 à 300 000 €</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="budget" value="300-600" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">300 000 à 600 000 €</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="budget" value="plus-600" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Plus de 600 000 €</span></span></label>
+                <label class="k-radio"><input type="radio" class="k-radio__input" name="budget" value="inconnu" required><span class="k-radio__box" aria-hidden="true"></span><span class="k-radio__text"><span class="k-radio__label">Je ne sais pas encore</span></span></label>
+              </div>
+              <p class="k-radio-group__help" id="budget-aide">Un ordre de grandeur suffit ; « Je ne sais pas encore » est une réponse.</p>
+              <p class="k-radio-group__error" id="budget-err" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez un budget, ou « Je ne sais pas encore ».</span></p>
+            </fieldset>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="projet">Votre projet en quelques lignes</label>
+              <div class="k-field__box"><textarea class="k-field__control" id="projet" name="projet" data-k-msg="Décrivez votre projet en une phrase ou deux (vingt caractères au moins)." rows="6" required minlength="20" maxlength="1000" aria-describedby="projet-aide"></textarea></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <div class="k-field__foot"><span class="k-field__help" id="projet-aide">Par exemple : la surface à peu près, si vous avez déjà le terrain ou le bâtiment, la date souhaitée.</span><span class="k-field__count"></span></div>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="nom">Votre nom</label>
+              <div class="k-field__box"><input class="k-field__control" id="nom" name="nom" data-k-msg="Indiquez votre nom." type="text" required autocomplete="name" aria-describedby="nom-aide"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="nom-aide">Pour savoir à qui nous répondons.</span>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="email">Votre adresse e-mail</label>
+              <div class="k-field__box"><input class="k-field__control" id="email" name="email" type="email" required autocomplete="email" inputmode="email" aria-describedby="email-aide"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="email-aide">Nous répondons à cette adresse.</span>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="tel">Votre téléphone <span class="k-field__opt">(facultatif)</span></label>
+              <div class="k-field__box"><input class="k-field__control" id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="tel-aide"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="tel-aide">Si vous préférez être rappelé.</span>
+            </div>
+            <p class="k-note" id="echec" role="alert" hidden>L'envoi n'a pas abouti : vérifiez votre connexion. Vos réponses sont gardées. Réessayez, ou joignez-nous au <a href="tel:+33400000021">04 00 00 00 21</a> ou à <a href="mailto:contact@atelier-sorbier.example">contact@atelier-sorbier.example</a>.</p>
+            <p><button type="submit" class="k-btn" id="envoyer"><span class="k-btn__spinner" aria-hidden="true" hidden></span><span id="envoyer-libelle">Envoyer la demande</span></button></p>
+          </form>
+          <div class="k-stack k-stack--lg" id="confirmation" hidden>
+            <h2 class="k-h2" id="t-confirmation" tabindex="-1">Demande envoyée</h2>
+            <div class="k-prose">
+              <p>Nous vous répondons sous trois jours ouvrés, par e-mail à <strong id="c-email"></strong>, pour convenir d'un premier rendez-vous. Il est gratuit et sans engagement.</p>
+            </div>
+            <dl class="k-facts" id="recapitulatif"></dl>
+            <p class="k-note">Une erreur, un changement d'avis ? Modifiez votre demande ci-dessous, ou annulez-la par téléphone ou par e-mail.</p>
+            <p class="k-note">Site d'exemple : l'envoi est simulé, aucun message n'est réellement transmis.</p>
+            <p><button type="button" class="k-btn k-btn--secondary" id="modifier">Modifier ma demande</button></p>
+            <p><a class="k-link" href="projets.html">Revoir les projets</a></p>
+          </div>
+        </div>
+        <aside class="k-sticky k-stack sv-aside" aria-labelledby="t-joindre">
+          <h2 class="k-h3" id="t-joindre">Nous joindre directement</h2>
+          <dl class="k-facts">
+            <div><dt>Téléphone</dt><dd><a class="k-link" href="tel:+33400000021">04 00 00 00 21</a></dd></div>
+            <div><dt>E-mail</dt><dd><a class="k-link" href="mailto:contact@atelier-sorbier.example">contact@atelier-sorbier.example</a></dd></div>
+            <div><dt>Horaires</dt><dd>Du lundi au vendredi, 9 h – 12 h 30 et 14 h – 18 h</dd></div>
+            <div><dt>Adresse</dt><dd>14 rue de Boigne, Chambéry</dd></div>
+            <div><dt>Réponse</dt><dd>Sous trois jours ouvrés</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Atelier Sorbier architectes</span><span>14 rue de Boigne, Chambéry · <a href="tel:+33400000021">04 00 00 00 21</a> · <a href="mailto:contact@atelier-sorbier.example">contact@atelier-sorbier.example</a></span><span>Cabinet fictif, créé pour un essai de kobo-studio.</span></div>
+      <ul><li><a href="index.html">Accueil</a></li><li><a href="projets.html">Projets</a></li><li><a href="agence.html">L'agence</a></li><li><a href="rendez-vous.html">Rendez-vous</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/glass-frame-estate.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="site.js"></script>
+</body>
+</html>

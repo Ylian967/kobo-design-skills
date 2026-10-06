@@ -1,0 +1,5 @@
+/* Styles du projet Chez Odile : rôles --k-* seulement. */
+/* Une rangée de boutons qui passe à la ligne : les heures d'arrivée, les actions d'une réservation. */
+.co-rangee { display: flex; flex-wrap: wrap; gap: var(--k-space-3); margin: 0; padding: 0; list-style: none; }
+/* Les liens du pied sont des étapes de parcours sur téléphone (Ma réservation, le numéro) : zone tactile pleine. */
+.k-foot a { display: inline-flex; align-items: center; min-block-size: var(--k-hit-min); }

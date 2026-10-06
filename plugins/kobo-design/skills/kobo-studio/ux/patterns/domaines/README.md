@@ -8,9 +8,13 @@ Sept fiches. Chacune décrit un parcours que les gens connaissent déjà : les �
 | Adhérer, s'inscrire à une activité, à un essai, à une liste | `adhesion-inscription.md` |
 | Se connecter, créer un compte, retrouver ce qui est à soi | `compte-espace-membre.md` |
 | Choisir un produit, remplir un panier, payer | `boutique-panier.md` |
-| Écrire, appeler, demander un devis | `contact-devis.md` |
-| Prendre rendez-vous avec une personne (soin, conseil, visite) | `prise-de-rendez-vous.md` |
+| Écrire, appeler, demander un devis ; demander un rendez-vous dont **la maison** fixera la date en répondant | `contact-devis.md` |
+| Prendre rendez-vous en **choisissant soi-même** un jour et une heure libres (soin, conseil, visite) | `prise-de-rendez-vous.md` |
 | Travailler toute la journée sur des enregistrements (employés) | `outil-interne.md` |
+
+## Une tâche sans fiche
+
+Consulter des réalisations ou un portfolio, lire un programme, trouver des horaires et une adresse : aucune fiche ne les encadre, et c'est voulu (ce sont des lectures, pas des transactions). Écris leur parcours avec la méthode seule, et vérifie trois choses : chaque élément qu'on voudrait ouvrir **est une destination** ou dit clairement qu'il n'y a rien derrière (heuristique 6) ; deux éléments différents ne mènent pas au même endroit (heuristiques 4 et 8) ; l'action principale est proposée à la fin de la lecture.
 
 ## Comment lire une fiche
 

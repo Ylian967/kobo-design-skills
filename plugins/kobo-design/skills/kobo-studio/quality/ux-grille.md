@@ -13,6 +13,8 @@ Chaque tâche principale du plan est jouée deux fois dans un navigateur piloté
 | **Doigt** | 390 × 844 px | Toucher simulé (voir plus bas), aucun clavier hors saisie de texte, aucun survol | Le nombre d'étapes, la plus petite cible touchée (en px), ce qui a gêné |
 | **Clavier** | 1440 × 900 px | Tab, Maj+Tab, Entrée, Espace, flèches, Échap. **Aucun clic** | Le nombre d'étapes, si le focus reste visible à chaque arrêt, si tout est atteignable |
 
+**Un appareil que personne n'utilise.** Les deux passes valent pour tout projet dont un profil est sur téléphone. Pour un outil interne dont le plan dit « ordinateur seulement », la passe clavier est la passe principale (c'est elle qui se compare à l'objectif) ; la passe doigt se réduit à vérifier que chaque tâche **aboutit** à 390 px, et les règles M1 et M3 s'écrivent « sans objet : aucun profil sur téléphone » au lieu de bloquer le verdict. À l'inverse, un site dont tous les profils sont sur téléphone garde sa passe clavier entière : le clavier est aussi une affaire d'accessibilité.
+
 Règles du jeu :
 
 - **On joue, on ne lit pas.** Lire le code ou regarder une capture ne compte pas. Une tâche est « jouée » quand le navigateur est arrivé à l'état de succès et qu'une capture le montre.
@@ -20,6 +22,10 @@ Règles du jeu :
 - **On part de l'entrée du plan**, pas de l'écran qui arrange : un profil sans compte part de la page publique, navigateur vidé (ni session ni stockage local).
 - **On joue aussi le retour** : la tâche inverse (annuler, retirer) et au moins un état vide, un état d'erreur et l'état déconnecté de chaque tâche qui en a dans le plan.
 - **On compare à l'objectif.** Plus d'étapes que l'objectif écrit dans le plan : la tâche est « à corriger », même si elle aboutit.
+- **Une preuve périmée n'est pas une preuve.** Après une correction, rejoue les tâches qu'elle touche et refais leurs captures ; ce qui n'a pas été rejoué s'écrit « joué avant la correction du … » dans le tableau.
+- **Un état qui dépend de l'heure** (trop tard pour aujourd'hui, délai d'annulation dépassé) se joue en décalant l'horloge de la page, pas en attendant ni en le sautant.
+- **Un onglet neuf par passe.** Les réglages d'émulation d'une session survivent dans l'onglet (un `pointer: coarse` qui reste vrai à 1440 px, une taille bloquée) et `clearDeviceMetricsOverride` depuis une autre session ne les défait pas. Ouvre un onglet (`page.context().newPage()`), joue la passe dedans, ferme-le. Vérifie au début de chaque passe : largeur de `main`, et `pointer: coarse` vrai pour le doigt, **faux** pour le clavier.
+- **Ce qui sort du navigateur ne se joue pas.** Un lien `mailto:`, `tel:` ou vers un autre site : lis sa cible, mesure la cible tactile, compte l'étape, et écris « non suivi ». Une liste du système (`<select>`) ouvre la roulette du téléphone, qu'un navigateur piloté ne touche pas : mesure la liste, pose le choix par commande (`selectOption`) et écris-le.
 - Les captures de preuve vont dans `<projet>/captures/parcours/` : `<tâche>-390-<n>.png`, `<tâche>-1440-<n>.png`, au moins celle de l'état de succès.
 
 ### Simuler le doigt
@@ -44,7 +50,9 @@ async function toucher(selecteur) {
 }
 ```
 
-Vérifie d'abord que la simulation est réelle : `window.innerWidth` doit rendre 390 et `matchMedia('(pointer: coarse)').matches` doit rendre `true`. Sinon écris la largeur et le mode réels dans le tableau : une passe à 500 px à la souris n'est pas une passe à 390 px au doigt.
+Si la fenêtre a déjà été redimensionnée par Playwright (`page.setViewportSize`), refais-le à 390 × 844 **avant** l'override : sinon `innerWidth` rend 390 alors que la mise en page reste large.
+
+Vérifie d'abord que la simulation est réelle : `window.innerWidth` doit rendre 390 et `matchMedia('(pointer: coarse)').matches` doit rendre `true`. Mesure aussi la largeur d'un bloc de la page (`document.querySelector('main').getBoundingClientRect().width`, 390 au plus) : c'est elle qui dit si la mise en page est celle du téléphone. Sinon écris la largeur et le mode réels dans le tableau : une passe à 500 px à la souris n'est pas une passe à 390 px au doigt.
 
 Après chaque toucher, **vérifie l'effet** (l'onglet est choisi, la page a changé) avant de compter l'étape : un toucher envoyé pendant qu'une page bouge encore, ou sur une ligne hors de l'écran, tombe à côté sans erreur. N'utilise pas `scrollIntoViewIfNeeded` ni rien qui attende `requestAnimationFrame` : dans une fenêtre masquée, ça n'arrive jamais. À la fin, coupe l'émulation (`Emulation.setTouchEmulationEnabled {enabled:false}`, `Emulation.clearDeviceMetricsOverride`).
 
@@ -102,6 +110,8 @@ M6 à M8 sont des règles de kobo-studio (déduites des heuristiques 1, 3 et 6),
 Pour chaque fiche de `ux/patterns/domaines/` lue à l'étape de méthode, reprends son tableau « Erreurs fréquentes » et écris, ligne par ligne, « absente » avec la preuve, ou « présente ». Une erreur présente est une case non conforme.
 
 ## 5. Verdict
+
+Le nombre d'étapes qui compte est celui du **point d'entrée écrit dans le plan**. Si un autre chemin plus court existe, il se note à côté ; il ne rattrape pas un chemin du plan trop long.
 
 - **Parcours OK** : toutes les tâches jouées aux deux passes, chacune dans son objectif d'étapes ; les dix heuristiques et les règles mobile conformes ou sans objet justifié ; aucune erreur du domaine présente.
 - **À corriger** : tout le reste. **On corrige, puis on rejoue les tâches touchées. On ne livre pas un projet « à corriger ».** Ce qui ne peut pas être corrigé (une pièce manque à kobo-studio) s'écrit au client comme une limite, en première partie du message, et le verdict reste « à corriger ».

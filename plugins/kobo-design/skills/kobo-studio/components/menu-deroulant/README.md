@@ -36,6 +36,8 @@ Un choix exclusif (tri) : `role="menuitemradio"` et `aria-checked`. Une option �
 
 Aucune ombre sauf `--k-shadow` du skill ; le panneau se détache par son contour.
 
+**Choix masqué ou désactivé.** Un choix `aria-disabled="true"` ou `hidden` est sauté au clavier ; un choix désactivé reste affiché, et sa raison s'écrit dans la page (sous le bouton), pas dans une longue `k-dropdown__hint` (elle passe à la ligne, mais alourdit le menu sur téléphone).
+
 ## Clavier
 
 Sur le bouton : `Entrée`, `Espace` ou `↓` ouvrent et vont au premier choix ; `↑` va au dernier. Dans le menu : `↓` `↑` (en boucle), `Début`, `Fin`, une lettre (choix qui commence par elle), `Entrée` ou `Espace` activent, `Échap` ferme et rend le focus au bouton, `Tab` ferme et passe à la suite. Le menu ne compte qu'un arrêt de tabulation : le bouton.

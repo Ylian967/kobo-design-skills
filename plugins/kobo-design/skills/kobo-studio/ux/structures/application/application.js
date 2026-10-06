@@ -154,7 +154,7 @@
         if (e.ctrlKey || e.metaKey || e.altKey || (t.matches && t.matches('input, select, textarea, [contenteditable]')) || document.querySelector('dialog[open]')) return;
         if (e.key === '/') { var q = $(ap, '[data-ap-search]'); if (q) { e.preventDefault(); q.focus(); } }
         else if (e.key === '?') { var help = $(ap, '[data-k-modal-open]#ap-aide-btn, [data-ap-help]'); if (help) { e.preventDefault(); help.click(); } }
-        else if (e.key === '[') toggleSide(ap);
+        else if (e.key === '[' && document.getElementById('ap-side')) toggleSide(ap);   // pas de barre latérale : la touche ne fait rien
       });
       var asked = new URLSearchParams(location.search).get('q'), field = $(ap, '[data-ap-search]');
       if (asked && field && $(ap, '.ap-list')) field.value = asked;   // recherche lancée depuis un autre écran

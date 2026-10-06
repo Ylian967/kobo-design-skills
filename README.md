@@ -72,15 +72,15 @@ La structure **application** sert aux outils internes d'employés, pas à l'espa
 
 ### Exemples
 
-Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL.md` et une demande. Tous sont fictifs. Les comptes rendus, avec ce qui a mal marché, sont dans [`quality/essais-etape-5.md`](plugins/kobo-design/skills/kobo-studio/quality/essais-etape-5.md). Les cinq premiers datent d'avant la méthode UX : leurs problèmes de parcours sont listés dans [`quality/ux-audit-exemples.md`](plugins/kobo-design/skills/kobo-studio/quality/ux-audit-exemples.md), pas encore corrigés.
+Ces projets ont été construits par un agent qui n'avait que `kobo-studio/SKILL.md` et une demande. Tous sont fictifs. Les comptes rendus, avec ce qui a mal marché, sont dans [`quality/essais-etape-5.md`](plugins/kobo-design/skills/kobo-studio/quality/essais-etape-5.md). Les cinq premiers datent d'avant la méthode UX ; ils ont été repris avec elle, chacun par un agent neuf : l'avant et l'après, tâche par tâche, sont dans [`quality/ux-audit-exemples.md`](plugins/kobo-design/skills/kobo-studio/quality/ux-audit-exemples.md), le compte rendu dans [`quality/essai-ux-reprises.md`](plugins/kobo-design/skills/kobo-studio/quality/essai-ux-reprises.md). Paiements, réservations, envois et connexions y sont simulés dans le navigateur.
 
 | Exemple | Demande | Skill | Structure |
 |---|---|---|---|
-| [`festival-lyon`](plugins/kobo-design/skills/kobo-studio/examples/festival-lyon/) | Une landing pour un festival de musique électronique | `nocturne-architecture` | landing produit |
-| [`restaurant-react`](plugins/kobo-design/skills/kobo-studio/examples/restaurant-react/) | Le site d'un restaurant de quartier, en React | `retro-mission-poster` | site vitrine |
-| [`reprise-poterie`](plugins/kobo-design/skills/kobo-studio/examples/reprise-poterie/) | Reprendre un site existant de cours de poterie | `serif-bistro-green` | reprise |
-| [`crm-pme`](plugins/kobo-design/skills/kobo-studio/examples/crm-pme/) | Un CRM B2B pour une PME de services | `clear-ledger-desk` | application |
-| [`cabinet-architectes`](plugins/kobo-design/skills/kobo-studio/examples/cabinet-architectes/) | Le site d'un cabinet d'architectes, avec deux couleurs de marque imposées | `glass-frame-estate` | site vitrine |
+| [`festival-lyon`](plugins/kobo-design/skills/kobo-studio/examples/festival-lyon/) | Le site d'un festival de musique électronique, avec sa billetterie (paiement simulé) | `nocturne-architecture` | landing produit |
+| [`restaurant-react`](plugins/kobo-design/skills/kobo-studio/examples/restaurant-react/) | Le site d'un restaurant de quartier, en React, avec réservation de table | `retro-mission-poster` | site vitrine |
+| [`reprise-poterie`](plugins/kobo-design/skills/kobo-studio/examples/reprise-poterie/) | Reprendre le site d'un atelier de poterie : réserver, retrouver, annuler une séance | `serif-bistro-green` | reprise |
+| [`crm-pme`](plugins/kobo-design/skills/kobo-studio/examples/crm-pme/) | Un CRM B2B pour une PME de services, pensé pour le clavier | `clear-ledger-desk` | application |
+| [`cabinet-architectes`](plugins/kobo-design/skills/kobo-studio/examples/cabinet-architectes/) | Le site d'un cabinet d'architectes : projets détaillés, demande de rendez-vous guidée, deux couleurs de marque | `glass-frame-estate` | site vitrine |
 | [`club-escalade`](plugins/kobo-design/skills/kobo-studio/examples/club-escalade/) | Le site d'un club d'escalade associatif : séance découverte, adhésion, et espace où les membres réservent leurs créneaux sur téléphone | `zigzag-snack-pop` | site vitrine, espace membre |
 
 La galerie publique permet de les ouvrir.

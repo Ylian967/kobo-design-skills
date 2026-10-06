@@ -2,7 +2,9 @@
 
 On ne repart pas de zéro : le site a un contenu, des adresses, des habitudes. La reprise garde ce qui a de la valeur et remplace le reste, par lots, avec une capture avant et après chaque lot.
 
-Quatre temps. Deux arrêts obligatoires dans le temps 2 : après les questions, puis après la proposition.
+Quatre temps. Deux arrêts obligatoires dans le temps 2 : après les questions, puis après le plan de parcours et la proposition.
+
+**Reprendre un projet déjà construit avec kobo-studio** (il a un dossier `kobo/`) : `avant/` reçoit **tout** le projet sauf `captures/` et `avant/` lui-même, donc **avec `kobo/`** (projet React : avec `src/` et `dist/`, sans `node_modules/`) : sans lui les pages copiées n'ont plus de styles et l'état des lieux mesure du HTML nu ; le kit se repose avec `kit.py … --maj` (même skill, sauf si le plan en décide autrement ; `--maj` met `kobo/` à jour, avec les composants demandés en plus, sans réécrire de page de départ) et les pages existantes se modifient en place plutôt que d'être réécrites depuis la page de départ.
 
 ```
 <projet>/
@@ -34,9 +36,11 @@ Puis lis le code d'origine et dresse l'inventaire, sans rien juger encore :
 
 ## 2. Rapprochement — vers quoi on va
 
-Pose au client les questions du premier tour de `interview.md` **que le site ne tranche pas** : l'action principale (souvent floue sur un vieux site), ce qui est encore vrai dans le contenu, les photos disponibles en plus, les couleurs à garder ou non, HTML ou React. Ne redemande pas ce que le site dit déjà. Joins les constats du temps 1, puis **arrête-toi** et attends les réponses.
+Pose au client les questions du premier tour de `interview.md` **que le site ne tranche pas**, en commençant par les personnes : **qui utilise le site, sur quel appareil, à quelle fréquence, et ce que chacun vient y faire** (un vieux site le dit rarement) ; puis les règles de ces tâches (prix, places, délais, annulation, qui répond et sous combien de temps), ce qui est encore vrai dans le contenu, les photos disponibles en plus, les couleurs à garder ou non, HTML ou React. Ne redemande pas ce que le site dit déjà. Joins les constats du temps 1, puis **arrête-toi** et attends les réponses.
 
-Une fois les réponses reçues, écris la proposition (étape c de `SKILL.md`) avec, en plus, le **tableau de rapprochement** :
+Une fois les réponses reçues, écris **d'abord le plan de parcours** (`ux/methode.md`, fiches de `ux/patterns/domaines/`, fichier `<projet>/parcours.md`), comme pour un nouveau projet : une reprise garde le contenu, pas les parcours. Pour chaque tâche du plan, note ce que le site d'origine permettait (« jouable », « s'arrête à un lien d'e-mail », « absent ») : c'est la colonne « avant » de la livraison. Si le plan montre que le skill du site d'origine ne convient pas à son public, dis-le et propose-en un autre ; sinon garde-le.
+
+Puis écris la proposition (étape c de `SKILL.md`, qui commence par ce plan) avec, en plus, le **tableau de rapprochement** :
 
 | Élément d'origine | Devient | Décision |
 |---|---|---|
@@ -60,7 +64,7 @@ Un lot est une partie du site qu'on peut montrer finie. Ordre conseillé :
 |---|---|---|
 | **1 — Socle et premier écran** | Kit posé, barre de navigation, héros, pied de page, marque | Le premier écran est reconnaissable et vrai |
 | **2 — Corps de la page principale** | Les sections dans l'ordre du plan UX | Tout le contenu gardé de la page est en place |
-| **3 — Actions et états** | Formulaire (validation, erreur, envoi, succès), états vides, liens | Chaque action aboutit ou dit pourquoi elle n'aboutit pas |
+| **3 — Parcours et états** | Les tâches du plan de parcours, une par une : écrans, formulaire (validation, erreur, envoi, succès), états vide, erreur, déconnecté, tâche inverse | Chaque tâche du plan se joue jusqu'à son état de succès, dans son objectif d'étapes |
 | **4 — Pages secondaires** | Une page par lot si elles sont longues | Toutes les adresses d'origine répondent |
 
 Un petit site d'une page tient en deux lots (1 + 2, puis 3) ; une page très courte peut tenir en un seul, suivi d'un passage de vérification : dis-le plutôt que d'inventer une frontière. Dis combien de lots tu prévois et ce que chacun contient.
@@ -81,13 +85,14 @@ python3 <kobo-studio>/tools/check_studio.py <projet> --prefixe lot-<n>-
 
 Tant qu'un lot n'est pas fait, sa partie de la page de départ garde le contenu de démonstration : le script le signale (« reste du contenu de démonstration »), c'est normal jusqu'au dernier lot. À la fin, 0 erreur.
 
-Dernier passage, sans préfixe, pour les captures finales, puis la grille anti-slop (étape e de `SKILL.md`).
+Dernier passage, sans préfixe, pour les captures finales, puis **toute** l'étape e de `SKILL.md` : la grille anti-slop, et les parcours joués (`quality/ux-grille.md`), verdict compris.
 
 ## Livraison
 
 Celle de `SKILL.md` (étape f), plus :
 
 - le **tableau de rapprochement** final : gardé, réécrit, déplacé, retiré ;
+- pour chaque tâche du plan, **avant / après** : ce que le site d'origine permettait, et le nombre d'étapes mesuré maintenant ;
 - les captures **avant / après** aux deux largeurs ;
 - les constats de départ que la reprise corrige (mesurés avant, mesurés après), et ceux qu'elle ne corrige pas ;
 - la correspondance des adresses, si l'une a changé ;

@@ -22,6 +22,12 @@ fieldset.k-radio-group
 
 Un bouton radio n'existe jamais seul : toujours dans un groupe de même `name`.
 
+Le message d'erreur du groupe, tel qu'il s'écrit (aucun script ne le pose : c'est ton script d'envoi qui retire `hidden`, met `aria-invalid="true"` sur les boutons et relie le `<fieldset>` par `aria-describedby`) :
+
+```html
+<p class="k-radio-group__error" id="formule-err" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span>Choisissez une formule.</span></p>
+```
+
 ## États
 
 | État | Déclencheur | Rendu |

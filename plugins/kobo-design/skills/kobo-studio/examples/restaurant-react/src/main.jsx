@@ -4,7 +4,7 @@ import { emplacements, useMouvement } from './styles.js';
 import { Bouton } from './kobo/kobo-studio/components/bouton/Bouton.jsx';
 import { Carte } from './kobo/kobo-studio/components/carte/Carte.jsx';
 import { Page, Emplacement, TitreSection, Image, Finale, Faits } from './kobo/kobo-studio/ux/structures/Page.jsx';
-import { page, suite, PLATS, PAGES, TELEPHONE } from './site.js';
+import { page, suite, PLATS, PAGES, RESERVER } from './site.js';
 
 const facade = { src: 'images/facade.jpg', alt: "Façade d'un petit restaurant d'angle, vitrine à petits carreaux, dans une rue en pente", largeur: 1600, hauteur: 1067, sujet: '70% 55%' };
 const portrait = { src: 'images/odile-cuisine.jpg', alt: 'Une cuisinière en chemise claire et tablier dresse des assiettes, dans une cuisine sombre', largeur: 1200, hauteur: 1500, ratio: '4 / 5', sujet: '55% 30%' };
@@ -25,7 +25,7 @@ function Accueil() {
     kicker: <p className="k-kicker">Chez Odile · pentes de la Croix-Rousse, Lyon</p>,
     title: <h1 className="k-h1" id="titre">La cuisine du marché, chez Odile</h1>,
     lead: <p className="k-lead">Une carte courte qui change chaque semaine, 28 couverts, et Odile seule aux fourneaux. Du mardi au samedi, midi et soir.</p>,
-    action: <Bouton href={TELEPHONE.href}>{TELEPHONE.libelle}</Bouton>,
+    action: <Bouton href={RESERVER.href}>{RESERVER.libelle}</Bouton>,
     media: <Image image={facade} differee={false} className="k-hero__side" />,
   };
   return (
@@ -42,9 +42,10 @@ function Accueil() {
           <TitreSection id="t-plats" surtitre="Cette semaine" titre="Les plats du moment"
             appui="Midi : 19 € ou 23 €. Soir : menu unique à 34 €." />
           <Emplacement nom="grid" className="sv-grid">
-            {PLATS.map((p) => <Carte key={p.id} titre={p.titre} meta={p.meta} image={p.image} href={`${PAGES.carte}#plats`} />)}
+            {PLATS.map((p) => <Carte key={p.id} titre={p.titre} meta={p.meta} image={p.image} />)}
           </Emplacement>
-          <p className="k-note">Photos provisoires, en attendant celles du restaurant. <a className="k-link" href={PAGES.carte}>Voir la carte, les horaires et l'adresse</a></p>
+          <p className="k-note">Photos provisoires, en attendant celles du restaurant.</p>
+          <div><Bouton variante="secondary" href={PAGES.carte}>Voir la carte, les horaires et l'adresse</Bouton></div>
         </div>
       </section>
 

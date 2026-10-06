@@ -1,5 +1,56 @@
 # Audit UX des exemples (6 octobre 2026)
 
+> **Mise à jour du 6 octobre 2026, second passage.** Les cinq exemples ont été repris, chacun par un agent neuf en mode reprise, à partir d'une fiche client neutre (`fiches-clients.md`). La première partie de ce fichier donne l'**après** ; l'audit d'origine (l'**avant**) suit, inchangé. Compte rendu des essais : `essai-ux-reprises.md`.
+
+## Après les reprises : avant / après
+
+Étapes comptées sur l'appareil principal du profil (téléphone, doigt simulé à 390 px ; clavier à 1440 px pour le CRM). « Rejoué » : rejoué par moi dans un onglet neuf après la livraison de l'agent ; sinon le chiffre est celui de l'agent, pris dans son tableau des tâches jouées.
+
+| Exemple (skill, gardé partout) | Tâche | Avant | Après | Rejoué |
+|---|---|---|---|---|
+| `festival-lyon` (nocturne-architecture) | Acheter des billets | 1 touche vers une billetterie extérieure fictive ; les trois prix n'étaient pas des actions | **4 étapes, 5 champs** : Billets, quantité, Commander, Payer ; récapitulatif modifiable, paiement simulé, confirmation avec numéro | oui |
+| | Changer d'avis avant de payer | absent | 2 étapes | non |
+| | Bouton d'achat | dans la barre sur ordinateur, derrière « Menu » sur téléphone | « Billets (n) » reste dans la barre sur téléphone (95 × 48 px) | oui |
+| `reprise-poterie` (serif-bistro-green) | Réserver une séance découverte | 1 touche puis un e-mail vide à écrire ; ni date ni place | **3 étapes, 4 champs** : dates avec places restantes, « Complet » écrit, confirmation avec numéro | oui |
+| | Retrouver et annuler | absent | 3 étapes depuis la confirmation, 5 depuis l'accueil (numéro et e-mail) | oui (3) |
+| | Changer de date | absent | 2 étapes ; 3 à moins de 48 h, une seule fois | non |
+| | Voir qui vient (la céramiste) | absent | 2 étapes, derrière un code de démonstration | non |
+| `restaurant-react` (retro-mission-poster) | Réserver une table | 1 touche = un appel ; bouton mort sur ordinateur | **3 étapes au plus court, 5 en changeant le jour et le nombre ; 3 champs** | oui (3) |
+| | Annuler | absent | 2 étapes depuis la confirmation ; 3 depuis « Ma réservation » (4 par le menu du téléphone) | oui (2) |
+| | Appeler | lien `tel:` partout, ordinateur compris | lien d'appel au doigt seulement ; sur ordinateur le numéro est écrit, avec les heures où l'on répond | oui |
+| | Cartes de plats | 4 liens vers la même ancre | 4 cartes sans lien, un bouton « Voir la carte… » dessous | oui |
+| `cabinet-architectes` (glass-frame-estate) | Demander un premier rendez-vous | 1 touche puis un e-mail vide | **3 étapes, 7 champs** (type et budget à cocher) ; confirmation qui redit la demande, « sous trois jours ouvrés », « Modifier ma demande » | oui |
+| | Voir une réalisation | 4 vignettes sans destination | 1 étape : la carte mène au projet (texte, faits, budget) dans une page « Projets » | oui |
+| | Horaires | absents | écrits sur chaque page, à côté du téléphone | oui |
+| `crm-pme` (clear-ledger-desk) | Ouvrir une affaire après une recherche, au clavier | 16 tabulations | **Entrée, Entrée** (2 touches) | oui |
+| | Changer l'étape | liste déroulante appliquée tout de suite, sans retour ; l'affaire disparaissait | 2 étapes (4 touches après la recherche) ; cinq boutons, « Annuler ce changement » | oui |
+| | Corriger une saisie | impossible | 3 étapes, dans le panneau, la liste reste visible | non |
+| | Retirer un doublon | impossible | 3 étapes (archiver, annulable, restaurable) ; suppression définitive réservée à la gérante, confirmée | non |
+| | Barre latérale | une barre pour une seule vue | retirée | oui |
+
+Verdicts des agents : festival « OK » sauf une tâche non jouée jusqu'au bout (lien d'e-mail) ; poterie « OK » avec quatre états non joués ; restaurant « OK avec réserve » (annulation à 4 touches par le menu du téléphone) ; cabinet « OK » ; CRM « à corriger » pour la seule règle des trois colonnes sur téléphone, depuis déclarée sans objet pour un outil que personne n'utilise au téléphone (`ux-grille.md`).
+
+### Ce qui s'écarte des attendus
+
+| Attendu | Livré | Pourquoi |
+|---|---|---|
+| Cabinet : une vraie page de détail par projet | une page « Projets » commune, chaque projet détaillé et atteint par son ancre | l'agent l'a écartée faute de photos (une seule, provisoire, par projet) et l'a écrit dans « ce qui n'est pas fait » ; je n'ai pas réclamé la page, pour ne répondre que depuis la fiche client |
+| Restaurant : cartes de plats et appel sur mobile seulement | faits, mais **par moi après la livraison** | le plan de l'agent gardait les quatre liens et le bouton d'appel ; sa grille ne les a pas relevés |
+| Festival : bouton d'achat accessible partout | fait, **complété par moi** sur téléphone | l'agent l'avait laissé derrière « Menu » (la barre masque son action quand elle se replie) |
+| Tous : rien de simulé | paiement, réservations, envois, connexion sont simulés dans le navigateur | kobo-studio n'a ni serveur ni authentification ; chaque page le dit |
+
+### Ce qui reste à corriger dans les exemples
+
+- Restaurant : sur téléphone, « Ma réservation » est derrière « Menu » (une touche de plus) ; la rangée des jours déborde (lettres du style).
+- Festival : le compteur « Billets (3) » passe sur deux lignes dans le bouton ; l'ancre d'un lien du menu arrivait au milieu de l'écran (corrigé dans `menu-mobile`, non rejoué sur cette page).
+- CRM : Échap pendant une modification abandonne la saisie sans prévenir ; six colonnes en défilement sur téléphone.
+- Poterie : la céramiste ne peut ni ajouter ni fermer une séance ; son espace n'est protégé que par un code de démonstration.
+- Partout : « en dessous de la démo » sous le premier écran (chantier des sections signature, en attente).
+
+---
+
+# Avant : l'audit d'origine
+
 La vérification de `ux-grille.md`, passée après coup sur les cinq exemples construits avant qu'elle existe. **Rien n'est corrigé ici** : ce fichier liste les problèmes de parcours. Le sixième exemple, `club-escalade`, a été refait ; son ancien état est rappelé en tête parce que c'est lui qui a fait écrire la méthode.
 
 Conditions : pages servies en local, Chrome piloté par Playwright. Passe « doigt » : 390 × 844 px, évènements tactiles simulés (`innerWidth` 390 et `pointer: coarse` vérifiés). Passe « clavier » : 1440 × 900 px, sans clic. Captures dans `ux-audit-exemples/`.

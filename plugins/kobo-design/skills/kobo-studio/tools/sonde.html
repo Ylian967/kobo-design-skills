@@ -22,6 +22,11 @@
     // le cadre de page (fixe, tout l'écran) non plus : répété à chaque écran, son bord couvrirait le texte coupé par le bas de la capture
     if (el.getAttribute('data-k-slot') === 'frame') el.style.setProperty('visibility', 'hidden', 'important');
   });
+  // premier écran d'une page plus longue que lui : le bord BAS du cadre fixe tomberait au milieu de la capture assemblée, sur le texte.
+  // On le rogne (le haut et les côtés du cadre restent visibles).
+  if (!+q.get('y') && d.documentElement.scrollHeight > H * 1.05) [].forEach.call(d.body.querySelectorAll('[data-k-slot="frame"]'), function (el) {
+    el.style.setProperty('clip-path', 'inset(0 0 ' + Math.round(H * 0.15) + 'px 0)', 'important');
+  });
   // un encart collant sur le côté reprend sa place dans le flux : sinon il se répète dans chaque écran de la capture assemblée
   [].forEach.call(d.body.querySelectorAll('*'), function (el) {
     if (f.getComputedStyle(el).position !== 'sticky') return;

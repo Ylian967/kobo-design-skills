@@ -54,6 +54,14 @@ Entrée : la liste, sur la vue de travail de la personne (ses affaires, les comm
 
 Chacun reste soumis à la règle 3 de `../../methode.md` : une tâche du plan doit le demander.
 
+## Ce que la structure `application` ne tranche pas
+
+- **Une seule vue** : pas de barre latérale (elle ne mène nulle part). Retire-la de la page de départ avec son bouton et son raccourci ; le compte qu'elle portait va dans la tête d'écran.
+- **Plus de deux gestes sur un enregistrement** (modifier, archiver, restaurer, supprimer) : le plus fréquent reste un bouton visible ; les rares vont derrière un `menu-deroulant` « Autres actions », le destructeur en dernier et confirmé par une `modale`. Déduit de [N8] et de [N5].
+- **De la recherche à la liste** : flèche bas dans le champ de recherche descend dans les résultats, Entrée ouvre le premier ; ne fais pas traverser les filtres et les en-têtes à la touche Tab. Déduit de [N7].
+- **Annuler plutôt que confirmer** pour les gestes fréquents (changer une étape, archiver) : le message de confirmation porte un bouton « Annuler » et reste affiché assez longtemps ; la confirmation préalable est réservée à ce qui ne se défait pas [N3], [N5].
+- **Rôles sans authentification** : kobo-studio n'a pas de connexion. Un droit propre à un rôle (« seule la gérante supprime ») se montre par un réglage de démonstration visible, dit au client sous « Inventé » ; le geste interdit reste affiché, désactivé, avec sa raison [N1].
+
 ## Sur téléphone
 
 Un outil interne se consulte parfois en déplacement. Le tableau se réduit à deux ou trois colonnes lisibles, la première épinglée, le reste dans le détail [NN-tableau-mobile]. Si le téléphone est l'appareil **principal** des utilisateurs, ce n'est plus cette fiche.

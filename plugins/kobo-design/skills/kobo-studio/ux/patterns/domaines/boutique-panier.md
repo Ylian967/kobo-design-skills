@@ -13,6 +13,24 @@ Choisir un produit, remplir un panier, payer. Sources : marques de `README.md`. 
 | **Relecture** | Ce qui va être payé, avant de payer | [G-relire] |
 | **Confirmation** | Numéro de commande, ce qui se passe ensuite et quand, un contact ; c'est **ici** qu'on propose de créer un compte | [G-confirmation] ; [B-compte] |
 
+## Petite offre et billetterie (moins de sept articles)
+
+Quelques billets, trois formules, un seul produit en plusieurs tailles : la liste, la fiche et le panier **tiennent sur un écran** (`../../methode.md`, règle 4). Ne construis pas trois pages pour cinq lignes.
+
+| Écran | Ce qu'il fait | Source |
+|---|---|---|
+| **Choix** | Toutes les lignes visibles, chacune avec son prix complet et sa quantité ; le total suit ; les règles qui engagent (maximum par commande, pas de remboursement, justificatif demandé) sont écrites ici, avant « Commander » | [N6], [N5] ; [B-abandon] total visible d'avance |
+| **Commande** | Le récapitulatif modifiable, le moins de champs possible (pour un billet envoyé par e-mail : l'e-mail et le paiement, ni nom ni adresse), puis payer | [B-champs] ; [G-relire] |
+| **Confirmation** | Une référence, ce qui a été acheté, où et quand arrive le billet, qui joindre ; la référence sert à retrouver sa commande sans compte | [G-confirmation] ; [G-compte] |
+
+- **Quantité** : kobo-studio n'a pas de bouton « − / + ». Jusqu'à six ou huit, une `selection` (« 0 à 6 ») sur chaque ligne ; dis-le au client comme une pièce qui manque.
+- **Quota** (places par soir, stock) : une ligne épuisée reste affichée, « Complet » écrit, quantité bloquée [N1], [N5]. Le maximum par commande est dit avant qu'on le dépasse, pas en erreur après.
+- **Non remboursable** : écrit sur l'écran de choix et redit au-dessus du bouton de paiement ; voir `../../methode.md`, règle 2.
+- Le bouton d'achat est dans la barre de **toutes** les pages, avec le nombre d'articles choisis [N1], [N6].
+- **Objectif** : accueil → choix → commande → paiement, 4 étapes, et le nombre de champs écrit en chiffre.
+
+Ces lignes sont des déductions de notre part à partir des sources citées : aucune ne traite la billetterie en accès libre.
+
 ## Parcours
 
 Entrée : une fiche produit (lien partagé, recherche) aussi souvent que l'accueil.
@@ -39,7 +57,7 @@ Entrée : une fiche produit (lien partagé, recherche) aussi souvent que l'accue
 
 ## Sur téléphone
 
-- Le panier est atteignable depuis la barre sur toutes les pages, avec son nombre d'articles [N1], [N6].
+- Le panier est atteignable depuis la barre sur toutes les pages, avec son nombre d'articles [N1], [N6]. Dans `barre-nav`, pose-le dans `.k-nav__actions` **sans** la classe `k-nav__extra` (qui masque l'élément quand la barre se replie) : un lien court, « Panier (2) », qui reste à côté de « Menu ».
 - « Ajouter au panier » reste visible sans remonter en haut de la fiche ; cible de 44 px [W-cible], [NN-doigt].
 - Formulaire de commande sur une colonne ; un seul champ « Nom complet » ; la seconde ligne d'adresse, le code de réduction et l'adresse de facturation sont repliés derrière un lien [B-champs] ; [NN-form] point 3.
 - `autocomplete` sur chaque champ d'adresse et de paiement [W-ressaisie].

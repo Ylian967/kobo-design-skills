@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="reduced" data-k-skill="serif-bistro-green">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace de l'atelier — Terre &amp; Feu</title>
+<meta name="description" content="Espace réservé à l'atelier Terre & Feu : les inscrits de chaque séance.">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/serif-bistro-green.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/modale/modale.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/serif-bistro-green.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/serif-bistro-green.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/motion.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/serif-bistro-green.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Terre &amp; Feu</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html#atelier">L'atelier</a></li>
+          <li><a class="k-nav__link" href="index.html#formules">Formules et tarifs</a></li>
+          <li><a class="k-nav__link" href="index.html#horaires">Horaires</a></li>
+          <li><a class="k-nav__link" href="index.html#venir">Venir</a></li>
+          <li><a class="k-nav__link" href="ma-reservation.html">Ma réservation</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="reserver.html">Réserver une séance</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html#atelier">L'atelier</a></li>
+        <li><a class="k-menu__link" href="index.html#formules">Formules et tarifs</a></li>
+        <li><a class="k-menu__link" href="index.html#horaires">Horaires</a></li>
+        <li><a class="k-menu__link" href="index.html#venir">Venir</a></li>
+        <li><a class="k-menu__link" href="ma-reservation.html">Ma réservation</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="reserver.html">Réserver une séance</a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Où l'on est -->
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Accueil</a></li><li><span aria-current="page">Espace de l'atelier</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Espace de l'atelier</h1>
+        <p class="k-lead" data-k-part="lead">Réservé à Maëlle : qui vient à chaque séance, avec le téléphone de chacun.</p>
+      </div>
+    </section>
+
+    <!-- 2. Le code, puis la liste des séances -->
+    <section class="k-section k-section--tight k-section--rule" aria-label="Les inscrits">
+      <div class="k-wrap k-wrap--text k-stack k-stack--lg">
+        <form class="k-stack" id="porte" novalidate>
+          <p>Derrière ce code : les prochaines séances, les personnes inscrites à chacune, leur téléphone, et de quoi retirer quelqu'un qui a prévenu.</p>
+          <div class="k-field" data-k-validate>
+            <label class="k-field__label" for="code">Code de l'atelier</label>
+            <div class="k-field__box"><input class="k-field__control" id="code" name="code" type="password" autocomplete="current-password" required data-k-msg="Saisissez le code de l'atelier." aria-describedby="code-aide"></div>
+            <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+            <span class="k-field__help" id="code-aide">Site en démonstration : le code est four-1280.</span>
+          </div>
+          <p><button type="submit" class="k-btn" id="entrer">Entrer</button></p>
+        </form>
+
+        <div class="k-stack k-stack--lg" id="liste" hidden>
+          <div class="tf-actions tf-actions--entre">
+            <h2 class="k-h2" id="t-liste" tabindex="-1">Les prochaines séances</h2>
+            <button type="button" class="k-btn k-btn--secondary" id="quitter">Quitter</button>
+          </div>
+          <p class="k-note">Site en démonstration : les inscrits marqués « (exemple) » sont inventés, et seules les réservations faites dans ce navigateur s'ajoutent à la liste.</p>
+          <p id="message" role="status"></p>
+          <div class="k-stack k-stack--lg" id="seances"></div>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="k-modal" id="m-retirer" role="alertdialog" aria-labelledby="m-retirer-t" aria-describedby="m-retirer-d">
+      <div class="k-modal__head"><h2 class="k-modal__title" id="m-retirer-t">Retirer cette personne ?</h2></div>
+      <div class="k-modal__body" id="m-retirer-d"><p id="m-retirer-texte"></p></div>
+      <div class="k-modal__foot">
+        <button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Ne rien changer</button>
+        <button type="button" class="k-btn k-btn--danger" data-k-modal-close="retire"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Oui, retirer</button>
+      </div>
+    </dialog>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Terre &amp; Feu</span><span>Atelier de céramique de Maëlle Guivarch</span><span>14 rue de la Verrerie, 44100 Nantes</span></div>
+      <ul><li><a href="index.html#atelier">L'atelier</a></li><li><a href="index.html#formules">Formules et tarifs</a></li><li><a href="index.html#horaires">Horaires</a></li><li><a href="index.html#venir">Venir</a></li><li><a href="ma-reservation.html">Ma réservation</a></li><li><a href="atelier.html">Espace de l'atelier</a></li><li><a href="mailto:bonjour@terre-et-feu.example">bonjour@terre-et-feu.example</a></li><li><a href="tel:+33240550127">02 40 55 01 27</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/modale/modale.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/serif-bistro-green.js"></script>
+<script src="kobo/kobo-studio/components/motion/motion.js"></script>
+<script src="kobo/kobo-studio/components/motion/serif-bistro-green.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="tf-seances.js"></script>
+<script src="tf-reservations.js"></script>
+<script src="tf-outils.js"></script>
+<script src="tf-atelier.js"></script>
+</body>
+</html>

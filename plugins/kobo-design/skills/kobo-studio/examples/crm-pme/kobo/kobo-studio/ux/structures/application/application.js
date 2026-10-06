@@ -1,6 +1,7 @@
 /*
- * kobo-studio — structure « application » : barre latérale, panneau de détail, filtres, raccourcis.
- * Sans dépendance (le tableau, la modale et les champs gardent leurs scripts). S'active seul sur .ap.
+ * kobo-studio — structure « application » : barre latérale, panneau de détail, filtres, chemin d'étapes, raccourcis.
+ * Sans dépendance (le tableau, la modale, les onglets et les champs gardent leurs scripts). S'active seul sur .ap.
+ * Un même script pour les trois écrans (liste, fiche, tableau de bord) : chaque partie ne s'active que si son balisage est là.
  *
  * Mesure, pas de point de rupture : compare la largeur de .ap à deux repères écrits en rôles (.ap-probe) et pose
  *   data-k-narrow (barre en tiroir) et data-k-detail="side" | "over" (panneau à côté de la liste, ou par-dessus).
@@ -9,9 +10,15 @@
  *   d'après la ligne (son en-tête de ligne devient le titre, ses autres cellules une liste de faits) ; [data-ap-close] ou Échap
  *   le ferme et rend le focus à la ligne. Événements sur .ap : « k-app:open » (detail.row) et « k-app:close ».
  * Filtres : <select data-ap-filter="etat"> masque les lignes dont data-etat diffère ; le champ [data-ap-search] filtre sur le
- *   texte ; le résumé [data-ap-sum] est réécrit (role="status") ; [data-ap-reset] efface tout.
+ *   texte des lignes et sur leur attribut data-ap-keywords (mots absents des cellules) ; le résumé [data-ap-sum] est réécrit
+ *   (role="status"), avec le modèle data-ap-sum-one quand une seule ligne reste ; [data-ap-reset] efface tout.
+ * Recherche hors de la liste (fiche, tableau de bord) : Entrée mène à l'écran de liste (attribut action du formulaire) avec ?q=… ;
+ *   la liste lit ?q= à l'ouverture et filtre.
+ * Chemin d'étapes (fiche) : <ol data-ap-steps> ; l'étape en cours porte aria-current="step", les étapes faites data-k-step="done".
+ *   [data-ap-step-next] fait avancer d'une étape, réécrit son libellé et annonce l'étape ([data-ap-step-status]).
+ *   Événement « k-app:step » sur .ap (detail.index, detail.name).
  * Raccourcis (hors d'un champ) : « / » recherche, « ? » aide (la modale #ap-aide), « [ » barre latérale, Échap ferme.
- * Kobo.app.init(conteneur), Kobo.app.open(ap, ligne), Kobo.app.close(ap), Kobo.app.measure(ap).
+ * Kobo.app.init(conteneur), Kobo.app.open(ap, ligne), Kobo.app.close(ap), Kobo.app.measure(ap), Kobo.app.filter(ap), Kobo.app.step(ap, avancer).
  */
 (function () {
   'use strict';
@@ -79,13 +86,32 @@
     var filters = Array.prototype.map.call(ap.querySelectorAll('[data-ap-filter]'), function (s) { return [s.dataset.apFilter, s.value]; });
     var rows = table.querySelectorAll('tbody > tr'), shown = 0;
     Array.prototype.forEach.call(rows, function (r) {
-      var ok = filters.every(function (f) { return !f[1] || r.dataset[f[0]] === f[1]; }) && (!needle || r.textContent.toLowerCase().indexOf(needle) >= 0);
+      var ok = filters.every(function (f) { return !f[1] || r.dataset[f[0]] === f[1]; }) && (!needle || (r.textContent + ' ' + (r.dataset.apKeywords || '')).toLowerCase().indexOf(needle) >= 0);
       r.hidden = !ok; if (ok) shown++;
     });
     if (ap._row && ap._row.hidden) close(ap, false);
     if (Kobo.table) Kobo.table.refresh(table);
     var sum = $(ap, '[data-ap-sum]');
-    if (sum) sum.textContent = (sum.dataset.apSum || '{n} sur {total}').replace('{n}', shown).replace('{total}', rows.length);
+    if (sum) sum.textContent = ((shown === 1 && sum.dataset.apSumOne) || sum.dataset.apSum || '{n} sur {total}').replace('{n}', shown).replace('{total}', rows.length);
+  }
+
+  /* ---------- Chemin d'étapes (écran fiche) ---------- */
+  function step(ap, advance) {
+    var list = $(ap, '[data-ap-steps]'); if (!list) return;
+    var items = Array.prototype.slice.call(list.children), btn = $(ap, '[data-ap-step-next]'), status = $(ap, '[data-ap-step-status]');
+    var name = function (li) { var n = li && $(li, '.ap-steps__name'); return n ? n.textContent.trim() : ''; };
+    var state = function (li, text) { var el = $(li, '.ap-steps__state'); if (el && text) el.textContent = text; };
+    var i = items.findIndex(function (li) { return li.getAttribute('aria-current') === 'step'; });
+    if (advance && i >= 0 && i < items.length - 1) {
+      items[i].removeAttribute('aria-current'); items[i].dataset.kStep = 'done'; state(items[i], list.dataset.apDone);
+      i++; items[i].setAttribute('aria-current', 'step'); state(items[i], list.dataset.apNow);
+      if (status) status.textContent = (status.dataset.apStepStatus || '{nom}').replace('{nom}', name(items[i]));
+      ap.dispatchEvent(new CustomEvent('k-app:step', { bubbles: true, detail: { index: i, name: name(items[i]) } }));
+    }
+    if (!btn) return;
+    var last = i < 0 || i >= items.length - 1;                 // le bouton reste atteignable : aria-disabled, pas disabled (le focus ne se perd pas)
+    btn.setAttribute('aria-disabled', String(last));
+    btn.textContent = last ? (btn.dataset.apStepEnd || btn.textContent) : (btn.dataset.apStepNext || '{nom}').replace('{nom}', name(items[i + 1]));
   }
 
   function init(scope) {
@@ -99,7 +125,9 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
       go();
       ap.addEventListener('click', function (e) {
-        if (e.target.closest('[data-ap-side]')) toggleSide(ap);
+        var next = e.target.closest('[data-ap-step-next]');
+        if (next) { if (next.getAttribute('aria-disabled') !== 'true') step(ap, true); }
+        else if (e.target.closest('[data-ap-side]')) toggleSide(ap);
         else if (e.target.closest('[data-ap-close]')) close(ap);
         else if (e.target.closest('[data-ap-reset]')) {
           ap.querySelectorAll('[data-ap-filter]').forEach(function (s) { s.value = ''; }); var q = $(ap, '[data-ap-search]'); if (q) q.value = ''; filter(ap);
@@ -110,7 +138,10 @@
       ap.addEventListener('input', function (e) { if (e.target.matches('[data-ap-search]')) filter(ap); });
       ap.addEventListener('submit', function (e) {
         if (!e.target.matches('.ap-search')) return;
-        e.preventDefault(); var first = $(ap, '.ap-list tbody > tr:not([hidden])'); if (first) first.focus();
+        e.preventDefault();
+        var first = $(ap, '.ap-list tbody > tr:not([hidden])'), q = $(ap, '[data-ap-search]'), to = e.target.getAttribute('action');
+        if (first) first.focus();
+        else if (!$(ap, '.ap-list') && to && q && q.value.trim()) location.href = to + '?q=' + encodeURIComponent(q.value.trim()) + location.hash;   // hors de la liste : on y va
       });
       document.addEventListener('keydown', function (e) {
         if (!ap.isConnected) return;
@@ -123,11 +154,13 @@
         if (e.ctrlKey || e.metaKey || e.altKey || (t.matches && t.matches('input, select, textarea, [contenteditable]')) || document.querySelector('dialog[open]')) return;
         if (e.key === '/') { var q = $(ap, '[data-ap-search]'); if (q) { e.preventDefault(); q.focus(); } }
         else if (e.key === '?') { var help = $(ap, '[data-k-modal-open]#ap-aide-btn, [data-ap-help]'); if (help) { e.preventDefault(); help.click(); } }
-        else if (e.key === '[') toggleSide(ap);
+        else if (e.key === '[' && document.getElementById('ap-side')) toggleSide(ap);   // pas de barre latérale : la touche ne fait rien
       });
-      filter(ap);
+      var asked = new URLSearchParams(location.search).get('q'), field = $(ap, '[data-ap-search]');
+      if (asked && field && $(ap, '.ap-list')) field.value = asked;   // recherche lancée depuis un autre écran
+      filter(ap); step(ap);
     });
   }
-  Kobo.app = { init: init, open: open, close: close, measure: measure, filter: filter };
+  Kobo.app = { init: init, open: open, close: close, measure: measure, filter: filter, step: step };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { init(); }); else init();
 })();

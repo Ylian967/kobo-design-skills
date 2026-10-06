@@ -31,6 +31,17 @@ Un devis demande plus de questions qu'un contact. Règles :
 - Les choix fermés (type de projet, budget) sont des boutons radio visibles, pas une liste déroulante, jusqu'à cinq options (`components/INDEX.md`).
 - La page dit avant de commencer combien de temps ça prend et ce qu'il faut avoir sous la main [G-depart].
 
+## Quand les demandes arrivent trop vagues
+
+Le client rappelle pour tout redemander : le formulaire ne posait pas les bonnes questions. Règles (déduites de [G-question] et de [NN-form] point 1) :
+
+- Demande au client **ce qu'il redemande à chaque fois au téléphone** : ce sont les champs. Rien d'autre.
+- Ce qui se range en quelques cas (type de projet, fourchette de budget, délai) est un choix à cocher, avec une sortie « Je ne sais pas encore » : une case cochée vaut mieux qu'un champ libre vide.
+- Ce qui ne se range pas tient dans **un** champ libre, dont l'aide dit quoi y mettre (« la surface à peu près, si vous avez déjà le terrain »).
+- Quand on arrive depuis un élément précis (un projet, une offre), le choix correspondant est déjà coché.
+- La page dit avant le formulaire combien de questions, combien de temps, et que rien n'est à préparer [G-depart].
+- La confirmation redit la demande : le visiteur vérifie, et le client lit la même chose.
+
 ## États
 
 | État | Rendu | Source |

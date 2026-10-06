@@ -62,6 +62,8 @@
 :not([data-k-intensity="off"] *) {
   &.k-table { border-color: var(--k-line); border-radius: var(--k-radius-lg); }
   &.k-table th, &.k-table td { block-size: var(--k-sig-row-h); padding: var(--k-sig-cell-y) var(--k-space-3); white-space: nowrap; }
+  /* la case d'une ligne ne dicte pas la hauteur de la ligne : c'est la densité qui la fixe (sa zone cliquable reste de 44 px) */
+  &.k-table__check .k-check { min-block-size: 0; padding-block: 0; }
   &.k-table thead th { block-size: var(--k-sig-head-h); font-size: max(var(--k-fs-label), var(--k-fs-min)); font-weight: var(--k-fw-display); color: var(--k-text-2); background: var(--k-surface); border-block-end-width: calc(var(--k-border-w) * 2); border-block-end-color: var(--k-line); }
   &.k-table tbody th { font-weight: var(--k-sig-weight-medium); }
   &.k-table tbody tr[aria-selected="true"] { background: var(--k-sig-selected); }

@@ -1,30 +1,39 @@
 // Contenu commun aux deux pages : tout vient de la cliente.
-export const TELEPHONE = { libelle: 'Réserver au 04 72 55 01 43', href: 'tel:+33472550143' };
+export const TELEPHONE = { libelle: '04 72 55 01 43', href: 'tel:+33472550143' };
+// Écran tactile : le numéro est un lien d'appel. Ailleurs il est écrit, sans lien (un lien tel: ne mène nulle part sur un ordinateur).
+export const AU_DOIGT = typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(pointer: coarse)').matches;
+// Quand le téléphone répond : écrit partout où le numéro est proposé pour réserver.
+export const QUAND_APPELER = 'Karim répond du mardi au samedi, en dehors du service (12 h – 14 h et 19 h 30 – 22 h).';
 export const ADRESSE = '8 rue des Tables-Claudiennes, 69001 Lyon';
 export const PLAN = 'https://www.google.com/maps/search/?api=1&query=8+rue+des+Tables-Claudiennes+69001+Lyon';
-export const PAGES = { accueil: './index.html', carte: './carte.html' };
+export const PAGES = { accueil: './index.html', carte: './carte.html', reserver: './reserver.html', maReservation: './ma-reservation.html' };
+// L'action principale du site, la même dans la barre, le premier écran et la fin de chaque page.
+export const RESERVER = { libelle: 'Réserver une table', href: PAGES.reserver };
 
 export const page = (courante) => ({
   marque: { libelle: 'Chez Odile', href: PAGES.accueil },
   liens: [
     { libelle: 'Accueil', href: PAGES.accueil, courant: courante === 'accueil' },
     { libelle: 'La carte et les infos pratiques', href: PAGES.carte, courant: courante === 'carte' },
+    { libelle: 'Ma réservation', href: PAGES.maReservation, courant: courante === 'ma-reservation' },
   ],
-  action: TELEPHONE,
+  action: RESERVER,
   pied: {
-    mention: `${ADRESSE} · du mardi au samedi, midi et soir`,
+    mention: `${ADRESSE} · du mardi au samedi, midi et soir${AU_DOIGT ? '' : ` · ${TELEPHONE.libelle}`}`,
     liens: [
       { libelle: 'Accueil', href: PAGES.accueil },
       { libelle: 'La carte et les infos pratiques', href: PAGES.carte },
-      { libelle: '04 72 55 01 43', href: TELEPHONE.href },
-    ],
+      { libelle: 'Ma réservation', href: PAGES.maReservation },
+    ].concat(AU_DOIGT ? [{ libelle: TELEPHONE.libelle, href: TELEPHONE.href }] : []),
   },
 });
 
 export const suite = {
   titre: 'Une table cette semaine ?',
-  appui: 'On réserve par téléphone, du mardi au samedi. La salle compte 28 couverts : mieux vaut appeler.',
-  action: TELEPHONE,
+  appui: 'On réserve en ligne, de 1 à 6 personnes, jusqu’à 30 jours à l’avance. La salle compte 28 couverts : mieux vaut réserver.'
+    + (AU_DOIGT ? '' : ` Plus de 6 personnes : par téléphone, au ${TELEPHONE.libelle}, en dehors du service.`),
+  action: RESERVER,
+  lien: AU_DOIGT ? { libelle: `Plus de 6 personnes : ${TELEPHONE.libelle}, en dehors du service`, href: TELEPHONE.href } : undefined,
 };
 
 export const PLATS = [

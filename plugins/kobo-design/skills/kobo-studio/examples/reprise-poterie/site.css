@@ -1,3 +1,24 @@
 /* Terre & Feu — styles du projet (rôles --k-* seulement). */
-/* La liste des formules est une liste sans puce : on retire le retrait par défaut du navigateur. */
-ul[data-k-slot="grid"] { list-style: none; margin: 0; padding: 0; }
+
+/* Formules : le prix au-dessus de sa description, dans la colonne de droite de la liste de faits. */
+.tf-formules dd { display: grid; gap: var(--k-space-1); }
+.tf-formules dd span { font-weight: normal; color: var(--k-text-2); }
+
+/* Une rangée de boutons qui passe à la ligne sans se toucher. */
+.tf-actions { display: flex; flex-wrap: wrap; gap: var(--k-space-3); }
+.tf-actions--entre { justify-content: space-between; align-items: center; }
+.tf-formules dt { font-family: var(--k-font-display); font-size: var(--k-fs-h3); color: var(--k-text); }
+
+/* Listes de dates et d'inscrits : une ligne par élément, le geste à droite, qui passe dessous quand la place manque. */
+.tf-slots { display: grid; margin: 0; padding: 0; list-style: none; }
+.tf-slot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-3); padding-block: var(--k-space-4); border-block-end: var(--k-border-w) solid var(--k-line); }
+.tf-slot__txt { display: grid; gap: var(--k-space-1); }
+.tf-slot__txt span { color: var(--k-text-2); }
+/* L'état choisi se lit dans le libellé du bouton (« Date choisie ») ; le filet épais le redit. */
+.tf-slot[data-etat="choisie"] { padding-inline-start: var(--k-space-3); border-inline-start: var(--k-space-1) solid var(--k-text); }
+.tf-slot[data-etat="complet"] .tf-slot__txt, .tf-slot[data-etat="retire"] .tf-slot__txt strong { color: var(--k-text-muted); }
+#alerte:empty, #message:empty { display: none; }
+#alerte { font-weight: bold; }
+
+/* Pied de page : « Ma réservation » et « Espace de l'atelier » sont des étapes de parcours, leur zone se touche au doigt. */
+.k-foot li a { display: inline-flex; align-items: center; min-block-size: var(--k-hit-min); }

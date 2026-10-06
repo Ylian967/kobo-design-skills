@@ -25,6 +25,7 @@
   function message(control) {
     var v = control.validity;
     if (v.valid) return '';
+    if (v.valueMissing && control.dataset.kMsgVide) return control.dataset.kMsgVide;   // champ vide : son propre message, les autres restent automatiques
     if (control.dataset.kMsg) return control.dataset.kMsg;
     if (v.valueMissing) return 'Ce champ est obligatoire.';
     if (v.typeMismatch && control.type === 'email') return 'Adresse incomplète : il manque « @ » ou le domaine, par exemple prenom@exemple.fr.';

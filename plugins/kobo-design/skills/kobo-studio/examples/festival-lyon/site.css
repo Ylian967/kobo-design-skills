@@ -1,0 +1,49 @@
+/* Styles du projet Nuits Basses : rôles --k-* seulement, aucun point de rupture. */
+
+/* Une ligne de billet : la liste de quantité prend la place, « Retirer » se range à côté ou dessous. */
+.nb-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--k-space-3);
+  padding-block: var(--k-space-4);
+  border-top: var(--k-border-w) solid var(--k-line);
+}
+.nb-line > .k-field {
+  flex: 1 1 calc(var(--k-space-32) * 2);
+}
+
+/* Le prix dans le libellé d'un billet. */
+.nb-price {
+  font-weight: var(--k-fw-display);
+  color: var(--k-text);
+  white-space: nowrap;
+}
+
+/* Rangée d'actions d'une étape : le bouton principal, puis la suite secondaire. */
+.nb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--k-space-4);
+}
+
+/* Deux champs qui se lisent ensemble (expiration et cryptogramme). */
+.nb-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--k-space-4);
+}
+.nb-pair > .k-field {
+  flex: 1 1 calc(var(--k-space-32) * 1);
+}
+
+/* Colonne d'un formulaire d'achat. */
+.nb-form {
+  max-width: var(--k-measure);
+}
+
+/* Compteur de billets dans le bouton d'action. */
+[data-nb-compteur]:not(:empty) {
+  margin-inline-start: var(--k-space-2);
+}

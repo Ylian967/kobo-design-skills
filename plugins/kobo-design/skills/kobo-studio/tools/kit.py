@@ -173,6 +173,7 @@ def main():
     ap.add_argument("--react", action="store_true")
     ap.add_argument("--marque", action="store_true")
     ap.add_argument("--prefixe", default="")
+    ap.add_argument("--maj", action="store_true", help="met à jour kobo/ sans écrire aucune page (reprise d'un projet kobo-studio)")
     a = ap.parse_args()
     if not (STUDIO / f"contract/maps/{a.skill}.css").exists():
         print(f"Skill inconnu : {a.skill}. Voir catalogue.md.")
@@ -234,6 +235,9 @@ def main():
                   " les autres familles restent neutres (option familles de gabarits(), non essayée).")
         else:
             print("Ce skill n'a pas de gabarit de signature : la page rend les emplacements neutres.")
+        return 0
+    if a.maj:
+        print("  --maj : kobo/ mis à jour, aucune page écrite")
         return 0
     names = {src: a.prefixe + name for src, name in PAGES[a.structure].items()}
     for src_name, name in names.items():

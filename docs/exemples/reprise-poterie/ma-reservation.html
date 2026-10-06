@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="reduced" data-k-skill="serif-bistro-green">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma réservation — Terre &amp; Feu, poterie à Nantes</title>
+<meta name="description" content="Retrouvez votre réservation chez Terre & Feu avec son numéro : la relire, changer de date ou l'annuler.">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/serif-bistro-green.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/champ/champ.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/etat-vide/etat-vide.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/fil-ariane/fil-ariane.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/modale/modale.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/site-vitrine/site-vitrine.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/serif-bistro-green.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/serif-bistro-green.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/motion.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/serif-bistro-green.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Terre &amp; Feu</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html#atelier">L'atelier</a></li>
+          <li><a class="k-nav__link" href="index.html#formules">Formules et tarifs</a></li>
+          <li><a class="k-nav__link" href="index.html#horaires">Horaires</a></li>
+          <li><a class="k-nav__link" href="index.html#venir">Venir</a></li>
+          <li><a class="k-nav__link" href="ma-reservation.html" aria-current="page">Ma réservation</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn k-nav__extra" href="reserver.html">Réserver une séance</a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+        <li><a class="k-menu__link" href="index.html#atelier">L'atelier</a></li>
+        <li><a class="k-menu__link" href="index.html#formules">Formules et tarifs</a></li>
+        <li><a class="k-menu__link" href="index.html#horaires">Horaires</a></li>
+        <li><a class="k-menu__link" href="index.html#venir">Venir</a></li>
+        <li><a class="k-menu__link" href="ma-reservation.html" aria-current="page">Ma réservation <span class="k-menu__here">page actuelle</span></a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="reserver.html">Réserver une séance</a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <!-- 1. Où l'on est -->
+    <section data-k-slot="hero" class="sv-inner-hero" aria-labelledby="titre">
+      <div class="k-wrap k-stack">
+        <nav class="k-crumbs" aria-label="Fil d'Ariane">
+          <ol><li><a href="index.html">Accueil</a></li><li><span aria-current="page">Ma réservation</span></li></ol>
+        </nav>
+        <h1 class="k-h1" id="titre" data-k-part="title">Ma réservation</h1>
+        <p class="k-lead" data-k-part="lead">Retrouvez votre réservation avec son numéro, pour la relire, changer de date ou l'annuler.</p>
+      </div>
+    </section>
+
+    <!-- 2. Retrouver, puis la réservation et ses gestes -->
+    <section class="k-section k-section--tight k-section--rule" aria-label="Votre réservation">
+      <div class="k-wrap k-split">
+        <div class="k-split__main k-stack k-stack--lg">
+          <form class="k-stack" id="chercher" novalidate>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="email">Adresse e-mail</label>
+              <div class="k-field__box"><input class="k-field__control" id="email" name="email" type="email" autocomplete="email" inputmode="email" required data-k-msg="Indiquez une adresse e-mail complète, par exemple prenom@exemple.fr." aria-describedby="email-aide"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="email-aide">Celle que vous avez donnée en réservant.</span>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="ref">Numéro de réservation</label>
+              <div class="k-field__box"><input class="k-field__control" id="ref" name="ref" type="text" autocomplete="off" autocapitalize="characters" required pattern="\s*[Tt][Ff]-?[0-9]{4}\s*" data-k-msg="Le numéro s'écrit TF- suivi de quatre chiffres, par exemple TF-4821." aria-describedby="ref-aide"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-err"/></svg><span></span></p>
+              <span class="k-field__help" id="ref-aide">Il est écrit sur votre confirmation et commence par TF-.</span>
+            </div>
+            <p><button type="submit" class="k-btn" id="retrouver">Retrouver ma réservation</button></p>
+          </form>
+
+          <div class="k-empty" id="introuvable" hidden>
+            <h2 class="k-empty__title" id="t-introuvable" tabindex="-1">Aucune réservation à ce numéro pour cette adresse</h2>
+            <p class="k-empty__text">Vérifiez le numéro et l'adresse e-mail : ils restent dans le formulaire ci-dessus. Si vous ne retrouvez pas votre numéro, Maëlle peut vous le redonner.</p>
+            <div class="k-empty__actions"><a class="k-btn k-btn--secondary" href="tel:+33240550127">Appeler le 02 40 55 01 27</a></div>
+          </div>
+
+          <div class="k-stack" id="fiche" hidden>
+            <h2 class="k-h2" id="t-fiche" tabindex="-1">Votre réservation</h2>
+            <p id="message" role="status"></p>
+            <p><strong id="etat"></strong></p>
+            <dl class="k-facts" id="faits"></dl>
+            <p class="k-note" id="regle"></p>
+            <p class="tf-actions" id="gestes">
+              <button type="button" class="k-btn k-btn--secondary" id="changer">Changer de date</button>
+              <button type="button" class="k-btn k-btn--danger" id="annuler" data-k-modal-open="m-annuler"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Annuler la réservation</button>
+              <a class="k-btn k-btn--secondary" id="appeler" href="tel:+33240550127">Appeler le 02 40 55 01 27</a>
+              <a class="k-btn" id="rereserver" href="reserver.html">Réserver une autre séance</a>
+            </p>
+            <div class="k-stack" id="bloc-changer" hidden>
+              <h3 class="k-h3" id="t-changer" tabindex="-1">Choisir la nouvelle date</h3>
+              <ul class="tf-slots" id="autres"></ul>
+              <div class="k-empty k-empty--plain" id="autres-vide" hidden>
+                <h4 class="k-empty__title">Aucune autre date n'a assez de places</h4>
+                <p class="k-empty__text">Votre réservation ne change pas. Maëlle peut vous proposer une autre date par téléphone.</p>
+              </div>
+              <p><button type="button" class="k-btn k-btn--secondary" id="garder">Garder ma date</button></p>
+            </div>
+            <p><button type="button" class="k-btn k-btn--ghost" id="autre">Chercher une autre réservation</button></p>
+          </div>
+        </div>
+
+        <aside class="k-sticky k-stack sv-aside" aria-labelledby="t-bref">
+          <h2 class="k-h3" id="t-bref">En bref</h2>
+          <dl class="k-facts">
+            <div><dt>Paiement</dt><dd>sur place, par chèque ou carte</dd></div>
+            <div><dt>Annulation</dt><dd>libre jusqu'à 48 h avant la séance</dd></div>
+            <div><dt>Moins de 48 h avant</dt><dd>séance non remboursée, un seul report possible</dd></div>
+            <div><dt>Compris</dt><dd>la terre, les émaux et les deux cuissons</dd></div>
+            <div><dt>Groupes</dt><dd>six personnes au plus</dd></div>
+          </dl>
+          <a class="k-btn k-btn--secondary k-btn--block" href="tel:+33240550127">Appeler le 02 40 55 01 27</a>
+        </aside>
+      </div>
+    </section>
+
+    <section data-k-slot="finale" aria-labelledby="t-suite" data-k-tone="inverse">
+      <div class="k-wrap k-split k-split--center">
+        <div class="k-stack k-split__main">
+          <h2 class="k-h2" id="t-suite" data-k-part="title">Envie de revenir ?</h2>
+          <p class="k-lead" data-k-part="lead">Découverte, cycle de six séances ou modelage parent-enfant : les dates sont en ligne.</p>
+        </div>
+        <div><a class="k-btn" href="reserver.html" data-k-part="action">Réserver une séance</a></div>
+      </div>
+    </section>
+
+    <dialog class="k-modal" id="m-annuler" role="alertdialog" aria-labelledby="m-annuler-t" aria-describedby="m-annuler-d">
+      <div class="k-modal__head"><h2 class="k-modal__title" id="m-annuler-t">Annuler la réservation ?</h2></div>
+      <div class="k-modal__body" id="m-annuler-d"><p id="m-annuler-texte"></p></div>
+      <div class="k-modal__foot">
+        <button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Garder ma place</button>
+        <button type="button" class="k-btn k-btn--danger" data-k-modal-close="annule"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Oui, annuler</button>
+      </div>
+    </dialog>
+
+    <dialog class="k-modal" id="m-report" role="alertdialog" aria-labelledby="m-report-t" aria-describedby="m-report-d">
+      <div class="k-modal__head"><h2 class="k-modal__title" id="m-report-t">Changer de date une seule fois ?</h2></div>
+      <div class="k-modal__body" id="m-report-d"><p id="m-report-texte"></p></div>
+      <div class="k-modal__foot">
+        <button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Garder ma date</button>
+        <button type="button" class="k-btn" data-k-modal-close="oui">Oui, changer de date</button>
+      </div>
+    </dialog>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Terre &amp; Feu</span><span>Atelier de céramique de Maëlle Guivarch</span><span>14 rue de la Verrerie, 44100 Nantes</span></div>
+      <ul><li><a href="index.html#atelier">L'atelier</a></li><li><a href="index.html#formules">Formules et tarifs</a></li><li><a href="index.html#horaires">Horaires</a></li><li><a href="index.html#venir">Venir</a></li><li><a href="ma-reservation.html">Ma réservation</a></li><li><a href="atelier.html">Espace de l'atelier</a></li><li><a href="mailto:bonjour@terre-et-feu.example">bonjour@terre-et-feu.example</a></li><li><a href="tel:+33240550127">02 40 55 01 27</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/components/champ/champ.js"></script>
+<script src="kobo/kobo-studio/components/modale/modale.js"></script>
+<script src="kobo/kobo-studio/components/notification/notification.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.js"></script>
+<script src="kobo/kobo-studio/ux/templates/hero-photo/serif-bistro-green.js"></script>
+<script src="kobo/kobo-studio/components/motion/motion.js"></script>
+<script src="kobo/kobo-studio/components/motion/serif-bistro-green.js"></script>
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+<script src="tf-seances.js"></script>
+<script src="tf-reservations.js"></script>
+<script src="tf-outils.js"></script>
+<script src="tf-ma-reservation.js"></script>
+</body>
+</html>

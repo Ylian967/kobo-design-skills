@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="kobo/kobo-studio/ux/templates/titre-geant/nocturne-architecture.css">
 <link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css">
 <link rel="stylesheet" href="kobo/kobo-studio/ux/templates/hero-photo/nocturne-architecture.css">
+<link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/signatures/nocturne-architecture.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/motion/motion.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/motion/nocturne-architecture.css">
@@ -46,7 +47,7 @@
         </ul>
       </nav>
       <div class="k-nav__actions">
-        <a class="k-btn k-nav__extra" href="https://billetterie.nuits-basses.example">Acheter un billet</a>
+        <a class="k-btn" href="billets.html">Billets<span data-nb-compteur="court"></span></a>
         <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
       </div>
     </header>
@@ -65,7 +66,7 @@
         <li><a class="k-menu__link" href="#pratique" data-k-menu-close>Pratique</a></li>
       </ul>
     </nav>
-    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="https://billetterie.nuits-basses.example">Acheter un billet</a></div>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="billets.html">Acheter un billet<span data-nb-compteur></span></a></div>
   </dialog>
 
   <main id="contenu" tabindex="-1">
@@ -81,7 +82,7 @@
             <div><dt>Lieu</dt><dd>Les Grandes Halles, Lyon 7e</dd></div>
             <div><dt>Billets</dt><dd>32 € le soir, 54 € les deux soirs</dd></div>
           </dl>
-          <a class="k-btn" href="https://billetterie.nuits-basses.example" data-k-part="action">Acheter un billet</a>
+          <a class="k-btn" href="billets.html" data-k-part="action">Acheter un billet<span data-nb-compteur></span></a>
         </div>
         <figure class="k-hero__side" data-k-slot="media" data-k-part="media">
           <img src="images/foule-lasers.jpg" alt="Foule en silhouettes dans une grande halle sombre, face à une scène baignée de lumière rouge" width="1600" height="1200" data-k-focus="60% 85%">
@@ -118,7 +119,7 @@
         <header data-k-slot="title">
           <p class="k-kicker" data-k-part="kicker">Tarifs</p>
           <h2 class="k-h2" id="t-tarifs" data-k-part="title">Trois billets</h2>
-          <p class="k-lead" data-k-part="lead">La billetterie est ouverte. Tous les pass se prennent au même endroit.</p>
+          <p class="k-lead" data-k-part="lead">La billetterie est ouverte, ici même.</p>
         </header>
         <div class="k-stack k-split__main">
           <dl class="k-facts">
@@ -127,6 +128,7 @@
             <div><dt>Réduit étudiant, 1 soir</dt><dd>26 €</dd></div>
           </dl>
           <p class="k-note">Le tarif étudiant ne vaut que pour un soir. La carte étudiante est demandée à l'entrée.</p>
+          <p><a class="k-link" href="billets.html">Choisir mes billets</a></p>
         </div>
       </div>
     </section>
@@ -183,8 +185,8 @@
       <div class="k-wrap">
         <div class="k-stack">
           <h2 class="k-h2" id="t-billets" data-k-part="title">Prenez votre place</h2>
-          <p data-k-part="lead">Vendredi 12 et samedi 13 juin 2027, aux Grandes Halles. La billetterie est tenue par notre prestataire : le bouton vous y conduit.</p>
-          <p><a class="k-btn" href="https://billetterie.nuits-basses.example" data-k-part="action">Acheter un billet</a></p>
+          <p data-k-part="lead">Vendredi 12 et samedi 13 juin 2027, aux Grandes Halles. Les billets se prennent ici, sur ce site.</p>
+          <p><a class="k-btn" href="billets.html" data-k-part="action">Acheter un billet<span data-nb-compteur></span></a></p>
         </div>
       </div>
     </section>
@@ -192,8 +194,8 @@
 
   <footer class="k-foot">
     <div class="k-wrap k-foot__in">
-      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Nuits Basses</span><span>Festival de musique électronique, 4e édition. Les Grandes Halles, Lyon 7e.</span><span>Photo d'ouverture provisoire, en attendant celles du festival : <a class="k-link" href="https://commons.wikimedia.org/wiki/File:Awakenings,_Gashouder_Amsterdam_(Ank_Kumar)_03.jpg">Ank Kumar, CC BY-SA 4.0</a>.</span></div>
-      <ul><li><a href="https://instagram.com/nuitsbasses">Instagram @nuitsbasses</a></li><li><a href="mailto:salut@nuits-basses.example">salut@nuits-basses.example</a></li><li><a href="https://billetterie.nuits-basses.example">Acheter un billet</a></li></ul>
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Nuits Basses</span><span>Festival de musique électronique, 4e édition. Les Grandes Halles, Lyon 7e.</span><span>Un souci avec un billet ? Écrivez-nous : nous sommes trois bénévoles et nous répondons dès que possible.</span><span>Photo d'ouverture provisoire, en attendant celles du festival : <a class="k-link" href="https://commons.wikimedia.org/wiki/File:Awakenings,_Gashouder_Amsterdam_(Ank_Kumar)_03.jpg">Ank Kumar, CC BY-SA 4.0</a>.</span></div>
+      <ul><li><a href="https://instagram.com/nuitsbasses">Instagram @nuitsbasses</a></li><li><a href="mailto:salut@nuits-basses.example">salut@nuits-basses.example</a></li><li><a href="billets.html">Acheter un billet</a></li><li><a href="conditions.html">Conditions de vente</a></li></ul>
     </div>
   </footer>
 </div>
@@ -209,6 +211,7 @@
 <script src="kobo/kobo-studio/ux/templates/hero-photo/nocturne-architecture.js"></script>
 <script src="kobo/kobo-studio/components/motion/motion.js"></script>
 <script src="kobo/kobo-studio/components/motion/nocturne-architecture.js"></script>
+<script src="site.js"></script>
 <script>
   Kobo.templates.apply();
   if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });

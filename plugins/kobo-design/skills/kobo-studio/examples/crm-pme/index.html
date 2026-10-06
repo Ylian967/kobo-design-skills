@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Affaires — Rivage Suivi, Atelier Rivage (données d'exemple fictives)</title>
-<!-- Fichiers de kobo/ : ne pas les modifier. Comportements du projet : site.js. -->
+<!-- Fichiers de kobo/ : ne pas les modifier. Styles du projet : site.css. Comportements du projet : dossier site/. -->
 <link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
 <link rel="stylesheet" href="kobo/kobo-studio/contract/maps/clear-ledger-desk.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
@@ -14,17 +14,18 @@
 <link rel="stylesheet" href="kobo/kobo-studio/components/etat-vide/etat-vide.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/tableau/tableau.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/modale/modale.css">
-<link rel="stylesheet" href="kobo/kobo-studio/components/notification/notification.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/interrupteur/interrupteur.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-deroulant/menu-deroulant.css">
 <link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
 <link rel="stylesheet" href="kobo/kobo-studio/ux/structures/application/application.css">
+<link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="kobo/kobo-studio/components/signatures/clear-ledger-desk.css">
 </head>
 <body>
 <svg class="k-defs" aria-hidden="true">
-  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
-  <symbol id="i-list" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></symbol>
   <symbol id="i-empty" viewBox="0 0 24 24"><path d="M3 13l3-8h12l3 8M3 13v6h18v-6M3 13h5l1.5 3h5L16 13h5"/></symbol>
   <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 8v5M12 16.5v.5M12 3l9.5 17h-19L12 3Z"/></symbol>
 </svg>
@@ -36,7 +37,6 @@
 
   <div class="k-page__top">
     <header class="ap-top">
-      <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-side aria-expanded="true" aria-controls="ap-side" aria-label="Barre latérale"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg></button>
       <a class="ap-brand" href="index.html">Rivage Suivi</a>
       <form class="k-field ap-search" role="search">
         <label class="k-field__label k-sr-only" for="ap-q">Chercher une affaire ou une société</label>
@@ -50,25 +50,19 @@
   </div>
 
   <div class="ap-body">
-    <nav class="ap-side" id="ap-side" aria-label="Sections de Rivage Suivi">
-      <h2 class="ap-side__title">Suivi</h2>
-      <ul>
-        <li><a class="ap-side__link" href="index.html" aria-current="page" title="Affaires ouvertes"><svg class="k-icon" aria-hidden="true"><use href="#i-list"/></svg><span class="ap-side__label">Affaires</span><span class="ap-side__count" data-rs-ouvertes>16</span></a></li>
-      </ul>
-    </nav>
-
     <main id="contenu" class="ap-main" tabindex="-1">
       <!-- 1. Tête d'écran : où je suis, combien, et la seule action principale -->
       <header data-k-slot="title" class="ap-head">
         <div class="ap-head__text">
           <p class="k-kicker" data-k-part="kicker">Atelier Rivage</p>
           <h1 id="titre" data-k-part="title">Affaires</h1>
-          <p class="ap-head__sum" data-k-part="lead" role="status" data-ap-sum="{n} affaires affichées sur {total}"></p>
+          <p class="ap-head__sum" data-k-part="lead" role="status" data-ap-sum="{n} affaires affichées sur {total}" data-ap-sum-one="{n} affaire affichée sur {total}"></p>
+          <p class="ap-head__sum" role="status" data-rs-total></p>
         </div>
         <div><button type="button" class="k-btn" data-k-part="action" data-k-modal-open="rs-creer" aria-haspopup="dialog">Créer une affaire</button></div>
       </header>
 
-      <p class="k-note"><strong>Données d'exemple fictives.</strong> Les sociétés, les affaires, les montants et les prénoms sont inventés. Rien n'est enregistré : une affaire créée ou une étape changée disparaît au rechargement de la page.</p>
+      <p class="k-note"><strong>Données d'exemple fictives.</strong> Les sociétés, les affaires, les montants et les prénoms sont inventés. Rien n'est enregistré : une affaire créée, corrigée, archivée ou supprimée revient à son état de départ au rechargement de la page. Le rôle de la gérante est simulé par le réglage « Session de la gérante ».</p>
 
       <!-- 2. Filtres -->
       <div class="ap-tools">
@@ -78,11 +72,7 @@
         </div>
         <div class="k-field k-select">
           <label class="k-field__label" for="f-avancement">Avancement</label>
-          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-avancement" data-ap-filter="avancement"><option value="ouverte" selected>Affaires ouvertes</option><option value="close">Affaires closes (gagnées, perdues)</option><option value="">Toutes les affaires</option></select></div>
-        </div>
-        <div class="k-field k-select">
-          <label class="k-field__label" for="f-etape">Étape</label>
-          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-etape" data-ap-filter="etape"><option value="">Toutes les étapes</option><option value="qualification">Qualification</option><option value="proposition">Proposition</option><option value="negociation">Négociation</option><option value="gagnee">Gagnée</option><option value="perdue">Perdue</option></select></div>
+          <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="f-avancement" data-ap-filter="avancement"><option value="ouverte" selected>Affaires ouvertes</option><option value="close">Affaires closes (gagnées, perdues)</option><option value="archivee">Affaires archivées</option><option value="">Toutes les affaires, archives comprises</option></select></div>
         </div>
         <button type="button" class="k-btn k-btn--ghost" data-ap-reset>Effacer les filtres</button>
         <button type="button" class="k-switch" role="switch" aria-checked="false" data-rs-densite>
@@ -90,9 +80,21 @@
           <span class="k-switch__label">Affichage compact</span>
           <span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span>
         </button>
+        <button type="button" class="k-switch" role="switch" aria-checked="false" data-rs-gerante aria-describedby="rs-gerante-aide">
+          <span class="k-switch__track" aria-hidden="true"><span class="k-switch__thumb"></span></span>
+          <span class="k-switch__label">Session de la gérante</span>
+          <span class="k-switch__state" aria-hidden="true" data-on="Activé" data-off="Désactivé" data-busy="Enregistrement…"></span>
+        </button>
+        <span class="k-sr-only" id="rs-gerante-aide">Démonstration : allumé, la suppression définitive est permise ; éteint, on archive seulement.</span>
       </div>
 
-      <!-- 3. Zone de travail : la liste, et le détail de l'affaire ouverte -->
+      <!-- 3. Dernier changement : il reste affiché, avec son annulation -->
+      <div class="rs-dernier" data-rs-dernier>
+        <p class="rs-dernier__texte" role="status" data-rs-dernier-texte>Aucun changement depuis l'ouverture de la page.</p>
+        <button type="button" class="k-btn k-btn--secondary" data-rs-annuler hidden>Annuler ce changement</button>
+      </div>
+
+      <!-- 4. Zone de travail : la liste, et le détail de l'affaire ouverte -->
       <div class="ap-work">
         <section data-k-slot="grid" class="ap-list" aria-labelledby="titre">
           <div class="k-table" role="region" aria-labelledby="t-aff" tabindex="0" data-k-rownav>
@@ -133,7 +135,7 @@
                 <tr data-etape="qualification" data-avancement="ouverte" data-responsable="erwan" data-service="refonte"><th scope="row">Refonte de l'espace élèves</th><td>Auto-école du Port</td><td data-rs-cell="etape" data-k-sort="1">Qualification</td><td data-k-type="number" data-k-sort="8400">8 400 €</td><td data-k-sort="2027-02-12">12 févr. 2027</td><td>Erwan</td></tr>
               </tbody>
             </table>
-            <div class="k-table__empty" hidden><div class="k-empty k-empty--plain"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h2 class="k-empty__title">Aucune affaire ne correspond</h2><p class="k-empty__text">Aucune affaire pour cette recherche et ces filtres. Changez le responsable, l'avancement ou l'étape, ou effacez tout pour revenir aux affaires ouvertes.</p><div class="k-empty__actions"><button type="button" class="k-btn k-btn--secondary" data-ap-reset>Effacer les filtres</button></div></div></div>
+            <div class="k-table__empty" hidden><div class="k-empty k-empty--plain"><svg class="k-icon k-empty__icon" aria-hidden="true"><use href="#i-empty"/></svg><h2 class="k-empty__title" data-rs-vide-titre>Aucune affaire ne correspond</h2><p class="k-empty__text" data-rs-vide-texte>Aucune affaire pour cette recherche et ces filtres. Changez la recherche, le responsable ou l'avancement, ou effacez tout pour revenir aux affaires ouvertes.</p><div class="k-empty__actions"><button type="button" class="k-btn k-btn--secondary" data-ap-reset>Effacer les filtres</button></div></div></div>
             <p class="k-table__status k-sr-only" role="status"></p>
           </div>
           <div class="ap-list__foot">
@@ -144,15 +146,81 @@
 
         <aside class="ap-detail" id="ap-detail" aria-labelledby="d-titre" hidden>
           <div class="ap-detail__head">
-            <div><h2 class="ap-detail__title" id="d-titre" tabindex="-1"></h2><p class="ap-detail__sub">Affaire</p></div>
+            <div><h2 class="ap-detail__title" id="d-titre" tabindex="-1"></h2><p class="ap-detail__sub" data-rs-societe></p></div>
             <button type="button" class="k-btn k-btn--ghost k-btn--icon" data-ap-close aria-label="Fermer le détail"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button>
           </div>
-          <dl class="k-facts" data-ap-facts></dl>
-          <div class="k-field k-select">
-            <label class="k-field__label" for="d-etape">Changer l'étape</label>
-            <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="d-etape" data-rs-etape aria-describedby="d-etape-aide"><option value="qualification">Qualification</option><option value="proposition">Proposition</option><option value="negociation">Négociation</option><option value="gagnee">Gagnée</option><option value="perdue">Perdue</option></select></div>
-            <span class="k-field__help" id="d-etape-aide">Le changement s'applique tout de suite.</span>
+
+          <!-- Lecture : les faits, l'étape en un geste, les autres gestes -->
+          <div class="k-stack" data-rs-lecture>
+            <div class="k-stack k-stack--sm" role="group" aria-labelledby="d-etape-t" aria-describedby="d-etape-aide">
+              <h3 class="k-field__label" id="d-etape-t">Étape</h3>
+              <div class="rs-rang" data-rs-etapes>
+                <button type="button" class="k-btn k-btn--secondary" aria-pressed="false" data-rs-etape="qualification">Qualification</button>
+                <button type="button" class="k-btn k-btn--secondary" aria-pressed="false" data-rs-etape="proposition">Proposition</button>
+                <button type="button" class="k-btn k-btn--secondary" aria-pressed="false" data-rs-etape="negociation">Négociation</button>
+                <button type="button" class="k-btn k-btn--secondary" aria-pressed="false" data-rs-etape="gagnee">Gagnée</button>
+                <button type="button" class="k-btn k-btn--secondary" aria-pressed="false" data-rs-etape="perdue">Perdue</button>
+              </div>
+              <p class="k-field__help" id="d-etape-aide" data-rs-etape-aide>Un bouton change l'étape tout de suite ; « Annuler ce changement » reste proposé juste après.</p>
+            </div>
+            <!-- Le dernier changement, redit là où l'on travaille (le panneau peut recouvrir la liste sur petit écran) -->
+            <div class="rs-dernier" data-rs-dernier hidden>
+              <p class="rs-dernier__texte" data-rs-dernier-texte></p>
+              <button type="button" class="k-btn k-btn--secondary" data-rs-annuler hidden>Annuler ce changement</button>
+            </div>
+            <dl class="k-facts" data-ap-facts></dl>
+            <div class="rs-rang">
+              <button type="button" class="k-btn k-btn--secondary" data-rs-modifier>Modifier</button>
+              <div class="k-dropdown">
+                <button type="button" class="k-btn k-btn--secondary" aria-haspopup="menu" aria-expanded="false" aria-controls="rs-autres">Autres actions<span class="k-dropdown__caret" aria-hidden="true"></span></button>
+                <ul class="k-dropdown__menu" role="menu" id="rs-autres" hidden>
+                  <li role="none"><button type="button" class="k-dropdown__item" role="menuitem" data-rs-action="archiver" data-rs-bascule>Archiver</button></li>
+                  <li role="separator" class="k-dropdown__sep"></li>
+                  <li role="none"><button type="button" class="k-dropdown__item k-dropdown__item--danger" role="menuitem" data-rs-action="supprimer" aria-disabled="true" aria-describedby="rs-supprimer-raison"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Supprimer définitivement…</button></li>
+                </ul>
+              </div>
+            </div>
+            <p class="k-field__help" id="rs-supprimer-raison" data-rs-supprimer-raison>Autres actions : archiver. La suppression définitive est réservée à la gérante.</p>
           </div>
+
+          <!-- Modification : dans le panneau, la liste reste visible -->
+          <form class="k-stack" id="rs-edition" data-rs-edition novalidate hidden aria-labelledby="d-titre">
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="e-affaire">Affaire</label>
+              <div class="k-field__box"><input class="k-field__control" id="e-affaire" name="affaire" autocomplete="off" type="text" required data-k-msg="Donnez un nom à l'affaire, par exemple « Refonte du site vitrine »."></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="e-societe">Société</label>
+              <div class="k-field__box"><input class="k-field__control" id="e-societe" name="societe" autocomplete="off" type="text" required list="rs-societes" data-k-msg="Indiquez la société cliente : choisissez-la dans la liste ou écrivez son nom."></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+            <div class="k-field k-select" data-k-validate>
+              <label class="k-field__label" for="e-service">Service</label>
+              <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="e-service" name="service" required data-k-msg="Choisissez le service vendu : audit, refonte de site, formation ou maintenance."><option value="audit">Audit</option><option value="refonte">Refonte de site</option><option value="formation">Formation</option><option value="maintenance">Maintenance</option></select></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="e-montant">Montant <span class="k-field__opt">(facultatif)</span></label>
+              <div class="k-field__box"><input class="k-field__control" id="e-montant" name="montant" autocomplete="off" type="number" min="0" step="1" inputmode="numeric" aria-describedby="e-montant-aide" data-k-msg="Écrivez le montant en chiffres, sans espace ni symbole : 4800."></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+              <span class="k-field__help" id="e-montant-aide">En euros hors taxes.</span>
+            </div>
+            <div class="k-field" data-k-validate>
+              <label class="k-field__label" for="e-cloture">Clôture prévue <span class="k-field__opt">(facultatif)</span></label>
+              <div class="k-field__box"><input class="k-field__control" id="e-cloture" name="cloture" autocomplete="off" type="date"></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+            <div class="k-field k-select" data-k-validate>
+              <label class="k-field__label" for="e-responsable">Responsable</label>
+              <div class="k-field__box k-select__box"><select class="k-field__control k-select__control" id="e-responsable" name="responsable" required data-k-msg="Choisissez la personne qui suit cette affaire."><option value="armelle">Armelle</option><option value="erwan">Erwan</option><option value="maëlle">Maëlle</option><option value="soizic">Soizic</option><option value="titouan">Titouan</option></select></div>
+              <p class="k-field__error" hidden><svg class="k-icon" aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+            </div>
+            <div class="rs-rang">
+              <button type="submit" class="k-btn k-btn--secondary">Enregistrer</button>
+              <button type="button" class="k-btn k-btn--ghost" data-rs-quitter>Annuler la modification</button>
+            </div>
+          </form>
         </aside>
       </div>
     </main>
@@ -207,6 +275,18 @@
     </div>
   </dialog>
 
+  <dialog class="k-modal" id="rs-supprimer" role="alertdialog" aria-labelledby="rs-supprimer-t" aria-describedby="rs-supprimer-d">
+    <div class="k-modal__head"><h2 class="k-modal__title" id="rs-supprimer-t">Supprimer définitivement cette affaire ?</h2></div>
+    <div class="k-modal__body k-stack" id="rs-supprimer-d">
+      <p data-rs-supprimer-quoi></p>
+      <p>Ce geste ne s'annule pas : l'affaire ne pourra pas être restaurée. Pour la mettre de côté sans la perdre, archivez-la.</p>
+    </div>
+    <div class="k-modal__foot">
+      <button type="button" class="k-btn k-btn--secondary" data-k-modal-close autofocus>Garder l'affaire</button>
+      <button type="button" class="k-btn k-btn--danger" data-k-modal-close="supprime"><svg class="k-icon" aria-hidden="true"><use href="#i-trash"/></svg>Oui, supprimer définitivement</button>
+    </div>
+  </dialog>
+
   <dialog class="k-modal" id="ap-aide" aria-labelledby="ap-aide-t" data-k-modal-dismiss="backdrop">
     <div class="k-modal__head"><h2 class="k-modal__title" id="ap-aide-t">Raccourcis clavier</h2><button type="button" class="k-btn k-btn--secondary k-btn--icon" data-k-modal-close aria-label="Fermer la fenêtre"><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg></button></div>
     <div class="k-modal__body">
@@ -215,8 +295,7 @@
         <li><span>Changer de ligne</span><span><span class="ap-key">↑</span><span class="ap-key">↓</span></span></li>
         <li><span>Première, dernière ligne</span><span><span class="ap-key">Début</span><span class="ap-key">Fin</span></span></li>
         <li><span>Ouvrir le détail de l'affaire</span><span><span class="ap-key">Entrée</span></span></li>
-        <li><span>Fermer le détail, le tiroir, cette fenêtre</span><span><span class="ap-key">Échap</span></span></li>
-        <li><span>Replier ou ouvrir la barre latérale</span><span><span class="ap-key">[</span></span></li>
+        <li><span>Fermer le détail, cette fenêtre</span><span><span class="ap-key">Échap</span></span></li>
         <li><span>Cette aide</span><span><span class="ap-key">?</span></span></li>
       </ul>
     </div>
@@ -226,12 +305,17 @@
 <script src="kobo/kobo-studio/components/champ/champ.js"></script>
 <script src="kobo/kobo-studio/components/tableau/tableau.js"></script>
 <script src="kobo/kobo-studio/components/modale/modale.js"></script>
-<script src="kobo/kobo-studio/components/notification/notification.js"></script>
 <script src="kobo/kobo-studio/components/interrupteur/interrupteur.js"></script>
+<script src="kobo/kobo-studio/components/menu-deroulant/menu-deroulant.js"></script>
 <script src="kobo/kobo-studio/ux/structures/page.js"></script>
 <script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
 <script src="kobo/kobo-studio/ux/structures/application/application.js"></script>
-<script src="site.js"></script>
+<script src="site/base.js"></script>
+<script src="site/journal.js"></script>
+<script src="site/filtres.js"></script>
+<script src="site/detail.js"></script>
+<script src="site/modifier.js"></script>
+<script src="site/creer.js"></script>
 <script>
   Kobo.templates.apply();
 </script>

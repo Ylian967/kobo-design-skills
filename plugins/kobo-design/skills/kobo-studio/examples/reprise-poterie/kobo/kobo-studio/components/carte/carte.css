@@ -1,0 +1,53 @@
+/*
+ * kobo-studio — carte
+ * Rôles lus : surface, surface-2, text, text-2, text-muted, line, line-strong, focus*, font-display, font-body, font-mono,
+ * fs-h3, fs-body, fs-small, fs-label, lh-tight, lh-body, ls-caps, fw-display, radius, radius-lg, border-w, shadow, space-*, dur-fast, ease-out.
+ */
+.k-card {
+  position: relative; display: flex; flex-direction: column; min-inline-size: 0; overflow: hidden;
+  font-family: var(--k-font-body); color: var(--k-text); background: var(--k-surface);
+  border: var(--k-border-w) solid var(--k-line); border-radius: var(--k-radius-lg); box-shadow: var(--k-shadow);
+  transition: border-color var(--k-dur-fast) var(--k-ease-out), background-color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-card__media { aspect-ratio: 3 / 2; overflow: hidden; background: var(--k-surface-2); border-block-end: var(--k-border-w) solid var(--k-line); }
+.k-card__media img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; filter: var(--k-img-filter); }
+.k-card__body { display: grid; gap: var(--k-space-3); padding: var(--k-space-6); align-content: start; flex: 1; }
+/* Surtitre : libellé décoratif, il peut rester sous le plancher de 12px si le skill le veut ainsi */
+.k-card__meta { font-family: var(--k-font-mono); font-size: max(var(--k-fs-label), var(--k-fs-min)); letter-spacing: var(--k-ls-caps); text-transform: var(--k-label-case); color: var(--k-text-muted); }
+.k-card__title { margin: 0; font-family: var(--k-font-display); font-size: var(--k-fs-h3); font-weight: var(--k-fw-display); line-height: max(var(--k-lh-tight), 1.1); }
+.k-card__title a { color: inherit; text-decoration: none; }
+.k-card__text { margin: 0; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text-2); }
+.k-card__inset { padding: var(--k-space-3); font-size: max(var(--k-fs-small), var(--k-fs-min)); background: var(--k-surface-2); border-radius: var(--k-radius); }
+.k-card__foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--k-space-3);
+  padding: var(--k-space-4) var(--k-space-6); border-block-start: var(--k-border-w) solid var(--k-line); font-size: max(var(--k-fs-small), var(--k-fs-min));
+}
+
+/* Carte cliquable : le lien du titre couvre toute la carte ; le focus est dessiné sur la carte entière */
+.k-card--link .k-card__title a::after { content: ""; position: absolute; inset: 0; }
+.k-card--link:hover, .k-card--link[data-k-state="hover"] { border-color: var(--k-line-strong); background: var(--k-surface-2); }
+.k-card--link:hover .k-card__title a, .k-card--link[data-k-state="hover"] .k-card__title a { text-decoration: underline; text-underline-offset: var(--k-space-1); }
+.k-card--link:active { background: var(--k-surface-2); box-shadow: none; }
+.k-card--link .k-card__title a:focus-visible { outline: none; }
+.k-card--link:has(.k-card__title a:focus-visible), .k-card--link[data-k-state="focus"] { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Les autres actions d'une carte cliquable restent au-dessus du lien étiré */
+.k-card--link .k-card__foot :is(a, button) { position: relative; z-index: 1; }
+
+/* Sélectionnée : bordure appuyée ET mention écrite avec icône (jamais la couleur seule) */
+.k-card[aria-current="true"], .k-card.is-selected { border-color: var(--k-line-strong); outline: var(--k-border-w) solid var(--k-line-strong); outline-offset: calc(var(--k-border-w) * -2); }
+.k-card__flag { display: inline-flex; align-items: center; gap: var(--k-space-1); font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text); }
+
+/* Indisponible */
+.k-card[aria-disabled="true"] { background: var(--k-surface-2); box-shadow: none; }
+.k-card[aria-disabled="true"] :is(.k-card__title, .k-card__text) { color: var(--k-text-muted); }
+.k-card[aria-disabled="true"] .k-card__media img { filter: grayscale(1) var(--k-img-filter); }
+
+/* Variantes */
+.k-card--flat { background: transparent; box-shadow: none; }
+/* En ligne : image à côté du texte tant que la carte est assez large ; sinon l'image repasse au-dessus (sans point de rupture). Le pied prend toute la largeur. */
+.k-card--row { flex-flow: row wrap; }
+.k-card--row .k-card__media { display: grid; flex: 1 1 calc(var(--k-space-32) * 2); min-block-size: calc(var(--k-space-32) + var(--k-space-16)); aspect-ratio: auto; border-block-end: 0; }
+.k-card--row .k-card__body { flex: 2 1 calc(var(--k-space-32) * 2); }
+.k-card--row .k-card__foot { flex: 1 1 100%; }
+
+@media (prefers-reduced-motion: reduce) { .k-card { transition: none; } }

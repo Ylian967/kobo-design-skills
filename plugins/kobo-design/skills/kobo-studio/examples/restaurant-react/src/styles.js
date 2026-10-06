@@ -12,6 +12,7 @@ import './kobo/kobo-studio/ux/templates/cadre/cadre.css';
 import './kobo/kobo-studio/ux/templates/cadre/retro-mission-poster.css';
 import './kobo/kobo-studio/ux/templates/hero-photo/hero-photo.css';
 import './kobo/kobo-studio/ux/templates/hero-photo/retro-mission-poster.css';
+import './site.css';
 import './kobo/kobo-studio/components/signatures/retro-mission-poster.css';
 import './kobo/kobo-studio/components/motion/motion.css';
 import './kobo/kobo-studio/components/motion/retro-mission-poster.css';

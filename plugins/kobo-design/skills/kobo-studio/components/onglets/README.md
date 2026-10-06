@@ -25,6 +25,12 @@ Fichiers : `onglets.css`, `onglets.js`, `Onglets.jsx`.
 | Vide | panneau sans contenu | le panneau affiche un état vide (`../etat-vide/`), jamais un blanc |
 | Chargement | panneau en `aria-busy` | squelette (`../chargement/`) |
 
+## Script
+
+- **Quand il s'active** : seul, sur les `.k-tabs` présents au chargement (à `DOMContentLoaded`). Des onglets **créés par script** ne réagissent à rien tant que tu n'as pas appelé `Kobo.tabs.init(conteneur)` après les avoir insérés.
+- Choisir un onglet depuis ton script : `Kobo.tabs.select(onglet)`, **après** l'initialisation. Un `onglet.click()` lancé avant est ignoré sans erreur.
+- Chaque changement émet `k-tabs:change` sur `.k-tabs` (`detail.tab`, `detail.panel`).
+
 ## Clavier
 
 Modèle ARIA « tabs » à activation automatique.

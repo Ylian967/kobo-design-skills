@@ -23,7 +23,7 @@ article.k-card
 | État | Déclencheur | Rendu |
 |---|---|---|
 | Repos | — | fond `--k-surface`, bordure `--k-line` |
-| Survol | `:hover` sur `k-card--link` | bordure `--k-line-strong`, fond `--k-surface-2`, titre souligné. Rien ne grossit, l'image ne zoome pas |
+| Survol | `:hover` sur `k-card--link` | bordure `--k-line-strong`, fond `--k-surface-2`, titre souligné. Rien ne grossit, l'image ne zoome pas. La couche de signature d'un skill peut y ajouter son geste (`zigzag-snack-pop` soulève et penche la carte d'un degré) : la boîte mesurée change alors de quelques pixels, la carte ne change pas de taille |
 | Focus clavier | focus sur le lien du titre | contour `--k-focus` autour de **toute** la carte |
 | Actif | `:active` | fond `--k-surface-2`, ombre retirée |
 | Sélectionnée | `aria-current="true"` | bordure doublée **et** mention écrite avec icône |
@@ -39,6 +39,8 @@ article.k-card
 | `k-card--flat` | sans fond ni ombre |
 | `k-card--row` | image à gauche, texte à droite, pied sur toute la largeur ; l'image repasse au-dessus quand la carte devient étroite |
 | `k-card--crochets` | variante à la demande d'acid-scan-security. Les couches de signature s'appliquent seules : voir `../signatures/` |
+
+**Carte mise en avant sur toute la largeur** (accueil d'un site vitrine) : `<article class="k-card k-card--link k-card--row k-grid__wide" data-k-part="item">` dans la liste `data-k-slot="grid"`. Avec quatre éléments, une carte en avant en laisserait une seule sur sa ligne : mets-en deux en avant, ou aucune.
 
 ## Clavier
 

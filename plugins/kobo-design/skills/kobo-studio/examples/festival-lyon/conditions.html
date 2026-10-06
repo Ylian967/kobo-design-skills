@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr" data-k-intensity="full" data-k-skill="nocturne-architecture">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conditions de vente — Nuits Basses</title>
+<meta name="description" content="Conditions de vente des billets de Nuits Basses : prix, remboursement, revente, âge, tarif étudiant.">
+<!-- Fichiers de kobo/ : ne pas les modifier. Paiement simulé : voir site.js et commande.js. -->
+<link rel="stylesheet" href="kobo/kobo-studio/contract/roles.css">
+<link rel="stylesheet" href="kobo/kobo-studio/contract/maps/nocturne-architecture.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/socle.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/bouton/bouton.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/barre-nav/barre-nav.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/menu-mobile/menu-mobile.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/page.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/structures/landing-produit/landing-produit.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/titre-geant/titre-geant.css">
+<link rel="stylesheet" href="kobo/kobo-studio/ux/templates/titre-geant/nocturne-architecture.css">
+<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/signatures/nocturne-architecture.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/motion.css">
+<link rel="stylesheet" href="kobo/kobo-studio/components/motion/nocturne-architecture.css">
+</head>
+<body>
+<svg class="k-defs" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-err" viewBox="0 0 24 24"><path d="M15 9l-6 6M9 9l6 6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></symbol>
+  <symbol id="i-billet" viewBox="0 0 24 24"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4V7ZM14 7v10"/></symbol>
+</svg>
+
+<div class="k-page">
+  <div data-k-slot="backdrop" aria-hidden="true"></div>
+  <div data-k-slot="frame" aria-hidden="true"></div>
+  <a class="k-btn k-skip" href="#contenu">Aller au contenu</a>
+
+  <div class="k-page__top">
+    <header class="k-nav">
+      <a class="k-nav__brand" href="index.html">Nuits Basses</a>
+      <nav aria-label="Navigation principale">
+        <ul class="k-nav__list">
+          <li><a class="k-nav__link" href="index.html#programmation">Programmation</a></li>
+          <li><a class="k-nav__link" href="index.html#tarifs">Tarifs</a></li>
+          <li><a class="k-nav__link" href="index.html#lieu">Le lieu</a></li>
+          <li><a class="k-nav__link" href="index.html#pratique">Pratique</a></li>
+        </ul>
+      </nav>
+      <div class="k-nav__actions">
+        <a class="k-btn" href="billets.html">Billets<span data-nb-compteur="court"></span></a>
+        <button type="button" class="k-btn k-btn--secondary k-nav__burger" data-k-menu-open="menu" aria-expanded="false" aria-controls="menu"><svg class="k-icon" aria-hidden="true"><use href="#i-menu"/></svg>Menu</button>
+      </div>
+    </header>
+  </div>
+
+  <dialog class="k-menu" id="menu" aria-labelledby="menu-titre">
+    <div class="k-menu__head">
+      <h2 class="k-menu__title" id="menu-titre">Menu</h2>
+      <button type="button" class="k-btn k-btn--secondary" data-k-menu-close><svg class="k-icon" aria-hidden="true"><use href="#i-close"/></svg>Fermer</button>
+    </div>
+    <nav aria-label="Menu">
+      <ul class="k-menu__list">
+          <li><a class="k-menu__link" href="index.html#programmation">Programmation</a></li>
+          <li><a class="k-menu__link" href="index.html#tarifs">Tarifs</a></li>
+          <li><a class="k-menu__link" href="index.html#lieu">Le lieu</a></li>
+          <li><a class="k-menu__link" href="index.html#pratique">Pratique</a></li>
+      </ul>
+    </nav>
+    <div class="k-menu__foot"><a class="k-btn k-btn--block" href="billets.html">Acheter un billet<span data-nb-compteur></span></a></div>
+  </dialog>
+
+  <main id="contenu" tabindex="-1">
+    <section class="k-section" aria-labelledby="titre">
+      <div class="k-wrap k-split">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">Règles</p>
+          <h1 class="k-h2" id="titre" data-k-part="title">Conditions de vente</h1>
+          <p class="k-lead" data-k-part="lead">Ce qu'il faut savoir avant d'acheter un billet pour Nuits Basses, les 12 et 13 juin 2027.</p>
+        </header>
+        <dl class="k-facts k-split__main">
+          <div><dt>Pass 1 soir, vendredi ou samedi</dt><dd>32 €</dd></div>
+          <div><dt>Pass 2 soirs</dt><dd>54 €</dd></div>
+          <div><dt>Réduit étudiant, 1 soir</dt><dd>26 €</dd></div>
+          <div><dt>Frais en plus</dt><dd>Aucun</dd></div>
+          <div><dt>Par commande</dt><dd>Six billets au plus</dd></div>
+          <div><dt>Places</dt><dd>1 800 par soir</dd></div>
+          <div><dt>Billets</dt><dd>Non nominatifs, envoyés par e-mail</dd></div>
+          <div><dt>Remboursement</dt><dd>Aucun. La revente entre particuliers est autorisée.</dd></div>
+          <div><dt>Tarif étudiant</dt><dd>Carte étudiante demandée à l'entrée</dd></div>
+          <div><dt>Âge</dt><dd>Interdit aux moins de 18 ans</dd></div>
+          <div><dt>Fin de la vente en ligne</dt><dd>À l'ouverture des portes du soir concerné, 20 h, ou quand le soir est complet</dd></div>
+          <div><dt>Sur place</dt><dd>Seulement s'il reste des places, aux mêmes prix</dd></div>
+          <div><dt>Paiement</dt><dd>Par carte bancaire</dd></div>
+          <div><dt>Contact</dt><dd><a class="k-link" href="mailto:salut@nuits-basses.example">salut@nuits-basses.example</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="k-section k-section--alt" id="mentions" aria-labelledby="t-mentions">
+      <div class="k-wrap k-split">
+        <header data-k-slot="title">
+          <p class="k-kicker" data-k-part="kicker">Mentions</p>
+          <h2 class="k-h2" id="t-mentions" data-k-part="title">Mentions légales</h2>
+        </header>
+        <p class="k-split__main">À venir. Les organisateurs publieront ici leurs mentions légales et le texte complet des conditions de vente avant l'ouverture de la billetterie.</p>
+      </div>
+    </section>
+
+    <section data-k-slot="finale" aria-labelledby="t-fin" data-k-tone="inverse">
+      <div class="k-wrap">
+        <div class="k-stack">
+          <h2 class="k-h2" id="t-fin" data-k-part="title">Prenez votre place</h2>
+          <p data-k-part="lead">Vendredi 12 et samedi 13 juin 2027, aux Grandes Halles. Les billets se prennent ici, sur ce site.</p>
+          <p><a class="k-btn" href="billets.html" data-k-part="action">Acheter un billet</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="k-foot">
+    <div class="k-wrap k-foot__in">
+      <div class="k-stack k-stack--sm"><span class="k-foot__brand">Nuits Basses</span><span>Festival de musique électronique, 4e édition. Les Grandes Halles, Lyon 7e.</span><span>Un souci avec un billet ? Écrivez-nous : nous sommes trois bénévoles et nous répondons dès que possible.</span></div>
+      <ul><li><a href="https://instagram.com/nuitsbasses">Instagram @nuitsbasses</a></li><li><a href="mailto:salut@nuits-basses.example">salut@nuits-basses.example</a></li><li><a href="billets.html">Acheter un billet</a></li><li><a href="conditions.html">Conditions de vente</a></li></ul>
+    </div>
+  </footer>
+</div>
+
+<script src="kobo/kobo-studio/components/barre-nav/barre-nav.js"></script>
+<script src="kobo/kobo-studio/components/menu-mobile/menu-mobile.js"></script>
+<script src="kobo/kobo-studio/ux/structures/page.js"></script>
+<script src="kobo/kobo-studio/ux/templates/gabarits.js"></script>
+<script src="kobo/kobo-studio/ux/templates/titre-geant/titre-geant.js"></script>
+<script src="kobo/kobo-studio/ux/templates/titre-geant/nocturne-architecture.js"></script>
+<script src="kobo/kobo-studio/components/motion/motion.js"></script>
+<script src="kobo/kobo-studio/components/motion/nocturne-architecture.js"></script>
+<script src="site.js"></script>
+
+<script>
+  Kobo.templates.apply();
+  if (document.fonts) document.fonts.ready.then(function () { document.querySelectorAll('.k-nav').forEach(Kobo.nav.fit); });
+</script>
+</body>
+</html>

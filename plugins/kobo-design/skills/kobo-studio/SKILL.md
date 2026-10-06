@@ -20,7 +20,7 @@ Tu conduis un projet de site du premier message à la livraison. Les 24 skills d
 7. **On ne contourne jamais un contrôle.** Ne retire, ne masque ni ne dégrade aucun contenu (lien, texte, image, fonction) pour faire passer `check_studio.py` ou la grille. Si un contrôle échoue et que la capture montre un faux positif, laisse la page telle quelle et signale-le à la livraison (ligne du script, ce que montre la capture). Le script peut avoir tort ; la page ne paie pas pour lui.
 8. **La signature ne s'arrête pas au héros.** Tous les gabarits que le catalogue donne au skill hors du héros sont posés : au moins deux autres emplacements quand le skill en a deux ou plus. Quand il en a moins, on le **dit** au client, à la proposition et à la livraison.
 9. **Performance.** On ne charge que les fichiers dont la page a besoin ; images dimensionnées et différées ; rien ne bloque ni ne confisque le défilement ; la 3D ne se charge qu'après la page.
-10. **Le niveau de la démo.** Une page livrée doit tenir à côté de la démo du skill (`../<id>/examples/demo.html`) : son **mouvement signature** est là (couche mouvement chargée, intensité `full` sauf choix du client), sa **mise en page ose** comme la démo (pas une suite de blocs sages sur un fond uni), et les **gabarits de signature** vont au-delà du héros. On le vérifie en posant la page à côté de la démo (étape e). En dessous : on continue, on ne livre pas ; ce qui ne peut pas être rattrapé se dit au client comme une limite, pas comme un détail.
+10. **Le niveau de la démo.** Une page livrée doit tenir à côté de la démo du skill (`../<id>/examples/demo.html`) : son **mouvement signature** est là (couche mouvement chargée, intensité `full` sauf choix du client), sa **mise en page ose** comme la démo (pas une suite de blocs sages sur un fond uni), et les **gabarits de signature** vont au-delà du héros. On le vérifie en posant la page à côté de la démo (étape e). En dessous : on continue, on ne livre pas ; ce qui ne peut pas être rattrapé se dit au client comme une limite, pas comme un détail. Pour un skill sans couche mouvement ni gabarit hors du héros (liste dans `catalogue.md`), « en dessous sous le premier écran » est connu d'avance : il s'annonce à la proposition, et la livraison se fait avec ce verdict écrit.
 11. **Les parcours d'abord.** Aucun skill n'est proposé, aucun fichier n'est écrit avant le plan de parcours (`ux/methode.md`) : un à trois profils, leurs tâches, chaque parcours écran par écran avec ses états et son objectif d'étapes. Chaque profil a un chemin qu'il peut finir, y compris celui qui n'a pas de compte ; tout ce qui se fait se défait ; **aucune fonction sans tâche** (recherche, filtres, raccourcis clavier, barre latérale, tableau de bord ne s'ajoutent que si une tâche du plan les demande).
 12. **Un parcours non joué n'est pas vérifié.** Avant de livrer, chaque tâche du plan est jouée dans le navigateur, au doigt à 390 px et au clavier à 1440 px (`quality/ux-grille.md`). `check_studio.py` à 0 erreur ne dit rien des parcours. Verdict « à corriger » : on corrige, on ne livre pas.
 
@@ -31,6 +31,7 @@ Ce dossier est gros. **N'ouvre pas** `audit/`, `quality/relecture-*.md`, `contra
 | Étape | À lire | Seulement si |
 |---|---|---|
 | b. Interview | `interview.md` | toujours |
+| | `ux/patterns/domaines/outil-interne.md`, section « Le test avant de choisir cette fiche » seulement | la demande parle d'un outil pour une équipe |
 | c. Plan de parcours | `ux/methode.md`, puis dans `ux/patterns/domaines/` le `README.md` et **les seules fiches** des tâches du projet | toujours, **avant** le catalogue |
 | c. Proposition | `catalogue.md`, puis `ux/structures/<structure>/README.md` de la structure retenue (une seule) | toujours |
 | | `components/INDEX.md` : une ligne par composant (rôle, états, script, fichier React) | le plan a besoin d'une pièce que la structure ne fournit pas ; à relire en d avant d'ajouter un composant |
@@ -69,7 +70,7 @@ Le second tour se pose avec la proposition (étape c), une fois les skills candi
 **Ensuite seulement** lis `catalogue.md` et choisis les skills (voir « Choisir l'UI » ci-dessous). Écris au client un seul message, qui **commence par le plan de parcours** (bloc de `ux/methode.md`, point 4), puis :
 
 1. **La nature du projet** en une phrase, dite par son public : « un site pour des curieux et des membres, sur téléphone », « un outil interne pour six commerciaux ». Seul un **outil interne utilisé par des employés** (les quatre « oui » de `ux/patterns/domaines/outil-interne.md`) reçoit le skill `clear-ledger-desk` et la structure **application** ; présente-le alors seul, avec `/kobo-design:site-to-skill` comme seconde voie. Voir `interview.md`, « Nature du projet ».
-2. **Deux ou trois skills**, chacun avec :
+2. **Deux ou trois skills** (en reprise : le skill du site d'origine d'abord, que tu gardes sauf si le plan le contredit, puis une ou deux autres voies dites en deux lignes), chacun avec :
    - une raison tirée **du public, de l'ambiance voulue et des images disponibles** (pas une description du style, jamais le seul registre) ;
    - sa **limite honnête** : ce que le skill exige et que le client n'a peut-être pas (type de photo, 3D), ce que le gabarit ne reproduit pas, un contraste qui dépend de la photo ;
    - les gabarits de signature disponibles (colonne « Gabarits » du catalogue).
@@ -99,7 +100,7 @@ Puis **arrête-toi** et attends la validation. Le client valide **le plan de par
 
 | Structure | À choisir quand | Dossier |
 |---|---|---|
-| Landing produit | une seule offre, un seul parcours, une demande au bout | `ux/structures/landing-produit/` |
+| Landing produit | une seule offre, un seul parcours, une demande au bout. Les écrans du parcours (choix, commande, confirmation) sont des pages de plus, copiées de la page de départ : la structure reste une landing | `ux/structures/landing-produit/` |
 | Site vitrine | plusieurs offres ou plusieurs pages : un accueil qui oriente, des pages qui renseignent | `ux/structures/site-vitrine/` |
 | Récit collant | une histoire en chapitres, lue dans l'ordre | `ux/structures/recit-collant/` |
 | Article | un texte long à lire d'une traite | `ux/structures/article/` |
@@ -128,7 +129,7 @@ Résultat : `<projet>/kobo/` (**ne jamais le modifier**) et `<projet>/index.html
 - **Mot géant** (nocturne-architecture : héros et titres de section) : c'est le nom du projet ou un mot-clé **choisi exprès**, jamais un mot pris automatiquement dans un titre. Pas d'article ni de mot vide (« lieu », pas « le »), trois lettres au moins, des mots de longueur voisine d'une section à l'autre (4 à 9 lettres) pour que les tailles se tiennent. Il vient du surtitre (`k-kicker`) de la section, ou de `data-k-word="…"` posé sur le titre ; pour le héros, du premier mot du nom dans la barre, ou de `data-k-word` sur le `<h1>`. Regarde-les sur capture : `check_studio.py` signale un mot de moins de trois lettres. Le héros de glass-frame-estate a aussi un mot géant, pris de la même façon : si le nom commence par un mot commun (« Atelier », « Cabinet », « Studio »), choisis le mot qui distingue avec `data-k-word` sur le `<h1>`.
 - Le nom dans la barre : sur téléphone, un nom long passe sur deux lignes à côté du bouton Menu (il n'est pas tronqué). Deux ou trois mots tiennent sur une ligne ; regarde-le sur la capture à 390 px.
 - Projet mixte : l'action principale est celle du profil **sans compte** sur les pages publiques (« Venir essayer »), celle du membre dans l'espace connecté (« Réserver un créneau ») ; une page qui est elle-même la destination de l'action n'a pas de dernière section qui y renvoie. Un compte de démonstration, s'il en faut un pour essayer une connexion simulée, est écrit sur la page de connexion et dit à la livraison sous « Inventé ».
-- Une seule action dans le héros ; **la même** dans la barre et dans la dernière section de chaque page. Une autre suite (la page qui lève les doutes, un itinéraire) est un lien simple `k-link` à côté, jamais un second bouton.
+- Une seule action dans le héros ; **la même** dans la barre et dans la dernière section de chaque page. Une autre suite (la page qui lève les doutes, un itinéraire) est un lien simple `k-link` à côté, jamais un second bouton. **Dans le héros, ce lien porte `data-k-part="more"`** : un gabarit ne garde que les éléments marqués `data-k-part`, tout autre élément du héros disparaît de la page.
 - Titre de page, `lang`, textes alternatifs, pied de page : ce sont aussi du contenu.
 - Les liens mènent quelque part : ancre de la page, page du site, `mailto:`, `tel:`. Jamais `href="#"`.
 - Pas de formulaire dans le projet (l'action est un lien, un téléphone, un e-mail) : la dernière section garde son emplacement `finale` avec une phrase et le bouton d'action ; les dates à cocher et le formulaire de la landing se retirent avec leurs balises.
@@ -138,14 +139,16 @@ Briques de page (fournies par `page.css`, déjà chargé) :
 
 | Besoin | Balisage |
 |---|---|
-| Une section, sa largeur | `<section class="k-section" aria-labelledby="…"><div class="k-wrap">…` ; variantes `k-section--alt` (fond de surface), `k-section--rule` (filet), `k-section--tight` ; `k-wrap--text` pour une colonne de lecture |
+| Une section, sa largeur | `<section class="k-section" aria-labelledby="…"><div class="k-wrap">…` ; variantes `k-section--alt` (fond de surface), `k-section--rule` (filet), `k-section--tight` ; `k-wrap--text` pour une colonne de lecture. `data-k-tone="inverse"` sur n'importe quelle section la passe sur la paire inversée du skill (fond sombre, texte clair) et les composants qu'elle contient suivent : une ou deux par page, pour rythmer |
 | Titre de section | `<header data-k-slot="title">` avec `<p class="k-kicker" data-k-part="kicker">`, `<h2 class="k-h2" data-k-part="title">`, `<p class="k-lead" data-k-part="lead">` |
 | Empiler | `k-stack` (`k-stack--sm`, `k-stack--lg`) |
 | Deux colonnes qui se replient | `k-split`, la colonne large en `k-split__main` |
-| Texte courant, liens soulignés | `k-prose` ; un lien isolé : `k-link` ; une remarque : `k-note`. Un `k-link` fait une vingtaine de pixels de haut : **une étape d'un parcours** (« Mes réservations », « Annuler ») est un bouton (`k-btn`), pas un `k-link` |
+| Texte courant, liens soulignés | `k-prose` ; un lien isolé : `k-link` ; une remarque : `k-note`. Un `k-link` est fin (sa zone cliquable fait `--k-hit-min` de haut, sa boîte une vingtaine de pixels) : **une étape d'un parcours de tâche** (« Mes réservations », « Annuler », « Commander ») est un bouton (`k-btn`) ; le `k-link` sert aux suites secondaires (téléphone, page qui renseigne) |
 | Liste de faits (horaires, prix, adresse) | `<dl class="k-facts"><div><dt>…</dt><dd>…</dd></div>…</dl>` |
 | Liste d'éléments en colonnes | `<ul data-k-slot="grid">` avec des `<li data-k-part="item">` ; `k-grid__wide` pour un élément sur toute la largeur. Cartes : composant `carte`, seulement si chaque élément a une image et une destination, et l'une d'elles est mise en avant. Des prix, des formules, des horaires sont une liste de faits, pas une rangée de cartes identiques |
 | Photo et légende | `<figure data-k-slot="media"><img …><figcaption>…</figcaption></figure>` |
+
+**Contenu créé par script** (créneaux, panier, lignes). Les composants s'activent seuls sur ce qui est dans la page **au chargement**. Pour ce que ton script insère ensuite : `Kobo.tabs.init(conteneur)`, `Kobo.field.init(conteneur)` après l'insertion ; la modale et la notification n'en ont pas besoin. Une valeur que ton script met à jour (total, compteur, places restantes) porte `data-k-still` ou `role="status"` : la couche mouvement ne la réécrit pas. Le README de chaque composant a une ligne « Quand il s'active ».
 
 Un composant en plus en cours de route : choisis-le dans `components/INDEX.md`, relance `kit.py` avec `--composants <nom>` (il affiche les balises à ajouter à la page), puis lis son README.
 

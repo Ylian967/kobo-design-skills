@@ -34,8 +34,9 @@ Fichiers : `champ.css`, `champ.js`, `Champ.jsx`.
 ## Script
 
 - `data-k-validate` sur `.k-field` : validation native à la sortie du champ, message en français ; une erreur déjà affichée se corrige en direct à la frappe.
-- `Kobo.field.setError(champ, message)` / `clearError(champ)` / `validate(champ)` : pour une erreur venue du serveur ou une validation à l'envoi.
-- `data-k-msg="…"` sur le contrôle remplace le message automatique.
+- `Kobo.field.setError(champ, message)` / `clearError(champ)` / `validate(champ)` : pour une erreur venue du serveur ou une validation à l'envoi. `champ` est l'élément `.k-field`. `validate` **rend `true` si le champ est valide, `false` sinon** (et écrit ou retire le message) : à l'envoi, valide tous les champs, puis donne le focus au premier qui rend `false`.
+- **Quand il s'active** : seul, sur les `.k-field` présents au chargement de la page. Pour un champ ajouté ensuite par script : `Kobo.field.init(conteneur)`.
+- `data-k-msg="…"` sur le contrôle remplace **tous** les messages automatiques du champ. `data-k-msg-vide="…"` ne remplace que celui du champ laissé vide (« Indiquez votre adresse e-mail. ») : le message d'un format faux reste automatique et précis. Préfère le second.
 - Compteur mis à jour si `.k-field__count` existe et que le contrôle a un `maxlength`.
 
 Un message d'erreur dit **quoi corriger** : « Adresse incomplète : il manque le domaine », pas « Champ invalide ».

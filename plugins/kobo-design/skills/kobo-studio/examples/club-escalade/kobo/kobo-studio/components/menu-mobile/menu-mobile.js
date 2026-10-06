@@ -42,7 +42,7 @@
     if (!menu.matches || !menu.matches('dialog.k-menu')) return;
     sync(menu, false);
     var opener = openers.get(menu);
-    if (opener && opener.isConnected && opener.offsetParent !== null) opener.focus(); // retour du focus au bouton d'ouverture
+    if (opener && opener.isConnected && opener.offsetParent !== null) opener.focus({ preventScroll: true }); // retour du focus au bouton d'ouverture, sans ramener la page vers lui : un lien d'ancre vient peut-être de la faire défiler
   }, true);
 
   Kobo.menu = { open: open, close: close };

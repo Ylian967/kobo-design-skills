@@ -329,7 +329,7 @@ def static(project):
     roles = set(re.findall(r"(--k-[\w-]+)\s*:", (STUDIO / "contract/roles.css").read_text(encoding="utf-8")))
     for f in sorted(project.rglob("*")):
         rel = f.relative_to(project)
-        if not f.is_file() or SKIP_DIRS & set(rel.parts) or f.suffix not in (".html", ".css", ".js", ".jsx", ".tsx", ".ts"):
+        if not f.is_file() or SKIP_DIRS & set(rel.parts) or any(part.startswith("avant") for part in rel.parts[:-1]) or f.suffix not in (".html", ".css", ".js", ".jsx", ".tsx", ".ts"):
             continue
         if f.name.endswith((".config.js", ".config.ts")):
             continue
@@ -342,6 +342,10 @@ def static(project):
         left = [m.group(0)] if m else sorted(t for t in demo if t in text)[:3]
         if left:
             errs.append(f"{where} : reste du contenu de démonstration (« {' », « '.join(left)} ») : contenu réel seulement")
+        if where.endswith(".html") and "/" not in where:           # liens vers une page du projet qui n'existe pas
+            for href in sorted(set(re.findall(r'href="([^"#?:]+\.html)(?:[#?][^"]*)?"', text))):
+                if not (project / href).exists() and not (project / "dist" / href).exists():
+                    errs.append(f"{where} : lien vers « {href} », page absente du projet")
         if where.endswith(".css"):
             if Path(where).name == "brand.css":
                 continue

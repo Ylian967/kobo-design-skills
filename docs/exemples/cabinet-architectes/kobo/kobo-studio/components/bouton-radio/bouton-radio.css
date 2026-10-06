@@ -1,0 +1,44 @@
+/*
+ * kobo-studio — bouton radio
+ * Rôles lus : text, text-2, text-muted, bg, surface-2, line-strong, danger, focus*, font-body, fs-body, fs-small, fs-min,
+ * lh-body, radius-pill, border-w, hit-min, space-*, dur-fast, ease-out.
+ * Le point est de la couleur du texte, pas de l'accent : il se lit sous tous les skills, accent pâle compris.
+ */
+.k-radio {
+  --_box: calc(var(--k-space-4) + var(--k-space-2)); --_w: max(var(--k-border-w), calc(var(--k-space-1) / 2));
+  position: relative; display: inline-flex; align-items: flex-start; gap: var(--k-space-3); min-block-size: var(--k-hit-min);
+  padding-block: calc((var(--k-hit-min) - var(--_box)) / 2); font-family: var(--k-font-body); font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text); cursor: pointer;
+}
+.k-radio__input { position: absolute; inset-block-start: 0; inset-inline-start: calc((var(--_box) - var(--k-hit-min)) / 2); inline-size: var(--k-hit-min); block-size: var(--k-hit-min); margin: 0; opacity: 0; cursor: inherit; }
+.k-radio__box {
+  flex: none; display: grid; place-items: center; inline-size: var(--_box); block-size: var(--_box); margin-block-start: calc((var(--k-lh-body) * var(--k-fs-body) - var(--_box)) / 2);
+  background: var(--k-bg); border: var(--_w) solid var(--k-line-strong); border-radius: 50%;   /* rond même sous un skill sans arrondi : c'est la forme qui le distingue d'une case */
+  transition: background-color var(--k-dur-fast) var(--k-ease-out), border-color var(--k-dur-fast) var(--k-ease-out);
+}
+.k-radio__box::after { content: ""; inline-size: 50%; block-size: 50%; background: var(--k-text); border-radius: 50%; transform: scale(0); transition: transform var(--k-dur-fast) var(--k-ease-out); }
+.k-radio__text { display: grid; gap: var(--k-space-1); min-inline-size: 0; }
+.k-radio__help { font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-2); }
+
+.k-radio:hover .k-radio__box, .k-radio[data-k-state="hover"] .k-radio__box { background: var(--k-surface-2); }
+.k-radio__input:focus-visible + .k-radio__box, .k-radio[data-k-state="focus"] .k-radio__box { outline: var(--k-focus-w) solid var(--k-focus); outline-offset: var(--k-focus-offset); }
+/* Choisi : contour de la couleur du texte ET point plein ; le libellé passe en gras */
+.k-radio__input:checked + .k-radio__box { border-color: var(--k-text); }
+.k-radio__input:checked + .k-radio__box::after { transform: scale(1); }
+.k-radio__input:checked ~ .k-radio__text { font-weight: bolder; }
+.k-radio__input:checked ~ .k-radio__text .k-radio__help { font-weight: normal; }
+.k-radio:has(.k-radio__input:disabled) { color: var(--k-text-muted); cursor: not-allowed; }
+.k-radio__input:disabled + .k-radio__box { background: var(--k-surface-2); border-style: dashed; }
+.k-radio__input:disabled + .k-radio__box::after { background: var(--k-text-muted); }
+.k-radio__input[aria-invalid="true"] + .k-radio__box { border-color: var(--k-danger); border-width: calc(var(--_w) * 2); }
+/* Choix indisponible mais dit : le libellé est barré et une mention l'explique (k-radio__help) */
+.k-radio--off .k-radio__text > :first-child, .k-radio--off .k-radio__label { text-decoration: line-through; }
+
+.k-radio-group { display: grid; gap: var(--k-space-1); min-inline-size: 0; margin: 0; padding: 0; border: 0; font-family: var(--k-font-body); color: var(--k-text); }
+.k-radio-group__legend { padding: 0; margin-block-end: var(--k-space-2); font-size: max(var(--k-fs-small), var(--k-fs-min)); line-height: var(--k-lh-body); }
+.k-radio-group__list { display: grid; gap: var(--k-space-1); }
+.k-radio-group--inline > .k-radio-group__list { display: flex; flex-wrap: wrap; gap: var(--k-space-1) var(--k-space-6); }
+.k-radio-group__help { margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-text-muted); }
+.k-radio-group__error { display: flex; align-items: flex-start; gap: var(--k-space-2); margin: 0; font-size: max(var(--k-fs-small), var(--k-fs-min)); color: var(--k-danger); }
+.k-radio-group__error[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) { .k-radio__box, .k-radio__box::after { transition: none; } }

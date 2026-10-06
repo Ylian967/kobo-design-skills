@@ -41,10 +41,12 @@ Déclencheur : `<button type="button" data-k-modal-open="id">`. Fermeture : `dat
 | Touche | Effet |
 |---|---|
 | `Entrée` / `Espace` sur le déclencheur | ouvre ; le focus va sur l'élément `autofocus`, sinon sur le premier élément focalisable |
-| `Tab` / `Maj+Tab` | tourne dans la fenêtre sans en sortir |
+| `Tab` / `Maj+Tab` | tourne dans la fenêtre sans en sortir (bouclé par `modale.js` : seul, le `<dialog>` de Chrome laisse passer le focus par l'interface du navigateur) |
 | `Échap` | ferme, sans valeur de retour |
 
 À la fermeture, le focus revient au déclencheur.
+
+**Contenu généré.** Le script écoute au niveau du document : une modale, un bouton `data-k-modal-open` ou `data-k-modal-close` ajoutés après le chargement marchent sans initialisation. Pour ouvrir depuis ton script : `Kobo.modal.open(id, declencheur)` ; passe le déclencheur pour que le focus lui revienne. La décision se lit à l'évènement `close` du `<dialog>`, dans `dialog.returnValue`.
 
 ## Accessibilité
 

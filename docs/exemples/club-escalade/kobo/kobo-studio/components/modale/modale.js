@@ -1,6 +1,7 @@
 /*
  * kobo-studio — modale : ouverture, fermeture, retour du focus.
- * Sans dépendance. Le <dialog> natif fournit le piège du focus et la touche Échap.
+ * Sans dépendance. Le <dialog> natif fournit la touche Échap ; Tab est bouclé ici (le navigateur le laisserait sortir vers sa propre interface).
+ * Écoute déléguée au document : une modale ou un déclencheur ajoutés après le chargement marchent sans initialisation.
  *
  *   <button data-k-modal-open="annuler">Annuler la réservation</button>
  *   <dialog class="k-modal" id="annuler" aria-labelledby="annuler-titre" data-k-modal-dismiss="backdrop">
@@ -43,6 +44,18 @@
       var r = modal.getBoundingClientRect();
       if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) close(modal);
     }
+  });
+
+  // Chrome laisse Tab passer par l'interface du navigateur entre le dernier et le premier élément : on boucle nous-mêmes.
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    var modal = document.activeElement && document.activeElement.closest && document.activeElement.closest('dialog.k-modal[open]');
+    if (!modal) return;
+    var items = Array.prototype.filter.call(modal.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'), function (n) { return !n.disabled && n.getClientRects().length; });
+    if (!items.length) return;
+    var first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 
   document.addEventListener('close', function (e) {

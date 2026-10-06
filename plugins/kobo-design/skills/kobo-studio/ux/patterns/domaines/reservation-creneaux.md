@@ -23,6 +23,24 @@ Entrée : l'écran d'arrivée après connexion est **déjà** l'écran des crén
 
 **Objectif à écrire dans le plan : 3 touches au plus sur téléphone**, 2 quand la réservation est gratuite et annulable (l'annulation facile remplace la confirmation : [N3] plutôt que [N5]). Annuler : 2 touches depuis « Mes réservations » (« Annuler », puis confirmer).
 
+## Sans compte : table de restaurant, séance ponctuelle
+
+Le parcours ci-dessus suppose un membre connecté. Quand **personne n'a de compte** (une table, une séance d'atelier, une visite) :
+
+| Ce qui change | Comment | Source |
+|---|---|---|
+| **Le nombre de personnes** | Un choix de plus, proposé d'avance sur la valeur courante (2) ; il se fait **avant** les heures, parce qu'il change ce qui reste libre | [N5], [N7] (déduction) |
+| **Les coordonnées** | Une étape de plus, **après** le choix du jour et de l'heure : nom, un moyen de joindre, un mot facultatif. Trois champs | [G-compte] ; [NN-form] point 1 |
+| **L'objectif d'étapes** | 3 au plus court (réserver, heure, envoyer) quand le jour et le nombre proposés conviennent ; 5 en les changeant. Écris les deux | — |
+| **Retrouver sa réservation** | Une **référence** donnée à la confirmation ; la page « Ma réservation » la demande avec le moyen de contact. La mémoire du navigateur peut l'éviter sur le même appareil, elle ne suffit pas : dis-le au client | [G-confirmation], [G-compte] |
+| **Annuler, déplacer** | Depuis la confirmation et depuis « Ma réservation » ; passé le délai du client, la page dit la règle et donne le téléphone | [N3], [N9] |
+| **Au-delà de sept jours** | Les prochains jours ouverts en rangée, puis « Plus tard » qui ouvre la suite (liste ou calendrier) : le calendrier n'est pas l'entrée | [G-dates] |
+| **Côté maison** | Quelqu'un doit voir les réservations : c'est une tâche d'un autre profil, à mettre au plan ou à écrire dans « ce qui n'est pas fait » | `../../methode.md`, règle 1 |
+
+Le lien « Ma réservation » est une entrée de parcours : dans la barre, il se pose **hors** de `k-nav__extra` pour rester visible sur téléphone (voir `components/barre-nav/README.md`), sinon il passe derrière « Menu » et coûte une touche de plus.
+
+**Choix du jour compact.** Avec un skill à très grandes lettres, des `onglets` par jour débordent (une rangée de 1 500 px pour 390). Écris des libellés courts (« mar. 7 ») ou prends `bouton-radio` en rangée ; regarde la rangée à 390 px avant de la garder.
+
 ## États
 
 | État | Rendu | Source |

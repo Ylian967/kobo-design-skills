@@ -10,6 +10,7 @@
  *            La durée de sortie vient du rôle --k-dur-exit.
  *            Le compte à rebours s'arrête tant que la souris ou le focus est sur la notification.
  * action   : { label, onClick } — un bouton dans la notification.
+ * Pile     : trois notifications au plus, et jamais plus du tiers de la hauteur de l'écran : une nouvelle ferme les plus anciennes.
  * Annonce  : les notifications sont insérées dans une zone aria-live (polie ; assertive pour les erreurs).
  * Clavier  : le bouton « Fermer » est atteignable à la tabulation ; Échap ferme la notification qui a le focus.
  */
@@ -84,6 +85,15 @@
     region().querySelector('[data-k-live="' + (type === 'error' ? 'assertive' : 'polite') + '"]').appendChild(node);
     duration = type === 'error' ? 0 : (opts.duration === undefined ? role(node, '--k-dur-toast', 0) : opts.duration);
     arm();
+    node._kClose = close;
+    // Pas de pile : trois notifications au plus, et jamais plus du tiers de la hauteur de l'écran (sur téléphone : une ou deux).
+    // Les plus anciennes partent d'abord ; celle qui a le focus reste.
+    var box = region(), all = Array.prototype.slice.call(box.querySelectorAll('.k-toast:not(.is-leaving)'));
+    while (all.length > 1 && (all.length > 3 || box.offsetHeight > window.innerHeight / 3)) {
+      var old = all.shift();
+      if (old === node || old.contains(document.activeElement)) continue;
+      old.hidden = true; if (old._kClose) old._kClose();
+    }
     return { element: node, close: close };
   }
 

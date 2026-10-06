@@ -1,0 +1,17 @@
+/*
+ * kobo-studio — structure « site vitrine » (accueil et page intérieure) : ce qui lui est propre (le reste vient de ../page.css).
+ * Uniquement des rôles --k-*.
+ */
+.sv-head { align-items: end; margin-block-end: var(--k-space-12); }
+.sv-head [data-k-slot="title"] { margin-block-end: 0; }
+.sv-search { flex-grow: 0; }
+
+/* Emplacement « grid » : deux colonnes larges plutôt qu'une rangée de petites cartes ; la sortie mise en avant prend toute la largeur */
+/* Le plancher de 34 % interdit une troisième colonne, même dans un conteneur très large : jamais trois cartes identiques en rang */
+.sv-grid[data-k-slot="grid"] { grid-template-columns: repeat(auto-fit, minmax(min(100%, max(calc(var(--k-space-32) * 2 + var(--k-space-16)), 34%)), 1fr)); }
+
+.sv-inner-hero[data-k-slot="hero"] { padding-block: var(--k-space-12) var(--k-space-16); }
+.k-split > .sv-aside { flex: 0 1 calc(var(--k-space-32) * 2 + var(--k-space-16)); } /* l'encart garde sa largeur ; il ne s'étire pas quand le texte est borné */
+.sv-aside { padding: var(--k-space-6); border: var(--k-border-w) solid var(--k-line-strong); border-radius: var(--k-radius-lg); }
+/* Dans la carte mise en avant, le texte ne s'étire pas sur toute la largeur */
+.sv-grid .k-card__text { max-inline-size: var(--k-measure); }

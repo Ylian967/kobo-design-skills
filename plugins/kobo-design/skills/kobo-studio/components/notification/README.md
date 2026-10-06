@@ -48,6 +48,12 @@ n.close();
 Kobo.toast({ type: 'info', title: 'Réservation annulée', action: { label: 'Rétablir', onClick: retablir }, duration: 0 });
 ```
 
+**Où elle s'affiche.** En bas à droite, par-dessus la page : dans la structure `application` c'est l'endroit du panneau de détail, sur téléphone celui du bouton du bas. Un message qui doit rester (avec « Annuler ») sur un écran où l'on continue de travailler s'écrit dans la page, en `role="status"`, pas en notification.
+
+**Une erreur reste affichée** jusqu'à ce qu'on la ferme. Quand l'action réussit ensuite (nouvel envoi), ferme-la toi-même : garde ce que `Kobo.toast` rend et appelle son `close()`, sinon l'échec reste à côté du succès.
+
+**Pas de pile.** Trois notifications au plus, et jamais plus du tiers de la hauteur de l'écran : une nouvelle ferme les plus anciennes (sur téléphone il en reste une, parfois deux). Une notification à action (`duration: 0`) ne s'accumule donc plus ; mais elle peut être chassée par la suivante : une action qui doit rester offerte (« Rétablir ») a aussi sa place dans la page.
+
 `duration` : millisecondes (par défaut le rôle `--k-dur-toast` de la fiche, 6 s en repli ; 0 = reste). `returnFocus` : élément qui reprend le focus si la notification fermée l'avait.
 
 ## Clavier

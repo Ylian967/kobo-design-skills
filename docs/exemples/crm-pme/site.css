@@ -1,0 +1,24 @@
+/* Rivage Suivi — styles du projet : rôles --k-* seulement, aucune valeur en dur. */
+
+/* Une rangée de boutons qui se replie seule (étapes, gestes du détail, enregistrement). */
+.rs-rang {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--k-space-2);
+}
+
+/* L'étape en cours : le bouton enfoncé porte une coche (posée par site/detail.js) et passe en gras. */
+.rs-rang [aria-pressed="true"] { font-weight: var(--k-fw-display); }
+
+/* Le dernier changement et son annulation, entre les filtres et la liste. */
+.rs-dernier {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--k-space-3);
+  padding-block: var(--k-space-2);
+  border-block: var(--k-border-w) solid var(--k-line);
+  color: var(--k-text);
+}
+.rs-dernier__texte { margin: 0; flex: 1 1 calc(var(--k-space-32) * 2); }

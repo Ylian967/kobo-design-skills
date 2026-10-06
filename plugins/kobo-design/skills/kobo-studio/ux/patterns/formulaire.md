@@ -23,7 +23,7 @@ Composants : `champ`, `bouton`, `notification`. Exemple complet : `structures/la
 ## Envoi
 
 1. Le bouton passe en `aria-busy="true"` et son libellé dit « Envoi en cours… ». Il ne se désactive pas (il garderait mal le focus) ; un second clic est ignoré.
-2. **Succès réel** : une notification de type `success` qui dit ce qui va se passer ensuite, et le formulaire se vide. Le succès vient de la réponse du serveur, jamais d'un changement de libellé dans `onsubmit`.
+2. **Succès réel** : pour un geste court (inscription à une lettre, question), une notification de type `success` qui dit ce qui va se passer ensuite, et le formulaire se vide. Pour une **demande qui compte** (devis, rendez-vous, réservation, commande), un écran ou un bloc de confirmation **qui reste** remplace le formulaire : ce qui a été envoyé, la suite et son délai, un contact, et « Modifier ma demande » qui rouvre le formulaire rempli (voir `domaines/contact-devis.md`). Le succès vient de la réponse du serveur, jamais d'un changement de libellé dans `onsubmit`.
 3. **Échec** : une notification de type `error`, qui reste affichée, dit que les réponses sont gardées et propose de réessayer. Le formulaire garde son contenu.
 4. Au-delà de 10 s sans réponse : c'est un échec.
 
